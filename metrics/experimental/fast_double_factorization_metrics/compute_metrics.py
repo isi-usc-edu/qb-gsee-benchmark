@@ -24,6 +24,7 @@ def compute_hypergraph_metrics(pauli_hamiltonian):
             vertex_degree[node] += 1
 
     weight_stats = {
+        "one_norm": sum(weights),
         "max_weight": np.max(weights),
         "min_weight": np.min(weights),
         "mean_weight": np.mean(weights),
