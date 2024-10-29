@@ -6,10 +6,10 @@ name: create_summary_csv
 on:
   # Triggers the workflow on push or pull request events for main branch
   # also runs nightly as a cron job
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  # push:
+  #   branches: [ main ]
+  # pull_request:
+  #   branches: [ main ]
   schedule:
     - cron: '0 1 * * *' # this needs to run **AFTER** the validation action runs.
 
