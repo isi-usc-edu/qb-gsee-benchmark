@@ -5,7 +5,7 @@ QB-GSEE-Benchmark is a comprehensive suite for benchmarking Ground State Energy 
 ## What is QB-GSEE-Benchmark?
 
 This repository includes:
-- A curated list of Hamiltonian instances for benchmarking, sourced from the [qb-gsee-problem-instances repository](https://github.com/jp7745/qb-gsee-problem-instances).
+- A curated list of Hamiltonian [`problem_instances`](./problem_instances/) for benchmarking.
 - Example code to access and process these instances.
 - Scripts to evaluate and summarize the performance of GSEE algorithms.
 
@@ -36,22 +36,22 @@ pip install -r requirements.txt
 --->
 ## Usage
 
-1. **Prepare the Data**:
-   Download and prepare the problem instances from the qb-gsee-problem-instances repository. Follow their guide on downloading associated data files.
+0. **Ensure you have access to the SFTP server where large files (e.g., FCIDUMPs) live.**
+   Contact the maintainers of this repository for keys.
 
-2. **Running Benchmarks**:
+1. **Running Benchmarks**:
    Execute the benchmark scripts with your solution files:
    ```bash
    python run_benchmark.py solution_file.json
    ```
 
-3. **View Results**:
+2. **View Results**:
    After running the benchmarks, generate a summary of performance:
    ```bash
    python summarize_performance.py solution_file.json
    ```
 
-4. **Explore with Bubble ML**:
+3. **Explore with Bubble ML**:
    Launch the Bubble ML GUI to visualize and explore performance details:
    ```bash
    python bubble_ml_gui.py
@@ -65,6 +65,9 @@ Contributions to the QB-GSEE-Benchmark are welcome! Please consider the followin
 - Commit your changes (`git commit -am 'Add some feature'`).
 - Push to the branch (`git push origin feature-branch`).
 - Open a Pull Request.
+
+WARNING!  Nightly GitHub actions are configured to validate JSON files against their associated [schema](./schemas/).  If a file does not pass validation, it will be moved to the [`json_files_with_errors`](./json_files_with_errors/) directory.
+
 
 ## License
 
