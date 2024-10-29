@@ -1,0 +1,174 @@
+{
+    "$schema": "https://raw.githubusercontent.com/zapatacomputing/qb-gsee-benchmark/refs/heads/main/instances/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "30d863a7-ffde-40f9-8107-af771ec986b5",
+    "problem_instance_uuid": "cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8",
+    "creation_timestamp": "2024-10-02T19:23:17.097271Z",
+    "short_name": "QPE",
+    "is_resource_estimate": true,
+    "contact_info": [
+        {
+            "name": "Max Radin",
+            "email": "max.radin@zapata.ai",
+            "institution": "Zapata AI"
+        }
+    ],
+    "solution_data": [
+        {
+            "instance_data_object_uuid": "68af0b80-3d27-4aba-84f9-bcdd30a9255b",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 130648434.19662397
+                },
+                "preprocessing_time": {
+                    "seconds": 92.24001598358154
+                },
+                "algorithm_run_time": {
+                    "seconds": 130648341.95660798
+                },
+                "postprocessing_time": {
+                    "seconds": 0
+                }
+            },
+            "error_bound": 0.001,
+            "confidence_level": 0.99
+        },
+        {
+            "instance_data_object_uuid": "28a7820f-63fe-4920-aeec-a7ffe7e55d83",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 1664073932.1223369
+                },
+                "preprocessing_time": {
+                    "seconds": 127.2850890159607
+                },
+                "algorithm_run_time": {
+                    "seconds": 1664073804.8372478
+                },
+                "postprocessing_time": {
+                    "seconds": 0
+                }
+            },
+            "error_bound": 0.001,
+            "confidence_level": 0.99
+        },
+        {
+            "instance_data_object_uuid": "f738fcd6-7ddc-4d70-8ff9-4019e3718b04",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 133173800.78035574
+                },
+                "preprocessing_time": {
+                    "seconds": 18.053699731826782
+                },
+                "algorithm_run_time": {
+                    "seconds": 133173782.726656
+                },
+                "postprocessing_time": {
+                    "seconds": 0
+                }
+            },
+            "error_bound": 0.001,
+            "confidence_level": 0.99
+        },
+        {
+            "instance_data_object_uuid": "6e2bf415-6a69-4b36-ba0f-780a11cb7c0b",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 1827250460.5177379
+                },
+                "preprocessing_time": {
+                    "seconds": 110.68720984458923
+                },
+                "algorithm_run_time": {
+                    "seconds": 1827250349.830528
+                },
+                "postprocessing_time": {
+                    "seconds": 0
+                }
+            },
+            "error_bound": 0.001,
+            "confidence_level": 0.99
+        },
+        {
+            "instance_data_object_uuid": "027490ba-34f9-4340-89ab-27fd110d2821",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 133699950.46700683
+                },
+                "preprocessing_time": {
+                    "seconds": 34.24659085273743
+                },
+                "algorithm_run_time": {
+                    "seconds": 133699916.22041598
+                },
+                "postprocessing_time": {
+                    "seconds": 0
+                }
+            },
+            "error_bound": 0.001,
+            "confidence_level": 0.99
+        },
+        {
+            "instance_data_object_uuid": "bae2da57-6a69-483e-95bc-b77f72ebfba8",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 1822049254.3327522
+                },
+                "preprocessing_time": {
+                    "seconds": 109.89768028259277
+                },
+                "algorithm_run_time": {
+                    "seconds": 1822049144.435072
+                },
+                "postprocessing_time": {
+                    "seconds": 0
+                }
+            },
+            "error_bound": 0.001,
+            "confidence_level": 0.99
+        },
+        {
+            "instance_data_object_uuid": "72343006-774e-4192-b481-fa840ed25573",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 133068577.38371417
+                },
+                "preprocessing_time": {
+                    "seconds": 21.355810165405273
+                },
+                "algorithm_run_time": {
+                    "seconds": 133068556.027904
+                },
+                "postprocessing_time": {
+                    "seconds": 0
+                }
+            },
+            "error_bound": 0.001,
+            "confidence_level": 0.99
+        },
+        {
+            "instance_data_object_uuid": "ea55abec-8253-445d-85fa-914948b5e5a5",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 1827701433.7916307
+                },
+                "preprocessing_time": {
+                    "seconds": 112.39502286911011
+                },
+                "algorithm_run_time": {
+                    "seconds": 1827701321.3966079
+                },
+                "postprocessing_time": {
+                    "seconds": 0
+                }
+            },
+            "error_bound": 0.001,
+            "confidence_level": 0.99
+        }
+    ],
+    "compute_hardware_type": "quantum_computer",
+    "compute_details": {
+        "description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Uses PyLIQTR logical resource estimates with BenchQ footprint analysis. Ground-state overlap assumed to be 0.8 and double-factorized truncation threshold to be 1e-3 Ha. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time."
+    },
+    "digital_signature": null
+}
