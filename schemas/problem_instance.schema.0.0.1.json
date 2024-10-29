@@ -20,7 +20,7 @@
     "properties": {
         "$schema": {
             "title": "Schema URI",
-            "desription": "A hyperlink to the schema that describes this JSON object.",
+            "description": "A hyperlink to the schema that describes this JSON object.",
             "type": "string"
         },
         "references":{
@@ -167,44 +167,55 @@
             "items": {
                 "type": "object",
                 "required":[
-                    "instance_data_object_uuid",
-                    "instance_data_object_url",
-                    "instance_data_checksum_type",
-                    "instance_data_checksum",
-                    "requirements"
+                    "supporting_files"
                 ],
                 "optional":[
                     "independent_parameters",
-                    "features",
-                    "scf_solution_data"
+                    "features"
                 ],
                 "properties":{
-                    "instance_data_object_uuid":{
-                        "title":"Instance Data Object UUID",
-                        "description": "Universally Unique Identifier (UUID) as a string in RFC4122 8-4-4-4-12 format.",
-                        "type": "string",
-                        "format": "uuid",
-                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
-                    },
-                    "instance_data_object_url":{
-                        "title":"Instance Data Object URL",
-                        "type":"string",
-                        "description":"TODO: description"
-                    },
-                    "instance_data_checksum_type":{
-                        "title": "Instance Data Checksum Type",
-                        "description": "One of \n\n`sha1sum`\n`sha256sum`\n`md5sum`",
-                        "type": "string",
-                        "enum": [
-                            "sha1sum",
-                            "sha256sum",
-                            "md5sum"
-                        ]
-                    },
-                    "instance_data_checksum":{
-                        "title":"Instance Data Checksum String",
-                        "description":"a string containing the checksum of the data file.",
-                        "type":"string"
+                    "supporting_files":{
+                        "title": "Supporting Files",
+                        "description": "A list of URLs and other metadata for supporting files.  E.g., FCIDUMP files, SCF solution files, checkpoint files, etc.  Note that this may be a list with only one item.",
+                        "type": "array",
+                        "items":{
+                            "type": "object",
+                            "required":[
+                                "instance_data_object_uuid",
+                                "instance_data_object_url",
+                                "instance_data_checksum_type",
+                                "instance_data_checksum"
+                            ],
+                            "properties":{
+                                "instance_data_object_uuid":{
+                                    "title":"Instance Data Object UUID",
+                                    "description": "Universally Unique Identifier (UUID) as a string in RFC4122 8-4-4-4-12 format.",
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                                },
+                                "instance_data_object_url":{
+                                    "title":"Instance Data Object URL",
+                                    "type":"string",
+                                    "description":"TODO: description"
+                                },
+                                "instance_data_checksum_type":{
+                                    "title": "Instance Data Checksum Type",
+                                    "description": "One of \n\n`sha1sum`\n`sha256sum`\n`md5sum`",
+                                    "type": "string",
+                                    "enum": [
+                                        "sha1sum",
+                                        "sha256sum",
+                                        "md5sum"
+                                    ]
+                                },
+                                "instance_data_checksum":{
+                                    "title":"Instance Data Checksum String",
+                                    "description":"a string containing the checksum of the data file.",
+                                    "type":"string"
+                                }
+                            }
+                        }
                     },
                     "requirements":{
                         "title":"Performance Requirements",
@@ -218,12 +229,7 @@
                     },
                     "features":{
                         "title":"Features of the Instance",
-                        "description":"[OPTIONAL] Supplemental information about the problem features that drive the construction of the Hamiltonian.  TODO: we may define this structure more.",
-                        "type":"object"
-                    },
-                    "scf_solution_data":{
-                        "title": "SCF Solution File",
-                        "description":"[OPTIONAL] Supplemental SCF solution file that underlies the Hamiltonian, including a UUID, URL, and parameters",
+                        "description":"[OPTIONAL] Supplemental information about the problem features that drive the construction of the Hamiltonian.  Currently this is typically `PySCF` Hamiltonian generation arguments/parameters.  TODO: we may define this structure more.",
                         "type":"object"
                     }
                 }
