@@ -1,5 +1,5 @@
 import numpy as np
-def compute_hypergraph_metrics(pauli_hamiltonian):
+def compute_hypergraph_ham_features(pauli_hamiltonian):
     # Initialize the nodes and weighted hyperedges
     nodes = set()
     weighted_hyperedges = []

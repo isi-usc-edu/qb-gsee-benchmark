@@ -1,12 +1,23 @@
+
+
+
+import pprint
+import logging
+
+
 from scipy.special import comb
 import numpy as np
 from pyscf import ao2mo
-from compute_metrics import compute_hypergraph_metrics
+from compute_ham_features import compute_hypergraph_ham_features
 from closedfermion.Models.Molecular.QuarticDirac import QuarticDirac
 from closedfermion.Transformations.fermionic_encodings import fermion_to_qubit_transformation
 from closedfermion.Transformations.quartic_dirac_transforms import majorana_operator_from_quartic, double_factorization_from_quartic
 import pandas as pd
 from pyscf.tools import fcidump
+
+
+
+
 
 def truncate_df_eigenvalues(lambs, threshold=1e-8):
     """
@@ -26,8 +37,18 @@ def truncate_df_eigenvalues(lambs, threshold=1e-8):
     return np.sort(new_list)
 
 
-def compute_metrics_csv(filename, save=True, csv_filename='metrics'):
+def compute_ham_features_csv(
+        filename: str, 
+        save: bool=True,
+        csv_filename: str="ham_features.csv",
+        verbose_logging: bool=False
+    ):
+    """TODO: docstring
+    """
+
+    if verbose_logging: logging.info(f"reading data from {filename}")
     data = fcidump.read(filename)
+    
 
     # Extract data from the dictionary
     norb = data['NORB']
@@ -40,7 +61,8 @@ def compute_metrics_csv(filename, save=True, csv_filename='metrics'):
     pauli_op = fermion_to_qubit_transformation(majorana_op, 'Jordan-Wigner')
 
     pauli_data = pauli_op.data
-    vertex_degree_stats, weight_stats, edge_order_stats = compute_hypergraph_metrics(pauli_data)
+    vertex_degree_stats, weight_stats, edge_order_stats = \
+        compute_hypergraph_ham_features(pauli_data)
 
     H_DF = double_factorization_from_quartic(quartic_fermion)
     eigs = truncate_df_eigenvalues(H_DF.eigs)
@@ -56,23 +78,31 @@ def compute_metrics_csv(filename, save=True, csv_filename='metrics'):
     fci_dim = np.log10(comb(norb, nalpha) * comb(norb, nbeta))
 
 
-    metrics = {}
-    metrics_list = list(vertex_degree_stats.items()) + list(weight_stats.items()) + list(edge_order_stats.items())
-    for key, val in metrics_list:
-        metrics[key] = val
+    ham_features = {}
+    ham_features_list = list(vertex_degree_stats.items()) \
+        + list(weight_stats.items()) \
+        + list(edge_order_stats.items())
+    
+    for key, val in ham_features_list:
+        ham_features[key] = val
 
-    metrics['number_of_terms'] = len(pauli_data.keys())
-    metrics['log_fci_dim'] = fci_dim
-    metrics['n_elec'] = nelec
-    metrics['n_orbs'] = norb
+    ham_features['number_of_terms'] = len(pauli_data.keys())
+    ham_features['log_fci_dim'] = fci_dim
+    ham_features['n_elec'] = nelec
+    ham_features['n_orbs'] = norb
 
-    metrics['df_rank'] = len(eigs)
-    metrics['df_gap'] = abs(eigs[-1] - eigs[-2])
-    metrics['df_eigs'] = eigs
-
+    ham_features['df_rank'] = len(eigs)
+    ham_features['df_gap'] = abs(eigs[-1] - eigs[-2])
+    ham_features['df_eigs'] = eigs
+    
     if save:
         # Convert the dictionary to a pandas DataFrame
-        df = pd.DataFrame([metrics])
-        df.to_csv(f'{csv_filename}.csv')
+        df = pd.DataFrame([ham_features])
+        df.to_csv(csv_filename, index=False)
+        if verbose_logging: logging.info(f"data written to {csv_filename}")
 
-    return metrics
+    if verbose_logging:
+        pprint.pprint(ham_features)
+
+
+    return ham_features
