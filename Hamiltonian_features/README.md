@@ -1,4 +1,6 @@
-## Metric List
+## Hamiltonian Features List
+
+
 Number of electrons $\eta$
 
 Number of natural orbitals $N_{\text{nao}}$
