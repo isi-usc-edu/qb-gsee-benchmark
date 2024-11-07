@@ -1,5 +1,15 @@
-## Hamiltonian Features List
+## Hamiltonian features calculation
 
+
+The `experimental.fast_double_factorization_features.main.py` script is provided to calculate the features of a Hamiltonian 
+described in one FCIDUMP file.  The output is a `.csv` file.  See `./main.py --help` for usage.
+
+The (TODO) `TODO_some_script.py` calculates the metrics for *all* the Hamiltonians listed in `problem_instance.json` files.
+The results are in the `TODO_some_results.csv` file.
+
+
+
+### List of features calculated
 
 Number of electrons $\eta$
 

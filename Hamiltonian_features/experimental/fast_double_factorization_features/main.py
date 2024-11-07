@@ -16,7 +16,7 @@ import logging
 import datetime
 
 
-from json_to_ham_features_csv import compute_ham_features_csv
+from fcidump_to_ham_features_csv import compute_ham_features_csv
 
 
 

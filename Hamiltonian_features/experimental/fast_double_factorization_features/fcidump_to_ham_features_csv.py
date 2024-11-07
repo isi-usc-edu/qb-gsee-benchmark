@@ -98,7 +98,7 @@ def compute_ham_features_csv(
     if save:
         # Convert the dictionary to a pandas DataFrame
         df = pd.DataFrame([ham_features])
-        df.to_csv(csv_filename)
+        df.to_csv(csv_filename, index=False)
         if verbose_logging: logging.info(f"data written to {csv_filename}")
 
     if verbose_logging:
