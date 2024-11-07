@@ -94,7 +94,7 @@ def compute_ham_features_csv(
     ham_features['df_rank'] = len(eigs)
     ham_features['df_gap'] = abs(eigs[-1] - eigs[-2])
     ham_features['df_eigs'] = eigs
-
+    
     if save:
         # Convert the dictionary to a pandas DataFrame
         df = pd.DataFrame([ham_features])
