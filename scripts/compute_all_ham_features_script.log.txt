@@ -64,4 +64,397 @@
 2024-11-07 14:33:15,266 - INFO - ===============================================
 2024-11-07 14:33:15,267 - INFO - calculating Hamiltonian features...
 2024-11-07 14:33:15,267 - INFO - reading data from fcidump.40_1_ts_noncan_0.2_new.7db0f859-073f-46af-9325-016a67229a4b
-Killed.
+Killed.2024-11-07 16:58:24,911 - INFO - ===============================================
+2024-11-07 16:58:24,912 - INFO - overall start time: 2024-11-07 16:58:24.911558
+2024-11-07 16:58:24,912 - INFO - input directory: ../problem_instances/
+2024-11-07 16:58:24,912 - INFO - output file: Hamiltonian_features_1731016704.91086.csv
+2024-11-07 16:58:24,913 - INFO - parsing 6 files in the input directory
+2024-11-07 16:58:24,913 - INFO - file: problem_instance.blue_dimer.dc8bdc56-5ebd-4996-6b81-81b1a06d8c76.json
+2024-11-07 16:58:24,913 - INFO - file: problem_instance.mn_mono.cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8.json
+2024-11-07 16:58:24,914 - INFO - file: problem_instance.mo_n2.664ec8e4-09d5-41cc-6266-ddb26219366f.json
+2024-11-07 16:58:24,914 - INFO - file: problem_instance.ru_mono.7213642b-5f16-48be-d5e5-2bc42ebb8526.json
+2024-11-07 16:58:24,914 - INFO - file: problem_instance.mo2_n2.90d4e4fc-1216-4846-b45f-198c0530e29b.json
+2024-11-07 16:58:24,914 - INFO - file: problem_instance.mo_n2_pincer.8a3787cc-d3d0-42a8-d9a9-7de2aed45208.json
+2024-11-07 16:58:24,915 - INFO - parsing ../problem_instances/problem_instance.blue_dimer.dc8bdc56-5ebd-4996-6b81-81b1a06d8c76.json
+2024-11-07 16:58:24,916 - INFO - problem_instance UUID: dc8bdc56-5ebd-4996-6b81-81b1a06d8c76
+2024-11-07 16:58:24,916 - INFO - problem_instance short name: blue_dimer
+2024-11-07 16:58:24,916 - INFO - contains 12 associated Hamiltonians.
+2024-11-07 16:58:24,917 - INFO - number of supporting files: 1
+2024-11-07 16:58:24,917 - INFO - supporting data file UUID: 46967cfc-d867-40e8-bef0-9655c46cef29.
+2024-11-07 16:58:24,917 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.38_1_ts_noncan_0.2_new.46967cfc-d867-40e8-bef0-9655c46cef29.gz.
+2024-11-07 16:58:24,917 - INFO - assuming fcidump.38_1_ts_noncan_0.2_new.46967cfc-d867-40e8-bef0-9655c46cef29.gz is an FCIDUMP file.
+2024-11-07 16:58:24,918 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.38_1_ts_noncan_0.2_new.46967cfc-d867-40e8-bef0-9655c46cef29.gz...
+2024-11-07 16:58:25,024 - INFO - Connected (version 2.0, client 0)
+2024-11-07 16:58:25,627 - INFO - Authentication (publickey) successful!
+2024-11-07 16:58:25,639 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 16:58:25,718 - INFO - [chan 0] sftp session closed.
+2024-11-07 16:58:25,719 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 16:58:25,719 - INFO - decompressing file fcidump.38_1_ts_noncan_0.2_new.46967cfc-d867-40e8-bef0-9655c46cef29.gz...
+2024-11-07 16:58:25,725 - INFO - ===============================================
+2024-11-07 16:58:25,725 - INFO - calculating Hamiltonian features...
+2024-11-07 16:58:25,725 - INFO - reading data from fcidump.38_1_ts_noncan_0.2_new.46967cfc-d867-40e8-bef0-9655c46cef29
+2024-11-07 16:58:54,896 - INFO - Hamiltonian features calculation run time (seconds): 29.171105
+2024-11-07 16:58:54,897 - INFO - deleting file fcidump.38_1_ts_noncan_0.2_new.46967cfc-d867-40e8-bef0-9655c46cef29.
+2024-11-07 16:58:54,897 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 16:58:54,902 - INFO - number of supporting files: 1
+2024-11-07 16:58:54,902 - INFO - supporting data file UUID: 85d9d818-501e-4a0e-8fd8-c216ab5e3cb5.
+2024-11-07 16:58:54,902 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.39_1_ts_noncan_0.2_new.85d9d818-501e-4a0e-8fd8-c216ab5e3cb5.gz.
+2024-11-07 16:58:54,902 - INFO - assuming fcidump.39_1_ts_noncan_0.2_new.85d9d818-501e-4a0e-8fd8-c216ab5e3cb5.gz is an FCIDUMP file.
+2024-11-07 16:58:54,902 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.39_1_ts_noncan_0.2_new.85d9d818-501e-4a0e-8fd8-c216ab5e3cb5.gz...
+2024-11-07 16:58:54,906 - INFO - Connected (version 2.0, client 0)
+2024-11-07 16:58:55,432 - INFO - Authentication (publickey) successful!
+2024-11-07 16:58:55,444 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 16:58:55,493 - INFO - [chan 0] sftp session closed.
+2024-11-07 16:58:55,493 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 16:58:55,494 - INFO - decompressing file fcidump.39_1_ts_noncan_0.2_new.85d9d818-501e-4a0e-8fd8-c216ab5e3cb5.gz...
+2024-11-07 16:58:55,505 - INFO - ===============================================
+2024-11-07 16:58:55,505 - INFO - calculating Hamiltonian features...
+2024-11-07 16:58:55,506 - INFO - reading data from fcidump.39_1_ts_noncan_0.2_new.85d9d818-501e-4a0e-8fd8-c216ab5e3cb5
+2024-11-07 17:00:00,457 - INFO - Hamiltonian features calculation run time (seconds): 64.951035
+2024-11-07 17:00:00,457 - INFO - deleting file fcidump.39_1_ts_noncan_0.2_new.85d9d818-501e-4a0e-8fd8-c216ab5e3cb5.
+2024-11-07 17:00:00,458 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 17:00:00,462 - INFO - number of supporting files: 1
+2024-11-07 17:00:00,463 - INFO - supporting data file UUID: 7db0f859-073f-46af-9325-016a67229a4b.
+2024-11-07 17:00:00,463 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.40_1_ts_noncan_0.2_new.7db0f859-073f-46af-9325-016a67229a4b.gz.
+2024-11-07 17:00:00,463 - INFO - assuming fcidump.40_1_ts_noncan_0.2_new.7db0f859-073f-46af-9325-016a67229a4b.gz is an FCIDUMP file.
+2024-11-07 17:00:00,463 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.40_1_ts_noncan_0.2_new.7db0f859-073f-46af-9325-016a67229a4b.gz...
+2024-11-07 17:00:00,468 - INFO - Connected (version 2.0, client 0)
+2024-11-07 17:00:01,164 - INFO - Authentication (publickey) successful!
+2024-11-07 17:00:01,286 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 17:00:01,588 - INFO - [chan 0] sftp session closed.
+2024-11-07 17:00:01,589 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 17:00:01,589 - INFO - decompressing file fcidump.40_1_ts_noncan_0.2_new.7db0f859-073f-46af-9325-016a67229a4b.gz...
+2024-11-07 17:00:01,672 - INFO - ===============================================
+2024-11-07 17:00:01,673 - INFO - calculating Hamiltonian features...
+2024-11-07 17:00:01,673 - INFO - reading data from fcidump.40_1_ts_noncan_0.2_new.7db0f859-073f-46af-9325-016a67229a4b
+2024-11-07 17:06:22,037 - INFO - Hamiltonian features calculation run time (seconds): 380.364301
+2024-11-07 17:06:22,038 - INFO - deleting file fcidump.40_1_ts_noncan_0.2_new.7db0f859-073f-46af-9325-016a67229a4b.
+2024-11-07 17:06:22,039 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 17:06:22,045 - INFO - number of supporting files: 1
+2024-11-07 17:06:22,045 - INFO - supporting data file UUID: 2f0b6ced-7831-4fe0-b95e-ce4d456c9c6b.
+2024-11-07 17:06:22,045 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.41_1_ts_noncan_0.2_new.2f0b6ced-7831-4fe0-b95e-ce4d456c9c6b.gz.
+2024-11-07 17:06:22,045 - INFO - assuming fcidump.41_1_ts_noncan_0.2_new.2f0b6ced-7831-4fe0-b95e-ce4d456c9c6b.gz is an FCIDUMP file.
+2024-11-07 17:06:22,045 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.41_1_ts_noncan_0.2_new.2f0b6ced-7831-4fe0-b95e-ce4d456c9c6b.gz...
+2024-11-07 17:06:22,050 - INFO - Connected (version 2.0, client 0)
+2024-11-07 17:06:22,570 - INFO - Authentication (publickey) successful!
+2024-11-07 17:06:22,585 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 17:06:22,755 - INFO - [chan 0] sftp session closed.
+2024-11-07 17:06:22,756 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 17:06:22,756 - INFO - decompressing file fcidump.41_1_ts_noncan_0.2_new.2f0b6ced-7831-4fe0-b95e-ce4d456c9c6b.gz...
+2024-11-07 17:06:22,820 - INFO - ===============================================
+2024-11-07 17:06:22,820 - INFO - calculating Hamiltonian features...
+2024-11-07 17:06:22,820 - INFO - reading data from fcidump.41_1_ts_noncan_0.2_new.2f0b6ced-7831-4fe0-b95e-ce4d456c9c6b
+2024-11-07 17:14:38,043 - INFO - Hamiltonian features calculation run time (seconds): 495.220448
+2024-11-07 17:14:38,045 - INFO - deleting file fcidump.41_1_ts_noncan_0.2_new.2f0b6ced-7831-4fe0-b95e-ce4d456c9c6b.
+2024-11-07 17:14:38,045 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 17:14:38,079 - INFO - number of supporting files: 1
+2024-11-07 17:14:38,079 - INFO - supporting data file UUID: a722dd32-93c7-4fbd-9cf5-f1bf44b2cdae.
+2024-11-07 17:14:38,080 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.42_1_star_noncan_0.2_new.a722dd32-93c7-4fbd-9cf5-f1bf44b2cdae.gz.
+2024-11-07 17:14:38,080 - INFO - assuming fcidump.42_1_star_noncan_0.2_new.a722dd32-93c7-4fbd-9cf5-f1bf44b2cdae.gz is an FCIDUMP file.
+2024-11-07 17:14:38,080 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.42_1_star_noncan_0.2_new.a722dd32-93c7-4fbd-9cf5-f1bf44b2cdae.gz...
+2024-11-07 17:14:38,112 - INFO - Connected (version 2.0, client 0)
+2024-11-07 17:14:38,728 - INFO - Authentication (publickey) successful!
+2024-11-07 17:14:38,745 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 17:14:38,827 - INFO - [chan 0] sftp session closed.
+2024-11-07 17:14:38,827 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 17:14:38,828 - INFO - decompressing file fcidump.42_1_star_noncan_0.2_new.a722dd32-93c7-4fbd-9cf5-f1bf44b2cdae.gz...
+2024-11-07 17:14:38,832 - INFO - ===============================================
+2024-11-07 17:14:38,832 - INFO - calculating Hamiltonian features...
+2024-11-07 17:14:38,832 - INFO - reading data from fcidump.42_1_star_noncan_0.2_new.a722dd32-93c7-4fbd-9cf5-f1bf44b2cdae
+2024-11-07 17:15:07,749 - INFO - Hamiltonian features calculation run time (seconds): 28.916839
+2024-11-07 17:15:07,757 - INFO - deleting file fcidump.42_1_star_noncan_0.2_new.a722dd32-93c7-4fbd-9cf5-f1bf44b2cdae.
+2024-11-07 17:15:07,757 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 17:15:07,761 - INFO - number of supporting files: 1
+2024-11-07 17:15:07,769 - INFO - supporting data file UUID: d9707874-28d5-48b6-824e-a2e6c8753437.
+2024-11-07 17:15:07,769 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.43_1_star_noncan_0.2_new.d9707874-28d5-48b6-824e-a2e6c8753437.gz.
+2024-11-07 17:15:07,769 - INFO - assuming fcidump.43_1_star_noncan_0.2_new.d9707874-28d5-48b6-824e-a2e6c8753437.gz is an FCIDUMP file.
+2024-11-07 17:15:07,769 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.43_1_star_noncan_0.2_new.d9707874-28d5-48b6-824e-a2e6c8753437.gz...
+2024-11-07 17:15:07,834 - INFO - Connected (version 2.0, client 0)
+2024-11-07 17:15:08,406 - INFO - Authentication (publickey) successful!
+2024-11-07 17:15:08,421 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 17:15:08,488 - INFO - [chan 0] sftp session closed.
+2024-11-07 17:15:08,488 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 17:15:08,489 - INFO - decompressing file fcidump.43_1_star_noncan_0.2_new.d9707874-28d5-48b6-824e-a2e6c8753437.gz...
+2024-11-07 17:15:08,501 - INFO - ===============================================
+2024-11-07 17:15:08,501 - INFO - calculating Hamiltonian features...
+2024-11-07 17:15:08,501 - INFO - reading data from fcidump.43_1_star_noncan_0.2_new.d9707874-28d5-48b6-824e-a2e6c8753437
+2024-11-07 17:16:18,467 - INFO - Hamiltonian features calculation run time (seconds): 69.96566
+2024-11-07 17:16:18,467 - INFO - deleting file fcidump.43_1_star_noncan_0.2_new.d9707874-28d5-48b6-824e-a2e6c8753437.
+2024-11-07 17:16:18,467 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 17:16:18,472 - INFO - number of supporting files: 1
+2024-11-07 17:16:18,472 - INFO - supporting data file UUID: 727ab190-e399-4bb6-a9b3-20ae57789bac.
+2024-11-07 17:16:18,472 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.44_1_star_noncan_0.2_new.727ab190-e399-4bb6-a9b3-20ae57789bac.gz.
+2024-11-07 17:16:18,472 - INFO - assuming fcidump.44_1_star_noncan_0.2_new.727ab190-e399-4bb6-a9b3-20ae57789bac.gz is an FCIDUMP file.
+2024-11-07 17:16:18,472 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.44_1_star_noncan_0.2_new.727ab190-e399-4bb6-a9b3-20ae57789bac.gz...
+2024-11-07 17:16:18,484 - INFO - Connected (version 2.0, client 0)
+2024-11-07 17:16:19,001 - INFO - Authentication (publickey) successful!
+2024-11-07 17:16:19,014 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 17:16:19,136 - INFO - [chan 0] sftp session closed.
+2024-11-07 17:16:19,136 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 17:16:19,136 - INFO - decompressing file fcidump.44_1_star_noncan_0.2_new.727ab190-e399-4bb6-a9b3-20ae57789bac.gz...
+2024-11-07 17:16:19,198 - INFO - ===============================================
+2024-11-07 17:16:19,198 - INFO - calculating Hamiltonian features...
+2024-11-07 17:16:19,198 - INFO - reading data from fcidump.44_1_star_noncan_0.2_new.727ab190-e399-4bb6-a9b3-20ae57789bac
+2024-11-07 17:22:35,238 - INFO - Hamiltonian features calculation run time (seconds): 376.039635
+2024-11-07 17:22:35,238 - INFO - deleting file fcidump.44_1_star_noncan_0.2_new.727ab190-e399-4bb6-a9b3-20ae57789bac.
+2024-11-07 17:22:35,239 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 17:22:35,245 - INFO - number of supporting files: 1
+2024-11-07 17:22:35,245 - INFO - supporting data file UUID: e986eb83-6b9d-439e-85ca-a9b931eef4a2.
+2024-11-07 17:22:35,245 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.45_1_star_noncan_0.2_new.e986eb83-6b9d-439e-85ca-a9b931eef4a2.gz.
+2024-11-07 17:22:35,245 - INFO - assuming fcidump.45_1_star_noncan_0.2_new.e986eb83-6b9d-439e-85ca-a9b931eef4a2.gz is an FCIDUMP file.
+2024-11-07 17:22:35,245 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.45_1_star_noncan_0.2_new.e986eb83-6b9d-439e-85ca-a9b931eef4a2.gz...
+2024-11-07 17:22:35,251 - INFO - Connected (version 2.0, client 0)
+2024-11-07 17:22:35,814 - INFO - Authentication (publickey) successful!
+2024-11-07 17:22:35,843 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 17:22:36,061 - INFO - [chan 0] sftp session closed.
+2024-11-07 17:22:36,061 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 17:22:36,062 - INFO - decompressing file fcidump.45_1_star_noncan_0.2_new.e986eb83-6b9d-439e-85ca-a9b931eef4a2.gz...
+2024-11-07 17:22:36,141 - INFO - ===============================================
+2024-11-07 17:22:36,141 - INFO - calculating Hamiltonian features...
+2024-11-07 17:22:36,142 - INFO - reading data from fcidump.45_1_star_noncan_0.2_new.e986eb83-6b9d-439e-85ca-a9b931eef4a2
+2024-11-07 17:30:52,135 - INFO - Hamiltonian features calculation run time (seconds): 495.993289
+2024-11-07 17:30:52,148 - INFO - deleting file fcidump.45_1_star_noncan_0.2_new.e986eb83-6b9d-439e-85ca-a9b931eef4a2.
+2024-11-07 17:30:52,154 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 17:30:52,203 - INFO - number of supporting files: 1
+2024-11-07 17:30:52,203 - INFO - supporting data file UUID: 6bf3207c-664b-4ed3-8e74-82b42e277234.
+2024-11-07 17:30:52,203 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.46_2_noncan_0.2_new.6bf3207c-664b-4ed3-8e74-82b42e277234.gz.
+2024-11-07 17:30:52,203 - INFO - assuming fcidump.46_2_noncan_0.2_new.6bf3207c-664b-4ed3-8e74-82b42e277234.gz is an FCIDUMP file.
+2024-11-07 17:30:52,204 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.46_2_noncan_0.2_new.6bf3207c-664b-4ed3-8e74-82b42e277234.gz...
+2024-11-07 17:30:52,211 - INFO - Connected (version 2.0, client 0)
+2024-11-07 17:30:52,776 - INFO - Authentication (publickey) successful!
+2024-11-07 17:30:52,792 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 17:30:52,885 - INFO - [chan 0] sftp session closed.
+2024-11-07 17:30:52,885 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 17:30:52,885 - INFO - decompressing file fcidump.46_2_noncan_0.2_new.6bf3207c-664b-4ed3-8e74-82b42e277234.gz...
+2024-11-07 17:30:52,894 - INFO - ===============================================
+2024-11-07 17:30:52,894 - INFO - calculating Hamiltonian features...
+2024-11-07 17:30:52,895 - INFO - reading data from fcidump.46_2_noncan_0.2_new.6bf3207c-664b-4ed3-8e74-82b42e277234
+2024-11-07 17:31:32,318 - INFO - Hamiltonian features calculation run time (seconds): 39.423346
+2024-11-07 17:31:32,319 - INFO - deleting file fcidump.46_2_noncan_0.2_new.6bf3207c-664b-4ed3-8e74-82b42e277234.
+2024-11-07 17:31:32,319 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 17:31:32,323 - INFO - number of supporting files: 1
+2024-11-07 17:31:32,323 - INFO - supporting data file UUID: fb3ecfad-6450-423e-aa58-d5cddab6f0f6.
+2024-11-07 17:31:32,323 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.47_2_noncan_0.2_new.fb3ecfad-6450-423e-aa58-d5cddab6f0f6.gz.
+2024-11-07 17:31:32,323 - INFO - assuming fcidump.47_2_noncan_0.2_new.fb3ecfad-6450-423e-aa58-d5cddab6f0f6.gz is an FCIDUMP file.
+2024-11-07 17:31:32,323 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.47_2_noncan_0.2_new.fb3ecfad-6450-423e-aa58-d5cddab6f0f6.gz...
+2024-11-07 17:31:32,332 - INFO - Connected (version 2.0, client 0)
+2024-11-07 17:31:32,904 - INFO - Authentication (publickey) successful!
+2024-11-07 17:31:32,919 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 17:31:33,000 - INFO - [chan 0] sftp session closed.
+2024-11-07 17:31:33,000 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 17:31:33,000 - INFO - decompressing file fcidump.47_2_noncan_0.2_new.fb3ecfad-6450-423e-aa58-d5cddab6f0f6.gz...
+2024-11-07 17:31:33,029 - INFO - ===============================================
+2024-11-07 17:31:33,029 - INFO - calculating Hamiltonian features...
+2024-11-07 17:31:33,029 - INFO - reading data from fcidump.47_2_noncan_0.2_new.fb3ecfad-6450-423e-aa58-d5cddab6f0f6
+2024-11-07 17:34:31,985 - INFO - Hamiltonian features calculation run time (seconds): 178.9554
+2024-11-07 17:34:31,985 - INFO - deleting file fcidump.47_2_noncan_0.2_new.fb3ecfad-6450-423e-aa58-d5cddab6f0f6.
+2024-11-07 17:34:31,988 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 17:34:31,993 - INFO - number of supporting files: 1
+2024-11-07 17:34:31,993 - INFO - supporting data file UUID: dc406285-bac1-4b99-afbf-06728b7d699b.
+2024-11-07 17:34:31,993 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.48_2_noncan_0.2_new.dc406285-bac1-4b99-afbf-06728b7d699b.gz.
+2024-11-07 17:34:31,993 - INFO - assuming fcidump.48_2_noncan_0.2_new.dc406285-bac1-4b99-afbf-06728b7d699b.gz is an FCIDUMP file.
+2024-11-07 17:34:31,993 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.48_2_noncan_0.2_new.dc406285-bac1-4b99-afbf-06728b7d699b.gz...
+2024-11-07 17:34:31,998 - INFO - Connected (version 2.0, client 0)
+2024-11-07 17:34:32,562 - INFO - Authentication (publickey) successful!
+2024-11-07 17:34:32,587 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 17:34:32,728 - INFO - [chan 0] sftp session closed.
+2024-11-07 17:34:32,729 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 17:34:32,729 - INFO - decompressing file fcidump.48_2_noncan_0.2_new.dc406285-bac1-4b99-afbf-06728b7d699b.gz...
+2024-11-07 17:34:32,799 - INFO - ===============================================
+2024-11-07 17:34:32,799 - INFO - calculating Hamiltonian features...
+2024-11-07 17:34:32,799 - INFO - reading data from fcidump.48_2_noncan_0.2_new.dc406285-bac1-4b99-afbf-06728b7d699b
+2024-11-07 17:40:53,680 - INFO - Hamiltonian features calculation run time (seconds): 380.881052
+2024-11-07 17:40:53,681 - INFO - deleting file fcidump.48_2_noncan_0.2_new.dc406285-bac1-4b99-afbf-06728b7d699b.
+2024-11-07 17:40:53,682 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 17:40:53,688 - INFO - number of supporting files: 1
+2024-11-07 17:40:53,688 - INFO - supporting data file UUID: af9d6a83-7898-4c13-80eb-a83a533ebf2d.
+2024-11-07 17:40:53,688 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.49_2_noncan_0.2_new.af9d6a83-7898-4c13-80eb-a83a533ebf2d.gz.
+2024-11-07 17:40:53,689 - INFO - assuming fcidump.49_2_noncan_0.2_new.af9d6a83-7898-4c13-80eb-a83a533ebf2d.gz is an FCIDUMP file.
+2024-11-07 17:40:53,689 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.49_2_noncan_0.2_new.af9d6a83-7898-4c13-80eb-a83a533ebf2d.gz...
+2024-11-07 17:40:53,702 - INFO - Connected (version 2.0, client 0)
+2024-11-07 17:40:54,246 - INFO - Authentication (publickey) successful!
+2024-11-07 17:40:54,260 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 17:40:54,389 - INFO - [chan 0] sftp session closed.
+2024-11-07 17:40:54,390 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 17:40:54,390 - INFO - decompressing file fcidump.49_2_noncan_0.2_new.af9d6a83-7898-4c13-80eb-a83a533ebf2d.gz...
+2024-11-07 17:40:54,472 - INFO - ===============================================
+2024-11-07 17:40:54,472 - INFO - calculating Hamiltonian features...
+2024-11-07 17:40:54,472 - INFO - reading data from fcidump.49_2_noncan_0.2_new.af9d6a83-7898-4c13-80eb-a83a533ebf2d
+2024-11-07 17:49:06,931 - INFO - Hamiltonian features calculation run time (seconds): 492.45871
+2024-11-07 17:49:06,934 - INFO - deleting file fcidump.49_2_noncan_0.2_new.af9d6a83-7898-4c13-80eb-a83a533ebf2d.
+2024-11-07 17:49:06,937 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 17:49:06,953 - INFO - parsing ../problem_instances/problem_instance.mn_mono.cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8.json
+2024-11-07 17:49:06,959 - INFO - problem_instance UUID: cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8
+2024-11-07 17:49:06,960 - INFO - problem_instance short name: mn_mono
+2024-11-07 17:49:06,960 - INFO - contains 8 associated Hamiltonians.
+2024-11-07 17:49:06,960 - INFO - number of supporting files: 1
+2024-11-07 17:49:06,960 - INFO - supporting data file UUID: 68af0b80-3d27-4aba-84f9-bcdd30a9255b.
+2024-11-07 17:49:06,960 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.59_5_16_noncan_0.2_new.68af0b80-3d27-4aba-84f9-bcdd30a9255b.gz.
+2024-11-07 17:49:06,960 - INFO - assuming fcidump.59_5_16_noncan_0.2_new.68af0b80-3d27-4aba-84f9-bcdd30a9255b.gz is an FCIDUMP file.
+2024-11-07 17:49:06,960 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.59_5_16_noncan_0.2_new.68af0b80-3d27-4aba-84f9-bcdd30a9255b.gz...
+2024-11-07 17:49:06,971 - INFO - Connected (version 2.0, client 0)
+2024-11-07 17:49:07,530 - INFO - Authentication (publickey) successful!
+2024-11-07 17:49:07,545 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 17:49:07,596 - INFO - [chan 0] sftp session closed.
+2024-11-07 17:49:07,596 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 17:49:07,596 - INFO - decompressing file fcidump.59_5_16_noncan_0.2_new.68af0b80-3d27-4aba-84f9-bcdd30a9255b.gz...
+2024-11-07 17:49:07,598 - INFO - ===============================================
+2024-11-07 17:49:07,599 - INFO - calculating Hamiltonian features...
+2024-11-07 17:49:07,599 - INFO - reading data from fcidump.59_5_16_noncan_0.2_new.68af0b80-3d27-4aba-84f9-bcdd30a9255b
+2024-11-07 17:49:18,211 - INFO - Hamiltonian features calculation run time (seconds): 10.612614
+2024-11-07 17:49:18,211 - INFO - deleting file fcidump.59_5_16_noncan_0.2_new.68af0b80-3d27-4aba-84f9-bcdd30a9255b.
+2024-11-07 17:49:18,212 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 17:49:18,222 - INFO - number of supporting files: 1
+2024-11-07 17:49:18,223 - INFO - supporting data file UUID: 28a7820f-63fe-4920-aeec-a7ffe7e55d83.
+2024-11-07 17:49:18,223 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.60_5_16_noncan_0.2_new.28a7820f-63fe-4920-aeec-a7ffe7e55d83.gz.
+2024-11-07 17:49:18,223 - INFO - assuming fcidump.60_5_16_noncan_0.2_new.28a7820f-63fe-4920-aeec-a7ffe7e55d83.gz is an FCIDUMP file.
+2024-11-07 17:49:18,223 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.60_5_16_noncan_0.2_new.28a7820f-63fe-4920-aeec-a7ffe7e55d83.gz...
+2024-11-07 17:49:18,240 - INFO - Connected (version 2.0, client 0)
+2024-11-07 17:49:18,795 - INFO - Authentication (publickey) successful!
+2024-11-07 17:49:18,807 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 17:49:18,987 - INFO - [chan 0] sftp session closed.
+2024-11-07 17:49:18,988 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 17:49:18,988 - INFO - decompressing file fcidump.60_5_16_noncan_0.2_new.28a7820f-63fe-4920-aeec-a7ffe7e55d83.gz...
+2024-11-07 17:49:19,029 - INFO - ===============================================
+2024-11-07 17:49:19,029 - INFO - calculating Hamiltonian features...
+2024-11-07 17:49:19,030 - INFO - reading data from fcidump.60_5_16_noncan_0.2_new.28a7820f-63fe-4920-aeec-a7ffe7e55d83
+2024-11-07 17:53:11,164 - INFO - Hamiltonian features calculation run time (seconds): 232.134824
+2024-11-07 17:53:11,165 - INFO - deleting file fcidump.60_5_16_noncan_0.2_new.28a7820f-63fe-4920-aeec-a7ffe7e55d83.
+2024-11-07 17:53:11,166 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 17:53:11,171 - INFO - number of supporting files: 1
+2024-11-07 17:53:11,172 - INFO - supporting data file UUID: f738fcd6-7ddc-4d70-8ff9-4019e3718b04.
+2024-11-07 17:53:11,172 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.61_3_15_af_noncan_0.2_new.f738fcd6-7ddc-4d70-8ff9-4019e3718b04.gz.
+2024-11-07 17:53:11,172 - INFO - assuming fcidump.61_3_15_af_noncan_0.2_new.f738fcd6-7ddc-4d70-8ff9-4019e3718b04.gz is an FCIDUMP file.
+2024-11-07 17:53:11,172 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.61_3_15_af_noncan_0.2_new.f738fcd6-7ddc-4d70-8ff9-4019e3718b04.gz...
+2024-11-07 17:53:11,177 - INFO - Connected (version 2.0, client 0)
+2024-11-07 17:53:11,722 - INFO - Authentication (publickey) successful!
+2024-11-07 17:53:11,737 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 17:53:11,794 - INFO - [chan 0] sftp session closed.
+2024-11-07 17:53:11,794 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 17:53:11,794 - INFO - decompressing file fcidump.61_3_15_af_noncan_0.2_new.f738fcd6-7ddc-4d70-8ff9-4019e3718b04.gz...
+2024-11-07 17:53:11,796 - INFO - ===============================================
+2024-11-07 17:53:11,796 - INFO - calculating Hamiltonian features...
+2024-11-07 17:53:11,796 - INFO - reading data from fcidump.61_3_15_af_noncan_0.2_new.f738fcd6-7ddc-4d70-8ff9-4019e3718b04
+2024-11-07 17:53:22,031 - INFO - Hamiltonian features calculation run time (seconds): 10.234475
+2024-11-07 17:53:22,037 - INFO - deleting file fcidump.61_3_15_af_noncan_0.2_new.f738fcd6-7ddc-4d70-8ff9-4019e3718b04.
+2024-11-07 17:53:22,037 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 17:53:22,041 - INFO - number of supporting files: 1
+2024-11-07 17:53:22,041 - INFO - supporting data file UUID: 6e2bf415-6a69-4b36-ba0f-780a11cb7c0b.
+2024-11-07 17:53:22,041 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.62_3_15_af_noncan_0.2_new.6e2bf415-6a69-4b36-ba0f-780a11cb7c0b.gz.
+2024-11-07 17:53:22,041 - INFO - assuming fcidump.62_3_15_af_noncan_0.2_new.6e2bf415-6a69-4b36-ba0f-780a11cb7c0b.gz is an FCIDUMP file.
+2024-11-07 17:53:22,041 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.62_3_15_af_noncan_0.2_new.6e2bf415-6a69-4b36-ba0f-780a11cb7c0b.gz...
+2024-11-07 17:53:22,048 - INFO - Connected (version 2.0, client 0)
+2024-11-07 17:53:22,611 - INFO - Authentication (publickey) successful!
+2024-11-07 17:53:22,623 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 17:53:22,716 - INFO - [chan 0] sftp session closed.
+2024-11-07 17:53:22,716 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 17:53:22,716 - INFO - decompressing file fcidump.62_3_15_af_noncan_0.2_new.6e2bf415-6a69-4b36-ba0f-780a11cb7c0b.gz...
+2024-11-07 17:53:22,753 - INFO - ===============================================
+2024-11-07 17:53:22,753 - INFO - calculating Hamiltonian features...
+2024-11-07 17:53:22,754 - INFO - reading data from fcidump.62_3_15_af_noncan_0.2_new.6e2bf415-6a69-4b36-ba0f-780a11cb7c0b
+2024-11-07 17:57:43,015 - INFO - Hamiltonian features calculation run time (seconds): 260.26144
+2024-11-07 17:57:43,016 - INFO - deleting file fcidump.62_3_15_af_noncan_0.2_new.6e2bf415-6a69-4b36-ba0f-780a11cb7c0b.
+2024-11-07 17:57:43,019 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 17:57:43,025 - INFO - number of supporting files: 1
+2024-11-07 17:57:43,025 - INFO - supporting data file UUID: 027490ba-34f9-4340-89ab-27fd110d2821.
+2024-11-07 17:57:43,025 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.63_5_15_af_ts_noncan_0.2_new.027490ba-34f9-4340-89ab-27fd110d2821.gz.
+2024-11-07 17:57:43,025 - INFO - assuming fcidump.63_5_15_af_ts_noncan_0.2_new.027490ba-34f9-4340-89ab-27fd110d2821.gz is an FCIDUMP file.
+2024-11-07 17:57:43,025 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.63_5_15_af_ts_noncan_0.2_new.027490ba-34f9-4340-89ab-27fd110d2821.gz...
+2024-11-07 17:57:43,030 - INFO - Connected (version 2.0, client 0)
+2024-11-07 17:57:43,588 - INFO - Authentication (publickey) successful!
+2024-11-07 17:57:43,601 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 17:57:43,642 - INFO - [chan 0] sftp session closed.
+2024-11-07 17:57:43,642 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 17:57:43,642 - INFO - decompressing file fcidump.63_5_15_af_ts_noncan_0.2_new.027490ba-34f9-4340-89ab-27fd110d2821.gz...
+2024-11-07 17:57:43,645 - INFO - ===============================================
+2024-11-07 17:57:43,645 - INFO - calculating Hamiltonian features...
+2024-11-07 17:57:43,645 - INFO - reading data from fcidump.63_5_15_af_ts_noncan_0.2_new.027490ba-34f9-4340-89ab-27fd110d2821
+2024-11-07 17:57:53,881 - INFO - Hamiltonian features calculation run time (seconds): 10.236397
+2024-11-07 17:57:53,881 - INFO - deleting file fcidump.63_5_15_af_ts_noncan_0.2_new.027490ba-34f9-4340-89ab-27fd110d2821.
+2024-11-07 17:57:53,882 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 17:57:53,884 - INFO - number of supporting files: 1
+2024-11-07 17:57:53,884 - INFO - supporting data file UUID: bae2da57-6a69-483e-95bc-b77f72ebfba8.
+2024-11-07 17:57:53,884 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.64_5_15_af_ts_noncan_0.2_new.bae2da57-6a69-483e-95bc-b77f72ebfba8.gz.
+2024-11-07 17:57:53,885 - INFO - assuming fcidump.64_5_15_af_ts_noncan_0.2_new.bae2da57-6a69-483e-95bc-b77f72ebfba8.gz is an FCIDUMP file.
+2024-11-07 17:57:53,885 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.64_5_15_af_ts_noncan_0.2_new.bae2da57-6a69-483e-95bc-b77f72ebfba8.gz...
+2024-11-07 17:57:53,897 - INFO - Connected (version 2.0, client 0)
+2024-11-07 17:57:54,489 - INFO - Authentication (publickey) successful!
+2024-11-07 17:57:54,505 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 17:57:54,605 - INFO - [chan 0] sftp session closed.
+2024-11-07 17:57:54,606 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 17:57:54,606 - INFO - decompressing file fcidump.64_5_15_af_ts_noncan_0.2_new.bae2da57-6a69-483e-95bc-b77f72ebfba8.gz...
+2024-11-07 17:57:54,643 - INFO - ===============================================
+2024-11-07 17:57:54,643 - INFO - calculating Hamiltonian features...
+2024-11-07 17:57:54,643 - INFO - reading data from fcidump.64_5_15_af_ts_noncan_0.2_new.bae2da57-6a69-483e-95bc-b77f72ebfba8
+2024-11-07 18:02:31,791 - INFO - Hamiltonian features calculation run time (seconds): 277.147534
+2024-11-07 18:02:31,791 - INFO - deleting file fcidump.64_5_15_af_ts_noncan_0.2_new.bae2da57-6a69-483e-95bc-b77f72ebfba8.
+2024-11-07 18:02:31,792 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 18:02:31,798 - INFO - number of supporting files: 1
+2024-11-07 18:02:31,798 - INFO - supporting data file UUID: 72343006-774e-4192-b481-fa840ed25573.
+2024-11-07 18:02:31,798 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.65_5_15_af_noncan_0.2_new.72343006-774e-4192-b481-fa840ed25573.gz.
+2024-11-07 18:02:31,798 - INFO - assuming fcidump.65_5_15_af_noncan_0.2_new.72343006-774e-4192-b481-fa840ed25573.gz is an FCIDUMP file.
+2024-11-07 18:02:31,798 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.65_5_15_af_noncan_0.2_new.72343006-774e-4192-b481-fa840ed25573.gz...
+2024-11-07 18:02:31,806 - INFO - Connected (version 2.0, client 0)
+2024-11-07 18:02:32,348 - INFO - Authentication (publickey) successful!
+2024-11-07 18:02:32,374 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 18:02:32,449 - INFO - [chan 0] sftp session closed.
+2024-11-07 18:02:32,449 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 18:02:32,449 - INFO - decompressing file fcidump.65_5_15_af_noncan_0.2_new.72343006-774e-4192-b481-fa840ed25573.gz...
+2024-11-07 18:02:32,451 - INFO - ===============================================
+2024-11-07 18:02:32,451 - INFO - calculating Hamiltonian features...
+2024-11-07 18:02:32,451 - INFO - reading data from fcidump.65_5_15_af_noncan_0.2_new.72343006-774e-4192-b481-fa840ed25573
+2024-11-07 18:02:42,647 - INFO - Hamiltonian features calculation run time (seconds): 10.195847
+2024-11-07 18:02:42,648 - INFO - deleting file fcidump.65_5_15_af_noncan_0.2_new.72343006-774e-4192-b481-fa840ed25573.
+2024-11-07 18:02:42,648 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 18:02:42,650 - INFO - number of supporting files: 1
+2024-11-07 18:02:42,651 - INFO - supporting data file UUID: ea55abec-8253-445d-85fa-914948b5e5a5.
+2024-11-07 18:02:42,651 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.66_5_15_af_noncan_0.2_new.ea55abec-8253-445d-85fa-914948b5e5a5.gz.
+2024-11-07 18:02:42,651 - INFO - assuming fcidump.66_5_15_af_noncan_0.2_new.ea55abec-8253-445d-85fa-914948b5e5a5.gz is an FCIDUMP file.
+2024-11-07 18:02:42,651 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.66_5_15_af_noncan_0.2_new.ea55abec-8253-445d-85fa-914948b5e5a5.gz...
+2024-11-07 18:02:42,655 - INFO - Connected (version 2.0, client 0)
+2024-11-07 18:02:43,204 - INFO - Authentication (publickey) successful!
+2024-11-07 18:02:43,218 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 18:02:43,307 - INFO - [chan 0] sftp session closed.
+2024-11-07 18:02:43,308 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 18:02:43,308 - INFO - decompressing file fcidump.66_5_15_af_noncan_0.2_new.ea55abec-8253-445d-85fa-914948b5e5a5.gz...
+2024-11-07 18:02:43,351 - INFO - ===============================================
+2024-11-07 18:02:43,352 - INFO - calculating Hamiltonian features...
+2024-11-07 18:02:43,352 - INFO - reading data from fcidump.66_5_15_af_noncan_0.2_new.ea55abec-8253-445d-85fa-914948b5e5a5
+2024-11-07 18:07:09,867 - INFO - Hamiltonian features calculation run time (seconds): 266.514893
+2024-11-07 18:07:09,867 - INFO - deleting file fcidump.66_5_15_af_noncan_0.2_new.ea55abec-8253-445d-85fa-914948b5e5a5.
+2024-11-07 18:07:09,868 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 18:07:09,874 - INFO - parsing ../problem_instances/problem_instance.mo_n2.664ec8e4-09d5-41cc-6266-ddb26219366f.json
+2024-11-07 18:07:09,876 - INFO - problem_instance UUID: 664ec8e4-09d5-41cc-6266-ddb26219366f
+2024-11-07 18:07:09,876 - INFO - problem_instance short name: mo_n2
+2024-11-07 18:07:09,877 - INFO - contains 4 associated Hamiltonians.
+2024-11-07 18:07:09,877 - INFO - number of supporting files: 1
+2024-11-07 18:07:09,877 - INFO - supporting data file UUID: 23aa47ca-9afe-4086-bd97-75de310e033e.
+2024-11-07 18:07:09,877 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.9_mo_n2-_noncan_0.2_new.23aa47ca-9afe-4086-bd97-75de310e033e.gz.
+2024-11-07 18:07:09,877 - INFO - assuming fcidump.9_mo_n2-_noncan_0.2_new.23aa47ca-9afe-4086-bd97-75de310e033e.gz is an FCIDUMP file.
+2024-11-07 18:07:09,877 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.9_mo_n2-_noncan_0.2_new.23aa47ca-9afe-4086-bd97-75de310e033e.gz...
+2024-11-07 18:07:09,882 - INFO - Connected (version 2.0, client 0)
+2024-11-07 18:07:10,430 - INFO - Authentication (publickey) successful!
+2024-11-07 18:07:10,453 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 18:07:10,562 - INFO - [chan 0] sftp session closed.
+2024-11-07 18:07:10,563 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 18:07:10,563 - INFO - decompressing file fcidump.9_mo_n2-_noncan_0.2_new.23aa47ca-9afe-4086-bd97-75de310e033e.gz...
+2024-11-07 18:07:10,607 - INFO - ===============================================
+2024-11-07 18:07:10,607 - INFO - calculating Hamiltonian features...
+2024-11-07 18:07:10,607 - INFO - reading data from fcidump.9_mo_n2-_noncan_0.2_new.23aa47ca-9afe-4086-bd97-75de310e033e
+2024-11-07 18:11:34,129 - INFO - Hamiltonian features calculation run time (seconds): 263.521523
+2024-11-07 18:11:34,129 - INFO - deleting file fcidump.9_mo_n2-_noncan_0.2_new.23aa47ca-9afe-4086-bd97-75de310e033e.
+2024-11-07 18:11:34,131 - INFO - writing data to features Hamiltonian_features_1731016704.91086.csv
+2024-11-07 18:11:34,136 - INFO - number of supporting files: 1
+2024-11-07 18:11:34,136 - INFO - supporting data file UUID: e10bd99a-435c-41cd-84f1-41bd67890fc7.
+2024-11-07 18:11:34,136 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.10_fecp2+_s0.5_noncan_0.2_new.e10bd99a-435c-41cd-84f1-41bd67890fc7.gz.
+2024-11-07 18:11:34,137 - INFO - assuming fcidump.10_fecp2+_s0.5_noncan_0.2_new.e10bd99a-435c-41cd-84f1-41bd67890fc7.gz is an FCIDUMP file.
+2024-11-07 18:11:34,137 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.10_fecp2+_s0.5_noncan_0.2_new.e10bd99a-435c-41cd-84f1-41bd67890fc7.gz...
+2024-11-07 18:11:34,142 - INFO - Connected (version 2.0, client 0)
+2024-11-07 18:11:34,698 - INFO - Authentication (publickey) successful!
+2024-11-07 18:11:34,714 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-07 18:11:35,049 - INFO - [chan 0] sftp session closed.
+2024-11-07 18:11:35,050 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-07 18:11:35,050 - INFO - decompressing file fcidump.10_fecp2+_s0.5_noncan_0.2_new.e10bd99a-435c-41cd-84f1-41bd67890fc7.gz...
+2024-11-07 18:11:35,252 - INFO - ===============================================
+2024-11-07 18:11:35,252 - INFO - calculating Hamiltonian features...
+2024-11-07 18:11:35,252 - INFO - reading data from fcidump.10_fecp2+_s0.5_noncan_0.2_new.e10bd99a-435c-41cd-84f1-41bd67890fc7
