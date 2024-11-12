@@ -23,6 +23,7 @@ import shutil
 import json
 import copy
 from urllib.parse import urlparse
+import time
 import sys
 sys.path.append("../")
 sys.path.append("../Hamiltonian_features/experimental/fast_double_factorization_features")
@@ -36,7 +37,10 @@ import logging
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 console_handler = logging.StreamHandler()
-file_handler = logging.FileHandler("compute_all_ham_features_script.log.txt")
+file_handler = logging.FileHandler(
+    "compute_all_ham_features_script.log.txt",
+    delay=False
+)
 formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 handlers = [console_handler , file_handler]
 for h in handlers:
@@ -98,10 +102,16 @@ def fetch_file_from_sftp(
 
 
 
-
-
-
-
+def read_in_Hamiltonian_features_database_csv(ham_features_file):
+    logging.info(f"accessing {ham_features_file}...")
+    if not os.path.exists(ham_features_file):
+        logging.info(f"database file does not exist. A new file will be created.")
+        ham_features_df_database = None
+    else:
+        ham_features_df_database = pd.read_csv(args.ham_features_file)
+        logging.info(f"number of entries in database:  {len(ham_features_df_database)}")
+    
+    return ham_features_df_database # may be None.
 
 
 
@@ -117,18 +127,25 @@ def fetch_file_from_sftp(
 
 def main(args):
 
+    time.sleep(2)
 
     overall_start_time = datetime.datetime.now()
     logging.info(f"===============================================")
     logging.info(f"overall start time: {overall_start_time}")
     logging.info(f"input directory: {args.input_dir}")
-    logging.info(f"output file: {args.output_file}")
+    logging.info(f"Hamiltonian features file: {args.ham_features_file}")
 
     
     input_dir = args.input_dir
 
+    # create backup Hamiltonian_features.csv file
+    if os.path.exists(args.ham_features_file):
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
+        back_up_file_name = args.ham_features_file + ".backup-" + timestamp + ".csv"
+        logging.info(f"creating back up file {back_up_file_name}.")
+        shutil.copy2(args.ham_features_file, back_up_file_name)
 
-    list_of_all_ham_features = []
+
 
     problem_instance_files = os.listdir(input_dir)
     logging.info(f"parsing {len(problem_instance_files)} files in the input directory")
@@ -161,6 +178,10 @@ def main(args):
                 logging.info(f"number of supporting files: {num_supporting_files}")
 
                 for j in range(num_supporting_files):
+                    # flush log buffer to log file
+                    file_handler.flush()
+
+
                     fcidump_uuid = problem_instance["instance_data"][i]["supporting_files"][j]["instance_data_object_uuid"]
                     fcidump_url = problem_instance["instance_data"][i]["supporting_files"][j]["instance_data_object_url"]
                     logging.info(f"supporting data file UUID: {fcidump_uuid}.")
@@ -176,6 +197,28 @@ def main(args):
                     else:
                         logging.info(f"assuming {fcidump_file_name} is NOT an FCIDUMP file.  SKIPPING!")
                         continue
+
+
+                    # check the see if we have already processed FCIDUMP_UUID
+                    # TODO: also compare version of the metrics calculation to see if we need to update.
+                    #==============================================================
+
+                    # re-read ham_features_df_database ... we may have updated it.
+                    ham_features_df_database = read_in_Hamiltonian_features_database_csv(args.ham_features_file)
+                    if ham_features_df_database is None:
+                        # empty features database... we will process the FCIDUMP
+                        logging.info(f"Hamiltonian features database is empty.")
+                        logging.info(f"FCIDUMP UUID {fcidump_uuid} not found in feature database.  Processing...")
+                    else:
+                        if fcidump_uuid in ham_features_df_database["fcidump_uuid"].values:
+                            logging.info(f"FCIDUMP UUID {fcidump_uuid} is already in the feature database.  Skipping it!")
+                            continue
+                        else:
+                            logging.info(f"FCIDUMP UUID {fcidump_uuid} not found in feature database.  Processing...")
+                            
+                    
+
+
 
                     # SFTP download the FCIDUMP file
                     #===============================================================
@@ -232,8 +275,13 @@ def main(args):
                     ham_features["fcidump_url"] = fcidump_url
                     ham_features["date_of_calculation"] = str(ham_features_stop_time)
                     ham_features["version_of_features_calculation_script"] = 1
-                    list_of_all_ham_features.append(copy.deepcopy(ham_features))
 
+
+
+                    # Back up df_eigs to a file. 
+                    # Sometimes the array is shortened in string representation...
+                    # we want all the eigs!
+                    ham_features["df_eigs"].tofile(f"df_eigs.{fcidump_uuid}.bin")
 
 
                     # Clean up
@@ -244,14 +292,15 @@ def main(args):
 
                     # Append/Write out features .csv file
                     #===============================================================
-                    logging.info(f"writing data to features {args.output_file}")
+                    logging.info(f"appending data to file {args.ham_features_file}")
                     df = pd.DataFrame([ham_features])
                     df.to_csv(
-                        args.output_file,
+                        args.ham_features_file,
                         mode="a", #append
-                        header=not os.path.exists(args.output_file), # write headers if starting a new file.
+                        header=not os.path.exists(args.ham_features_file), # write headers if starting a new file.
                         index=False
                     )
+
 
                     
 
@@ -291,12 +340,10 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
-        "-o",
-        "--output_file",
+        "--ham_features_file",
         type=str,
-        required=False,
-        default=f"Hamiltonian_features_{datetime.datetime.now().timestamp()}.csv",
-        help="Output file name.  If left unspecified, the default value is Hamiltonian_features_<unix_time>.csv."
+        required=True,
+        help="The file name of the Hamiltonian features (.csv) file."
     )
 
     parser.add_argument(
@@ -315,3 +362,5 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     main(args)
+
+

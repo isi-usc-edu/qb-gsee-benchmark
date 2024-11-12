@@ -54,7 +54,10 @@ def compute_ham_features_csv(
 
 
     # Extract data from the dictionary
+    logging.info(f"data['NORB']: {data['NORB']}")    
     norb = data['NORB']
+
+    logging.info(f"len(data['H1']): {len(data['H1'])}")    
     h1 = data['H1']
 
 
