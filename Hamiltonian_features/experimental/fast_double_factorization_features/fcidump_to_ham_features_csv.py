@@ -48,24 +48,49 @@ def compute_ham_features_csv(
 
     if verbose_logging: logging.info(f"reading data from {filename}")
     data = fcidump.read(filename)
-    
+    logging.info(f"finished reading FCIDUMP data.")
+        
+
+
 
     # Extract data from the dictionary
     norb = data['NORB']
     h1 = data['H1']
+
+
+    logging.info(f"ao2mo.restore...")
     eri_4d = ao2mo.restore(1, data['H2'], norb)
-
+    logging.info(f"done.")
+    
+    logging.info(f"QuarticDirac(eri_4d, h1, norb)...")
     quartic_fermion = QuarticDirac(eri_4d, h1, norb)
+    logging.info(f"done.")
+    
 
+    logging.info(f"majorana_operator_from_quartic(quartic_fermion)...")
     majorana_op = majorana_operator_from_quartic(quartic_fermion)
+    logging.info(f"done.")
+    
+    logging.info(f"fermion_to_qubit_transformation(majorana_op, 'Jordan-Wigner')...")
     pauli_op = fermion_to_qubit_transformation(majorana_op, 'Jordan-Wigner')
+    logging.info(f"done.")
+    
 
+    logging.info(f"compute_hypergraph_ham_features(pauli_data)...")
     pauli_data = pauli_op.data
     vertex_degree_stats, weight_stats, edge_order_stats = \
         compute_hypergraph_ham_features(pauli_data)
+    logging.info(f"done.")
+    
 
+    logging.info(f"double_factorization_from_quartic(quartic_fermion)...")
     H_DF = double_factorization_from_quartic(quartic_fermion)
+    logging.info(f"done.")
+    
+    logging.info(f"truncate_df_eigenvalues(H_DF.eigs)...")
     eigs = truncate_df_eigenvalues(H_DF.eigs)
+    logging.info(f"done.")
+    
 
     nelec = data['NELEC']
     spin = data['MS2'] / 2
@@ -75,7 +100,10 @@ def compute_ham_features_csv(
     nbeta = (nelec - spin) // 2
 
     # Compute FCI determinant dimension using binomial coefficients
+    logging.info(f"Compute FCI determinant dimension using binomial coefficients...")
     fci_dim = np.log10(comb(norb, nalpha) * comb(norb, nbeta))
+    logging.info(f"done.")
+    
 
 
     ham_features = {}
