@@ -191,7 +191,7 @@ def main(args):
                     fcidump_file_name = parsed_url.path.split("/")[-1]
 
 
-                    #TODO: hacky way to only grab FCIDUMP files:
+                    #TODO: fix hacky way of only grabbing FCIDUMP files:
                     if "fcidump".lower() in fcidump_file_name.lower():
                         logging.info(f"assuming {fcidump_file_name} is an FCIDUMP file.")
                     else:
@@ -234,7 +234,7 @@ def main(args):
 
                     # Decompress the FCIDUMP file (if detected)
                     #===============================================================
-                    # hacky way of detecting the file is compressed:
+                    # TODO: fix hacky way of detecting the file is compressed:
                     if ".gz".lower() in fcidump_file_name.lower():
                         logging.info(f"decompressing file {fcidump_file_name}...")
                         fcidump_file_name_gz = fcidump_file_name
@@ -264,7 +264,8 @@ def main(args):
                         verbose_logging=True
                     )
                     ham_features_stop_time = datetime.datetime.now()
-                    logging.info(f"Hamiltonian features calculation run time (seconds): {(ham_features_stop_time - ham_features_start_time).total_seconds()}")
+                    ham_features_calc_time = (ham_features_stop_time - ham_features_start_time).total_seconds()
+                    logging.info(f"Hamiltonian features calculation run time (seconds): {ham_features_calc_time}")
 
 
 
@@ -275,13 +276,18 @@ def main(args):
                     ham_features["fcidump_url"] = fcidump_url
                     ham_features["date_of_calculation"] = str(ham_features_stop_time)
                     ham_features["version_of_features_calculation_script"] = 1
+                    ham_features["ham_features_calc_time"] = ham_features_calc_time
+
+
 
 
 
                     # Back up df_eigs to a file. 
                     # Sometimes the array is shortened in string representation...
                     # we want all the eigs!
+                    df_eigs_file = f"df_eigs.{fcidump_uuid}.bin"
                     ham_features["df_eigs"].tofile(f"df_eigs.{fcidump_uuid}.bin")
+                    logging.info(f"wrote df_eigs to file: {df_eigs_file}")
 
 
                     # Clean up

@@ -1,8 +1,418 @@
-2024-11-12 12:42:01,132 - INFO - Connected (version 2.0, client 0)
-2024-11-12 12:42:01,651 - INFO - Authentication (publickey) successful!
-2024-11-12 12:42:01,664 - INFO - [chan 0] Opened sftp connection (server version 3)
-2024-11-12 12:42:01,910 - INFO - [chan 0] sftp session closed.
-2024-11-12 12:42:42,606 - INFO - Connected (version 2.0, client 0)
-2024-11-12 12:42:43,139 - INFO - Authentication (publickey) successful!
-2024-11-12 12:42:43,155 - INFO - [chan 0] Opened sftp connection (server version 3)
-2024-11-12 12:42:43,370 - INFO - [chan 0] sftp session closed.
+2024-11-12 14:03:01,391 - INFO - ===============================================
+2024-11-12 14:03:01,392 - INFO - overall start time: 2024-11-12 14:03:01.391830
+2024-11-12 14:03:01,392 - INFO - input directory: ../problem_instances/
+2024-11-12 14:03:01,392 - INFO - Hamiltonian features file: Hamiltonian_features_testing.csv.csv
+2024-11-12 14:03:01,392 - INFO - parsing 6 files in the input directory
+2024-11-12 14:03:01,392 - INFO - file: problem_instance.blue_dimer.dc8bdc56-5ebd-4996-6b81-81b1a06d8c76.json
+2024-11-12 14:03:01,392 - INFO - file: problem_instance.mn_mono.cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8.json
+2024-11-12 14:03:01,392 - INFO - file: problem_instance.mo_n2.664ec8e4-09d5-41cc-6266-ddb26219366f.json
+2024-11-12 14:03:01,392 - INFO - file: problem_instance.ru_mono.7213642b-5f16-48be-d5e5-2bc42ebb8526.json
+2024-11-12 14:03:01,392 - INFO - file: problem_instance.mo2_n2.90d4e4fc-1216-4846-b45f-198c0530e29b.json
+2024-11-12 14:03:01,392 - INFO - file: problem_instance.mo_n2_pincer.8a3787cc-d3d0-42a8-d9a9-7de2aed45208.json
+2024-11-12 14:03:01,393 - INFO - parsing ../problem_instances/problem_instance.blue_dimer.dc8bdc56-5ebd-4996-6b81-81b1a06d8c76.json
+2024-11-12 14:03:01,393 - INFO - problem_instance UUID: dc8bdc56-5ebd-4996-6b81-81b1a06d8c76
+2024-11-12 14:03:01,393 - INFO - problem_instance short name: blue_dimer
+2024-11-12 14:03:01,393 - INFO - contains 12 associated Hamiltonians.
+2024-11-12 14:03:01,393 - INFO - number of supporting files: 1
+2024-11-12 14:03:01,393 - INFO - supporting data file UUID: 46967cfc-d867-40e8-bef0-9655c46cef29.
+2024-11-12 14:03:01,393 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.38_1_ts_noncan_0.2_new.46967cfc-d867-40e8-bef0-9655c46cef29.gz.
+2024-11-12 14:03:01,393 - INFO - assuming fcidump.38_1_ts_noncan_0.2_new.46967cfc-d867-40e8-bef0-9655c46cef29.gz is an FCIDUMP file.
+2024-11-12 14:03:01,393 - INFO - accessing Hamiltonian_features_testing.csv.csv...
+2024-11-12 14:03:01,394 - INFO - database file does not exist. A new file will be created.
+2024-11-12 14:03:01,394 - INFO - Hamiltonian features database is empty.
+2024-11-12 14:03:01,394 - INFO - FCIDUMP UUID 46967cfc-d867-40e8-bef0-9655c46cef29 not found in feature database.  Processing...
+2024-11-12 14:03:01,394 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.38_1_ts_noncan_0.2_new.46967cfc-d867-40e8-bef0-9655c46cef29.gz...
+2024-11-12 14:03:01,437 - INFO - Connected (version 2.0, client 0)
+2024-11-12 14:03:01,960 - INFO - Authentication (publickey) successful!
+2024-11-12 14:03:01,977 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-12 14:03:02,038 - INFO - [chan 0] sftp session closed.
+2024-11-12 14:03:02,039 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-12 14:03:02,039 - INFO - decompressing file fcidump.38_1_ts_noncan_0.2_new.46967cfc-d867-40e8-bef0-9655c46cef29.gz...
+2024-11-12 14:03:02,046 - INFO - ===============================================
+2024-11-12 14:03:02,046 - INFO - calculating Hamiltonian features...
+2024-11-12 14:03:02,047 - INFO - reading data from fcidump.38_1_ts_noncan_0.2_new.46967cfc-d867-40e8-bef0-9655c46cef29
+2024-11-12 14:03:02,079 - INFO - finished reading FCIDUMP data.
+2024-11-12 14:03:02,079 - INFO - data['NORB']: 18
+2024-11-12 14:03:02,079 - INFO - len(data['H1']): 18
+2024-11-12 14:03:02,079 - INFO - ao2mo.restore...
+2024-11-12 14:03:02,080 - INFO - done.
+2024-11-12 14:03:02,080 - INFO - QuarticDirac(eri_4d, h1, norb)...
+2024-11-12 14:03:02,080 - INFO - done.
+2024-11-12 14:03:02,080 - INFO - majorana_operator_from_quartic(quartic_fermion)...
+2024-11-12 14:03:27,929 - INFO - done.
+2024-11-12 14:03:27,930 - INFO - fermion_to_qubit_transformation(majorana_op, 'Jordan-Wigner')...
+2024-11-12 14:03:29,701 - INFO - done.
+2024-11-12 14:03:29,701 - INFO - compute_hypergraph_ham_features(pauli_data)...
+2024-11-12 14:03:29,795 - INFO - done.
+2024-11-12 14:03:29,795 - INFO - double_factorization_from_quartic(quartic_fermion)...
+2024-11-12 14:03:29,804 - INFO - done.
+2024-11-12 14:03:29,804 - INFO - truncate_df_eigenvalues(H_DF.eigs)...
+2024-11-12 14:03:29,804 - INFO - done.
+2024-11-12 14:03:29,805 - INFO - Compute FCI determinant dimension using binomial coefficients...
+2024-11-12 14:03:29,805 - INFO - done.
+2024-11-12 14:03:29,817 - INFO - Hamiltonian features calculation run time (seconds): 27.770874
+2024-11-12 14:03:29,818 - INFO - deleting file fcidump.38_1_ts_noncan_0.2_new.46967cfc-d867-40e8-bef0-9655c46cef29.
+2024-11-12 14:03:29,818 - INFO - appending data to file Hamiltonian_features_testing.csv.csv
+2024-11-12 14:03:29,822 - INFO - number of supporting files: 1
+2024-11-12 14:03:29,823 - INFO - supporting data file UUID: 85d9d818-501e-4a0e-8fd8-c216ab5e3cb5.
+2024-11-12 14:03:29,823 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.39_1_ts_noncan_0.2_new.85d9d818-501e-4a0e-8fd8-c216ab5e3cb5.gz.
+2024-11-12 14:03:29,823 - INFO - assuming fcidump.39_1_ts_noncan_0.2_new.85d9d818-501e-4a0e-8fd8-c216ab5e3cb5.gz is an FCIDUMP file.
+2024-11-12 14:03:29,823 - INFO - accessing Hamiltonian_features_testing.csv.csv...
+2024-11-12 14:03:29,825 - INFO - number of entries in database:  1
+2024-11-12 14:03:29,825 - INFO - FCIDUMP UUID 85d9d818-501e-4a0e-8fd8-c216ab5e3cb5 not found in feature database.  Processing...
+2024-11-12 14:03:29,825 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.39_1_ts_noncan_0.2_new.85d9d818-501e-4a0e-8fd8-c216ab5e3cb5.gz...
+2024-11-12 14:03:29,873 - INFO - Connected (version 2.0, client 0)
+2024-11-12 14:03:30,419 - INFO - Authentication (publickey) successful!
+2024-11-12 14:03:30,442 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-12 14:03:30,504 - INFO - [chan 0] sftp session closed.
+2024-11-12 14:03:30,505 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-12 14:03:30,505 - INFO - decompressing file fcidump.39_1_ts_noncan_0.2_new.85d9d818-501e-4a0e-8fd8-c216ab5e3cb5.gz...
+2024-11-12 14:03:30,517 - INFO - ===============================================
+2024-11-12 14:03:30,517 - INFO - calculating Hamiltonian features...
+2024-11-12 14:03:30,517 - INFO - reading data from fcidump.39_1_ts_noncan_0.2_new.85d9d818-501e-4a0e-8fd8-c216ab5e3cb5
+2024-11-12 14:03:30,583 - INFO - finished reading FCIDUMP data.
+2024-11-12 14:03:30,583 - INFO - data['NORB']: 22
+2024-11-12 14:03:30,583 - INFO - len(data['H1']): 22
+2024-11-12 14:03:30,584 - INFO - ao2mo.restore...
+2024-11-12 14:03:30,584 - INFO - done.
+2024-11-12 14:03:30,584 - INFO - QuarticDirac(eri_4d, h1, norb)...
+2024-11-12 14:03:30,584 - INFO - done.
+2024-11-12 14:03:30,584 - INFO - majorana_operator_from_quartic(quartic_fermion)...
+2024-11-12 14:04:26,220 - INFO - done.
+2024-11-12 14:04:26,221 - INFO - fermion_to_qubit_transformation(majorana_op, 'Jordan-Wigner')...
+2024-11-12 14:04:30,370 - INFO - done.
+2024-11-12 14:04:30,371 - INFO - compute_hypergraph_ham_features(pauli_data)...
+2024-11-12 14:04:30,623 - INFO - done.
+2024-11-12 14:04:30,623 - INFO - double_factorization_from_quartic(quartic_fermion)...
+2024-11-12 14:04:30,641 - INFO - done.
+2024-11-12 14:04:30,642 - INFO - truncate_df_eigenvalues(H_DF.eigs)...
+2024-11-12 14:04:30,642 - INFO - done.
+2024-11-12 14:04:30,642 - INFO - Compute FCI determinant dimension using binomial coefficients...
+2024-11-12 14:04:30,642 - INFO - done.
+2024-11-12 14:04:30,672 - INFO - Hamiltonian features calculation run time (seconds): 60.154353
+2024-11-12 14:04:30,673 - INFO - deleting file fcidump.39_1_ts_noncan_0.2_new.85d9d818-501e-4a0e-8fd8-c216ab5e3cb5.
+2024-11-12 14:04:30,673 - INFO - appending data to file Hamiltonian_features_testing.csv.csv
+2024-11-12 14:04:30,677 - INFO - number of supporting files: 1
+2024-11-12 14:04:30,677 - INFO - supporting data file UUID: 7db0f859-073f-46af-9325-016a67229a4b.
+2024-11-12 14:04:30,678 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.40_1_ts_noncan_0.2_new.7db0f859-073f-46af-9325-016a67229a4b.gz.
+2024-11-12 14:04:30,678 - INFO - assuming fcidump.40_1_ts_noncan_0.2_new.7db0f859-073f-46af-9325-016a67229a4b.gz is an FCIDUMP file.
+2024-11-12 14:04:30,678 - INFO - accessing Hamiltonian_features_testing.csv.csv...
+2024-11-12 14:04:30,680 - INFO - number of entries in database:  2
+2024-11-12 14:04:30,680 - INFO - FCIDUMP UUID 7db0f859-073f-46af-9325-016a67229a4b not found in feature database.  Processing...
+2024-11-12 14:04:30,680 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.40_1_ts_noncan_0.2_new.7db0f859-073f-46af-9325-016a67229a4b.gz...
+2024-11-12 14:04:30,724 - INFO - Connected (version 2.0, client 0)
+2024-11-12 14:04:31,239 - INFO - Authentication (publickey) successful!
+2024-11-12 14:04:31,255 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-12 14:04:31,350 - INFO - [chan 0] sftp session closed.
+2024-11-12 14:04:31,350 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-12 14:04:31,350 - INFO - decompressing file fcidump.40_1_ts_noncan_0.2_new.7db0f859-073f-46af-9325-016a67229a4b.gz...
+2024-11-12 14:04:31,407 - INFO - ===============================================
+2024-11-12 14:04:31,407 - INFO - calculating Hamiltonian features...
+2024-11-12 14:04:31,407 - INFO - reading data from fcidump.40_1_ts_noncan_0.2_new.7db0f859-073f-46af-9325-016a67229a4b
+2024-11-12 14:04:31,770 - INFO - finished reading FCIDUMP data.
+2024-11-12 14:04:31,771 - INFO - data['NORB']: 34
+2024-11-12 14:04:31,771 - INFO - len(data['H1']): 34
+2024-11-12 14:04:31,771 - INFO - ao2mo.restore...
+2024-11-12 14:04:31,773 - INFO - done.
+2024-11-12 14:04:31,773 - INFO - QuarticDirac(eri_4d, h1, norb)...
+2024-11-12 14:04:31,773 - INFO - done.
+2024-11-12 14:04:31,773 - INFO - majorana_operator_from_quartic(quartic_fermion)...
+2024-11-12 14:06:14,485 - INFO - ===============================================
+2024-11-12 14:06:14,486 - INFO - overall start time: 2024-11-12 14:06:14.485829
+2024-11-12 14:06:14,486 - INFO - input directory: ../problem_instances/
+2024-11-12 14:06:14,486 - INFO - Hamiltonian features file: Hamiltonian_features_testing.csv
+2024-11-12 14:06:14,486 - INFO - creating back up file Hamiltonian_features_testing.csv.backup-2024-11-12-14-06.csv.
+2024-11-12 14:06:14,486 - INFO - parsing 6 files in the input directory
+2024-11-12 14:06:14,486 - INFO - file: problem_instance.blue_dimer.dc8bdc56-5ebd-4996-6b81-81b1a06d8c76.json
+2024-11-12 14:06:14,486 - INFO - file: problem_instance.mn_mono.cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8.json
+2024-11-12 14:06:14,487 - INFO - file: problem_instance.mo_n2.664ec8e4-09d5-41cc-6266-ddb26219366f.json
+2024-11-12 14:06:14,487 - INFO - file: problem_instance.ru_mono.7213642b-5f16-48be-d5e5-2bc42ebb8526.json
+2024-11-12 14:06:14,487 - INFO - file: problem_instance.mo2_n2.90d4e4fc-1216-4846-b45f-198c0530e29b.json
+2024-11-12 14:06:14,487 - INFO - file: problem_instance.mo_n2_pincer.8a3787cc-d3d0-42a8-d9a9-7de2aed45208.json
+2024-11-12 14:06:14,487 - INFO - parsing ../problem_instances/problem_instance.blue_dimer.dc8bdc56-5ebd-4996-6b81-81b1a06d8c76.json
+2024-11-12 14:06:14,487 - INFO - problem_instance UUID: dc8bdc56-5ebd-4996-6b81-81b1a06d8c76
+2024-11-12 14:06:14,487 - INFO - problem_instance short name: blue_dimer
+2024-11-12 14:06:14,487 - INFO - contains 12 associated Hamiltonians.
+2024-11-12 14:06:14,487 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,487 - INFO - supporting data file UUID: 46967cfc-d867-40e8-bef0-9655c46cef29.
+2024-11-12 14:06:14,487 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.38_1_ts_noncan_0.2_new.46967cfc-d867-40e8-bef0-9655c46cef29.gz.
+2024-11-12 14:06:14,487 - INFO - assuming fcidump.38_1_ts_noncan_0.2_new.46967cfc-d867-40e8-bef0-9655c46cef29.gz is an FCIDUMP file.
+2024-11-12 14:06:14,488 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,493 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,494 - INFO - FCIDUMP UUID 46967cfc-d867-40e8-bef0-9655c46cef29 is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,494 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,494 - INFO - supporting data file UUID: 85d9d818-501e-4a0e-8fd8-c216ab5e3cb5.
+2024-11-12 14:06:14,494 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.39_1_ts_noncan_0.2_new.85d9d818-501e-4a0e-8fd8-c216ab5e3cb5.gz.
+2024-11-12 14:06:14,494 - INFO - assuming fcidump.39_1_ts_noncan_0.2_new.85d9d818-501e-4a0e-8fd8-c216ab5e3cb5.gz is an FCIDUMP file.
+2024-11-12 14:06:14,494 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,498 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,499 - INFO - FCIDUMP UUID 85d9d818-501e-4a0e-8fd8-c216ab5e3cb5 is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,499 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,499 - INFO - supporting data file UUID: 7db0f859-073f-46af-9325-016a67229a4b.
+2024-11-12 14:06:14,499 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.40_1_ts_noncan_0.2_new.7db0f859-073f-46af-9325-016a67229a4b.gz.
+2024-11-12 14:06:14,499 - INFO - assuming fcidump.40_1_ts_noncan_0.2_new.7db0f859-073f-46af-9325-016a67229a4b.gz is an FCIDUMP file.
+2024-11-12 14:06:14,499 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,503 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,503 - INFO - FCIDUMP UUID 7db0f859-073f-46af-9325-016a67229a4b is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,504 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,504 - INFO - supporting data file UUID: 2f0b6ced-7831-4fe0-b95e-ce4d456c9c6b.
+2024-11-12 14:06:14,504 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.41_1_ts_noncan_0.2_new.2f0b6ced-7831-4fe0-b95e-ce4d456c9c6b.gz.
+2024-11-12 14:06:14,504 - INFO - assuming fcidump.41_1_ts_noncan_0.2_new.2f0b6ced-7831-4fe0-b95e-ce4d456c9c6b.gz is an FCIDUMP file.
+2024-11-12 14:06:14,504 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,508 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,509 - INFO - FCIDUMP UUID 2f0b6ced-7831-4fe0-b95e-ce4d456c9c6b is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,509 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,509 - INFO - supporting data file UUID: a722dd32-93c7-4fbd-9cf5-f1bf44b2cdae.
+2024-11-12 14:06:14,509 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.42_1_star_noncan_0.2_new.a722dd32-93c7-4fbd-9cf5-f1bf44b2cdae.gz.
+2024-11-12 14:06:14,509 - INFO - assuming fcidump.42_1_star_noncan_0.2_new.a722dd32-93c7-4fbd-9cf5-f1bf44b2cdae.gz is an FCIDUMP file.
+2024-11-12 14:06:14,509 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,513 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,513 - INFO - FCIDUMP UUID a722dd32-93c7-4fbd-9cf5-f1bf44b2cdae is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,513 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,513 - INFO - supporting data file UUID: d9707874-28d5-48b6-824e-a2e6c8753437.
+2024-11-12 14:06:14,513 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.43_1_star_noncan_0.2_new.d9707874-28d5-48b6-824e-a2e6c8753437.gz.
+2024-11-12 14:06:14,513 - INFO - assuming fcidump.43_1_star_noncan_0.2_new.d9707874-28d5-48b6-824e-a2e6c8753437.gz is an FCIDUMP file.
+2024-11-12 14:06:14,513 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,517 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,518 - INFO - FCIDUMP UUID d9707874-28d5-48b6-824e-a2e6c8753437 is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,518 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,518 - INFO - supporting data file UUID: 727ab190-e399-4bb6-a9b3-20ae57789bac.
+2024-11-12 14:06:14,518 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.44_1_star_noncan_0.2_new.727ab190-e399-4bb6-a9b3-20ae57789bac.gz.
+2024-11-12 14:06:14,518 - INFO - assuming fcidump.44_1_star_noncan_0.2_new.727ab190-e399-4bb6-a9b3-20ae57789bac.gz is an FCIDUMP file.
+2024-11-12 14:06:14,518 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,522 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,522 - INFO - FCIDUMP UUID 727ab190-e399-4bb6-a9b3-20ae57789bac is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,522 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,522 - INFO - supporting data file UUID: e986eb83-6b9d-439e-85ca-a9b931eef4a2.
+2024-11-12 14:06:14,522 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.45_1_star_noncan_0.2_new.e986eb83-6b9d-439e-85ca-a9b931eef4a2.gz.
+2024-11-12 14:06:14,522 - INFO - assuming fcidump.45_1_star_noncan_0.2_new.e986eb83-6b9d-439e-85ca-a9b931eef4a2.gz is an FCIDUMP file.
+2024-11-12 14:06:14,523 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,526 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,527 - INFO - FCIDUMP UUID e986eb83-6b9d-439e-85ca-a9b931eef4a2 is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,527 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,527 - INFO - supporting data file UUID: 6bf3207c-664b-4ed3-8e74-82b42e277234.
+2024-11-12 14:06:14,527 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.46_2_noncan_0.2_new.6bf3207c-664b-4ed3-8e74-82b42e277234.gz.
+2024-11-12 14:06:14,527 - INFO - assuming fcidump.46_2_noncan_0.2_new.6bf3207c-664b-4ed3-8e74-82b42e277234.gz is an FCIDUMP file.
+2024-11-12 14:06:14,527 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,531 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,532 - INFO - FCIDUMP UUID 6bf3207c-664b-4ed3-8e74-82b42e277234 is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,532 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,532 - INFO - supporting data file UUID: fb3ecfad-6450-423e-aa58-d5cddab6f0f6.
+2024-11-12 14:06:14,532 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.47_2_noncan_0.2_new.fb3ecfad-6450-423e-aa58-d5cddab6f0f6.gz.
+2024-11-12 14:06:14,532 - INFO - assuming fcidump.47_2_noncan_0.2_new.fb3ecfad-6450-423e-aa58-d5cddab6f0f6.gz is an FCIDUMP file.
+2024-11-12 14:06:14,532 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,536 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,536 - INFO - FCIDUMP UUID fb3ecfad-6450-423e-aa58-d5cddab6f0f6 is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,536 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,536 - INFO - supporting data file UUID: dc406285-bac1-4b99-afbf-06728b7d699b.
+2024-11-12 14:06:14,537 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.48_2_noncan_0.2_new.dc406285-bac1-4b99-afbf-06728b7d699b.gz.
+2024-11-12 14:06:14,537 - INFO - assuming fcidump.48_2_noncan_0.2_new.dc406285-bac1-4b99-afbf-06728b7d699b.gz is an FCIDUMP file.
+2024-11-12 14:06:14,537 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,541 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,542 - INFO - FCIDUMP UUID dc406285-bac1-4b99-afbf-06728b7d699b is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,542 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,542 - INFO - supporting data file UUID: af9d6a83-7898-4c13-80eb-a83a533ebf2d.
+2024-11-12 14:06:14,542 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.49_2_noncan_0.2_new.af9d6a83-7898-4c13-80eb-a83a533ebf2d.gz.
+2024-11-12 14:06:14,542 - INFO - assuming fcidump.49_2_noncan_0.2_new.af9d6a83-7898-4c13-80eb-a83a533ebf2d.gz is an FCIDUMP file.
+2024-11-12 14:06:14,542 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,546 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,546 - INFO - FCIDUMP UUID af9d6a83-7898-4c13-80eb-a83a533ebf2d is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,546 - INFO - parsing ../problem_instances/problem_instance.mn_mono.cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8.json
+2024-11-12 14:06:14,547 - INFO - problem_instance UUID: cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8
+2024-11-12 14:06:14,547 - INFO - problem_instance short name: mn_mono
+2024-11-12 14:06:14,547 - INFO - contains 8 associated Hamiltonians.
+2024-11-12 14:06:14,547 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,547 - INFO - supporting data file UUID: 68af0b80-3d27-4aba-84f9-bcdd30a9255b.
+2024-11-12 14:06:14,547 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.59_5_16_noncan_0.2_new.68af0b80-3d27-4aba-84f9-bcdd30a9255b.gz.
+2024-11-12 14:06:14,547 - INFO - assuming fcidump.59_5_16_noncan_0.2_new.68af0b80-3d27-4aba-84f9-bcdd30a9255b.gz is an FCIDUMP file.
+2024-11-12 14:06:14,547 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,551 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,551 - INFO - FCIDUMP UUID 68af0b80-3d27-4aba-84f9-bcdd30a9255b is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,551 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,551 - INFO - supporting data file UUID: 28a7820f-63fe-4920-aeec-a7ffe7e55d83.
+2024-11-12 14:06:14,551 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.60_5_16_noncan_0.2_new.28a7820f-63fe-4920-aeec-a7ffe7e55d83.gz.
+2024-11-12 14:06:14,551 - INFO - assuming fcidump.60_5_16_noncan_0.2_new.28a7820f-63fe-4920-aeec-a7ffe7e55d83.gz is an FCIDUMP file.
+2024-11-12 14:06:14,552 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,556 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,556 - INFO - FCIDUMP UUID 28a7820f-63fe-4920-aeec-a7ffe7e55d83 is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,557 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,557 - INFO - supporting data file UUID: f738fcd6-7ddc-4d70-8ff9-4019e3718b04.
+2024-11-12 14:06:14,557 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.61_3_15_af_noncan_0.2_new.f738fcd6-7ddc-4d70-8ff9-4019e3718b04.gz.
+2024-11-12 14:06:14,557 - INFO - assuming fcidump.61_3_15_af_noncan_0.2_new.f738fcd6-7ddc-4d70-8ff9-4019e3718b04.gz is an FCIDUMP file.
+2024-11-12 14:06:14,557 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,561 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,561 - INFO - FCIDUMP UUID f738fcd6-7ddc-4d70-8ff9-4019e3718b04 is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,561 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,561 - INFO - supporting data file UUID: 6e2bf415-6a69-4b36-ba0f-780a11cb7c0b.
+2024-11-12 14:06:14,561 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.62_3_15_af_noncan_0.2_new.6e2bf415-6a69-4b36-ba0f-780a11cb7c0b.gz.
+2024-11-12 14:06:14,562 - INFO - assuming fcidump.62_3_15_af_noncan_0.2_new.6e2bf415-6a69-4b36-ba0f-780a11cb7c0b.gz is an FCIDUMP file.
+2024-11-12 14:06:14,562 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,567 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,567 - INFO - FCIDUMP UUID 6e2bf415-6a69-4b36-ba0f-780a11cb7c0b is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,567 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,568 - INFO - supporting data file UUID: 027490ba-34f9-4340-89ab-27fd110d2821.
+2024-11-12 14:06:14,568 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.63_5_15_af_ts_noncan_0.2_new.027490ba-34f9-4340-89ab-27fd110d2821.gz.
+2024-11-12 14:06:14,568 - INFO - assuming fcidump.63_5_15_af_ts_noncan_0.2_new.027490ba-34f9-4340-89ab-27fd110d2821.gz is an FCIDUMP file.
+2024-11-12 14:06:14,568 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,572 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,573 - INFO - FCIDUMP UUID 027490ba-34f9-4340-89ab-27fd110d2821 is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,573 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,573 - INFO - supporting data file UUID: bae2da57-6a69-483e-95bc-b77f72ebfba8.
+2024-11-12 14:06:14,573 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.64_5_15_af_ts_noncan_0.2_new.bae2da57-6a69-483e-95bc-b77f72ebfba8.gz.
+2024-11-12 14:06:14,573 - INFO - assuming fcidump.64_5_15_af_ts_noncan_0.2_new.bae2da57-6a69-483e-95bc-b77f72ebfba8.gz is an FCIDUMP file.
+2024-11-12 14:06:14,573 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,578 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,578 - INFO - FCIDUMP UUID bae2da57-6a69-483e-95bc-b77f72ebfba8 is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,579 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,579 - INFO - supporting data file UUID: 72343006-774e-4192-b481-fa840ed25573.
+2024-11-12 14:06:14,579 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.65_5_15_af_noncan_0.2_new.72343006-774e-4192-b481-fa840ed25573.gz.
+2024-11-12 14:06:14,579 - INFO - assuming fcidump.65_5_15_af_noncan_0.2_new.72343006-774e-4192-b481-fa840ed25573.gz is an FCIDUMP file.
+2024-11-12 14:06:14,579 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,583 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,583 - INFO - FCIDUMP UUID 72343006-774e-4192-b481-fa840ed25573 is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,584 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,584 - INFO - supporting data file UUID: ea55abec-8253-445d-85fa-914948b5e5a5.
+2024-11-12 14:06:14,584 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.66_5_15_af_noncan_0.2_new.ea55abec-8253-445d-85fa-914948b5e5a5.gz.
+2024-11-12 14:06:14,584 - INFO - assuming fcidump.66_5_15_af_noncan_0.2_new.ea55abec-8253-445d-85fa-914948b5e5a5.gz is an FCIDUMP file.
+2024-11-12 14:06:14,584 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,588 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,589 - INFO - FCIDUMP UUID ea55abec-8253-445d-85fa-914948b5e5a5 is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,589 - INFO - parsing ../problem_instances/problem_instance.mo_n2.664ec8e4-09d5-41cc-6266-ddb26219366f.json
+2024-11-12 14:06:14,589 - INFO - problem_instance UUID: 664ec8e4-09d5-41cc-6266-ddb26219366f
+2024-11-12 14:06:14,589 - INFO - problem_instance short name: mo_n2
+2024-11-12 14:06:14,589 - INFO - contains 4 associated Hamiltonians.
+2024-11-12 14:06:14,589 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,589 - INFO - supporting data file UUID: 23aa47ca-9afe-4086-bd97-75de310e033e.
+2024-11-12 14:06:14,590 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.9_mo_n2-_noncan_0.2_new.23aa47ca-9afe-4086-bd97-75de310e033e.gz.
+2024-11-12 14:06:14,590 - INFO - assuming fcidump.9_mo_n2-_noncan_0.2_new.23aa47ca-9afe-4086-bd97-75de310e033e.gz is an FCIDUMP file.
+2024-11-12 14:06:14,590 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,594 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,594 - INFO - FCIDUMP UUID 23aa47ca-9afe-4086-bd97-75de310e033e is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,594 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,594 - INFO - supporting data file UUID: e10bd99a-435c-41cd-84f1-41bd67890fc7.
+2024-11-12 14:06:14,594 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.10_fecp2+_s0.5_noncan_0.2_new.e10bd99a-435c-41cd-84f1-41bd67890fc7.gz.
+2024-11-12 14:06:14,594 - INFO - assuming fcidump.10_fecp2+_s0.5_noncan_0.2_new.e10bd99a-435c-41cd-84f1-41bd67890fc7.gz is an FCIDUMP file.
+2024-11-12 14:06:14,595 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,598 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,599 - INFO - FCIDUMP UUID e10bd99a-435c-41cd-84f1-41bd67890fc7 is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,599 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,599 - INFO - supporting data file UUID: b71baf3c-d5f0-4f8d-aead-648ba69a058e.
+2024-11-12 14:06:14,599 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.11_fecp2_s0_noncan_0.2_new.b71baf3c-d5f0-4f8d-aead-648ba69a058e.gz.
+2024-11-12 14:06:14,600 - INFO - assuming fcidump.11_fecp2_s0_noncan_0.2_new.b71baf3c-d5f0-4f8d-aead-648ba69a058e.gz is an FCIDUMP file.
+2024-11-12 14:06:14,600 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,604 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,604 - INFO - FCIDUMP UUID b71baf3c-d5f0-4f8d-aead-648ba69a058e is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,604 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,604 - INFO - supporting data file UUID: 77c12db8-c32e-4f88-8552-9762a0fff763.
+2024-11-12 14:06:14,605 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.12_mo_n2_noncan_0.2_new.77c12db8-c32e-4f88-8552-9762a0fff763.gz.
+2024-11-12 14:06:14,605 - INFO - assuming fcidump.12_mo_n2_noncan_0.2_new.77c12db8-c32e-4f88-8552-9762a0fff763.gz is an FCIDUMP file.
+2024-11-12 14:06:14,605 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,609 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,609 - INFO - FCIDUMP UUID 77c12db8-c32e-4f88-8552-9762a0fff763 is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,609 - INFO - parsing ../problem_instances/problem_instance.ru_mono.7213642b-5f16-48be-d5e5-2bc42ebb8526.json
+2024-11-12 14:06:14,610 - INFO - problem_instance UUID: 7213642b-5f16-48be-d5e5-2bc42ebb8526
+2024-11-12 14:06:14,610 - INFO - problem_instance short name: ru_mono
+2024-11-12 14:06:14,610 - INFO - contains 6 associated Hamiltonians.
+2024-11-12 14:06:14,610 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,610 - INFO - supporting data file UUID: cb60079d-5a30-4e3a-89d5-dbe95822df5e.
+2024-11-12 14:06:14,610 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.32_2ru_III_3pl_noncan_0.2_new.cb60079d-5a30-4e3a-89d5-dbe95822df5e.gz.
+2024-11-12 14:06:14,610 - INFO - assuming fcidump.32_2ru_III_3pl_noncan_0.2_new.cb60079d-5a30-4e3a-89d5-dbe95822df5e.gz is an FCIDUMP file.
+2024-11-12 14:06:14,611 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,614 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,615 - INFO - FCIDUMP UUID cb60079d-5a30-4e3a-89d5-dbe95822df5e is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,619 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,619 - INFO - supporting data file UUID: 4811297e-a8df-4150-9d4d-376fd0c6e9cd.
+2024-11-12 14:06:14,619 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.33_2ru_III_3pl_noncan_0.2_new.4811297e-a8df-4150-9d4d-376fd0c6e9cd.gz.
+2024-11-12 14:06:14,620 - INFO - assuming fcidump.33_2ru_III_3pl_noncan_0.2_new.4811297e-a8df-4150-9d4d-376fd0c6e9cd.gz is an FCIDUMP file.
+2024-11-12 14:06:14,620 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,623 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,624 - INFO - FCIDUMP UUID 4811297e-a8df-4150-9d4d-376fd0c6e9cd is already in the feature database.  Skipping it!
+2024-11-12 14:06:14,624 - INFO - number of supporting files: 1
+2024-11-12 14:06:14,624 - INFO - supporting data file UUID: 30c3e4f9-1b24-4fe5-9cab-ad0b67e0d74b.
+2024-11-12 14:06:14,624 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.34_3ruo_IV_2pl_noncan_0.2_new.30c3e4f9-1b24-4fe5-9cab-ad0b67e0d74b.gz.
+2024-11-12 14:06:14,624 - INFO - assuming fcidump.34_3ruo_IV_2pl_noncan_0.2_new.30c3e4f9-1b24-4fe5-9cab-ad0b67e0d74b.gz is an FCIDUMP file.
+2024-11-12 14:06:14,624 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:14,628 - INFO - number of entries in database:  29
+2024-11-12 14:06:14,628 - INFO - FCIDUMP UUID 30c3e4f9-1b24-4fe5-9cab-ad0b67e0d74b not found in feature database.  Processing...
+2024-11-12 14:06:14,629 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.34_3ruo_IV_2pl_noncan_0.2_new.30c3e4f9-1b24-4fe5-9cab-ad0b67e0d74b.gz...
+2024-11-12 14:06:14,672 - INFO - Connected (version 2.0, client 0)
+2024-11-12 14:06:15,211 - INFO - Authentication (publickey) successful!
+2024-11-12 14:06:15,229 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-12 14:06:15,279 - INFO - [chan 0] sftp session closed.
+2024-11-12 14:06:15,280 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-12 14:06:15,280 - INFO - decompressing file fcidump.34_3ruo_IV_2pl_noncan_0.2_new.30c3e4f9-1b24-4fe5-9cab-ad0b67e0d74b.gz...
+2024-11-12 14:06:15,280 - INFO - ===============================================
+2024-11-12 14:06:15,281 - INFO - calculating Hamiltonian features...
+2024-11-12 14:06:15,281 - INFO - reading data from fcidump.34_3ruo_IV_2pl_noncan_0.2_new.30c3e4f9-1b24-4fe5-9cab-ad0b67e0d74b
+2024-11-12 14:06:15,285 - INFO - finished reading FCIDUMP data.
+2024-11-12 14:06:15,285 - INFO - data['NORB']: 10
+2024-11-12 14:06:15,285 - INFO - len(data['H1']): 10
+2024-11-12 14:06:15,285 - INFO - ao2mo.restore...
+2024-11-12 14:06:15,285 - INFO - done.
+2024-11-12 14:06:15,285 - INFO - QuarticDirac(eri_4d, h1, norb)...
+2024-11-12 14:06:15,285 - INFO - done.
+2024-11-12 14:06:15,285 - INFO - majorana_operator_from_quartic(quartic_fermion)...
+2024-11-12 14:06:17,501 - INFO - done.
+2024-11-12 14:06:17,501 - INFO - fermion_to_qubit_transformation(majorana_op, 'Jordan-Wigner')...
+2024-11-12 14:06:17,624 - INFO - done.
+2024-11-12 14:06:17,624 - INFO - compute_hypergraph_ham_features(pauli_data)...
+2024-11-12 14:06:17,628 - INFO - done.
+2024-11-12 14:06:17,628 - INFO - double_factorization_from_quartic(quartic_fermion)...
+2024-11-12 14:06:17,636 - INFO - done.
+2024-11-12 14:06:17,636 - INFO - truncate_df_eigenvalues(H_DF.eigs)...
+2024-11-12 14:06:17,637 - INFO - done.
+2024-11-12 14:06:17,637 - INFO - Compute FCI determinant dimension using binomial coefficients...
+2024-11-12 14:06:17,637 - INFO - done.
+2024-11-12 14:06:17,640 - INFO - Hamiltonian features calculation run time (seconds): 2.35891
+2024-11-12 14:06:17,640 - INFO - deleting file fcidump.34_3ruo_IV_2pl_noncan_0.2_new.30c3e4f9-1b24-4fe5-9cab-ad0b67e0d74b.
+2024-11-12 14:06:17,641 - INFO - appending data to file Hamiltonian_features_testing.csv
+2024-11-12 14:06:17,644 - INFO - number of supporting files: 1
+2024-11-12 14:06:17,644 - INFO - supporting data file UUID: a2417602-4e97-4395-b3f0-1e29262c8053.
+2024-11-12 14:06:17,644 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.35_3ruo_IV_2pl_noncan_0.2_new.a2417602-4e97-4395-b3f0-1e29262c8053.gz.
+2024-11-12 14:06:17,645 - INFO - assuming fcidump.35_3ruo_IV_2pl_noncan_0.2_new.a2417602-4e97-4395-b3f0-1e29262c8053.gz is an FCIDUMP file.
+2024-11-12 14:06:17,645 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:17,648 - INFO - number of entries in database:  30
+2024-11-12 14:06:17,649 - INFO - FCIDUMP UUID a2417602-4e97-4395-b3f0-1e29262c8053 is already in the feature database.  Skipping it!
+2024-11-12 14:06:17,649 - INFO - number of supporting files: 1
+2024-11-12 14:06:17,649 - INFO - supporting data file UUID: 51f7d629-9a0e-4688-8562-59a5f0c0a404.
+2024-11-12 14:06:17,650 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.36_1ru_II_2pl_noncan_0.2_new.51f7d629-9a0e-4688-8562-59a5f0c0a404.gz.
+2024-11-12 14:06:17,650 - INFO - assuming fcidump.36_1ru_II_2pl_noncan_0.2_new.51f7d629-9a0e-4688-8562-59a5f0c0a404.gz is an FCIDUMP file.
+2024-11-12 14:06:17,650 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:17,653 - INFO - number of entries in database:  30
+2024-11-12 14:06:17,654 - INFO - FCIDUMP UUID 51f7d629-9a0e-4688-8562-59a5f0c0a404 is already in the feature database.  Skipping it!
+2024-11-12 14:06:17,654 - INFO - number of supporting files: 1
+2024-11-12 14:06:17,654 - INFO - supporting data file UUID: 7be1766a-b3f7-4779-9a69-f4358645831b.
+2024-11-12 14:06:17,654 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.37_1ru_II_2pl_noncan_0.2_new.7be1766a-b3f7-4779-9a69-f4358645831b.gz.
+2024-11-12 14:06:17,655 - INFO - assuming fcidump.37_1ru_II_2pl_noncan_0.2_new.7be1766a-b3f7-4779-9a69-f4358645831b.gz is an FCIDUMP file.
+2024-11-12 14:06:17,655 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:17,658 - INFO - number of entries in database:  30
+2024-11-12 14:06:17,659 - INFO - FCIDUMP UUID 7be1766a-b3f7-4779-9a69-f4358645831b is already in the feature database.  Skipping it!
+2024-11-12 14:06:17,659 - INFO - parsing ../problem_instances/problem_instance.mo2_n2.90d4e4fc-1216-4846-b45f-198c0530e29b.json
+2024-11-12 14:06:17,659 - INFO - problem_instance UUID: 90d4e4fc-1216-4846-b45f-198c0530e29b
+2024-11-12 14:06:17,660 - INFO - problem_instance short name: mo2_n2
+2024-11-12 14:06:17,660 - INFO - contains 3 associated Hamiltonians.
+2024-11-12 14:06:17,660 - INFO - number of supporting files: 1
+2024-11-12 14:06:17,660 - INFO - supporting data file UUID: 09c3ddd5-0187-46e8-95c3-157c470cb69a.
+2024-11-12 14:06:17,660 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/fcidump.13_1_lut_ts_noncan_0.2_new.09c3ddd5-0187-46e8-95c3-157c470cb69a.gz.
+2024-11-12 14:06:17,661 - INFO - assuming fcidump.13_1_lut_ts_noncan_0.2_new.09c3ddd5-0187-46e8-95c3-157c470cb69a.gz is an FCIDUMP file.
+2024-11-12 14:06:17,661 - INFO - accessing Hamiltonian_features_testing.csv...
+2024-11-12 14:06:17,664 - INFO - number of entries in database:  30
+2024-11-12 14:06:17,664 - INFO - FCIDUMP UUID 09c3ddd5-0187-46e8-95c3-157c470cb69a not found in feature database.  Processing...
+2024-11-12 14:06:17,665 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/fcidump.13_1_lut_ts_noncan_0.2_new.09c3ddd5-0187-46e8-95c3-157c470cb69a.gz...
+2024-11-12 14:06:17,707 - INFO - Connected (version 2.0, client 0)
+2024-11-12 14:06:18,240 - INFO - Authentication (publickey) successful!
+2024-11-12 14:06:18,255 - INFO - [chan 0] Opened sftp connection (server version 3)
+2024-11-12 14:06:22,269 - INFO - [chan 0] sftp session closed.
+2024-11-12 14:06:22,270 - INFO - File fetched successfully from sftp.l3harris.com
+2024-11-12 14:06:22,270 - INFO - decompressing file fcidump.13_1_lut_ts_noncan_0.2_new.09c3ddd5-0187-46e8-95c3-157c470cb69a.gz...
+2024-11-12 14:06:23,090 - INFO - ===============================================
+2024-11-12 14:06:23,091 - INFO - calculating Hamiltonian features...
+2024-11-12 14:06:23,091 - INFO - reading data from fcidump.13_1_lut_ts_noncan_0.2_new.09c3ddd5-0187-46e8-95c3-157c470cb69a
+2024-11-12 14:06:29,147 - INFO - finished reading FCIDUMP data.
+2024-11-12 14:06:29,147 - INFO - data['NORB']: 69
+2024-11-12 14:06:29,147 - INFO - len(data['H1']): 69
+2024-11-12 14:06:29,148 - INFO - ao2mo.restore...
+2024-11-12 14:06:29,231 - INFO - done.
+2024-11-12 14:06:29,231 - INFO - QuarticDirac(eri_4d, h1, norb)...
+2024-11-12 14:06:29,232 - INFO - done.
+2024-11-12 14:06:29,232 - INFO - majorana_operator_from_quartic(quartic_fermion)...
