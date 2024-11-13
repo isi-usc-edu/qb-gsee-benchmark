@@ -1,12 +1,12 @@
 ## Hamiltonian features calculation
 
 
-The `experimental.fast_double_factorization_features.main.py` script is provided to calculate the features of a Hamiltonian 
+The features of all the Hamiltonians listed in the `problem_instance.json` files are calculated and available in the `Hamiltonian_featurs.csv` file.  
+
+The `experimental.fast_double_factorization_features.main.py` script is provided to calculate the features of *one* Hamiltonian 
 described in one FCIDUMP file.  The output is a `.csv` file.  See `./main.py --help` for usage.
 
-The (TODO) `TODO_some_script.py` calculates the metrics for *all* the Hamiltonians listed in `problem_instance.json` files.
-The results are in the `TODO_some_results.csv` file.
-
+In the `scripts` directory, the `compute_all_ham_features_script.py` script will calculate the features of *all* the Hamiltonians and *update* or *append new data* to the `Hamiltonian_features.csv` file.  This script is only intended to be used by the QB team.
 
 
 ### List of features calculated
