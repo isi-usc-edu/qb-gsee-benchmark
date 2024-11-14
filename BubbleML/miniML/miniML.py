@@ -50,7 +50,7 @@ def evaluate(model, test_features, test_labels,model_name):
     
 
 
-def trainML(X,Y, latent_model_name, model_name, hypopt_cv, imp_features):
+def trainML(X,Y, latent_model_name, model_name, hypopt_cv, conf_thresh, imp_features):
 
     '''
     This function trains a machine learning model (name given by model_name) with data points X and labels Y 
@@ -87,7 +87,7 @@ def trainML(X,Y, latent_model_name, model_name, hypopt_cv, imp_features):
         X_train = X_sc
         param_grid = {'C': [0.001, 0.1, 0.5, 1, 10, 50, 100],  
             'gamma': [1, 0.1, 0.01, 0.001, 0.0001], 
-            'kernel': ['rbf', 'poly', 'linear']}  #add linear
+            'kernel': ['rbf', 'poly', 'linear']} 
 
 
     if hypopt_cv == 0:
@@ -114,7 +114,7 @@ def trainML(X,Y, latent_model_name, model_name, hypopt_cv, imp_features):
 
         #ratio_of_solved_to_truesolved @ above 50% (bounded by min and max of points or convex hull - as in the figure)
         #sending original X (it will be transformed)
-        ratio = compute_ratio_of_solved_to_unsolved(X, y_train, sc, latent_model_name, model,draw_plot)
+        ratio = compute_ratio_of_solved_to_unsolved(X, y_train, sc, latent_model_name, model, conf_thresh, draw_plot)
         print('Percent of solvable space: ', str(ratio))
 
         #explain all the predictions in the test set
@@ -146,7 +146,6 @@ def getProjectedData(X, latent_model_name):
         Returns the latent model ("pca"), latent axes ("pca_axes") and the projected data ("proj_data2")
         '''
         
-
         pca = PCA(n_components = 2,whiten = True) # want all the components for now.   rows are components, cols are coefficients
         proj_data2 = pca.fit_transform(X)
         pca_axes = pca.components_  #whitened checked np.diag(np.matmul(pca_axes,np.transpose(pca_axes))) 
@@ -162,8 +161,7 @@ def getProjectedData(X, latent_model_name):
 
         return sc, pca, proj_data2, recons_error
 
-    else: # for now, it is just NNMF as the other choice
-                #another plot for NMF
+    else: # for now, it is just NNMF as the other choice.  The UI provides Umap if the user would like to explore that.
         # Apply NNMF
         # Normalize data (NNMF requires non-negative input.  The data is non-negative, but we will scale in the range of min-max of the features which is great for reconstruction of valid points)
         scaler_minmax = MinMaxScaler()
@@ -193,7 +191,7 @@ def getConvexHull(points):
     return hull
 
 
-def compute_ratio_of_solved_to_unsolved(X, Y, scaler, latent_model_name, learned_model, draw_plot):
+def compute_ratio_of_solved_to_unsolved(X, Y, ml_scaler, latent_model_name, learned_model, conf_thresh, draw_plot):
     '''
     X here is the raw data.  It is uncentered and unscaled.  
     '''
@@ -210,16 +208,13 @@ def compute_ratio_of_solved_to_unsolved(X, Y, scaler, latent_model_name, learned
 
     newX = np.c_[XX.ravel(), YY.ravel()] #grid of projected data
 
-    if latent_model_name == 'PCA':
-        orig_dim_data = latent_model.inverse_transform(newX) #back to the original dimensionality undoing the rotation, centering, scaling and projection
-    else:
-        #have to undo the latent transformation and the min max scaling seperately.
-        orig_dim_data = latent_model.inverse_transform(newX) #undo latent
-        orig_dim_data = latent_sc.inverse_transform(orig_dim_data) #undo scaling
-
+    # Regardless of PCA or NNMF, we undo the latent transformation first and then undo the scaling.
+   
+    orig_dim_data = latent_model.inverse_transform(newX) #back to the original dimensionality undoing the rotation, centering, scaling and projection
+    orig_dim_data = latent_sc.inverse_transform(orig_dim_data) #undo scaling
 
     #svm model was trained on centered and scaled data on the stats of X, so need to re-do that
-    orig_dim_data_for_pred = scaler.transform(orig_dim_data)  #(orig_dim_data-scaler.mean_)/np.sqrt(scaler.var_)
+    orig_dim_data_for_pred = ml_scaler.transform(orig_dim_data)  #(orig_dim_data-scaler.mean_)/np.sqrt(scaler.var_)
     prob = learned_model.predict_proba(np.asarray(orig_dim_data_for_pred))
     
     Z0 = prob[:,1].reshape(XX.shape)
@@ -266,9 +261,7 @@ def compute_ratio_of_solved_to_unsolved(X, Y, scaler, latent_model_name, learned
             #project hull points
 
 
-        
-
-    result = np.where(prob[:,1] > 0.75)
+    result = np.where(prob[:,1] > conf_thresh)
     ratio_solvable = len(result[0])/len(prob[:,1])
 
     return ratio_solvable
@@ -287,6 +280,7 @@ if __name__ == "__main__":
     filename = contents['Filename']
     features =  contents['Features']
     target = contents['Target']
+    conf_thresh = contents['Threshold For Confidence of Solvability']
 
 
     df = pd.read_csv(filename)
@@ -295,8 +289,8 @@ if __name__ == "__main__":
     if all_var == 1:
         X = df.loc[:,features]
         Y = df.loc[:,target]
-        #features_wanted = np.array([12,13,14,15])
-        #X = X.iloc[:,features_wanted]
+        features_wanted = np.array([13,15])
+        X = X.iloc[:,features_wanted]
 
     else:
         features_wanted = np.array([14,16])
@@ -315,8 +309,8 @@ if __name__ == "__main__":
         X = X.drop(zerovar_cols, axis = 1)
 
     hypopt_cv = 1
-    latent_model_name = 'NMF'
+    latent_model_name = 'NNMF'
     model_name = 'SVM'
     importance_features_desired = 1
-    model, cr = trainML(X=X, Y=Y, latent_model_name = latent_model_name, model_name = model_name, hypopt_cv = hypopt_cv, imp_features = importance_features_desired)
+    model, cr = trainML(X=X, Y=Y, latent_model_name = latent_model_name, model_name = model_name, hypopt_cv = hypopt_cv, conf_thresh = conf_thresh, imp_features = importance_features_desired)
 
