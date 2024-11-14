@@ -74,6 +74,8 @@ class UIMainWindow(object):
         self.latent_name = []
         self.latent_model = [] # currently selected latent space
         self.latent_axes = [] # either or both the model or the axes can be used - depends on the model. 
+        self.latent_scaler = [] #pca and umap use standard scaler, nnmf uses minmax scaling
+
         self.actualLabels = []
         self.clusterLabels = []
 
@@ -490,12 +492,14 @@ class UIMainWindow(object):
         self.latent_name = self.ui.latent_comboBox.currentText() #get model name that user set
 
         if self.latent_name == 'Principal Component Analysis (PCA)':
-            pca, pca_axes,pca_proj_data = MLFunctionsForUI.proj_pca(self.X)
-            self.proj_data = pca_proj_data
-            self.latent_model = pca
-            self.latent_axes = pca_axes
+            latent_sc, latent_model, latent_axes,proj_data = MLFunctionsForUI.proj_pca(self.X)
+            
+        
+        elif  self.latent_name == 'Non-Negative Matrix Factorization (NNMF)':
+            latent_sc, latent_model, latent_axes,proj_data = MLFunctionsForUI.proj_nnmf(self.X)
 
-        else:
+
+        else: #UMAP
             n_neigh_min = 2
             n_neigh_max = int(0.25*len(self.X))
             ui_n_neigh = np.min([int(self.ui.umap_numneigh_lineEdit.text()),n_neigh_max]) #or some other justified max based on some initial analysis.  Maybe look this up?
@@ -506,18 +510,18 @@ class UIMainWindow(object):
             ui_min_dist = np.min([float(self.ui.umap_minDist_lineEdit.text()),min_dist_max])  # or the spread.  Can we get access to what this value is?
             ui_min_dist = np.max([float(self.ui.umap_minDist_lineEdit.text()),min_dist_min])  # or the spread.  Can we get access to what this value is?
             
-            umap, umap_axes,umap_proj_data = MLFunctionsForUI.perform_umap(self.X, ui_n_neigh, ui_min_dist)
-            self.proj_data = umap_proj_data
-            self.latent_model = umap
-            self.latent_axes = umap_axes #this is []
+            latent_sc, latent_model, latent_axes,proj_data = MLFunctionsForUI.perform_umap(self.X, ui_n_neigh, ui_min_dist)
 
+        self.latent_scaler = latent_sc
+        self.latent_model = latent_model
+        self.latent_axes = latent_axes
+        self.proj_data = proj_data
         colors = self.Y.tolist()
         self.latentPlotVisualization(colors)
 
 
 
     def clustersButtonClicked(self):
-        
         
         #get which method and its parameters
         if self.ui.kmeans_checkBox.checkState()  == QtCore.Qt.Checked:
@@ -613,12 +617,13 @@ class UIMainWindow(object):
         
         if X_is_good and Y_is_good:
             acc_str  = ' '
-            self.MLModel, self.MLModel_accuracy  = MLFunctionsForUI.trainML(self, self.X,self.Y,self.ML_model_name, self.HypOptCV)
+            self.MLModel, self.MLModel_accuracy = MLFunctionsForUI.trainML(self, self.X,self.Y,self.ML_model_name, self.HypOptCV)
             acc_str = ' {:0.2f}%, ' ' {:0.2f}%.'.format(self.MLModel_accuracy[0]*100, self.MLModel_accuracy[1]*100)
             
 
             self.ui.MLResults.setText('Accuracy [target=false, target = true] with model ' + self.ML_model_name + ' on Data (' + self.MLData + ')' + ': ' + acc_str)
             self.ui.MLResults.update()
+
         else:
             self.ui.MLResults.setText('Please set predictors and target in the Data Tab')
             self.ui.MLResults.update()
@@ -643,8 +648,9 @@ class UIMainWindow(object):
                 self.latentPlotButtonClicked()
             
             #compute the uncertainty values for point in the 2D latent space.
-            XX, YY, Z0, novelX  = MLFunctionsForUI.create_uncertainity_plot_values(self.ML_model_name, self.MLModel, self.latent_model, self.proj_data, self.train_on_reduceddim_data, self.svm_scaler)
-            
+            XX, YY, Z0, novelX, prob  = MLFunctionsForUI.create_uncertainity_plot_values(self.ML_model_name, self.MLModel, self.latent_model, self.proj_data, self.train_on_reduceddim_data, self.latent_scaler, self.svm_scaler)
+            self.prob = prob
+
             #make a dataframe for novelX with uncertainty
             if self.train_on_reduceddim_data == 0:
                 self.novelX = pd.DataFrame(novelX,columns = self.predictors)
@@ -656,6 +662,11 @@ class UIMainWindow(object):
             self.novelX = pd.concat([self.novelX, uncertainty],axis=1)
 
             self.MLVisualizationPlot(XX, YY, Z0)
+            #print solvability ratio
+            conf_thresh = 0.75
+            result =   np.where(self.prob[:,1] > conf_thresh)
+            ratio_str = str(len(result[0])/len(self.prob[:,1]))
+            self.ui.MLResults.setText('Solvability ratio in embedding [Number of point solvable >= 75% / total number of points] with model: ' + ratio_str)
 
             # copy the visualization onto the Active Learning Tab plot
             self.ALVisualizationPlot(XX, YY, Z0)

@@ -9,13 +9,16 @@ from sklearn.model_selection import train_test_split
 import pprint
 import joblib # for saving the model
 import pandas as pd
-from sklearn.decomposition import PCA
+from sklearn.decomposition import PCA, NMF
 import umap
 from mpl_toolkits.mplot3d import Axes3D
 from sklearn.metrics import balanced_accuracy_score
 from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import classification_report, confusion_matrix 
 from sklearn.model_selection import cross_val_score
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+
 
 #helper functions for UI
 def create_scatter_obj(x, y, colors, cmap, norm, ax):
@@ -112,22 +115,38 @@ def proj_pca(X):
 
     '''
     Compute the Principal Components as the latent space for points X.
-    Returns the latent model ("pca"), latent axes ("pca_axes") and the projected data ("proj_data2")
+    Returns the scaler ("sc"), latent model ("pca"), latent axes ("pca_axes") and the projected data ("proj_data2")
     '''
 
     pca = PCA(n_components = 2,whiten=True) # want all the components for now.   rows are components, cols are coefficients
     proj_data2 = pca.fit_transform(X)
 
     ##### for verification
-    from sklearn.preprocessing import StandardScaler
+    
     sc = StandardScaler() 
     X_sc = sc.fit_transform(X)
     pca_axes = pca.components_  #whitened checked np.diag(np.matmul(pca_axes,np.transpose(pca_axes))) 
     proj_data = np.matmul(X_sc,np.transpose(pca_axes))  #if multipled by -1, it will be the same as proj_data2
     #####
 
-    return pca, pca_axes, proj_data2
+    return sc, pca, pca_axes, proj_data2
     
+def proj_nnmf(X):
+
+    '''
+    Compute the Principal Components as the latent space for points X.
+    Returns the latent model ("pca"), latent axes ("pca_axes") and the projected data ("proj_data2")
+    '''
+
+    scaler_minmax = MinMaxScaler()
+    X_scaled = scaler_minmax.fit_transform(X)
+    nnmf = NMF(n_components=2, init='random', random_state=42,max_iter = 500)
+    proj_data = nnmf.fit_transform(X_scaled)
+    nnmf_axes = nnmf.components_
+
+    #nnmf.reconstruction_err_
+    #recons_error = np.sqrt(np.sum((scaler_minmax.inverse_transform(nnmf.inverse_transform(proj_data)) - X)**2))
+    return scaler_minmax, nnmf, nnmf_axes, proj_data
 
 
 def perform_umap(X, ui_n_neigh, ui_min_dist):
@@ -142,14 +161,16 @@ def perform_umap(X, ui_n_neigh, ui_min_dist):
     n_neighbors = ui_n_neigh #int(X.shape[0]/5) # 15 is the default
     min_dist = ui_min_dist #2 #0.1 is the default
 
+    sc = StandardScaler() 
+    X_sc = sc.fit_transform(X)
 
     reducer2D = umap.UMAP(random_state=42, n_components=2,n_neighbors=n_neighbors,min_dist = min_dist)
-    reducer2D.fit(X)
-    reduced_data = reducer2D.transform(X)
+    reducer2D.fit(X_sc)
+    reduced_data = reducer2D.transform(X_sc)
 
     umap_axes = []
 
-    return reducer2D, umap_axes, reduced_data
+    return sc, reducer2D, umap_axes, reduced_data
 
 
 def transform_points_using_latent_space(X, latent_space_name, latent_space):
@@ -282,10 +303,10 @@ def trainML(ui_self, X,Y,model_name, hypopt_cv):
         'min_samples_leaf': [3, 4, 5],
         'min_samples_split': [8, 10, 12],
         'n_estimators': [100, 200, 300, 1000]
-    }
+        }
     else:
         from sklearn.svm import SVC
-        model = SVC(random_state=6) 
+        model = SVC(random_state=42) 
         model.probability = True
         from sklearn.preprocessing import StandardScaler
     
@@ -330,7 +351,7 @@ def trainML(ui_self, X,Y,model_name, hypopt_cv):
     return model, accuracy
 
 
-def create_uncertainity_plot_values(learned_model_name, learned_model, latent_model, proj_data, train_on_reduceddim_data, scaler):
+def create_uncertainity_plot_values(learned_model_name, learned_model, latent_model, proj_data, train_on_reduceddim_data, latent_scaler, ml_scaler):
     '''
     This function used the ML nodel ("learned model" with name "learned_model_name") to predict the class with uncertainity for
     every point for the projected data ("proj_data") of the latent space ("latent_model" with name "latent_axes_name") with axes "latent_axes".
@@ -346,26 +367,38 @@ def create_uncertainity_plot_values(learned_model_name, learned_model, latent_mo
     y = np.linspace(yminmax[0], yminmax[-1],100)
     XX, YY = np.meshgrid(x, y)
    
-
     newX = np.c_[XX.ravel(), YY.ravel()]
-
-     
+  
     if train_on_reduceddim_data == 0:
-        orig_dim_data = latent_model.inverse_transform(newX) #inverts the rotation and the whitenening and centering from the latent model
-    else:
+        #we have to undo the transform and the scaling (in that order) to get the projected points to the original feature space
+
+        #first, undo transform of latent space
+        newX_untransformed = latent_model.inverse_transform(newX)
+
+        #next, undo the scaling of the latent space.
+        orig_dim_data = latent_scaler.inverse_transform(newX_untransformed)
+    else:  #train on the projected data
         orig_dim_data = newX
-        orig_dim_data_for_pred = orig_dim_data
-        
+
+
     #if learned_model was SVM, it was trained on centered and scaled data, so we have to scale the new data
-    if train_on_reduceddim_data == 0 and learned_model_name == 'Support Vector Machine':
-        orig_dim_data_for_pred = scaler.transform(orig_dim_data)   
-        #orig_dim_data_for_pred = (orig_dim_data-scaler.mean_)/np.sqrt(scaler.var_)  #same as above (verification)
+    if learned_model_name == 'Support Vector Machine':
+
+        #standardize data per ml_scaler
+        orig_dim_data_for_pred = ml_scaler.transform(orig_dim_data)   
+        #same as above (verification)
+        #orig_dim_data_for_pred = (orig_dim_data-scaler.mean_)/np.sqrt(scaler.var_)  
+    else: #Random Forest did not need scaling
+        orig_dim_data_for_pred = orig_dim_data
+
                                   
     prob = learned_model.predict_proba(np.asarray(orig_dim_data_for_pred))
     Z0 = prob[:,1].reshape(XX.shape)
+
+
     
     
-    return XX, YY, Z0, orig_dim_data
+    return XX, YY, Z0, orig_dim_data, prob
 
 
 
