@@ -1,0 +1,52 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/problem_instance.schema.0.0.1.json",
+    "references": [
+        "https://github.com/jtcantin/planted_solutions"
+    ],
+    "problem_instance_uuid": "a37c86c0-1937-4f05-83ab-08a5fd104b7e",
+    "creation_timestamp": "2024-11-14T10:12:30.055628",
+    "calendar_due_date": null,
+    "short_name": "planted_solution_0003",
+    "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "contact_info": [
+        {
+            "name": "Joshua T. Cantin",
+            "email": "joshua.cantin@utoronto.ca",
+            "institution": "University of Toronto at Scarborough"
+        }
+    ],
+    "status": "in_development",
+    "superseded_by": null,
+    "problem_type": "GSEE",
+    "application_domain": "QC",
+    "instance_data": [
+        {
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "efddd28a-383d-4929-9335-22e54ba2ffbe",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/planted_solutions/fcidump.planted_solution_0003.efddd28a-383d-4929-9335-22e54ba2ffbe.gz",
+                    "instance_data_checksum": "48e4bda8ad2e48926e8b7c36ea24f1e16ab8edf2",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        }
+    ],
+    "requirements": [
+        {
+            "probability_of_success": 0.99,
+            "time_limit_seconds": 86400,
+            "accuracy": 1.0,
+            "energy_units": "millihartree",
+            "energy_target": 0.99
+        }
+    ],
+    "features": {
+        "multiplicity": 1,
+        "num_electrons": 50,
+        "num_orbitals": 31,
+        "utility_scale": false
+    }
+}
