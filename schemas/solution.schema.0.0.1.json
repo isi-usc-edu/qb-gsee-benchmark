@@ -88,11 +88,11 @@
             "items": {
                 "type": "object",
                 "required": [
-                    "instance_data_object_uuid",
+                    "task_uuid",
                     "run_time"
                 ],
                 "properties": {
-                    "instance_data_object_uuid": {
+                    "task_uuid": {
                         "title": "Instance Data Object UUID",
                         "description": "TODO: description",
                         "type": "string",
@@ -253,21 +253,55 @@
                 }
             }
         },
-        "compute_hardware_type": {
-            "title": "Compute Hardware Type",
-            "description": "Type of device the algorithm is actually run on.  Choose from:\n\n`classical_computer` \n`quantum_computer` \n`hybrid_classical_quantum_computer` \n`other`.",
-            "type": "string",
-            "enum": [
-                "classical_computer",
-                "quantum_computer",
-                "hybrid_classical_quantum_computer",
-                "other"
-            ]
-        },
-        "compute_details": {
+        "solver_details": {
             "title": "Compute Hardware & Software Details",
             "description": "Details on the hardware and software (algorithm) used by the test performer. Exact structure is TBD.",
-            "type": "object"
+            "type": "object",
+            "required": [
+                "solver_uuid",
+                "compute_hardware_type",
+            ],
+            "solver_uuid": {
+                "title": "Solver UUID",
+                "description": "Universally Unique Identifier (UUID) as a string in RFC4122 8-4-4-4-12 format.",
+                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            "compute_hardware_type": {
+                "title": "Compute Hardware Type",
+                "description": "Type of device the algorithm is actually run on.  Choose from:\n\n`classical_computer` \n`quantum_computer` \n`hybrid_classical_quantum_computer` \n`other`.",
+                "type": "string",
+                "enum": [
+                    "classical_computer",
+                    "quantum_computer",
+                    "hybrid_classical_quantum_computer",
+                    "other"
+                ]
+            },
+            "classical_hardware_details": {
+                "title": "Compute Hardware Details",
+                "description": "Details on the hardware used by the test performer. Exact structure is TBD.",
+                "type": "object"
+            },
+            "quantum_hardware_details": {
+                "title": "Compute Hardware Details",
+                "description": "Details on the hardware used by the test performer. Exact structure is TBD.",
+                "type": "object"
+            },
+            "logical_quantum_resources": {
+                "title": "Logical Quantum Resources",
+                "description": "Details on the logical quantum resources used by the test performer. Exact structure is TBD.",
+                "type": "object"
+            },
+            "algorithm_details": {
+                "title": "Algorithm Details",
+                "description": "Details on the algorithm used by the test performer. Exact structure is TBD.",
+                "type": "object"
+            },
+            "software_details": {
+                "title": "Software Details",
+                "description": "Details on the software used by the test performer. Exact structure is TBD.",
+                "type": "object"
+            }
         },
         "digital_signature": {
             "title": "Digital Signature",
