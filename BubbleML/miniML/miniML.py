@@ -1,4 +1,10 @@
+#!/usr/bin/env python3
 
+
+
+import argparse
+import logging
+import datetime
 import os
 import sys, getopt
 import numpy as np
@@ -25,7 +31,8 @@ import shap
 
 random.seed(6) 
 
-#to run: (UIenv) (base) python miniML.py 'inputForMiniML.json'
+
+
 ########################### start of functions #####################
 
 
@@ -39,10 +46,10 @@ def evaluate(model, test_features, test_labels,model_name):
     prec, recall, f1, support = precision_recall_fscore_support(test_labels, y_pred,labels = labels)
     #The support is the number of occurrences of each class in y_true.
     
-    print(model_name,' Performance:')
-    print('Precision [class (target=False) , class (target=true) ]:  {:0.2f}%,  {:0.2f}%,'.format(prec[0]*100,prec[1]*100))
-    print('Recall [class (target=False) , class (target=true) ]:  {:0.2f}%,  {:0.2f}%,'.format(recall[0]*100,recall[1]*100))
-    print('F1-score [class (target=False) , class (target=true) ]:  {:0.2f}%,  {:0.2f}%,'.format(f1[0]*100,f1[1]*100))
+    logging.info(model_name,' Performance:')
+    logging.info('Precision [class (target=False) , class (target=true) ]:  {:0.2f}%,  {:0.2f}%,'.format(prec[0]*100,prec[1]*100))
+    logging.info('Recall [class (target=False) , class (target=true) ]:  {:0.2f}%,  {:0.2f}%,'.format(recall[0]*100,recall[1]*100))
+    logging.info('F1-score [class (target=False) , class (target=true) ]:  {:0.2f}%,  {:0.2f}%,'.format(f1[0]*100,f1[1]*100))
  
     cr = classification_report(test_labels, y_pred)
     pprint.pp(cr)
@@ -50,7 +57,16 @@ def evaluate(model, test_features, test_labels,model_name):
     
 
 
-def trainML(X,Y, latent_model_name, model_name, hypopt_cv, conf_thresh, imp_features):
+def trainML(
+        X,
+        Y,
+        latent_model_name,
+        model_name,
+        hypopt_cv,
+        conf_thresh,
+        imp_features,
+        verbose
+    ):
 
     '''
     This function trains a machine learning model (name given by model_name) with data points X and labels Y 
@@ -115,7 +131,7 @@ def trainML(X,Y, latent_model_name, model_name, hypopt_cv, conf_thresh, imp_feat
         #ratio_of_solved_to_truesolved @ above 50% (bounded by min and max of points or convex hull - as in the figure)
         #sending original X (it will be transformed)
         ratio = compute_ratio_of_solved_to_unsolved(X, y_train, sc, latent_model_name, model, conf_thresh, draw_plot)
-        print('Percent of solvable space: ', str(ratio))
+        logging.info('Percent of solvable space: ', str(ratio))
 
         #explain all the predictions in the test set
         plt.figure()
@@ -126,8 +142,8 @@ def trainML(X,Y, latent_model_name, model_name, hypopt_cv, conf_thresh, imp_feat
         shap.summary_plot(shap_values[1],features=X.columns,plot_type="bar")
         #shap.force_plot(explainer.expected_value[class_index], shap_values[class_index], X_train, matplotlib=True, show=False)
 
-        print_out_to_file = 0
-        if print_out_to_file:
+        if verbose:
+            # print to file
             y_pred = model.predict(X_train)
             probs = model.predict_proba(X_train)
             
@@ -191,14 +207,22 @@ def getConvexHull(points):
     return hull
 
 
-def compute_ratio_of_solved_to_unsolved(X, Y, ml_scaler, latent_model_name, learned_model, conf_thresh, draw_plot):
+def compute_ratio_of_solved_to_unsolved(
+        X,
+        Y,
+        ml_scaler,
+        latent_model_name,
+        learned_model,
+        conf_thresh,
+        draw_plot
+    ):
     '''
     X here is the raw data.  It is uncentered and unscaled.  
     '''
 
     latent_sc, latent_model, proj_data, recons_error = getProjectedData(X, latent_model_name) #just PCA in this code.  The UI has more dimensionality reduction algms
 
-    # %% min and max in 2 dimensions of projected data
+    # min and max in 2 dimensions of projected data
     xminmax = np.arange(np.min(proj_data[:, 0]), np.max(proj_data[:, 0]), 0.1)
     yminmax = np.arange(np.min(proj_data[:, 1]), np.max(proj_data[:, 1]), 0.1)
 
@@ -237,6 +261,8 @@ def compute_ratio_of_solved_to_unsolved(X, Y, ml_scaler, latent_model_name, lear
         cbar = plt.colorbar()
         cbar.set_label('Probability of CCSD = True',rotation=270,x=1.25)
         plt.title('Embedding: ' + latent_model_name)
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
+        plt.savefig(f"plot_{timestamp}.png")
 
         '''
         # Select the top 5 most important features
@@ -268,49 +294,95 @@ def compute_ratio_of_solved_to_unsolved(X, Y, ml_scaler, latent_model_name, lear
 
 ############################### end of functions #################
 
-if __name__ == "__main__":
+def main(args):
 
-    #dirname = sys.argv[0]
-    #fn = sys.argv[1]
-    fn = '/Users/rnsundareswara/Desktop/QBG/Code/QBG_HRL/ChemicalFrontier/UI/MLTool/user-interface-for-machine-learning/MiniML/inputForMiniML.json'
-    with open(fn, 'r') as j:
-        contents = json.loads(j.read())
+    mini_ml_config_file_name = args.config_file
+    with open(mini_ml_config_file_name, 'r') as j:
+        mini_ml_config = json.loads(j.read())
 
-    # Print values using keys
-    filename = contents['Filename']
-    features =  contents['Features']
-    target = contents['Target']
-    conf_thresh = contents['Threshold For Confidence of Solvability']
+    df_hams = pd.read_csv(args.ham_features_file)
+    df_labels = pd.read_csv(args.solver_labels_file)
+    df = pd.merge(
+        df_hams,
+        df_labels,
+        on="fcidump_uuid",
+        how="outer" # fill in NaN when merging if uuids missing from either file.
+    )
+
+    selected_features =  mini_ml_config["features"]
+    target = "label" # a column header in the solver_labels.csv file.
+    conf_thresh = mini_ml_config["threshold_for_confidence_of_solvability"]
 
 
-    df = pd.read_csv(filename)
-
-    all_var = 1 #all_variables mentioned in the json file
-    if all_var == 1:
-        X = df.loc[:,features]
-        Y = df.loc[:,target]
-        features_wanted = np.array([13,15])
-        X = X.iloc[:,features_wanted]
-
-    else:
-        features_wanted = np.array([14,16])
-        X = df.iloc[:,features_wanted]
-        Y = df.iloc[:,-1]
-
+    X = df.loc[:,selected_features]
+    Y = df.loc[:,target]
+    
 
     # before training, remove any variables which has 0 variance
     varX = np.var(X, axis = 0)
     zerovar_inds = np.where(varX == 0)
     
     if len(zerovar_inds[0] > 0):
-        print('Some features were found to have 0 variance, these will be dropped in the analysis: ' )
+        logging.info('Some features were found to have 0 variance, these will be dropped in the analysis: ')
         zerovar_cols = X.columns[zerovar_inds]
-        print(zerovar_cols[0])
+        logging.info(zerovar_cols[0])
         X = X.drop(zerovar_cols, axis = 1)
 
     hypopt_cv = 1
     latent_model_name = 'NNMF'
     model_name = 'SVM'
     importance_features_desired = 1
-    model, cr = trainML(X=X, Y=Y, latent_model_name = latent_model_name, model_name = model_name, hypopt_cv = hypopt_cv, conf_thresh = conf_thresh, imp_features = importance_features_desired)
+    model, cr = trainML(
+        X=X,
+        Y=Y,
+        latent_model_name=latent_model_name,
+        model_name=model_name,
+        hypopt_cv=hypopt_cv,
+        conf_thresh=conf_thresh,
+        imp_features=importance_features_desired,
+        verbose=args.verbose
+    )
 
+
+
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="""
+            train an ML model using `Hamiltonian_features.csv` and `solver_labels.csv`.
+            The model attempts to predict the True/False solvability of a set of Hamiltonian features (input vector).
+        """
+    )
+
+    parser.add_argument(
+        "--config_file",
+        type=str,
+        required=True,
+        help="The/path/to/the miniML_config.json file."
+    )
+
+    parser.add_argument(
+        "--ham_features_file",
+        type=str,
+        required=True,
+        help="The/path/to/the Hamiltonian features (.csv) file."
+    )
+
+    parser.add_argument(
+        "--solver_labels_file", 
+        type=str, 
+        required=True,
+        help="The/path/to/the solver_labels.csv file."
+    )
+
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        default=False,
+        help="provide verbose output"
+    )
+
+    args = parser.parse_args()
+    main(args)
