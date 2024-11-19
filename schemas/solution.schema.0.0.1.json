@@ -142,6 +142,11 @@
                             }
                         }
                     },
+                    "calculation_details": {
+                        "title": "Calculation Details",
+                        "description": "Additional details about the calculation.",
+                        "type": "object"                        
+                    },
                     "run_time": {
                         "title": "Wall Clock Runtime",
                         "description": "A breakdown of start/stop wall clock time(s) reported according to ISO 8601 in UTC and duration in seconds.  run_time is broken down into (1) overall_time, (2) preprocessing_time, (3), algorithm_run_time, and (4) postprocessing_time.  See descriptions of each object.",
