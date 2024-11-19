@@ -65,6 +65,7 @@ def trainML(
         hypopt_cv,
         conf_thresh,
         imp_features,
+        solver_uuid,
         verbose
     ):
 
@@ -126,11 +127,18 @@ def trainML(
         accuracy = evaluate(model, X_train, y_train, model_name)
       
         
-        draw_plot = 1
-
         #ratio_of_solved_to_truesolved @ above 50% (bounded by min and max of points or convex hull - as in the figure)
         #sending original X (it will be transformed)
-        ratio = compute_ratio_of_solved_to_unsolved(X, y_train, sc, latent_model_name, model, conf_thresh, draw_plot)
+        ratio = compute_ratio_of_solved_to_unsolved(
+            X,
+            y_train,
+            sc,
+            latent_model_name,
+            model,
+            conf_thresh,
+            solver_uuid=solver_uuid,
+            draw_plot=verbose
+        )
         logging.info('Percent of solvable space: ', str(ratio))
 
         #explain all the predictions in the test set
@@ -146,11 +154,24 @@ def trainML(
             # print to file
             y_pred = model.predict(X_train)
             probs = model.predict_proba(X_train)
-            
-            data = np.array([X, y_train, y_pred, probs[:,0], probs[:,1]]).transpose()
-            df = pd.DataFrame(data, columns=[X.columns, 'Labels', 'Prob Class 0', 'Prob Class 1' ])             
-            df.to_csv('probs.csv')
     
+            df = pd.DataFrame(
+                {
+                    X.columns[0]: X[X.columns[0]],
+                    X.columns[1]: X[X.columns[1]],
+                    "y_train": y_train,
+                    "y_pred": y_pred,
+                    "prob_class_0": probs[:,0],
+                    "prob_class_1": probs[:,1]
+                }
+            )
+            timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
+            probs_file_name = f"probs_solver={solver_uuid}_{timestamp}.csv"
+            df.to_csv(probs_file_name, index=False)
+            logging.info(f"wrote probs to file {probs_file_name}.")
+    
+            
+            
     return model, accuracy
 
 
@@ -214,6 +235,7 @@ def compute_ratio_of_solved_to_unsolved(
         latent_model_name,
         learned_model,
         conf_thresh,
+        solver_uuid,
         draw_plot
     ):
     '''
@@ -259,10 +281,10 @@ def compute_ratio_of_solved_to_unsolved(
         target = Y
         plt.scatter(x=proj_data[:,0], y=proj_data[:,1], c=target, s=50, edgecolors='black', cmap = cmap,norm = norm)
         cbar = plt.colorbar()
-        cbar.set_label('Probability of CCSD = True',rotation=270,x=1.25)
+        cbar.set_label("Probability that solver can compute GSE (label==True)",rotation=270,x=1.25)
         plt.title('Embedding: ' + latent_model_name)
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
-        plt.savefig(f"plot_{timestamp}.png")
+        plt.savefig(f"plot_solver={solver_uuid}_{timestamp}.png")
 
         '''
         # Select the top 5 most important features
@@ -340,6 +362,7 @@ def main(args):
         hypopt_cv=hypopt_cv,
         conf_thresh=conf_thresh,
         imp_features=importance_features_desired,
+        solver_uuid=args.solver_uuid,
         verbose=args.verbose
     )
 
@@ -350,30 +373,53 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="""
-            train an ML model using `Hamiltonian_features.csv` and `solver_labels.csv`.
-            The model attempts to predict the True/False solvability of a set of Hamiltonian features (input vector).
+            train an ML model using `Hamiltonian_features.csv` 
+            and `solver_labels.csv`.  The model attempts to predict the 
+            True/False solvability of a set of Hamiltonian features (input
+            vectors).
         """
-    )
-
-    parser.add_argument(
-        "--config_file",
-        type=str,
-        required=True,
-        help="The/path/to/the miniML_config.json file."
     )
 
     parser.add_argument(
         "--ham_features_file",
         type=str,
         required=True,
-        help="The/path/to/the Hamiltonian features (.csv) file."
+        help="""
+            The/path/to/the Hamiltonian features (.csv) file.  
+            Hamiltonian features in this .csv file are solver-agnostic.
+        """
+    )
+
+
+    parser.add_argument(
+        "--config_file",
+        type=str,
+        required=True,
+        help="""
+            The/path/to/the miniML_config.json file that specifies the 
+            Hamiltonian features that should be considered for the ML model.
+        """
+    )
+
+
+    parser.add_argument(
+        "--solver_uuid",
+        required=True,
+        help="""
+            the UUID for the solver.  A `solver` is defined as an 
+            algorithm/hardware pair and assigned a UUID for tracking.
+        """
     )
 
     parser.add_argument(
         "--solver_labels_file", 
         type=str, 
         required=True,
-        help="The/path/to/the solver_labels.csv file."
+        help="""
+            The/path/to/the solver_labels.csv file.  The labels are True/False
+            to indicate that a solver can find the ground state energy of a 
+            Hamiltonian (by FCIDUMP UUID).
+        """
     )
 
     parser.add_argument(
@@ -383,6 +429,7 @@ if __name__ == "__main__":
         default=False,
         help="provide verbose output"
     )
+
 
     args = parser.parse_args()
     main(args)
