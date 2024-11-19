@@ -11,7 +11,7 @@
         "contact_info",
         "solution_data",
         "compute_hardware_type",
-        "compute_details",
+        "solver_details",
         "digital_signature",
         "$schema"
     ],
@@ -122,8 +122,35 @@
                     },
                     "classical_resources": {
                         "title": "Classical Resources",
-                        "description": "Required classical compute resources. Exact structure is TBD.",
+                        "description": "Required classical compute resources. Anything not included here is assumed to be the same as the values in solver_details.",
                         "type": "object"
+                         "properties" : {
+                            "cpu_description" : {
+                                "title": "CPU Description",
+                                "description": "Description of the CPU.",
+                                "type": "string"
+                            },
+                            "total_num_cores" : {
+                                "title": "Total number of cores used.",
+                                "description": "The total number of cores used.",
+                                "type": "number"
+                            },
+                            "clock_speed" : {
+                                "title": "Clock Speed",
+                                "description": "Clock speed(s) used.",
+                                "type": "string"
+                            },
+                            "ram_used_gb" : {
+                                "title": "RAM (GB)",
+                                "description": "Total RAM available for the computation, in GB.",
+                                "type": "number"
+                            },
+                            "computing_environment_name" : {
+                                "title": "Computing Environment Name",
+                                "description": "Identifying name of computing environment (e.g. cluster or facility name), if relevant.",
+                                "type": "string"
+                            },
+                        }
                     },
                     "quantum_resources": {
                         "title": "Quantum Resources",
@@ -281,7 +308,7 @@
         },
         "solver_details": {
             "title": "Compute Hardware & Software Details",
-            "description": "Details on the hardware and software (algorithm) used by the test performer. Exact structure is TBD.",
+            "description": "Details on the hardware and software (algorithm) used by the test performer. Each Algorithm + Software Implementation + Hardware has its own solver_uuid.",
             "type": "object",
             "required": [
                 "solver_uuid",
@@ -289,7 +316,7 @@
             ],
             "solver_uuid": {
                 "title": "Solver UUID",
-                "description": "Universally Unique Identifier (UUID) as a string in RFC4122 8-4-4-4-12 format.",
+                "description": "Universally Unique Identifier (UUID) as a string in RFC4122 8-4-4-4-12 format. Each Algorithm + Software Implementation + Hardware has its own UUID.",
                 "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             },
             "compute_hardware_type": {
@@ -304,23 +331,51 @@
                 ]
             },
             "classical_hardware_details": {
-                "title": "Compute Hardware Details",
-                "description": "Details on the hardware used by the test performer. Exact structure is TBD.",
+                "title": "Classical Compute Hardware Details",
+                "description": "Details on the hardware used by the solver. All tasks are assumed to have the included values unless specified otherwise at the task level.",
                 "type": "object"
+                 "properties" : {
+                    "cpu_description" : {
+                        "title": "CPU Description",
+                        "description": "Description of the CPU.",
+                        "type": "string"
+                    },
+                    "total_num_cores" : {
+                        "title": "Total number of cores used.",
+                        "description": "The total number of cores used.",
+                        "type": "number"
+                    },
+                    "clock_speed" : {
+                        "title": "Clock Speed",
+                        "description": "Clock speed(s) used.",
+                        "type": "string"
+                    },
+                    "ram_used_gb" : {
+                        "title": "RAM (GB)",
+                        "description": "Total RAM available for the computation, in GB.",
+                        "type": "number"
+                    },
+                    "computing_environment_name" : {
+                        "title": "Computing Environment Name",
+                        "description": "Identifying name of computing environment (e.g. cluster or facility name), if relevant.",
+                        "type": "string"
+                    },
+                }
+                    
             },
             "quantum_hardware_details": {
-                "title": "Compute Hardware Details",
+                "title": "Quantum Compute Hardware Details",
                 "description": "Details on the hardware used by the test performer. Exact structure is TBD.",
                 "type": "object"
             },
             "algorithm_details": {
                 "title": "Algorithm Details",
-                "description": "Details on the algorithm used by the test performer. Exact structure is TBD.",
+                "description": "Details on the algorithm used by the test performer. Includes broad descriptions and/or literature references.",
                 "type": "object"
             },
             "software_details": {
                 "title": "Software Details",
-                "description": "Details on the software used by the test performer. Exact structure is TBD.",
+                "description": "Details on the software used by the test performer. Includes all relevant software, with version numbers, literature reference(s) and url(s).",
                 "type": "object"
             }
         },
