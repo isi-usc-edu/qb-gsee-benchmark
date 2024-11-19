@@ -114,17 +114,25 @@
                     },
                     "by_hamiltonian_performance_metrics": {
                         "title": "TODO",
-                        "description": "A list of objects, one for each Hamiltonian (FCIDUMP file) in the `problem_instance`",
+                        "description": "A list of objects, one for each Hamiltonian (by `task_uuid`) in the `problem_instance`",
                         "type": "array",
                         "items": {
                             "type": "object",
                             "required": [
+                                "task_uuid",
                                 "instance_data_object_uuid",
                                 "attempted",
                                 "solved_within_run_time",
                                 "solved_within_accuracy_requirement"
                             ],
                             "properties": {
+                                "task_uuid": {
+                                    "title": "Task UUID",
+                                    "description": "UUID for the task from the list of tasks in the `problem_instance` file in 8-4-4-4-12 format.",
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                                },
                                 "instance_data_object_uuid": {
                                     "title": "Instance Data Object UUID",
                                     "description": "UUID for the data object (typically a Hamiltonian in FCIDUMP format) in 8-4-4-4-12 format.",
