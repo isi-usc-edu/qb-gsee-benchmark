@@ -164,8 +164,35 @@
                             },
                             "logical" : {
                                 "title": "Logical Quantum Resources",
-                                "description": "Logical quantum resources used by the test performer. Exact structure is TBD.",
-                                "type": "object"
+                                "description": "Logical quantum resources used by the test performer.",
+                                "type": "object",
+                                "properties" : {
+                                    "num_logical_qubits": {
+                                        "title": "Number of Logical Qubits",
+                                        "description": "The number of logical qubits used by the solver.",
+                                        "type": "integer",
+                                        "minimum": 0
+                                    },
+                                    "num_T_gates_per_shot": {
+                                        "title": "Number of T-Gates",
+                                        "description": "The total number of T-gates used by the solver.",
+                                        "type": "integer",
+                                        "minimum": 0
+                                    },
+                                    "num_shots": {
+                                        "title": "Number of Shots",
+                                        "description": "The number of shots used by the solver.",
+                                        "type": "integer",
+                                        "minimum": 0
+                                    },
+                                    "hardware_failure_tolerance_per_shot": {
+                                        "title": "Hardware Failure Tolerance Per Shot",
+                                        "description": "The allowable probability that the hardware fails to perform a shot correctly.",
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1
+                                    }
+                                }
                             }
                         }
                     },
