@@ -21,13 +21,17 @@ import datetime
 import gzip
 import shutil
 import json
-import copy
 from urllib.parse import urlparse
 import time
-import sys
-sys.path.append("../")
 
+import json
+import time
+from typing import Any
 
+from pyLIQTR.utils.resource_analysis import estimate_resources
+
+from qb_gsee_benchmark.qre import get_df_qpe_circuit
+from qb_gsee_benchmark.utils import retrieve_fcidump_from_sftp
 
 import logging
 logger = logging.getLogger()
@@ -45,69 +49,42 @@ for h in handlers:
 
 
 
-import paramiko # for SSH/SFTP
-def fetch_file_from_sftp(
-        url=None,
-        local_path=None,
-        ppk_path=None,
-        username=None,
-        port=22
-    ):
-    """TODO: docstring
+def get_lqre(problem_instance: dict, username: str, ppk_path: str) -> None:    
+    solution_data: list[dict[str, Any]] = []
+    results = {}
+    for instance in problem_instance["instance_data"]:
+        print(
+            f"Getting logical resource estimates for {instance['instance_data_object_uuid']}..."
+        )
+        fci = retrieve_fcidump_from_sftp(
+            instance["instance_data_object_url"], username=username, ppk_path=ppk_path
+        )
 
-    Args:
-        url (_type_, optional): _description_. Defaults to None.
-        local_path (_type_, optional): _description_. Defaults to None.
-        ppk_path (_type_, optional): _description_. Defaults to None.
-        username (_type_, optional): _description_. Defaults to None.
-        port (_type_, optional): _description_. Defaults to 22.
-    """
+        start = time.time()
+        circuit, num_shots, hardware_failure_tolerance_per_shot = get_df_qpe_circuit(
+            fci=fci,
+            error_tolerance=1.6e-3,
+            failure_tolerance=1e-2,
+            square_overlap=0.8**2,
+            df_threshold=1e-3,
+        )
+        preprocessing_time = time.time() - start
+        print(f"Initialized circuit in {preprocessing_time} seconds.")
+        print(f"Estimating logical resources...")
+        logical_resources = estimate_resources(circuit.circuit)
 
+        results[instance["instance_data_object_uuid"]] = {
+            "num_logical_qubits": logical_resources["LogicalQubits"],
+            "num_t": logical_resources["T"],
+            "preprocessing_time": preprocessing_time,
+            "num_shots": num_shots,
+            "hardware_failure_tolerance_per_shot": hardware_failure_tolerance_per_shot,
+        }
 
-    parsed_url = urlparse(url)
-    hostname = parsed_url.hostname
-    remote_path = parsed_url.path.lstrip("/")
-
-    try:
-        # Create an SSH client
-        with paramiko.SSHClient() as client:
-            client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-            
-            # Connect using the private key file (.ppk)
-            client.connect(
-                hostname=hostname, 
-                port=port, 
-                username=username, 
-                key_filename=ppk_path
-            )
-
-            # Open an SFTP session
-            with client.open_sftp() as sftp:
-                sftp.get(remote_path, local_path)
-
-        logging.info(f"File fetched successfully from {hostname}")
-    except Exception as e:
-        logging.error(f"Error: {e}")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    with open(f"lqre-{problem_instance['problem_instance_uuid']}.json", "w") as f:
+        json.dump(results, f)
 
 def main(args):
-
-    print("TODO: write this script!")
-    script_is_finished=False
-    assert script_is_finished, "this script needs work!"
 
 
     overall_start_time = datetime.datetime.now()
