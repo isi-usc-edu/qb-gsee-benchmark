@@ -42,7 +42,9 @@ for h in handlers:
     logger.addHandler(h)
 
 
-def get_lqre(problem_instance: dict, username: str, ppk_path: str, config: dict) -> None:
+def get_lqre(
+    problem_instance: dict, username: str, ppk_path: str, config: dict
+) -> None:
     problem_instance_uuid = problem_instance["problem_instance_uuid"]
     problem_instance_short_name = problem_instance["short_name"]
     logging.info(f"problem_instance UUID: {problem_instance_uuid}")
@@ -95,44 +97,62 @@ def get_lqre(problem_instance: dict, username: str, ppk_path: str, config: dict)
             # Calculate logical resource estimate for the FCIDUMP file
             # ===============================================================
             logging.info(f"===============================================")
-            logging.info(f"calculating Logical Resource Estimate...")
+            logging.info(f"Calculating Logical Resource Estimate...")
 
-            LRE_start_time = datetime.datetime.now()
-            start = time.time()
+            circuit_generation_start_time = datetime.datetime.now()
             (
                 circuit,
                 num_shots,
                 hardware_failure_tolerance_per_shot,
             ) = get_df_qpe_circuit(
                 fci=fci,
-                error_tolerance=1.6e-3, # TODO: extract this from problem instance
-                failure_tolerance=1e-2, # TODO: extract this from problem instance
+                error_tolerance=1.6e-3,  # TODO: extract this from problem instance
+                failure_tolerance=1e-2,  # TODO: extract this from problem instance
                 square_overlap=config["algorithm_parameters"]["square_overlap"],
                 df_threshold=config["algorithm_parameters"]["df_threshold"],
             )
-            preprocessing_time = time.time() - start
-            logging.info(f"Initialized circuit in {preprocessing_time} seconds.")
+            circuit_generation_end_time = datetime.datetime.now()
+            logging.info(
+                f"Circuit initialization time: {(circuit_generation_end_time - circuit_generation_end_time).total_seconds()} seconds."
+            )
             logging.info(f"Estimating logical resources...")
+            resource_estimation_start_time = datetime.datetime.now()
             logical_resources = estimate_resources(circuit.circuit)
+            resource_estimation_end_time = datetime.datetime.now()
+            LRE_calc_time = (
+                resource_estimation_end_time - resource_estimation_start_time
+            ).total_seconds()
+            logging.info(f"Resource estimation time (seconds): {LRE_calc_time}")
 
             solution_data.append(
                 {
-                    # "task_uuid": task["task_uuid"],
-                    "num_logical_qubits": logical_resources["LogicalQubits"],
-                    "num_t": logical_resources["T"],
-                    "preprocessing_time": preprocessing_time,
-                    "num_shots": num_shots,
-                    "hardware_failure_tolerance_per_shot": hardware_failure_tolerance_per_shot,
+                    "task_uuid": task["task_uuid"],
+                    "quantum_resources": {
+                        "logical": {
+                            "num_logical_qubits": logical_resources["LogicalQubits"],
+                            "num_T_gates_per_shot": logical_resources["T"],
+                            "num_shots": num_shots,
+                            "hardware_failure_tolerance_per_shot": hardware_failure_tolerance_per_shot,
+                        }
+                    },
+                    "runtime": {
+                        "preprocessing_time": {
+                            "wall_clock_start_time": circuit_generation_start_time.strftime(
+                                "%Y-%m-%dT%H:%M:%S.%f"
+                            )
+                            + "Z",
+                            "wall_clock_stop_time": circuit_generation_end_time.strftime(
+                                "%Y-%m-%dT%H:%M:%S.%f"
+                            )
+                            + "Z",
+                            "seconds": (
+                                circuit_generation_end_time
+                                - circuit_generation_start_time
+                            ).total_seconds(),
+                        }
+                    },
                 }
             )
-            LRE_stop_time = datetime.datetime.now()
-            LRE_calc_time = (LRE_stop_time - LRE_start_time).total_seconds()
-            logging.info(f"LRE calculation run time (seconds): {LRE_calc_time}")
-
-            # Clean up
-            # ===============================================================
-            logging.info(f"deleting file {fcidump_file_name}.")
-            os.remove(fcidump_file_name)
 
         solution_uuid = str(uuid4())
         current_time = datetime.datetime.now(UTC)
@@ -140,7 +160,10 @@ def get_lqre(problem_instance: dict, username: str, ppk_path: str, config: dict)
 
         solver_details = {
             "solver_uuid": config["solver_uuid"],
-            "algorithm_details": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Uses PyLIQTR logical resource estimates with BenchQ footprint analysis. Ground-state overlap assumed to be 0.8 and double-factorized truncation threshold to be 1e-3 Ha. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time."
+            "algorithm_details": {
+                "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Uses PyLIQTR logical resource estimates. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time.",
+                "algorithm_parameters": config["algorithm_parameters"],
+            },
         }
         results = {
             "$schema": "https://raw.githubusercontent.com/zapatacomputing/qb-gsee-benchmark/refs/heads/main/instances/schemas/solution.schema.0.0.1.json",
@@ -159,7 +182,7 @@ def get_lqre(problem_instance: dict, username: str, ppk_path: str, config: dict)
         return results
 
 
-def main(args:argparse.Namespace) -> None:
+def main(args: argparse.Namespace) -> None:
 
     config = json.load(open(args.LRE_config_file, "r"))
 
@@ -192,7 +215,9 @@ def main(args:argparse.Namespace) -> None:
                 problem_instance, args.sftp_username, args.sftp_key_file, config=config
             )
             # TODO: include solver id in filename
-            with open(f"lqre-{problem_instance['problem_instance_uuid']}.json", "w") as f:
+            with open(
+                f"lqre-{problem_instance['problem_instance_uuid']}.json", "w"
+            ) as f:
                 json.dump(resource_estimate, f)
 
     # Print overall time.

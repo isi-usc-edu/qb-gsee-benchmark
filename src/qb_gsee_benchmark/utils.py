@@ -42,5 +42,7 @@ def retrieve_fcidump_from_sftp(url: str, username: str, ppk_path: str, port=22) 
     with gzip.open(filename, "rb") as f_in:
         with open(fcidump_filename, "wb") as f_out:
             shutil.copyfileobj(f_in, f_out)
-
-    return fcidump.read(filename=fcidump_filename)
+    fci = fcidump.read(filename=fcidump_filename)
+    os.remove(filename)
+    os.remove(fcidump_filename)
+    return fci
