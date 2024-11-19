@@ -22,6 +22,7 @@ import json
 from urllib.parse import urlparse
 import uuid
 
+import numpy as np
 import pandas as pd
 
 
@@ -67,17 +68,30 @@ def locate_solution_results_by_FCIDUMP_UUID(
         if test_uuid.lower() == fcidump_uuid.lower():
             return solution_datum
         
-def locate_solution_results_by_FCIDUMP_UUID_and_solver_uuid(
+def locate_solution_results_by_task_uuid_and_solver_uuid(
         solver_uuid,
-        fcidump_uuid,
+        task_uuid,
         solution_list
     ) -> tuple:
     results = None # init as None and update if we find it.
     solution_uuid = None # init as None and update if we find it.
-    
-    assert False, "this isn't done yet."
+    for solution in solution_list:
+        test_solver_uuid = solution["solver_details"]["solver_uuid"]
+        if test_solver_uuid.lower() == solver_uuid.lower():
+            # we have matched on the solver...
+            for solution_datum in solution["solution_data"]:
+                test_task_uuid = solution_datum["task_uuid"]
+                if test_task_uuid.lower() == task_uuid.lower():
+                    # we have mached on task_uuid as well
+                    results = solution_datum
+                    solution_uuid = solution["solution_uuid"]
+                    return results, solution_uuid
+
+    # if the function has made it this far, we have not found a match
+    # and (None, None) will be returned. 
     return results, solution_uuid
     
+
 
 
 def identify_unique_participating_solvers(
@@ -85,13 +99,13 @@ def identify_unique_participating_solvers(
     ) -> pd.DataFrame:
     solvers_list = pd.DataFrame(columns=["solver_short_name","solver_uuid"])
     for solution in solution_list:
-        solver_uuid = solution["solver_uuid"]
+        solver_uuid = solution["solver_details"]["solver_uuid"]
         if solver_uuid in solvers_list["solver_uuid"].values:
             # the solver (by UUID) is already in the list.
             continue
         else:
             # the solver (by UUID) is NOT in the list.  add it.
-            solver_short_name = solution["solver_short_name"]
+            solver_short_name = solution["solver_details"]["solver_short_name"]
             solvers_list.loc[len(solvers_list)] = [solver_short_name, solver_uuid]
     return solvers_list
 
@@ -152,6 +166,7 @@ def main(args):
         "solver_uuid",
         "solution_uuid",
         "problem_instance_uuid",
+        "task_uuid",
         "fcidump_uuid",
         "attempted",
         "solved_within_run_time",
@@ -166,6 +181,8 @@ def main(args):
         for i in range(num_hams):
             num_supporting_files = len(problem_instance["instance_data"][i]["supporting_files"])
             logging.info(f"number of supporting files: {num_supporting_files}")
+
+            task_uuid = problem_instance["task"]
 
             for j in range(num_supporting_files):
             
@@ -190,9 +207,9 @@ def main(args):
             for solver_uuid in solver_list["solver_uuid"].values:
                 solver_short_name = get_solver_short_name(solver_uuid, solver_list)
 
-                results, solution_uuid = locate_solution_results_by_FCIDUMP_UUID_and_solver_uuid(
+                results, solution_uuid = locate_solution_results_by_task_uuid_and_solver_uuid(
                     solver_uuid=solver_uuid,
-                    fcidump_uuid=fcidump_uuid,
+                    task_uuid=task_uuid,
                     solution_list=solution_list
                 )
                 if results is None:
@@ -203,12 +220,21 @@ def main(args):
                     solved_within_accuracy_requirement=False
                     label=False # solved=False
                 else:
-                    # calcalate simple performance metrics for the solver against
+                    # calculate simple performance metrics for the solver against
                     # this Hamiltonian
+                    attempted = True
+
+                    overall_run_time_seconds = results["run_time"]["overall_time"]["seconds"]
                     time_limit_seconds = problem_instance["instance_data"][i]["time_limit_seconds"]
-                    accuracy = problem_instance["instance_data"][i]["accuracy"]
+                    solved_within_run_time = overall_run_time_seconds <= time_limit_seconds
+
+                    reported_energy = results["energy"]
+                    accuracy_tol = problem_instance["instance_data"][i]["accuracy"]
                     energy_target = problem_instance["instance_data"][i]["energy_target"]
-                    assert False, "TODO: finish this part."
+                    solved_within_accuracy_requirement = np.abs(reported_energy - energy_target) < accuracy_tol
+                    
+                    label = solved_within_run_time and solved_within_accuracy_requirement
+                        
 
 
             
@@ -217,13 +243,15 @@ def main(args):
                 solver_uuid,
                 solution_uuid,
                 problem_instance_uuid,
+                task_uuid,
                 fcidump_uuid,
                 attempted,
                 solved_within_run_time,
                 solved_within_accuracy_requirement,
                 label # label True/False, that the Hamiltonian was solved.
             ]
-            aggregated_results.loc[len(aggregated_results)] = new_row
+            logging.info(f"{pd.DataFrame(new_row)}") # just for printout.
+            aggregated_results.loc[len(aggregated_results)] = new_row # add to list of results.
 
 
 
