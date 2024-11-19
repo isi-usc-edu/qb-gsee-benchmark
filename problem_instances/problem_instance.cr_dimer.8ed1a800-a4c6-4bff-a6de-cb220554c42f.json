@@ -1,0 +1,387 @@
+{
+    "problem_instance_uuid": "8ed1a800-a4c6-4bff-a6de-cb220554c42f",
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+    "problem_type": "GSEE",
+    "application_domain": "QC",
+    "creation_timestamp": "2024-11-19T21:13:19.486613",
+    "calendar_due_date": "2124-10-26T21:13:19.486764",
+    "status": "in_force",
+    "superseded_by": null,
+    "contact_info": [
+        {
+            "name": "Matthew Otten",
+            "email": "mjotten@wisc.edu",
+            "institution": "University of Wisconsin -- Madison"
+        }
+    ],
+    "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "references": [
+        "Journal of the American Chemical Society 2022 144 (35), 15932-15937 DOI: 10.1021/jacs.2c06357"
+    ],
+    "instance_data": [
+        {
+            "features": {
+                "software_used": "PySCF 2.5.0",
+                "molecule_name": "Cr Dimer",
+                "geometry": [
+                    "Cr 0 0 0",
+                    "Cr 0 0 1.68"
+                ],
+                "basis_set": {
+                    "default": "sto-3g"
+                },
+                "charge": 0,
+                "utility_scale": false,
+                "correlated_electrons": 12
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "millihartree"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "3092dd74-660d-4c7a-9d43-16d1436e084b",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_d_1.68_b_sto-3g_ne_12.3092dd74-660d-4c7a-9d43-16d1436e084b.gz",
+                    "instance_data_checksum": "7d79d6618ff311cf5c844691276db4ea75d2902d",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "features": {
+                "software_used": "PySCF 2.5.0",
+                "molecule_name": "Cr Dimer",
+                "geometry": [
+                    "Cr 0 0 0",
+                    "Cr 0 0 1.68"
+                ],
+                "basis_set": {
+                    "default": "sto-3g"
+                },
+                "charge": 0,
+                "utility_scale": false,
+                "correlated_electrons": 28
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "millihartree"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "96843098-e69d-4d1f-8a88-5b24826f7390",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_d_1.68_b_sto-3g_ne_28.96843098-e69d-4d1f-8a88-5b24826f7390.gz",
+                    "instance_data_checksum": "6763701f533702a4032fa9c9d218d3921432b515",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "features": {
+                "software_used": "PySCF 2.5.0",
+                "molecule_name": "Cr Dimer",
+                "geometry": [
+                    "Cr 0 0 0",
+                    "Cr 0 0 1.68"
+                ],
+                "basis_set": {
+                    "default": "cc-pvdz-dk"
+                },
+                "charge": 0,
+                "utility_scale": false,
+                "correlated_electrons": 12
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "millihartree"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "673dfe91-d90e-4ecd-8560-d6d74de11070",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_d_1.68_b_cc-pvdz-dk_ne_12.673dfe91-d90e-4ecd-8560-d6d74de11070.gz",
+                    "instance_data_checksum": "bee1eab1b5bf68f5f2a71eefd85b2892e4b19d7a",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "features": {
+                "software_used": "PySCF 2.5.0",
+                "molecule_name": "Cr Dimer",
+                "geometry": [
+                    "Cr 0 0 0",
+                    "Cr 0 0 1.68"
+                ],
+                "basis_set": {
+                    "default": "cc-pvdz-dk"
+                },
+                "charge": 0,
+                "utility_scale": false,
+                "correlated_electrons": 28
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "millihartree"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "4412b7d6-86db-4616-9dd2-2c32ee02560f",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_d_1.68_b_cc-pvdz-dk_ne_28.4412b7d6-86db-4616-9dd2-2c32ee02560f.gz",
+                    "instance_data_checksum": "5a416e50c8416cb875537ace6a0d17e83c746807",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "features": {
+                "software_used": "PySCF 2.5.0",
+                "molecule_name": "Cr Dimer",
+                "geometry": [
+                    "Cr 0 0 0",
+                    "Cr 0 0 2.0"
+                ],
+                "basis_set": {
+                    "default": "sto-3g"
+                },
+                "charge": 0,
+                "utility_scale": false,
+                "correlated_electrons": 12
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "millihartree"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "cdf017c4-7c30-4274-9567-f5e55a6ba857",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_d_2.0_b_sto-3g_ne_12.cdf017c4-7c30-4274-9567-f5e55a6ba857.gz",
+                    "instance_data_checksum": "edef00cb9132faa896aa2d5aa866318e336dbc8b",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "features": {
+                "software_used": "PySCF 2.5.0",
+                "molecule_name": "Cr Dimer",
+                "geometry": [
+                    "Cr 0 0 0",
+                    "Cr 0 0 2.0"
+                ],
+                "basis_set": {
+                    "default": "sto-3g"
+                },
+                "charge": 0,
+                "utility_scale": false,
+                "correlated_electrons": 28
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "millihartree"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "d9341cde-90e8-4d1e-beb2-4e40246d31ce",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_d_2.0_b_sto-3g_ne_28.d9341cde-90e8-4d1e-beb2-4e40246d31ce.gz",
+                    "instance_data_checksum": "7a05834e93505385fbe3d54346a34b528c4f278a",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "features": {
+                "software_used": "PySCF 2.5.0",
+                "molecule_name": "Cr Dimer",
+                "geometry": [
+                    "Cr 0 0 0",
+                    "Cr 0 0 2.0"
+                ],
+                "basis_set": {
+                    "default": "cc-pvdz-dk"
+                },
+                "charge": 0,
+                "utility_scale": false,
+                "correlated_electrons": 12
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "millihartree"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "5439a548-153b-4990-be12-f0e33c30fe63",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_d_2.0_b_cc-pvdz-dk_ne_12.5439a548-153b-4990-be12-f0e33c30fe63.gz",
+                    "instance_data_checksum": "31b8feff3869ca126fe7677a26a8530ed4065ca1",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "features": {
+                "software_used": "PySCF 2.5.0",
+                "molecule_name": "Cr Dimer",
+                "geometry": [
+                    "Cr 0 0 0",
+                    "Cr 0 0 2.0"
+                ],
+                "basis_set": {
+                    "default": "cc-pvdz-dk"
+                },
+                "charge": 0,
+                "utility_scale": false,
+                "correlated_electrons": 28
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "millihartree"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "e2995852-9911-4021-a82f-5b14ddb2d5c8",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_d_2.0_b_cc-pvdz-dk_ne_28.e2995852-9911-4021-a82f-5b14ddb2d5c8.gz",
+                    "instance_data_checksum": "e572a3c560a67dd3ba8f760cb9d7cb3305cdd649",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "features": {
+                "software_used": "PySCF 2.5.0",
+                "molecule_name": "Cr Dimer",
+                "geometry": [
+                    "Cr 0 0 0",
+                    "Cr 0 0 3.0"
+                ],
+                "basis_set": {
+                    "default": "sto-3g"
+                },
+                "charge": 0,
+                "utility_scale": false,
+                "correlated_electrons": 12
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "millihartree"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "67acc90d-1a9e-49a7-98a1-8ca643dca272",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_d_3.0_b_sto-3g_ne_12.67acc90d-1a9e-49a7-98a1-8ca643dca272.gz",
+                    "instance_data_checksum": "ab8dd5eb992bc45c3158e62fda5b729108e6eda2",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "features": {
+                "software_used": "PySCF 2.5.0",
+                "molecule_name": "Cr Dimer",
+                "geometry": [
+                    "Cr 0 0 0",
+                    "Cr 0 0 3.0"
+                ],
+                "basis_set": {
+                    "default": "sto-3g"
+                },
+                "charge": 0,
+                "utility_scale": false,
+                "correlated_electrons": 28
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "millihartree"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "01d526fb-276e-4369-85d4-66a553a1d02e",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_d_3.0_b_sto-3g_ne_28.01d526fb-276e-4369-85d4-66a553a1d02e.gz",
+                    "instance_data_checksum": "33217b4ea3941b07f3a162144a293a1a2abb9ca5",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "features": {
+                "software_used": "PySCF 2.5.0",
+                "molecule_name": "Cr Dimer",
+                "geometry": [
+                    "Cr 0 0 0",
+                    "Cr 0 0 3.0"
+                ],
+                "basis_set": {
+                    "default": "cc-pvdz-dk"
+                },
+                "charge": 0,
+                "utility_scale": false,
+                "correlated_electrons": 12
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "millihartree"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "b0eb2de4-1286-4cfb-8724-e5e4bfc7a4f4",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_d_3.0_b_cc-pvdz-dk_ne_12.b0eb2de4-1286-4cfb-8724-e5e4bfc7a4f4.gz",
+                    "instance_data_checksum": "cb061a473439bd67f2040938188a810eb5483e6d",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "features": {
+                "software_used": "PySCF 2.5.0",
+                "molecule_name": "Cr Dimer",
+                "geometry": [
+                    "Cr 0 0 0",
+                    "Cr 0 0 3.0"
+                ],
+                "basis_set": {
+                    "default": "cc-pvdz-dk"
+                },
+                "charge": 0,
+                "utility_scale": false,
+                "correlated_electrons": 28
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "millihartree"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "2101e6fa-9fb3-4697-98be-25a4e0de2079",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_d_3.0_b_cc-pvdz-dk_ne_28.2101e6fa-9fb3-4697-98be-25a4e0de2079.gz",
+                    "instance_data_checksum": "4eacce4787d99756904434a2e683d0a3cac190b5",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        }
+    ],
+    "short_name": "cr_dimer"
+}
