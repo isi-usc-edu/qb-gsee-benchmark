@@ -420,10 +420,12 @@
         "properties": {
             "solution_data": {
                 "items": {
-                    "required": [
-                        "energy",
-                        "run_time"
-                    ]
+                    "required": ["energy"],
+                    "properties" : {
+                        "runtime" : {
+                            "required" : "overall_time"
+                        }
+                    }
                 }
             }
         }
