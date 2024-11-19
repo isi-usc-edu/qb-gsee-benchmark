@@ -20,7 +20,6 @@ import datetime
 import json
 import logging
 import os
-import time
 from datetime import UTC
 from typing import Any
 from urllib.parse import urlparse
@@ -44,7 +43,7 @@ for h in handlers:
 
 def get_lqre(
     problem_instance: dict, username: str, ppk_path: str, config: dict
-) -> None:
+) -> dict[str, Any]:
     problem_instance_uuid = problem_instance["problem_instance_uuid"]
     problem_instance_short_name = problem_instance["short_name"]
     logging.info(f"problem_instance UUID: {problem_instance_uuid}")
@@ -53,7 +52,7 @@ def get_lqre(
     logging.info(f"contains {num_hams} associated Hamiltonians.")
 
     solution_data: list[dict[str, Any]] = []
-    results = {}
+    results: dict[str, Any] = {}
 
     for task in problem_instance["instance_data"]:
         num_supporting_files = len(task["supporting_files"])
@@ -80,12 +79,8 @@ def get_lqre(
                 )
                 continue
 
-            # check the see if we have already processed FCIDUMP_UUID and have a resource estimate for it.
-            # ==============================================================
-            # TODO... may need some ephemeral file output for incomplete/restarted work.
+            # TODO: check to see if we have already processed this FCIDUMP file.
 
-            # SFTP download the FCIDUMP file
-            # ===============================================================
             logging.info(f"SFTP downloading file {fcidump_url}...")
             fci = retrieve_fcidump_from_sftp(
                 url=fcidump_url,
@@ -94,8 +89,6 @@ def get_lqre(
                 port=22,
             )
 
-            # Calculate logical resource estimate for the FCIDUMP file
-            # ===============================================================
             logging.info(f"===============================================")
             logging.info(f"Calculating Logical Resource Estimate...")
 
@@ -154,32 +147,32 @@ def get_lqre(
                 }
             )
 
-        solution_uuid = str(uuid4())
-        current_time = datetime.datetime.now(UTC)
-        current_time_string = current_time.strftime("%Y-%m-%dT%H:%M:%S.%f") + "Z"
+    solution_uuid = str(uuid4())
+    current_time = datetime.datetime.now(UTC)
+    current_time_string = current_time.strftime("%Y-%m-%dT%H:%M:%S.%f") + "Z"
 
-        solver_details = {
-            "solver_uuid": config["solver_uuid"],
-            "algorithm_details": {
-                "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Uses PyLIQTR logical resource estimates. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time.",
-                "algorithm_parameters": config["algorithm_parameters"],
-            },
-        }
-        results = {
-            "$schema": "https://raw.githubusercontent.com/zapatacomputing/qb-gsee-benchmark/refs/heads/main/instances/schemas/solution.schema.0.0.1.json",
-            "solution_uuid": solution_uuid,
-            "problem_instance_uuid": problem_instance["problem_instance_uuid"],
-            "creation_timestamp": current_time_string,
-            "short_name": "QPE",
-            "is_resource_estimate": True,
-            "contact_info": config["contact_info"],
-            "solution_data": solution_data,
-            "compute_hardware_type": "quantum_computer",
-            "solver_details": solver_details,
-            "digital_signature": None,
-        }
+    solver_details = {
+        "solver_uuid": config["solver_uuid"],
+        "algorithm_details": {
+            "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Uses PyLIQTR logical resource estimates. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time.",
+            "algorithm_parameters": config["algorithm_parameters"],
+        },
+    }
+    results = {
+        "$schema": "https://raw.githubusercontent.com/zapatacomputing/qb-gsee-benchmark/refs/heads/main/instances/schemas/solution.schema.0.0.1.json",
+        "solution_uuid": solution_uuid,
+        "problem_instance_uuid": problem_instance["problem_instance_uuid"],
+        "creation_timestamp": current_time_string,
+        "short_name": "QPE",
+        "is_resource_estimate": True,
+        "contact_info": config["contact_info"],
+        "solution_data": solution_data,
+        "compute_hardware_type": "quantum_computer",
+        "solver_details": solver_details,
+        "digital_signature": None,
+    }
 
-        return results
+    return results
 
 
 def main(args: argparse.Namespace) -> None:
