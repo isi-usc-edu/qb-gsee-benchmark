@@ -6,7 +6,6 @@
     "required": [
         "solution_uuid",
         "problem_instance_uuid",
-        "short_name",
         "creation_timestamp",
         "contact_info",
         "solution_data",
@@ -38,11 +37,6 @@
             "description": "Timestamp in ISO 8601 format in UTC (note the `Z`).\n\nExamples:  \n`2022-12-25T18:00:02.223Z`,\n`2022-12-25T07:18:45Z`",
             "type": "string",
             "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
-        },
-        "short_name": {
-            "title": "Short Name",
-            "description": "A short string.  Not necessarily unique.",
-            "type": "string"
         },
         "contact_info": {
             "title": "Point of Contact(s)",
@@ -316,12 +310,18 @@
             "type": "object",
             "required": [
                 "solver_uuid",
-                "compute_hardware_type"
+                "compute_hardware_type",
+                "solver_short_name"
             ],
             "solver_uuid": {
                 "title": "Solver UUID",
                 "description": "Universally Unique Identifier (UUID) as a string in RFC4122 8-4-4-4-12 format. Each Algorithm + Software Implementation + Hardware has its own UUID.",
                 "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            },
+            "solver_short_name": {
+            "title": "Solver Short Name",
+            "description": "A short string.  Not necessarily unique.",
+            "type": "string"
             },
             "compute_hardware_type": {
                 "title": "Compute Hardware Type",
