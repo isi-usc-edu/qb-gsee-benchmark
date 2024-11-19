@@ -138,8 +138,9 @@ def get_lqre(problem_instance: dict, username: str, ppk_path: str, config: dict)
         current_time = datetime.datetime.now(UTC)
         current_time_string = current_time.strftime("%Y-%m-%dT%H:%M:%S.%f") + "Z"
 
-        compute_details = {
-            "description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Uses PyLIQTR logical resource estimates with BenchQ footprint analysis. Ground-state overlap assumed to be 0.8 and double-factorized truncation threshold to be 1e-3 Ha. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time."
+        solver_details = {
+            "solver_uuid": config["solver_uuid"],
+            "algorithm_details": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Uses PyLIQTR logical resource estimates with BenchQ footprint analysis. Ground-state overlap assumed to be 0.8 and double-factorized truncation threshold to be 1e-3 Ha. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time."
         }
         results = {
             "$schema": "https://raw.githubusercontent.com/zapatacomputing/qb-gsee-benchmark/refs/heads/main/instances/schemas/solution.schema.0.0.1.json",
@@ -151,7 +152,7 @@ def get_lqre(problem_instance: dict, username: str, ppk_path: str, config: dict)
             "contact_info": config["contact_info"],
             "solution_data": solution_data,
             "compute_hardware_type": "quantum_computer",
-            "compute_details": compute_details,
+            "solver_details": solver_details,
             "digital_signature": None,
         }
 
