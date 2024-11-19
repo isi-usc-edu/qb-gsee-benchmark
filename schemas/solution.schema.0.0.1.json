@@ -83,13 +83,12 @@
         },
         "solution_data": {
             "title": "Solution Data",
-            "description": "A list of objects describing the data.  Exact structure is TDB.  For large instances, a URL to the data is given.",
+            "description": "A list of objects describing the solution of each of the problem's tasks.",
             "type": "array",
             "items": {
                 "type": "object",
                 "required": [
-                    "task_uuid",
-                    "run_time"
+                    "task_uuid"
                 ],
                 "properties": {
                     "task_uuid": {
@@ -120,6 +119,28 @@
                         "type": "number",
                         "minimum": 0,
                         "maximum": 1
+                    },
+                    "classical_resources": {
+                        "title": "Classical Resources",
+                        "description": "Required classical compute resources. Exact structure is TBD.",
+                        "type": "object"
+                    },
+                    "quantum_resources": {
+                        "title": "Quantum Resources",
+                        "description": "Quantum resources used by the test performer.",
+                        "type": "object",
+                        "properties" : {
+                            "physical" : {
+                                "title": "Physical Quantum Resources",
+                                "description": "Physical quantum resources used by the test performer. Exact structure is TBD.",
+                                "type": "object"
+                            },
+                            "logical" : {
+                                "title": "Logical Quantum Resources",
+                                "description": "Logical quantum resources used by the test performer. Exact structure is TBD.",
+                                "type": "object"
+                            }
+                        }
                     },
                     "run_time": {
                         "title": "Wall Clock Runtime",
@@ -259,7 +280,7 @@
             "type": "object",
             "required": [
                 "solver_uuid",
-                "compute_hardware_type",
+                "compute_hardware_type"
             ],
             "solver_uuid": {
                 "title": "Solver UUID",
@@ -285,11 +306,6 @@
             "quantum_hardware_details": {
                 "title": "Compute Hardware Details",
                 "description": "Details on the hardware used by the test performer. Exact structure is TBD.",
-                "type": "object"
-            },
-            "logical_quantum_resources": {
-                "title": "Logical Quantum Resources",
-                "description": "Details on the logical quantum resources used by the test performer. Exact structure is TBD.",
                 "type": "object"
             },
             "algorithm_details": {
@@ -341,7 +357,8 @@
             "solution_data": {
                 "items": {
                     "required": [
-                        "energy"
+                        "energy",
+                        "run_time"
                     ]
                 }
             }
