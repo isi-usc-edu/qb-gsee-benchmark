@@ -122,33 +122,13 @@
                     },
                     "classical_resources": {
                         "title": "Classical Resources",
-                        "description": "Required classical compute resources. Anything not included here is assumed to be the same as the values in solver_details.",
+                        "description": "Required classical compute resources. Values defined here are considered to override those of solver_details where conflict exists.",
                         "type": "object"
                          "properties" : {
-                            "cpu_description" : {
-                                "title": "CPU Description",
-                                "description": "Description of the CPU.",
-                                "type": "string"
-                            },
-                            "total_num_cores" : {
-                                "title": "Total number of cores used.",
-                                "description": "The total number of cores used.",
-                                "type": "number"
-                            },
-                            "clock_speed" : {
-                                "title": "Clock Speed",
-                                "description": "Clock speed(s) used.",
-                                "type": "string"
-                            },
                             "ram_used_gb" : {
                                 "title": "RAM (GB)",
                                 "description": "Total RAM available for the computation, in GB.",
                                 "type": "number"
-                            },
-                            "computing_environment_name" : {
-                                "title": "Computing Environment Name",
-                                "description": "Identifying name of computing environment (e.g. cluster or facility name), if relevant.",
-                                "type": "string"
                             },
                         }
                     },
@@ -374,7 +354,7 @@
                         "description": "Clock speed(s) used.",
                         "type": "string"
                     },
-                    "ram_used_gb" : {
+                    "ram_available_gb" : {
                         "title": "RAM (GB)",
                         "description": "Total RAM available for the computation, in GB.",
                         "type": "number"
