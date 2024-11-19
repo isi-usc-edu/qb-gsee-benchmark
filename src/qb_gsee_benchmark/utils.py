@@ -35,9 +35,9 @@ def _fetch_file_from_sftp(
 
 def retrieve_fcidump_from_sftp(url: str, username: str, ppk_path: str, port=22) -> dict:
     filename = os.path.basename(urlparse(url).path)
-    # _fetch_file_from_sftp(
-    #     url=url, username=username, ppk_path=ppk_path, local_path=filename, port=port
-    # )
+    _fetch_file_from_sftp(
+        url=url, username=username, ppk_path=ppk_path, local_path=filename, port=port
+    )
     fcidump_filename = filename.replace(".gz", "")
     with gzip.open(filename, "rb") as f_in:
         with open(fcidump_filename, "wb") as f_out:

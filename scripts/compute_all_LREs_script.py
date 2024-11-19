@@ -42,7 +42,7 @@ for h in handlers:
     logger.addHandler(h)
 
 
-def get_lqre(problem_instance: dict, username: str, ppk_path: str) -> None:
+def get_lqre(problem_instance: dict, username: str, ppk_path: str, config: dict) -> None:
     problem_instance_uuid = problem_instance["problem_instance_uuid"]
     problem_instance_short_name = problem_instance["short_name"]
     logging.info(f"problem_instance UUID: {problem_instance_uuid}")
@@ -105,14 +105,14 @@ def get_lqre(problem_instance: dict, username: str, ppk_path: str) -> None:
                 hardware_failure_tolerance_per_shot,
             ) = get_df_qpe_circuit(
                 fci=fci,
-                error_tolerance=1.6e-3,
-                failure_tolerance=1e-2,
-                square_overlap=0.8**2,
-                df_threshold=1e-3,
+                error_tolerance=1.6e-3, # TODO: extract this from problem instance
+                failure_tolerance=1e-2, # TODO: extract this from problem instance
+                square_overlap=config["algorithm_parameters"]["square_overlap"],
+                df_threshold=config["algorithm_parameters"]["df_threshold"],
             )
             preprocessing_time = time.time() - start
-            print(f"Initialized circuit in {preprocessing_time} seconds.")
-            print(f"Estimating logical resources...")
+            logging.info(f"Initialized circuit in {preprocessing_time} seconds.")
+            logging.info(f"Estimating logical resources...")
             logical_resources = estimate_resources(circuit.circuit)
 
             solution_data.append(
@@ -148,23 +148,19 @@ def get_lqre(problem_instance: dict, username: str, ppk_path: str) -> None:
             "creation_timestamp": current_time_string,
             "short_name": "QPE",
             "is_resource_estimate": True,
-            "contact_info": [
-                {
-                    "name": "Max Radin",
-                    "email": "max.radin@zapata.ai",
-                    "institution": "Zapata AI",
-                }
-            ],
+            "contact_info": config["contact_info"],
             "solution_data": solution_data,
             "compute_hardware_type": "quantum_computer",
             "compute_details": compute_details,
             "digital_signature": None,
         }
-        with open(f"lqre-{problem_instance['problem_instance_uuid']}.json", "w") as f:
-            json.dump(results, f)
+
+        return results
 
 
-def main(args):
+def main(args:argparse.Namespace) -> None:
+
+    config = json.load(open(args.LRE_config_file, "r"))
 
     overall_start_time = datetime.datetime.now()
     logging.info(f"===============================================")
@@ -192,8 +188,11 @@ def main(args):
                 continue  # to next json file.
 
             resource_estimate = get_lqre(
-                problem_instance, args.sftp_username, args.sftp_key_file
+                problem_instance, args.sftp_username, args.sftp_key_file, config=config
             )
+            # TODO: include solver id in filename
+            with open(f"lqre-{problem_instance['problem_instance_uuid']}.json", "w") as f:
+                json.dump(resource_estimate, f)
 
     # Print overall time.
     # ===============================================================
