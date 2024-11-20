@@ -1,0 +1,107 @@
+{
+    "problem_instance_uuid": "f377cc27-366a-45af-b45a-c8478e4b6199",
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+    "problem_type": "GSEE",
+    "application_domain": "QC",
+    "creation_timestamp": "2024-11-19T18:34:11.483879",
+    "calendar_due_date": "2124-10-26T18:34:11.484017",
+    "status": "in_force",
+    "superseded_by": null,
+    "contact_info": [
+        {
+            "name": "Matthew Otten",
+            "email": "mjotten@wisc.edu",
+            "institution": "University of Wisconsin -- Madison"
+        }
+    ],
+    "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "references": [
+        "The Journal of Physical Chemistry Letters 2020 11 (20), 8922-8929 DOI: 10.1021/acs.jpclett.0c02621"
+    ],
+    "short_name": "benzene",
+    "tasks": [
+        {
+            "task_uuid": "b86457a4-abf4-43c9-9c08-2397e95b7c0f",
+            "features": {
+                "software_used": "PySCF 2.5.0",
+                "molecule_name": "Benzene",
+                "geometry": [
+                    "C 0.000000 1.396792 0.000000",
+                    "C 0.000000 -1.396792 0.000000",
+                    "C 1.209657 0.698396 0.000000",
+                    "C -1.209657 -0.698396 0.000000",
+                    "C -1.209657 0.698396 0.000000",
+                    "C 1.209657 -0.698396 0.000000",
+                    "H 0.000000 2.484212 0.000000",
+                    "H 2.151390 1.242106 0.000000",
+                    "H -2.151390 -1.242106 0.000000",
+                    "H -2.151390 1.242106 0.000000",
+                    "H 2.151390 -1.242106 0.000000",
+                    "H 0.000000 -2.484212 0.000000"
+                ],
+                "basis_set": {
+                    "default": "sto-3g"
+                },
+                "charge": 0,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "millihartree"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "4c655f65-1899-469c-975a-a3caec750697",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_benzene_sto-3g_4c655f65-1899-469c-975a-a3caec750697.gz",
+                    "instance_data_checksum": "358ab2639cdfa6195a760abf231e8b33c6681e27",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "7148b36a-0571-4a41-9239-19a97339f68a",
+            "features": {
+                "software_used": "PySCF 2.5.0",
+                "molecule_name": "Benzene",
+                "geometry": [
+                    "C 0.000000 1.396792 0.000000",
+                    "C 0.000000 -1.396792 0.000000",
+                    "C 1.209657 0.698396 0.000000",
+                    "C -1.209657 -0.698396 0.000000",
+                    "C -1.209657 0.698396 0.000000",
+                    "C 1.209657 -0.698396 0.000000",
+                    "H 0.000000 2.484212 0.000000",
+                    "H 2.151390 1.242106 0.000000",
+                    "H -2.151390 -1.242106 0.000000",
+                    "H -2.151390 1.242106 0.000000",
+                    "H 2.151390 -1.242106 0.000000",
+                    "H 0.000000 -2.484212 0.000000"
+                ],
+                "basis_set": {
+                    "default": "cc-pvdz"
+                },
+                "charge": 0,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "millihartree"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "96ff0e22-a3ab-49f3-aee9-9a1886cbf850",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_benzene_cc-pvdz_96ff0e22-a3ab-49f3-aee9-9a1886cbf850.gz",
+                    "instance_data_checksum": "ce09c8ce0d2bd030c6e886c0e099a6d656f33edd",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        }
+    ]
+}
