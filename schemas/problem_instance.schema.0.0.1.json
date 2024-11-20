@@ -10,7 +10,7 @@
         "calendar_due_date",
         "contact_info",
         "problem_type",
-        "instance_data",
+        "tasks",
         "status",
         "superseded_by",
         "application_domain",
@@ -160,13 +160,14 @@
                 "HEP"
             ]
         },
-        "instance_data": {
-            "title": "Instance Data",
-            "description": "A list of objects describing the required data.  Exact structure is TDB.  For large instances, a URL to the data is given.",
+        "tasks": {
+            "title": "Tasks",
+            "description": "A list of tasks that must be performed.",
             "type": "array",
             "items": {
                 "type": "object",
                 "required":[
+                    "task_uuid",
                     "supporting_files"
                 ],
                 "optional":[
@@ -174,6 +175,12 @@
                     "features"
                 ],
                 "properties":{
+                    "task_uuid": {
+                        "title": "Task UUID",
+                        "description": "Universally Unique Identifier (UUID) as a string in RFC4122 8-4-4-4-12 format.",
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                    },
                     "supporting_files":{
                         "title": "Supporting Files",
                         "description": "A list of URLs and other metadata for supporting files.  E.g., FCIDUMP files, SCF solution files, checkpoint files, etc.  Note that this may be a list with only one item.",

@@ -22,18 +22,6 @@
     "superseded_by": null,
     "problem_type": "GSEE",
     "application_domain": "QC",
-    "instance_data": [
-        {
-            "supporting_files": [
-                {
-                    "instance_data_object_uuid": "eea867d0-285e-462d-94ab-15579c782be7",
-                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/planted_solutions/fcidump.planted_solution_0010.eea867d0-285e-462d-94ab-15579c782be7.gz",
-                    "instance_data_checksum": "df0f26817d3d203778ffd0b9b74b5edf99cd5c48",
-                    "instance_data_checksum_type": "sha1sum"
-                }
-            ]
-        }
-    ],
     "requirements": [
         {
             "probability_of_success": 0.99,
@@ -48,5 +36,18 @@
         "num_electrons": 48,
         "num_orbitals": 30,
         "utility_scale": false
-    }
+    },
+    "tasks": [
+        {
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "eea867d0-285e-462d-94ab-15579c782be7",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/planted_solutions/fcidump.planted_solution_0010.eea867d0-285e-462d-94ab-15579c782be7.gz",
+                    "instance_data_checksum": "df0f26817d3d203778ffd0b9b74b5edf99cd5c48",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ],
+            "task_uuid": "1927c401-27e1-463d-9bb5-3ac8ee4dd7f2"
+        }
+    ]
 }
