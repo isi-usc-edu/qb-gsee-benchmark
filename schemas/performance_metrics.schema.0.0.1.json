@@ -8,8 +8,8 @@
         "solver_short_name",
         "solver_uuid",
         "creation_timestamp",
-        "itemized_metrics",
-        "aggregate_metrics",
+        "metrics_for_each_problem_instance",
+        "aggregated_metrics",
         "ml_metrics",
         "$schema"
     ],
@@ -161,7 +161,7 @@
                 }
             }
         },
-        "aggregate_metrics": {
+        "aggregated_metrics": {
             "title": "Aggregated performance metrics for the solver",
             "description": "The summary performance metrics for the solver over all `problem_instance`/Hamiltonian files.",
             "type": "object"

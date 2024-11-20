@@ -21,6 +21,14 @@ import datetime
 import json
 from urllib.parse import urlparse
 import uuid
+import sys
+sys.path.append("../")
+
+
+# miniML methods from this repo:
+# NOTE: renaming `main` function as `miniML` during import.
+from BubbleML.miniML.miniML import main as miniML
+
 
 import numpy as np
 import pandas as pd
@@ -256,7 +264,7 @@ def main(args):
 
 
 
-    # interim results printed to file
+    # interim results printed to .csv file
     # ==============================================================
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
     aggregated_labels_file_name = f"aggregated_solver_labels_{timestamp}.csv"
@@ -267,10 +275,40 @@ def main(args):
 
 
 
+
+
     # Calculate ML scores for each solver
     # ===============================================================
+    ml_scores = {}
     for solver_uuid in solver_list["solver_uuid"].values:
-        print("TODO")
+        solver_short_name = get_solver_short_name(
+            solver_uuid=solver_uuid,
+            solver_list=solver_list
+        )
+        # filter aggregated results to ONLY the solver (by solver_uuid)
+        solver_labels = aggregated_results[aggregated_results["solver_uuid"]==solver_uuid]
+        
+        # write out the labels to a .csv file... one file for each solver.
+        solver_labels_file_name = f"solver.{solver_short_name}.{solver_uuid}.labels.csv"
+        solver_labels.to_csv(solver_labels_file_name)
+
+        logging.info(f"calculating ML scores for solver {solver_short_name}/{solver_uuid}...")
+        ml_solvability_score, f1_score = miniML(argparse.Namespace(
+            ham_features_file="../Hamiltonian_features/experimental...",
+            config_file="BubbleML/miniML/miniML_config.json",
+            solver_uuid=solver_uuid,
+            solver_labels_file=solver_labels_file_name,
+            verbose=False
+        ))
+        ml_scores[solver_uuid] = {
+            "ml_solvability_score":ml_solvability_score,
+            "f1_score":f1_score    
+        }
+
+
+
+        
+
 
 
     
@@ -278,9 +316,30 @@ def main(args):
     # Write out a performance_metrics.uuid.json file for each solver
     # ===============================================================
     for solver_uuid in solver_list["solver_uuid"].values:
-        performance_metrics_uuid = str(uuid.uuid4())
-        creation_time_stamp = datetime.datetime.utcnow().isoformat()
-        print("TODO")
+        solver_short_name = get_solver_short_name(
+            solver_uuid=solver_uuid,
+            solver_list=solver_list
+        )
+        performance_metrics = {}
+        performance_metrics["$schema"] = "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/performance_metrics.schema.0.0.1.json"
+        performance_metrics["performance_metrics_uuid"] = str(uuid.uuid4())
+        performance_metrics["solver_short_name"] = solver_short_name
+        performance_metrics["solver_uuid"] = solver_uuid
+        performance_metrics["creation_timestamp"] = datetime.datetime.utcnow().isoformat()
+        performance_metrics["ml_metrics"] = {
+            "ml_metrics_calculator_version": 1, # TODO, update this programmatically
+            "solvability_ratio": ml_scores[solver_uuid]["ml_solvability_score"],
+            "f1_score": ml_scores[solver_uuid]["f1_score"]    
+        }
+        performance_metrics["aggregate_metrics"] = {} # TODO
+        performance_metrics["metrics_for_each_problem_instance"] = {} # TODO
+
+        performance_metrics_file_name = args.performance_metrics_dir 
+        performance_metrics_file_name += f"performance_metrics.{solver_short_name}.{solver_uuid}.json"
+        with open(performance_metrics_file_name, "w") as jo:
+            json.dump(performance_metrics, jo, indent=4)
+        logging.info(f"wrote file: {performance_metrics_file_name}")
+
 
 
 
