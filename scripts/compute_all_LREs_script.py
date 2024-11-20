@@ -24,8 +24,8 @@ from datetime import UTC
 from typing import Any
 from urllib.parse import urlparse
 from uuid import uuid4
-import numpy as np
 
+import numpy as np
 from pyLIQTR.utils.resource_analysis import estimate_resources
 
 from qb_gsee_benchmark.qre import get_df_qpe_circuit
@@ -159,6 +159,7 @@ def get_lqre(
 
     solver_details = {
         "solver_uuid": config["solver_uuid"],
+        "solver_short_name": "DF QPE",
         "compute_hardware_type": "quantum_computer",
         "algorithm_details": {
             "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Uses PyLIQTR logical resource estimates. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time.",
@@ -170,7 +171,6 @@ def get_lqre(
         "solution_uuid": solution_uuid,
         "problem_instance_uuid": problem_instance["problem_instance_uuid"],
         "creation_timestamp": current_time_string,
-        "short_name": "QPE",
         "is_resource_estimate": True,
         "contact_info": config["contact_info"],
         "solution_data": solution_data,
@@ -214,11 +214,10 @@ def main(args: argparse.Namespace) -> None:
             resource_estimate = get_lqre(
                 problem_instance, args.sftp_username, args.sftp_key_file, config=config
             )
-            # TODO: include solver id in filename
             with open(
-                f"lqre-{problem_instance['problem_instance_uuid']}.json", "w"
+                os.path.join(args.output_dir, f"{problem_instance['problem_instance_uuid']}_sol_{resource_estimate['solution_uuid']}.json"), "w"
             ) as f:
-                json.dump(resource_estimate, f)
+                json.dump(resource_estimate, f, indent=4)
 
     # Print overall time.
     # ===============================================================
@@ -242,6 +241,14 @@ if __name__ == "__main__":
         type=str,
         required=True,
         help="Specify directory for problem_instances (.json files)",
+    )
+
+    parser.add_argument(
+        "-o",
+        "--output_dir",
+        type=str,
+        required=True,
+        help="Specify directory to save resource estimates to (.json files)",
     )
 
     parser.add_argument(
