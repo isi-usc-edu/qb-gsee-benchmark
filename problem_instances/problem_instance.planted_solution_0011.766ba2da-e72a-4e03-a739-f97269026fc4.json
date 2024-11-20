@@ -22,7 +22,7 @@
     "superseded_by": null,
     "problem_type": "GSEE",
     "application_domain": "QC",
-    "instance_data": [
+    "tasks": [
         {
             "supporting_files": [
                 {
@@ -31,22 +31,21 @@
                     "instance_data_checksum": "f57caedd6b03cab2f27670179eda967973044356",
                     "instance_data_checksum_type": "sha1sum"
                 }
-            ]
+            ],
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 86400,
+                "accuracy": 1.0,
+                "energy_units": "millihartree",
+                "energy_target": 0.99
+            },
+            "features": {
+                "multiplicity": 1,
+                "num_electrons": 50,
+                "num_orbitals": 31,
+                "utility_scale": false
+            },
+            "task_uuid": "0021e256-8e13-42db-839d-e9155e8af82c"
         }
-    ],
-    "requirements": [
-        {
-            "probability_of_success": 0.99,
-            "time_limit_seconds": 86400,
-            "accuracy": 1.0,
-            "energy_units": "millihartree",
-            "energy_target": 0.99
-        }
-    ],
-    "features": {
-        "multiplicity": 1,
-        "num_electrons": 50,
-        "num_orbitals": 31,
-        "utility_scale": false
-    }
+    ]
 }
