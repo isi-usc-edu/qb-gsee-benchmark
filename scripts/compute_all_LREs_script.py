@@ -24,6 +24,7 @@ from datetime import UTC
 from typing import Any
 from urllib.parse import urlparse
 from uuid import uuid4
+import numpy as np
 
 from pyLIQTR.utils.resource_analysis import estimate_resources
 
@@ -48,13 +49,13 @@ def get_lqre(
     problem_instance_short_name = problem_instance["short_name"]
     logging.info(f"problem_instance UUID: {problem_instance_uuid}")
     logging.info(f"problem_instance short name: {problem_instance_short_name}")
-    num_hams = len(problem_instance["instance_data"])
+    num_hams = len(problem_instance["tasks"])
     logging.info(f"contains {num_hams} associated Hamiltonians.")
 
     solution_data: list[dict[str, Any]] = []
     results: dict[str, Any] = {}
 
-    for task in problem_instance["instance_data"]:
+    for task in problem_instance["tasks"]:
         num_supporting_files = len(task["supporting_files"])
         logging.info(f"number of supporting files: {num_supporting_files}")
 
@@ -92,6 +93,9 @@ def get_lqre(
             logging.info(f"===============================================")
             logging.info(f"Calculating Logical Resource Estimate...")
 
+            error_tolerance = 1.6e-3  # TODO: extract this from problem instance
+            failure_tolerance = 1e-2  # TODO: extract this from problem instance
+
             circuit_generation_start_time = datetime.datetime.now()
             (
                 circuit,
@@ -99,8 +103,8 @@ def get_lqre(
                 hardware_failure_tolerance_per_shot,
             ) = get_df_qpe_circuit(
                 fci=fci,
-                error_tolerance=1.6e-3,  # TODO: extract this from problem instance
-                failure_tolerance=1e-2,  # TODO: extract this from problem instance
+                error_tolerance=error_tolerance,
+                failure_tolerance=failure_tolerance,
                 square_overlap=config["algorithm_parameters"]["square_overlap"],
                 df_threshold=config["algorithm_parameters"]["df_threshold"],
             )
@@ -120,15 +124,17 @@ def get_lqre(
             solution_data.append(
                 {
                     "task_uuid": task["task_uuid"],
+                    "error_bound": error_tolerance,
+                    "confidence_level": failure_tolerance,
                     "quantum_resources": {
                         "logical": {
                             "num_logical_qubits": logical_resources["LogicalQubits"],
                             "num_T_gates_per_shot": logical_resources["T"],
-                            "num_shots": num_shots,
+                            "num_shots": np.ceil(num_shots),
                             "hardware_failure_tolerance_per_shot": hardware_failure_tolerance_per_shot,
                         }
                     },
-                    "runtime": {
+                    "run_time": {
                         "preprocessing_time": {
                             "wall_clock_start_time": circuit_generation_start_time.strftime(
                                 "%Y-%m-%dT%H:%M:%S.%f"
@@ -153,6 +159,7 @@ def get_lqre(
 
     solver_details = {
         "solver_uuid": config["solver_uuid"],
+        "compute_hardware_type": "quantum_computer",
         "algorithm_details": {
             "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Uses PyLIQTR logical resource estimates. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time.",
             "algorithm_parameters": config["algorithm_parameters"],
