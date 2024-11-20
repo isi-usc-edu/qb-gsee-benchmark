@@ -1,64 +1,64 @@
 {
-    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/problem_instance.schema.0.0.1.json",
-    "references": [
-        "https://doi.org/10.1103/PhysRevX.10.011041"
-    ],
-    "problem_instance_uuid": "e2212cdf-adef-454a-b218-05041d723c55",
-    "creation_timestamp": "2024-11-20T00:30:06.833754",
-    "calendar_due_date": null,
-    "short_name": "MnO_0",
-    "license": {
-        "name": "Apache 2.0",
-        "url": "http://www.apache.org/licenses/LICENSE-2.0"
-    },
-    "contact_info": [
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/problem_instance.schema.0.0.1.json",
+  "references": [
+    "https://doi.org/10.1103/PhysRevX.10.011041"
+  ],
+  "problem_instance_uuid": "e2212cdf-adef-454a-b218-05041d723c55",
+  "creation_timestamp": "2024-11-20T00:30:06.833754",
+  "calendar_due_date": null,
+  "short_name": "MnO_0",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "contact_info": [
+    {
+      "name": "Joshua T. Cantin",
+      "email": "joshua.cantin@utoronto.ca",
+      "institution": "University of Toronto at Scarborough"
+    }
+  ],
+  "status": "in_development",
+  "superseded_by": null,
+  "problem_type": "GSEE",
+  "application_domain": "QC",
+  "tasks": [
+    {
+      "task_uuid": "f0ee8150-86e2-4f9e-ae35-95af38f3c69e",
+      "features": {
+        "molecule_name": "MnO_vdz",
+        "geometry": "Mn          0.00000        0.00000        0.00000\nO           0.00000        0.00000        1.64800",
+        "basis_set": "vdz",
+        "charge": 0,
+        "multiplicity": 6,
+        "num_electrons": 21,
+        "num_orbitals": 76
+      },
+      "requirements": {
+        "probability_of_success": 0.99,
+        "time_limit_seconds": 86400,
+        "accuracy": 1.0,
+        "energy_units": "millihartree",
+        "energy_target": 0.99,
+        "reference_energy": -119.85051,
+        "reference_energy_units": "hartree",
+        "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
+        "reference_energy_method": "SHCI"
+      },
+      "supporting_files": [
         {
-            "name": "Joshua T. Cantin",
-            "email": "joshua.cantin@utoronto.ca",
-            "institution": "University of Toronto at Scarborough"
-        }
-    ],
-    "status": "in_development",
-    "superseded_by": null,
-    "problem_type": "GSEE",
-    "application_domain": "QC",
-    "tasks": [
+          "instance_data_object_uuid": "55355f72-52f0-427d-b5ac-3b41666ca5fb",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.MnO_vdz.55355f72-52f0-427d-b5ac-3b41666ca5fb.gz",
+          "instance_data_checksum": "7b5a37b7586e79191aad7c3144bba2a86b538167",
+          "instance_data_checksum_type": "sha1sum"
+        },
         {
-            "task_uuid": "f0ee8150-86e2-4f9e-ae35-95af38f3c69e",
-            "features": {
-                "molecule_name": "MnO_vdz",
-                "geometry": "Mn          0.00000        0.00000        0.00000\nO           0.00000        0.00000        1.64800",
-                "basis_set": "vdz",
-                "charge": 0,
-                "multiplicity": 6,
-                "num_electrons": 21,
-                "num_orbitals": 76
-            },
-            "requirements": {
-                "probability_of_success": 0.99,
-                "time_limit_seconds": 86400,
-                "accuracy": 1.0,
-                "energy_units": "millihartree",
-                "energy_target": 0.99,
-                "reference_energy": -119.85051,
-                "reference_energy_units": "hartree",
-                "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
-                "reference_energy_method": "SHCI"
-            },
-            "supporting_files": [
-                {
-                    "instance_data_object_uuid": "55355f72-52f0-427d-b5ac-3b41666ca5fb",
-                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.MnO_vdz.chkfile.55355f72-52f0-427d-b5ac-3b41666ca5fb.gz",
-                    "instance_data_checksum": "7b5a37b7586e79191aad7c3144bba2a86b538167",
-                    "instance_data_checksum_type": "sha1sum"
-                },
-                {
-                    "instance_data_object_uuid": "fcdc3853-9542-4586-a0bc-9ec19df6a63a",
-                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/MnO_vdz.fcdc3853-9542-4586-a0bc-9ec19df6a63a.chk",
-                    "instance_data_checksum": "dfac082f09f1583f7729dd8f0e15511115d27528",
-                    "instance_data_checksum_type": "sha1sum"
-                }
-            ]
+          "instance_data_object_uuid": "fcdc3853-9542-4586-a0bc-9ec19df6a63a",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/MnO_vdz.fcdc3853-9542-4586-a0bc-9ec19df6a63a.chk",
+          "instance_data_checksum": "dfac082f09f1583f7729dd8f0e15511115d27528",
+          "instance_data_checksum_type": "sha1sum"
         }
-    ]
+      ]
+    }
+  ]
 }

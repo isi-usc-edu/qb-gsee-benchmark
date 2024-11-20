@@ -1,101 +1,101 @@
 {
-    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/problem_instance.schema.0.0.1.json",
-    "references": [
-        "https://doi.org/10.1103/PhysRevX.10.011041"
-    ],
-    "problem_instance_uuid": "d5c7ab73-dfc1-499e-9027-601476004107",
-    "creation_timestamp": "2024-11-20T00:23:36.740411",
-    "calendar_due_date": null,
-    "short_name": "Cu_1",
-    "license": {
-        "name": "Apache 2.0",
-        "url": "http://www.apache.org/licenses/LICENSE-2.0"
-    },
-    "contact_info": [
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/problem_instance.schema.0.0.1.json",
+  "references": [
+    "https://doi.org/10.1103/PhysRevX.10.011041"
+  ],
+  "problem_instance_uuid": "d5c7ab73-dfc1-499e-9027-601476004107",
+  "creation_timestamp": "2024-11-20T00:23:36.740411",
+  "calendar_due_date": null,
+  "short_name": "Cu_1",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "contact_info": [
+    {
+      "name": "Joshua T. Cantin",
+      "email": "joshua.cantin@utoronto.ca",
+      "institution": "University of Toronto at Scarborough"
+    }
+  ],
+  "status": "in_development",
+  "superseded_by": null,
+  "problem_type": "GSEE",
+  "application_domain": "QC",
+  "tasks": [
+    {
+      "task_uuid": "5f5fee92-5821-4d38-a54a-d204660f205f",
+      "features": {
+        "molecule_name": "Cu1_vdz",
+        "geometry": "Cu          0.00000        0.00000        0.00000",
+        "basis_set": "vdz",
+        "charge": 1,
+        "multiplicity": 1,
+        "num_electrons": 18,
+        "num_orbitals": 54
+      },
+      "requirements": {
+        "probability_of_success": 0.99,
+        "time_limit_seconds": 86400,
+        "accuracy": 1.0,
+        "energy_units": "millihartree",
+        "energy_target": 0.99,
+        "reference_energy": -196.96723,
+        "reference_energy_units": "hartree",
+        "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
+        "reference_energy_method": "SHCI"
+      },
+      "supporting_files": [
         {
-            "name": "Joshua T. Cantin",
-            "email": "joshua.cantin@utoronto.ca",
-            "institution": "University of Toronto at Scarborough"
-        }
-    ],
-    "status": "in_development",
-    "superseded_by": null,
-    "problem_type": "GSEE",
-    "application_domain": "QC",
-    "tasks": [
-        {
-            "task_uuid": "5f5fee92-5821-4d38-a54a-d204660f205f",
-            "features": {
-                "molecule_name": "Cu1_vdz",
-                "geometry": "Cu          0.00000        0.00000        0.00000",
-                "basis_set": "vdz",
-                "charge": 1,
-                "multiplicity": 1,
-                "num_electrons": 18,
-                "num_orbitals": 54
-            },
-            "requirements": {
-                "probability_of_success": 0.99,
-                "time_limit_seconds": 86400,
-                "accuracy": 1.0,
-                "energy_units": "millihartree",
-                "energy_target": 0.99,
-                "reference_energy": -196.96723,
-                "reference_energy_units": "hartree",
-                "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
-                "reference_energy_method": "SHCI"
-            },
-            "supporting_files": [
-                {
-                    "instance_data_object_uuid": "6facf2d4-6cb3-49b6-8b66-3bd21c1461ec",
-                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.Cu1_vdz.chkfile.6facf2d4-6cb3-49b6-8b66-3bd21c1461ec.gz",
-                    "instance_data_checksum": "91e63978f875f207f7455c78539e873ade693c2a",
-                    "instance_data_checksum_type": "sha1sum"
-                },
-                {
-                    "instance_data_object_uuid": "36737c9f-2f69-4963-91a1-daf7a2a3fcfd",
-                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/Cu1_vdz.36737c9f-2f69-4963-91a1-daf7a2a3fcfd.chk",
-                    "instance_data_checksum": "650075b482b9fbbbd23e67b4b3401072ec9758d9",
-                    "instance_data_checksum_type": "sha1sum"
-                }
-            ]
+          "instance_data_object_uuid": "6facf2d4-6cb3-49b6-8b66-3bd21c1461ec",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.Cu1_vdz.6facf2d4-6cb3-49b6-8b66-3bd21c1461ec.gz",
+          "instance_data_checksum": "91e63978f875f207f7455c78539e873ade693c2a",
+          "instance_data_checksum_type": "sha1sum"
         },
         {
-            "task_uuid": "1c7f5399-8982-4daf-81a5-7cef4e4588cc",
-            "features": {
-                "molecule_name": "Cu1_vtz",
-                "geometry": "Cu          0.00000        0.00000        0.00000",
-                "basis_set": "vtz",
-                "charge": 1,
-                "multiplicity": 1,
-                "num_electrons": 18,
-                "num_orbitals": 88
-            },
-            "requirements": {
-                "probability_of_success": 0.99,
-                "time_limit_seconds": 86400,
-                "accuracy": 1.0,
-                "energy_units": "millihartree",
-                "energy_target": 0.99,
-                "reference_energy": -197.16304,
-                "reference_energy_units": "hartree",
-                "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
-                "reference_energy_method": "SHCI"
-            },
-            "supporting_files": [
-                {
-                    "instance_data_object_uuid": "68952c71-d281-40fa-bcd2-cb0352f70a89",
-                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.Cu1_vtz.chkfile.68952c71-d281-40fa-bcd2-cb0352f70a89.gz",
-                    "instance_data_checksum": "7e64602653f814acf20d8ceabeb0e67f18562bca",
-                    "instance_data_checksum_type": "sha1sum"
-                },
-                {
-                    "instance_data_object_uuid": "d9bbc858-2cef-43ee-896f-c9059d2b13b5",
-                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/Cu1_vtz.d9bbc858-2cef-43ee-896f-c9059d2b13b5.chk",
-                    "instance_data_checksum": "26a6b1d097e5ee79e9709a7c9c086e1ade35561d",
-                    "instance_data_checksum_type": "sha1sum"
-                }
-            ]
+          "instance_data_object_uuid": "36737c9f-2f69-4963-91a1-daf7a2a3fcfd",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/Cu1_vdz.36737c9f-2f69-4963-91a1-daf7a2a3fcfd.chk",
+          "instance_data_checksum": "650075b482b9fbbbd23e67b4b3401072ec9758d9",
+          "instance_data_checksum_type": "sha1sum"
         }
-    ]
+      ]
+    },
+    {
+      "task_uuid": "1c7f5399-8982-4daf-81a5-7cef4e4588cc",
+      "features": {
+        "molecule_name": "Cu1_vtz",
+        "geometry": "Cu          0.00000        0.00000        0.00000",
+        "basis_set": "vtz",
+        "charge": 1,
+        "multiplicity": 1,
+        "num_electrons": 18,
+        "num_orbitals": 88
+      },
+      "requirements": {
+        "probability_of_success": 0.99,
+        "time_limit_seconds": 86400,
+        "accuracy": 1.0,
+        "energy_units": "millihartree",
+        "energy_target": 0.99,
+        "reference_energy": -197.16304,
+        "reference_energy_units": "hartree",
+        "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
+        "reference_energy_method": "SHCI"
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "68952c71-d281-40fa-bcd2-cb0352f70a89",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.Cu1_vtz.68952c71-d281-40fa-bcd2-cb0352f70a89.gz",
+          "instance_data_checksum": "7e64602653f814acf20d8ceabeb0e67f18562bca",
+          "instance_data_checksum_type": "sha1sum"
+        },
+        {
+          "instance_data_object_uuid": "d9bbc858-2cef-43ee-896f-c9059d2b13b5",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/Cu1_vtz.d9bbc858-2cef-43ee-896f-c9059d2b13b5.chk",
+          "instance_data_checksum": "26a6b1d097e5ee79e9709a7c9c086e1ade35561d",
+          "instance_data_checksum_type": "sha1sum"
+        }
+      ]
+    }
+  ]
 }
