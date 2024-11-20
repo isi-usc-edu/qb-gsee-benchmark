@@ -21,7 +21,9 @@ import json
 import logging
 import math
 import os
+import sys
 from datetime import UTC
+from importlib.metadata import version
 from typing import Any
 from urllib.parse import urlparse
 from uuid import uuid4
@@ -112,7 +114,7 @@ def get_lqre(
                 fci=fci,
                 error_tolerance=error_tolerance,
                 failure_tolerance=failure_tolerance,
-                square_overlap=config["algorithm_parameters"]["square_overlap"],
+                square_overlap=config["algorithm_parameters"]["overlap"] ** 2,
                 df_threshold=config["algorithm_parameters"]["df_threshold"],
             )
             circuit_generation_end_time = datetime.datetime.now()
@@ -169,9 +171,17 @@ def get_lqre(
         "solver_short_name": "DF QPE",
         "compute_hardware_type": "quantum_computer",
         "algorithm_details": {
-            "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Uses PyLIQTR logical resource estimates. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time.",
+            "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Also note that unlike arXiv:2406.06335, the ground-state overlaps are not computed from DMRG but instead set to a nominal value.",
             "algorithm_parameters": config["algorithm_parameters"],
         },
+        "software_details": [
+            {"software_name": "pyLIQTR", "software_version": version("pyLIQTR")},
+            {
+                "software_name": "qb-gsee-benchmark",
+                "software_version": version("qb-gsee-benchmark"),
+            },
+            {"software_name": "Python", "software_version": sys.version},
+        ],
     }
     results = {
         "$schema": "https://raw.githubusercontent.com/zapatacomputing/qb-gsee-benchmark/refs/heads/main/instances/schemas/solution.schema.0.0.1.json",
