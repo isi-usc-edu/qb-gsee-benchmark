@@ -117,13 +117,13 @@
                     "classical_resources": {
                         "title": "Classical Resources",
                         "description": "Required classical compute resources. Values defined here are considered to override those of solver_details where conflict exists.",
-                        "type": "object"
+                        "type": "object",
                          "properties" : {
                             "ram_used_gb" : {
                                 "title": "RAM (GB)",
                                 "description": "Total RAM available for the computation, in GB.",
                                 "type": "number"
-                            },
+                            }
                         }
                     },
                     "quantum_resources": {
@@ -179,9 +179,6 @@
                         "title": "Wall Clock Runtime",
                         "description": "A breakdown of start/stop wall clock time(s) reported according to ISO 8601 in UTC and duration in seconds.  run_time is broken down into (1) overall_time, (2) preprocessing_time, (3), algorithm_run_time, and (4) postprocessing_time.  See descriptions of each object.",
                         "type": "object",
-                        "required": [
-                            "overall_time"
-                        ],
                         "properties": {
                             "overall_time": {
                                 "title": "Overall Wall Clock Time",
@@ -337,7 +334,7 @@
             "classical_hardware_details": {
                 "title": "Classical Compute Hardware Details",
                 "description": "Details on the hardware used by the solver. All tasks are assumed to have the included values unless specified otherwise at the task level.",
-                "type": "object"
+                "type": "object",
                  "properties" : {
                     "cpu_description" : {
                         "title": "CPU Description",
@@ -363,7 +360,7 @@
                         "title": "Computing Environment Name",
                         "description": "Identifying name of computing environment (e.g. cluster or facility name), if relevant.",
                         "type": "string"
-                    },
+                    }
                 }
                     
             },
@@ -421,13 +418,14 @@
             "solution_data": {
                 "items": {
                     "required": ["energy"],
-                    "properties" : {
-                        "runtime" : {
-                            "required" : "overall_time"
+                    "properties": {
+                        "run_time": {
+                            "required": ["overall_time"]
                         }
                     }
                 }
             }
         }
     }
+
 }
