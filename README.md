@@ -46,7 +46,7 @@ In order to run this script, two files are required:
 
 The paths to these files must be passed as arguments to the script, for example:
 ```bash
-python compute_all_LREs_script.py -i problem_instances -o solutions --LRE_config_file LRE_config.json --sftp_username darpa-qb --sftp_key_file path_to_ppk_file
+python compute_all_LREs_script.py -i ../problem_instances -o ../solutions --LRE_config_file LRE_config.json --sftp_username darpa-qb --sftp_key_file path_to_ppk_file
 ```
 
 <!-- ### Viewing Results

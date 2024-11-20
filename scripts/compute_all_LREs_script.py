@@ -19,13 +19,13 @@ import argparse
 import datetime
 import json
 import logging
+import math
 import os
 from datetime import UTC
 from typing import Any
 from urllib.parse import urlparse
 from uuid import uuid4
 
-import numpy as np
 from pyLIQTR.utils.resource_analysis import estimate_resources
 
 from qb_gsee_benchmark.qre import get_df_qpe_circuit
@@ -90,6 +90,13 @@ def get_lqre(
                 port=22,
             )
 
+            num_orbitals = fci["H1"].shape[0]
+            if num_orbitals >= config["algorithm_parameters"]["max_orbitals"]:
+                logging.info(
+                    f"Skipping Logical Resource Estimate because number of orbitals ({num_orbitals}) exceeds maximum specified in config ({config['algorithm_parameters']['max_orbitals']})."
+                )
+                continue
+
             logging.info(f"===============================================")
             logging.info(f"Calculating Logical Resource Estimate...")
 
@@ -130,7 +137,7 @@ def get_lqre(
                         "logical": {
                             "num_logical_qubits": logical_resources["LogicalQubits"],
                             "num_T_gates_per_shot": logical_resources["T"],
-                            "num_shots": np.ceil(num_shots),
+                            "num_shots": math.ceil(num_shots),
                             "hardware_failure_tolerance_per_shot": hardware_failure_tolerance_per_shot,
                         }
                     },
@@ -215,7 +222,11 @@ def main(args: argparse.Namespace) -> None:
                 problem_instance, args.sftp_username, args.sftp_key_file, config=config
             )
             with open(
-                os.path.join(args.output_dir, f"{problem_instance['problem_instance_uuid']}_sol_{resource_estimate['solution_uuid']}.json"), "w"
+                os.path.join(
+                    args.output_dir,
+                    f"{problem_instance['problem_instance_uuid']}_sol_{resource_estimate['solution_uuid']}.json",
+                ),
+                "w",
             ) as f:
                 json.dump(resource_estimate, f, indent=4)
 
