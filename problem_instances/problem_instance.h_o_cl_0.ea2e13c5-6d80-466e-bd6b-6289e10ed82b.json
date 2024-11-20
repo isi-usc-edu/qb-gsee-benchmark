@@ -1,101 +1,101 @@
 {
-    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/problem_instance.schema.0.0.1.json",
-    "references": [
-        "https://doi.org/10.1063/5.0018577"
-    ],
-    "problem_instance_uuid": "ea2e13c5-6d80-466e-bd6b-6289e10ed82b",
-    "creation_timestamp": "2024-11-20T00:13:56.281754",
-    "calendar_due_date": null,
-    "short_name": "h_o_cl_0",
-    "license": {
-        "name": "Apache 2.0",
-        "url": "http://www.apache.org/licenses/LICENSE-2.0"
-    },
-    "contact_info": [
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "references": [
+    "https://doi.org/10.1063/5.0018577"
+  ],
+  "problem_instance_uuid": "ea2e13c5-6d80-466e-bd6b-6289e10ed82b",
+  "creation_timestamp": "2024-11-20T00:13:56.281754",
+  "calendar_due_date": null,
+  "short_name": "h_o_cl_0",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "contact_info": [
+    {
+      "name": "Joshua T. Cantin",
+      "email": "joshua.cantin@utoronto.ca",
+      "institution": "University of Toronto at Scarborough"
+    }
+  ],
+  "status": "in_development",
+  "superseded_by": null,
+  "problem_type": "GSEE",
+  "application_domain": "QC",
+  "tasks": [
+    {
+      "task_uuid": "bd44e482-057d-42c3-a052-cbd952fa8025",
+      "features": {
+        "molecule_name": "h_o_cl_cc-pVDZ",
+        "geometry": "H          -1.70724        2.47779        0.00000\nO           0.06829        2.07114        0.00000\nCl          0.06829       -1.12042        0.00000",
+        "basis_set": "cc-pVDZ",
+        "charge": 0,
+        "multiplicity": 1,
+        "num_electrons": 26,
+        "num_orbitals": 37
+      },
+      "requirements": {
+        "probability_of_success": 0.99,
+        "time_limit_seconds": 86400,
+        "accuracy": 1.0,
+        "energy_units": "millihartree",
+        "energy_target": 0.99,
+        "reference_energy": -535.2295951475559,
+        "reference_energy_units": "hartree",
+        "reference_energy_source": "https://doi.org/10.1063/5.0018577",
+        "reference_energy_method": "SHCI"
+      },
+      "supporting_files": [
         {
-            "name": "Joshua T. Cantin",
-            "email": "joshua.cantin@utoronto.ca",
-            "institution": "University of Toronto at Scarborough"
-        }
-    ],
-    "status": "in_development",
-    "superseded_by": null,
-    "problem_type": "GSEE",
-    "application_domain": "QC",
-    "tasks": [
-        {
-            "task_uuid": "bd44e482-057d-42c3-a052-cbd952fa8025",
-            "features": {
-                "molecule_name": "h_o_cl_cc-pVDZ",
-                "geometry": "H          -1.70724        2.47779        0.00000\nO           0.06829        2.07114        0.00000\nCl          0.06829       -1.12042        0.00000",
-                "basis_set": "cc-pVDZ",
-                "charge": 0,
-                "multiplicity": 1,
-                "num_electrons": 26,
-                "num_orbitals": 37
-            },
-            "requirements": {
-                "probability_of_success": 0.99,
-                "time_limit_seconds": 86400,
-                "accuracy": 1.0,
-                "energy_units": "millihartree",
-                "energy_target": 0.99,
-                "reference_energy": -535.2295951475559,
-                "reference_energy_units": "hartree",
-                "reference_energy_source": "https://doi.org/10.1063/5.0018577",
-                "reference_energy_method": "SHCI"
-            },
-            "supporting_files": [
-                {
-                    "instance_data_object_uuid": "95dec49b-7d4e-4889-9e31-97e21db7b329",
-                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.h_o_cl_cc-pVDZ.95dec49b-7d4e-4889-9e31-97e21db7b329.gz",
-                    "instance_data_checksum": "4e7202543bdb645a2720d781fcf25717a501de02",
-                    "instance_data_checksum_type": "sha1sum"
-                },
-                {
-                    "instance_data_object_uuid": "aa593c42-1dff-4302-b3f6-85eb6945f108",
-                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/h_o_cl_cc-pVDZ.aa593c42-1dff-4302-b3f6-85eb6945f108.chk",
-                    "instance_data_checksum": "1230f3a6b9b73f058504cfaadaf7140571566ae3",
-                    "instance_data_checksum_type": "sha1sum"
-                }
-            ]
+          "instance_data_object_uuid": "95dec49b-7d4e-4889-9e31-97e21db7b329",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.h_o_cl_cc-pVDZ.95dec49b-7d4e-4889-9e31-97e21db7b329.gz",
+          "instance_data_checksum": "4e7202543bdb645a2720d781fcf25717a501de02",
+          "instance_data_checksum_type": "sha1sum"
         },
         {
-            "task_uuid": "fea4b4a2-64a1-45c3-a760-83aec702bdca",
-            "features": {
-                "molecule_name": "h_o_cl_cc-pVTZ",
-                "geometry": "H          -1.70724        2.47779        0.00000\nO           0.06829        2.07114        0.00000\nCl          0.06829       -1.12042        0.00000",
-                "basis_set": "cc-pVTZ",
-                "charge": 0,
-                "multiplicity": 1,
-                "num_electrons": 26,
-                "num_orbitals": 78
-            },
-            "requirements": {
-                "probability_of_success": 0.99,
-                "time_limit_seconds": 86400,
-                "accuracy": 1.0,
-                "energy_units": "millihartree",
-                "energy_target": 0.99,
-                "reference_energy": -535.3960453601376,
-                "reference_energy_units": "hartree",
-                "reference_energy_source": "https://doi.org/10.1063/5.0018577",
-                "reference_energy_method": "SHCI"
-            },
-            "supporting_files": [
-                {
-                    "instance_data_object_uuid": "e8ed1ee4-2780-4978-8d21-d1a23a30ae8d",
-                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.h_o_cl_cc-pVTZ.e8ed1ee4-2780-4978-8d21-d1a23a30ae8d.gz",
-                    "instance_data_checksum": "cfb46335cbf6bbf120da59b6d1057eac83f1afd5",
-                    "instance_data_checksum_type": "sha1sum"
-                },
-                {
-                    "instance_data_object_uuid": "3f652fb4-0324-46c1-ae9a-d69ed4da1756",
-                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/h_o_cl_cc-pVTZ.3f652fb4-0324-46c1-ae9a-d69ed4da1756.chk",
-                    "instance_data_checksum": "2f6f1c4f057120322042b5d344366f193c5b51cc",
-                    "instance_data_checksum_type": "sha1sum"
-                }
-            ]
+          "instance_data_object_uuid": "aa593c42-1dff-4302-b3f6-85eb6945f108",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/h_o_cl_cc-pVDZ.aa593c42-1dff-4302-b3f6-85eb6945f108.chk",
+          "instance_data_checksum": "1230f3a6b9b73f058504cfaadaf7140571566ae3",
+          "instance_data_checksum_type": "sha1sum"
         }
-    ]
+      ]
+    },
+    {
+      "task_uuid": "fea4b4a2-64a1-45c3-a760-83aec702bdca",
+      "features": {
+        "molecule_name": "h_o_cl_cc-pVTZ",
+        "geometry": "H          -1.70724        2.47779        0.00000\nO           0.06829        2.07114        0.00000\nCl          0.06829       -1.12042        0.00000",
+        "basis_set": "cc-pVTZ",
+        "charge": 0,
+        "multiplicity": 1,
+        "num_electrons": 26,
+        "num_orbitals": 78
+      },
+      "requirements": {
+        "probability_of_success": 0.99,
+        "time_limit_seconds": 86400,
+        "accuracy": 1.0,
+        "energy_units": "millihartree",
+        "energy_target": 0.99,
+        "reference_energy": -535.3960453601376,
+        "reference_energy_units": "hartree",
+        "reference_energy_source": "https://doi.org/10.1063/5.0018577",
+        "reference_energy_method": "SHCI"
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "e8ed1ee4-2780-4978-8d21-d1a23a30ae8d",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.h_o_cl_cc-pVTZ.e8ed1ee4-2780-4978-8d21-d1a23a30ae8d.gz",
+          "instance_data_checksum": "cfb46335cbf6bbf120da59b6d1057eac83f1afd5",
+          "instance_data_checksum_type": "sha1sum"
+        },
+        {
+          "instance_data_object_uuid": "3f652fb4-0324-46c1-ae9a-d69ed4da1756",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/h_o_cl_cc-pVTZ.3f652fb4-0324-46c1-ae9a-d69ed4da1756.chk",
+          "instance_data_checksum": "2f6f1c4f057120322042b5d344366f193c5b51cc",
+          "instance_data_checksum_type": "sha1sum"
+        }
+      ]
+    }
+  ]
 }
