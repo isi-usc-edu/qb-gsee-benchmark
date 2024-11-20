@@ -1,0 +1,64 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/problem_instance.schema.0.0.1.json",
+  "references": [
+    "https://doi.org/10.1103/PhysRevX.10.011041"
+  ],
+  "problem_instance_uuid": "7437abf0-1394-47ce-9218-d181f1732112",
+  "creation_timestamp": "2024-11-20T00:39:34.175260",
+  "calendar_due_date": null,
+  "short_name": "ScO_0",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "contact_info": [
+    {
+      "name": "Joshua T. Cantin",
+      "email": "joshua.cantin@utoronto.ca",
+      "institution": "University of Toronto at Scarborough"
+    }
+  ],
+  "status": "in_development",
+  "superseded_by": null,
+  "problem_type": "GSEE",
+  "application_domain": "QC",
+  "tasks": [
+    {
+      "task_uuid": "9fa4fc3a-b0b9-4eaa-99ee-0469ae5a511d",
+      "features": {
+        "molecule_name": "ScO_vdz",
+        "geometry": "Sc          0.00000        0.00000        0.00000\nO           0.00000        0.00000        1.66800",
+        "basis_set": "vdz",
+        "charge": 0,
+        "multiplicity": 2,
+        "num_electrons": 17,
+        "num_orbitals": 76
+      },
+      "requirements": {
+        "probability_of_success": 0.99,
+        "time_limit_seconds": 86400,
+        "accuracy": 1.0,
+        "energy_units": "millihartree",
+        "energy_target": 0.99,
+        "reference_energy": -62.42004,
+        "reference_energy_units": "hartree",
+        "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
+        "reference_energy_method": "SHCI"
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "987498ce-5b91-4df6-924c-82d4841c17c2",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.ScO_vdz.987498ce-5b91-4df6-924c-82d4841c17c2.gz",
+          "instance_data_checksum": "cd330e655f81a33b30d66ba158f6e9d2c624ab8b",
+          "instance_data_checksum_type": "sha1sum"
+        },
+        {
+          "instance_data_object_uuid": "249d53eb-a925-4b2b-92eb-5a7b05c39069",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/ScO_vdz.249d53eb-a925-4b2b-92eb-5a7b05c39069.chk",
+          "instance_data_checksum": "474bb9a45f4d7b74d58acfa6c4b55599c3f664ca",
+          "instance_data_checksum_type": "sha1sum"
+        }
+      ]
+    }
+  ]
+}

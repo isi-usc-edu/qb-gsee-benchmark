@@ -1,0 +1,64 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/problem_instance.schema.0.0.1.json",
+  "references": [
+    "https://doi.org/10.1103/PhysRevX.10.011041"
+  ],
+  "problem_instance_uuid": "2140edd4-8eb3-4270-b753-278334998e3d",
+  "creation_timestamp": "2024-11-20T00:22:01.921747",
+  "calendar_due_date": null,
+  "short_name": "CrO_0",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "contact_info": [
+    {
+      "name": "Joshua T. Cantin",
+      "email": "joshua.cantin@utoronto.ca",
+      "institution": "University of Toronto at Scarborough"
+    }
+  ],
+  "status": "in_development",
+  "superseded_by": null,
+  "problem_type": "GSEE",
+  "application_domain": "QC",
+  "tasks": [
+    {
+      "task_uuid": "e0101b06-dfd6-4caa-8580-a9815b225204",
+      "features": {
+        "molecule_name": "CrO_vdz",
+        "geometry": "Cr          0.00000        0.00000        0.00000\nO           0.00000        0.00000        1.62100",
+        "basis_set": "vdz",
+        "charge": 0,
+        "multiplicity": 5,
+        "num_electrons": 20,
+        "num_orbitals": 76
+      },
+      "requirements": {
+        "probability_of_success": 0.99,
+        "time_limit_seconds": 86400,
+        "accuracy": 1.0,
+        "energy_units": "millihartree",
+        "energy_target": 0.99,
+        "reference_energy": -102.55837,
+        "reference_energy_units": "hartree",
+        "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
+        "reference_energy_method": "SHCI"
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "b9a18106-c719-4d0c-af12-30ded772eb55",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.CrO_vdz.b9a18106-c719-4d0c-af12-30ded772eb55.gz",
+          "instance_data_checksum": "32f82817e5798225c8bc7b417a2867ad389be12a",
+          "instance_data_checksum_type": "sha1sum"
+        },
+        {
+          "instance_data_object_uuid": "59764ee7-250e-4e06-89c7-e9cdc5850196",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/CrO_vdz.59764ee7-250e-4e06-89c7-e9cdc5850196.chk",
+          "instance_data_checksum": "7df9313f7454c3d4385d361eaf67f76bcea0fda0",
+          "instance_data_checksum_type": "sha1sum"
+        }
+      ]
+    }
+  ]
+}

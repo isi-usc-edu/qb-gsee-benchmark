@@ -9,7 +9,6 @@
         "creation_timestamp",
         "contact_info",
         "solution_data",
-        "compute_hardware_type",
         "solver_details",
         "digital_signature",
         "$schema"
@@ -425,8 +424,10 @@
                         "energy"
                     ],
                     "properties": {
-                        "runtime": {
-                            "required": "overall_time"
+                        "run_time": {
+                            "required": [
+                                "overall_time"
+                            ]
                         }
                     }
                 }
