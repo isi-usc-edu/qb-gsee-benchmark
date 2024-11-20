@@ -85,8 +85,8 @@ def get_lqre(
             logging.info(f"SFTP downloading file {fcidump_url}...")
             fci = retrieve_fcidump_from_sftp(
                 url=fcidump_url,
-                username=args.sftp_username,
-                ppk_path=args.sftp_key_file,
+                username=username,
+                ppk_path=ppk_path,
                 port=22,
             )
 
@@ -209,26 +209,20 @@ def main(args: argparse.Namespace) -> None:
         problem_instance_path = os.path.join(input_dir, problem_instance_file_name)
         logging.info(f"parsing {problem_instance_path}")
         with open(problem_instance_path, "r") as jf:
-
-            # load data from file as a Python dictionary object:
-            # Try... because we may have non-JSON files that we will skip.
-            try:
-                problem_instance = json.load(jf)
-            except Exception as e:
-                logging.error(f"Error: {e}", exc_info=True)
-                continue  # to next json file.
+            problem_instance = json.load(jf)
 
             resource_estimate = get_lqre(
                 problem_instance, args.sftp_username, args.sftp_key_file, config=config
             )
-            with open(
-                os.path.join(
-                    args.output_dir,
-                    f"{problem_instance['problem_instance_uuid']}_sol_{resource_estimate['solution_uuid']}.json",
-                ),
-                "w",
-            ) as f:
-                json.dump(resource_estimate, f, indent=4)
+            if len(resource_estimate["solution_data"]) > 0:
+                with open(
+                    os.path.join(
+                        args.output_dir,
+                        f"{problem_instance['problem_instance_uuid']}_sol_{resource_estimate['solution_uuid']}.json",
+                    ),
+                    "w",
+                ) as f:
+                    json.dump(resource_estimate, f, indent=4)
 
     # Print overall time.
     # ===============================================================
