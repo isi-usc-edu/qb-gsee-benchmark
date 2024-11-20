@@ -81,9 +81,7 @@
             "type": "array",
             "items": {
                 "type": "object",
-                "required": [
-                    "task_uuid"
-                ],
+                "required": "task_uuid",
                 "properties": {
                     "task_uuid": {
                         "title": "Instance Data Object UUID",
@@ -179,17 +177,13 @@
                         "title": "Wall Clock Runtime",
                         "description": "A breakdown of start/stop wall clock time(s) reported according to ISO 8601 in UTC and duration in seconds.  run_time is broken down into (1) overall_time, (2) preprocessing_time, (3), algorithm_run_time, and (4) postprocessing_time.  See descriptions of each object.",
                         "type": "object",
-                        "required": [
-                            "overall_time"
-                        ],
+                        "required": "overall_time",
                         "properties": {
                             "overall_time": {
                                 "title": "Overall Wall Clock Time",
                                 "description": "Includes all pre/postprocessing times and algorithm_run_time.",
                                 "type": "object",
-                                "required": [
-                                    "seconds"
-                                ],
+                                "required": "seconds",
                                 "properties": {
                                     "wall_clock_start_time": {
                                         "title": "Wall Clock Start Time",
@@ -215,9 +209,7 @@
                                 "title": "Preprocessing Wall Clock Time",
                                 "description": "The time required to load any data into an idle machine before running an algorithm.",
                                 "type": "object",
-                                "required": [
-                                    "seconds"
-                                ],
+                                "required": "seconds",
                                 "properties": {
                                     "wall_clock_start_time": {
                                         "title": "Wall Clock Start Time",
@@ -243,9 +235,7 @@
                                 "title": "Algorithm Run Time",
                                 "description": "The start/stop times for how long the software/algorithm ran.",
                                 "type": "object",
-                                "required": [
-                                    "seconds"
-                                ],
+                                "required": "seconds",
                                 "properties": {
                                     "wall_clock_start_time": {
                                         "title": "Wall Clock Start Time",
@@ -275,9 +265,7 @@
                                 "title": "Postprocessing Wall Clock Time",
                                 "description": "The time required measure or read out any data from the machine.  .",
                                 "type": "object",
-                                "required": [
-                                    "seconds"
-                                ],
+                                "required": "seconds",
                                 "properties": {
                                     "wall_clock_start_time": {
                                         "title": "Wall Clock Start Time",
