@@ -1,0 +1,101 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/problem_instance.schema.0.0.1.json",
+    "references": [
+        "https://doi.org/10.1103/PhysRevX.10.011041"
+    ],
+    "problem_instance_uuid": "11c8be98-d9c9-40ea-8d88-ea8c555028f6",
+    "creation_timestamp": "2024-11-20T00:29:01.320423",
+    "calendar_due_date": null,
+    "short_name": "Mn_1",
+    "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "contact_info": [
+        {
+            "name": "Joshua T. Cantin",
+            "email": "joshua.cantin@utoronto.ca",
+            "institution": "University of Toronto at Scarborough"
+        }
+    ],
+    "status": "in_development",
+    "superseded_by": null,
+    "problem_type": "GSEE",
+    "application_domain": "QC",
+    "tasks": [
+        {
+            "task_uuid": "9d82f7d4-165d-4499-8add-361a770d1d44",
+            "features": {
+                "molecule_name": "Mn1_vdz",
+                "geometry": "Mn          0.00000        0.00000        0.00000",
+                "basis_set": "vdz",
+                "charge": 1,
+                "multiplicity": 7,
+                "num_electrons": 14,
+                "num_orbitals": 54
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 86400,
+                "accuracy": 1.0,
+                "energy_units": "millihartree",
+                "energy_target": 0.99,
+                "reference_energy": -103.67336,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
+                "reference_energy_method": "SHCI"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "51fac1c9-e29a-4033-b3d3-9cc37f64b4d4",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.Mn1_vdz.chkfile.51fac1c9-e29a-4033-b3d3-9cc37f64b4d4.gz",
+                    "instance_data_checksum": "04ccc73187b89e0feebf470b4840e6f2f144d813",
+                    "instance_data_checksum_type": "sha1sum"
+                },
+                {
+                    "instance_data_object_uuid": "d6ee6ee5-1c48-4d9b-8175-e94f0d3e9924",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/Mn1_vdz.d6ee6ee5-1c48-4d9b-8175-e94f0d3e9924.chk",
+                    "instance_data_checksum": "ef6f878ed66fd25ea86841491dc9f2714e6fd20c",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "29eecba9-3d4d-4672-8b19-475f53b2f1be",
+            "features": {
+                "molecule_name": "Mn1_vtz",
+                "geometry": "Mn          0.00000        0.00000        0.00000",
+                "basis_set": "vtz",
+                "charge": 1,
+                "multiplicity": 7,
+                "num_electrons": 14,
+                "num_orbitals": 88
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 86400,
+                "accuracy": 1.0,
+                "energy_units": "millihartree",
+                "energy_target": 0.99,
+                "reference_energy": -103.79214,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
+                "reference_energy_method": "SHCI"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "00c757c4-3c99-4521-82b1-3e3a12d49854",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.Mn1_vtz.chkfile.00c757c4-3c99-4521-82b1-3e3a12d49854.gz",
+                    "instance_data_checksum": "86164c9828026a54da3c279ecf6ccd5acf90efac",
+                    "instance_data_checksum_type": "sha1sum"
+                },
+                {
+                    "instance_data_object_uuid": "e4481467-4b06-43b0-9e22-b3c5fa930709",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/Mn1_vtz.e4481467-4b06-43b0-9e22-b3c5fa930709.chk",
+                    "instance_data_checksum": "197b6f0b5aeef57d8b7cc5a89dc5319d5309434d",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        }
+    ]
+}
