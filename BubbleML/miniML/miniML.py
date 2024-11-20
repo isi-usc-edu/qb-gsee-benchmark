@@ -33,30 +33,31 @@ random.seed(6)
 
 
 
-########################### start of functions #####################
 
-
-def evaluate(model, test_features, test_labels,model_name):
+################################################################################
+def evaluate(model, test_features, test_labels, model_name):
     '''
     This function returns the accuracy by the trained ML model ("model" with "model_name") on test_features with test_labels.
     Returns the f1-score (harmonic mean of precision and recall)
     '''
     y_pred = model.predict(test_features)
     labels = np.array([0,1]) #because I want the results back in this order
-    prec, recall, f1, support = precision_recall_fscore_support(test_labels, y_pred,labels = labels)
+    prec, recall, f1_score, support = precision_recall_fscore_support(test_labels, y_pred,labels = labels)
     #The support is the number of occurrences of each class in y_true.
     
     logging.info(model_name,' Performance:')
     logging.info('Precision [class (target=False) , class (target=true) ]:  {:0.2f}%,  {:0.2f}%,'.format(prec[0]*100,prec[1]*100))
     logging.info('Recall [class (target=False) , class (target=true) ]:  {:0.2f}%,  {:0.2f}%,'.format(recall[0]*100,recall[1]*100))
-    logging.info('F1-score [class (target=False) , class (target=true) ]:  {:0.2f}%,  {:0.2f}%,'.format(f1[0]*100,f1[1]*100))
+    logging.info('F1-score [class (target=False) , class (target=true) ]:  {:0.2f}%,  {:0.2f}%,'.format(f1_score[0]*100,f1_score[1]*100))
  
     cr = classification_report(test_labels, y_pred)
     pprint.pp(cr)
+    return f1_score
     
     
 
 
+################################################################################
 def trainML(
         X,
         Y,
@@ -72,8 +73,6 @@ def trainML(
     '''
     This function trains a machine learning model (name given by model_name) with data points X and labels Y 
     with or without hyperparamterization and cross-validation (option given by hypopt_cv)
-
-    Returns the model used and the accuracy
     '''
 
     X_train = X #will be scaling this for svm
@@ -110,7 +109,7 @@ def trainML(
     if hypopt_cv == 0:
         #uses all the data for train and tests on the same data
         model.fit(X_train,y_train)
-        accuracy = evaluate(model, X_train, y_train, model_name)
+        f1_score = evaluate(model, X_train, y_train, model_name)
         from pprint import pprint
         # Look at parameters used by our current forest (print this into the Text Edit Box). #later
         print('Parameters currently in use by base model:\n')
@@ -124,12 +123,12 @@ def trainML(
                             cv = kfold_num, n_jobs = -1, verbose = 2)
         
         model.fit(X_train,y_train)
-        accuracy = evaluate(model, X_train, y_train, model_name)
+        f1_score = evaluate(model, X_train, y_train, model_name)
       
         
         #ratio_of_solved_to_truesolved @ above 50% (bounded by min and max of points or convex hull - as in the figure)
         #sending original X (it will be transformed)
-        ratio = compute_ratio_of_solved_to_unsolved(
+        ml_solvability_ratio = compute_ratio_of_solved_to_unsolved(
             X,
             y_train,
             sc,
@@ -139,7 +138,7 @@ def trainML(
             solver_uuid=solver_uuid,
             draw_plot=verbose
         )
-        logging.info('Percent of solvable space: ', str(ratio))
+        logging.info('Percent of solvable space: ', str(ml_solvability_ratio))
 
         #explain all the predictions in the test set
         plt.figure()
@@ -171,10 +170,17 @@ def trainML(
             logging.info(f"wrote probs to file {probs_file_name}.")
     
             
-            
-    return model, accuracy
+    return ml_solvability_ratio, model, f1_score
 
 
+
+
+
+
+
+
+
+################################################################################
 def getProjectedData(X, latent_model_name):
    
     if latent_model_name == 'PCA':
@@ -211,6 +217,7 @@ def getProjectedData(X, latent_model_name):
 
 
 
+################################################################################
 def getConvexHull(points):
     
     # Compute the convex hull
@@ -228,6 +235,7 @@ def getConvexHull(points):
     return hull
 
 
+################################################################################
 def compute_ratio_of_solved_to_unsolved(
         X,
         Y,
@@ -310,13 +318,40 @@ def compute_ratio_of_solved_to_unsolved(
 
 
     result = np.where(prob[:,1] > conf_thresh)
-    ratio_solvable = len(result[0])/len(prob[:,1])
+    ml_solvability_ratio = len(result[0])/len(prob[:,1])
 
-    return ratio_solvable
+    print(f"ml_solvability_ratio: {ml_solvability_ratio}")
+    return ml_solvability_ratio
 
-############################### end of functions #################
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+################################################################################
 def main(args):
+
+    # if args.verbose:
+    #     #configure logging.  we are probably running this script one time by itself
+    #     logger = logging.getLogger()
+    #     logger.setLevel(logging.INFO)
+    #     console_handler = logging.StreamHandler()
+    #     formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+    #     console_handler.setFormatter(formatter)
+    #     logger.addHandler(console_handler)
+
 
     mini_ml_config_file_name = args.config_file
     with open(mini_ml_config_file_name, 'r') as j:
@@ -354,7 +389,7 @@ def main(args):
     latent_model_name = 'NNMF'
     model_name = 'SVM'
     importance_features_desired = 1
-    model, cr = trainML(
+    ml_solvability_ratio, model, f1_score = trainML(
         X=X,
         Y=Y,
         latent_model_name=latent_model_name,
@@ -367,9 +402,23 @@ def main(args):
     )
 
 
+    if args.verbose:
+        logging.info(f"solver_uuid: {args.solver_uuid}")
+        logging.info(f"ml_solvability_ratio: {ml_solvability_ratio}")
+        logging.info(f"f1_score: {f1_score}")
+        print(f"solver_uuid: {args.solver_uuid}")
+        print(f"ml_solvability_ratio: {ml_solvability_ratio}")
+        print(f"f1_score: {f1_score}")
+    
+
+    return ml_solvability_ratio, f1_score
 
 
 
+
+
+
+################################################################################
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="""
