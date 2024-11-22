@@ -1,53 +1,53 @@
 {
-    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/problem_instance.schema.0.0.1.json",
-    "references": [
-        "https://github.com/jtcantin/planted_solutions"
-    ],
-    "problem_instance_uuid": "3aaf0bb4-b412-4746-922a-c380b4024d00",
-    "creation_timestamp": "2024-11-14T10:16:42.261857",
-    "calendar_due_date": null,
-    "short_name": "planted_solution_0007",
-    "license": {
-        "name": "Apache 2.0",
-        "url": "http://www.apache.org/licenses/LICENSE-2.0"
-    },
-    "contact_info": [
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "references": [
+    "https://github.com/jtcantin/planted_solutions"
+  ],
+  "problem_instance_uuid": "3aaf0bb4-b412-4746-922a-c380b4024d00",
+  "creation_timestamp": "2024-11-14T10:16:42.261857",
+  "calendar_due_date": null,
+  "short_name": "planted_solution_0007",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "contact_info": [
+    {
+      "name": "Joshua T. Cantin",
+      "email": "joshua.cantin@utoronto.ca",
+      "institution": "University of Toronto at Scarborough"
+    }
+  ],
+  "status": "in_development",
+  "superseded_by": null,
+  "problem_type": "GSEE",
+  "application_domain": "QC",
+  "tasks": [
+    {
+      "supporting_files": [
         {
-            "name": "Joshua T. Cantin",
-            "email": "joshua.cantin@utoronto.ca",
-            "institution": "University of Toronto at Scarborough"
+          "instance_data_object_uuid": "c594d63e-29c7-462a-b385-f70c6d7d8350",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/planted_solutions/fcidump.planted_solution_0007.c594d63e-29c7-462a-b385-f70c6d7d8350.gz",
+          "instance_data_checksum": "6514cc2a499b882603958fe2b862c0edebe50b83",
+          "instance_data_checksum_type": "sha1sum"
         }
-    ],
-    "status": "in_development",
-    "superseded_by": null,
-    "problem_type": "GSEE",
-    "application_domain": "QC",
-    "requirements": [
-        {
-            "probability_of_success": 0.99,
-            "time_limit_seconds": 86400,
-            "accuracy": 1.0,
-            "energy_units": "millihartree",
-            "energy_target": 0.99
-        }
-    ],
-    "features": {
+      ],
+      "requirements": {
+        "probability_of_success": 0.99,
+        "time_limit_seconds": 86400,
+        "accuracy": 1.0,
+        "energy_units": "millihartree",
+        "energy_target": 0.99,
+        "reference_energy": -582.1588851222295,
+        "reference_energy_units": "hartree"
+      },
+      "features": {
         "multiplicity": 1,
         "num_electrons": 50,
         "num_orbitals": 31,
         "utility_scale": false
-    },
-    "tasks": [
-        {
-            "supporting_files": [
-                {
-                    "instance_data_object_uuid": "c594d63e-29c7-462a-b385-f70c6d7d8350",
-                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/planted_solutions/fcidump.planted_solution_0007.c594d63e-29c7-462a-b385-f70c6d7d8350.gz",
-                    "instance_data_checksum": "6514cc2a499b882603958fe2b862c0edebe50b83",
-                    "instance_data_checksum_type": "sha1sum"
-                }
-            ],
-            "task_uuid": "7b33c35a-bcd6-4115-b2a3-eaaa369f5c2e"
-        }
-    ]
+      },
+      "task_uuid": "d3c058ec-9b13-4a9a-aba0-d3f19091c47b"
+    }
+  ]
 }

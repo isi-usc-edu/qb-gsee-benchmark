@@ -1,0 +1,101 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "references": [
+    "https://doi.org/10.1103/PhysRevX.10.011041"
+  ],
+  "problem_instance_uuid": "33c9a058-7a67-454c-856c-2519ba55b44d",
+  "creation_timestamp": "2024-11-20T00:26:25.116887",
+  "calendar_due_date": null,
+  "short_name": "Fe_1",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "contact_info": [
+    {
+      "name": "Joshua T. Cantin",
+      "email": "joshua.cantin@utoronto.ca",
+      "institution": "University of Toronto at Scarborough"
+    }
+  ],
+  "status": "in_development",
+  "superseded_by": null,
+  "problem_type": "GSEE",
+  "application_domain": "QC",
+  "tasks": [
+    {
+      "task_uuid": "a7e26b10-bd6b-457c-978e-9050f6529007",
+      "features": {
+        "molecule_name": "Fe1_vdz",
+        "geometry": "Fe          0.00000        0.00000        0.00000",
+        "basis_set": "vdz",
+        "charge": 1,
+        "multiplicity": 6,
+        "num_electrons": 15,
+        "num_orbitals": 54
+      },
+      "requirements": {
+        "probability_of_success": 0.99,
+        "time_limit_seconds": 86400,
+        "accuracy": 1.0,
+        "energy_units": "millihartree",
+        "energy_target": 0.99,
+        "reference_energy": -123.23354,
+        "reference_energy_units": "hartree",
+        "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
+        "reference_energy_method": "SHCI"
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "b57e3b82-2511-4c00-a850-f6aeba98b0b2",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.Fe1_vdz.b57e3b82-2511-4c00-a850-f6aeba98b0b2.gz",
+          "instance_data_checksum": "3d6a93e1ea0e9f2769a23e720576e102af570b16",
+          "instance_data_checksum_type": "sha1sum"
+        },
+        {
+          "instance_data_object_uuid": "eaab709a-c628-4295-85d0-412071d1d7cc",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/Fe1_vdz.eaab709a-c628-4295-85d0-412071d1d7cc.chk",
+          "instance_data_checksum": "ff1f8100cc839009e30f8aa93f4dd8100f633322",
+          "instance_data_checksum_type": "sha1sum"
+        }
+      ]
+    },
+    {
+      "task_uuid": "6ab8d16c-b8f3-4780-b278-dad81646ca8c",
+      "features": {
+        "molecule_name": "Fe1_vtz",
+        "geometry": "Fe          0.00000        0.00000        0.00000",
+        "basis_set": "vtz",
+        "charge": 1,
+        "multiplicity": 6,
+        "num_electrons": 15,
+        "num_orbitals": 88
+      },
+      "requirements": {
+        "probability_of_success": 0.99,
+        "time_limit_seconds": 86400,
+        "accuracy": 1.0,
+        "energy_units": "millihartree",
+        "energy_target": 0.99,
+        "reference_energy": -123.36857,
+        "reference_energy_units": "hartree",
+        "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
+        "reference_energy_method": "SHCI"
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "b9615d62-11ee-49f7-8df4-df94466b2211",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.Fe1_vtz.b9615d62-11ee-49f7-8df4-df94466b2211.gz",
+          "instance_data_checksum": "f3ac29664e56ff26b9fbdfeef16aeb934bdafc32",
+          "instance_data_checksum_type": "sha1sum"
+        },
+        {
+          "instance_data_object_uuid": "7421b0eb-3b7f-42d6-ae6b-6583666b38e2",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/Fe1_vtz.7421b0eb-3b7f-42d6-ae6b-6583666b38e2.chk",
+          "instance_data_checksum": "e6517b7f3115b4a346c5d6cf98318c84a896d9ac",
+          "instance_data_checksum_type": "sha1sum"
+        }
+      ]
+    }
+  ]
+}
