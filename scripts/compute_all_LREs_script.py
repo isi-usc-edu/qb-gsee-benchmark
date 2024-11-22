@@ -102,8 +102,8 @@ def get_lqre(
             logging.info(f"===============================================")
             logging.info(f"Calculating Logical Resource Estimate...")
 
-            error_tolerance = 1.6e-3  # TODO: extract this from problem instance
-            failure_tolerance = 1e-2  # TODO: extract this from problem instance
+            error_tolerance = task["requirements"]["accuracy"]
+            failure_tolerance = 1 - task["requirements"]["probability_of_success"]
 
             circuit_generation_start_time = datetime.datetime.now()
             (
