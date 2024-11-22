@@ -184,7 +184,7 @@ def get_lqre(
         ],
     }
     results = {
-        "$schema": "https://raw.githubusercontent.com/zapatacomputing/qb-gsee-benchmark/refs/heads/main/instances/schemas/solution.schema.0.0.1.json",
+        "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/solution.schema.0.0.1.json",
         "solution_uuid": solution_uuid,
         "problem_instance_uuid": problem_instance["problem_instance_uuid"],
         "creation_timestamp": current_time_string,
