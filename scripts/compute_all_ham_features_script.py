@@ -320,11 +320,13 @@ def main(args):
     # Print overall time.
     #===============================================================
     overall_stop_time = datetime.datetime.now()
-    logging.info(f"done!")
+    logging.info(f"===============================================")
+    logging.info(f"the overall script is done!")
     logging.info(f"overall start time: {overall_start_time}")
     logging.info(f"overall stop time: {overall_stop_time}")
     logging.info(f"run time (seconds): {(overall_stop_time - overall_start_time).total_seconds()}")
-
+    logging.info(f"===============================================")
+    
     
     
 
