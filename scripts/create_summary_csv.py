@@ -65,7 +65,7 @@ def main(args):
                 row["creation_timestamp"] = problem_instance["creation_timestamp"]
                 row["short_name"] = problem_instance["short_name"]
                 
-                row["number_of_hamiltonians"] = len(problem_instance["instance_data"])
+                row["number_of_hamiltonians"] = len(problem_instance["tasks"])
 
                 # write "row" data for csv file.
                 writer.writerow(row)
