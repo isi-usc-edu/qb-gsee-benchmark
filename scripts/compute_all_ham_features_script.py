@@ -200,7 +200,7 @@ def main(args):
                     continue
 
 
-                # check the see if we have already processed FCIDUMP_UUID
+                # check the see if we have already processed instance_data_object_uuid
                 # TODO: also compare version of the metrics calculation to see if we need to update.
                 #==============================================================
 
@@ -210,7 +210,7 @@ def main(args):
                     # empty features database... we will process the FCIDUMP
                     logging.info(f"Hamiltonian features database is empty.")
                 else:
-                    if instance_data_object_uuid in ham_features_df_database["fcidump_uuid"].values:
+                    if instance_data_object_uuid in ham_features_df_database["instance_data_object_uuid"].values:
                         logging.info(f"instance_data_object_uuid {instance_data_object_uuid} is already in the feature database.  Skipping it!")
                         continue
                     else:
