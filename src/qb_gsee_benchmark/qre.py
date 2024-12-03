@@ -4,7 +4,6 @@
 
 import numpy as np
 from openfermion import InteractionOperator
-from openfermion.resource_estimates.molecule import cas_to_pyscf
 from pyLIQTR.BlockEncodings.DoubleFactorized import DoubleFactorized
 from pyLIQTR.ProblemInstances.ChemicalHamiltonian import ChemicalHamiltonian
 from pyLIQTR.qubitization.phase_estimation import QubitizedPhaseEstimation
