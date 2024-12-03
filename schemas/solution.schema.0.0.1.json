@@ -9,7 +9,6 @@
         "creation_timestamp",
         "contact_info",
         "solution_data",
-        "compute_hardware_type",
         "solver_details",
         "digital_signature",
         "$schema"
@@ -117,30 +116,30 @@
                     "classical_resources": {
                         "title": "Classical Resources",
                         "description": "Required classical compute resources. Values defined here are considered to override those of solver_details where conflict exists.",
-                        "type": "object"
-                         "properties" : {
-                            "ram_used_gb" : {
+                        "type": "object",
+                        "properties": {
+                            "ram_used_gb": {
                                 "title": "RAM (GB)",
                                 "description": "Total RAM available for the computation, in GB.",
                                 "type": "number"
-                            },
+                            }
                         }
                     },
                     "quantum_resources": {
                         "title": "Quantum Resources",
                         "description": "Quantum resources used by the test performer.",
                         "type": "object",
-                        "properties" : {
-                            "physical" : {
+                        "properties": {
+                            "physical": {
                                 "title": "Physical Quantum Resources",
                                 "description": "Physical quantum resources used by the test performer. Exact structure is TBD.",
                                 "type": "object"
                             },
-                            "logical" : {
+                            "logical": {
                                 "title": "Logical Quantum Resources",
                                 "description": "Logical quantum resources used by the test performer.",
                                 "type": "object",
-                                "properties" : {
+                                "properties": {
                                     "num_logical_qubits": {
                                         "title": "Number of Logical Qubits",
                                         "description": "The number of logical qubits used by the solver.",
@@ -173,7 +172,7 @@
                     "solution_details": {
                         "title": "Solution Details",
                         "description": "Additional details about the solution.",
-                        "type": "object"                        
+                        "type": "object"
                     },
                     "run_time": {
                         "title": "Wall Clock Runtime",
@@ -319,9 +318,9 @@
                 "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             },
             "solver_short_name": {
-            "title": "Solver Short Name",
-            "description": "A short string.  Not necessarily unique.",
-            "type": "string"
+                "title": "Solver Short Name",
+                "description": "A short string.  Not necessarily unique.",
+                "type": "string"
             },
             "compute_hardware_type": {
                 "title": "Compute Hardware Type",
@@ -337,35 +336,34 @@
             "classical_hardware_details": {
                 "title": "Classical Compute Hardware Details",
                 "description": "Details on the hardware used by the solver. All tasks are assumed to have the included values unless specified otherwise at the task level.",
-                "type": "object"
-                 "properties" : {
-                    "cpu_description" : {
+                "type": "object",
+                "properties": {
+                    "cpu_description": {
                         "title": "CPU Description",
                         "description": "Description of the CPU.",
                         "type": "string"
                     },
-                    "total_num_cores" : {
+                    "total_num_cores": {
                         "title": "Total number of cores used.",
                         "description": "The total number of cores used.",
                         "type": "number"
                     },
-                    "clock_speed" : {
+                    "clock_speed": {
                         "title": "Clock Speed",
                         "description": "Clock speed(s) used.",
                         "type": "string"
                     },
-                    "ram_available_gb" : {
+                    "ram_available_gb": {
                         "title": "RAM (GB)",
                         "description": "Total RAM available for the computation, in GB.",
                         "type": "number"
                     },
-                    "computing_environment_name" : {
+                    "computing_environment_name": {
                         "title": "Computing Environment Name",
                         "description": "Identifying name of computing environment (e.g. cluster or facility name), if relevant.",
                         "type": "string"
-                    },
+                    }
                 }
-                    
             },
             "quantum_hardware_details": {
                 "title": "Quantum Compute Hardware Details",
@@ -397,7 +395,9 @@
         }
     },
     "if": {
-        "required": ["is_resource_estimate"],
+        "required": [
+            "is_resource_estimate"
+        ],
         "properties": {
             "is_resource_estimate": {
                 "const": true
@@ -420,10 +420,14 @@
         "properties": {
             "solution_data": {
                 "items": {
-                    "required": ["energy"],
-                    "properties" : {
-                        "runtime" : {
-                            "required" : "overall_time"
+                    "required": [
+                        "energy"
+                    ],
+                    "properties": {
+                        "run_time": {
+                            "required": [
+                                "overall_time"
+                            ]
                         }
                     }
                 }

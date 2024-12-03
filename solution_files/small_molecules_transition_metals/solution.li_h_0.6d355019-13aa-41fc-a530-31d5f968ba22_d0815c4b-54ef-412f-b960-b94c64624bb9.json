@@ -1,0 +1,148 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "d0815c4b-54ef-412f-b960-b94c64624bb9",
+    "problem_instance_uuid": "6d355019-13aa-41fc-a530-31d5f968ba22",
+    "creation_timestamp": "2024-11-20T20:37:46.972743Z",
+    "contact_info": [
+        {
+            "name": "Joshua T. Cantin",
+            "email": "joshua.cantin@utoronto.ca",
+            "institution": "University of Toronto at Scarborough"
+        }
+    ],
+    "is_resource_estimate": false,
+    "solution_data": [
+        {
+            "task_uuid": "92917287-d937-410c-bb70-c1f34224fab7",
+            "energy": -7.955280641017793,
+            "energy_units": "Hartree",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 15.91911897
+                },
+                "preprocessing_time": {
+                    "seconds": 13.805971321999998
+                },
+                "algorithm_run_time": {
+                    "seconds": 2.549337602
+                },
+                "postprocessing_time": {
+                    "seconds": 0.001109188
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 108.187568432
+                },
+                "preprocessing_time": {
+                    "seconds": 15.464628055999999
+                },
+                "algorithm_run_time": {
+                    "seconds": 99.587451185
+                },
+                "postprocessing_time": {
+                    "seconds": 0.00110675
+                }
+            },
+            "solution_details": {
+                "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.li_h_cc-pVDZ.9c6f0876-5690-4391-a98c-0347d111257e.gz",
+                "bond_dimension": 8,
+                "discarded_weight": 1.375974199189565e-06,
+                "calculation_uuid": "a03381fd-b1fe-4d76-96fa-098ea6cc3fe4"
+            }
+        },
+        {
+            "task_uuid": "13b4bdcc-1cef-419a-92b1-156febff71d4",
+            "energy": -7.978881399904355,
+            "energy_units": "Hartree",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 1680.376641049
+                },
+                "preprocessing_time": {
+                    "seconds": 924.740103788
+                },
+                "algorithm_run_time": {
+                    "seconds": 831.907416537
+                },
+                "postprocessing_time": {
+                    "seconds": 0.013114641
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 28481.210126534
+                },
+                "preprocessing_time": {
+                    "seconds": 1037.091261152
+                },
+                "algorithm_run_time": {
+                    "seconds": 28957.800976408
+                },
+                "postprocessing_time": {
+                    "seconds": 0.013074775
+                }
+            },
+            "solution_details": {
+                "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.li_h_cc-pVQZ.c21d87dd-9338-4498-8ed6-95b0dacd75b1.gz",
+                "bond_dimension": 30,
+                "discarded_weight": 3.0276771544963047e-07,
+                "calculation_uuid": "719e84e4-d571-435e-af4b-f821b90fe930"
+            }
+        },
+        {
+            "task_uuid": "d15db194-aa2d-4de9-8f86-fcffeb82f38b",
+            "energy": -7.9736689159896725,
+            "energy_units": "Hartree",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 153.848463072
+                },
+                "preprocessing_time": {
+                    "seconds": 115.54360813000001
+                },
+                "algorithm_run_time": {
+                    "seconds": 30.537194127
+                },
+                "postprocessing_time": {
+                    "seconds": 0.004436061
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 1594.587103751
+                },
+                "preprocessing_time": {
+                    "seconds": 135.69092962
+                },
+                "algorithm_run_time": {
+                    "seconds": 1140.505479213
+                },
+                "postprocessing_time": {
+                    "seconds": 0.004394615
+                }
+            },
+            "solution_details": {
+                "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.li_h_cc-pVTZ.02d12f52-ff42-4adf-99b9-acada93cb96b.gz",
+                "bond_dimension": 21,
+                "discarded_weight": 2.070893214617062e-06,
+                "calculation_uuid": "16f7e9a8-f671-4d83-bd5b-38fb5cc0948b"
+            }
+        }
+    ],
+    "solver_details": {
+        "solver_uuid": "16537433-9f4c-4eae-a65d-787dc3b35b59",
+        "solver_short_name": "DMRG_Niagara_cluster_lowest_energy",
+        "compute_hardware_type": "classical_computer",
+        "classical_hardware_details": {
+            "computing_environment_name": "Niagara Cluster, Compute Canada",
+            "cpu_description": "40 Intel \"Skylake\" cores at 2.4 GHz or 40 Intel \"CascadeLake\" cores at 2.5 GHz",
+            "ram_available_gb": "202 GB (188 GiB)",
+            "clock_speed": "2.4 GHz or 2.5 GHz",
+            "total_num_cores": 40
+        },
+        "algorithm_details": "DMRG with the lowest variational energy obtained so far.",
+        "software_details": "Block2 v0.5.3rc16 with dmrghandler, commit version d603fdc6409fc194a416aa3a519362d5d91790d9 or later."
+    },
+    "digital_signature": null
+}

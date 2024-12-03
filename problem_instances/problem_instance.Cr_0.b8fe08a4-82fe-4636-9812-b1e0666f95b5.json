@@ -1,0 +1,101 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "references": [
+    "https://doi.org/10.1103/PhysRevX.10.011041"
+  ],
+  "problem_instance_uuid": "b8fe08a4-82fe-4636-9812-b1e0666f95b5",
+  "creation_timestamp": "2024-11-20T00:15:53.104955",
+  "calendar_due_date": null,
+  "short_name": "Cr_0",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "contact_info": [
+    {
+      "name": "Joshua T. Cantin",
+      "email": "joshua.cantin@utoronto.ca",
+      "institution": "University of Toronto at Scarborough"
+    }
+  ],
+  "status": "in_development",
+  "superseded_by": null,
+  "problem_type": "GSEE",
+  "application_domain": "QC",
+  "tasks": [
+    {
+      "task_uuid": "5d85532e-9116-48a1-9810-7925c9ed9c57",
+      "features": {
+        "molecule_name": "Cr0_vdz",
+        "geometry": "Cr          0.00000        0.00000        0.00000",
+        "basis_set": "vdz",
+        "charge": 0,
+        "multiplicity": 7,
+        "num_electrons": 14,
+        "num_orbitals": 54
+      },
+      "requirements": {
+        "probability_of_success": 0.99,
+        "time_limit_seconds": 86400,
+        "accuracy": 1.0,
+        "energy_units": "millihartree",
+        "energy_target": 0.99,
+        "reference_energy": -86.61203,
+        "reference_energy_units": "hartree",
+        "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
+        "reference_energy_method": "SHCI"
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "be2e7f6c-ccba-45ce-a42b-bd1d828b2d18",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.Cr0_vdz.be2e7f6c-ccba-45ce-a42b-bd1d828b2d18.gz",
+          "instance_data_checksum": "0e7b6f15a3e399c49d58b472ba189ad18c7fef20",
+          "instance_data_checksum_type": "sha1sum"
+        },
+        {
+          "instance_data_object_uuid": "40f36526-3534-4688-8bd5-9cb9e1a8a6c8",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/Cr0_vdz.40f36526-3534-4688-8bd5-9cb9e1a8a6c8.chk",
+          "instance_data_checksum": "71fecf8624ba7beb7c93e17cdb57755ab129594f",
+          "instance_data_checksum_type": "sha1sum"
+        }
+      ]
+    },
+    {
+      "task_uuid": "35b59fd4-e046-4d69-ba52-4b94a7777ac3",
+      "features": {
+        "molecule_name": "Cr0_vtz",
+        "geometry": "Cr          0.00000        0.00000        0.00000",
+        "basis_set": "vtz",
+        "charge": 0,
+        "multiplicity": 7,
+        "num_electrons": 14,
+        "num_orbitals": 88
+      },
+      "requirements": {
+        "probability_of_success": 0.99,
+        "time_limit_seconds": 86400,
+        "accuracy": 1.0,
+        "energy_units": "millihartree",
+        "energy_target": 0.99,
+        "reference_energy": -86.72091999999998,
+        "reference_energy_units": "hartree",
+        "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
+        "reference_energy_method": "SHCI"
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "dd44b59c-f6b3-4f9a-acfe-34eaf6de3411",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.Cr0_vtz.dd44b59c-f6b3-4f9a-acfe-34eaf6de3411.gz",
+          "instance_data_checksum": "fd64975b694bc21d82df558c4049d32598b71462",
+          "instance_data_checksum_type": "sha1sum"
+        },
+        {
+          "instance_data_object_uuid": "83f5e74f-7848-4b7d-8c79-85ff5e3ecd8a",
+          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/Cr0_vtz.83f5e74f-7848-4b7d-8c79-85ff5e3ecd8a.chk",
+          "instance_data_checksum": "2d6fce31ef6f90ba0a2b605746e4b7d1eb980e0c",
+          "instance_data_checksum_type": "sha1sum"
+        }
+      ]
+    }
+  ]
+}
