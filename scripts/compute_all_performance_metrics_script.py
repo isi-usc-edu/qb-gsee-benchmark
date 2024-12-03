@@ -67,13 +67,13 @@ def load_json_files(search_dir) -> list:
     
 
 
-def locate_solution_results_by_FCIDUMP_UUID(
-        fcidump_uuid,
+def locate_solution_results_by_instance_data_object_uuid(
+        instance_data_object_uuid,
         solution
     ) -> dict:
     for solution_datum in solution["solution_data"]:
         test_uuid = solution_datum["instance_data_object_uuid"]
-        if test_uuid.lower() == fcidump_uuid.lower():
+        if test_uuid.lower() == instance_data_object_uuid.lower():
             return solution_datum
         
 def locate_solution_results_by_task_uuid_and_solver_uuid(
@@ -175,7 +175,8 @@ def main(args):
         "solution_uuid",
         "problem_instance_uuid",
         "task_uuid",
-        "fcidump_uuid",
+        "instance_data_object_uuid",
+        "instance_data_object_url"
         "attempted",
         "solved_within_run_time",
         "solved_within_accuracy_requirement",
@@ -185,30 +186,29 @@ def main(args):
     for problem_instance in problem_instance_list:
         problem_instance_uuid = problem_instance["problem_instance_uuid"]
         
-        num_hams = len(problem_instance["instance_data"])
-        for i in range(num_hams):
-            num_supporting_files = len(problem_instance["instance_data"][i]["supporting_files"])
+        for task in problem_instance["tasks"]:
+            num_supporting_files = len(task["supporting_files"])
             logging.info(f"number of supporting files: {num_supporting_files}")
 
             task_uuid = problem_instance["task"]
 
-            for j in range(num_supporting_files):
+            for supporting_file in task["supporting_files"]:
             
-                fcidump_uuid = problem_instance["instance_data"][i]["supporting_files"][j]["instance_data_object_uuid"]
-                fcidump_url = problem_instance["instance_data"][i]["supporting_files"][j]["instance_data_object_url"]
-                logging.info(f"supporting data file UUID: {fcidump_uuid}.")
-                logging.info(f"supporting data file URL: {fcidump_url}.")
-                parsed_url = urlparse(fcidump_url)
-                fcidump_file_name = parsed_url.path.split("/")[-1]
+                instance_data_object_uuid = supporting_file["instance_data_object_uuid"]
+                instance_data_object_url = supporting_file["instance_data_object_url"]
+                logging.info(f"supporting data file UUID: {instance_data_object_uuid}.")
+                logging.info(f"supporting data file URL: {instance_data_object_url}.")
+                parsed_url = urlparse(instance_data_object_url)
+                instance_data_object_file_name = parsed_url.path.split("/")[-1]
 
 
                 #TODO: improve hacky way of only grabbing FCIDUMP files:
-                if "fcidump".lower() in fcidump_file_name.lower():
-                    logging.info(f"assuming {fcidump_file_name} is THE FCIDUMP file.")
+                if "fcidump".lower() in instance_data_object_file_name.lower():
+                    logging.info(f"assuming {instance_data_object_file_name} is THE FCIDUMP file.")
                     # TODO: note we are assuming there is ONLY ONE FCIDUMP file for the Hamiltonian.
                     break
                 else:
-                    logging.info(f"assuming {fcidump_file_name} is NOT an FCIDUMP file.  SKIPPING!")
+                    logging.info(f"assuming {instance_data_object_file_name} is NOT an FCIDUMP file.  SKIPPING!")
                     # NOTE: this may be different type of file... such as a checkpoint CHK file.
                     continue
 
@@ -233,12 +233,12 @@ def main(args):
                     attempted = True
 
                     overall_run_time_seconds = results["run_time"]["overall_time"]["seconds"]
-                    time_limit_seconds = problem_instance["instance_data"][i]["time_limit_seconds"]
+                    time_limit_seconds = task["time_limit_seconds"]
                     solved_within_run_time = overall_run_time_seconds <= time_limit_seconds
 
                     reported_energy = results["energy"]
-                    accuracy_tol = problem_instance["instance_data"][i]["accuracy"]
-                    energy_target = problem_instance["instance_data"][i]["energy_target"]
+                    accuracy_tol = task["accuracy"]
+                    energy_target = task["energy_target"]
                     solved_within_accuracy_requirement = np.abs(reported_energy - energy_target) < accuracy_tol
                     
                     label = solved_within_run_time and solved_within_accuracy_requirement
@@ -252,7 +252,8 @@ def main(args):
                 solution_uuid,
                 problem_instance_uuid,
                 task_uuid,
-                fcidump_uuid,
+                instance_data_object_uuid,
+                instance_data_object_url,
                 attempted,
                 solved_within_run_time,
                 solved_within_accuracy_requirement,
@@ -264,7 +265,7 @@ def main(args):
 
 
 
-    # interim results printed to .csv file
+    # interim results output to .csv file
     # ==============================================================
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
     aggregated_labels_file_name = f"aggregated_solver_labels_{timestamp}.csv"
@@ -294,8 +295,8 @@ def main(args):
 
         logging.info(f"calculating ML scores for solver {solver_short_name}/{solver_uuid}...")
         ml_solvability_score, f1_score = miniML(argparse.Namespace(
-            ham_features_file="../Hamiltonian_features/experimental...",
-            config_file="BubbleML/miniML/miniML_config.json",
+            ham_features_file="../Hamiltonian_features/experimental/Hamiltonian_features.csv",
+            config_file="../BubbleML/miniML/miniML_config.json",
             solver_uuid=solver_uuid,
             solver_labels_file=solver_labels_file_name,
             verbose=False
@@ -320,12 +321,18 @@ def main(args):
             solver_uuid=solver_uuid,
             solver_list=solver_list
         )
+
+        # Boilerplate metadata:
+        # ===============================================================
         performance_metrics = {}
         performance_metrics["$schema"] = "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/performance_metrics.schema.0.0.1.json"
         performance_metrics["performance_metrics_uuid"] = str(uuid.uuid4())
         performance_metrics["solver_short_name"] = solver_short_name
         performance_metrics["solver_uuid"] = solver_uuid
-        performance_metrics["creation_timestamp"] = datetime.datetime.utcnow().isoformat()
+        performance_metrics["creation_timestamp"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
+
+        # ML metrics object:
+        # ===============================================================
         performance_metrics["ml_metrics"] = {
             "ml_metrics_calculator_version": 1, # TODO, update this programmatically
             "solvability_ratio": ml_scores[solver_uuid]["ml_solvability_score"],
@@ -334,6 +341,23 @@ def main(args):
         performance_metrics["aggregate_metrics"] = {} # TODO
         performance_metrics["metrics_for_each_problem_instance"] = {} # TODO
 
+        # Top-level aggregated performance metrics:
+        # ===============================================================
+        # TODO
+
+
+        # Performance metrics by problem_instance:
+        # ===============================================================
+        # TODO
+
+
+        # Performance metrics by task:
+        # ===============================================================
+        # TODO
+
+
+        # Write out performance_metrics.json file:
+        # ===============================================================
         performance_metrics_file_name = args.performance_metrics_dir 
         performance_metrics_file_name += f"performance_metrics.{solver_short_name}.{solver_uuid}.json"
         with open(performance_metrics_file_name, "w") as jo:

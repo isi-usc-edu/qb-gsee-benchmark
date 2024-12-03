@@ -362,7 +362,7 @@ def main(args):
     df = pd.merge(
         df_hams,
         df_labels,
-        on="fcidump_uuid",
+        on="task_uuid",
         how="outer" # fill in NaN when merging if uuids missing from either file.
     )
 
@@ -467,7 +467,7 @@ if __name__ == "__main__":
         help="""
             The/path/to/the solver_labels.csv file.  The labels are True/False
             to indicate that a solver can find the ground state energy of a 
-            Hamiltonian (by FCIDUMP UUID).
+            Hamiltonian (by task_uuid).
         """
     )
 
