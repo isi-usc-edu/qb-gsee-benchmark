@@ -35,6 +35,6 @@ Number of Pauli Strings | $E$ |
 
 Edge Order $\mathrm{ord}(e_i) = k(i)$
 
-Vertex Degree $\mathrm{deg}(v)$ = |{ $e \in E : v \in e $ }|
+Vertex Degree $\mathrm{deg}(v)$ = |{ $e \in E : v \in e$ }|
 
 
