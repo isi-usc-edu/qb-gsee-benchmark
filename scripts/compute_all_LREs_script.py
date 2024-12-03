@@ -23,7 +23,6 @@ import math
 import os
 import sys
 from collections import defaultdict
-from datetime import UTC
 from importlib.metadata import version
 from typing import Any
 from urllib.parse import urlparse
@@ -187,7 +186,7 @@ def get_lqre(
             )
 
     solution_uuid = str(uuid4())
-    current_time = datetime.datetime.now(UTC)
+    current_time = datetime.datetime.now(datetime.timezone.utc)
     current_time_string = current_time.strftime("%Y-%m-%dT%H:%M:%S.%f") + "Z"
 
     solver_details = {

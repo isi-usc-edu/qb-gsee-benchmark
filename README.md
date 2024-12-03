@@ -39,7 +39,8 @@ Contact the repository maintainers to get these.
 ### Generating Logical Quantum Resource Estimates
 
 The [`scripts/compute_all_LREs_script.py`](scripts/compute_all_LREs_script.py) script can be used to generate LQREs.
-In order to run this script, several files are required:
+In order to run this script, first ensure that the qb-gsee-benchmark package is installed as described above.
+Then, several files are required:
 
 * A PPK file containing a key to access the SFTP server that provides access to FCIDUMP files as described above.
 * A configuration file similar to [`scripts/LRE_config.json`](scripts/LRE_config.json) or [`scripts/LRE_config.json`](scripts/LRE_config_overlaps.json) which specifies algorithm parameters, solver UUID, and other information.
