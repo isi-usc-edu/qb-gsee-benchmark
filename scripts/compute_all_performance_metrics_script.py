@@ -180,6 +180,8 @@ def main(args):
         "attempted",
         "solved_within_run_time",
         "solved_within_accuracy_requirement",
+        "run_time",
+        "is_resource_estimate",
         "label" # label True/False, that the Hamiltonian was solved.
     ])
 
@@ -220,17 +222,28 @@ def main(args):
                     task_uuid=task_uuid,
                     solution_list=solution_list
                 )
+
+                # results = { 
+                #   task_uuid,
+                #   energy,
+                #   energy_units,
+                #   run_time{overall_time{seconds}}
+                # }
+
+                is_resource_estimate = solution_list[solution_uuid]["is_resource_estimate"]
+
                 if results is None:
                     # the solver did NOT submit a solution file for the problem_instance or Hamiltonian.
                     # mark it as failed.  TODO:  do something more nuanced with non-attempted problems in the future.
                     attempted=False
                     solved_within_run_time=False
                     solved_within_accuracy_requirement=False
-                    label=False # solved=False
+                    label=False # overall:  solved==False
+                    overall_run_time_seconds = None # TODO may change this to "NaN"
                 else:
                     # calculate simple performance metrics for the solver against
                     # this Hamiltonian
-                    attempted = True
+                    attempted = True 
 
                     overall_run_time_seconds = results["run_time"]["overall_time"]["seconds"]
                     time_limit_seconds = task["time_limit_seconds"]
@@ -239,33 +252,37 @@ def main(args):
                     reported_energy = results["energy"]
                     accuracy_tol = task["accuracy"]
                     energy_target = task["energy_target"]
+                    # TODO:  account for differences in units.  E.g., Hartree vs. kCal/mol vs. other.
+                    # TODO:  have team review this definition of "within accuracy requirement"
                     solved_within_accuracy_requirement = np.abs(reported_energy - energy_target) < accuracy_tol
                     
                     label = solved_within_run_time and solved_within_accuracy_requirement
                         
 
 
-            
-            new_row = [
-                solver_short_name,
-                solver_uuid,
-                solution_uuid,
-                problem_instance_uuid,
-                task_uuid,
-                instance_data_object_uuid,
-                instance_data_object_url,
-                attempted,
-                solved_within_run_time,
-                solved_within_accuracy_requirement,
-                label # label True/False, that the Hamiltonian was solved.
-            ]
-            logging.info(f"{pd.DataFrame(new_row)}") # just for printout.
-            aggregated_results.loc[len(aggregated_results)] = new_row # add to list of results.
+                # new row for each solver_uuid/task_uuid
+                new_row = [
+                    solver_short_name,
+                    solver_uuid,
+                    solution_uuid,
+                    problem_instance_uuid,
+                    task_uuid,
+                    instance_data_object_uuid,
+                    instance_data_object_url,
+                    attempted,
+                    solved_within_run_time,
+                    solved_within_accuracy_requirement,
+                    overall_run_time_seconds,
+                    is_resource_estimate,
+                    label # label True/False, that the Hamiltonian was solved.
+                ]
+                logging.info(f"{pd.DataFrame(new_row)}") # just for printout.
+                aggregated_results.loc[len(aggregated_results)] = new_row # add to list of results.
 
 
 
-
-    # interim results output to .csv file
+    # we have completed filling out the aggregated_results DataFrame.
+    # write results to .csv file
     # ==============================================================
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
     aggregated_labels_file_name = f"aggregated_solver_labels_{timestamp}.csv"
@@ -290,20 +307,22 @@ def main(args):
         solver_labels = aggregated_results[aggregated_results["solver_uuid"]==solver_uuid]
         
         # write out the labels to a .csv file... one file for each solver.
-        solver_labels_file_name = f"solver.{solver_short_name}.{solver_uuid}.labels.csv"
+        solver_labels_file_name = f"solver_labels.{solver_short_name}.{solver_uuid}.csv"
         solver_labels.to_csv(solver_labels_file_name)
 
         logging.info(f"calculating ML scores for solver {solver_short_name}/{solver_uuid}...")
-        ml_solvability_score, f1_score = miniML(argparse.Namespace(
-            ham_features_file="../Hamiltonian_features/experimental/Hamiltonian_features.csv",
-            config_file="../BubbleML/miniML/miniML_config.json",
-            solver_uuid=solver_uuid,
-            solver_labels_file=solver_labels_file_name,
-            verbose=False
-        ))
+        # TODO: revisit this... test.
+        # solvability_ratio, f1_score = miniML(argparse.Namespace(
+        #     ham_features_file="../Hamiltonian_features/experimental/Hamiltonian_features.csv",
+        #     config_file="../BubbleML/miniML/miniML_config.json",
+        #     solver_uuid=solver_uuid,
+        #     solver_labels_file=solver_labels_file_name,
+        #     verbose=False
+        # ))
         ml_scores[solver_uuid] = {
-            "ml_solvability_score":ml_solvability_score,
-            "f1_score":f1_score    
+            "solvability_ratio":1111111, # TODO: update.
+            "f1_score":1111111,
+            "ml_metrics_calculator_version":1111111
         }
 
 
@@ -333,27 +352,55 @@ def main(args):
 
         # ML metrics object:
         # ===============================================================
-        performance_metrics["ml_metrics"] = {
-            "ml_metrics_calculator_version": 1, # TODO, update this programmatically
-            "solvability_ratio": ml_scores[solver_uuid]["ml_solvability_score"],
-            "f1_score": ml_scores[solver_uuid]["f1_score"]    
-        }
-        performance_metrics["aggregate_metrics"] = {} # TODO
-        performance_metrics["metrics_for_each_problem_instance"] = {} # TODO
+        performance_metrics["ml_metrics"] = ml_scores[solver_uuid] 
 
+        
         # Top-level aggregated performance metrics:
         # ===============================================================
         # TODO
+        performance_metrics["top_level_results"] = {
+                "number_of_problem_instances":11111,
+                "number_of_problem_instances_attempted":11111,
+                "number_of_problem_instances_solved":11111,
+                "number_of_tasks":11111,
+                "number_of_tasks_attempted":11111,
+                "number_of_tasks_solved":11111,
+                "number_of_tasks_solved_within_run_time_limit":11111,
+                "number_of_tasks_solved_within_accuracy_threshold":11111,
+                "max_run_time_of_attempted_tasks":11111,
+                "sum_of_run_time_of_attempted_tasks":11111
+        }
+        
 
 
         # Performance metrics by problem_instance:
         # ===============================================================
         # TODO
-
-
+        performance_metrics["results_by_problem_instance"] = {
+            "problem_instance_uuid":11111,
+            "solution_uuid":11111,
+            "number_of_tasks":11111,
+            "number_of_tasks_attempted":11111,
+            "number_of_tasks_solved_within_runtime_limit":11111,
+            "number_of_tasks_solved_within_accuracy_requirement":11111,
+            "number_of_tasks_solved":11111,
+            "sum_of_run_time_of_attempted_tasks":11111,
+            "max_run_time_of_attempted_tasks":11111,
+            "solution_submitted_by_due_date":11111
+        }
+        
         # Performance metrics by task:
         # ===============================================================
         # TODO
+        performance_metrics["results_by_task"] = {
+            "task_uuid":11111,
+            "problem_instance_uuid":11111,
+            "instance_data_object_uuid":11111,
+            "attempted":11111,
+            "solved_within_run_time":11111,
+            "solved_within_accuracy_requirement":11111,
+            "run_time":11111
+        }
 
 
         # Write out performance_metrics.json file:
