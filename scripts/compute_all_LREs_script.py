@@ -22,11 +22,13 @@ import logging
 import math
 import os
 import sys
+from collections import defaultdict
 from importlib.metadata import version
 from typing import Any
 from urllib.parse import urlparse
 from uuid import uuid4
 
+import pandas as pd
 from pyLIQTR.utils.resource_analysis import estimate_resources
 
 from qb_gsee_benchmark.qre import get_df_qpe_circuit
@@ -53,10 +55,32 @@ def get_lqre(
     num_hams = len(problem_instance["tasks"])
     logging.info(f"contains {num_hams} associated Hamiltonians.")
 
+    if (
+        "overlap" in config["algorithm_parameters"]
+        and "overlap_csv" in config["algorithm_parameters"]
+    ):
+        raise ValueError("Config cannot specify both 'overlap' and 'overlap_csv'.")
+
+    if config["algorithm_parameters"].get("overlap_csv"):
+        overlap_df = pd.read_csv(config["algorithm_parameters"]["overlap_csv"])
+        overlaps = {
+            row["task_uuid"]: row["overlap"] for index, row in overlap_df.iterrows()
+        }
+    else:
+        overlaps = defaultdict(lambda: config["algorithm_parameters"]["overlap"])
+
     solution_data: list[dict[str, Any]] = []
     results: dict[str, Any] = {}
 
     for task in problem_instance["tasks"]:
+        if not overlaps.get(task["task_uuid"]):
+            logging.info(
+                f"Skipping task {task['task_uuid']} because no overlap was provided."
+            )
+            continue
+
+        logging.info(f"Analyzing task {task['task_uuid']}...")
+
         num_supporting_files = len(task["supporting_files"])
         logging.info(f"number of supporting files: {num_supporting_files}")
 
@@ -113,12 +137,12 @@ def get_lqre(
                 fci=fci,
                 error_tolerance=error_tolerance,
                 failure_tolerance=failure_tolerance,
-                square_overlap=config["algorithm_parameters"]["overlap"] ** 2,
+                square_overlap=overlaps[task["task_uuid"]] ** 2,
                 df_threshold=config["algorithm_parameters"]["df_threshold"],
             )
             circuit_generation_end_time = datetime.datetime.now()
             logging.info(
-                f"Circuit initialization time: {(circuit_generation_end_time - circuit_generation_end_time).total_seconds()} seconds."
+                f"Circuit initialization time: {(circuit_generation_end_time - circuit_generation_start_time).total_seconds()} seconds."
             )
             logging.info(f"Estimating logical resources...")
             resource_estimation_start_time = datetime.datetime.now()
@@ -170,7 +194,7 @@ def get_lqre(
         "solver_short_name": "DF QPE",
         "compute_hardware_type": "quantum_computer",
         "algorithm_details": {
-            "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Also note that unlike arXiv:2406.06335, the ground-state overlaps are not computed from DMRG but instead set to a nominal value.",
+            "algorithm_description": config["algorithm_description"],
             "algorithm_parameters": config["algorithm_parameters"],
         },
         "software_details": [
