@@ -18,16 +18,18 @@
 import os
 import argparse
 import datetime
+from pathlib import Path
 import json
 from urllib.parse import urlparse
 import uuid
 import sys
 sys.path.append("../")
+sys.path.append("../BubbleML/miniML")
 
 
 # miniML methods from this repo:
 # NOTE: renaming `main` function as `miniML` during import.
-from BubbleML.miniML.miniML import main as miniML
+from miniML import main as miniML
 
 
 import numpy as np
@@ -54,12 +56,13 @@ for h in handlers:
 
 def load_json_files(search_dir) -> list:
     dict_list = []
-    files = os.listdir(search_dir)
-    for f in files:
-        f_path = search_dir + f
-        with open(f_path, "r") as json_file:
+
+    # this recurses through all subdirectories.
+    for json_file in Path(search_dir).rglob("*.json"):
+        with json_file.open("r") as file:
             try:
-                dict_list.append(json.load(json_file))
+                data = json.load(file)
+                dict_list.append(data)
             except Exception as e:
                 logging.error(f'Error: {e}', exc_info=True)
                 continue # to next json file.
@@ -122,7 +125,8 @@ def identify_unique_participating_solvers(
 
 
 def get_solver_short_name(solver_uuid, solver_list) -> str:
-    return solver_list[solver_list["solver_uuid"] == solver_uuid].iloc[0]
+    df = solver_list[solver_list["solver_uuid"] == solver_uuid]
+    return df["solver_short_name"][0]
 
 
      
@@ -154,7 +158,8 @@ def main(args):
     logging.info(f"problem_instance directory: {args.problem_instance_dir}")
     logging.info(f"solution_file directory: {args.solution_file_dir}")
     logging.info(f"performance_metrics directory: {args.performance_metrics_dir}")
-    logging.info(f"the version of the ML metrics script is: {ml_metrics_version}")
+    
+    # TODO: logging.info(f"the version of the ML metrics script is: {ml_metrics_version}")
 
 
 
@@ -162,6 +167,10 @@ def main(args):
 
     solution_list = load_json_files(search_dir=args.solution_file_dir)
     problem_instance_list = load_json_files(search_dir=args.problem_instance_dir)
+    
+    logging.info(f"number of problem_instance files: {len(problem_instance_list)}")
+    logging.info(f"number of solution files: {len(solution_list)}")
+    
 
 
     solver_list = identify_unique_participating_solvers(solution_list=solution_list)
@@ -169,21 +178,23 @@ def main(args):
     logging.info(f"solver list:  {solver_list}")
 
 
-    aggregated_results = pd.DataFrame(columns=[
+    aggregated_results_columns = [
         "solver_short_name",
         "solver_uuid",
         "solution_uuid",
         "problem_instance_uuid",
         "task_uuid",
         "instance_data_object_uuid",
-        "instance_data_object_url"
+        "instance_data_object_url",
         "attempted",
         "solved_within_run_time",
         "solved_within_accuracy_requirement",
-        "run_time",
+        "overall_run_time_seconds",
         "is_resource_estimate",
+        "submitted_by_calendar_due_date",
         "label" # label True/False, that the Hamiltonian was solved.
-    ])
+    ]
+    aggregated_results = pd.DataFrame(columns=aggregated_results_columns)
 
     for problem_instance in problem_instance_list:
         problem_instance_uuid = problem_instance["problem_instance_uuid"]
@@ -192,7 +203,7 @@ def main(args):
             num_supporting_files = len(task["supporting_files"])
             logging.info(f"number of supporting files: {num_supporting_files}")
 
-            task_uuid = problem_instance["task"]
+            task_uuid = task["task_uuid"]
 
             for supporting_file in task["supporting_files"]:
             
@@ -223,6 +234,7 @@ def main(args):
                     solution_list=solution_list
                 )
 
+                # the format of a results dictionary:
                 # results = { 
                 #   task_uuid,
                 #   energy,
@@ -230,54 +242,75 @@ def main(args):
                 #   run_time{overall_time{seconds}}
                 # }
 
-                is_resource_estimate = solution_list[solution_uuid]["is_resource_estimate"]
+                for solution in solution_list:
+                    if solution["solution_uuid"] == solution_uuid:
+                        is_resource_estimate = solution["is_resource_estimate"]
+                        break
+
 
                 if results is None:
                     # the solver did NOT submit a solution file for the problem_instance or Hamiltonian.
                     # mark it as failed.  TODO:  do something more nuanced with non-attempted problems in the future.
-                    attempted=False
-                    solved_within_run_time=False
-                    solved_within_accuracy_requirement=False
-                    label=False # overall:  solved==False
-                    overall_run_time_seconds = None # TODO may change this to "NaN"
+                    attempted = False
+                    solved_within_run_time = False
+                    solved_within_accuracy_requirement = False
+                    label = False # overall:  solved==False
+                    submitted_by_calendar_due_date = False
+                    overall_run_time_seconds = None 
                 else:
                     # calculate simple performance metrics for the solver against
                     # this Hamiltonian
                     attempted = True 
 
                     overall_run_time_seconds = results["run_time"]["overall_time"]["seconds"]
-                    time_limit_seconds = task["time_limit_seconds"]
+                    time_limit_seconds = task["requirements"]["time_limit_seconds"]
                     solved_within_run_time = overall_run_time_seconds <= time_limit_seconds
 
                     reported_energy = results["energy"]
-                    accuracy_tol = task["accuracy"]
-                    energy_target = task["energy_target"]
-                    # TODO:  account for differences in units.  E.g., Hartree vs. kCal/mol vs. other.
-                    # TODO:  have team review this definition of "within accuracy requirement"
-                    solved_within_accuracy_requirement = np.abs(reported_energy - energy_target) < accuracy_tol
+                    accuracy_tol = task["requirements"]["accuracy"]
+                    try:
+                        energy_target = task["requirements"]["energy_target"]
+                        # TODO:  account for differences in units.  E.g., Hartree vs. kCal/mol vs. other.
+                        # TODO:  have team review this definition of "within accuracy requirement"
+                        solved_within_accuracy_requirement = bool(np.abs(reported_energy - energy_target) < accuracy_tol)
+                    except Exception as e:
+                        logging.error(f'Error: {e}', exc_info=True)
+                        logging.info(f"warning!  no energy target specified in task {task_uuid}")
+                        energy_target = None
+                        solved_within_accuracy_requirement = False
                     
+                    calendar_due_date = problem_instance["calendar_due_date"]
+                    if calendar_due_date is None:
+                        submitted_by_calendar_due_date = True # no due date.
+                    else:
+                        # TODO: issue-44.  handle case when more than one solution submitted by
+                        # one solver.  for now assume, solutions were submitted by due date.
+                        submitted_by_calendar_due_date = True # no due date.
+                        
                     label = solved_within_run_time and solved_within_accuracy_requirement
                         
 
 
                 # new row for each solver_uuid/task_uuid
-                new_row = [
-                    solver_short_name,
-                    solver_uuid,
-                    solution_uuid,
-                    problem_instance_uuid,
-                    task_uuid,
-                    instance_data_object_uuid,
-                    instance_data_object_url,
-                    attempted,
-                    solved_within_run_time,
-                    solved_within_accuracy_requirement,
-                    overall_run_time_seconds,
-                    is_resource_estimate,
-                    label # label True/False, that the Hamiltonian was solved.
-                ]
-                logging.info(f"{pd.DataFrame(new_row)}") # just for printout.
-                aggregated_results.loc[len(aggregated_results)] = new_row # add to list of results.
+                new_row = pd.DataFrame([{
+                    "solver_short_name":solver_short_name,
+                    "solver_uuid":solver_uuid,
+                    "solution_uuid":solution_uuid,
+                    "problem_instance_uuid":problem_instance_uuid,
+                    "task_uuid":task_uuid,
+                    "instance_data_object_uuid":instance_data_object_uuid,
+                    "instance_data_object_url":instance_data_object_url,
+                    "attempted":attempted,
+                    "solved_within_run_time":solved_within_run_time,
+                    "solved_within_accuracy_requirement":solved_within_accuracy_requirement,
+                    "overall_run_time_seconds":overall_run_time_seconds,
+                    "is_resource_estimate":is_resource_estimate,
+                    "submitted_by_calendar_due_date":submitted_by_calendar_due_date,
+                    "label":label # label True/False, that the Hamiltonian was solved.
+                }])
+                logging.info(f"added a row for solver {solver_short_name}, task {task_uuid}")
+                aggregated_results = pd.concat([aggregated_results, new_row], ignore_index=True)
+                #aggregated_results.loc[len(aggregated_results)] = new_row # add to list of results.
 
 
 
@@ -311,18 +344,20 @@ def main(args):
         solver_labels.to_csv(solver_labels_file_name)
 
         logging.info(f"calculating ML scores for solver {solver_short_name}/{solver_uuid}...")
-        # TODO: revisit this... test.
-        # solvability_ratio, f1_score = miniML(argparse.Namespace(
-        #     ham_features_file="../Hamiltonian_features/experimental/Hamiltonian_features.csv",
-        #     config_file="../BubbleML/miniML/miniML_config.json",
-        #     solver_uuid=solver_uuid,
-        #     solver_labels_file=solver_labels_file_name,
-        #     verbose=False
-        # ))
+
+        # TODO:  update remove the "partial_results" from the Hamiltonian features when completed.  Re-run.
+        ham_features_file="../Hamiltonian_features/experimental/fast_double_factorization_features/Hamiltonian_features.partial_results.csv"
+        solvability_ratio, f1_score = miniML(argparse.Namespace(
+            ham_features_file=ham_features_file,
+            config_file="../BubbleML/miniML/miniML_config.json",
+            solver_uuid=solver_uuid,
+            solver_labels_file=solver_labels_file_name,
+            verbose=False
+        ))
         ml_scores[solver_uuid] = {
-            "solvability_ratio":1111111, # TODO: update.
-            "f1_score":1111111,
-            "ml_metrics_calculator_version":1111111
+            "solvability_ratio":solvability_ratio,
+            "f1_score":f1_score,
+            "ml_metrics_calculator_version":1
         }
 
 
@@ -336,16 +371,20 @@ def main(args):
     # Write out a performance_metrics.uuid.json file for each solver
     # ===============================================================
     for solver_uuid in solver_list["solver_uuid"].values:
+        solver_results_df = aggregated_results[aggregated_results["solver_uuid"]==solver_uuid]
         solver_short_name = get_solver_short_name(
             solver_uuid=solver_uuid,
             solver_list=solver_list
         )
 
+
+
         # Boilerplate metadata:
         # ===============================================================
         performance_metrics = {}
         performance_metrics["$schema"] = "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/performance_metrics.schema.0.0.1.json"
-        performance_metrics["performance_metrics_uuid"] = str(uuid.uuid4())
+        performance_metrics_uuid = str(uuid.uuid4())
+        performance_metrics["performance_metrics_uuid"] = performance_metrics_uuid
         performance_metrics["solver_short_name"] = solver_short_name
         performance_metrics["solver_uuid"] = solver_uuid
         performance_metrics["creation_timestamp"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -357,58 +396,151 @@ def main(args):
         
         # Top-level aggregated performance metrics:
         # ===============================================================
-        # TODO
+        # filter aggregated results to ONLY the solver we are currently working with:
         performance_metrics["top_level_results"] = {
-                "number_of_problem_instances":11111,
-                "number_of_problem_instances_attempted":11111,
-                "number_of_problem_instances_solved":11111,
-                "number_of_tasks":11111,
-                "number_of_tasks_attempted":11111,
-                "number_of_tasks_solved":11111,
-                "number_of_tasks_solved_within_run_time_limit":11111,
-                "number_of_tasks_solved_within_accuracy_threshold":11111,
-                "max_run_time_of_attempted_tasks":11111,
-                "sum_of_run_time_of_attempted_tasks":11111
+                "number_of_problem_instances": aggregated_results["problem_instance_uuid"].nunique(),
+                "number_of_problem_instances_attempted": None, #calculated below...
+                "number_of_problem_instances_solved": None, #calculated below...
+                "number_of_tasks": aggregated_results["task_uuid"].nunique(),
+                "number_of_tasks_attempted": len(solver_results_df["attempted"]),
+                "number_of_tasks_solved": len(solver_results_df["label"]),
+                "number_of_tasks_solved_within_run_time_limit": len(solver_results_df["solved_within_run_time"]),
+                "number_of_tasks_solved_within_accuracy_threshold": len(solver_results_df["solved_within_accuracy_requirement"]),
+                "max_run_time_of_attempted_tasks": None, #calculated below...,
+                "sum_of_run_time_of_attempted_tasks":None, #calculated below...,
         }
         
+        
+        # number_of_problem_instances_attempted...
+        problem_instance_uuid_list = aggregated_results["problem_instance_uuid"].unique()
+        count_number_problem_instances_attempted = 0
+        for problem_instance_uuid in problem_instance_uuid_list:
+            # filter df to only problem instance
+            df_filtered = solver_results_df[solver_results_df["problem_instance_uuid"]==problem_instance_uuid]
+            num_tasks = len(df_filtered)
+            num_attempted_tasks = len(df_filtered["attempted"])
+            # must attempt ALL task to "attempt" the problem_instance.
+            if num_tasks == num_attempted_tasks:
+                count_number_problem_instances_attempted += 1
+        performance_metrics["top_level_results"]["number_of_problem_instances_attempted"] \
+            = count_number_problem_instances_attempted
+
+
+        # number_of_problem_instances_solved...
+        problem_instance_uuid_list = aggregated_results["problem_instance_uuid"].unique()
+        count_number_problem_instances_solved = 0
+        for problem_instance_uuid in problem_instance_uuid_list:
+            # filter df to only problem instance
+            df_filtered = solver_results_df[solver_results_df["problem_instance_uuid"]==problem_instance_uuid]
+            num_tasks = len(df_filtered)
+            num_solved_tasks = len(df_filtered["label"])
+            # must attempt ALL task to "attempt" the problem_instance.
+            if num_tasks == num_solved_tasks:
+                count_number_problem_instances_solved += 1
+        performance_metrics["top_level_results"]["number_of_problem_instances_solved"] \
+            = count_number_problem_instances_solved
+
+
+        # max_run_time_of_attempted_tasks...
+        # filter down to only task that were attempted:
+        df_filtered = solver_results_df[solver_results_df["attempted"]]
+        performance_metrics["top_level_results"]["max_run_time_of_attempted_tasks"] \
+            = max(df_filtered["overall_run_time_seconds"])
+
+        # sum_of_run_time_of_attempted_tasks...
+        # filter down to only task that were attempted:
+        df_filtered = solver_results_df[solver_results_df["attempted"]]
+        performance_metrics["top_level_results"]["sum_of_run_time_of_attempted_tasks"] \
+            = sum(df_filtered["overall_run_time_seconds"])
+
+
+
+
+
+
+
+
+
 
 
         # Performance metrics by problem_instance:
         # ===============================================================
-        # TODO
-        performance_metrics["results_by_problem_instance"] = {
-            "problem_instance_uuid":11111,
-            "solution_uuid":11111,
-            "number_of_tasks":11111,
-            "number_of_tasks_attempted":11111,
-            "number_of_tasks_solved_within_runtime_limit":11111,
-            "number_of_tasks_solved_within_accuracy_requirement":11111,
-            "number_of_tasks_solved":11111,
-            "sum_of_run_time_of_attempted_tasks":11111,
-            "max_run_time_of_attempted_tasks":11111,
-            "solution_submitted_by_due_date":11111
-        }
         
+        # init as empty list.
+        performance_metrics["results_by_problem_instance"] = []
+        
+        problem_instance_uuid_list = aggregated_results["problem_instance_uuid"].unique()
+        for problem_instance_uuid in problem_instance_uuid_list:
+            df_filtered = solver_results_df[solver_results_df["problem_instance_uuid"]==problem_instance_uuid]
+            logging.info(f"problem_instance_uuid: {problem_instance_uuid}")
+            logging.info(f"number of tasks: {len(df_filtered)}")
+            
+            # TODO: PRIORITY:  issue #44: handle situation where one solver has more than one solution_uuid for a single problem_uuid
+            assert df_filtered["solution_uuid"].nunique() <= 1, "issue #44:  we have more than one solution_uuid for a (solver_uuid,problem_uuid) pair."
+            x = {
+                "problem_instance_uuid":problem_instance_uuid,
+                "solution_uuid": df_filtered["solution_uuid"].unique()[0], # should only be one solution_uuid.  see issue #44.
+                "number_of_tasks": len(df_filtered),
+                "number_of_tasks_attempted": len(df_filtered[df_filtered["attempted"]]),
+                "number_of_tasks_solved_within_runtime_limit":len(df_filtered["solved_within_run_time"]),
+                "number_of_tasks_solved_within_accuracy_requirement":len(df_filtered["solved_within_accuracy_requirement"]),
+                "number_of_tasks_solved":len(df_filtered["label"]),
+                "sum_of_run_time_of_attempted_tasks":None, # updated below...
+                "max_run_time_of_attempted_tasks":None, # updated below...
+                "solution_submitted_by_due_date":\
+                    df_filtered["submitted_by_calendar_due_date"].values[0] # should only be one.  see issue #44.
+                    
+            }
+            if len(df_filtered[df_filtered["attempted"]]) > 0:
+                logging.info(f"number of attempted tasks: {len(df_filtered[df_filtered['attempted']])}")
+                x["sum_of_run_time_of_attempted_tasks"] \
+                    = sum(df_filtered[df_filtered["attempted"]]["overall_run_time_seconds"])
+                
+                x["max_run_time_of_attempted_tasks"] \
+                    = max(df_filtered[df_filtered["attempted"]]["overall_run_time_seconds"])
+            else:
+                logging.info(f"it seems the solver did not attempt ANY of the tasks in problem_instance_uuid {problem_instance_uuid}")
+
+            performance_metrics["results_by_problem_instance"].append(x)
+
+
+
+
+
+
         # Performance metrics by task:
         # ===============================================================
-        # TODO
-        performance_metrics["results_by_task"] = {
-            "task_uuid":11111,
-            "problem_instance_uuid":11111,
-            "instance_data_object_uuid":11111,
-            "attempted":11111,
-            "solved_within_run_time":11111,
-            "solved_within_accuracy_requirement":11111,
-            "run_time":11111
-        }
+        # init as empty list.
+        performance_metrics["results_by_task"] = []
+        
+        task_uuid_list = aggregated_results["task_uuid"].unique()
+        for task_uuid in task_uuid_list:
+            df_filtered = solver_results_df[solver_results_df["task_uuid"]==task_uuid]
+            # TODO: issue #44:  handle case where more than one solution_uuid per (solver_uuid, task_uuid) present.
+            assert df_filtered["solution_uuid"].nunique() <= 1, "issue #44:  we have more than one solution_uuid for a (solver_uuid,task_uuid) pair."
+            assert len(df_filtered) == 1, "issue #44:  we have more than one solution_uuid for a (solver_uuid,task_uuid) pair."
+            x = {
+                "task_uuid":task_uuid,
+                "problem_instance_uuid":df_filtered["problem_instance_uuid"].values[0], # should only be one...issue #44.
+                "instance_data_object_uuid":df_filtered["instance_data_object_uuid"].values[0],
+                "attempted":df_filtered["attempted"].values[0],
+                "solved_within_run_time":df_filtered["solved_within_run_time"].values[0],
+                "solved_within_accuracy_requirement":df_filtered["solved_within_accuracy_requirement"].values[0],
+                "solved":df_filtered["label"].values[0],
+                "overall_run_time_seconds":None #calculated below
+            }
+            if x["attempted"]:
+                x["overall_run_time_seconds"] = df_filtered["overall_run_time_seconds"].values[0]
+            performance_metrics["results_by_task"].append(x)
+
 
 
         # Write out performance_metrics.json file:
         # ===============================================================
         performance_metrics_file_name = args.performance_metrics_dir 
-        performance_metrics_file_name += f"performance_metrics.{solver_short_name}.{solver_uuid}.json"
-        with open(performance_metrics_file_name, "w") as jo:
-            json.dump(performance_metrics, jo, indent=4)
+        performance_metrics_file_name += f"performance_metrics.{solver_short_name}.{solver_uuid}.{performance_metrics_uuid}.json"
+        with open(performance_metrics_file_name, "w") as output_file:
+            json.dump(performance_metrics, output_file, indent=4)
         logging.info(f"wrote file: {performance_metrics_file_name}")
 
 

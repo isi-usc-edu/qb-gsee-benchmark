@@ -363,8 +363,11 @@ def main(args):
         df_hams,
         df_labels,
         on="task_uuid",
-        how="outer" # fill in NaN when merging if uuids missing from either file.
+        how="inner"
+        # how=inner only match rows that by task_uuid that exist in either file (possibly fewer rows).
+        # how=outer fill in NaN when merging if uuids missing from either file.
     )
+    # df.to_csv("artifact.miniML.features_and_labels.csv")
 
     selected_features =  mini_ml_config["features"]
     target = "label" # a column header in the solver_labels.csv file.
