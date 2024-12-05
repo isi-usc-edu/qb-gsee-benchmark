@@ -13,7 +13,7 @@ In the `scripts` directory, the `compute_all_ham_features_script.py` script will
 
 Number of electrons $\eta$
 
-Number of natural orbitals $N_{\text{nao}}$
+Number of orbitals $N$
 
 Number of qubits $n$
 
@@ -28,6 +28,8 @@ $$
 Rank $L$
 
 Eigenvalues { $\lambda_\ell$ }
+
+Double factorization eigenvalue gap $|\lambda_1 - \lambda_2|$
 
  $G(H) = (V,E)$ where $V = [n]$ for an $n$-qubit Hamiltonian $H$ where the edge set contains hyperedges $e_i = (i_1,...,i_{k(i)}) \in E$ where $i_1, ..., i_{k(i)} \in V$ are all those qubits that are being acted upon by non-identity single qubit Pauli operators. The graph has edge weights $w(e) = h_e$ where $h_e$ is the coefficient of Pauli string $e \in E$ where $H = \sum_{e \in E} h_e P_e$. We take statistics (max, min, mean, std. dev.) on edge order (Pauli weight), vertex degree, and edge weights.
 
