@@ -248,6 +248,18 @@ def main(args):
                         break
 
 
+                # task-specific requirements
+                time_limit_seconds = task["requirements"]["time_limit_seconds"]
+                accuracy_tol = task["requirements"]["accuracy"]
+                try:
+                    reference_energy = task["requirements"]["reference_energy"]
+                    # TODO:  account for differences in units.  E.g., Hartree vs. kCal/mol vs. other.
+                except Exception as e:
+                    logging.error(f'Error: {e}', exc_info=True)
+                    logging.info(f"warning!  no reference_energy specified in task {task_uuid}")
+                    reference_energy = None
+
+
                 if results is None:
                     # the solver did NOT submit a solution file for the problem_instance or Hamiltonian.
                     # mark it as failed.  TODO:  do something more nuanced with non-attempted problems in the future.
@@ -263,20 +275,18 @@ def main(args):
                     attempted = True 
 
                     overall_run_time_seconds = results["run_time"]["overall_time"]["seconds"]
-                    time_limit_seconds = task["requirements"]["time_limit_seconds"]
                     solved_within_run_time = overall_run_time_seconds <= time_limit_seconds
 
                     reported_energy = results["energy"]
-                    accuracy_tol = task["requirements"]["accuracy"]
+                    
+                    
+                    
                     try:
-                        energy_target = task["requirements"]["energy_target"]
+                        solved_within_accuracy_requirement = bool(np.abs(reported_energy - reference_energy) < accuracy_tol)
                         # TODO:  account for differences in units.  E.g., Hartree vs. kCal/mol vs. other.
-                        # TODO:  have team review this definition of "within accuracy requirement"
-                        solved_within_accuracy_requirement = bool(np.abs(reported_energy - energy_target) < accuracy_tol)
                     except Exception as e:
                         logging.error(f'Error: {e}', exc_info=True)
                         logging.info(f"warning!  no energy target specified in task {task_uuid}")
-                        energy_target = None
                         solved_within_accuracy_requirement = False
                     
                     calendar_due_date = problem_instance["calendar_due_date"]
@@ -356,7 +366,7 @@ def main(args):
         ))
         ml_scores[solver_uuid] = {
             "solvability_ratio":solvability_ratio,
-            "f1_score":f1_score,
+            "f1_score":list(f1_score),
             "ml_metrics_calculator_version":1
         }
 
