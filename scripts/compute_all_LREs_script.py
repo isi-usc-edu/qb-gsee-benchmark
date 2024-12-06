@@ -217,14 +217,19 @@ def get_lqre(
             }
 
             try:
+                physical_resource_estimation_start = datetime.datetime.now()
                 algorithm_runtime_seconds, num_physical_qubits = get_physical_cost(
                     num_logical_qubits=logical_resources["LogicalQubits"],
                     num_T_gates=logical_resources["T"],
                     hardware_failure_tolerance_per_shot=hardware_failure_tolerance_per_shot,
-                    n_factories=config["hardware_parameters"]["n_factories"],
+                    n_factories=config["hardware_parameters"]["num_factories"],
                     physical_error_rate=config["hardware_parameters"][
                         "physical_error_rate"
                     ],
+                )
+                physical_resource_estimation_end = datetime.datetime.now()
+                logging.info(
+                    f"Physical resource estimation time: {(physical_resource_estimation_end - physical_resource_estimation_start).total_seconds()} seconds."
                 )
                 task_solution_data["run_time"]["algorithm_run_time"] = (
                     {

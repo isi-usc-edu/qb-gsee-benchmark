@@ -3,9 +3,14 @@
   "algorithm_parameters": {
     "overlap": 0.8,
     "df_threshold": 1e-3,
-    "max_orbitals": 32
+    "max_orbitals": 37
   },
   "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Also note that unlike arXiv:2406.06335, the ground-state overlaps are not computed from DMRG but instead set to a nominal value.",
+  "quantum_hardware_parameters": {
+    "num_factories": 4,
+    "physical_error_rate": 1e-3
+  },
+  "quantum_hardware_description": "foo",
   "contact_info": [
     {
       "name": "Max Radin",
