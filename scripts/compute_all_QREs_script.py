@@ -22,7 +22,6 @@ import logging
 import math
 import os
 import sys
-from collections import defaultdict
 from importlib.metadata import version
 from typing import Any
 from urllib.parse import urlparse
@@ -47,7 +46,7 @@ class NoFactoriesFoundError(Exception):
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 console_handler = logging.StreamHandler()
-file_handler = logging.FileHandler("compute_all_LREs_scripts.log.txt", delay=False)
+file_handler = logging.FileHandler("compute_all_QREs_scripts.log.txt", delay=False)
 formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 handlers = [console_handler, file_handler]
 for h in handlers:
@@ -63,6 +62,16 @@ def get_physical_cost(
     physical_error_rate: float,
 ):
     n_magic = AlgorithmSummary(t_gates=num_T_gates)
+
+    best_cost, best_factory, best_data_block = get_ccz2t_costs_from_grid_search(
+        n_magic=n_magic,
+        n_algo_qubits=num_logical_qubits,
+        error_budget=hardware_failure_tolerance_per_shot,
+        phys_err=physical_error_rate,
+        factory_iter=iter_ccz2t_factories(n_factories=n_factories),
+        cost_function=(lambda pc: pc.duration_hr),
+    )
+    return best_cost.duration_hr * 60 * 60, best_cost.footprint
     try:
         best_cost, best_factory, best_data_block = get_ccz2t_costs_from_grid_search(
             n_magic=n_magic,
@@ -227,8 +236,8 @@ def get_lqre(
                     num_logical_qubits=logical_resources["LogicalQubits"],
                     num_T_gates=logical_resources["T"],
                     hardware_failure_tolerance_per_shot=hardware_failure_tolerance_per_shot,
-                    n_factories=config["hardware_parameters"]["num_factories"],
-                    physical_error_rate=config["hardware_parameters"][
+                    n_factories=config["quantum_hardware_parameters"]["num_factories"],
+                    physical_error_rate=config["quantum_hardware_parameters"][
                         "physical_error_rate"
                     ],
                 )
@@ -247,6 +256,9 @@ def get_lqre(
                     ).total_seconds()
                     + algorithm_runtime_seconds
                 }
+                task_solution_data["quantum_resources"]["physical"] = {
+                    "num_physical_qubits": num_physical_qubits,
+                }
             except NoFactoriesFoundError:
                 logging.info(
                     f"No factories found that meet the performance requirements. Skipping physical cost estimation."
@@ -264,6 +276,10 @@ def get_lqre(
         "algorithm_details": {
             "algorithm_description": config["algorithm_description"],
             "algorithm_parameters": config["algorithm_parameters"],
+        },
+        "quantum_hardware_details": {
+            "quantum_hardware_description": config["quantum_hardware_description"],
+            "quantum_hardware_parameters": config["quantum_hardware_parameters"],
         },
         "software_details": [
             {"software_name": "pyLIQTR", "software_version": version("pyLIQTR")},
@@ -292,7 +308,7 @@ def get_lqre(
 
 def main(args: argparse.Namespace) -> None:
 
-    config = json.load(open(args.LRE_config_file, "r"))
+    config = json.load(open(args.QRE_config_file, "r"))
 
     overall_start_time = datetime.datetime.now()
     logging.info(f"===============================================")
@@ -338,7 +354,7 @@ def main(args: argparse.Namespace) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="a script to calculate Logical Resource Estimates (LREs) for all problem_instance files.  Outputs are solution.uuid.json files."
+        description="a script to calculate Quantum Resource Estimates (QREs) for all problem_instance files.  Outputs are solution.uuid.json files."
     )
 
     parser.add_argument(
@@ -358,10 +374,10 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
-        "--LRE_config_file",
+        "--QRE_config_file",
         type=str,
         required=True,
-        help="A JSON file with configuration options and hyperparameters for LRE and a `solver` UUID.",
+        help="A JSON file with configuration options and hyperparameters for QRE and a `solver` UUID.",
     )
 
     parser.add_argument(

@@ -38,17 +38,17 @@ Contact the repository maintainers to get these.
 
 ### Generating Logical Quantum Resource Estimates
 
-The [`scripts/compute_all_LREs_script.py`](scripts/compute_all_LREs_script.py) script can be used to generate LQREs.
+The [`scripts/compute_all_QREs_script.py`](scripts/compute_all_QREs_script.py) script can be used to generate LQREs.
 In order to run this script, first ensure that the qb-gsee-benchmark package is installed as described above.
 Then, several files are required:
 
 * A PPK file containing a key to access the SFTP server that provides access to FCIDUMP files as described above.
-* A configuration file similar to [`scripts/LRE_config.json`](scripts/LRE_config.json) or [`scripts/LRE_config.json`](scripts/LRE_config_overlaps.json) which specifies algorithm parameters, solver UUID, and other information.
+* A configuration file similar to [`scripts/QRE_config.json`](scripts/QRE_config.json) or [`scripts/QRE_config.json`](scripts/QRE_config_overlaps.json) which specifies algorithm parameters, solver UUID, and other information.
 * If the `algorithm_parameters` object in the config file specifies a value for `overlap_csv`, then this CSV file must also be present. See for example [`scripts/overlaps.csv`](scripts/overlaps.csv)
 
 The paths to these files must be passed as arguments to the script, for example:
 ```bash
-python compute_all_LREs_script.py -i ../problem_instances -o ../solution_files --LRE_config_file LRE_config.json --sftp_username darpa-qb --sftp_key_file path_to_ppk_file
+python compute_all_QREs_script.py -i ../problem_instances -o ../solution_files --QRE_config_file QRE_config.json --sftp_username darpa-qb --sftp_key_file path_to_ppk_file
 ```
 
 <!-- ### Viewing Results
