@@ -29,6 +29,14 @@
                     "wall_clock_start_time": "2024-12-05T17:46:37.043328Z",
                     "wall_clock_stop_time": "2024-12-05T17:47:07.859168Z",
                     "seconds": 30.81584
+                },
+                "overall_time": {
+                    "seconds": 165197.96352000002,
+                    "comments": {
+                        "comment_1": "seconds = (0.00002 seconds/t_gate)(num_T_gates_per_shot)(num_shots)",
+                        "comment_2": "20usec/t_gate based on the assumptions in the paper, including: 4 factories, 0.1percent physical error rate and AutoCCZ factories can support twice as many T-gates as Toffolis.",
+                        "reference": "https://journals.aps.org/prxquantum/abstract/10.1103/PRXQuantum.2.030305"
+                    }
                 }
             }
         }
