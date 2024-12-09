@@ -5,13 +5,13 @@
     "description": "Describes required fields for a valid performance metrics file.",
     "required": [
         "performance_metrics_uuid",
-        "solution_uuid",
-        "problem_instance_uuid",
-        "short_name",
-        "performance_metrics_calculator_details",
+        "solver_short_name",
+        "solver_uuid",
         "creation_timestamp",
-        "itemized_metrics",
-        "aggregate_metrics",
+        "ml_metrics",
+        "top_level_results",
+        "results_by_problem_instance",
+        "results_by_task",
         "$schema"
     ],
     "properties": {
@@ -26,73 +26,236 @@
             "type": "string",
             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
         },
-        "solution_uuid": {
-            "title": "Solution UUID",
-            "description": "The UUID of the solution that the performance metrics were calculated for.  A string in 8-4-4-4-12 format.",
-            "type": "string",
-            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
-        },
-        "problem_instance_uuid": {
-            "title": "Problem Instance UUID",
-            "description": "The UUID of the problem instance that the solution is based on.",
-            "type": "string",
-            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
-        },
         "creation_timestamp": {
             "title": "Creation Timestamp",
             "description": "Timestamp in ISO 8601 format in UTC (note the `Z`).\n\nExamples:  \n`2022-12-25T18:00:02.223Z`,\n`2022-12-25T07:18:45Z`",
             "type": "string",
             "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
         },
-        "short_name": {
-            "title": "Short Name",
-            "description": "A short string.  Not necessarily unique.",
+        "solver_short_name": {
+            "title": "Short name of the solver.",
+            "description": "A short string for human readability that is not necessarily unique.  E.g., `DMRG_32core_64GB`",
             "type": "string"
         },
-        "performance_metrics_calculator_details": {
-            "title": "Performance Metrics Calculator Details",
-            "description": "Information on the type/version and attribution of the software used to evaluate the solution file and produce the performance metrics.",
-            "type": "object"
+        "solver_uuid": {
+            "title": "The UUID of the solver.",
+            "description": "The UUID of the solver as a string in 8-4-4-4-12 format.",
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
         },
-        "itemized_metrics": {
-            "title": "Metrics Object",
-            "description": "An object holding the various performance metrics calculated.  The exact structure is TBD and will change based on type of problem (GSEE, QUANTUM_DYNAMICS, DIFFERENTIAL_EQUATIONS, etc).",
+        "ml_metrics": {
+            "title": "ML performance metrics",
+            "description": "TODO",
+            "type": "object",
+            "required": [
+                "solvability_ratio",
+                "f1_score"
+            ],
+            "properties": {
+                "ml_metrics_calculator_version": {
+                    "title": "ML performance metrics calculator version",
+                    "description": "The version of the ML metrics calculator software.",
+                    "type": "string"
+                },
+                "solvability_ratio": {
+                    "title": "ML Solvability Ratio",
+                    "description": "TODO.  A number between 0-1.  A higher number is better.",
+                    "type": "number"
+                },
+                "f1_score": {
+                    "title": "F1 score",
+                    "description": "TODO.  This is a measure of the goodness of the ML model, not the solver being evaluated.",
+                    "type": "number"
+                }
+            }
+        },
+        "top_level_results":{
+            "title": "Results",
+            "description": "Aggregated performance metrics and ML scores.",
+            "type": "object",
+            "required":[
+                "number_of_problem_instances",
+                "number_of_problem_instances_attempted",
+                "number_of_problem_instances_solved",
+                "number_of_tasks",
+                "number_of_tasks_attempted",
+                "number_of_tasks_solved",
+                "number_of_tasks_solved_within_run_time_limit",
+                "number_of_tasks_solved_within_accuracy_threshold",
+                "max_run_time_of_attempted_tasks",
+                "sum_of_run_time_of_attempted_tasks"
+            ],
+            "properties":{
+                "number_of_problem_instances":{
+                    "title": "Number of problem instances available.",
+                    "description": "A count of the number of `problem_instances` currently available (at creation time of this file) in the `problem_instances` directory.",
+                    "type": "integer"
+                },
+                "number_of_problem_instances_attempted":{
+                    "title": "Number of problem instances attempted",
+                    "description": "A count of the number of `problem_instances` where a solution was provided for at least one Hamiltonian (task) in the `problem_instance`",
+                    "type": "integer"
+                },
+                "number_of_problem_instances_solved":{
+                    "title": "Number of problem instances solved",
+                    "description": "A count of the number of `problem_instances` where the solutions for *all* Hamiltonians (tasks) were within the run time and accuracy requirements.",
+                    "type": "integer"
+                },
+                "number_of_tasks":{
+                    "title": "Number of Hamiltonians (tasks) available.",
+                    "description": "A count of the number of Hamiltonians (tasks) currently available (at creation time of this file) required in each `problem_instance` file.",
+                    "type": "integer"
+                },
+                "number_of_tasks_attempted":{
+                    "title": "Number of Hamiltonians (tasks) attempted.",
+                    "description": "A count of the number of Hamiltonians (tasks) where a solution was provided.",
+                    "type": "integer"
+                },
+                "number_of_tasks_solved_within_run_time_limit":{
+                    "title": "Number of Hamiltonians (tasks) solved within run time limit.",
+                    "description": "A count of the number of Hamiltonians (tasks) where a solution was provided that was within the run time limit.",
+                    "type": "integer"
+                },
+                "number_of_tasks_solved_within_accuracy_threshold":{
+                    "title": "Number of Hamiltonians (tasks) solved within accuracy threshold.",
+                    "description": "A count of the number of Hamiltonians (tasks) where a solution was provided that was within the accuracy threshold.",
+                    "type": "integer"
+                },
+                "number_of_tasks_solved":{
+                    "title": "Number of Hamiltonians (tasks) solved to requirements.",
+                    "description": "A count of the number of Hamiltonians (tasks) where a solution was provided met requirements.",
+                    "type": "integer"
+                },
+                "max_run_time_of_attempted_tasks":{
+                    "title": "Max run time of attempted Hamiltonians (tasks).",
+                    "description": "The maximum run time of the solutions provided for all attempted Hamiltonians (tasks).  In seconds.",
+                    "type": "integer"
+                },
+                "sum_of_run_time_of_attempted_tasks":{
+                    "title": "The sum of the run time of attempted Hamiltonians (tasks).",
+                    "description": "The sum of the run time of the solutions provided for all attempted Hamiltonians (tasks).  In seconds.",
+                    "type": "number"
+                }
+            }
+        },
+        "results_by_problem_instance":{
+            "title": "Results aggregated by problem instance",
+            "description": "Performance metrics are aggregated to the `problem_instance` level.",
             "type": "array",
-            "items":{
+            "items": {
                 "type": "object",
-                "required":[
-                    "instance_data_object_uuid",
-                    "solution_calculated_within_time_limit",
-                    "solution_submitted_by_due_date",
-                    "metrics"
+                "required": [
+                    "problem_instance_uuid",
+                    "solution_uuid",
+                    "number_of_tasks",
+                    "number_of_tasks_attempted",
+                    "number_of_tasks_solved_within_runtime_limit",
+                    "number_of_tasks_solved_within_accuracy_requirement",
+                    "number_of_tasks_solved",
+                    "sum_of_run_time_of_attempted_tasks",
+                    "max_run_time_of_attempted_tasks",
+                    "solution_submitted_by_due_date"
                 ],
-                "properties":{
-                    "instance_data_object_uuid":{
-                        "title": "Instance Data Object UUID",
-                        "description": "The UUID of the related instance data.  A string in 8-4-4-4-12 format.",
+                "properties": {
+                    "problem_instance_uuid": {
+                        "title": "Problem instance UUID",
+                        "description": "The UUID of the starting `problem_instance`.  A string in 8-4-4-4-12 format.",
                         "type": "string",
                         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                     },
-                    "solution_calculated_within_time_limit": {
-                        "title": "Solution Calculated Within Time Limit?",
-                        "description": "A boolean to identify if the solution was calculated within the required time limit.",
-                        "type": "boolean"
+                    "solution_uuid": {
+                        "title": "Solution file UUID",
+                        "description": "The UUID of the solution JSON submitted by a performer/solver to solve the associated `problem_instance`.  A string in 8-4-4-4-12 format.",
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                    },
+                    "number_of_tasks_attempted": {
+                        "type": "integer",
+                        "description": "TODO DESCRIPTION"
+                    },
+                    "number_of_tasks_solved_within_runtime_limit": {
+                        "type": "integer",
+                        "description": "TODO DESCRIPTION"
+                    },
+                    "hamiltonians_solved_within_accuracy_requirement": {
+                        "type": "integer",
+                        "description": "TODO DESCRIPTION"
+                    },
+                    "number_of_tasks_solved": {
+                        "type": "integer",
+                        "description": "TODO DESCRIPTION solved within run time limit and accuracy threshold."
+                    },
+                    "number_of_tasks": {
+                        "type": "integer",
+                        "description": "TODO DESCRIPTION"
+                    },
+                    "sum_of_run_time_of_attempted_tasks": {
+                        "type": "number",
+                        "description": "TODO DESCRIPTION."
+                    },
+                    "max_of_run_time_of_attempted_tasks": {
+                        "type": "number",
+                        "description": "TODO DESCRIPTION."
                     },
                     "solution_submitted_by_due_date": {
                         "title": "Solution Within Due Date?",
-                        "description": "A boolean to identify if the solution was submitted by the required due date.  If there was no due date specified, then this is `true`.",
+                        "description": "Each `problem_instance` file has a specified calendar due date.  This boolean to identifies if the solution was submitted by the due date.  If there was no due date specified, then this is `true`.",
                         "type": "boolean"
-                    },
-                    "metrics":{
-
                     }
                 }
-            }               
+            }
         },
-        "aggregate_metrics":{
-            "title": "Metrics Object",
-            "description": "An object holding the various aggregate metrics and ancillary outputs. metrics calculated.  The exact structure is TBD and will change based on type of problem (GSEE, QUANTUM_DYNAMICS, DIFFERENTIAL_EQUATIONS, etc).",
-            "type": "object"
+        "results_by_task": {
+            "title": "TODO",
+            "description": "A list of objects, one for each Hamiltonian (by `task_uuid`)",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "task_uuid",
+                    "problem_instance_uuid",
+                    "instance_data_object_uuid",
+                    "attempted",
+                    "solved_within_run_time",
+                    "solved_within_accuracy_requirement",
+                    "run_time"
+                ],
+                "properties": {
+                    "task_uuid": {
+                        "title": "Task UUID",
+                        "description": "UUID for the task from the list of tasks in the `problem_instance` file in 8-4-4-4-12 format.",
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                    },
+                    "problem_instance_uuid": {
+                        "title": "Problem instance UUID",
+                        "description": "The UUID of the starting `problem_instance`.  A string in 8-4-4-4-12 format.",
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                    },
+                    "instance_data_object_uuid": {
+                        "title": "Instance Data Object UUID",
+                        "description": "UUID for the data object (typically a Hamiltonian in FCIDUMP format) in 8-4-4-4-12 format.",
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                    },
+                    "attempted": {
+                        "title": "TODO",
+                        "description": "a boolean indicating if the solver attempted to calculate the GSE for the Hamiltonian.  At this time, if the data is missing from `solution.json` files, it is considered NOT attempted and other metrics indicate failure.",
+                        "type": "boolean"
+                    },
+                    "solved_within_run_time": {
+                        "title": "TODO",
+                        "description": "a boolean indicating if the solver run time was within the run time requirement specified in the problem_instance.",
+                        "type": "boolean"
+                    },
+                    "solved_within_accuracy_requirement": {
+                        "title": "TODO",
+                        "description": "a boolean indicating if the solver run time was within the accuracy requirement specified in the problem_instance.",
+                        "type": "boolean"
+                    }
+                }
+            }
         }
     }
 }
