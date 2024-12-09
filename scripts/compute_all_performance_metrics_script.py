@@ -126,7 +126,7 @@ def identify_unique_participating_solvers(
 
 def get_solver_short_name(solver_uuid, solver_list) -> str:
     df = solver_list[solver_list["solver_uuid"] == solver_uuid]
-    return df["solver_short_name"][0]
+    return df["solver_short_name"].iloc[0]
 
 
      
@@ -182,6 +182,7 @@ def main(args):
         "solver_short_name",
         "solver_uuid",
         "solution_uuid",
+        "problem_instance_short_name",
         "problem_instance_uuid",
         "task_uuid",
         "instance_data_object_uuid",
@@ -191,6 +192,9 @@ def main(args):
         "solved_within_accuracy_requirement",
         "overall_run_time_seconds",
         "is_resource_estimate",
+        "num_logical_qubits",
+        "num_shots",
+        "num_T_gates_per_shot",
         "submitted_by_calendar_due_date",
         "label" # label True/False, that the Hamiltonian was solved.
     ]
@@ -198,6 +202,7 @@ def main(args):
 
     for problem_instance in problem_instance_list:
         problem_instance_uuid = problem_instance["problem_instance_uuid"]
+        problem_instance_short_name = problem_instance["short_name"]
         
         for task in problem_instance["tasks"]:
             num_supporting_files = len(task["supporting_files"])
@@ -234,18 +239,14 @@ def main(args):
                     solution_list=solution_list
                 )
 
-                # the format of a results dictionary:
-                # results = { 
-                #   task_uuid,
-                #   energy,
-                #   energy_units,
-                #   run_time{overall_time{seconds}}
-                # }
 
+                # determine if it's a resource estimate
+                is_resource_estimate = None
                 for solution in solution_list:
                     if solution["solution_uuid"] == solution_uuid:
                         is_resource_estimate = solution["is_resource_estimate"]
                         break
+
 
 
                 # task-specific requirements
@@ -263,6 +264,7 @@ def main(args):
                 if results is None:
                     # the solver did NOT submit a solution file for the problem_instance or Hamiltonian.
                     # mark it as failed.  TODO:  do something more nuanced with non-attempted problems in the future.
+                    is_resource_estimate = None
                     attempted = False
                     solved_within_run_time = False
                     solved_within_accuracy_requirement = False
@@ -277,25 +279,35 @@ def main(args):
                     overall_run_time_seconds = results["run_time"]["overall_time"]["seconds"]
                     solved_within_run_time = overall_run_time_seconds <= time_limit_seconds
 
-                    reported_energy = results["energy"]
-                    
-                    
-                    
-                    try:
-                        solved_within_accuracy_requirement = bool(np.abs(reported_energy - reference_energy) < accuracy_tol)
-                        # TODO:  account for differences in units.  E.g., Hartree vs. kCal/mol vs. other.
-                    except Exception as e:
-                        logging.error(f'Error: {e}', exc_info=True)
-                        logging.info(f"warning!  no energy target specified in task {task_uuid}")
-                        solved_within_accuracy_requirement = False
-                    
-                    calendar_due_date = problem_instance["calendar_due_date"]
-                    if calendar_due_date is None:
-                        submitted_by_calendar_due_date = True # no due date.
+                    if is_resource_estimate:
+                        num_logical_qubits = results["quantum_resources"]["logical"]["num_logical_qubits"]
+                        num_shots = results["quantum_resources"]["logical"]["num_shots"]
+                        num_T_gates_per_shot = results["quantum_resources"]["logical"]["num_T_gates_per_shot"]
+                        solved_within_accuracy_requirement = True # always true.  assume LREs solve to accuracy.
+                        submitted_by_calendar_due_date = None 
                     else:
-                        # TODO: issue-44.  handle case when more than one solution submitted by
-                        # one solver.  for now assume, solutions were submitted by due date.
-                        submitted_by_calendar_due_date = True # no due date.
+                        # NOT a logical resource estimate.
+                        num_logical_qubits = None
+                        num_shots = None
+                        num_T_gates_per_shot = None
+    
+                        reported_energy = results["energy"]
+                        try:
+                            solved_within_accuracy_requirement = bool(np.abs(reported_energy - reference_energy) < accuracy_tol)
+                            # TODO:  account for differences in units.  E.g., Hartree vs. kCal/mol vs. other.
+                        except Exception as e:
+                            logging.error(f'Error: {e}', exc_info=True)
+                            logging.info(f"warning!  no energy target specified in task {task_uuid}")
+                            solved_within_accuracy_requirement = False
+                        
+                        calendar_due_date = problem_instance["calendar_due_date"]
+                        if calendar_due_date is None: 
+                            # no due date specified in problem_instance
+                            submitted_by_calendar_due_date = True
+                        else:
+                            # TODO: issue-44.  handle case when more than one solution submitted by
+                            # one solver.  for now assume solutions were submitted by due date.
+                            submitted_by_calendar_due_date = True 
                         
                     label = solved_within_run_time and solved_within_accuracy_requirement
                         
@@ -306,6 +318,7 @@ def main(args):
                     "solver_short_name":solver_short_name,
                     "solver_uuid":solver_uuid,
                     "solution_uuid":solution_uuid,
+                    "problem_instance_short_name":problem_instance_short_name,
                     "problem_instance_uuid":problem_instance_uuid,
                     "task_uuid":task_uuid,
                     "instance_data_object_uuid":instance_data_object_uuid,
@@ -315,6 +328,9 @@ def main(args):
                     "solved_within_accuracy_requirement":solved_within_accuracy_requirement,
                     "overall_run_time_seconds":overall_run_time_seconds,
                     "is_resource_estimate":is_resource_estimate,
+                    "num_logical_qubits":num_logical_qubits,
+                    "num_shots":num_shots,
+                    "num_T_gates_per_shot":num_T_gates_per_shot,
                     "submitted_by_calendar_due_date":submitted_by_calendar_due_date,
                     "label":label # label True/False, that the Hamiltonian was solved.
                 }])
@@ -353,22 +369,31 @@ def main(args):
         solver_labels_file_name = f"solver_labels.{solver_short_name}.{solver_uuid}.csv"
         solver_labels.to_csv(solver_labels_file_name)
 
-        logging.info(f"calculating ML scores for solver {solver_short_name}/{solver_uuid}...")
+        
+        try:
+            logging.info(f"calculating ML scores for solver {solver_short_name}/{solver_uuid}...")
 
-        # TODO:  update remove the "partial_results" from the Hamiltonian features when completed.  Re-run.
-        ham_features_file="../Hamiltonian_features/experimental/fast_double_factorization_features/Hamiltonian_features.partial_results.csv"
-        solvability_ratio, f1_score = miniML(argparse.Namespace(
-            ham_features_file=ham_features_file,
-            config_file="../BubbleML/miniML/miniML_config.json",
-            solver_uuid=solver_uuid,
-            solver_labels_file=solver_labels_file_name,
-            verbose=False
-        ))
-        ml_scores[solver_uuid] = {
-            "solvability_ratio":solvability_ratio,
-            "f1_score":list(f1_score),
-            "ml_metrics_calculator_version":1
-        }
+            ham_features_file="../Hamiltonian_features/experimental/fast_double_factorization_features/Hamiltonian_features.csv"
+            solvability_ratio, f1_score = miniML(argparse.Namespace(
+                ham_features_file=ham_features_file,
+                config_file="../BubbleML/miniML/miniML_config.json",
+                solver_uuid=solver_uuid,
+                solver_labels_file=solver_labels_file_name,
+                verbose=False
+            ))
+            ml_scores[solver_uuid] = {
+                "solvability_ratio":solvability_ratio,
+                "f1_score":list(f1_score),
+                "ml_metrics_calculator_version":1
+            }
+        except Exception as e:
+            logging.error(f'Error: {e}', exc_info=True)
+            logging.info(f"bummer!  setting ml_scores to `None`.")
+            ml_scores[solver_uuid] = {
+                "solvability_ratio":None,
+                "f1_score":None,
+                "ml_metrics_calculator_version":1
+            }
 
 
 
