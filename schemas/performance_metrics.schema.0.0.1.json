@@ -65,7 +65,7 @@
                 "f1_score": {
                     "title": "F1 score",
                     "description": "TODO.  This is a measure of the goodness of the ML model, not the solver being evaluated.",
-                    "type": "number"
+                    "type": "object"
                 }
             }
         },
@@ -129,7 +129,7 @@
                 "max_run_time_of_attempted_tasks":{
                     "title": "Max run time of attempted Hamiltonians (tasks).",
                     "description": "The maximum run time of the solutions provided for all attempted Hamiltonians (tasks).  In seconds.",
-                    "type": "integer"
+                    "type": "number"
                 },
                 "sum_of_run_time_of_attempted_tasks":{
                     "title": "The sum of the run time of attempted Hamiltonians (tasks).",
@@ -166,7 +166,7 @@
                     "solution_uuid": {
                         "title": "Solution file UUID",
                         "description": "The UUID of the solution JSON submitted by a performer/solver to solve the associated `problem_instance`.  A string in 8-4-4-4-12 format.",
-                        "type": "string",
+                        "type": ["null","string"],
                         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
                     },
                     "number_of_tasks_attempted": {
@@ -190,11 +190,11 @@
                         "description": "TODO DESCRIPTION"
                     },
                     "sum_of_run_time_of_attempted_tasks": {
-                        "type": "number",
+                        "type": ["null","number"],
                         "description": "TODO DESCRIPTION."
                     },
                     "max_of_run_time_of_attempted_tasks": {
-                        "type": "number",
+                        "type": ["null","number"],
                         "description": "TODO DESCRIPTION."
                     },
                     "solution_submitted_by_due_date": {
@@ -218,7 +218,7 @@
                     "attempted",
                     "solved_within_run_time",
                     "solved_within_accuracy_requirement",
-                    "run_time"
+                    "overall_run_time_seconds"
                 ],
                 "properties": {
                     "task_uuid": {
@@ -253,6 +253,11 @@
                         "title": "TODO",
                         "description": "a boolean indicating if the solver run time was within the accuracy requirement specified in the problem_instance.",
                         "type": "boolean"
+                    },
+                    "overall_run_time_seconds":{
+                        "title": "TODO",
+                        "description": "TODO",
+                        "type": ["null", "number"]
                     }
                 }
             }
