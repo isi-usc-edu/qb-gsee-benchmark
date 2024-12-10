@@ -66,14 +66,14 @@ def get_lqre(
         overlaps = {
             row["task_uuid"]: row["overlap"] for index, row in overlap_df.iterrows()
         }
-    else:
-        overlaps = defaultdict(lambda: config["algorithm_parameters"]["overlap"])
 
     solution_data: list[dict[str, Any]] = []
     results: dict[str, Any] = {}
 
     for task in problem_instance["tasks"]:
-        if not overlaps.get(task["task_uuid"]):
+        if not config["algorithm_parameters"].get("overlap") and not overlaps.get(
+            task["task_uuid"]
+        ):
             logging.info(
                 f"Skipping task {task['task_uuid']} because no overlap was provided."
             )
@@ -116,7 +116,7 @@ def get_lqre(
             )
 
             num_orbitals = fci["H1"].shape[0]
-            if num_orbitals >= config["algorithm_parameters"]["max_orbitals"]:
+            if num_orbitals > config["algorithm_parameters"]["max_orbitals"]:
                 logging.info(
                     f"Skipping Logical Resource Estimate because number of orbitals ({num_orbitals}) exceeds maximum specified in config ({config['algorithm_parameters']['max_orbitals']})."
                 )
@@ -128,6 +128,11 @@ def get_lqre(
             error_tolerance = task["requirements"]["accuracy"]
             failure_tolerance = 1 - task["requirements"]["probability_of_success"]
 
+            overlap = (
+                config["algorithm_parameters"].get("overlap")
+                if config["algorithm_parameters"].get("overlap")
+                else overlaps.get(task["task_uuid"])
+            )
             circuit_generation_start_time = datetime.datetime.now()
             (
                 circuit,
@@ -137,7 +142,7 @@ def get_lqre(
                 fci=fci,
                 error_tolerance=error_tolerance,
                 failure_tolerance=failure_tolerance,
-                square_overlap=overlaps[task["task_uuid"]] ** 2,
+                square_overlap=overlap**2,
                 df_threshold=config["algorithm_parameters"]["df_threshold"],
             )
             circuit_generation_end_time = datetime.datetime.now()
