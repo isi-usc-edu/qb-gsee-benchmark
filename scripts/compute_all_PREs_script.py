@@ -60,18 +60,8 @@ def get_physical_cost(
     hardware_failure_tolerance_per_shot: float,
     n_factories: int,
     physical_error_rate: float,
-):
+) -> tuple[float, int]:
     n_magic = AlgorithmSummary(t_gates=num_T_gates)
-
-    best_cost, best_factory, best_data_block = get_ccz2t_costs_from_grid_search(
-        n_magic=n_magic,
-        n_algo_qubits=num_logical_qubits,
-        error_budget=hardware_failure_tolerance_per_shot,
-        phys_err=physical_error_rate,
-        factory_iter=iter_ccz2t_factories(n_factories=n_factories),
-        cost_function=(lambda pc: pc.duration_hr),
-    )
-    return best_cost.duration_hr * 60 * 60, best_cost.footprint
     try:
         best_cost, best_factory, best_data_block = get_ccz2t_costs_from_grid_search(
             n_magic=n_magic,
@@ -89,8 +79,6 @@ def get_physical_cost(
 
 
 def get_pqre(solution_lre: dict, config: dict) -> dict[str, Any]:
-    problem_instance_uuid = problem_instance["problem_instance_uuid"]
-    problem_instance_short_name = problem_instance["short_name"]
     logging.info(f"solution UUID: {solution_lre['solution_uuid']}")
 
     solution_pre = copy.deepcopy(solution_lre)
@@ -170,25 +158,23 @@ def main(args: argparse.Namespace) -> None:
 
     input_dir = args.input_dir
 
-    problem_instance_files = os.listdir(input_dir)
-    logging.info(f"parsing {len(problem_instance_files)} files in the input directory")
-    for p in problem_instance_files:
-        logging.info(f"file: {p}")
+    solution_lre_files = os.listdir(input_dir)
+    logging.info(f"parsing {len(solution_lre_files)} files in the input directory")
+    for s in solution_lre_files:
+        logging.info(f"file: {s}")
 
-    for problem_instance_file_name in problem_instance_files:
-        problem_instance_path = os.path.join(input_dir, problem_instance_file_name)
-        logging.info(f"parsing {problem_instance_path}")
-        with open(problem_instance_path, "r") as jf:
-            problem_instance = json.load(jf)
+    for solution_lre_file_name in solution_lre_files:
+        solution_lre_path = os.path.join(input_dir, solution_lre_file_name)
+        logging.info(f"parsing {solution_lre_path}")
+        with open(solution_lre_path, "r") as jf:
+            solution_lre = json.load(jf)
 
-            resource_estimate = get_lqre(
-                problem_instance, args.sftp_username, args.sftp_key_file, config=config
-            )
+            resource_estimate = get_pqre(solution_lre=solution_lre, config=config)
             if len(resource_estimate["solution_data"]) > 0:
                 with open(
                     os.path.join(
                         args.output_dir,
-                        f"{problem_instance['problem_instance_uuid']}_sol_{resource_estimate['solution_uuid']}.json",
+                        f"{resource_estimate['problem_instance_uuid']}_sol_{resource_estimate['solution_uuid']}.json",
                     ),
                     "w",
                 ) as f:
@@ -207,7 +193,7 @@ def main(args: argparse.Namespace) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="a script to calculate Quantum Resource Estimates (QREs) for all problem_instance files.  Outputs are solution.uuid.json files."
+        description="a script to calculate Physical Resource Estimates (PREs) for all solution files containing Logical Resource Estimates (LREs).  Outputs are solution.uuid.json files."
     )
 
     parser.add_argument(
@@ -215,7 +201,7 @@ if __name__ == "__main__":
         "--input_dir",
         type=str,
         required=True,
-        help="Specify directory for problem_instances (.json files)",
+        help="Specify directory for solution logical resource estiamtes (.json files)",
     )
 
     parser.add_argument(
@@ -223,28 +209,14 @@ if __name__ == "__main__":
         "--output_dir",
         type=str,
         required=True,
-        help="Specify directory to save resource estimates to (.json files)",
+        help="Specify directory to save physical resource estimates to (.json files)",
     )
 
     parser.add_argument(
-        "--QRE_config_file",
+        "--PRE_config_file",
         type=str,
         required=True,
-        help="A JSON file with configuration options and hyperparameters for QRE and a `solver` UUID.",
-    )
-
-    parser.add_argument(
-        "--sftp_username",
-        type=str,
-        required=True,
-        help="username for SFTP server where FCIDUMP files are stored.",
-    )
-
-    parser.add_argument(
-        "--sftp_key_file",
-        type=str,
-        required=True,
-        help="local/path/to/the/keyfile for the SFTP server (corresponding to sftp_username)",
+        help="A JSON file with configuration options and hyperparameters for PRE and a `solver` UUID.",
     )
 
     args = parser.parse_args()
