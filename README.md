@@ -51,6 +51,15 @@ The paths to these files must be passed as arguments to the script, for example:
 python compute_all_LREs_script.py -i ../problem_instances -o ../solution_files --LRE_config_file LRE_config.json --sftp_username darpa-qb --sftp_key_file path_to_ppk_file
 ```
 
+### DMRG Performer Example
+
+As a usage demonstration, we have `examples/run_dmrg.ipynb`. This notebook can be used to run density matrix renormalization group (DMRG) calculations on a choice of problem instance files and then produce solution files. Running instructions are included in the notebook.
+
+### Planted Solutions
+
+Several cropped complete active space (CCAS) planted solutions are already included in this benchmark. The related proctor json files, which include generation parameters, can be found in the [planted solutions repository](https://github.com/jtcantin/planted_solutions). The planted solutions repository includes code and instructions to generate more planted solutions.
+
+
 <!-- ### Viewing Results
 After running the benchmarks, generate a summary of performance:
 ```bash
