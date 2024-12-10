@@ -33,11 +33,6 @@ from pyLIQTR.utils.resource_analysis import estimate_resources
 from qb_gsee_benchmark.qre import get_df_qpe_circuit
 from qb_gsee_benchmark.utils import retrieve_fcidump_from_sftp
 
-
-class NoFactoriesFoundError(Exception):
-    pass
-
-
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 console_handler = logging.StreamHandler()
@@ -205,10 +200,6 @@ def get_lqre(
         "algorithm_details": {
             "algorithm_description": config["algorithm_description"],
             "algorithm_parameters": config["algorithm_parameters"],
-        },
-        "quantum_hardware_details": {
-            "quantum_hardware_description": config["quantum_hardware_description"],
-            "quantum_hardware_parameters": config["quantum_hardware_parameters"],
         },
         "software_details": [
             {"software_name": "pyLIQTR", "software_version": version("pyLIQTR")},

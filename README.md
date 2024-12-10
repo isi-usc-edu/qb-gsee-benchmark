@@ -48,7 +48,7 @@ Then, several files are required:
 
 The paths to these files must be passed as arguments to the script, for example:
 ```bash
-python compute_all_QREs_script.py -i ../problem_instances -o ../solution_files --LRE_config_file LRE_config.json --sftp_username darpa-qb --sftp_key_file path_to_ppk_file
+python compute_all_LREs_script.py -i ../problem_instances -o ../solution_files --LRE_config_file LRE_config.json --sftp_username darpa-qb --sftp_key_file path_to_ppk_file
 ```
 
 ### Generating Physical Quantum Resource Estimates
@@ -61,7 +61,7 @@ It is also recommended to specify a solver UUID in the PRE config file that is d
 
 The PREs can be generated using a command such as:
 ```bash
-python compute_all_QREs_script.py -i LRE_solution_files -o ../solution_files -PLRE_config_file PRE_config.json
+python compute_all_LREs_script.py -i LRE_solution_files -o ../solution_files -PLRE_config_file PRE_config.json
 ```
 
 <!-- ### Viewing Results
