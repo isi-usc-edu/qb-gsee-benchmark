@@ -52,7 +52,7 @@ As an **industry or academic expert**, I want to contribute new or suggest chang
 - This repository has automatic validation in place to move non-compliant JSON files to the `json_files_with_errors` directory until they are fixed.
  
 As a **maintainer of this repository**, I want to ensure all artifacts and results are up-to-date.
-- This benchmark is a prototype and currently relies on several important scripts in the [`/scripts`](./scripts/) directory. Some scripts require large compute platforms to complete their jobs.
+- This benchmark is a prototype and currently relies on several important scripts in the [`/scripts`](./scripts/) directory. See [`/scripts/README.md`](./scripts/README.md) for more information.
 - All outputs from the scripts are based on the `problem_instances.json` and `solution.json` files.
 
 
