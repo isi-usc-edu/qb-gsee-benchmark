@@ -604,7 +604,14 @@
                 "time_limit_seconds": 172800,
                 "accuracy": 1.0,
                 "enery_units": "millihartree",
-                "energy_target": 0.99
+                "energy_target": 0.99,
+                "reference_energy": -2592.848378223888,
+                "reference_energy_units": "hartree",
+                "reference_energy_uncertainty": 8.911620197292276e-01,
+                "reference_energy_uncertainty_units": "millihartree",
+                "reference_energy_source": "Calculated with Block2 (https://block2.readthedocs.io/)",
+                "reference_energy_method": "DMRG with linear extrapolation to zero discarded weight. Reverse schedule used with orbital ordering based on genetic algorithm optimization with the exchange matrix. See DRMG section of arXiv:2406.06335.",
+                "reference_energy_uncertainty_type": "value +/- uncertainty gives a 95% confidence interval. The uncertainty is from the fit."
             },
             "supporting_files": [
                 {
