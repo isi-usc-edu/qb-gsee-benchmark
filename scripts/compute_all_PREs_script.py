@@ -20,23 +20,16 @@ import copy
 import datetime
 import json
 import logging
-import math
 import os
-import sys
 from importlib.metadata import version
 from typing import Any
-from urllib.parse import urlparse
 from uuid import uuid4
 
-from pyLIQTR.utils.resource_analysis import estimate_resources
 from qualtran.surface_code.algorithm_summary import AlgorithmSummary
 from qualtran.surface_code.ccz2t_cost_model import (
     get_ccz2t_costs_from_grid_search,
     iter_ccz2t_factories,
 )
-
-from qb_gsee_benchmark.qre import get_df_qpe_circuit
-from qb_gsee_benchmark.utils import retrieve_fcidump_from_sftp
 
 
 class NoFactoriesFoundError(Exception):
@@ -82,7 +75,6 @@ def get_pqre(solution_lre: dict, config: dict) -> dict[str, Any]:
     logging.info(f"solution UUID: {solution_lre['solution_uuid']}")
 
     solution_pre = copy.deepcopy(solution_lre)
-
     for task_solution_data in solution_pre["solution_data"]:
         logging.info(f"Analyzing task {task_solution_data['task_uuid']}...")
         try:
@@ -106,15 +98,14 @@ def get_pqre(solution_lre: dict, config: dict) -> dict[str, Any]:
             logging.info(
                 f"Physical resource estimation time: {(physical_resource_estimation_end - physical_resource_estimation_start).total_seconds()} seconds."
             )
-            task_solution_data["run_time"]["algorithm_run_time"] = (
-                {
-                    "seconds": algorithm_runtime_seconds,
-                },
-            )
-            task_solution_data["run_time"]["overall_time"] = {
-                task_solution_data["run_time"]["preprocessing"]["seconds"]
-                + algorithm_runtime_seconds
+            task_solution_data["run_time"]["algorithm_run_time"] = {
+                "seconds": algorithm_runtime_seconds,
             }
+            task_solution_data["run_time"]["overall_time"] = (
+                task_solution_data["run_time"]["preprocessing_time"]["seconds"]
+                + algorithm_runtime_seconds
+            )
+
             task_solution_data["quantum_resources"]["physical"] = {
                 "num_physical_qubits": num_physical_qubits,
             }
@@ -149,7 +140,7 @@ def get_pqre(solution_lre: dict, config: dict) -> dict[str, Any]:
 
 def main(args: argparse.Namespace) -> None:
 
-    config = json.load(open(args.QRE_config_file, "r"))
+    config = json.load(open(args.PRE_config_file, "r"))
 
     overall_start_time = datetime.datetime.now()
     logging.info(f"===============================================")

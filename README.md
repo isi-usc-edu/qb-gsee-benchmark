@@ -51,6 +51,19 @@ The paths to these files must be passed as arguments to the script, for example:
 python compute_all_QREs_script.py -i ../problem_instances -o ../solution_files --LRE_config_file LRE_config.json --sftp_username darpa-qb --sftp_key_file path_to_ppk_file
 ```
 
+### Generating Physical Quantum Resource Estimates
+
+Given a set of solution files containing logical quantum resource estimates, the [`scripts/compute_all_PREs_script.py`](scripts/compute_all_PREs_script.py) script can be used to generate physical resource estimates.
+In addition to having solution files with LREs, you also must have a configuration file similar to [`scripts/PRE_config.json`](scripts/PRE_config.json) which specifies hardware parameters and other information.
+The newly generated solution files will contain runtime estimates and physical quantum resources.
+Note that these solution files will have new solution IDs that differ from the input LRE solution files.
+It is also recommended to specify a solver UUID in the PRE config file that is different from the solver UUID for the LRE.
+
+The PREs can be generated using a command such as:
+```bash
+python compute_all_QREs_script.py -i LRE_solution_files -o ../solution_files -PLRE_config_file PRE_config.json
+```
+
 <!-- ### Viewing Results
 After running the benchmarks, generate a summary of performance:
 ```bash
