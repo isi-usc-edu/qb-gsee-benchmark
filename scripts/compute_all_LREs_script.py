@@ -46,7 +46,7 @@ class NoFactoriesFoundError(Exception):
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 console_handler = logging.StreamHandler()
-file_handler = logging.FileHandler("compute_all_QREs_scripts.log.txt", delay=False)
+file_handler = logging.FileHandler("compute_all_LREs_scripts.log.txt", delay=False)
 formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 handlers = [console_handler, file_handler]
 for h in handlers:
@@ -308,7 +308,7 @@ def get_lqre(
 
 def main(args: argparse.Namespace) -> None:
 
-    config = json.load(open(args.QRE_config_file, "r"))
+    config = json.load(open(args.LRE_config_file, "r"))
 
     overall_start_time = datetime.datetime.now()
     logging.info(f"===============================================")
@@ -354,7 +354,7 @@ def main(args: argparse.Namespace) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="a script to calculate Quantum Resource Estimates (QREs) for all problem_instance files.  Outputs are solution.uuid.json files."
+        description="a script to calculate Logical Resource Estimates (LREs) for all problem_instance files.  Outputs are solution.uuid.json files."
     )
 
     parser.add_argument(
@@ -374,10 +374,10 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
-        "--QRE_config_file",
+        "--LRE_config_file",
         type=str,
         required=True,
-        help="A JSON file with configuration options and hyperparameters for QRE and a `solver` UUID.",
+        help="A JSON file with configuration options and hyperparameters for LRE and a `solver` UUID.",
     )
 
     parser.add_argument(
