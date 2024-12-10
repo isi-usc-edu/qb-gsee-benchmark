@@ -29,11 +29,6 @@ from uuid import uuid4
 
 import pandas as pd
 from pyLIQTR.utils.resource_analysis import estimate_resources
-from qualtran.surface_code.algorithm_summary import AlgorithmSummary
-from qualtran.surface_code.ccz2t_cost_model import (
-    get_ccz2t_costs_from_grid_search,
-    iter_ccz2t_factories,
-)
 
 from qb_gsee_benchmark.qre import get_df_qpe_circuit
 from qb_gsee_benchmark.utils import retrieve_fcidump_from_sftp
@@ -52,40 +47,6 @@ handlers = [console_handler, file_handler]
 for h in handlers:
     h.setFormatter(formatter)
     logger.addHandler(h)
-
-
-def get_physical_cost(
-    num_logical_qubits: int,
-    num_T_gates: int,
-    hardware_failure_tolerance_per_shot: float,
-    n_factories: int,
-    physical_error_rate: float,
-):
-    n_magic = AlgorithmSummary(t_gates=num_T_gates)
-
-    best_cost, best_factory, best_data_block = get_ccz2t_costs_from_grid_search(
-        n_magic=n_magic,
-        n_algo_qubits=num_logical_qubits,
-        error_budget=hardware_failure_tolerance_per_shot,
-        phys_err=physical_error_rate,
-        factory_iter=iter_ccz2t_factories(n_factories=n_factories),
-        cost_function=(lambda pc: pc.duration_hr),
-    )
-    return best_cost.duration_hr * 60 * 60, best_cost.footprint
-    try:
-        best_cost, best_factory, best_data_block = get_ccz2t_costs_from_grid_search(
-            n_magic=n_magic,
-            n_algo_qubits=num_logical_qubits,
-            error_budget=hardware_failure_tolerance_per_shot,
-            phys_err=physical_error_rate,
-            factory_iter=iter_ccz2t_factories(n_factories=n_factories),
-            cost_function=(lambda pc: pc.duration_hr),
-        )
-        return best_cost.duration_hr * 60 * 60, best_cost.footprint
-    except TypeError:
-        raise NoFactoriesFoundError(
-            f"No factories found that meet the performance requirements."
-        )
 
 
 def get_lqre(
@@ -201,69 +162,37 @@ def get_lqre(
             ).total_seconds()
             logging.info(f"Resource estimation time (seconds): {LRE_calc_time}")
 
-            task_solution_data = {
-                "task_uuid": task["task_uuid"],
-                "error_bound": error_tolerance,
-                "confidence_level": failure_tolerance,
-                "quantum_resources": {
-                    "logical": {
-                        "num_logical_qubits": logical_resources["LogicalQubits"],
-                        "num_T_gates_per_shot": logical_resources["T"],
-                        "num_shots": math.ceil(num_shots),
-                        "hardware_failure_tolerance_per_shot": hardware_failure_tolerance_per_shot,
-                    }
-                },
-                "run_time": {
-                    "preprocessing_time": {
-                        "wall_clock_start_time": circuit_generation_start_time.strftime(
-                            "%Y-%m-%dT%H:%M:%S.%f"
-                        )
-                        + "Z",
-                        "wall_clock_stop_time": circuit_generation_end_time.strftime(
-                            "%Y-%m-%dT%H:%M:%S.%f"
-                        )
-                        + "Z",
-                        "seconds": (
-                            circuit_generation_end_time - circuit_generation_start_time
-                        ).total_seconds(),
+            solution_data.append(
+                {
+                    "task_uuid": task["task_uuid"],
+                    "error_bound": error_tolerance,
+                    "confidence_level": failure_tolerance,
+                    "quantum_resources": {
+                        "logical": {
+                            "num_logical_qubits": logical_resources["LogicalQubits"],
+                            "num_T_gates_per_shot": logical_resources["T"],
+                            "num_shots": math.ceil(num_shots),
+                            "hardware_failure_tolerance_per_shot": hardware_failure_tolerance_per_shot,
+                        }
                     },
-                },
-            }
-
-            try:
-                physical_resource_estimation_start = datetime.datetime.now()
-                algorithm_runtime_seconds, num_physical_qubits = get_physical_cost(
-                    num_logical_qubits=logical_resources["LogicalQubits"],
-                    num_T_gates=logical_resources["T"],
-                    hardware_failure_tolerance_per_shot=hardware_failure_tolerance_per_shot,
-                    n_factories=config["quantum_hardware_parameters"]["num_factories"],
-                    physical_error_rate=config["quantum_hardware_parameters"][
-                        "physical_error_rate"
-                    ],
-                )
-                physical_resource_estimation_end = datetime.datetime.now()
-                logging.info(
-                    f"Physical resource estimation time: {(physical_resource_estimation_end - physical_resource_estimation_start).total_seconds()} seconds."
-                )
-                task_solution_data["run_time"]["algorithm_run_time"] = (
-                    {
-                        "seconds": algorithm_runtime_seconds,
+                    "run_time": {
+                        "preprocessing_time": {
+                            "wall_clock_start_time": circuit_generation_start_time.strftime(
+                                "%Y-%m-%dT%H:%M:%S.%f"
+                            )
+                            + "Z",
+                            "wall_clock_stop_time": circuit_generation_end_time.strftime(
+                                "%Y-%m-%dT%H:%M:%S.%f"
+                            )
+                            + "Z",
+                            "seconds": (
+                                circuit_generation_end_time
+                                - circuit_generation_start_time
+                            ).total_seconds(),
+                        },
                     },
-                )
-                task_solution_data["run_time"]["overall_time"] = {
-                    "seconds": (
-                        circuit_generation_end_time - circuit_generation_start_time
-                    ).total_seconds()
-                    + algorithm_runtime_seconds
                 }
-                task_solution_data["quantum_resources"]["physical"] = {
-                    "num_physical_qubits": num_physical_qubits,
-                }
-            except NoFactoriesFoundError:
-                logging.info(
-                    f"No factories found that meet the performance requirements. Skipping physical cost estimation."
-                )
-            solution_data.append(task_solution_data)
+            )
 
     solution_uuid = str(uuid4())
     current_time = datetime.datetime.now(datetime.timezone.utc)
