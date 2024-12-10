@@ -345,7 +345,7 @@ def main(args):
     # ==============================================================
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
     aggregated_labels_file_name = f"aggregated_solver_labels_{timestamp}.csv"
-    aggregated_results.to_csv(aggregated_labels_file_name)
+    aggregated_results.to_csv(aggregated_labels_file_name, index=False)
     logging.info(f"wrote interim output to {aggregated_labels_file_name}")
     logging.info(f"=============================================")
     
@@ -367,7 +367,7 @@ def main(args):
         
         # write out the labels to a .csv file... one file for each solver.
         solver_labels_file_name = f"solver_labels.{solver_short_name}.{solver_uuid}.csv"
-        solver_labels.to_csv(solver_labels_file_name)
+        solver_labels.to_csv(solver_labels_file_name, index=False)
 
         
         try:
