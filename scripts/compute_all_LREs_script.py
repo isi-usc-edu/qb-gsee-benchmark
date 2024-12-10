@@ -196,7 +196,7 @@ def get_lqre(
 
     solver_details = {
         "solver_uuid": config["solver_uuid"],
-        "solver_short_name": "DF QPE",
+        "solver_short_name": "DF_QPE",
         "compute_hardware_type": "quantum_computer",
         "algorithm_details": {
             "algorithm_description": config["algorithm_description"],
