@@ -61,7 +61,7 @@ It is also recommended to specify a solver UUID in the PRE config file that is d
 
 The PREs can be generated using a command such as:
 ```bash
-python compute_all_LREs_script.py -i LRE_solution_files -o ../solution_files -PLRE_config_file PRE_config.json
+python compute_all_PREs_script.py -i LRE_solution_files -o ../solution_files -PLRE_config_file PRE_config.json
 ```
 
 <!-- ### Viewing Results
