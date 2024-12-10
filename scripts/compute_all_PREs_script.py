@@ -27,9 +27,12 @@ from uuid import uuid4
 
 from qualtran.surface_code.algorithm_summary import AlgorithmSummary
 from qualtran.surface_code.ccz2t_cost_model import (
+    CCZ2TFactory,
     get_ccz2t_costs_from_grid_search,
     iter_ccz2t_factories,
 )
+from qualtran.surface_code.data_block import SimpleDataBlock
+from qualtran.surface_code.physical_cost import PhysicalCost
 
 
 class NoFactoriesFoundError(Exception):
@@ -53,18 +56,20 @@ def get_physical_cost(
     hardware_failure_tolerance_per_shot: float,
     n_factories: int,
     physical_error_rate: float,
-) -> tuple[float, int]:
+    cycle_time_us: float,
+) -> tuple[PhysicalCost, CCZ2TFactory, SimpleDataBlock]:
     n_magic = AlgorithmSummary(t_gates=num_T_gates)
     try:
         best_cost, best_factory, best_data_block = get_ccz2t_costs_from_grid_search(
             n_magic=n_magic,
             n_algo_qubits=num_logical_qubits,
             error_budget=hardware_failure_tolerance_per_shot,
+            cycle_time_us=cycle_time_us,
             phys_err=physical_error_rate,
             factory_iter=iter_ccz2t_factories(n_factories=n_factories),
             cost_function=(lambda pc: pc.duration_hr),
         )
-        return best_cost.duration_hr * 60 * 60, best_cost.footprint
+        return best_cost, best_factory, best_data_block
     except TypeError:
         raise NoFactoriesFoundError(
             f"No factories found that meet the performance requirements."
@@ -79,7 +84,8 @@ def get_pqre(solution_lre: dict, config: dict) -> dict[str, Any]:
         logging.info(f"Analyzing task {task_solution_data['task_uuid']}...")
         try:
             physical_resource_estimation_start = datetime.datetime.now()
-            algorithm_runtime_seconds, num_physical_qubits = get_physical_cost(
+
+            cost, factory, data_block = get_physical_cost(
                 num_logical_qubits=task_solution_data["quantum_resources"]["logical"][
                     "num_logical_qubits"
                 ],
@@ -93,21 +99,33 @@ def get_pqre(solution_lre: dict, config: dict) -> dict[str, Any]:
                 physical_error_rate=config["quantum_hardware_parameters"][
                     "physical_error_rate"
                 ],
+                cycle_time_us=config["quantum_hardware_parameters"][
+                    "cycle_time_microseconds"
+                ],
             )
             physical_resource_estimation_end = datetime.datetime.now()
             logging.info(
                 f"Physical resource estimation time: {(physical_resource_estimation_end - physical_resource_estimation_start).total_seconds()} seconds."
             )
+
+            algorithm_runtime_seconds = cost.duration_hr * 60 * 60
+            num_physical_qubits = cost.footprint
             task_solution_data["run_time"]["algorithm_run_time"] = {
                 "seconds": algorithm_runtime_seconds,
             }
-            task_solution_data["run_time"]["overall_time"] = (
-                task_solution_data["run_time"]["preprocessing_time"]["seconds"]
+            task_solution_data["run_time"]["overall_time"] = {
+                "seconds": task_solution_data["run_time"]["preprocessing_time"][
+                    "seconds"
+                ]
                 + algorithm_runtime_seconds
-            )
+            }
 
             task_solution_data["quantum_resources"]["physical"] = {
                 "num_physical_qubits": num_physical_qubits,
+                "distillation_layer_1_code_distance": factory.base_factory.distillation_l1_d,
+                "distillation_layer_2_code_distance": factory.base_factory.distillation_l2_d,
+                "data_code_distance": data_block.data_d,
+                "data_routing_overhead": data_block.routing_overhead,
             }
         except NoFactoriesFoundError:
             logging.info(
@@ -134,6 +152,12 @@ def get_pqre(solution_lre: dict, config: dict) -> dict[str, Any]:
     }
     solution_pre["solver_details"]["solver_uuid"] = config["solver_uuid"]
     solution_pre["digital_signature"] = None
+    solution_pre["solver_details"][
+        "logical_resource_estimate_solution_uuid"
+    ] = solution_lre["solution_uuid"]
+    solution_pre["solver_details"][
+        "logical_resource_estimate_solver_uuid"
+    ] = solution_lre["solver_details"]["solver_uuid"]
 
     return solution_pre
 
@@ -184,7 +208,7 @@ def main(args: argparse.Namespace) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="a script to calculate Physical Resource Estimates (PREs) for all solution files containing Logical Resource Estimates (LREs).  Outputs are solution.uuid.json files."
+        description="a script to calculate Physical Resource Estimates (PREs) for all solution files containing Logical Resource Estimates (LREs). Outputs are solution.uuid.json files."
     )
 
     parser.add_argument(
