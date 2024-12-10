@@ -1,101 +1,111 @@
 {
-  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
-  "references": [
-    "https://doi.org/10.1103/PhysRevX.10.011041"
-  ],
-  "problem_instance_uuid": "9823b0dd-87b6-4793-9741-e8cbcf2b50c0",
-  "creation_timestamp": "2024-11-20T00:41:06.011782",
-  "calendar_due_date": null,
-  "short_name": "Ti_1",
-  "license": {
-    "name": "Apache 2.0",
-    "url": "http://www.apache.org/licenses/LICENSE-2.0"
-  },
-  "contact_info": [
-    {
-      "name": "Joshua T. Cantin",
-      "email": "joshua.cantin@utoronto.ca",
-      "institution": "University of Toronto at Scarborough"
-    }
-  ],
-  "status": "in_development",
-  "superseded_by": null,
-  "problem_type": "GSEE",
-  "application_domain": "QC",
-  "tasks": [
-    {
-      "task_uuid": "2cd76a23-0514-458a-b588-94e2d10564d3",
-      "features": {
-        "molecule_name": "Ti1_vdz",
-        "geometry": "Ti          0.00000        0.00000        0.00000",
-        "basis_set": "vdz",
-        "charge": 1,
-        "multiplicity": 4,
-        "num_electrons": 11,
-        "num_orbitals": 54
-      },
-      "requirements": {
-        "probability_of_success": 0.99,
-        "time_limit_seconds": 86400,
-        "accuracy": 1.0,
-        "energy_units": "millihartree",
-        "energy_target": 0.99,
-        "reference_energy": -57.63401999999999,
-        "reference_energy_units": "hartree",
-        "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
-        "reference_energy_method": "SHCI"
-      },
-      "supporting_files": [
-        {
-          "instance_data_object_uuid": "760e312c-9982-486d-b50e-d9acb003aedc",
-          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.Ti1_vdz.760e312c-9982-486d-b50e-d9acb003aedc.gz",
-          "instance_data_checksum": "0aac8168852cd79ee0d918c2290f1e180f4647d1",
-          "instance_data_checksum_type": "sha1sum"
-        },
-        {
-          "instance_data_object_uuid": "c4414ea6-320e-4c98-89ef-cc16d7932fd7",
-          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/Ti1_vdz.c4414ea6-320e-4c98-89ef-cc16d7932fd7.chk",
-          "instance_data_checksum": "7e565636e5c669d8202dac5c98c72cee1e9d18e1",
-          "instance_data_checksum_type": "sha1sum"
-        }
-      ]
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+    "references": [
+        "https://doi.org/10.1103/PhysRevX.10.011041"
+    ],
+    "problem_instance_uuid": "9823b0dd-87b6-4793-9741-e8cbcf2b50c0",
+    "creation_timestamp": "2024-11-20T00:41:06.011782",
+    "calendar_due_date": null,
+    "short_name": "Ti_1",
+    "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0"
     },
-    {
-      "task_uuid": "c7049602-5460-4277-8148-d9c66012f8f0",
-      "features": {
-        "molecule_name": "Ti1_vtz",
-        "geometry": "Ti          0.00000        0.00000        0.00000",
-        "basis_set": "vtz",
-        "charge": 1,
-        "multiplicity": 4,
-        "num_electrons": 11,
-        "num_orbitals": 88
-      },
-      "requirements": {
-        "probability_of_success": 0.99,
-        "time_limit_seconds": 86400,
-        "accuracy": 1.0,
-        "energy_units": "millihartree",
-        "energy_target": 0.99,
-        "reference_energy": -57.70424000000001,
-        "reference_energy_units": "hartree",
-        "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
-        "reference_energy_method": "SHCI"
-      },
-      "supporting_files": [
+    "contact_info": [
         {
-          "instance_data_object_uuid": "2ae865cc-f4c6-4e9f-903c-c8221e06b7a9",
-          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.Ti1_vtz.2ae865cc-f4c6-4e9f-903c-c8221e06b7a9.gz",
-          "instance_data_checksum": "0c9dc92357592d2ba62ee753ae63eca464559d71",
-          "instance_data_checksum_type": "sha1sum"
+            "name": "Matthew Otten",
+            "email": "mjotten@wisc.edu",
+            "institution": "University of Wisconsin -- Madison"
         },
         {
-          "instance_data_object_uuid": "1391b3e4-1862-4808-8990-dab576dade6a",
-          "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/Ti1_vtz.1391b3e4-1862-4808-8990-dab576dade6a.chk",
-          "instance_data_checksum": "d07169917802203512b4f8b4b6185e713a9008c8",
-          "instance_data_checksum_type": "sha1sum"
+            "name": "Thomas Watts",
+            "email": "-",
+            "institution": "HRL Laboratories"
+        },
+        {
+            "name": "Joshua T. Cantin",
+            "email": "joshua.cantin@utoronto.ca",
+            "institution": "University of Toronto at Scarborough"
         }
-      ]
-    }
-  ]
+    ],
+    "status": "in_development",
+    "superseded_by": null,
+    "problem_type": "GSEE",
+    "application_domain": "QC",
+    "tasks": [
+        {
+            "task_uuid": "2cd76a23-0514-458a-b588-94e2d10564d3",
+            "features": {
+                "molecule_name": "Ti1_vdz",
+                "geometry": "Ti          0.00000        0.00000        0.00000",
+                "basis_set": "vdz",
+                "charge": 1,
+                "multiplicity": 4,
+                "num_electrons": 11,
+                "num_orbitals": 54
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 86400,
+                "accuracy": 1.0,
+                "energy_units": "millihartree",
+                "energy_target": 0.99,
+                "reference_energy": -57.63401999999999,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
+                "reference_energy_method": "SHCI"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "760e312c-9982-486d-b50e-d9acb003aedc",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.Ti1_vdz.760e312c-9982-486d-b50e-d9acb003aedc.gz",
+                    "instance_data_checksum": "0aac8168852cd79ee0d918c2290f1e180f4647d1",
+                    "instance_data_checksum_type": "sha1sum"
+                },
+                {
+                    "instance_data_object_uuid": "c4414ea6-320e-4c98-89ef-cc16d7932fd7",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/Ti1_vdz.c4414ea6-320e-4c98-89ef-cc16d7932fd7.chk",
+                    "instance_data_checksum": "7e565636e5c669d8202dac5c98c72cee1e9d18e1",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "c7049602-5460-4277-8148-d9c66012f8f0",
+            "features": {
+                "molecule_name": "Ti1_vtz",
+                "geometry": "Ti          0.00000        0.00000        0.00000",
+                "basis_set": "vtz",
+                "charge": 1,
+                "multiplicity": 4,
+                "num_electrons": 11,
+                "num_orbitals": 88
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 86400,
+                "accuracy": 1.0,
+                "energy_units": "millihartree",
+                "energy_target": 0.99,
+                "reference_energy": -57.70424000000001,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
+                "reference_energy_method": "SHCI"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "2ae865cc-f4c6-4e9f-903c-c8221e06b7a9",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.Ti1_vtz.2ae865cc-f4c6-4e9f-903c-c8221e06b7a9.gz",
+                    "instance_data_checksum": "0c9dc92357592d2ba62ee753ae63eca464559d71",
+                    "instance_data_checksum_type": "sha1sum"
+                },
+                {
+                    "instance_data_object_uuid": "1391b3e4-1862-4808-8990-dab576dade6a",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/small_molecules/Ti1_vtz.1391b3e4-1862-4808-8990-dab576dade6a.chk",
+                    "instance_data_checksum": "d07169917802203512b4f8b4b6185e713a9008c8",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        }
+    ]
 }
