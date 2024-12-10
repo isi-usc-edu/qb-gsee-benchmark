@@ -21,6 +21,7 @@ import datetime
 import gzip
 import shutil
 import json
+import random
 import copy
 from urllib.parse import urlparse
 import time
@@ -28,9 +29,11 @@ import sys
 sys.path.append("../")
 sys.path.append("../Hamiltonian_features/experimental/fast_double_factorization_features")
 
+from pyscf.tools import fcidump
 import pandas as pd
 from Hamiltonian_features.experimental.fast_double_factorization_features.fcidump_to_ham_features_csv import compute_ham_features_csv
 # from Hamiltonian_features.experimental.fast_double_factorization_features.compute_ham_features import compute_hypergraph_ham_features
+
 
 
 import logging
@@ -100,18 +103,37 @@ def fetch_file_from_sftp(
 
 
 
-
-
-def read_in_Hamiltonian_features_database_csv(ham_features_file):
-    logging.info(f"accessing {ham_features_file}...")
-    if not os.path.exists(ham_features_file):
+def read_in_csv_database(database_csv_file_name):
+    if not os.path.exists(database_csv_file_name):
         logging.info(f"database file does not exist. A new file will be created.")
-        ham_features_df_database = None
+        df_database = None
     else:
-        ham_features_df_database = pd.read_csv(args.ham_features_file)
-        logging.info(f"number of entries in database:  {len(ham_features_df_database)}")
+        df_database = pd.read_csv(database_csv_file_name)
+        logging.info(f"number of entries in {database_csv_file_name}:  {len(df_database)}")
     
-    return ham_features_df_database # may be None.
+    return df_database # may be None.
+
+
+
+
+def append_to_csv_database(
+        df: pd.DataFrame,
+        csv_database_file_name: str
+    ):
+
+    df.to_csv(
+        csv_database_file_name,
+        mode="a", #append
+        header=(not os.path.exists(csv_database_file_name)), # write headers if starting a new file.
+        index=False
+    )
+
+
+
+
+def time_check(overall_start_time):
+    t = datetime.datetime.now()
+    logging.info(f"this script has been running for {(t - overall_start_time).total_seconds()/3600:.2f} hours.")
 
 
 
@@ -126,8 +148,6 @@ def read_in_Hamiltonian_features_database_csv(ham_features_file):
 
 
 def main(args):
-
-    time.sleep(2)
 
     overall_start_time = datetime.datetime.now()
     logging.info(f"===============================================")
@@ -152,82 +172,149 @@ def main(args):
     for p in problem_instance_files:
         logging.info(f"file: {p}")
 
-    for problem_instance_file_name in problem_instance_files:
-        problem_instance_path = input_dir + problem_instance_file_name
-        logging.info(f"parsing {problem_instance_path}")
-        with open(problem_instance_path, "r") as jf:
+    num_orbitals_cheat_sheet = pd.read_csv("num_orbitals_cheat_sheet.csv")
+
+
+    finished_all_hamiltonians = False # init
+    max_num_orbitals = 10 # init.  we will complete the "small" Hamiltonians first
+    # and increase the `max_num_orbitals` later to finish off the large Hamiltonians.
+    
+    while not finished_all_hamiltonians:
+        max_num_orbitals += 5 # increase the size of Hamiltonians considered in each loop.
+        finished_all_hamiltonians = True # reset... update to `False` if we skip one due to its large size.
+        
+        random.shuffle(problem_instance_files) # randomize order of problem instances processed.
+
+        for problem_instance_file_name in problem_instance_files:
+            problem_instance_path = input_dir + problem_instance_file_name
+            logging.info(f"parsing {problem_instance_path}")
             
-            # load data from file as a Python dictionary object:
-            # Try... because we may have non-JSON files that we will skip.
-            try:
-                problem_instance = json.load(jf)
-            except Exception as e:
-                logging.error(f'Error: {e}', exc_info=True)
-                continue # to next json file.
-
-
+            
+            with open(problem_instance_path, "r") as jf:
+                # load data from file as a Python dictionary object:
+                # Try... because we may have non-JSON files that we will skip.
+                try:
+                    problem_instance = json.load(jf)
+                except Exception as e:
+                    logging.error(f'Error: {e}', exc_info=True)
+                    continue # to next json file.
+            
+            
+            
             problem_instance_uuid = problem_instance["problem_instance_uuid"]
             problem_instance_short_name = problem_instance["short_name"]
             logging.info(f"problem_instance UUID: {problem_instance_uuid}")
             logging.info(f"problem_instance short name: {problem_instance_short_name}")
-            num_hams = len(problem_instance["instance_data"])
-            logging.info(f"contains {num_hams} associated Hamiltonians.")
+            num_tasks = len(problem_instance["tasks"])
+            logging.info(f"contains {num_tasks} associated tasks (Hamiltonians).")
 
-            for i in range(num_hams):
-                num_supporting_files = len(problem_instance["instance_data"][i]["supporting_files"])
+            for task in problem_instance["tasks"]:
+
+                task_uuid = task["task_uuid"]
+                logging.info(f"task UUID: {task_uuid}...")
+
+                num_orbitals = None # reset
+
+                try:
+                    num_orbitals = task["features"]["num_orbitals"]
+                except Exception as e:
+                    logging.error(f'Error: {e}', exc_info=True)
+                    logging.info(f"problem instance does not explicitly state the number of orbitals.")
+
+
+
+                if num_orbitals is not None:
+                    # try to update the num_orbitals_cheat_sheet
+                    num_orbitals_df = read_in_csv_database("num_orbitals_cheat_sheet.csv") # assuming file exists.
+                    if task_uuid not in num_orbitals_df["task_uuid"].values:
+                        append_to_csv_database(
+                            df=pd.DataFrame(
+                                    [
+                                        {
+                                            "task_uuid":task_uuid,
+                                            "num_orbitals":num_orbitals
+                                        }
+                                    ]
+                                ),
+                            csv_database_file_name="num_orbitals_cheat_sheet.csv"
+                        )
+
+                
+                if num_orbitals is None:
+                    # the problem_instance did not explicity state the number of orbitals
+                    logging.info(f"checking the num_orbitals_cheat_sheet...")
+                    num_orbitals_df = read_in_csv_database("num_orbitals_cheat_sheet.csv") # assuming file exists.
+                    if task_uuid in num_orbitals_df["task_uuid"].values:
+                        num_orbitals = num_orbitals_df.loc[num_orbitals_df["task_uuid"] == task_uuid, "num_orbitals"].values[0]
+                
+
+                if num_orbitals is None:
+                    logging.info(f"we don't know how many orbitals are in this Hamiltonian yet...")
+                else:
+                    if num_orbitals > max_num_orbitals:
+                        logging.info(f"number of orbitals:  {num_orbitals}")
+                        logging.info(f"too many orbitals!  we are only considering max_num_orbitals {max_num_orbitals}.")
+                        logging.info(f"skipping this Hamiltonian for now now.  We will revisit it later.")
+                        finished_all_hamiltonians = False # reset this to False, so we increase max_num_orbitals and try again later.
+                        logging.info(f"moving on ...")
+                        continue
+                    else:
+                        logging.info(f"attempting to process the Hamiltonian...")
+                   
+                
+                
+                
+                num_supporting_files = len(task["supporting_files"])
                 logging.info(f"number of supporting files: {num_supporting_files}")
+                for supporting_file in task["supporting_files"]:
+                    
+                    instance_data_object_uuid = supporting_file["instance_data_object_uuid"]
+                    instance_data_object_url = supporting_file["instance_data_object_url"]
+                    logging.info(f"supporting data file UUID: {instance_data_object_uuid}.")
+                    logging.info(f"supporting data file URL: {instance_data_object_url}.")
 
-                for j in range(num_supporting_files):
-                    # flush log buffer to log file
-                    file_handler.flush()
-
-
-                    fcidump_uuid = problem_instance["instance_data"][i]["supporting_files"][j]["instance_data_object_uuid"]
-                    fcidump_url = problem_instance["instance_data"][i]["supporting_files"][j]["instance_data_object_url"]
-                    logging.info(f"supporting data file UUID: {fcidump_uuid}.")
-                    logging.info(f"supporting data file URL: {fcidump_url}.")
-
-                    parsed_url = urlparse(fcidump_url)
-                    fcidump_file_name = parsed_url.path.split("/")[-1]
+                    parsed_url = urlparse(instance_data_object_url)
+                    instance_data_object_file_name = parsed_url.path.split("/")[-1]
 
 
                     #TODO: fix hacky way of only grabbing FCIDUMP files:
-                    if "fcidump".lower() in fcidump_file_name.lower():
-                        logging.info(f"assuming {fcidump_file_name} is an FCIDUMP file.")
+                    if "fcidump" in instance_data_object_file_name.lower():
+                        logging.info(f"assuming {instance_data_object_file_name} is an FCIDUMP file.")
                     else:
-                        logging.info(f"assuming {fcidump_file_name} is NOT an FCIDUMP file.  SKIPPING!")
+                        logging.info(f"assuming {instance_data_object_file_name} is NOT an FCIDUMP file.  SKIPPING!")
                         continue
 
 
-                    # check the see if we have already processed FCIDUMP_UUID
+                    # check the see if we have already processed instance_data_object_uuid
                     # TODO: also compare version of the metrics calculation to see if we need to update.
                     #==============================================================
 
                     # re-read ham_features_df_database ... we may have updated it.
-                    ham_features_df_database = read_in_Hamiltonian_features_database_csv(args.ham_features_file)
+                    ham_features_df_database = read_in_csv_database(args.ham_features_file)
                     if ham_features_df_database is None:
                         # empty features database... we will process the FCIDUMP
                         logging.info(f"Hamiltonian features database is empty.")
-                        logging.info(f"FCIDUMP UUID {fcidump_uuid} not found in feature database.  Processing...")
                     else:
-                        if fcidump_uuid in ham_features_df_database["fcidump_uuid"].values:
-                            logging.info(f"FCIDUMP UUID {fcidump_uuid} is already in the feature database.  Skipping it!")
+                        if instance_data_object_uuid in ham_features_df_database["instance_data_object_uuid"].values:
+                            logging.info(f"instance_data_object_uuid {instance_data_object_uuid} is already in the feature database.  Skipping it!")
                             continue
                         else:
-                            logging.info(f"FCIDUMP UUID {fcidump_uuid} not found in feature database.  Processing...")
+                            logging.info(f"did NOT find instance_data_object_uuid {instance_data_object_uuid} in database.")
                             
+                    # proceed to process the FCIDUMP file...
+                    logging.info(f"Processing instance_data_object_uuid {instance_data_object_uuid} ...")
                     
 
 
 
                     # SFTP download the FCIDUMP file
                     #===============================================================
-                    logging.info(f"SFTP downloading file {fcidump_url}...")
+                    logging.info(f"SFTP downloading file {instance_data_object_url}...")
                     fetch_file_from_sftp(
-                        url=fcidump_url,
+                        url=instance_data_object_url,
                         username=args.sftp_username,
                         ppk_path=args.sftp_key_file, 
-                        local_path=fcidump_file_name,
+                        local_path=instance_data_object_file_name,
                         port=22
                     )
                     
@@ -235,22 +322,53 @@ def main(args):
                     # Decompress the FCIDUMP file (if detected)
                     #===============================================================
                     # TODO: fix hacky way of detecting the file is compressed:
-                    if ".gz".lower() in fcidump_file_name.lower():
-                        logging.info(f"decompressing file {fcidump_file_name}...")
-                        fcidump_file_name_gz = fcidump_file_name
-                        fcidump_file_name = fcidump_file_name.split(".gz")[0] # update file name with no .gz
+                    if ".gz".lower() in instance_data_object_file_name.lower():
+                        logging.info(f"decompressing file {instance_data_object_file_name}...")
+                        instance_data_object_file_name_gz = instance_data_object_file_name
+                        instance_data_object_file_name = instance_data_object_file_name.split(".gz")[0] # update file name with no .gz
                         
-                        with gzip.open(fcidump_file_name_gz, "rb") as f_in:
-                            with open(fcidump_file_name, "wb") as f_out:
+                        with gzip.open(instance_data_object_file_name_gz, "rb") as f_in:
+                            with open(instance_data_object_file_name, "wb") as f_out:
                                 shutil.copyfileobj(f_in, f_out)
                         
-                        os.remove(fcidump_file_name_gz)
+                        os.remove(instance_data_object_file_name_gz)
                     else:
-                        logging.info(f"assuming file {fcidump_file_name} is NOT compressed.")
+                        logging.info(f"assuming file {instance_data_object_file_name} is NOT compressed.")
 
 
 
+                    if num_orbitals is None:
+                        logging.info(f"we need to read the FCIDUMP file to determine num_orbitals...")
+                        data = fcidump.read(instance_data_object_file_name)
+                        num_orbitals = data['NORB']
+                        logging.info(f"num_orbitals: {num_orbitals}")    
+                        append_to_csv_database(
+                            df=pd.DataFrame(
+                                    [
+                                        {
+                                            "task_uuid":task_uuid,
+                                            "num_orbitals":num_orbitals
+                                        }
+                                    ]
+                                ),
+                            csv_database_file_name="num_orbitals_cheat_sheet.csv"
+                        )
+                    
+                    
+                    time_check(overall_start_time)
 
+                    if num_orbitals > max_num_orbitals:
+                        logging.info(f"number of orbitals:  {num_orbitals}")
+                        logging.info(f"too many orbitals!  we are only considering max_num_orbitals {max_num_orbitals}.")
+                        logging.info(f"skipping this Hamiltonian for now now.  We will revisit it later.")
+                        finished_all_hamiltonians = False # reset this to False, so we increase max_num_orbitals and try again later.
+                        logging.info(f"cleaning up: removing file {os.remove(instance_data_object_file_name_gz)}")
+                        os.remove(instance_data_object_file_name_gz)
+                        logging.info(f"moving on ...")
+                        continue
+
+
+                    
                     # Calculate features of the FCIDUMP file
                     #===============================================================
                     logging.info(f"===============================================")
@@ -258,7 +376,7 @@ def main(args):
                     ham_features = {}
                     ham_features_start_time = datetime.datetime.now()
                     ham_features = compute_ham_features_csv(
-                        filename=fcidump_file_name,
+                        filename=instance_data_object_file_name,
                         save=False,
                         csv_filename=None,
                         verbose_logging=True
@@ -271,9 +389,10 @@ def main(args):
 
                     ham_features["problem_instance_uuid"] = problem_instance_uuid
                     ham_features["problem_instance_short_name"] = problem_instance_short_name
-                    ham_features["fcidump_file_name"] = fcidump_file_name
-                    ham_features["fcidump_uuid"] = fcidump_uuid
-                    ham_features["fcidump_url"] = fcidump_url
+                    ham_features["task_uuid"] = task_uuid
+                    ham_features["instance_data_object_uuid"] = instance_data_object_uuid
+                    ham_features["instance_data_object_file_name"] = instance_data_object_file_name
+                    ham_features["instance_data_object_url"] = instance_data_object_url
                     ham_features["date_of_calculation"] = str(ham_features_stop_time)
                     ham_features["version_of_features_calculation_script"] = 1
                     ham_features["ham_features_calc_time"] = ham_features_calc_time
@@ -285,41 +404,42 @@ def main(args):
                     # Back up df_eigs to a file. 
                     # Sometimes the array is shortened in string representation...
                     # we want all the eigs!
-                    df_eigs_file = f"df_eigs.{fcidump_uuid}.bin"
-                    ham_features["df_eigs"].tofile(f"df_eigs.{fcidump_uuid}.bin")
+                    df_eigs_file = f"df_eigs.{instance_data_object_uuid}.bin"
+                    ham_features["df_eigs"].tofile(f"double_factorized_eigs.{instance_data_object_uuid}.bin")
                     logging.info(f"wrote df_eigs to file: {df_eigs_file}")
 
 
                     # Clean up
                     #===============================================================
-                    logging.info(f"deleting file {fcidump_file_name}.")
-                    os.remove(fcidump_file_name)
+                    logging.info(f"deleting file {instance_data_object_file_name}.")
+                    os.remove(instance_data_object_file_name)
 
 
                     # Append/Write out features .csv file
                     #===============================================================
                     logging.info(f"appending data to file {args.ham_features_file}")
-                    df = pd.DataFrame([ham_features])
-                    df.to_csv(
-                        args.ham_features_file,
-                        mode="a", #append
-                        header=not os.path.exists(args.ham_features_file), # write headers if starting a new file.
-                        index=False
+                    append_to_csv_database(
+                        df=pd.DataFrame([ham_features]),
+                        csv_database_file_name=args.ham_features_file
                     )
-
-
                     
+                    time_check(overall_start_time)
+                    
+
+                        
 
 
     
     # Print overall time.
     #===============================================================
     overall_stop_time = datetime.datetime.now()
-    logging.info(f"done.")
+    logging.info(f"===============================================")
+    logging.info(f"the overall script is done!")
     logging.info(f"overall start time: {overall_start_time}")
     logging.info(f"overall stop time: {overall_stop_time}")
     logging.info(f"run time (seconds): {(overall_stop_time - overall_start_time).total_seconds()}")
-
+    logging.info(f"===============================================")
+    
     
     
 
@@ -334,7 +454,10 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="a script to update all problem_instance files at once."
+        description="""A script to calculate the features of all 
+            the Hamiltonians referenced in the problem_instance JSON files.  The output
+            is the `Hamiltonian_features.csv` file.
+        """
     )
     
     parser.add_argument(
@@ -342,28 +465,30 @@ if __name__ == "__main__":
         "--input_dir", 
         type=str, 
         required=True,
-        help="Specify directory for problem_instances (.json files)"
+        help="The directory that contains the problem_instance JSON files."
     )
 
     parser.add_argument(
         "--ham_features_file",
         type=str,
         required=True,
-        help="The file name of the Hamiltonian features (.csv) file."
+        help="""The file name of the Hamiltonian features (.csv) file.  If the 
+           file already exists, new data rows will be added to it.
+           A backup copy is also made at the beginning of the script."""
     )
 
     parser.add_argument(
         "--sftp_username", 
         type=str, 
         required=True,
-        help="username for SFTP server where FCIDUMP files are stored."
+        help="username for the SFTP server where FCIDUMP files are stored."
     )
 
     parser.add_argument(
         "--sftp_key_file", 
         type=str, 
         required=True,
-        help="local/path/to/the/keyfile for the SFTP server (corresponding to sftp_username)"
+        help="local/path/to/the/keyfile for the SFTP server corresponding to sftp_username."
     )
 
     args = parser.parse_args()
