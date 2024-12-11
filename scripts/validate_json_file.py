@@ -26,7 +26,6 @@ import jsonschema
 
 
 
-
 def main(args):
     
     # read the file you want to validate
@@ -75,7 +74,9 @@ def main(args):
         jsonschema.validate(instance=file_contents, schema=schema)
         print("JSON file is valid per the schema!\n\n")
     except Exception as e:
-        # print(f"Error: {e}") ## lots of output.
+        if args.verbose:
+            print(f"Error: {e}") ## lots of output...
+            print("\n\n")
         print(f"JSON file has FAILED schema validation!\n\n")
         sys.exit(1)
 
@@ -102,6 +103,13 @@ if __name__ == "__main__":
         help="(Optional) schema file.  If used, this will override whatever URL may be listed in the JSON file in the $schema field."
     )
     
+    parser.add_argument(
+        "-v","--verbose",
+        action="store_true",
+        default=False,
+        help="print verbose error message of why the file may have failed validation."
+    )
+
     args = parser.parse_args()
 
     main(args)

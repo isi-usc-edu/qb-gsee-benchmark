@@ -55,17 +55,17 @@
                 "ml_metrics_calculator_version": {
                     "title": "ML performance metrics calculator version",
                     "description": "The version of the ML metrics calculator software.",
-                    "type": "string"
+                    "type": "number"
                 },
                 "solvability_ratio": {
                     "title": "ML Solvability Ratio",
                     "description": "TODO.  A number between 0-1.  A higher number is better.",
-                    "type": "number"
+                    "type":["null","number"]
                 },
                 "f1_score": {
                     "title": "F1 score",
                     "description": "TODO.  This is a measure of the goodness of the ML model, not the solver being evaluated.",
-                    "type": "object"
+                    "type": ["null","array"]
                 }
             }
         },
@@ -200,7 +200,7 @@
                     "solution_submitted_by_due_date": {
                         "title": "Solution Within Due Date?",
                         "description": "Each `problem_instance` file has a specified calendar due date.  This boolean to identifies if the solution was submitted by the due date.  If there was no due date specified, then this is `true`.",
-                        "type": "boolean"
+                        "type": ["null","boolean"]
                     }
                 }
             }
@@ -247,12 +247,12 @@
                     "solved_within_run_time": {
                         "title": "TODO",
                         "description": "a boolean indicating if the solver run time was within the run time requirement specified in the problem_instance.",
-                        "type": "boolean"
+                        "type": ["null","boolean"]
                     },
                     "solved_within_accuracy_requirement": {
                         "title": "TODO",
                         "description": "a boolean indicating if the solver run time was within the accuracy requirement specified in the problem_instance.",
-                        "type": "boolean"
+                        "type": ["null","boolean"]
                     },
                     "overall_run_time_seconds":{
                         "title": "TODO",
