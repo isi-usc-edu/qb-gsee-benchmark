@@ -22,7 +22,6 @@ import logging
 import math
 import os
 import sys
-from collections import defaultdict
 from importlib.metadata import version
 from typing import Any
 from urllib.parse import urlparse
@@ -143,6 +142,7 @@ def get_lqre(
                 error_tolerance=error_tolerance,
                 failure_tolerance=failure_tolerance,
                 square_overlap=overlap**2,
+                sf_threshold=config["algorithm_parameters"]["sf_threshold"],
                 df_threshold=config["algorithm_parameters"]["df_threshold"],
             )
             circuit_generation_end_time = datetime.datetime.now()
