@@ -53,7 +53,7 @@ The script will generate logical quantum resource estimates for a subset of Hami
 This script is currently based on the qubitized quantum phase estimation with double factorization algorithm.
 
 
-###  Generating physical quantum resource estimates as `solution.json` files.
+## Generating physical quantum resource estimates as `solution.json` files.
 
 `./compute_all_PREs_script.py`
 
