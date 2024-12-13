@@ -1,0 +1,134 @@
+{
+    "id": "cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8",
+    "category": "industrial",
+    "size": null,
+    "task": "ground_state_energy_estimation",
+    "name": "mn_mono",
+    "tasks": [
+        {
+            "id": "de3ea361-c2d3-4ab6-add4-ccd43cea6aa8",
+            "name": "sftp://sftp.l3harris.com/gsee/fcidump.59_5_16_noncan_0.2_new.68af0b80-3d27-4aba-84f9-bcdd30a9255b.gz",
+            "value": 0.03001084,
+            "value_ci": [
+                0.023027308,
+                0.038280296
+            ],
+            "implementation": "Qubitized QPE with double factorization",
+            "repetitions": 15.0,
+            "logical-abstract": {
+                "num_qubits": 467.0,
+                "t_count": 2125857968.0
+            }
+        },
+        {
+            "id": "6c39d3a7-c71a-4049-a8c7-3a3a4b61d8da",
+            "name": "sftp://sftp.l3harris.com/gsee/fcidump.60_5_16_noncan_0.2_new.28a7820f-63fe-4920-aeec-a7ffe7e55d83.gz",
+            "value": 26.07488744,
+            "value_ci": [
+                17.97034674,
+                38.076855
+            ],
+            "implementation": "Qubitized QPE with double factorization",
+            "repetitions": 78.0,
+            "logical-abstract": {
+                "num_qubits": 929.0,
+                "t_count": 56744478440.0
+            }
+        },
+        {
+            "id": "1ade03f3-06b1-4e95-b271-fea5a6343829",
+            "name": "sftp://sftp.l3harris.com/gsee/fcidump.61_3_15_af_noncan_0.2_new.f738fcd6-7ddc-4d70-8ff9-4019e3718b04.gz",
+            "value": 0.216679485,
+            "value_ci": [
+                0.163054421,
+                0.285066319
+            ],
+            "implementation": "Qubitized QPE with double factorization",
+            "repetitions": 34.0,
+            "logical-abstract": {
+                "num_qubits": 468.0,
+                "t_count": 4337698048.0
+            }
+        },
+        {
+            "id": "ff0da1e2-2c76-4589-aefa-c13bb1a1ef8f",
+            "name": "sftp://sftp.l3harris.com/gsee/fcidump.62_3_15_af_noncan_0.2_new.6e2bf415-6a69-4b36-ba0f-780a11cb7c0b.gz",
+            "value": 46.93508218,
+            "value_ci": [
+                41.69050008,
+                52.81243752
+            ],
+            "implementation": "Qubitized QPE with double factorization",
+            "repetitions": 41.0,
+            "logical-abstract": {
+                "num_qubits": 955.0,
+                "t_count": 62404167400.0
+            }
+        },
+        {
+            "id": "a9c90f98-6557-44d2-9ca0-0c9122f4080c",
+            "name": "sftp://sftp.l3harris.com/gsee/fcidump.63_5_15_af_ts_noncan_0.2_new.027490ba-34f9-4340-89ab-27fd110d2821.gz",
+            "value": 0.051587712,
+            "value_ci": [
+                0.043766067,
+                0.062608375
+            ],
+            "implementation": "Qubitized QPE with double factorization",
+            "repetitions": 108.0,
+            "logical-abstract": {
+                "num_qubits": 468.0,
+                "t_count": 4360242432.0
+            }
+        },
+        {
+            "id": "a16168e2-98cd-430d-a180-84f64b4d5e75",
+            "name": "sftp://sftp.l3harris.com/gsee/fcidump.64_5_15_af_ts_noncan_0.2_new.bae2da57-6a69-483e-95bc-b77f72ebfba8.gz",
+            "value": 8.778415022,
+            "value_ci": [
+                6.718317517,
+                11.59059828
+            ],
+            "implementation": "Qubitized QPE with double factorization",
+            "repetitions": 280.0,
+            "logical-abstract": {
+                "num_qubits": 956.0,
+                "t_count": 124355348304.0
+            }
+        },
+        {
+            "id": "590c2f0b-964b-4d09-96ad-101a9be59cab",
+            "name": "sftp://sftp.l3harris.com/gsee/fcidump.65_5_15_af_noncan_0.2_new.72343006-774e-4192-b481-fa840ed25573.gz",
+            "value": 0.049623203,
+            "value_ci": [
+                0.035031302,
+                0.06779088
+            ],
+            "implementation": "Qubitized QPE with double factorization",
+            "repetitions": 151.0,
+            "logical-abstract": {
+                "num_qubits": 469.0,
+                "t_count": 8668054864.0
+            }
+        },
+        {
+            "id": "6e617348-d0b3-4b6d-9923-ea54ba5cf751",
+            "name": "sftp://sftp.l3harris.com/gsee/fcidump.66_5_15_af_noncan_0.2_new.ea55abec-8253-445d-85fa-914948b5e5a5.gz",
+            "value": 2.112505666,
+            "value_ci": [
+                1.644077649,
+                2.725285229
+            ],
+            "implementation": "Qubitized QPE with double factorization",
+            "repetitions": 104.0,
+            "logical-abstract": {
+                "num_qubits": 955.0,
+                "t_count": 62379001576.0
+            }
+        }
+    ],
+    "value": 84.248791548,
+    "value_ci": [
+        68.28812108399998,
+        105.658921899
+    ]
+}

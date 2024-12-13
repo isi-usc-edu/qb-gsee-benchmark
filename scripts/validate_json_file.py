@@ -26,43 +26,58 @@ import jsonschema
 
 
 
-
 def main(args):
-    input_json_file = args.file
     
+    # read the file you want to validate
     try:
-        with open(input_json_file, "r") as json_file:
+        with open(args.file, "r") as json_file:
             file_contents = json.load(json_file)
     except Exception as e:
         print(f"Error: {e}")
-        print(f"\n\nCannot read the file {input_json_file}...\n\n")
+        print(f"Cannot read the file {args.file}...\n\n")
         sys.exit(1)
 
-    # pull out the $schema field as specified in the JSON file:
-    try:
-        schema_url = file_contents["$schema"]
-        print(f"\n\nSchema URL to fetch: {schema_url}\n\n")
-    except Exception as e:
-        print(f"Error: {e}")
-        print(f"\n\nThe JSON file may be missing the $schema field...\n\n")
-        sys.exit(1)
 
-    
-    # fetch the schema from the URL (http request):
-    try:
-        schema = requests.get(schema_url).json()
-    except Exception as e:
-        print(f"Error: {e}")
-        print(f"\n\nFailed to retrieve the schema from the URL...\n\n")
-        sys.exit(1)
-    
+
+    if args.schema:
+        # a schema was specified on the command line... try and read it.
+        try:
+            with open(args.schema, "r") as schema_file:
+                schema = json.load(schema_file)
+        except Exception as e:
+                print(f"Error: {e}")
+                print(f"Cannot read the schema file {args.schema}...\n\n")
+                sys.exit(1)
+    else:     
+        # a schema was NOT specified in a command line argument.
+        # pull out the $schema field as specified in the JSON file:
+        print(f"No schema was specified as a command-line argument.")
+        print(f"Trying to find $schema inside of JSON file...")
+        try:
+            schema_url = file_contents["$schema"]
+            print(f"Schema URL to fetch: {schema_url}")
+        except Exception as e:
+            print(f"Error: {e}")
+            print(f"\n\nThe JSON file may be missing the $schema field...\n\n")
+            sys.exit(1)
+        # fetch the schema from the URL (http request):
+        try:
+            schema = requests.get(schema_url, verify=False).json()
+        except Exception as e:
+            print(f"Error: {e}")
+            print(f"Failed to retrieve the schema from the URL...\n\n")
+            sys.exit(1)
+
+
     # validate ... no output implies success!
     try:
         jsonschema.validate(instance=file_contents, schema=schema)
-        print("\n\nJSON file is valid per the schema!\n\n")
+        print("JSON file is valid per the schema!\n\n")
     except Exception as e:
-        # print(f"Error: {e}") ## lots of output.
-        print(f"\n\nJSON file has FAILED schema validation!\n\n")
+        if args.verbose:
+            print(f"Error: {e}") ## lots of output...
+            print("\n\n")
+        print(f"JSON file has FAILED schema validation!\n\n")
         sys.exit(1)
 
 
@@ -78,7 +93,21 @@ if __name__ == "__main__":
     parser.add_argument(
         "file", 
         type=str, 
-        help="the/path/to/the/ JSON file you want to validate."
+        help="the JSON file you want to validate."
+    )
+
+    parser.add_argument(
+        "--schema", 
+        type=str, 
+        required=False,
+        help="(Optional) schema file.  If used, this will override whatever URL may be listed in the JSON file in the $schema field."
+    )
+    
+    parser.add_argument(
+        "-v","--verbose",
+        action="store_true",
+        default=False,
+        help="print verbose error message of why the file may have failed validation."
     )
 
     args = parser.parse_args()

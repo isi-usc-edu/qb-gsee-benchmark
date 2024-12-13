@@ -1,0 +1,62 @@
+{
+    "id": "90d4e4fc-1216-4846-b45f-198c0530e29b",
+    "category": "industrial",
+    "size": null,
+    "task": "ground_state_energy_estimation",
+    "name": "mo2_n2",
+    "tasks": [
+        {
+            "id": "e3a07092-d1e5-4867-a4d7-d0258f9df6db",
+            "name": "sftp://sftp.l3harris.com/gsee/fcidump.13_1_lut_ts_noncan_0.2_new.09c3ddd5-0187-46e8-95c3-157c470cb69a.gz",
+            "value": 3852.986008,
+            "value_ci": [
+                1836.192222,
+                8330.204852
+            ],
+            "implementation": "Qubitized QPE with double factorization",
+            "comment": "did not attempt resource estimation for this task.",
+            "repetitions": null,
+            "logical-abstract": {
+                "num_qubits": null,
+                "t_count": null
+            }
+        },
+        {
+            "id": "138733f0-08f5-4077-b848-813c8ec53c79",
+            "name": "sftp://sftp.l3harris.com/gsee/fcidump.14_1_lut_prod_noncan_0.2_new.f36a9dbc-c34a-401f-8ea6-dc996d785edf.gz",
+            "value": 3706.27159,
+            "value_ci": [
+                850.2519236,
+                18278.23552
+            ],
+            "implementation": "Qubitized QPE with double factorization",
+            "comment": "did not attempt resource estimation for this task.",
+            "repetitions": null,
+            "logical-abstract": {
+                "num_qubits": null,
+                "t_count": null
+            }
+        },
+        {
+            "id": "79b74ad4-afa8-458f-87a3-a5ec339056c6",
+            "name": "sftp://sftp.l3harris.com/gsee/fcidump.15_1_lut_react_noncan_0.2_new.9cba211b-820c-4ad4-a050-336e8049e1c7.gz",
+            "value": 4581.658495,
+            "value_ci": [
+                4008.43553,
+                5240.601721
+            ],
+            "implementation": "Qubitized QPE with double factorization",
+            "comment": "did not attempt resource estimation for this task.",
+            "repetitions": null,
+            "logical-abstract": {
+                "num_qubits": null,
+                "t_count": null
+            }
+        }
+    ],
+    "value": 12140.916093,
+    "value_ci": [
+        6694.8796756,
+        31849.042092999996
+    ]
+}

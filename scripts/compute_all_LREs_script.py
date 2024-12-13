@@ -142,6 +142,7 @@ def get_lqre(
                 error_tolerance=error_tolerance,
                 failure_tolerance=failure_tolerance,
                 square_overlap=overlap**2,
+                sf_threshold=config["algorithm_parameters"]["sf_threshold"],
                 df_threshold=config["algorithm_parameters"]["df_threshold"],
             )
             circuit_generation_end_time = datetime.datetime.now()
@@ -195,7 +196,7 @@ def get_lqre(
 
     solver_details = {
         "solver_uuid": config["solver_uuid"],
-        "solver_short_name": "DF QPE",
+        "solver_short_name": "DF_QPE",
         "compute_hardware_type": "quantum_computer",
         "algorithm_details": {
             "algorithm_description": config["algorithm_description"],
