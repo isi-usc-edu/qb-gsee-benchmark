@@ -185,7 +185,7 @@ def get_lqre(
                                 circuit_generation_end_time
                                 - circuit_generation_start_time
                             ).total_seconds(),
-                        }
+                        },
                     },
                 }
             )

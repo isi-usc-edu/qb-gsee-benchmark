@@ -133,7 +133,14 @@
                             "physical": {
                                 "title": "Physical Quantum Resources",
                                 "description": "Physical quantum resources used by the test performer. Exact structure is TBD.",
-                                "type": "object"
+                                "type": "object",
+                                "properties": {
+                                    "num_physical_qubits": {
+                                        "title": "Number of Physical Qubits",
+                                        "description": "The number of physical qubits used by the solver.",
+                                        "type": "integer",
+                                        "minimum": 0
+                                    }
                             },
                             "logical": {
                                 "title": "Logical Quantum Resources",
@@ -166,6 +173,7 @@
                                         "maximum": 1
                                     }
                                 }
+                                
                             }
                         }
                     },
