@@ -1,8 +1,8 @@
 {
     "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/solution.schema.0.0.1.json",
-    "solution_uuid": "7b886fa9-393e-44d9-bed3-cc6c4d27c036",
-    "problem_instance_uuid": "bf3fb654-72c7-4fd4-bfd1-9ffef5aaebd8",
-    "creation_timestamp": "2024-12-05T22:40:30.585593Z",
+    "solution_uuid": "aad5b11a-3004-4e7b-a801-72881a48db3b",
+    "problem_instance_uuid": "b57eb979-5c09-4974-97b4-5862e109a1ae",
+    "creation_timestamp": "2024-12-14T19:57:53.289013Z",
     "is_resource_estimate": true,
     "contact_info": [
         {
@@ -13,30 +13,22 @@
     ],
     "solution_data": [
         {
-            "task_uuid": "7cc1ed5c-0dcb-4315-9e51-2ae94b5cdd02",
+            "task_uuid": "af56de36-35aa-44b9-8eb7-b9c1e8f7d0f3",
             "error_bound": 1.0,
             "confidence_level": 0.010000000000000009,
             "quantum_resources": {
                 "logical": {
-                    "num_logical_qubits": 1025,
-                    "num_T_gates_per_shot": 19401541168,
-                    "num_shots": 2,
-                    "hardware_failure_tolerance_per_shot": 0.0005001250625390474
+                    "num_logical_qubits": 516,
+                    "num_T_gates_per_shot": 4109763784,
+                    "num_shots": 7,
+                    "hardware_failure_tolerance_per_shot": 0.00014291840527491662
                 }
             },
             "run_time": {
                 "preprocessing_time": {
-                    "wall_clock_start_time": "2024-12-05T17:38:14.241816Z",
-                    "wall_clock_stop_time": "2024-12-05T17:40:26.079021Z",
-                    "seconds": 131.837205
-                },
-                "overall_time": {
-                    "seconds": 776061.6467200001,
-                    "comments": {
-                        "comment_1": "seconds = (0.00002 seconds/t_gate)(num_T_gates_per_shot)(num_shots)",
-                        "comment_2": "20usec/t_gate based on the assumptions in the paper, including: 4 factories, 0.1percent physical error rate and AutoCCZ factories can support twice as many T-gates as Toffolis.",
-                        "reference": "https://journals.aps.org/prxquantum/abstract/10.1103/PRXQuantum.2.030305"
-                    }
+                    "wall_clock_start_time": "2024-12-14T14:57:42.204258Z",
+                    "wall_clock_stop_time": "2024-12-14T14:57:51.758754Z",
+                    "seconds": 9.554496
                 }
             }
         }
@@ -50,6 +42,7 @@
             "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
             "algorithm_parameters": {
                 "overlap_csv": "overlaps.csv",
+                "sf_threshold": 1e-12,
                 "df_threshold": 0.001,
                 "max_orbitals": 32
             }

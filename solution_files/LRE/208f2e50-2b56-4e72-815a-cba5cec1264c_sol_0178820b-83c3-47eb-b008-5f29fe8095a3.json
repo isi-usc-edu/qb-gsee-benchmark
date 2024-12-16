@@ -1,8 +1,8 @@
 {
     "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/solution.schema.0.0.1.json",
-    "solution_uuid": "3708295d-6a32-44c0-a07e-0361483b05e5",
+    "solution_uuid": "0178820b-83c3-47eb-b008-5f29fe8095a3",
     "problem_instance_uuid": "208f2e50-2b56-4e72-815a-cba5cec1264c",
-    "creation_timestamp": "2024-12-05T22:13:32.586349Z",
+    "creation_timestamp": "2024-12-14T19:37:25.239443Z",
     "is_resource_estimate": true,
     "contact_info": [
         {
@@ -26,17 +26,9 @@
             },
             "run_time": {
                 "preprocessing_time": {
-                    "wall_clock_start_time": "2024-12-05T17:08:32.247739Z",
-                    "wall_clock_stop_time": "2024-12-05T17:09:42.627315Z",
-                    "seconds": 70.379576
-                },
-                "overall_time": {
-                    "seconds": 2652674.75712,
-                    "comments": {
-                        "comment_1": "seconds = (0.00002 seconds/t_gate)(num_T_gates_per_shot)(num_shots)",
-                        "comment_2": "20usec/t_gate based on the assumptions in the paper, including: 4 factories, 0.1percent physical error rate and AutoCCZ factories can support twice as many T-gates as Toffolis.",
-                        "reference": "https://journals.aps.org/prxquantum/abstract/10.1103/PRXQuantum.2.030305"
-                    }
+                    "wall_clock_start_time": "2024-12-14T14:32:12.463012Z",
+                    "wall_clock_stop_time": "2024-12-14T14:33:30.843468Z",
+                    "seconds": 78.380456
                 }
             }
         }
@@ -50,6 +42,7 @@
             "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
             "algorithm_parameters": {
                 "overlap_csv": "overlaps.csv",
+                "sf_threshold": 1e-12,
                 "df_threshold": 0.001,
                 "max_orbitals": 32
             }
