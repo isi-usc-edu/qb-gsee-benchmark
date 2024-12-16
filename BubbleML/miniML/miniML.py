@@ -140,15 +140,30 @@ def trainML(
         )
         logging.info('Percent of solvable space: ', str(ml_solvability_ratio))
 
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
+
+
         #explain all the predictions in the test set
         plt.figure()
         explainer = shap.KernelExplainer(model.predict_proba, X_train)
         shap_values = explainer.shap_values(X_train)
         class_index = 1
         shap.initjs()
-        shap.summary_plot(shap_values[1],features=X.columns,plot_type="bar")
+        
+        shap.summary_plot(
+            shap_values[1],
+            features=X.columns,
+            plot_type="bar"
+        )
+
         #shap.force_plot(explainer.expected_value[class_index], shap_values[class_index], X_train, matplotlib=True, show=False)
 
+        plt.savefig(
+            f"shap_summary_plot_solver={solver_uuid}_{timestamp}.png",
+            format="png"
+        )
+        
+        
         if verbose:
             # print to file
             y_pred = model.predict(X_train)
@@ -164,7 +179,6 @@ def trainML(
                     "prob_class_1": probs[:,1]
                 }
             )
-            timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
             probs_file_name = f"probs_solver={solver_uuid}_{timestamp}.csv"
             df.to_csv(probs_file_name, index=False)
             logging.info(f"wrote probs to file {probs_file_name}.")
