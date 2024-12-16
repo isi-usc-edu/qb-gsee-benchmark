@@ -75,6 +75,7 @@ def get_df_qpe_circuit(
     square_overlap: float,
     error_tolerance: float,
     failure_tolerance: float,
+    sf_threshold: float,
     df_threshold: float,
 ):
     """Get the QPE circuit for a given PySCF FCI object.
@@ -152,7 +153,7 @@ def get_df_qpe_circuit(
         instance,
         energy_error=block_encoding_error_tolerance * 10 * 2 / 3,
         df_error_threshold=df_threshold,
-        sf_error_threshold=1e-12,  # See https://github.com/isi-usc-edu/pyLIQTR/issues/21
+        sf_error_threshold=sf_threshold,  # See https://github.com/isi-usc-edu/pyLIQTR/issues/21
     )
 
     circuit = QubitizedPhaseEstimation(encoding, eps=sigma)
