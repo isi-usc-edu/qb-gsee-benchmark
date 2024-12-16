@@ -183,7 +183,7 @@ def main(args):
         max_num_orbitals += 5 # increase the size of Hamiltonians considered in each loop.
         finished_all_hamiltonians = True # reset... update to `False` if we skip one due to its large size.
         
-        random.shuffle(problem_instance_files) # randomize order of problem instances processed.
+        # random.shuffle(problem_instance_files) # randomize order of problem instances processed.
 
         for problem_instance_file_name in problem_instance_files:
             problem_instance_path = input_dir + problem_instance_file_name

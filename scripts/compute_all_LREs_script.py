@@ -185,7 +185,7 @@ def get_lqre(
                                 circuit_generation_end_time
                                 - circuit_generation_start_time
                             ).total_seconds(),
-                        }
+                        },
                     },
                 }
             )
@@ -226,6 +226,37 @@ def get_lqre(
 
     return results
 
+def get_solved_problem_uuids(config: dict[str, Any], output_dir: str) -> set[str]:
+    existing_output_files = os.listdir(args.output_dir)
+    print(output_dir)
+    print(existing_output_files)
+    logging.info(f"parsing {len(existing_output_files)} files in the output directory")
+    solved_problem_uuids = []
+    for s in existing_output_files:
+        with (open(os.path.join(args.output_dir, s), "r")) as f:
+            solution = json.load(f)
+            if (
+                solution["solver_details"]["solver_uuid"] == config["solver_uuid"]
+                and json.dumps(
+                    solution["solver_details"]["algorithm_details"][
+                        "algorithm_description"
+                    ],
+                    sort_keys=True,
+                )
+                == json.dumps(config["algorithm_description"], sort_keys=True)
+                and json.dumps(
+                    solution["solver_details"]["algorithm_details"][
+                        "algorithm_parameters"
+                    ],
+                    sort_keys=True,
+                )
+                == json.dumps(config["algorithm_parameters"], sort_keys=True)
+            ):
+                solved_problem_uuids.append(solution["problem_instance_uuid"])
+    logging.info(
+        f"found {len(solved_problem_uuids)} existing solutions for this solver."
+    )
+    return set(solved_problem_uuids)
 
 def main(args: argparse.Namespace) -> None:
 
@@ -243,11 +274,19 @@ def main(args: argparse.Namespace) -> None:
     for p in problem_instance_files:
         logging.info(f"file: {p}")
 
+    solved_problem_uuids = get_solved_problem_uuids(config, args.output_dir)
+
     for problem_instance_file_name in problem_instance_files:
         problem_instance_path = os.path.join(input_dir, problem_instance_file_name)
         logging.info(f"parsing {problem_instance_path}")
         with open(problem_instance_path, "r") as jf:
             problem_instance = json.load(jf)
+
+            if problem_instance["problem_instance_uuid"] in solved_problem_uuids:
+                logging.info(
+                    f"skipping {problem_instance['problem_instance_uuid']} because it already has a solution with the same solver UUID and algorithm details."
+                )
+                continue
 
             resource_estimate = get_lqre(
                 problem_instance, args.sftp_username, args.sftp_key_file, config=config

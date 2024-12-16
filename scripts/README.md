@@ -53,6 +53,25 @@ The script will generate logical quantum resource estimates for a subset of Hami
 This script is currently based on the qubitized quantum phase estimation with double factorization algorithm.
 
 
+## Generating physical quantum resource estimates as `solution.json` files.
+
+`./compute_all_PREs_script.py`
+
+```bash
+options:
+  -h, --help            show this help message and exit
+  -i INPUT_DIR, --input_dir INPUT_DIR
+                        Specify directory for solution logical resource estiamtes (.json files)
+  -o OUTPUT_DIR, --output_dir OUTPUT_DIR
+                        Specify directory to save physical resource estimates to (.json files)
+  --PRE_config_file PRE_CONFIG_FILE
+                        A JSON file with configuration options and hyperparameters for PRE and a `solver` UUID.
+```
+
+This script ingests solution files containing logical resource estimates and generates new solution files that contain physical resource estimates.
+Note that these solution files will have new solution IDs that differ from the input LRE solution files.
+It is also recommended to specify a solver UUID in the PRE config file that is different from the solver UUID for the LRE.
+See [`PRE_config.json`](PRE_config.json) for an example PRE config file.
 
 ## Generating `performance_metrics.json` files
 
