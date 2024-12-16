@@ -33,11 +33,9 @@ options:
 Example call:
 
 ```bash
-./miniML.py --ham_features_file TESTING_ONLY_Hamiltonian_features.csv --config_file miniML_config.json --solver_uuid bd63d0e0-a681-11ef-b4bd-6f1bb9e0689f --solver_labels_file TESTING_ONLY_solver.ccsdt.labels.csv --verbose
+./miniML.py -v --ham_features_file ../../Hamiltonian_features/experimental/fast_double_factorization_features/Hamiltonian_features.csv --config_file miniML_config.json --solver_uuid 16537433-9f4c-4eae-a65d-787dc3b35b59 --solver_labels_file ../../scripts/solver_labels.DMRG_Niagara_cluster_lowest_energy.16537433-9f4c-4eae-a65d-787dc3b35b59.csv --verbose
 ```
 
-Note that the `solver_uuid` is contrived for this example.  The solver is CCSDT in this example.
+Note that the `solver_uuid` is specific to the DMRG algorithm running on a specific compute platform in this example.
 
 If the `--verbose` flag is included, then a `plot_<solver_uuid, datestamp>.png` plot and the `probs<solver_uuid, datestamp>.csv` file will be generated as artifacts.
-
-TODO: As we are integrating, use the `TESTING_ONLY_Hamiltonian_features.csv` and `TESTING_ONLY_solver.ccsdt.labels.csv` files.  As more data is collated, we should point to `../../Hamiltonian_features/experimental/fast_double_factorization/Hamiltonian_features.csv` and an appropriately aligned `solver.<solver_uuid>.labels.csv` files.
