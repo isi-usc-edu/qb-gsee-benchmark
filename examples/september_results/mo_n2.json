@@ -1,0 +1,80 @@
+{
+    "id": "mo_n2",
+    "name": "Schrock catalyst",
+    "category": "scientific",
+    "value": 100000.0,
+    "tasks": [
+        {
+            "id": "mo_n2--31",
+            "size": "31 orbitals",
+            "task": "ground_state_energy_estimation",
+            "implementation": "Qubitized QPE with double factorization",
+            "repetitions": 4,
+            "logical-abstract": {
+                "num_qubits": 1250,
+                "t_count": 323706791688
+            },
+            "physical": {
+                "physical_architecture_description": "Fowler-Gidney with Litinski factories",
+                "code_name": "surface",
+                "code_distance": 45,
+                "runtime": 10358617.334015999,
+                "num_qubits": 8228600
+            }
+        },
+        {
+            "id": "fecp2+_s0.5-46",
+            "size": "46 orbitals",
+            "task": "ground_state_energy_estimation",
+            "implementation": "Qubitized QPE with double factorization",
+            "repetitions": 6,
+            "logical-abstract": {
+                "num_qubits": 3371,
+                "t_count": 1745628590580
+            },
+            "physical": {
+                "physical_architecture_description": "Fowler-Gidney with Litinski factories",
+                "code_name": "surface",
+                "code_distance": 47,
+                "runtime": 55860114.898559995,
+                "num_qubits": 23596256
+            }
+        },
+        {
+            "id": "fecp2_s0-46",
+            "size": "46 orbitals",
+            "task": "ground_state_energy_estimation",
+            "implementation": "Qubitized QPE with double factorization",
+            "repetitions": 7,
+            "logical-abstract": {
+                "num_qubits": 3375,
+                "t_count": 1884699943052
+            },
+            "physical": {
+                "physical_architecture_description": "Fowler-Gidney with Litinski factories",
+                "code_name": "surface",
+                "code_distance": 47,
+                "runtime": 60310398.177664,
+                "num_qubits": 23623904
+            }
+        },
+        {
+            "id": "mo_n2-30",
+            "size": "30 orbitals",
+            "task": "ground_state_energy_estimation",
+            "implementation": "Qubitized QPE with double factorization",
+            "repetitions": 19,
+            "logical-abstract": {
+                "num_qubits": 2150,
+                "t_count": 779363686512
+            },
+            "physical": {
+                "physical_architecture_description": "Fowler-Gidney with Litinski factories",
+                "code_name": "surface",
+                "code_distance": 47,
+                "runtime": 24939637.968383998,
+                "num_qubits": 15154400
+            }
+        }
+    ]
+}

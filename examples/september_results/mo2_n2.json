@@ -1,0 +1,62 @@
+{
+    "id": "mo2_n2",
+    "name": "Bridged dimolybdenum",
+    "category": "scientific",
+    "value": 100000.0,
+    "tasks": [
+        {
+            "id": "1_lut_ts-69",
+            "size": "69 orbitals",
+            "task": "ground_state_energy_estimation",
+            "implementation": "Qubitized QPE with double factorization",
+            "repetitions": 6,
+            "logical-abstract": {
+                "num_qubits": 5086,
+                "t_count": 5330835264000
+            },
+            "physical": {
+                "physical_architecture_description": "Fowler-Gidney with Litinski factories",
+                "code_name": "surface",
+                "code_distance": 49,
+                "runtime": 170586728.44799998,
+                "num_qubits": 38438600
+            }
+        },
+        {
+            "id": "1_lut_prod-70",
+            "size": "70 orbitals",
+            "task": "ground_state_energy_estimation",
+            "implementation": "Qubitized QPE with double factorization",
+            "repetitions": 6,
+            "logical-abstract": {
+                "num_qubits": 5153,
+                "t_count": 5533218440608
+            },
+            "physical": {
+                "physical_architecture_description": "Fowler-Gidney with Litinski factories",
+                "code_name": "surface",
+                "code_distance": 49,
+                "runtime": 177062990.09945598,
+                "num_qubits": 38943600
+            }
+        },
+        {
+            "id": "1_lut_react-69",
+            "size": "69 orbitals",
+            "task": "ground_state_energy_estimation",
+            "implementation": "Qubitized QPE with double factorization",
+            "repetitions": 5,
+            "logical-abstract": {
+                "num_qubits": 5087,
+                "t_count": 4945419085880
+            },
+            "physical": {
+                "physical_architecture_description": "Fowler-Gidney with Litinski factories",
+                "code_name": "surface",
+                "code_distance": 49,
+                "runtime": 158253410.74816,
+                "num_qubits": 38448600
+            }
+        }
+    ]
+}
