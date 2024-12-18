@@ -86,6 +86,21 @@ options:
                         Specify directory for solution.json files. This is input.
   --performance_metrics_dir PERFORMANCE_METRICS_DIR
                         Specify directory for performance_metrics.json files. Freshly calculated performance_metrics.json files will be placed here.
+  --ham_features_file HAM_FEATURES_FILE
+                        The/path/to/the Hamiltonian features (.csv) file. Hamiltonian features in this .csv file are solver-agnostic.
+```
+
+
+
+```bash
+options:
+  -h, --help            show this help message and exit
+  --problem_instance_dir PROBLEM_INSTANCE_DIR
+                        Specify directory for problem_instances (.json files). This is input.
+  --solution_file_dir SOLUTION_FILE_DIR
+                        Specify directory for solution.json files. This is input.
+  --performance_metrics_dir PERFORMANCE_METRICS_DIR
+                        Specify directory for performance_metrics.json files. Freshly calculated performance_metrics.json files will be placed here.
 ```
 The script ingests all available `problem_instance.json` and `solution.json` files and, for each solver identified by `solver_uuid`, returns a `performance_metrics.solver_uuid.json` file.  Note that *many* `solution.json` files are ingested for one `solver_uuid` and only a single `performance_metrics.solver_uuid.json` is returned.  This `performance_metrics.solver_uuid.json` contains performance metrics broken down to the Hamiltonian and aggregated to higher levels. 
 
