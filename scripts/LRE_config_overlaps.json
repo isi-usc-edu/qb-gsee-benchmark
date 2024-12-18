@@ -4,7 +4,7 @@
     "overlap_csv": "overlaps.csv",
     "sf_threshold": 1e-12,
     "df_threshold": 1e-3,
-    "max_orbitals": 32
+    "max_orbitals": 1000
   },
   "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
   "contact_info": [
