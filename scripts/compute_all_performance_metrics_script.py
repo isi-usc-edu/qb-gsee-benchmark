@@ -187,6 +187,11 @@ def main(args):
         "task_uuid",
         "instance_data_object_uuid",
         "instance_data_object_url",
+        "num_orbitals",
+        "time_limit_seconds",
+        "accuracy_tol",
+        "reference_energy",
+        "calendar_due_date",
         "attempted",
         "solved_within_run_time",
         "solved_within_accuracy_requirement",
@@ -240,6 +245,30 @@ def main(args):
                 )
 
 
+
+                # init (reset) other parameters to None, then update below.
+                num_orbitals = None
+                time_limit_seconds = None
+                accuracy_tol = None
+                reference_energy = None
+                calendar_due_date = None
+
+                # init (reset) all reported parameters as None, then update below.
+                attempted = None
+                solved_within_run_time = None
+                solved_within_accuracy_requirement = None
+                overall_run_time_seconds = None 
+                is_resource_estimate = None
+                num_logical_qubits = None
+                num_shots = None
+                num_T_gates_per_shot = None
+                submitted_by_calendar_due_date = None
+                label = None
+
+
+
+
+
                 # determine if it's a resource estimate
                 is_resource_estimate = None
                 for solution in solution_list:
@@ -249,7 +278,15 @@ def main(args):
 
 
 
-                # task-specific requirements
+                # TODO: replace num_orbitals_cheat_sheet.csv with required field
+                # in problem_insance.json schema.
+                num_orbitals_cheat_sheet = pd.read_csv("num_orbitals_cheat_sheet.csv")
+                num_orbitals = num_orbitals_cheat_sheet[num_orbitals_cheat_sheet["task_uuid"]==task_uuid]["num_orbitals"].iloc[0]
+                
+
+
+                # task-specific requirements from `problem_instance`
+                calendar_due_date = problem_instance["calendar_due_date"] # may be None/null per .json.
                 time_limit_seconds = task["requirements"]["time_limit_seconds"]
                 accuracy_tol = task["requirements"]["accuracy"]
                 try:
@@ -278,13 +315,18 @@ def main(args):
 
                     overall_run_time_seconds = results["run_time"]["overall_time"]["seconds"]
                     solved_within_run_time = overall_run_time_seconds <= time_limit_seconds
+                    
+                    
+                    # TODO: check calendar due date submission.
+                    submitted_by_calendar_due_date = True 
+                        
+
 
                     if is_resource_estimate:
                         num_logical_qubits = results["quantum_resources"]["logical"]["num_logical_qubits"]
                         num_shots = results["quantum_resources"]["logical"]["num_shots"]
                         num_T_gates_per_shot = results["quantum_resources"]["logical"]["num_T_gates_per_shot"]
                         solved_within_accuracy_requirement = True # always true.  assume LREs solve to accuracy.
-                        submitted_by_calendar_due_date = None 
                     else:
                         # NOT a logical resource estimate.
                         num_logical_qubits = None
@@ -300,14 +342,9 @@ def main(args):
                             logging.info(f"warning!  no energy target specified in task {task_uuid}")
                             solved_within_accuracy_requirement = False
                         
-                        calendar_due_date = problem_instance["calendar_due_date"]
-                        if calendar_due_date is None: 
-                            # no due date specified in problem_instance
-                            submitted_by_calendar_due_date = True
-                        else:
-                            # TODO: issue-44.  handle case when more than one solution submitted by
-                            # one solver.  for now assume solutions were submitted by due date.
-                            submitted_by_calendar_due_date = True 
+                        # TODO: issue-44.  handle case when more than one solution submitted by
+                        # one solver.  for now assume solutions were submitted by due date.
+                        # TODO: check calendar due date submission.
                         
                     label = solved_within_run_time and solved_within_accuracy_requirement
                         
@@ -323,6 +360,11 @@ def main(args):
                     "task_uuid":task_uuid,
                     "instance_data_object_uuid":instance_data_object_uuid,
                     "instance_data_object_url":instance_data_object_url,
+                    "num_orbitals":num_orbitals,
+                    "time_limit_seconds":time_limit_seconds,
+                    "accuracy_tol":accuracy_tol,
+                    "reference_energy":reference_energy,
+                    "calendar_due_date":calendar_due_date,
                     "attempted":attempted,
                     "solved_within_run_time":solved_within_run_time,
                     "solved_within_accuracy_requirement":solved_within_accuracy_requirement,
@@ -372,11 +414,11 @@ def main(args):
         
         try:
             logging.info(f"calculating ML scores for solver {solver_short_name}/{solver_uuid}...")
-
-            ham_features_file="../Hamiltonian_features/experimental/fast_double_factorization_features/Hamiltonian_features.csv"
+            
+            ham_features_file=args.ham_features_file
             solvability_ratio, f1_score = miniML(argparse.Namespace(
                 ham_features_file=ham_features_file,
-                config_file="../BubbleML/miniML/miniML_config.json",
+                config_file="../BubbleML/miniML/miniML_config.json", # TODO: expose argument or put it in a config file.
                 solver_uuid=solver_uuid,
                 solver_labels_file=solver_labels_file_name,
                 verbose=False
@@ -432,15 +474,19 @@ def main(args):
         # Top-level aggregated performance metrics:
         # ===============================================================
         # filter aggregated results to ONLY the solver we are currently working with:
+        number_of_tasks_attempted = len(solver_results_df[solver_results_df["attempted"]==True])
+        number_of_tasks_solved = len(solver_results_df[solver_results_df["label"]==True])
+        number_of_tasks_solved_within_run_time_limit = len(solver_results_df[solver_results_df["solved_within_run_time"]==True])
+        number_of_tasks_solved_within_accuracy_threshold = len(solver_results_df[solver_results_df["solved_within_accuracy_requirement"]==True])
         performance_metrics["top_level_results"] = {
                 "number_of_problem_instances": aggregated_results["problem_instance_uuid"].nunique(),
                 "number_of_problem_instances_attempted": None, #calculated below...
                 "number_of_problem_instances_solved": None, #calculated below...
                 "number_of_tasks": aggregated_results["task_uuid"].nunique(),
-                "number_of_tasks_attempted": len(solver_results_df["attempted"]),
-                "number_of_tasks_solved": len(solver_results_df["label"]),
-                "number_of_tasks_solved_within_run_time_limit": len(solver_results_df["solved_within_run_time"]),
-                "number_of_tasks_solved_within_accuracy_threshold": len(solver_results_df["solved_within_accuracy_requirement"]),
+                "number_of_tasks_attempted": number_of_tasks_attempted,
+                "number_of_tasks_solved": number_of_tasks_solved,
+                "number_of_tasks_solved_within_run_time_limit": number_of_tasks_solved_within_run_time_limit,
+                "number_of_tasks_solved_within_accuracy_threshold": number_of_tasks_solved_within_accuracy_threshold,
                 "max_run_time_of_attempted_tasks": None, #calculated below...,
                 "sum_of_run_time_of_attempted_tasks":None, #calculated below...,
         }
@@ -453,7 +499,7 @@ def main(args):
             # filter df to only problem instance
             df_filtered = solver_results_df[solver_results_df["problem_instance_uuid"]==problem_instance_uuid]
             num_tasks = len(df_filtered)
-            num_attempted_tasks = len(df_filtered["attempted"])
+            num_attempted_tasks = len(df_filtered[df_filtered["attempted"]==True])
             # must attempt ALL task to "attempt" the problem_instance.
             if num_tasks == num_attempted_tasks:
                 count_number_problem_instances_attempted += 1
@@ -468,7 +514,7 @@ def main(args):
             # filter df to only problem instance
             df_filtered = solver_results_df[solver_results_df["problem_instance_uuid"]==problem_instance_uuid]
             num_tasks = len(df_filtered)
-            num_solved_tasks = len(df_filtered["label"])
+            num_solved_tasks = len(df_filtered[df_filtered["label"]==True])
             # must attempt ALL task to "attempt" the problem_instance.
             if num_tasks == num_solved_tasks:
                 count_number_problem_instances_solved += 1
@@ -478,13 +524,13 @@ def main(args):
 
         # max_run_time_of_attempted_tasks...
         # filter down to only task that were attempted:
-        df_filtered = solver_results_df[solver_results_df["attempted"]]
+        df_filtered = solver_results_df[solver_results_df["attempted"]==True]
         performance_metrics["top_level_results"]["max_run_time_of_attempted_tasks"] \
             = max(df_filtered["overall_run_time_seconds"])
 
         # sum_of_run_time_of_attempted_tasks...
         # filter down to only task that were attempted:
-        df_filtered = solver_results_df[solver_results_df["attempted"]]
+        df_filtered = solver_results_df[solver_results_df["attempted"]==True]
         performance_metrics["top_level_results"]["sum_of_run_time_of_attempted_tasks"] \
             = sum(df_filtered["overall_run_time_seconds"])
 
@@ -516,23 +562,23 @@ def main(args):
                 "problem_instance_uuid":problem_instance_uuid,
                 "solution_uuid": df_filtered["solution_uuid"].unique()[0], # should only be one solution_uuid.  see issue #44.
                 "number_of_tasks": len(df_filtered),
-                "number_of_tasks_attempted": len(df_filtered[df_filtered["attempted"]]),
-                "number_of_tasks_solved_within_runtime_limit":len(df_filtered["solved_within_run_time"]),
-                "number_of_tasks_solved_within_accuracy_requirement":len(df_filtered["solved_within_accuracy_requirement"]),
-                "number_of_tasks_solved":len(df_filtered["label"]),
+                "number_of_tasks_attempted": len(df_filtered[df_filtered["attempted"]==True]),
+                "number_of_tasks_solved_within_runtime_limit":len(df_filtered[df_filtered["solved_within_run_time"]==True]),
+                "number_of_tasks_solved_within_accuracy_requirement":len(df_filtered[df_filtered["solved_within_accuracy_requirement"]==True]),
+                "number_of_tasks_solved":len(df_filtered[df_filtered["label"]==True]),
                 "sum_of_run_time_of_attempted_tasks":None, # updated below...
                 "max_run_time_of_attempted_tasks":None, # updated below...
                 "solution_submitted_by_due_date":\
                     df_filtered["submitted_by_calendar_due_date"].values[0] # should only be one.  see issue #44.
                     
             }
-            if len(df_filtered[df_filtered["attempted"]]) > 0:
-                logging.info(f"number of attempted tasks: {len(df_filtered[df_filtered['attempted']])}")
+            if len(df_filtered[df_filtered["attempted"]==True]) > 0:
+                logging.info(f"number of attempted tasks: {len(df_filtered[df_filtered['attempted']==True])}")
                 x["sum_of_run_time_of_attempted_tasks"] \
-                    = sum(df_filtered[df_filtered["attempted"]]["overall_run_time_seconds"])
+                    = sum(df_filtered[df_filtered["attempted"]==True]["overall_run_time_seconds"])
                 
                 x["max_run_time_of_attempted_tasks"] \
-                    = max(df_filtered[df_filtered["attempted"]]["overall_run_time_seconds"])
+                    = max(df_filtered[df_filtered["attempted"]==True]["overall_run_time_seconds"])
             else:
                 logging.info(f"it seems the solver did not attempt ANY of the tasks in problem_instance_uuid {problem_instance_uuid}")
 
@@ -634,6 +680,16 @@ if __name__ == "__main__":
             Specify directory for performance_metrics.json files.  
             Freshly calculated performance_metrics.json files will be 
             placed here.
+        """
+    )
+
+    parser.add_argument(
+        "--ham_features_file",
+        type=str,
+        required=True,
+        help="""
+            The/path/to/the Hamiltonian features (.csv) file.  
+            Hamiltonian features in this .csv file are solver-agnostic.
         """
     )
 
