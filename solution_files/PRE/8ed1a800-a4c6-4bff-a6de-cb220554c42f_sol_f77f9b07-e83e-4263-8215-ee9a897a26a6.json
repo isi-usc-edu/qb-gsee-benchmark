@@ -1,0 +1,258 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "f77f9b07-e83e-4263-8215-ee9a897a26a6",
+    "problem_instance_uuid": "8ed1a800-a4c6-4bff-a6de-cb220554c42f",
+    "creation_timestamp": "2024-12-18T15:10:55.020660Z",
+    "is_resource_estimate": true,
+    "contact_info": [
+        {
+            "name": "Max Radin",
+            "email": "radin.max@gmail.com",
+            "institution": "L3Harris"
+        }
+    ],
+    "solution_data": [
+        {
+            "task_uuid": "9030e9c9-0323-413c-a98e-aba16b180ba7",
+            "error_bound": 1.0,
+            "confidence_level": 0.010000000000000009,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 574,
+                    "num_T_gates_per_shot": 23085975232,
+                    "num_shots": 689,
+                    "hardware_failure_tolerance_per_shot": 1.4521039291004456e-06
+                },
+                "physical": {
+                    "num_physical_qubits": 1019242,
+                    "distillation_layer_1_code_distance": 11,
+                    "distillation_layer_2_code_distance": 17,
+                    "data_code_distance": 21,
+                    "data_routing_overhead": 0.5
+                }
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2024-12-14T15:30:05.753814Z",
+                    "wall_clock_stop_time": "2024-12-14T15:30:24.578930Z",
+                    "seconds": 18.825116
+                },
+                "algorithm_run_time": {
+                    "seconds": 431419.16214800003
+                },
+                "overall_time": {
+                    "seconds": 431437.98726400005
+                }
+            }
+        },
+        {
+            "task_uuid": "c7c653b0-4440-4a36-a66b-8b81a9a351c7",
+            "error_bound": 1.0,
+            "confidence_level": 0.010000000000000009,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 827,
+                    "num_T_gates_per_shot": 223193597984,
+                    "num_shots": 5090,
+                    "hardware_failure_tolerance_per_shot": 1.9656193228634322e-07
+                },
+                "physical": {
+                    "num_physical_qubits": 1591250,
+                    "distillation_layer_1_code_distance": 11,
+                    "distillation_layer_2_code_distance": 19,
+                    "data_code_distance": 23,
+                    "data_routing_overhead": 0.5
+                }
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2024-12-14T15:30:30.521894Z",
+                    "wall_clock_stop_time": "2024-12-14T15:31:47.904122Z",
+                    "seconds": 77.382228
+                },
+                "algorithm_run_time": {
+                    "seconds": 4170930.3623260004
+                },
+                "overall_time": {
+                    "seconds": 4171007.7445540004
+                }
+            }
+        },
+        {
+            "task_uuid": "61ad4cfe-b057-4dd8-bd06-ed56347745c1",
+            "error_bound": 1.0,
+            "confidence_level": 0.010000000000000009,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 575,
+                    "num_T_gates_per_shot": 47509931808,
+                    "num_shots": 2904,
+                    "hardware_failure_tolerance_per_shot": 3.4452484887204093e-07
+                },
+                "physical": {
+                    "num_physical_qubits": 1039438,
+                    "distillation_layer_1_code_distance": 11,
+                    "distillation_layer_2_code_distance": 19,
+                    "data_code_distance": 21,
+                    "data_routing_overhead": 0.5
+                }
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2024-12-14T15:32:42.448981Z",
+                    "wall_clock_stop_time": "2024-12-14T15:33:04.241946Z",
+                    "seconds": 21.792965
+                },
+                "algorithm_run_time": {
+                    "seconds": 887841.850662
+                },
+                "overall_time": {
+                    "seconds": 887863.643627
+                }
+            }
+        },
+        {
+            "task_uuid": "fc25a232-d249-4e1c-a9ec-360cab33f779",
+            "error_bound": 1.0,
+            "confidence_level": 0.010000000000000009,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 828,
+                    "num_T_gates_per_shot": 451319695496,
+                    "num_shots": 7745,
+                    "hardware_failure_tolerance_per_shot": 1.2918015090956914e-07
+                },
+                "physical": {
+                    "num_physical_qubits": 1686516,
+                    "distillation_layer_1_code_distance": 13,
+                    "distillation_layer_2_code_distance": 21,
+                    "data_code_distance": 23,
+                    "data_routing_overhead": 0.5
+                }
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2024-12-14T15:33:10.353312Z",
+                    "wall_clock_stop_time": "2024-12-14T15:34:39.499418Z",
+                    "seconds": 89.146106
+                },
+                "algorithm_run_time": {
+                    "seconds": 9900825.819944
+                },
+                "overall_time": {
+                    "seconds": 9900914.966049999
+                }
+            }
+        },
+        {
+            "task_uuid": "202e6184-1e7d-4c02-a82a-f588b6abf809",
+            "error_bound": 1.0,
+            "confidence_level": 0.010000000000000009,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 574,
+                    "num_T_gates_per_shot": 24266671808,
+                    "num_shots": 1316,
+                    "hardware_failure_tolerance_per_shot": 7.602583231847149e-07
+                },
+                "physical": {
+                    "num_physical_qubits": 899914,
+                    "distillation_layer_1_code_distance": 11,
+                    "distillation_layer_2_code_distance": 19,
+                    "data_code_distance": 19,
+                    "data_routing_overhead": 0.5
+                }
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2024-12-14T15:35:31.762348Z",
+                    "wall_clock_stop_time": "2024-12-14T15:35:51.918516Z",
+                    "seconds": 20.156168
+                },
+                "algorithm_run_time": {
+                    "seconds": 453483.429412
+                },
+                "overall_time": {
+                    "seconds": 453503.58558
+                }
+            }
+        },
+        {
+            "task_uuid": "7c8f0a36-cda5-4b33-bb46-4e58a15b37a1",
+            "error_bound": 1.0,
+            "confidence_level": 0.010000000000000009,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 826,
+                    "num_T_gates_per_shot": 104634255288,
+                    "num_shots": 435,
+                    "hardware_failure_tolerance_per_shot": 2.299998121846336e-06
+                },
+                "physical": {
+                    "num_physical_qubits": 1371070,
+                    "distillation_layer_1_code_distance": 11,
+                    "distillation_layer_2_code_distance": 19,
+                    "data_code_distance": 21,
+                    "data_routing_overhead": 0.5
+                }
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2024-12-14T15:35:58.032778Z",
+                    "wall_clock_stop_time": "2024-12-14T15:37:22.831163Z",
+                    "seconds": 84.798385
+                },
+                "algorithm_run_time": {
+                    "seconds": 1955352.6456949997
+                },
+                "overall_time": {
+                    "seconds": 1955437.4440799998
+                }
+            }
+        }
+    ],
+    "compute_hardware_type": "quantum_computer",
+    "solver_details": {
+        "solver_uuid": "5dad4064-cd11-412f-85cb-d722afe3b3de",
+        "solver_short_name": "DF_QPE",
+        "compute_hardware_type": "quantum_computer",
+        "algorithm_details": {
+            "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
+            "algorithm_parameters": {
+                "overlap_csv": "overlaps.csv",
+                "sf_threshold": 1e-12,
+                "df_threshold": 0.001,
+                "max_orbitals": 32
+            }
+        },
+        "software_details": [
+            {
+                "software_name": "pyLIQTR",
+                "software_version": "1.3.3"
+            },
+            {
+                "software_name": "qb-gsee-benchmark",
+                "software_version": "0.1.dev259+ga60a05a"
+            },
+            {
+                "software_name": "Python",
+                "software_version": "3.10.12 (main, Nov  6 2024, 20:22:13) [GCC 11.4.0]"
+            },
+            {
+                "software_name": "qualtran",
+                "software_version": "0.2.0"
+            }
+        ],
+        "quantum_hardware_details": {
+            "quantum_hardware_description": "Optimistic superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494.",
+            "quantum_hardware_parameters": {
+                "num_factories": 4,
+                "physical_error_rate": 0.0001,
+                "cycle_time_microseconds": 1
+            }
+        },
+        "logical_resource_estimate_solution_uuid": "389e632b-7462-451b-82f6-9cc5930fac45",
+        "logical_resource_estimate_solver_uuid": "f2d73e1f-3058-43c4-a634-b6c267c84ff1"
+    },
+    "digital_signature": null
+}
