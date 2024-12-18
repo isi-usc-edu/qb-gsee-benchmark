@@ -421,7 +421,7 @@ def main(args):
                 config_file="../BubbleML/miniML/miniML_config.json", # TODO: expose argument or put it in a config file.
                 solver_uuid=solver_uuid,
                 solver_labels_file=solver_labels_file_name,
-                verbose=False
+                verbose=True # output plots and `probs`.
             ))
             ml_scores[solver_uuid] = {
                 "solvability_ratio":solvability_ratio,
