@@ -1,6 +1,6 @@
 # GSEE Benchmark Standard Report
 
-Report created on 2024-12-18-11-27
+Report created on 2024-12-18-12-11
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
@@ -14,7 +14,7 @@ WARNING!  We only have features calculated for 229/230 Hamiltonians. This report
 
 number of `problem_instances`: 82
 
-`problem_instance.json` with the most tasks: 999999
+`problem_instance.json` with the most tasks: 16 (mo_n2_pincer/8a3787cc-d3d0-42a8-d9a9-7de2aed45208)
 
 number of Hamiltonians (i.e., tasks): 230
 
@@ -29,6 +29,8 @@ maximum number of orbitals: 135
 ## Solver Summary Statistics
 
 number of unique participating solvers: 2
+
+![Solver scatter plot](solver_scatter_plot.png)
 
 ### Solver DMRG_Niagara_cluster_lowest_energy, 16537433-9f4c-4eae-a65d-787dc3b35b59
 
@@ -64,7 +66,9 @@ f1_score: [0.7558139534883721, 0.8531468531468531]
 
 ml_metrics_calculator_version: 1
 
-TODO:  put some charts in here!### Solver DF_QPE, 5dad4064-cd11-412f-85cb-d722afe3b3de
+TODO:  put some charts in here!
+
+### Solver DF_QPE, 5dad4064-cd11-412f-85cb-d722afe3b3de
 
 solver_short_name: DF_QPE
 
@@ -99,3 +103,4 @@ f1_score: [0.995049504950495, 0.9629629629629629]
 ml_metrics_calculator_version: 1
 
 TODO:  put some charts in here!
+

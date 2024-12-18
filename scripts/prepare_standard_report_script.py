@@ -78,7 +78,8 @@ def load_json_files(search_dir) -> list:
 
 
 def main(config):
-   
+    np.random.seed(42)
+
 
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
     output_directory = f"standard_report_{timestamp}"
@@ -94,6 +95,7 @@ def main(config):
     logging.info(f"Output directory: {output_directory}")
 
     performance_metrics_list = load_json_files(search_dir=config["performance_metrics_directory"])
+    problem_instance_list = load_json_files(search_dir=config["problem_instances_directory"])
     solutions_list = load_json_files(search_dir=config["solution_files_directory"])
 
 
@@ -129,6 +131,13 @@ def main(config):
         index=False
     )
 
+    solver_uuid_list = data["solver_uuid"].unique()
+    solver_uuid_dict = {}
+    for solver_uuid in solver_uuid_list:
+        solver_uuid_dict[solver_uuid] = data[data["solver_uuid"]==solver_uuid]["solver_short_name"].iloc[0]
+
+
+
 
 
     # Histogram of number of orbitals
@@ -145,7 +154,32 @@ def main(config):
     plt.savefig(os.path.join(output_directory,f"num_orbitals_histogram.png"))
 
 
-
+    # scatter plot of num_orbitals vs. run_time (for all solvers)
+    plt.figure()
+    plt.title("Run time of solvers (for attempted tasks)")
+    plt.xlabel("Number of spatial orbitals")
+    plt.ylabel("Overall run time in seconds (log)")
+    plt.yscale("log")
+    colors = [tuple(np.random.rand(3)) for _ in range(len(solver_uuid_dict))]
+    markers = ['o', 's', '^', 'D', 'p', '*', 'H', 'X', 'v', '<']
+    series_counter = 0
+    for solver_uuid in solver_uuid_dict:
+        solver_short_name = solver_uuid_dict[solver_uuid]
+        df = data
+        df = df[df["solver_uuid"]==solver_uuid]
+        df = df[df["attempted"]==True]
+        plt.scatter(
+            df["num_orbitals"].values,
+            df["overall_run_time_seconds"].values,
+            color=colors[series_counter],
+            marker=markers[series_counter%len(markers)], # loop around on markers.
+            edgecolor="black",
+            label=f"{solver_short_name} ({solver_uuid[:4]}...)"
+        )
+        series_counter += 1
+    plt.legend()
+    plt.savefig(os.path.join(output_directory,f"solver_scatter_plot.png"))
+    
 
 
 
@@ -170,7 +204,15 @@ def main(config):
         TODO=999999
         file.write(f"## Problem Instance Summary Statistics\n\n")
         file.write(f"number of `problem_instances`: {data['problem_instance_uuid'].nunique()}\n\n")
-        file.write(f"`problem_instance.json` with the most tasks: {TODO}\n\n")
+
+        max_num_tasks = 0
+        for problem_instance in problem_instance_list:
+            if len(problem_instance["tasks"]) > max_num_tasks:
+                max_num_tasks = len(problem_instance["tasks"])
+                problem_instance_uuid = problem_instance["problem_instance_uuid"]
+                problem_instance_short_name = problem_instance["short_name"]
+
+        file.write(f"`problem_instance.json` with the most tasks: {max_num_tasks} ({problem_instance_short_name}/{problem_instance_uuid})\n\n")
         file.write(f"number of Hamiltonians (i.e., tasks): {num_tasks}\n\n")
         file.write(f"minimum number of orbitals: {np.min(data['num_orbitals'])}\n\n")
         file.write(f"median number of orbitals: {np.median(data['num_orbitals'])}\n\n")
@@ -181,8 +223,9 @@ def main(config):
 
         file.write(f"## Solver Summary Statistics\n\n")
         file.write(f"number of unique participating solvers: {data['solver_uuid'].nunique()}\n\n")
+        file.write(f"![Solver scatter plot](solver_scatter_plot.png)\n\n")
 
-        solver_uuid_list = data["solver_uuid"].unique()
+        
         for solver_uuid in solver_uuid_list:
 
             # locate performance metrics for solver from list
@@ -220,7 +263,7 @@ def main(config):
             # file.write(pprint.pformat(filtered_performance_metrics, indent=4))
             # file.write(f"\n```\n")
                     
-            file.write(f"TODO:  put some charts in here!")
+            file.write(f"TODO:  put the ML charts in here!\n\n")
 
 
 
