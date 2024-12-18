@@ -142,8 +142,12 @@ def main(config):
 
     # Histogram of number of orbitals
     #===============================================================
+    # note that the Hamiltonian features are repeated for each solver_uuid in `data`
+    # just pick the first solver_uuid and filter by that.  
+    # that filter provides a list of all Hamiltonians with no double counting.
+    df = data[data["solver_uuid"]==solver_uuid_list[0]]
     plt.hist(
-        data["num_orbitals"],
+        df["num_orbitals"],
         bins=[10*x for x in range(int(max(data["num_orbitals"])/10+2))], # bin edges by 10
         edgecolor="black",
         alpha=0.7
