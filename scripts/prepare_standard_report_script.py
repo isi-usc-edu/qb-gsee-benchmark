@@ -110,17 +110,7 @@ def main(config):
     logging.info(f"number of Hamiltonians we have features calculated for: {num_features_calculated}")
     
     
-    # TODO: fix performance_metrics script so that `num_orbitals` is in the labels.csv file.
-    # hacky workaround for now:
-    aggregated_solver_labels = pd.merge(
-        aggregated_solver_labels,
-        pd.read_csv("num_orbitals_cheat_sheet.csv"),
-        on="task_uuid",
-        how="outer" # should throw a NaN in the sheet if this is incomplete.
-    )
-
-
-
+    
     if num_features_calculated != num_tasks:
         logging.warn(f"we have an inconsistency in the number of tasks and the number of features calculated!")
         logging.info(f"continuing...")
