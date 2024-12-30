@@ -18,6 +18,7 @@
 import os
 import argparse
 import datetime
+import shutil
 from pathlib import Path
 import json
 from urllib.parse import urlparse
@@ -294,7 +295,7 @@ def main(args):
                     # TODO:  account for differences in units.  E.g., Hartree vs. kCal/mol vs. other.
                 except Exception as e:
                     logging.error(f'Error: {e}', exc_info=True)
-                    logging.info(f"warning!  no reference_energy specified in task {task_uuid}")
+                    logging.warning(f"warning!  no reference_energy specified in task {task_uuid}")
                     reference_energy = None
 
 
@@ -313,8 +314,24 @@ def main(args):
                     # this Hamiltonian
                     attempted = True 
 
-                    overall_run_time_seconds = results["run_time"]["overall_time"]["seconds"]
-                    solved_within_run_time = overall_run_time_seconds <= time_limit_seconds
+                    # TODO: issue-#94:  physical resource estimate (PRE) not calculated for LRE
+                    if is_resource_estimate:
+                        try:
+                            overall_run_time_seconds = results["run_time"]["overall_time"]["seconds"]
+                            solved_within_run_time = overall_run_time_seconds <= time_limit_seconds
+                        except Exception as e:
+                            logging.error(f'Error: {e}', exc_info=True)
+                            logging.error("physical resource estimate does not provide overall run time.")
+                            overall_run_time_seconds = None
+                            solved_within_run_time = False
+                            attempted = False
+                            solved_within_accuracy_requirement = True # always true for resource estimates.
+                            label = None
+                    else:
+                        # not a resource estimate...
+                        overall_run_time_seconds = results["run_time"]["overall_time"]["seconds"]
+                        solved_within_run_time = overall_run_time_seconds <= time_limit_seconds
+
                     
                     
                     # TODO: check calendar due date submission.
@@ -339,7 +356,7 @@ def main(args):
                             # TODO:  account for differences in units.  E.g., Hartree vs. kCal/mol vs. other.
                         except Exception as e:
                             logging.error(f'Error: {e}', exc_info=True)
-                            logging.info(f"warning!  no energy target specified in task {task_uuid}")
+                            logging.warning(f"warning!  no energy target specified in task {task_uuid}")
                             solved_within_accuracy_requirement = False
                         
                         # TODO: issue-44.  handle case when more than one solution submitted by
@@ -388,8 +405,11 @@ def main(args):
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
     aggregated_labels_file_name = f"aggregated_solver_labels_{timestamp}.csv"
     aggregated_results.to_csv(aggregated_labels_file_name, index=False)
+    shutil.copy2(aggregated_labels_file_name, "aggregated_solver_labels.csv")
     logging.info(f"wrote interim output to {aggregated_labels_file_name}")
+    logging.info(f"also updated `aggregated_solver_labels.csv` with latest results.")
     logging.info(f"=============================================")
+    
     
 
 
