@@ -159,7 +159,7 @@ def trainML(
         #shap.force_plot(explainer.expected_value[class_index], shap_values[class_index], X_train, matplotlib=True, show=False)
 
         plt.savefig(
-            f"shap_summary_plot_solver={solver_uuid}_{timestamp}.png",
+            f"shap_summary_plot_solver_{solver_uuid}_{timestamp}.png",
             format="png"
         )
         
@@ -179,7 +179,7 @@ def trainML(
                     "prob_class_1": probs[:,1]
                 }
             )
-            probs_file_name = f"probs_solver={solver_uuid}_{timestamp}.csv"
+            probs_file_name = f"probs_solver_{solver_uuid}_{timestamp}.csv"
             df.to_csv(probs_file_name, index=False)
             logging.info(f"wrote probs to file {probs_file_name}.")
     
@@ -306,7 +306,7 @@ def compute_ratio_of_solved_to_unsolved(
         cbar.set_label("Probability that solver can compute GSE (label==True)",rotation=270,x=1.25)
         plt.title('Embedding: ' + latent_model_name)
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
-        plt.savefig(f"plot_solver={solver_uuid}_{timestamp}.png")
+        plt.savefig(f"plot_solver_{solver_uuid}_{timestamp}.png")
 
         '''
         # Select the top 5 most important features
