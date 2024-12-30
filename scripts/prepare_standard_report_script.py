@@ -213,6 +213,7 @@ def main(config):
     plt.figure()
     plt.title("Run time of solvers (for attempted tasks)")
     plt.xlabel("Number of spatial orbitals")
+    plt.xlim(0,10*np.ceil(max(data["num_orbitals"])/10))
     plt.ylabel("Overall run time in seconds")
     colors = [tuple(np.random.rand(3)) for _ in range(len(solver_uuid_dict))]
     # markers = ['o', 's', '^', 'D', 'p', '*', 'H', 'X', 'v', '<']
@@ -253,6 +254,45 @@ def main(config):
     
 
 
+    # scatter plot of num_orbitals vs. run_time for EACH solver
+    for solver_uuid in solver_uuid_list:
+        df = data
+        df = df[df["solver_uuid"]==solver_uuid] 
+        
+        solver_short_name = solver_uuid_dict[solver_uuid]
+        
+        plt.figure()
+        plt.title(f"{solver_short_name}/{solver_uuid[:4]}...")
+        plt.xlabel("Number of spatial orbitals")
+        plt.xlim(0,10*np.ceil(max(data["num_orbitals"])/10))
+        plt.ylabel("Overall run time in seconds")
+        df = df[df["attempted"]==True] # attempted
+        
+        df_solved = df[df["label"]==True] # Solved!
+        plt.scatter(
+            df_solved["num_orbitals"].values,
+            df_solved["overall_run_time_seconds"].values,
+            color="blue",
+            edgecolor="black",
+            marker="^", # triangle up for success.
+            label=f"Task success {solver_short_name} ({solver_uuid[:4]}...)"
+        )
+        
+        df_failed = df[df["label"]==False] # failed to solve the task
+        plt.scatter(
+            df_failed["num_orbitals"].values,
+            df_failed["overall_run_time_seconds"].values,
+            color="red",
+            marker="v", # triangle down for failure.
+            edgecolor="black",
+            label=f"Task failed {solver_short_name} ({solver_uuid[:4]}...)"
+        )
+        
+        plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+        plt.tight_layout()
+        plt.savefig(os.path.join(output_directory,f"solver_{solver_uuid}_plot.png"))
+       
+    
 
 
 
@@ -315,6 +355,7 @@ def main(config):
         
         for solver_uuid in solver_uuid_list:
 
+                                    
             # locate performance metrics for solver from list
             failed_to_locate_associated_performance_metrics_file = True
             for performance_metrics in performance_metrics_list:
@@ -336,7 +377,11 @@ def main(config):
                 "top_level_results",
                 "ml_metrics"                
             ]
+            
             file.write(f"### Solver {performance_metrics['solver_short_name']}, {solver_uuid}\n\n")
+            
+            file.write(f"![Solver success/failure plot](solver_{solver_uuid}_plot.png)\n\n")
+            
             filtered_performance_metrics = {key: performance_metrics[key] for key in write_out_fields if key in performance_metrics}
             for k, v in filtered_performance_metrics.items():
                 if not isinstance(v, dict):
@@ -352,7 +397,6 @@ def main(config):
             
             file.write(f"![Solver miniML plot](plot_solver_{solver_uuid}.png)\n\n")
             file.write(f"![SHAP summary plot](shap_summary_plot_solver_{solver_uuid}.png)\n\n")
-            
         
 
 

@@ -1,6 +1,6 @@
 # GSEE Benchmark Standard Report
 
-Report created on 2024-12-30-12-55
+Report created on 2024-12-30-14-26
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
@@ -42,6 +42,8 @@ number of unique participating solvers: 2
 
 ### Solver DMRG_Niagara_cluster_lowest_energy, 16537433-9f4c-4eae-a65d-787dc3b35b59
 
+![Solver success/failure plot](solver_16537433-9f4c-4eae-a65d-787dc3b35b59_plot.png)
+
 solver_short_name: DMRG_Niagara_cluster_lowest_energy
 
 performance_metrics_uuid: 4fc59937-7062-441c-8469-7971ecd6d5c9
@@ -79,6 +81,8 @@ ml_metrics_calculator_version: 1
 ![SHAP summary plot](shap_summary_plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png)
 
 ### Solver DF_QPE, 5dad4064-cd11-412f-85cb-d722afe3b3de
+
+![Solver success/failure plot](solver_5dad4064-cd11-412f-85cb-d722afe3b3de_plot.png)
 
 solver_short_name: DF_QPE
 
