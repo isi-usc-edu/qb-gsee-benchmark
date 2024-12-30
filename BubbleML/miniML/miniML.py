@@ -6,6 +6,7 @@ import argparse
 import logging
 import datetime
 import os
+import shutil
 import sys, getopt
 import numpy as np
 import sklearn
@@ -140,8 +141,7 @@ def trainML(
         )
         logging.info('Percent of solvable space: ', str(ml_solvability_ratio))
 
-        timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
-
+        
 
         #explain all the predictions in the test set
         plt.figure()
@@ -159,7 +159,7 @@ def trainML(
         #shap.force_plot(explainer.expected_value[class_index], shap_values[class_index], X_train, matplotlib=True, show=False)
 
         plt.savefig(
-            f"shap_summary_plot_solver_{solver_uuid}_{timestamp}.png",
+            f"ml_artifacts/shap_summary_plot_solver_{solver_uuid}.png",
             format="png"
         )
         
@@ -179,7 +179,7 @@ def trainML(
                     "prob_class_1": probs[:,1]
                 }
             )
-            probs_file_name = f"probs_solver_{solver_uuid}_{timestamp}.csv"
+            probs_file_name = f"ml_artifacts/probs_solver_{solver_uuid}.csv"
             df.to_csv(probs_file_name, index=False)
             logging.info(f"wrote probs to file {probs_file_name}.")
     
@@ -297,6 +297,7 @@ def compute_ratio_of_solved_to_unsolved(
 
 
         #generated points
+        plt.figure()
         plt.scatter(x=XX.flatten(), y=YY.flatten(), c=colors, cmap=cmap, norm = norm)
 
         #projected training data
@@ -305,8 +306,7 @@ def compute_ratio_of_solved_to_unsolved(
         cbar = plt.colorbar()
         cbar.set_label("Probability that solver can compute GSE (label==True)",rotation=270,x=1.25)
         plt.title('Embedding: ' + latent_model_name)
-        timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
-        plt.savefig(f"plot_solver_{solver_uuid}_{timestamp}.png")
+        plt.savefig(f"ml_artifacts/plot_solver_{solver_uuid}.png")
 
         '''
         # Select the top 5 most important features
@@ -366,6 +366,16 @@ def main(args):
     #     console_handler.setFormatter(formatter)
     #     logger.addHandler(console_handler)
 
+
+    # clear out the ml_artifacts directory
+    try:
+        shutil.rmtree("ml_artifacts")
+    except Exception as e:
+        logging.error(f'Error: {e}', exc_info=True)
+        logging.error(f"attempted to remove the directory `ml_artifacts`...")
+    
+    # recreate the clean/empty output_directory
+    os.mkdir("ml_artifacts")
 
     mini_ml_config_file_name = args.config_file
     with open(mini_ml_config_file_name, 'r') as j:
