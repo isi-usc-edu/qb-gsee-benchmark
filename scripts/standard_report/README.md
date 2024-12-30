@@ -1,20 +1,18 @@
 # GSEE Benchmark Standard Report
 
-Report created on 2024-12-30-14-26
+Report created on 2024-12-30-17-05
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
-Input data: `aggregated_solver_labels.csv`, last modified Mon Dec 30 10:32:50 2024
+Input data: `aggregated_solver_labels.csv`, last modified Mon Dec 30 16:30:37 2024
 
-Input data: `Hamiltonian_features.csv`, last modified Mon Dec 16 11:50:19 2024
+Input data: `Hamiltonian_features.csv`, last modified Mon Dec 30 16:29:03 2024
 
-WARNING!  We only have features calculated for 229/230 Hamiltonians. This report is based on partial results!
+Latest creation time for a `problem_instance.json` file: Wed Dec 11 11:17:02 2024
 
-Latest creation time for a `problem_instance.json` file: Fri Dec 13 23:09:21 2024
+Latest creation time for a `performance_metrics.json` file: Mon Dec 30 17:05:08 2024
 
-Latest creation time for a `performance_metrics.json` file: Mon Dec 30 12:05:13 2024
-
-Latest creation time for a `solution.json` file: Mon Dec 30 10:32:50 2024
+Latest creation time for a `solution.json` file: Mon Dec 30 16:29:03 2024
 
 ## Problem Instance Summary Statistics
 
@@ -46,9 +44,9 @@ number of unique participating solvers: 2
 
 solver_short_name: DMRG_Niagara_cluster_lowest_energy
 
-performance_metrics_uuid: 4fc59937-7062-441c-8469-7971ecd6d5c9
+performance_metrics_uuid: 8db26914-87ff-4ba9-b69d-6ae8c3356ce1
 
-creation_timestamp: 2024-12-30T14:53:42.218159+00:00
+creation_timestamp: 2024-12-30T22:04:37.630488+00:00
 
 number_of_problem_instances: 82
 
@@ -72,7 +70,7 @@ sum_of_run_time_of_attempted_tasks: 1824772.0337238186
 
 solvability_ratio: 0.0
 
-f1_score: [0.7558139534883721, 0.8531468531468531]
+f1_score: [0.7586206896551724, 0.8531468531468531]
 
 ml_metrics_calculator_version: 1
 
@@ -86,9 +84,9 @@ ml_metrics_calculator_version: 1
 
 solver_short_name: DF_QPE
 
-performance_metrics_uuid: 97a58710-8702-4721-8971-288144232e2f
+performance_metrics_uuid: 8c1e6625-ada5-4a59-818c-7a1d70c8ce35
 
-creation_timestamp: 2024-12-30T14:53:43.965750+00:00
+creation_timestamp: 2024-12-30T22:04:38.396815+00:00
 
 number_of_problem_instances: 82
 
@@ -110,9 +108,9 @@ max_run_time_of_attempted_tasks: 30188593.464838002
 
 sum_of_run_time_of_attempted_tasks: 374908704.304665
 
-solvability_ratio: 0.0134
+solvability_ratio: 0.009
 
-f1_score: [0.9976133651551312, 0.9743589743589743]
+f1_score: [0.997624703087886, 0.9743589743589743]
 
 ml_metrics_calculator_version: 1
 

@@ -1,1 +1,357 @@
-empty
+empty2024-12-30 17:05:50,945 - INFO - ===============================================
+2024-12-30 17:05:50,946 - INFO - Starting to prepare the standard report...
+2024-12-30 17:05:50,949 - INFO - overall start time: 2024-12-30 17:05:50.945105
+2024-12-30 17:05:50,950 - INFO - aggregated_solver_labels_file: aggregated_solver_labels.csv
+2024-12-30 17:05:50,950 - INFO - hamiltonian_features_file: Hamiltonian_features.csv
+2024-12-30 17:05:50,951 - INFO - performance_metrics_directory: ../performance_metrics
+2024-12-30 17:05:50,951 - INFO - problem_instances_directory: ../problem_instances
+2024-12-30 17:05:50,952 - INFO - solution_files_directory: ../solution_files
+2024-12-30 17:05:50,952 - INFO - ml_artifacts_directory: ./ml_artifacts
+2024-12-30 17:05:50,952 - INFO - Output directory: standard_report
+2024-12-30 17:05:51,009 - INFO - merging Hamiltonian features and aggregated solver labels...
+2024-12-30 17:05:51,017 - INFO - number of entries in aggregated_solver_labels.csv: 460
+2024-12-30 17:05:51,018 - INFO - number tasks (unique Hamiltonians): 230
+2024-12-30 17:05:51,041 - INFO - number of Hamiltonians we have features calculated for: 230
+2024-12-30 17:05:53,684 - DEBUG - Reading 'maxp' table from disk
+2024-12-30 17:05:53,684 - DEBUG - Decompiling 'maxp' table
+2024-12-30 17:05:53,685 - DEBUG - Took 0.001s to load 'maxp'
+2024-12-30 17:05:53,685 - DEBUG - Took 0.000s to prune 'maxp'
+2024-12-30 17:05:53,685 - INFO - maxp pruned
+2024-12-30 17:05:53,687 - DEBUG - Reading 'cmap' table from disk
+2024-12-30 17:05:53,687 - DEBUG - Decompiling 'cmap' table
+2024-12-30 17:05:53,688 - DEBUG - Reading 'post' table from disk
+2024-12-30 17:05:53,689 - DEBUG - Decompiling 'post' table
+2024-12-30 17:05:53,696 - DEBUG - Took 0.009s to load 'cmap'
+2024-12-30 17:05:53,696 - DEBUG - Took 0.000s to prune 'cmap'
+2024-12-30 17:05:53,697 - INFO - cmap pruned
+2024-12-30 17:05:53,697 - INFO - fpgm dropped
+2024-12-30 17:05:53,697 - INFO - prep dropped
+2024-12-30 17:05:53,697 - INFO - cvt  dropped
+2024-12-30 17:05:53,697 - INFO - kern dropped
+2024-12-30 17:05:53,697 - DEBUG - Took 0.000s to load 'post'
+2024-12-30 17:05:53,698 - DEBUG - Took 0.000s to prune 'post'
+2024-12-30 17:05:53,698 - INFO - post pruned
+2024-12-30 17:05:53,701 - INFO - GPOS dropped
+2024-12-30 17:05:53,701 - INFO - GSUB dropped
+2024-12-30 17:05:53,701 - DEBUG - Reading 'glyf' table from disk
+2024-12-30 17:05:53,702 - DEBUG - Decompiling 'glyf' table
+2024-12-30 17:05:53,702 - DEBUG - Reading 'loca' table from disk
+2024-12-30 17:05:53,702 - DEBUG - Decompiling 'loca' table
+2024-12-30 17:05:53,702 - DEBUG - Reading 'head' table from disk
+2024-12-30 17:05:53,702 - DEBUG - Decompiling 'head' table
+2024-12-30 17:05:53,708 - DEBUG - Took 0.007s to load 'glyf'
+2024-12-30 17:05:53,709 - DEBUG - Took 0.000s to prune 'glyf'
+2024-12-30 17:05:53,709 - INFO - glyf pruned
+2024-12-30 17:05:53,709 - DEBUG - Took 0.001s to close glyph list over 'cmap'
+2024-12-30 17:05:53,710 - INFO - Added gid0 to subset
+2024-12-30 17:05:53,710 - INFO - Closing glyph list over 'glyf': 49 glyphs before
+2024-12-30 17:05:53,710 - INFO - Glyph names: ['.notdef', 'B', 'D', 'E', 'F', 'G', 'I', 'M', 'N', 'P', 'Q', 'R', 'S', 'a', 'b', 'c', 'comma', 'd', 'e', 'eight', 'f', 'five', 'four', 'g', 'h', 'hyphen', 'i', 'k', 'l', 'm', 'n', 'nine', 'o', 'one', 'p', 'r', 's', 'seven', 'six', 'space', 't', 'three', 'two', 'u', 'underscore', 'v', 'w', 'y', 'zero']
+2024-12-30 17:05:53,711 - INFO - Glyph IDs:   [0, 3, 15, 16, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 37, 39, 40, 41, 42, 44, 48, 49, 51, 52, 53, 54, 66, 68, 69, 70, 71, 72, 73, 74, 75, 76, 78, 79, 80, 81, 82, 83, 85, 86, 87, 88, 89, 90, 92]
+2024-12-30 17:05:53,711 - INFO - Closed glyph list over 'glyf': 49 glyphs after
+2024-12-30 17:05:53,711 - INFO - Glyph names: ['.notdef', 'B', 'D', 'E', 'F', 'G', 'I', 'M', 'N', 'P', 'Q', 'R', 'S', 'a', 'b', 'c', 'comma', 'd', 'e', 'eight', 'f', 'five', 'four', 'g', 'h', 'hyphen', 'i', 'k', 'l', 'm', 'n', 'nine', 'o', 'one', 'p', 'r', 's', 'seven', 'six', 'space', 't', 'three', 'two', 'u', 'underscore', 'v', 'w', 'y', 'zero']
+2024-12-30 17:05:53,711 - INFO - Glyph IDs:   [0, 3, 15, 16, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 37, 39, 40, 41, 42, 44, 48, 49, 51, 52, 53, 54, 66, 68, 69, 70, 71, 72, 73, 74, 75, 76, 78, 79, 80, 81, 82, 83, 85, 86, 87, 88, 89, 90, 92]
+2024-12-30 17:05:53,711 - DEBUG - Took 0.002s to close glyph list over 'glyf'
+2024-12-30 17:05:53,713 - INFO - Retaining 49 glyphs
+2024-12-30 17:05:53,714 - INFO - head subsetting not needed
+2024-12-30 17:05:53,714 - INFO - hhea subsetting not needed
+2024-12-30 17:05:53,714 - INFO - maxp subsetting not needed
+2024-12-30 17:05:53,715 - INFO - OS/2 subsetting not needed
+2024-12-30 17:05:53,715 - DEBUG - Reading 'hmtx' table from disk
+2024-12-30 17:05:53,715 - DEBUG - Decompiling 'hmtx' table
+2024-12-30 17:05:53,715 - DEBUG - Reading 'hhea' table from disk
+2024-12-30 17:05:53,715 - DEBUG - Decompiling 'hhea' table
+2024-12-30 17:05:53,717 - DEBUG - Took 0.003s to subset 'hmtx'
+2024-12-30 17:05:53,717 - INFO - hmtx subsetted
+2024-12-30 17:05:53,720 - DEBUG - Took 0.002s to subset 'cmap'
+2024-12-30 17:05:53,720 - INFO - cmap subsetted
+2024-12-30 17:05:53,720 - INFO - loca subsetting not needed
+2024-12-30 17:05:53,720 - DEBUG - Took 0.000s to subset 'post'
+2024-12-30 17:05:53,720 - INFO - post subsetted
+2024-12-30 17:05:53,720 - INFO - gasp subsetting not needed
+2024-12-30 17:05:53,721 - INFO - FFTM NOT subset; don't know how to subset
+2024-12-30 17:05:53,721 - DEBUG - Reading 'GDEF' table from disk
+2024-12-30 17:05:53,721 - DEBUG - Decompiling 'GDEF' table
+2024-12-30 17:05:53,724 - DEBUG - Took 0.003s to subset 'GDEF'
+2024-12-30 17:05:53,724 - INFO - GDEF subsetted
+2024-12-30 17:05:53,724 - INFO - name subsetting not needed
+2024-12-30 17:05:53,725 - DEBUG - Took 0.001s to subset 'glyf'
+2024-12-30 17:05:53,725 - INFO - glyf subsetted
+2024-12-30 17:05:53,725 - DEBUG - Took 0.000s to subset GlyphOrder
+2024-12-30 17:05:53,725 - DEBUG - Took 0.000s to prune 'head'
+2024-12-30 17:05:53,725 - INFO - head pruned
+2024-12-30 17:05:53,726 - DEBUG - Reading 'OS/2' table from disk
+2024-12-30 17:05:53,726 - DEBUG - Decompiling 'OS/2' table
+2024-12-30 17:05:53,726 - INFO - OS/2 Unicode ranges pruned: [0]
+2024-12-30 17:05:53,726 - INFO - OS/2 CodePage ranges pruned: [0]
+2024-12-30 17:05:53,727 - DEBUG - Took 0.001s to prune 'glyf'
+2024-12-30 17:05:53,727 - INFO - glyf pruned
+2024-12-30 17:05:53,728 - DEBUG - Took 0.000s to prune 'GDEF'
+2024-12-30 17:05:53,728 - INFO - GDEF pruned
+2024-12-30 17:05:53,728 - DEBUG - Reading 'name' table from disk
+2024-12-30 17:05:53,728 - DEBUG - Decompiling 'name' table
+2024-12-30 17:05:53,729 - DEBUG - Reading 'gasp' table from disk
+2024-12-30 17:05:53,729 - DEBUG - Decompiling 'gasp' table
+2024-12-30 17:05:53,729 - DEBUG - Reading 'FFTM' table from disk
+2024-12-30 17:05:53,730 - DEBUG - Decompiling 'FFTM' table
+2024-12-30 17:05:53,730 - DEBUG - Took 0.002s to prune 'name'
+2024-12-30 17:05:53,730 - INFO - name pruned
+2024-12-30 17:05:53,732 - DEBUG - Compiling 'glyf' table
+2024-12-30 17:05:53,744 - DEBUG - Writing 'glyf' table to disk
+2024-12-30 17:05:53,745 - DEBUG - Compiling 'maxp' table
+2024-12-30 17:05:53,745 - DEBUG - Writing 'maxp' table to disk
+2024-12-30 17:05:53,746 - DEBUG - Compiling 'loca' table
+2024-12-30 17:05:53,746 - DEBUG - Writing 'loca' table to disk
+2024-12-30 17:05:53,747 - DEBUG - Compiling 'head' table
+2024-12-30 17:05:53,747 - DEBUG - Writing 'head' table to disk
+2024-12-30 17:05:53,748 - DEBUG - Compiling 'hmtx' table
+2024-12-30 17:05:53,749 - DEBUG - Writing 'hmtx' table to disk
+2024-12-30 17:05:53,749 - DEBUG - Compiling 'hhea' table
+2024-12-30 17:05:53,750 - DEBUG - Writing 'hhea' table to disk
+2024-12-30 17:05:53,750 - DEBUG - Compiling 'OS/2' table
+2024-12-30 17:05:53,751 - DEBUG - Writing 'OS/2' table to disk
+2024-12-30 17:05:53,751 - DEBUG - Compiling 'cmap' table
+2024-12-30 17:05:53,752 - DEBUG - Writing 'cmap' table to disk
+2024-12-30 17:05:53,752 - DEBUG - Compiling 'name' table
+2024-12-30 17:05:53,753 - DEBUG - Writing 'name' table to disk
+2024-12-30 17:05:53,753 - DEBUG - Compiling 'post' table
+2024-12-30 17:05:53,754 - DEBUG - Writing 'post' table to disk
+2024-12-30 17:05:53,754 - DEBUG - Compiling 'gasp' table
+2024-12-30 17:05:53,754 - DEBUG - Writing 'gasp' table to disk
+2024-12-30 17:05:53,755 - DEBUG - Compiling 'FFTM' table
+2024-12-30 17:05:53,755 - DEBUG - Writing 'FFTM' table to disk
+2024-12-30 17:05:53,756 - DEBUG - Compiling 'GDEF' table
+2024-12-30 17:05:53,757 - DEBUG - Writing 'GDEF' table to disk
+2024-12-30 17:05:53,759 - DEBUG - Reading 'maxp' table from disk
+2024-12-30 17:05:53,760 - DEBUG - Decompiling 'maxp' table
+2024-12-30 17:05:53,760 - DEBUG - Took 0.001s to load 'maxp'
+2024-12-30 17:05:53,761 - DEBUG - Took 0.000s to prune 'maxp'
+2024-12-30 17:05:53,761 - INFO - maxp pruned
+2024-12-30 17:05:53,761 - DEBUG - Reading 'cmap' table from disk
+2024-12-30 17:05:53,762 - DEBUG - Decompiling 'cmap' table
+2024-12-30 17:05:53,763 - DEBUG - Reading 'post' table from disk
+2024-12-30 17:05:53,764 - DEBUG - Decompiling 'post' table
+2024-12-30 17:05:53,772 - DEBUG - Took 0.010s to load 'cmap'
+2024-12-30 17:05:53,772 - DEBUG - Took 0.000s to prune 'cmap'
+2024-12-30 17:05:53,772 - INFO - cmap pruned
+2024-12-30 17:05:53,773 - INFO - fpgm dropped
+2024-12-30 17:05:53,773 - INFO - prep dropped
+2024-12-30 17:05:53,773 - INFO - cvt  dropped
+2024-12-30 17:05:53,774 - INFO - kern dropped
+2024-12-30 17:05:53,774 - DEBUG - Took 0.000s to load 'post'
+2024-12-30 17:05:53,774 - DEBUG - Took 0.000s to prune 'post'
+2024-12-30 17:05:53,775 - INFO - post pruned
+2024-12-30 17:05:53,775 - INFO - GPOS dropped
+2024-12-30 17:05:53,776 - INFO - GSUB dropped
+2024-12-30 17:05:53,776 - DEBUG - Reading 'glyf' table from disk
+2024-12-30 17:05:53,776 - DEBUG - Decompiling 'glyf' table
+2024-12-30 17:05:53,777 - DEBUG - Reading 'loca' table from disk
+2024-12-30 17:05:53,777 - DEBUG - Decompiling 'loca' table
+2024-12-30 17:05:53,777 - DEBUG - Reading 'head' table from disk
+2024-12-30 17:05:53,778 - DEBUG - Decompiling 'head' table
+2024-12-30 17:05:53,782 - DEBUG - Took 0.006s to load 'glyf'
+2024-12-30 17:05:53,783 - DEBUG - Took 0.000s to prune 'glyf'
+2024-12-30 17:05:53,783 - INFO - glyf pruned
+2024-12-30 17:05:53,784 - DEBUG - Took 0.001s to close glyph list over 'cmap'
+2024-12-30 17:05:53,785 - INFO - Added gid0 to subset
+2024-12-30 17:05:53,785 - INFO - Closing glyph list over 'MATH': 63 glyphs before
+2024-12-30 17:05:53,785 - INFO - Glyph names: ['.notdef', 'D', 'E', 'F', 'G', 'H', 'I', 'L', 'M', 'N', 'P', 'Q', 'R', 'T', 'W', 'a', 'b', 'bracketleft', 'bracketright', 'c', 'colon', 'comma', 'd', 'e', 'eight', 'f', 'fi', 'five', 'four', 'g', 'h', 'hyphen', 'i', 'k', 'l', 'm', 'n', 'nine', 'o', 'one', 'p', 'parenleft', 'parenright', 'period', 'plus', 'q', 'r', 's', 'seven', 'six', 'slash', 'space', 't', 'three', 'two', 'u', 'underscore', 'uniFB00', 'v', 'w', 'x', 'y', 'zero']
+2024-12-30 17:05:53,786 - INFO - Glyph IDs:   [0, 3, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 39, 40, 41, 42, 43, 44, 47, 48, 49, 51, 52, 53, 55, 58, 62, 64, 66, 68, 69, 70, 71, 72, 73, 74, 75, 76, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 3314, 3315]
+2024-12-30 17:05:53,787 - DEBUG - Reading 'MATH' table from disk
+2024-12-30 17:05:53,787 - DEBUG - Decompiling 'MATH' table
+2024-12-30 17:05:53,789 - INFO - Closed glyph list over 'MATH': 75 glyphs after
+2024-12-30 17:05:53,790 - INFO - Glyph names: ['.notdef', 'D', 'E', 'F', 'G', 'H', 'I', 'L', 'M', 'N', 'P', 'Q', 'R', 'T', 'W', 'a', 'b', 'bracketleft', 'bracketright', 'c', 'colon', 'comma', 'd', 'e', 'eight', 'f', 'fi', 'five', 'four', 'g', 'h', 'hyphen', 'i', 'k', 'l', 'm', 'n', 'nine', 'o', 'one', 'p', 'parenleft', 'parenright', 'period', 'plus', 'q', 'r', 's', 'seven', 'six', 'slash', 'space', 't', 'three', 'two', 'u', 'underscore', 'uni239B', 'uni239C', 'uni239D', 'uni239E', 'uni239F', 'uni23A0', 'uni23A1', 'uni23A2', 'uni23A3', 'uni23A4', 'uni23A5', 'uni23A6', 'uniFB00', 'v', 'w', 'x', 'y', 'zero']
+2024-12-30 17:05:53,790 - INFO - Glyph IDs:   [0, 3, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 39, 40, 41, 42, 43, 44, 47, 48, 49, 51, 52, 53, 55, 58, 62, 64, 66, 68, 69, 70, 71, 72, 73, 74, 75, 76, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 2358, 2359, 2360, 2361, 2362, 2363, 2364, 2365, 2366, 2367, 2368, 2369, 3314, 3315]
+2024-12-30 17:05:53,791 - DEBUG - Took 0.005s to close glyph list over 'MATH'
+2024-12-30 17:05:53,791 - INFO - Closing glyph list over 'glyf': 75 glyphs before
+2024-12-30 17:05:53,791 - INFO - Glyph names: ['.notdef', 'D', 'E', 'F', 'G', 'H', 'I', 'L', 'M', 'N', 'P', 'Q', 'R', 'T', 'W', 'a', 'b', 'bracketleft', 'bracketright', 'c', 'colon', 'comma', 'd', 'e', 'eight', 'f', 'fi', 'five', 'four', 'g', 'h', 'hyphen', 'i', 'k', 'l', 'm', 'n', 'nine', 'o', 'one', 'p', 'parenleft', 'parenright', 'period', 'plus', 'q', 'r', 's', 'seven', 'six', 'slash', 'space', 't', 'three', 'two', 'u', 'underscore', 'uni239B', 'uni239C', 'uni239D', 'uni239E', 'uni239F', 'uni23A0', 'uni23A1', 'uni23A2', 'uni23A3', 'uni23A4', 'uni23A5', 'uni23A6', 'uniFB00', 'v', 'w', 'x', 'y', 'zero']
+2024-12-30 17:05:53,792 - INFO - Glyph IDs:   [0, 3, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 39, 40, 41, 42, 43, 44, 47, 48, 49, 51, 52, 53, 55, 58, 62, 64, 66, 68, 69, 70, 71, 72, 73, 74, 75, 76, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 2358, 2359, 2360, 2361, 2362, 2363, 2364, 2365, 2366, 2367, 2368, 2369, 3314, 3315]
+2024-12-30 17:05:53,792 - INFO - Closed glyph list over 'glyf': 75 glyphs after
+2024-12-30 17:05:53,793 - INFO - Glyph names: ['.notdef', 'D', 'E', 'F', 'G', 'H', 'I', 'L', 'M', 'N', 'P', 'Q', 'R', 'T', 'W', 'a', 'b', 'bracketleft', 'bracketright', 'c', 'colon', 'comma', 'd', 'e', 'eight', 'f', 'fi', 'five', 'four', 'g', 'h', 'hyphen', 'i', 'k', 'l', 'm', 'n', 'nine', 'o', 'one', 'p', 'parenleft', 'parenright', 'period', 'plus', 'q', 'r', 's', 'seven', 'six', 'slash', 'space', 't', 'three', 'two', 'u', 'underscore', 'uni239B', 'uni239C', 'uni239D', 'uni239E', 'uni239F', 'uni23A0', 'uni23A1', 'uni23A2', 'uni23A3', 'uni23A4', 'uni23A5', 'uni23A6', 'uniFB00', 'v', 'w', 'x', 'y', 'zero']
+2024-12-30 17:05:53,793 - INFO - Glyph IDs:   [0, 3, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 39, 40, 41, 42, 43, 44, 47, 48, 49, 51, 52, 53, 55, 58, 62, 64, 66, 68, 69, 70, 71, 72, 73, 74, 75, 76, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 2358, 2359, 2360, 2361, 2362, 2363, 2364, 2365, 2366, 2367, 2368, 2369, 3314, 3315]
+2024-12-30 17:05:53,793 - DEBUG - Took 0.002s to close glyph list over 'glyf'
+2024-12-30 17:05:53,797 - INFO - Retaining 75 glyphs
+2024-12-30 17:05:53,797 - INFO - head subsetting not needed
+2024-12-30 17:05:53,798 - INFO - hhea subsetting not needed
+2024-12-30 17:05:53,798 - INFO - maxp subsetting not needed
+2024-12-30 17:05:53,798 - INFO - OS/2 subsetting not needed
+2024-12-30 17:05:53,798 - DEBUG - Reading 'hmtx' table from disk
+2024-12-30 17:05:53,798 - DEBUG - Decompiling 'hmtx' table
+2024-12-30 17:05:53,798 - DEBUG - Reading 'hhea' table from disk
+2024-12-30 17:05:53,798 - DEBUG - Decompiling 'hhea' table
+2024-12-30 17:05:53,801 - DEBUG - Took 0.003s to subset 'hmtx'
+2024-12-30 17:05:53,801 - INFO - hmtx subsetted
+2024-12-30 17:05:53,805 - DEBUG - Took 0.003s to subset 'cmap'
+2024-12-30 17:05:53,805 - INFO - cmap subsetted
+2024-12-30 17:05:53,805 - INFO - loca subsetting not needed
+2024-12-30 17:05:53,806 - DEBUG - Took 0.000s to subset 'post'
+2024-12-30 17:05:53,806 - INFO - post subsetted
+2024-12-30 17:05:53,806 - INFO - gasp subsetting not needed
+2024-12-30 17:05:53,806 - INFO - FFTM NOT subset; don't know how to subset
+2024-12-30 17:05:53,806 - DEBUG - Took 0.000s to subset 'MATH'
+2024-12-30 17:05:53,806 - INFO - MATH subsetted
+2024-12-30 17:05:53,806 - DEBUG - Reading 'GDEF' table from disk
+2024-12-30 17:05:53,807 - DEBUG - Decompiling 'GDEF' table
+2024-12-30 17:05:53,808 - DEBUG - Took 0.001s to subset 'GDEF'
+2024-12-30 17:05:53,808 - INFO - GDEF subsetted
+2024-12-30 17:05:53,808 - INFO - name subsetting not needed
+2024-12-30 17:05:53,811 - DEBUG - Took 0.003s to subset 'glyf'
+2024-12-30 17:05:53,811 - INFO - glyf subsetted
+2024-12-30 17:05:53,812 - DEBUG - Took 0.000s to subset GlyphOrder
+2024-12-30 17:05:53,812 - DEBUG - Took 0.000s to prune 'head'
+2024-12-30 17:05:53,812 - INFO - head pruned
+2024-12-30 17:05:53,812 - DEBUG - Reading 'OS/2' table from disk
+2024-12-30 17:05:53,812 - DEBUG - Decompiling 'OS/2' table
+2024-12-30 17:05:53,813 - INFO - OS/2 Unicode ranges pruned: [0, 62]
+2024-12-30 17:05:53,813 - INFO - OS/2 CodePage ranges pruned: [0]
+2024-12-30 17:05:53,815 - DEBUG - Took 0.002s to prune 'glyf'
+2024-12-30 17:05:53,815 - INFO - glyf pruned
+2024-12-30 17:05:53,815 - DEBUG - Took 0.000s to prune 'GDEF'
+2024-12-30 17:05:53,815 - INFO - GDEF pruned
+2024-12-30 17:05:53,816 - DEBUG - Reading 'name' table from disk
+2024-12-30 17:05:53,816 - DEBUG - Decompiling 'name' table
+2024-12-30 17:05:53,816 - DEBUG - Reading 'gasp' table from disk
+2024-12-30 17:05:53,816 - DEBUG - Decompiling 'gasp' table
+2024-12-30 17:05:53,817 - DEBUG - Reading 'FFTM' table from disk
+2024-12-30 17:05:53,817 - DEBUG - Decompiling 'FFTM' table
+2024-12-30 17:05:53,817 - DEBUG - Took 0.001s to prune 'name'
+2024-12-30 17:05:53,817 - INFO - name pruned
+2024-12-30 17:05:53,817 - DEBUG - Compiling 'glyf' table
+2024-12-30 17:05:53,835 - DEBUG - Writing 'glyf' table to disk
+2024-12-30 17:05:53,835 - DEBUG - Compiling 'maxp' table
+2024-12-30 17:05:53,837 - DEBUG - Writing 'maxp' table to disk
+2024-12-30 17:05:53,837 - DEBUG - Compiling 'loca' table
+2024-12-30 17:05:53,838 - DEBUG - Writing 'loca' table to disk
+2024-12-30 17:05:53,839 - DEBUG - Compiling 'head' table
+2024-12-30 17:05:53,839 - DEBUG - Writing 'head' table to disk
+2024-12-30 17:05:53,839 - DEBUG - Compiling 'hmtx' table
+2024-12-30 17:05:53,843 - DEBUG - Writing 'hmtx' table to disk
+2024-12-30 17:05:53,843 - DEBUG - Compiling 'hhea' table
+2024-12-30 17:05:53,846 - DEBUG - Writing 'hhea' table to disk
+2024-12-30 17:05:53,846 - DEBUG - Compiling 'OS/2' table
+2024-12-30 17:05:53,846 - DEBUG - Writing 'OS/2' table to disk
+2024-12-30 17:05:53,846 - DEBUG - Compiling 'cmap' table
+2024-12-30 17:05:53,847 - DEBUG - Writing 'cmap' table to disk
+2024-12-30 17:05:53,847 - DEBUG - Compiling 'name' table
+2024-12-30 17:05:53,847 - DEBUG - Writing 'name' table to disk
+2024-12-30 17:05:53,847 - DEBUG - Compiling 'post' table
+2024-12-30 17:05:53,847 - DEBUG - Writing 'post' table to disk
+2024-12-30 17:05:53,848 - DEBUG - Compiling 'gasp' table
+2024-12-30 17:05:53,848 - DEBUG - Writing 'gasp' table to disk
+2024-12-30 17:05:53,848 - DEBUG - Compiling 'FFTM' table
+2024-12-30 17:05:53,848 - DEBUG - Writing 'FFTM' table to disk
+2024-12-30 17:05:53,848 - DEBUG - Compiling 'GDEF' table
+2024-12-30 17:05:53,849 - DEBUG - Writing 'GDEF' table to disk
+2024-12-30 17:05:53,849 - DEBUG - Compiling 'MATH' table
+2024-12-30 17:05:53,850 - DEBUG - Writing 'MATH' table to disk
+2024-12-30 17:05:53,852 - DEBUG - Reading 'maxp' table from disk
+2024-12-30 17:05:53,852 - DEBUG - Decompiling 'maxp' table
+2024-12-30 17:05:53,853 - DEBUG - Took 0.000s to load 'maxp'
+2024-12-30 17:05:53,853 - DEBUG - Took 0.000s to prune 'maxp'
+2024-12-30 17:05:53,853 - INFO - maxp pruned
+2024-12-30 17:05:53,853 - DEBUG - Reading 'cmap' table from disk
+2024-12-30 17:05:53,853 - DEBUG - Decompiling 'cmap' table
+2024-12-30 17:05:53,854 - DEBUG - Reading 'post' table from disk
+2024-12-30 17:05:53,854 - DEBUG - Decompiling 'post' table
+2024-12-30 17:05:53,861 - DEBUG - Took 0.008s to load 'cmap'
+2024-12-30 17:05:53,861 - DEBUG - Took 0.000s to prune 'cmap'
+2024-12-30 17:05:53,861 - INFO - cmap pruned
+2024-12-30 17:05:53,861 - INFO - fpgm dropped
+2024-12-30 17:05:53,861 - INFO - prep dropped
+2024-12-30 17:05:53,861 - INFO - cvt  dropped
+2024-12-30 17:05:53,861 - DEBUG - Took 0.000s to load 'post'
+2024-12-30 17:05:53,861 - DEBUG - Took 0.000s to prune 'post'
+2024-12-30 17:05:53,862 - INFO - post pruned
+2024-12-30 17:05:53,862 - INFO - GPOS dropped
+2024-12-30 17:05:53,862 - INFO - GSUB dropped
+2024-12-30 17:05:53,862 - DEBUG - Reading 'glyf' table from disk
+2024-12-30 17:05:53,862 - DEBUG - Decompiling 'glyf' table
+2024-12-30 17:05:53,862 - DEBUG - Reading 'loca' table from disk
+2024-12-30 17:05:53,862 - DEBUG - Decompiling 'loca' table
+2024-12-30 17:05:53,862 - DEBUG - Reading 'head' table from disk
+2024-12-30 17:05:53,863 - DEBUG - Decompiling 'head' table
+2024-12-30 17:05:53,867 - DEBUG - Took 0.005s to load 'glyf'
+2024-12-30 17:05:53,867 - DEBUG - Took 0.000s to prune 'glyf'
+2024-12-30 17:05:53,867 - INFO - glyf pruned
+2024-12-30 17:05:53,868 - DEBUG - Took 0.001s to close glyph list over 'cmap'
+2024-12-30 17:05:53,868 - INFO - Added gid0 to subset
+2024-12-30 17:05:53,868 - INFO - Closing glyph list over 'glyf': 23 glyphs before
+2024-12-30 17:05:53,868 - INFO - Glyph names: ['.notdef', 'H', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'i', 'j', 'l', 'm', 'n', 'o', 'p', 'period', 'r', 's', 't', 'u', 'underscore', 'v']
+2024-12-30 17:05:53,869 - INFO - Glyph IDs:   [0, 17, 43, 66, 68, 69, 70, 71, 72, 73, 74, 76, 77, 79, 80, 81, 82, 83, 85, 86, 87, 88, 89]
+2024-12-30 17:05:53,869 - INFO - Closed glyph list over 'glyf': 23 glyphs after
+2024-12-30 17:05:53,869 - INFO - Glyph names: ['.notdef', 'H', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'i', 'j', 'l', 'm', 'n', 'o', 'p', 'period', 'r', 's', 't', 'u', 'underscore', 'v']
+2024-12-30 17:05:53,870 - INFO - Glyph IDs:   [0, 17, 43, 66, 68, 69, 70, 71, 72, 73, 74, 76, 77, 79, 80, 81, 82, 83, 85, 86, 87, 88, 89]
+2024-12-30 17:05:53,870 - DEBUG - Took 0.001s to close glyph list over 'glyf'
+2024-12-30 17:05:53,872 - INFO - Retaining 23 glyphs
+2024-12-30 17:05:53,872 - INFO - head subsetting not needed
+2024-12-30 17:05:53,872 - INFO - hhea subsetting not needed
+2024-12-30 17:05:53,873 - INFO - maxp subsetting not needed
+2024-12-30 17:05:53,873 - INFO - OS/2 subsetting not needed
+2024-12-30 17:05:53,873 - DEBUG - Reading 'hmtx' table from disk
+2024-12-30 17:05:53,873 - DEBUG - Decompiling 'hmtx' table
+2024-12-30 17:05:53,873 - DEBUG - Reading 'hhea' table from disk
+2024-12-30 17:05:53,873 - DEBUG - Decompiling 'hhea' table
+2024-12-30 17:05:53,874 - DEBUG - Took 0.002s to subset 'hmtx'
+2024-12-30 17:05:53,875 - INFO - hmtx subsetted
+2024-12-30 17:05:53,877 - DEBUG - Took 0.002s to subset 'cmap'
+2024-12-30 17:05:53,877 - INFO - cmap subsetted
+2024-12-30 17:05:53,877 - INFO - loca subsetting not needed
+2024-12-30 17:05:53,877 - DEBUG - Took 0.000s to subset 'post'
+2024-12-30 17:05:53,877 - INFO - post subsetted
+2024-12-30 17:05:53,877 - INFO - gasp subsetting not needed
+2024-12-30 17:05:53,877 - INFO - FFTM NOT subset; don't know how to subset
+2024-12-30 17:05:53,878 - DEBUG - Reading 'GDEF' table from disk
+2024-12-30 17:05:53,878 - DEBUG - Decompiling 'GDEF' table
+2024-12-30 17:05:53,879 - DEBUG - Took 0.002s to subset 'GDEF'
+2024-12-30 17:05:53,879 - INFO - GDEF subsetted
+2024-12-30 17:05:53,879 - INFO - name subsetting not needed
+2024-12-30 17:05:53,880 - DEBUG - Took 0.001s to subset 'glyf'
+2024-12-30 17:05:53,881 - INFO - glyf subsetted
+2024-12-30 17:05:53,881 - DEBUG - Took 0.000s to subset GlyphOrder
+2024-12-30 17:05:53,881 - DEBUG - Took 0.000s to prune 'head'
+2024-12-30 17:05:53,881 - INFO - head pruned
+2024-12-30 17:05:53,881 - DEBUG - Reading 'OS/2' table from disk
+2024-12-30 17:05:53,881 - DEBUG - Decompiling 'OS/2' table
+2024-12-30 17:05:53,882 - INFO - OS/2 Unicode ranges pruned: [0]
+2024-12-30 17:05:53,882 - INFO - OS/2 CodePage ranges pruned: [0]
+2024-12-30 17:05:53,882 - DEBUG - Took 0.000s to prune 'glyf'
+2024-12-30 17:05:53,883 - INFO - glyf pruned
+2024-12-30 17:05:53,883 - DEBUG - Took 0.000s to prune 'GDEF'
+2024-12-30 17:05:53,883 - INFO - GDEF pruned
+2024-12-30 17:05:53,883 - DEBUG - Reading 'name' table from disk
+2024-12-30 17:05:53,883 - DEBUG - Decompiling 'name' table
+2024-12-30 17:05:53,884 - DEBUG - Reading 'gasp' table from disk
+2024-12-30 17:05:53,884 - DEBUG - Decompiling 'gasp' table
+2024-12-30 17:05:53,884 - DEBUG - Reading 'FFTM' table from disk
+2024-12-30 17:05:53,884 - DEBUG - Decompiling 'FFTM' table
+2024-12-30 17:05:53,884 - DEBUG - Took 0.001s to prune 'name'
+2024-12-30 17:05:53,884 - INFO - name pruned
+2024-12-30 17:05:53,885 - DEBUG - Compiling 'glyf' table
+2024-12-30 17:05:53,889 - DEBUG - Writing 'glyf' table to disk
+2024-12-30 17:05:53,889 - DEBUG - Compiling 'maxp' table
+2024-12-30 17:05:53,890 - DEBUG - Writing 'maxp' table to disk
+2024-12-30 17:05:53,890 - DEBUG - Compiling 'loca' table
+2024-12-30 17:05:53,890 - DEBUG - Writing 'loca' table to disk
+2024-12-30 17:05:53,890 - DEBUG - Compiling 'head' table
+2024-12-30 17:05:53,890 - DEBUG - Writing 'head' table to disk
+2024-12-30 17:05:53,890 - DEBUG - Compiling 'hmtx' table
+2024-12-30 17:05:53,891 - DEBUG - Writing 'hmtx' table to disk
+2024-12-30 17:05:53,891 - DEBUG - Compiling 'hhea' table
+2024-12-30 17:05:53,891 - DEBUG - Writing 'hhea' table to disk
+2024-12-30 17:05:53,891 - DEBUG - Compiling 'OS/2' table
+2024-12-30 17:05:53,891 - DEBUG - Writing 'OS/2' table to disk
+2024-12-30 17:05:53,891 - DEBUG - Compiling 'cmap' table
+2024-12-30 17:05:53,892 - DEBUG - Writing 'cmap' table to disk
+2024-12-30 17:05:53,892 - DEBUG - Compiling 'name' table
+2024-12-30 17:05:53,892 - DEBUG - Writing 'name' table to disk
+2024-12-30 17:05:53,892 - DEBUG - Compiling 'post' table
+2024-12-30 17:05:53,892 - DEBUG - Writing 'post' table to disk
+2024-12-30 17:05:53,893 - DEBUG - Compiling 'gasp' table
+2024-12-30 17:05:53,893 - DEBUG - Writing 'gasp' table to disk
+2024-12-30 17:05:53,893 - DEBUG - Compiling 'FFTM' table
+2024-12-30 17:05:53,893 - DEBUG - Writing 'FFTM' table to disk
+2024-12-30 17:05:53,893 - DEBUG - Compiling 'GDEF' table
+2024-12-30 17:05:53,893 - DEBUG - Writing 'GDEF' table to disk
+2024-12-30 17:05:54,188 - INFO - done.
+2024-12-30 17:05:54,188 - INFO - overall start time: 2024-12-30 17:05:50.945105
+2024-12-30 17:05:54,189 - INFO - overall stop time: 2024-12-30 17:05:54.188405
+2024-12-30 17:05:54,189 - INFO - run time (seconds): 3.2433
