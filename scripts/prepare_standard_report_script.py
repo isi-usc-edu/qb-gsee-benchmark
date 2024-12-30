@@ -97,8 +97,18 @@ def main(config):
 
 
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
-    output_directory = f"standard_report_{timestamp}"
+    output_directory = f"standard_report"
+    
+    # clear out the old output_directory
+    try:
+        shutil.rmtree(output_directory)
+    except Exception as e:
+        logging.error(f'Error: {e}', exc_info=True)
+        logging.error(f"attempted to remove the directory {output_directory}...")
+    
+    # recreate the clean/empty output_directory
     os.mkdir(output_directory)
+
 
 
 
@@ -205,28 +215,40 @@ def main(config):
     plt.xlabel("Number of spatial orbitals")
     plt.ylabel("Overall run time in seconds")
     colors = [tuple(np.random.rand(3)) for _ in range(len(solver_uuid_dict))]
-    markers = ['o', 's', '^', 'D', 'p', '*', 'H', 'X', 'v', '<']
+    # markers = ['o', 's', '^', 'D', 'p', '*', 'H', 'X', 'v', '<']
     series_counter = 0
     for solver_uuid in solver_uuid_dict:
         solver_short_name = solver_uuid_dict[solver_uuid]
         df = data
-        df = df[df["solver_uuid"]==solver_uuid]
-        df = df[df["attempted"]==True]
+        df = df[df["solver_uuid"]==solver_uuid] 
+        df = df[df["attempted"]==True] # attempted
+        df_solved = df[df["label"]==True] # Solved!
         plt.scatter(
-            df["num_orbitals"].values,
-            df["overall_run_time_seconds"].values,
+            df_solved["num_orbitals"].values,
+            df_solved["overall_run_time_seconds"].values,
             color=colors[series_counter],
-            marker=markers[series_counter%len(markers)], # loop around on markers.
             edgecolor="black",
-            label=f"{solver_short_name} ({solver_uuid[:4]}...)"
+            marker="^", # triangle up for success.
+            label=f"Success {solver_short_name} ({solver_uuid[:4]}...)"
+        )
+        df_failed = df[df["label"]==False] # failed to solve the task
+        plt.scatter(
+            df_failed["num_orbitals"].values,
+            df_failed["overall_run_time_seconds"].values,
+            color=colors[series_counter],
+            marker="v", # triangle down for failure.
+            edgecolor="black",
+            label=f"Failed {solver_short_name} ({solver_uuid[:4]}...)"
         )
         series_counter += 1
-    plt.legend()
+    plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+    plt.tight_layout()
     plt.savefig(os.path.join(output_directory,f"solver_num_orbs_vs_runtime_scatter_plot.png"))
 
     plt.yscale("log")
     plt.ylabel("Overall run time in seconds (log)")
-    plt.legend
+    plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+    plt.tight_layout()
     plt.savefig(os.path.join(output_directory,f"solver_num_orbs_vs_log_runtime_scatter_plot.png"))
     
 
