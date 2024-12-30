@@ -86,6 +86,8 @@ def main(config):
     os.mkdir(output_directory)
 
 
+
+
     overall_start_time = datetime.datetime.now()
     logging.info(f"===============================================")
     logging.info(f"Starting to prepare the standard report...")
@@ -137,7 +139,31 @@ def main(config):
         solver_uuid_dict[solver_uuid] = data[data["solver_uuid"]==solver_uuid]["solver_short_name"].iloc[0]
 
 
+    # copy latest miniML charts to the output directory
+    for solver_uuid in solver_uuid_list:
 
+        # miniML plot
+        p1 = os.path.join(
+            config["ml_artifacts_directory"],
+            f"plot_solver_{solver_uuid}.png"
+        )
+        p2 = os.path.join(
+            output_directory,
+            f"plot_solver_{solver_uuid}.png"
+        )
+        shutil.copy2(p1,p2)
+
+        # SHAP plot
+        p1 = os.path.join(
+            config["ml_artifacts_directory"],
+            f"shap_summary_plot_solver_{solver_uuid}.png"
+        )
+        p2 = os.path.join(
+            output_directory,
+            f"shap_summary_plot_solver_{solver_uuid}.png"
+        )
+        shutil.copy2(p1,p2)
+        
 
 
     # Histogram of number of orbitals
@@ -162,8 +188,7 @@ def main(config):
     plt.figure()
     plt.title("Run time of solvers (for attempted tasks)")
     plt.xlabel("Number of spatial orbitals")
-    plt.ylabel("Overall run time in seconds (log)")
-    plt.yscale("log")
+    plt.ylabel("Overall run time in seconds")
     colors = [tuple(np.random.rand(3)) for _ in range(len(solver_uuid_dict))]
     markers = ['o', 's', '^', 'D', 'p', '*', 'H', 'X', 'v', '<']
     series_counter = 0
@@ -182,8 +207,15 @@ def main(config):
         )
         series_counter += 1
     plt.legend()
-    plt.savefig(os.path.join(output_directory,f"solver_scatter_plot.png"))
+    plt.savefig(os.path.join(output_directory,f"solver_num_orbs_vs_runtime_scatter_plot.png"))
+
+    plt.yscale("log")
+    plt.ylabel("Overall run time in seconds (log)")
+    plt.legend
+    plt.savefig(os.path.join(output_directory,f"solver_num_orbs_vs_log_runtime_scatter_plot.png"))
     
+
+
 
 
 
@@ -227,7 +259,9 @@ def main(config):
 
         file.write(f"## Solver Summary Statistics\n\n")
         file.write(f"number of unique participating solvers: {data['solver_uuid'].nunique()}\n\n")
-        file.write(f"![Solver scatter plot](solver_scatter_plot.png)\n\n")
+        file.write(f"![Solver scatter plot](solver_num_orbs_vs_runtime_scatter_plot.png)\n\n")
+        file.write(f"![Solver scatter plot](solver_num_orbs_vs_log_runtime_scatter_plot.png)\n\n")
+        
 
         
         for solver_uuid in solver_uuid_list:
@@ -266,8 +300,11 @@ def main(config):
             # file.write(f"```python\n")
             # file.write(pprint.pformat(filtered_performance_metrics, indent=4))
             # file.write(f"\n```\n")
-                    
-            file.write(f"TODO:  put the ML charts in here!\n\n")
+            
+            file.write(f"![Solver miniML plot](plot_solver_{solver_uuid}.png)\n\n")
+            file.write(f"![SHAP summary plot](shap_summary_plot_solver_{solver_uuid}.png)\n\n")
+            
+        
 
 
 

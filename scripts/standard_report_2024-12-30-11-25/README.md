@@ -1,10 +1,10 @@
 # GSEE Benchmark Standard Report
 
-Report created on 2024-12-30-10-29
+Report created on 2024-12-30-11-25
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
-Input data: aggregated_solver_labels.csv, last modified Mon Dec 30 10:17:20 2024
+Input data: aggregated_solver_labels.csv, last modified Mon Dec 30 10:32:50 2024
 
 Input data: Hamiltonian_features.csv, last modified Mon Dec 16 11:50:19 2024
 
@@ -30,7 +30,9 @@ maximum number of orbitals: 135
 
 number of unique participating solvers: 2
 
-![Solver scatter plot](solver_scatter_plot.png)
+![Solver scatter plot](solver_num_orbs_vs_runtime_scatter_plot.png)
+
+![Solver scatter plot](solver_num_orbs_vs_log_runtime_scatter_plot.png)
 
 ### Solver DMRG_Niagara_cluster_lowest_energy, 16537433-9f4c-4eae-a65d-787dc3b35b59
 
@@ -66,7 +68,9 @@ f1_score: [0.7558139534883721, 0.8531468531468531]
 
 ml_metrics_calculator_version: 1
 
-TODO:  put the ML charts in here!
+![Solver miniML plot](plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png)
+
+![SHAP summary plot](shap_summary_plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png)
 
 ### Solver DF_QPE, 5dad4064-cd11-412f-85cb-d722afe3b3de
 
@@ -102,5 +106,7 @@ f1_score: [0.995049504950495, 0.9629629629629629]
 
 ml_metrics_calculator_version: 1
 
-TODO:  put the ML charts in here!
+![Solver miniML plot](plot_solver_5dad4064-cd11-412f-85cb-d722afe3b3de.png)
+
+![SHAP summary plot](shap_summary_plot_solver_5dad4064-cd11-412f-85cb-d722afe3b3de.png)
 
