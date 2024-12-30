@@ -1,7 +1,7 @@
 # miniML script
 
 
-The `miniML.py` script is primarily responsible for generating the *solvability ratio* performance metric of a solver over the set of `problem_instances`.  
+The `miniML.py` script is primarily responsible for generating the *solvability ratio* performance metric of a solver over the set of `problem_instances`.   Output plots and other files are placed in a nearby directory called `ml_artifacts`. 
 
 
 Help message (`./miniML.py --help`):
