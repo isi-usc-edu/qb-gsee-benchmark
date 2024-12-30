@@ -56,6 +56,21 @@ for h in handlers:
 
 
 
+def get_latest_ctime_within_dir(search_dir) -> float:
+    latest_ctime = 0
+    # this recurses through all subdirectories.
+    for root, dirs, files in os.walk(search_dir):
+        for filename in files:
+            filepath = os.path.join(root, filename)
+            ctime = os.path.getctime(filepath)
+            if ctime > latest_ctime:
+                latest_ctime = ctime
+    return latest_ctime
+
+
+
+
+
 def load_json_files(search_dir) -> list:
     dict_list = []
 
@@ -82,8 +97,20 @@ def main(config):
 
 
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
-    output_directory = f"standard_report_{timestamp}"
+    output_directory = f"standard_report"
+    
+    # clear out the old output_directory
+    try:
+        shutil.rmtree(output_directory)
+    except Exception as e:
+        logging.error(f'Error: {e}', exc_info=True)
+        logging.error(f"attempted to remove the directory {output_directory}...")
+    
+    # recreate the clean/empty output_directory
     os.mkdir(output_directory)
+
+
+
 
 
     overall_start_time = datetime.datetime.now()
@@ -137,7 +164,31 @@ def main(config):
         solver_uuid_dict[solver_uuid] = data[data["solver_uuid"]==solver_uuid]["solver_short_name"].iloc[0]
 
 
+    # copy latest miniML charts to the output directory
+    for solver_uuid in solver_uuid_list:
 
+        # miniML plot
+        p1 = os.path.join(
+            config["ml_artifacts_directory"],
+            f"plot_solver_{solver_uuid}.png"
+        )
+        p2 = os.path.join(
+            output_directory,
+            f"plot_solver_{solver_uuid}.png"
+        )
+        shutil.copy2(p1,p2)
+
+        # SHAP plot
+        p1 = os.path.join(
+            config["ml_artifacts_directory"],
+            f"shap_summary_plot_solver_{solver_uuid}.png"
+        )
+        p2 = os.path.join(
+            output_directory,
+            f"shap_summary_plot_solver_{solver_uuid}.png"
+        )
+        shutil.copy2(p1,p2)
+        
 
 
     # Histogram of number of orbitals
@@ -162,27 +213,85 @@ def main(config):
     plt.figure()
     plt.title("Run time of solvers (for attempted tasks)")
     plt.xlabel("Number of spatial orbitals")
-    plt.ylabel("Overall run time in seconds (log)")
-    plt.yscale("log")
+    plt.xlim(0,10*np.ceil(max(data["num_orbitals"])/10))
+    plt.ylabel("Overall run time in seconds")
     colors = [tuple(np.random.rand(3)) for _ in range(len(solver_uuid_dict))]
-    markers = ['o', 's', '^', 'D', 'p', '*', 'H', 'X', 'v', '<']
+    # markers = ['o', 's', '^', 'D', 'p', '*', 'H', 'X', 'v', '<']
     series_counter = 0
     for solver_uuid in solver_uuid_dict:
         solver_short_name = solver_uuid_dict[solver_uuid]
         df = data
-        df = df[df["solver_uuid"]==solver_uuid]
-        df = df[df["attempted"]==True]
+        df = df[df["solver_uuid"]==solver_uuid] 
+        df = df[df["attempted"]==True] # attempted
+        df_solved = df[df["label"]==True] # Solved!
         plt.scatter(
-            df["num_orbitals"].values,
-            df["overall_run_time_seconds"].values,
+            df_solved["num_orbitals"].values,
+            df_solved["overall_run_time_seconds"].values,
             color=colors[series_counter],
-            marker=markers[series_counter%len(markers)], # loop around on markers.
             edgecolor="black",
-            label=f"{solver_short_name} ({solver_uuid[:4]}...)"
+            marker="^", # triangle up for success.
+            label=f"Success {solver_short_name} ({solver_uuid[:4]}...)"
+        )
+        df_failed = df[df["label"]==False] # failed to solve the task
+        plt.scatter(
+            df_failed["num_orbitals"].values,
+            df_failed["overall_run_time_seconds"].values,
+            color=colors[series_counter],
+            marker="v", # triangle down for failure.
+            edgecolor="black",
+            label=f"Failed {solver_short_name} ({solver_uuid[:4]}...)"
         )
         series_counter += 1
-    plt.legend()
-    plt.savefig(os.path.join(output_directory,f"solver_scatter_plot.png"))
+    plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+    plt.tight_layout()
+    plt.savefig(os.path.join(output_directory,f"solver_num_orbs_vs_runtime_scatter_plot.png"))
+
+    plt.yscale("log")
+    plt.ylabel("Overall run time in seconds (log)")
+    plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+    plt.tight_layout()
+    plt.savefig(os.path.join(output_directory,f"solver_num_orbs_vs_log_runtime_scatter_plot.png"))
+    
+
+
+    # scatter plot of num_orbitals vs. run_time for EACH solver
+    for solver_uuid in solver_uuid_list:
+        df = data
+        df = df[df["solver_uuid"]==solver_uuid] 
+        
+        solver_short_name = solver_uuid_dict[solver_uuid]
+        
+        plt.figure()
+        plt.title(f"{solver_short_name}/{solver_uuid[:4]}...")
+        plt.xlabel("Number of spatial orbitals")
+        plt.xlim(0,10*np.ceil(max(data["num_orbitals"])/10))
+        plt.ylabel("Overall run time in seconds")
+        df = df[df["attempted"]==True] # attempted
+        
+        df_solved = df[df["label"]==True] # Solved!
+        plt.scatter(
+            df_solved["num_orbitals"].values,
+            df_solved["overall_run_time_seconds"].values,
+            color="blue",
+            edgecolor="black",
+            marker="^", # triangle up for success.
+            label=f"Task success {solver_short_name} ({solver_uuid[:4]}...)"
+        )
+        
+        df_failed = df[df["label"]==False] # failed to solve the task
+        plt.scatter(
+            df_failed["num_orbitals"].values,
+            df_failed["overall_run_time_seconds"].values,
+            color="red",
+            marker="v", # triangle down for failure.
+            edgecolor="black",
+            label=f"Task failed {solver_short_name} ({solver_uuid[:4]}...)"
+        )
+        
+        plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+        plt.tight_layout()
+        plt.savefig(os.path.join(output_directory,f"solver_{solver_uuid}_plot.png"))
+       
     
 
 
@@ -199,13 +308,25 @@ def main(config):
         file.write(f"[https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)\n\n")
         
         last_modified_time = time.ctime(os.path.getmtime(config["aggregated_solver_labels_file"]))
-        file.write(f"Input data: {config['aggregated_solver_labels_file']}, last modified {last_modified_time}\n\n")
+        file.write(f"Input data: `{config['aggregated_solver_labels_file']}`, last modified {last_modified_time}\n\n")
         
         last_modified_time = time.ctime(os.path.getmtime(config['hamiltonian_features_file']))
-        file.write(f"Input data: {config['hamiltonian_features_file']}, last modified {last_modified_time}\n\n")
+        file.write(f"Input data: `{config['hamiltonian_features_file']}`, last modified {last_modified_time}\n\n")
         if num_features_calculated < num_tasks:
             file.write(f"WARNING!  We only have features calculated for {num_features_calculated}/{num_tasks} Hamiltonians. This report is based on partial results!\n\n")
-        TODO=999999
+        
+
+        c = get_latest_ctime_within_dir(config["problem_instances_directory"])
+        file.write(f"Latest creation time for a `problem_instance.json` file: {time.ctime(c)}\n\n")
+        
+        c = get_latest_ctime_within_dir(config["performance_metrics_directory"])
+        file.write(f"Latest creation time for a `performance_metrics.json` file: {time.ctime(c)}\n\n")
+
+        c = get_latest_ctime_within_dir(config["solution_files_directory"])
+        file.write(f"Latest creation time for a `solution.json` file: {time.ctime(c)}\n\n")
+
+
+        
         file.write(f"## Problem Instance Summary Statistics\n\n")
         file.write(f"number of `problem_instances`: {data['problem_instance_uuid'].nunique()}\n\n")
 
@@ -227,11 +348,14 @@ def main(config):
 
         file.write(f"## Solver Summary Statistics\n\n")
         file.write(f"number of unique participating solvers: {data['solver_uuid'].nunique()}\n\n")
-        file.write(f"![Solver scatter plot](solver_scatter_plot.png)\n\n")
+        file.write(f"![Solver scatter plot](solver_num_orbs_vs_runtime_scatter_plot.png)\n\n")
+        file.write(f"![Solver scatter plot](solver_num_orbs_vs_log_runtime_scatter_plot.png)\n\n")
+        
 
         
         for solver_uuid in solver_uuid_list:
 
+                                    
             # locate performance metrics for solver from list
             failed_to_locate_associated_performance_metrics_file = True
             for performance_metrics in performance_metrics_list:
@@ -253,7 +377,11 @@ def main(config):
                 "top_level_results",
                 "ml_metrics"                
             ]
+            
             file.write(f"### Solver {performance_metrics['solver_short_name']}, {solver_uuid}\n\n")
+            
+            file.write(f"![Solver success/failure plot](solver_{solver_uuid}_plot.png)\n\n")
+            
             filtered_performance_metrics = {key: performance_metrics[key] for key in write_out_fields if key in performance_metrics}
             for k, v in filtered_performance_metrics.items():
                 if not isinstance(v, dict):
@@ -266,8 +394,10 @@ def main(config):
             # file.write(f"```python\n")
             # file.write(pprint.pformat(filtered_performance_metrics, indent=4))
             # file.write(f"\n```\n")
-                    
-            file.write(f"TODO:  put the ML charts in here!\n\n")
+            
+            file.write(f"![Solver miniML plot](plot_solver_{solver_uuid}.png)\n\n")
+            file.write(f"![SHAP summary plot](shap_summary_plot_solver_{solver_uuid}.png)\n\n")
+        
 
 
 
