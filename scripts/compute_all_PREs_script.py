@@ -80,21 +80,23 @@ def get_pqre(solution_lre: dict, config: dict) -> dict[str, Any]:
     logging.info(f"solution UUID: {solution_lre['solution_uuid']}")
 
     solution_pre = copy.deepcopy(solution_lre)
-    for task_solution_data in solution_pre["solution_data"]:
-        logging.info(f"Analyzing task {task_solution_data['task_uuid']}...")
+    solution_data = solution_pre.pop("solution_data")
+    solution_pre["solution_data"] = []
+    for task_solution in solution_data:
+        logging.info(f"Analyzing task {task_solution['task_uuid']}...")
         try:
             physical_resource_estimation_start = datetime.datetime.now()
 
             cost, factory, data_block = get_physical_cost(
-                num_logical_qubits=task_solution_data["quantum_resources"]["logical"][
+                num_logical_qubits=task_solution["quantum_resources"]["logical"][
                     "num_logical_qubits"
                 ],
-                num_T_gates=task_solution_data["quantum_resources"]["logical"][
+                num_T_gates=task_solution["quantum_resources"]["logical"][
                     "num_T_gates_per_shot"
                 ],
-                hardware_failure_tolerance_per_shot=task_solution_data[
-                    "quantum_resources"
-                ]["logical"]["hardware_failure_tolerance_per_shot"],
+                hardware_failure_tolerance_per_shot=task_solution["quantum_resources"][
+                    "logical"
+                ]["hardware_failure_tolerance_per_shot"],
                 n_factories=config["quantum_hardware_parameters"]["num_factories"],
                 physical_error_rate=config["quantum_hardware_parameters"][
                     "physical_error_rate"
@@ -107,26 +109,24 @@ def get_pqre(solution_lre: dict, config: dict) -> dict[str, Any]:
             logging.info(
                 f"Physical resource estimation time: {(physical_resource_estimation_end - physical_resource_estimation_start).total_seconds()} seconds."
             )
-
             algorithm_runtime_seconds = cost.duration_hr * 60 * 60
             num_physical_qubits = cost.footprint
-            task_solution_data["run_time"]["algorithm_run_time"] = {
+            task_solution["run_time"]["algorithm_run_time"] = {
                 "seconds": algorithm_runtime_seconds,
             }
-            task_solution_data["run_time"]["overall_time"] = {
-                "seconds": task_solution_data["run_time"]["preprocessing_time"][
-                    "seconds"
-                ]
+            task_solution["run_time"]["overall_time"] = {
+                "seconds": task_solution["run_time"]["preprocessing_time"]["seconds"]
                 + algorithm_runtime_seconds
             }
 
-            task_solution_data["quantum_resources"]["physical"] = {
+            task_solution["quantum_resources"]["physical"] = {
                 "num_physical_qubits": num_physical_qubits,
                 "distillation_layer_1_code_distance": factory.base_factory.distillation_l1_d,
                 "distillation_layer_2_code_distance": factory.base_factory.distillation_l2_d,
                 "data_code_distance": data_block.data_d,
                 "data_routing_overhead": data_block.routing_overhead,
             }
+            solution_pre["solution_data"].append(task_solution)
         except NoFactoriesFoundError:
             logging.info(
                 f"No factories found that meet the performance requirements. Skipping physical cost estimation."
