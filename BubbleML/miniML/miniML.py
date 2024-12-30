@@ -367,15 +367,14 @@ def main(args):
     #     logger.addHandler(console_handler)
 
 
-    # clear out the ml_artifacts directory
+    # create the output directory `ml_artifacts`
     try:
-        shutil.rmtree("ml_artifacts")
+        os.mkdir("ml_artifacts")
     except Exception as e:
         logging.error(f'Error: {e}', exc_info=True)
-        logging.error(f"attempted to remove the directory `ml_artifacts`...")
+        logging.info(f"attempted to create the the directory `ml_artifacts` but it is already there.")
     
-    # recreate the clean/empty output_directory
-    os.mkdir("ml_artifacts")
+
 
     mini_ml_config_file_name = args.config_file
     with open(mini_ml_config_file_name, 'r') as j:
