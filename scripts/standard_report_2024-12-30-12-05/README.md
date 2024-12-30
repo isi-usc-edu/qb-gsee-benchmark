@@ -1,14 +1,20 @@
 # GSEE Benchmark Standard Report
 
-Report created on 2024-12-30-11-25
+Report created on 2024-12-30-12-05
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
-Input data: aggregated_solver_labels.csv, last modified Mon Dec 30 10:32:50 2024
+Input data: `aggregated_solver_labels.csv`, last modified Mon Dec 30 10:32:50 2024
 
-Input data: Hamiltonian_features.csv, last modified Mon Dec 16 11:50:19 2024
+Input data: `Hamiltonian_features.csv`, last modified Mon Dec 16 11:50:19 2024
 
 WARNING!  We only have features calculated for 229/230 Hamiltonians. This report is based on partial results!
+
+Latest creation time for a `problem_instance.json` file: Fri Dec 13 23:09:21 2024
+
+Latest creation time for a `performance_metrics.json` file: Mon Dec 30 12:05:13 2024
+
+Latest creation time for a `solution.json` file: Mon Dec 30 10:32:50 2024
 
 ## Problem Instance Summary Statistics
 
@@ -38,9 +44,9 @@ number of unique participating solvers: 2
 
 solver_short_name: DMRG_Niagara_cluster_lowest_energy
 
-performance_metrics_uuid: 9fa6c773-01b3-4723-afa0-5558e91fddaa
+performance_metrics_uuid: 4fc59937-7062-441c-8469-7971ecd6d5c9
 
-creation_timestamp: 2024-12-18T15:38:21.126384+00:00
+creation_timestamp: 2024-12-30T14:53:42.218159+00:00
 
 number_of_problem_instances: 82
 
@@ -76,33 +82,33 @@ ml_metrics_calculator_version: 1
 
 solver_short_name: DF_QPE
 
-performance_metrics_uuid: e9459073-db4a-4ca5-a6c4-746a62762cb9
+performance_metrics_uuid: 97a58710-8702-4721-8971-288144232e2f
 
-creation_timestamp: 2024-12-18T15:38:21.799198+00:00
+creation_timestamp: 2024-12-30T14:53:43.965750+00:00
 
 number_of_problem_instances: 82
 
-number_of_problem_instances_attempted: 9
+number_of_problem_instances_attempted: 13
 
-number_of_problem_instances_solved: 3
+number_of_problem_instances_solved: 2
 
 number_of_tasks: 230
 
-number_of_tasks_attempted: 65
+number_of_tasks_attempted: 99
 
-number_of_tasks_solved: 26
+number_of_tasks_solved: 19
 
-number_of_tasks_solved_within_run_time_limit: 26
+number_of_tasks_solved_within_run_time_limit: 19
 
-number_of_tasks_solved_within_accuracy_threshold: 65
+number_of_tasks_solved_within_accuracy_threshold: 102
 
-max_run_time_of_attempted_tasks: 9900914.966049999
+max_run_time_of_attempted_tasks: 30188593.464838002
 
-sum_of_run_time_of_attempted_tasks: 37957820.57215899
+sum_of_run_time_of_attempted_tasks: 374908704.304665
 
-solvability_ratio: 0.009
+solvability_ratio: 0.0134
 
-f1_score: [0.995049504950495, 0.9629629629629629]
+f1_score: [0.9976133651551312, 0.9743589743589743]
 
 ml_metrics_calculator_version: 1
 

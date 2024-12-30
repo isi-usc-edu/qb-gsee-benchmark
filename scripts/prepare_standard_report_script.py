@@ -56,6 +56,21 @@ for h in handlers:
 
 
 
+def get_latest_ctime_within_dir(search_dir) -> float:
+    latest_ctime = 0
+    # this recurses through all subdirectories.
+    for root, dirs, files in os.walk(search_dir):
+        for filename in files:
+            filepath = os.path.join(root, filename)
+            ctime = os.path.getctime(filepath)
+            if ctime > latest_ctime:
+                latest_ctime = ctime
+    return latest_ctime
+
+
+
+
+
 def load_json_files(search_dir) -> list:
     dict_list = []
 
@@ -231,13 +246,25 @@ def main(config):
         file.write(f"[https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)\n\n")
         
         last_modified_time = time.ctime(os.path.getmtime(config["aggregated_solver_labels_file"]))
-        file.write(f"Input data: {config['aggregated_solver_labels_file']}, last modified {last_modified_time}\n\n")
+        file.write(f"Input data: `{config['aggregated_solver_labels_file']}`, last modified {last_modified_time}\n\n")
         
         last_modified_time = time.ctime(os.path.getmtime(config['hamiltonian_features_file']))
-        file.write(f"Input data: {config['hamiltonian_features_file']}, last modified {last_modified_time}\n\n")
+        file.write(f"Input data: `{config['hamiltonian_features_file']}`, last modified {last_modified_time}\n\n")
         if num_features_calculated < num_tasks:
             file.write(f"WARNING!  We only have features calculated for {num_features_calculated}/{num_tasks} Hamiltonians. This report is based on partial results!\n\n")
-        TODO=999999
+        
+
+        c = get_latest_ctime_within_dir(config["problem_instances_directory"])
+        file.write(f"Latest creation time for a `problem_instance.json` file: {time.ctime(c)}\n\n")
+        
+        c = get_latest_ctime_within_dir(config["performance_metrics_directory"])
+        file.write(f"Latest creation time for a `performance_metrics.json` file: {time.ctime(c)}\n\n")
+
+        c = get_latest_ctime_within_dir(config["solution_files_directory"])
+        file.write(f"Latest creation time for a `solution.json` file: {time.ctime(c)}\n\n")
+
+
+        
         file.write(f"## Problem Instance Summary Statistics\n\n")
         file.write(f"number of `problem_instances`: {data['problem_instance_uuid'].nunique()}\n\n")
 
