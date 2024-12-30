@@ -4,10 +4,12 @@ example QPE resource estimates with those reported in the September 2024 QB deli
 import json
 import os
 from collections import defaultdict
+import matplotlib.pyplot as plt
 
 import pandas as pd
 
-benchmark_results_dir = "../scripts/resource_estimate_files_20241210"
+# benchmark_results_dir = "../scripts/resource_estimate_files_20241210"
+benchmark_results_dir = "resource_estimate_files_20241219"
 september_results_dir = "september_results"
 
 
@@ -39,6 +41,13 @@ def load_task_id_map():
         task_id_map[row["september_task_id"]] = row["benchmark_task_id"]
     return task_id_map
 
+def plot_logical_qubit_comparison(results: pd.DataFrame) -> plt.Axes:
+    ax = results.plot.scatter("Logical qubits (December 2024)", "Logical qubits (September 2024)")
+    return ax
+
+def plot_t_count_comparison(results: pd.DataFrame) -> plt.Axes:
+    ax = results.plot.scatter("T gates (December 2024)", "T gates (September 2024)")
+    return ax
 
 def main():
     task_id_map = load_task_id_map()
@@ -58,7 +67,22 @@ def main():
         suffixes=("_benchmark", "_september"),
     )
 
-    print(results)
+    results = results.rename(
+        columns={
+            "task_uuid": "Task UUID",
+            "num_T_gates_benchmark": "T gates (December 2024)",
+            "num_T_gates_september": "T gates (September 2024)",
+            "num_logical_qubits_benchmark": "Logical qubits (December 2024)",
+            "num_logical_qubits_september": "Logical qubits (September 2024)",
+        },
+    )
+    print(results.to_markdown(index=False))
+
+    plot_logical_qubit_comparison(results)
+    plt.show()
+
+    plot_t_count_comparison(results)
+    plt.show()
 
 
 if __name__ == "__main__":
