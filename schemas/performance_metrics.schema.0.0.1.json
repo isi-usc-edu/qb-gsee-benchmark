@@ -223,9 +223,7 @@
                 "properties": {
                     "task_uuid": {
                         "title": "Task UUID",
-                        "description": "UUID for the task from the list of tasks in the `problem_instance` file in 8-4-4-4-12 format.",
-                        "type": "string",
-                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                        "$ref": "uuid.schema.json"
                     },
                     "problem_instance_uuid": {
                         "title": "Problem instance UUID",
