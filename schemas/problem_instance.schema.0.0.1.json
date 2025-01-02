@@ -19,36 +19,29 @@
     ],
     "properties": {
         "$schema": {
-            "title": "Schema URI",
+            "title": "Schema URL",
             "description": "A hyperlink to the schema that describes this JSON object.",
             "type": "string"
         },
-        "references":{
+        "references": {
             "title": "References",
             "description": "A list of citations or references for the problem instance or data.",
             "type": "array"
         },
         "problem_instance_uuid": {
             "title": "Problem Instance UUID",
-            "description": "Universally Unique Identifier (UUID) as a string in RFC4122 8-4-4-4-12 format.",
-            "type": "string",
-            "format": "uuid",
-            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            "$ref": "uuid.schema.json"
         },
         "creation_timestamp": {
             "title": "Creation Timestamp",
-            "description": "Timestamp in ISO 8601 format.",
-            "type": "string",
-            "format": "date-time"
+            "$ref": "timestamp.schema.json"
         },
         "calendar_due_date": {
             "title": "Calendar Due Date",
-            "description": "For competitions and ad hoc evaluations this may be set so that the benchmark performer must return a solution by the UTC due date.  The value is a string with a timestamp in ISO 8601 format.\n\n If there is no due date, it is set to `null`.",
+            "comment": "For competitions and ad hoc evaluations this may be set so that the benchmark performer must return a solution by the UTC due date.  The value is a string with a timestamp in ISO 8601 format.\n\n If there is no due date, it is set to `null`.",
             "oneOf": [
                 {
-                    "description": "Timestamp in ISO 8601 format",
-                    "type": "string",
-                    "format": "date-time"
+                    "$ref": "timestamp.schema.json"
                 },
                 {
                     "type": "null"
@@ -60,14 +53,14 @@
             "description": "A short string.  Not necessarily unique.",
             "type": "string"
         },
-        "license":{
+        "license": {
             "title": "License",
             "description": "object",
             "required": [
                 "name",
                 "url"
             ],
-            "properties":{
+            "properties": {
                 "name": {
                     "title": "Name of License",
                     "type": "string"
@@ -111,7 +104,7 @@
         },
         "status": {
             "title": "Status of the Test Procedure",
-            "description": "may be 'in_force', 'in_development', 'deprecated'.",
+            "description": "may be `in_force`, `in_development`, `deprecated`.",
             "type": "string",
             "enum": [
                 "in_force",
@@ -120,13 +113,11 @@
             ]
         },
         "superseded_by": {
-            "title": "Successor Test Procedure",
-            "description": "If this problem instance is status:deprecated, this field lists the UUID of the successor test_procedure object.\nIf this test_procedure is NOT deprecated, then the value is set to null.",
+            "title": "(if deprecated) Successor Problem Instance UUID",
+            "comment": "If this problem instance is status:deprecated, this field lists the UUID of the successor test_procedure object.\nIf this test_procedure is NOT deprecated, then the value is set to null.",
             "oneOf": [
                 {
-                    "type": "string",
-                    "format": "uuid",
-                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                    "$ref": "uuid.schema.json"
                 },
                 {
                     "type": "null"
@@ -135,29 +126,22 @@
         },
         "problem_type": {
             "title": "Problem Type",
-            "description": "Choose from the following:\n\nGSEE\nQUANTUM_DYNAMICS\nDIFFERENTIAL_EQUATIONS\nOTHER",
+            "description": "Limited to `GSEE`.",
             "type": "string",
             "enum": [
-                "GSEE",
-                "QUANTUM_DYNAMICS",
-                "DIFFERENTIAL_EQUATIONS",
-                "OTHER"
+                "GSEE"
             ]
         },
         "application_domain": {
             "title": "Application Domain",
-            "description": "Domain of the Problem Instance.  Choose from the following:\n\nCM: Condense Matter\nQC: Quantum Chemistry\nQB: Quantum Biochemistry\nBIO: Biology/Biomedical\nENG: Engineering\nFLP: Fluids/Plasmas\nOPT: Optimization\nDML: Data and Machine Learning\nHEP: High-Energy and Fundamental Physics",
+            "description": "Domain of the Problem Instance.  Choose from the following:\n\n`CM`: Condense Matter\n`QC`: Quantum Chemistry\n`QB`: Quantum Biochemistry\n`BIO`: Biology/Biomedical\n`ENG`: Engineering",
             "type": "string",
             "enum": [
                 "CM",
                 "QC",
                 "QB",
                 "BIO",
-                "ENG",
-                "FLP",
-                "OPT",
-                "DML",
-                "HEP"
+                "ENG"
             ]
         },
         "tasks": {
@@ -166,47 +150,42 @@
             "type": "array",
             "items": {
                 "type": "object",
-                "required":[
+                "required": [
                     "task_uuid",
                     "supporting_files"
                 ],
-                "optional":[
+                "optional": [
                     "independent_parameters",
                     "features"
                 ],
-                "properties":{
+                "properties": {
                     "task_uuid": {
                         "title": "Task UUID",
-                        "description": "Universally Unique Identifier (UUID) as a string in RFC4122 8-4-4-4-12 format.",
-                        "type": "string",
-                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                        "$ref": "uuid.schema.json"
                     },
-                    "supporting_files":{
+                    "supporting_files": {
                         "title": "Supporting Files",
                         "description": "A list of URLs and other metadata for supporting files.  E.g., FCIDUMP files, SCF solution files, checkpoint files, etc.  Note that this may be a list with only one item.",
                         "type": "array",
-                        "items":{
+                        "items": {
                             "type": "object",
-                            "required":[
+                            "required": [
                                 "instance_data_object_uuid",
                                 "instance_data_object_url",
                                 "instance_data_checksum_type",
                                 "instance_data_checksum"
                             ],
-                            "properties":{
-                                "instance_data_object_uuid":{
-                                    "title":"Instance Data Object UUID",
-                                    "description": "Universally Unique Identifier (UUID) as a string in RFC4122 8-4-4-4-12 format.",
+                            "properties": {
+                                "instance_data_object_uuid": {
+                                    "title": "Instance Data Object UUID",
+                                    "$ref": "uuid.schema.json"
+                                },
+                                "instance_data_object_url": {
+                                    "title": "Instance Data Object URL",
                                     "type": "string",
-                                    "format": "uuid",
-                                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                                    "description": "A URL to the data file."
                                 },
-                                "instance_data_object_url":{
-                                    "title":"Instance Data Object URL",
-                                    "type":"string",
-                                    "description":"TODO: description"
-                                },
-                                "instance_data_checksum_type":{
+                                "instance_data_checksum_type": {
                                     "title": "Instance Data Checksum Type",
                                     "description": "One of \n\n`sha1sum`\n`sha256sum`\n`md5sum`",
                                     "type": "string",
@@ -216,28 +195,28 @@
                                         "md5sum"
                                     ]
                                 },
-                                "instance_data_checksum":{
-                                    "title":"Instance Data Checksum String",
-                                    "description":"a string containing the checksum of the data file.",
-                                    "type":"string"
+                                "instance_data_checksum": {
+                                    "title": "Instance Data Checksum String",
+                                    "description": "a string containing the checksum of the data file.",
+                                    "type": "string"
                                 }
                             }
                         }
                     },
-                    "requirements":{
-                        "title":"Performance Requirements",
-                        "description":"an object containing the accuracy, precision and runtime requirements for the benchmark.",
-                        "type":"object"                        
+                    "requirements": {
+                        "title": "Performance Requirements",
+                        "description": "an object containing the accuracy, precision and runtime requirements for the benchmark.",
+                        "type": "object"
                     },
-                    "independent_parameters":{
-                        "title":"Independent Parameters",
-                        "description":"[OPTIONAL] A list of parameters that are being varied over the family of Hamiltonians.",
-                        "type":"object"
+                    "independent_parameters": {
+                        "title": "Independent Parameters",
+                        "description": "[OPTIONAL] A list of parameters that are being varied over the family of Hamiltonians.",
+                        "type": "object"
                     },
-                    "features":{
-                        "title":"Features of the Instance",
-                        "description":"[OPTIONAL] Supplemental information about the problem features that drive the construction of the Hamiltonian.  Currently this is typically `PySCF` Hamiltonian generation arguments/parameters.  TODO: we may define this structure more.",
-                        "type":"object"
+                    "features": {
+                        "title": "Features of the Instance",
+                        "description": "[OPTIONAL] Supplemental information about the problem features that drive the construction of the Hamiltonian.  Currently this is typically `PySCF` Hamiltonian generation arguments/parameters.  TODO: we may define this structure more.",
+                        "type": "object"
                     }
                 }
             }

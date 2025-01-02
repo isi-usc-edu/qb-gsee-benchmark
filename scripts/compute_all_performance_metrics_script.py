@@ -36,6 +36,8 @@ from miniML import main as miniML
 import numpy as np
 import pandas as pd
 
+from qb_gsee_benchmark.utils import iso8601_timestamp
+
 
 import logging
 logger = logging.getLogger()
@@ -484,7 +486,7 @@ def main(args):
         performance_metrics["performance_metrics_uuid"] = performance_metrics_uuid
         performance_metrics["solver_short_name"] = solver_short_name
         performance_metrics["solver_uuid"] = solver_uuid
-        performance_metrics["creation_timestamp"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
+        performance_metrics["creation_timestamp"] = iso8601_timestamp()
 
         # ML metrics object:
         # ===============================================================

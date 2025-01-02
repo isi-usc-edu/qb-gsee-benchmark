@@ -34,6 +34,8 @@ from qualtran.surface_code.ccz2t_cost_model import (
 from qualtran.surface_code.data_block import SimpleDataBlock
 from qualtran.surface_code.physical_cost import PhysicalCost
 
+from qb_gsee_benchmark.utils import iso8601_timestamp
+
 
 class NoFactoriesFoundError(Exception):
     pass
@@ -133,11 +135,9 @@ def get_pqre(solution_lre: dict, config: dict) -> dict[str, Any]:
             )
 
     solution_uuid = str(uuid4())
-    current_time = datetime.datetime.now(datetime.timezone.utc)
-    current_time_string = current_time.strftime("%Y-%m-%dT%H:%M:%S.%f") + "Z"
-
+    
     solution_pre["solution_uuid"] = solution_uuid
-    solution_pre["creation_timestamp"] = current_time_string
+    solution_pre["creation_timestamp"] = iso8601_timestamp()
     solution_pre["contact_info"] = config["contact_info"]
     solution_pre["solver_details"]["software_details"].append(
         {
