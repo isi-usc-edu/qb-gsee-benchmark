@@ -36,7 +36,7 @@ from qb_gsee_benchmark.utils import retrieve_fcidump_from_sftp
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 console_handler = logging.StreamHandler()
-file_handler = logging.FileHandler("compute_all_LREs_scripts.log.txt", delay=False)
+file_handler = logging.FileHandler("compute_all_LREs_script.log.txt", delay=False)
 formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 handlers = [console_handler, file_handler]
 for h in handlers:
