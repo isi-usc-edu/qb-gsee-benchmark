@@ -56,38 +56,52 @@ def main(args):
         if os.path.isfile(json_file_path):
             logging.info(f"parsing {json_file_path}")
             with open(json_file_path, "r") as jf:
-
                 # load data from file as a Python dictionary object:
                 try:
                     data = json.load(jf)
                 except Exception as e:
                     logging.error(f'Error: {e}', exc_info=True)
                 
-            for k, v in data.items():
-                try:
-                    timestamp = pd.to_datetime(v)
-                    if timestamp.tz is None:
-                        # no timezone....add it.
-                        timestamp = timestamp.to_pydatetime()
-                        timestamp = timestamp.replace(tzinfo=datetime.timezone.utc)
-                        new_v = timestamp.isoformat()
+            try:
+                k = "creation_timestamp"
+                old_v = data[k]
+                timestamp = pd.to_datetime(old_v)
+                if timestamp.tz is None:
+                    # no timezone....add it.
+                    timestamp = timestamp.to_pydatetime()
+                    timestamp = timestamp.replace(tzinfo=datetime.timezone.utc)
+                    new_v = timestamp.isoformat()
 
-                        logging.info(f"about to replace a value...")
-                        logging.info(f"old value:  {v}")
+                    logging.info(f"about to replace a value...")
+                    logging.info(f"key: {k}")
+                    logging.info(f"old value:  {old_v}")
+                    logging.info(f"new value: {new_v}")
+                    choice = input(f"type 'k' to proceed.  any other input to stop.")
+                    if choice == "k":
+                        data[k] = new_v
+                    else:
+                        logging.info("user has decided to exit script early.")
+                        sys.exit(1)
+                else:
+                    logging.info(f"found a valid timestamp with timezone:  {k}:{old_v}")
+                    logging.info(f"nothing to do.")
+                    if old_v[-1] == "Z":
+                        logging.info(f"Z at the end... let's replace that with +00:00...")    
+                        new_v = old_v[:len(old_v)-1] + "+00:00"
+                        logging.info(f"old value:  {old_v}")
                         logging.info(f"new value: {new_v}")
                         choice = input(f"type 'k' to proceed.  any other input to stop.")
                         if choice == "k":
-                            v = new_v
+                            data[k] = new_v
                         else:
                             logging.info("user has decided to exit script early.")
                             sys.exit(1)
-                    else:
-                        logging.info(f"found a valid timestamp:  {k}:{v}")
+                            
                         
 
-                except Exception as e:
-                    logging.error(f'Error: {e}', exc_info=True)
-                    logging.info(f"attempted to convert {v} into a timestamp.")
+            except Exception as e:
+                logging.error(f'Error: {e}', exc_info=True)
+                logging.info(f"attempted to convert {v} into a timestamp.")
 
 
                 
