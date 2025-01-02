@@ -12,11 +12,11 @@ A JSON file that contains a lot of metadata about a `problem_instance`, includin
 
 The data files may be large, so typically the JSON file only contains the metadata and *URLs* to where the data files may be downloaded.
 
-###  How do I download the associated data files (e.g., Hamiltonians)?
+###  How do I download the associated data files (e.g., Hamiltonians in FCIDUMP format)?
 
 Each `problem_instance` file may point to data sets on different servers, so you'll need to contact the POCs referenced in each `problem_instance` file.  
 
-For the current set of GSEE `problem_instances` provided, the data lives on an SFTP server at [sftp.l3harris.com](sftp://sftp.l3harris.com).  The *read-only* credentials for accessing the Hamiltonian files are available on the QB program basecamp here: [https://3.basecamp.com/3613864/buckets/26823103/messages/7222735635](https://3.basecamp.com/3613864/buckets/26823103/messages/7222735635).
+For the current set of GSEE `problem_instances` provided, the data lives on an SFTP server at [sftp.l3harris.com](sftp://sftp.l3harris.com).  The *read-only* credentials for accessing the Hamiltonian files are available on the QB program basecamp here: [https://3.basecamp.com/3613864/buckets/26823103/messages/7222735635](https://3.basecamp.com/3613864/buckets/26823103/messages/7222735635).  Contact the repository maintainers for credentials.
 
 ###  What if the JSON schema doesn't have the fields I want to use?
 
