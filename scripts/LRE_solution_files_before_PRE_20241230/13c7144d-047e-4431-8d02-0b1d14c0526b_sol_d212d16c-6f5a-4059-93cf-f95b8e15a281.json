@@ -1,0 +1,66 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "d212d16c-6f5a-4059-93cf-f95b8e15a281",
+    "problem_instance_uuid": "13c7144d-047e-4431-8d02-0b1d14c0526b",
+    "creation_timestamp": "2025-01-01T12:17:28.009041Z",
+    "is_resource_estimate": true,
+    "contact_info": [
+        {
+            "name": "Max Radin",
+            "email": "radin.max@gmail.com",
+            "institution": "L3Harris"
+        }
+    ],
+    "solution_data": [
+        {
+            "task_uuid": "2eaee11d-c1a0-4d2b-b29b-a38e658572f2",
+            "error_bound": 1.0,
+            "confidence_level": 0.010000000000000009,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1187,
+                    "num_T_gates_per_shot": 83544639480,
+                    "num_shots": 15,
+                    "hardware_failure_tolerance_per_shot": 6.669779784185259e-05
+                }
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-01-01T07:01:58.441010Z",
+                    "wall_clock_stop_time": "2025-01-01T07:10:21.671042Z",
+                    "seconds": 503.230032
+                }
+            }
+        }
+    ],
+    "compute_hardware_type": "quantum_computer",
+    "solver_details": {
+        "solver_uuid": "f2d73e1f-3058-43c4-a634-b6c267c84ff1",
+        "solver_short_name": "DF_QPE",
+        "compute_hardware_type": "quantum_computer",
+        "algorithm_details": {
+            "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
+            "algorithm_parameters": {
+                "overlap_csv": "overlaps.csv",
+                "sf_threshold": 1e-12,
+                "df_threshold": 0.001,
+                "max_orbitals": 70
+            }
+        },
+        "software_details": [
+            {
+                "software_name": "pyLIQTR",
+                "software_version": "1.2.1"
+            },
+            {
+                "software_name": "qb-gsee-benchmark",
+                "software_version": "0.1.0a2.dev71+g5d9efab.d20241230"
+            },
+            {
+                "software_name": "Python",
+                "software_version": "3.10.12 (main, Nov  6 2024, 20:22:13) [GCC 11.4.0]"
+            }
+        ]
+    },
+    "digital_signature": null
+}
