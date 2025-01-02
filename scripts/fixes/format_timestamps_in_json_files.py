@@ -97,7 +97,7 @@ def main(args):
             #### write out the updated .json file
             output_json_file_path = output_directory + json_file
             with open(output_json_file_path, "w") as output_json_file:
-                json.dump(data, output_json_file)
+                json.dump(data, output_json_file, indent=4)
 
 
     
