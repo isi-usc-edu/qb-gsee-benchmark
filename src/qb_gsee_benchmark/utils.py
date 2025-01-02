@@ -7,6 +7,8 @@ import os
 import shutil
 from urllib.parse import urlparse
 
+import datetime
+
 import paramiko
 from pyscf.tools import fcidump
 
@@ -46,3 +48,16 @@ def retrieve_fcidump_from_sftp(url: str, username: str, ppk_path: str, port=22) 
     os.remove(filename)
     os.remove(fcidump_filename)
     return fci
+
+
+
+
+def iso8601_timestamp() -> str:
+    """Returns the current UTC time as an ISO 8601 formatted string.
+
+    Returns:
+        str: The current UTC time in ISO 8601 format.
+
+    """
+    return datetime.datetime.now(datetime.timezone.utc).isoformat()
+
