@@ -1,6 +1,7 @@
 {
-    "description": "Date-time ISO 8601 format including timezone postfix as '+00:00' or simply 'Z'.",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "timestamp.schema.json",
+    "description": "Date-time ISO 8601 format string including timezone postfix as '+00:00' or simply 'Z'.",
     "type": "string",
-    "format": "date-time",
-    "comment": "`date-time` enforces ISO 8601 with a timezone postfix as '+00:00' or simply 'Z'."
+    "format": "date-time"
 }

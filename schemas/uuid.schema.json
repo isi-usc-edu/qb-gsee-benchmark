@@ -1,5 +1,9 @@
 {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id":"uuid.schema.json",
     "description": "Universally unique identifier (UUID) in 8-4-4-4-12 format.",
     "type": "string",
-    "format": "uuid"
+    "format": "uuid",
+    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+    "comment": "as of writing this file, VS code could not catch errors simply by the `format:uuid` requirement, so a `pattern` was added.  Other validators such as `check-jsonschema` catch errors with only `format:uuid`."
 }
