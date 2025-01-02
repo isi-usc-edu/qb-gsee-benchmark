@@ -14,6 +14,7 @@ import copy
 import uuid
 import datetime
 import os
+from qb_gsee_benchmark.utils import iso8601_timestamp
 
 
 def fetch_file_from_sftp(
@@ -386,10 +387,8 @@ def create_solution_files(
             f"solution.{prob_inst_data['prob_inst_short_name']}.{prob_inst_uuid}_{solution_file_uuid}.json"
         )
 
-        # Timestamp in ISO 8601 format in UTC (note the `Z`) with final Z
-        creation_timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
-        # Replace the time zone shift with Z
-        creation_timestamp = creation_timestamp[:-6] + "Z"
+        # Timestamp in ISO 8601 format in UTC
+        creation_timestamp = iso8601_timestamp()
         prob_inst_sol_data = {
             "$schema": json_solution_schema_url_file,
             "solution_uuid": solution_file_uuid,

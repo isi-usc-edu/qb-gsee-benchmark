@@ -32,6 +32,8 @@ from pyLIQTR.utils.resource_analysis import estimate_resources
 
 from qb_gsee_benchmark.qre import get_df_qpe_circuit
 from qb_gsee_benchmark.utils import retrieve_fcidump_from_sftp
+from qb_gsee_benchmark.utils import iso8601_timestamp
+
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -176,11 +178,11 @@ def get_lqre(
                             "wall_clock_start_time": circuit_generation_start_time.strftime(
                                 "%Y-%m-%dT%H:%M:%S.%f"
                             )
-                            + "Z",
+                            + "+00:00",
                             "wall_clock_stop_time": circuit_generation_end_time.strftime(
                                 "%Y-%m-%dT%H:%M:%S.%f"
                             )
-                            + "Z",
+                            + "+00:00",
                             "seconds": (
                                 circuit_generation_end_time
                                 - circuit_generation_start_time
@@ -190,10 +192,7 @@ def get_lqre(
                 }
             )
 
-    solution_uuid = str(uuid4())
-    current_time = datetime.datetime.now(datetime.timezone.utc)
-    current_time_string = current_time.strftime("%Y-%m-%dT%H:%M:%S.%f") + "Z"
-
+    
     solver_details = {
         "solver_uuid": config["solver_uuid"],
         "solver_short_name": "DF_QPE",
@@ -213,9 +212,9 @@ def get_lqre(
     }
     results = {
         "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/solution.schema.0.0.1.json",
-        "solution_uuid": solution_uuid,
+        "solution_uuid": str(uuid4()),
         "problem_instance_uuid": problem_instance["problem_instance_uuid"],
-        "creation_timestamp": current_time_string,
+        "creation_timestamp": iso8601_timestamp(),
         "is_resource_estimate": True,
         "contact_info": config["contact_info"],
         "solution_data": solution_data,

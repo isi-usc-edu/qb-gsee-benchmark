@@ -37,6 +37,8 @@ import matplotlib.pyplot as plt
 import markdown
 import weasyprint
 
+from qb_gsee_benchmark.utils import iso8601_timestamp
+
 
 import logging
 logger = logging.getLogger()
@@ -96,7 +98,8 @@ def main(config):
     np.random.seed(42)
 
 
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
+    timestamp = iso8601_timestamp()
+
     output_directory = f"standard_report"
     
     # clear out the old output_directory
@@ -413,7 +416,7 @@ def main(config):
 
     readme_pdf_file = os.path.join(
         output_directory,
-        f"GSEE_benchmark_standard_report_{timestamp}.pdf"
+        f"GSEE_benchmark_standard_report.pdf"
     )
     weasyprint.HTML(readme_html_file).write_pdf(readme_pdf_file)
     
@@ -445,7 +448,7 @@ if __name__ == "__main__":
         description="""
             A script to generate the standard report.  
             The report files are placed in a nearby directory 
-            called `standard_report_<timestamp>`.
+            called `/standard_report`.
         """
     )
     
