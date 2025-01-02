@@ -117,12 +117,14 @@ if __name__ == "__main__":
         "-i", 
         "--input_dir", 
         type=str, 
+        required=True,
         help="Specify directory for problem_instances (.json files)"
     )
     parser.add_argument(
         "-o",
         "--output_dir",
         type=str,
+        required=True,
         help="The directory where updated .json files are moved to."
     )
 
