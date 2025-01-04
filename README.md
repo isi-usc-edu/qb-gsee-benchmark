@@ -11,11 +11,11 @@ This repository includes:
   - In some cases, the list only contains one Hamiltonian.
   - The `problem_instance.json` file specifies the requirements for accuracy and run time.
   - The Hamiltonians are large FCIDUMP files.  The `problem_instance.json` file contains a URL to where the FCIDUMP file can be downloaded.  In most cases, the FCIDUMP files are stored at [`sftp.L3Harris.com`](sftp.L3Harris.com).  Contact the maintainers for credentials.  
-- A set of [`solution.json` files](./solution_files/)
+- A set of [`solution.json` files](./data/solution_files/)
   - Some solution files were submitted representing classical algorithms (e.g., DMRG).
   - Some solution files are "quantum resource estimates" which include estimates for the number of logical qubits, T-gates, and estimates of run time for a given quantum algorithm (e.g., qubitized quantum phase estimation with double factorization).  Resource estimation gives us an idea of how large of a quantum computer would be required to be meet or exceed classical algorithm/hardware performance.
   - The hope is that eventually some solution files will be submitted based on the performance of actual quantum computing hardware, and thus we can compare the performance of real quantum computing hardware/algorithms to classical hardware/algorithms.
-- A set of [`performance_metrics.json` files](./performance_metrics/)
+- A set of [`performance_metrics.json` files](./data/performance_metrics/)
   - For one particular compute platform or "solver"--which is a combination of algorithm/hyperparameters/hardware and uniquely identified by `solver_uuid`--the QB-GSEE-Benchmark repository contains scripts to calculate a `performance_metrics.json` file.  
   - The `performance_metrics.json` file compares the solver's performance against all `problem_instance.json` files, even if the solver did not attempt them (i.e., the solver did not submit a `solution.json` file for a `problem_instance.json` or did not attempt to solve all Hamiltonians in the set of `tasks` within a `problem_instance.json` file.)
   - The `performance_metrics.json` file contains performance metrics broken down by Hamiltonian and aggregated to other levels. 
