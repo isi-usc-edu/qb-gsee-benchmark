@@ -49,7 +49,7 @@ As a **competition host**, I want to host a competition between various compute 
 
 As an **industry or academic expert**, I want to contribute new or suggest changes to existing `problem_instance.json` files.
 - Ensure the `problem_instance.json` files you generate adhere to our [schemas](./schemas/). 
-- This repository has automatic validation in place to move non-compliant JSON files to the `json_files_with_errors` directory until they are fixed.
+- This repository has automatic validation in place to move non-compliant JSON files to the `data/json_files_with_errors` directory until they are fixed.
  
 As a **maintainer of this repository**, I want to ensure all artifacts and results are up-to-date.
 - This benchmark is a prototype and currently relies on several important scripts in the [`/scripts`](./scripts/) directory. See [`/scripts/README.md`](./scripts/README.md) for more information.
@@ -81,7 +81,7 @@ Contributions to the QB-GSEE-Benchmark are welcome! Please consider the followin
 - Push to the branch (`git push origin feature-branch`).
 - Open a pull request.
 
-As a reminder, GitHub actions are configured to validate JSON files against their associated [schema](./schemas/).  If a file does not pass validation, it will be moved to the [`json_files_with_errors`](./json_files_with_errors/) directory.
+As a reminder, GitHub actions are configured to validate JSON files against their associated [schema](./schemas/).  If a file does not pass validation, it will be moved to the [`json_files_with_errors`](./data/json_files_with_errors/) directory.
 
 
 ## License
