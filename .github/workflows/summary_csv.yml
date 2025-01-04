@@ -34,7 +34,7 @@ jobs:
         working-directory: ./scripts
         run: |
           date > summary_csv_script_log.txt
-          python3 create_summary_csv.py -i ../problem_instances -o ../summary.csv >> summary_csv_script_log.txt 2>&1
+          python3 create_summary_csv.py -i ../data/problem_instances -o ../summary.csv >> summary_csv_script_log.txt 2>&1
         
       - name: commit changes
         run: |

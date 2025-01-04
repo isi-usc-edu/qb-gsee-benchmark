@@ -5,7 +5,7 @@ QB-GSEE-Benchmark is a comprehensive suite for benchmarking Ground State Energy 
 ## What is QB-GSEE-Benchmark?
 
 This repository includes:
-- A curated set of [`problem_instance.json` files](./problem_instances/).
+- A curated set of [`problem_instance.json` files](./data/problem_instances/).
   - See [`summary.csv`](summary.csv).
   - Each `problem_instance.json` contains a relevant family of Hamiltonians in a list of `tasks`.
   - In some cases, the list only contains one Hamiltonian.
