@@ -27,12 +27,12 @@ from urllib.parse import urlparse
 import time
 import sys
 sys.path.append("../")
-sys.path.append("../Hamiltonian_features/experimental/fast_double_factorization_features")
+sys.path.append("../data/Hamiltonian_features/experimental/fast_double_factorization_features")
 
 from pyscf.tools import fcidump
 import pandas as pd
-from Hamiltonian_features.experimental.fast_double_factorization_features.fcidump_to_ham_features_csv import compute_ham_features_csv
-# from Hamiltonian_features.experimental.fast_double_factorization_features.compute_ham_features import compute_hypergraph_ham_features
+from data.Hamiltonian_features.experimental.fast_double_factorization_features.fcidump_to_ham_features_csv import compute_ham_features_csv
+# from data.Hamiltonian_features.experimental.fast_double_factorization_features.compute_ham_features import compute_hypergraph_ham_features
 
 
 

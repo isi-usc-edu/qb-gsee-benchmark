@@ -33,7 +33,7 @@ options:
 Example call:
 
 ```bash
-./miniML.py -v --ham_features_file ../../Hamiltonian_features/experimental/fast_double_factorization_features/Hamiltonian_features.csv --config_file miniML_config.json --solver_uuid 16537433-9f4c-4eae-a65d-787dc3b35b59 --solver_labels_file ../../scripts/solver_labels.DMRG_Niagara_cluster_lowest_energy.16537433-9f4c-4eae-a65d-787dc3b35b59.csv --verbose
+./miniML.py -v --ham_features_file ../../data/Hamiltonian_features/experimental/fast_double_factorization_features/Hamiltonian_features.csv --config_file miniML_config.json --solver_uuid 16537433-9f4c-4eae-a65d-787dc3b35b59 --solver_labels_file ../../scripts/solver_labels.DMRG_Niagara_cluster_lowest_energy.16537433-9f4c-4eae-a65d-787dc3b35b59.csv --verbose
 ```
 
 Note that the `solver_uuid` is specific to the DMRG algorithm running on a specific compute platform in this example.

@@ -1,7 +1,7 @@
 ## Hamiltonian features calculation
 
 
-The features of all the Hamiltonians listed in the `problem_instance.json` files are calculated and available in the `Hamiltonian_featurs.csv` file.  
+The features of all the Hamiltonians listed in the `problem_instance.json` files are calculated and available in the `Hamiltonian_features.csv` file.  
 
 The `experimental.fast_double_factorization_features.main.py` script is provided to calculate the features of *one* Hamiltonian 
 described in one FCIDUMP file.  The output is a `.csv` file.  See `./main.py --help` for usage.
