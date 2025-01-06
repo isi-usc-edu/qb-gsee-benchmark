@@ -1,0 +1,159 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "aea76137-7dab-4d79-80bb-e26b2c34c221",
+    "problem_instance_uuid": "90d4e4fc-1216-4846-b45f-198c0530e29b",
+    "creation_timestamp": "2025-01-06T13:39:45.720112Z",
+    "is_resource_estimate": true,
+    "contact_info": [
+        {
+            "name": "Max Radin",
+            "email": "radin.max@gmail.com",
+            "institution": "L3Harris"
+        }
+    ],
+    "compute_hardware_type": "quantum_computer",
+    "solver_details": {
+        "solver_uuid": "5dad4064-cd11-412f-85cb-d722afe3b3de",
+        "solver_short_name": "DF_QPE",
+        "compute_hardware_type": "quantum_computer",
+        "algorithm_details": {
+            "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
+            "algorithm_parameters": {
+                "overlap_csv": "overlaps.csv",
+                "sf_threshold": 1e-12,
+                "df_threshold": 0.001,
+                "max_orbitals": 70
+            }
+        },
+        "software_details": [
+            {
+                "software_name": "pyLIQTR",
+                "software_version": "1.2.1"
+            },
+            {
+                "software_name": "qb-gsee-benchmark",
+                "software_version": "0.1.0a2.dev71+g5d9efab.d20241230"
+            },
+            {
+                "software_name": "Python",
+                "software_version": "3.10.12 (main, Nov  6 2024, 20:22:13) [GCC 11.4.0]"
+            },
+            {
+                "software_name": "qualtran",
+                "software_version": "0.2.0"
+            }
+        ],
+        "quantum_hardware_details": {
+            "quantum_hardware_description": "Optimistic superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494.",
+            "quantum_hardware_parameters": {
+                "num_factories": 4,
+                "physical_error_rate": 0.0001,
+                "cycle_time_microseconds": 1
+            }
+        },
+        "logical_resource_estimate_solution_uuid": "86e8797d-35b6-4a2e-a1a4-c6eed91b7bba",
+        "logical_resource_estimate_solver_uuid": "f2d73e1f-3058-43c4-a634-b6c267c84ff1"
+    },
+    "digital_signature": null,
+    "solution_data": [
+        {
+            "task_uuid": "e3a07092-d1e5-4867-a4d7-d0258f9df6db",
+            "error_bound": 1.0,
+            "confidence_level": 0.010000000000000009,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2176,
+                    "num_T_gates_per_shot": 510313761032,
+                    "num_shots": 6,
+                    "hardware_failure_tolerance_per_shot": 0.00016673615357942762
+                },
+                "physical": {
+                    "num_physical_qubits": 2616448,
+                    "distillation_layer_1_code_distance": 11,
+                    "distillation_layer_2_code_distance": 17,
+                    "data_code_distance": 19,
+                    "data_routing_overhead": 0.5
+                }
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-01-03T05:37:02.850753Z",
+                    "wall_clock_stop_time": "2025-01-03T07:36:32.340701Z",
+                    "seconds": 7169.489948
+                },
+                "algorithm_run_time": {
+                    "seconds": 9536488.409286
+                },
+                "overall_time": {
+                    "seconds": 9543657.899234
+                }
+            }
+        },
+        {
+            "task_uuid": "138733f0-08f5-4077-b848-813c8ec53c79",
+            "error_bound": 1.0,
+            "confidence_level": 0.010000000000000009,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2205,
+                    "num_T_gates_per_shot": 515478522120,
+                    "num_shots": 6,
+                    "hardware_failure_tolerance_per_shot": 0.00016673615357942762
+                },
+                "physical": {
+                    "num_physical_qubits": 2648216,
+                    "distillation_layer_1_code_distance": 11,
+                    "distillation_layer_2_code_distance": 17,
+                    "data_code_distance": 19,
+                    "data_routing_overhead": 0.5
+                }
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-01-03T08:34:11.385516Z",
+                    "wall_clock_stop_time": "2025-01-03T10:45:20.019252Z",
+                    "seconds": 7868.633736
+                },
+                "algorithm_run_time": {
+                    "seconds": 9633004.882117998
+                },
+                "overall_time": {
+                    "seconds": 9640873.515853997
+                }
+            }
+        },
+        {
+            "task_uuid": "79b74ad4-afa8-458f-87a3-a5ec339056c6",
+            "error_bound": 1.0,
+            "confidence_level": 0.010000000000000009,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2176,
+                    "num_T_gates_per_shot": 518492653832,
+                    "num_shots": 5,
+                    "hardware_failure_tolerance_per_shot": 0.000200080048033624
+                },
+                "physical": {
+                    "num_physical_qubits": 2616448,
+                    "distillation_layer_1_code_distance": 11,
+                    "distillation_layer_2_code_distance": 17,
+                    "data_code_distance": 19,
+                    "data_routing_overhead": 0.5
+                }
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-01-03T11:44:39.201867Z",
+                    "wall_clock_stop_time": "2025-01-03T13:43:50.864576Z",
+                    "seconds": 7151.662709
+                },
+                "algorithm_run_time": {
+                    "seconds": 9689331.468486
+                },
+                "overall_time": {
+                    "seconds": 9696483.131195
+                }
+            }
+        }
+    ]
+}

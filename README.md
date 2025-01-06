@@ -39,7 +39,7 @@ As a **quantum algorithm/hardware developer**, I want to test my new algorithm/h
 - Included in this repository is the `scripts/compute_all_LREs_script.py`, which will estimate logical quantum resources for a subset of the problem instances based on qubitized quantum phase estimation with double factorization.
 
 As an **investor or budget/policymaker**, I want to compare the performance of various hardware/software platforms to determine where investment should be made.
-- Standard reports and other output products are still in development.  What reports, charts or leader boards would you like to see?
+- See the [`README.md`](./standard_report/README.md) in the [`./standard_report/`](./standard_report/) directory.  The report/results are also available in PDF and HTML formats in the same directory.  Standard reports and other output products are still in development.  What reports, charts or leader boards would you like to see?
 
 As a **competition host**, I want to host a competition between various compute platforms using the benchmark instances.
 - The repository contains some "planted solution" problem instances, which are obfuscated Hamiltonians with known ground state energies.  
