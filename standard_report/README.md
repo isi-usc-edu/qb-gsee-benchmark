@@ -1,18 +1,20 @@
 # GSEE Benchmark Standard Report
 
-Report created on 2025-01-06T16:06:38.752601+00:00
+Report created on 2025-01-06T21:51:52.342392+00:00
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
-Input data: `aggregated_solver_labels.csv`, last modified Mon Jan  6 11:05:47 2025
+Input data: `aggregated_solver_labels.csv`, last modified Mon Jan  6 14:15:52 2025
 
-Input data: `Hamiltonian_features.csv`, last modified Mon Dec 30 14:31:01 2024
+Input data: `Hamiltonian_features.csv`, last modified Mon Dec 30 16:29:03 2024
 
-Latest creation time for a `problem_instance.json` file: Mon Jan  6 11:05:23 2025
+Input data: `GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv`, last modified Wed Dec 11 11:17:02 2024
 
-Latest creation time for a `performance_metrics.json` file: Mon Jan  6 10:47:43 2025
+Input data: Latest creation time for a `problem_instance.json` file: Mon Jan  6 14:15:52 2025
 
-Latest creation time for a `solution.json` file: Mon Jan  6 11:05:23 2025
+Latest creation time for a `performance_metrics.json` file: Mon Jan  6 14:15:52 2025
+
+Latest creation time for a `solution.json` file: Mon Jan  6 14:15:52 2025
 
 ## Problem Instance Summary Statistics
 
@@ -30,6 +32,8 @@ maximum number of orbitals: 135
 
 ![Number of orbitals histogram](num_orbitals_histogram.png)
 
+![Utility estimate per Hamiltonian](num_orbitals_vs_utility.png)
+
 ## Solver Summary Statistics
 
 number of unique participating solvers: 2
@@ -41,6 +45,8 @@ number of unique participating solvers: 2
 ### Solver DMRG_Niagara_cluster_lowest_energy, 16537433-9f4c-4eae-a65d-787dc3b35b59
 
 ![Solver success/failure plot](solver_16537433-9f4c-4eae-a65d-787dc3b35b59_plot.png)
+
+![Solver utility capture](solver_16537433-9f4c-4eae-a65d-787dc3b35b59_utility_capture_plot.png)
 
 solver_short_name: DMRG_Niagara_cluster_lowest_energy
 
@@ -81,6 +87,8 @@ ml_metrics_calculator_version: 1
 ### Solver DF_QPE, 5dad4064-cd11-412f-85cb-d722afe3b3de
 
 ![Solver success/failure plot](solver_5dad4064-cd11-412f-85cb-d722afe3b3de_plot.png)
+
+![Solver utility capture](solver_5dad4064-cd11-412f-85cb-d722afe3b3de_utility_capture_plot.png)
 
 solver_short_name: DF_QPE
 

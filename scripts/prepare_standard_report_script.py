@@ -33,6 +33,7 @@ sys.path.append("../BubbleML/miniML")
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 
 import markdown
 import weasyprint
@@ -155,13 +156,34 @@ def main(config):
         how="outer",
         suffixes=("", "_2") # some column headers may be duplicated.
     )
-    
+
+    utility_data = pd.read_csv(config["utility_data_csv"])
+    logging.info(f"length of utility data:  {len(utility_data)}")
+    utility_data["task_uuid"] = utility_data["task_uuid"].str.strip()
+    data = pd.merge(
+        data, 
+        utility_data[[ # merge in utility estimate data.
+            "task_uuid",
+            "Utility NPV $",
+            "Utility NVP lower bound $",
+            "Utility NVP upper bound $"
+        ]], 
+        on="task_uuid",
+        how="outer",
+    )
+
+    data = data.fillna(0) # some utility estimate data may be NaN.  fill in with zero.
+
+
+    # write out data.csv for posterity.
     data.to_csv(
         os.path.join(output_directory, f"data.csv"),
         index=False
     )
 
+    # figure out the list of solvers (by solver_uuid) that participated.
     solver_uuid_list = data["solver_uuid"].unique()
+    logging.info(f"participating solver_uuids: {solver_uuid_list}")
     solver_uuid_dict = {}
     for solver_uuid in solver_uuid_list:
         solver_uuid_dict[solver_uuid] = data[data["solver_uuid"]==solver_uuid]["solver_short_name"].iloc[0]
@@ -200,6 +222,7 @@ def main(config):
     # just pick the first solver_uuid and filter by that.  
     # that filter provides a list of all Hamiltonians with no double counting.
     df = data[data["solver_uuid"]==solver_uuid_list[0]]
+    plt.figure()
     plt.hist(
         df["num_orbitals"],
         bins=[10*x for x in range(int(max(data["num_orbitals"])/10+2))], # bin edges by 10
@@ -212,7 +235,41 @@ def main(config):
     plt.savefig(os.path.join(output_directory,f"num_orbitals_histogram.png"))
 
 
+
+
+    # scatter plot of num_orbitals vs. utility for each task (Hamiltonian)
+    #===============================================================
+    # note that utility estimate data is repeated for each solver_uuid in `data`
+    # just pick the first solver_uuid and filter by that.  
+    # that filter provides a list of all Hamiltonians with no double counting.
+    df = data[data["solver_uuid"]==solver_uuid_list[0]]
+    total_utility = sum(df['Utility NPV $'].values)
+    plt.figure()
+    plt.scatter(
+        df["num_orbitals"].values,
+        df["Utility NPV $"].values, 
+    )
+    plt.title(f"Utility estimate per Hamiltonian (total: ${total_utility:.1e})")
+    plt.xlabel("Number of spatial orbitals")
+    plt.xlim(0,10*np.ceil(max(data["num_orbitals"])/10))
+    plt.ylabel("Utility estimate in USD")
+    plt.savefig(os.path.join(output_directory,f"num_orbitals_vs_utility.png"))
+        
+
+    
+    
+
+
+
+
+
+
+
+
+
+
     # scatter plot of num_orbitals vs. run_time (for all solvers)
+    #===============================================================
     plt.figure()
     plt.title("Run time of solvers (for attempted tasks)")
     plt.xlabel("Number of spatial orbitals")
@@ -257,7 +314,11 @@ def main(config):
     
 
 
+
+
+
     # scatter plot of num_orbitals vs. run_time for EACH solver
+    #===============================================================
     for solver_uuid in solver_uuid_list:
         df = data
         df = df[df["solver_uuid"]==solver_uuid] 
@@ -265,7 +326,7 @@ def main(config):
         solver_short_name = solver_uuid_dict[solver_uuid]
         
         plt.figure()
-        plt.title(f"{solver_short_name}/{solver_uuid[:4]}...")
+        plt.title(f"Performance for {solver_short_name}/{solver_uuid[:4]}...")
         plt.xlabel("Number of spatial orbitals")
         plt.xlim(0,10*np.ceil(max(data["num_orbitals"])/10))
         plt.ylabel("Overall run time in seconds")
@@ -296,7 +357,50 @@ def main(config):
         plt.savefig(os.path.join(output_directory,f"solver_{solver_uuid}_plot.png"))
        
     
+    # scatter plot of num_orbitals vs. utility estimate for EACH solver
+    #===============================================================
+    for solver_uuid in solver_uuid_list:
+        df = data
+        df = df[df["solver_uuid"]==solver_uuid] 
 
+        
+        captured_utility = sum(df[df["label"]==True]["Utility NPV $"])
+        captured_percent = 100*captured_utility/total_utility
+
+        solver_short_name = solver_uuid_dict[solver_uuid]
+        plt.figure()
+        plt.title(f"""
+            Utility capture from {solver_short_name}/{solver_uuid[:4]}... \n
+            (captured: ${captured_utility:.1e}/{total_utility:.1e}, approximately {captured_percent:.1e}%)            
+            """)
+        plt.xlabel("Number of spatial orbitals")
+        plt.xlim(0,10*np.ceil(max(data["num_orbitals"])/10))
+        plt.ylabel("Utility estimate in USD")
+        
+        df_solved = df[df["label"]==True] # Solved!
+        plt.scatter(
+            df_solved["num_orbitals"].values,
+            df_solved["Utility NPV $"].values,
+            color="blue",
+            edgecolor="black",
+            marker="^", # triangle up for success.
+            label=f"Task success {solver_short_name} ({solver_uuid[:4]}...)"
+        )
+        
+        df_failed = df[df["label"]==False] # failed to solve the task
+        plt.scatter(
+            df_failed["num_orbitals"].values,
+            df_failed["Utility NPV $"].values,
+            color="red",
+            marker="v", # triangle down for failure.
+            edgecolor="black",
+            label=f"Task failed {solver_short_name} ({solver_uuid[:4]}...)"
+        )
+
+        
+        plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+        plt.tight_layout()
+        plt.savefig(os.path.join(output_directory,f"solver_{solver_uuid}_utility_capture_plot.png"))
 
 
 
@@ -317,7 +421,12 @@ def main(config):
         file.write(f"Input data: `{config['hamiltonian_features_file']}`, last modified {last_modified_time}\n\n")
         if num_features_calculated < num_tasks:
             file.write(f"WARNING!  We only have features calculated for {num_features_calculated}/{num_tasks} Hamiltonians. This report is based on partial results!\n\n")
-        
+
+        last_modified_time = time.ctime(os.path.getmtime(config["utility_data_csv"]))
+        file.write(f"Input data: `{config['utility_data_csv']}`, last modified {last_modified_time}\n\n")
+
+        last_modified_time = time.ctime(os.path.getmtime(config["utility_data_csv"]))
+        file.write(f"Input data: ")
 
         c = get_latest_ctime_within_dir(config["problem_instances_directory"])
         file.write(f"Latest creation time for a `problem_instance.json` file: {time.ctime(c)}\n\n")
@@ -346,6 +455,8 @@ def main(config):
         file.write(f"median number of orbitals: {np.median(data['num_orbitals'])}\n\n")
         file.write(f"maximum number of orbitals: {np.max(data['num_orbitals'])}\n\n")
         file.write(f"![Number of orbitals histogram](num_orbitals_histogram.png)\n\n")
+        file.write(f"![Utility estimate per Hamiltonian](num_orbitals_vs_utility.png)\n\n")
+        
         
 
 
@@ -384,7 +495,8 @@ def main(config):
             file.write(f"### Solver {performance_metrics['solver_short_name']}, {solver_uuid}\n\n")
             
             file.write(f"![Solver success/failure plot](solver_{solver_uuid}_plot.png)\n\n")
-            
+            file.write(f"![Solver utility capture](solver_{solver_uuid}_utility_capture_plot.png)\n\n")
+
             filtered_performance_metrics = {key: performance_metrics[key] for key in write_out_fields if key in performance_metrics}
             for k, v in filtered_performance_metrics.items():
                 if not isinstance(v, dict):
