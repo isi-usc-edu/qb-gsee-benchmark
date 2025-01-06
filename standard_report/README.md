@@ -1,20 +1,18 @@
 # GSEE Benchmark Standard Report
 
-Report created on 2024-12-30-14-26
+Report created on 2025-01-06-09-09
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
-Input data: `aggregated_solver_labels.csv`, last modified Mon Dec 30 10:32:50 2024
+Input data: `aggregated_solver_labels.csv`, last modified Mon Jan  6 08:43:55 2025
 
-Input data: `Hamiltonian_features.csv`, last modified Mon Dec 16 11:50:19 2024
-
-WARNING!  We only have features calculated for 229/230 Hamiltonians. This report is based on partial results!
+Input data: `Hamiltonian_features.csv`, last modified Mon Dec 30 14:31:01 2024
 
 Latest creation time for a `problem_instance.json` file: Fri Dec 13 23:09:21 2024
 
-Latest creation time for a `performance_metrics.json` file: Mon Dec 30 12:05:13 2024
+Latest creation time for a `performance_metrics.json` file: Mon Jan  6 09:08:40 2025
 
-Latest creation time for a `solution.json` file: Mon Dec 30 10:32:50 2024
+Latest creation time for a `solution.json` file: Mon Jan  6 08:39:48 2025
 
 ## Problem Instance Summary Statistics
 
@@ -46,9 +44,9 @@ number of unique participating solvers: 2
 
 solver_short_name: DMRG_Niagara_cluster_lowest_energy
 
-performance_metrics_uuid: 4fc59937-7062-441c-8469-7971ecd6d5c9
+performance_metrics_uuid: f666d154-a6ff-4a89-a795-8a9b1e5bb786
 
-creation_timestamp: 2024-12-30T14:53:42.218159+00:00
+creation_timestamp: 2025-01-06T14:04:15.318011+00:00
 
 number_of_problem_instances: 82
 
@@ -72,7 +70,7 @@ sum_of_run_time_of_attempted_tasks: 1824772.0337238186
 
 solvability_ratio: 0.0
 
-f1_score: [0.7558139534883721, 0.8531468531468531]
+f1_score: [0.7586206896551724, 0.8531468531468531]
 
 ml_metrics_calculator_version: 1
 
@@ -86,33 +84,33 @@ ml_metrics_calculator_version: 1
 
 solver_short_name: DF_QPE
 
-performance_metrics_uuid: 97a58710-8702-4721-8971-288144232e2f
+performance_metrics_uuid: b836aa30-274e-4d09-bc93-6bd2e8506b67
 
-creation_timestamp: 2024-12-30T14:53:43.965750+00:00
+creation_timestamp: 2025-01-06T14:04:15.984519+00:00
 
 number_of_problem_instances: 82
 
-number_of_problem_instances_attempted: 13
+number_of_problem_instances_attempted: 24
 
-number_of_problem_instances_solved: 2
+number_of_problem_instances_solved: 3
 
 number_of_tasks: 230
 
-number_of_tasks_attempted: 99
+number_of_tasks_attempted: 163
 
-number_of_tasks_solved: 19
+number_of_tasks_solved: 26
 
-number_of_tasks_solved_within_run_time_limit: 19
+number_of_tasks_solved_within_run_time_limit: 26
 
-number_of_tasks_solved_within_accuracy_threshold: 102
+number_of_tasks_solved_within_accuracy_threshold: 163
 
-max_run_time_of_attempted_tasks: 30188593.464838002
+max_run_time_of_attempted_tasks: 233737829.40462503
 
-sum_of_run_time_of_attempted_tasks: 374908704.304665
+sum_of_run_time_of_attempted_tasks: 1180589418.3385441
 
-solvability_ratio: 0.0134
+solvability_ratio: 0.0086
 
-f1_score: [0.9976133651551312, 0.9743589743589743]
+f1_score: [0.9950738916256158, 0.9629629629629629]
 
 ml_metrics_calculator_version: 1
 
