@@ -4,16 +4,17 @@ example QPE resource estimates with those reported in the September 2024 QB deli
 import json
 import os
 from collections import defaultdict
-import matplotlib.pyplot as plt
 
+import matplotlib.pyplot as plt
 import pandas as pd
 
 # benchmark_results_dir = "../scripts/resource_estimate_files_20241210"
-benchmark_results_dir = "resource_estimate_files_20241219"
+benchmark_results_dir = "resource_estimate_files_20250106"
 september_results_dir = "september_results"
+PROBLEM_INSTANCE_DIR = "../problem_instances"
 
 
-def get_qre_from_dir(dir):
+def get_qre_from_dir(dir: str) -> dict:
     result = defaultdict(list)
     files = os.listdir(dir)
     for file in files:
@@ -32,33 +33,43 @@ def get_qre_from_dir(dir):
     return result
 
 
-def load_task_id_map():
-    with open("task_id_map.csv") as f:
-        task_ids = pd.read_csv(f)
+def infer_september_style_task_id(row: pd.Series) -> str:
+    for file in os.listdir(PROBLEM_INSTANCE_DIR):
+        if row["instance_id"] in file:
+            with open(os.path.join(PROBLEM_INSTANCE_DIR, file)) as f:
+                data = json.load(f)
+                for task in data["tasks"]:
+                    if task["task_uuid"] == row["task_id"]:
+                        return (
+                            task["features"]["molecule_name"]
+                            + "-"
+                            + str(task["features"]["avas_no"])
+                        )
+    raise ValueError(f"Task {row['task_id']} not found")
 
-    task_id_map = {}
-    for _, row in task_ids.iterrows():
-        task_id_map[row["september_task_id"]] = row["benchmark_task_id"]
-    return task_id_map
 
 def plot_logical_qubit_comparison(results: pd.DataFrame) -> plt.Axes:
-    ax = results.plot.scatter("Logical qubits (December 2024)", "Logical qubits (September 2024)")
+    ax = results.plot.scatter(
+        "Logical qubits (December 2024)", "Logical qubits (September 2024)"
+    )
     return ax
+
 
 def plot_t_count_comparison(results: pd.DataFrame) -> plt.Axes:
     ax = results.plot.scatter("T gates (December 2024)", "T gates (September 2024)")
     return ax
 
-def main():
-    task_id_map = load_task_id_map()
-    benchmark_results = get_qre_from_dir(benchmark_results_dir)
-    september_results = get_qre_from_dir(september_results_dir)
-    september_results["task_id"] = [
-        task_id_map.get(task_id) for task_id in september_results["task_id"]
-    ]
 
+def main():
+    benchmark_results = get_qre_from_dir(benchmark_results_dir)
     benchmark_results = pd.DataFrame(benchmark_results)
-    september_results = pd.DataFrame(september_results).dropna(subset=["task_id"])
+    benchmark_results["task_uuid"] = benchmark_results["task_id"]
+    benchmark_results["task_id"] = benchmark_results.apply(
+        infer_september_style_task_id, axis=1
+    )
+
+    september_results = get_qre_from_dir(september_results_dir)
+    september_results = pd.DataFrame(september_results)
 
     results = pd.merge(
         benchmark_results,
