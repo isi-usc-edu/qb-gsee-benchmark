@@ -1,0 +1,507 @@
+{
+    "problem_instance_uuid": "9fd00015-08b4-4e9f-b097-6a304c6624ee",
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+    "problem_type": "GSEE",
+    "application_domain": "QC",
+    "creation_timestamp": "2025-01-07T13:08:10.635192",
+    "calendar_due_date": null,
+    "status": "in_force",
+    "superseded_by": null,
+    "contact_info": [
+        {
+            "name": "Matthew Otten",
+            "email": "mjotten@wisc.edu",
+            "institution": "University of Wisconsin -- Madison"
+        }
+    ],
+    "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "references": [
+        "Dian Wu et al., Variational benchmarks for quantum many-body problems. Science 386, 296-301(2024). DOI:10.1126/science.adg9774"
+    ],
+    "tasks": [
+        {
+            "task_uuid": "02026ec5-58c0-43eb-87b2-d0553ea99610",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 3.5981,
+                "boundary": "peri",
+                "Nf": 4,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -17.698030018702067,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "c224904e-cb5b-4fa6-82ca-42f1636c3491",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_3.5981.c224904e-cb5b-4fa6-82ca-42f1636c3491.gz",
+                    "instance_data_checksum": "a027e3af9654a156675abf51a1add9057b68a2d0",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "5ab5720a-373d-4fd1-b458-81abe8eae5a8",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 8.0,
+                "boundary": "peri",
+                "Nf": 5,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -17.51036669487866,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "62e225ac-32b1-4883-be4d-0922f12231c2",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_8.0.62e225ac-32b1-4883-be4d-0922f12231c2.gz",
+                    "instance_data_checksum": "cbfd725a2bd273f609446b219bfdea79d26c12cb",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "6f6b448d-2781-442c-a7e1-a69a424f0ab6",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 6.0,
+                "boundary": "peri",
+                "Nf": 4,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -16.899926630974996,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "a9f516bf-9f71-4d1d-9347-6989cdc35a9d",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_6.0.a9f516bf-9f71-4d1d-9347-6989cdc35a9d.gz",
+                    "instance_data_checksum": "0a4de5c6039db8ea086d1ef029011eef07b44dbc",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "49bcced9-1774-473d-953c-b4933dfc8170",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 4.0,
+                "boundary": "peri",
+                "Nf": 5,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -19.580937525419095,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "3048bb9f-e841-46c1-85ff-c6686dbb9106",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_4.0.3048bb9f-e841-46c1-85ff-c6686dbb9106.gz",
+                    "instance_data_checksum": "c6bbfdb7e70ea7c93dc1a73625c776653e535bcc",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "bb5fabe0-3b12-43f4-92a7-82de6f81b02b",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 8.0,
+                "boundary": "peri",
+                "Nf": 4,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -16.46062675368178,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "0358a452-1309-477e-a265-7c05a74e8356",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_8.0.0358a452-1309-477e-a265-7c05a74e8356.gz",
+                    "instance_data_checksum": "b8995606aaf72987d1df3d3b3f097d038a54983c",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "bae3e1a2-f0c4-4f12-a824-a4fe29629489",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 6.0,
+                "boundary": "peri",
+                "Nf": 5,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -18.358365074454827,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "0cefe1e9-4a85-41fd-b748-af56be78978d",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_6.0.0cefe1e9-4a85-41fd-b748-af56be78978d.gz",
+                    "instance_data_checksum": "579881bc519600b40b201eaa250a77504705659a",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "e6656ae5-b6e6-4060-9d93-aff5f719e1e7",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 2.0,
+                "boundary": "peri",
+                "Nf": 5,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -21.376950984458336,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "39dd6747-6561-4263-a5eb-3d6d876f908c",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_2.0.39dd6747-6561-4263-a5eb-3d6d876f908c.gz",
+                    "instance_data_checksum": "99b87c71682617a4f97f63b762e517ea5136a0d4",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "0df58324-dfa0-4239-9abb-234deddd5de9",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 3.5981,
+                "boundary": "peri",
+                "Nf": 5,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -19.891637199948672,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "27eca0c1-c39a-4f5a-8411-4a8b42e470ed",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_3.5981.27eca0c1-c39a-4f5a-8411-4a8b42e470ed.gz",
+                    "instance_data_checksum": "00f53a4cbd6dfaf2fadf82f36a976d2cce090d1e",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "abda9d87-7fda-4ecb-ac66-2fbbcc7dac7a",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 2.1544,
+                "boundary": "peri",
+                "Nf": 5,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -21.21223577699911,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "1e063807-3f89-42ff-a058-aeb75866dae1",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_2.1544.1e063807-3f89-42ff-a058-aeb75866dae1.gz",
+                    "instance_data_checksum": "59eede0c92c015621cc84689163047a1ed121c2a",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "8438a9e1-04aa-41cd-a1f3-70d561b01486",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 7.74264,
+                "boundary": "peri",
+                "Nf": 4,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -16.509154825265142,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "858776ae-a44f-4835-bae0-672493aa8180",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_7.74264.858776ae-a44f-4835-bae0-672493aa8180.gz",
+                    "instance_data_checksum": "2906eb1c4b47ffa99fe17df41456680824ca1340",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "c2f9d72f-2bfa-42e7-b259-2bb4c5c13874",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 10.0,
+                "boundary": "peri",
+                "Nf": 4,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -16.143208170202413,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "9baa6cb9-0eb8-400a-b56f-7207446dca22",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_10.0.9baa6cb9-0eb8-400a-b56f-7207446dca22.gz",
+                    "instance_data_checksum": "64a459bbd6bfcda33ad9491320a3eaa5e7679302",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "c340d31e-071b-4740-ad2e-fcb7b611b54c",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 7.74264,
+                "boundary": "peri",
+                "Nf": 5,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -17.60373155517909,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "bcfb6c07-e558-45ed-afc2-289e7ecfd914",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_7.74264.bcfb6c07-e558-45ed-afc2-289e7ecfd914.gz",
+                    "instance_data_checksum": "e1b8045c0443d85777256917b844bea59b4ad917",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "462b826c-b7af-4014-9e98-17e64a2e360e",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 10.0,
+                "boundary": "peri",
+                "Nf": 5,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -16.903559984243547,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "57b385ec-f136-42c5-83e3-bcea2cf37b52",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_10.0.57b385ec-f136-42c5-83e3-bcea2cf37b52.gz",
+                    "instance_data_checksum": "e66ac20dbdfe5e03b1e81ef7eabbe6028b7ce9ea",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "8650acfc-bd60-47dd-830b-da0e7d0cf08f",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 4.0,
+                "boundary": "peri",
+                "Nf": 4,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -17.534897796641197,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "31ceb507-8f4a-4bb3-aa08-aaf980512c75",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_4.0.31ceb507-8f4a-4bb3-aa08-aaf980512c75.gz",
+                    "instance_data_checksum": "ee6624424c4d58e3e270cd133657fd73dd909333",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "5f0f269a-9f31-4020-b1af-c80cdfbd51bc",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 2.0,
+                "boundary": "peri",
+                "Nf": 4,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -18.495436619460737,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "80f02c19-75d5-42e1-822b-4fd7dab36897",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_2.0.80f02c19-75d5-42e1-822b-4fd7dab36897.gz",
+                    "instance_data_checksum": "b75c11b85cd8d90c9d1b95059b8a8ba72e145406",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        }
+    ],
+    "short_name": "hubbard_square"
+}
