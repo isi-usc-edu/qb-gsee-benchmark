@@ -5,6 +5,7 @@ import json
 import os
 from collections import defaultdict
 
+import matplotlib.cm as cm
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -49,15 +50,31 @@ def infer_september_style_task_id(row: pd.Series) -> str:
 
 
 def plot_logical_qubit_comparison(results: pd.DataFrame) -> plt.Axes:
-    ax = results.plot.scatter(
-        "Logical qubits (December 2024)", "Logical qubits (September 2024)"
-    )
-    return ax
+    colormap = cm.get_cmap("tab10", len(results.groupby("instance_name_benchmark")))
+    plt.figure()
+    for index, (name, group) in enumerate(results.groupby("instance_name_benchmark")):
+        group.plot.scatter(
+            "Logical qubits (December 2024)",
+            "Logical qubits (September 2024)",
+            label=name,
+            color=colormap(index),
+            ax=plt.gca(),
+        )
+    return plt.gca()
 
 
 def plot_t_count_comparison(results: pd.DataFrame) -> plt.Axes:
-    ax = results.plot.scatter("T gates (December 2024)", "T gates (September 2024)")
-    return ax
+    colormap = cm.get_cmap("tab10", len(results.groupby("instance_name_benchmark")))
+    plt.figure()
+    for index, (name, group) in enumerate(results.groupby("instance_name_benchmark")):
+        group.plot.scatter(
+            "T gates (December 2024)",
+            "T gates (September 2024)",
+            label=name,
+            color=colormap(index),
+            ax=plt.gca(),
+        )
+    return plt.gca()
 
 
 def main():
