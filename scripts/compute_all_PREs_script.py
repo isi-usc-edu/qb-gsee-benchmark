@@ -120,13 +120,17 @@ def get_pqre(solution_lre: dict, config: dict) -> dict[str, Any]:
                 "seconds": task_solution["run_time"]["preprocessing_time"]["seconds"]
                 + algorithm_runtime_seconds
             }
-
             task_solution["quantum_resources"]["physical"] = {
                 "num_physical_qubits": num_physical_qubits,
                 "distillation_layer_1_code_distance": factory.base_factory.distillation_l1_d,
                 "distillation_layer_2_code_distance": factory.base_factory.distillation_l2_d,
                 "data_code_distance": data_block.data_d,
                 "data_routing_overhead": data_block.routing_overhead,
+                "num_factory_physical_qubits": factory.footprint(),
+                "num_logical_compiled_qubits": int(
+                    task_solution["quantum_resources"]["logical"]["num_logical_qubits"]
+                    * (1 + data_block.routing_overhead)
+                ),
             }
             solution_pre["solution_data"].append(task_solution)
         except NoFactoriesFoundError:
@@ -135,7 +139,7 @@ def get_pqre(solution_lre: dict, config: dict) -> dict[str, Any]:
             )
 
     solution_uuid = str(uuid4())
-    
+
     solution_pre["solution_uuid"] = solution_uuid
     solution_pre["creation_timestamp"] = iso8601_timestamp()
     solution_pre["contact_info"] = config["contact_info"]
