@@ -132,6 +132,18 @@
                                         "description": "The number of physical qubits used by the solver.",
                                         "type": "integer",
                                         "minimum": 0
+                                    },
+                                    "num_factory_physical_qubits": {
+                                        "title": "Number of Factory Physical Qubits",
+                                        "description": "The number of physical qubits used for magic state factories.",
+                                        "type": "integer",
+                                        "minimum": 0
+                                    },
+                                    "num_logical_compiled_qubits": {
+                                        "title": "Number of Logical Compiled Qubits",
+                                        "description": "The number of logical compiled qubits.",
+                                        "type": "integer",
+                                        "minimum": 0
                                     }
                                 },
                                 "logical": {
