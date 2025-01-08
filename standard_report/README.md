@@ -1,20 +1,20 @@
 # GSEE Benchmark Standard Report
 
-Report created on 2025-01-06T21:51:52.342392+00:00
+Report created on 2025-01-08T14:34:09.541855+00:00
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
-Input data: `aggregated_solver_labels.csv`, last modified Mon Jan  6 14:15:52 2025
+Input data: `aggregated_solver_labels.csv`, last modified Wed Jan  8 09:13:55 2025
 
 Input data: `Hamiltonian_features.csv`, last modified Mon Dec 30 16:29:03 2024
 
 Input data: `GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv`, last modified Wed Dec 11 11:17:02 2024
 
-Input data: Latest creation time for a `problem_instance.json` file: Mon Jan  6 14:15:52 2025
+Input data: Latest creation time for a `problem_instance.json` file: Wed Jan  8 07:08:49 2025
 
-Latest creation time for a `performance_metrics.json` file: Mon Jan  6 14:15:52 2025
+Latest creation time for a `performance_metrics.json` file: Wed Jan  8 09:33:34 2025
 
-Latest creation time for a `solution.json` file: Mon Jan  6 14:15:52 2025
+Latest creation time for a `solution.json` file: Wed Jan  8 09:10:43 2025
 
 ## Problem Instance Summary Statistics
 
@@ -50,9 +50,9 @@ number of unique participating solvers: 2
 
 solver_short_name: DMRG_Niagara_cluster_lowest_energy
 
-performance_metrics_uuid: f666d154-a6ff-4a89-a795-8a9b1e5bb786
+performance_metrics_uuid: 9b982ac0-5fcd-476b-85f1-3c7b08879e3e
 
-creation_timestamp: 2025-01-06T14:04:15.318011+00:00
+creation_timestamp: 2025-01-08T14:31:00.488904+00:00
 
 number_of_problem_instances: 82
 
@@ -92,9 +92,9 @@ ml_metrics_calculator_version: 1
 
 solver_short_name: DF_QPE
 
-performance_metrics_uuid: b836aa30-274e-4d09-bc93-6bd2e8506b67
+performance_metrics_uuid: c5fbe072-8546-42a5-af09-0c90d853b87c
 
-creation_timestamp: 2025-01-06T14:04:15.984519+00:00
+creation_timestamp: 2025-01-08T14:31:01.092493+00:00
 
 number_of_problem_instances: 82
 
