@@ -145,245 +145,245 @@
                                         "type": "integer",
                                         "minimum": 0
                                     }
-                                },
-                                "logical": {
-                                    "title": "Logical Quantum Resources",
-                                    "description": "Logical quantum resources used by the test performer.",
-                                    "type": "object",
-                                    "properties": {
-                                        "num_logical_qubits": {
-                                            "title": "Number of Logical Qubits",
-                                            "description": "The number of logical qubits used by the solver.",
-                                            "type": "integer",
-                                            "minimum": 0
-                                        },
-                                        "num_T_gates_per_shot": {
-                                            "title": "Number of T-Gates",
-                                            "description": "The total number of T-gates used by the solver.",
-                                            "type": "integer",
-                                            "minimum": 0
-                                        },
-                                        "num_shots": {
-                                            "title": "Number of Shots",
-                                            "description": "The number of shots used by the solver.",
-                                            "type": "integer",
-                                            "minimum": 0
-                                        },
-                                        "hardware_failure_tolerance_per_shot": {
-                                            "title": "Hardware Failure Tolerance Per Shot",
-                                            "description": "The allowable probability that the hardware fails to perform a shot correctly.",
-                                            "type": "number",
-                                            "minimum": 0,
-                                            "maximum": 1
-                                        }
-                                    }
                                 }
-                            }
-                        },
-                        "solution_details": {
-                            "title": "Solution Details",
-                            "description": "Additional details about the solution.",
-                            "type": "object"
-                        },
-                        "run_time": {
-                            "title": "Wall Clock Runtime",
-                            "description": "A breakdown of start/stop wall clock time(s) reported according to ISO 8601 in UTC and duration in seconds.  run_time is broken down into (1) overall_time, (2) preprocessing_time, (3), algorithm_run_time, and (4) postprocessing_time.  See descriptions of each object.",
-                            "type": "object",
-                            "properties": {
-                                "overall_time": {
-                                    "title": "Overall Wall Clock Time",
-                                    "description": "Includes all pre/postprocessing times and algorithm_run_time.",
-                                    "type": "object",
-                                    "required": [
-                                        "seconds"
-                                    ],
-                                    "properties": {
-                                        "wall_clock_start_time": {
-                                            "title": "Wall Clock Start Time",
-                                            "$ref": "timestamp.schema.json"
-                                        },
-                                        "wall_clock_stop_time": {
-                                            "title": "Wall Clock Stop Time",
-                                            "$ref": "timestamp.schema.json"
-                                        },
-                                        "seconds": {
-                                            "title": "Duration in Seconds",
-                                            "description": "The number of seconds that has elapsed between start/stop times reported.",
-                                            "type": "number",
-                                            "minimum": 0
-                                        }
-                                    }
-                                },
-                                "preprocessing_time": {
-                                    "title": "Preprocessing Wall Clock Time",
-                                    "description": "The time required to load any data into an idle machine before running an algorithm.",
-                                    "type": "object",
-                                    "required": [
-                                        "seconds"
-                                    ],
-                                    "properties": {
-                                        "wall_clock_start_time": {
-                                            "title": "Wall Clock Start Time",
-                                            "$ref": "timestamp.schema.json"
-                                        },
-                                        "wall_clock_stop_time": {
-                                            "title": "Wall Clock Stop Time",
-                                            "$ref": "timestamp.schema.json"
-                                        },
-                                        "seconds": {
-                                            "title": "Duration in Seconds",
-                                            "description": "The number of seconds that has elapsed between start/stop times reported.",
-                                            "type": "number",
-                                            "minimum": 0
-                                        }
-                                    }
-                                },
-                                "algorithm_run_time": {
-                                    "title": "Algorithm Run Time",
-                                    "description": "The start/stop times for how long the software/algorithm ran.",
-                                    "type": "object",
-                                    "required": [
-                                        "seconds"
-                                    ],
-                                    "properties": {
-                                        "wall_clock_start_time": {
-                                            "title": "Wall Clock Start Time",
-                                            "$ref": "timestamp.schema.json"
-                                        },
-                                        "wall_clock_stop_time": {
-                                            "title": "Wall Clock Stop Time",
-                                            "$ref": "timestamp.schema.json"
-                                        },
-                                        "seconds": {
-                                            "title": "Duration in Seconds",
-                                            "description": "The number of seconds that has elapsed between start/stop times reported.",
-                                            "type": "number",
-                                            "minimum": 0
-                                        },
-                                        "compute_node_run_time_breakdown": {
-                                            "title": "Compute Node Run Time Breakdown",
-                                            "description": "Breakdown of algorithm_run_time across multiple nodes if a cluster of multiple machines was utilized.\n\nThis object is optional.  There is no required structure for this object."
-                                        }
-                                    }
-                                },
-                                "postprocessing_time": {
-                                    "title": "Postprocessing Wall Clock Time",
-                                    "description": "The time required measure or read out any data from the machine.  .",
-                                    "type": "object",
-                                    "required": [
-                                        "seconds"
-                                    ],
-                                    "properties": {
-                                        "wall_clock_start_time": {
-                                            "title": "Wall Clock Start Time",
-                                            "$ref": "timestamp.schema.json"
-                                        },
-                                        "wall_clock_stop_time": {
-                                            "title": "Wall Clock Stop Time",
-                                            "$ref": "timestamp.schema.json"
-                                        },
-                                        "seconds": {
-                                            "title": "Duration in Seconds",
-                                            "description": "The number of seconds that has elapsed between start/stop times reported.",
-                                            "type": "number",
-                                            "minimum": 0
-                                        }
+                            },
+                            "logical": {
+                                "title": "Logical Quantum Resources",
+                                "description": "Logical quantum resources used by the test performer.",
+                                "type": "object",
+                                "properties": {
+                                    "num_logical_qubits": {
+                                        "title": "Number of Logical Qubits",
+                                        "description": "The number of logical qubits used by the solver.",
+                                        "type": "integer",
+                                        "minimum": 0
+                                    },
+                                    "num_T_gates_per_shot": {
+                                        "title": "Number of T-Gates",
+                                        "description": "The total number of T-gates used by the solver.",
+                                        "type": "integer",
+                                        "minimum": 0
+                                    },
+                                    "num_shots": {
+                                        "title": "Number of Shots",
+                                        "description": "The number of shots used by the solver.",
+                                        "type": "integer",
+                                        "minimum": 0
+                                    },
+                                    "hardware_failure_tolerance_per_shot": {
+                                        "title": "Hardware Failure Tolerance Per Shot",
+                                        "description": "The allowable probability that the hardware fails to perform a shot correctly.",
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1
                                     }
                                 }
                             }
                         }
-                    }
-                }
-            },
-            "solver_details": {
-                "title": "Compute Hardware & Software Details",
-                "description": "Details on the hardware and software (algorithm) used by the test performer. Each Algorithm + Software Implementation + Hardware has its own solver_uuid.",
-                "type": "object",
-                "required": [
-                    "solver_uuid",
-                    "compute_hardware_type",
-                    "solver_short_name"
-                ],
-                "solver_uuid": {
-                    "title": "Solver UUID",
-                    "$ref": "uuid.schema.json"
-                },
-                "solver_short_name": {
-                    "title": "Solver Short Name",
-                    "description": "A short string.  Not necessarily unique.",
-                    "type": "string"
-                },
-                "compute_hardware_type": {
-                    "title": "Compute Hardware Type",
-                    "description": "Type of device the algorithm is actually run on.  Choose from:\n\n`classical_computer` \n`quantum_computer` \n`hybrid_classical_quantum_computer` \n`other`.",
-                    "type": "string",
-                    "enum": [
-                        "classical_computer",
-                        "quantum_computer",
-                        "hybrid_classical_quantum_computer",
-                        "other"
-                    ]
-                },
-                "classical_hardware_details": {
-                    "title": "Classical Compute Hardware Details",
-                    "description": "Details on the hardware used by the solver. All tasks are assumed to have the included values unless specified otherwise at the task level.",
-                    "type": "object",
-                    "properties": {
-                        "cpu_description": {
-                            "title": "CPU Description",
-                            "description": "Description of the CPU.",
-                            "type": "string"
-                        },
-                        "total_num_cores": {
-                            "title": "Total number of cores used.",
-                            "description": "The total number of cores used.",
-                            "type": "number"
-                        },
-                        "clock_speed": {
-                            "title": "Clock Speed",
-                            "description": "Clock speed(s) used.",
-                            "type": "string"
-                        },
-                        "ram_available_gb": {
-                            "title": "RAM (GB)",
-                            "description": "Total RAM available for the computation, in GB.",
-                            "type": "number"
-                        },
-                        "computing_environment_name": {
-                            "title": "Computing Environment Name",
-                            "description": "Identifying name of computing environment (e.g. cluster or facility name), if relevant.",
-                            "type": "string"
-                        }
-                    }
-                },
-                "quantum_hardware_details": {
-                    "title": "Quantum Compute Hardware Details",
-                    "description": "Details on the hardware used by the test performer. Exact structure is TBD.",
-                    "type": "object"
-                },
-                "algorithm_details": {
-                    "title": "Algorithm Details",
-                    "description": "Details on the algorithm used by the test performer. Includes broad descriptions and/or literature references.",
-                    "type": "object"
-                },
-                "software_details": {
-                    "title": "Software Details",
-                    "description": "Details on the software used by the test performer. Includes all relevant software, with version numbers, literature reference(s) and url(s).",
-                    "type": "object"
-                }
-            },
-            "digital_signature": {
-                "title": "Digital Signature",
-                "description": "This is created by the benchmark performer and their private key.  It is calculated over the TBD object.  If this is not implemented, it may be set to null",
-                "anyOf": [
-                    {
+                    },
+                    "solution_details": {
+                        "title": "Solution Details",
+                        "description": "Additional details about the solution.",
                         "type": "object"
                     },
-                    {
-                        "type": "null"
+                    "run_time": {
+                        "title": "Wall Clock Runtime",
+                        "description": "A breakdown of start/stop wall clock time(s) reported according to ISO 8601 in UTC and duration in seconds.  run_time is broken down into (1) overall_time, (2) preprocessing_time, (3), algorithm_run_time, and (4) postprocessing_time.  See descriptions of each object.",
+                        "type": "object",
+                        "properties": {
+                            "overall_time": {
+                                "title": "Overall Wall Clock Time",
+                                "description": "Includes all pre/postprocessing times and algorithm_run_time.",
+                                "type": "object",
+                                "required": [
+                                    "seconds"
+                                ],
+                                "properties": {
+                                    "wall_clock_start_time": {
+                                        "title": "Wall Clock Start Time",
+                                        "$ref": "timestamp.schema.json"
+                                    },
+                                    "wall_clock_stop_time": {
+                                        "title": "Wall Clock Stop Time",
+                                        "$ref": "timestamp.schema.json"
+                                    },
+                                    "seconds": {
+                                        "title": "Duration in Seconds",
+                                        "description": "The number of seconds that has elapsed between start/stop times reported.",
+                                        "type": "number",
+                                        "minimum": 0
+                                    }
+                                }
+                            },
+                            "preprocessing_time": {
+                                "title": "Preprocessing Wall Clock Time",
+                                "description": "The time required to load any data into an idle machine before running an algorithm.",
+                                "type": "object",
+                                "required": [
+                                    "seconds"
+                                ],
+                                "properties": {
+                                    "wall_clock_start_time": {
+                                        "title": "Wall Clock Start Time",
+                                        "$ref": "timestamp.schema.json"
+                                    },
+                                    "wall_clock_stop_time": {
+                                        "title": "Wall Clock Stop Time",
+                                        "$ref": "timestamp.schema.json"
+                                    },
+                                    "seconds": {
+                                        "title": "Duration in Seconds",
+                                        "description": "The number of seconds that has elapsed between start/stop times reported.",
+                                        "type": "number",
+                                        "minimum": 0
+                                    }
+                                }
+                            },
+                            "algorithm_run_time": {
+                                "title": "Algorithm Run Time",
+                                "description": "The start/stop times for how long the software/algorithm ran.",
+                                "type": "object",
+                                "required": [
+                                    "seconds"
+                                ],
+                                "properties": {
+                                    "wall_clock_start_time": {
+                                        "title": "Wall Clock Start Time",
+                                        "$ref": "timestamp.schema.json"
+                                    },
+                                    "wall_clock_stop_time": {
+                                        "title": "Wall Clock Stop Time",
+                                        "$ref": "timestamp.schema.json"
+                                    },
+                                    "seconds": {
+                                        "title": "Duration in Seconds",
+                                        "description": "The number of seconds that has elapsed between start/stop times reported.",
+                                        "type": "number",
+                                        "minimum": 0
+                                    },
+                                    "compute_node_run_time_breakdown": {
+                                        "title": "Compute Node Run Time Breakdown",
+                                        "description": "Breakdown of algorithm_run_time across multiple nodes if a cluster of multiple machines was utilized.\n\nThis object is optional.  There is no required structure for this object."
+                                    }
+                                }
+                            },
+                            "postprocessing_time": {
+                                "title": "Postprocessing Wall Clock Time",
+                                "description": "The time required measure or read out any data from the machine.  .",
+                                "type": "object",
+                                "required": [
+                                    "seconds"
+                                ],
+                                "properties": {
+                                    "wall_clock_start_time": {
+                                        "title": "Wall Clock Start Time",
+                                        "$ref": "timestamp.schema.json"
+                                    },
+                                    "wall_clock_stop_time": {
+                                        "title": "Wall Clock Stop Time",
+                                        "$ref": "timestamp.schema.json"
+                                    },
+                                    "seconds": {
+                                        "title": "Duration in Seconds",
+                                        "description": "The number of seconds that has elapsed between start/stop times reported.",
+                                        "type": "number",
+                                        "minimum": 0
+                                    }
+                                }
+                            }
+                        }
                     }
-                ]
+                }
             }
+        },
+        "solver_details": {
+            "title": "Compute Hardware & Software Details",
+            "description": "Details on the hardware and software (algorithm) used by the test performer. Each Algorithm + Software Implementation + Hardware has its own solver_uuid.",
+            "type": "object",
+            "required": [
+                "solver_uuid",
+                "compute_hardware_type",
+                "solver_short_name"
+            ],
+            "solver_uuid": {
+                "title": "Solver UUID",
+                "$ref": "uuid.schema.json"
+            },
+            "solver_short_name": {
+                "title": "Solver Short Name",
+                "description": "A short string.  Not necessarily unique.",
+                "type": "string"
+            },
+            "compute_hardware_type": {
+                "title": "Compute Hardware Type",
+                "description": "Type of device the algorithm is actually run on.  Choose from:\n\n`classical_computer` \n`quantum_computer` \n`hybrid_classical_quantum_computer` \n`other`.",
+                "type": "string",
+                "enum": [
+                    "classical_computer",
+                    "quantum_computer",
+                    "hybrid_classical_quantum_computer",
+                    "other"
+                ]
+            },
+            "classical_hardware_details": {
+                "title": "Classical Compute Hardware Details",
+                "description": "Details on the hardware used by the solver. All tasks are assumed to have the included values unless specified otherwise at the task level.",
+                "type": "object",
+                "properties": {
+                    "cpu_description": {
+                        "title": "CPU Description",
+                        "description": "Description of the CPU.",
+                        "type": "string"
+                    },
+                    "total_num_cores": {
+                        "title": "Total number of cores used.",
+                        "description": "The total number of cores used.",
+                        "type": "number"
+                    },
+                    "clock_speed": {
+                        "title": "Clock Speed",
+                        "description": "Clock speed(s) used.",
+                        "type": "string"
+                    },
+                    "ram_available_gb": {
+                        "title": "RAM (GB)",
+                        "description": "Total RAM available for the computation, in GB.",
+                        "type": "number"
+                    },
+                    "computing_environment_name": {
+                        "title": "Computing Environment Name",
+                        "description": "Identifying name of computing environment (e.g. cluster or facility name), if relevant.",
+                        "type": "string"
+                    }
+                }
+            },
+            "quantum_hardware_details": {
+                "title": "Quantum Compute Hardware Details",
+                "description": "Details on the hardware used by the test performer. Exact structure is TBD.",
+                "type": "object"
+            },
+            "algorithm_details": {
+                "title": "Algorithm Details",
+                "description": "Details on the algorithm used by the test performer. Includes broad descriptions and/or literature references.",
+                "type": "object"
+            },
+            "software_details": {
+                "title": "Software Details",
+                "description": "Details on the software used by the test performer. Includes all relevant software, with version numbers, literature reference(s) and url(s).",
+                "type": "object"
+            }
+        },
+        "digital_signature": {
+            "title": "Digital Signature",
+            "description": "This is created by the benchmark performer and their private key.  It is calculated over the TBD object.  If this is not implemented, it may be set to null",
+            "anyOf": [
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "null"
+                }
+            ]
         },
         "if": {
             "required": [
