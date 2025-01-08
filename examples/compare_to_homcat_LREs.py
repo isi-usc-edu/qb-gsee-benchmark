@@ -9,7 +9,6 @@ import matplotlib.cm as cm
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# benchmark_results_dir = "../scripts/resource_estimate_files_20241210"
 benchmark_results_dir = "resource_estimate_files_20250106"
 september_results_dir = "september_results"
 PROBLEM_INSTANCE_DIR = "../problem_instances"
@@ -54,12 +53,13 @@ def plot_logical_qubit_comparison(results: pd.DataFrame) -> plt.Axes:
     plt.figure()
     for index, (name, group) in enumerate(results.groupby("instance_name_benchmark")):
         group.plot.scatter(
-            "Logical qubits (December 2024)",
+            "Logical qubits (January 2025)",
             "Logical qubits (September 2024)",
             label=name,
             color=colormap(index),
             ax=plt.gca(),
         )
+    plt.tight_layout()
     return plt.gca()
 
 
@@ -68,12 +68,13 @@ def plot_t_count_comparison(results: pd.DataFrame) -> plt.Axes:
     plt.figure()
     for index, (name, group) in enumerate(results.groupby("instance_name_benchmark")):
         group.plot.scatter(
-            "T gates (December 2024)",
+            "T gates (January 2025)",
             "T gates (September 2024)",
             label=name,
             color=colormap(index),
             ax=plt.gca(),
         )
+    plt.tight_layout()
     return plt.gca()
 
 
@@ -93,14 +94,22 @@ def main():
         september_results,
         on="task_id",
         suffixes=("_benchmark", "_september"),
+        how="left"
     )
+
+    missing_rows = results[results["num_logical_qubits_benchmark"].isna()]
+    if not missing_rows.empty:
+        print("The following tasks are in the benchmark but not in the September results:")
+        print(missing_rows[["task_id", "instance_name_september"]])
+    else:
+        print("All September tasks are in the benchmark results.")
 
     results = results.rename(
         columns={
             "task_uuid": "Task UUID",
-            "num_T_gates_benchmark": "T gates (December 2024)",
+            "num_T_gates_benchmark": "T gates (January 2025)",
             "num_T_gates_september": "T gates (September 2024)",
-            "num_logical_qubits_benchmark": "Logical qubits (December 2024)",
+            "num_logical_qubits_benchmark": "Logical qubits (January 2025)",
             "num_logical_qubits_september": "Logical qubits (September 2024)",
         },
     )
