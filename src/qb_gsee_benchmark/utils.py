@@ -317,6 +317,22 @@ class BenchmarkData:
             "num_logical_qubits",
             "num_shots",
             "num_T_gates_per_shot",
+            "re_circuit_repetitions_per_calculation",
+            "re_calculation_repetitions",
+            "re_total_circuit_repetitions",
+            "re_logical_abstract_num_qubits",
+            "re_logical_abstract_t_count",
+            "re_logical_architecture_description",
+            "re_logical_compiled_num_qubits",
+            "re_logical_compiled_t_count",
+            "re_logical_compiled_num_t_factories",
+            "re_physical_architecture_description",
+            "re_physical_code_name",
+            "re_physical_code_distance",
+            "re_physical_runtime",
+            "re_physical_num_qubits",
+            "re_physical_t_count",
+            "re_physical_num_t_factories",
             "submitted_by_calendar_due_date",
             "label" # label True/False, that the Hamiltonian was solved.
         ]
@@ -326,7 +342,6 @@ class BenchmarkData:
             problem_instance_uuid = problem_instance["problem_instance_uuid"]
             problem_instance_short_name = problem_instance["short_name"]
             for task in problem_instance["tasks"]:
-                num_supporting_files = len(task["supporting_files"])
                 task_uuid = task["task_uuid"]
                 for supporting_file in task["supporting_files"]:
                     instance_data_object_uuid = supporting_file["instance_data_object_uuid"]
@@ -353,36 +368,30 @@ class BenchmarkData:
                         task_uuid=task_uuid                        
                     )
 
+                    d = {}
+                    for k in aggregated_solver_labels_columns:
+                        d[k] = None # init all to None.  Update below.    
 
-                    # init (reset) other parameters to None, then update below.
-                    num_orbitals = None
-                    time_limit_seconds = None
-                    accuracy_tol = None
-                    reference_energy = None
-                    calendar_due_date = None
+                    # re init some metadata:
+                    d["solver_short_name"] = solver_short_name
+                    d["solver_uuid"] = solver_uuid
+                    d["solution_uuid"] = solution_uuid
+                    d["problem_instance_short_name"] = problem_instance_short_name
+                    d["problem_instance_uuid"] = problem_instance_uuid
+                    d["task_uuid"] = task_uuid
+                    d["instance_data_object_uuid"] = instance_data_object_uuid
+                    d["instance_data_object_url"] = instance_data_object_url
 
-                    # init (reset) all reported parameters as None, then update below.
-                    attempted = None
-                    solved_within_run_time = None
-                    solved_within_accuracy_requirement = None
-                    overall_run_time_seconds = None 
-                    is_resource_estimate = None
-                    num_logical_qubits = None
-                    num_shots = None
-                    num_T_gates_per_shot = None
-                    submitted_by_calendar_due_date = None
-                    label = None
 
 
                     # determine if it's a resource estimate
-                    is_resource_estimate = None
                     for solution in self.solution_list:
                         if solution["solution_uuid"] == solution_uuid:
-                            is_resource_estimate = solution["is_resource_estimate"]
+                            d["is_resource_estimate"] = solution["is_resource_estimate"]
                             break
 
 
-                    num_orbitals = data_frame_vlookup(
+                    d["num_orbitals"] = data_frame_vlookup(
                         df=self.hamiltonian_features,
                         lookup_value=task_uuid,
                         lookup_value_column_header="task_uuid",
@@ -392,116 +401,115 @@ class BenchmarkData:
 
 
                     # task-specific requirements from `problem_instance`
-                    calendar_due_date = problem_instance["calendar_due_date"] # may be None/null per .json.
-                    time_limit_seconds = task["requirements"]["time_limit_seconds"]
-                    accuracy_tol = task["requirements"]["accuracy"]
+                    d["calendar_due_date"] = problem_instance["calendar_due_date"] # may be None/null per .json.
+                    d["time_limit_seconds"] = task["requirements"]["time_limit_seconds"]
+                    d["accuracy_tol"] = task["requirements"]["accuracy"]
                     try:
-                        reference_energy = task["requirements"]["reference_energy"]
+                        d["reference_energy"] = task["requirements"]["reference_energy"]
                         # TODO:  account for differences in units.  E.g., Hartree vs. kCal/mol vs. other.
                     except Exception as e:
                         logging.error(f'Error: {e}', exc_info=True)
                         logging.warning(f"warning!  no reference_energy specified in task {task_uuid}")
-                        reference_energy = None
+                        d["reference_energy"] = None
 
 
                     if results is None:
                         # the solver did NOT submit a solution file for the problem_instance or Hamiltonian.
                         # mark it as failed.  TODO:  do something more nuanced with non-attempted problems in the future.
-                        is_resource_estimate = None
-                        attempted = False
-                        solved_within_run_time = False
-                        solved_within_accuracy_requirement = False
-                        label = False # overall:  solved==False
-                        submitted_by_calendar_due_date = False
-                        overall_run_time_seconds = None 
+                        d["is_resource_estimate"] = None
+                        d["attempted"] = False
+                        d["solved_within_run_time"] = False
+                        d["solved_within_accuracy_requirement"] = False
+                        d["label"] = False # overall:  solved==True/False
+                        d["submitted_by_calendar_due_date"] = False
+                        d["overall_run_time_seconds"] = None
                     else:
                         # calculate simple performance metrics for the solver against
                         # this Hamiltonian
-                        attempted = True 
+                        d["attempted"] = True 
 
                         # TODO: issue-#94:  physical resource estimate (PRE) not calculated for LRE
-                        if is_resource_estimate:
-                            try:
-                                overall_run_time_seconds = results["run_time"]["overall_time"]["seconds"]
-                                solved_within_run_time = overall_run_time_seconds <= time_limit_seconds
-                            except Exception as e:
-                                logging.error(f'Error: {e}', exc_info=True)
-                                logging.error("physical resource estimate does not provide overall run time.")
-                                overall_run_time_seconds = None
-                                solved_within_run_time = False
-                                attempted = False
-                                solved_within_accuracy_requirement = True # always true for resource estimates.
-                                label = None
+                        if d["is_resource_estimate"]:
+                            d["overall_run_time_seconds"] = results["run_time"]["overall_time"]["seconds"]
+                            d["solved_within_run_time"] = d["overall_run_time_seconds"] <= d["time_limit_seconds"]
                         else:
                             # not a resource estimate...
-                            overall_run_time_seconds = results["run_time"]["overall_time"]["seconds"]
-                            solved_within_run_time = overall_run_time_seconds <= time_limit_seconds
+                            d["overall_run_time_seconds"] = results["run_time"]["overall_time"]["seconds"]
+                            d["solved_within_run_time"] = d["overall_run_time_seconds"] <= d["time_limit_seconds"]
 
                         
-                        
                         # TODO: check calendar due date submission.
-                        submitted_by_calendar_due_date = True 
+                        d["submitted_by_calendar_due_date"] = True 
                             
 
 
-                        if is_resource_estimate:
-                            num_logical_qubits = results["quantum_resources"]["logical"]["num_logical_qubits"]
-                            num_shots = results["quantum_resources"]["logical"]["num_shots"]
-                            num_T_gates_per_shot = results["quantum_resources"]["logical"]["num_T_gates_per_shot"]
-                            solved_within_accuracy_requirement = True # always true.  assume LREs solve to accuracy.
+                        if d["is_resource_estimate"]:
+                            d["num_logical_qubits"] = results["quantum_resources"]["logical"]["num_logical_qubits"]
+                            d["num_shots"] = results["quantum_resources"]["logical"]["num_shots"]
+                            d["num_T_gates_per_shot"] = results["quantum_resources"]["logical"]["num_T_gates_per_shot"]
+                            d["solved_within_accuracy_requirement"] = True # always true.  assume LREs solve to accuracy.
                         else:
                             # NOT a logical resource estimate.
-                            num_logical_qubits = None
-                            num_shots = None
-                            num_T_gates_per_shot = None
+                            d["num_logical_qubits"] = None
+                            d["num_shots"] = None
+                            d["num_T_gates_per_shot"] = None
         
-                            reported_energy = results["energy"]
+                            d["reported_energy"] = results["energy"]
                             try:
-                                solved_within_accuracy_requirement = bool(np.abs(reported_energy - reference_energy) < accuracy_tol)
+                                d["solved_within_accuracy_requirement"] = bool(np.abs(d["reported_energy"] - d["reference_energy"]) < d["accuracy_tol"])
                                 # TODO:  account for differences in units.  E.g., Hartree vs. kCal/mol vs. other.
                             except Exception as e:
                                 logging.error(f'Error: {e}', exc_info=True)
                                 logging.warning(f"warning!  no energy target specified in task {task_uuid}")
-                                solved_within_accuracy_requirement = False
+                                d["solved_within_accuracy_requirement"] = False
                             
                             # TODO: issue-44.  handle case when more than one solution submitted by
                             # one solver.  for now assume solutions were submitted by due date.
                             # TODO: check calendar due date submission.
                             
-                        label = solved_within_run_time and solved_within_accuracy_requirement
+                        d["label"] = d["solved_within_run_time"] and d["solved_within_accuracy_requirement"]
                             
 
+                    # translate values for sponsor RE field names
+                    d["re_circuit_repetitions_per_calculation"] = d["num_shots"]
+                    d["re_calculation_repetitions"] = 1
+                    d["re_total_circuit_repetitions"] = d["re_circuit_repetitions_per_calculation"]*d["re_calculation_repetitions"]
+                    d["re_logical_abstract_num_qubits"] = d["num_logical_qubits"]
+                    d["re_logical_abstract_t_count"] = d["num_T_gates_per_shot"]
+                    d["re_logical_architecture_description"] = XXXXX
+                    d["re_logical_compiled_num_qubits"] = results["quantum_resources"]["physical"]["num_logical_compiled_qubits"]
+                    d["re_logical_compiled_t_count"] = None XXXXXXXXXX
+                    d["re_logical_compiled_num_t_factories"] = GET IT FROM QUANTUM HARDWARD DETAILS
+                    d["re_physical_architecture_description"] = GET IT FROM QUANTUM HARDWARD DETAILS
+                    d["re_physical_code_name"] = "surface" # TODO: fixed value at this time.  Revisit later. 
+                    d["re_physical_code_distance"] = results["quantum_resources"]["physical"]["data_code_distance"]
+                    d["re_physical_runtime"] = d["overall_run_time_seconds"]
+                    d["re_physical_num_qubits"] = results["quantum_resources"]["physical"]["num_physical_qubits"]
+                    d["re_physical_t_count"] = rXZXXXXX
+                    d["re_physical_num_t_factories"] = XXXXX
 
-                    # new row for each solver_uuid/task_uuid
-                    new_row = pd.DataFrame([{
-                        "solver_short_name":solver_short_name,
-                        "solver_uuid":solver_uuid,
-                        "solution_uuid":solution_uuid,
-                        "problem_instance_short_name":problem_instance_short_name,
-                        "problem_instance_uuid":problem_instance_uuid,
-                        "task_uuid":task_uuid,
-                        "instance_data_object_uuid":instance_data_object_uuid,
-                        "instance_data_object_url":instance_data_object_url,
-                        "num_orbitals":num_orbitals,
-                        "time_limit_seconds":time_limit_seconds,
-                        "accuracy_tol":accuracy_tol,
-                        "reference_energy":reference_energy,
-                        "calendar_due_date":calendar_due_date,
-                        "attempted":attempted,
-                        "solved_within_run_time":solved_within_run_time,
-                        "solved_within_accuracy_requirement":solved_within_accuracy_requirement,
-                        "overall_run_time_seconds":overall_run_time_seconds,
-                        "is_resource_estimate":is_resource_estimate,
-                        "num_logical_qubits":num_logical_qubits,
-                        "num_shots":num_shots,
-                        "num_T_gates_per_shot":num_T_gates_per_shot,
-                        "submitted_by_calendar_due_date":submitted_by_calendar_due_date,
-                        "label":label # label True/False, that the Hamiltonian was solved.
-                    }])
+
+                    # new row added (for each solver_uuid/task_uuid)
                     aggregated_solver_labels = pd.concat(
-                        [aggregated_solver_labels, new_row],
+                        [aggregated_solver_labels, pd.DataFrame([d])],
                         ignore_index=True
                     )
         
         return aggregated_solver_labels
-                    
+    
+
+    def calculate_sponsor_resource_estimate_json(
+            self,
+            config_file: str
+        ) -> list:
+        """TODO: 
+
+        Args:
+            config_file (str): _description_
+
+        Returns:
+            list: _description_
+        """
+        # get implementation details
+
+        pass
