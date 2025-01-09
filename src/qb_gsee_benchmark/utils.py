@@ -873,23 +873,27 @@ class BenchmarkData:
                 # re["logical-abstract"]["gate_count"] # SCHEMA-OPTIONAL.  Not reported at this time.
                 # re["logical-abstract"]["circuit_depth"] # SCHEMA-OPTIONAL.  Not reported at this time.
                 # re["logical-abstract"]["t_depth"] # SCHEMA-OPTIONAL.  Not reported at this time.
-                re["logical-compiled"] = {} # object is optional.
-                re["logical-compiled"]["logical_architecture_description"] = d["re_logical_architecture_description"]
-                re["logical-compiled"]["num_qubits"] = d["re_logical_compiled_num_qubits"]
-                re["logical-compiled"]["t_count"] = "XXXXXXXXXXXXX"
-                re["logical-compiled"]["num_t_factories"] = d["re_physical_num_t_factories"]
+                
+                # TODO: not reporting logical-compiled as of 2025-01-09 as we are missing the REQUIRED t_count field.
+                # re["logical-compiled"] = {} # object is optional.
+                # re["logical-compiled"]["logical_architecture_description"] = d["re_logical_architecture_description"]
+                # re["logical-compiled"]["num_qubits"] = d["re_logical_compiled_num_qubits"]
+                # re["logical-compiled"]["t_count"] = "XXXXXXXXXXXXX"
+                # re["logical-compiled"]["num_t_factories"] = d["re_physical_num_t_factories"]
                 # re["logical-compiled"]["gate_count"] # SCHEMA-OPTIONAL.  Not reported at this time.
                 # re["logical-compiled"]["clifford_count"] # SCHEMA-OPTIONAL.  Not reported at this time.
                 # re["logical-compiled"]["circuit_depth"] # SCHEMA-OPTIONAL.  Not reported at this time.
                 # re["logical-compiled"]["t_depth"] # SCHEMA-OPTIONAL.  Not reported at this time.
-                re["physical"] = {} # object is optional
-                re["physical"]["physical_architecture_description"] = d["re_physical_architecture_description"]
-                re["physical"]["code_name"] = d["re_physical_code_name"] #schema enum to "surface" or "other"
-                re["physical"]["code_distance"] = d["re_physical_code_distance"]
-                re["physical"]["runtime"] = d["re_physical_runtime"]
-                re["physical"]["num_qubits"] = d["re_physical_num_qubits"]
-                re["physical"]["t_count"] = "XXXXXXXXXXXXX"
-                re["physical"]["num_t_factories"] = d["re_physical_num_t_factories"]
+                
+                # TODO: not reporting physical as of 2025-01-09 as we are missing the REQUIRED t_count field.
+                # re["physical"] = {} # object is optional
+                # re["physical"]["physical_architecture_description"] = d["re_physical_architecture_description"]
+                # re["physical"]["code_name"] = d["re_physical_code_name"] #schema enum to "surface" or "other"
+                # re["physical"]["code_distance"] = d["re_physical_code_distance"]
+                # re["physical"]["runtime"] = d["re_physical_runtime"]
+                # re["physical"]["num_qubits"] = d["re_physical_num_qubits"]
+                # re["physical"]["t_count"] = "XXXXXXXXXXXXX"
+                # re["physical"]["num_t_factories"] = d["re_physical_num_t_factories"]
                 # re["physical"]["num_factory_qubits"]# SCHEMA-OPTIONAL.  Not reported at this time.
                 # re["physical"]["gate_count"]# SCHEMA-OPTIONAL.  Not reported at this time.
                 # re["physical"]["circuit_depth"]# SCHEMA-OPTIONAL.  Not reported at this time.
