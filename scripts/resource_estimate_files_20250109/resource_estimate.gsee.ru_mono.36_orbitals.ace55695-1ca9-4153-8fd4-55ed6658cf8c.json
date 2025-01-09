@@ -1,0 +1,38 @@
+{
+    "$schema": "https://raw.githubusercontent.com/rroodll/QB-Estimate-Reporting/main/schema/resource_estimate_schema.json",
+    "id": "ace55695-1ca9-4153-8fd4-55ed6658cf8c",
+    "name": "ru_mono",
+    "category": "industrial",
+    "size": "36_orbitals",
+    "task": "ground_state_energy_estimation",
+    "implementation": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
+    "value": 307.7303081,
+    "value_ci": [
+        269.3114425,
+        269.3114425
+    ],
+    "circuit_repetitions_per_calculation": 13,
+    "calculation_repetitions": 1,
+    "total_circuit_repetitions": 13,
+    "runtime_requirement": 172800,
+    "logical-abstract": {
+        "num_qubits": 1092,
+        "t_count": 43199694720
+    },
+    "logical-compiled": {
+        "logical_architecture_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
+        "num_qubits": 1638,
+        "t_count": "XXXXXXXXXXXXX",
+        "num_t_factories": 4
+    },
+    "physical": {
+        "physical_architecture_description": "Optimistic superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494.",
+        "code_name": "surface",
+        "code_distance": 23,
+        "runtime": 737543.523842,
+        "num_qubits": 1970316,
+        "t_count": "XXXXXXXXXXXXX",
+        "num_t_factories": 4
+    },
+    "value_per_t_gate": 5.479567000407373e-10
+}

@@ -1,0 +1,38 @@
+{
+    "$schema": "https://raw.githubusercontent.com/rroodll/QB-Estimate-Reporting/main/schema/resource_estimate_schema.json",
+    "id": "c7c653b0-4440-4a36-a66b-8b81a9a351c7",
+    "name": "cr_dimer",
+    "category": "industrial",
+    "size": "26_orbitals",
+    "task": "ground_state_energy_estimation",
+    "implementation": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
+    "value": 0.0,
+    "value_ci": [
+        0.0,
+        0.0
+    ],
+    "circuit_repetitions_per_calculation": 5090,
+    "calculation_repetitions": 1,
+    "total_circuit_repetitions": 5090,
+    "runtime_requirement": 172800,
+    "logical-abstract": {
+        "num_qubits": 827,
+        "t_count": 222760536096
+    },
+    "logical-compiled": {
+        "logical_architecture_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
+        "num_qubits": 1240,
+        "t_count": "XXXXXXXXXXXXX",
+        "num_t_factories": 4
+    },
+    "physical": {
+        "physical_architecture_description": "Optimistic superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494.",
+        "code_name": "surface",
+        "code_distance": 23,
+        "runtime": 4162913.8827559995,
+        "num_qubits": 1591250,
+        "t_count": "XXXXXXXXXXXXX",
+        "num_t_factories": 4
+    },
+    "value_per_t_gate": 0.0
+}

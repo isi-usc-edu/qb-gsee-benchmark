@@ -1,13 +1,31 @@
-################################################################################
-# © Copyright 2024 Zapata Computing Inc.
-################################################################################
+# Copyright 2025 L3Harris Technologies, Inc.
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+
+# http://www.apache.org/licenses/LICENSE-2.0
+
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 
 import gzip
 import os
 import shutil
 from urllib.parse import urlparse
 
+from typing import Any
+import logging
+import json
 import datetime
+from pathlib import Path
+
+import pandas as pd
+import numpy as np
 
 import paramiko
 from pyscf.tools import fcidump
@@ -35,6 +53,28 @@ def _fetch_file_from_sftp(
             sftp.get(remote_path, local_path)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def retrieve_fcidump_from_sftp(url: str, username: str, ppk_path: str, port=22) -> dict:
     filename = os.path.basename(urlparse(url).path)
     _fetch_file_from_sftp(
@@ -52,6 +92,28 @@ def retrieve_fcidump_from_sftp(url: str, username: str, ppk_path: str, port=22) 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def iso8601_timestamp() -> str:
     """Returns the current UTC time as an ISO 8601 formatted string.
 
@@ -61,3 +123,847 @@ def iso8601_timestamp() -> str:
     """
     return datetime.datetime.now(datetime.timezone.utc).isoformat()
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def load_json_files(search_dir: str) -> list:
+    """Searches through `search_dir` and subdirectories to read in all JSON files.
+
+    Args:
+        search_dir (str): relative/path/to/directory
+
+    Returns:
+        list: A `list` of Python `dict` objects from each JSON file read in.
+    """
+
+    dict_list = []
+
+    # this recurses through all subdirectories.
+    for json_file in Path(search_dir).rglob("*.json"):
+        with json_file.open("r") as file:
+            try:
+                data = json.load(file)
+                dict_list.append(data)
+            except Exception as e:
+                logging.error(f'Error: {e}', exc_info=True)
+                continue # to next json file.
+    return dict_list
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def data_frame_vlookup(df: pd.DataFrame, 
+        lookup_value: Any,
+        lookup_value_column_header: str,
+        find_value_column_header: str
+    ) -> Any:
+    """A simple `vlookup` operation for a Pandas `pd.DataFrame`.
+
+    Args:
+        df (pd.DataFrame): The `pd.DataFrame` to search within.
+        lookup_value (Any): The value to find.
+        lookup_value_column_header (str): The column to find `lookup_value` in.
+        find_value_column_header (str): The column to locate the corresponding value in.
+
+    Returns:
+        Any: The corresponding value in the `find_value_column_header` column.
+    """
+    assert len(df[df[lookup_value_column_header]==lookup_value]) == 1, \
+        f"Found zero or more than one instance of `{lookup_value}` in column `{lookup_value_column_header}`."
+    
+    return df.loc[df[lookup_value_column_header]==lookup_value, find_value_column_header].values[0]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def find_dict_with_matching_kv_pair(
+        list_of_dicts: list,
+        lookup_key: str,
+        lookup_val: Any
+    ) -> dict:
+    """Return a dictionary (from a list of dictionaries) that matches `lookup_key`:`lookup_val` provided.
+    If more or less than exactly one dictionary is found in this way and error is raised.
+
+    Args:
+        list_of_dicts (list): A list of dictionaries.
+        lookup_key (str): The top-level key within the dictionaries to search through.
+        lookup_val (Any): The value of the key that we seek.  
+
+    Returns:
+        dict: The matching dictionary.
+    """
+
+    matching_dicts = [d for d in list_of_dicts if d[lookup_key]==lookup_val]
+    assert len(matching_dicts) == 1, \
+        f"Found zero or more than one dictionary in list with key:value == {lookup_key}:{lookup_val}."
+    return matching_dicts[0]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class BenchmarkData:
+    def __init__(self,
+            hamiltonian_features_csv_file_name: str,
+            utility_estimation_csv_file_name: str,
+            problem_instances_directory: str,
+            solution_files_directory: str,
+            performance_metrics_directory: str
+        ):
+        """Initializes a `BenchmarkData` object that collates the data currently in the repository.
+
+        Args:
+            hamiltonian_features_csv_file_name (str): relative/path/to/hamiltonian_features.csv
+            utility_estimation_csv_file_name (str): relative/path/to/utility_estimation.csv
+            problem_instances_directory (str): relative/path/to/problem_instance directory
+            solution_files_directory (str): relative/path/to/solution_files directory
+            performance_metrics_directory (str): relative/path/to/performance_metrics directory
+        """
+
+        # store file paths and directories for posterity:
+        self.hamiltonian_features_csv_file_name = hamiltonian_features_csv_file_name
+        self.utility_estimation_csv_file_name = utility_estimation_csv_file_name
+        self.problem_instances_directory = problem_instances_directory
+        self.solution_files_directory = solution_files_directory
+        self.performance_metrics_directory = performance_metrics_directory
+
+        # read in data:
+        self.hamiltonian_features = pd.read_csv(hamiltonian_features_csv_file_name)
+        self.utility_estimation_data = pd.read_csv(utility_estimation_csv_file_name)
+        self.problem_instance_list = load_json_files(search_dir=problem_instances_directory)
+        self.solution_list = load_json_files(search_dir=solution_files_directory)
+        # TODO:  migrate performance metrics calculation to method below. self.performance_metrics_list = load_json_files(search_dir=performance_metrics_directory)
+        
+        # Calculations and data collation:
+        # Order of operations matters:
+        #1:
+        self.identify_unique_participating_solvers()
+        #2:
+        self.calculate_solver_success_labels()
+        #3:
+        self.flatten_benchmark_data()
+        #4:
+        self.calculate_sponsor_resource_estimates()
+
+
+
+
+
+
+
+
+
+
+
+
+    def __repr__(self) -> str:
+        return f"benchmark data with {len(self.problem_instance_list)} problem instances, and {len(self.solution_list)} solutions, submitted by {len(self.solvers_df)} solvers."
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def identify_unique_participating_solvers(self) -> pd.DataFrame:
+        """Construct the `BenchmarkData.solvers_df` (`pd.DataFrame`) attribute containing the solvers participating.  The columns are `solver_uuid` and `solver_short_name`. 
+        
+        Depends:
+            `BenchmarkData.solution_list` (`list`): A list of solutions (dictionary objects), most likely produced by `load_json_files()`. 
+
+        Returns:
+           `pd.DataFrame`: The `BenchmarkData.solvers_df` attribute is updated in place.  It is also returned for other usage.
+        """
+
+
+        solvers_df = pd.DataFrame(columns=["solver_short_name","solver_uuid"])
+        for solution in self.solution_list:
+            solver_uuid = solution["solver_details"]["solver_uuid"]
+            if solver_uuid in solvers_df["solver_uuid"].values:
+                # the solver (by UUID) is already in the list.
+                continue
+            else:
+                # the solver (by UUID) is NOT in the list.  add it.
+                solver_short_name = solution["solver_details"]["solver_short_name"]
+                solvers_df.loc[len(solvers_df)] = [solver_short_name, solver_uuid]
+        
+        self.solvers_df = solvers_df
+        return solvers_df
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def locate_solution_results_by_task_uuid_and_solver_uuid(self,
+            solver_uuid: str,
+            task_uuid: str,
+        ) -> tuple:
+        """Search `BenchmarkData.solution_list` attribute for specific results object by `solver_uuid` and `task_uuid`
+
+        Depends:
+            BenchmarkData.solution_list (list): A list of solutions (dictionary objects), most likely produced by `load_json_files()`. 
+
+        Args:
+            solver_uuid (str): UUID in 8-4-4-4-12 format as a string.
+            task_uuid (str): UUID in 8-4-4-4-12 format as a string.
+
+        Returns:
+            tuple: `results` (`dict`), `solution_uuid` (`str`)
+        """
+        results = None # init as None and update if we find it.
+        solution_uuid = None # init as None and update if we find it.
+        for solution in self.solution_list:
+            test_solver_uuid = solution["solver_details"]["solver_uuid"]
+            if test_solver_uuid.lower() == solver_uuid.lower():
+                # we have matched on the solver...
+                for solution_datum in solution["solution_data"]:
+                    test_task_uuid = solution_datum["task_uuid"]
+                    if test_task_uuid.lower() == task_uuid.lower():
+                        # we have mached on task_uuid as well
+                        results = solution_datum
+                        solution_uuid = solution["solution_uuid"]
+                        return results, solution_uuid
+
+        # if the function has made it this far, we have not found a match
+        # and (None, None) will be returned. 
+        return results, solution_uuid
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def to_csv(self, output_csv_file_name: str):
+        """Write all of the current BenchmarkData to a large, flat CSV file.
+
+        Depends:
+            BenchmarkData.all_data_df (pd.DataFrame): Should be up-to-date. It should have been created during `.__init__()`.
+
+        Args:
+            output_csv_file_name (str): relative/path/to/the/output CSV file.
+        """
+        self.all_data_df.to_csv(output_csv_file_name, index=False)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def flatten_benchmark_data(
+            self,
+        ) -> pd.DataFrame:
+        """Updates the `BenchmarkData.all_data_df` (DataFrame) attribute with collated benchmark data from the various sources.
+
+        Depends:
+            on almost all of the attributes of BenchmarkData.
+
+        Returns:
+            pd.DataFrame: The `BenchmarkData.all_data_df` is updated in place.  It is also returned for other usage.
+        """
+
+        util_est_cols = ["task_uuid","Utility NPV $", "Utility NVP lower bound $", "Utility NVP upper bound $"]        
+        df = pd.merge(
+            self.hamiltonian_features,
+            self.utility_estimation_data[util_est_cols],
+            on="task_uuid",
+            how="outer"
+        )
+        df.fillna(0.0, inplace=True) # fill NaN in Utility estimates with zeros.
+
+        df = pd.merge(
+            self.aggregated_solver_labels_df,
+            df,
+            on="task_uuid",
+            how="outer",
+            suffixes=("","_duplicate")
+        )
+        self.all_data_df = df 
+        return self.all_data_df
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def calculate_ml_scores(self) -> dict:
+        """TODO: migrate `miniML.py` workflow into this method.  Note that running `miniML.py` takes about 15 minutes.
+
+        Returns:
+            dict: _description_
+        """
+        pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def calculate_solver_success_labels(self) -> pd.DataFrame:
+        """Construct the `BenchmarkData.aggregated_solver_labels_df` (pd.DataFrame) attribute containing the success/failure of each solver against `task_uuids`.
+        
+        Depends:
+            BenchmarkData.solver_df (pd.DataFrame): Columns are `solver_uuid` and `solver_short_name`.  Each unique `solver_uuid` only appears once.
+            BenchmarkData.problem_instance_list (list): A list of problem instances (dictionary objects), most likely produced by `load_json_files()`. 
+            BenchmarkData.solution_list (list): A list of solutions (dictionary objects), most likely produced by `load_json_files()`. 
+            BenchmarkData.hamiltonian_features (pd.DataFrame): A data frame containing a variety of interesting features about the Hamiltonians (by `task_uuid`).
+
+        Returns:
+            pd.DataFrame: The `BenchmarkData.aggregated_solver_labels_df` attribute is updated in place.  It is also returned for other usage.
+        """
+
+        aggregated_solver_labels_columns = [
+            "solver_short_name",
+            "solver_uuid",
+            "solution_uuid",
+            "problem_instance_short_name",
+            "problem_instance_uuid",
+            "task_uuid",
+            "instance_data_object_uuid",
+            "instance_data_object_url",
+            "num_orbitals",
+            "time_limit_seconds",
+            "accuracy_tol",
+            "reference_energy",
+            "calendar_due_date",
+            "attempted",
+            "solved_within_run_time",
+            "solved_within_accuracy_requirement",
+            "overall_run_time_seconds",
+            "is_resource_estimate",
+            "num_logical_qubits",
+            "num_shots",
+            "num_T_gates_per_shot",
+            "re_circuit_repetitions_per_calculation",
+            "re_calculation_repetitions",
+            "re_total_circuit_repetitions",
+            "re_logical_abstract_num_qubits",
+            "re_logical_abstract_t_count",
+            "re_logical_architecture_description",
+            "re_logical_compiled_num_qubits",
+            "re_logical_compiled_t_count",
+            "re_logical_compiled_num_t_factories",
+            "re_physical_architecture_description",
+            "re_physical_code_name",
+            "re_physical_code_distance",
+            "re_physical_runtime",
+            "re_physical_num_qubits",
+            "re_physical_t_count",
+            "re_physical_num_t_factories",
+            "submitted_by_calendar_due_date",
+            "label" # label True/False, that the Hamiltonian was solved.
+        ]
+        aggregated_solver_labels = pd.DataFrame(columns=aggregated_solver_labels_columns)
+
+        for problem_instance in self.problem_instance_list:
+            problem_instance_uuid = problem_instance["problem_instance_uuid"]
+            problem_instance_short_name = problem_instance["short_name"]
+            for task in problem_instance["tasks"]:
+                task_uuid = task["task_uuid"]
+                for supporting_file in task["supporting_files"]:
+                    instance_data_object_uuid = supporting_file["instance_data_object_uuid"]
+                    instance_data_object_url = supporting_file["instance_data_object_url"]
+                    parsed_url = urlparse(instance_data_object_url)
+                    instance_data_object_file_name = parsed_url.path.split("/")[-1]
+                    #TODO: improve hacky way of only grabbing FCIDUMP files:
+                    if "fcidump".lower() in instance_data_object_file_name.lower():
+                        # TODO: note we are assuming there is ONLY ONE FCIDUMP file for the Hamiltonian.
+                        break
+                    else:
+                        # NOTE: this may be different type of file... such as a checkpoint CHK file.
+                        continue
+                for solver_uuid in self.solvers_df["solver_uuid"].values:
+                    solver_short_name = data_frame_vlookup(
+                        df=self.solvers_df,
+                        lookup_value=solver_uuid,
+                        lookup_value_column_header="solver_uuid",
+                        find_value_column_header="solver_short_name"
+                    )
+
+                    results, solution_uuid = self.locate_solution_results_by_task_uuid_and_solver_uuid(
+                        solver_uuid=solver_uuid,
+                        task_uuid=task_uuid                        
+                    )
+
+                    if results is None: 
+                        # no corresponding results/solution submitted for task_uuid by solver.
+                        solution = None
+                    else:
+                        solution = find_dict_with_matching_kv_pair(
+                            list_of_dicts=self.solution_list,
+                            lookup_key="solution_uuid",
+                            lookup_val=solution_uuid
+                        )
+
+
+
+                    d = {}
+                    for k in aggregated_solver_labels_columns:
+                        d[k] = None # init all to None.  Update below.    
+
+                    # re init some metadata:
+                    d["solver_short_name"] = solver_short_name
+                    d["solver_uuid"] = solver_uuid
+                    d["solution_uuid"] = solution_uuid
+                    d["problem_instance_short_name"] = problem_instance_short_name
+                    d["problem_instance_uuid"] = problem_instance_uuid
+                    d["task_uuid"] = task_uuid
+                    d["instance_data_object_uuid"] = instance_data_object_uuid
+                    d["instance_data_object_url"] = instance_data_object_url
+
+                    d["num_orbitals"] = data_frame_vlookup(
+                        df=self.hamiltonian_features,
+                        lookup_value=task_uuid,
+                        lookup_value_column_header="task_uuid",
+                        find_value_column_header="n_orbs" # TODO: standardize on num_orbitals
+                    )
+
+                    # task-specific requirements from `problem_instance`
+                    d["calendar_due_date"] = problem_instance["calendar_due_date"] # may be None/null per .json.
+                    d["time_limit_seconds"] = task["requirements"]["time_limit_seconds"]
+                    d["accuracy_tol"] = task["requirements"]["accuracy"]
+                    try:
+                        d["reference_energy"] = task["requirements"]["reference_energy"]
+                        # TODO:  account for differences in units.  E.g., Hartree vs. kCal/mol vs. other.
+                    except Exception as e:
+                        logging.error(f'Error: {e}', exc_info=True)
+                        logging.warning(f"warning!  no reference_energy specified in task {task_uuid}")
+                        
+
+                    if results is None:
+                        # the solver did NOT submit a solution file for the problem_instance or Hamiltonian.
+                        # mark it as failed.  TODO:  do something more nuanced with non-attempted problems in the future.
+                        d["is_resource_estimate"] = None
+                        d["attempted"] = False
+                        d["solved_within_run_time"] = False
+                        d["solved_within_accuracy_requirement"] = False
+                        d["label"] = False # overall result:  solved==True/False
+                        d["submitted_by_calendar_due_date"] = False
+                        d["overall_run_time_seconds"] = None
+                    else:
+                        d["is_resource_estimate"] = solution["is_resource_estimate"]
+                        
+                        # calculate simple performance metrics for the solver against
+                        # this Hamiltonian
+                        d["attempted"] = True 
+
+                        # TODO: issue-#94:  physical resource estimate (PRE) not calculated for LRE
+                        d["overall_run_time_seconds"] = results["run_time"]["overall_time"]["seconds"]
+                        d["solved_within_run_time"] = d["overall_run_time_seconds"] <= d["time_limit_seconds"]
+                    
+                        
+                        # TODO: check calendar due date submission.... not implemented at this time.
+                        d["submitted_by_calendar_due_date"] = True 
+                            
+
+
+                        if d["is_resource_estimate"]:
+                            d["num_logical_qubits"] = results["quantum_resources"]["logical"]["num_logical_qubits"]
+                            d["num_shots"] = results["quantum_resources"]["logical"]["num_shots"]
+                            d["num_T_gates_per_shot"] = results["quantum_resources"]["logical"]["num_T_gates_per_shot"]
+                            d["solved_within_accuracy_requirement"] = True # always true.  assume LREs solve to accuracy.
+                        else:
+                            # NOT a logical resource estimate.
+                            
+                            d["reported_energy"] = results["energy"]
+                            try:
+                                d["solved_within_accuracy_requirement"] = bool(np.abs(d["reported_energy"] - d["reference_energy"]) < d["accuracy_tol"])
+                                # TODO:  account for differences in units.  E.g., Hartree vs. kCal/mol vs. other.
+                            except Exception as e:
+                                logging.error(f'Error: {e}', exc_info=True)
+                                logging.warning(f"warning!  no energy target specified in task {task_uuid}")
+                                d["solved_within_accuracy_requirement"] = False
+                            
+                            # TODO: issue-44.  handle case when more than one solution submitted by
+                            # one solver.  for now assume solutions were submitted by due date.
+                            # TODO: check calendar due date submission.
+                            
+                        d["label"] = d["solved_within_run_time"] and d["solved_within_accuracy_requirement"]
+                            
+
+                    # translate values for sponsor RE field names
+                    if d["is_resource_estimate"]:
+                        d["re_circuit_repetitions_per_calculation"] = d["num_shots"]
+                        d["re_calculation_repetitions"] = 1
+                        d["re_total_circuit_repetitions"] = d["re_circuit_repetitions_per_calculation"]*d["re_calculation_repetitions"]
+                        d["re_logical_abstract_num_qubits"] = d["num_logical_qubits"]
+                        d["re_logical_abstract_t_count"] = d["num_T_gates_per_shot"]
+                        
+                        # remove commas so we don't mess up the CSV output.
+                        d["re_logical_architecture_description"] = solution["solver_details"]["algorithm_details"]["algorithm_description"].replace(",","")
+                        d["re_logical_compiled_num_qubits"] = results["quantum_resources"]["physical"]["num_logical_compiled_qubits"]
+                        d["re_logical_compiled_t_count"] = None # TODO: not reported at this time.
+                        d["re_logical_compiled_num_t_factories"] = solution["solver_details"]["quantum_hardware_details"]["quantum_hardware_parameters"]["num_factories"]
+                        
+                        # remove commas so we don't mess up the CSV output.
+                        d["re_physical_architecture_description"] = solution["solver_details"]["quantum_hardware_details"]["quantum_hardware_description"].replace(",","")
+                        
+                        d["re_physical_code_name"] = "surface" # TODO: fixed value at this time.  Revisit later. 
+                        d["re_physical_code_distance"] = results["quantum_resources"]["physical"]["data_code_distance"]
+                        d["re_physical_runtime"] = d["overall_run_time_seconds"]
+                        d["re_physical_num_qubits"] = results["quantum_resources"]["physical"]["num_physical_qubits"]
+                        d["re_physical_t_count"] = None # TODO: not reported at this time.
+                        d["re_physical_num_t_factories"] = solution["solver_details"]["quantum_hardware_details"]["quantum_hardware_parameters"]["num_factories"]
+
+
+                    # new row added (for each solver_uuid/task_uuid)
+                    aggregated_solver_labels = pd.concat(
+                        [aggregated_solver_labels, pd.DataFrame([d])],
+                        ignore_index=True
+                    )
+        
+        self.aggregated_solver_labels_df = aggregated_solver_labels
+        return aggregated_solver_labels
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def write_sponsor_resource_estimate_files(
+            self,
+            output_directory: str,
+        ) -> None:
+        """Write the sponsor's resource estimate JSON files to the `output_directory`
+
+        Warning:
+            The `output_directory` is erased and repopulated.
+
+        Depends:
+            BenchmarkData.sponsor_resource_estimate_list (list): Should be up-to-date. It should have been created during `.__init__()`.
+
+        Args:
+            output_directory (str): relative/path/to/output/directory for JSON files.
+        """
+        
+        # remove `output_directory` if it exists and re-create it.
+        if os.path.exists(output_directory):
+            shutil.rmtree(output_directory)
+        os.makedirs(output_directory)
+
+        for re in self.sponsor_resource_estimate_list:
+            resource_estimate_file_name = f"resource_estimate.gsee.{re['name']}.{re['size']}.{re['id']}.json"
+            output_path = os.path.join(output_directory, resource_estimate_file_name)
+            with open(output_path, "w") as output:
+                json.dump(re, output, indent=4)
+
+
+
+
+
+
+
+    def calculate_sponsor_resource_estimates(self) -> list:
+        """Construct the `BenchmarkData.sponsor_resource_estimate_list` (`list`) attribute per the sponsor's resource estimate schema.
+
+        Returns:
+            list: The `BenchmarkData.sponsor_resource_estimate_list` attribute is updated in place.  It is also returned for other usage.
+        """
+
+        
+        self.sponsor_resource_estimate_list = [] # erase/init.
+
+        for i in range(len(self.all_data_df)):
+            d = self.all_data_df.iloc[i]
+            if d["is_resource_estimate"] and d["attempted"]:
+
+                # translate lots of our fields to sponsor-schema fields:
+                re = {}
+                re["$schema"] = "https://raw.githubusercontent.com/rroodll/QB-Estimate-Reporting/main/schema/resource_estimate_schema.json"
+                re["id"] = d["task_uuid"]
+                re["name"] = d['problem_instance_short_name']
+                re["category"] = "industrial" #enum
+                re["size"] = f"{d['num_orbitals']}_orbitals"
+                re["task"] = "ground_state_energy_estimation" #enum
+                re["implementation"] = d["re_logical_architecture_description"]
+                re["value"] = d["Utility NPV $"]
+                re["value_ci"] = [d["Utility NVP lower bound $"], d["Utility NVP lower bound $"]]
+                # re["value_per_t_gate"] updated below after other fields populated...
+                re["circuit_repetitions_per_calculation"] = d["re_circuit_repetitions_per_calculation"]
+                re["calculation_repetitions"] = d["re_calculation_repetitions"]
+                re["total_circuit_repetitions"] = d["re_total_circuit_repetitions"]
+                re["runtime_requirement"] = d["time_limit_seconds"]
+                re["logical-abstract"] = {} # object is required.
+                re["logical-abstract"]["num_qubits"] = d["re_logical_abstract_num_qubits"]
+                re["logical-abstract"]["t_count"] = d["re_logical_abstract_t_count"]
+                # re["logical-abstract"]["clifford_count"] # SCHEMA-OPTIONAL.  Not reported at this time.
+                # re["logical-abstract"]["gate_count"] # SCHEMA-OPTIONAL.  Not reported at this time.
+                # re["logical-abstract"]["circuit_depth"] # SCHEMA-OPTIONAL.  Not reported at this time.
+                # re["logical-abstract"]["t_depth"] # SCHEMA-OPTIONAL.  Not reported at this time.
+                re["logical-compiled"] = {} # object is optional.
+                re["logical-compiled"]["logical_architecture_description"] = d["re_logical_architecture_description"]
+                re["logical-compiled"]["num_qubits"] = d["re_logical_compiled_num_qubits"]
+                re["logical-compiled"]["t_count"] = "XXXXXXXXXXXXX"
+                re["logical-compiled"]["num_t_factories"] = d["re_physical_num_t_factories"]
+                # re["logical-compiled"]["gate_count"] # SCHEMA-OPTIONAL.  Not reported at this time.
+                # re["logical-compiled"]["clifford_count"] # SCHEMA-OPTIONAL.  Not reported at this time.
+                # re["logical-compiled"]["circuit_depth"] # SCHEMA-OPTIONAL.  Not reported at this time.
+                # re["logical-compiled"]["t_depth"] # SCHEMA-OPTIONAL.  Not reported at this time.
+                re["physical"] = {} # object is optional
+                re["physical"]["physical_architecture_description"] = d["re_physical_architecture_description"]
+                re["physical"]["code_name"] = d["re_physical_code_name"] #schema enum to "surface" or "other"
+                re["physical"]["code_distance"] = d["re_physical_code_distance"]
+                re["physical"]["runtime"] = d["re_physical_runtime"]
+                re["physical"]["num_qubits"] = d["re_physical_num_qubits"]
+                re["physical"]["t_count"] = "XXXXXXXXXXXXX"
+                re["physical"]["num_t_factories"] = d["re_physical_num_t_factories"]
+                # re["physical"]["num_factory_qubits"]# SCHEMA-OPTIONAL.  Not reported at this time.
+                # re["physical"]["gate_count"]# SCHEMA-OPTIONAL.  Not reported at this time.
+                # re["physical"]["circuit_depth"]# SCHEMA-OPTIONAL.  Not reported at this time.
+                # re["physical"]["t_depth"]# SCHEMA-OPTIONAL.  Not reported at this time.
+                # re["physical"]["clifford_count"]# SCHEMA-OPTIONAL.  Not reported at this time.
+                
+                # update "value_per_t_gate" after all other fields populated:
+                x = re["value"]
+                y = re["total_circuit_repetitions"]*re["logical-abstract"]["t_count"]
+                re["value_per_t_gate"] = x/y
+
+                self.sponsor_resource_estimate_list.append(re)
+        
+        return self.sponsor_resource_estimate_list
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    def write_performance_metrics_json_files(
+            self,
+            output_directory: str
+        ) -> None:
+        """TODO:
+
+        Args:
+            output_directory (str): _description_
+        """
+        pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def write_standard_report(
+            self,
+            output_directory: str="./standard_report"
+        ) -> None:
+        """TODO:
+
+        Args:
+            output_directory (str, optional): _description_. Defaults to "./standard_report".
+        """
+        pass
