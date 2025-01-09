@@ -24,11 +24,15 @@ import json
 import datetime
 from pathlib import Path
 
+import check_jsonschema
+
 import pandas as pd
 import numpy as np
 
 import paramiko
 from pyscf.tools import fcidump
+
+
 
 
 def _fetch_file_from_sftp(
@@ -106,6 +110,16 @@ def retrieve_fcidump_from_sftp(url: str, username: str, ppk_path: str, port=22) 
 
 
 
+
+
+def validate_json(json_dict: dict, json_schema_dict: dict=None) -> None:
+    """TODO:
+
+    Args:
+        json_dict (dict): _description_
+        json_schema_dict (dict, optional): _description_. Defaults to None.
+    """
+    
 
 
 
