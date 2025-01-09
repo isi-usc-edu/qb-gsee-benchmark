@@ -1,0 +1,38 @@
+{
+    "$schema": "https://raw.githubusercontent.com/rroodll/QB-Estimate-Reporting/main/schema/resource_estimate_schema.json",
+    "id": "2761e36e-f001-42af-8086-f507b5643ec8",
+    "name": "c2_h2_0",
+    "category": "industrial",
+    "size": "38_orbitals",
+    "task": "ground_state_energy_estimation",
+    "implementation": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
+    "value": 0.0,
+    "value_ci": [
+        0.0,
+        0.0
+    ],
+    "circuit_repetitions_per_calculation": 16,
+    "calculation_repetitions": 1,
+    "total_circuit_repetitions": 16,
+    "runtime_requirement": 86400,
+    "logical-abstract": {
+        "num_qubits": 1222,
+        "t_count": 50116822896
+    },
+    "logical-compiled": {
+        "logical_architecture_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
+        "num_qubits": 1833,
+        "t_count": "XXXXXXXXXXXXX",
+        "num_t_factories": 4
+    },
+    "physical": {
+        "physical_architecture_description": "Optimistic superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494.",
+        "code_name": "surface",
+        "code_distance": 19,
+        "runtime": 936793.4014920001,
+        "num_qubits": 1583266,
+        "t_count": "XXXXXXXXXXXXX",
+        "num_t_factories": 4
+    },
+    "value_per_t_gate": 0.0
+}
