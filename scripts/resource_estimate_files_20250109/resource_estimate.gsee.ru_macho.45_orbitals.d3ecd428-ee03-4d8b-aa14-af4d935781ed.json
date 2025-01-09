@@ -19,20 +19,5 @@
         "num_qubits": 1376,
         "t_count": 86421997440
     },
-    "logical-compiled": {
-        "logical_architecture_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
-        "num_qubits": 2064,
-        "t_count": "XXXXXXXXXXXXX",
-        "num_t_factories": 4
-    },
-    "physical": {
-        "physical_architecture_description": "Optimistic superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494.",
-        "code_name": "surface",
-        "code_distance": 19,
-        "runtime": 1335367.806427,
-        "num_qubits": 1688608,
-        "t_count": "XXXXXXXXXXXXX",
-        "num_t_factories": 4
-    },
     "value_per_t_gate": 4.825746327947868e-09
 }
