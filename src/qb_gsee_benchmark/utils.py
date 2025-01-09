@@ -24,11 +24,18 @@ import json
 import datetime
 from pathlib import Path
 
+from jsonschema import validate as _validate
+from jsonschema import RefResolver
+
+import requests
+
 import pandas as pd
 import numpy as np
 
 import paramiko
 from pyscf.tools import fcidump
+
+
 
 
 def _fetch_file_from_sftp(
@@ -107,6 +114,28 @@ def retrieve_fcidump_from_sftp(url: str, username: str, ppk_path: str, port=22) 
 
 
 
+
+def validate_json(
+        json_dict: dict,
+    ) -> None:
+    """A bespoke utility to validate a JSON object (passed as a `dict`).  
+    An error is raised if the `json_dict` is not valid.   Errors should be
+    handled accordingly in other scripts.
+
+    Args:
+        json_dict (dict): Instance data to validate that must contain the `$schema` field.
+    """
+    # NOTE: this is making some assumptions about how the schema directory
+    # is organized.  It works for our convention.
+    schema_url = json_dict["$schema"]
+    schema = requests.get(schema_url).json()
+    base_url = "/".join(schema_url.split("/")[:-1]) + "/"
+    resolver = RefResolver(base_uri=base_url, referrer=schema)
+    _validate(instance=json_dict, schema=schema, resolver=resolver)
+
+    
+        
+        
 
 
 
