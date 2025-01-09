@@ -134,7 +134,27 @@ def data_frame_vlookup(df: pd.DataFrame,
 
 
 
+def find_dict_with_matching_kv_pair(
+        list_of_dicts: list,
+        lookup_key: str,
+        lookup_val: Any
+    ) -> dict:
+    """Return a dictionary (from a list of dictionaries) that matches `lookup_key`:`lookup_val` provided.
+    If more or less than exactly one dictionary is found in this way and error is raised.
 
+    Args:
+        list_of_dicts (list): A list of dictionaries.
+        lookup_key (str): The top-level key within the dictionaries to search through.
+        lookup_val (Any): The value of the key that we seek.  
+
+    Returns:
+        dict: The matching dictionary.
+    """
+
+    matching_dicts = [d for d in list_of_dicts if d[lookup_key]==lookup_val]
+    assert len(matching_dicts) == 1, \
+        f"Found zero or more than one dictionary in list with key:value == {lookup_key}:{lookup_val}."
+    return matching_dicts[0]
 
 
 
@@ -156,8 +176,8 @@ class BenchmarkData:
             problem_instances_directory (str): relative/path/to/problem_instance directory
             solution_files_directory (str): relative/path/to/solution_files directory
             performance_metrics_directory (str): relative/path/to/performance_metrics directory
-            output_csv_file_name (str, optional): if specified, the data will be written out as a .csv file.
         """
+
 
         self.hamiltonian_features = pd.read_csv(hamiltonian_features_csv_file_name)
         self.utility_estimation_data = pd.read_csv(utility_estimation_csv_file_name)
@@ -165,7 +185,8 @@ class BenchmarkData:
         self.solution_list = load_json_files(search_dir=solution_files_directory)
         self.performance_metrics_list = load_json_files(search_dir=performance_metrics_directory)
         self.solver_df = self.identify_unique_participating_solvers()
-        self.aggregated_solver_labels_df = self.calculate_solver_success_labels()     
+        self.aggregated_solver_labels_df = self.calculate_solver_success_labels()
+        self.all_data_df = self.flatten_benchmark_data()
 
 
     def __repr__(self) -> str:
@@ -176,10 +197,10 @@ class BenchmarkData:
         """Returns a `pd.DataFrame` of solvers participating.  The columns are `solver_uuid` and `solver_short_name`. 
         
         Depends:
-            `BenchmarkData.solution_list` (list): A list of solutions (dictionary objects), most likely produced by `load_json_files()`. 
+            `self.solution_list` (`list`): A list of solutions (dictionary objects), most likely produced by `load_json_files()`. 
 
         Returns:
-            pd.DataFrame: Columns are `solver_uuid` and `solver_short_name`.  Each unique `solver_uuid` only appears once.
+           `pd.DataFrame`: Columns are `solver_uuid` and `solver_short_name`.  Each unique `solver_uuid` only appears once.
         """
 
 
@@ -195,23 +216,23 @@ class BenchmarkData:
                 solvers_list.loc[len(solvers_list)] = [solver_short_name, solver_uuid]
         return solvers_list
     
-    
+
 
     def locate_solution_results_by_task_uuid_and_solver_uuid(self,
             solver_uuid: str,
             task_uuid: str,
         ) -> tuple:
-        """Search `BenchmarkData.solution_list` for specific results object by `solver_uuid` and `task_uuid`
+        """Search `self.solution_list` for specific results object by `solver_uuid` and `task_uuid`
 
         Depends:
-            BenchmarkData.solution_list (list): A list of solutions (dictionary objects), most likely produced by `load_json_files()`. 
+            self.solution_list (list): A list of solutions (dictionary objects), most likely produced by `load_json_files()`. 
 
         Args:
             solver_uuid (str): UUID in 8-4-4-4-12 format as a string.
             task_uuid (str): UUID in 8-4-4-4-12 format as a string.
 
         Returns:
-            tuple: (results: dict, solution_uuid: str)
+            tuple: `results` (`dict`), `solution_uuid` (`str`)
         """
         results = None # init as None and update if we find it.
         solution_uuid = None # init as None and update if we find it.
@@ -233,20 +254,26 @@ class BenchmarkData:
 
 
 
+    def to_csv(self, output_csv_file_name: str):
+        """Write all of the current BenchmarkData to a large, flat CSV file.
+
+        Depends:
+            self.all_data_df (pd.DataFrame): Should be up-to-date. It should have been created during `.__init__()`.
+
+        Args:
+            output_csv_file_name (str): relative/path/to/the/output CSV file.
+        """
+        self.all_data_df.to_csv(output_csv_file_name, index=False)
 
 
 
     def flatten_benchmark_data(
             self,
-            output_csv_file_name: str = None
         ) -> pd.DataFrame:
-        """Return a pd.DataFrame object with collated benchmark data from the various sources.
+        """Return a `pd.DataFrame` object with collated benchmark data from the various sources.
 
         Depends:
             on almost all of the attributes of BenchmarkData.
-
-        Args:
-            output_csv_file_name (str, optional): If specified, the data will be written to file. Defaults to None.
 
         Returns:
             pd.DataFrame: a large, flat data frame containing collated data by `task_uuid` from all JSON files and other inputs.
@@ -259,22 +286,17 @@ class BenchmarkData:
             on="task_uuid",
             how="outer"
         )
-
         df = pd.merge(
             self.aggregated_solver_labels_df,
             df,
             on="task_uuid",
             how="outer",
         )
-
-        if output_csv_file_name is not None:
-            df.to_csv(output_csv_file_name, index=False)
-
         return df
 
 
     def calculate_ml_scores(self) -> dict:
-        """TODO: migrate miniML.py workflow into this method.  Note that running miniML.py takes about 15 minutes.
+        """TODO: migrate `miniML.py` workflow into this method.  Note that running `miniML.py` takes about 15 minutes.
 
         Returns:
             dict: _description_
@@ -283,13 +305,13 @@ class BenchmarkData:
 
 
     def calculate_solver_success_labels(self) -> pd.DataFrame:
-        """Construct a pd.DataFrame containing the success/failure of each solver against `task_uuids`.
+        """Construct a `pd.DataFrame` containing the success/failure of each solver against `task_uuids`.
         
         Depends:
-            BenchmarkData.solver_df (pd.DataFrame): Columns are `solver_uuid` and `solver_short_name`.  Each unique `solver_uuid` only appears once.
-            BenchmarkData.problem_instance_list (list): A list of problem instances (dictionary objects), most likely produced by `load_json_files()`. 
-            BenchmarkData.solution_list (list): A list of solutions (dictionary objects), most likely produced by `load_json_files()`. 
-            BenchmarkData.hamiltonian_features (pd.DataFrame): A data frame containing a variety of interesting features about the Hamiltonians (by `task_uuid`).
+            self.solver_df (pd.DataFrame): Columns are `solver_uuid` and `solver_short_name`.  Each unique `solver_uuid` only appears once.
+            self.problem_instance_list (list): A list of problem instances (dictionary objects), most likely produced by `load_json_files()`. 
+            self.solution_list (list): A list of solutions (dictionary objects), most likely produced by `load_json_files()`. 
+            self.hamiltonian_features (pd.DataFrame): A data frame containing a variety of interesting features about the Hamiltonians (by `task_uuid`).
 
         Returns:
             pd.DataFrame: A large, flat data frame containing the success/failure labels for the solvers against `task_uuids`.
@@ -368,6 +390,18 @@ class BenchmarkData:
                         task_uuid=task_uuid                        
                     )
 
+                    if results is None: 
+                        # no corresponding results/solution submitted for task_uuid by solver.
+                        solution = None
+                    else:
+                        solution = find_dict_with_matching_kv_pair(
+                            list_of_dicts=self.solution_list,
+                            lookup_key="solution_uuid",
+                            lookup_val=solution_uuid
+                        )
+
+
+
                     d = {}
                     for k in aggregated_solver_labels_columns:
                         d[k] = None # init all to None.  Update below.    
@@ -382,23 +416,12 @@ class BenchmarkData:
                     d["instance_data_object_uuid"] = instance_data_object_uuid
                     d["instance_data_object_url"] = instance_data_object_url
 
-
-
-                    # determine if it's a resource estimate
-                    for solution in self.solution_list:
-                        if solution["solution_uuid"] == solution_uuid:
-                            d["is_resource_estimate"] = solution["is_resource_estimate"]
-                            break
-
-
                     d["num_orbitals"] = data_frame_vlookup(
                         df=self.hamiltonian_features,
                         lookup_value=task_uuid,
                         lookup_value_column_header="task_uuid",
                         find_value_column_header="n_orbs" # TODO: standardize on num_orbitals
                     )
-                    
-
 
                     # task-specific requirements from `problem_instance`
                     d["calendar_due_date"] = problem_instance["calendar_due_date"] # may be None/null per .json.
@@ -410,8 +433,7 @@ class BenchmarkData:
                     except Exception as e:
                         logging.error(f'Error: {e}', exc_info=True)
                         logging.warning(f"warning!  no reference_energy specified in task {task_uuid}")
-                        d["reference_energy"] = None
-
+                        
 
                     if results is None:
                         # the solver did NOT submit a solution file for the problem_instance or Hamiltonian.
@@ -420,25 +442,22 @@ class BenchmarkData:
                         d["attempted"] = False
                         d["solved_within_run_time"] = False
                         d["solved_within_accuracy_requirement"] = False
-                        d["label"] = False # overall:  solved==True/False
+                        d["label"] = False # overall result:  solved==True/False
                         d["submitted_by_calendar_due_date"] = False
                         d["overall_run_time_seconds"] = None
                     else:
+                        d["is_resource_estimate"] = solution["is_resource_estimate"]
+                        
                         # calculate simple performance metrics for the solver against
                         # this Hamiltonian
                         d["attempted"] = True 
 
                         # TODO: issue-#94:  physical resource estimate (PRE) not calculated for LRE
-                        if d["is_resource_estimate"]:
-                            d["overall_run_time_seconds"] = results["run_time"]["overall_time"]["seconds"]
-                            d["solved_within_run_time"] = d["overall_run_time_seconds"] <= d["time_limit_seconds"]
-                        else:
-                            # not a resource estimate...
-                            d["overall_run_time_seconds"] = results["run_time"]["overall_time"]["seconds"]
-                            d["solved_within_run_time"] = d["overall_run_time_seconds"] <= d["time_limit_seconds"]
-
+                        d["overall_run_time_seconds"] = results["run_time"]["overall_time"]["seconds"]
+                        d["solved_within_run_time"] = d["overall_run_time_seconds"] <= d["time_limit_seconds"]
+                    
                         
-                        # TODO: check calendar due date submission.
+                        # TODO: check calendar due date submission.... not implemented at this time.
                         d["submitted_by_calendar_due_date"] = True 
                             
 
@@ -450,10 +469,7 @@ class BenchmarkData:
                             d["solved_within_accuracy_requirement"] = True # always true.  assume LREs solve to accuracy.
                         else:
                             # NOT a logical resource estimate.
-                            d["num_logical_qubits"] = None
-                            d["num_shots"] = None
-                            d["num_T_gates_per_shot"] = None
-        
+                            
                             d["reported_energy"] = results["energy"]
                             try:
                                 d["solved_within_accuracy_requirement"] = bool(np.abs(d["reported_energy"] - d["reference_energy"]) < d["accuracy_tol"])
@@ -471,22 +487,28 @@ class BenchmarkData:
                             
 
                     # translate values for sponsor RE field names
-                    d["re_circuit_repetitions_per_calculation"] = d["num_shots"]
-                    d["re_calculation_repetitions"] = 1
-                    d["re_total_circuit_repetitions"] = d["re_circuit_repetitions_per_calculation"]*d["re_calculation_repetitions"]
-                    d["re_logical_abstract_num_qubits"] = d["num_logical_qubits"]
-                    d["re_logical_abstract_t_count"] = d["num_T_gates_per_shot"]
-                    d["re_logical_architecture_description"] = XXXXX
-                    d["re_logical_compiled_num_qubits"] = results["quantum_resources"]["physical"]["num_logical_compiled_qubits"]
-                    d["re_logical_compiled_t_count"] = None XXXXXXXXXX
-                    d["re_logical_compiled_num_t_factories"] = GET IT FROM QUANTUM HARDWARD DETAILS
-                    d["re_physical_architecture_description"] = GET IT FROM QUANTUM HARDWARD DETAILS
-                    d["re_physical_code_name"] = "surface" # TODO: fixed value at this time.  Revisit later. 
-                    d["re_physical_code_distance"] = results["quantum_resources"]["physical"]["data_code_distance"]
-                    d["re_physical_runtime"] = d["overall_run_time_seconds"]
-                    d["re_physical_num_qubits"] = results["quantum_resources"]["physical"]["num_physical_qubits"]
-                    d["re_physical_t_count"] = rXZXXXXX
-                    d["re_physical_num_t_factories"] = XXXXX
+                    if d["is_resource_estimate"]:
+                        d["re_circuit_repetitions_per_calculation"] = d["num_shots"]
+                        d["re_calculation_repetitions"] = 1
+                        d["re_total_circuit_repetitions"] = d["re_circuit_repetitions_per_calculation"]*d["re_calculation_repetitions"]
+                        d["re_logical_abstract_num_qubits"] = d["num_logical_qubits"]
+                        d["re_logical_abstract_t_count"] = d["num_T_gates_per_shot"]
+                        
+                        # remove commas so we don't mess up the CSV output.
+                        d["re_logical_architecture_description"] = solution["solver_details"]["algorithm_details"]["algorithm_description"].replace(",","")
+                        d["re_logical_compiled_num_qubits"] = results["quantum_resources"]["physical"]["num_logical_compiled_qubits"]
+                        d["re_logical_compiled_t_count"] = None # TODO: not reported at this time.
+                        d["re_logical_compiled_num_t_factories"] = solution["solver_details"]["quantum_hardware_details"]["quantum_hardware_parameters"]["num_factories"]
+                        
+                        # remove commas so we don't mess up the CSV output.
+                        d["re_physical_architecture_description"] = solution["solver_details"]["quantum_hardware_details"]["quantum_hardware_description"].replace(",","")
+                        
+                        d["re_physical_code_name"] = "surface" # TODO: fixed value at this time.  Revisit later. 
+                        d["re_physical_code_distance"] = results["quantum_resources"]["physical"]["data_code_distance"]
+                        d["re_physical_runtime"] = d["overall_run_time_seconds"]
+                        d["re_physical_num_qubits"] = results["quantum_resources"]["physical"]["num_physical_qubits"]
+                        d["re_physical_t_count"] = None # TODO: not reported at this time.
+                        d["re_physical_num_t_factories"] = solution["solver_details"]["quantum_hardware_details"]["quantum_hardware_parameters"]["num_factories"]
 
 
                     # new row added (for each solver_uuid/task_uuid)
@@ -498,18 +520,24 @@ class BenchmarkData:
         return aggregated_solver_labels
     
 
-    def calculate_sponsor_resource_estimate_json(
+
+
+
+    def write_sponsor_resource_estimate_json_files(
             self,
-            config_file: str
-        ) -> list:
-        """TODO: 
+            output_directory: str
+        ) -> None:
+        """Create and output resource estimates in the sponsor's schema.
+
+        Depends:
+            self.all_data_df (pd.DataFrame): Should be up-to-date. It should have been created during `.__init__()`.
 
         Args:
-            config_file (str): _description_
-
-        Returns:
-            list: _description_
+            output_directory (str): relative/path/to/output/directory for JSON files.
         """
-        # get implementation details
+        
+        # ensure aggregated_solver_labels_df is up to date:
+        self.aggregated_solver_labels_df = self.calculate_solver_success_labels()
 
-        pass
+        
+
