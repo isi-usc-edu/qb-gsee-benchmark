@@ -86,6 +86,16 @@ def get_pqre(solution_lre: dict, config: dict) -> dict[str, Any]:
     solution_pre["solution_data"] = []
     for task_solution in solution_data:
         logging.info(f"Analyzing task {task_solution['task_uuid']}...")
+        num_T_gates = (
+            task_solution["quantum_resources"]["logical"]["num_T_gates_per_shot"]
+            if task_solution["quantum_resources"]["logical"].get("num_T_gates_per_shot")
+            else 0
+        )
+        num_toffoli_gates = (
+            task_solution["quantum_resources"]["logical"]["num_toffoli_gates_per_shot"]
+            if task_solution["quantum_resources"]["logical"].get("num_T_gates_per_shot")
+            else 0
+        )
         try:
             physical_resource_estimation_start = datetime.datetime.now()
 
@@ -93,9 +103,7 @@ def get_pqre(solution_lre: dict, config: dict) -> dict[str, Any]:
                 num_logical_qubits=task_solution["quantum_resources"]["logical"][
                     "num_logical_qubits"
                 ],
-                num_T_gates=task_solution["quantum_resources"]["logical"][
-                    "num_T_gates_per_shot"
-                ],
+                num_T_gates=num_T_gates,
                 hardware_failure_tolerance_per_shot=task_solution["quantum_resources"][
                     "logical"
                 ]["hardware_failure_tolerance_per_shot"],
