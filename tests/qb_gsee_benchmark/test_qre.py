@@ -63,6 +63,6 @@ def test_get_df_qpe_circuit():
         error_tolerance=error_tolerance,
         failure_tolerance=failure_tolerance,
         df_threshold=1e-3,
-        sf_error_threshold=1e-12,
+        sf_threshold=1e-12,
     )
     assert (1 - square_overlap) ** num_shots < failure_tolerance
