@@ -1,20 +1,20 @@
 # GSEE Benchmark Standard Report
 
-Report created on 2025-01-08T14:34:09.541855+00:00
+Report created on 2025-01-14T21:41:39.280731+00:00
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
-Input data: `aggregated_solver_labels.csv`, last modified Wed Jan  8 09:13:55 2025
+Input data: `aggregated_solver_labels.csv`, last modified Tue Jan 14 15:41:23 2025
 
 Input data: `Hamiltonian_features.csv`, last modified Mon Dec 30 16:29:03 2024
 
-Input data: `GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv`, last modified Wed Dec 11 11:17:02 2024
+Input data: `GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv`, last modified Thu Jan  9 12:11:19 2025
 
-Input data: Latest creation time for a `problem_instance.json` file: Wed Jan  8 07:08:49 2025
+Input data: Latest creation time for a `problem_instance.json` file: Mon Jan 13 10:14:13 2025
 
-Latest creation time for a `performance_metrics.json` file: Wed Jan  8 09:33:34 2025
+Latest creation time for a `performance_metrics.json` file: Tue Jan 14 16:15:38 2025
 
-Latest creation time for a `solution.json` file: Wed Jan  8 09:10:43 2025
+Latest creation time for a `solution.json` file: Tue Jan 14 15:07:46 2025
 
 ## Problem Instance Summary Statistics
 
@@ -36,7 +36,7 @@ maximum number of orbitals: 135
 
 ## Solver Summary Statistics
 
-number of unique participating solvers: 2
+number of unique participating solvers: 3
 
 ![Solver scatter plot](solver_num_orbs_vs_runtime_scatter_plot.png)
 
@@ -50,9 +50,9 @@ number of unique participating solvers: 2
 
 solver_short_name: DMRG_Niagara_cluster_lowest_energy
 
-performance_metrics_uuid: 9b982ac0-5fcd-476b-85f1-3c7b08879e3e
+performance_metrics_uuid: 967e6eb2-9928-4bc3-8bf4-d17c223b2369
 
-creation_timestamp: 2025-01-08T14:31:00.488904+00:00
+creation_timestamp: 2025-01-14T21:15:08.273215+00:00
 
 number_of_problem_instances: 82
 
@@ -74,7 +74,7 @@ max_run_time_of_attempted_tasks: 80820.729907066
 
 sum_of_run_time_of_attempted_tasks: 1824772.0337238186
 
-solvability_ratio: 0.0
+solvability_ratio: 0.9711
 
 f1_score: [0.7586206896551724, 0.8531468531468531]
 
@@ -84,6 +84,48 @@ ml_metrics_calculator_version: 1
 
 ![SHAP summary plot](shap_summary_plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png)
 
+### Solver CCSDT_PLACEHOLDER, fd13c864-baf1-44de-b52d-0e5dd69f647a
+
+![Solver success/failure plot](solver_fd13c864-baf1-44de-b52d-0e5dd69f647a_plot.png)
+
+![Solver utility capture](solver_fd13c864-baf1-44de-b52d-0e5dd69f647a_utility_capture_plot.png)
+
+solver_short_name: CCSDT_PLACEHOLDER
+
+performance_metrics_uuid: 52576a21-8818-4009-8fc5-666148e0445d
+
+creation_timestamp: 2025-01-14T21:15:08.818640+00:00
+
+number_of_problem_instances: 82
+
+number_of_problem_instances_attempted: 4
+
+number_of_problem_instances_solved: 4
+
+number_of_tasks: 230
+
+number_of_tasks_attempted: 53
+
+number_of_tasks_solved: 53
+
+number_of_tasks_solved_within_run_time_limit: 53
+
+number_of_tasks_solved_within_accuracy_threshold: 53
+
+max_run_time_of_attempted_tasks: 3600.0
+
+sum_of_run_time_of_attempted_tasks: 190800.0
+
+solvability_ratio: 0.0103
+
+f1_score: [0.9915492957746479, 0.9714285714285714]
+
+ml_metrics_calculator_version: 1
+
+![Solver miniML plot](plot_solver_fd13c864-baf1-44de-b52d-0e5dd69f647a.png)
+
+![SHAP summary plot](shap_summary_plot_solver_fd13c864-baf1-44de-b52d-0e5dd69f647a.png)
+
 ### Solver DF_QPE, 5dad4064-cd11-412f-85cb-d722afe3b3de
 
 ![Solver success/failure plot](solver_5dad4064-cd11-412f-85cb-d722afe3b3de_plot.png)
@@ -92,9 +134,9 @@ ml_metrics_calculator_version: 1
 
 solver_short_name: DF_QPE
 
-performance_metrics_uuid: c5fbe072-8546-42a5-af09-0c90d853b87c
+performance_metrics_uuid: acd97190-9a59-49bf-a6c0-e635837867d8
 
-creation_timestamp: 2025-01-08T14:31:01.092493+00:00
+creation_timestamp: 2025-01-14T21:15:09.271301+00:00
 
 number_of_problem_instances: 82
 
@@ -116,7 +158,7 @@ max_run_time_of_attempted_tasks: 233737829.40462503
 
 sum_of_run_time_of_attempted_tasks: 1180589418.3385441
 
-solvability_ratio: 0.0086
+solvability_ratio: 0.0154
 
 f1_score: [0.9950738916256158, 0.9629629629629629]
 

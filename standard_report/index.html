@@ -1,12 +1,12 @@
 <h1>GSEE Benchmark Standard Report</h1>
-<p>Report created on 2025-01-08T14:34:09.541855+00:00</p>
+<p>Report created on 2025-01-14T21:41:39.280731+00:00</p>
 <p><a href="https://github.com/isi-usc-edu/qb-gsee-benchmark">https://github.com/isi-usc-edu/qb-gsee-benchmark</a></p>
-<p>Input data: <code>aggregated_solver_labels.csv</code>, last modified Wed Jan  8 09:13:55 2025</p>
+<p>Input data: <code>aggregated_solver_labels.csv</code>, last modified Tue Jan 14 15:41:23 2025</p>
 <p>Input data: <code>Hamiltonian_features.csv</code>, last modified Mon Dec 30 16:29:03 2024</p>
-<p>Input data: <code>GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv</code>, last modified Wed Dec 11 11:17:02 2024</p>
-<p>Input data: Latest creation time for a <code>problem_instance.json</code> file: Wed Jan  8 07:08:49 2025</p>
-<p>Latest creation time for a <code>performance_metrics.json</code> file: Wed Jan  8 09:33:34 2025</p>
-<p>Latest creation time for a <code>solution.json</code> file: Wed Jan  8 09:10:43 2025</p>
+<p>Input data: <code>GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv</code>, last modified Thu Jan  9 12:11:19 2025</p>
+<p>Input data: Latest creation time for a <code>problem_instance.json</code> file: Mon Jan 13 10:14:13 2025</p>
+<p>Latest creation time for a <code>performance_metrics.json</code> file: Tue Jan 14 16:15:38 2025</p>
+<p>Latest creation time for a <code>solution.json</code> file: Tue Jan 14 15:07:46 2025</p>
 <h2>Problem Instance Summary Statistics</h2>
 <p>number of <code>problem_instances</code>: 82</p>
 <p><code>problem_instance.json</code> with the most tasks: 16 (mo_n2_pincer/8a3787cc-d3d0-42a8-d9a9-7de2aed45208)</p>
@@ -17,15 +17,15 @@
 <p><img alt="Number of orbitals histogram" src="num_orbitals_histogram.png" /></p>
 <p><img alt="Utility estimate per Hamiltonian" src="num_orbitals_vs_utility.png" /></p>
 <h2>Solver Summary Statistics</h2>
-<p>number of unique participating solvers: 2</p>
+<p>number of unique participating solvers: 3</p>
 <p><img alt="Solver scatter plot" src="solver_num_orbs_vs_runtime_scatter_plot.png" /></p>
 <p><img alt="Solver scatter plot" src="solver_num_orbs_vs_log_runtime_scatter_plot.png" /></p>
 <h3>Solver DMRG_Niagara_cluster_lowest_energy, 16537433-9f4c-4eae-a65d-787dc3b35b59</h3>
 <p><img alt="Solver success/failure plot" src="solver_16537433-9f4c-4eae-a65d-787dc3b35b59_plot.png" /></p>
 <p><img alt="Solver utility capture" src="solver_16537433-9f4c-4eae-a65d-787dc3b35b59_utility_capture_plot.png" /></p>
 <p>solver_short_name: DMRG_Niagara_cluster_lowest_energy</p>
-<p>performance_metrics_uuid: 9b982ac0-5fcd-476b-85f1-3c7b08879e3e</p>
-<p>creation_timestamp: 2025-01-08T14:31:00.488904+00:00</p>
+<p>performance_metrics_uuid: 967e6eb2-9928-4bc3-8bf4-d17c223b2369</p>
+<p>creation_timestamp: 2025-01-14T21:15:08.273215+00:00</p>
 <p>number_of_problem_instances: 82</p>
 <p>number_of_problem_instances_attempted: 76</p>
 <p>number_of_problem_instances_solved: 43</p>
@@ -36,17 +36,38 @@
 <p>number_of_tasks_solved_within_accuracy_threshold: 142</p>
 <p>max_run_time_of_attempted_tasks: 80820.729907066</p>
 <p>sum_of_run_time_of_attempted_tasks: 1824772.0337238186</p>
-<p>solvability_ratio: 0.0</p>
+<p>solvability_ratio: 0.9711</p>
 <p>f1_score: [0.7586206896551724, 0.8531468531468531]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver miniML plot" src="plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png" /></p>
 <p><img alt="SHAP summary plot" src="shap_summary_plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png" /></p>
+<h3>Solver CCSDT_PLACEHOLDER, fd13c864-baf1-44de-b52d-0e5dd69f647a</h3>
+<p><img alt="Solver success/failure plot" src="solver_fd13c864-baf1-44de-b52d-0e5dd69f647a_plot.png" /></p>
+<p><img alt="Solver utility capture" src="solver_fd13c864-baf1-44de-b52d-0e5dd69f647a_utility_capture_plot.png" /></p>
+<p>solver_short_name: CCSDT_PLACEHOLDER</p>
+<p>performance_metrics_uuid: 52576a21-8818-4009-8fc5-666148e0445d</p>
+<p>creation_timestamp: 2025-01-14T21:15:08.818640+00:00</p>
+<p>number_of_problem_instances: 82</p>
+<p>number_of_problem_instances_attempted: 4</p>
+<p>number_of_problem_instances_solved: 4</p>
+<p>number_of_tasks: 230</p>
+<p>number_of_tasks_attempted: 53</p>
+<p>number_of_tasks_solved: 53</p>
+<p>number_of_tasks_solved_within_run_time_limit: 53</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 53</p>
+<p>max_run_time_of_attempted_tasks: 3600.0</p>
+<p>sum_of_run_time_of_attempted_tasks: 190800.0</p>
+<p>solvability_ratio: 0.0103</p>
+<p>f1_score: [0.9915492957746479, 0.9714285714285714]</p>
+<p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver miniML plot" src="plot_solver_fd13c864-baf1-44de-b52d-0e5dd69f647a.png" /></p>
+<p><img alt="SHAP summary plot" src="shap_summary_plot_solver_fd13c864-baf1-44de-b52d-0e5dd69f647a.png" /></p>
 <h3>Solver DF_QPE, 5dad4064-cd11-412f-85cb-d722afe3b3de</h3>
 <p><img alt="Solver success/failure plot" src="solver_5dad4064-cd11-412f-85cb-d722afe3b3de_plot.png" /></p>
 <p><img alt="Solver utility capture" src="solver_5dad4064-cd11-412f-85cb-d722afe3b3de_utility_capture_plot.png" /></p>
 <p>solver_short_name: DF_QPE</p>
-<p>performance_metrics_uuid: c5fbe072-8546-42a5-af09-0c90d853b87c</p>
-<p>creation_timestamp: 2025-01-08T14:31:01.092493+00:00</p>
+<p>performance_metrics_uuid: acd97190-9a59-49bf-a6c0-e635837867d8</p>
+<p>creation_timestamp: 2025-01-14T21:15:09.271301+00:00</p>
 <p>number_of_problem_instances: 82</p>
 <p>number_of_problem_instances_attempted: 24</p>
 <p>number_of_problem_instances_solved: 3</p>
@@ -57,7 +78,7 @@
 <p>number_of_tasks_solved_within_accuracy_threshold: 163</p>
 <p>max_run_time_of_attempted_tasks: 233737829.40462503</p>
 <p>sum_of_run_time_of_attempted_tasks: 1180589418.3385441</p>
-<p>solvability_ratio: 0.0086</p>
+<p>solvability_ratio: 0.0154</p>
 <p>f1_score: [0.9950738916256158, 0.9629629629629629]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver miniML plot" src="plot_solver_5dad4064-cd11-412f-85cb-d722afe3b3de.png" /></p>

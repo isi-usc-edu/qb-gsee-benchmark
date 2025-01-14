@@ -34,6 +34,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
+from matplotlib.colors import cnames as color_names
+
 
 import markdown
 import weasyprint
@@ -275,7 +277,13 @@ def main(config):
     plt.xlabel("Number of spatial orbitals")
     plt.xlim(0,10*np.ceil(max(data["num_orbitals"])/10))
     plt.ylabel("Overall run time in seconds")
-    colors = [tuple(np.random.rand(3)) for _ in range(len(solver_uuid_dict))]
+    
+    # colors = [tuple(np.random.rand(3)) for _ in range(len(solver_uuid_dict))]
+    p_list = np.random.permutation(len(solver_uuid_dict))
+    colors = [ list(color_names.keys())[i] for i in p_list ]
+    # use normal colors first... then dig deep into the color list.
+    colors = ['g', 'c', 'm', 'y', 'k', 'w'] + colors
+    
     # markers = ['o', 's', '^', 'D', 'p', '*', 'H', 'X', 'v', '<']
     series_counter = 0
     for solver_uuid in solver_uuid_dict:
