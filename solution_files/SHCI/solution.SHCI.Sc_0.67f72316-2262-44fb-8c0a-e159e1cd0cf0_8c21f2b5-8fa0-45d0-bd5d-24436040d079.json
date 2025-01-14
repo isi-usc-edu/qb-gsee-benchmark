@@ -1,0 +1,58 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "8c21f2b5-8fa0-45d0-bd5d-24436040d079",
+    "problem_instance_uuid": "67f72316-2262-44fb-8c0a-e159e1cd0cf0",
+    "creation_timestamp": "2024-12-24T19:10:33.377198Z",
+    "contact_info": [
+        {
+            "name": "Matthew Otten",
+            "email": "mjotten@wisc.edu",
+            "institution": "University of Wisconsin -- Madison"
+        }
+    ],
+    "is_resource_estimate": false,
+    "solution_data": [
+        {
+            "task_uuid": "fb87d637-aaab-4e8f-8898-4ecca8bd0fe0",
+            "energy": -46.39682893630179,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 1.0951511555390425e-06,
+            "run_time": 687.609,
+            "run_time_cpu": 4834.325000000001,
+            "solution_details": ""
+        },
+        {
+            "task_uuid": "dc1da839-0ccc-434c-bf9c-a3874ffc3b1c",
+            "energy": -46.45226259578061,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 6.081200936591813e-06,
+            "run_time": 4665.61,
+            "run_time_cpu": 32519.534,
+            "solution_details": ""
+        },
+        {
+            "task_uuid": "96c6a0d7-8a1e-4189-a934-833b80ade346",
+            "energy": -46.473910620224345,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 6.525223547271253e-06,
+            "run_time": 8732.847,
+            "run_time_cpu": 44944.379,
+            "solution_details": ""
+        }
+    ],
+    "solver_details": {
+        "solver_uuid": "2dde727e-a881-44fa-aabf-bba6248e4baf",
+        "solver_short_name": "SHCI_opt",
+        "compute_hardware_type": "classical_computer",
+        "classical_hardware_details": {
+            "computing_environment_name": "LCRC Improv (per node)",
+            "cpu_description": "2x AMD EPYC 7713 64C",
+            "ram_available_gb": "256GB",
+            "clock_speed": "2 GHz",
+            "total_num_cores": 128
+        },
+        "algorithm_details": "SHCI with optimized orbitals followed by SHCI+PT",
+        "software_details": "SHCI Arrow Code (https://github.com/QMC-Cornell/shci)."
+    },
+    "digital_signature": null
+}

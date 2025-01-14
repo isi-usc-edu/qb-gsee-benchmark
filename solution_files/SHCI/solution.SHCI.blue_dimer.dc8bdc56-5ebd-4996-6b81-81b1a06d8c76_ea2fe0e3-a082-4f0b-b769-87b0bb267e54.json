@@ -1,0 +1,103 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "ea2fe0e3-a082-4f0b-b769-87b0bb267e54",
+    "problem_instance_uuid": "dc8bdc56-5ebd-4996-6b81-81b1a06d8c76",
+    "creation_timestamp": "2024-12-24T19:01:45.441587Z",
+    "contact_info": [
+        {
+            "name": "Matthew Otten",
+            "email": "mjotten@wisc.edu",
+            "institution": "University of Wisconsin -- Madison"
+        }
+    ],
+    "is_resource_estimate": false,
+    "solution_data": [
+        {
+            "task_uuid": "9da97ef6-4bad-4c82-8576-9b8e539a7ba8",
+            "energy": -2453.3940998343687,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 1.359817360935267e-07,
+            "run_time": 335.695,
+            "run_time_cpu": 452.504,
+            "solution_details": ""
+        },
+        {
+            "task_uuid": "f20db1b1-86e3-4ddf-96ff-a6d37f331935",
+            "energy": -2453.73283761122,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 0.0012452648534235777,
+            "run_time": 585.949,
+            "run_time_cpu": 863.366,
+            "solution_details": ""
+        },
+        {
+            "task_uuid": "742be33c-0982-4b06-b324-1d86242e28d9",
+            "energy": -2454.501792919987,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 0.0003479537190287374,
+            "run_time": 26405.942,
+            "run_time_cpu": 197315.429,
+            "solution_details": ""
+        },
+        {
+            "task_uuid": "3b49563d-948a-4ecb-84a0-d3c0c2c0d217",
+            "energy": -2454.559195706688,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 0.00012354306591078057,
+            "run_time": 31449.753999999997,
+            "run_time_cpu": 226701.699,
+            "solution_details": ""
+        },
+        {
+            "task_uuid": "950da653-13ce-4cd7-95d8-5045ab03d4bc",
+            "energy": -2452.7144061661797,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 4.599078238243237e-07,
+            "run_time": 210.134,
+            "run_time_cpu": 383.202,
+            "solution_details": ""
+        },
+        {
+            "task_uuid": "765594e5-44ac-41a2-89a7-f2ac03536379",
+            "energy": -2454.5567490449093,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 2.8130403279646998e-05,
+            "run_time": 11455.914,
+            "run_time_cpu": 31216.760000000002,
+            "solution_details": ""
+        },
+        {
+            "task_uuid": "1a013e9f-7eab-4a1b-b486-1d9e2d99e754",
+            "energy": -2454.21167483994,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 8.656536465423414e-05,
+            "run_time": 1047.295,
+            "run_time_cpu": 4441.8330000000005,
+            "solution_details": ""
+        },
+        {
+            "task_uuid": "6713517a-ab65-4381-aae1-0839dcd6c1a0",
+            "energy": -2454.684748758669,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 0.0077731370133733435,
+            "run_time": 40667.631,
+            "run_time_cpu": 306424.619,
+            "solution_details": ""
+        }
+    ],
+    "solver_details": {
+        "solver_uuid": "2dde727e-a881-44fa-aabf-bba6248e4baf",
+        "solver_short_name": "SHCI_opt",
+        "compute_hardware_type": "classical_computer",
+        "classical_hardware_details": {
+            "computing_environment_name": "LCRC Improv (per node)",
+            "cpu_description": "2x AMD EPYC 7713 64C",
+            "ram_available_gb": "256GB",
+            "clock_speed": "2 GHz",
+            "total_num_cores": 128
+        },
+        "algorithm_details": "SHCI with optimized orbitals followed by SHCI+PT",
+        "software_details": "SHCI Arrow Code (https://github.com/QMC-Cornell/shci)."
+    },
+    "digital_signature": null
+}

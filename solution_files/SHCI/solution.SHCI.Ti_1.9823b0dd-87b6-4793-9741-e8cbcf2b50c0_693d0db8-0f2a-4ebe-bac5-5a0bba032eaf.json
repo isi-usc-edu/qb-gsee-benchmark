@@ -1,0 +1,49 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "693d0db8-0f2a-4ebe-bac5-5a0bba032eaf",
+    "problem_instance_uuid": "9823b0dd-87b6-4793-9741-e8cbcf2b50c0",
+    "creation_timestamp": "2024-12-24T16:46:20.198090Z",
+    "contact_info": [
+        {
+            "name": "Matthew Otten",
+            "email": "mjotten@wisc.edu",
+            "institution": "University of Wisconsin -- Madison"
+        }
+    ],
+    "is_resource_estimate": false,
+    "solution_data": [
+        {
+            "task_uuid": "2cd76a23-0514-458a-b588-94e2d10564d3",
+            "energy": -57.63401385479064,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 1.2034448246822649e-06,
+            "run_time": 600.234,
+            "run_time_cpu": 4190.429,
+            "solution_details": ""
+        },
+        {
+            "task_uuid": "c7049602-5460-4277-8148-d9c66012f8f0",
+            "energy": -57.70422895374305,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 1.6111960405851278e-05,
+            "run_time": 5081.3730000000005,
+            "run_time_cpu": 34811.990000000005,
+            "solution_details": ""
+        }
+    ],
+    "solver_details": {
+        "solver_uuid": "2dde727e-a881-44fa-aabf-bba6248e4baf",
+        "solver_short_name": "SHCI_opt",
+        "compute_hardware_type": "classical_computer",
+        "classical_hardware_details": {
+            "computing_environment_name": "LCRC Improv (per node)",
+            "cpu_description": "2x AMD EPYC 7713 64C",
+            "ram_available_gb": "256GB",
+            "clock_speed": "2 GHz",
+            "total_num_cores": 128
+        },
+        "algorithm_details": "SHCI with optimized orbitals followed by SHCI+PT",
+        "software_details": "SHCI Arrow Code (https://github.com/QMC-Cornell/shci)."
+    },
+    "digital_signature": null
+}
