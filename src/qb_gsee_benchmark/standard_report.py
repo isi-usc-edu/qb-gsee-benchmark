@@ -77,7 +77,11 @@ class StandardReport:
         # copy latest miniML plots/charts to the output_directory
         # these plots were created/updated when 
         # BenchmarkData.calculate_performance_metrics() was last called.
-        shutil.copytree("ml_artifacts",self.standard_report_output_directory)
+        shutil.copytree(
+            "ml_artifacts",
+            self.standard_report_output_directory,
+            dirs_exist_ok=True
+        )
 
         # generate plots:
         self.create_plot_histogram_of_number_of_orbitals()
@@ -108,8 +112,8 @@ class StandardReport:
         df = self.benchmark_data.hamiltonian_features
         plt.figure()
         plt.hist(
-            df["num_orbitals"],
-            bins=[10*x for x in range(int(max(df["num_orbitals"])/10+2))], # bin edges by 10
+            df["n_orbs"], # TODO: transition n_orbs to num_orbitals
+            bins=[10*x for x in range(int(max(df["n_orbs"])/10+2))], # bin edges by 10
             edgecolor="black",
             alpha=0.7
         )
@@ -170,6 +174,7 @@ class StandardReport:
     def create_plot_num_orbitals_vs_run_time_for_all_solvers(self) -> None:
         """TODO: docstring
         """
+        df = self.benchmark_data.all_data_df
         plt.figure()
         plt.title("Run time of solvers (for attempted tasks)")
         plt.xlabel("Number of spatial orbitals")
@@ -177,7 +182,7 @@ class StandardReport:
         plt.ylabel("Overall run time in seconds")
         
         # colors = [tuple(np.random.rand(3)) for _ in range(len(solver_uuid_dict))]
-        p_list = np.random.permutation(len())
+        p_list = np.random.permutation(len(self.benchmark_data.solvers_dict))
         colors = [ list(color_names.keys())[i] for i in p_list ]
         # use "normal" colors first except for blue, red, and black
         # ... then dig deep into the color list.
@@ -359,7 +364,7 @@ class StandardReport:
             last_modified_time = time.ctime(os.path.getmtime(self.benchmark_data.hamiltonian_features_csv_file_name))
             file.write(f"Input data: `{self.benchmark_data.hamiltonian_features_csv_file_name}`, last modified {last_modified_time}\n\n")
             
-            num_features_calculated = len(self.benchmark_data.hamiltonian_features_csv_file_name)
+            num_features_calculated = len(self.benchmark_data.hamiltonian_features)
             num_tasks = self.benchmark_data.all_data_df["task_uuid"].nunique()
             if num_features_calculated < num_tasks:
                 file.write(f"WARNING!  We only have features calculated for {num_features_calculated}/{num_tasks} Hamiltonians. This report is based on partial results!\n\n")
@@ -377,7 +382,7 @@ class StandardReport:
             file.write(f"Latest creation time for a `solution.json` file: {time.ctime(c)}\n\n")
 
             df = self.benchmark_data.all_data_df
-            file.write(f"## Problem Instance Summary Statistics\n\n")
+            file.write(f"# Problem Instance Summary Statistics\n\n")
             file.write(f"number of `problem_instances`: {df['problem_instance_uuid'].nunique()}\n\n")
 
             max_num_tasks = 0
@@ -398,7 +403,7 @@ class StandardReport:
             
 
 
-            file.write(f"## Solver Summary Statistics\n\n")
+            file.write(f"# Solver Summary Statistics\n\n")
             file.write(f"number of unique participating solvers: {df['solver_uuid'].nunique()}\n\n")
             file.write(f"![Solver scatter plot](solver_num_orbs_vs_runtime_scatter_plot.png)\n\n")
             file.write(f"![Solver scatter plot](solver_num_orbs_vs_log_runtime_scatter_plot.png)\n\n")
@@ -408,27 +413,26 @@ class StandardReport:
            
             solvers = self.benchmark_data.solvers_dict
             for solver_uuid in solvers:
-                solver = solvers["solver_uuid"]
+                solver = solvers[solver_uuid]
 
                 found_it = False
-                for performance_metrics_uuid in self.benchmark_data.performance_metrics_dict:
-                    performance_metrics = self.benchmark_data.performance_metrics_dict[performance_metrics_uuid]
+                for performance_metrics in self.benchmark_data.performance_metrics_list:
                     if performance_metrics["solver_uuid"] == solver_uuid:
                         # we have located performance_metrics for solver_uuid
+                        found_it = True
                         break
                     else:
                         continue
                 assert found_it, f"Can't find associated performance_metrics for solver_uuid {solver_uuid}"
 
                 performance_metrics_fields = [
-                    "solver_short_name",
                     "performance_metrics_uuid",
                     "creation_timestamp",
                     "top_level_results",
                     "ml_metrics"                
                 ]
                 
-                file.write(f"### Solver {solver['solver_short_name']}, {solver['solver_uuid']}\n\n")
+                file.write(f"## Solver {solver['solver_short_name']}, {solver['solver_uuid']}\n\n")
                 
                 # writing out solver_details:
                 for k,v in solver.items():

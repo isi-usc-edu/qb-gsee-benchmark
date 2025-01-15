@@ -31,11 +31,17 @@ benchmark_data = BenchmarkData(
 )
 print(benchmark_data)
 
+
+# benchmark_data.read_performance_metrics_json_files()
+# print(f"read in {len(benchmark_data.performance_metrics_list)} performance metrics files.")
+
 benchmark_data.calculate_performance_metrics()
 
-benchmark_data.validate_all_json_objects()
+# benchmark_data.validate_all_json_objects()
 
-benchmark_data.write_performance_metrics_json_files()
+benchmark_data.write_performance_metrics_json_files(
+    output_directory=benchmark_data.performance_metrics_directory
+)
 
 benchmark_data.to_csv(
     f"all_data_{benchmark_data.datestamp}.csv"

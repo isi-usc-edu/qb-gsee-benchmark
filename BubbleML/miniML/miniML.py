@@ -144,24 +144,24 @@ def trainML(
         
 
         #explain all the predictions in the test set
-        plt.figure()
-        explainer = shap.KernelExplainer(model.predict_proba, X_train)
-        shap_values = explainer.shap_values(X_train)
-        class_index = 1
-        shap.initjs()
+        # plt.figure()
+        # explainer = shap.KernelExplainer(model.predict_proba, X_train)
+        # shap_values = explainer.shap_values(X_train)
+        # class_index = 1
+        # shap.initjs()
         
-        shap.summary_plot(
-            shap_values[1],
-            features=X.columns,
-            plot_type="bar"
-        )
+        # shap.summary_plot(
+        #     shap_values[1],
+        #     features=X.columns,
+        #     plot_type="bar"
+        # )
 
-        #shap.force_plot(explainer.expected_value[class_index], shap_values[class_index], X_train, matplotlib=True, show=False)
+        # #shap.force_plot(explainer.expected_value[class_index], shap_values[class_index], X_train, matplotlib=True, show=False)
 
-        plt.savefig(
-            f"ml_artifacts/shap_summary_plot_solver_{solver_uuid}.png",
-            format="png"
-        )
+        # plt.savefig(
+        #     f"ml_artifacts/shap_summary_plot_solver_{solver_uuid}.png",
+        #     format="png"
+        # )
         
         
         if verbose:

@@ -14,7 +14,6 @@
 
 
 import os
-import shutil
 from urllib.parse import urlparse
 from datetime import datetime
 
@@ -30,6 +29,7 @@ import numpy as np
 
 
 from qb_gsee_benchmark.utils import load_json_files
+from qb_gsee_benchmark.utils import clear_or_create_output_directory
 from qb_gsee_benchmark.utils import find_dict_with_matching_kv_pair
 from qb_gsee_benchmark.utils import data_frame_vlookup
 from qb_gsee_benchmark.utils import iso8601_timestamp
@@ -71,6 +71,7 @@ class BenchmarkData:
         self.utility_estimation_data = pd.read_csv(utility_estimation_csv_file_name)
         self.problem_instance_list = load_json_files(search_dir=problem_instances_directory)
         self.solution_list = load_json_files(search_dir=solution_files_directory)
+        self.performance_metrics_list = None # read in or calculated later.
         # TODO:  migrate performance metrics calculation to method below. self.performance_metrics_list = load_json_files(search_dir=performance_metrics_directory)
         
 
@@ -108,8 +109,9 @@ class BenchmarkData:
 
 
     def validate_all_json_objects(self) -> None:
-        """TODO: docstring
+        """TODO: need to cache schemas.  This takes a while to fetch the schema every time.
         """
+        assert 0, "need to cache schemas.  This takes a while to fetch the schema every time."
         for problem_instance in self.problem_instance_list:
             validate_json(problem_instance)
         for solution in self.solution_list:
@@ -333,7 +335,7 @@ class BenchmarkData:
         ml_scores_dict = {}
         for solver_uuid in self.solvers_dict:
             solver = self.solvers_dict[solver_uuid]
-            solver_labels_file_name = f"solver_labels.{solver["solver_short_name"]}.{solver_uuid}"
+            solver_labels_file_name = f"solver_labels.{solver['solver_short_name']}.{solver_uuid}.csv"
 
             solvability_ratio, f1_score = miniML(argparse.Namespace(
                 ham_features_file=self.hamiltonian_features_csv_file_name,
@@ -624,10 +626,7 @@ class BenchmarkData:
             output_directory (str): relative/path/to/output/directory for JSON files.
         """
         
-        # remove `output_directory` if it exists and re-create it.
-        if os.path.exists(output_directory):
-            shutil.rmtree(output_directory)
-        os.makedirs(output_directory)
+        clear_or_create_output_directory(output_directory=output_directory)
 
         for re in self.sponsor_resource_estimate_list:
             resource_estimate_file_name = f"resource_estimate.gsee.{re['name']}.{re['size']}.{re['id']}.json"
@@ -733,7 +732,14 @@ class BenchmarkData:
 
 
 
+    def read_performance_metrics_json_files(self) -> list:
+        """TODO: docstring
+        """
+        self.performance_metrics_list = load_json_files(
+            search_dir=self.performance_metrics_directory
+        ) # updated in place.
 
+        return self.performance_metrics_list # returned for other usage.
 
 
 
@@ -925,7 +931,14 @@ class BenchmarkData:
         Args:
             output_directory (str): _description_
         """
-        pass
+        clear_or_create_output_directory(output_directory=output_directory)
+        
+        for pm in self.performance_metrics_list:
+            performance_metrics_file_name = f"performance_metrics.{pm['solver_short_name']}.{pm['solver_uuid']}.json"
+            output_path = os.path.join(output_directory, performance_metrics_file_name)
+            with open(output_path, "w") as output:
+                json.dump(pm, output, indent=4)
+
 
 
 
