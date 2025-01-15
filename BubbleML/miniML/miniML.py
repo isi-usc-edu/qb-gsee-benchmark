@@ -97,7 +97,7 @@ def trainML(
         }
     else: #SVM
         from sklearn.svm import SVC
-        model = SVC(random_state = random_state) 
+        model = SVC(random_state = random_state, class_weight='balanced') 
         model.probability = True
 
         #SVM on centered and scaled data
