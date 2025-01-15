@@ -16,7 +16,10 @@
 
 
 import datetime
-from qb_gsee_benchmark.utils import BenchmarkData
+from qb_gsee_benchmark.benchmark_data import BenchmarkData
+from qb_gsee_benchmark.standard_report import StandardReport 
+
+
 
 
 benchmark_data = BenchmarkData(
@@ -29,11 +32,30 @@ benchmark_data = BenchmarkData(
 print(benchmark_data)
 
 
-datestamp = datetime.datetime.now().strftime("%Y%m%d")
-benchmark_data.to_csv(f"all_data_{datestamp}.csv")
+# benchmark_data.read_performance_metrics_json_files()
+# print(f"read in {len(benchmark_data.performance_metrics_list)} performance metrics files.")
 
-re_output_directory = f"resource_estimate_files_{datestamp}"
-benchmark_data.write_sponsor_resource_estimate_files(re_output_directory)
+benchmark_data.calculate_performance_metrics()
+
+# benchmark_data.validate_all_json_objects()
+
+benchmark_data.write_performance_metrics_json_files(
+    output_directory=benchmark_data.performance_metrics_directory
+)
+
+benchmark_data.to_csv(
+    f"all_data_{benchmark_data.datestamp}.csv"
+)
+
+benchmark_data.write_sponsor_resource_estimate_files(
+    f"resource_estimate_files_{benchmark_data.datestamp}"
+)
+
+StandardReport(
+    benchmark_data=benchmark_data,
+    standard_report_output_directory="standard_report"
+)
+
 
 
 
