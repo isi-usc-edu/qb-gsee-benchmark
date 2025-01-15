@@ -160,7 +160,13 @@
                                     },
                                     "num_T_gates_per_shot": {
                                         "title": "Number of T-Gates",
-                                        "description": "The total number of T-gates used by the solver.",
+                                        "description": "The total number of T-gates used by the solver per shot.",
+                                        "type": "integer",
+                                        "minimum": 0
+                                    },
+                                    "num_toffoli_gates_per_shot": {
+                                        "title": "Number of T-Gates",
+                                        "description": "The total number of Toffoli gates used by the solver per shot.",
                                         "type": "integer",
                                         "minimum": 0
                                     },
