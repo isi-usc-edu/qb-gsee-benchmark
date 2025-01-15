@@ -131,6 +131,8 @@ def retrieve_fcidump_from_sftp(url: str, username: str, ppk_path: str, port=22) 
 
 def validate_json(
         json_dict: dict,
+        schema: dict=None,
+        local_resolver_directory: str=None,
     ) -> None:
     """A bespoke utility to validate a JSON object (passed as a `dict`).  
     An error is raised if the `json_dict` is not valid.   Errors should be
@@ -141,10 +143,23 @@ def validate_json(
     """
     # NOTE: this is making some assumptions about how the schema directory
     # is organized.  It works for our convention.
-    schema_url = json_dict["$schema"]
-    schema = requests.get(schema_url).json()
-    base_url = "/".join(schema_url.split("/")[:-1]) + "/"
-    resolver = RefResolver(base_uri=base_url, referrer=schema)
+    if schema is not None:
+        if local_resolver_directory is not None:
+            # A schema and local resolver directory was provided.
+            local_uri = f"file://{os.path.abspath(local_resolver_directory)}"
+            resolver = RefResolver(base_uri=local_uri, referrer=schema)
+        else:
+            raise ValueError(f"`schema` was provided, but no `local_resolver_directory` was provided.")
+    else:
+        if local_resolver_directory is not None:
+            raise ValueError(f"`local_resolver_directory` was provided, but no `schema` was provided.")
+        else:
+            # no schema provided... fetch it from URL.        
+            schema_url = json_dict["$schema"]
+            schema = requests.get(schema_url).json()
+            base_url = "/".join(schema_url.split("/")[:-1]) + "/"
+            resolver = RefResolver(base_uri=base_url, referrer=schema)
+    
     _validate(instance=json_dict, schema=schema, resolver=resolver)
 
     
