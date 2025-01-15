@@ -1,0 +1,79 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "2480cf97-42a7-42b0-ad3f-2c87c00b20df",
+    "problem_instance_uuid": "d712afaf-6ec4-42d9-b5fd-1edee3ec1046",
+    "creation_timestamp": "2025-01-15T19:36:59.054446Z",
+    "contact_info": [
+        {
+            "name": "Matthew Otten",
+            "email": "mjotten@wisc.edu",
+            "institution": "University of Wisconsin -- Madison"
+        }
+    ],
+    "is_resource_estimate": false,
+    "solution_data": [
+        {
+            "task_uuid": "752966e5-7de7-4506-82ae-6b22cd54b1c1",
+            "energy": -15.214112673032949,
+            "energy_units": "Hartree",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 0.9050900936126709
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 115.85153198242188
+                }
+            },
+            "solution_details": {}
+        },
+        {
+            "task_uuid": "64122cc6-e1bb-4c11-8d00-2189d27194f1",
+            "energy": -15.216646295302066,
+            "energy_units": "Hartree",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 1.901642084121704
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 243.41018676757812
+                }
+            },
+            "solution_details": {}
+        },
+        {
+            "task_uuid": "f9bdbb3b-91b6-43f3-93ca-bef1e10d3835",
+            "energy": -15.215933275085082,
+            "energy_units": "Hartree",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 1.1138336658477783
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 142.57070922851562
+                }
+            },
+            "solution_details": {}
+        }
+    ],
+    "solver_details": {
+        "solver_uuid": "5f5e617a-19c2-4d82-bebc-b2d6b3dcb012",
+        "solver_short_name": "SHCI_opt",
+        "compute_hardware_type": "classical_computer",
+        "classical_hardware_details": {
+            "computing_environment_name": "LCRC Improv (per node)",
+            "cpu_description": "2x AMD EPYC 7713 64C",
+            "ram_available_gb": "256GB",
+            "clock_speed": "2 GHz",
+            "total_num_cores": 128
+        },
+        "algorithm_details": "Hartree Fock",
+        "software_details": "pyscf (https://github.com/pyscf/pyscf)."
+    },
+    "digital_signature": null
+}

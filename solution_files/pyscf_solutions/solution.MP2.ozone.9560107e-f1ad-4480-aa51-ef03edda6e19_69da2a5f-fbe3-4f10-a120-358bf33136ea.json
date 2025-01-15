@@ -1,0 +1,127 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "69da2a5f-fbe3-4f10-a120-358bf33136ea",
+    "problem_instance_uuid": "9560107e-f1ad-4480-aa51-ef03edda6e19",
+    "creation_timestamp": "2025-01-15T19:36:59.007435Z",
+    "contact_info": [
+        {
+            "name": "Matthew Otten",
+            "email": "mjotten@wisc.edu",
+            "institution": "University of Wisconsin -- Madison"
+        }
+    ],
+    "is_resource_estimate": false,
+    "solution_data": [
+        {
+            "task_uuid": "881f5275-83eb-470c-80fe-eebb7ced30e9",
+            "energy": -224.84325494263666,
+            "energy_units": "Hartree",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 0.2287006378173828
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 29.273681640625
+                }
+            },
+            "solution_details": {}
+        },
+        {
+            "task_uuid": "e0de65ed-e45e-46e0-a57b-c6ad4efbdafe",
+            "energy": -220.68141998153206,
+            "energy_units": "Hartree",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 0.11556887626647949
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 14.792816162109375
+                }
+            },
+            "solution_details": {}
+        },
+        {
+            "task_uuid": "6918e02b-1e04-40bf-a800-1c9ed100d261",
+            "energy": -225.09844731060323,
+            "energy_units": "Hartree",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 0.5310757160186768
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 67.97769165039062
+                }
+            },
+            "solution_details": {}
+        },
+        {
+            "task_uuid": "a2ad41b8-37bb-44e1-be3e-df1052952e9c",
+            "energy": -224.9064214226371,
+            "energy_units": "Hartree",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 0.3918278217315674
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 50.153961181640625
+                }
+            },
+            "solution_details": {}
+        },
+        {
+            "task_uuid": "b4968ccd-6711-4173-8f80-f16094b3e0cd",
+            "energy": -221.52078109521145,
+            "energy_units": "Hartree",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 0.11547589302062988
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 14.780914306640625
+                }
+            },
+            "solution_details": {}
+        },
+        {
+            "task_uuid": "ee2925f1-a302-4c21-b33c-5cb30b10270f",
+            "energy": -225.1561281243914,
+            "energy_units": "Hartree",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 0.43067312240600586
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 55.12615966796875
+                }
+            },
+            "solution_details": {}
+        }
+    ],
+    "solver_details": {
+        "solver_uuid": "b420358b-5def-41e6-8c5d-b9d93b6aecd2",
+        "solver_short_name": "SHCI_opt",
+        "compute_hardware_type": "classical_computer",
+        "classical_hardware_details": {
+            "computing_environment_name": "LCRC Improv (per node)",
+            "cpu_description": "2x AMD EPYC 7713 64C",
+            "ram_available_gb": "256GB",
+            "clock_speed": "2 GHz",
+            "total_num_cores": 128
+        },
+        "algorithm_details": "MP2",
+        "software_details": "pyscf (https://github.com/pyscf/pyscf)."
+    },
+    "digital_signature": null
+}

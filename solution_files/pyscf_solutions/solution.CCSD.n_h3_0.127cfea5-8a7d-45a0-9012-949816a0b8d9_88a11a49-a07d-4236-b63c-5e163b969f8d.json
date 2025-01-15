@@ -1,0 +1,63 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "88a11a49-a07d-4236-b63c-5e163b969f8d",
+    "problem_instance_uuid": "127cfea5-8a7d-45a0-9012-949816a0b8d9",
+    "creation_timestamp": "2025-01-15T19:36:58.612218Z",
+    "contact_info": [
+        {
+            "name": "Matthew Otten",
+            "email": "mjotten@wisc.edu",
+            "institution": "University of Wisconsin -- Madison"
+        }
+    ],
+    "is_resource_estimate": false,
+    "solution_data": [
+        {
+            "task_uuid": "77c3a92c-066c-4043-a4a1-5e8324014d0b",
+            "energy": -56.02301250950101,
+            "energy_units": "Hartree",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 10.879923343658447
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 1392.6301879882812
+                }
+            },
+            "solution_details": {}
+        },
+        {
+            "task_uuid": "1094e868-f84e-403b-9b54-50802b1cdb60",
+            "energy": -56.07179156840369,
+            "energy_units": "Hartree",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 37.01631426811218
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 4738.088226318359
+                }
+            },
+            "solution_details": {}
+        }
+    ],
+    "solver_details": {
+        "solver_uuid": "0a29e54f-bef9-4d19-bafa-d94b1c4b37aa",
+        "solver_short_name": "SHCI_opt",
+        "compute_hardware_type": "classical_computer",
+        "classical_hardware_details": {
+            "computing_environment_name": "LCRC Improv (per node)",
+            "cpu_description": "2x AMD EPYC 7713 64C",
+            "ram_available_gb": "256GB",
+            "clock_speed": "2 GHz",
+            "total_num_cores": 128
+        },
+        "algorithm_details": "CCSD",
+        "software_details": "pyscf (https://github.com/pyscf/pyscf)."
+    },
+    "digital_signature": null
+}
