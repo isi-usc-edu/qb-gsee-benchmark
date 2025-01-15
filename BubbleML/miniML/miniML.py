@@ -270,8 +270,8 @@ def compute_ratio_of_solved_to_unsolved(
     xminmax = np.arange(np.min(proj_data[:, 0]), np.max(proj_data[:, 0]), 0.1)
     yminmax = np.arange(np.min(proj_data[:, 1]), np.max(proj_data[:, 1]), 0.1)
 
-    x = np.linspace(xminmax[0], xminmax[-1],100)
-    y = np.linspace(yminmax[0], yminmax[-1],100)
+    x = np.linspace(xminmax[0], xminmax[-1]+0.09,100)
+    y = np.linspace(yminmax[0], yminmax[-1]+0.09,100)
     XX, YY = np.meshgrid(x, y)   
 
     newX = np.c_[XX.ravel(), YY.ravel()] #grid of projected data
