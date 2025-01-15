@@ -13,22 +13,21 @@
     "is_resource_estimate": false,
     "solution_data": [
         {
-            "task_uuid": "aaa24a30-ade6-44a6-b6aa-51bf54c31eef",
-            "energy": -14.905289827359612,
-            "energy_units": "Hartree",
-            "energy_uncertainty": 4.253684693367177e-08,
-            "run_time": 1282.224,
-            "run_time_cpu": 1422.56,
-            "solution_details": ""
-        },
-        {
             "task_uuid": "410cd417-988a-4f7f-99ad-93dda7eacdcb",
             "energy": -14.897613114223022,
             "energy_units": "Hartree",
             "energy_uncertainty": 1.1538396904597903e-08,
-            "run_time": 64.243,
-            "run_time_cpu": 101.574,
-            "solution_details": ""
+            "run_time": {
+                "overall_time": {
+                    "seconds": 64.243
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 101.574
+                }
+            },
+            "solution_details": {}
         }
     ],
     "solver_details": {
