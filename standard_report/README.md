@@ -1,6 +1,6 @@
 # GSEE Benchmark Standard Report
 
-Report based on data from 2025-01-16T14:40:23.264140+00:00
+Report based on data from 2025-01-16T15:18:34.432203+00:00
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
@@ -10,9 +10,9 @@ Input data: `GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv`, last mo
 
 Latest creation time for a `problem_instance.json` file: Thu Jan 16 08:13:11 2025
 
-Latest creation time for a `performance_metrics.json` file: Thu Jan 16 09:41:20 2025
+Latest creation time for a `performance_metrics.json` file: Thu Jan 16 10:20:39 2025
 
-Latest creation time for a `solution.json` file: Thu Jan 16 08:27:31 2025
+Latest creation time for a `solution.json` file: Thu Jan 16 10:13:00 2025
 
 # Problem Instance Summary Statistics
 
@@ -34,7 +34,7 @@ maximum number of orbitals: 135
 
 # Solver Summary Statistics
 
-number of unique participating solvers: 4
+number of unique participating solvers: 9
 
 ![Solver scatter plot](solver_num_orbs_vs_runtime_scatter_plot.png)
 
@@ -54,9 +54,9 @@ algorithm_details:SHCI with optimized orbitals followed by SHCI+PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 5152b115-de8c-4ede-ad28-6a1e0b0d9203
+performance_metrics_uuid: a1f1169a-3107-40f9-b2ea-81395d34dd87
 
-creation_timestamp: 2025-01-16T14:40:23.264140+00:00
+creation_timestamp: 2025-01-16T15:18:34.432203+00:00
 
 number_of_problem_instances: 82
 
@@ -106,9 +106,9 @@ algorithm_details:DMRG with the lowest variational energy obtained so far.
 
 software_details:Block2 v0.5.3rc16 with dmrghandler, commit version d603fdc6409fc194a416aa3a519362d5d91790d9 or later.
 
-performance_metrics_uuid: c0016151-2581-4ef6-8531-a032ef34174a
+performance_metrics_uuid: 78af3c47-7749-473f-97bf-d95cb682577b
 
-creation_timestamp: 2025-01-16T14:40:23.264140+00:00
+creation_timestamp: 2025-01-16T15:18:34.432203+00:00
 
 number_of_problem_instances: 82
 
@@ -158,9 +158,9 @@ algorithm_details:CCSDT_PLACEHOLDER_algorithm_details
 
 software_details:CCSDT_PLACEHOLDER_software_details
 
-performance_metrics_uuid: 4271a06e-f531-4333-8477-b70c36c673fa
+performance_metrics_uuid: 78854cab-8150-46b7-9bbf-c4a43e85c501
 
-creation_timestamp: 2025-01-16T14:40:23.264140+00:00
+creation_timestamp: 2025-01-16T15:18:34.432203+00:00
 
 number_of_problem_instances: 82
 
@@ -196,6 +196,266 @@ ml_metrics_calculator_version: 1
 
 ![SHAP summary plot](shap_summary_plot_solver_fd13c864-baf1-44de-b52d-0e5dd69f647a.png)
 
+## Solver CISD, 418f060e-496b-4024-8d2d-9b1f8791e76d
+
+solver_uuid:418f060e-496b-4024-8d2d-9b1f8791e76d
+
+solver_short_name:CISD
+
+compute_hardware_type:classical_computer
+
+classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}
+
+algorithm_details:CISD
+
+software_details:pyscf (https://github.com/pyscf/pyscf).
+
+performance_metrics_uuid: 9ba7b981-3ffe-470f-8a38-ff2f0694e6ac
+
+creation_timestamp: 2025-01-16T15:18:34.432203+00:00
+
+number_of_problem_instances: 82
+
+number_of_problem_instances_attempted: 82
+
+number_of_problem_instances_solved: 69
+
+number_of_tasks: 230
+
+number_of_tasks_attempted: 230
+
+number_of_tasks_solved: 193
+
+number_of_tasks_solved_within_run_time_limit: 230
+
+number_of_tasks_solved_within_accuracy_threshold: 193
+
+max_run_time_of_attempted_tasks: 62.58296537399292
+
+sum_of_run_time_of_attempted_tasks: 2895.8530027866364
+
+solvability_ratio: 0.9958
+
+f1_score: [0.8131868131868132, 0.9539295392953929]
+
+ml_metrics_calculator_version: 1
+
+![Solver success/failure plot](solver_418f060e-496b-4024-8d2d-9b1f8791e76d_plot.png)
+
+![Solver utility capture](solver_418f060e-496b-4024-8d2d-9b1f8791e76d_utility_capture_plot.png)
+
+![Solver miniML plot](plot_solver_418f060e-496b-4024-8d2d-9b1f8791e76d.png)
+
+![SHAP summary plot](shap_summary_plot_solver_418f060e-496b-4024-8d2d-9b1f8791e76d.png)
+
+## Solver CCSD(T), c09217e6-d0f7-4b0f-81c4-79210b7ac878
+
+solver_uuid:c09217e6-d0f7-4b0f-81c4-79210b7ac878
+
+solver_short_name:CCSD(T)
+
+compute_hardware_type:classical_computer
+
+classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}
+
+algorithm_details:CCSD(T)
+
+software_details:pyscf (https://github.com/pyscf/pyscf).
+
+performance_metrics_uuid: 54efd6d0-ed1b-4061-ac99-19c39a4ed4a0
+
+creation_timestamp: 2025-01-16T15:18:34.432203+00:00
+
+number_of_problem_instances: 82
+
+number_of_problem_instances_attempted: 78
+
+number_of_problem_instances_solved: 71
+
+number_of_tasks: 230
+
+number_of_tasks_attempted: 221
+
+number_of_tasks_solved: 195
+
+number_of_tasks_solved_within_run_time_limit: 221
+
+number_of_tasks_solved_within_accuracy_threshold: 195
+
+max_run_time_of_attempted_tasks: 493.4080808162689
+
+sum_of_run_time_of_attempted_tasks: 12968.4871737957
+
+solvability_ratio: 1.0
+
+f1_score: [0.0, 0.9176470588235294]
+
+ml_metrics_calculator_version: 1
+
+![Solver success/failure plot](solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_plot.png)
+
+![Solver utility capture](solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_utility_capture_plot.png)
+
+![Solver miniML plot](plot_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878.png)
+
+![SHAP summary plot](shap_summary_plot_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878.png)
+
+## Solver HF, 5f5e617a-19c2-4d82-bebc-b2d6b3dcb012
+
+solver_uuid:5f5e617a-19c2-4d82-bebc-b2d6b3dcb012
+
+solver_short_name:HF
+
+compute_hardware_type:classical_computer
+
+classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}
+
+algorithm_details:Hartree Fock
+
+software_details:pyscf (https://github.com/pyscf/pyscf).
+
+performance_metrics_uuid: b667fdad-6c7a-4dd4-a68d-f034b11cce1f
+
+creation_timestamp: 2025-01-16T15:18:34.432203+00:00
+
+number_of_problem_instances: 82
+
+number_of_problem_instances_attempted: 82
+
+number_of_problem_instances_solved: 56
+
+number_of_tasks: 230
+
+number_of_tasks_attempted: 230
+
+number_of_tasks_solved: 174
+
+number_of_tasks_solved_within_run_time_limit: 230
+
+number_of_tasks_solved_within_accuracy_threshold: 174
+
+max_run_time_of_attempted_tasks: 20.338801622390747
+
+sum_of_run_time_of_attempted_tasks: 792.8028435707092
+
+solvability_ratio: 0.9977
+
+f1_score: [0.8888888888888888, 0.9580838323353293]
+
+ml_metrics_calculator_version: 1
+
+![Solver success/failure plot](solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012_plot.png)
+
+![Solver utility capture](solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012_utility_capture_plot.png)
+
+![Solver miniML plot](plot_solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012.png)
+
+![SHAP summary plot](shap_summary_plot_solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012.png)
+
+## Solver MP2, b420358b-5def-41e6-8c5d-b9d93b6aecd2
+
+solver_uuid:b420358b-5def-41e6-8c5d-b9d93b6aecd2
+
+solver_short_name:MP2
+
+compute_hardware_type:classical_computer
+
+classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}
+
+algorithm_details:MP2
+
+software_details:pyscf (https://github.com/pyscf/pyscf).
+
+performance_metrics_uuid: 10960846-c7e8-4eb1-9656-574dc577aa2c
+
+creation_timestamp: 2025-01-16T15:18:34.432203+00:00
+
+number_of_problem_instances: 82
+
+number_of_problem_instances_attempted: 79
+
+number_of_problem_instances_solved: 69
+
+number_of_tasks: 230
+
+number_of_tasks_attempted: 222
+
+number_of_tasks_solved: 193
+
+number_of_tasks_solved_within_run_time_limit: 222
+
+number_of_tasks_solved_within_accuracy_threshold: 193
+
+max_run_time_of_attempted_tasks: 2.230440139770508
+
+sum_of_run_time_of_attempted_tasks: 87.6544258594513
+
+solvability_ratio: 0.9958
+
+f1_score: [0.8131868131868132, 0.9539295392953929]
+
+ml_metrics_calculator_version: 1
+
+![Solver success/failure plot](solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2_plot.png)
+
+![Solver utility capture](solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2_utility_capture_plot.png)
+
+![Solver miniML plot](plot_solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2.png)
+
+![SHAP summary plot](shap_summary_plot_solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2.png)
+
+## Solver CCSD, 0a29e54f-bef9-4d19-bafa-d94b1c4b37aa
+
+solver_uuid:0a29e54f-bef9-4d19-bafa-d94b1c4b37aa
+
+solver_short_name:CCSD
+
+compute_hardware_type:classical_computer
+
+classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}
+
+algorithm_details:CCSD
+
+software_details:pyscf (https://github.com/pyscf/pyscf).
+
+performance_metrics_uuid: f6c3d5d5-2f7f-4521-bc89-ae3d3cd1283b
+
+creation_timestamp: 2025-01-16T15:18:34.432203+00:00
+
+number_of_problem_instances: 82
+
+number_of_problem_instances_attempted: 78
+
+number_of_problem_instances_solved: 70
+
+number_of_tasks: 230
+
+number_of_tasks_attempted: 221
+
+number_of_tasks_solved: 194
+
+number_of_tasks_solved_within_run_time_limit: 221
+
+number_of_tasks_solved_within_accuracy_threshold: 194
+
+max_run_time_of_attempted_tasks: 485.1982181072235
+
+sum_of_run_time_of_attempted_tasks: 12029.76450586319
+
+solvability_ratio: 1.0
+
+f1_score: [0.2706766917293233, 0.0]
+
+ml_metrics_calculator_version: 1
+
+![Solver success/failure plot](solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa_plot.png)
+
+![Solver utility capture](solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa_utility_capture_plot.png)
+
+![Solver miniML plot](plot_solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa.png)
+
+![SHAP summary plot](shap_summary_plot_solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa.png)
+
 ## Solver DF_QPE, 5dad4064-cd11-412f-85cb-d722afe3b3de
 
 solver_uuid:5dad4064-cd11-412f-85cb-d722afe3b3de
@@ -214,9 +474,9 @@ logical_resource_estimate_solution_uuid:72dea71b-fb03-43f0-8086-eb37605ba3db
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: 5c88eca6-6e53-4cb5-927a-9f7cd879f4b9
+performance_metrics_uuid: 6519cb8c-a800-44a0-a218-018eec132eca
 
-creation_timestamp: 2025-01-16T14:40:23.264140+00:00
+creation_timestamp: 2025-01-16T15:18:34.432203+00:00
 
 number_of_problem_instances: 82
 
