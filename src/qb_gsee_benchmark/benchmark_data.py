@@ -24,6 +24,8 @@ import json
 from pathlib import Path
 from uuid import uuid4
 
+import requests
+
 import pandas as pd
 import numpy as np
 
@@ -108,22 +110,36 @@ class BenchmarkData:
 
 
 
-    def validate_all_json_objects(self) -> None:
-        """TODO: need to cache schemas.  This takes a while to fetch the schema every time.
+    def validate_all_json_objects(
+            self,
+            local_resolver_directory: str
+        ) -> None:
+        """TODO: docstring.  no errors implies success!!
         """
-        assert 0, "need to cache schemas.  This takes a while to fetch the schema every time."
-        for problem_instance in self.problem_instance_list:
-            validate_json(problem_instance)
-        for solution in self.solution_list:
-            validate_json(solution)
-        for resource_estimate in self.sponsor_resource_estimate_list:
-            validate_json(resource_estimate)
-        for performance_metrics in self.performance_metrics_list:
-            validate_json(performance_metrics)
         
-        
-
-
+        lists = [
+            ("problem instances", self.problem_instance_list),
+            ("solutions", self.solution_list),
+            ("resource estimates", self.sponsor_resource_estimate_list),
+            ("performance metrics", self.performance_metrics_list)
+        ]
+        for listy in lists:
+            name = listy[0]
+            the_list = listy[1]
+            if the_list is None:
+                print(f"{name} is empty/None.")
+                # this may happen if performance metrics have not yet been calculated.
+            else:
+                print(f"validating {name}...")
+                schema_url = the_list[0]["$schema"]
+                schema = requests.get(schema_url).json()
+                for json_dict in the_list:
+                    validate_json(
+                        json_dict=json_dict,
+                        schema=schema,
+                        local_resolver_directory=local_resolver_directory
+                    )
+            
 
 
 
