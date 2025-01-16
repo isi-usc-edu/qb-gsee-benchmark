@@ -352,6 +352,9 @@ class BenchmarkData:
         for solver_uuid in self.solvers_dict:
             solver = self.solvers_dict[solver_uuid]
             solver_labels_file_name = f"solver_labels.{solver['solver_short_name']}.{solver_uuid}.csv"
+            df = self.aggregated_solver_labels_df
+            df = df[df["solver_uuid"]==solver_uuid] # filter df to only solver_uuid
+            df.to_csv(solver_labels_file_name) # write out to file
 
             solvability_ratio, f1_score = miniML(argparse.Namespace(
                 ham_features_file=self.hamiltonian_features_csv_file_name,
@@ -912,6 +915,7 @@ class BenchmarkData:
                     "task_uuid":task_uuid,
                     "problem_instance_uuid":df_filtered["problem_instance_uuid"].values[0], # should only be one...TODO: issue #44.
                     "instance_data_object_uuid":df_filtered["instance_data_object_uuid"].values[0],
+                    "solution_uuid": df_filtered["solution_uuid"].unique()[0],
                     "attempted":df_filtered["attempted"].values[0],
                     "solved_within_run_time":df_filtered["solved_within_run_time"].values[0],
                     "solved_within_accuracy_requirement":df_filtered["solved_within_accuracy_requirement"].values[0],

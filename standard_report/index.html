@@ -1,13 +1,12 @@
 <h1>GSEE Benchmark Standard Report</h1>
-<p>Report created on 2025-01-14T21:41:39.280731+00:00</p>
+<p>Report based on data from 2025-01-16T14:40:23.264140+00:00</p>
 <p><a href="https://github.com/isi-usc-edu/qb-gsee-benchmark">https://github.com/isi-usc-edu/qb-gsee-benchmark</a></p>
-<p>Input data: <code>aggregated_solver_labels.csv</code>, last modified Tue Jan 14 15:41:23 2025</p>
 <p>Input data: <code>Hamiltonian_features.csv</code>, last modified Mon Dec 30 16:29:03 2024</p>
 <p>Input data: <code>GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv</code>, last modified Thu Jan  9 12:11:19 2025</p>
-<p>Input data: Latest creation time for a <code>problem_instance.json</code> file: Mon Jan 13 10:14:13 2025</p>
-<p>Latest creation time for a <code>performance_metrics.json</code> file: Tue Jan 14 16:15:38 2025</p>
-<p>Latest creation time for a <code>solution.json</code> file: Tue Jan 14 15:07:46 2025</p>
-<h2>Problem Instance Summary Statistics</h2>
+<p>Latest creation time for a <code>problem_instance.json</code> file: Thu Jan 16 08:13:11 2025</p>
+<p>Latest creation time for a <code>performance_metrics.json</code> file: Thu Jan 16 09:41:20 2025</p>
+<p>Latest creation time for a <code>solution.json</code> file: Thu Jan 16 08:27:31 2025</p>
+<h1>Problem Instance Summary Statistics</h1>
 <p>number of <code>problem_instances</code>: 82</p>
 <p><code>problem_instance.json</code> with the most tasks: 16 (mo_n2_pincer/8a3787cc-d3d0-42a8-d9a9-7de2aed45208)</p>
 <p>number of Hamiltonians (i.e., tasks): 230</p>
@@ -16,16 +15,45 @@
 <p>maximum number of orbitals: 135</p>
 <p><img alt="Number of orbitals histogram" src="num_orbitals_histogram.png" /></p>
 <p><img alt="Utility estimate per Hamiltonian" src="num_orbitals_vs_utility.png" /></p>
-<h2>Solver Summary Statistics</h2>
-<p>number of unique participating solvers: 3</p>
+<h1>Solver Summary Statistics</h1>
+<p>number of unique participating solvers: 4</p>
 <p><img alt="Solver scatter plot" src="solver_num_orbs_vs_runtime_scatter_plot.png" /></p>
 <p><img alt="Solver scatter plot" src="solver_num_orbs_vs_log_runtime_scatter_plot.png" /></p>
-<h3>Solver DMRG_Niagara_cluster_lowest_energy, 16537433-9f4c-4eae-a65d-787dc3b35b59</h3>
-<p><img alt="Solver success/failure plot" src="solver_16537433-9f4c-4eae-a65d-787dc3b35b59_plot.png" /></p>
-<p><img alt="Solver utility capture" src="solver_16537433-9f4c-4eae-a65d-787dc3b35b59_utility_capture_plot.png" /></p>
-<p>solver_short_name: DMRG_Niagara_cluster_lowest_energy</p>
-<p>performance_metrics_uuid: 967e6eb2-9928-4bc3-8bf4-d17c223b2369</p>
-<p>creation_timestamp: 2025-01-14T21:15:08.273215+00:00</p>
+<h2>Solver SHCI_opt, 2dde727e-a881-44fa-aabf-bba6248e4baf</h2>
+<p>solver_uuid:2dde727e-a881-44fa-aabf-bba6248e4baf</p>
+<p>solver_short_name:SHCI_opt</p>
+<p>compute_hardware_type:classical_computer</p>
+<p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
+<p>algorithm_details:SHCI with optimized orbitals followed by SHCI+PT</p>
+<p>software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).</p>
+<p>performance_metrics_uuid: 5152b115-de8c-4ede-ad28-6a1e0b0d9203</p>
+<p>creation_timestamp: 2025-01-16T14:40:23.264140+00:00</p>
+<p>number_of_problem_instances: 82</p>
+<p>number_of_problem_instances_attempted: 41</p>
+<p>number_of_problem_instances_solved: 41</p>
+<p>number_of_tasks: 230</p>
+<p>number_of_tasks_attempted: 162</p>
+<p>number_of_tasks_solved: 149</p>
+<p>number_of_tasks_solved_within_run_time_limit: 162</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 149</p>
+<p>max_run_time_of_attempted_tasks: 55299.387</p>
+<p>sum_of_run_time_of_attempted_tasks: 1138067.4269999997</p>
+<p>solvability_ratio: 0.9998</p>
+<p>f1_score: [0.5691056910569106, 0.8427299703264095]</p>
+<p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver success/failure plot" src="solver_2dde727e-a881-44fa-aabf-bba6248e4baf_plot.png" /></p>
+<p><img alt="Solver utility capture" src="solver_2dde727e-a881-44fa-aabf-bba6248e4baf_utility_capture_plot.png" /></p>
+<p><img alt="Solver miniML plot" src="plot_solver_2dde727e-a881-44fa-aabf-bba6248e4baf.png" /></p>
+<p><img alt="SHAP summary plot" src="shap_summary_plot_solver_2dde727e-a881-44fa-aabf-bba6248e4baf.png" /></p>
+<h2>Solver DMRG_Niagara_cluster_lowest_energy, 16537433-9f4c-4eae-a65d-787dc3b35b59</h2>
+<p>solver_uuid:16537433-9f4c-4eae-a65d-787dc3b35b59</p>
+<p>solver_short_name:DMRG_Niagara_cluster_lowest_energy</p>
+<p>compute_hardware_type:classical_computer</p>
+<p>classical_hardware_details:{'computing_environment_name': 'Niagara Cluster, Compute Canada', 'cpu_description': '40 Intel "Skylake" cores at 2.4 GHz or 40 Intel "CascadeLake" cores at 2.5 GHz', 'ram_available_gb': '202 GB (188 GiB)', 'clock_speed': '2.4 GHz or 2.5 GHz', 'total_num_cores': 40}</p>
+<p>algorithm_details:DMRG with the lowest variational energy obtained so far.</p>
+<p>software_details:Block2 v0.5.3rc16 with dmrghandler, commit version d603fdc6409fc194a416aa3a519362d5d91790d9 or later.</p>
+<p>performance_metrics_uuid: c0016151-2581-4ef6-8531-a032ef34174a</p>
+<p>creation_timestamp: 2025-01-16T14:40:23.264140+00:00</p>
 <p>number_of_problem_instances: 82</p>
 <p>number_of_problem_instances_attempted: 76</p>
 <p>number_of_problem_instances_solved: 43</p>
@@ -36,17 +64,22 @@
 <p>number_of_tasks_solved_within_accuracy_threshold: 142</p>
 <p>max_run_time_of_attempted_tasks: 80820.729907066</p>
 <p>sum_of_run_time_of_attempted_tasks: 1824772.0337238186</p>
-<p>solvability_ratio: 0.9711</p>
-<p>f1_score: [0.7586206896551724, 0.8531468531468531]</p>
+<p>solvability_ratio: 0.3377</p>
+<p>f1_score: [0.865979381443299, 0.9022556390977443]</p>
 <p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver success/failure plot" src="solver_16537433-9f4c-4eae-a65d-787dc3b35b59_plot.png" /></p>
+<p><img alt="Solver utility capture" src="solver_16537433-9f4c-4eae-a65d-787dc3b35b59_utility_capture_plot.png" /></p>
 <p><img alt="Solver miniML plot" src="plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png" /></p>
 <p><img alt="SHAP summary plot" src="shap_summary_plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png" /></p>
-<h3>Solver CCSDT_PLACEHOLDER, fd13c864-baf1-44de-b52d-0e5dd69f647a</h3>
-<p><img alt="Solver success/failure plot" src="solver_fd13c864-baf1-44de-b52d-0e5dd69f647a_plot.png" /></p>
-<p><img alt="Solver utility capture" src="solver_fd13c864-baf1-44de-b52d-0e5dd69f647a_utility_capture_plot.png" /></p>
-<p>solver_short_name: CCSDT_PLACEHOLDER</p>
-<p>performance_metrics_uuid: 52576a21-8818-4009-8fc5-666148e0445d</p>
-<p>creation_timestamp: 2025-01-14T21:15:08.818640+00:00</p>
+<h2>Solver CCSDT_PLACEHOLDER, fd13c864-baf1-44de-b52d-0e5dd69f647a</h2>
+<p>solver_uuid:fd13c864-baf1-44de-b52d-0e5dd69f647a</p>
+<p>solver_short_name:CCSDT_PLACEHOLDER</p>
+<p>compute_hardware_type:classical_computer</p>
+<p>classical_hardware_details:{'cpu_description': 'CCSDT_PLACEHOLDER_cpu_description'}</p>
+<p>algorithm_details:CCSDT_PLACEHOLDER_algorithm_details</p>
+<p>software_details:CCSDT_PLACEHOLDER_software_details</p>
+<p>performance_metrics_uuid: 4271a06e-f531-4333-8477-b70c36c673fa</p>
+<p>creation_timestamp: 2025-01-16T14:40:23.264140+00:00</p>
 <p>number_of_problem_instances: 82</p>
 <p>number_of_problem_instances_attempted: 4</p>
 <p>number_of_problem_instances_solved: 4</p>
@@ -57,17 +90,24 @@
 <p>number_of_tasks_solved_within_accuracy_threshold: 53</p>
 <p>max_run_time_of_attempted_tasks: 3600.0</p>
 <p>sum_of_run_time_of_attempted_tasks: 190800.0</p>
-<p>solvability_ratio: 0.0103</p>
-<p>f1_score: [0.9915492957746479, 0.9714285714285714]</p>
+<p>solvability_ratio: 0.0068</p>
+<p>f1_score: [1.0, 1.0]</p>
 <p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver success/failure plot" src="solver_fd13c864-baf1-44de-b52d-0e5dd69f647a_plot.png" /></p>
+<p><img alt="Solver utility capture" src="solver_fd13c864-baf1-44de-b52d-0e5dd69f647a_utility_capture_plot.png" /></p>
 <p><img alt="Solver miniML plot" src="plot_solver_fd13c864-baf1-44de-b52d-0e5dd69f647a.png" /></p>
 <p><img alt="SHAP summary plot" src="shap_summary_plot_solver_fd13c864-baf1-44de-b52d-0e5dd69f647a.png" /></p>
-<h3>Solver DF_QPE, 5dad4064-cd11-412f-85cb-d722afe3b3de</h3>
-<p><img alt="Solver success/failure plot" src="solver_5dad4064-cd11-412f-85cb-d722afe3b3de_plot.png" /></p>
-<p><img alt="Solver utility capture" src="solver_5dad4064-cd11-412f-85cb-d722afe3b3de_utility_capture_plot.png" /></p>
-<p>solver_short_name: DF_QPE</p>
-<p>performance_metrics_uuid: acd97190-9a59-49bf-a6c0-e635837867d8</p>
-<p>creation_timestamp: 2025-01-14T21:15:09.271301+00:00</p>
+<h2>Solver DF_QPE, 5dad4064-cd11-412f-85cb-d722afe3b3de</h2>
+<p>solver_uuid:5dad4064-cd11-412f-85cb-d722afe3b3de</p>
+<p>solver_short_name:DF_QPE</p>
+<p>compute_hardware_type:quantum_computer</p>
+<p>algorithm_details:{'algorithm_description': 'Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.', 'algorithm_parameters': {'overlap_csv': 'overlaps.csv', 'sf_threshold': 1e-12, 'df_threshold': 0.001, 'max_orbitals': 70}}</p>
+<p>software_details:[{'software_name': 'pyLIQTR', 'software_version': '1.2.1'}, {'software_name': 'qb-gsee-benchmark', 'software_version': '0.1.0a2.dev71+g5d9efab.d20241230'}, {'software_name': 'Python', 'software_version': '3.10.12 (main, Nov  6 2024, 20:22:13) [GCC 11.4.0]'}, {'software_name': 'qualtran', 'software_version': '0.2.0'}]</p>
+<p>quantum_hardware_details:{'quantum_hardware_description': 'Optimistic superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494.', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 0.0001, 'cycle_time_microseconds': 1}}</p>
+<p>logical_resource_estimate_solution_uuid:72dea71b-fb03-43f0-8086-eb37605ba3db</p>
+<p>logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1</p>
+<p>performance_metrics_uuid: 5c88eca6-6e53-4cb5-927a-9f7cd879f4b9</p>
+<p>creation_timestamp: 2025-01-16T14:40:23.264140+00:00</p>
 <p>number_of_problem_instances: 82</p>
 <p>number_of_problem_instances_attempted: 24</p>
 <p>number_of_problem_instances_solved: 3</p>
@@ -77,9 +117,11 @@
 <p>number_of_tasks_solved_within_run_time_limit: 26</p>
 <p>number_of_tasks_solved_within_accuracy_threshold: 163</p>
 <p>max_run_time_of_attempted_tasks: 233737829.40462503</p>
-<p>sum_of_run_time_of_attempted_tasks: 1180589418.3385441</p>
-<p>solvability_ratio: 0.0154</p>
+<p>sum_of_run_time_of_attempted_tasks: 1180589418.3385448</p>
+<p>solvability_ratio: 0.0232</p>
 <p>f1_score: [0.9950738916256158, 0.9629629629629629]</p>
 <p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver success/failure plot" src="solver_5dad4064-cd11-412f-85cb-d722afe3b3de_plot.png" /></p>
+<p><img alt="Solver utility capture" src="solver_5dad4064-cd11-412f-85cb-d722afe3b3de_utility_capture_plot.png" /></p>
 <p><img alt="Solver miniML plot" src="plot_solver_5dad4064-cd11-412f-85cb-d722afe3b3de.png" /></p>
 <p><img alt="SHAP summary plot" src="shap_summary_plot_solver_5dad4064-cd11-412f-85cb-d722afe3b3de.png" /></p>
