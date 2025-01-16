@@ -146,13 +146,15 @@ def validate_json(
     if schema is not None:
         if local_resolver_directory is not None:
             # A schema and local resolver directory was provided.
+            x = "/TODO_hacky_placeholder_to_fix_local_URL_resolution"
+            local_resolver_directory += x
             local_uri = f"file://{os.path.abspath(local_resolver_directory)}"
             resolver = RefResolver(base_uri=local_uri, referrer=schema)
         else:
-            raise ValueError(f"`schema` was provided, but no `local_resolver_directory` was provided.")
+            raise ValueError(f"`schema` was provided, but no `local_resolver_directory` was provided (need both).")
     else:
         if local_resolver_directory is not None:
-            raise ValueError(f"`local_resolver_directory` was provided, but no `schema` was provided.")
+            raise ValueError(f"`local_resolver_directory` was provided, but no `schema` was provided (need both).")
         else:
             # no schema provided... fetch it from URL.        
             schema_url = json_dict["$schema"]
