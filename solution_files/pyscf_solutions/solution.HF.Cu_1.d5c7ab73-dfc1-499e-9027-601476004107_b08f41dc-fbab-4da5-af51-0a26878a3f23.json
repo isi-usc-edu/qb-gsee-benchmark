@@ -1,0 +1,63 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "b08f41dc-fbab-4da5-af51-0a26878a3f23",
+    "problem_instance_uuid": "d5c7ab73-dfc1-499e-9027-601476004107",
+    "creation_timestamp": "2025-01-15T19:36:58.706798Z",
+    "contact_info": [
+        {
+            "name": "Matthew Otten",
+            "email": "mjotten@wisc.edu",
+            "institution": "University of Wisconsin -- Madison"
+        }
+    ],
+    "is_resource_estimate": false,
+    "solution_data": [
+        {
+            "task_uuid": "5f5fee92-5821-4d38-a54a-d204660f205f",
+            "energy": -196.32402730647655,
+            "energy_units": "Hartree",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 1.196232795715332
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 153.1177978515625
+                }
+            },
+            "solution_details": {}
+        },
+        {
+            "task_uuid": "1c7f5399-8982-4daf-81a5-7cef4e4588cc",
+            "energy": -196.32520712735766,
+            "energy_units": "Hartree",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 1.9165153503417969
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 245.31396484375
+                }
+            },
+            "solution_details": {}
+        }
+    ],
+    "solver_details": {
+        "solver_uuid": "5f5e617a-19c2-4d82-bebc-b2d6b3dcb012",
+        "solver_short_name": "HF",
+        "compute_hardware_type": "classical_computer",
+        "classical_hardware_details": {
+            "computing_environment_name": "LCRC Improv (per node)",
+            "cpu_description": "2x AMD EPYC 7713 64C",
+            "ram_available_gb": "256GB",
+            "clock_speed": "2 GHz",
+            "total_num_cores": 128
+        },
+        "algorithm_details": "Hartree Fock",
+        "software_details": "pyscf (https://github.com/pyscf/pyscf)."
+    },
+    "digital_signature": null
+}
