@@ -1,6 +1,6 @@
 # GSEE Benchmark Standard Report
 
-Report based on data from 2025-01-16T15:18:34.432203+00:00
+Report based on data from 2025-01-16T19:10:17.205242+00:00
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
@@ -8,11 +8,11 @@ Input data: `Hamiltonian_features.csv`, last modified Mon Dec 30 16:29:03 2024
 
 Input data: `GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv`, last modified Thu Jan  9 12:11:19 2025
 
-Latest creation time for a `problem_instance.json` file: Thu Jan 16 08:13:11 2025
+Latest creation time for a `problem_instance.json` file: Thu Jan 16 11:55:29 2025
 
-Latest creation time for a `performance_metrics.json` file: Thu Jan 16 10:20:39 2025
+Latest creation time for a `performance_metrics.json` file: Thu Jan 16 14:12:17 2025
 
-Latest creation time for a `solution.json` file: Thu Jan 16 10:13:00 2025
+Latest creation time for a `solution.json` file: Thu Jan 16 14:04:59 2025
 
 # Problem Instance Summary Statistics
 
@@ -54,9 +54,9 @@ algorithm_details:SHCI with optimized orbitals followed by SHCI+PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: a1f1169a-3107-40f9-b2ea-81395d34dd87
+performance_metrics_uuid: 5ab06b82-39c0-41e1-9612-02744f194e25
 
-creation_timestamp: 2025-01-16T15:18:34.432203+00:00
+creation_timestamp: 2025-01-16T19:10:17.205242+00:00
 
 number_of_problem_instances: 82
 
@@ -92,58 +92,6 @@ ml_metrics_calculator_version: 1
 
 ![SHAP summary plot](shap_summary_plot_solver_2dde727e-a881-44fa-aabf-bba6248e4baf.png)
 
-## Solver DMRG_Niagara_cluster_lowest_energy, 16537433-9f4c-4eae-a65d-787dc3b35b59
-
-solver_uuid:16537433-9f4c-4eae-a65d-787dc3b35b59
-
-solver_short_name:DMRG_Niagara_cluster_lowest_energy
-
-compute_hardware_type:classical_computer
-
-classical_hardware_details:{'computing_environment_name': 'Niagara Cluster, Compute Canada', 'cpu_description': '40 Intel "Skylake" cores at 2.4 GHz or 40 Intel "CascadeLake" cores at 2.5 GHz', 'ram_available_gb': '202 GB (188 GiB)', 'clock_speed': '2.4 GHz or 2.5 GHz', 'total_num_cores': 40}
-
-algorithm_details:DMRG with the lowest variational energy obtained so far.
-
-software_details:Block2 v0.5.3rc16 with dmrghandler, commit version d603fdc6409fc194a416aa3a519362d5d91790d9 or later.
-
-performance_metrics_uuid: 78af3c47-7749-473f-97bf-d95cb682577b
-
-creation_timestamp: 2025-01-16T15:18:34.432203+00:00
-
-number_of_problem_instances: 82
-
-number_of_problem_instances_attempted: 76
-
-number_of_problem_instances_solved: 43
-
-number_of_tasks: 230
-
-number_of_tasks_attempted: 192
-
-number_of_tasks_solved: 142
-
-number_of_tasks_solved_within_run_time_limit: 192
-
-number_of_tasks_solved_within_accuracy_threshold: 142
-
-max_run_time_of_attempted_tasks: 80820.729907066
-
-sum_of_run_time_of_attempted_tasks: 1824772.0337238186
-
-solvability_ratio: 0.3377
-
-f1_score: [0.865979381443299, 0.9022556390977443]
-
-ml_metrics_calculator_version: 1
-
-![Solver success/failure plot](solver_16537433-9f4c-4eae-a65d-787dc3b35b59_plot.png)
-
-![Solver utility capture](solver_16537433-9f4c-4eae-a65d-787dc3b35b59_utility_capture_plot.png)
-
-![Solver miniML plot](plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png)
-
-![SHAP summary plot](shap_summary_plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png)
-
 ## Solver CCSDT_PLACEHOLDER, fd13c864-baf1-44de-b52d-0e5dd69f647a
 
 solver_uuid:fd13c864-baf1-44de-b52d-0e5dd69f647a
@@ -158,9 +106,9 @@ algorithm_details:CCSDT_PLACEHOLDER_algorithm_details
 
 software_details:CCSDT_PLACEHOLDER_software_details
 
-performance_metrics_uuid: 78854cab-8150-46b7-9bbf-c4a43e85c501
+performance_metrics_uuid: 4437d609-d148-434f-98ce-661069b852df
 
-creation_timestamp: 2025-01-16T15:18:34.432203+00:00
+creation_timestamp: 2025-01-16T19:10:17.205242+00:00
 
 number_of_problem_instances: 82
 
@@ -210,9 +158,9 @@ algorithm_details:CISD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 9ba7b981-3ffe-470f-8a38-ff2f0694e6ac
+performance_metrics_uuid: dcda23b6-0eb0-4da9-a605-b44aa85a6c69
 
-creation_timestamp: 2025-01-16T15:18:34.432203+00:00
+creation_timestamp: 2025-01-16T19:10:17.205242+00:00
 
 number_of_problem_instances: 82
 
@@ -262,9 +210,9 @@ algorithm_details:CCSD(T)
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 54efd6d0-ed1b-4061-ac99-19c39a4ed4a0
+performance_metrics_uuid: 87854781-4b5b-46c5-b915-9b83ea8bc162
 
-creation_timestamp: 2025-01-16T15:18:34.432203+00:00
+creation_timestamp: 2025-01-16T19:10:17.205242+00:00
 
 number_of_problem_instances: 82
 
@@ -314,9 +262,9 @@ algorithm_details:Hartree Fock
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: b667fdad-6c7a-4dd4-a68d-f034b11cce1f
+performance_metrics_uuid: f1a801ad-90cd-4c33-98d7-0db4033d37ee
 
-creation_timestamp: 2025-01-16T15:18:34.432203+00:00
+creation_timestamp: 2025-01-16T19:10:17.205242+00:00
 
 number_of_problem_instances: 82
 
@@ -366,9 +314,9 @@ algorithm_details:MP2
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 10960846-c7e8-4eb1-9656-574dc577aa2c
+performance_metrics_uuid: 9289dadd-3c1e-46eb-8fdc-ececc06f5927
 
-creation_timestamp: 2025-01-16T15:18:34.432203+00:00
+creation_timestamp: 2025-01-16T19:10:17.205242+00:00
 
 number_of_problem_instances: 82
 
@@ -418,9 +366,9 @@ algorithm_details:CCSD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: f6c3d5d5-2f7f-4521-bc89-ae3d3cd1283b
+performance_metrics_uuid: c4cbf554-6a23-4603-a65b-1e8902b4bedc
 
-creation_timestamp: 2025-01-16T15:18:34.432203+00:00
+creation_timestamp: 2025-01-16T19:10:17.205242+00:00
 
 number_of_problem_instances: 82
 
@@ -474,9 +422,9 @@ logical_resource_estimate_solution_uuid:72dea71b-fb03-43f0-8086-eb37605ba3db
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: 6519cb8c-a800-44a0-a218-018eec132eca
+performance_metrics_uuid: 4230575a-1659-4082-a570-4edd43498b3a
 
-creation_timestamp: 2025-01-16T15:18:34.432203+00:00
+creation_timestamp: 2025-01-16T19:10:17.205242+00:00
 
 number_of_problem_instances: 82
 
@@ -511,4 +459,56 @@ ml_metrics_calculator_version: 1
 ![Solver miniML plot](plot_solver_5dad4064-cd11-412f-85cb-d722afe3b3de.png)
 
 ![SHAP summary plot](shap_summary_plot_solver_5dad4064-cd11-412f-85cb-d722afe3b3de.png)
+
+## Solver DMRG_Niagara_cluster_lowest_energy, 16537433-9f4c-4eae-a65d-787dc3b35b59
+
+solver_uuid:16537433-9f4c-4eae-a65d-787dc3b35b59
+
+solver_short_name:DMRG_Niagara_cluster_lowest_energy
+
+compute_hardware_type:classical_computer
+
+classical_hardware_details:{'computing_environment_name': 'Niagara Cluster, Compute Canada', 'cpu_description': '40 Intel "Skylake" cores at 2.4 GHz or 40 Intel "CascadeLake" cores at 2.5 GHz', 'ram_available_gb': '202 GB (188 GiB)', 'clock_speed': '2.4 GHz or 2.5 GHz', 'total_num_cores': 40}
+
+algorithm_details:DMRG with the lowest variational energy obtained so far.
+
+software_details:Block2 v0.5.3rc16 with dmrghandler, commit version d603fdc6409fc194a416aa3a519362d5d91790d9 or later.
+
+performance_metrics_uuid: f70d1823-51a8-40d3-9652-e570ee63bf4d
+
+creation_timestamp: 2025-01-16T19:10:17.205242+00:00
+
+number_of_problem_instances: 82
+
+number_of_problem_instances_attempted: 82
+
+number_of_problem_instances_solved: 45
+
+number_of_tasks: 230
+
+number_of_tasks_attempted: 230
+
+number_of_tasks_solved: 174
+
+number_of_tasks_solved_within_run_time_limit: 230
+
+number_of_tasks_solved_within_accuracy_threshold: 174
+
+max_run_time_of_attempted_tasks: 80820.729907066
+
+sum_of_run_time_of_attempted_tasks: 2456481.4481055504
+
+solvability_ratio: 0.5138
+
+f1_score: [0.8545454545454545, 0.9542857142857143]
+
+ml_metrics_calculator_version: 1
+
+![Solver success/failure plot](solver_16537433-9f4c-4eae-a65d-787dc3b35b59_plot.png)
+
+![Solver utility capture](solver_16537433-9f4c-4eae-a65d-787dc3b35b59_utility_capture_plot.png)
+
+![Solver miniML plot](plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png)
+
+![SHAP summary plot](shap_summary_plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png)
 
