@@ -162,8 +162,19 @@
                         "$ref": "uuid.schema.json"
                     },
                     "solution_uuid": {
-                        "title": "Solution file UUID",
-                        "$ref": "uuid.schema.json"
+                        "title": "Solution file UUID.  May be `null` if not attempted.",
+                        "type": [
+                            "null",
+                            "string"
+                        ],
+                        "anyOf":[
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "$ref": "uuid.schema.json"
+                            }
+                        ]                        
                     },
                     "number_of_tasks_attempted": {
                         "type": "integer",
@@ -220,6 +231,7 @@
                     "task_uuid",
                     "problem_instance_uuid",
                     "instance_data_object_uuid",
+                    "solution_uuid",
                     "attempted",
                     "solved_within_run_time",
                     "solved_within_accuracy_requirement",
@@ -237,6 +249,21 @@
                     "instance_data_object_uuid": {
                         "title": "Instance Data Object (typically FCIDUMP file) UUID",
                         "$ref": "uuid.schema.json"
+                    },
+                    "solution_uuid":{
+                        "title": "Solution file UUID.  May be `null` if not attempted.",
+                        "type": [
+                            "null",
+                            "string"
+                        ],
+                        "anyOf":[
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "$ref": "uuid.schema.json"
+                            }
+                        ]
                     },
                     "attempted": {
                         "title": "Attempted flag",
