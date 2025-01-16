@@ -30,7 +30,8 @@ import shap
 
 
 
-random.seed(6) 
+random_state = 6
+random.seed(random_state) 
 
 
 
@@ -78,7 +79,6 @@ def trainML(
 
     X_train = X #will be scaling this for svm
     y_train = Y
-    random_state = 6
     sc = StandardScaler() 
     X_sc = sc.fit_transform(X_train)
 
@@ -223,7 +223,7 @@ def getProjectedData(X, latent_model_name):
         # Normalize data (NNMF requires non-negative input.  The data is non-negative, but we will scale in the range of min-max of the features which is great for reconstruction of valid points)
         scaler_minmax = MinMaxScaler()
         X_scaled = scaler_minmax.fit_transform(X)
-        nnmf = NMF(n_components=2, init='random', random_state=42,max_iter = 500)
+        nnmf = NMF(n_components=2, init='random', random_state=random_state,max_iter = 500)
         proj_data = nnmf.fit_transform(X_scaled)
 
         recons_error = np.sqrt(np.sum((scaler_minmax.inverse_transform(nnmf.inverse_transform(proj_data)) - X)**2))
@@ -399,9 +399,13 @@ def main(args):
 
     X = df.loc[:,selected_features]
     Y = df.loc[:,target]
-    shuffled_keys = np.random.permutation(range(0,len(X)))
+
+    #noticed that DMRG solver came in continguous blocks of classes which caused a problem with the cv splitting, so shuffling helped.
+    #I could have done it during CV splitting itself, which produced similar results.
+    rng = np.random.default_rng(seed=random_state) 
+    shuffled_keys = rng.permutation(range(0,len(X)))
     X = X.iloc[shuffled_keys,:]
-    Y = Y[shuffled_keys]    
+    Y = Y[shuffled_keys]
 
     # before training, remove any variables which has 0 variance
     varX = np.var(X, axis = 0)

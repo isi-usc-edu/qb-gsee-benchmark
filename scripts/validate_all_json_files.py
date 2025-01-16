@@ -15,10 +15,7 @@
 # limitations under the License.
 
 
-import datetime
 from qb_gsee_benchmark.benchmark_data import BenchmarkData
-from qb_gsee_benchmark.standard_report import StandardReport 
-
 
 
 
@@ -29,36 +26,11 @@ benchmark_data = BenchmarkData(
     solution_files_directory="../solution_files",
     performance_metrics_directory="../performance_metrics"
 )
-print(benchmark_data)
-
-
-# benchmark_data.read_performance_metrics_json_files()
-# print(f"read in {len(benchmark_data.performance_metrics_list)} performance metrics files.")
-
-benchmark_data.calculate_performance_metrics()
 
 benchmark_data.validate_all_json_objects(
     local_resolver_directory="../schemas"
 )
 print(f"All JSON files are OK!")
 
-benchmark_data.write_performance_metrics_json_files(
-    output_directory=benchmark_data.performance_metrics_directory
-)
-
-benchmark_data.to_csv(
-    f"all_data_{benchmark_data.datestamp}.csv"
-)
-
-benchmark_data.write_sponsor_resource_estimate_files(
-    f"resource_estimate_files_{benchmark_data.datestamp}"
-)
-
-StandardReport(
-    benchmark_data=benchmark_data,
-    standard_report_output_directory="standard_report"
-)
-
-
-
+print(benchmark_data)
 
