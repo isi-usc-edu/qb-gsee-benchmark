@@ -73,6 +73,11 @@ Note that these solution files will have new solution IDs that differ from the i
 It is also recommended to specify a solver UUID in the PRE config file that is different from the solver UUID for the LRE.
 See [`PRE_config.json`](PRE_config.json) for an example PRE config file.
 
+
+
+
+
+
 ## Generating `performance_metrics.json` files
 
 `./compute_all_performance_metrics_script.py`
@@ -91,17 +96,6 @@ options:
 ```
 
 
-
-```bash
-options:
-  -h, --help            show this help message and exit
-  --problem_instance_dir PROBLEM_INSTANCE_DIR
-                        Specify directory for problem_instances (.json files). This is input.
-  --solution_file_dir SOLUTION_FILE_DIR
-                        Specify directory for solution.json files. This is input.
-  --performance_metrics_dir PERFORMANCE_METRICS_DIR
-                        Specify directory for performance_metrics.json files. Freshly calculated performance_metrics.json files will be placed here.
-```
 The script ingests all available `problem_instance.json` and `solution.json` files and, for each solver identified by `solver_uuid`, returns a `performance_metrics.solver_uuid.json` file.  Note that *many* `solution.json` files are ingested for one `solver_uuid` and only a single `performance_metrics.solver_uuid.json` is returned.  This `performance_metrics.solver_uuid.json` contains performance metrics broken down to the Hamiltonian and aggregated to higher levels. 
 
 The script also produces the `aggregated_solver_labels_<date>.csv` artifact file.  The `aggregated_solver_labels_<date>.csv` and the `Hamiltonian_features.csv` file are used by the `miniML.py` functions to calculate the ML scores which appear as fields in the `performance_metrics.json` file.  Note that the `Hamiltonian_features.csv` is calculated by a different script and should be up-to-date before running this script.

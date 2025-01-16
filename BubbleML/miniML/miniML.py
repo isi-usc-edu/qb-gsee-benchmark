@@ -97,7 +97,7 @@ def trainML(
         }
     else: #SVM
         from sklearn.svm import SVC
-        model = SVC(random_state = random_state) 
+        model = SVC(random_state = random_state, class_weight='balanced') 
         model.probability = True
 
         #SVM on centered and scaled data
@@ -264,7 +264,7 @@ def compute_ratio_of_solved_to_unsolved(
     X here is the raw data.  It is uncentered and unscaled.  
     '''
 
-    latent_sc, latent_model, proj_data, recons_error = getProjectedData(X, latent_model_name) #just PCA in this code.  The UI has more dimensionality reduction algms
+    latent_sc, latent_model, proj_data, recons_error = getProjectedData(X, latent_model_name) #just PCA or NNMF in this code.  The UI has more dimensionality reduction algms
 
     # min and max in 2 dimensions of projected data
     xminmax = np.arange(np.min(proj_data[:, 0]), np.max(proj_data[:, 0]), 0.1)
@@ -288,12 +288,12 @@ def compute_ratio_of_solved_to_unsolved(
     Z0 = prob[:,1].reshape(XX.shape)
      
     if draw_plot == 1:
-        #plot figure with training data, generated points, and convex hull boundary
+        #plot figure with training data, generated points
         colors = Z0.flatten()
         ax = plt.gca()
         cmap = plt.cm.bwr_r
-        #norm = plt.Normalize(0,1)
-        norm = plt.Normalize(np.min(colors),np.max(colors)) #normalized according to the probabilities in the decision space
+        norm = plt.Normalize(0,1)
+        #norm = plt.Normalize(np.min(colors),np.max(colors)) #normalized according to the probabilities in the decision space
 
 
         #generated points
@@ -399,7 +399,9 @@ def main(args):
 
     X = df.loc[:,selected_features]
     Y = df.loc[:,target]
-    
+    shuffled_keys = np.random.permutation(range(0,len(X)))
+    X = X.iloc[shuffled_keys,:]
+    Y = Y[shuffled_keys]    
 
     # before training, remove any variables which has 0 variance
     varX = np.var(X, axis = 0)
