@@ -195,7 +195,7 @@ def trainML(
 
 
 ################################################################################
-def getProjectedData(X, latent_model_name):
+def getProjectedData(X, latent_model_name, verbose):
    
     if latent_model_name == 'PCA':
         '''
@@ -225,6 +225,21 @@ def getProjectedData(X, latent_model_name):
         X_scaled = scaler_minmax.fit_transform(X)
         nnmf = NMF(n_components=2, init='random', random_state=random_state,max_iter = 500)
         proj_data = nnmf.fit_transform(X_scaled)
+        if verbose:
+            #print the coefficients of the first two axes.
+            print('NNMF components:')
+            H = nnmf.components_
+            print(H)
+            plt.figure()
+            plt.title('NNMF Components')
+            plt.plot(H[0,:],'r-o')
+            plt.plot(H[1,:],'g-o')
+            plt.legend(['Component 1', 'Component 2'])
+            plt.xticks(np.arange(0,len(X.columns)))
+            plt.xticks(rotation=30)
+            plt.gca().xaxis.set_ticklabels(X.columns.to_list(),ha = 'right')
+            plt.tight_layout()
+            plt.show()
 
         recons_error = np.sqrt(np.sum((scaler_minmax.inverse_transform(nnmf.inverse_transform(proj_data)) - X)**2))
         return scaler_minmax, nnmf, proj_data, recons_error
@@ -264,7 +279,7 @@ def compute_ratio_of_solved_to_unsolved(
     X here is the raw data.  It is uncentered and unscaled.  
     '''
 
-    latent_sc, latent_model, proj_data, recons_error = getProjectedData(X, latent_model_name) #just PCA or NNMF in this code.  The UI has more dimensionality reduction algms
+    latent_sc, latent_model, proj_data, recons_error = getProjectedData(X, latent_model_name, draw_plot) #just PCA or NNMF in this code.  The UI has more dimensionality reduction algms
 
     # min and max in 2 dimensions of projected data
     xminmax = np.arange(np.min(proj_data[:, 0]), np.max(proj_data[:, 0]), 0.1)
