@@ -1,26 +1,26 @@
 {
     "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/performance_metrics.schema.0.0.1.json",
-    "performance_metrics_uuid": "d416fd3e-9bfb-4f97-8e7b-14e23d66e78b",
+    "performance_metrics_uuid": "3eb9c362-299a-4266-ba65-03306379cac3",
     "solver_short_name": "CCSD(T)",
     "solver_uuid": "c09217e6-d0f7-4b0f-81c4-79210b7ac878",
-    "creation_timestamp": "2025-01-21T14:58:48.865624+00:00",
+    "creation_timestamp": "2025-01-21T21:29:50.150187+00:00",
     "ml_metrics": {
-        "solvability_ratio": 0.0,
+        "solvability_ratio": 0.0016,
         "f1_score": [
-            0.8385093167701864,
-            0.6231884057971014
+            0.9100817438692098,
+            0.6451612903225806
         ],
         "ml_metrics_calculator_version": 1
     },
     "top_level_results": {
         "number_of_problem_instances": 82,
         "number_of_problem_instances_attempted": 78,
-        "number_of_problem_instances_solved": 16,
+        "number_of_problem_instances_solved": 19,
         "number_of_tasks": 230,
         "number_of_tasks_attempted": 221,
-        "number_of_tasks_solved": 44,
+        "number_of_tasks_solved": 54,
         "number_of_tasks_solved_within_run_time_limit": 221,
-        "number_of_tasks_solved_within_accuracy_threshold": 44,
+        "number_of_tasks_solved_within_accuracy_threshold": 54,
         "max_run_time_of_attempted_tasks": 493.4080808162689,
         "sum_of_run_time_of_attempted_tasks": 12968.4871737957
     },
@@ -91,8 +91,8 @@
             "number_of_tasks": 9,
             "number_of_tasks_attempted": 9,
             "number_of_tasks_solved_within_runtime_limit": 9,
-            "number_of_tasks_solved_within_accuracy_requirement": 1,
-            "number_of_tasks_solved": 1,
+            "number_of_tasks_solved_within_accuracy_requirement": 4,
+            "number_of_tasks_solved": 4,
             "sum_of_run_time_of_attempted_tasks": 273.3769142627716,
             "max_run_time_of_attempted_tasks": 38.894699573516846,
             "solution_submitted_by_due_date": true
@@ -139,8 +139,8 @@
             "number_of_tasks": 16,
             "number_of_tasks_attempted": 11,
             "number_of_tasks_solved_within_runtime_limit": 11,
-            "number_of_tasks_solved_within_accuracy_requirement": 3,
-            "number_of_tasks_solved": 3,
+            "number_of_tasks_solved_within_accuracy_requirement": 4,
+            "number_of_tasks_solved": 4,
             "sum_of_run_time_of_attempted_tasks": 747.6985447406769,
             "max_run_time_of_attempted_tasks": 222.09710502624512,
             "solution_submitted_by_due_date": true
@@ -187,8 +187,8 @@
             "number_of_tasks": 2,
             "number_of_tasks_attempted": 2,
             "number_of_tasks_solved_within_runtime_limit": 2,
-            "number_of_tasks_solved_within_accuracy_requirement": 0,
-            "number_of_tasks_solved": 0,
+            "number_of_tasks_solved_within_accuracy_requirement": 2,
+            "number_of_tasks_solved": 2,
             "sum_of_run_time_of_attempted_tasks": 61.50117540359497,
             "max_run_time_of_attempted_tasks": 44.356491804122925,
             "solution_submitted_by_due_date": true
@@ -295,8 +295,8 @@
             "number_of_tasks": 2,
             "number_of_tasks_attempted": 2,
             "number_of_tasks_solved_within_runtime_limit": 2,
-            "number_of_tasks_solved_within_accuracy_requirement": 0,
-            "number_of_tasks_solved": 0,
+            "number_of_tasks_solved_within_accuracy_requirement": 2,
+            "number_of_tasks_solved": 2,
             "sum_of_run_time_of_attempted_tasks": 73.5413339138031,
             "max_run_time_of_attempted_tasks": 50.45328712463379,
             "solution_submitted_by_due_date": true
@@ -547,8 +547,8 @@
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 3,
             "number_of_tasks_solved_within_runtime_limit": 3,
-            "number_of_tasks_solved_within_accuracy_requirement": 1,
-            "number_of_tasks_solved": 1,
+            "number_of_tasks_solved_within_accuracy_requirement": 2,
+            "number_of_tasks_solved": 2,
             "sum_of_run_time_of_attempted_tasks": 198.57441782951355,
             "max_run_time_of_attempted_tasks": 138.61466217041016,
             "solution_submitted_by_due_date": true
@@ -943,8 +943,8 @@
             "number_of_tasks": 1,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 1,
-            "number_of_tasks_solved_within_accuracy_requirement": 0,
-            "number_of_tasks_solved": 0,
+            "number_of_tasks_solved_within_accuracy_requirement": 1,
+            "number_of_tasks_solved": 1,
             "sum_of_run_time_of_attempted_tasks": 4.588603973388672,
             "max_run_time_of_attempted_tasks": 4.588603973388672,
             "solution_submitted_by_due_date": true
@@ -1150,8 +1150,8 @@
             "solution_uuid": "6e2ee4f1-4c2d-4c84-bc35-81c1363d4d0f",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
             "overall_run_time_seconds": 35.69576025009155
         },
         {
@@ -1172,8 +1172,8 @@
             "solution_uuid": "b7a5221f-f721-42fa-964a-7f331e0bfa8b",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
             "overall_run_time_seconds": 44.356491804122925
         },
         {
@@ -1293,8 +1293,8 @@
             "solution_uuid": "c31351c4-350d-4412-946f-8691ea7e7854",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
             "overall_run_time_seconds": 50.45328712463379
         },
         {
@@ -1612,8 +1612,8 @@
             "solution_uuid": "6e2ee4f1-4c2d-4c84-bc35-81c1363d4d0f",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
             "overall_run_time_seconds": 34.029539585113525
         },
         {
@@ -1656,8 +1656,8 @@
             "solution_uuid": "6e2ee4f1-4c2d-4c84-bc35-81c1363d4d0f",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
             "overall_run_time_seconds": 18.54265809059143
         },
         {
@@ -1667,8 +1667,8 @@
             "solution_uuid": "fd56de2f-6fac-4f5b-ba45-8afe41b0fb3c",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
             "overall_run_time_seconds": 11.009503841400146
         },
         {
@@ -1821,8 +1821,8 @@
             "solution_uuid": "c31351c4-350d-4412-946f-8691ea7e7854",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
             "overall_run_time_seconds": 23.08804678916931
         },
         {
@@ -2129,8 +2129,8 @@
             "solution_uuid": "b7a5221f-f721-42fa-964a-7f331e0bfa8b",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
             "overall_run_time_seconds": 17.144683599472046
         },
         {
@@ -3108,8 +3108,8 @@
             "solution_uuid": "a190a47c-ac91-4e67-8803-99126c9dff0e",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
             "overall_run_time_seconds": 4.588603973388672
         },
         {
@@ -3438,8 +3438,8 @@
             "solution_uuid": "76645e2b-87e5-4a4e-b223-074a89ca13bf",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
             "overall_run_time_seconds": 138.61466217041016
         },
         {
