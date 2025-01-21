@@ -518,11 +518,7 @@ class BenchmarkData:
                     d["calendar_due_date"] = problem_instance["calendar_due_date"] # may be None/null per .json.
                     d["time_limit_seconds"] = task["requirements"]["time_limit_seconds"]
                     d["accuracy_tol"] = task["requirements"]["absolute_accuracy_threshold"]
-                    try:
-                        d["reference_energy"] = task["requirements"]["reference_energy"]
-                    except Exception as e:
-                        logging.error(f'Error: {e}', exc_info=True)
-                        logging.warning(f"warning!  no reference_energy specified in task {task_uuid}")
+                    d["reference_energy"] = task["requirements"]["reference_energy"]
                         
 
                     if results is None:
@@ -563,10 +559,9 @@ class BenchmarkData:
                             d["reported_energy"] = results["energy"]
                             try:
                                 d["solved_within_accuracy_requirement"] = bool(np.abs(d["reported_energy"] - d["reference_energy"]) < d["accuracy_tol"])
-                                # TODO:  account for differences in units.  E.g., Hartree vs. kCal/mol vs. other.
                             except Exception as e:
                                 logging.error(f'Error: {e}', exc_info=True)
-                                logging.warning(f"warning!  no energy target specified in task {task_uuid}")
+                                logging.warning(f"warning!  no energy target specified in task {task_uuid}.  reference_energy={d['reference_energy']}")
                                 d["solved_within_accuracy_requirement"] = False
                             
                             # TODO: issue-44.  handle case when more than one solution submitted by

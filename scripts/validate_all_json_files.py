@@ -69,7 +69,7 @@ def main(args: argparse.Namespace) -> None:
                     local_resolver_directory="../schemas",
                     local_schema_file=listy[2]
                 )
-            print(f"warning:  did not validate resource estimates for schema (schema is not a local file!!")
+            print(f"warning:  did not validate resource estimates for schema (schema is not a local file!!)")
     elif args.LOCALSCHEMAS_or_REMOTESCHEMAS == "REMOTESCHEMAS":
         benchmark_data.validate_all_json_objects(
             local_resolver_directory="../schemas",
