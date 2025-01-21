@@ -206,7 +206,53 @@
                     "requirements": {
                         "title": "Performance Requirements",
                         "description": "an object containing the accuracy, precision and runtime requirements for the benchmark.",
-                        "type": "object"
+                        "type": "object",
+                        "required":[
+                            "time_limit_seconds",
+                            "absolute_accuracy_threshold",
+                            "absolute_accuracy_threshold_energy_units",
+                            "reference_energy",
+                            "reference_energy_units"
+                        ],
+                        "properties":{
+                            "time_limit_seconds":{
+                                "title": "Time limit (in seconds)",
+                                "type": "number"
+                            },
+                            "absolute_accuracy_threshold":{
+                                "title": "Absolute accuracy threshold (in units of Hartree)",
+                                "description": "The absolute accuracy threshold in units of Hartree required for a reported solution to 'solve' the problem.  E.g., `reported_energy - reference_energy <= absolute_accuracy_threshold` implies that the reported solution has 'solved' the problem",
+                                "type": "number"
+                            },
+                            "absolute_accuracy_threshold_energy_units":{
+                                "title": "Absolute accuracy threshold units (Hartree)",
+                                "description": "The absolute accuracy threshold units: Hartree.  (The only choice is Hartree at this time.)",
+                                "type": "string",
+                                "enum": [
+                                    "Hartree"
+                                ]
+                            },
+                            "reference_energy":{
+                                "title": "Reference energy (in units of Hartree)",
+                                "description": "The reference energy of the Hamiltonian as determined classically, empirically or otherwise.  If a `reference_energy` is unknown, this may be `null`.",
+                                "oneOf": [
+                                    {
+                                        "type": "number"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ]
+                            },
+                            "reference_energy_units":{
+                                "title": "Reference energy units (Hartree)",
+                                "description": "The reference energy units: Hartree.  (The only choice is Hartree at this time.)",
+                                "type": "string",
+                                "enum": [
+                                    "Hartree"
+                                ]
+                            }
+                        }
                     },
                     "independent_parameters": {
                         "title": "Independent Parameters",
