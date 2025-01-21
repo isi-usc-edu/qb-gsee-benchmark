@@ -1,6 +1,6 @@
 # GSEE Benchmark Standard Report
 
-Report based on data from 2025-01-16T19:10:17.205242+00:00
+Report based on data from 2025-01-21T14:58:48.865624+00:00
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
@@ -8,9 +8,9 @@ Input data: `Hamiltonian_features.csv`, last modified Mon Dec 30 16:29:03 2024
 
 Input data: `GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv`, last modified Thu Jan  9 12:11:19 2025
 
-Latest creation time for a `problem_instance.json` file: Thu Jan 16 11:55:29 2025
+Latest creation time for a `problem_instance.json` file: Tue Jan 21 09:56:18 2025
 
-Latest creation time for a `performance_metrics.json` file: Thu Jan 16 14:12:17 2025
+Latest creation time for a `performance_metrics.json` file: Tue Jan 21 10:00:21 2025
 
 Latest creation time for a `solution.json` file: Thu Jan 16 14:04:59 2025
 
@@ -54,33 +54,33 @@ algorithm_details:SHCI with optimized orbitals followed by SHCI+PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 5ab06b82-39c0-41e1-9612-02744f194e25
+performance_metrics_uuid: dc8c8186-ed41-4390-b91a-788d4b516dcf
 
-creation_timestamp: 2025-01-16T19:10:17.205242+00:00
+creation_timestamp: 2025-01-21T14:58:48.865624+00:00
 
 number_of_problem_instances: 82
 
 number_of_problem_instances_attempted: 41
 
-number_of_problem_instances_solved: 41
+number_of_problem_instances_solved: 14
 
 number_of_tasks: 230
 
 number_of_tasks_attempted: 162
 
-number_of_tasks_solved: 149
+number_of_tasks_solved: 57
 
 number_of_tasks_solved_within_run_time_limit: 162
 
-number_of_tasks_solved_within_accuracy_threshold: 149
+number_of_tasks_solved_within_accuracy_threshold: 57
 
 max_run_time_of_attempted_tasks: 55299.387
 
 sum_of_run_time_of_attempted_tasks: 1138067.4269999997
 
-solvability_ratio: 0.9998
+solvability_ratio: 0.0118
 
-f1_score: [0.5691056910569106, 0.8427299703264095]
+f1_score: [0.9702380952380952, 0.9193548387096774]
 
 ml_metrics_calculator_version: 1
 
@@ -106,33 +106,33 @@ algorithm_details:CCSDT_PLACEHOLDER_algorithm_details
 
 software_details:CCSDT_PLACEHOLDER_software_details
 
-performance_metrics_uuid: 4437d609-d148-434f-98ce-661069b852df
+performance_metrics_uuid: 47b2a55d-3ade-4ac4-ab24-bca4581292cb
 
-creation_timestamp: 2025-01-16T19:10:17.205242+00:00
+creation_timestamp: 2025-01-21T14:58:48.865624+00:00
 
 number_of_problem_instances: 82
 
 number_of_problem_instances_attempted: 4
 
-number_of_problem_instances_solved: 4
+number_of_problem_instances_solved: 0
 
 number_of_tasks: 230
 
 number_of_tasks_attempted: 53
 
-number_of_tasks_solved: 53
+number_of_tasks_solved: 27
 
 number_of_tasks_solved_within_run_time_limit: 53
 
-number_of_tasks_solved_within_accuracy_threshold: 53
+number_of_tasks_solved_within_accuracy_threshold: 27
 
 max_run_time_of_attempted_tasks: 3600.0
 
 sum_of_run_time_of_attempted_tasks: 190800.0
 
-solvability_ratio: 0.0068
+solvability_ratio: 0.0042
 
-f1_score: [1.0, 1.0]
+f1_score: [0.9900497512437811, 0.9310344827586207]
 
 ml_metrics_calculator_version: 1
 
@@ -158,33 +158,33 @@ algorithm_details:CISD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: dcda23b6-0eb0-4da9-a605-b44aa85a6c69
+performance_metrics_uuid: a84a3693-4948-420a-a99a-d61ef8857d7f
 
-creation_timestamp: 2025-01-16T19:10:17.205242+00:00
+creation_timestamp: 2025-01-21T14:58:48.865624+00:00
 
 number_of_problem_instances: 82
 
 number_of_problem_instances_attempted: 82
 
-number_of_problem_instances_solved: 69
+number_of_problem_instances_solved: 8
 
 number_of_tasks: 230
 
 number_of_tasks_attempted: 230
 
-number_of_tasks_solved: 193
+number_of_tasks_solved: 13
 
 number_of_tasks_solved_within_run_time_limit: 230
 
-number_of_tasks_solved_within_accuracy_threshold: 193
+number_of_tasks_solved_within_accuracy_threshold: 13
 
 max_run_time_of_attempted_tasks: 62.58296537399292
 
 sum_of_run_time_of_attempted_tasks: 2895.8530027866364
 
-solvability_ratio: 0.9958
+solvability_ratio: 0.0069
 
-f1_score: [0.8131868131868132, 0.9539295392953929]
+f1_score: [0.9976905311778291, 0.9629629629629629]
 
 ml_metrics_calculator_version: 1
 
@@ -210,33 +210,33 @@ algorithm_details:CCSD(T)
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 87854781-4b5b-46c5-b915-9b83ea8bc162
+performance_metrics_uuid: d416fd3e-9bfb-4f97-8e7b-14e23d66e78b
 
-creation_timestamp: 2025-01-16T19:10:17.205242+00:00
+creation_timestamp: 2025-01-21T14:58:48.865624+00:00
 
 number_of_problem_instances: 82
 
 number_of_problem_instances_attempted: 78
 
-number_of_problem_instances_solved: 71
+number_of_problem_instances_solved: 16
 
 number_of_tasks: 230
 
 number_of_tasks_attempted: 221
 
-number_of_tasks_solved: 195
+number_of_tasks_solved: 44
 
 number_of_tasks_solved_within_run_time_limit: 221
 
-number_of_tasks_solved_within_accuracy_threshold: 195
+number_of_tasks_solved_within_accuracy_threshold: 44
 
 max_run_time_of_attempted_tasks: 493.4080808162689
 
 sum_of_run_time_of_attempted_tasks: 12968.4871737957
 
-solvability_ratio: 1.0
+solvability_ratio: 0.0
 
-f1_score: [0.0, 0.9176470588235294]
+f1_score: [0.8385093167701864, 0.6231884057971014]
 
 ml_metrics_calculator_version: 1
 
@@ -262,33 +262,33 @@ algorithm_details:Hartree Fock
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: f1a801ad-90cd-4c33-98d7-0db4033d37ee
+performance_metrics_uuid: 2fb4b67e-a951-44eb-a224-5969c99d86fe
 
-creation_timestamp: 2025-01-16T19:10:17.205242+00:00
+creation_timestamp: 2025-01-21T14:58:48.865624+00:00
 
 number_of_problem_instances: 82
 
 number_of_problem_instances_attempted: 82
 
-number_of_problem_instances_solved: 56
+number_of_problem_instances_solved: 4
 
 number_of_tasks: 230
 
 number_of_tasks_attempted: 230
 
-number_of_tasks_solved: 174
+number_of_tasks_solved: 4
 
 number_of_tasks_solved_within_run_time_limit: 230
 
-number_of_tasks_solved_within_accuracy_threshold: 174
+number_of_tasks_solved_within_accuracy_threshold: 4
 
 max_run_time_of_attempted_tasks: 20.338801622390747
 
 sum_of_run_time_of_attempted_tasks: 792.8028435707092
 
-solvability_ratio: 0.9977
+solvability_ratio: 0.0
 
-f1_score: [0.8888888888888888, 0.9580838323353293]
+f1_score: [0.9933184855233853, 0.7272727272727273]
 
 ml_metrics_calculator_version: 1
 
@@ -314,33 +314,33 @@ algorithm_details:MP2
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 9289dadd-3c1e-46eb-8fdc-ececc06f5927
+performance_metrics_uuid: 122ed412-3185-4209-997b-c9005e32f702
 
-creation_timestamp: 2025-01-16T19:10:17.205242+00:00
+creation_timestamp: 2025-01-21T14:58:48.865624+00:00
 
 number_of_problem_instances: 82
 
 number_of_problem_instances_attempted: 79
 
-number_of_problem_instances_solved: 69
+number_of_problem_instances_solved: 4
 
 number_of_tasks: 230
 
 number_of_tasks_attempted: 222
 
-number_of_tasks_solved: 193
+number_of_tasks_solved: 4
 
 number_of_tasks_solved_within_run_time_limit: 222
 
-number_of_tasks_solved_within_accuracy_threshold: 193
+number_of_tasks_solved_within_accuracy_threshold: 4
 
 max_run_time_of_attempted_tasks: 2.230440139770508
 
 sum_of_run_time_of_attempted_tasks: 87.6544258594513
 
-solvability_ratio: 0.9958
+solvability_ratio: 0.0
 
-f1_score: [0.8131868131868132, 0.9539295392953929]
+f1_score: [0.9933184855233853, 0.7272727272727273]
 
 ml_metrics_calculator_version: 1
 
@@ -366,33 +366,33 @@ algorithm_details:CCSD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: c4cbf554-6a23-4603-a65b-1e8902b4bedc
+performance_metrics_uuid: 9aee0c75-6c39-4c49-88a1-137030865ce3
 
-creation_timestamp: 2025-01-16T19:10:17.205242+00:00
+creation_timestamp: 2025-01-21T14:58:48.865624+00:00
 
 number_of_problem_instances: 82
 
 number_of_problem_instances_attempted: 78
 
-number_of_problem_instances_solved: 70
+number_of_problem_instances_solved: 8
 
 number_of_tasks: 230
 
 number_of_tasks_attempted: 221
 
-number_of_tasks_solved: 194
+number_of_tasks_solved: 16
 
 number_of_tasks_solved_within_run_time_limit: 221
 
-number_of_tasks_solved_within_accuracy_threshold: 194
+number_of_tasks_solved_within_accuracy_threshold: 16
 
 max_run_time_of_attempted_tasks: 485.1982181072235
 
 sum_of_run_time_of_attempted_tasks: 12029.76450586319
 
-solvability_ratio: 1.0
+solvability_ratio: 0.0101
 
-f1_score: [0.2706766917293233, 0.0]
+f1_score: [1.0, 1.0]
 
 ml_metrics_calculator_version: 1
 
@@ -422,9 +422,9 @@ logical_resource_estimate_solution_uuid:72dea71b-fb03-43f0-8086-eb37605ba3db
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: 4230575a-1659-4082-a570-4edd43498b3a
+performance_metrics_uuid: 268ed7d3-f72d-449a-aef7-d14fe31b9081
 
-creation_timestamp: 2025-01-16T19:10:17.205242+00:00
+creation_timestamp: 2025-01-21T14:58:48.865624+00:00
 
 number_of_problem_instances: 82
 
@@ -474,33 +474,33 @@ algorithm_details:DMRG with the lowest variational energy obtained so far.
 
 software_details:Block2 v0.5.3rc16 with dmrghandler, commit version d603fdc6409fc194a416aa3a519362d5d91790d9 or later.
 
-performance_metrics_uuid: f70d1823-51a8-40d3-9652-e570ee63bf4d
+performance_metrics_uuid: 5d548e5f-1156-4e9b-99bb-d65105fcade7
 
-creation_timestamp: 2025-01-16T19:10:17.205242+00:00
+creation_timestamp: 2025-01-21T14:58:48.865624+00:00
 
 number_of_problem_instances: 82
 
 number_of_problem_instances_attempted: 82
 
-number_of_problem_instances_solved: 45
+number_of_problem_instances_solved: 7
 
 number_of_tasks: 230
 
 number_of_tasks_attempted: 230
 
-number_of_tasks_solved: 174
+number_of_tasks_solved: 46
 
 number_of_tasks_solved_within_run_time_limit: 230
 
-number_of_tasks_solved_within_accuracy_threshold: 174
+number_of_tasks_solved_within_accuracy_threshold: 46
 
 max_run_time_of_attempted_tasks: 80820.729907066
 
 sum_of_run_time_of_attempted_tasks: 2456481.4481055504
 
-solvability_ratio: 0.5138
+solvability_ratio: 0.0226
 
-f1_score: [0.8545454545454545, 0.9542857142857143]
+f1_score: [0.945054945054945, 0.7916666666666666]
 
 ml_metrics_calculator_version: 1
 
