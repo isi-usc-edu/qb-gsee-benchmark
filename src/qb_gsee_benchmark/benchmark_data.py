@@ -517,10 +517,9 @@ class BenchmarkData:
                     # task-specific requirements from `problem_instance`
                     d["calendar_due_date"] = problem_instance["calendar_due_date"] # may be None/null per .json.
                     d["time_limit_seconds"] = task["requirements"]["time_limit_seconds"]
-                    d["accuracy_tol"] = task["requirements"]["accuracy"]
+                    d["accuracy_tol"] = task["requirements"]["absolute_accuracy_threshold"]
                     try:
                         d["reference_energy"] = task["requirements"]["reference_energy"]
-                        # TODO:  account for differences in units.  E.g., Hartree vs. kCal/mol vs. other.
                     except Exception as e:
                         logging.error(f'Error: {e}', exc_info=True)
                         logging.warning(f"warning!  no reference_energy specified in task {task_uuid}")

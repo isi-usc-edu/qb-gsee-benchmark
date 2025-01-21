@@ -16,6 +16,8 @@
 # limitations under the License.
 
 
+from qb_gsee_benchmark.utils import validate_json
+
 
 import json
 import sys
@@ -29,6 +31,11 @@ import jsonschema
 
 
 input_directory = "../../problem_instances"
+
+local_schema_file = "../../schemas/problem_instance.schema.0.0.1.json"
+with open(local_schema_file, "r") as schema_file:
+    schema = json.load(schema_file)
+local_resolver_directory = "../../schemas"
 
 output_directory = "../../problem_instances"
 
@@ -47,6 +54,15 @@ for json_file in json_files:
             problem_instance["tasks"][i]["requirements"]["reference_energy_units"] = "Hartree"
             print("added None as reference energy.")
     
+
+    validate_json(
+        json_dict=problem_instance,
+        schema=schema,
+        local_resolver_directory="../../schemas"
+    )
+
+
+
     ########################################################
     #### write out the updated .json file
     output_json_file_path = os.path.join(output_directory, json_file)
