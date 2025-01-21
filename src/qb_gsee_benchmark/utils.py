@@ -119,8 +119,19 @@ def retrieve_fcidump_from_sftp(url: str, username: str, ppk_path: str, port=22) 
 
 
 
-
-
+def validate_list_of_json_objects(
+        json_object_list: list,
+        local_resolver_directory: str,
+        local_schema_file: dict=None
+    ) -> None:
+    """TODO: docstring.  no output implies success!
+    """
+    for json_dict in json_object_list:
+        validate_json(
+            json_dict=json_dict,
+            schema=local_schema_file,
+            local_resolver_directory=local_resolver_directory
+        )
 
 
 

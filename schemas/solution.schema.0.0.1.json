@@ -75,7 +75,9 @@
             "items": {
                 "type": "object",
                 "required": [
-                    "task_uuid"
+                    "task_uuid",
+                    "energy",
+                    "energy_units"
                 ],
                 "properties": {
                     "task_uuid": {
@@ -84,13 +86,15 @@
                     },
                     "energy": {
                         "title": "Energy",
-                        "description": "The Ground State Energy.",
+                        "description": "The Ground State Energy as reported by the solver in Hartree.",
                         "type": "number"
                     },
                     "energy_units": {
-                        "title": "Energy Units",
-                        "description": "units.  E.g., `kcal/mol`",
-                        "type": "string"
+                        "title": "Energy Units (Hartree)",
+                        "description": "The energy units of the ground-state energy reported by the solver: Hartree.  (The only choice is Hartree at this time.)",
+                        "enum":[
+                            "Hartree"
+                        ]
                     },
                     "error_bound": {
                         "title": "Error Bound",
@@ -419,6 +423,7 @@
                     "items": {
                         "required": [
                             "energy",
+                            "energy_units",
                             "run_time"
                         ],
                         "properties": {

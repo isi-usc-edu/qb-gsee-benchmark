@@ -54,6 +54,8 @@ def main(args: argparse.Namespace) -> None:
     print(f"All JSON files are OK!")
 
 
+
+
     if args.DRYRUN_or_PRODUCTION == "DRYRUN":
         temp_results_dir = "temp_results"
         clear_or_create_output_directory(temp_results_dir)
@@ -68,7 +70,7 @@ def main(args: argparse.Namespace) -> None:
             benchmark_data=benchmark_data,
             standard_report_output_directory=os.path.join(temp_results_dir,"standard_report")
         )
-    else:
+    elif args.DRYRUN_or_PRODUCTION == "PRODUCTION":
         benchmark_data.write_performance_metrics_json_files(
             output_directory=benchmark_data.performance_metrics_directory
         )
@@ -80,6 +82,8 @@ def main(args: argparse.Namespace) -> None:
             benchmark_data=benchmark_data,
             standard_report_output_directory="../standard_report"
         )
+    else:
+        print("No action taken.  Select: DRYRUN or PRODUCTION.")
 
     print(benchmark_data)
 
