@@ -74,10 +74,13 @@ def get_physical_cost(
             cost_function=(lambda pc: pc.duration_hr),
         )
         return best_cost, best_factory, best_data_block
-    except TypeError:
-        raise NoFactoriesFoundError(
-            f"No factories found that meet the performance requirements."
-        )
+    except ValueError as e:
+        if str(e) == "No valid factories found!":
+            raise NoFactoriesFoundError(
+                f"No factories found that meet the performance requirements."
+            )
+        else:
+            raise e
 
 
 def get_pqre(solution_lre: dict, config: dict) -> dict[str, Any]:
@@ -124,7 +127,12 @@ def get_pqre(solution_lre: dict, config: dict) -> dict[str, Any]:
             logging.info(
                 f"Physical resource estimation time: {(physical_resource_estimation_end - physical_resource_estimation_start).total_seconds()} seconds."
             )
-            algorithm_runtime_seconds = cost.duration_hr * 60 * 60
+            algorithm_runtime_seconds = (
+                cost.duration_hr
+                * 60
+                * 60
+                * task_solution["quantum_resources"]["logical"]["num_shots"]
+            )
             num_physical_qubits = cost.footprint
             task_solution["run_time"]["algorithm_run_time"] = {
                 "seconds": algorithm_runtime_seconds,
