@@ -1,0 +1,1017 @@
+{
+    "problem_instance_uuid": "614c4444-a31a-4348-b24d-01040208651c",
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+    "problem_type": "GSEE",
+    "application_domain": "QC",
+    "creation_timestamp": "2025-01-16T15:49:24.971414+00:00",
+    "calendar_due_date": null,
+    "status": "in_force",
+    "superseded_by": null,
+    "contact_info": [
+        {
+            "name": "Matthew Otten",
+            "email": "mjotten@wisc.edu",
+            "institution": "University of Wisconsin -- Madison"
+        }
+    ],
+    "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "references": [
+        "Dian Wu et al., Variational benchmarks for quantum many-body problems. Science 386, 296-301(2024). DOI:10.1126/science.adg9774"
+    ],
+    "tasks": [
+        {
+            "task_uuid": "0a4f3801-33b8-4e3f-89a9-d5c7d6ef9b4a",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 3.5981,
+                "boundary": "peri",
+                "Nf": 4,
+                "ms": 0,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -17.698030018702067,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "bb8a78a4-b713-4c02-b86d-cb7502090249",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_3.5981_ms_0.bb8a78a4-b713-4c02-b86d-cb7502090249.gz",
+                    "instance_data_checksum": "6b8db82a7a2736ff53e20f3bc376a17e52e0be6a",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "5701d5dc-a1cb-4ea3-95cc-b051e6af73d6",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 3.5981,
+                "boundary": "peri",
+                "Nf": 4,
+                "ms": 2,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -17.6319921632942,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+                "reference_energy_method": "SHCI and DMRG"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "ed72b6c5-cf46-45d0-b22a-05298a5fce99",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_3.5981_ms_2.ed72b6c5-cf46-45d0-b22a-05298a5fce99.gz",
+                    "instance_data_checksum": "dae30523142a18655595251f0b8dfc4e338f159e",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "5ed34541-f69a-4ca7-8779-cdb79c36d135",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 8.0,
+                "boundary": "peri",
+                "Nf": 5,
+                "ms": 0,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -17.51036669487866,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "8918cb29-a347-4e7c-8560-062dc55d8184",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_8.0_ms_0.8918cb29-a347-4e7c-8560-062dc55d8184.gz",
+                    "instance_data_checksum": "885dc9a49cea0b9eb6c6bb66a0fcb714360bfe12",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "ae13b614-f16a-43f2-9270-ab6c7203bd3b",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 8.0,
+                "boundary": "peri",
+                "Nf": 5,
+                "ms": 2,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -16.4107090022809,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+                "reference_energy_method": "SHCI and DMRG"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "3fd2d6b8-5271-4a68-b867-95754131e856",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_8.0_ms_2.3fd2d6b8-5271-4a68-b867-95754131e856.gz",
+                    "instance_data_checksum": "a347c87c7fc5bcfcd2535d69dd7d6f4b5f3173d4",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "a31d14b2-0bc9-4966-b52b-807f4e0c40b0",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 6.0,
+                "boundary": "peri",
+                "Nf": 4,
+                "ms": 0,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -16.899926630974996,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "6cc38b2e-2fab-42bb-bf98-a7908b056061",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_6.0_ms_0.6cc38b2e-2fab-42bb-bf98-a7908b056061.gz",
+                    "instance_data_checksum": "fba4561aa0cd69c57bfe73e7e93de84e4e926366",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "5b8ca880-1666-4305-83d8-ff0882f875ce",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 6.0,
+                "boundary": "peri",
+                "Nf": 4,
+                "ms": 2,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -16.7966464178731,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+                "reference_energy_method": "SHCI and DMRG"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "387e4f43-b06a-48d0-bd84-113980aae15d",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_6.0_ms_2.387e4f43-b06a-48d0-bd84-113980aae15d.gz",
+                    "instance_data_checksum": "69128bc04801e4920f735ea103c2c7b5923d4065",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "1d0de371-0d29-4da9-9e09-f2f25a2a4d77",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 4.0,
+                "boundary": "peri",
+                "Nf": 5,
+                "ms": 0,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -19.580937525419095,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "04bb1db7-6c6a-4b65-96cc-7037ca2e89ae",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_4.0_ms_0.04bb1db7-6c6a-4b65-96cc-7037ca2e89ae.gz",
+                    "instance_data_checksum": "0e8cb4ec72ecebd8bd01a0cfa5a01246636c3193",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "11dee35c-fadc-4813-8393-d81b91abae75",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 4.0,
+                "boundary": "peri",
+                "Nf": 5,
+                "ms": 2,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -18.1740136323583,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+                "reference_energy_method": "SHCI and DMRG"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "56e75d82-f441-49eb-98e2-05625e301627",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_4.0_ms_2.56e75d82-f441-49eb-98e2-05625e301627.gz",
+                    "instance_data_checksum": "35d4cfe847cbbb977d2a0198f40574ba1a3041b2",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "0a7cc9c9-c999-4564-b93a-39498416942f",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 8.0,
+                "boundary": "peri",
+                "Nf": 4,
+                "ms": 0,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -16.46062675368178,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "cd729f30-f623-409f-8f06-d46fa971e268",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_8.0_ms_0.cd729f30-f623-409f-8f06-d46fa971e268.gz",
+                    "instance_data_checksum": "1476d751366aac0cd3377eda14900dda2e272086",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "85ee9159-e41c-4cda-b8b6-326cc11cf6a2",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 8.0,
+                "boundary": "peri",
+                "Nf": 4,
+                "ms": 2,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -16.3383132376898,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+                "reference_energy_method": "SHCI and DMRG"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "5add677d-7310-4138-8278-dfed143a3f72",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_8.0_ms_2.5add677d-7310-4138-8278-dfed143a3f72.gz",
+                    "instance_data_checksum": "c23b3792c3ab42c0e69778f2753439a60719ee0e",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "5c16cc3c-7fae-48ff-acf1-80cefb5da544",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 6.0,
+                "boundary": "peri",
+                "Nf": 5,
+                "ms": 0,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -18.358365074454827,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "a238383a-5a6e-4556-9177-f1517f9dba23",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_6.0_ms_0.a238383a-5a6e-4556-9177-f1517f9dba23.gz",
+                    "instance_data_checksum": "ba155940f1a0f05100ee50b8d8740bd05aae4e06",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "3e55e04b-968e-4e69-83e6-30006e2217af",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 6.0,
+                "boundary": "peri",
+                "Nf": 5,
+                "ms": 2,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -17.1321291762755,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+                "reference_energy_method": "SHCI and DMRG"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "e5134e89-565d-4f6b-bb4a-67e0ee2eb76a",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_6.0_ms_2.e5134e89-565d-4f6b-bb4a-67e0ee2eb76a.gz",
+                    "instance_data_checksum": "bc0155ba75bac45d03719f6493132c7c5b822a8e",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "6a495f07-1a27-4ff1-b428-045e99d471d9",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 2.0,
+                "boundary": "peri",
+                "Nf": 5,
+                "ms": 0,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -21.376950984458336,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "54221e8e-23c1-40a1-835a-23e14d5dbced",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_2.0_ms_0.54221e8e-23c1-40a1-835a-23e14d5dbced.gz",
+                    "instance_data_checksum": "55ecd7dc441b3daddc3fe4245d63f32ac0067df7",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "69141746-d69a-420a-bb6d-c4757dd181bc",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 2.0,
+                "boundary": "peri",
+                "Nf": 5,
+                "ms": 2,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -19.7152889366722,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+                "reference_energy_method": "SHCI and DMRG"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "5589b026-97bf-4c09-9a1c-396e43db12e3",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_2.0_ms_2.5589b026-97bf-4c09-9a1c-396e43db12e3.gz",
+                    "instance_data_checksum": "61d05915544e4b60cc498c609ae70b3466d10f30",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "bf74bd34-2115-4c60-9843-016a1571da70",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 3.5981,
+                "boundary": "peri",
+                "Nf": 5,
+                "ms": 0,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -19.891637199948672,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "9cb686f1-8506-430c-a4be-90defa4ba296",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_3.5981_ms_0.9cb686f1-8506-430c-a4be-90defa4ba296.gz",
+                    "instance_data_checksum": "f717b4879ed49580c1c5df2589e69354cb540ac3",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "551ad48b-a6d7-4b56-b9b3-ddfe03e85b9a",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 3.5981,
+                "boundary": "peri",
+                "Nf": 5,
+                "ms": 2,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -18.4366455092245,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+                "reference_energy_method": "SHCI and DMRG"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "63a712cf-631f-4edc-937e-0e51365b0b52",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_3.5981_ms_2.63a712cf-631f-4edc-937e-0e51365b0b52.gz",
+                    "instance_data_checksum": "d5dd6801c66a2496b0afbb5d8ae9dcb4084a32b3",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "7f9dce03-6492-4ed4-84af-a366c7aa4963",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 2.1544,
+                "boundary": "peri",
+                "Nf": 5,
+                "ms": 0,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -21.21223577699911,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "0986452e-c6f6-44f9-af65-a07d79cddd4d",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_2.1544_ms_0.0986452e-c6f6-44f9-af65-a07d79cddd4d.gz",
+                    "instance_data_checksum": "c3f936c7fbf22983449bc64aa0c5fde37286d1c8",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "3340fb5c-ad9b-4766-824f-a3387504291e",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 2.1544,
+                "boundary": "peri",
+                "Nf": 5,
+                "ms": 2,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -19.5732821734844,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+                "reference_energy_method": "SHCI and DMRG"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "3dfa2668-82f0-4b1e-9f63-20ddd8ad33e6",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_2.1544_ms_2.3dfa2668-82f0-4b1e-9f63-20ddd8ad33e6.gz",
+                    "instance_data_checksum": "5a796a58064e7c77a6805492b16bbd4cb6926da9",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "536630f4-628c-48cb-951c-6bde776695d0",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 7.74264,
+                "boundary": "peri",
+                "Nf": 4,
+                "ms": 0,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -16.509154825265142,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "662b1435-59af-4aa6-b1d5-491dc7d0c8de",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_7.74264_ms_0.662b1435-59af-4aa6-b1d5-491dc7d0c8de.gz",
+                    "instance_data_checksum": "49856432f205615567da71ed7c8b7c1869a52b85",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "f76b7888-eae2-466d-b0b9-616691b6c5ab",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 7.74264,
+                "boundary": "peri",
+                "Nf": 4,
+                "ms": 2,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -16.3887626099126,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+                "reference_energy_method": "SHCI and DMRG"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "7595f80d-524f-4adc-b245-9b29b2fb70f8",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_7.74264_ms_2.7595f80d-524f-4adc-b245-9b29b2fb70f8.gz",
+                    "instance_data_checksum": "aeda1e4155518cfe19ae91c62571440d1b70ad25",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "015fac89-f9df-48a9-b96f-769c287e107f",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 10.0,
+                "boundary": "peri",
+                "Nf": 4,
+                "ms": 0,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -16.143208170202413,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "e30d9005-5d15-4cd1-8a57-7deb81e1c627",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_10.0_ms_0.e30d9005-5d15-4cd1-8a57-7deb81e1c627.gz",
+                    "instance_data_checksum": "3a0eab631e33d7c63f6a74083bd7d4b1267d4134",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "80d23438-84c9-4f68-841e-d39a0aa5779f",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 10.0,
+                "boundary": "peri",
+                "Nf": 4,
+                "ms": 2,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -16.0098268759767,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+                "reference_energy_method": "SHCI and DMRG"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "0bafc6da-d16e-4546-948a-23b6b0f65473",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_10.0_ms_2.0bafc6da-d16e-4546-948a-23b6b0f65473.gz",
+                    "instance_data_checksum": "d70bf5815257874df9bf13e50712ca93f18ff05b",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "c3fcc49a-bd14-44c0-ae50-c07b334266ce",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 7.74264,
+                "boundary": "peri",
+                "Nf": 5,
+                "ms": 0,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -17.60373155517909,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "5466bd97-e326-47ae-bedc-ff3f0297afd9",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_7.74264_ms_0.5466bd97-e326-47ae-bedc-ff3f0297afd9.gz",
+                    "instance_data_checksum": "76f0bf53ca5f139eb9243d2865d74cadb7f71cd8",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "4c61ca43-aea8-4ec1-a1ec-63a65f92cf54",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 7.74264,
+                "boundary": "peri",
+                "Nf": 5,
+                "ms": 2,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -16.4901603882080,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+                "reference_energy_method": "SHCI and DMRG"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "0d4a0e25-e49b-4d5f-9d73-d849ab83cc35",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_7.74264_ms_2.0d4a0e25-e49b-4d5f-9d73-d849ab83cc35.gz",
+                    "instance_data_checksum": "b06035cdccef99f37bcd0bc00cb4d1407b3aa5bd",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "760ef1da-42a2-4af4-a1be-62e2203e1327",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 10.0,
+                "boundary": "peri",
+                "Nf": 5,
+                "ms": 0,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -16.903559984243547,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "94fbcc3e-873b-49f4-9972-39a397b93e51",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_10.0_ms_0.94fbcc3e-873b-49f4-9972-39a397b93e51.gz",
+                    "instance_data_checksum": "84cefc0b407e988abed0cf5f1323766156df47a5",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "53298955-9478-407f-ad45-e9a7b67f860d",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 10.0,
+                "boundary": "peri",
+                "Nf": 5,
+                "ms": 2,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -15.9007081986970,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+                "reference_energy_method": "SHCI and DMRG"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "0ef97510-fe25-4fb2-90e4-1305ff735c71",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_5_U_10.0_ms_2.0ef97510-fe25-4fb2-90e4-1305ff735c71.gz",
+                    "instance_data_checksum": "266b3b524cce44a88a210ed6fc1d036b9fa78afb",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "92c0868c-00eb-466a-877e-4550670b53bf",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 4.0,
+                "boundary": "peri",
+                "Nf": 4,
+                "ms": 0,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -17.534897796641197,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "deea4707-b5bb-4c8d-82e3-3b1e20846be1",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_4.0_ms_0.deea4707-b5bb-4c8d-82e3-3b1e20846be1.gz",
+                    "instance_data_checksum": "6cae7cb62de98ce26e2089768f31f4e6df735b8f",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "63d014e9-8e0a-47bc-b765-f080100e325b",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 4.0,
+                "boundary": "peri",
+                "Nf": 4,
+                "ms": 2,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -17.4627440213496,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+                "reference_energy_method": "SHCI and DMRG"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "effea241-7e09-495d-ae32-cd8e752a8f8b",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_4.0_ms_2.effea241-7e09-495d-ae32-cd8e752a8f8b.gz",
+                    "instance_data_checksum": "c74019e75788dbd6c9f716d0b787a2ecb0323726",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "c02180a4-329c-4381-8735-b60e26b5b48c",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 2.0,
+                "boundary": "peri",
+                "Nf": 4,
+                "ms": 0,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -18.495436619460737,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "https://github.com/varbench/varbench",
+                "reference_energy_method": "Exact Diagonalization"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "4b769605-9959-436b-b448-5284cf4832e5",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_2.0_ms_0.4b769605-9959-436b-b448-5284cf4832e5.gz",
+                    "instance_data_checksum": "c28f16da7e3a4a04178c85436483868e70b3d018",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
+        {
+            "task_uuid": "b34333c1-7ce1-41ab-abd9-8586bcf2b457",
+            "features": {
+                "software_used": "Netket 3.15.2",
+                "system_name": "Hubbard Model Square",
+                "geometry": "square",
+                "ham_dim": 2,
+                "L": 4,
+                "U": 2.0,
+                "boundary": "peri",
+                "Nf": 4,
+                "ms": 2,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 172800,
+                "accuracy": 1.0,
+                "energy_units": "hartree",
+                "reference_energy": -18.4661887419488,
+                "reference_energy_units": "hartree",
+                "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+                "reference_energy_method": "SHCI and DMRG"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "b8140a6a-f451-4ee9-9c0b-699d1ae5b91a",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_2.0_ms_2.b8140a6a-f451-4ee9-9c0b-699d1ae5b91a.gz",
+                    "instance_data_checksum": "a40fb8f018ff36dd8753b1337c765ed49fb19092",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        }
+    ],
+    "short_name": "hubbard_square"
+}
