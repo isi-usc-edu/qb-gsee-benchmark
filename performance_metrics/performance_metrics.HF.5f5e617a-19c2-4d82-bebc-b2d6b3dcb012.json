@@ -1,26 +1,26 @@
 {
     "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/performance_metrics.schema.0.0.1.json",
-    "performance_metrics_uuid": "2fb4b67e-a951-44eb-a224-5969c99d86fe",
+    "performance_metrics_uuid": "a1db1491-8349-4ed0-8320-20a5ab6d7eba",
     "solver_short_name": "HF",
     "solver_uuid": "5f5e617a-19c2-4d82-bebc-b2d6b3dcb012",
-    "creation_timestamp": "2025-01-21T14:58:48.865624+00:00",
+    "creation_timestamp": "2025-01-21T21:29:50.150187+00:00",
     "ml_metrics": {
         "solvability_ratio": 0.0,
         "f1_score": [
-            0.9933184855233853,
-            0.7272727272727273
+            0.9955357142857143,
+            0.8333333333333334
         ],
         "ml_metrics_calculator_version": 1
     },
     "top_level_results": {
         "number_of_problem_instances": 82,
         "number_of_problem_instances_attempted": 82,
-        "number_of_problem_instances_solved": 4,
+        "number_of_problem_instances_solved": 5,
         "number_of_tasks": 230,
         "number_of_tasks_attempted": 230,
-        "number_of_tasks_solved": 4,
+        "number_of_tasks_solved": 5,
         "number_of_tasks_solved_within_run_time_limit": 230,
-        "number_of_tasks_solved_within_accuracy_threshold": 4,
+        "number_of_tasks_solved_within_accuracy_threshold": 5,
         "max_run_time_of_attempted_tasks": 20.338801622390747,
         "sum_of_run_time_of_attempted_tasks": 792.8028435707092
     },
@@ -523,8 +523,8 @@
             "number_of_tasks": 1,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 1,
-            "number_of_tasks_solved_within_accuracy_requirement": 0,
-            "number_of_tasks_solved": 0,
+            "number_of_tasks_solved_within_accuracy_requirement": 1,
+            "number_of_tasks_solved": 1,
             "sum_of_run_time_of_attempted_tasks": 0.7541923522949219,
             "max_run_time_of_attempted_tasks": 0.7541923522949219,
             "solution_submitted_by_due_date": true
@@ -1645,8 +1645,8 @@
             "solution_uuid": "22846863-d921-4b86-9310-ef35cebb7b09",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
             "overall_run_time_seconds": 0.7541923522949219
         },
         {
