@@ -1,7 +1,7 @@
 # QB-GSEE-Benchmark
 
 QB-GSEE-Benchmark is a comprehensive suite for benchmarking Ground State Energy Estimation (GSEE) algorithms.  QB-GSEE-Benchmark was developed by the DARPA Quantum Benchmarking (QB) Program. This tool enables performers to run a subset of Hamiltonian instances and assess the performance of their algorithms in terms of accuracy, runtime, and hardware utilization.  Although this work was developed for the Quantum Benchmarking program, the benchmark is hardware agnostic and classical computing algorithm/hardware developers are encouraged to participate.
-
+ 
 ## What is QB-GSEE-Benchmark?
 
 This repository includes:
