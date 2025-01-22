@@ -54,6 +54,17 @@ def main(args: argparse.Namespace) -> None:
     print(f"All JSON files are OK!")
 
 
+    if args.SHAP_analysis:
+        for solver_uuid in benchmark_data.ml_models_dict:
+            benchmark_data.ml_models_dict[solver_uuid].run_shap_analysis()
+    
+    for solver_uuid in benchmark_data.ml_models_dict:
+        benchmark_data.ml_models_dict[solver_uuid].write_all_plots()
+        benchmark_data.ml_models_dict[solver_uuid].write_probs_to_file()
+        
+            
+
+
 
 
     if args.DRYRUN_or_PRODUCTION == "DRYRUN":
@@ -105,6 +116,12 @@ if __name__ == "__main__":
         "DRYRUN_or_PRODUCTION", 
         type=str, 
         help="typing DRYRUN places results in a temporary folder nearby for review.  PRODUCTION overwrites results."
+    )
+    parser.add_argument(
+        "--SHAP_analysis",
+        action="store_true",
+        default=False,
+        help="Run SHAP analysis and generate SHAP plots for ML models (WARNING: Take a long time!!)"
     )
 
 

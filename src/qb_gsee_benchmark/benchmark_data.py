@@ -36,6 +36,7 @@ from qb_gsee_benchmark.utils import find_dict_with_matching_kv_pair
 from qb_gsee_benchmark.utils import data_frame_vlookup
 from qb_gsee_benchmark.utils import iso8601_timestamp
 from qb_gsee_benchmark.utils import validate_json
+from qb_gsee_benchmark.mini_ml import MiniML
 
 
 
@@ -332,43 +333,43 @@ class BenchmarkData:
 
 
 
-    def calculate_ml_scores(self) -> dict:
+    def calculate_ml_scores(
+            self,
+        ) -> dict:
         """TODO: `miniML.py` takes about 15 minutes.
 
         Returns:
             dict: _description_
         """
 
-        # TODO: better integration with miniML in the future.
-        import sys
-        sys.path.append("../")
-        sys.path.append("../BubbleML/miniML")
-        sys.path.append("../../BubbleML/miniML")
-        # miniML methods from this repo:
-        # NOTE: renaming `main` function as `miniML` during import.
-        from miniML import main as miniML
-
         ml_scores_dict = {}
+        ml_models_dict = {}
         for solver_uuid in self.solvers_dict:
-            solver = self.solvers_dict[solver_uuid]
-            solver_labels_file_name = f"solver_labels.{solver['solver_short_name']}.{solver_uuid}.csv"
             df = self.aggregated_solver_labels_df
             df = df[df["solver_uuid"]==solver_uuid] # filter df to only solver_uuid
-            df.to_csv(solver_labels_file_name) # write out to file
+            # solver = self.solvers_dict[solver_uuid]
+            # solver_labels_file_name = f"solver_labels.{solver['solver_short_name']}.{solver_uuid}.csv"
+            # df.to_csv(solver_labels_file_name) # write out to file
 
-            solvability_ratio, f1_score = miniML(argparse.Namespace(
-                ham_features_file=self.hamiltonian_features_csv_file_name,
-                config_file="../BubbleML/miniML/miniML_config.json", # TODO: expose argument or put it in a config file.
-                solver_uuid=solver_uuid,
-                solver_labels_file=solver_labels_file_name,
-                verbose=True # output plots and `probs`.
-            ))
+            mini_ml_model = MiniML(
+                solver_labels_by_task_uuid=df,
+                hamiltonian_features_by_task_uuid=self.hamiltonian_features    
+            )
+
+            # SHAP is optionally called later.
+            mini_ml_model.write_all_plots()
+            mini_ml_model.write_probs_to_file()
+            
+            
             ml_scores_dict[solver_uuid] = {
-                "solvability_ratio":solvability_ratio,
-                "f1_score":list(f1_score),
-                "ml_metrics_calculator_version":1
+                "solvability_ratio":mini_ml_model.ml_solvability_ratio,
+                "f1_score":list(mini_ml_model.f1_score),
+                "ml_metrics_calculator_version":1,
             }
+            ml_models_dict[solver_uuid] = mini_ml_model # TODO: currently storing the all MiniML model.
+
         self.ml_scores_dict = ml_scores_dict # update in place
+        self.ml_models_dict = ml_models_dict # update in place
         return self.ml_scores_dict # return for other usage.
         
 

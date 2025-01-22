@@ -56,7 +56,7 @@ import shap
 
 
 # global parameters
-RNG_SEED = 42
+RNG_SEED = 6
 FEATURES = [
     "max_vertex_degree",
     "min_vertex_degree",
@@ -82,6 +82,7 @@ UNUSED_FEATURES = [
 THRESHOLD_FOR_CONFIDENCE_OF_SOLVABILITY = 0.5
 LATENT_MODEL_NAME = "NNMF" # only NNMF is supported at this time.
 MODEL_NAME = "SVM" # only SVM is supported at this time.
+KFOLD_NUM = 5
 HYPOPT_CV = True
 PARAM_GRID = {'C': [0.001, 0.1, 0.5, 1, 10, 50, 100],  
             'gamma': [1, 0.1, 0.01, 0.001, 0.0001], 
@@ -105,16 +106,18 @@ class MiniML:
         self.latent_model_name = LATENT_MODEL_NAME
         self.model_name = MODEL_NAME
         self.hypopt_cv = HYPOPT_CV
+        self.param_grid = PARAM_GRID
+        self.kfold_num = KFOLD_NUM
         self.threshold_for_confidence_of_solvability = THRESHOLD_FOR_CONFIDENCE_OF_SOLVABILITY                
         self.solver_labels = pd.merge(
             hamiltonian_features_by_task_uuid,
             solver_labels_by_task_uuid,
             on="task_uuid",
             how="inner",
-            suffixes="_duplicate_column"
+            suffixes=("","_duplicate_column")
         )
-        self.param_grid = PARAM_GRID
-        self.kfold_num = 5
+
+        self.solver_labels.to_csv("ml_debug_solver_labels.csv", index=False)
 
         # order of operations matters!
         self.__validate_input_labels()
@@ -127,14 +130,6 @@ class MiniML:
         self.__get_projected_data()
         self.__compute_ratio_of_solved_to_unsolved()
 
-        
-        
-        # self.model = None
-        # self.f1_score = None 
-        # self.ml_solvability_ratio = None 
-        # self.shap_plot = None
-        # self.solvability_plot = None 
-        
         
 
 
@@ -174,16 +169,17 @@ class MiniML:
     def __filter_labels(self) -> None:
         """TODO: docstring.
         """
-        self.X = self.solver_labels[:,FEATURES]
-        self.Y = self.solver_labels[:,"label"] # column header is `label`
+        self.X = self.solver_labels.loc[:,FEATURES]
+        self.Y = self.solver_labels.loc[:,"label"] # column header is `label`
         
 
     def __shuffle_labels(self) -> None:
         """TODO: docstring.
         """
-        row_index_permutation_list = random.shuffle(list(range(len(self.X))))
+        row_index_permutation_list = list(range(len(self.X)))
+        random.shuffle(row_index_permutation_list)
         self.X = self.X.iloc[row_index_permutation_list,:]
-        self.Y = self.Y.iloc[row_index_permutation_list,:]
+        self.Y = self.Y[row_index_permutation_list]
 
 
 
@@ -205,9 +201,9 @@ class MiniML:
         """TODO:docstring
         """
         self.X_train = self.X # TODO: ask Rashmi about this.  seems to flip flop.
-        self.Y_train = self.Y # TODO: ask rashmi about this... are we just using all X/Y data for training?
+        self.Y_train = self.Y # TODO: ask rashmi about this... are we just using all X/Y data for training?  don't actually scale Y... already 0/1.
         self.standard_scaler = StandardScaler()
-        self.X_sc = self.standard_scaler.fit_transform(self.X_train)
+        self.X_scaled = self.standard_scaler.fit_transform(self.X_train)
 
 
 
@@ -223,7 +219,7 @@ class MiniML:
         self.model.probability = True
 
         #SVM on centered and scaled data
-        self.X_train = self.X_sc # TODO: ask Rashmi about this.  seems to flip flop.
+        self.X_train = self.X_scaled # TODO: ask Rashmi about this.  seems to flip flop.
 
         if self.hypopt_cv: # TODO: maybe break this into a separate method.
             self.model = GridSearchCV(
@@ -302,7 +298,8 @@ class MiniML:
             ha='right'
         )
         plt.tight_layout()
-        self.nnmf_figure = fig
+        self.nnmf_plot = fig
+        self.nnmf_plot_file_name = f"nnmf_plot_solver_{self.solver_uuid}.png"
 
         self.reconstruction_error = np.sqrt(
             np.sum(
@@ -384,6 +381,7 @@ class MiniML:
         cbar.set_label("Probability that solver can estimate GSE (label==True)",rotation=270,x=1.25)
         plt.title(f"Solver {self.solver_short_name} ({self.solver_uuid[0:4]}...)\nEmbedding: {self.latent_model_name})")
         self.solvability_surface_plot = fig
+        self.solvability_surface_plot_file_name = f"plot_solver_{self.solver_uuid}.png"
         
         '''
         TODO: ask Rashmi:  not doing this.  # Select the top 5 most important features
@@ -402,32 +400,34 @@ class MiniML:
 
 
 
-    def __run_shap(self):
+    def run_shap_analysis(self):
         """TODO:docstring
         """
+        print("TODO: SHAP IS NOT IMPLEMENTED AT THIS TIME.")
         pass
 
     def write_all_plots(self) -> None:
         """TODO: docstring
         """
-        pass
+
+        output_file_name = os.path.join("./ml-artifacts/",self.solvability_surface_plot_file_name)
+        self.solvability_surface_plot_file_name.savefig(output_file_name)
+
+        output_file_name = os.path.join("./ml-artifacts/",self.nnmf_plot_file_name)
+        self.nnmf_plot.savefig(output_file_name)
+
+        try:
+            output_file_name = os.path.join("./ml-artifacts/",self.shap_plot_file_name)
+            self.shap_plot.savefig(output_file_name)
+        except Exception as e:
+            logging.error(f"Error: failed to write SHAP plot.  Did you run SHAP analysis?")
 
 
-    def write_shap_plot_to_png_file(self, output_file_name: str) -> None:
-        """TODO:docstring
-        """
-        pass
 
-    def write_solvability_plot_to_png_file(self, output_file_name: str) -> None:
-        """TODO:docstring
-        """
-        pass
+    
 
-    def write_probs_to_file(self, output_file_name: str) -> None:
+    def write_probs_to_file(self) -> None:
         """_summary_
-
-        Args:
-            output_file_name (str): _description_
         """
         Y_predicted = self.model.predict(self.X_train)
         self.probs = self.model.predict_proba(self.X_train)
@@ -442,6 +442,8 @@ class MiniML:
                 "prob_class_1": self.probs[:,1]
             }
         )
+
+        output_file_name = os.path.join("./ml-artifacts/",f"probs_solver_{self.solver_uuid}.csv")
         df.to_csv(output_file_name, index=False)
     
     
