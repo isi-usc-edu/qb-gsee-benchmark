@@ -46,6 +46,9 @@ from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import GridSearchCV
 
 import matplotlib.pyplot as plt
+from matplotlib.colors import LinearSegmentedColormap
+from matplotlib.colors import Normalize
+
 from scipy.spatial import ConvexHull
 from sklearn.preprocessing import StandardScaler
 from sklearn.feature_selection import RFE
@@ -84,9 +87,11 @@ LATENT_MODEL_NAME = "NNMF" # only NNMF is supported at this time.
 MODEL_NAME = "SVM" # only SVM is supported at this time.
 KFOLD_NUM = 5
 HYPOPT_CV = True
-PARAM_GRID = {'C': [0.001, 0.1, 0.5, 1, 10, 50, 100],  
-            'gamma': [1, 0.1, 0.01, 0.001, 0.0001], 
-            'kernel': ['rbf', 'poly', 'linear']} 
+PARAM_GRID = {
+    'C': [0.001, 0.1, 0.5, 1, 10, 50, 100],  
+    'gamma': [1, 0.1, 0.01, 0.001, 0.0001], 
+    'kernel': ['rbf', 'poly', 'linear']
+} 
 
 
 
@@ -122,7 +127,7 @@ class MiniML:
         # order of operations matters!
         self.__validate_input_labels()
         self.__filter_labels()
-        self.__shuffle_labels()
+        # self.__shuffle_labels() # TODO: test shuffling.
         self.__remove_zero_variance_columns()
         self.__scale_data()
         self.__train_model()
@@ -171,15 +176,15 @@ class MiniML:
         """
         self.X = self.solver_labels.loc[:,FEATURES]
         self.Y = self.solver_labels.loc[:,"label"] # column header is `label`
+        self.Y = self.Y.astype(bool) # enforce boolean type.
         
-
     def __shuffle_labels(self) -> None:
         """TODO: docstring.
         """
-        row_index_permutation_list = list(range(len(self.X)))
-        random.shuffle(row_index_permutation_list)
-        self.X = self.X.iloc[row_index_permutation_list,:]
-        self.Y = self.Y[row_index_permutation_list]
+        rng = np.random.default_rng(seed=self.rng_seed) 
+        shuffled_keys = rng.permutation(range(0,len(self.X)))
+        self.X = self.X.iloc[shuffled_keys,:]
+        self.Y = self.Y.iloc[shuffled_keys,:]
 
 
 
@@ -200,11 +205,12 @@ class MiniML:
     def __scale_data(self) -> None:
         """TODO:docstring
         """
-        self.X_train = self.X # TODO: ask Rashmi about this.  seems to flip flop.
-        self.Y_train = self.Y # TODO: ask rashmi about this... are we just using all X/Y data for training?  don't actually scale Y... already 0/1.
+        # self.X_train = self.X # TODO: ask Rashmi about this.  seems to flip flop.
+        # self.Y_train = self.Y # TODO: ask rashmi about this... are we just using all X/Y data for training?  don't actually scale Y... already 0/1.
         self.standard_scaler = StandardScaler()
-        self.X_scaled = self.standard_scaler.fit_transform(self.X_train)
-
+        self.X_scaled = self.standard_scaler.fit_transform(self.X)
+        self.X_train = self.X_scaled
+        self.Y_train = self.Y # TODO: sklearn having issues with datatype... .astype(int).to_numpy()
 
 
 
@@ -219,7 +225,7 @@ class MiniML:
         self.model.probability = True
 
         #SVM on centered and scaled data
-        self.X_train = self.X_scaled # TODO: ask Rashmi about this.  seems to flip flop.
+        # self.X_train = self.X_scaled # TODO: ask Rashmi about this.  seems to flip flop.
 
         if self.hypopt_cv: # TODO: maybe break this into a separate method.
             self.model = GridSearchCV(
@@ -227,12 +233,22 @@ class MiniML:
                 param_grid=self.param_grid,
                 cv=self.kfold_num,
                 n_jobs=-1,
-                verbose=2
+                verbose=2,
+                error_score="raise"
             )
-                
+        
+        # TODO: Debug only:
+        
+        print(f"type X_train: {type(self.X_train)}")
+        print(f"type Y_train: {type(self.Y_train)}")
+        print(f"type of stuff in Y_train: {type(self.Y_train[0])}")
+        
+        x = self.X_train
+        y = self.Y_train
+
         self.model.fit(
-            self.X_train,
-            self.Y_train
+            x,
+            y
         )
     
 
@@ -243,21 +259,21 @@ class MiniML:
         """
         Y_predicted = self.model.predict(self.X_train)
         output = precision_recall_fscore_support(
-            self.X_train,
-            Y_predicted,
-            labels=np.array([0,1]) # results in this order.
+            self.Y_train,
+            Y_predicted
+            # labels=np.array([0,1]) # results in this order.
         )
         self.precision = output[0]
         self.recall = output[1]
         self.f1_score = output[2]
         self.support = output[3]
 
-        self.precision_interpretation = f"Precision [class (target=False) , class (target=true) ]:  {100*self.precision[0]:0.2f}%,  {100*self.precision[1]::0.2f}"
-        self.recall_interpretation = f"Recall [class (target=False) , class (target=true) ]:  {self.recall[0]:0.2f}%,  {self.recall[1]:0.2f}%"
-        self.f1_score_interpretation = f"F1-score [class (target=False) , class (target=true) ]:  {self.f1_score[0]:0.2f}%,  {self.f1_score[1]:0.2f}%"
+        self.precision_interpretation = f"Precision [class (target=False) , class (target=true) ]:  {100*self.precision[0]:.2f}%,  {100*self.precision[1]:.2f}"
+        self.recall_interpretation = f"Recall [class (target=False) , class (target=true) ]:  {self.recall[0]:.2f}%,  {self.recall[1]:.2f}%"
+        self.f1_score_interpretation = f"F1-score [class (target=False) , class (target=true) ]:  {self.f1_score[0]:.2f}%,  {self.f1_score[1]:.2f}%"
         
         self.classification_report = classification_report(
-            self.X_train,
+            self.Y_train,
             Y_predicted
         )
 
@@ -298,8 +314,8 @@ class MiniML:
             ha='right'
         )
         plt.tight_layout()
-        self.nnmf_plot = fig
-        self.nnmf_plot_file_name = f"nnmf_plot_solver_{self.solver_uuid}.png"
+        self.nnmf_components_plot = fig
+        self.nnmf_components_plot_file_name = f"nnmf_components_plot_solver_{self.solver_uuid}.png"
 
         self.reconstruction_error = np.sqrt(
             np.sum(
@@ -355,15 +371,20 @@ class MiniML:
         
         
         # plot figure with training data, generated points
-        colors = Z0.flatten()
         fig = plt.figure()
-        cmap = plt.cm.bwr_r
-        norm = plt.Normalize(0,1)
+        # cmap = plt.cm.bwr_r
+        red = (1,0,0)
+        white = (1,1,1)
+        blue = (0,0,1)
+        colors = [red, red, white, white, white, blue, blue]
+        positions = [0, 0.4, 0.45, 0.5, 0.55, 0.6, 1] 
+        cmap = LinearSegmentedColormap.from_list("custom_red_blue", list(zip(positions, colors)))
+        norm = Normalize(0,1)
         #norm = plt.Normalize(np.min(colors),np.max(colors)) #normalized according to the probabilities in the decision space
         plt.scatter(
             x=XX.flatten(),
             y=YY.flatten(),
-            c=colors,
+            c=Z0.flatten(),
             cmap=cmap,
             norm=norm
         )
@@ -379,7 +400,7 @@ class MiniML:
         )
         cbar = plt.colorbar()
         cbar.set_label("Probability that solver can estimate GSE (label==True)",rotation=270,x=1.25)
-        plt.title(f"Solver {self.solver_short_name} ({self.solver_uuid[0:4]}...)\nEmbedding: {self.latent_model_name})")
+        plt.title(f"Solver {self.solver_short_name} ({self.solver_uuid[0:4]}...)\nEmbedding: {self.latent_model_name}")
         self.solvability_surface_plot = fig
         self.solvability_surface_plot_file_name = f"plot_solver_{self.solver_uuid}.png"
         
@@ -410,14 +431,14 @@ class MiniML:
         """TODO: docstring
         """
 
-        output_file_name = os.path.join("./ml-artifacts/",self.solvability_surface_plot_file_name)
-        self.solvability_surface_plot_file_name.savefig(output_file_name)
+        output_file_name = os.path.join("./ml_artifacts/",self.solvability_surface_plot_file_name)
+        self.solvability_surface_plot.savefig(output_file_name)
 
-        output_file_name = os.path.join("./ml-artifacts/",self.nnmf_plot_file_name)
-        self.nnmf_plot.savefig(output_file_name)
+        output_file_name = os.path.join("./ml_artifacts/",self.nnmf_components_plot_file_name)
+        self.nnmf_components_plot.savefig(output_file_name)
 
         try:
-            output_file_name = os.path.join("./ml-artifacts/",self.shap_plot_file_name)
+            output_file_name = os.path.join("./ml_artifacts/",self.shap_plot_file_name)
             self.shap_plot.savefig(output_file_name)
         except Exception as e:
             logging.error(f"Error: failed to write SHAP plot.  Did you run SHAP analysis?")
@@ -443,7 +464,7 @@ class MiniML:
             }
         )
 
-        output_file_name = os.path.join("./ml-artifacts/",f"probs_solver_{self.solver_uuid}.csv")
+        output_file_name = os.path.join("./ml_artifacts/",f"probs_solver_{self.solver_uuid}.csv")
         df.to_csv(output_file_name, index=False)
     
     

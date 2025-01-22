@@ -128,8 +128,11 @@ class BenchmarkData:
             name = listy[0]
             the_list = listy[1]
             if the_list is None:
-                print(f"{name} is empty/None.")
+                print(f"{name} is None.")
                 # this may happen if performance metrics have not yet been calculated.
+            elif the_list ==[]:
+                print(f"{name} is empty.")
+                # this may happen if there are no resource estimates.
             else:
                 print(f"validating {name}...")
                 schema_url = the_list[0]["$schema"]
