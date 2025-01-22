@@ -122,8 +122,7 @@ class MiniML:
             suffixes=("","_duplicate_column")
         )
 
-        self.solver_labels.to_csv("ml_debug_solver_labels.csv", index=False)
-
+        
         # order of operations matters!
         self.__validate_input_labels()
         self.__filter_labels()
@@ -237,19 +236,10 @@ class MiniML:
                 error_score="raise"
             )
         
-        # TODO: Debug only:
         
-        print(f"type X_train: {type(self.X_train)}")
-        print(f"type Y_train: {type(self.Y_train)}")
-        print(f"type of stuff in Y_train: {type(self.Y_train[0])}")
         
-        x = self.X_train
-        y = self.Y_train
 
-        self.model.fit(
-            x,
-            y
-        )
+        self.model.fit(self.X_train, self.Y_train)
     
 
 
@@ -374,10 +364,12 @@ class MiniML:
         fig = plt.figure()
         # cmap = plt.cm.bwr_r
         red = (1,0,0)
+        light_red = (1,0.6,0.6)
         white = (1,1,1)
+        light_blue = (0.6, 0.6, 1)
         blue = (0,0,1)
-        colors = [red, red, white, white, white, blue, blue]
-        positions = [0, 0.4, 0.45, 0.5, 0.55, 0.6, 1] 
+        colors = [red, red, light_red, light_red, white, light_blue, light_blue, blue, blue]
+        positions = [0, 0.19, 0.21, 0.48, 0.5, 0.52, 0.79, 0.81, 1] 
         cmap = LinearSegmentedColormap.from_list("custom_red_blue", list(zip(positions, colors)))
         norm = Normalize(0,1)
         #norm = plt.Normalize(np.min(colors),np.max(colors)) #normalized according to the probabilities in the decision space
@@ -448,7 +440,7 @@ class MiniML:
     
 
     def write_probs_to_file(self) -> None:
-        """_summary_
+        """TODO: docstring _summary_
         """
         Y_predicted = self.model.predict(self.X_train)
         self.probs = self.model.predict_proba(self.X_train)

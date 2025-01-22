@@ -359,10 +359,6 @@ class BenchmarkData:
                 hamiltonian_features_by_task_uuid=self.hamiltonian_features    
             )
 
-            # SHAP is optionally called later.
-            mini_ml_model.write_all_plots()
-            mini_ml_model.write_probs_to_file()
-            
             
             ml_scores_dict[solver_uuid] = {
                 "solvability_ratio":mini_ml_model.ml_solvability_ratio,
