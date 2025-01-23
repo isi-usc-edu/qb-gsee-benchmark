@@ -110,6 +110,7 @@ class MiniML:
         random.seed(self.rng_seed)
         self.latent_model_name = LATENT_MODEL_NAME
         self.model_name = MODEL_NAME
+        self.features = FEATURES
         self.hypopt_cv = HYPOPT_CV
         self.param_grid = PARAM_GRID
         self.kfold_num = KFOLD_NUM
@@ -442,6 +443,8 @@ class MiniML:
             show=False, # do not show plot to screen.  save it to file later.
             max_display=len(FEATURES)
         )
+        plt.xlim([0,0.1]) # TODO: dynamically check to ensure this x-limit is large enough.
+        plt.tight_layout()
         self.shap_summary_plot = plt.gcf()
         # TODO: fix figures x-axis range.  
         self.shap_summary_plot_file_name = f"shap_summary_plot_solver_{self.solver_uuid}.png"
