@@ -53,6 +53,7 @@ for h in handlers:
 
 
 import paramiko # for SSH/SFTP
+paramiko.common.logging.basicConfig(level=paramiko.common.DEBUG)
 def fetch_file_from_sftp(
         url=None,
         local_path=None,
@@ -85,7 +86,11 @@ def fetch_file_from_sftp(
                 hostname=hostname, 
                 port=port, 
                 username=username, 
-                key_filename=ppk_path
+                key_filename=ppk_path,
+                banner_timeout=10,
+                timeout=5,
+                auth_timeout=5,
+                channel_timeout=5
             )
 
             # Open an SFTP session
