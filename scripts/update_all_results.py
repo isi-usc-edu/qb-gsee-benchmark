@@ -38,7 +38,7 @@ def main(args: argparse.Namespace) -> None:
         hamiltonian_features_csv_file_name="Hamiltonian_features.csv",
         utility_estimation_csv_file_name="GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv",
         problem_instances_directory="../problem_instances",
-        solution_files_directory="../solution_files",
+        solution_files_directory="../solution_files/",
         performance_metrics_directory="../performance_metrics"
     )
     

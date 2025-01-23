@@ -306,6 +306,7 @@ class MiniML:
         plt.tight_layout()
         self.nnmf_components_plot = fig
         self.nnmf_components_plot_file_name = f"nnmf_components_plot_solver_{self.solver_uuid}.png"
+        plt.close()
 
         self.reconstruction_error = np.sqrt(
             np.sum(
@@ -395,6 +396,7 @@ class MiniML:
         plt.title(f"Solver {self.solver_short_name} ({self.solver_uuid[0:4]}...)\nEmbedding: {self.latent_model_name}")
         self.solvability_surface_plot = fig
         self.solvability_surface_plot_file_name = f"plot_solver_{self.solver_uuid}.png"
+        plt.close()
         
         '''
         TODO: ask Rashmi:  not doing this.  # Select the top 5 most important features
@@ -416,8 +418,47 @@ class MiniML:
     def run_shap_analysis(self):
         """TODO:docstring
         """
-        print("TODO: SHAP IS NOT IMPLEMENTED AT THIS TIME.")
-        pass
+        # explain all the predictions in the test set
+        explainer = shap.KernelExplainer(
+            model=self.model.predict_proba, # a function.
+            data=self.X_train, # X_train an np.ndarray
+            feature_names=self.X.columns, # X is original pandas.DataFrame
+            seed=self.rng_seed
+        )
+        shap_values = explainer.shap_values(
+            self.X_train, # X_train an np.ndarray
+            nsamples=500
+        )
+        # TODO: may put in kwarg nsamples=smaller_number into .shap_values().
+        # TODO: Also consider using shap.sample(data, K) or shap.kmeans(data, K)
+        # to summarize the background as K samples.
+        
+        # NOTE: shap_values.shape = (num_rows, num_features, num_classes)
+
+        shap.summary_plot(
+            shap_values[:,:,0], # TODO: ask rashmi about only referenceing the first class.
+            feature_names=self.X.columns, # X is the original pd.DataFrame, with column headers.
+            plot_type="bar",
+            show=False, # do not show plot to screen.  save it to file later.
+            max_display=len(FEATURES)
+        )
+        self.shap_summary_plot = plt.gcf()
+        # TODO: fix figures x-axis range.  
+        self.shap_summary_plot_file_name = f"shap_summary_plot_solver_{self.solver_uuid}.png"
+        self.shap_summary_plot.suptitle(f"SHAP summary plot {self.solver_short_name} ({self.solver_uuid[0:4]}...)")
+        plt.close()
+        # plot is written out when .write_all_plots() is called.
+
+        # shap.initjs()
+        # class_index = 1
+        # shap.force_plot(
+        #     explainer.expected_value[class_index],
+        #     shap_values[class_index],
+        #     self.X_train,
+        #     matplotlib=True,
+        #     show=False
+        # )        
+        
 
     def write_all_plots(self) -> None:
         """TODO: docstring
@@ -430,8 +471,8 @@ class MiniML:
         self.nnmf_components_plot.savefig(output_file_name)
 
         try:
-            output_file_name = os.path.join("./ml_artifacts/",self.shap_plot_file_name)
-            self.shap_plot.savefig(output_file_name)
+            output_file_name = os.path.join("./ml_artifacts/",self.shap_summary_plot_file_name)
+            self.shap_summary_plot.savefig(output_file_name)
         except Exception as e:
             logging.error(f"Error: failed to write SHAP plot.  Did you run SHAP analysis?")
 
