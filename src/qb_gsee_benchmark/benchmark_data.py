@@ -350,10 +350,8 @@ class BenchmarkData:
         for solver_uuid in self.solvers_dict:
             df = self.aggregated_solver_labels_df
             df = df[df["solver_uuid"]==solver_uuid] # filter df to only solver_uuid
-            # solver = self.solvers_dict[solver_uuid]
-            # solver_labels_file_name = f"solver_labels.{solver['solver_short_name']}.{solver_uuid}.csv"
-            # df.to_csv(solver_labels_file_name) # write out to file
-
+            df = df[~df["reference_energy"].isna()] # filter to only entries with reference energy specified.
+            
             mini_ml_model = MiniML(
                 solver_labels_by_task_uuid=df,
                 hamiltonian_features_by_task_uuid=self.hamiltonian_features    
@@ -456,6 +454,12 @@ class BenchmarkData:
             problem_instance_short_name = problem_instance["short_name"]
             for task in problem_instance["tasks"]:
                 task_uuid = task["task_uuid"]
+                
+
+                if len(self.hamiltonian_features[self.hamiltonian_features["task_uuid"]==task_uuid])==0:
+                    # we do NOT have Hamiltonian features calculated for this task_uuid yet... skip it.
+                    continue
+                
                 for supporting_file in task["supporting_files"]:
                     instance_data_object_uuid = supporting_file["instance_data_object_uuid"]
                     instance_data_object_url = supporting_file["instance_data_object_url"]

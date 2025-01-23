@@ -1,14 +1,14 @@
 {
     "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/performance_metrics.schema.0.0.1.json",
-    "performance_metrics_uuid": "d1c3e86c-7b1e-46fb-a590-57d6f2bb301e",
+    "performance_metrics_uuid": "7aed8d7f-da42-4e5c-892a-055cb567d768",
     "solver_short_name": "CCSD",
     "solver_uuid": "0a29e54f-bef9-4d19-bafa-d94b1c4b37aa",
-    "creation_timestamp": "2025-01-21T21:29:50.150187+00:00",
+    "creation_timestamp": "2025-01-23T13:31:51.327173+00:00",
     "ml_metrics": {
-        "solvability_ratio": 0.0125,
+        "solvability_ratio": 0.0122,
         "f1_score": [
-            1.0,
-            1.0
+            0.995850622406639,
+            0.9714285714285714
         ],
         "ml_metrics_calculator_version": 1
     },
@@ -18,9 +18,9 @@
         "number_of_problem_instances_solved": 9,
         "number_of_tasks": 230,
         "number_of_tasks_attempted": 221,
-        "number_of_tasks_solved": 19,
+        "number_of_tasks_solved": 17,
         "number_of_tasks_solved_within_run_time_limit": 221,
-        "number_of_tasks_solved_within_accuracy_threshold": 19,
+        "number_of_tasks_solved_within_accuracy_threshold": 17,
         "max_run_time_of_attempted_tasks": 485.1982181072235,
         "sum_of_run_time_of_attempted_tasks": 12029.76450586319
     },
@@ -259,8 +259,8 @@
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 3,
             "number_of_tasks_solved_within_runtime_limit": 3,
-            "number_of_tasks_solved_within_accuracy_requirement": 0,
-            "number_of_tasks_solved": 0,
+            "number_of_tasks_solved_within_accuracy_requirement": 2,
+            "number_of_tasks_solved": 2,
             "sum_of_run_time_of_attempted_tasks": 17.441283226013184,
             "max_run_time_of_attempted_tasks": 9.721973180770874,
             "solution_submitted_by_due_date": true
@@ -475,8 +475,8 @@
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 3,
             "number_of_tasks_solved_within_runtime_limit": 3,
-            "number_of_tasks_solved_within_accuracy_requirement": 1,
-            "number_of_tasks_solved": 1,
+            "number_of_tasks_solved_within_accuracy_requirement": 0,
+            "number_of_tasks_solved": 0,
             "sum_of_run_time_of_attempted_tasks": 4.064499378204346,
             "max_run_time_of_attempted_tasks": 1.9881389141082764,
             "solution_submitted_by_due_date": true
@@ -499,8 +499,8 @@
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 3,
             "number_of_tasks_solved_within_runtime_limit": 3,
-            "number_of_tasks_solved_within_accuracy_requirement": 1,
-            "number_of_tasks_solved": 1,
+            "number_of_tasks_solved_within_accuracy_requirement": 0,
+            "number_of_tasks_solved": 0,
             "sum_of_run_time_of_attempted_tasks": 63.779515981674194,
             "max_run_time_of_attempted_tasks": 41.85674500465393,
             "solution_submitted_by_due_date": true
@@ -547,8 +547,8 @@
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 3,
             "number_of_tasks_solved_within_runtime_limit": 3,
-            "number_of_tasks_solved_within_accuracy_requirement": 2,
-            "number_of_tasks_solved": 2,
+            "number_of_tasks_solved_within_accuracy_requirement": 0,
+            "number_of_tasks_solved": 0,
             "sum_of_run_time_of_attempted_tasks": 185.22552227973938,
             "max_run_time_of_attempted_tasks": 128.71721482276917,
             "solution_submitted_by_due_date": true
@@ -1249,8 +1249,8 @@
             "solution_uuid": "5e726469-3657-44c9-be7e-52a82e94d798",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
             "overall_run_time_seconds": 9.721973180770874
         },
         {
@@ -1579,8 +1579,8 @@
             "solution_uuid": "24dd33aa-a167-4884-b8e8-f9d1a89db402",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": true,
-            "solved": true,
+            "solved_within_accuracy_requirement": false,
+            "solved": false,
             "overall_run_time_seconds": 0.27882909774780273
         },
         {
@@ -1854,8 +1854,8 @@
             "solution_uuid": "d8371bf7-923c-45da-8bd2-4cfea6e275f7",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": true,
-            "solved": true,
+            "solved_within_accuracy_requirement": false,
+            "solved": false,
             "overall_run_time_seconds": 37.78245544433594
         },
         {
@@ -2624,8 +2624,8 @@
             "solution_uuid": "ce2901f3-d077-42ea-9298-0b12afbaea3a",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": true,
-            "solved": true,
+            "solved_within_accuracy_requirement": false,
+            "solved": false,
             "overall_run_time_seconds": 41.85674500465393
         },
         {
@@ -3086,8 +3086,8 @@
             "solution_uuid": "5e726469-3657-44c9-be7e-52a82e94d798",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
             "overall_run_time_seconds": 6.177847862243652
         },
         {
@@ -3438,8 +3438,8 @@
             "solution_uuid": "d8371bf7-923c-45da-8bd2-4cfea6e275f7",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": true,
-            "solved": true,
+            "solved_within_accuracy_requirement": false,
+            "solved": false,
             "overall_run_time_seconds": 128.71721482276917
         },
         {
