@@ -443,6 +443,7 @@ class MiniML:
             max_display=len(FEATURES)
         )
         self.shap_summary_plot = plt.gcf()
+        # TODO: fix figures x-axis range.  
         self.shap_summary_plot_file_name = f"shap_summary_plot_solver_{self.solver_uuid}.png"
         self.shap_summary_plot.suptitle(f"SHAP summary plot {self.solver_short_name} ({self.solver_uuid[0:4]}...)")
         plt.close()

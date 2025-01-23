@@ -1,6 +1,6 @@
 # GSEE Benchmark Standard Report
 
-Report based on data from 2025-01-23T13:31:51.327173+00:00
+Report based on data from 2025-01-23T16:28:43.200733+00:00
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
@@ -10,7 +10,7 @@ Input data: `GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv`, last mo
 
 Latest creation time for a `problem_instance.json` file: Wed Jan 22 17:01:13 2025
 
-Latest creation time for a `performance_metrics.json` file: Thu Jan 23 08:33:05 2025
+Latest creation time for a `performance_metrics.json` file: Thu Jan 23 11:38:42 2025
 
 Latest creation time for a `solution.json` file: Wed Jan 22 16:55:50 2025
 
@@ -54,9 +54,9 @@ algorithm_details:SHCI with optimized orbitals followed by SHCI+PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: c6c10c13-6a0e-472d-a43f-0277ffc56606
+performance_metrics_uuid: 80ee05f7-aa48-48e1-ad58-d21baa5cfdd4
 
-creation_timestamp: 2025-01-23T13:31:51.327173+00:00
+creation_timestamp: 2025-01-23T16:28:43.200733+00:00
 
 number_of_problem_instances: 82
 
@@ -106,9 +106,9 @@ algorithm_details:CCSDT_PLACEHOLDER_algorithm_details
 
 software_details:CCSDT_PLACEHOLDER_software_details
 
-performance_metrics_uuid: 119b53fd-0fc6-4b04-a228-20c5fcfed8fd
+performance_metrics_uuid: a1a3bd58-31dc-4940-8785-713186a1fa2e
 
-creation_timestamp: 2025-01-23T13:31:51.327173+00:00
+creation_timestamp: 2025-01-23T16:28:43.200733+00:00
 
 number_of_problem_instances: 82
 
@@ -158,9 +158,9 @@ algorithm_details:CISD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: f03ff937-5491-4f24-a4fc-6f6b76ee10f4
+performance_metrics_uuid: 1ea2d124-f609-43a3-831a-d09a02f770d3
 
-creation_timestamp: 2025-01-23T13:31:51.327173+00:00
+creation_timestamp: 2025-01-23T16:28:43.200733+00:00
 
 number_of_problem_instances: 82
 
@@ -210,9 +210,9 @@ algorithm_details:CCSD(T)
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: b9b1938e-a4da-4c2f-afa1-65e41c184f95
+performance_metrics_uuid: 82e77fa6-bd75-4e86-ab35-b17898dc6834
 
-creation_timestamp: 2025-01-23T13:31:51.327173+00:00
+creation_timestamp: 2025-01-23T16:28:43.200733+00:00
 
 number_of_problem_instances: 82
 
@@ -262,9 +262,9 @@ algorithm_details:Hartree Fock
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 500f9a10-5888-4c77-a857-a18f63e3cd07
+performance_metrics_uuid: 84ecadfc-b2d8-47a8-a9fe-28fd5a212dee
 
-creation_timestamp: 2025-01-23T13:31:51.327173+00:00
+creation_timestamp: 2025-01-23T16:28:43.200733+00:00
 
 number_of_problem_instances: 82
 
@@ -314,9 +314,9 @@ algorithm_details:MP2
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: f23f8d17-0587-46f6-9520-87714f67c1e1
+performance_metrics_uuid: d791e295-64ee-4806-bc59-2bac79f92611
 
-creation_timestamp: 2025-01-23T13:31:51.327173+00:00
+creation_timestamp: 2025-01-23T16:28:43.200733+00:00
 
 number_of_problem_instances: 82
 
@@ -366,9 +366,9 @@ algorithm_details:CCSD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 7aed8d7f-da42-4e5c-892a-055cb567d768
+performance_metrics_uuid: d80a29c2-1b9f-418d-bc65-de1ed7c499a5
 
-creation_timestamp: 2025-01-23T13:31:51.327173+00:00
+creation_timestamp: 2025-01-23T16:28:43.200733+00:00
 
 number_of_problem_instances: 82
 
@@ -422,9 +422,9 @@ logical_resource_estimate_solution_uuid:72dea71b-fb03-43f0-8086-eb37605ba3db
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: f1e54230-1575-45d7-b088-98d7bac97c61
+performance_metrics_uuid: 8332924f-3b1d-421f-a35b-78d6d593ec4d
 
-creation_timestamp: 2025-01-23T13:31:51.327173+00:00
+creation_timestamp: 2025-01-23T16:28:43.200733+00:00
 
 number_of_problem_instances: 82
 
@@ -474,9 +474,9 @@ algorithm_details:DMRG with the lowest variational energy obtained so far.
 
 software_details:Block2 v0.5.3rc16 with dmrghandler, commit version d603fdc6409fc194a416aa3a519362d5d91790d9 or later.
 
-performance_metrics_uuid: 36fdbf4f-9357-4b93-9406-67dc15eba132
+performance_metrics_uuid: 8b4756f5-fc22-4c14-9b33-f11ba48eb72b
 
-creation_timestamp: 2025-01-23T13:31:51.327173+00:00
+creation_timestamp: 2025-01-23T16:28:43.200733+00:00
 
 number_of_problem_instances: 82
 
