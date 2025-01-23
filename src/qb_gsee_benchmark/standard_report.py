@@ -623,14 +623,15 @@ class StandardReport:
             file.write(f"![Solver scatter plot](solver_num_orbs_vs_log_runtime_scatter_plot.png)\n\n")
             file.write(f"NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.\n\n")
             
+            file.write(f"![Quantum vs Classical scatter plot](quantum_vs_classical_solver_num_orbs_vs_log_runtime_scatter_plot.png)\n\n")
+            file.write(f"NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.\n\n")
+            
             file.write(f"![Solver logFCI scatter plot](log_fci_dim_vs_runtime_all_solvers_plot.png)\n\n")
             file.write(f"NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.\n\n")
             
-            file.write(f"![Solver logFCI scatter plot, log(runtime)](log_fci_dim_vs_runtime_all_solvers_plot.png)\n\n")
+            file.write(f"![Solver logFCI scatter plot, log(runtime)](log_fci_dim_vs_log_runtime_all_solvers_plot.png)\n\n")
             file.write(f"NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.\n\n")
             
-            file.write(f"![Quantum vs Classical scatter plot](quantum_vs_classical_solver_num_orbs_vs_log_runtime_scatter_plot.png)\n\n")
-            file.write(f"NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.\n\n")
             
             
             
