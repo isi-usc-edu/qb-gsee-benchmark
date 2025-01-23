@@ -1,26 +1,26 @@
 # GSEE Benchmark Standard Report
 
-Report based on data from 2025-01-23T16:28:43.200733+00:00
+Report based on data from 2025-01-23T19:37:07.010747+00:00
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
 Input data: `Hamiltonian_features.csv`, last modified Mon Dec 30 16:29:03 2024
 
+WARNING!  We only have features calculated for                             230/276 Hamiltonians.                             This report is based on partial results!
+
 Input data: `GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv`, last modified Thu Jan  9 12:11:19 2025
 
 Latest creation time for a `problem_instance.json` file: Wed Jan 22 17:01:13 2025
-
-Latest creation time for a `performance_metrics.json` file: Thu Jan 23 11:38:42 2025
 
 Latest creation time for a `solution.json` file: Wed Jan 22 16:55:50 2025
 
 # Problem Instance Summary Statistics
 
-number of `problem_instances`: 82
+number of `problem_instances`: 84.
 
 `problem_instance.json` with the most tasks: 30 (hubbard_square/614c4444-a31a-4348-b24d-01040208651c)
 
-number of Hamiltonians (i.e., tasks): 230
+number of Hamiltonians (i.e., tasks) we have features calculated for: 230
 
 minimum number of orbitals: 6
 
@@ -38,7 +38,23 @@ number of unique participating solvers: 9
 
 ![Solver scatter plot](solver_num_orbs_vs_runtime_scatter_plot.png)
 
+NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.
+
 ![Solver scatter plot](solver_num_orbs_vs_log_runtime_scatter_plot.png)
+
+NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.
+
+![Solver logFCI scatter plot](log_fci_dim_vs_runtime_all_solvers_plot.png)
+
+NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.
+
+![Solver logFCI scatter plot, log(runtime)](log_fci_dim_vs_log_runtime_all_solvers_plot.png)
+
+NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.
+
+![Quantum vs Classical scatter plot](quantum_vs_classical_solver_num_orbs_vs_log_runtime_scatter_plot.png)
+
+NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.
 
 ## Solver SHCI_opt, 2dde727e-a881-44fa-aabf-bba6248e4baf
 
@@ -54,9 +70,9 @@ algorithm_details:SHCI with optimized orbitals followed by SHCI+PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 80ee05f7-aa48-48e1-ad58-d21baa5cfdd4
+performance_metrics_uuid: b2dab9b6-24f2-46c2-8ade-d0f29dd62ec1
 
-creation_timestamp: 2025-01-23T16:28:43.200733+00:00
+creation_timestamp: 2025-01-23T19:37:07.010747+00:00
 
 number_of_problem_instances: 82
 
@@ -86,9 +102,17 @@ ml_metrics_calculator_version: 1
 
 ![Solver success/failure plot](solver_2dde727e-a881-44fa-aabf-bba6248e4baf_plot.png)
 
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_2dde727e-a881-44fa-aabf-bba6248e4baf_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
 ![Solver utility capture](solver_2dde727e-a881-44fa-aabf-bba6248e4baf_utility_capture_plot.png)
 
 ![Solver miniML plot](plot_solver_2dde727e-a881-44fa-aabf-bba6248e4baf.png)
+
+Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
 
 ![SHAP summary plot](shap_summary_plot_solver_2dde727e-a881-44fa-aabf-bba6248e4baf.png)
 
@@ -106,9 +130,9 @@ algorithm_details:CCSDT_PLACEHOLDER_algorithm_details
 
 software_details:CCSDT_PLACEHOLDER_software_details
 
-performance_metrics_uuid: a1a3bd58-31dc-4940-8785-713186a1fa2e
+performance_metrics_uuid: 5feaa842-812e-4167-a8dd-c422a36cb6dd
 
-creation_timestamp: 2025-01-23T16:28:43.200733+00:00
+creation_timestamp: 2025-01-23T19:37:07.010747+00:00
 
 number_of_problem_instances: 82
 
@@ -138,9 +162,17 @@ ml_metrics_calculator_version: 1
 
 ![Solver success/failure plot](solver_fd13c864-baf1-44de-b52d-0e5dd69f647a_plot.png)
 
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_fd13c864-baf1-44de-b52d-0e5dd69f647a_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
 ![Solver utility capture](solver_fd13c864-baf1-44de-b52d-0e5dd69f647a_utility_capture_plot.png)
 
 ![Solver miniML plot](plot_solver_fd13c864-baf1-44de-b52d-0e5dd69f647a.png)
+
+Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
 
 ![SHAP summary plot](shap_summary_plot_solver_fd13c864-baf1-44de-b52d-0e5dd69f647a.png)
 
@@ -158,9 +190,9 @@ algorithm_details:CISD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 1ea2d124-f609-43a3-831a-d09a02f770d3
+performance_metrics_uuid: adb25b3d-aee5-437d-9e6c-2493228d58fa
 
-creation_timestamp: 2025-01-23T16:28:43.200733+00:00
+creation_timestamp: 2025-01-23T19:37:07.010747+00:00
 
 number_of_problem_instances: 82
 
@@ -190,9 +222,17 @@ ml_metrics_calculator_version: 1
 
 ![Solver success/failure plot](solver_418f060e-496b-4024-8d2d-9b1f8791e76d_plot.png)
 
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_418f060e-496b-4024-8d2d-9b1f8791e76d_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
 ![Solver utility capture](solver_418f060e-496b-4024-8d2d-9b1f8791e76d_utility_capture_plot.png)
 
 ![Solver miniML plot](plot_solver_418f060e-496b-4024-8d2d-9b1f8791e76d.png)
+
+Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
 
 ![SHAP summary plot](shap_summary_plot_solver_418f060e-496b-4024-8d2d-9b1f8791e76d.png)
 
@@ -210,9 +250,9 @@ algorithm_details:CCSD(T)
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 82e77fa6-bd75-4e86-ab35-b17898dc6834
+performance_metrics_uuid: 432c53c7-0bd1-47b0-a97f-7831c2ae896e
 
-creation_timestamp: 2025-01-23T16:28:43.200733+00:00
+creation_timestamp: 2025-01-23T19:37:07.010747+00:00
 
 number_of_problem_instances: 82
 
@@ -242,9 +282,17 @@ ml_metrics_calculator_version: 1
 
 ![Solver success/failure plot](solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_plot.png)
 
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
 ![Solver utility capture](solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_utility_capture_plot.png)
 
 ![Solver miniML plot](plot_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878.png)
+
+Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
 
 ![SHAP summary plot](shap_summary_plot_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878.png)
 
@@ -262,9 +310,9 @@ algorithm_details:Hartree Fock
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 84ecadfc-b2d8-47a8-a9fe-28fd5a212dee
+performance_metrics_uuid: 1c5cb0b7-6a61-4cbb-ae64-ba8030800b25
 
-creation_timestamp: 2025-01-23T16:28:43.200733+00:00
+creation_timestamp: 2025-01-23T19:37:07.010747+00:00
 
 number_of_problem_instances: 82
 
@@ -294,9 +342,17 @@ ml_metrics_calculator_version: 1
 
 ![Solver success/failure plot](solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012_plot.png)
 
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
 ![Solver utility capture](solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012_utility_capture_plot.png)
 
 ![Solver miniML plot](plot_solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012.png)
+
+Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
 
 ![SHAP summary plot](shap_summary_plot_solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012.png)
 
@@ -314,9 +370,9 @@ algorithm_details:MP2
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: d791e295-64ee-4806-bc59-2bac79f92611
+performance_metrics_uuid: b46a5d2f-14f9-4125-8dc3-7dc467296d4a
 
-creation_timestamp: 2025-01-23T16:28:43.200733+00:00
+creation_timestamp: 2025-01-23T19:37:07.010747+00:00
 
 number_of_problem_instances: 82
 
@@ -346,9 +402,17 @@ ml_metrics_calculator_version: 1
 
 ![Solver success/failure plot](solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2_plot.png)
 
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
 ![Solver utility capture](solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2_utility_capture_plot.png)
 
 ![Solver miniML plot](plot_solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2.png)
+
+Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
 
 ![SHAP summary plot](shap_summary_plot_solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2.png)
 
@@ -366,9 +430,9 @@ algorithm_details:CCSD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: d80a29c2-1b9f-418d-bc65-de1ed7c499a5
+performance_metrics_uuid: 2b7f9540-da3b-42b2-a511-d324af07c0f4
 
-creation_timestamp: 2025-01-23T16:28:43.200733+00:00
+creation_timestamp: 2025-01-23T19:37:07.010747+00:00
 
 number_of_problem_instances: 82
 
@@ -398,9 +462,17 @@ ml_metrics_calculator_version: 1
 
 ![Solver success/failure plot](solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa_plot.png)
 
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
 ![Solver utility capture](solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa_utility_capture_plot.png)
 
 ![Solver miniML plot](plot_solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa.png)
+
+Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
 
 ![SHAP summary plot](shap_summary_plot_solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa.png)
 
@@ -422,9 +494,9 @@ logical_resource_estimate_solution_uuid:72dea71b-fb03-43f0-8086-eb37605ba3db
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: 8332924f-3b1d-421f-a35b-78d6d593ec4d
+performance_metrics_uuid: 65f92ed8-716d-40aa-bd7b-852a8e3c2297
 
-creation_timestamp: 2025-01-23T16:28:43.200733+00:00
+creation_timestamp: 2025-01-23T19:37:07.010747+00:00
 
 number_of_problem_instances: 82
 
@@ -454,9 +526,17 @@ ml_metrics_calculator_version: 1
 
 ![Solver success/failure plot](solver_5dad4064-cd11-412f-85cb-d722afe3b3de_plot.png)
 
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_5dad4064-cd11-412f-85cb-d722afe3b3de_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
 ![Solver utility capture](solver_5dad4064-cd11-412f-85cb-d722afe3b3de_utility_capture_plot.png)
 
 ![Solver miniML plot](plot_solver_5dad4064-cd11-412f-85cb-d722afe3b3de.png)
+
+Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
 
 ![SHAP summary plot](shap_summary_plot_solver_5dad4064-cd11-412f-85cb-d722afe3b3de.png)
 
@@ -474,9 +554,9 @@ algorithm_details:DMRG with the lowest variational energy obtained so far.
 
 software_details:Block2 v0.5.3rc16 with dmrghandler, commit version d603fdc6409fc194a416aa3a519362d5d91790d9 or later.
 
-performance_metrics_uuid: 8b4756f5-fc22-4c14-9b33-f11ba48eb72b
+performance_metrics_uuid: ebfcd8c7-f5b0-4b5f-962f-4e17ad966a6c
 
-creation_timestamp: 2025-01-23T16:28:43.200733+00:00
+creation_timestamp: 2025-01-23T19:37:07.010747+00:00
 
 number_of_problem_instances: 82
 
@@ -506,9 +586,31 @@ ml_metrics_calculator_version: 1
 
 ![Solver success/failure plot](solver_16537433-9f4c-4eae-a65d-787dc3b35b59_plot.png)
 
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_16537433-9f4c-4eae-a65d-787dc3b35b59_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
 ![Solver utility capture](solver_16537433-9f4c-4eae-a65d-787dc3b35b59_utility_capture_plot.png)
 
 ![Solver miniML plot](plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png)
 
+Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+
 ![SHAP summary plot](shap_summary_plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png)
+
+# Non-negative matrix factorization (ML latent space)
+
+![NNMF plot](nnmf_components.png)
+
+Features: ['max_vertex_degree', 'min_vertex_degree', 'mean_vertex_degree', 'std_dev_vertex_degree', 'max_weight', 'min_weight', 'mean_weight', 'std_dev_weight', 'max_edge_order', 'mean_edge_order', 'std_dev_edge_order', 'one_norm', 'log_fci_dim', 'n_elec', 'n_orbs', 'df_gap']
+
+Component 1: [0.05774064 0.19694981 0.0603299  0.0508406  0.4012572  0.0346899
+ 0.08885595 0.11803315 0.41809938 0.44697988 0.40843297 0.02288265
+ 0.97875176 1.18836004 0.41822578 0.        ]
+
+Component 2: [0.38626949 0.3223573  0.38508113 0.38692953 0.2859609  0.
+ 0.00339035 0.02136758 0.58665216 0.58951865 0.58380465 0.39646894
+ 0.33932268 0.         0.58688391 0.54358436]
 

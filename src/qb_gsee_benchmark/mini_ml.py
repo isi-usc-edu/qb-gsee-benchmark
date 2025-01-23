@@ -110,6 +110,7 @@ class MiniML:
         random.seed(self.rng_seed)
         self.latent_model_name = LATENT_MODEL_NAME
         self.model_name = MODEL_NAME
+        self.features = FEATURES
         self.hypopt_cv = HYPOPT_CV
         self.param_grid = PARAM_GRID
         self.kfold_num = KFOLD_NUM
@@ -293,7 +294,7 @@ class MiniML:
         print(self.H)
         
         fig = plt.figure()
-        plt.title(f"{self.solver_short_name} ({self.solver_uuid[0:4]}...)\nNNMF Components")
+        plt.title(f"NNMF Components")
         plt.plot(self.H[0,:],'r-o')
         plt.plot(self.H[1,:],'g-o')
         plt.legend(['Component 1', 'Component 2'])
@@ -305,7 +306,7 @@ class MiniML:
         )
         plt.tight_layout()
         self.nnmf_components_plot = fig
-        self.nnmf_components_plot_file_name = f"nnmf_components_plot_solver_{self.solver_uuid}.png"
+        self.nnmf_components_plot_file_name = f"nnmf_components.png"
         plt.close()
 
         self.reconstruction_error = np.sqrt(
@@ -394,6 +395,7 @@ class MiniML:
         cbar = plt.colorbar()
         cbar.set_label("Probability that solver can estimate GSE (label==True)",rotation=270,x=1.25)
         plt.title(f"Solver {self.solver_short_name} ({self.solver_uuid[0:4]}...)\nEmbedding: {self.latent_model_name}")
+        plt.tight_layout()
         self.solvability_surface_plot = fig
         self.solvability_surface_plot_file_name = f"plot_solver_{self.solver_uuid}.png"
         plt.close()
@@ -442,13 +444,16 @@ class MiniML:
             show=False, # do not show plot to screen.  save it to file later.
             max_display=len(FEATURES)
         )
+        plt.xlim([0,0.1]) # TODO: dynamically check to ensure this x-limit is large enough.
+        plt.tight_layout()
         self.shap_summary_plot = plt.gcf()
         # TODO: fix figures x-axis range.  
         self.shap_summary_plot_file_name = f"shap_summary_plot_solver_{self.solver_uuid}.png"
         self.shap_summary_plot.suptitle(f"SHAP summary plot {self.solver_short_name} ({self.solver_uuid[0:4]}...)")
         plt.close()
-        # plot is written out when .write_all_plots() is called.
-
+        output_file_name = os.path.join("./ml_artifacts/",self.shap_summary_plot_file_name)
+        self.shap_summary_plot.savefig(output_file_name) # we write SHAP plots out upon creation unlike some other plots.
+        
         # shap.initjs()
         # class_index = 1
         # shap.force_plot(

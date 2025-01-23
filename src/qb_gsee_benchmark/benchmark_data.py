@@ -351,7 +351,8 @@ class BenchmarkData:
             df = self.aggregated_solver_labels_df
             df = df[df["solver_uuid"]==solver_uuid] # filter df to only solver_uuid
             df = df[~df["reference_energy"].isna()] # filter to only entries with reference energy specified.
-            
+            # df = df[df["attempted"]==True] # filter to attempted tasks/Hamiltonians
+
             mini_ml_model = MiniML(
                 solver_labels_by_task_uuid=df,
                 hamiltonian_features_by_task_uuid=self.hamiltonian_features    
