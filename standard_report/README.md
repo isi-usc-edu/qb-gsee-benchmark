@@ -602,7 +602,7 @@ Note: ML surface plot is based on Hamiltonians where a `reference_energy` was pr
 
 # Non-negative matrix factorization (ML latent space)
 
-![NNMF plot](nnmf_components_plot_solver_2dde727e-a881-44fa-aabf-bba6248e4baf.png)
+![NNMF plot](nnmf_components.png)
 
 Features: ['max_vertex_degree', 'min_vertex_degree', 'mean_vertex_degree', 'std_dev_vertex_degree', 'max_weight', 'min_weight', 'mean_weight', 'std_dev_weight', 'max_edge_order', 'mean_edge_order', 'std_dev_edge_order', 'one_norm', 'log_fci_dim', 'n_elec', 'n_orbs', 'df_gap']
 
