@@ -416,8 +416,34 @@ class MiniML:
     def run_shap_analysis(self):
         """TODO:docstring
         """
-        print("TODO: SHAP IS NOT IMPLEMENTED AT THIS TIME.")
-        pass
+        # explain all the predictions in the test set
+        explainer = shap.KernelExplainer(
+            model=self.model.predict_proba, # a function.
+            data=self.X_train, # X_train an np.ndarray
+            seed=self.rng_seed,
+        )
+        shap_values = explainer.shap_values(
+            self.X_train, # X_train an np.ndarray
+            nsamples=100 # trying to limit run time of SHAP.
+        )
+        
+        
+        
+        fig = plt.figure()
+        plt.title(f"SHAP summary plot {self.solver_short_name} ({self.solver_uuid[0:4]}...)")
+        shap.summary_plot(
+            shap_values,
+            features=self.X.columns, # X is the original pd.DataFrame, with column headers.
+            plot_type="bar"
+        )
+        self.shap_summary_plot = fig
+        self.shap_summary_plot_file_name = f"shap_summary_plot_solver_{self.solver_uuid}.png"
+        
+        # shap.initjs()
+        # class_index = 1
+        # #shap.force_plot(explainer.expected_value[class_index], shap_values[class_index], X_train, matplotlib=True, show=False)
+        
+        
 
     def write_all_plots(self) -> None:
         """TODO: docstring
