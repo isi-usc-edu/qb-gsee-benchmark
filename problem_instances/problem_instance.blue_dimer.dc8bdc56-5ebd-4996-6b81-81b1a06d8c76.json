@@ -4,6 +4,7 @@
     "problem_type": "GSEE",
     "application_domain": "QC",
     "creation_timestamp": "2024-03-20T20:48:21.795324+00:00",
+    "latest_update_timestamp": "2025-01-23T21:44:34.746411+00:00",
     "calendar_due_date": "2124-03-20T20:48:21.795324+00:00",
     "status": "in_force",
     "superseded_by": null,
@@ -151,13 +152,10 @@
                 "absolute_accuracy_threshold": 0.00159362,
                 "absolute_accuracy_threshold_energy_units": "Hartree",
                 "energy_target": 0.99,
-                "reference_energy": -2453.383139874957,
+                "reference_energy": null,
                 "reference_energy_units": "Hartree",
-                "reference_energy_uncertainty": 0.02433247829503012,
-                "reference_energy_uncertainty_units": "millihartree",
-                "reference_energy_source": "Calculated with Block2 (https://block2.readthedocs.io/)",
-                "reference_energy_method": "DMRG with linear extrapolation to zero discarded weight. Forward schedule used with orbital ordering based on genetic algorithm optimization with the exchange matrix. See DRMG section of arXiv:2406.06335.",
-                "reference_energy_uncertainty_type": "value +/- uncertainty gives a 95% confidence interval. The uncertainty is from the fit."
+                "reference_energy_source": "None",
+                "reference_energy_method": "None"
             },
             "supporting_files": [
                 {
@@ -287,13 +285,10 @@
                 "absolute_accuracy_threshold": 0.00159362,
                 "absolute_accuracy_threshold_energy_units": "Hartree",
                 "energy_target": 0.99,
-                "reference_energy": -2453.722353799089,
+                "reference_energy": null,
                 "reference_energy_units": "Hartree",
-                "reference_energy_uncertainty": 0.03051324152993481,
-                "reference_energy_uncertainty_units": "millihartree",
-                "reference_energy_source": "Calculated with Block2 (https://block2.readthedocs.io/)",
-                "reference_energy_method": "DMRG with linear extrapolation to zero discarded weight. Forward schedule used with orbital ordering based on genetic algorithm optimization with the exchange matrix. See DRMG section of arXiv:2406.06335.",
-                "reference_energy_uncertainty_type": "value +/- uncertainty gives a 95% confidence interval. The uncertainty is from the fit."
+                "reference_energy_source": "None",
+                "reference_energy_method": "None"
             },
             "supporting_files": [
                 {
@@ -429,13 +424,10 @@
                 "absolute_accuracy_threshold": 0.00159362,
                 "absolute_accuracy_threshold_energy_units": "Hartree",
                 "energy_target": 0.99,
-                "reference_energy": -2454.500248971286,
+                "reference_energy": null,
                 "reference_energy_units": "Hartree",
-                "reference_energy_uncertainty": 0.3725829650051142,
-                "reference_energy_uncertainty_units": "millihartree",
-                "reference_energy_source": "Calculated with Block2 (https://block2.readthedocs.io/)",
-                "reference_energy_method": "DMRG with linear extrapolation to zero discarded weight. Reverse schedule used with orbital ordering based on genetic algorithm optimization with the exchange matrix. See DRMG section of arXiv:2406.06335.",
-                "reference_energy_uncertainty_type": "value +/- uncertainty gives a 95% confidence interval. The uncertainty is from the fit."
+                "reference_energy_source": "None",
+                "reference_energy_method": "None"
             },
             "supporting_files": [
                 {
@@ -574,7 +566,9 @@
                 "absolute_accuracy_threshold_energy_units": "Hartree",
                 "energy_target": 0.99,
                 "reference_energy": null,
-                "reference_energy_units": "Hartree"
+                "reference_energy_units": "Hartree",
+                "reference_energy_source": "None",
+                "reference_energy_method": "None"
             },
             "supporting_files": [
                 {
@@ -702,13 +696,10 @@
                 "absolute_accuracy_threshold": 0.00159362,
                 "absolute_accuracy_threshold_energy_units": "Hartree",
                 "energy_target": 0.99,
-                "reference_energy": -2452.705783831708,
+                "reference_energy": null,
                 "reference_energy_units": "Hartree",
-                "reference_energy_uncertainty": 0.04910340810039335,
-                "reference_energy_uncertainty_units": "millihartree",
-                "reference_energy_source": "Calculated with Block2 (https://block2.readthedocs.io/)",
-                "reference_energy_method": "DMRG with linear extrapolation to zero discarded weight. Forward schedule used with orbital ordering based on genetic algorithm optimization with the exchange matrix. See DRMG section of arXiv:2406.06335.",
-                "reference_energy_uncertainty_type": "value +/- uncertainty gives a 95% confidence interval. The uncertainty is from the fit."
+                "reference_energy_source": "None",
+                "reference_energy_method": "None"
             },
             "supporting_files": [
                 {
@@ -838,13 +829,10 @@
                 "absolute_accuracy_threshold": 0.00159362,
                 "absolute_accuracy_threshold_energy_units": "Hartree",
                 "energy_target": 0.99,
-                "reference_energy": -2452.785072302863,
+                "reference_energy": -2452.7849399480883,
                 "reference_energy_units": "Hartree",
-                "reference_energy_uncertainty": 0.01519686441347251,
-                "reference_energy_uncertainty_units": "millihartree",
-                "reference_energy_source": "Calculated with Block2 (https://block2.readthedocs.io/)",
-                "reference_energy_method": "DMRG with linear extrapolation to zero discarded weight. Forward schedule used with orbital ordering based on genetic algorithm optimization with the exchange matrix. See DRMG section of arXiv:2406.06335.",
-                "reference_energy_uncertainty_type": "value +/- uncertainty gives a 95% confidence interval. The uncertainty is from the fit."
+                "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+                "reference_energy_method": "SHCI and extrapolated DMRG"
             },
             "supporting_files": [
                 {
@@ -981,7 +969,9 @@
                 "absolute_accuracy_threshold_energy_units": "Hartree",
                 "energy_target": 0.99,
                 "reference_energy": null,
-                "reference_energy_units": "Hartree"
+                "reference_energy_units": "Hartree",
+                "reference_energy_source": "None",
+                "reference_energy_method": "None"
             },
             "supporting_files": [
                 {
@@ -1120,7 +1110,9 @@
                 "absolute_accuracy_threshold_energy_units": "Hartree",
                 "energy_target": 0.99,
                 "reference_energy": null,
-                "reference_energy_units": "Hartree"
+                "reference_energy_units": "Hartree",
+                "reference_energy_source": "None",
+                "reference_energy_method": "None"
             },
             "supporting_files": [
                 {
@@ -1248,13 +1240,10 @@
                 "absolute_accuracy_threshold": 0.00159362,
                 "absolute_accuracy_threshold_energy_units": "Hartree",
                 "energy_target": 0.99,
-                "reference_energy": -2454.21163859541,
+                "reference_energy": -2454.21155683801,
                 "reference_energy_units": "Hartree",
-                "reference_energy_uncertainty": 0.05218184279071702,
-                "reference_energy_uncertainty_units": "millihartree",
-                "reference_energy_source": "Calculated with Block2 (https://block2.readthedocs.io/)",
-                "reference_energy_method": "DMRG with linear extrapolation to zero discarded weight. Forward schedule used with orbital ordering based on genetic algorithm optimization with the exchange matrix. See DRMG section of arXiv:2406.06335.",
-                "reference_energy_uncertainty_type": "value +/- uncertainty gives a 95% confidence interval. The uncertainty is from the fit."
+                "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+                "reference_energy_method": "SHCI and extrapolated DMRG"
             },
             "supporting_files": [
                 {
@@ -1384,13 +1373,10 @@
                 "absolute_accuracy_threshold": 0.00159362,
                 "absolute_accuracy_threshold_energy_units": "Hartree",
                 "energy_target": 0.99,
-                "reference_energy": -2454.563249138352,
+                "reference_energy": -2454.5631186758173,
                 "reference_energy_units": "Hartree",
-                "reference_energy_uncertainty": 0.02343907830069505,
-                "reference_energy_uncertainty_units": "millihartree",
-                "reference_energy_source": "Calculated with Block2 (https://block2.readthedocs.io/)",
-                "reference_energy_method": "DMRG with linear extrapolation to zero discarded weight. Forward schedule used with orbital ordering based on genetic algorithm optimization with the exchange matrix. See DRMG section of arXiv:2406.06335.",
-                "reference_energy_uncertainty_type": "value +/- uncertainty gives a 95% confidence interval. The uncertainty is from the fit."
+                "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+                "reference_energy_method": "SHCI and extrapolated DMRG"
             },
             "supporting_files": [
                 {
@@ -1526,13 +1512,10 @@
                 "absolute_accuracy_threshold": 0.00159362,
                 "absolute_accuracy_threshold_energy_units": "Hartree",
                 "energy_target": 0.99,
-                "reference_energy": -2454.622490265655,
+                "reference_energy": null,
                 "reference_energy_units": "Hartree",
-                "reference_energy_uncertainty": 0.1765383516274419,
-                "reference_energy_uncertainty_units": "millihartree",
-                "reference_energy_source": "Calculated with Block2 (https://block2.readthedocs.io/)",
-                "reference_energy_method": "DMRG with linear extrapolation to zero discarded weight. Forward schedule used with orbital ordering based on genetic algorithm optimization with the exchange matrix. See DRMG section of arXiv:2406.06335.",
-                "reference_energy_uncertainty_type": "value +/- uncertainty gives a 95% confidence interval. The uncertainty is from the fit."
+                "reference_energy_source": "None",
+                "reference_energy_method": "None"
             },
             "supporting_files": [
                 {
@@ -1670,13 +1653,10 @@
                 "absolute_accuracy_threshold": 0.00159362,
                 "absolute_accuracy_threshold_energy_units": "Hartree",
                 "energy_target": 0.99,
-                "reference_energy": -2454.679201689047,
+                "reference_energy": null,
                 "reference_energy_units": "Hartree",
-                "reference_energy_uncertainty": 0.1555460101267775,
-                "reference_energy_uncertainty_units": "millihartree",
-                "reference_energy_source": "Calculated with Block2 (https://block2.readthedocs.io/)",
-                "reference_energy_method": "DMRG with linear extrapolation to zero discarded weight. Reverse schedule used with orbital ordering based on genetic algorithm optimization with the exchange matrix. See DRMG section of arXiv:2406.06335.",
-                "reference_energy_uncertainty_type": "value +/- uncertainty gives a 95% confidence interval. The uncertainty is from the fit."
+                "reference_energy_source": "None",
+                "reference_energy_method": "None"
             },
             "supporting_files": [
                 {
