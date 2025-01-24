@@ -89,6 +89,11 @@ class StandardReport:
         self.create_plot_num_orbitals_vs_run_time_for_all_solvers()
         self.create_plot_num_orbitals_vs_run_time_for_each_solver()
         self.create_plot_utility_capture_for_each_solver()
+        self.create_plot_quantum_vs_classical_num_orbitals_vs_run_time()
+        self.create_plot_log_fci_dim_vs_run_time_for_all_solvers()
+        self.create_plot_log_fci_dim_vs_run_time_for_each_solver()
+
+        # NOTE: some plots created during ML processing and already in the `ml_artifacts` directory.
 
         # add content to README.md
         self.create_readme_content()
@@ -124,6 +129,7 @@ class StandardReport:
             self.standard_report_output_directory,
             f"num_orbitals_histogram.png")
         )
+        plt.close()
 
 
 
@@ -160,6 +166,7 @@ class StandardReport:
             self.standard_report_output_directory,
             f"num_orbitals_vs_utility.png")
         )
+        plt.close()
     
 
 
@@ -176,7 +183,7 @@ class StandardReport:
         """
         df = self.benchmark_data.all_data_df
         plt.figure()
-        plt.title("Run time of solvers (for attempted tasks)")
+        plt.title("Run time of solvers")
         plt.xlabel("Number of spatial orbitals")
         plt.xlim(0,10*np.ceil(max(df["num_orbitals"])/10))
         plt.ylabel("Overall run time in seconds")
@@ -231,6 +238,76 @@ class StandardReport:
             self.standard_report_output_directory,
             f"solver_num_orbs_vs_log_runtime_scatter_plot.png")
         )
+
+        plt.close()
+        
+
+
+
+
+
+    def create_plot_log_fci_dim_vs_run_time_for_all_solvers(self) -> None:
+        """TODO: docstring
+        """
+        df = self.benchmark_data.all_data_df
+        plt.figure()
+        plt.title("Run time of solvers")
+        plt.xlabel("Log(FCI size)")
+        plt.xlim([0,self.benchmark_data.all_data_df["log_fci_dim"].max()])
+        plt.ylabel("Overall run time in seconds")
+        
+        # colors = [tuple(np.random.rand(3)) for _ in range(len(solver_uuid_dict))]
+        p_list = np.random.permutation(len(self.benchmark_data.solvers_dict))
+        colors = [ list(color_names.keys())[i] for i in p_list ]
+        # use "normal" colors first except for blue, red, and black
+        # ... then dig deep into the color list.
+        colors = ['c', 'm', 'y', 'g', 'w'] + colors
+        
+        # markers = ['o', 's', '^', 'D', 'p', '*', 'H', 'X', 'v', '<']
+        series_counter = 0
+        for solver_uuid in self.benchmark_data.solvers_dict:
+            solver_short_name = self.benchmark_data.solvers_dict[solver_uuid]["solver_short_name"]
+            df = self.benchmark_data.all_data_df
+            df = df[df["solver_uuid"]==solver_uuid] # filter by solver...
+            df = df[df["attempted"]==True] # filter by attempted
+            df_solved = df[df["label"]==True] # filter by solved!
+            plt.scatter(
+                df_solved["log_fci_dim"].values,
+                df_solved["overall_run_time_seconds"].values,
+                color=colors[series_counter],
+                edgecolor="black",
+                marker="^", # triangle up for success.
+                label=f"Success {solver_short_name} ({solver_uuid[:4]}...)"
+            )
+            df_failed = df[df["label"]==False] # filter by failed to solve
+            plt.scatter(
+                df_failed["log_fci_dim"].values,
+                df_failed["overall_run_time_seconds"].values,
+                color=colors[series_counter],
+                marker="v", # triangle down for failure.
+                edgecolor="black",
+                label=f"Failed {solver_short_name} ({solver_uuid[:4]}...)"
+            )
+            series_counter += 1
+        # plot in linear run time y-scale:
+        plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+        plt.tight_layout()
+        plt.savefig(os.path.join(
+            self.standard_report_output_directory,
+            f"log_fci_dim_vs_runtime_all_solvers_plot.png")
+        )
+
+        # plot in log(run time) y-scale:
+        plt.yscale("log")
+        plt.ylabel("Overall run time in seconds (log)")
+        plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+        plt.tight_layout()
+        plt.savefig(os.path.join(
+            self.standard_report_output_directory,
+            f"log_fci_dim_vs_log_runtime_all_solvers_plot.png")
+        )
+
+        plt.close()
         
 
 
@@ -238,6 +315,88 @@ class StandardReport:
 
 
 
+
+
+    def create_plot_quantum_vs_classical_num_orbitals_vs_run_time(self) -> None:
+        """TODO: docstring
+        """
+        df = self.benchmark_data.all_data_df
+        plt.figure()
+        plt.title("Run time of Classical (red) vs Quantum (blue) solvers")
+        plt.xlabel("Number of spatial orbitals")
+        plt.xlim(0,10*np.ceil(max(df["num_orbitals"])/10))
+        plt.ylabel("Overall run time in seconds")
+        
+        df = df[df["attempted"]==True] # filter by attempted
+        df_quantum = df[df["is_resource_estimate"]==True] # filter by quantum
+        df_classical = df[df["is_resource_estimate"]==False] # filter by classical
+        
+        df_quantum_solved = df_quantum[df_quantum["label"]==True] # filter by solved!
+        plt.scatter(
+            df_quantum_solved["num_orbitals"].values,
+            df_quantum_solved["overall_run_time_seconds"].values,
+            color="blue",
+            edgecolor="black",
+            marker="^", # triangle up for success.
+            label=f"Success quantum solver"
+        )
+        df_quantum_failed = df_quantum[df_quantum["label"]==False] # filter by failed!
+        plt.scatter(
+            df_quantum_failed["num_orbitals"].values,
+            df_quantum_failed["overall_run_time_seconds"].values,
+            color="blue",
+            edgecolor="black",
+            marker="v", # triangle down for failure
+            label=f"Failed quantum solver"
+        )
+        df_classical_solved = df_classical[df_classical["label"]==True] # filter by solved!
+        plt.scatter(
+            df_classical_solved["num_orbitals"].values,
+            df_classical_solved["overall_run_time_seconds"].values,
+            color="red",
+            edgecolor="black",
+            marker="^", # triangle up for success.
+            label=f"Success classical solver"
+        )
+        df_classical_failed = df_classical[df_classical["label"]==False] # filter by failed!
+        plt.scatter(
+            df_classical_failed["num_orbitals"].values,
+            df_classical_failed["overall_run_time_seconds"].values,
+            color="red",
+            edgecolor="black",
+            marker="v", # triangle down for failure
+            label=f"Failed classical solver"
+        )
+
+
+        # plot in linear run time y-scale:
+        plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+        plt.tight_layout()
+        plt.savefig(os.path.join(
+            self.standard_report_output_directory,
+            f"quantum_vs_classical_solver_num_orbs_vs_runtime_scatter_plot.png")
+        )
+
+        # plot in log(run time) y-scale:
+        plt.yscale("log")
+        plt.ylabel("Overall run time in seconds (log)")
+        plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+        plt.tight_layout()
+        plt.savefig(os.path.join(
+            self.standard_report_output_directory,
+            f"quantum_vs_classical_solver_num_orbs_vs_log_runtime_scatter_plot.png")
+        )
+
+        plt.close()
+        
+
+
+
+
+
+
+
+        
 
 
 
@@ -252,7 +411,7 @@ class StandardReport:
             solver_short_name = self.benchmark_data.solvers_dict[solver_uuid]["solver_short_name"]
                         
             plt.figure()
-            plt.title(f"Run time on attempted tasks for {solver_short_name}/{solver_uuid[:4]}...")
+            plt.title(f"Run time for {solver_short_name}/{solver_uuid[:4]}...")
             plt.xlabel("Number of spatial orbitals")
             plt.xlim(0,10*np.ceil(max(df["num_orbitals"])/10))
             plt.ylabel("Overall run time in seconds")
@@ -285,9 +444,57 @@ class StandardReport:
                 self.standard_report_output_directory,
                 f"solver_{solver_uuid}_plot.png")
             )
+
+            plt.close()
         
 
 
+
+    def create_plot_log_fci_dim_vs_run_time_for_each_solver(self) -> None:
+        """TODO: docstring"""
+        for solver_uuid in self.benchmark_data.solvers_dict:
+            df = self.benchmark_data.all_data_df
+            df = df[df["solver_uuid"]==solver_uuid] # filter to solver_uuid
+            df = df[df["attempted"]==True] # filter to only attempted
+            
+            solver_short_name = self.benchmark_data.solvers_dict[solver_uuid]["solver_short_name"]
+                        
+            plt.figure()
+            plt.title(f"Run time for {solver_short_name}/{solver_uuid[:4]}...")
+            plt.xlabel("log(FCI size)")
+            plt.xlim([0,self.benchmark_data.all_data_df["log_fci_dim"].max()])
+            plt.ylabel("Overall run time in seconds")
+            
+            
+            df_solved = df[df["label"]==True] # Solved!
+            plt.scatter(
+                df_solved["log_fci_dim"].values,
+                df_solved["overall_run_time_seconds"].values,
+                color="blue", # blue for success
+                marker="^", # triangle up for success.
+                edgecolor="black",
+                label=f"Task success {solver_short_name} ({solver_uuid[:4]}...)"
+            )
+            
+            df_failed = df[df["label"]==False] # failed to solve the task
+            plt.scatter(
+                df_failed["log_fci_dim"].values,
+                df_failed["overall_run_time_seconds"].values,
+                color="red", # red for failure
+                marker="v", # triangle down for failure.
+                edgecolor="black",
+                label=f"Task failed {solver_short_name} ({solver_uuid[:4]}...)"
+            )
+            
+            plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+            plt.tight_layout()
+            plt.savefig(os.path.join(
+                self.standard_report_output_directory,
+                f"log_fci_dim_vs_runtime_solver_{solver_uuid}_plot.png")
+            )
+
+            plt.close()
+        
 
 
 
@@ -345,6 +552,9 @@ class StandardReport:
                 f"solver_{solver_uuid}_utility_capture_plot.png")
             )
 
+            plt.close()
+
+
 
 
 
@@ -365,9 +575,13 @@ class StandardReport:
             file.write(f"Input data: `{self.benchmark_data.hamiltonian_features_csv_file_name}`, last modified {last_modified_time}\n\n")
             
             num_features_calculated = len(self.benchmark_data.hamiltonian_features)
-            num_tasks = self.benchmark_data.all_data_df["task_uuid"].nunique()
+            num_tasks = 0
+            for problem_instance in self.benchmark_data.problem_instance_list:
+                num_tasks += len(problem_instance["tasks"]) # count up tasks.
             if num_features_calculated < num_tasks:
-                file.write(f"WARNING!  We only have features calculated for {num_features_calculated}/{num_tasks} Hamiltonians. This report is based on partial results!\n\n")
+                file.write(f"WARNING!  We only have features calculated for \
+                            {num_features_calculated}/{num_tasks} Hamiltonians. \
+                            This report is based on partial results!\n\n")
 
             last_modified_time = time.ctime(os.path.getmtime(self.benchmark_data.utility_estimation_csv_file_name))
             file.write(f"Input data: `{self.benchmark_data.utility_estimation_csv_file_name}`, last modified {last_modified_time}\n\n")
@@ -375,15 +589,12 @@ class StandardReport:
             c = get_latest_ctime_within_dir(self.benchmark_data.problem_instances_directory)
             file.write(f"Latest creation time for a `problem_instance.json` file: {time.ctime(c)}\n\n")
             
-            c = get_latest_ctime_within_dir(self.benchmark_data.performance_metrics_directory)
-            file.write(f"Latest creation time for a `performance_metrics.json` file: {time.ctime(c)}\n\n")
-
             c = get_latest_ctime_within_dir(self.benchmark_data.solution_files_directory)
             file.write(f"Latest creation time for a `solution.json` file: {time.ctime(c)}\n\n")
 
             df = self.benchmark_data.all_data_df
             file.write(f"# Problem Instance Summary Statistics\n\n")
-            file.write(f"number of `problem_instances`: {df['problem_instance_uuid'].nunique()}\n\n")
+            file.write(f"number of `problem_instances`: {len(self.benchmark_data.problem_instance_list)}.\n\n")
 
             max_num_tasks = 0
             for problem_instance in self.benchmark_data.problem_instance_list:
@@ -393,7 +604,7 @@ class StandardReport:
                     problem_instance_short_name = problem_instance["short_name"]
 
             file.write(f"`problem_instance.json` with the most tasks: {max_num_tasks} ({problem_instance_short_name}/{problem_instance_uuid})\n\n")
-            file.write(f"number of Hamiltonians (i.e., tasks): {num_tasks}\n\n")
+            file.write(f"number of Hamiltonians (i.e., tasks) we have features calculated for: {num_features_calculated}\n\n")
             file.write(f"minimum number of orbitals: {np.min(df['num_orbitals'])}\n\n")
             file.write(f"median number of orbitals: {np.median(df['num_orbitals'])}\n\n")
             file.write(f"maximum number of orbitals: {np.max(df['num_orbitals'])}\n\n")
@@ -405,8 +616,24 @@ class StandardReport:
 
             file.write(f"# Solver Summary Statistics\n\n")
             file.write(f"number of unique participating solvers: {df['solver_uuid'].nunique()}\n\n")
+            
             file.write(f"![Solver scatter plot](solver_num_orbs_vs_runtime_scatter_plot.png)\n\n")
+            file.write(f"NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.\n\n")
+            
             file.write(f"![Solver scatter plot](solver_num_orbs_vs_log_runtime_scatter_plot.png)\n\n")
+            file.write(f"NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.\n\n")
+            
+            file.write(f"![Quantum vs Classical scatter plot](quantum_vs_classical_solver_num_orbs_vs_log_runtime_scatter_plot.png)\n\n")
+            file.write(f"NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.\n\n")
+            
+            file.write(f"![Solver logFCI scatter plot](log_fci_dim_vs_runtime_all_solvers_plot.png)\n\n")
+            file.write(f"NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.\n\n")
+            
+            file.write(f"![Solver logFCI scatter plot, log(runtime)](log_fci_dim_vs_log_runtime_all_solvers_plot.png)\n\n")
+            file.write(f"NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.\n\n")
+            
+            
+            
             
 
 
@@ -450,9 +677,21 @@ class StandardReport:
                 
                 # writing out plots:
                 file.write(f"![Solver success/failure plot](solver_{solver_uuid}_plot.png)\n\n")
+                file.write(f"Note: plot only contains `attempted` tasks.\n\n")
+                file.write(f"![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_{solver_uuid}_plot.png)\n\n")
+                file.write(f"Note: plot only contains `attempted` tasks.\n\n")
                 file.write(f"![Solver utility capture](solver_{solver_uuid}_utility_capture_plot.png)\n\n")
                 file.write(f"![Solver miniML plot](plot_solver_{solver_uuid}.png)\n\n")
+                file.write(f"Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)\n\n")
                 file.write(f"![SHAP summary plot](shap_summary_plot_solver_{solver_uuid}.png)\n\n")
+        
+            # at the end of the file, write out NNMF information for ML models:
+            file.write(f"# Non-negative matrix factorization (ML latent space)\n\n")
+            file.write(f"![NNMF plot](nnmf_components.png)\n\n")
+            solver_uuid = list(self.benchmark_data.solvers_dict.keys())[0]# just get the first solver_uuid.
+            file.write(f"Features: {self.benchmark_data.ml_models_dict[solver_uuid].features}\n\n")
+            for i in range(2):
+                file.write(f"Component {i+1}: {self.benchmark_data.ml_models_dict[solver_uuid].H[i]}\n\n")
     
 
 
