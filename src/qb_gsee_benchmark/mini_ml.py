@@ -122,12 +122,13 @@ class MiniML:
             how="inner",
             suffixes=("","_duplicate_column")
         )
+        self.shap_values = None # updated when .shap_analysis() called.
 
         
         # order of operations matters!
         self.__validate_input_labels()
         self.__filter_labels()
-        # self.__shuffle_labels() # TODO: test shuffling.
+        self.__shuffle_labels()
         self.__remove_zero_variance_columns()
         self.__scale_data()
         self.__train_model()
@@ -182,9 +183,9 @@ class MiniML:
         """TODO: docstring.
         """
         rng = np.random.default_rng(seed=self.rng_seed) 
-        shuffled_keys = rng.permutation(range(0,len(self.X)))
-        self.X = self.X.iloc[shuffled_keys,:]
-        self.Y = self.Y.iloc[shuffled_keys,:]
+        self.shuffled_keys = rng.permutation(range(0,len(self.X)))
+        self.X = self.X.iloc[self.shuffled_keys]
+        self.Y = self.Y.iloc[self.shuffled_keys]
 
 
 
@@ -205,8 +206,6 @@ class MiniML:
     def __scale_data(self) -> None:
         """TODO:docstring
         """
-        # self.X_train = self.X # TODO: ask Rashmi about this.  seems to flip flop.
-        # self.Y_train = self.Y # TODO: ask rashmi about this... are we just using all X/Y data for training?  don't actually scale Y... already 0/1.
         self.standard_scaler = StandardScaler()
         self.X_scaled = self.standard_scaler.fit_transform(self.X)
         self.X_train = self.X_scaled
@@ -224,12 +223,9 @@ class MiniML:
         ) 
         self.model.probability = True
 
-        #SVM on centered and scaled data
-        # self.X_train = self.X_scaled # TODO: ask Rashmi about this.  seems to flip flop.
-
         if self.hypopt_cv: # TODO: maybe break this into a separate method.
             self.model = GridSearchCV(
-                estimator=self.model, # TODO: ask Rashmi about this.  modifying model?
+                estimator=self.model,
                 param_grid=self.param_grid,
                 cv=self.kfold_num,
                 n_jobs=-1,
@@ -237,9 +233,7 @@ class MiniML:
                 error_score="raise"
             )
         
-        
-        
-
+        #SVM on centered and scaled data
         self.model.fit(self.X_train, self.Y_train)
     
 
@@ -287,12 +281,9 @@ class MiniML:
             max_iter = 500
         )
         self.nnmf_projected_data = self.nnmf.fit_transform(self.X_scaled)
-        
-        # TODO: store components as attributes.  print the coefficients of the first two axes.
-        print('NNMF components:')
         self.H = self.nnmf.components_
-        print(self.H)
         
+
         fig = plt.figure()
         plt.title(f"NNMF Components")
         plt.plot(self.H[0,:],'r-o')
@@ -360,7 +351,9 @@ class MiniML:
         orig_probs = self.model.predict_proba(np.asarray(orig_dim_data_for_pred))
         
         Z0 = orig_probs[:,1].reshape(XX.shape)
-        
+        self.Z0 = Z0
+        self.XX = XX
+        self.YY = YY
         
         # plot figure with training data, generated points
         fig = plt.figure()
@@ -399,13 +392,6 @@ class MiniML:
         self.solvability_surface_plot = fig
         self.solvability_surface_plot_file_name = f"plot_solver_{self.solver_uuid}.png"
         plt.close()
-        
-        '''
-        TODO: ask Rashmi:  not doing this.  # Select the top 5 most important features
-        selector = SelectFromModel(rf, max_features=5, prefit=True)
-        X_train_selected = selector.transform(X_train)
-        '''
-        # TODO: ask rashmi:  not computing convex hull.  
             
 
         result = np.where(orig_probs[:,1] > self.threshold_for_confidence_of_solvability)
@@ -431,6 +417,7 @@ class MiniML:
             self.X_train, # X_train an np.ndarray
             nsamples=500
         )
+        self.shap_values = shap_values
         # TODO: may put in kwarg nsamples=smaller_number into .shap_values().
         # TODO: Also consider using shap.sample(data, K) or shap.kmeans(data, K)
         # to summarize the background as K samples.
@@ -438,16 +425,15 @@ class MiniML:
         # NOTE: shap_values.shape = (num_rows, num_features, num_classes)
 
         shap.summary_plot(
-            shap_values[:,:,0], # TODO: ask rashmi about only referenceing the first class.
+            shap_values[:,:,0],
             feature_names=self.X.columns, # X is the original pd.DataFrame, with column headers.
             plot_type="bar",
             show=False, # do not show plot to screen.  save it to file later.
             max_display=len(FEATURES)
         )
-        plt.xlim([0,0.1]) # TODO: dynamically check to ensure this x-limit is large enough.
+        plt.xlim([0,0.15]) # TODO: dynamically check to ensure this x-limit is large enough.
         plt.tight_layout()
         self.shap_summary_plot = plt.gcf()
-        # TODO: fix figures x-axis range.  
         self.shap_summary_plot_file_name = f"shap_summary_plot_solver_{self.solver_uuid}.png"
         self.shap_summary_plot.suptitle(f"SHAP summary plot {self.solver_short_name} ({self.solver_uuid[0:4]}...)")
         plt.close()
