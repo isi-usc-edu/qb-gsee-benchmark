@@ -162,11 +162,14 @@ class MiniML:
         ## 
         num_unique_solver_uuids = self.solver_labels["solver_uuid"].nunique()
         assert num_unique_solver_uuids == 1, \
-            f"Error in solver labels: num_unique_solver_uuids={num_unique_solver_uuids} and should be 1."
+            f"Error: in solver labels, num_unique_solver_uuids={num_unique_solver_uuids} and should be 1."
         num_unique_solver_short_names = self.solver_labels["solver_short_name"].nunique()
         assert num_unique_solver_short_names == 1, \
-            f"Error in solver labels: num_unique_solver_short_names={num_unique_solver_short_names} and should be 1."
+            f"Error: in solver labels, num_unique_solver_short_names={num_unique_solver_short_names} and should be 1."
 
+        assert self.solver_labels["label"].nunique() > 1, \
+            f"Error: there is only one value for `label` (either all `True` or `False`), we can't compute an ML categorization model."
+        
         self.solver_uuid = self.solver_labels["solver_uuid"].values[0]
         self.solver_short_name = self.solver_labels["solver_short_name"].values[0]        
 

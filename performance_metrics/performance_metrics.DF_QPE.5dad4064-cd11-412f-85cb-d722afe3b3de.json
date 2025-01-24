@@ -1,100 +1,98 @@
 {
     "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/performance_metrics.schema.0.0.1.json",
-    "performance_metrics_uuid": "65f92ed8-716d-40aa-bd7b-852a8e3c2297",
+    "performance_metrics_uuid": "8f235a80-da44-468b-a75e-31f49d54acc9",
     "solver_short_name": "DF_QPE",
     "solver_uuid": "5dad4064-cd11-412f-85cb-d722afe3b3de",
-    "creation_timestamp": "2025-01-23T19:37:07.010747+00:00",
+    "creation_timestamp": "2025-01-24T22:30:00.577981+00:00",
     "ml_metrics": {
-        "solvability_ratio": 0.0235,
-        "f1_score": [
-            0.9819819819819819,
-            0.9259259259259259
-        ],
-        "ml_metrics_calculator_version": 1
+        "solvability_ratio": null,
+        "f1_score": null,
+        "ml_metrics_calculator_version": 1,
+        "comment": "All labels were either all `True` or all `False` and we cannot create an ML model with only one class."
     },
     "top_level_results": {
         "number_of_problem_instances": 82,
-        "number_of_problem_instances_attempted": 24,
-        "number_of_problem_instances_solved": 3,
+        "number_of_problem_instances_attempted": 22,
+        "number_of_problem_instances_solved": 0,
         "number_of_tasks": 230,
-        "number_of_tasks_attempted": 163,
-        "number_of_tasks_solved": 26,
-        "number_of_tasks_solved_within_run_time_limit": 26,
-        "number_of_tasks_solved_within_accuracy_threshold": 163,
-        "max_run_time_of_attempted_tasks": 233737829.40462503,
-        "sum_of_run_time_of_attempted_tasks": 1180589418.3385448
+        "number_of_tasks_attempted": 154,
+        "number_of_tasks_solved": 0,
+        "number_of_tasks_solved_within_run_time_limit": 0,
+        "number_of_tasks_solved_within_accuracy_threshold": 154,
+        "max_run_time_of_attempted_tasks": 1394068547267.4111,
+        "sum_of_run_time_of_attempted_tasks": 15652541022388.93
     },
     "results_by_problem_instance": [
         {
             "problem_instance_uuid": "dc8bdc56-5ebd-4996-6b81-81b1a06d8c76",
-            "solution_uuid": "4c67130e-9f94-4142-bc52-f3645d96e892",
+            "solution_uuid": "22775139-ba46-49ef-9354-9d38cb45a5dd",
             "number_of_tasks": 12,
             "number_of_tasks_attempted": 12,
-            "number_of_tasks_solved_within_runtime_limit": 4,
+            "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 12,
-            "number_of_tasks_solved": 4,
-            "sum_of_run_time_of_attempted_tasks": 17102698.671205,
-            "max_run_time_of_attempted_tasks": 3511121.2856980003,
+            "number_of_tasks_solved": 0,
+            "sum_of_run_time_of_attempted_tasks": 1970009884217.3206,
+            "max_run_time_of_attempted_tasks": 909375843074.0541,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "766ba2da-e72a-4e03-a739-f97269026fc4",
-            "solution_uuid": "1bfb882d-f6a5-47a2-b3eb-d7dcea4aa0cf",
+            "solution_uuid": "a4a844e2-b510-4468-ac49-f569f5f8b1e3",
             "number_of_tasks": 1,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 292036.66555700003,
-            "max_run_time_of_attempted_tasks": 292036.66555700003,
+            "sum_of_run_time_of_attempted_tasks": 421145962.411894,
+            "max_run_time_of_attempted_tasks": 421145962.411894,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "664ec8e4-09d5-41cc-6266-ddb26219366f",
-            "solution_uuid": "fb266417-b2ee-42a6-8dd0-8962abf48e65",
+            "solution_uuid": "4b5cba99-2520-4729-b070-e1a4797480af",
             "number_of_tasks": 4,
             "number_of_tasks_attempted": 4,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 4,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 6964171.178771,
-            "max_run_time_of_attempted_tasks": 3276255.1770940004,
+            "sum_of_run_time_of_attempted_tasks": 27029893603.22499,
+            "max_run_time_of_attempted_tasks": 10937330067.796438,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "3f141f05-532b-478d-b38a-2ae07baadc88",
-            "solution_uuid": "30634853-a495-4894-938b-5bdb1d929939",
+            "solution_uuid": "a33a4c50-b5f9-47a0-8b39-4672100c0faa",
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 2,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 2,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 11464718.209817,
-            "max_run_time_of_attempted_tasks": 11030717.787609,
+            "sum_of_run_time_of_attempted_tasks": 18120000615.46198,
+            "max_run_time_of_attempted_tasks": 17278526442.997,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "1c3155e0-3679-4eff-bed0-57a1082672c3",
-            "solution_uuid": "6d58695a-2a52-4ab9-8a1f-6ce11694424d",
+            "solution_uuid": "e9804389-5bf3-4e99-ab7f-e5d0fd595108",
             "number_of_tasks": 3,
-            "number_of_tasks_attempted": 2,
+            "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
-            "number_of_tasks_solved_within_accuracy_requirement": 2,
+            "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 28923446.633055996,
-            "max_run_time_of_attempted_tasks": 27927604.775332995,
+            "sum_of_run_time_of_attempted_tasks": 20028037875.97874,
+            "max_run_time_of_attempted_tasks": 20028037875.97874,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "a8895776-3583-4884-fbc7-d6f9df21a7ac",
-            "solution_uuid": "26e94c6e-10c4-4007-af01-078b4af1af99",
+            "solution_uuid": "f7f03aaa-72da-4c34-a837-beddb8359aed",
             "number_of_tasks": 9,
             "number_of_tasks_attempted": 9,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 9,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 33227004.489454,
-            "max_run_time_of_attempted_tasks": 5771612.960158,
+            "sum_of_run_time_of_attempted_tasks": 87668926811.79166,
+            "max_run_time_of_attempted_tasks": 14916369321.586258,
             "solution_submitted_by_due_date": true
         },
         {
@@ -105,44 +103,44 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 2,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 7142260.388153999,
-            "max_run_time_of_attempted_tasks": 7033638.987582999,
+            "sum_of_run_time_of_attempted_tasks": 11523050023.194674,
+            "max_run_time_of_attempted_tasks": 11094974624.165678,
             "solution_submitted_by_due_date": false
         },
         {
             "problem_instance_uuid": "379781b8-5732-492e-9fca-6fad3fc3692a",
-            "solution_uuid": "bb68f96b-f04c-490f-9304-3dc7d7080a30",
+            "solution_uuid": "6c72dfae-c523-4ecb-bf6b-c9a7d0b6f2f7",
             "number_of_tasks": 2,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 5130335.070489,
-            "max_run_time_of_attempted_tasks": 5130335.070489,
+            "sum_of_run_time_of_attempted_tasks": 45476684698.96988,
+            "max_run_time_of_attempted_tasks": 45476684698.96988,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "2e61ba35-b6b0-42b5-b3e8-d25bd83145ba",
-            "solution_uuid": "f02a1a4e-e6e9-46cb-9230-8f12b8980a27",
+            "solution_uuid": "007a4457-b2fa-459e-8c78-9c746e5b41cb",
             "number_of_tasks": 3,
-            "number_of_tasks_attempted": 2,
+            "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
-            "number_of_tasks_solved_within_accuracy_requirement": 2,
+            "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 55090334.071615,
-            "max_run_time_of_attempted_tasks": 50843516.331184,
+            "sum_of_run_time_of_attempted_tasks": 146228190136.75098,
+            "max_run_time_of_attempted_tasks": 146228190136.75098,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
-            "solution_uuid": "1129e852-9d41-40d8-82eb-6dfe5bb21b99",
+            "solution_uuid": "b252a1e1-652e-4d99-abf4-7e880aa27c80",
             "number_of_tasks": 16,
-            "number_of_tasks_attempted": 16,
+            "number_of_tasks_attempted": 13,
             "number_of_tasks_solved_within_runtime_limit": 0,
-            "number_of_tasks_solved_within_accuracy_requirement": 16,
+            "number_of_tasks_solved_within_accuracy_requirement": 13,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 254079530.713172,
-            "max_run_time_of_attempted_tasks": 80075692.49281399,
+            "sum_of_run_time_of_attempted_tasks": 2715571635714.461,
+            "max_run_time_of_attempted_tasks": 1394068547267.4111,
             "solution_submitted_by_due_date": true
         },
         {
@@ -153,32 +151,32 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 26168558.008835,
-            "max_run_time_of_attempted_tasks": 26168558.008835,
+            "sum_of_run_time_of_attempted_tasks": 1361934653970.5488,
+            "max_run_time_of_attempted_tasks": 1361934653970.5488,
             "solution_submitted_by_due_date": false
         },
         {
             "problem_instance_uuid": "00043d56-ed63-4266-907c-99c95c51b9db",
-            "solution_uuid": "85e4b618-b303-4a82-857e-75ede5bddba7",
+            "solution_uuid": null,
             "number_of_tasks": 1,
-            "number_of_tasks_attempted": 1,
+            "number_of_tasks_attempted": 0,
             "number_of_tasks_solved_within_runtime_limit": 0,
-            "number_of_tasks_solved_within_accuracy_requirement": 1,
+            "number_of_tasks_solved_within_accuracy_requirement": 0,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 233737829.40462503,
-            "max_run_time_of_attempted_tasks": 233737829.40462503,
-            "solution_submitted_by_due_date": true
+            "sum_of_run_time_of_attempted_tasks": null,
+            "max_run_time_of_attempted_tasks": null,
+            "solution_submitted_by_due_date": false
         },
         {
             "problem_instance_uuid": "a14a1e28-71c5-4e23-bf6e-dd9662a6df58",
-            "solution_uuid": "ce6e2537-6f44-4307-a122-a70e39a84edb",
+            "solution_uuid": "36e95dad-547d-49aa-a692-b4a0944c5804",
             "number_of_tasks": 2,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 12576022.72562,
-            "max_run_time_of_attempted_tasks": 12576022.72562,
+            "sum_of_run_time_of_attempted_tasks": 246913640327.66345,
+            "max_run_time_of_attempted_tasks": 246913640327.66345,
             "solution_submitted_by_due_date": true
         },
         {
@@ -189,8 +187,8 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 18956844.471942,
-            "max_run_time_of_attempted_tasks": 18956844.471942,
+            "sum_of_run_time_of_attempted_tasks": 435310799170.6477,
+            "max_run_time_of_attempted_tasks": 435310799170.6477,
             "solution_submitted_by_due_date": false
         },
         {
@@ -201,8 +199,8 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 4327713.296678999,
-            "max_run_time_of_attempted_tasks": 4327713.296678999,
+            "sum_of_run_time_of_attempted_tasks": 16124747364.19018,
+            "max_run_time_of_attempted_tasks": 16124747364.19018,
             "solution_submitted_by_due_date": false
         },
         {
@@ -213,8 +211,8 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 10463140.73969,
-            "max_run_time_of_attempted_tasks": 10463140.73969,
+            "sum_of_run_time_of_attempted_tasks": 161664716067.94662,
+            "max_run_time_of_attempted_tasks": 161664716067.94662,
             "solution_submitted_by_due_date": false
         },
         {
@@ -225,32 +223,32 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 681885.2211359999,
-            "max_run_time_of_attempted_tasks": 681885.2211359999,
+            "sum_of_run_time_of_attempted_tasks": 4372183228.819837,
+            "max_run_time_of_attempted_tasks": 4372183228.819837,
             "solution_submitted_by_due_date": false
         },
         {
             "problem_instance_uuid": "0c1dfb55-f021-409a-80b1-79c8c2908095",
-            "solution_uuid": "ac500bd1-d6b4-4a16-8b10-958da0a4830e",
+            "solution_uuid": "561024d4-c87f-490d-9d94-dc4c6e1356ca",
             "number_of_tasks": 1,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 26176938.864974998,
-            "max_run_time_of_attempted_tasks": 26176938.864974998,
+            "sum_of_run_time_of_attempted_tasks": 397557350730.9313,
+            "max_run_time_of_attempted_tasks": 397557350730.9313,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "90d4e4fc-1216-4846-b45f-198c0530e29b",
-            "solution_uuid": "36ffd739-b179-4a6a-a008-63b4652c3edf",
+            "solution_uuid": "22757023-38b7-4820-a7f4-1dad4ee0a4f6",
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 3,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 3,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 28881014.546282995,
-            "max_run_time_of_attempted_tasks": 9696483.131195,
+            "sum_of_run_time_of_attempted_tasks": 189003084607.71564,
+            "max_run_time_of_attempted_tasks": 69896409497.05801,
             "solution_submitted_by_due_date": true
         },
         {
@@ -258,35 +256,35 @@
             "solution_uuid": null,
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 2,
-            "number_of_tasks_solved_within_runtime_limit": 1,
+            "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 2,
-            "number_of_tasks_solved": 1,
-            "sum_of_run_time_of_attempted_tasks": 1333880.1206810002,
-            "max_run_time_of_attempted_tasks": 1311228.7672920001,
+            "number_of_tasks_solved": 0,
+            "sum_of_run_time_of_attempted_tasks": 3432088154.4556913,
+            "max_run_time_of_attempted_tasks": 3371118333.7807193,
             "solution_submitted_by_due_date": false
         },
         {
             "problem_instance_uuid": "b1c5ac4e-9b94-4e89-9557-da2026933172",
-            "solution_uuid": "a20992af-f211-4f66-a8c8-cace2659e1cb",
+            "solution_uuid": "08e97cb1-6a66-4c5d-8e88-d36b47d01c71",
             "number_of_tasks": 1,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 9703259.582003998,
-            "max_run_time_of_attempted_tasks": 9703259.582003998,
+            "sum_of_run_time_of_attempted_tasks": 165069010166.48825,
+            "max_run_time_of_attempted_tasks": 165069010166.48825,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8",
-            "solution_uuid": "a07902c4-6d2f-4cf4-8e00-a9eb3600918d",
+            "solution_uuid": "b240ccfe-37cd-4710-b160-11824a656b1a",
             "number_of_tasks": 8,
             "number_of_tasks_attempted": 8,
-            "number_of_tasks_solved_within_runtime_limit": 4,
+            "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 8,
-            "number_of_tasks_solved": 4,
-            "sum_of_run_time_of_attempted_tasks": 6040251.904405,
-            "max_run_time_of_attempted_tasks": 2322131.2408799995,
+            "number_of_tasks_solved": 0,
+            "sum_of_run_time_of_attempted_tasks": 1103323533781.3606,
+            "max_run_time_of_attempted_tasks": 801633541061.9941,
             "solution_submitted_by_due_date": true
         },
         {
@@ -297,20 +295,20 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 4590196.263592,
-            "max_run_time_of_attempted_tasks": 4590196.263592,
+            "sum_of_run_time_of_attempted_tasks": 34026404011.512127,
+            "max_run_time_of_attempted_tasks": 34026404011.512127,
             "solution_submitted_by_due_date": false
         },
         {
             "problem_instance_uuid": "8ed1a800-a4c6-4bff-a6de-cb220554c42f",
-            "solution_uuid": "8601ee1d-450c-42fc-8637-d2c9c3c1467b",
+            "solution_uuid": "5b0a7ca4-d94a-4fd2-8765-64ab5d0dfb60",
             "number_of_tasks": 12,
-            "number_of_tasks_attempted": 6,
+            "number_of_tasks_attempted": 3,
             "number_of_tasks_solved_within_runtime_limit": 0,
-            "number_of_tasks_solved_within_accuracy_requirement": 6,
+            "number_of_tasks_solved_within_accuracy_requirement": 3,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 17764953.841298,
-            "max_run_time_of_attempted_tasks": 9881906.325159002,
+            "sum_of_run_time_of_attempted_tasks": 1520354816959.4822,
+            "max_run_time_of_attempted_tasks": 783250842035.7645,
             "solution_submitted_by_due_date": true
         },
         {
@@ -321,20 +319,20 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 2,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 25523140.763682,
-            "max_run_time_of_attempted_tasks": 23386615.621802002,
+            "sum_of_run_time_of_attempted_tasks": 356808382574.20605,
+            "max_run_time_of_attempted_tasks": 343165323066.1819,
             "solution_submitted_by_due_date": false
         },
         {
             "problem_instance_uuid": "a0a07bfe-aac2-4d61-9425-009953899b3b",
-            "solution_uuid": "9f6784e7-8208-4e55-abd3-083eedd1f124",
+            "solution_uuid": "1ce4d5fc-b165-47bd-89d0-d93b902eb9be",
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 2,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 2,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 8223321.2203830015,
-            "max_run_time_of_attempted_tasks": 7995211.792247001,
+            "sum_of_run_time_of_attempted_tasks": 79782673985.0339,
+            "max_run_time_of_attempted_tasks": 78590032780.48885,
             "solution_submitted_by_due_date": true
         },
         {
@@ -345,44 +343,44 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 6547041.559696999,
-            "max_run_time_of_attempted_tasks": 6547041.559696999,
+            "sum_of_run_time_of_attempted_tasks": 27420438542.507454,
+            "max_run_time_of_attempted_tasks": 27420438542.507454,
             "solution_submitted_by_due_date": false
         },
         {
             "problem_instance_uuid": "9fbd9b4c-5ea9-4095-af7b-7d4491399e42",
-            "solution_uuid": "d151b616-b3dd-4b6d-942f-4de1ee23b473",
+            "solution_uuid": "e015258a-6257-4eec-b8f0-e6bb0f060eae",
             "number_of_tasks": 2,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 4260938.3069939995,
-            "max_run_time_of_attempted_tasks": 4260938.3069939995,
+            "sum_of_run_time_of_attempted_tasks": 131779041114.94218,
+            "max_run_time_of_attempted_tasks": 131779041114.94218,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "0ca102a7-dad4-4d42-8c73-9acfa45378d7",
-            "solution_uuid": "07619ea2-72d6-41dc-bba6-d56422781a20",
+            "solution_uuid": "d17c05de-1048-4aed-ba15-afbcb112b529",
             "number_of_tasks": 2,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 936793.4014920001,
-            "max_run_time_of_attempted_tasks": 936793.4014920001,
+            "sum_of_run_time_of_attempted_tasks": 16046300420.767134,
+            "max_run_time_of_attempted_tasks": 16046300420.767134,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "b78a10f2-ce8a-43c0-69ec-4cf666d8e85c",
-            "solution_uuid": "d7e9bab1-5227-4992-abb2-a0c3d01e2e51",
+            "solution_uuid": "04f3dc13-c620-4a80-92e6-19e7a17adebc",
             "number_of_tasks": 9,
             "number_of_tasks_attempted": 9,
-            "number_of_tasks_solved_within_runtime_limit": 6,
+            "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 9,
-            "number_of_tasks_solved": 6,
-            "sum_of_run_time_of_attempted_tasks": 2842297.3141770004,
-            "max_run_time_of_attempted_tasks": 1335367.806427,
+            "number_of_tasks_solved": 0,
+            "sum_of_run_time_of_attempted_tasks": 7916617306.327575,
+            "max_run_time_of_attempted_tasks": 4185869224.337452,
             "solution_submitted_by_due_date": true
         },
         {
@@ -393,32 +391,32 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 2294877.227481,
-            "max_run_time_of_attempted_tasks": 2294877.227481,
+            "sum_of_run_time_of_attempted_tasks": 8774378010.017073,
+            "max_run_time_of_attempted_tasks": 8774378010.017073,
             "solution_submitted_by_due_date": false
         },
         {
             "problem_instance_uuid": "9823b0dd-87b6-4793-9741-e8cbcf2b50c0",
-            "solution_uuid": "ee0a2e66-0ce3-4a96-bfe5-2811edecf7f9",
+            "solution_uuid": "ae5887ea-508e-41e9-b7b0-c50554c2f64d",
             "number_of_tasks": 2,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 6547470.146287001,
-            "max_run_time_of_attempted_tasks": 6547470.146287001,
+            "sum_of_run_time_of_attempted_tasks": 27330163584.54851,
+            "max_run_time_of_attempted_tasks": 27330163584.54851,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "13c7144d-047e-4431-8d02-0b1d14c0526b",
-            "solution_uuid": "fec6f65c-ce69-4033-8a1f-04116eb31f28",
+            "solution_uuid": "1c93c867-84fc-4b0f-97e2-73c27c765402",
             "number_of_tasks": 2,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 1561743.680315,
-            "max_run_time_of_attempted_tasks": 1561743.680315,
+            "sum_of_run_time_of_attempted_tasks": 24615351609.667583,
+            "max_run_time_of_attempted_tasks": 24615351609.667583,
             "solution_submitted_by_due_date": true
         },
         {
@@ -429,8 +427,8 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 6055231.181249,
-            "max_run_time_of_attempted_tasks": 6055231.181249,
+            "sum_of_run_time_of_attempted_tasks": 15874561106.932808,
+            "max_run_time_of_attempted_tasks": 15874561106.932808,
             "solution_submitted_by_due_date": false
         },
         {
@@ -453,20 +451,20 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 2,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 16146463.848230999,
-            "max_run_time_of_attempted_tasks": 15919291.662694998,
+            "sum_of_run_time_of_attempted_tasks": 90661521084.26643,
+            "max_run_time_of_attempted_tasks": 87980888895.06749,
             "solution_submitted_by_due_date": false
         },
         {
             "problem_instance_uuid": "e3e78b41-577d-4536-a63f-7e968eeb6493",
-            "solution_uuid": "b4de309e-91a5-49b5-a630-f389cc4a7d8e",
+            "solution_uuid": "5bb7fda5-669b-4f71-a8c8-0b46f2011b76",
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 2,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 2,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 30613973.125785004,
-            "max_run_time_of_attempted_tasks": 30188495.218917005,
+            "sum_of_run_time_of_attempted_tasks": 225753508143.56656,
+            "max_run_time_of_attempted_tasks": 222963644116.02087,
             "solution_submitted_by_due_date": true
         },
         {
@@ -477,140 +475,140 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 2,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 5652257.291078,
-            "max_run_time_of_attempted_tasks": 5424029.829384,
+            "sum_of_run_time_of_attempted_tasks": 8999731807.257286,
+            "max_run_time_of_attempted_tasks": 8549754207.087881,
             "solution_submitted_by_due_date": false
         },
         {
             "problem_instance_uuid": "162f41da-af43-427c-a8bc-ae9fa97ace95",
-            "solution_uuid": "2239965d-1c2e-4f05-b2e0-90d7979e0286",
-            "number_of_tasks": 3,
-            "number_of_tasks_attempted": 2,
-            "number_of_tasks_solved_within_runtime_limit": 1,
-            "number_of_tasks_solved_within_accuracy_requirement": 2,
-            "number_of_tasks_solved": 1,
-            "sum_of_run_time_of_attempted_tasks": 2473009.5887170006,
-            "max_run_time_of_attempted_tasks": 2411295.7923330003,
-            "solution_submitted_by_due_date": true
-        },
-        {
-            "problem_instance_uuid": "3301a356-21a9-472b-8021-f02f4d2c9eec",
-            "solution_uuid": "56f208ac-fec4-4849-b985-9c777540f7c4",
+            "solution_uuid": "4028c4e5-ec6d-418c-902c-a905928a10e7",
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 2,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 2,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 3121014.744856,
-            "max_run_time_of_attempted_tasks": 3011188.780196,
+            "sum_of_run_time_of_attempted_tasks": 9275048374.338142,
+            "max_run_time_of_attempted_tasks": 9028484748.946033,
+            "solution_submitted_by_due_date": true
+        },
+        {
+            "problem_instance_uuid": "3301a356-21a9-472b-8021-f02f4d2c9eec",
+            "solution_uuid": "4b772bff-319b-4a6b-9e10-ddff273c513f",
+            "number_of_tasks": 3,
+            "number_of_tasks_attempted": 2,
+            "number_of_tasks_solved_within_runtime_limit": 0,
+            "number_of_tasks_solved_within_accuracy_requirement": 2,
+            "number_of_tasks_solved": 0,
+            "sum_of_run_time_of_attempted_tasks": 19480542640.292084,
+            "max_run_time_of_attempted_tasks": 19049653059.769505,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "e0f6ed02-6502-454b-bf2c-e7994e0510f4",
-            "solution_uuid": "e216847c-7588-4d34-9895-c9f625ada705",
+            "solution_uuid": "735d4e8b-f107-4459-8799-0aee2b028e35",
             "number_of_tasks": 2,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 1196642.112083,
-            "max_run_time_of_attempted_tasks": 1196642.112083,
+            "sum_of_run_time_of_attempted_tasks": 5668809204.485021,
+            "max_run_time_of_attempted_tasks": 5668809204.485021,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "a37c86c0-1937-4f05-83ab-08a5fd104b7e",
-            "solution_uuid": "e03b9dd3-fda8-4e68-9741-f4bfe6d91035",
+            "solution_uuid": "d2c86be2-04a7-41ba-9d14-e72b8cc2d244",
             "number_of_tasks": 1,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 309094.449787,
-            "max_run_time_of_attempted_tasks": 309094.449787,
+            "sum_of_run_time_of_attempted_tasks": 663442499.224214,
+            "max_run_time_of_attempted_tasks": 663442499.224214,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "9b8083ab-ea59-47db-894c-95a0d2ba3cb6",
-            "solution_uuid": "5577286d-100b-47ad-a1c6-6f0b43419efb",
+            "solution_uuid": "452e3639-36d8-4077-90d7-bf27e717d33d",
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 2,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 2,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 14592888.823467001,
-            "max_run_time_of_attempted_tasks": 14415816.233996002,
+            "sum_of_run_time_of_attempted_tasks": 45884195195.14272,
+            "max_run_time_of_attempted_tasks": 45187731188.880035,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "edb1dfc4-c9d0-41ce-902a-2cfcf97c0c76",
-            "solution_uuid": "044d7b42-fd57-4806-928a-d9f4887956a5",
+            "solution_uuid": "7ff5d1d7-7a33-49a7-a1ba-0f0fed453b45",
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 2,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 2,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 9377618.816981,
-            "max_run_time_of_attempted_tasks": 8965471.790427001,
+            "sum_of_run_time_of_attempted_tasks": 34787780350.61136,
+            "max_run_time_of_attempted_tasks": 32923575159.13464,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "7213642b-5f16-48be-d5e5-2bc42ebb8526",
-            "solution_uuid": "9f8d9957-d0f9-4576-b8bc-02d37c24068d",
+            "solution_uuid": "5e829107-0a53-4461-9a39-ab0870df2479",
             "number_of_tasks": 6,
             "number_of_tasks_attempted": 6,
-            "number_of_tasks_solved_within_runtime_limit": 3,
+            "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 6,
-            "number_of_tasks_solved": 3,
-            "sum_of_run_time_of_attempted_tasks": 1638368.365387,
-            "max_run_time_of_attempted_tasks": 737543.523842,
+            "number_of_tasks_solved": 0,
+            "sum_of_run_time_of_attempted_tasks": 10691777158.22346,
+            "max_run_time_of_attempted_tasks": 5482191547.438866,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "f90280cc-c860-4ff1-a9ec-4841cec989f7",
-            "solution_uuid": "3db1eef7-7c06-4f5f-91f0-aeb73efe00f2",
+            "solution_uuid": "32447c6f-a2a0-4e0f-b64b-e691c1badceb",
             "number_of_tasks": 2,
             "number_of_tasks_attempted": 2,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 2,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 22830421.746833,
-            "max_run_time_of_attempted_tasks": 21996192.366232,
+            "sum_of_run_time_of_attempted_tasks": 515389654014.5056,
+            "max_run_time_of_attempted_tasks": 508720241093.1134,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "05abb33d-ecea-406f-8832-31a814b26dfd",
-            "solution_uuid": "26a941d6-051c-48bb-a2d7-1fe3c6f988c8",
+            "solution_uuid": "561e9fb2-1340-4d0a-987f-b8fd2eb4c0d6",
             "number_of_tasks": 2,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 6776827.617965001,
-            "max_run_time_of_attempted_tasks": 6776827.617965001,
+            "sum_of_run_time_of_attempted_tasks": 24758384949.877457,
+            "max_run_time_of_attempted_tasks": 24758384949.877457,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "7ca1486c-06a5-47c1-b8ab-eab491ffc68b",
-            "solution_uuid": "1fecfa30-cc3e-4122-bb01-e792411e8efb",
+            "solution_uuid": "900e3d80-0665-4db4-b598-2824e08c7273",
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 2,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 2,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 7330184.202274,
-            "max_run_time_of_attempted_tasks": 7156453.193287,
+            "sum_of_run_time_of_attempted_tasks": 45650908648.91694,
+            "max_run_time_of_attempted_tasks": 44853519316.41435,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "3987b2dd-25bc-44e2-b516-dbc3f670a9c3",
-            "solution_uuid": "3f7637a3-7bec-44a8-a1f8-5c8119abdbb7",
+            "solution_uuid": "7b5ab086-f0c0-4446-8998-ceb606888d8f",
             "number_of_tasks": 2,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 4871704.881500999,
-            "max_run_time_of_attempted_tasks": 4871704.881500999,
+            "sum_of_run_time_of_attempted_tasks": 195972197278.4552,
+            "max_run_time_of_attempted_tasks": 195972197278.4552,
             "solution_submitted_by_due_date": true
         },
         {
@@ -630,23 +628,23 @@
             "solution_uuid": null,
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 2,
-            "number_of_tasks_solved_within_runtime_limit": 1,
+            "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 2,
-            "number_of_tasks_solved": 1,
-            "sum_of_run_time_of_attempted_tasks": 1194971.053228,
-            "max_run_time_of_attempted_tasks": 1131383.8645829998,
+            "number_of_tasks_solved": 0,
+            "sum_of_run_time_of_attempted_tasks": 3014011150.4749503,
+            "max_run_time_of_attempted_tasks": 2929671221.1499405,
             "solution_submitted_by_due_date": false
         },
         {
             "problem_instance_uuid": "9bd9cde6-6daa-441a-984e-ae1c1c051e91",
-            "solution_uuid": "dcb0aaba-cc27-4600-ac93-5b8907232091",
+            "solution_uuid": "1f9c41a7-0e5e-4628-9a89-b9db8a731df2",
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 2,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 2,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 28694745.128291,
-            "max_run_time_of_attempted_tasks": 28140765.266451,
+            "sum_of_run_time_of_attempted_tasks": 412779273057.53674,
+            "max_run_time_of_attempted_tasks": 398994270002.4834,
             "solution_submitted_by_due_date": true
         },
         {
@@ -654,11 +652,11 @@
             "solution_uuid": null,
             "number_of_tasks": 6,
             "number_of_tasks_attempted": 4,
-            "number_of_tasks_solved_within_runtime_limit": 2,
+            "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 4,
-            "number_of_tasks_solved": 2,
-            "sum_of_run_time_of_attempted_tasks": 5132204.904073999,
-            "max_run_time_of_attempted_tasks": 3545202.805513,
+            "number_of_tasks_solved": 0,
+            "sum_of_run_time_of_attempted_tasks": 21248317535.115025,
+            "max_run_time_of_attempted_tasks": 11181106947.894611,
             "solution_submitted_by_due_date": false
         },
         {
@@ -669,8 +667,8 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 6590492.351621999,
-            "max_run_time_of_attempted_tasks": 6590492.351621999,
+            "sum_of_run_time_of_attempted_tasks": 10339310216.597315,
+            "max_run_time_of_attempted_tasks": 10339310216.597315,
             "solution_submitted_by_due_date": false
         },
         {
@@ -681,20 +679,20 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 2991602.9063999997,
-            "max_run_time_of_attempted_tasks": 2991602.9063999997,
+            "sum_of_run_time_of_attempted_tasks": 1090153680039.5792,
+            "max_run_time_of_attempted_tasks": 1090153680039.5792,
             "solution_submitted_by_due_date": false
         },
         {
             "problem_instance_uuid": "bf3fb654-72c7-4fd4-bfd1-9ffef5aaebd8",
-            "solution_uuid": "810dbf82-81a6-43dd-b880-f5a765b2720f",
+            "solution_uuid": "4c2298ab-ea78-4b06-b479-a3f40206fc64",
             "number_of_tasks": 1,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 296755.57209599996,
-            "max_run_time_of_attempted_tasks": 296755.57209599996,
+            "sum_of_run_time_of_attempted_tasks": 424777804.594502,
+            "max_run_time_of_attempted_tasks": 424777804.594502,
             "solution_submitted_by_due_date": true
         },
         {
@@ -705,8 +703,8 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 4626732.113286,
-            "max_run_time_of_attempted_tasks": 4626732.113286,
+            "sum_of_run_time_of_attempted_tasks": 113980370421.15825,
+            "max_run_time_of_attempted_tasks": 113980370421.15825,
             "solution_submitted_by_due_date": false
         },
         {
@@ -717,20 +715,20 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 1102502.8496939999,
-            "max_run_time_of_attempted_tasks": 1102502.8496939999,
+            "sum_of_run_time_of_attempted_tasks": 8127862417.012413,
+            "max_run_time_of_attempted_tasks": 8127862417.012413,
             "solution_submitted_by_due_date": false
         },
         {
             "problem_instance_uuid": "f1a6b508-75e8-4afb-9c81-fc61af11b523",
-            "solution_uuid": "540912ad-64e0-4b0b-8c70-630e0cfbbf08",
+            "solution_uuid": "46609a34-eed2-4100-aa07-82f8a4e989f4",
             "number_of_tasks": 1,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 11479839.893135002,
-            "max_run_time_of_attempted_tasks": 11479839.893135002,
+            "sum_of_run_time_of_attempted_tasks": 237862927173.15945,
+            "max_run_time_of_attempted_tasks": 237862927173.15945,
             "solution_submitted_by_due_date": true
         },
         {
@@ -741,8 +739,8 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 8310544.262921,
-            "max_run_time_of_attempted_tasks": 8310544.262921,
+            "sum_of_run_time_of_attempted_tasks": 169744576895.79507,
+            "max_run_time_of_attempted_tasks": 169744576895.79507,
             "solution_submitted_by_due_date": false
         },
         {
@@ -759,38 +757,38 @@
         },
         {
             "problem_instance_uuid": "cc7044d7-28e0-4fe2-bd6b-c9c758da4776",
-            "solution_uuid": "4e198853-1a51-4b4a-ad19-efaa9d9682d3",
+            "solution_uuid": "1d4afc9c-7e61-4eab-9d94-3532aadbb49f",
             "number_of_tasks": 2,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 3040029.447631,
-            "max_run_time_of_attempted_tasks": 3040029.447631,
+            "sum_of_run_time_of_attempted_tasks": 28621566644.982822,
+            "max_run_time_of_attempted_tasks": 28621566644.982822,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "68f1a091-8652-4095-ba31-56f0e02e27d3",
-            "solution_uuid": "183f3579-095a-4387-9e48-979146acefcb",
+            "solution_uuid": "216301cb-20ac-41f8-ab63-fb30c9f11c45",
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 2,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 2,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 37878967.943631,
-            "max_run_time_of_attempted_tasks": 36334844.279721,
+            "sum_of_run_time_of_attempted_tasks": 538656701749.21924,
+            "max_run_time_of_attempted_tasks": 513769299190.2939,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "8db449b1-265b-4a66-b965-a2b4833a88d1",
-            "solution_uuid": "13aaa818-60e0-4aa3-929d-81ff2a2bc45d",
+            "solution_uuid": "1f57216c-12e1-4c9e-8d7e-c759023eb75e",
             "number_of_tasks": 1,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 13464630.401525002,
-            "max_run_time_of_attempted_tasks": 13464630.401525002,
+            "sum_of_run_time_of_attempted_tasks": 65932407409.289055,
+            "max_run_time_of_attempted_tasks": 65932407409.289055,
             "solution_submitted_by_due_date": true
         },
         {
@@ -801,20 +799,20 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 2,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 3927770.221195,
-            "max_run_time_of_attempted_tasks": 3786773.599711,
+            "sum_of_run_time_of_attempted_tasks": 12522802256.573774,
+            "max_run_time_of_attempted_tasks": 12055704423.614347,
             "solution_submitted_by_due_date": false
         },
         {
             "problem_instance_uuid": "8846a90e-96cb-4bc3-ad06-5388212f728e",
-            "solution_uuid": "78938c97-b900-4740-9ecd-fa675bbb426a",
+            "solution_uuid": "490f5b54-0b32-4b32-953b-09390f6b0774",
             "number_of_tasks": 2,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 1489843.1937529999,
-            "max_run_time_of_attempted_tasks": 1489843.1937529999,
+            "sum_of_run_time_of_attempted_tasks": 44012330077.524826,
+            "max_run_time_of_attempted_tasks": 44012330077.524826,
             "solution_submitted_by_due_date": true
         },
         {
@@ -825,8 +823,8 @@
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 4260973.064608,
-            "max_run_time_of_attempted_tasks": 4260973.064608,
+            "sum_of_run_time_of_attempted_tasks": 15906193337.317005,
+            "max_run_time_of_attempted_tasks": 15906193337.317005,
             "solution_submitted_by_due_date": false
         },
         {
@@ -834,11 +832,11 @@
             "solution_uuid": null,
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 2,
-            "number_of_tasks_solved_within_runtime_limit": 1,
+            "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 2,
-            "number_of_tasks_solved": 1,
-            "sum_of_run_time_of_attempted_tasks": 3087168.7061429997,
-            "max_run_time_of_attempted_tasks": 3041074.9842449995,
+            "number_of_tasks_solved": 0,
+            "sum_of_run_time_of_attempted_tasks": 6710871193.1336155,
+            "max_run_time_of_attempted_tasks": 6460545908.721526,
             "solution_submitted_by_due_date": false
         },
         {
@@ -855,38 +853,38 @@
         },
         {
             "problem_instance_uuid": "7e0fb928-b0a9-4b44-89f1-7e0ee3b2bb13",
-            "solution_uuid": "9114f637-cdd4-471b-a676-13a330bed3ae",
+            "solution_uuid": "179dca1a-fe91-4eab-8698-6f8d0760b473",
             "number_of_tasks": 1,
             "number_of_tasks_attempted": 1,
-            "number_of_tasks_solved_within_runtime_limit": 1,
+            "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
-            "number_of_tasks_solved": 1,
-            "sum_of_run_time_of_attempted_tasks": 64562.558798,
-            "max_run_time_of_attempted_tasks": 64562.558798,
+            "number_of_tasks_solved": 0,
+            "sum_of_run_time_of_attempted_tasks": 95787928.44425301,
+            "max_run_time_of_attempted_tasks": 95787928.44425301,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "b57eb979-5c09-4974-97b4-5862e109a1ae",
-            "solution_uuid": "6c2a0a70-5ff6-429e-b1af-60253fc0c8f2",
+            "solution_uuid": "a3337aa0-634f-4817-bc48-e271e7b4d0e5",
             "number_of_tasks": 1,
             "number_of_tasks_attempted": 1,
-            "number_of_tasks_solved_within_runtime_limit": 1,
+            "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
-            "number_of_tasks_solved": 1,
-            "sum_of_run_time_of_attempted_tasks": 62409.942293000015,
-            "max_run_time_of_attempted_tasks": 62409.942293000015,
+            "number_of_tasks_solved": 0,
+            "sum_of_run_time_of_attempted_tasks": 651132132.634808,
+            "max_run_time_of_attempted_tasks": 651132132.634808,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "02a8c4e9-9d15-4742-b4cc-7f47f69da0e5",
-            "solution_uuid": "b4f52dae-5bea-41ba-b3d8-0d8b7b786225",
+            "solution_uuid": "87c3319f-bac1-4c34-b014-34e521d766f3",
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 5903212.758298,
-            "max_run_time_of_attempted_tasks": 5903212.758298,
+            "sum_of_run_time_of_attempted_tasks": 18698164344.878193,
+            "max_run_time_of_attempted_tasks": 18698164344.878193,
             "solution_submitted_by_due_date": true
         },
         {
@@ -903,74 +901,74 @@
         },
         {
             "problem_instance_uuid": "ea2e13c5-6d80-466e-bd6b-6289e10ed82b",
-            "solution_uuid": "17cc6d31-4114-4275-90ef-978ef5fcfbfe",
+            "solution_uuid": "4fabfec8-a308-4c1e-971d-585f5ccf7b06",
             "number_of_tasks": 2,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 2371304.865385,
-            "max_run_time_of_attempted_tasks": 2371304.865385,
+            "sum_of_run_time_of_attempted_tasks": 20047451517.399254,
+            "max_run_time_of_attempted_tasks": 20047451517.399254,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "3d3b9e8a-7842-4ca1-bd82-eddb9804972d",
-            "solution_uuid": "591082d9-5336-4d89-975c-9adf84549feb",
+            "solution_uuid": "2345ddb4-ac80-4b9b-9b66-4a8cb186796b",
             "number_of_tasks": 1,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 124615.86568699998,
-            "max_run_time_of_attempted_tasks": 124615.86568699998,
+            "sum_of_run_time_of_attempted_tasks": 1022986911.4912959,
+            "max_run_time_of_attempted_tasks": 1022986911.4912959,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "e0adafc5-789e-43e6-8f9e-e718da28de3a",
-            "solution_uuid": "127d3bb1-7e1a-4e61-92d2-91d977e38c7e",
+            "solution_uuid": "9284d781-2a91-4427-887c-0bee9e4b08ed",
             "number_of_tasks": 1,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 13418629.055952998,
-            "max_run_time_of_attempted_tasks": 13418629.055952998,
+            "sum_of_run_time_of_attempted_tasks": 41926039437.90279,
+            "max_run_time_of_attempted_tasks": 41926039437.90279,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "42958a3e-8b35-4992-acd8-6711848066c1",
-            "solution_uuid": "e28155fa-866b-4566-9fda-5dd8a2c973af",
-            "number_of_tasks": 1,
-            "number_of_tasks_attempted": 1,
-            "number_of_tasks_solved_within_runtime_limit": 1,
-            "number_of_tasks_solved_within_accuracy_requirement": 1,
-            "number_of_tasks_solved": 1,
-            "sum_of_run_time_of_attempted_tasks": 61131.635164,
-            "max_run_time_of_attempted_tasks": 61131.635164,
-            "solution_submitted_by_due_date": true
-        },
-        {
-            "problem_instance_uuid": "3aaf0bb4-b412-4746-922a-c380b4024d00",
-            "solution_uuid": "67344f25-2749-41b1-a7e0-d2c7fa293547",
+            "solution_uuid": "433c9b0b-0d57-43eb-a375-1210ef902062",
             "number_of_tasks": 1,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 293327.949139,
-            "max_run_time_of_attempted_tasks": 293327.949139,
+            "sum_of_run_time_of_attempted_tasks": 367420300.708031,
+            "max_run_time_of_attempted_tasks": 367420300.708031,
+            "solution_submitted_by_due_date": true
+        },
+        {
+            "problem_instance_uuid": "3aaf0bb4-b412-4746-922a-c380b4024d00",
+            "solution_uuid": "6831c462-550c-4c39-9b2c-9cefd4b8f722",
+            "number_of_tasks": 1,
+            "number_of_tasks_attempted": 1,
+            "number_of_tasks_solved_within_runtime_limit": 0,
+            "number_of_tasks_solved_within_accuracy_requirement": 1,
+            "number_of_tasks_solved": 0,
+            "sum_of_run_time_of_attempted_tasks": 843816748.89951,
+            "max_run_time_of_attempted_tasks": 843816748.89951,
             "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "25fd617b-8e7f-4422-9e97-cc3f6b0d3876",
-            "solution_uuid": "e83765f6-3b82-49a6-bb0e-8939971a138f",
+            "solution_uuid": "96ece6e5-5bc8-45cb-a209-bdf4d7cf14c3",
             "number_of_tasks": 2,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 2274974.7396789994,
-            "max_run_time_of_attempted_tasks": 2274974.7396789994,
+            "sum_of_run_time_of_attempted_tasks": 25363550646.459366,
+            "max_run_time_of_attempted_tasks": 25363550646.459366,
             "solution_submitted_by_due_date": true
         },
         {
@@ -999,14 +997,14 @@
         },
         {
             "problem_instance_uuid": "674b572a-3d6d-4418-8cc2-4755d90367ee",
-            "solution_uuid": "a9e2fcc2-8de6-4ebd-8dbe-0543a6712016",
+            "solution_uuid": "a676b241-02e6-4c43-b3a3-c2e597e8851b",
             "number_of_tasks": 1,
             "number_of_tasks_attempted": 1,
             "number_of_tasks_solved_within_runtime_limit": 0,
             "number_of_tasks_solved_within_accuracy_requirement": 1,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": 5903125.455158,
-            "max_run_time_of_attempted_tasks": 5903125.455158,
+            "sum_of_run_time_of_attempted_tasks": 152336805235.60443,
+            "max_run_time_of_attempted_tasks": 152336805235.60443,
             "solution_submitted_by_due_date": true
         }
     ],
@@ -1015,67 +1013,67 @@
             "task_uuid": "001a0d11-165a-49c5-a334-643023029f40",
             "problem_instance_uuid": "dc8bdc56-5ebd-4996-6b81-81b1a06d8c76",
             "instance_data_object_uuid": "fb3ecfad-6450-423e-aa58-d5cddab6f0f6",
-            "solution_uuid": "4c67130e-9f94-4142-bc52-f3645d96e892",
+            "solution_uuid": "22775139-ba46-49ef-9354-9d38cb45a5dd",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 363418.657089
+            "overall_run_time_seconds": 5102491506.434819
         },
         {
             "task_uuid": "0021e256-8e13-42db-839d-e9155e8af82c",
             "problem_instance_uuid": "766ba2da-e72a-4e03-a739-f97269026fc4",
             "instance_data_object_uuid": "befcf6f0-cfcb-49b7-b661-de48ad8a44c8",
-            "solution_uuid": "1bfb882d-f6a5-47a2-b3eb-d7dcea4aa0cf",
+            "solution_uuid": "a4a844e2-b510-4468-ac49-f569f5f8b1e3",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 292036.66555700003
+            "overall_run_time_seconds": 421145962.411894
         },
         {
             "task_uuid": "00ba4917-d66a-4335-819f-43390dfc9929",
             "problem_instance_uuid": "664ec8e4-09d5-41cc-6266-ddb26219366f",
             "instance_data_object_uuid": "23aa47ca-9afe-4086-bd97-75de310e033e",
-            "solution_uuid": "fb266417-b2ee-42a6-8dd0-8962abf48e65",
+            "solution_uuid": "4b5cba99-2520-4729-b070-e1a4797480af",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 240776.040389
+            "overall_run_time_seconds": 611223226.357859
         },
         {
             "task_uuid": "01ec60f7-d38a-4c33-a498-659a388e10ee",
             "problem_instance_uuid": "3f141f05-532b-478d-b38a-2ae07baadc88",
             "instance_data_object_uuid": "444f3f27-904b-463f-b2f2-c92686c9637d",
-            "solution_uuid": "30634853-a495-4894-938b-5bdb1d929939",
+            "solution_uuid": "a33a4c50-b5f9-47a0-8b39-4672100c0faa",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 11030717.787609
+            "overall_run_time_seconds": 17278526442.997
         },
         {
             "task_uuid": "02588640-a5ae-48e6-b28b-f6759886ab70",
             "problem_instance_uuid": "1c3155e0-3679-4eff-bed0-57a1082672c3",
             "instance_data_object_uuid": "5de3dbbd-1d79-45c9-ac75-4140ae123baa",
-            "solution_uuid": "6d58695a-2a52-4ab9-8a1f-6ce11694424d",
+            "solution_uuid": "e9804389-5bf3-4e99-ab7f-e5d0fd595108",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 995841.8577229999
+            "overall_run_time_seconds": 20028037875.97874
         },
         {
             "task_uuid": "03c70feb-49b8-4113-831a-05e3ae55c66b",
             "problem_instance_uuid": "a8895776-3583-4884-fbc7-d6f9df21a7ac",
             "instance_data_object_uuid": "eb34bf5e-ecd6-4c2a-9eb6-d9bcb507e047",
-            "solution_uuid": "26e94c6e-10c4-4007-af01-078b4af1af99",
+            "solution_uuid": "f7f03aaa-72da-4c34-a837-beddb8359aed",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 4784958.709845
+            "overall_run_time_seconds": 12372564728.11988
         },
         {
             "task_uuid": "0485949f-722c-49ee-a748-eec54801f021",
@@ -1092,34 +1090,34 @@
             "task_uuid": "0667179a-19eb-44b9-a544-dae8793fdc3f",
             "problem_instance_uuid": "379781b8-5732-492e-9fca-6fad3fc3692a",
             "instance_data_object_uuid": "80298b55-8915-462f-8f20-e4332c94ed41",
-            "solution_uuid": "bb68f96b-f04c-490f-9304-3dc7d7080a30",
+            "solution_uuid": "6c72dfae-c523-4ecb-bf6b-c9a7d0b6f2f7",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 5130335.070489
+            "overall_run_time_seconds": 45476684698.96988
         },
         {
             "task_uuid": "084acde0-d1c7-4721-aa45-acb4832e0998",
             "problem_instance_uuid": "2e61ba35-b6b0-42b5-b3e8-d25bd83145ba",
             "instance_data_object_uuid": "7702bafa-2620-4d12-8ec6-e8c6246d385a",
-            "solution_uuid": "f02a1a4e-e6e9-46cb-9230-8f12b8980a27",
+            "solution_uuid": "007a4457-b2fa-459e-8c78-9c746e5b41cb",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 4246817.7404310005
+            "overall_run_time_seconds": 146228190136.75098
         },
         {
             "task_uuid": "09b81c3d-aee1-4bc3-98ce-a72da477b108",
             "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
             "instance_data_object_uuid": "e701d53e-63fe-47f1-b727-39457c9207e6",
-            "solution_uuid": "1129e852-9d41-40d8-82eb-6dfe5bb21b99",
+            "solution_uuid": "b252a1e1-652e-4d99-abf4-7e880aa27c80",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 323851.13773300004
+            "overall_run_time_seconds": 8758089854.686993
         },
         {
             "task_uuid": "0c023ffe-8453-4f5f-b29e-7863589fb191",
@@ -1136,34 +1134,34 @@
             "task_uuid": "0deae366-42de-4081-914d-db85c6b47168",
             "problem_instance_uuid": "00043d56-ed63-4266-907c-99c95c51b9db",
             "instance_data_object_uuid": "16f9288f-be7e-4f8a-ab09-0153263f83c7",
-            "solution_uuid": "85e4b618-b303-4a82-857e-75ede5bddba7",
-            "attempted": true,
+            "solution_uuid": null,
+            "attempted": false,
             "solved_within_run_time": false,
-            "solved_within_accuracy_requirement": true,
+            "solved_within_accuracy_requirement": false,
             "solved": false,
-            "overall_run_time_seconds": 233737829.40462503
+            "overall_run_time_seconds": null
         },
         {
             "task_uuid": "0e936335-6370-4587-92f0-02eafaf650ed",
             "problem_instance_uuid": "a8895776-3583-4884-fbc7-d6f9df21a7ac",
             "instance_data_object_uuid": "5f3178b5-0ad3-469a-ae08-e9ecdc637ed3",
-            "solution_uuid": "26e94c6e-10c4-4007-af01-078b4af1af99",
+            "solution_uuid": "f7f03aaa-72da-4c34-a837-beddb8359aed",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 4959052.1962210005
+            "overall_run_time_seconds": 12819399586.904734
         },
         {
             "task_uuid": "0f0c8766-4bf5-4c1e-991a-9dafe9bc8f27",
             "problem_instance_uuid": "a14a1e28-71c5-4e23-bf6e-dd9662a6df58",
             "instance_data_object_uuid": "950e31e2-142f-480b-b0d1-174381bdb64a",
-            "solution_uuid": "ce6e2537-6f44-4307-a122-a70e39a84edb",
+            "solution_uuid": "36e95dad-547d-49aa-a692-b4a0944c5804",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 12576022.72562
+            "overall_run_time_seconds": 246913640327.66345
         },
         {
             "task_uuid": "0f5171c4-cf55-4a82-99a2-c72edebce9c9",
@@ -1213,34 +1211,34 @@
             "task_uuid": "109f95c5-8561-458c-8f41-72be596b87e6",
             "problem_instance_uuid": "0c1dfb55-f021-409a-80b1-79c8c2908095",
             "instance_data_object_uuid": "bdb74fe0-4d88-4e9f-8354-7ff891c21b5b",
-            "solution_uuid": "ac500bd1-d6b4-4a16-8b10-958da0a4830e",
+            "solution_uuid": "561024d4-c87f-490d-9d94-dc4c6e1356ca",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 26176938.864974998
+            "overall_run_time_seconds": 397557350730.9313
         },
         {
             "task_uuid": "13821f5c-78a6-485c-9006-a17a234cde9f",
             "problem_instance_uuid": "dc8bdc56-5ebd-4996-6b81-81b1a06d8c76",
             "instance_data_object_uuid": "d9707874-28d5-48b6-824e-a2e6c8753437",
-            "solution_uuid": "4c67130e-9f94-4142-bc52-f3645d96e892",
+            "solution_uuid": "22775139-ba46-49ef-9354-9d38cb45a5dd",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 234387.875864
+            "overall_run_time_seconds": 9027195182.9652
         },
         {
             "task_uuid": "138733f0-08f5-4077-b848-813c8ec53c79",
             "problem_instance_uuid": "90d4e4fc-1216-4846-b45f-198c0530e29b",
             "instance_data_object_uuid": "f36a9dbc-c34a-401f-8ea6-dc996d785edf",
-            "solution_uuid": "36ffd739-b179-4a6a-a008-63b4652c3edf",
+            "solution_uuid": "22757023-38b7-4820-a7f4-1dad4ee0a4f6",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 9640873.515853997
+            "overall_run_time_seconds": 69896409497.05801
         },
         {
             "task_uuid": "13b4bdcc-1cef-419a-92b1-156febff71d4",
@@ -1257,34 +1255,34 @@
             "task_uuid": "15a25e30-cba9-4f63-80a6-ef95a8c79d41",
             "problem_instance_uuid": "b1c5ac4e-9b94-4e89-9557-da2026933172",
             "instance_data_object_uuid": "da21513f-c490-45e2-8ce9-1c7a511ca925",
-            "solution_uuid": "a20992af-f211-4f66-a8c8-cace2659e1cb",
+            "solution_uuid": "08e97cb1-6a66-4c5d-8e88-d36b47d01c71",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 9703259.582003998
+            "overall_run_time_seconds": 165069010166.48825
         },
         {
             "task_uuid": "1a013e9f-7eab-4a1b-b486-1d9e2d99e754",
             "problem_instance_uuid": "dc8bdc56-5ebd-4996-6b81-81b1a06d8c76",
             "instance_data_object_uuid": "6bf3207c-664b-4ed3-8e74-82b42e277234",
-            "solution_uuid": "4c67130e-9f94-4142-bc52-f3645d96e892",
+            "solution_uuid": "22775139-ba46-49ef-9354-9d38cb45a5dd",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 67321.78819800001
+            "solved": false,
+            "overall_run_time_seconds": 705329205.3450339
         },
         {
             "task_uuid": "1ade03f3-06b1-4e95-b271-fea5a6343829",
             "problem_instance_uuid": "cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8",
             "instance_data_object_uuid": "f738fcd6-7ddc-4d70-8ff9-4019e3718b04",
-            "solution_uuid": "a07902c4-6d2f-4cf4-8e00-a9eb3600918d",
+            "solution_uuid": "b240ccfe-37cd-4710-b160-11824a656b1a",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 66765.853678
+            "solved": false,
+            "overall_run_time_seconds": 1535163849.081692
         },
         {
             "task_uuid": "1c7f5399-8982-4daf-81a5-7cef4e4588cc",
@@ -1301,23 +1299,23 @@
             "task_uuid": "1c9508e3-b9fe-44f1-ae58-c6339ef43f47",
             "problem_instance_uuid": "dc8bdc56-5ebd-4996-6b81-81b1a06d8c76",
             "instance_data_object_uuid": "dc406285-bac1-4b99-afbf-06728b7d699b",
-            "solution_uuid": "4c67130e-9f94-4142-bc52-f3645d96e892",
+            "solution_uuid": "22775139-ba46-49ef-9354-9d38cb45a5dd",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1505508.820898
+            "overall_run_time_seconds": 49599945137.50266
         },
         {
             "task_uuid": "202e6184-1e7d-4c02-a82a-f588b6abf809",
             "problem_instance_uuid": "8ed1a800-a4c6-4bff-a6de-cb220554c42f",
             "instance_data_object_uuid": "67acc90d-1a9e-49a7-98a1-8ca643dca272",
-            "solution_uuid": "8601ee1d-450c-42fc-8637-d2c9c3c1467b",
+            "solution_uuid": "5b0a7ca4-d94a-4fd2-8765-64ab5d0dfb60",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 452488.906852
+            "overall_run_time_seconds": 783250842035.7645
         },
         {
             "task_uuid": "214bb702-d7bc-4141-8cf3-f6979ba0f67a",
@@ -1334,23 +1332,23 @@
             "task_uuid": "23a06c81-be81-4f88-98ab-9e7030c909ef",
             "problem_instance_uuid": "2e61ba35-b6b0-42b5-b3e8-d25bd83145ba",
             "instance_data_object_uuid": "1ffb78a3-162a-43a4-a64c-d1d8fb0bce24",
-            "solution_uuid": "f02a1a4e-e6e9-46cb-9230-8f12b8980a27",
-            "attempted": true,
+            "solution_uuid": null,
+            "attempted": false,
             "solved_within_run_time": false,
-            "solved_within_accuracy_requirement": true,
+            "solved_within_accuracy_requirement": false,
             "solved": false,
-            "overall_run_time_seconds": 50843516.331184
+            "overall_run_time_seconds": null
         },
         {
             "task_uuid": "240f7830-f4e1-4301-b0af-ab8936851796",
             "problem_instance_uuid": "a0a07bfe-aac2-4d61-9425-009953899b3b",
             "instance_data_object_uuid": "7fdb7bf4-2eed-4b4f-bf6f-767c7518367d",
-            "solution_uuid": "9f6784e7-8208-4e55-abd3-083eedd1f124",
+            "solution_uuid": "1ce4d5fc-b165-47bd-89d0-d93b902eb9be",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 228109.428136
+            "overall_run_time_seconds": 1192641204.545063
         },
         {
             "task_uuid": "24f12fad-130e-44fc-8b07-bc26c5a3d878",
@@ -1367,45 +1365,45 @@
             "task_uuid": "26423f2e-e3e1-4bbb-b2ff-52bdae87d65b",
             "problem_instance_uuid": "9fbd9b4c-5ea9-4095-af7b-7d4491399e42",
             "instance_data_object_uuid": "40035d66-75b8-4b6e-95e5-8b1a3ff1a61d",
-            "solution_uuid": "d151b616-b3dd-4b6d-942f-4de1ee23b473",
+            "solution_uuid": "e015258a-6257-4eec-b8f0-e6bb0f060eae",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 4260938.3069939995
+            "overall_run_time_seconds": 131779041114.94218
         },
         {
             "task_uuid": "2761e36e-f001-42af-8086-f507b5643ec8",
             "problem_instance_uuid": "0ca102a7-dad4-4d42-8c73-9acfa45378d7",
             "instance_data_object_uuid": "5b507b3d-b6fc-4e13-9586-06113819d99f",
-            "solution_uuid": "07619ea2-72d6-41dc-bba6-d56422781a20",
+            "solution_uuid": "d17c05de-1048-4aed-ba15-afbcb112b529",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 936793.4014920001
+            "overall_run_time_seconds": 16046300420.767134
         },
         {
             "task_uuid": "289f5dfe-e6d5-48a3-a6ae-25088321d3c6",
             "problem_instance_uuid": "bc202949-d76c-4962-b937-5c12b298b8b4",
             "instance_data_object_uuid": "a83413fb-96e3-466e-910b-6d4bab7cdf1d",
-            "solution_uuid": "64b25fbf-a774-45a9-96f7-e0c1b7729e28",
+            "solution_uuid": "e50d085f-eb3c-4bd6-8518-c697c3f4842b",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 6547041.559696999
+            "overall_run_time_seconds": 27420438542.507454
         },
         {
             "task_uuid": "28bd4997-c04c-4914-9984-0101713041fe",
             "problem_instance_uuid": "b78a10f2-ce8a-43c0-69ec-4cf666d8e85c",
             "instance_data_object_uuid": "587f69a8-4295-4d6d-811e-0eacfbc5f6dd",
-            "solution_uuid": "d7e9bab1-5227-4992-abb2-a0c3d01e2e51",
+            "solution_uuid": "04f3dc13-c620-4a80-92e6-19e7a17adebc",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 4156.619229
+            "solved": false,
+            "overall_run_time_seconds": 11285000.351278001
         },
         {
             "task_uuid": "29eecba9-3d4d-4672-8b19-475f53b2f1be",
@@ -1422,23 +1420,23 @@
             "task_uuid": "2cd76a23-0514-458a-b588-94e2d10564d3",
             "problem_instance_uuid": "9823b0dd-87b6-4793-9741-e8cbcf2b50c0",
             "instance_data_object_uuid": "760e312c-9982-486d-b50e-d9acb003aedc",
-            "solution_uuid": "ee0a2e66-0ce3-4a96-bfe5-2811edecf7f9",
+            "solution_uuid": "ae5887ea-508e-41e9-b7b0-c50554c2f64d",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 6547470.146287001
+            "overall_run_time_seconds": 27330163584.54851
         },
         {
             "task_uuid": "2eaee11d-c1a0-4d2b-b29b-a38e658572f2",
             "problem_instance_uuid": "13c7144d-047e-4431-8d02-0b1d14c0526b",
             "instance_data_object_uuid": "c37edb04-5163-4d5c-a54e-df5887f0d82e",
-            "solution_uuid": "fec6f65c-ce69-4033-8a1f-04116eb31f28",
+            "solution_uuid": "1c93c867-84fc-4b0f-97e2-73c27c765402",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1561743.680315
+            "overall_run_time_seconds": 24615351609.667583
         },
         {
             "task_uuid": "338f4b6e-775c-413b-a508-9132659ebbc3",
@@ -1455,12 +1453,12 @@
             "task_uuid": "349e9cbe-d675-411f-b6b8-be846c27902c",
             "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
             "instance_data_object_uuid": "2e1dab84-5b1a-4521-8d36-78117ab88bbd",
-            "solution_uuid": "1129e852-9d41-40d8-82eb-6dfe5bb21b99",
+            "solution_uuid": "b252a1e1-652e-4d99-abf4-7e880aa27c80",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 18878495.969506003
+            "overall_run_time_seconds": 1394068547267.4111
         },
         {
             "task_uuid": "35b59fd4-e046-4d69-ba52-4b94a7777ac3",
@@ -1477,23 +1475,23 @@
             "task_uuid": "35c1aee4-4ef3-4e18-bc2a-377cf45e8fa1",
             "problem_instance_uuid": "664ec8e4-09d5-41cc-6266-ddb26219366f",
             "instance_data_object_uuid": "77c12db8-c32e-4f88-8552-9762a0fff763",
-            "solution_uuid": "fb266417-b2ee-42a6-8dd0-8962abf48e65",
+            "solution_uuid": "4b5cba99-2520-4729-b070-e1a4797480af",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 436706.741792
+            "overall_run_time_seconds": 5291603733.136216
         },
         {
             "task_uuid": "35e4c771-0f4f-4413-b42f-132f1e606cb0",
             "problem_instance_uuid": "0e393c20-3915-42b9-a8aa-29bf53548269",
             "instance_data_object_uuid": "781d0704-7a95-4183-9c50-cbdbd976884a",
-            "solution_uuid": "ef8fa827-d41f-453f-80bb-c0d3850d46d6",
+            "solution_uuid": "1c88a1d8-848a-46d5-bd75-7af6bb8fe7d2",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 23386615.621802002
+            "overall_run_time_seconds": 343165323066.1819
         },
         {
             "task_uuid": "362386c9-f0c2-483e-a64d-52208ab9bbc1",
@@ -1521,12 +1519,12 @@
             "task_uuid": "3b49563d-948a-4ecb-84a0-d3c0c2c0d217",
             "problem_instance_uuid": "dc8bdc56-5ebd-4996-6b81-81b1a06d8c76",
             "instance_data_object_uuid": "2f0b6ced-7831-4fe0-b95e-ce4d456c9c6b",
-            "solution_uuid": "4c67130e-9f94-4142-bc52-f3645d96e892",
+            "solution_uuid": "22775139-ba46-49ef-9354-9d38cb45a5dd",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 3511121.2856980003
+            "overall_run_time_seconds": 909375843074.0541
         },
         {
             "task_uuid": "3d5186f9-82b3-4de0-9bc1-242d7bdb678a",
@@ -1543,34 +1541,34 @@
             "task_uuid": "3eccbccf-e84a-44b9-b775-cef772cd84f0",
             "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
             "instance_data_object_uuid": "21b0efe8-adc7-44c2-ac49-671cc4b4a1ee",
-            "solution_uuid": "1129e852-9d41-40d8-82eb-6dfe5bb21b99",
-            "attempted": true,
+            "solution_uuid": null,
+            "attempted": false,
             "solved_within_run_time": false,
-            "solved_within_accuracy_requirement": true,
+            "solved_within_accuracy_requirement": false,
             "solved": false,
-            "overall_run_time_seconds": 71514244.92851901
+            "overall_run_time_seconds": null
         },
         {
             "task_uuid": "3fa3940d-8a68-44ae-9223-7346404651e6",
             "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
             "instance_data_object_uuid": "bed1771c-394c-44e6-93e3-ca41732326d2",
-            "solution_uuid": "1129e852-9d41-40d8-82eb-6dfe5bb21b99",
+            "solution_uuid": "b252a1e1-652e-4d99-abf4-7e880aa27c80",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 240759.79593300002
+            "overall_run_time_seconds": 611072721.7841929
         },
         {
             "task_uuid": "3fb371ad-c738-40ae-b9ae-80e5bce8f2ac",
             "problem_instance_uuid": "e3e78b41-577d-4536-a63f-7e968eeb6493",
             "instance_data_object_uuid": "3c3967d4-17c1-4947-9465-b9223b01e694",
-            "solution_uuid": "b4de309e-91a5-49b5-a630-f389cc4a7d8e",
+            "solution_uuid": "5bb7fda5-669b-4f71-a8c8-0b46f2011b76",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 30188495.218917005
+            "overall_run_time_seconds": 222963644116.02087
         },
         {
             "task_uuid": "3fb92ecd-bcbc-43dd-9f29-aa56ea646b75",
@@ -1587,111 +1585,111 @@
             "task_uuid": "402d5237-16a3-4eb8-8bd4-5dcf2cb14c36",
             "problem_instance_uuid": "162f41da-af43-427c-a8bc-ae9fa97ace95",
             "instance_data_object_uuid": "c3e26bde-f8e2-4e34-a833-9176dc6c5d58",
-            "solution_uuid": "2239965d-1c2e-4f05-b2e0-90d7979e0286",
+            "solution_uuid": "4028c4e5-ec6d-418c-902c-a905928a10e7",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 61713.796383999994
+            "solved": false,
+            "overall_run_time_seconds": 246563625.39210802
         },
         {
             "task_uuid": "410cd417-988a-4f7f-99ad-93dda7eacdcb",
             "problem_instance_uuid": "3301a356-21a9-472b-8021-f02f4d2c9eec",
             "instance_data_object_uuid": "26d2547c-96a4-400d-9528-9987ae6699b2",
-            "solution_uuid": "56f208ac-fec4-4849-b985-9c777540f7c4",
+            "solution_uuid": "4b772bff-319b-4a6b-9e10-ddff273c513f",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 3011188.780196
+            "overall_run_time_seconds": 19049653059.769505
         },
         {
             "task_uuid": "41907f9f-923d-49e3-80a9-519962110ae7",
             "problem_instance_uuid": "a8895776-3583-4884-fbc7-d6f9df21a7ac",
             "instance_data_object_uuid": "22ab7092-61bb-401f-ac43-912ec10ea48b",
-            "solution_uuid": "26e94c6e-10c4-4007-af01-078b4af1af99",
+            "solution_uuid": "f7f03aaa-72da-4c34-a837-beddb8359aed",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 4780621.596123
+            "overall_run_time_seconds": 12357013907.377073
         },
         {
             "task_uuid": "4357d5bb-ed2b-466a-947b-e868afb81d3d",
             "problem_instance_uuid": "b78a10f2-ce8a-43c0-69ec-4cf666d8e85c",
             "instance_data_object_uuid": "1dc29784-ab7f-45a1-9821-31fea4363d74",
-            "solution_uuid": "d7e9bab1-5227-4992-abb2-a0c3d01e2e51",
+            "solution_uuid": "04f3dc13-c620-4a80-92e6-19e7a17adebc",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 206.154708
+            "solved": false,
+            "overall_run_time_seconds": 321418.22645899997
         },
         {
             "task_uuid": "443371ce-c80d-450d-b281-ac1c4d5ecc4d",
             "problem_instance_uuid": "e0f6ed02-6502-454b-bf2c-e7994e0510f4",
             "instance_data_object_uuid": "a7321b5d-4730-4ace-9ff8-734ec07f3fef",
-            "solution_uuid": "e216847c-7588-4d34-9895-c9f625ada705",
+            "solution_uuid": "735d4e8b-f107-4459-8799-0aee2b028e35",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1196642.112083
+            "overall_run_time_seconds": 5668809204.485021
         },
         {
             "task_uuid": "472bbfb1-c081-4df6-b966-32ce1194ab8c",
             "problem_instance_uuid": "a37c86c0-1937-4f05-83ab-08a5fd104b7e",
             "instance_data_object_uuid": "efddd28a-383d-4929-9335-22e54ba2ffbe",
-            "solution_uuid": "e03b9dd3-fda8-4e68-9741-f4bfe6d91035",
+            "solution_uuid": "d2c86be2-04a7-41ba-9d14-e72b8cc2d244",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 309094.449787
+            "overall_run_time_seconds": 663442499.224214
         },
         {
             "task_uuid": "4970c526-817f-4c04-8d7e-797526d5948d",
             "problem_instance_uuid": "a8895776-3583-4884-fbc7-d6f9df21a7ac",
             "instance_data_object_uuid": "79e71b3e-6364-4972-b4b3-07841fa8ba97",
-            "solution_uuid": "26e94c6e-10c4-4007-af01-078b4af1af99",
+            "solution_uuid": "f7f03aaa-72da-4c34-a837-beddb8359aed",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1201274.876597
+            "overall_run_time_seconds": 3022066032.0781493
         },
         {
             "task_uuid": "4c240146-6b8b-4fa5-88e4-41cbd39c8ac3",
             "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
             "instance_data_object_uuid": "b96f67e6-fafe-4ccd-ac6f-67afb52f3835",
-            "solution_uuid": "1129e852-9d41-40d8-82eb-6dfe5bb21b99",
+            "solution_uuid": "b252a1e1-652e-4d99-abf4-7e880aa27c80",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 240772.732348
+            "overall_run_time_seconds": 611072728.65454
         },
         {
             "task_uuid": "4e395cc5-b5d2-4b82-95a2-1276262386c8",
             "problem_instance_uuid": "9b8083ab-ea59-47db-894c-95a0d2ba3cb6",
             "instance_data_object_uuid": "dd869557-00f9-421f-ab39-faa9d8e05df2",
-            "solution_uuid": "5577286d-100b-47ad-a1c6-6f0b43419efb",
+            "solution_uuid": "452e3639-36d8-4077-90d7-bf27e717d33d",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 14415816.233996002
+            "overall_run_time_seconds": 45187731188.880035
         },
         {
             "task_uuid": "4fb7e994-8e7a-4acd-86d4-bb52db824cfc",
             "problem_instance_uuid": "edb1dfc4-c9d0-41ce-902a-2cfcf97c0c76",
             "instance_data_object_uuid": "4ceb8edc-937e-4cb6-9e42-51b6760b2557",
-            "solution_uuid": "044d7b42-fd57-4806-928a-d9f4887956a5",
+            "solution_uuid": "7ff5d1d7-7a33-49a7-a1ba-0f0fed453b45",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 412147.02655400004
+            "overall_run_time_seconds": 1864205191.4767182
         },
         {
             "task_uuid": "50de76ad-110a-4c09-836a-64cc60c87f9a",
@@ -1708,89 +1706,89 @@
             "task_uuid": "543e2ed4-a12d-495b-a246-1e4d905ad4a3",
             "problem_instance_uuid": "19cada59-64cc-466c-8809-782a4f574dcc",
             "instance_data_object_uuid": "fdc83bd0-c9bd-47da-abee-99b743b36494",
-            "solution_uuid": "cd33e053-a174-460e-b019-586d58adba4b",
+            "solution_uuid": "7641b54d-360a-4189-8842-d99edfc0687e",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 228227.46169400003
+            "overall_run_time_seconds": 449977600.169405
         },
         {
             "task_uuid": "5509795a-90ce-45d6-b03d-db956a5da5b2",
             "problem_instance_uuid": "7213642b-5f16-48be-d5e5-2bc42ebb8526",
             "instance_data_object_uuid": "cb60079d-5a30-4e3a-89d5-dbe95822df5e",
-            "solution_uuid": "9f8d9957-d0f9-4576-b8bc-02d37c24068d",
+            "solution_uuid": "5e829107-0a53-4461-9a39-ab0870df2479",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 957.3147630000001
+            "solved": false,
+            "overall_run_time_seconds": 3341857.411912
         },
         {
             "task_uuid": "5547bb48-fac6-4426-91ad-c4853ce421aa",
             "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
             "instance_data_object_uuid": "d74d0c01-8507-445b-bec1-f02bafbbfaab",
-            "solution_uuid": "1129e852-9d41-40d8-82eb-6dfe5bb21b99",
-            "attempted": true,
+            "solution_uuid": null,
+            "attempted": false,
             "solved_within_run_time": false,
-            "solved_within_accuracy_requirement": true,
+            "solved_within_accuracy_requirement": false,
             "solved": false,
-            "overall_run_time_seconds": 80075692.49281399
+            "overall_run_time_seconds": null
         },
         {
             "task_uuid": "57830810-1133-4c19-9a19-30183dd86a9f",
             "problem_instance_uuid": "f90280cc-c860-4ff1-a9ec-4841cec989f7",
             "instance_data_object_uuid": "f895f408-4aa7-47e2-a903-c26b963b399e",
-            "solution_uuid": "3db1eef7-7c06-4f5f-91f0-aeb73efe00f2",
+            "solution_uuid": "32447c6f-a2a0-4e0f-b64b-e691c1badceb",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 21996192.366232
+            "overall_run_time_seconds": 508720241093.1134
         },
         {
             "task_uuid": "590c2f0b-964b-4d09-96ad-101a9be59cab",
             "problem_instance_uuid": "cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8",
             "instance_data_object_uuid": "72343006-774e-4192-b481-fa840ed25573",
-            "solution_uuid": "a07902c4-6d2f-4cf4-8e00-a9eb3600918d",
+            "solution_uuid": "b240ccfe-37cd-4710-b160-11824a656b1a",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 161489.173019
+            "solved": false,
+            "overall_run_time_seconds": 13625262406.883078
         },
         {
             "task_uuid": "5b8f4746-a08b-4ec5-92e2-ce55cc2fdb75",
             "problem_instance_uuid": "05abb33d-ecea-406f-8832-31a814b26dfd",
             "instance_data_object_uuid": "133ec573-3d06-4582-b2f5-8afe8be8dbe3",
-            "solution_uuid": "26a941d6-051c-48bb-a2d7-1fe3c6f988c8",
+            "solution_uuid": "561e9fb2-1340-4d0a-987f-b8fd2eb4c0d6",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 6776827.617965001
+            "overall_run_time_seconds": 24758384949.877457
         },
         {
             "task_uuid": "5d85532e-9116-48a1-9810-7925c9ed9c57",
             "problem_instance_uuid": "b8fe08a4-82fe-4636-9812-b1e0666f95b5",
             "instance_data_object_uuid": "be2e7f6c-ccba-45ce-a42b-bd1d828b2d18",
-            "solution_uuid": "0318af8d-a31c-4faa-a9f5-411ca8c44299",
+            "solution_uuid": "2b70e6cd-0efc-400d-ac58-110f9871f426",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 6055231.181249
+            "overall_run_time_seconds": 15874561106.932808
         },
         {
             "task_uuid": "5e1dcd34-1373-4f34-b9df-d738a8cf4db6",
             "problem_instance_uuid": "a0a07bfe-aac2-4d61-9425-009953899b3b",
             "instance_data_object_uuid": "0534fd24-c760-462e-b288-c3ea9fe721c8",
-            "solution_uuid": "9f6784e7-8208-4e55-abd3-083eedd1f124",
+            "solution_uuid": "1ce4d5fc-b165-47bd-89d0-d93b902eb9be",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 7995211.792247001
+            "overall_run_time_seconds": 78590032780.48885
         },
         {
             "task_uuid": "5e576716-0df8-4712-8f03-ea1ac3808e35",
@@ -1807,67 +1805,67 @@
             "task_uuid": "5f0ac7ac-1dcc-46a6-bfa0-6e76c73a0bdd",
             "problem_instance_uuid": "7ca1486c-06a5-47c1-b8ab-eab491ffc68b",
             "instance_data_object_uuid": "290cfb48-dbdd-4915-bbaf-b0bc69fa070c",
-            "solution_uuid": "1fecfa30-cc3e-4122-bb01-e792411e8efb",
+            "solution_uuid": "900e3d80-0665-4db4-b598-2824e08c7273",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 173731.00898699998
+            "overall_run_time_seconds": 797389332.502589
         },
         {
             "task_uuid": "5f5fee92-5821-4d38-a54a-d204660f205f",
             "problem_instance_uuid": "d5c7ab73-dfc1-499e-9027-601476004107",
             "instance_data_object_uuid": "6facf2d4-6cb3-49b6-8b66-3bd21c1461ec",
-            "solution_uuid": "33f105df-af33-4b28-85d7-c90b28235bdb",
+            "solution_uuid": "398c2fea-0532-4294-9ed0-c1a024db7b91",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 4590196.263592
+            "overall_run_time_seconds": 34026404011.512127
         },
         {
             "task_uuid": "615c9d78-2b84-4c7b-ab6b-ba05b188f50a",
             "problem_instance_uuid": "3987b2dd-25bc-44e2-b516-dbc3f670a9c3",
             "instance_data_object_uuid": "b45cfaee-dd16-4f80-963d-ab0f9cc4dab5",
-            "solution_uuid": "3f7637a3-7bec-44a8-a1f8-5c8119abdbb7",
+            "solution_uuid": "7b5ab086-f0c0-4446-8998-ceb606888d8f",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 4871704.881500999
+            "overall_run_time_seconds": 195972197278.4552
         },
         {
             "task_uuid": "61ad4cfe-b057-4dd8-bd06-ed56347745c1",
             "problem_instance_uuid": "8ed1a800-a4c6-4bff-a6de-cb220554c42f",
             "instance_data_object_uuid": "cdf017c4-7c30-4274-9567-f5e55a6ba857",
-            "solution_uuid": "8601ee1d-450c-42fc-8637-d2c9c3c1467b",
-            "attempted": true,
+            "solution_uuid": null,
+            "attempted": false,
             "solved_within_run_time": false,
-            "solved_within_accuracy_requirement": true,
+            "solved_within_accuracy_requirement": false,
             "solved": false,
-            "overall_run_time_seconds": 885834.78904
+            "overall_run_time_seconds": null
         },
         {
             "task_uuid": "620e9ff4-07bf-4767-9237-d39aa659b8e5",
             "problem_instance_uuid": "edb1dfc4-c9d0-41ce-902a-2cfcf97c0c76",
             "instance_data_object_uuid": "c288da42-cf53-4437-a310-24bf3e35e008",
-            "solution_uuid": "044d7b42-fd57-4806-928a-d9f4887956a5",
+            "solution_uuid": "7ff5d1d7-7a33-49a7-a1ba-0f0fed453b45",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 8965471.790427001
+            "overall_run_time_seconds": 32923575159.13464
         },
         {
             "task_uuid": "6346b7fe-a4a5-4b10-a79b-706d4339923e",
             "problem_instance_uuid": "b78a10f2-ce8a-43c0-69ec-4cf666d8e85c",
             "instance_data_object_uuid": "496aaf89-2cdf-43cf-8b25-246e915cc8b5",
-            "solution_uuid": "d7e9bab1-5227-4992-abb2-a0c3d01e2e51",
+            "solution_uuid": "04f3dc13-c620-4a80-92e6-19e7a17adebc",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 286066.1275739999
+            "overall_run_time_seconds": 723898872.502252
         },
         {
             "task_uuid": "63c089b2-1940-4301-89d6-93ecc98c07f1",
@@ -1895,34 +1893,34 @@
             "task_uuid": "666185aa-b65d-4f73-8846-ae9693388d9d",
             "problem_instance_uuid": "9bd9cde6-6daa-441a-984e-ae1c1c051e91",
             "instance_data_object_uuid": "48512c28-04a3-4e3b-b6b2-3e4b654c1887",
-            "solution_uuid": "dcb0aaba-cc27-4600-ac93-5b8907232091",
+            "solution_uuid": "1f9c41a7-0e5e-4628-9a89-b9db8a731df2",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 28140765.266451
+            "overall_run_time_seconds": 398994270002.4834
         },
         {
             "task_uuid": "6713517a-ab65-4381-aae1-0839dcd6c1a0",
             "problem_instance_uuid": "dc8bdc56-5ebd-4996-6b81-81b1a06d8c76",
             "instance_data_object_uuid": "af9d6a83-7898-4c13-80eb-a83a533ebf2d",
-            "solution_uuid": "4c67130e-9f94-4142-bc52-f3645d96e892",
+            "solution_uuid": "22775139-ba46-49ef-9354-9d38cb45a5dd",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1770842.9807670002
+            "overall_run_time_seconds": 119518111799.52795
         },
         {
             "task_uuid": "68db6781-dd54-43c4-b667-7b754c4d5cdb",
             "problem_instance_uuid": "b78a10f2-ce8a-43c0-69ec-4cf666d8e85c",
             "instance_data_object_uuid": "0d7e4a74-fd11-46e3-ba22-044a7ebc54c7",
-            "solution_uuid": "d7e9bab1-5227-4992-abb2-a0c3d01e2e51",
+            "solution_uuid": "04f3dc13-c620-4a80-92e6-19e7a17adebc",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 53864.630612999994
+            "solved": false,
+            "overall_run_time_seconds": 104600210.63326801
         },
         {
             "task_uuid": "6918e02b-1e04-40bf-a800-1c9ed100d261",
@@ -1961,12 +1959,12 @@
             "task_uuid": "6c39d3a7-c71a-4049-a8c7-3a3a4b61d8da",
             "problem_instance_uuid": "cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8",
             "instance_data_object_uuid": "28a7820f-63fe-4920-aeec-a7ffe7e55d83",
-            "solution_uuid": "a07902c4-6d2f-4cf4-8e00-a9eb3600918d",
+            "solution_uuid": "b240ccfe-37cd-4710-b160-11824a656b1a",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1059632.262763
+            "overall_run_time_seconds": 102001973635.25952
         },
         {
             "task_uuid": "6ca72d49-425b-43f3-96e7-4067bacd0596",
@@ -1983,23 +1981,23 @@
             "task_uuid": "6d0f8edd-507f-43d5-9960-9ad49532ee42",
             "problem_instance_uuid": "18e1973e-d6cf-48d6-9ca4-c1af21ff7c98",
             "instance_data_object_uuid": "cf7aa422-2b82-4d7c-a031-8923e1fc8a41",
-            "solution_uuid": "060a71e5-39b7-444d-8207-d70192a83d79",
+            "solution_uuid": "e774a8c0-22b4-4b3c-9e60-47ae45c1a2d8",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 10463140.73969
+            "overall_run_time_seconds": 161664716067.94662
         },
         {
             "task_uuid": "6e617348-d0b3-4b6d-9923-ea54ba5cf751",
             "problem_instance_uuid": "cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8",
             "instance_data_object_uuid": "ea55abec-8253-445d-85fa-914948b5e5a5",
-            "solution_uuid": "a07902c4-6d2f-4cf4-8e00-a9eb3600918d",
+            "solution_uuid": "b240ccfe-37cd-4710-b160-11824a656b1a",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1164965.3729779997
+            "overall_run_time_seconds": 149335352157.12833
         },
         {
             "task_uuid": "7148b36a-0571-4a41-9239-19a97339f68a",
@@ -2016,45 +2014,45 @@
             "task_uuid": "742be33c-0982-4b06-b324-1d86242e28d9",
             "problem_instance_uuid": "dc8bdc56-5ebd-4996-6b81-81b1a06d8c76",
             "instance_data_object_uuid": "7db0f859-073f-46af-9325-016a67229a4b",
-            "solution_uuid": "4c67130e-9f94-4142-bc52-f3645d96e892",
+            "solution_uuid": "22775139-ba46-49ef-9354-9d38cb45a5dd",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 3018503.616514
+            "overall_run_time_seconds": 196409588072.88745
         },
         {
             "task_uuid": "752966e5-7de7-4506-82ae-6b22cd54b1c1",
             "problem_instance_uuid": "d712afaf-6ec4-42d9-b5fd-1edee3ec1046",
             "instance_data_object_uuid": "0767fb16-25bd-4f1c-b134-6b536191b36e",
-            "solution_uuid": "cb0e30e4-b585-4ed0-a07c-edd50de776b8",
+            "solution_uuid": "7e044d15-8dd3-4f86-9419-277a1e8bfc4a",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 63587.188644999995
+            "solved": false,
+            "overall_run_time_seconds": 84339929.32501
         },
         {
             "task_uuid": "765594e5-44ac-41a2-89a7-f2ac03536379",
             "problem_instance_uuid": "dc8bdc56-5ebd-4996-6b81-81b1a06d8c76",
             "instance_data_object_uuid": "727ab190-e399-4bb6-a9b3-20ae57789bac",
-            "solution_uuid": "4c67130e-9f94-4142-bc52-f3645d96e892",
+            "solution_uuid": "22775139-ba46-49ef-9354-9d38cb45a5dd",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 2958961.770323
+            "overall_run_time_seconds": 225115093274.32114
         },
         {
             "task_uuid": "77c3a92c-066c-4043-a4a1-5e8324014d0b",
             "problem_instance_uuid": "127cfea5-8a7d-45a0-9012-949816a0b8d9",
             "instance_data_object_uuid": "9820e181-088a-4b00-8a14-8cafb952ccdd",
-            "solution_uuid": "7d3c685f-a3e6-494b-8055-0e41b130f05e",
+            "solution_uuid": "36b11b94-61b8-4adc-8fca-cba191b60d75",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 681885.2211359999
+            "overall_run_time_seconds": 4372183228.819837
         },
         {
             "task_uuid": "78d5e5ba-0b2c-4cfe-92c5-f1c749150015",
@@ -2071,34 +2069,34 @@
             "task_uuid": "79b74ad4-afa8-458f-87a3-a5ec339056c6",
             "problem_instance_uuid": "90d4e4fc-1216-4846-b45f-198c0530e29b",
             "instance_data_object_uuid": "9cba211b-820c-4ad4-a050-336e8049e1c7",
-            "solution_uuid": "36ffd739-b179-4a6a-a008-63b4652c3edf",
+            "solution_uuid": "22757023-38b7-4820-a7f4-1dad4ee0a4f6",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 9696483.131195
+            "overall_run_time_seconds": 49906817161.64289
         },
         {
             "task_uuid": "7c8f0a36-cda5-4b33-bb46-4e58a15b37a1",
             "problem_instance_uuid": "8ed1a800-a4c6-4bff-a6de-cb220554c42f",
             "instance_data_object_uuid": "01d526fb-276e-4369-85d4-66a553a1d02e",
-            "solution_uuid": "8601ee1d-450c-42fc-8637-d2c9c3c1467b",
+            "solution_uuid": "5b0a7ca4-d94a-4fd2-8765-64ab5d0dfb60",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1951386.479801
+            "overall_run_time_seconds": 539809565041.6919
         },
         {
             "task_uuid": "7cc1ed5c-0dcb-4315-9e51-2ae94b5cdd02",
             "problem_instance_uuid": "bf3fb654-72c7-4fd4-bfd1-9ffef5aaebd8",
             "instance_data_object_uuid": "eea867d0-285e-462d-94ab-15579c782be7",
-            "solution_uuid": "810dbf82-81a6-43dd-b880-f5a765b2720f",
+            "solution_uuid": "4c2298ab-ea78-4b06-b479-a3f40206fc64",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 296755.57209599996
+            "overall_run_time_seconds": 424777804.594502
         },
         {
             "task_uuid": "7ea61c79-c0e5-453b-8fd0-b176cb8821a7",
@@ -2126,45 +2124,45 @@
             "task_uuid": "7f0518e8-e2c8-4912-8268-4de4cd504084",
             "problem_instance_uuid": "1448d27d-bfa9-470f-a6c8-864a295b66f4",
             "instance_data_object_uuid": "48434e2f-f09e-474e-b98c-af180386a258",
-            "solution_uuid": "5d751f9d-e50d-45ea-84ed-bd490776ca30",
+            "solution_uuid": "69d2f647-3b3c-4e43-8a73-5bfebb9599f6",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 18956844.471942
+            "overall_run_time_seconds": 435310799170.6477
         },
         {
             "task_uuid": "7fc4c1d7-3469-40a3-9cd8-4354b6acf01d",
             "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
             "instance_data_object_uuid": "f7797f63-30ab-40e0-8ca6-042c9aa932b4",
-            "solution_uuid": "1129e852-9d41-40d8-82eb-6dfe5bb21b99",
+            "solution_uuid": "b252a1e1-652e-4d99-abf4-7e880aa27c80",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1362530.332787
+            "overall_run_time_seconds": 3416436873.13468
         },
         {
             "task_uuid": "80043b93-039c-4d5a-abcb-84b8f25f7abb",
             "problem_instance_uuid": "e48e7467-1fcd-478b-a599-f4ce881c57b9",
             "instance_data_object_uuid": "19cf5a4d-e90f-4ab1-a062-b20089724a63",
-            "solution_uuid": "1c76fdb8-c03d-4c5e-b15a-e4e288b70961",
+            "solution_uuid": "856b2b6e-fbac-40a4-9b4a-1f9c304d904d",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 108621.40057099999
+            "overall_run_time_seconds": 428075399.02899593
         },
         {
             "task_uuid": "80d75334-b878-41ec-99a8-b21277f3df60",
             "problem_instance_uuid": "9b8083ab-ea59-47db-894c-95a0d2ba3cb6",
             "instance_data_object_uuid": "96954db2-ef3e-47fd-82f8-2ac3cbfd6c17",
-            "solution_uuid": "5577286d-100b-47ad-a1c6-6f0b43419efb",
+            "solution_uuid": "452e3639-36d8-4077-90d7-bf27e717d33d",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 177072.58947099998
+            "overall_run_time_seconds": 696464006.262684
         },
         {
             "task_uuid": "819ff18a-5aad-46df-83ef-bd209e44936b",
@@ -2181,12 +2179,12 @@
             "task_uuid": "828c931b-4d5a-486e-ba26-abb293c1ccef",
             "problem_instance_uuid": "f1a6b508-75e8-4afb-9c81-fc61af11b523",
             "instance_data_object_uuid": "aba33661-3ce8-4f28-824f-e98244906d94",
-            "solution_uuid": "540912ad-64e0-4b0b-8c70-630e0cfbbf08",
+            "solution_uuid": "46609a34-eed2-4100-aa07-82f8a4e989f4",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 11479839.893135002
+            "overall_run_time_seconds": 237862927173.15945
         },
         {
             "task_uuid": "82f35801-6276-4090-a9aa-b821d94708d4",
@@ -2214,12 +2212,12 @@
             "task_uuid": "842d2152-2f91-4dce-b088-7ed26afb2381",
             "problem_instance_uuid": "b78a10f2-ce8a-43c0-69ec-4cf666d8e85c",
             "instance_data_object_uuid": "73ae455f-a729-4fac-a626-5654b03c1ef5",
-            "solution_uuid": "d7e9bab1-5227-4992-abb2-a0c3d01e2e51",
+            "solution_uuid": "04f3dc13-c620-4a80-92e6-19e7a17adebc",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1114484.0297500002
+            "overall_run_time_seconds": 2799812245.731047
         },
         {
             "task_uuid": "84aa9e2d-18e6-4689-9274-28e89ef44080",
@@ -2236,67 +2234,67 @@
             "task_uuid": "85743547-31ba-48ff-b854-220e4b9b620f",
             "problem_instance_uuid": "cc7044d7-28e0-4fe2-bd6b-c9c758da4776",
             "instance_data_object_uuid": "459b2739-8810-4cd9-82c4-4285c36a0193",
-            "solution_uuid": "4e198853-1a51-4b4a-ad19-efaa9d9682d3",
+            "solution_uuid": "1d4afc9c-7e61-4eab-9d94-3532aadbb49f",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 3040029.447631
+            "overall_run_time_seconds": 28621566644.982822
         },
         {
             "task_uuid": "858b9683-fc6c-4ebe-8c33-27f0d848f24f",
             "problem_instance_uuid": "dc8bdc56-5ebd-4996-6b81-81b1a06d8c76",
             "instance_data_object_uuid": "e986eb83-6b9d-439e-85ca-a9b931eef4a2",
-            "solution_uuid": "4c67130e-9f94-4142-bc52-f3645d96e892",
+            "solution_uuid": "22775139-ba46-49ef-9354-9d38cb45a5dd",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 3486932.3597109998
+            "overall_run_time_seconds": 453342253733.72864
         },
         {
             "task_uuid": "85a3a8d6-f2c7-458c-bbc3-25fd76d9afc0",
             "problem_instance_uuid": "162f41da-af43-427c-a8bc-ae9fa97ace95",
             "instance_data_object_uuid": "1661aaae-621a-430d-990a-bcbbbe270dfb",
-            "solution_uuid": "2239965d-1c2e-4f05-b2e0-90d7979e0286",
+            "solution_uuid": "4028c4e5-ec6d-418c-902c-a905928a10e7",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 2411295.7923330003
+            "overall_run_time_seconds": 9028484748.946033
         },
         {
             "task_uuid": "87d59f7c-e397-42dc-aa6e-00200d8697aa",
             "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
             "instance_data_object_uuid": "21abd0b3-b2cb-4a8a-812e-a8706542f429",
-            "solution_uuid": "1129e852-9d41-40d8-82eb-6dfe5bb21b99",
+            "solution_uuid": "b252a1e1-652e-4d99-abf4-7e880aa27c80",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 4416350.712039
+            "overall_run_time_seconds": 243004098739.01913
         },
         {
             "task_uuid": "881f5275-83eb-470c-80fe-eebb7ced30e9",
             "problem_instance_uuid": "9560107e-f1ad-4480-aa51-ef03edda6e19",
             "instance_data_object_uuid": "b0c72570-cf06-4ecc-ae64-52a65720c849",
-            "solution_uuid": "42b7d61e-a2e5-49b3-9b27-b4b66a22028b",
+            "solution_uuid": "0b5a55ba-270d-4f61-aac1-4385658afec7",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1555880.2849209998
+            "overall_run_time_seconds": 9897483605.419111
         },
         {
             "task_uuid": "886855d3-f1a7-4004-a736-417360e81d0a",
             "problem_instance_uuid": "f90280cc-c860-4ff1-a9ec-4841cec989f7",
             "instance_data_object_uuid": "1c5f7390-3d26-4730-addd-b0fbd7591169",
-            "solution_uuid": "3db1eef7-7c06-4f5f-91f0-aeb73efe00f2",
+            "solution_uuid": "32447c6f-a2a0-4e0f-b64b-e691c1badceb",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 834229.3806009999
+            "overall_run_time_seconds": 6669412921.392233
         },
         {
             "task_uuid": "8874bf11-f594-41df-b8a0-d2a7441904a1",
@@ -2313,45 +2311,45 @@
             "task_uuid": "88a6b9fd-e159-4059-9ee5-ba718fd624dc",
             "problem_instance_uuid": "68f1a091-8652-4095-ba31-56f0e02e27d3",
             "instance_data_object_uuid": "ab244b36-ab52-4cce-b50a-2b04d8c548e7",
-            "solution_uuid": "183f3579-095a-4387-9e48-979146acefcb",
+            "solution_uuid": "216301cb-20ac-41f8-ab63-fb30c9f11c45",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1544123.6639100001
+            "overall_run_time_seconds": 24887402558.92538
         },
         {
             "task_uuid": "89253c8f-0f01-4046-a138-1bada22f0a6a",
             "problem_instance_uuid": "b78a10f2-ce8a-43c0-69ec-4cf666d8e85c",
             "instance_data_object_uuid": "d7bea809-6e34-49f8-8daf-8d728dd18268",
-            "solution_uuid": "d7e9bab1-5227-4992-abb2-a0c3d01e2e51",
+            "solution_uuid": "04f3dc13-c620-4a80-92e6-19e7a17adebc",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 43084.945855
+            "solved": false,
+            "overall_run_time_seconds": 83899597.27933201
         },
         {
             "task_uuid": "8aa559b0-3aae-4850-a2d7-14e037ce26c0",
             "problem_instance_uuid": "68f1a091-8652-4095-ba31-56f0e02e27d3",
             "instance_data_object_uuid": "1b1a93a4-a3cd-424f-87a2-c5a7ae5dbaf7",
-            "solution_uuid": "183f3579-095a-4387-9e48-979146acefcb",
+            "solution_uuid": "216301cb-20ac-41f8-ab63-fb30c9f11c45",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 36334844.279721
+            "overall_run_time_seconds": 513769299190.2939
         },
         {
             "task_uuid": "8f373cb0-952d-48c6-a871-8a10e52e7c19",
             "problem_instance_uuid": "8db449b1-265b-4a66-b965-a2b4833a88d1",
             "instance_data_object_uuid": "bbbbba1c-868c-45a5-b16c-0c17536e83d8",
-            "solution_uuid": "13aaa818-60e0-4aa3-929d-81ff2a2bc45d",
+            "solution_uuid": "1f57216c-12e1-4c9e-8d7e-c759023eb75e",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 13464630.401525002
+            "overall_run_time_seconds": 65932407409.289055
         },
         {
             "task_uuid": "8f39fc4f-91dc-4f67-ab5c-00e8ffc866c4",
@@ -2368,67 +2366,67 @@
             "task_uuid": "8fa0ddcf-9b98-4144-8250-522f38c28b02",
             "problem_instance_uuid": "7ca1486c-06a5-47c1-b8ab-eab491ffc68b",
             "instance_data_object_uuid": "59fca8b4-25f4-44f7-b961-34d6a4037051",
-            "solution_uuid": "1fecfa30-cc3e-4122-bb01-e792411e8efb",
+            "solution_uuid": "900e3d80-0665-4db4-b598-2824e08c7273",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 7156453.193287
+            "overall_run_time_seconds": 44853519316.41435
         },
         {
             "task_uuid": "9030e9c9-0323-413c-a98e-aba16b180ba7",
             "problem_instance_uuid": "8ed1a800-a4c6-4bff-a6de-cb220554c42f",
             "instance_data_object_uuid": "3092dd74-660d-4c7a-9d43-16d1436e084b",
-            "solution_uuid": "8601ee1d-450c-42fc-8637-d2c9c3c1467b",
+            "solution_uuid": "5b0a7ca4-d94a-4fd2-8765-64ab5d0dfb60",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 430423.45768999995
+            "overall_run_time_seconds": 197294409882.02573
         },
         {
             "task_uuid": "92917287-d937-410c-bb70-c1f34224fab7",
             "problem_instance_uuid": "6d355019-13aa-41fc-a530-31d5f968ba22",
             "instance_data_object_uuid": "9c6f0876-5690-4391-a98c-0347d111257e",
-            "solution_uuid": "27ad5a6a-5e0d-45ba-b432-c4eca0cc769a",
+            "solution_uuid": "fca63d34-fcd3-424a-a246-22a6b69e5e58",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 22651.353389
+            "solved": false,
+            "overall_run_time_seconds": 60969820.67497199
         },
         {
             "task_uuid": "94db0c2c-89f6-4c3d-b886-a3a6a2bdad1d",
             "problem_instance_uuid": "8846a90e-96cb-4bc3-ad06-5388212f728e",
             "instance_data_object_uuid": "8ab023ed-7cdf-49e6-87d9-369a13f2ac82",
-            "solution_uuid": "78938c97-b900-4740-9ecd-fa675bbb426a",
+            "solution_uuid": "490f5b54-0b32-4b32-953b-09390f6b0774",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1489843.1937529999
+            "overall_run_time_seconds": 44012330077.524826
         },
         {
             "task_uuid": "94fc2317-29af-43a1-aaec-dade9850ca27",
             "problem_instance_uuid": "e3e78b41-577d-4536-a63f-7e968eeb6493",
             "instance_data_object_uuid": "ac269a87-2bc4-458e-8f4a-64f524c77044",
-            "solution_uuid": "b4de309e-91a5-49b5-a630-f389cc4a7d8e",
+            "solution_uuid": "5bb7fda5-669b-4f71-a8c8-0b46f2011b76",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 425477.906868
+            "overall_run_time_seconds": 2789864027.5456877
         },
         {
             "task_uuid": "950da653-13ce-4cd7-95d8-5045ab03d4bc",
             "problem_instance_uuid": "dc8bdc56-5ebd-4996-6b81-81b1a06d8c76",
             "instance_data_object_uuid": "a722dd32-93c7-4fbd-9cf5-f1bf44b2cdae",
-            "solution_uuid": "4c67130e-9f94-4142-bc52-f3645d96e892",
+            "solution_uuid": "22775139-ba46-49ef-9354-9d38cb45a5dd",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 59324.126711
+            "solved": false,
+            "overall_run_time_seconds": 823903120.74811
         },
         {
             "task_uuid": "96c6a0d7-8a1e-4189-a934-833b80ade346",
@@ -2456,23 +2454,23 @@
             "task_uuid": "9d82f7d4-165d-4499-8add-361a770d1d44",
             "problem_instance_uuid": "11c8be98-d9c9-40ea-8d88-ea8c555028f6",
             "instance_data_object_uuid": "51fac1c9-e29a-4033-b3d3-9cc37f64b4d4",
-            "solution_uuid": "82312e07-4520-4fdd-b93e-2893eb884125",
+            "solution_uuid": "f413eb9f-0be2-4311-ad17-7dafd508bfec",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 2294877.227481
+            "overall_run_time_seconds": 8774378010.017073
         },
         {
             "task_uuid": "9da97ef6-4bad-4c82-8576-9b8e539a7ba8",
             "problem_instance_uuid": "dc8bdc56-5ebd-4996-6b81-81b1a06d8c76",
             "instance_data_object_uuid": "46967cfc-d867-40e8-bef0-9655c46cef29",
-            "solution_uuid": "4c67130e-9f94-4142-bc52-f3645d96e892",
+            "solution_uuid": "22775139-ba46-49ef-9354-9d38cb45a5dd",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 29615.466316
+            "solved": false,
+            "overall_run_time_seconds": 176087924.81344098
         },
         {
             "task_uuid": "9e3c577f-a25d-42f5-a809-61dfb63a52de",
@@ -2522,23 +2520,23 @@
             "task_uuid": "a16168e2-98cd-430d-a180-84f64b4d5e75",
             "problem_instance_uuid": "cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8",
             "instance_data_object_uuid": "bae2da57-6a69-483e-95bc-b77f72ebfba8",
-            "solution_uuid": "a07902c4-6d2f-4cf4-8e00-a9eb3600918d",
+            "solution_uuid": "b240ccfe-37cd-4710-b160-11824a656b1a",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 2322131.2408799995
+            "overall_run_time_seconds": 801633541061.9941
         },
         {
             "task_uuid": "a2ad41b8-37bb-44e1-be3e-df1052952e9c",
             "problem_instance_uuid": "9560107e-f1ad-4480-aa51-ef03edda6e19",
             "instance_data_object_uuid": "1a42101c-3c00-4105-8ed3-9275bf0d18db",
-            "solution_uuid": "42b7d61e-a2e5-49b3-9b27-b4b66a22028b",
+            "solution_uuid": "0b5a55ba-270d-4f61-aac1-4385658afec7",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 3545202.805513
+            "overall_run_time_seconds": 11181106947.894611
         },
         {
             "task_uuid": "a2f9649f-0f47-4a5d-a6a7-b0bebc848797",
@@ -2555,67 +2553,67 @@
             "task_uuid": "a41a284c-7baa-438e-9323-532091c7a78f",
             "problem_instance_uuid": "7e0fb928-b0a9-4b44-89f1-7e0ee3b2bb13",
             "instance_data_object_uuid": "0ddeaaab-a6ef-436b-8189-290afa6408ea",
-            "solution_uuid": "9114f637-cdd4-471b-a676-13a330bed3ae",
+            "solution_uuid": "179dca1a-fe91-4eab-8698-6f8d0760b473",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 64562.558798
+            "solved": false,
+            "overall_run_time_seconds": 95787928.44425301
         },
         {
             "task_uuid": "a475af8e-cb0b-4533-906d-a6b8eda313e7",
             "problem_instance_uuid": "7213642b-5f16-48be-d5e5-2bc42ebb8526",
             "instance_data_object_uuid": "7be1766a-b3f7-4779-9a69-f4358645831b",
-            "solution_uuid": "9f8d9957-d0f9-4576-b8bc-02d37c24068d",
+            "solution_uuid": "5e829107-0a53-4461-9a39-ab0870df2479",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 283378.91831
+            "overall_run_time_seconds": 538413263.4365001
         },
         {
             "task_uuid": "a7cd2501-2f67-4fcd-b428-f6620f3596fe",
             "problem_instance_uuid": "a8895776-3583-4884-fbc7-d6f9df21a7ac",
             "instance_data_object_uuid": "4854c3ff-b3ce-462b-ab8e-0b132cd880d0",
-            "solution_uuid": "26e94c6e-10c4-4007-af01-078b4af1af99",
+            "solution_uuid": "f7f03aaa-72da-4c34-a837-beddb8359aed",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 5771612.960158
+            "overall_run_time_seconds": 14916369321.586258
         },
         {
             "task_uuid": "a7e26b10-bd6b-457c-978e-9050f6529007",
             "problem_instance_uuid": "33c9a058-7a67-454c-856c-2519ba55b44d",
             "instance_data_object_uuid": "b57e3b82-2511-4c00-a850-f6aeba98b0b2",
-            "solution_uuid": "e0931376-58d7-4b62-8204-a42a760fd9a6",
+            "solution_uuid": "f0cb3063-deff-453d-ac54-d586b7ffc16b",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 6590492.351621999
+            "overall_run_time_seconds": 10339310216.597315
         },
         {
             "task_uuid": "a92f6594-5ccc-4385-9cb5-8c21b4407dcf",
             "problem_instance_uuid": "1c3155e0-3679-4eff-bed0-57a1082672c3",
             "instance_data_object_uuid": "2b749f51-9ea9-41c4-9f67-e9c8334478c4",
-            "solution_uuid": "6d58695a-2a52-4ab9-8a1f-6ce11694424d",
-            "attempted": true,
+            "solution_uuid": null,
+            "attempted": false,
             "solved_within_run_time": false,
-            "solved_within_accuracy_requirement": true,
+            "solved_within_accuracy_requirement": false,
             "solved": false,
-            "overall_run_time_seconds": 27927604.775332995
+            "overall_run_time_seconds": null
         },
         {
             "task_uuid": "a9c90f98-6557-44d2-9ca0-0c9122f4080c",
             "problem_instance_uuid": "cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8",
             "instance_data_object_uuid": "027490ba-34f9-4340-89ab-27fd110d2821",
-            "solution_uuid": "a07902c4-6d2f-4cf4-8e00-a9eb3600918d",
+            "solution_uuid": "b240ccfe-37cd-4710-b160-11824a656b1a",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 67114.01004
+            "solved": false,
+            "overall_run_time_seconds": 9790729465.858118
         },
         {
             "task_uuid": "aaa24a30-ade6-44a6-b6aa-51bf54c31eef",
@@ -2632,67 +2630,67 @@
             "task_uuid": "aaae8d93-cb88-41ee-8f11-c70cc9b0d7fb",
             "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
             "instance_data_object_uuid": "4476d0ff-9618-4774-9619-e3f223249cea",
-            "solution_uuid": "1129e852-9d41-40d8-82eb-6dfe5bb21b99",
-            "attempted": true,
+            "solution_uuid": null,
+            "attempted": false,
             "solved_within_run_time": false,
-            "solved_within_accuracy_requirement": true,
+            "solved_within_accuracy_requirement": false,
             "solved": false,
-            "overall_run_time_seconds": 21580615.582093
+            "overall_run_time_seconds": null
         },
         {
             "task_uuid": "ab482d50-9a85-48d9-aa17-83dcbb38614b",
             "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
             "instance_data_object_uuid": "53abfc75-37a3-440c-a023-6e4cbffecd6a",
-            "solution_uuid": "1129e852-9d41-40d8-82eb-6dfe5bb21b99",
+            "solution_uuid": "b252a1e1-652e-4d99-abf4-7e880aa27c80",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 39859502.648898005
+            "overall_run_time_seconds": 843321795476.3185
         },
         {
             "task_uuid": "ab61c91a-68ea-401f-a3ad-392e83ee802e",
             "problem_instance_uuid": "c1e4c7dd-2dc4-4dd0-889d-fb34f602965a",
             "instance_data_object_uuid": "cdae3a0c-d613-4375-ab65-7088244b54ef",
-            "solution_uuid": "4cf41eb9-a331-4a1f-8190-d690c3f48ce7",
+            "solution_uuid": "867d3be1-e664-4e01-b04e-954c5d88e3d7",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 26168558.008835
+            "overall_run_time_seconds": 1361934653970.5488
         },
         {
             "task_uuid": "ace55695-1ca9-4153-8fd4-55ed6658cf8c",
             "problem_instance_uuid": "7213642b-5f16-48be-d5e5-2bc42ebb8526",
             "instance_data_object_uuid": "a2417602-4e97-4395-b3f0-1e29262c8053",
-            "solution_uuid": "9f8d9957-d0f9-4576-b8bc-02d37c24068d",
+            "solution_uuid": "5e829107-0a53-4461-9a39-ab0870df2479",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 737543.523842
+            "overall_run_time_seconds": 5482191547.438866
         },
         {
             "task_uuid": "ad9ceeaf-d7be-46b7-95a9-15bfd33f5022",
             "problem_instance_uuid": "a8895776-3583-4884-fbc7-d6f9df21a7ac",
             "instance_data_object_uuid": "8a8780b0-a0ba-4b7e-9847-589302123e86",
-            "solution_uuid": "26e94c6e-10c4-4007-af01-078b4af1af99",
+            "solution_uuid": "f7f03aaa-72da-4c34-a837-beddb8359aed",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 4973692.603921001
+            "overall_run_time_seconds": 12868704424.108906
         },
         {
             "task_uuid": "adecdd92-73c7-416d-90da-b7a3da7ed50b",
             "problem_instance_uuid": "a8895776-3583-4884-fbc7-d6f9df21a7ac",
             "instance_data_object_uuid": "e6671ea9-f0cf-413c-97cb-c8ab6eda9d5e",
-            "solution_uuid": "26e94c6e-10c4-4007-af01-078b4af1af99",
+            "solution_uuid": "f7f03aaa-72da-4c34-a837-beddb8359aed",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1141215.703309
+            "overall_run_time_seconds": 7179711903.75959
         },
         {
             "task_uuid": "ae315bef-f3c6-4c84-93c5-0d8ab510ece3",
@@ -2720,34 +2718,34 @@
             "task_uuid": "af399f2b-a4f8-4fec-aca2-7c126ed989a5",
             "problem_instance_uuid": "0c2e43eb-58f3-41ca-a21f-ae46fc2a0e57",
             "instance_data_object_uuid": "7ffaab25-7912-4ca9-b0e5-9fe8fd00a0e1",
-            "solution_uuid": "a1221b74-09c6-4239-9ff1-c3d5d886690f",
+            "solution_uuid": "b78da5f0-9e8f-42a6-a68a-c6a505653541",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1102502.8496939999
+            "overall_run_time_seconds": 8127862417.012413
         },
         {
             "task_uuid": "af56de36-35aa-44b9-8eb7-b9c1e8f7d0f3",
             "problem_instance_uuid": "b57eb979-5c09-4974-97b4-5862e109a1ae",
             "instance_data_object_uuid": "44060124-8f2d-4a91-80a9-5a29f0f4f716",
-            "solution_uuid": "6c2a0a70-5ff6-429e-b1af-60253fc0c8f2",
+            "solution_uuid": "a3337aa0-634f-4817-bc48-e271e7b4d0e5",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 62409.942293000015
+            "solved": false,
+            "overall_run_time_seconds": 651132132.634808
         },
         {
             "task_uuid": "afdc2f74-eb52-41ae-b72a-30e5a4c07013",
             "problem_instance_uuid": "19cada59-64cc-466c-8809-782a4f574dcc",
             "instance_data_object_uuid": "f9afcdc1-ce5c-40dd-ae18-0afc933da5bb",
-            "solution_uuid": "cd33e053-a174-460e-b019-586d58adba4b",
+            "solution_uuid": "7641b54d-360a-4189-8842-d99edfc0687e",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 5424029.829384
+            "overall_run_time_seconds": 8549754207.087881
         },
         {
             "task_uuid": "b1352b0c-aa96-4f58-a0e2-356d3c43c8a1",
@@ -2764,34 +2762,34 @@
             "task_uuid": "b164af91-a758-445c-8e78-610ffd2ad795",
             "problem_instance_uuid": "b78a10f2-ce8a-43c0-69ec-4cf666d8e85c",
             "instance_data_object_uuid": "5dbed2ac-f9a4-4afe-9b18-f67378a51fb2",
-            "solution_uuid": "d7e9bab1-5227-4992-abb2-a0c3d01e2e51",
+            "solution_uuid": "04f3dc13-c620-4a80-92e6-19e7a17adebc",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 1972.7066059999997
+            "solved": false,
+            "overall_run_time_seconds": 3431600.504355
         },
         {
             "task_uuid": "b24b71b9-971a-4aca-9fc0-7198d16ca9ed",
             "problem_instance_uuid": "02a8c4e9-9d15-4742-b4cc-7f47f69da0e5",
             "instance_data_object_uuid": "69a1826c-1bee-4855-8f5f-5df29035bfca",
-            "solution_uuid": "b4f52dae-5bea-41ba-b3d8-0d8b7b786225",
+            "solution_uuid": "87c3319f-bac1-4c34-b014-34e521d766f3",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 5903212.758298
+            "overall_run_time_seconds": 18698164344.878193
         },
         {
             "task_uuid": "b4968ccd-6711-4173-8f80-f16094b3e0cd",
             "problem_instance_uuid": "9560107e-f1ad-4480-aa51-ef03edda6e19",
             "instance_data_object_uuid": "93698b08-3188-4961-b551-50ac2c1e62b3",
-            "solution_uuid": "42b7d61e-a2e5-49b3-9b27-b4b66a22028b",
+            "solution_uuid": "0b5a55ba-270d-4f61-aac1-4385658afec7",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 15475.722958999999
+            "solved": false,
+            "overall_run_time_seconds": 126960387.815877
         },
         {
             "task_uuid": "b4e88a1e-f05f-4ff7-bd91-b24a5073c6ca",
@@ -2808,34 +2806,34 @@
             "task_uuid": "b59bd259-4941-4cec-bca5-e2795c35d8e0",
             "problem_instance_uuid": "892e3341-7186-44c6-9a1a-20f270ddc8b8",
             "instance_data_object_uuid": "b93a2eeb-79c3-4f98-8919-f5e0aaedcea7",
-            "solution_uuid": "a8a93f4b-2c06-4f52-88d3-ade38c6bcc46",
+            "solution_uuid": "314c1fa3-daea-4fd2-be83-d913a6afd0ae",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 46093.721898
+            "solved": false,
+            "overall_run_time_seconds": 250325284.41208902
         },
         {
             "task_uuid": "b628f4be-582f-4f23-96eb-c8b9e0005e4a",
             "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
             "instance_data_object_uuid": "3527a125-6e74-4df9-a9ac-ebba7d8b84ff",
-            "solution_uuid": "1129e852-9d41-40d8-82eb-6dfe5bb21b99",
+            "solution_uuid": "b252a1e1-652e-4d99-abf4-7e880aa27c80",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 237266.878098
+            "overall_run_time_seconds": 602474628.2034559
         },
         {
             "task_uuid": "b80345ff-5df9-4fb3-86ab-0a25188b296d",
             "problem_instance_uuid": "e48e7467-1fcd-478b-a599-f4ce881c57b9",
             "instance_data_object_uuid": "c0df5db1-1bc0-40f5-9cff-6aa2867aba7c",
-            "solution_uuid": "1c76fdb8-c03d-4c5e-b15a-e4e288b70961",
+            "solution_uuid": "856b2b6e-fbac-40a4-9b4a-1f9c304d904d",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 7033638.987582999
+            "overall_run_time_seconds": 11094974624.165678
         },
         {
             "task_uuid": "b8344eb5-f574-4198-b917-8312240ba288",
@@ -2852,23 +2850,23 @@
             "task_uuid": "b86457a4-abf4-43c9-9c08-2397e95b7c0f",
             "problem_instance_uuid": "f377cc27-366a-45af-b45a-c8478e4b6199",
             "instance_data_object_uuid": "4c655f65-1899-469c-975a-a3caec750697",
-            "solution_uuid": "6c8cab74-20e8-4159-bfad-1e62178d2ee4",
+            "solution_uuid": "62ea2606-b210-4713-b62a-dc4c5cdc700f",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 2991602.9063999997
+            "overall_run_time_seconds": 1090153680039.5792
         },
         {
             "task_uuid": "b900c4a3-fe87-4df7-96b7-2767ccdc1d56",
             "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
             "instance_data_object_uuid": "e03635b0-a537-4a58-9f3e-c7114715e47d",
-            "solution_uuid": "1129e852-9d41-40d8-82eb-6dfe5bb21b99",
+            "solution_uuid": "b252a1e1-652e-4d99-abf4-7e880aa27c80",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 240695.08100699997
+            "overall_run_time_seconds": 610761706.9892781
         },
         {
             "task_uuid": "b99ec02f-b46a-43fe-8a87-1b3286e072d8",
@@ -2885,67 +2883,67 @@
             "task_uuid": "b9c35349-927d-47d5-8e0c-e054bbf4e4e0",
             "problem_instance_uuid": "9bd9cde6-6daa-441a-984e-ae1c1c051e91",
             "instance_data_object_uuid": "60c52c22-d27a-4544-8b9c-6022507611f9",
-            "solution_uuid": "dcb0aaba-cc27-4600-ac93-5b8907232091",
+            "solution_uuid": "1f9c41a7-0e5e-4628-9a89-b9db8a731df2",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 553979.86184
+            "overall_run_time_seconds": 13785003055.053349
         },
         {
             "task_uuid": "b9cc699a-80f8-4280-9731-23dee4d5a6a5",
             "problem_instance_uuid": "664ec8e4-09d5-41cc-6266-ddb26219366f",
             "instance_data_object_uuid": "e10bd99a-435c-41cd-84f1-41bd67890fc7",
-            "solution_uuid": "fb266417-b2ee-42a6-8dd0-8962abf48e65",
+            "solution_uuid": "4b5cba99-2520-4729-b070-e1a4797480af",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 3276255.1770940004
+            "overall_run_time_seconds": 10189736575.934477
         },
         {
             "task_uuid": "bc3520b5-bf25-4a43-892c-8d7e9a690fe2",
             "problem_instance_uuid": "7213642b-5f16-48be-d5e5-2bc42ebb8526",
             "instance_data_object_uuid": "4811297e-a8df-4150-9d4d-376fd0c6e9cd",
-            "solution_uuid": "9f8d9957-d0f9-4576-b8bc-02d37c24068d",
+            "solution_uuid": "5e829107-0a53-4461-9a39-ab0870df2479",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 611415.8310540001
+            "overall_run_time_seconds": 4643261469.755975
         },
         {
             "task_uuid": "bd44e482-057d-42c3-a052-cbd952fa8025",
             "problem_instance_uuid": "ea2e13c5-6d80-466e-bd6b-6289e10ed82b",
             "instance_data_object_uuid": "95dec49b-7d4e-4889-9e31-97e21db7b329",
-            "solution_uuid": "17cc6d31-4114-4275-90ef-978ef5fcfbfe",
+            "solution_uuid": "4fabfec8-a308-4c1e-971d-585f5ccf7b06",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 2371304.865385
+            "overall_run_time_seconds": 20047451517.399254
         },
         {
             "task_uuid": "be3812d3-5975-4736-8a23-96d64e50e66a",
             "problem_instance_uuid": "3d3b9e8a-7842-4ca1-bd82-eddb9804972d",
             "instance_data_object_uuid": "3add17d8-cb86-4ae5-8474-96d272269d80",
-            "solution_uuid": "591082d9-5336-4d89-975c-9adf84549feb",
+            "solution_uuid": "2345ddb4-ac80-4b9b-9b66-4a8cb186796b",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 124615.86568699998
+            "overall_run_time_seconds": 1022986911.4912959
         },
         {
             "task_uuid": "c01649e2-8c5c-4827-a037-1ede2159e558",
             "problem_instance_uuid": "0e393c20-3915-42b9-a8aa-29bf53548269",
             "instance_data_object_uuid": "8d4aaf5e-4bca-4e5b-9fb0-2556228f5c52",
-            "solution_uuid": "ef8fa827-d41f-453f-80bb-c0d3850d46d6",
+            "solution_uuid": "1c88a1d8-848a-46d5-bd75-7af6bb8fe7d2",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 2136525.14188
+            "overall_run_time_seconds": 13643059508.024181
         },
         {
             "task_uuid": "c28e09e1-5983-42f7-9ecb-b271438ebcc8",
@@ -2962,23 +2960,23 @@
             "task_uuid": "c436c481-00d1-49ec-8d0e-0a5e83a8df19",
             "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
             "instance_data_object_uuid": "7fc6d81a-8e1c-436f-ade2-93aed1dfee42",
-            "solution_uuid": "1129e852-9d41-40d8-82eb-6dfe5bb21b99",
+            "solution_uuid": "b252a1e1-652e-4d99-abf4-7e880aa27c80",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1292069.347091
+            "overall_run_time_seconds": 4051580500.253606
         },
         {
             "task_uuid": "c582e543-075c-4fa1-b189-5e7455286d82",
             "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
             "instance_data_object_uuid": "47f67a0f-a385-405d-9ac6-2e22f8ceb8e4",
-            "solution_uuid": "1129e852-9d41-40d8-82eb-6dfe5bb21b99",
+            "solution_uuid": "b252a1e1-652e-4d99-abf4-7e880aa27c80",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1337077.476228
+            "overall_run_time_seconds": 4191989192.084603
         },
         {
             "task_uuid": "c5ef4702-fc8d-4168-b594-8d5872fdb523",
@@ -3017,45 +3015,45 @@
             "task_uuid": "c7c653b0-4440-4a36-a66b-8b81a9a351c7",
             "problem_instance_uuid": "8ed1a800-a4c6-4bff-a6de-cb220554c42f",
             "instance_data_object_uuid": "96843098-e69d-4d1f-8a88-5b24826f7390",
-            "solution_uuid": "8601ee1d-450c-42fc-8637-d2c9c3c1467b",
-            "attempted": true,
+            "solution_uuid": null,
+            "attempted": false,
             "solved_within_run_time": false,
-            "solved_within_accuracy_requirement": true,
+            "solved_within_accuracy_requirement": false,
             "solved": false,
-            "overall_run_time_seconds": 4162913.8827559995
+            "overall_run_time_seconds": null
         },
         {
             "task_uuid": "c7cd47fa-1bbd-4859-a0c8-3fd5c287c6db",
             "problem_instance_uuid": "1d0b8322-24b3-407a-8246-07444bb020be",
             "instance_data_object_uuid": "42f8e26e-4707-41e4-8b0a-c099a8a4145c",
-            "solution_uuid": "dacd4719-a037-46bc-845e-97dc2458840a",
+            "solution_uuid": "2c7315a6-c3c3-47f7-a3df-7d4c371475ea",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 8310544.262921
+            "overall_run_time_seconds": 169744576895.79507
         },
         {
             "task_uuid": "c9809448-2f3d-40d4-858d-6288a4703af4",
             "problem_instance_uuid": "e0adafc5-789e-43e6-8f9e-e718da28de3a",
             "instance_data_object_uuid": "52ddfe55-8758-448b-a6b1-3afdab85fdf4",
-            "solution_uuid": "127d3bb1-7e1a-4e61-92d2-91d977e38c7e",
+            "solution_uuid": "9284d781-2a91-4427-887c-0bee9e4b08ed",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 13418629.055952998
+            "overall_run_time_seconds": 41926039437.90279
         },
         {
             "task_uuid": "ca6f7678-0952-4fe4-83fe-c4455a682132",
             "problem_instance_uuid": "c6ab4ddb-efe8-46d6-9fc4-90901c08d9a7",
             "instance_data_object_uuid": "75228927-fac3-4caf-9e09-1fdfe51098a3",
-            "solution_uuid": "465ab3ae-05a6-409c-9f23-b56c97061836",
+            "solution_uuid": "ebb382fc-ab1b-491c-aee3-ab12036b58cd",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 4327713.296678999
+            "overall_run_time_seconds": 16124747364.19018
         },
         {
             "task_uuid": "cbab5937-5e2f-4f3f-819e-ede8b66d7238",
@@ -3083,133 +3081,133 @@
             "task_uuid": "d15db194-aa2d-4de9-8f86-fcffeb82f38b",
             "problem_instance_uuid": "6d355019-13aa-41fc-a530-31d5f968ba22",
             "instance_data_object_uuid": "02d12f52-ff42-4adf-99b9-acada93cb96b",
-            "solution_uuid": "27ad5a6a-5e0d-45ba-b432-c4eca0cc769a",
+            "solution_uuid": "fca63d34-fcd3-424a-a246-22a6b69e5e58",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1311228.7672920001
+            "overall_run_time_seconds": 3371118333.7807193
         },
         {
             "task_uuid": "d27fb590-4e90-4d5a-bdb8-37fbf22f528b",
             "problem_instance_uuid": "a8895776-3583-4884-fbc7-d6f9df21a7ac",
             "instance_data_object_uuid": "e8f72c80-2fde-4bdc-ac1e-07220942f1c2",
-            "solution_uuid": "26e94c6e-10c4-4007-af01-078b4af1af99",
+            "solution_uuid": "f7f03aaa-72da-4c34-a837-beddb8359aed",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 4467669.430633
+            "overall_run_time_seconds": 9246282840.019518
         },
         {
             "task_uuid": "d28f02ba-d43f-4df9-a01a-f1e8ac326e08",
             "problem_instance_uuid": "42958a3e-8b35-4992-acd8-6711848066c1",
             "instance_data_object_uuid": "a4b9a6bd-4479-44b2-b172-642f74396781",
-            "solution_uuid": "e28155fa-866b-4566-9fda-5dd8a2c973af",
+            "solution_uuid": "433c9b0b-0d57-43eb-a375-1210ef902062",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 61131.635164
+            "solved": false,
+            "overall_run_time_seconds": 367420300.708031
         },
         {
             "task_uuid": "d3bcc63c-57ad-4346-8290-e36447186440",
             "problem_instance_uuid": "a8895776-3583-4884-fbc7-d6f9df21a7ac",
             "instance_data_object_uuid": "379a0693-4ac3-4ff0-be33-7be3f6cad84f",
-            "solution_uuid": "26e94c6e-10c4-4007-af01-078b4af1af99",
+            "solution_uuid": "f7f03aaa-72da-4c34-a837-beddb8359aed",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1146906.412647
+            "overall_run_time_seconds": 2886814067.837543
         },
         {
             "task_uuid": "d3c058ec-9b13-4a9a-aba0-d3f19091c47b",
             "problem_instance_uuid": "3aaf0bb4-b412-4746-922a-c380b4024d00",
             "instance_data_object_uuid": "c594d63e-29c7-462a-b385-f70c6d7d8350",
-            "solution_uuid": "67344f25-2749-41b1-a7e0-d2c7fa293547",
+            "solution_uuid": "6831c462-550c-4c39-9b2c-9cefd4b8f722",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 293327.949139
+            "overall_run_time_seconds": 843816748.89951
         },
         {
             "task_uuid": "d3ecd428-ee03-4d8b-aa14-af4d935781ed",
             "problem_instance_uuid": "b78a10f2-ce8a-43c0-69ec-4cf666d8e85c",
             "instance_data_object_uuid": "e5e63f77-dbaa-431c-a53f-93c0f4c0758d",
-            "solution_uuid": "d7e9bab1-5227-4992-abb2-a0c3d01e2e51",
+            "solution_uuid": "04f3dc13-c620-4a80-92e6-19e7a17adebc",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1335367.806427
+            "overall_run_time_seconds": 4185869224.337452
         },
         {
             "task_uuid": "d58cb72b-e144-4164-aec0-309aaef6394c",
             "problem_instance_uuid": "25fd617b-8e7f-4422-9e97-cc3f6b0d3876",
             "instance_data_object_uuid": "d3d8851e-f3df-490c-975a-467933bd9fa1",
-            "solution_uuid": "e83765f6-3b82-49a6-bb0e-8939971a138f",
+            "solution_uuid": "96ece6e5-5bc8-45cb-a209-bdf4d7cf14c3",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 2274974.7396789994
+            "overall_run_time_seconds": 25363550646.459366
         },
         {
             "task_uuid": "d937e005-3688-4138-9465-426798087395",
             "problem_instance_uuid": "7213642b-5f16-48be-d5e5-2bc42ebb8526",
             "instance_data_object_uuid": "30c3e4f9-1b24-4fe5-9cab-ad0b67e0d74b",
-            "solution_uuid": "9f8d9957-d0f9-4576-b8bc-02d37c24068d",
+            "solution_uuid": "5e829107-0a53-4461-9a39-ab0870df2479",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 4170.1820769999995
+            "solved": false,
+            "overall_run_time_seconds": 23496764.93521
         },
         {
             "task_uuid": "da831b60-89ce-4c01-96f9-c9f8a4512aab",
             "problem_instance_uuid": "3f141f05-532b-478d-b38a-2ae07baadc88",
             "instance_data_object_uuid": "cd31956d-bef5-4112-9959-510170644e72",
-            "solution_uuid": "30634853-a495-4894-938b-5bdb1d929939",
+            "solution_uuid": "a33a4c50-b5f9-47a0-8b39-4672100c0faa",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 434000.422208
+            "overall_run_time_seconds": 841474172.4649761
         },
         {
             "task_uuid": "daa86ad6-bda9-4d47-a50d-4ec34801bd82",
             "problem_instance_uuid": "892e3341-7186-44c6-9a1a-20f270ddc8b8",
             "instance_data_object_uuid": "819ffa8e-51ee-4e78-aa07-17686d7a9488",
-            "solution_uuid": "a8a93f4b-2c06-4f52-88d3-ade38c6bcc46",
+            "solution_uuid": "314c1fa3-daea-4fd2-be83-d913a6afd0ae",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 3041074.9842449995
+            "overall_run_time_seconds": 6460545908.721526
         },
         {
             "task_uuid": "dab492c3-27fe-4ac3-8c98-de2563caf66c",
             "problem_instance_uuid": "7213642b-5f16-48be-d5e5-2bc42ebb8526",
             "instance_data_object_uuid": "51f7d629-9a0e-4688-8562-59a5f0c0a404",
-            "solution_uuid": "9f8d9957-d0f9-4576-b8bc-02d37c24068d",
+            "solution_uuid": "5e829107-0a53-4461-9a39-ab0870df2479",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 902.5953410000001
+            "solved": false,
+            "overall_run_time_seconds": 1072255.244998
         },
         {
             "task_uuid": "db75bf65-181b-40c2-b978-26453437c2b0",
             "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
             "instance_data_object_uuid": "f6516937-6182-4dae-a39c-f94c0d72bf70",
-            "solution_uuid": "1129e852-9d41-40d8-82eb-6dfe5bb21b99",
+            "solution_uuid": "b252a1e1-652e-4d99-abf4-7e880aa27c80",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 11119481.047996
+            "overall_run_time_seconds": 208913800455.26862
         },
         {
             "task_uuid": "dc1da839-0ccc-434c-bf9c-a3874ffc3b1c",
@@ -3226,34 +3224,34 @@
             "task_uuid": "dcf2b441-b297-4a89-ae18-5778ec2d674d",
             "problem_instance_uuid": "b78a10f2-ce8a-43c0-69ec-4cf666d8e85c",
             "instance_data_object_uuid": "46aea10c-d57f-4133-9837-3c57d474d9a2",
-            "solution_uuid": "d7e9bab1-5227-4992-abb2-a0c3d01e2e51",
+            "solution_uuid": "04f3dc13-c620-4a80-92e6-19e7a17adebc",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 3094.293415
+            "solved": false,
+            "overall_run_time_seconds": 3499136.762132
         },
         {
             "task_uuid": "de3ea361-c2d3-4ab6-add4-ccd43cea6aa8",
             "problem_instance_uuid": "cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8",
             "instance_data_object_uuid": "68af0b80-3d27-4aba-84f9-bcdd30a9255b",
-            "solution_uuid": "a07902c4-6d2f-4cf4-8e00-a9eb3600918d",
+            "solution_uuid": "b240ccfe-37cd-4710-b160-11824a656b1a",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 32724.953456
+            "solved": false,
+            "overall_run_time_seconds": 332318443.85768604
         },
         {
             "task_uuid": "dfd78a05-437d-4667-88d7-7e2a3384b816",
             "problem_instance_uuid": "664ec8e4-09d5-41cc-6266-ddb26219366f",
             "instance_data_object_uuid": "b71baf3c-d5f0-4f8d-aead-648ba69a058e",
-            "solution_uuid": "fb266417-b2ee-42a6-8dd0-8962abf48e65",
+            "solution_uuid": "4b5cba99-2520-4729-b070-e1a4797480af",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 3010433.2194959996
+            "overall_run_time_seconds": 10937330067.796438
         },
         {
             "task_uuid": "e0101b06-dfd6-4caa-8580-a9815b225204",
@@ -3270,23 +3268,23 @@
             "task_uuid": "e0de65ed-e45e-46e0-a57b-c6ad4efbdafe",
             "problem_instance_uuid": "9560107e-f1ad-4480-aa51-ef03edda6e19",
             "instance_data_object_uuid": "598f7475-c056-4a46-8d20-5159c73e5d02",
-            "solution_uuid": "42b7d61e-a2e5-49b3-9b27-b4b66a22028b",
+            "solution_uuid": "0b5a55ba-270d-4f61-aac1-4385658afec7",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 15646.090681
+            "solved": false,
+            "overall_run_time_seconds": 42766593.98542699
         },
         {
             "task_uuid": "e3a07092-d1e5-4867-a4d7-d0258f9df6db",
             "problem_instance_uuid": "90d4e4fc-1216-4846-b45f-198c0530e29b",
             "instance_data_object_uuid": "09c3ddd5-0187-46e8-95c3-157c470cb69a",
-            "solution_uuid": "36ffd739-b179-4a6a-a008-63b4652c3edf",
+            "solution_uuid": "22757023-38b7-4820-a7f4-1dad4ee0a4f6",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 9543657.899234
+            "overall_run_time_seconds": 69199857949.01474
         },
         {
             "task_uuid": "e604a906-55fa-4b3f-bf17-c24a30312b84",
@@ -3314,34 +3312,34 @@
             "task_uuid": "e7d3b8bd-ff6c-44f6-8a9e-b9b75396cee0",
             "problem_instance_uuid": "3301a356-21a9-472b-8021-f02f4d2c9eec",
             "instance_data_object_uuid": "243670ee-2d2e-4d90-abc1-16938a04a80b",
-            "solution_uuid": "56f208ac-fec4-4849-b985-9c777540f7c4",
+            "solution_uuid": "4b772bff-319b-4a6b-9e10-ddff273c513f",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 109825.96466000001
+            "overall_run_time_seconds": 430889580.52258
         },
         {
             "task_uuid": "eadd62e9-ee3d-4193-94de-7735a529edce",
             "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
             "instance_data_object_uuid": "98016425-092d-41a4-b397-9b4b237c582a",
-            "solution_uuid": "1129e852-9d41-40d8-82eb-6dfe5bb21b99",
+            "solution_uuid": "b252a1e1-652e-4d99-abf4-7e880aa27c80",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1360124.5500820002
+            "overall_run_time_seconds": 3409915570.6522565
         },
         {
             "task_uuid": "ec0baf59-05f5-49df-b5e5-8f887d822a10",
             "problem_instance_uuid": "208f2e50-2b56-4e72-815a-cba5cec1264c",
             "instance_data_object_uuid": "83f0f242-e184-4581-a77a-f019731d8a6f",
-            "solution_uuid": "6c6be957-d70f-4657-a174-c66f5d1452ba",
+            "solution_uuid": "fbb3c8dd-817d-47fb-a78a-9cd88c068a34",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 15919291.662694998
+            "overall_run_time_seconds": 87980888895.06749
         },
         {
             "task_uuid": "ed09e1bf-40f3-4bf0-b9c7-7bb1990c5cae",
@@ -3369,12 +3367,12 @@
             "task_uuid": "f0637f33-3c53-4f01-8cf7-cfd9c6f39a51",
             "problem_instance_uuid": "586ce6a9-1876-459e-9b6c-be8bb1c4d1a5",
             "instance_data_object_uuid": "9ef07114-7e1a-4eba-a9ac-2c71c5fd518a",
-            "solution_uuid": "65434a40-d6a4-40b1-b064-32daef472f99",
+            "solution_uuid": "9a6aa142-9e7c-40c4-924d-8bbaefa4e032",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 3786773.599711
+            "overall_run_time_seconds": 12055704423.614347
         },
         {
             "task_uuid": "f0ee8150-86e2-4f9e-ae35-95af38f3c69e",
@@ -3391,23 +3389,23 @@
             "task_uuid": "f20db1b1-86e3-4ddf-96ff-a6d37f331935",
             "problem_instance_uuid": "dc8bdc56-5ebd-4996-6b81-81b1a06d8c76",
             "instance_data_object_uuid": "85d9d818-501e-4a0e-8fd8-c216ab5e3cb5",
-            "solution_uuid": "4c67130e-9f94-4142-bc52-f3645d96e892",
+            "solution_uuid": "22775139-ba46-49ef-9354-9d38cb45a5dd",
             "attempted": true,
-            "solved_within_run_time": true,
+            "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
-            "solved": true,
-            "overall_run_time_seconds": 96759.923116
+            "solved": false,
+            "overall_run_time_seconds": 814042184.9920479
         },
         {
             "task_uuid": "f2f09d9f-8328-4d4a-ba91-089f9e56bf0d",
             "problem_instance_uuid": "208f2e50-2b56-4e72-815a-cba5cec1264c",
             "instance_data_object_uuid": "11a0ff0b-3c6f-416f-be8a-a02acd56aeb9",
-            "solution_uuid": "6c6be957-d70f-4657-a174-c66f5d1452ba",
+            "solution_uuid": "fbb3c8dd-817d-47fb-a78a-9cd88c068a34",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 227172.185536
+            "overall_run_time_seconds": 2680632189.198947
         },
         {
             "task_uuid": "f4b120e9-acd0-4c7c-89e2-cc082f52f5cf",
@@ -3446,23 +3444,23 @@
             "task_uuid": "f9bdbb3b-91b6-43f3-93ca-bef1e10d3835",
             "problem_instance_uuid": "d712afaf-6ec4-42d9-b5fd-1edee3ec1046",
             "instance_data_object_uuid": "ee1c9912-bca9-42fa-a90d-421e9a26c785",
-            "solution_uuid": "cb0e30e4-b585-4ed0-a07c-edd50de776b8",
+            "solution_uuid": "7e044d15-8dd3-4f86-9419-277a1e8bfc4a",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1131383.8645829998
+            "overall_run_time_seconds": 2929671221.1499405
         },
         {
             "task_uuid": "fa3bc2a8-8067-4088-909a-2ddfa655ebfb",
             "problem_instance_uuid": "586ce6a9-1876-459e-9b6c-be8bb1c4d1a5",
             "instance_data_object_uuid": "5373214f-f344-4bdb-8840-5acf3b4c07c2",
-            "solution_uuid": "65434a40-d6a4-40b1-b064-32daef472f99",
+            "solution_uuid": "9a6aa142-9e7c-40c4-924d-8bbaefa4e032",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 140996.621484
+            "overall_run_time_seconds": 467097832.959427
         },
         {
             "task_uuid": "fa8e83f2-cec5-4609-9b77-d713608a6b53",
@@ -3479,34 +3477,34 @@
             "task_uuid": "fb87d637-aaab-4e8f-8898-4ecca8bd0fe0",
             "problem_instance_uuid": "67f72316-2262-44fb-8c0a-e159e1cd0cf0",
             "instance_data_object_uuid": "9da0b1fb-c6a5-4da5-b390-3920e3c26154",
-            "solution_uuid": "5f05f9e2-0a96-41be-90c4-f29a6fc32b75",
+            "solution_uuid": "78d6f67e-4b08-415b-a26e-fba9388cc857",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 4260973.064608
+            "overall_run_time_seconds": 15906193337.317005
         },
         {
             "task_uuid": "fc25a232-d249-4e1c-a9ec-360cab33f779",
             "problem_instance_uuid": "8ed1a800-a4c6-4bff-a6de-cb220554c42f",
             "instance_data_object_uuid": "d9341cde-90e8-4d1e-beb2-4e40246d31ce",
-            "solution_uuid": "8601ee1d-450c-42fc-8637-d2c9c3c1467b",
-            "attempted": true,
+            "solution_uuid": null,
+            "attempted": false,
             "solved_within_run_time": false,
-            "solved_within_accuracy_requirement": true,
+            "solved_within_accuracy_requirement": false,
             "solved": false,
-            "overall_run_time_seconds": 9881906.325159002
+            "overall_run_time_seconds": null
         },
         {
             "task_uuid": "fc3586af-0290-4a4a-81e1-422a1d331a09",
             "problem_instance_uuid": "5524b5e5-adba-4322-9808-69e75e4335b2",
             "instance_data_object_uuid": "26a32758-4c43-4add-a12e-7273b2ddfd0e",
-            "solution_uuid": "74e703c2-e352-426b-beb3-c100554bf940",
+            "solution_uuid": "3ea25c64-cb79-4ae9-bbf4-9cf2dfec28b9",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 4626732.113286
+            "overall_run_time_seconds": 113980370421.15825
         },
         {
             "task_uuid": "fea4b4a2-64a1-45c3-a760-83aec702bdca",
@@ -3523,23 +3521,23 @@
             "task_uuid": "ff0da1e2-2c76-4589-aefa-c13bb1a1ef8f",
             "problem_instance_uuid": "cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8",
             "instance_data_object_uuid": "6e2bf415-6a69-4b36-ba0f-780a11cb7c0b",
-            "solution_uuid": "a07902c4-6d2f-4cf4-8e00-a9eb3600918d",
+            "solution_uuid": "b240ccfe-37cd-4710-b160-11824a656b1a",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 1165429.037591
+            "overall_run_time_seconds": 25069192761.29801
         },
         {
             "task_uuid": "ff159145-fd97-486b-bf16-fc766b362ea3",
             "problem_instance_uuid": "674b572a-3d6d-4418-8cc2-4755d90367ee",
             "instance_data_object_uuid": "65a71ea2-097e-472c-b96a-13ddf6a0962c",
-            "solution_uuid": "a9e2fcc2-8de6-4ebd-8dbe-0543a6712016",
+            "solution_uuid": "a676b241-02e6-4c43-b3a3-c2e597e8851b",
             "attempted": true,
             "solved_within_run_time": false,
             "solved_within_accuracy_requirement": true,
             "solved": false,
-            "overall_run_time_seconds": 5903125.455158
+            "overall_run_time_seconds": 152336805235.60443
         }
     ]
 }
