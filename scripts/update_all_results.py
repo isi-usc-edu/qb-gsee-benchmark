@@ -56,11 +56,19 @@ def main(args: argparse.Namespace) -> None:
 
     if args.SHAP_analysis:
         for solver_uuid in benchmark_data.ml_models_dict:
-            benchmark_data.ml_models_dict[solver_uuid].run_shap_analysis()
+            try:
+                benchmark_data.ml_models_dict[solver_uuid].run_shap_analysis()
+            except Exception as e:
+                print(f"Error: {e}")
+                print(f"probably no ML model for {solver_uuid}")
     
     for solver_uuid in benchmark_data.ml_models_dict:
-        benchmark_data.ml_models_dict[solver_uuid].write_all_plots()
-        benchmark_data.ml_models_dict[solver_uuid].write_probs_to_file()
+        try:
+            benchmark_data.ml_models_dict[solver_uuid].write_all_plots()
+            benchmark_data.ml_models_dict[solver_uuid].write_probs_to_file()
+        except Exception as e:
+            print(f"Error: {e}")
+            print(f"probably no ML model for {solver_uuid}")
         
             
 

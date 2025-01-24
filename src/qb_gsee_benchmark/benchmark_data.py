@@ -353,18 +353,27 @@ class BenchmarkData:
             df = df[~df["reference_energy"].isna()] # filter to only entries with reference energy specified.
             # df = df[df["attempted"]==True] # filter to attempted tasks/Hamiltonians
 
-            mini_ml_model = MiniML(
-                solver_labels_by_task_uuid=df,
-                hamiltonian_features_by_task_uuid=self.hamiltonian_features    
-            )
+            try:
+                mini_ml_model = MiniML(
+                    solver_labels_by_task_uuid=df,
+                    hamiltonian_features_by_task_uuid=self.hamiltonian_features    
+                )
+                ml_scores_dict[solver_uuid] = {
+                    "solvability_ratio":mini_ml_model.ml_solvability_ratio,
+                    "f1_score":list(mini_ml_model.f1_score),
+                    "ml_metrics_calculator_version":1
+                }
+            except Exception as e:
+                logging.error(f'Error: {e}', exc_info=True)
+                mini_ml_model = "Model could not be calculated."
+                ml_scores_dict[solver_uuid] = {
+                    "solvability_ratio":None,
+                    "f1_score":None,
+                    "ml_metrics_calculator_version":1,
+                    "comment":"All labels were either all `True` or all `False` and we cannot create an ML model with only one class."
+                }
 
-            
-            ml_scores_dict[solver_uuid] = {
-                "solvability_ratio":mini_ml_model.ml_solvability_ratio,
-                "f1_score":list(mini_ml_model.f1_score),
-                "ml_metrics_calculator_version":1,
-            }
-            ml_models_dict[solver_uuid] = mini_ml_model # TODO: currently storing the all MiniML model.
+            ml_models_dict[solver_uuid] = mini_ml_model # TODO: currently storing the all MiniML models.
 
         self.ml_scores_dict = ml_scores_dict # update in place
         self.ml_models_dict = ml_models_dict # update in place

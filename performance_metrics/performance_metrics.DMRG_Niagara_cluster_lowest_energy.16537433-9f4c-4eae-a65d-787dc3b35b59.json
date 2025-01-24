@@ -1,21 +1,21 @@
 {
     "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/performance_metrics.schema.0.0.1.json",
-    "performance_metrics_uuid": "ebfcd8c7-f5b0-4b5f-962f-4e17ad966a6c",
+    "performance_metrics_uuid": "4c257743-402c-49c0-be8a-eb24a2c1a63e",
     "solver_short_name": "DMRG_Niagara_cluster_lowest_energy",
     "solver_uuid": "16537433-9f4c-4eae-a65d-787dc3b35b59",
-    "creation_timestamp": "2025-01-23T19:37:07.010747+00:00",
+    "creation_timestamp": "2025-01-24T22:30:00.577981+00:00",
     "ml_metrics": {
-        "solvability_ratio": 0.1179,
+        "solvability_ratio": 0.354,
         "f1_score": [
-            0.8955223880597015,
-            0.9014084507042254
+            0.9772727272727273,
+            0.9861111111111112
         ],
         "ml_metrics_calculator_version": 1
     },
     "top_level_results": {
         "number_of_problem_instances": 82,
         "number_of_problem_instances_attempted": 82,
-        "number_of_problem_instances_solved": 8,
+        "number_of_problem_instances_solved": 9,
         "number_of_tasks": 230,
         "number_of_tasks_attempted": 230,
         "number_of_tasks_solved": 72,
@@ -31,8 +31,8 @@
             "number_of_tasks": 12,
             "number_of_tasks_attempted": 12,
             "number_of_tasks_solved_within_runtime_limit": 12,
-            "number_of_tasks_solved_within_accuracy_requirement": 6,
-            "number_of_tasks_solved": 6,
+            "number_of_tasks_solved_within_accuracy_requirement": 3,
+            "number_of_tasks_solved": 3,
             "sum_of_run_time_of_attempted_tasks": 247866.00764160798,
             "max_run_time_of_attempted_tasks": 54817.298062527,
             "solution_submitted_by_due_date": true
@@ -91,8 +91,8 @@
             "number_of_tasks": 9,
             "number_of_tasks_attempted": 9,
             "number_of_tasks_solved_within_runtime_limit": 9,
-            "number_of_tasks_solved_within_accuracy_requirement": 1,
-            "number_of_tasks_solved": 1,
+            "number_of_tasks_solved_within_accuracy_requirement": 0,
+            "number_of_tasks_solved": 0,
             "sum_of_run_time_of_attempted_tasks": 328076.37282895297,
             "max_run_time_of_attempted_tasks": 71487.725871868,
             "solution_submitted_by_due_date": true
@@ -139,8 +139,8 @@
             "number_of_tasks": 16,
             "number_of_tasks_attempted": 16,
             "number_of_tasks_solved_within_runtime_limit": 16,
-            "number_of_tasks_solved_within_accuracy_requirement": 8,
-            "number_of_tasks_solved": 8,
+            "number_of_tasks_solved_within_accuracy_requirement": 7,
+            "number_of_tasks_solved": 7,
             "sum_of_run_time_of_attempted_tasks": 331974.884954726,
             "max_run_time_of_attempted_tasks": 59341.271612651,
             "solution_submitted_by_due_date": true
@@ -259,8 +259,8 @@
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 3,
             "number_of_tasks_solved_within_runtime_limit": 3,
-            "number_of_tasks_solved_within_accuracy_requirement": 2,
-            "number_of_tasks_solved": 2,
+            "number_of_tasks_solved_within_accuracy_requirement": 3,
+            "number_of_tasks_solved": 3,
             "sum_of_run_time_of_attempted_tasks": 1850.144223091,
             "max_run_time_of_attempted_tasks": 1680.376641049,
             "solution_submitted_by_due_date": true
@@ -475,8 +475,8 @@
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 3,
             "number_of_tasks_solved_within_runtime_limit": 3,
-            "number_of_tasks_solved_within_accuracy_requirement": 0,
-            "number_of_tasks_solved": 0,
+            "number_of_tasks_solved_within_accuracy_requirement": 2,
+            "number_of_tasks_solved": 2,
             "sum_of_run_time_of_attempted_tasks": 545.765308402,
             "max_run_time_of_attempted_tasks": 489.714718099,
             "solution_submitted_by_due_date": true
@@ -499,8 +499,8 @@
             "number_of_tasks": 3,
             "number_of_tasks_attempted": 3,
             "number_of_tasks_solved_within_runtime_limit": 3,
-            "number_of_tasks_solved_within_accuracy_requirement": 0,
-            "number_of_tasks_solved": 0,
+            "number_of_tasks_solved_within_accuracy_requirement": 1,
+            "number_of_tasks_solved": 1,
             "sum_of_run_time_of_attempted_tasks": 4437.926915933,
             "max_run_time_of_attempted_tasks": 3859.784110037,
             "solution_submitted_by_due_date": true
@@ -559,8 +559,8 @@
             "number_of_tasks": 6,
             "number_of_tasks_attempted": 6,
             "number_of_tasks_solved_within_runtime_limit": 6,
-            "number_of_tasks_solved_within_accuracy_requirement": 4,
-            "number_of_tasks_solved": 4,
+            "number_of_tasks_solved_within_accuracy_requirement": 5,
+            "number_of_tasks_solved": 5,
             "sum_of_run_time_of_attempted_tasks": 11845.470172984,
             "max_run_time_of_attempted_tasks": 11397.326345378,
             "solution_submitted_by_due_date": true
@@ -1315,8 +1315,8 @@
             "solution_uuid": "ff8fb42d-d490-4f58-b471-99fb50736c0d",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": true,
-            "solved": true,
+            "solved_within_accuracy_requirement": false,
+            "solved": false,
             "overall_run_time_seconds": 148.098751375
         },
         {
@@ -1579,8 +1579,8 @@
             "solution_uuid": "7b911c28-079a-4f75-9400-afe3ebfa123b",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
             "overall_run_time_seconds": 8.323415388
         },
         {
@@ -1656,8 +1656,8 @@
             "solution_uuid": "2fac2f03-09b1-4850-8fcc-523d297d267c",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": true,
-            "solved": true,
+            "solved_within_accuracy_requirement": false,
+            "solved": false,
             "overall_run_time_seconds": 10630.293786768
         },
         {
@@ -2382,8 +2382,8 @@
             "solution_uuid": "ff8fb42d-d490-4f58-b471-99fb50736c0d",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
             "overall_run_time_seconds": 369.150044319
         },
         {
@@ -2393,8 +2393,8 @@
             "solution_uuid": "d0815c4b-54ef-412f-b960-b94c64624bb9",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
             "overall_run_time_seconds": 15.91911897
         },
         {
@@ -2426,8 +2426,8 @@
             "solution_uuid": "74c4d0fe-efb6-4364-897f-d7e8df04de6f",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": true,
-            "solved": true,
+            "solved_within_accuracy_requirement": false,
+            "solved": false,
             "overall_run_time_seconds": 56.447158804
         },
         {
@@ -2470,8 +2470,8 @@
             "solution_uuid": "74c4d0fe-efb6-4364-897f-d7e8df04de6f",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": true,
-            "solved": true,
+            "solved_within_accuracy_requirement": false,
+            "solved": false,
             "overall_run_time_seconds": 22.18260602
         },
         {
@@ -2569,8 +2569,8 @@
             "solution_uuid": "371a8eb0-c0ac-41f3-a179-6574af1556e8",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
             "overall_run_time_seconds": 174.15415919
         },
         {
@@ -2745,8 +2745,8 @@
             "solution_uuid": "7b911c28-079a-4f75-9400-afe3ebfa123b",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
             "overall_run_time_seconds": 489.714718099
         },
         {
@@ -2976,8 +2976,8 @@
             "solution_uuid": "32aa9592-24d4-4e88-beb8-a674303d3cbf",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": true,
-            "solved": true,
+            "solved_within_accuracy_requirement": false,
+            "solved": false,
             "overall_run_time_seconds": 15628.225070986
         },
         {
@@ -3317,8 +3317,8 @@
             "solution_uuid": "da2f5ddf-2f5e-4526-8bdb-275b7151a7dc",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
             "overall_run_time_seconds": 39.236841305
         },
         {
@@ -3394,8 +3394,8 @@
             "solution_uuid": "74c4d0fe-efb6-4364-897f-d7e8df04de6f",
             "attempted": true,
             "solved_within_run_time": true,
-            "solved_within_accuracy_requirement": true,
-            "solved": true,
+            "solved_within_accuracy_requirement": false,
+            "solved": false,
             "overall_run_time_seconds": 61.545912159
         },
         {
