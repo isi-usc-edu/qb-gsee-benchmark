@@ -26,6 +26,7 @@ from importlib.metadata import version
 from typing import Any
 from urllib.parse import urlparse
 from uuid import uuid4
+import time
 
 import pandas as pd
 from pyLIQTR.utils.resource_analysis import estimate_resources
@@ -38,7 +39,7 @@ from qb_gsee_benchmark.utils import iso8601_timestamp
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 console_handler = logging.StreamHandler()
-file_handler = logging.FileHandler("compute_all_LREs_scripts.log.txt", delay=False)
+file_handler = logging.FileHandler("compute_all_LREs_script.log.txt", delay=False)
 formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 handlers = [console_handler, file_handler]
 for h in handlers:
@@ -107,14 +108,29 @@ def get_lqre(
                 continue
 
             # TODO: check to see if we have already processed this FCIDUMP file.
+            sftp_attempt = 1
+            max_sftp_attempts = 10
+            while sftp_attempt <= max_sftp_attempts:
+                try:
+                    logging.info(f"SFTP downloading file {fcidump_url}...attempt {sftp_attempt}/{max_sftp_attempts}")
+                    fci = retrieve_fcidump_from_sftp(
+                        url=fcidump_url,
+                        username=username,
+                        ppk_path=ppk_path,
+                        port=22,
+                    )
+                    break
+                except Exception as e:
+                    logging.error(f'Error: {e}', exc_info=True)
+                    logging.info(f"Sleeping for 5 seconds and trying again...")
+                    time.sleep(5)
+                    sftp_attempt += 1
+                    continue
+            
+            if sftp_attempt > max_sftp_attempts:
+                logging.error(f"Error: failed to SFTP fetch file.")
+                sys.exit(1)
 
-            logging.info(f"SFTP downloading file {fcidump_url}...")
-            fci = retrieve_fcidump_from_sftp(
-                url=fcidump_url,
-                username=username,
-                ppk_path=ppk_path,
-                port=22,
-            )
 
             num_orbitals = fci["H1"].shape[0]
             if num_orbitals > config["algorithm_parameters"]["max_orbitals"]:
@@ -126,7 +142,7 @@ def get_lqre(
             logging.info(f"===============================================")
             logging.info(f"Calculating Logical Resource Estimate...")
 
-            error_tolerance = task["requirements"]["accuracy"]
+            error_tolerance = task["requirements"]["absolute_accuracy_threshold"]
             failure_tolerance = 1 - task["requirements"]["probability_of_success"]
 
             overlap = (
