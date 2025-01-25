@@ -142,8 +142,15 @@ def get_lqre(
             logging.info(f"===============================================")
             logging.info(f"Calculating Logical Resource Estimate...")
 
-            error_tolerance = task["requirements"]["absolute_accuracy_threshold"]
-            failure_tolerance = 1 - task["requirements"]["probability_of_success"]
+            if config["algorithm_parameters"].get("absolute_accuracy_threshold"):
+                error_tolerance = config["algorithm_parameters"]["absolute_accuracy_threshold"]
+            else:
+                error_tolerance = task["requirements"]["absolute_accuracy_threshold"]
+
+            if config["algorithm_parameters"].get("probability_of_success"):
+                failure_tolerance = config["algorithm_parameters"]["probability_of_success"]
+            else:
+                failure_tolerance = 1 - task["requirements"]["probability_of_success"]
 
             overlap = (
                 config["algorithm_parameters"].get("overlap")
