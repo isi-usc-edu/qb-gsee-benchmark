@@ -39,6 +39,12 @@
           "type": "integer",
           "minimum": 1,
           "description": "Tasks with a number of spatial orbitals exceeding this amount will be skipped."
+        },
+        "probability_of_success": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "The minimum acceptable success probability of the algorithm when accounting for all sources of error, including hardware errors. If not specified, the success probability is taken from the task's requirements."
         }
       },
       "required": [
