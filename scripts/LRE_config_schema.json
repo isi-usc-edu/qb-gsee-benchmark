@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "$schema": {
+        "title": "Schema URL",
+        "description": "A hyperlink to the schema that describes this JSON object.",
+        "type": "string"
+    },
+    "solver_uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "A unique identifier for the solver."
+    },
+    "algorithm_parameters": {
+      "type": "object",
+      "properties": {
+        "overlap_csv": {
+          "type": "string",
+          "description": "Filename of the CSV containing overlap data The CSV should have a 'task_uuid' column with the task UUID and an 'overlap' column with the overlap of the initial state with the ground state. Note that this must be the absolute overlap and not the square overlap."
+        },
+        "overlap" : {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "The overlap of the initial state with the ground state. Note that this must be the absolute overlap and not the square overlap."
+        },
+        "sf_threshold": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Threshold for truncation of the first factorization in Hartrees."
+        },
+        "df_threshold": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Threshold for truncation of the second factorization in Hartrees."
+        },
+        "max_orbitals": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Tasks with a number of spatial orbitals exceeding this amount will be skipped."
+        }
+      },
+      "required": [
+        "sf_threshold",
+        "df_threshold",
+        "max_orbitals"
+      ],
+      "oneOf": [{ "required": ["overlap_csv"] }, { "required": ["overlap"] }],
+      "additionalProperties": false
+    },
+    "algorithm_description": {
+      "type": "string",
+      "description": "Description of the algorithm used."
+    },
+    "contact_info": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the contact person."
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Email address of the contact person."
+          },
+          "institution": {
+            "type": "string",
+            "description": "Institution the contact is associated with."
+          }
+        },
+        "required": ["name", "email", "institution"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "$schema",
+    "solver_uuid",
+    "algorithm_parameters",
+    "algorithm_description",
+    "contact_info"
+  ],
+  "additionalProperties": false
+}
