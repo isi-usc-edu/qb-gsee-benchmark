@@ -112,7 +112,9 @@ def get_lqre(
             max_sftp_attempts = 10
             while sftp_attempt <= max_sftp_attempts:
                 try:
-                    logging.info(f"SFTP downloading file {fcidump_url}...attempt {sftp_attempt}/{max_sftp_attempts}")
+                    logging.info(
+                        f"SFTP downloading file {fcidump_url}...attempt {sftp_attempt}/{max_sftp_attempts}"
+                    )
                     fci = retrieve_fcidump_from_sftp(
                         url=fcidump_url,
                         username=username,
@@ -121,16 +123,15 @@ def get_lqre(
                     )
                     break
                 except Exception as e:
-                    logging.error(f'Error: {e}', exc_info=True)
+                    logging.error(f"Error: {e}", exc_info=True)
                     logging.info(f"Sleeping for 5 seconds and trying again...")
                     time.sleep(5)
                     sftp_attempt += 1
                     continue
-            
+
             if sftp_attempt > max_sftp_attempts:
                 logging.error(f"Error: failed to SFTP fetch file.")
                 sys.exit(1)
-
 
             num_orbitals = fci["H1"].shape[0]
             if num_orbitals > config["algorithm_parameters"]["max_orbitals"]:
@@ -145,12 +146,17 @@ def get_lqre(
             if config["algorithm_parameters"].get("absolute_accuracy_threshold"):
                 error_tolerance = config["algorithm_parameters"]["absolute_accuracy_threshold"]
             else:
+                assert (
+                    task["requirements"]["absolute_accuracy_threshold_energy_units"]
+                    == "Hartree"
+                ), "Only Hartree units are supported for absolute_accuracy_threshold."
                 error_tolerance = task["requirements"]["absolute_accuracy_threshold"]
 
             if config["algorithm_parameters"].get("probability_of_success"):
                 failure_tolerance = config["algorithm_parameters"]["probability_of_success"]
             else:
                 failure_tolerance = 1 - task["requirements"]["probability_of_success"]
+
 
             overlap = (
                 config["algorithm_parameters"].get("overlap")
@@ -215,7 +221,6 @@ def get_lqre(
                 }
             )
 
-    
     solver_details = {
         "solver_uuid": config["solver_uuid"],
         "solver_short_name": "DF_QPE",
@@ -248,6 +253,7 @@ def get_lqre(
 
     return results
 
+
 def get_solved_problem_uuids(config: dict[str, Any], output_dir: str) -> set[str]:
     existing_output_files = os.listdir(args.output_dir)
     print(output_dir)
@@ -279,6 +285,7 @@ def get_solved_problem_uuids(config: dict[str, Any], output_dir: str) -> set[str
         f"found {len(solved_problem_uuids)} existing solutions for this solver."
     )
     return set(solved_problem_uuids)
+
 
 def main(args: argparse.Namespace) -> None:
 

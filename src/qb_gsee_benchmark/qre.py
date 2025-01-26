@@ -88,7 +88,8 @@ def get_df_qpe_circuit(
         fci: The FCI object, i.e. what you get from loading a pyscf fcidump.
         square_overlap: The square overlap between the target state and the initial
             state.
-        error_tolerance: The desired error in the energy estimation.
+        error_tolerance: The desired error in the energy estimation. Must use units that
+            are consistent with the FCI object, which is typically Hartrees.
         failure_tolerance: The allowable probability that the absolute energy error
             exceeds the error tolerance.
 
