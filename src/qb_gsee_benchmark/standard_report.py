@@ -222,7 +222,7 @@ class StandardReport:
             )
             series_counter += 1
         # plot in linear run time y-scale:
-        plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+        # plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
         plt.tight_layout()
         plt.savefig(os.path.join(
             self.standard_report_output_directory,
@@ -232,7 +232,7 @@ class StandardReport:
         # plot in log(run time) y-scale:
         plt.yscale("log")
         plt.ylabel("Overall run time in seconds (log)")
-        plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+        # plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
         plt.tight_layout()
         plt.savefig(os.path.join(
             self.standard_report_output_directory,
@@ -290,7 +290,7 @@ class StandardReport:
             )
             series_counter += 1
         # plot in linear run time y-scale:
-        plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+        # plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
         plt.tight_layout()
         plt.savefig(os.path.join(
             self.standard_report_output_directory,
@@ -300,7 +300,7 @@ class StandardReport:
         # plot in log(run time) y-scale:
         plt.yscale("log")
         plt.ylabel("Overall run time in seconds (log)")
-        plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+        # plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
         plt.tight_layout()
         plt.savefig(os.path.join(
             self.standard_report_output_directory,
@@ -370,7 +370,7 @@ class StandardReport:
 
 
         # plot in linear run time y-scale:
-        plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+        # plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
         plt.tight_layout()
         plt.savefig(os.path.join(
             self.standard_report_output_directory,
@@ -380,7 +380,7 @@ class StandardReport:
         # plot in log(run time) y-scale:
         plt.yscale("log")
         plt.ylabel("Overall run time in seconds (log)")
-        plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+        # plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
         plt.tight_layout()
         plt.savefig(os.path.join(
             self.standard_report_output_directory,
