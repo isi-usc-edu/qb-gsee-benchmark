@@ -1,16 +1,16 @@
 # GSEE Benchmark Standard Report
 
-Report based on data from 2025-01-27T15:13:49.214554+00:00
+Report based on data from 2025-01-27T16:43:41.107794+00:00
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
-Input data: `Hamiltonian_features.csv`, last modified Mon Jan 27 08:48:37 2025
+Input data: `Hamiltonian_features.csv`, last modified Mon Jan 27 11:42:37 2025
 
 Input data: `GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv`, last modified Thu Jan  9 12:11:19 2025
 
-Latest creation time for a `problem_instance.json` file: Fri Jan 24 15:12:37 2025
+Latest creation time for a `problem_instance.json` file: Mon Jan 27 11:42:37 2025
 
-Latest creation time for a `solution.json` file: Fri Jan 24 17:42:26 2025
+Latest creation time for a `solution.json` file: Mon Jan 27 11:42:54 2025
 
 # Problem Instance Summary Statistics
 
@@ -32,7 +32,7 @@ maximum number of orbitals: 135
 
 # Solver Summary Statistics
 
-number of unique participating solvers: 8
+number of unique participating solvers: 16
 
 ![Solver scatter plot](solver_num_orbs_vs_runtime_scatter_plot.png)
 
@@ -68,9 +68,9 @@ algorithm_details:SHCI with optimized orbitals followed by SHCI+PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: cf1a40bd-52ec-4d9c-b0a8-3490ece15cf3
+performance_metrics_uuid: 431232fa-2c17-4c53-bc08-c53ad727f2d6
 
-creation_timestamp: 2025-01-27T15:13:49.214554+00:00
+creation_timestamp: 2025-01-27T16:43:41.107794+00:00
 
 number_of_problem_instances: 84
 
@@ -114,6 +114,486 @@ Note: ML surface plot is based on Hamiltonians where a `reference_energy` was pr
 
 ![SHAP summary plot](shap_summary_plot_solver_2dde727e-a881-44fa-aabf-bba6248e4baf.png)
 
+## Solver SHCI_pt_1e-4, 4ed500f1-0650-41e3-af00-e4d0359394b4
+
+solver_uuid:4ed500f1-0650-41e3-af00-e4d0359394b4
+
+solver_short_name:SHCI_pt_1e-4
+
+compute_hardware_type:classical_computer
+
+classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}
+
+algorithm_details:SHCI with eps_var 1e-4 + PT
+
+software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
+
+performance_metrics_uuid: 137e4b1e-0d98-490e-9b76-7a5025f14ee3
+
+creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+
+number_of_problem_instances: 84
+
+number_of_problem_instances_attempted: 83
+
+number_of_problem_instances_solved: 22
+
+number_of_tasks: 276
+
+number_of_tasks_attempted: 275
+
+number_of_tasks_solved: 140
+
+number_of_tasks_solved_within_run_time_limit: 275
+
+number_of_tasks_solved_within_accuracy_threshold: 140
+
+max_run_time_of_attempted_tasks: 77244.15200000002
+
+sum_of_run_time_of_attempted_tasks: 1863349.633000001
+
+solvability_ratio: 0.547
+
+f1_score: [0.8, 0.9750889679715302]
+
+ml_metrics_calculator_version: 1
+
+![Solver success/failure plot](solver_4ed500f1-0650-41e3-af00-e4d0359394b4_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_4ed500f1-0650-41e3-af00-e4d0359394b4_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver utility capture](solver_4ed500f1-0650-41e3-af00-e4d0359394b4_utility_capture_plot.png)
+
+![Solver miniML plot](plot_solver_4ed500f1-0650-41e3-af00-e4d0359394b4.png)
+
+Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+
+![SHAP summary plot](shap_summary_plot_solver_4ed500f1-0650-41e3-af00-e4d0359394b4.png)
+
+## Solver SHCI_var_1e-4, 7e730dfb-57ee-480b-a8a1-4b73f5f07c54
+
+solver_uuid:7e730dfb-57ee-480b-a8a1-4b73f5f07c54
+
+solver_short_name:SHCI_var_1e-4
+
+compute_hardware_type:classical_computer
+
+classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}
+
+algorithm_details:SHCI with eps_var 1e-4
+
+software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
+
+performance_metrics_uuid: e62321ab-6054-4124-b1dc-0abac2ffd112
+
+creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+
+number_of_problem_instances: 84
+
+number_of_problem_instances_attempted: 83
+
+number_of_problem_instances_solved: 13
+
+number_of_tasks: 276
+
+number_of_tasks_attempted: 275
+
+number_of_tasks_solved: 95
+
+number_of_tasks_solved_within_run_time_limit: 275
+
+number_of_tasks_solved_within_accuracy_threshold: 95
+
+max_run_time_of_attempted_tasks: 77244.15200000002
+
+sum_of_run_time_of_attempted_tasks: 1863349.633000001
+
+solvability_ratio: 0.9262
+
+f1_score: [0.9841269841269841, 0.9894736842105263]
+
+ml_metrics_calculator_version: 1
+
+![Solver success/failure plot](solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver utility capture](solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54_utility_capture_plot.png)
+
+![Solver miniML plot](plot_solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54.png)
+
+Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+
+![SHAP summary plot](shap_summary_plot_solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54.png)
+
+## Solver SHCI_pt_2e-4, ad964781-302e-4728-a26d-39918e0a6cdb
+
+solver_uuid:ad964781-302e-4728-a26d-39918e0a6cdb
+
+solver_short_name:SHCI_pt_2e-4
+
+compute_hardware_type:classical_computer
+
+classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}
+
+algorithm_details:SHCI with eps_var 2e-4 + PT
+
+software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
+
+performance_metrics_uuid: 4e309f75-a220-4ae3-be6e-15b956525b42
+
+creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+
+number_of_problem_instances: 84
+
+number_of_problem_instances_attempted: 83
+
+number_of_problem_instances_solved: 22
+
+number_of_tasks: 276
+
+number_of_tasks_attempted: 275
+
+number_of_tasks_solved: 137
+
+number_of_tasks_solved_within_run_time_limit: 275
+
+number_of_tasks_solved_within_accuracy_threshold: 137
+
+max_run_time_of_attempted_tasks: 77244.15200000002
+
+sum_of_run_time_of_attempted_tasks: 1863349.633000001
+
+solvability_ratio: 0.5184
+
+f1_score: [0.6486486486486487, 0.953405017921147]
+
+ml_metrics_calculator_version: 1
+
+![Solver success/failure plot](solver_ad964781-302e-4728-a26d-39918e0a6cdb_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_ad964781-302e-4728-a26d-39918e0a6cdb_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver utility capture](solver_ad964781-302e-4728-a26d-39918e0a6cdb_utility_capture_plot.png)
+
+![Solver miniML plot](plot_solver_ad964781-302e-4728-a26d-39918e0a6cdb.png)
+
+Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+
+![SHAP summary plot](shap_summary_plot_solver_ad964781-302e-4728-a26d-39918e0a6cdb.png)
+
+## Solver SHCI_pt_2e-5, c71b90bd-3250-4c0c-b4e7-fc9878f141f6
+
+solver_uuid:c71b90bd-3250-4c0c-b4e7-fc9878f141f6
+
+solver_short_name:SHCI_pt_2e-5
+
+compute_hardware_type:classical_computer
+
+classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}
+
+algorithm_details:SHCI with eps_var 2e-5 + PT
+
+software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
+
+performance_metrics_uuid: 85a2e7bb-3417-44b4-8121-e0f9f5e63811
+
+creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+
+number_of_problem_instances: 84
+
+number_of_problem_instances_attempted: 83
+
+number_of_problem_instances_solved: 26
+
+number_of_tasks: 276
+
+number_of_tasks_attempted: 275
+
+number_of_tasks_solved: 145
+
+number_of_tasks_solved_within_run_time_limit: 275
+
+number_of_tasks_solved_within_accuracy_threshold: 145
+
+max_run_time_of_attempted_tasks: 77244.15200000002
+
+sum_of_run_time_of_attempted_tasks: 1863349.633000001
+
+solvability_ratio: 0.8922
+
+f1_score: [1.0, 1.0]
+
+ml_metrics_calculator_version: 1
+
+![Solver success/failure plot](solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver utility capture](solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6_utility_capture_plot.png)
+
+![Solver miniML plot](plot_solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6.png)
+
+Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+
+![SHAP summary plot](shap_summary_plot_solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6.png)
+
+## Solver SHCI_pt_5e-5, d626506c-7aae-4ad6-802a-b29af5f2bb93
+
+solver_uuid:d626506c-7aae-4ad6-802a-b29af5f2bb93
+
+solver_short_name:SHCI_pt_5e-5
+
+compute_hardware_type:classical_computer
+
+classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}
+
+algorithm_details:SHCI with eps_var 5e-5 + PT
+
+software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
+
+performance_metrics_uuid: 7f93c734-4257-4fde-a274-92d36efd5e8e
+
+creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+
+number_of_problem_instances: 84
+
+number_of_problem_instances_attempted: 83
+
+number_of_problem_instances_solved: 24
+
+number_of_tasks: 276
+
+number_of_tasks_attempted: 275
+
+number_of_tasks_solved: 143
+
+number_of_tasks_solved_within_run_time_limit: 275
+
+number_of_tasks_solved_within_accuracy_threshold: 143
+
+max_run_time_of_attempted_tasks: 77244.15200000002
+
+sum_of_run_time_of_attempted_tasks: 1863349.633000001
+
+solvability_ratio: 0.482
+
+f1_score: [0.75, 0.971830985915493]
+
+ml_metrics_calculator_version: 1
+
+![Solver success/failure plot](solver_d626506c-7aae-4ad6-802a-b29af5f2bb93_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_d626506c-7aae-4ad6-802a-b29af5f2bb93_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver utility capture](solver_d626506c-7aae-4ad6-802a-b29af5f2bb93_utility_capture_plot.png)
+
+![Solver miniML plot](plot_solver_d626506c-7aae-4ad6-802a-b29af5f2bb93.png)
+
+Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+
+![SHAP summary plot](shap_summary_plot_solver_d626506c-7aae-4ad6-802a-b29af5f2bb93.png)
+
+## Solver SHCI_var_2e-4, 0db183e3-a86d-491b-9125-599556e37c7a
+
+solver_uuid:0db183e3-a86d-491b-9125-599556e37c7a
+
+solver_short_name:SHCI_var_2e-4
+
+compute_hardware_type:classical_computer
+
+classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}
+
+algorithm_details:SHCI with eps_var 2e-4
+
+software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
+
+performance_metrics_uuid: 66ac8f5a-2694-4bbd-ab96-4cfdbe809b85
+
+creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+
+number_of_problem_instances: 84
+
+number_of_problem_instances_attempted: 83
+
+number_of_problem_instances_solved: 13
+
+number_of_tasks: 276
+
+number_of_tasks_attempted: 275
+
+number_of_tasks_solved: 84
+
+number_of_tasks_solved_within_run_time_limit: 275
+
+number_of_tasks_solved_within_accuracy_threshold: 84
+
+max_run_time_of_attempted_tasks: 77244.15200000002
+
+sum_of_run_time_of_attempted_tasks: 1863349.633000001
+
+solvability_ratio: 0.3462
+
+f1_score: [0.9864864864864865, 0.9880952380952381]
+
+ml_metrics_calculator_version: 1
+
+![Solver success/failure plot](solver_0db183e3-a86d-491b-9125-599556e37c7a_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_0db183e3-a86d-491b-9125-599556e37c7a_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver utility capture](solver_0db183e3-a86d-491b-9125-599556e37c7a_utility_capture_plot.png)
+
+![Solver miniML plot](plot_solver_0db183e3-a86d-491b-9125-599556e37c7a.png)
+
+Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+
+![SHAP summary plot](shap_summary_plot_solver_0db183e3-a86d-491b-9125-599556e37c7a.png)
+
+## Solver SHCI_var_2e-5, 86bfe50c-9342-4d54-bb68-abc8abd95688
+
+solver_uuid:86bfe50c-9342-4d54-bb68-abc8abd95688
+
+solver_short_name:SHCI_var_2e-5
+
+compute_hardware_type:classical_computer
+
+classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}
+
+algorithm_details:SHCI with eps_var 2e-5
+
+software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
+
+performance_metrics_uuid: ff59b049-307e-48e7-a451-b7b1710d23b2
+
+creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+
+number_of_problem_instances: 84
+
+number_of_problem_instances_attempted: 83
+
+number_of_problem_instances_solved: 18
+
+number_of_tasks: 276
+
+number_of_tasks_attempted: 275
+
+number_of_tasks_solved: 133
+
+number_of_tasks_solved_within_run_time_limit: 275
+
+number_of_tasks_solved_within_accuracy_threshold: 133
+
+max_run_time_of_attempted_tasks: 77244.15200000002
+
+sum_of_run_time_of_attempted_tasks: 1863349.633000001
+
+solvability_ratio: 0.592
+
+f1_score: [0.8846153846153846, 0.9772727272727273]
+
+ml_metrics_calculator_version: 1
+
+![Solver success/failure plot](solver_86bfe50c-9342-4d54-bb68-abc8abd95688_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_86bfe50c-9342-4d54-bb68-abc8abd95688_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver utility capture](solver_86bfe50c-9342-4d54-bb68-abc8abd95688_utility_capture_plot.png)
+
+![Solver miniML plot](plot_solver_86bfe50c-9342-4d54-bb68-abc8abd95688.png)
+
+Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+
+![SHAP summary plot](shap_summary_plot_solver_86bfe50c-9342-4d54-bb68-abc8abd95688.png)
+
+## Solver SHCI_var_5e-5, 01949b95-c427-4693-9134-01f47f688c09
+
+solver_uuid:01949b95-c427-4693-9134-01f47f688c09
+
+solver_short_name:SHCI_var_5e-5
+
+compute_hardware_type:classical_computer
+
+classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}
+
+algorithm_details:SHCI with eps_var 5e-5
+
+software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
+
+performance_metrics_uuid: e2a26353-84ed-4ce9-9510-ea5a65336239
+
+creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+
+number_of_problem_instances: 84
+
+number_of_problem_instances_attempted: 83
+
+number_of_problem_instances_solved: 14
+
+number_of_tasks: 276
+
+number_of_tasks_attempted: 275
+
+number_of_tasks_solved: 120
+
+number_of_tasks_solved_within_run_time_limit: 275
+
+number_of_tasks_solved_within_accuracy_threshold: 120
+
+max_run_time_of_attempted_tasks: 77244.15200000002
+
+sum_of_run_time_of_attempted_tasks: 1863349.633000001
+
+solvability_ratio: 0.3443
+
+f1_score: [0.85, 0.9491525423728814]
+
+ml_metrics_calculator_version: 1
+
+![Solver success/failure plot](solver_01949b95-c427-4693-9134-01f47f688c09_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_01949b95-c427-4693-9134-01f47f688c09_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver utility capture](solver_01949b95-c427-4693-9134-01f47f688c09_utility_capture_plot.png)
+
+![Solver miniML plot](plot_solver_01949b95-c427-4693-9134-01f47f688c09.png)
+
+Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+
+![SHAP summary plot](shap_summary_plot_solver_01949b95-c427-4693-9134-01f47f688c09.png)
+
 ## Solver DF_QPE, 5dad4064-cd11-412f-85cb-d722afe3b3de
 
 solver_uuid:5dad4064-cd11-412f-85cb-d722afe3b3de
@@ -132,9 +612,9 @@ logical_resource_estimate_solution_uuid:fc17e113-d2e0-49ab-955a-6fc08c6eb2f9
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: 90a16327-fbf4-4b46-8260-c1d9b7eb00ab
+performance_metrics_uuid: a8b4215c-28a2-4c78-ac6d-52a15ee10319
 
-creation_timestamp: 2025-01-27T15:13:49.214554+00:00
+creation_timestamp: 2025-01-27T16:43:41.107794+00:00
 
 number_of_problem_instances: 84
 
@@ -194,9 +674,9 @@ algorithm_details:CISD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 1b52f6c5-8dc7-46de-be21-a37589f2f250
+performance_metrics_uuid: 549cbae1-aff0-4b70-8808-18350977b8bf
 
-creation_timestamp: 2025-01-27T15:13:49.214554+00:00
+creation_timestamp: 2025-01-27T16:43:41.107794+00:00
 
 number_of_problem_instances: 84
 
@@ -254,9 +734,9 @@ algorithm_details:CCSD(T)
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 0c28995e-47ad-4391-b719-256428dcf6cb
+performance_metrics_uuid: 9f1096ab-5993-4b40-9f98-ede62038d63e
 
-creation_timestamp: 2025-01-27T15:13:49.214554+00:00
+creation_timestamp: 2025-01-27T16:43:41.107794+00:00
 
 number_of_problem_instances: 84
 
@@ -314,9 +794,9 @@ algorithm_details:Hartree Fock
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 30aa466b-ad2c-43b5-abbc-7d0a0f64f90c
+performance_metrics_uuid: db60d1bb-2e53-4f87-985b-92edc7a2626c
 
-creation_timestamp: 2025-01-27T15:13:49.214554+00:00
+creation_timestamp: 2025-01-27T16:43:41.107794+00:00
 
 number_of_problem_instances: 84
 
@@ -374,9 +854,9 @@ algorithm_details:MP2
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 10729930-3edd-42fd-9a0c-f351dcbaed1a
+performance_metrics_uuid: 4f63aecd-749b-42f3-9038-55bb58c83b82
 
-creation_timestamp: 2025-01-27T15:13:49.214554+00:00
+creation_timestamp: 2025-01-27T16:43:41.107794+00:00
 
 number_of_problem_instances: 84
 
@@ -434,9 +914,9 @@ algorithm_details:CCSD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 83c1a56e-1306-427a-bc6e-3f6e6fc9d127
+performance_metrics_uuid: a835435f-cb20-4071-86e8-99a3f456c997
 
-creation_timestamp: 2025-01-27T15:13:49.214554+00:00
+creation_timestamp: 2025-01-27T16:43:41.107794+00:00
 
 number_of_problem_instances: 84
 
@@ -494,9 +974,9 @@ algorithm_details:DMRG with the lowest variational energy obtained so far.
 
 software_details:Block2 v0.5.3rc16 with dmrghandler, commit version d603fdc6409fc194a416aa3a519362d5d91790d9 or later.
 
-performance_metrics_uuid: d0f46196-4d22-4bb7-b003-9b2ed6f4b350
+performance_metrics_uuid: cb5e8e7c-fe2c-4b83-84b1-b49f3c752896
 
-creation_timestamp: 2025-01-27T15:13:49.214554+00:00
+creation_timestamp: 2025-01-27T16:43:41.107794+00:00
 
 number_of_problem_instances: 84
 
