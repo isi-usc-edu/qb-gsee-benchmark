@@ -1,0 +1,48 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "7ae66df4-1bd1-4b46-9e96-6d86b296810e",
+    "problem_instance_uuid": "674b572a-3d6d-4418-8cc2-4755d90367ee",
+    "creation_timestamp": "2025-01-23T18:47:34.995016Z",
+    "contact_info": [
+        {
+            "name": "Matthew Otten",
+            "email": "mjotten@wisc.edu",
+            "institution": "University of Wisconsin -- Madison"
+        }
+    ],
+    "is_resource_estimate": false,
+    "solution_data": [
+        {
+            "task_uuid": "ff159145-fd97-486b-bf16-fc766b362ea3",
+            "energy": -437.4667910114675,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 4.845727076895007e-06,
+            "run_time": {
+                "overall_time": {
+                    "seconds": 5712.126
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 43273.188
+                }
+            },
+            "solution_details": {}
+        }
+    ],
+    "solver_details": {
+        "solver_uuid": "4ed500f1-0650-41e3-af00-e4d0359394b4",
+        "solver_short_name": "SHCI_pt_1e-4",
+        "compute_hardware_type": "classical_computer",
+        "classical_hardware_details": {
+            "computing_environment_name": "LCRC Improv (per node)",
+            "cpu_description": "2x AMD EPYC 7713 64C",
+            "ram_available_gb": "256GB",
+            "clock_speed": "2 GHz",
+            "total_num_cores": 128
+        },
+        "algorithm_details": "SHCI with eps_var 1e-4 + PT",
+        "software_details": "SHCI Arrow Code (https://github.com/QMC-Cornell/shci)."
+    },
+    "digital_signature": null
+}

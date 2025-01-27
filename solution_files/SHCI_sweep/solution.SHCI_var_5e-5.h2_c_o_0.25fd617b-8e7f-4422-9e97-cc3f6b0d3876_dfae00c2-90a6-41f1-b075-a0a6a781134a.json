@@ -1,0 +1,65 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "dfae00c2-90a6-41f1-b075-a0a6a781134a",
+    "problem_instance_uuid": "25fd617b-8e7f-4422-9e97-cc3f6b0d3876",
+    "creation_timestamp": "2025-01-23T18:47:29.691824Z",
+    "contact_info": [
+        {
+            "name": "Matthew Otten",
+            "email": "mjotten@wisc.edu",
+            "institution": "University of Wisconsin -- Madison"
+        }
+    ],
+    "is_resource_estimate": false,
+    "solution_data": [
+        {
+            "task_uuid": "d58cb72b-e144-4164-aec0-309aaef6394c",
+            "energy": -113.73203023670038,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 0,
+            "run_time": {
+                "overall_time": {
+                    "seconds": 3813.402
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 28218.237
+                }
+            },
+            "solution_details": {}
+        },
+        {
+            "task_uuid": "ed09e1bf-40f3-4bf0-b9c7-7bb1990c5cae",
+            "energy": -113.83785048711032,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 0,
+            "run_time": {
+                "overall_time": {
+                    "seconds": 5715.082
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 31288.854000000003
+                }
+            },
+            "solution_details": {}
+        }
+    ],
+    "solver_details": {
+        "solver_uuid": "01949b95-c427-4693-9134-01f47f688c09",
+        "solver_short_name": "SHCI_var_5e-5",
+        "compute_hardware_type": "classical_computer",
+        "classical_hardware_details": {
+            "computing_environment_name": "LCRC Improv (per node)",
+            "cpu_description": "2x AMD EPYC 7713 64C",
+            "ram_available_gb": "256GB",
+            "clock_speed": "2 GHz",
+            "total_num_cores": 128
+        },
+        "algorithm_details": "SHCI with eps_var 5e-5",
+        "software_details": "SHCI Arrow Code (https://github.com/QMC-Cornell/shci)."
+    },
+    "digital_signature": null
+}
