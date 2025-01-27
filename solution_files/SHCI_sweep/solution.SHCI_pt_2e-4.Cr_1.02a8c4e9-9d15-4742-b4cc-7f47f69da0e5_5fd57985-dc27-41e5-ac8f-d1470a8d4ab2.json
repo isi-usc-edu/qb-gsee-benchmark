@@ -1,0 +1,82 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "5fd57985-dc27-41e5-ac8f-d1470a8d4ab2",
+    "problem_instance_uuid": "02a8c4e9-9d15-4742-b4cc-7f47f69da0e5",
+    "creation_timestamp": "2025-01-23T18:47:29.939411Z",
+    "contact_info": [
+        {
+            "name": "Matthew Otten",
+            "email": "mjotten@wisc.edu",
+            "institution": "University of Wisconsin -- Madison"
+        }
+    ],
+    "is_resource_estimate": false,
+    "solution_data": [
+        {
+            "task_uuid": "b24b71b9-971a-4aca-9fc0-7198d16ca9ed",
+            "energy": -86.3724964646201,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 4.196651637226101e-06,
+            "run_time": {
+                "overall_time": {
+                    "seconds": 291.523
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 979.1120000000001
+                }
+            },
+            "solution_details": {}
+        },
+        {
+            "task_uuid": "e604a906-55fa-4b3f-bf17-c24a30312b84",
+            "energy": -86.51973688471422,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 6.549352533556284e-06,
+            "run_time": {
+                "overall_time": {
+                    "seconds": 14659.9
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 63045.895
+                }
+            },
+            "solution_details": {}
+        },
+        {
+            "task_uuid": "f4b120e9-acd0-4c7c-89e2-cc082f52f5cf",
+            "energy": -86.47339159056388,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 4.507532449708902e-06,
+            "run_time": {
+                "overall_time": {
+                    "seconds": 2995.071
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 13390.603
+                }
+            },
+            "solution_details": {}
+        }
+    ],
+    "solver_details": {
+        "solver_uuid": "ad964781-302e-4728-a26d-39918e0a6cdb",
+        "solver_short_name": "SHCI_pt_2e-4",
+        "compute_hardware_type": "classical_computer",
+        "classical_hardware_details": {
+            "computing_environment_name": "LCRC Improv (per node)",
+            "cpu_description": "2x AMD EPYC 7713 64C",
+            "ram_available_gb": "256GB",
+            "clock_speed": "2 GHz",
+            "total_num_cores": 128
+        },
+        "algorithm_details": "SHCI with eps_var 2e-4 + PT",
+        "software_details": "SHCI Arrow Code (https://github.com/QMC-Cornell/shci)."
+    },
+    "digital_signature": null
+}

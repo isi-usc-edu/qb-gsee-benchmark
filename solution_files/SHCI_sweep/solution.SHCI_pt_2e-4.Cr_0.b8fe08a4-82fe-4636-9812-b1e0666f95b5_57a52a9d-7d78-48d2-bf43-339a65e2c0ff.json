@@ -1,0 +1,65 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "57a52a9d-7d78-48d2-bf43-339a65e2c0ff",
+    "problem_instance_uuid": "b8fe08a4-82fe-4636-9812-b1e0666f95b5",
+    "creation_timestamp": "2025-01-23T18:47:35.501632Z",
+    "contact_info": [
+        {
+            "name": "Matthew Otten",
+            "email": "mjotten@wisc.edu",
+            "institution": "University of Wisconsin -- Madison"
+        }
+    ],
+    "is_resource_estimate": false,
+    "solution_data": [
+        {
+            "task_uuid": "5d85532e-9116-48a1-9810-7925c9ed9c57",
+            "energy": -86.61207218203158,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 5.659862600739362e-06,
+            "run_time": {
+                "overall_time": {
+                    "seconds": 8625.980000000001
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 66457.31300000001
+                }
+            },
+            "solution_details": {}
+        },
+        {
+            "task_uuid": "35b59fd4-e046-4d69-ba52-4b94a7777ac3",
+            "energy": -86.72131406411862,
+            "energy_units": "Hartree",
+            "energy_uncertainty": 5.567784742715774e-06,
+            "run_time": {
+                "overall_time": {
+                    "seconds": 8619.437
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 48085.087
+                }
+            },
+            "solution_details": {}
+        }
+    ],
+    "solver_details": {
+        "solver_uuid": "ad964781-302e-4728-a26d-39918e0a6cdb",
+        "solver_short_name": "SHCI_pt_2e-4",
+        "compute_hardware_type": "classical_computer",
+        "classical_hardware_details": {
+            "computing_environment_name": "LCRC Improv (per node)",
+            "cpu_description": "2x AMD EPYC 7713 64C",
+            "ram_available_gb": "256GB",
+            "clock_speed": "2 GHz",
+            "total_num_cores": 128
+        },
+        "algorithm_details": "SHCI with eps_var 2e-4 + PT",
+        "software_details": "SHCI Arrow Code (https://github.com/QMC-Cornell/shci)."
+    },
+    "digital_signature": null
+}
