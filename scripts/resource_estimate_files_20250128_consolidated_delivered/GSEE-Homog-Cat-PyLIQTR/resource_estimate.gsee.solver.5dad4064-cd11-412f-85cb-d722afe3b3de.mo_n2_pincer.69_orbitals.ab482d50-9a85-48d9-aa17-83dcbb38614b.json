@@ -1,0 +1,23 @@
+{
+    "$schema": "https://raw.githubusercontent.com/rroodll/QB-Estimate-Reporting/main/schema/resource_estimate_schema.json",
+    "id": "solver.5dad4064-cd11-412f-85cb-d722afe3b3de.task.ab482d50-9a85-48d9-aa17-83dcbb38614b",
+    "name": "mo_n2_pincer",
+    "category": "industrial",
+    "size": "69_orbitals",
+    "task": "ground_state_energy_estimation",
+    "implementation": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
+    "value": 2097859.259,
+    "value_ci": [
+        1370688.418,
+        1370688.418
+    ],
+    "circuit_repetitions_per_calculation": 35,
+    "calculation_repetitions": 1,
+    "total_circuit_repetitions": 35,
+    "runtime_requirement": 172800,
+    "logical-abstract": {
+        "num_qubits": 2846,
+        "t_count": 1098343396675520
+    },
+    "value_per_t_gate": 5.4572036535069286e-11
+}

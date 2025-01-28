@@ -1,16 +1,16 @@
 # GSEE Benchmark Standard Report
 
-Report based on data from 2025-01-27T16:43:41.107794+00:00
+Report based on data from 2025-01-28T17:07:42.747013+00:00
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
-Input data: `Hamiltonian_features.csv`, last modified Mon Jan 27 11:42:37 2025
+Input data: `Hamiltonian_features.csv`, last modified Tue Jan 28 11:45:36 2025
 
 Input data: `GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv`, last modified Thu Jan  9 12:11:19 2025
 
 Latest creation time for a `problem_instance.json` file: Mon Jan 27 11:42:37 2025
 
-Latest creation time for a `solution.json` file: Mon Jan 27 11:42:54 2025
+Latest creation time for a `solution.json` file: Tue Jan 28 11:45:40 2025
 
 # Problem Instance Summary Statistics
 
@@ -32,7 +32,7 @@ maximum number of orbitals: 135
 
 # Solver Summary Statistics
 
-number of unique participating solvers: 16
+number of unique participating solvers: 17
 
 ![Solver scatter plot](solver_num_orbs_vs_runtime_scatter_plot.png)
 
@@ -68,9 +68,9 @@ algorithm_details:SHCI with optimized orbitals followed by SHCI+PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 431232fa-2c17-4c53-bc08-c53ad727f2d6
+performance_metrics_uuid: 7adbdf90-dbaa-467f-b454-29336d2a218b
 
-creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+creation_timestamp: 2025-01-28T17:07:42.747013+00:00
 
 number_of_problem_instances: 84
 
@@ -128,9 +128,9 @@ algorithm_details:SHCI with eps_var 1e-4 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 137e4b1e-0d98-490e-9b76-7a5025f14ee3
+performance_metrics_uuid: befcfa2d-16e8-4dbb-995f-9fc52809fec2
 
-creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+creation_timestamp: 2025-01-28T17:07:42.747013+00:00
 
 number_of_problem_instances: 84
 
@@ -188,9 +188,9 @@ algorithm_details:SHCI with eps_var 1e-4
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: e62321ab-6054-4124-b1dc-0abac2ffd112
+performance_metrics_uuid: 67964365-6d54-49eb-a188-c11a778a50ec
 
-creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+creation_timestamp: 2025-01-28T17:07:42.747013+00:00
 
 number_of_problem_instances: 84
 
@@ -248,9 +248,9 @@ algorithm_details:SHCI with eps_var 2e-4 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 4e309f75-a220-4ae3-be6e-15b956525b42
+performance_metrics_uuid: 2657eba4-a179-4d81-a1af-9fc71ec31d0c
 
-creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+creation_timestamp: 2025-01-28T17:07:42.747013+00:00
 
 number_of_problem_instances: 84
 
@@ -308,9 +308,9 @@ algorithm_details:SHCI with eps_var 2e-5 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 85a2e7bb-3417-44b4-8121-e0f9f5e63811
+performance_metrics_uuid: cb2a5002-0658-4d82-be07-24f3bf003941
 
-creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+creation_timestamp: 2025-01-28T17:07:42.747013+00:00
 
 number_of_problem_instances: 84
 
@@ -368,9 +368,9 @@ algorithm_details:SHCI with eps_var 5e-5 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 7f93c734-4257-4fde-a274-92d36efd5e8e
+performance_metrics_uuid: 9a4c296f-2c56-4d43-8ca5-b0d7724f156f
 
-creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+creation_timestamp: 2025-01-28T17:07:42.747013+00:00
 
 number_of_problem_instances: 84
 
@@ -428,9 +428,9 @@ algorithm_details:SHCI with eps_var 2e-4
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 66ac8f5a-2694-4bbd-ab96-4cfdbe809b85
+performance_metrics_uuid: dd15fb24-e981-4464-81ac-fa60a71d2b2e
 
-creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+creation_timestamp: 2025-01-28T17:07:42.747013+00:00
 
 number_of_problem_instances: 84
 
@@ -488,9 +488,9 @@ algorithm_details:SHCI with eps_var 2e-5
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: ff59b049-307e-48e7-a451-b7b1710d23b2
+performance_metrics_uuid: a94c949a-a859-4d07-b25c-28094afea9db
 
-creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+creation_timestamp: 2025-01-28T17:07:42.747013+00:00
 
 number_of_problem_instances: 84
 
@@ -548,9 +548,9 @@ algorithm_details:SHCI with eps_var 5e-5
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: e2a26353-84ed-4ce9-9510-ea5a65336239
+performance_metrics_uuid: 48fc7a3a-bf8a-4fa4-b168-62de5ab1f49b
 
-creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+creation_timestamp: 2025-01-28T17:07:42.747013+00:00
 
 number_of_problem_instances: 84
 
@@ -612,9 +612,9 @@ logical_resource_estimate_solution_uuid:fc17e113-d2e0-49ab-955a-6fc08c6eb2f9
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: a8b4215c-28a2-4c78-ac6d-52a15ee10319
+performance_metrics_uuid: ff0f05ef-a965-43d1-8960-c8b0e3ca996d
 
-creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+creation_timestamp: 2025-01-28T17:07:42.747013+00:00
 
 number_of_problem_instances: 84
 
@@ -674,9 +674,9 @@ algorithm_details:CISD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 549cbae1-aff0-4b70-8808-18350977b8bf
+performance_metrics_uuid: f977a25c-b18a-47f4-b8e0-81979949b19f
 
-creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+creation_timestamp: 2025-01-28T17:07:42.747013+00:00
 
 number_of_problem_instances: 84
 
@@ -734,9 +734,9 @@ algorithm_details:CCSD(T)
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 9f1096ab-5993-4b40-9f98-ede62038d63e
+performance_metrics_uuid: 55960442-3a06-48c0-a7cb-4841d1f1f871
 
-creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+creation_timestamp: 2025-01-28T17:07:42.747013+00:00
 
 number_of_problem_instances: 84
 
@@ -794,9 +794,9 @@ algorithm_details:Hartree Fock
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: db60d1bb-2e53-4f87-985b-92edc7a2626c
+performance_metrics_uuid: d3040414-62ea-470b-8694-23b30cbbe4d8
 
-creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+creation_timestamp: 2025-01-28T17:07:42.747013+00:00
 
 number_of_problem_instances: 84
 
@@ -854,9 +854,9 @@ algorithm_details:MP2
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 4f63aecd-749b-42f3-9038-55bb58c83b82
+performance_metrics_uuid: e445e548-c86f-4d2f-8772-ae2f1a951f36
 
-creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+creation_timestamp: 2025-01-28T17:07:42.747013+00:00
 
 number_of_problem_instances: 84
 
@@ -914,9 +914,9 @@ algorithm_details:CCSD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: a835435f-cb20-4071-86e8-99a3f456c997
+performance_metrics_uuid: b1019247-1377-4706-9522-5cb5407e5407
 
-creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+creation_timestamp: 2025-01-28T17:07:42.747013+00:00
 
 number_of_problem_instances: 84
 
@@ -974,9 +974,9 @@ algorithm_details:DMRG with the lowest variational energy obtained so far.
 
 software_details:Block2 v0.5.3rc16 with dmrghandler, commit version d603fdc6409fc194a416aa3a519362d5d91790d9 or later.
 
-performance_metrics_uuid: cb5e8e7c-fe2c-4b83-84b1-b49f3c752896
+performance_metrics_uuid: 9722e21e-c0ad-4112-b0fb-ce12fe834fbe
 
-creation_timestamp: 2025-01-27T16:43:41.107794+00:00
+creation_timestamp: 2025-01-28T17:07:42.747013+00:00
 
 number_of_problem_instances: 84
 
@@ -1019,6 +1019,72 @@ Note: plot only contains `attempted` tasks.
 Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
 
 ![SHAP summary plot](shap_summary_plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png)
+
+## Solver DF_QPE, 6f385080-934b-4cbb-b813-39c2cb61349e
+
+solver_uuid:6f385080-934b-4cbb-b813-39c2cb61349e
+
+solver_short_name:DF_QPE
+
+compute_hardware_type:quantum_computer
+
+algorithm_details:{'algorithm_description': 'Double factorized QPE resource estimates based on methodology of arXiv:2406.06335, as implemented in BenchQ/OpenFermion. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs. Note that the target accuracy is 1 mHa, which is smaller than required by the problem instances.', 'algorithm_parameters': {'overlap_csv': 'overlaps.csv', 'sf_threshold': 1e-12, 'df_threshold': 0.001, 'max_orbitals': 70}}
+
+software_details:[{'software_name': 'benchq', 'software_version': '0.7.1.dev10+g80b8279.d20250116'}, {'software_name': 'openfermion', 'software_version': '1.6.1'}, {'software_name': 'Python', 'software_version': '3.11.5 (main, Sep 11 2023, 08:31:25) [Clang 14.0.6 ]'}, {'software_name': 'benchq', 'software_version': '0.7.1.dev10+g80b8279.d20250116'}]
+
+quantum_hardware_details:{'quantum_hardware_description': 'Superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494, but with Litinski factories (Quantum 3, 205 (2019)).', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 0.001, 'cycle_time_microseconds': 1}}
+
+logical_resource_estimate_solution_uuid:0b647970-5b30-47f0-bbca-1a83704b9e06
+
+logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
+
+performance_metrics_uuid: cae2d073-ae33-4ef3-8fde-e0b737f1f641
+
+creation_timestamp: 2025-01-28T17:07:42.747013+00:00
+
+number_of_problem_instances: 84
+
+number_of_problem_instances_attempted: 3
+
+number_of_problem_instances_solved: 0
+
+number_of_tasks: 276
+
+number_of_tasks_attempted: 23
+
+number_of_tasks_solved: 0
+
+number_of_tasks_solved_within_run_time_limit: 0
+
+number_of_tasks_solved_within_accuracy_threshold: 23
+
+max_run_time_of_attempted_tasks: 441362513808.82544
+
+sum_of_run_time_of_attempted_tasks: 819346667619.2955
+
+solvability_ratio: None
+
+f1_score: None
+
+ml_metrics_calculator_version: 1
+
+comment: All labels were either all `True` or all `False` and we cannot create an ML model with only one class.
+
+![Solver success/failure plot](solver_6f385080-934b-4cbb-b813-39c2cb61349e_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_6f385080-934b-4cbb-b813-39c2cb61349e_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver utility capture](solver_6f385080-934b-4cbb-b813-39c2cb61349e_utility_capture_plot.png)
+
+![Solver miniML plot](plot_solver_6f385080-934b-4cbb-b813-39c2cb61349e.png)
+
+Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+
+![SHAP summary plot](shap_summary_plot_solver_6f385080-934b-4cbb-b813-39c2cb61349e.png)
 
 # Non-negative matrix factorization (ML latent space)
 
