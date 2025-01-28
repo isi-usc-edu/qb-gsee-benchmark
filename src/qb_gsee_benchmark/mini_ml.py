@@ -114,7 +114,8 @@ class MiniML:
         self.hypopt_cv = HYPOPT_CV
         self.param_grid = PARAM_GRID
         self.kfold_num = KFOLD_NUM
-        self.threshold_for_confidence_of_solvability = THRESHOLD_FOR_CONFIDENCE_OF_SOLVABILITY                
+        self.threshold_for_confidence_of_solvability = THRESHOLD_FOR_CONFIDENCE_OF_SOLVABILITY      
+        self.complete_hamiltonian_features = hamiltonian_features_by_task_uuid          
         self.solver_labels = pd.merge(
             hamiltonian_features_by_task_uuid,
             solver_labels_by_task_uuid,
@@ -181,6 +182,9 @@ class MiniML:
         self.X = self.solver_labels.loc[:,FEATURES]
         self.Y = self.solver_labels.loc[:,"label"] # column header is `label`
         self.Y = self.Y.astype(bool) # enforce boolean type.
+
+        self.complete_hamiltonian_features_X = self.complete_hamiltonian_features.loc[:,FEATURES]
+        
         
     def __shuffle_labels(self) -> None:
         """TODO: docstring.
@@ -189,21 +193,29 @@ class MiniML:
         self.shuffled_keys = rng.permutation(range(0,len(self.X)))
         self.X = self.X.iloc[self.shuffled_keys]
         self.Y = self.Y.iloc[self.shuffled_keys]
+        self.complete_hamiltonian_features_X.iloc[self.shuffled_keys]
 
 
 
     def __remove_zero_variance_columns(self) -> list:
         """TODO: docstring.
-
         Returns:
             list: _description_
         """
-        varX = np.var(self.X, axis=0)
-        self.zero_variance_columns = self.X.columns[np.where(varX == 0)]
+        varX = np.var(self.complete_hamiltonian_features axis=0)
+        self.zero_variance_columns = self.complete_hamiltonian_features.columns[np.where(varX == 0)]
+        
+        # drop from complete set of Ham features:
+        self.complete_hamiltonian_features = self.complete_hamiltonian_features.drop(self.zero_variance_columns, axis=1)
+        
+        # drop from X, where X is the (rows) subset of data we are constructing ML model on:
         self.X = self.X.drop(self.zero_variance_columns, axis=1)
+        
         if len(self.zero_variance_columns) > 0:
             logging.warning(f"zero variance columns: {self.zero_variance_columns} were removed.")
         return self.zero_variance_columns
+    
+
 
 
     def __scale_data(self) -> None:
