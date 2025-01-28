@@ -202,7 +202,7 @@ class MiniML:
         Returns:
             list: _description_
         """
-        varX = np.var(self.complete_hamiltonian_features axis=0)
+        varX = np.var(self.complete_hamiltonian_features, axis=0)
         self.zero_variance_columns = self.complete_hamiltonian_features.columns[np.where(varX == 0)]
         
         # drop from complete set of Ham features:
@@ -221,15 +221,13 @@ class MiniML:
     def __scale_data(self) -> None:
         """TODO:docstring
         """
-        self.standard_scaler = StandardScaler()
+        self.ham_features_standard_scaler = StandardScaler()
 
         # the scaler is based on ALLLLLL of the hamiltonian features.
-        self.standard_scaler.fit(self.complete_hamiltonian_features)
+        self.ham_features_standard_scaler.fit(self.complete_hamiltonian_features)
 
-        self.complete_hamiltonian_features_scaled = self.standard_scaler.transform(self.complete_hamiltonian_features)
-        
         # the scaler (based on all Ham features) is then applied to X.
-        self.X_scaled = self.standard_scaler.transform(self.X)
+        self.X_scaled = self.ham_features_standard_scaler.transform(self.X)
         self.X_train = self.X_scaled
         self.Y_train = self.Y 
 
@@ -293,12 +291,12 @@ class MiniML:
             "Error: only NNMF is supported at this time."
 
         # Apply NNMF
-        # Normalize data (NNMF requires non-negative input.  The data is non-negative, but we will scale in the range of
-        # min-max of the features which is great for reconstruction of valid points)
-        self.scaler_minmax = MinMaxScaler()
+        # Normalize data
+        # NNMF requires non-negative input.  The data is non-negative, but we will scale in the range of
+        # min-max of the features which is great for reconstruction of valid points.
+        self.ham_features_scaler_minmax = MinMaxScaler()
 
-        # note that self.complete_hamiltonian_features_scaled has already been scaled by StandardScaler()
-        self.complete_hamiltonian_features_scaled_minmax = self.scaler_minmax.fit_transform(self.complete_hamiltonian_features_scaled)
+        self.complete_hamiltonian_features_scaled_minmax = self.ham_features_scaler_minmax.fit_transform(self.complete_hamiltonian_features)
         
         self.nnmf = NMF(
             n_components=2,
@@ -330,7 +328,7 @@ class MiniML:
         self.reconstruction_error = f"TODO: Check this implementation.  It needs to go through several inverse transforms. And be computed for self.complete_hamiltonian_features."
         # self.reconstruction_error = np.sqrt(
         #     np.sum(
-        #         (self.scaler_minmax.inverse_transform(self.nnmf.inverse_transform(self.nnmf_projected_data)) - self.X)**2
+        #         (self.ham_features_scaler_minmax.inverse_transform(self.nnmf.inverse_transform(self.nnmf_projected_data)) - self.X)**2
         #     )
         # )
 
@@ -346,39 +344,50 @@ class MiniML:
 
 
         # latent_sc, latent_model, proj_data, recons_error = getProjectedData(X, latent_model_name, draw_plot) #just PCA or NNMF in this code.  The UI has more dimensionality reduction algms
-        # self.scaler_minmax, self.nnmf, self.nnmf_projected_data, self.reconstruction_error
+        # self.ham_features_scaler_minmax, self.nnmf, self.nnmf_projected_data, self.reconstruction_error
         #  recons_error = getProjectedData(X, latent_model_name, draw_plot) #just PCA or NNMF in this code.  The UI has more dimensionality reduction algms
 
 
         
-        # min and max in 2 dimensions of projected data
-        xminmax = np.arange(
-            np.min(self.nnmf_projected_data[:, 0]),
-            np.max(self.nnmf_projected_data[:, 0]),
-            0.1
-        )
-        yminmax = np.arange(
-            np.min(self.nnmf_projected_data[:, 1]),
-            np.max(self.nnmf_projected_data[:, 1]),
-            0.1
-        )
-
-        x = np.linspace(xminmax[0], xminmax[-1]+0.09,100)
-        y = np.linspace(yminmax[0], yminmax[-1]+0.09,100)
+        # min and max in 2 dimensions of projected data.
+        # note that self.nnmf_projected_data may be outside of the range [0,1].
+        # Hence, we take the min/max
+        x_min = np.min(self.nnmf_projected_data[:,0])
+        x_max = np.max(self.nnmf_projected_data[:,0])
+        
+        y_min = np.min(self.nnmf_projected_data[:,1])
+        y_max = np.max(self.nnmf_projected_data[:,1])
+        
+        x = np.linspace(x_min, x_max + 0.09, 100) # 100 points evenly spaced
+        y = np.linspace(y_min, y_max + 0.09, 100)
         XX, YY = np.meshgrid(x, y)   
+        # NOTE: XX.shape is 100*100
 
-        newX = np.c_[XX.ravel(), YY.ravel()] #grid of projected data
+        nnmf_grid_points = np.c_[XX.ravel(), YY.ravel()] # grid of projected data
+        # NOTE: nnmf_grid_points.shape is 10000*2
 
         # undo latent transformation
-        orig_dim_data = self.nnmf.inverse_transform(newX) #back to the original dimensionality undoing the rotation, centering, scaling and projection
-        # undo the scaling.
-        orig_dim_data = self.scaler_minmax.inverse_transform(orig_dim_data) #undo scaling
-
-        # SVM model was trained on centered and scaled data on the stats of X, so need to re-do that
-        orig_dim_data_for_pred = self.standard_scaler.transform(orig_dim_data) #(orig_dim_data-scaler.mean_)/np.sqrt(scaler.var_)
-        orig_probs = self.model.predict_proba(np.asarray(orig_dim_data_for_pred))
+        # back to the original dimensionality undoing the rotation, centering, scaling and projection
+        back_projected_data = self.nnmf.inverse_transform(nnmf_grid_points) 
+        # NOTE: back_projected_data.shape is 10000*num_features (10000 from the 10000 grid points)
+        # now back_projected_data is MinMaxScaled in the range: [0,1]
+        # TODO: max is 1.3... which is larger than 1.  That may have to do with the extra 0.09 in the linspace.
         
-        Z0 = orig_probs[:,1].reshape(XX.shape)
+        # undo the minmax scaling:
+        back_projected_data = self.ham_features_scaler_minmax.inverse_transform(back_projected_data)
+        # now back_projected_data is in the original units/scale of Hamiltonian features.
+        # TODO: this has some negative values.
+
+        # SVM model was trained on centered and scaled data... so transform again:
+        back_projected_data = self.ham_features_standard_scaler.transform(back_projected_data)
+        
+        # now run the back_projected_data through the model to get a probability of success between [0,1].
+        back_projected_data_probs = self.model.predict_proba(np.asarray(back_projected_data)) 
+        # NOTE: back_projected_data_probability_of_success.shape is 10000*2
+        # 10000 data points with [ Prob[Fail] , Prob[Solve] ] for each.
+        
+        Z0 = back_projected_data_probs[:,1].reshape(XX.shape) # index 1 is Prob[Solve]
+        # NOTE: Z0.shape is now 100*100... same shape as XX, YY.
         self.Z0 = Z0
         self.XX = XX
         self.YY = YY
@@ -399,20 +408,39 @@ class MiniML:
         plt.scatter(
             x=XX.flatten(),
             y=YY.flatten(),
-            c=Z0.flatten(),
+            c=Z0.flatten(), # this is the base/background color.
             cmap=cmap,
             norm=norm
         )
-        #projected training data
+        #projected X,Y data
+        nnmf_transformed_X = self.nnmf.transform(self.ham_features_scaler_minmax.transform(self.X))
+
+
+        # plot black dots for allllll Hamiltonians
+        nnmf_transformed_all_hams = self.nnmf.transform(self.ham_features_scaler_minmax.transform(self.complete_hamiltonian_features))
         plt.scatter(
-            x=self.nnmf_projected_data[:,0],
-            y=self.nnmf_projected_data[:,1],
-            c=self.Y,
-            s=50,
+            x=nnmf_transformed_all_hams[:,0], # NNMF component 1
+            y=nnmf_transformed_all_hams[:,1], # NNMF component 2
+            color="white",
+            edgecolors="black",
+            marker="*",
+            s=40 # default marker size is 50.  slightly smaller so circles below cover starts (where attempted)
+        )
+
+        # plot blue/red dots for hamiltonians with reference energies solved/failed.
+        # circles will cover stars where they appear.
+        plt.scatter(
+            x=nnmf_transformed_X[:,0], # NNMF component 1
+            y=nnmf_transformed_X[:,1], # NNMF component 2
+            c=self.Y, # Y is True=Solved=Blue, False=Failed=Red
+            s=50, # default marker size is 50.
             edgecolors='black',
             cmap=cmap,
             norm=norm
         )
+
+
+
         cbar = plt.colorbar()
         cbar.set_label("Probability that solver can estimate GSE (label==True)",rotation=270,x=1.25)
         plt.title(f"Solver {self.solver_short_name} ({self.solver_uuid[0:4]}...)\nEmbedding: {self.latent_model_name}")
@@ -422,8 +450,8 @@ class MiniML:
         plt.close()
             
 
-        result = np.where(orig_probs[:,1] > self.threshold_for_confidence_of_solvability)
-        self.ml_solvability_ratio = len(result[0])/len(orig_probs[:,1])
+        num_solved = np.sum(back_projected_data_probs[:,1] > self.threshold_for_confidence_of_solvability)
+        self.ml_solvability_ratio = num_solved/len(back_projected_data_probs)
         return self.ml_solvability_ratio
 
 

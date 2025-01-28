@@ -1,0 +1,536 @@
+<h1>GSEE Benchmark Standard Report</h1>
+<p>Report based on data from 2025-01-28T21:50:06.833854+00:00</p>
+<p><a href="https://github.com/isi-usc-edu/qb-gsee-benchmark">https://github.com/isi-usc-edu/qb-gsee-benchmark</a></p>
+<p>Input data: <code>Hamiltonian_features.csv</code>, last modified Tue Jan 28 11:45:36 2025</p>
+<p>Input data: <code>GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv</code>, last modified Thu Jan  9 12:11:19 2025</p>
+<p>Latest creation time for a <code>problem_instance.json</code> file: Mon Jan 27 11:42:37 2025</p>
+<p>Latest creation time for a <code>solution.json</code> file: Tue Jan 28 11:45:36 2025</p>
+<h1>Problem Instance Summary Statistics</h1>
+<p>number of <code>problem_instances</code>: 84.</p>
+<p><code>problem_instance.json</code> with the most tasks: 30 (hubbard_square/614c4444-a31a-4348-b24d-01040208651c)</p>
+<p>number of Hamiltonians (i.e., tasks) we have features calculated for: 276</p>
+<p>minimum number of orbitals: 6</p>
+<p>median number of orbitals: 42.0</p>
+<p>maximum number of orbitals: 135</p>
+<p><img alt="Number of orbitals histogram" src="num_orbitals_histogram.png" /></p>
+<p><img alt="Utility estimate per Hamiltonian" src="num_orbitals_vs_utility.png" /></p>
+<h1>Solver Summary Statistics</h1>
+<p>number of unique participating solvers: 16</p>
+<p>Solver: SHCI_opt/2dde727e-a881-44fa-aabf-bba6248e4baf, ML Solvability Ratio: 1.0, F1 Score: [0.83333333 0.99342105]</p>
+<p>Solver: SHCI_pt_1e-4/4ed500f1-0650-41e3-af00-e4d0359394b4, ML Solvability Ratio: 0.9859, F1 Score: [0.71428571 0.97222222]</p>
+<p>Solver: SHCI_var_1e-4/7e730dfb-57ee-480b-a8a1-4b73f5f07c54, ML Solvability Ratio: 0.8794, F1 Score: [0.99212598 0.99470899]</p>
+<p>Solver: SHCI_pt_2e-4/ad964781-302e-4728-a26d-39918e0a6cdb, ML Solvability Ratio: 1.0, F1 Score: [0.64516129 0.96140351]</p>
+<p>Solver: SHCI_pt_2e-5/c71b90bd-3250-4c0c-b4e7-fc9878f141f6, ML Solvability Ratio: 1.0, F1 Score: [0.375      0.96666667]</p>
+<p>Solver: SHCI_pt_5e-5/d626506c-7aae-4ad6-802a-b29af5f2bb93, ML Solvability Ratio: 1.0, F1 Score: [0.9375     0.99295775]</p>
+<p>Solver: SHCI_var_2e-4/0db183e3-a86d-491b-9125-599556e37c7a, ML Solvability Ratio: 0.0833, F1 Score: [0.95364238 0.95757576]</p>
+<p>Solver: SHCI_var_2e-5/86bfe50c-9342-4d54-bb68-abc8abd95688, ML Solvability Ratio: 0.3942, F1 Score: [0.8627451  0.97358491]</p>
+<p>Solver: SHCI_var_5e-5/01949b95-c427-4693-9134-01f47f688c09, ML Solvability Ratio: 0.3549, F1 Score: [0.83950617 0.94468085]</p>
+<p>Solver: DF_QPE/5dad4064-cd11-412f-85cb-d722afe3b3de, Model could not be calculated.</p>
+<p>Solver: CISD/418f060e-496b-4024-8d2d-9b1f8791e76d, ML Solvability Ratio: 0.003, F1 Score: [0.97826087 0.85      ]</p>
+<p>Solver: CCSD(T)/c09217e6-d0f7-4b0f-81c4-79210b7ac878, ML Solvability Ratio: 0.8102, F1 Score: [0.86956522 0.86451613]</p>
+<p>Solver: HF/5f5e617a-19c2-4d82-bebc-b2d6b3dcb012, ML Solvability Ratio: 0.0, F1 Score: [0.98675497 0.71428571]</p>
+<p>Solver: MP2/b420358b-5def-41e6-8c5d-b9d93b6aecd2, ML Solvability Ratio: 0.0, F1 Score: [0.98675497 0.71428571]</p>
+<p>Solver: CCSD/0a29e54f-bef9-4d19-bafa-d94b1c4b37aa, ML Solvability Ratio: 0.0197, F1 Score: [0.98867925 0.94117647]</p>
+<p>Solver: DMRG_Niagara_cluster_lowest_energy/16537433-9f4c-4eae-a65d-787dc3b35b59, ML Solvability Ratio: 0.6106, F1 Score: [0.96629213 0.98678414]</p>
+<p><img alt="Solver scatter plot" src="solver_num_orbs_vs_runtime_scatter_plot.png" /></p>
+<p>NOTE: only <code>attempted</code> tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.</p>
+<p><img alt="Solver scatter plot" src="solver_num_orbs_vs_log_runtime_scatter_plot.png" /></p>
+<p>NOTE: only <code>attempted</code> tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.</p>
+<p><img alt="Quantum vs Classical scatter plot" src="quantum_vs_classical_solver_num_orbs_vs_log_runtime_scatter_plot.png" /></p>
+<p>NOTE: only <code>attempted</code> tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.</p>
+<p><img alt="Solver logFCI scatter plot" src="log_fci_dim_vs_runtime_all_solvers_plot.png" /></p>
+<p>NOTE: only <code>attempted</code> tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.</p>
+<p><img alt="Solver logFCI scatter plot, log(runtime)" src="log_fci_dim_vs_log_runtime_all_solvers_plot.png" /></p>
+<p>NOTE: only <code>attempted</code> tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.</p>
+<h2>Solver SHCI_opt, 2dde727e-a881-44fa-aabf-bba6248e4baf</h2>
+<p>solver_uuid:2dde727e-a881-44fa-aabf-bba6248e4baf</p>
+<p>solver_short_name:SHCI_opt</p>
+<p>compute_hardware_type:classical_computer</p>
+<p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
+<p>algorithm_details:SHCI with optimized orbitals followed by SHCI+PT</p>
+<p>software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).</p>
+<p>performance_metrics_uuid: 0503c522-5530-488b-b5d3-3a26b4544d21</p>
+<p>creation_timestamp: 2025-01-28T21:50:06.833854+00:00</p>
+<p>number_of_problem_instances: 84</p>
+<p>number_of_problem_instances_attempted: 80</p>
+<p>number_of_problem_instances_solved: 33</p>
+<p>number_of_tasks: 276</p>
+<p>number_of_tasks_attempted: 265</p>
+<p>number_of_tasks_solved: 153</p>
+<p>number_of_tasks_solved_within_run_time_limit: 265</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 153</p>
+<p>max_run_time_of_attempted_tasks: 57334.2</p>
+<p>sum_of_run_time_of_attempted_tasks: 1553340.6179999998</p>
+<p>solvability_ratio: 1.0</p>
+<p>f1_score: [0.8333333333333334, 0.993421052631579]</p>
+<p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver success/failure plot" src="solver_2dde727e-a881-44fa-aabf-bba6248e4baf_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver success/failure logFCI plot" src="log_fci_dim_vs_runtime_solver_2dde727e-a881-44fa-aabf-bba6248e4baf_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver utility capture" src="solver_2dde727e-a881-44fa-aabf-bba6248e4baf_utility_capture_plot.png" /></p>
+<p><img alt="Solver miniML plot" src="plot_solver_2dde727e-a881-44fa-aabf-bba6248e4baf.png" /></p>
+<p>Note: <code>attempted</code> may be <code>True</code> or <code>False</code>.  Tasks with a <code>reference_energy</code> can be labeled as solved or failed-to-solve. A task with a <code>reference_energy</code> that was NOT <code>attempted</code> is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a <code>reference_energy</code>.</p>
+<p><img alt="SHAP summary plot" src="shap_summary_plot_solver_2dde727e-a881-44fa-aabf-bba6248e4baf.png" /></p>
+<h2>Solver SHCI_pt_1e-4, 4ed500f1-0650-41e3-af00-e4d0359394b4</h2>
+<p>solver_uuid:4ed500f1-0650-41e3-af00-e4d0359394b4</p>
+<p>solver_short_name:SHCI_pt_1e-4</p>
+<p>compute_hardware_type:classical_computer</p>
+<p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
+<p>algorithm_details:SHCI with eps_var 1e-4 + PT</p>
+<p>software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).</p>
+<p>performance_metrics_uuid: 705809bf-aa08-4c34-942a-1164cf5861d8</p>
+<p>creation_timestamp: 2025-01-28T21:50:06.833854+00:00</p>
+<p>number_of_problem_instances: 84</p>
+<p>number_of_problem_instances_attempted: 83</p>
+<p>number_of_problem_instances_solved: 22</p>
+<p>number_of_tasks: 276</p>
+<p>number_of_tasks_attempted: 275</p>
+<p>number_of_tasks_solved: 140</p>
+<p>number_of_tasks_solved_within_run_time_limit: 275</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 140</p>
+<p>max_run_time_of_attempted_tasks: 77244.15200000002</p>
+<p>sum_of_run_time_of_attempted_tasks: 1863349.633000001</p>
+<p>solvability_ratio: 0.9859</p>
+<p>f1_score: [0.7142857142857143, 0.9722222222222222]</p>
+<p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver success/failure plot" src="solver_4ed500f1-0650-41e3-af00-e4d0359394b4_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver success/failure logFCI plot" src="log_fci_dim_vs_runtime_solver_4ed500f1-0650-41e3-af00-e4d0359394b4_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver utility capture" src="solver_4ed500f1-0650-41e3-af00-e4d0359394b4_utility_capture_plot.png" /></p>
+<p><img alt="Solver miniML plot" src="plot_solver_4ed500f1-0650-41e3-af00-e4d0359394b4.png" /></p>
+<p>Note: <code>attempted</code> may be <code>True</code> or <code>False</code>.  Tasks with a <code>reference_energy</code> can be labeled as solved or failed-to-solve. A task with a <code>reference_energy</code> that was NOT <code>attempted</code> is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a <code>reference_energy</code>.</p>
+<p><img alt="SHAP summary plot" src="shap_summary_plot_solver_4ed500f1-0650-41e3-af00-e4d0359394b4.png" /></p>
+<h2>Solver SHCI_var_1e-4, 7e730dfb-57ee-480b-a8a1-4b73f5f07c54</h2>
+<p>solver_uuid:7e730dfb-57ee-480b-a8a1-4b73f5f07c54</p>
+<p>solver_short_name:SHCI_var_1e-4</p>
+<p>compute_hardware_type:classical_computer</p>
+<p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
+<p>algorithm_details:SHCI with eps_var 1e-4</p>
+<p>software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).</p>
+<p>performance_metrics_uuid: f6651392-bd78-4907-bffc-502553f28bfd</p>
+<p>creation_timestamp: 2025-01-28T21:50:06.833854+00:00</p>
+<p>number_of_problem_instances: 84</p>
+<p>number_of_problem_instances_attempted: 83</p>
+<p>number_of_problem_instances_solved: 13</p>
+<p>number_of_tasks: 276</p>
+<p>number_of_tasks_attempted: 275</p>
+<p>number_of_tasks_solved: 95</p>
+<p>number_of_tasks_solved_within_run_time_limit: 275</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 95</p>
+<p>max_run_time_of_attempted_tasks: 77244.15200000002</p>
+<p>sum_of_run_time_of_attempted_tasks: 1863349.633000001</p>
+<p>solvability_ratio: 0.8794</p>
+<p>f1_score: [0.9921259842519685, 0.9947089947089947]</p>
+<p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver success/failure plot" src="solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver success/failure logFCI plot" src="log_fci_dim_vs_runtime_solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver utility capture" src="solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54_utility_capture_plot.png" /></p>
+<p><img alt="Solver miniML plot" src="plot_solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54.png" /></p>
+<p>Note: <code>attempted</code> may be <code>True</code> or <code>False</code>.  Tasks with a <code>reference_energy</code> can be labeled as solved or failed-to-solve. A task with a <code>reference_energy</code> that was NOT <code>attempted</code> is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a <code>reference_energy</code>.</p>
+<p><img alt="SHAP summary plot" src="shap_summary_plot_solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54.png" /></p>
+<h2>Solver SHCI_pt_2e-4, ad964781-302e-4728-a26d-39918e0a6cdb</h2>
+<p>solver_uuid:ad964781-302e-4728-a26d-39918e0a6cdb</p>
+<p>solver_short_name:SHCI_pt_2e-4</p>
+<p>compute_hardware_type:classical_computer</p>
+<p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
+<p>algorithm_details:SHCI with eps_var 2e-4 + PT</p>
+<p>software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).</p>
+<p>performance_metrics_uuid: f29b193d-5cdc-4078-9bbb-5e12187184e1</p>
+<p>creation_timestamp: 2025-01-28T21:50:06.833854+00:00</p>
+<p>number_of_problem_instances: 84</p>
+<p>number_of_problem_instances_attempted: 83</p>
+<p>number_of_problem_instances_solved: 22</p>
+<p>number_of_tasks: 276</p>
+<p>number_of_tasks_attempted: 275</p>
+<p>number_of_tasks_solved: 137</p>
+<p>number_of_tasks_solved_within_run_time_limit: 275</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 137</p>
+<p>max_run_time_of_attempted_tasks: 77244.15200000002</p>
+<p>sum_of_run_time_of_attempted_tasks: 1863349.633000001</p>
+<p>solvability_ratio: 1.0</p>
+<p>f1_score: [0.6451612903225806, 0.9614035087719298]</p>
+<p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver success/failure plot" src="solver_ad964781-302e-4728-a26d-39918e0a6cdb_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver success/failure logFCI plot" src="log_fci_dim_vs_runtime_solver_ad964781-302e-4728-a26d-39918e0a6cdb_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver utility capture" src="solver_ad964781-302e-4728-a26d-39918e0a6cdb_utility_capture_plot.png" /></p>
+<p><img alt="Solver miniML plot" src="plot_solver_ad964781-302e-4728-a26d-39918e0a6cdb.png" /></p>
+<p>Note: <code>attempted</code> may be <code>True</code> or <code>False</code>.  Tasks with a <code>reference_energy</code> can be labeled as solved or failed-to-solve. A task with a <code>reference_energy</code> that was NOT <code>attempted</code> is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a <code>reference_energy</code>.</p>
+<p><img alt="SHAP summary plot" src="shap_summary_plot_solver_ad964781-302e-4728-a26d-39918e0a6cdb.png" /></p>
+<h2>Solver SHCI_pt_2e-5, c71b90bd-3250-4c0c-b4e7-fc9878f141f6</h2>
+<p>solver_uuid:c71b90bd-3250-4c0c-b4e7-fc9878f141f6</p>
+<p>solver_short_name:SHCI_pt_2e-5</p>
+<p>compute_hardware_type:classical_computer</p>
+<p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
+<p>algorithm_details:SHCI with eps_var 2e-5 + PT</p>
+<p>software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).</p>
+<p>performance_metrics_uuid: 7be4c9eb-e050-4a17-9162-2472de6b20ea</p>
+<p>creation_timestamp: 2025-01-28T21:50:06.833854+00:00</p>
+<p>number_of_problem_instances: 84</p>
+<p>number_of_problem_instances_attempted: 83</p>
+<p>number_of_problem_instances_solved: 26</p>
+<p>number_of_tasks: 276</p>
+<p>number_of_tasks_attempted: 275</p>
+<p>number_of_tasks_solved: 145</p>
+<p>number_of_tasks_solved_within_run_time_limit: 275</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 145</p>
+<p>max_run_time_of_attempted_tasks: 77244.15200000002</p>
+<p>sum_of_run_time_of_attempted_tasks: 1863349.633000001</p>
+<p>solvability_ratio: 1.0</p>
+<p>f1_score: [0.375, 0.9666666666666667]</p>
+<p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver success/failure plot" src="solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver success/failure logFCI plot" src="log_fci_dim_vs_runtime_solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver utility capture" src="solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6_utility_capture_plot.png" /></p>
+<p><img alt="Solver miniML plot" src="plot_solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6.png" /></p>
+<p>Note: <code>attempted</code> may be <code>True</code> or <code>False</code>.  Tasks with a <code>reference_energy</code> can be labeled as solved or failed-to-solve. A task with a <code>reference_energy</code> that was NOT <code>attempted</code> is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a <code>reference_energy</code>.</p>
+<p><img alt="SHAP summary plot" src="shap_summary_plot_solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6.png" /></p>
+<h2>Solver SHCI_pt_5e-5, d626506c-7aae-4ad6-802a-b29af5f2bb93</h2>
+<p>solver_uuid:d626506c-7aae-4ad6-802a-b29af5f2bb93</p>
+<p>solver_short_name:SHCI_pt_5e-5</p>
+<p>compute_hardware_type:classical_computer</p>
+<p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
+<p>algorithm_details:SHCI with eps_var 5e-5 + PT</p>
+<p>software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).</p>
+<p>performance_metrics_uuid: a5691c59-71c7-4631-82ac-202f187e92b0</p>
+<p>creation_timestamp: 2025-01-28T21:50:06.833854+00:00</p>
+<p>number_of_problem_instances: 84</p>
+<p>number_of_problem_instances_attempted: 83</p>
+<p>number_of_problem_instances_solved: 24</p>
+<p>number_of_tasks: 276</p>
+<p>number_of_tasks_attempted: 275</p>
+<p>number_of_tasks_solved: 143</p>
+<p>number_of_tasks_solved_within_run_time_limit: 275</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 143</p>
+<p>max_run_time_of_attempted_tasks: 77244.15200000002</p>
+<p>sum_of_run_time_of_attempted_tasks: 1863349.633000001</p>
+<p>solvability_ratio: 1.0</p>
+<p>f1_score: [0.9375, 0.9929577464788732]</p>
+<p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver success/failure plot" src="solver_d626506c-7aae-4ad6-802a-b29af5f2bb93_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver success/failure logFCI plot" src="log_fci_dim_vs_runtime_solver_d626506c-7aae-4ad6-802a-b29af5f2bb93_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver utility capture" src="solver_d626506c-7aae-4ad6-802a-b29af5f2bb93_utility_capture_plot.png" /></p>
+<p><img alt="Solver miniML plot" src="plot_solver_d626506c-7aae-4ad6-802a-b29af5f2bb93.png" /></p>
+<p>Note: <code>attempted</code> may be <code>True</code> or <code>False</code>.  Tasks with a <code>reference_energy</code> can be labeled as solved or failed-to-solve. A task with a <code>reference_energy</code> that was NOT <code>attempted</code> is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a <code>reference_energy</code>.</p>
+<p><img alt="SHAP summary plot" src="shap_summary_plot_solver_d626506c-7aae-4ad6-802a-b29af5f2bb93.png" /></p>
+<h2>Solver SHCI_var_2e-4, 0db183e3-a86d-491b-9125-599556e37c7a</h2>
+<p>solver_uuid:0db183e3-a86d-491b-9125-599556e37c7a</p>
+<p>solver_short_name:SHCI_var_2e-4</p>
+<p>compute_hardware_type:classical_computer</p>
+<p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
+<p>algorithm_details:SHCI with eps_var 2e-4</p>
+<p>software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).</p>
+<p>performance_metrics_uuid: 9315c8ca-3e06-4795-b27a-cb483f5977ea</p>
+<p>creation_timestamp: 2025-01-28T21:50:06.833854+00:00</p>
+<p>number_of_problem_instances: 84</p>
+<p>number_of_problem_instances_attempted: 83</p>
+<p>number_of_problem_instances_solved: 13</p>
+<p>number_of_tasks: 276</p>
+<p>number_of_tasks_attempted: 275</p>
+<p>number_of_tasks_solved: 84</p>
+<p>number_of_tasks_solved_within_run_time_limit: 275</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 84</p>
+<p>max_run_time_of_attempted_tasks: 77244.15200000002</p>
+<p>sum_of_run_time_of_attempted_tasks: 1863349.633000001</p>
+<p>solvability_ratio: 0.0833</p>
+<p>f1_score: [0.9536423841059603, 0.9575757575757575]</p>
+<p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver success/failure plot" src="solver_0db183e3-a86d-491b-9125-599556e37c7a_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver success/failure logFCI plot" src="log_fci_dim_vs_runtime_solver_0db183e3-a86d-491b-9125-599556e37c7a_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver utility capture" src="solver_0db183e3-a86d-491b-9125-599556e37c7a_utility_capture_plot.png" /></p>
+<p><img alt="Solver miniML plot" src="plot_solver_0db183e3-a86d-491b-9125-599556e37c7a.png" /></p>
+<p>Note: <code>attempted</code> may be <code>True</code> or <code>False</code>.  Tasks with a <code>reference_energy</code> can be labeled as solved or failed-to-solve. A task with a <code>reference_energy</code> that was NOT <code>attempted</code> is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a <code>reference_energy</code>.</p>
+<p><img alt="SHAP summary plot" src="shap_summary_plot_solver_0db183e3-a86d-491b-9125-599556e37c7a.png" /></p>
+<h2>Solver SHCI_var_2e-5, 86bfe50c-9342-4d54-bb68-abc8abd95688</h2>
+<p>solver_uuid:86bfe50c-9342-4d54-bb68-abc8abd95688</p>
+<p>solver_short_name:SHCI_var_2e-5</p>
+<p>compute_hardware_type:classical_computer</p>
+<p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
+<p>algorithm_details:SHCI with eps_var 2e-5</p>
+<p>software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).</p>
+<p>performance_metrics_uuid: 7643a400-ea13-40b9-ad74-561667281b66</p>
+<p>creation_timestamp: 2025-01-28T21:50:06.833854+00:00</p>
+<p>number_of_problem_instances: 84</p>
+<p>number_of_problem_instances_attempted: 83</p>
+<p>number_of_problem_instances_solved: 18</p>
+<p>number_of_tasks: 276</p>
+<p>number_of_tasks_attempted: 275</p>
+<p>number_of_tasks_solved: 133</p>
+<p>number_of_tasks_solved_within_run_time_limit: 275</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 133</p>
+<p>max_run_time_of_attempted_tasks: 77244.15200000002</p>
+<p>sum_of_run_time_of_attempted_tasks: 1863349.633000001</p>
+<p>solvability_ratio: 0.3942</p>
+<p>f1_score: [0.8627450980392157, 0.9735849056603774]</p>
+<p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver success/failure plot" src="solver_86bfe50c-9342-4d54-bb68-abc8abd95688_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver success/failure logFCI plot" src="log_fci_dim_vs_runtime_solver_86bfe50c-9342-4d54-bb68-abc8abd95688_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver utility capture" src="solver_86bfe50c-9342-4d54-bb68-abc8abd95688_utility_capture_plot.png" /></p>
+<p><img alt="Solver miniML plot" src="plot_solver_86bfe50c-9342-4d54-bb68-abc8abd95688.png" /></p>
+<p>Note: <code>attempted</code> may be <code>True</code> or <code>False</code>.  Tasks with a <code>reference_energy</code> can be labeled as solved or failed-to-solve. A task with a <code>reference_energy</code> that was NOT <code>attempted</code> is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a <code>reference_energy</code>.</p>
+<p><img alt="SHAP summary plot" src="shap_summary_plot_solver_86bfe50c-9342-4d54-bb68-abc8abd95688.png" /></p>
+<h2>Solver SHCI_var_5e-5, 01949b95-c427-4693-9134-01f47f688c09</h2>
+<p>solver_uuid:01949b95-c427-4693-9134-01f47f688c09</p>
+<p>solver_short_name:SHCI_var_5e-5</p>
+<p>compute_hardware_type:classical_computer</p>
+<p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
+<p>algorithm_details:SHCI with eps_var 5e-5</p>
+<p>software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).</p>
+<p>performance_metrics_uuid: 2eccdee5-615c-4be6-977b-5e6e18702f4e</p>
+<p>creation_timestamp: 2025-01-28T21:50:06.833854+00:00</p>
+<p>number_of_problem_instances: 84</p>
+<p>number_of_problem_instances_attempted: 83</p>
+<p>number_of_problem_instances_solved: 14</p>
+<p>number_of_tasks: 276</p>
+<p>number_of_tasks_attempted: 275</p>
+<p>number_of_tasks_solved: 120</p>
+<p>number_of_tasks_solved_within_run_time_limit: 275</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 120</p>
+<p>max_run_time_of_attempted_tasks: 77244.15200000002</p>
+<p>sum_of_run_time_of_attempted_tasks: 1863349.633000001</p>
+<p>solvability_ratio: 0.3549</p>
+<p>f1_score: [0.8395061728395061, 0.9446808510638298]</p>
+<p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver success/failure plot" src="solver_01949b95-c427-4693-9134-01f47f688c09_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver success/failure logFCI plot" src="log_fci_dim_vs_runtime_solver_01949b95-c427-4693-9134-01f47f688c09_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver utility capture" src="solver_01949b95-c427-4693-9134-01f47f688c09_utility_capture_plot.png" /></p>
+<p><img alt="Solver miniML plot" src="plot_solver_01949b95-c427-4693-9134-01f47f688c09.png" /></p>
+<p>Note: <code>attempted</code> may be <code>True</code> or <code>False</code>.  Tasks with a <code>reference_energy</code> can be labeled as solved or failed-to-solve. A task with a <code>reference_energy</code> that was NOT <code>attempted</code> is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a <code>reference_energy</code>.</p>
+<p><img alt="SHAP summary plot" src="shap_summary_plot_solver_01949b95-c427-4693-9134-01f47f688c09.png" /></p>
+<h2>Solver DF_QPE, 5dad4064-cd11-412f-85cb-d722afe3b3de</h2>
+<p>solver_uuid:5dad4064-cd11-412f-85cb-d722afe3b3de</p>
+<p>solver_short_name:DF_QPE</p>
+<p>compute_hardware_type:quantum_computer</p>
+<p>algorithm_details:{'algorithm_description': 'Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.', 'algorithm_parameters': {'overlap_csv': 'overlaps.csv', 'sf_threshold': 1e-12, 'df_threshold': 0.001, 'max_orbitals': 70}}</p>
+<p>software_details:[{'software_name': 'pyLIQTR', 'software_version': '1.3.4'}, {'software_name': 'qb-gsee-benchmark', 'software_version': '0.1.0a2.dev193+g879c00d'}, {'software_name': 'Python', 'software_version': '3.10.12 (main, Nov  6 2024, 20:22:13) [GCC 11.4.0]'}, {'software_name': 'qualtran', 'software_version': '0.4.0'}]</p>
+<p>quantum_hardware_details:{'quantum_hardware_description': 'Optimistic superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494.', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 0.0001, 'cycle_time_microseconds': 1}}</p>
+<p>logical_resource_estimate_solution_uuid:fc17e113-d2e0-49ab-955a-6fc08c6eb2f9</p>
+<p>logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1</p>
+<p>performance_metrics_uuid: dfb6f14e-3619-4557-9e95-d22067ccef5c</p>
+<p>creation_timestamp: 2025-01-28T21:50:06.833854+00:00</p>
+<p>number_of_problem_instances: 84</p>
+<p>number_of_problem_instances_attempted: 22</p>
+<p>number_of_problem_instances_solved: 0</p>
+<p>number_of_tasks: 276</p>
+<p>number_of_tasks_attempted: 154</p>
+<p>number_of_tasks_solved: 0</p>
+<p>number_of_tasks_solved_within_run_time_limit: 0</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 154</p>
+<p>max_run_time_of_attempted_tasks: 1394068547267.4111</p>
+<p>sum_of_run_time_of_attempted_tasks: 15652541022388.93</p>
+<p>solvability_ratio: None</p>
+<p>f1_score: None</p>
+<p>ml_metrics_calculator_version: 1</p>
+<p>comment: All labels were either all <code>True</code> or all <code>False</code> and we cannot create an ML model with only one class.</p>
+<p><img alt="Solver success/failure plot" src="solver_5dad4064-cd11-412f-85cb-d722afe3b3de_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver success/failure logFCI plot" src="log_fci_dim_vs_runtime_solver_5dad4064-cd11-412f-85cb-d722afe3b3de_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver utility capture" src="solver_5dad4064-cd11-412f-85cb-d722afe3b3de_utility_capture_plot.png" /></p>
+<p><img alt="Solver miniML plot" src="plot_solver_5dad4064-cd11-412f-85cb-d722afe3b3de.png" /></p>
+<p>Note: <code>attempted</code> may be <code>True</code> or <code>False</code>.  Tasks with a <code>reference_energy</code> can be labeled as solved or failed-to-solve. A task with a <code>reference_energy</code> that was NOT <code>attempted</code> is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a <code>reference_energy</code>.</p>
+<p><img alt="SHAP summary plot" src="shap_summary_plot_solver_5dad4064-cd11-412f-85cb-d722afe3b3de.png" /></p>
+<h2>Solver CISD, 418f060e-496b-4024-8d2d-9b1f8791e76d</h2>
+<p>solver_uuid:418f060e-496b-4024-8d2d-9b1f8791e76d</p>
+<p>solver_short_name:CISD</p>
+<p>compute_hardware_type:classical_computer</p>
+<p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
+<p>algorithm_details:CISD</p>
+<p>software_details:pyscf (https://github.com/pyscf/pyscf).</p>
+<p>performance_metrics_uuid: 7fb33e1e-6fb9-4789-9936-ce8b272fbae7</p>
+<p>creation_timestamp: 2025-01-28T21:50:06.833854+00:00</p>
+<p>number_of_problem_instances: 84</p>
+<p>number_of_problem_instances_attempted: 84</p>
+<p>number_of_problem_instances_solved: 9</p>
+<p>number_of_tasks: 276</p>
+<p>number_of_tasks_attempted: 276</p>
+<p>number_of_tasks_solved: 17</p>
+<p>number_of_tasks_solved_within_run_time_limit: 276</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 17</p>
+<p>max_run_time_of_attempted_tasks: 62.58296537399292</p>
+<p>sum_of_run_time_of_attempted_tasks: 2929.870177745819</p>
+<p>solvability_ratio: 0.003</p>
+<p>f1_score: [0.9782608695652174, 0.85]</p>
+<p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver success/failure plot" src="solver_418f060e-496b-4024-8d2d-9b1f8791e76d_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver success/failure logFCI plot" src="log_fci_dim_vs_runtime_solver_418f060e-496b-4024-8d2d-9b1f8791e76d_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver utility capture" src="solver_418f060e-496b-4024-8d2d-9b1f8791e76d_utility_capture_plot.png" /></p>
+<p><img alt="Solver miniML plot" src="plot_solver_418f060e-496b-4024-8d2d-9b1f8791e76d.png" /></p>
+<p>Note: <code>attempted</code> may be <code>True</code> or <code>False</code>.  Tasks with a <code>reference_energy</code> can be labeled as solved or failed-to-solve. A task with a <code>reference_energy</code> that was NOT <code>attempted</code> is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a <code>reference_energy</code>.</p>
+<p><img alt="SHAP summary plot" src="shap_summary_plot_solver_418f060e-496b-4024-8d2d-9b1f8791e76d.png" /></p>
+<h2>Solver CCSD(T), c09217e6-d0f7-4b0f-81c4-79210b7ac878</h2>
+<p>solver_uuid:c09217e6-d0f7-4b0f-81c4-79210b7ac878</p>
+<p>solver_short_name:CCSD(T)</p>
+<p>compute_hardware_type:classical_computer</p>
+<p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
+<p>algorithm_details:CCSD(T)</p>
+<p>software_details:pyscf (https://github.com/pyscf/pyscf).</p>
+<p>performance_metrics_uuid: 12e14154-4351-464f-a933-e85f088cfe47</p>
+<p>creation_timestamp: 2025-01-28T21:50:06.833854+00:00</p>
+<p>number_of_problem_instances: 84</p>
+<p>number_of_problem_instances_attempted: 79</p>
+<p>number_of_problem_instances_solved: 19</p>
+<p>number_of_tasks: 276</p>
+<p>number_of_tasks_attempted: 264</p>
+<p>number_of_tasks_solved: 71</p>
+<p>number_of_tasks_solved_within_run_time_limit: 264</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 71</p>
+<p>max_run_time_of_attempted_tasks: 493.4080808162689</p>
+<p>sum_of_run_time_of_attempted_tasks: 13199.317583084106</p>
+<p>solvability_ratio: 0.8102</p>
+<p>f1_score: [0.8695652173913043, 0.864516129032258]</p>
+<p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver success/failure plot" src="solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver success/failure logFCI plot" src="log_fci_dim_vs_runtime_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver utility capture" src="solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_utility_capture_plot.png" /></p>
+<p><img alt="Solver miniML plot" src="plot_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878.png" /></p>
+<p>Note: <code>attempted</code> may be <code>True</code> or <code>False</code>.  Tasks with a <code>reference_energy</code> can be labeled as solved or failed-to-solve. A task with a <code>reference_energy</code> that was NOT <code>attempted</code> is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a <code>reference_energy</code>.</p>
+<p><img alt="SHAP summary plot" src="shap_summary_plot_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878.png" /></p>
+<h2>Solver HF, 5f5e617a-19c2-4d82-bebc-b2d6b3dcb012</h2>
+<p>solver_uuid:5f5e617a-19c2-4d82-bebc-b2d6b3dcb012</p>
+<p>solver_short_name:HF</p>
+<p>compute_hardware_type:classical_computer</p>
+<p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
+<p>algorithm_details:Hartree Fock</p>
+<p>software_details:pyscf (https://github.com/pyscf/pyscf).</p>
+<p>performance_metrics_uuid: 3abe001b-2d7c-4661-9a22-e418c72af383</p>
+<p>creation_timestamp: 2025-01-28T21:50:06.833854+00:00</p>
+<p>number_of_problem_instances: 84</p>
+<p>number_of_problem_instances_attempted: 84</p>
+<p>number_of_problem_instances_solved: 5</p>
+<p>number_of_tasks: 276</p>
+<p>number_of_tasks_attempted: 276</p>
+<p>number_of_tasks_solved: 5</p>
+<p>number_of_tasks_solved_within_run_time_limit: 276</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 5</p>
+<p>max_run_time_of_attempted_tasks: 20.338801622390747</p>
+<p>sum_of_run_time_of_attempted_tasks: 906.4860525131226</p>
+<p>solvability_ratio: 0.0</p>
+<p>f1_score: [0.9867549668874173, 0.7142857142857143]</p>
+<p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver success/failure plot" src="solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver success/failure logFCI plot" src="log_fci_dim_vs_runtime_solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver utility capture" src="solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012_utility_capture_plot.png" /></p>
+<p><img alt="Solver miniML plot" src="plot_solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012.png" /></p>
+<p>Note: <code>attempted</code> may be <code>True</code> or <code>False</code>.  Tasks with a <code>reference_energy</code> can be labeled as solved or failed-to-solve. A task with a <code>reference_energy</code> that was NOT <code>attempted</code> is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a <code>reference_energy</code>.</p>
+<p><img alt="SHAP summary plot" src="shap_summary_plot_solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012.png" /></p>
+<h2>Solver MP2, b420358b-5def-41e6-8c5d-b9d93b6aecd2</h2>
+<p>solver_uuid:b420358b-5def-41e6-8c5d-b9d93b6aecd2</p>
+<p>solver_short_name:MP2</p>
+<p>compute_hardware_type:classical_computer</p>
+<p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
+<p>algorithm_details:MP2</p>
+<p>software_details:pyscf (https://github.com/pyscf/pyscf).</p>
+<p>performance_metrics_uuid: d1774265-c873-46bf-b518-670a2a9a9b77</p>
+<p>creation_timestamp: 2025-01-28T21:50:06.833854+00:00</p>
+<p>number_of_problem_instances: 84</p>
+<p>number_of_problem_instances_attempted: 81</p>
+<p>number_of_problem_instances_solved: 5</p>
+<p>number_of_tasks: 276</p>
+<p>number_of_tasks_attempted: 268</p>
+<p>number_of_tasks_solved: 5</p>
+<p>number_of_tasks_solved_within_run_time_limit: 268</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 5</p>
+<p>max_run_time_of_attempted_tasks: 2.230440139770508</p>
+<p>sum_of_run_time_of_attempted_tasks: 94.7442626953125</p>
+<p>solvability_ratio: 0.0</p>
+<p>f1_score: [0.9867549668874173, 0.7142857142857143]</p>
+<p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver success/failure plot" src="solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver success/failure logFCI plot" src="log_fci_dim_vs_runtime_solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver utility capture" src="solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2_utility_capture_plot.png" /></p>
+<p><img alt="Solver miniML plot" src="plot_solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2.png" /></p>
+<p>Note: <code>attempted</code> may be <code>True</code> or <code>False</code>.  Tasks with a <code>reference_energy</code> can be labeled as solved or failed-to-solve. A task with a <code>reference_energy</code> that was NOT <code>attempted</code> is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a <code>reference_energy</code>.</p>
+<p><img alt="SHAP summary plot" src="shap_summary_plot_solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2.png" /></p>
+<h2>Solver CCSD, 0a29e54f-bef9-4d19-bafa-d94b1c4b37aa</h2>
+<p>solver_uuid:0a29e54f-bef9-4d19-bafa-d94b1c4b37aa</p>
+<p>solver_short_name:CCSD</p>
+<p>compute_hardware_type:classical_computer</p>
+<p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
+<p>algorithm_details:CCSD</p>
+<p>software_details:pyscf (https://github.com/pyscf/pyscf).</p>
+<p>performance_metrics_uuid: 3b4570f3-f224-4fec-857b-4725857548ac</p>
+<p>creation_timestamp: 2025-01-28T21:50:06.833854+00:00</p>
+<p>number_of_problem_instances: 84</p>
+<p>number_of_problem_instances_attempted: 79</p>
+<p>number_of_problem_instances_solved: 10</p>
+<p>number_of_tasks: 276</p>
+<p>number_of_tasks_attempted: 264</p>
+<p>number_of_tasks_solved: 24</p>
+<p>number_of_tasks_solved_within_run_time_limit: 264</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 24</p>
+<p>max_run_time_of_attempted_tasks: 485.1982181072235</p>
+<p>sum_of_run_time_of_attempted_tasks: 12252.72845697403</p>
+<p>solvability_ratio: 0.0197</p>
+<p>f1_score: [0.9886792452830189, 0.9411764705882353]</p>
+<p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver success/failure plot" src="solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver success/failure logFCI plot" src="log_fci_dim_vs_runtime_solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver utility capture" src="solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa_utility_capture_plot.png" /></p>
+<p><img alt="Solver miniML plot" src="plot_solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa.png" /></p>
+<p>Note: <code>attempted</code> may be <code>True</code> or <code>False</code>.  Tasks with a <code>reference_energy</code> can be labeled as solved or failed-to-solve. A task with a <code>reference_energy</code> that was NOT <code>attempted</code> is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a <code>reference_energy</code>.</p>
+<p><img alt="SHAP summary plot" src="shap_summary_plot_solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa.png" /></p>
+<h2>Solver DMRG_Niagara_cluster_lowest_energy, 16537433-9f4c-4eae-a65d-787dc3b35b59</h2>
+<p>solver_uuid:16537433-9f4c-4eae-a65d-787dc3b35b59</p>
+<p>solver_short_name:DMRG_Niagara_cluster_lowest_energy</p>
+<p>compute_hardware_type:classical_computer</p>
+<p>classical_hardware_details:{'computing_environment_name': 'Niagara Cluster, Compute Canada', 'cpu_description': '40 Intel "Skylake" cores at 2.4 GHz or 40 Intel "CascadeLake" cores at 2.5 GHz', 'ram_available_gb': '202 GB (188 GiB)', 'clock_speed': '2.4 GHz or 2.5 GHz', 'total_num_cores': 40}</p>
+<p>algorithm_details:DMRG with the lowest variational energy obtained so far.</p>
+<p>software_details:Block2 v0.5.3rc16 with dmrghandler, commit version d603fdc6409fc194a416aa3a519362d5d91790d9 or later.</p>
+<p>performance_metrics_uuid: 98ee23bd-16f7-402a-9818-f1ffc399ac74</p>
+<p>creation_timestamp: 2025-01-28T21:50:06.833854+00:00</p>
+<p>number_of_problem_instances: 84</p>
+<p>number_of_problem_instances_attempted: 84</p>
+<p>number_of_problem_instances_solved: 9</p>
+<p>number_of_tasks: 276</p>
+<p>number_of_tasks_attempted: 276</p>
+<p>number_of_tasks_solved: 112</p>
+<p>number_of_tasks_solved_within_run_time_limit: 276</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 112</p>
+<p>max_run_time_of_attempted_tasks: 80820.729907066</p>
+<p>sum_of_run_time_of_attempted_tasks: 2471726.9051446947</p>
+<p>solvability_ratio: 0.6106</p>
+<p>f1_score: [0.9662921348314607, 0.986784140969163]</p>
+<p>ml_metrics_calculator_version: 1</p>
+<p><img alt="Solver success/failure plot" src="solver_16537433-9f4c-4eae-a65d-787dc3b35b59_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver success/failure logFCI plot" src="log_fci_dim_vs_runtime_solver_16537433-9f4c-4eae-a65d-787dc3b35b59_plot.png" /></p>
+<p>Note: plot only contains <code>attempted</code> tasks.</p>
+<p><img alt="Solver utility capture" src="solver_16537433-9f4c-4eae-a65d-787dc3b35b59_utility_capture_plot.png" /></p>
+<p><img alt="Solver miniML plot" src="plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png" /></p>
+<p>Note: <code>attempted</code> may be <code>True</code> or <code>False</code>.  Tasks with a <code>reference_energy</code> can be labeled as solved or failed-to-solve. A task with a <code>reference_energy</code> that was NOT <code>attempted</code> is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a <code>reference_energy</code>.</p>
+<p><img alt="SHAP summary plot" src="shap_summary_plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png" /></p>
+<h1>Non-negative matrix factorization (ML latent space)</h1>
+<p><img alt="NNMF plot" src="nnmf_components.png" /></p>
+<p>Features: ['max_vertex_degree', 'min_vertex_degree', 'mean_vertex_degree', 'std_dev_vertex_degree', 'max_weight', 'min_weight', 'mean_weight', 'std_dev_weight', 'max_edge_order', 'mean_edge_order', 'std_dev_edge_order', 'one_norm', 'log_fci_dim', 'n_elec', 'n_orbs', 'df_gap']</p>
+<p>Component 1: [0.35690922 0.38545468 0.35487749 0.35852601 0.51063391 0.
+ 0.         0.0515893  0.89395573 0.92611292 0.88423213 0.48450204
+ 0.86941452 0.49234596 0.89376327 0.49515561]</p>
+<p>Component 2: [0.         0.         0.         0.         0.05747991 1.00601694
+ 0.52355998 0.4045106  0.04642006 0.0127596  0.06203818 0.
+ 0.11068966 0.07250786 0.06174321 0.        ]</p>

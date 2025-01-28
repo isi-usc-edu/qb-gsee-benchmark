@@ -616,6 +616,17 @@ class StandardReport:
 
             file.write(f"# Solver Summary Statistics\n\n")
             file.write(f"number of unique participating solvers: {df['solver_uuid'].nunique()}\n\n")
+
+            for solver_uuid in self.benchmark_data.ml_models_dict:
+                solver_short_name = self.benchmark_data.solvers_dict[solver_uuid]["solver_short_name"]
+
+                ml_model = self.benchmark_data.ml_models_dict[solver_uuid]
+                if isinstance(ml_model, str):
+                    # probably an error that we couldn't calculate the model.
+                    verbiage = f"Solver: {solver_short_name}/{solver_uuid}, {ml_model}"
+                else:
+                    verbiage = f"Solver: {solver_short_name}/{solver_uuid}, ML Solvability Ratio: {ml_model.ml_solvability_ratio}, F1 Score: {ml_model.f1_score}"
+                file.write(f"{verbiage}\n\n")
             
             file.write(f"![Solver scatter plot](solver_num_orbs_vs_runtime_scatter_plot.png)\n\n")
             file.write(f"NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.\n\n")
@@ -682,7 +693,7 @@ class StandardReport:
                 file.write(f"Note: plot only contains `attempted` tasks.\n\n")
                 file.write(f"![Solver utility capture](solver_{solver_uuid}_utility_capture_plot.png)\n\n")
                 file.write(f"![Solver miniML plot](plot_solver_{solver_uuid}.png)\n\n")
-                file.write(f"Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)\n\n")
+                file.write(f"Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.\n\n")
                 file.write(f"![SHAP summary plot](shap_summary_plot_solver_{solver_uuid}.png)\n\n")
         
             # at the end of the file, write out NNMF information for ML models:
