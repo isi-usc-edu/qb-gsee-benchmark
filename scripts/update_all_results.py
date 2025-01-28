@@ -62,9 +62,6 @@ def main(args: argparse.Namespace) -> None:
         benchmark_data.ml_models_dict[solver_uuid].write_all_plots()
         benchmark_data.ml_models_dict[solver_uuid].write_probs_to_file()
         
-            
-
-
 
 
     if args.DRYRUN_or_PRODUCTION == "DRYRUN":

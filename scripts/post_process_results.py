@@ -23,13 +23,13 @@ def visualize_simMatrix(sim_mat, solver_names):
     plt.show()
 
 
-    plt.figure()
+    fig2, ax2 = plt.subplots()
     plt.imshow(sim_mat, cmap='coolwarm', interpolation='nearest')
     plt.colorbar()
-    ax.set_xticks(np.arange(0,8))
-    ax.set_yticks(np.arange(0,8))
-    ax.set_xticklabels(solver_names, rotation=45, ha='right') 
-    ax.set_yticklabels(solver_names)
+    ax2.set_xticks(np.arange(0,8))
+    #ax.set_yticks(np.arange(0,8))
+    ax2.set_xticklabels(solver_names, rotation=45, ha='right') 
+    #ax.set_yticklabels(solver_names)
    
     plt.show()
 
@@ -46,14 +46,13 @@ def visualize_simMatrix2(sim_mat, solver_names):
     plt.setp(g.ax_heatmap.get_yticklabels(), rotation=0, rotation_mode="anchor") 
    
 
-
-
-
+    plt.tight_layout()
     plt.show()
 
 def perform_spectral_clustering(X, solver_names):
     # Use a Gaussian kernel to measure pairwise similarities
     similarity_matrix = np.exp(-pairwise_distances(X)**2 / (2 * 0.1**2)) 
+    #visualize_simMatrix(similarity_matrix, solver_names)
     visualize_simMatrix2(similarity_matrix, solver_names)
 
     u, s, vh = np.linalg.svd(similarity_matrix, full_matrices=True)
@@ -71,11 +70,11 @@ def perform_spectral_clustering(X, solver_names):
     plt.title("Solver points in PCA space")
     plt.legend()
 
-    # Create a spectral clustering object with 2 clusters
-    spectral_clustering = SpectralClustering(n_clusters=4, affinity='precomputed', n_components = 2)
+    ## Create a spectral clustering object with 2 clusters
+    #spectral_clustering = SpectralClustering(n_clusters=4, affinity='precomputed', n_components = 2)
 
-    # Fit the algorithm to the similarity matrix
-    labels = spectral_clustering.fit_predict(similarity_matrix)
+    ## Fit the algorithm to the similarity matrix
+    #labels = spectral_clustering.fit_predict(similarity_matrix)
 
     #plt.figure()
     #plt.scatter(proj[:, 0], proj[:, 1], c=labels)
@@ -91,7 +90,7 @@ with open(filename, 'rb') as f:
     my_object = pickle.load(f)
 
 
-solver_names = list(my_object[0].keys())
+solver_names = list(my_object[0].keys())  #uuid
 Z0_all = np.array(list(my_object[0].values()))
 #for Z0_all, we need to flatten dimensions 1 and 2
 Z0_all = Z0_all.reshape(Z0_all.shape[0],-1)
@@ -103,16 +102,26 @@ class_index = 1;  #doesn't matter if it is 1 or 0
 num_features = shap_values_all.shape[-1]
 num_solvers = shap_values_all.shape[0]
 shap_summary = np.zeros((num_solvers,num_features))
-area_summary = np.zeros((num_solvers,num_features))
 
 
+sub_sample = 10
+num_gridvalues = Z0_all.shape[1]/sub_sample
+area_summary = np.zeros((num_solvers,int(num_gridvalues)))
+
+#compute mean absolute shap values for each feature
 for solver_ind in range(0,num_solvers):
-    temp = shap_values_all[solver_ind, class_index,:,:]
-    shap_summary[solver_ind,:] = np.sort(np.mean(np.abs(temp),axis=0)) 
+    temp_shap = shap_values_all[solver_ind, class_index,:,:]
+    shap_summary[solver_ind,:] = np.mean(np.abs(temp_shap),axis=0)
+
+    temp_area = Z0_all[solver_ind, :]
+    area_summary[solver_ind,:] = temp_area[::sub_sample]
+
+#for Z0_all, let's subsample
+#area_summary = Z0_all[:,::1000]
 
 print('done')
 
 perform_spectral_clustering(shap_summary, solver_names)
-#perform_spectral_clustering(Z0_all, solver_names)
+#perform_spectral_clustering(area_summary, solver_names)
 
 

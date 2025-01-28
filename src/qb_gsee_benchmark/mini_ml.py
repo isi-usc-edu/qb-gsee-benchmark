@@ -425,7 +425,7 @@ class MiniML:
         # NOTE: shap_values.shape = (num_rows, num_features, num_classes)
 
         shap.summary_plot(
-            shap_values[:,:,0],
+            shap_values,
             feature_names=self.X.columns, # X is the original pd.DataFrame, with column headers.
             plot_type="bar",
             show=False, # do not show plot to screen.  save it to file later.
