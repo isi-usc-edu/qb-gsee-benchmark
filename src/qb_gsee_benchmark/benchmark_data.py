@@ -656,7 +656,9 @@ class BenchmarkData:
         clear_or_create_output_directory(output_directory=output_directory)
 
         for re in self.sponsor_resource_estimate_list:
-            resource_estimate_file_name = f"resource_estimate.gsee.{re['name']}.{re['size']}.{re['id']}.json"
+            # TODO: fairly hacky way to get back solver_uuid/task_uuid... 
+            _ , solver_uuid , _ , task_uuid = re["id"].split(".")
+            resource_estimate_file_name = f"resource_estimate.gsee.solver.{solver_uuid}.{re['name']}.{re['size']}.{task_uuid}.json"
             output_path = os.path.join(output_directory, resource_estimate_file_name)
             with open(output_path, "w") as output:
                 json.dump(re, output, indent=4)
@@ -699,7 +701,7 @@ class BenchmarkData:
                 # translate lots of our fields to sponsor-schema fields:
                 re = {}
                 re["$schema"] = "https://raw.githubusercontent.com/rroodll/QB-Estimate-Reporting/main/schema/resource_estimate_schema.json"
-                re["id"] = d["task_uuid"]
+                re["id"] = f"solver.{d['solver_uuid']}.task.{d['task_uuid']}"
                 re["name"] = d['problem_instance_short_name']
                 re["category"] = "industrial" #enum
                 re["size"] = f"{d['num_orbitals']}_orbitals"
