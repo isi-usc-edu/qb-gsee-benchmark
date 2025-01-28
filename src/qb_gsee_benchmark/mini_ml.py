@@ -115,7 +115,7 @@ class MiniML:
         self.param_grid = PARAM_GRID
         self.kfold_num = KFOLD_NUM
         self.threshold_for_confidence_of_solvability = THRESHOLD_FOR_CONFIDENCE_OF_SOLVABILITY      
-        self.complete_hamiltonian_features = hamiltonian_features_by_task_uuid          
+        self.complete_hamiltonian_features = hamiltonian_features_by_task_uuid        
         self.solver_labels = pd.merge(
             hamiltonian_features_by_task_uuid,
             solver_labels_by_task_uuid,
@@ -183,7 +183,7 @@ class MiniML:
         self.Y = self.solver_labels.loc[:,"label"] # column header is `label`
         self.Y = self.Y.astype(bool) # enforce boolean type.
 
-        self.complete_hamiltonian_features_X = self.complete_hamiltonian_features.loc[:,FEATURES]
+        self.complete_hamiltonian_features = self.complete_hamiltonian_features.loc[:,FEATURES]
         
         
     def __shuffle_labels(self) -> None:
@@ -193,7 +193,7 @@ class MiniML:
         self.shuffled_keys = rng.permutation(range(0,len(self.X)))
         self.X = self.X.iloc[self.shuffled_keys]
         self.Y = self.Y.iloc[self.shuffled_keys]
-        self.complete_hamiltonian_features_X.iloc[self.shuffled_keys]
+        self.complete_hamiltonian_features.iloc[self.shuffled_keys]
 
 
 
@@ -222,9 +222,16 @@ class MiniML:
         """TODO:docstring
         """
         self.standard_scaler = StandardScaler()
-        self.X_scaled = self.standard_scaler.fit_transform(self.X)
+
+        # the scaler is based on ALLLLLL of the hamiltonian features.
+        self.standard_scaler.fit(self.complete_hamiltonian_features)
+
+        self.complete_hamiltonian_features_scaled = self.standard_scaler.transform(self.complete_hamiltonian_features)
+        
+        # the scaler (based on all Ham features) is then applied to X.
+        self.X_scaled = self.standard_scaler.transform(self.X)
         self.X_train = self.X_scaled
-        self.Y_train = self.Y # TODO: sklearn having issues with datatype... .astype(int).to_numpy()
+        self.Y_train = self.Y 
 
 
 
@@ -286,16 +293,20 @@ class MiniML:
             "Error: only NNMF is supported at this time."
 
         # Apply NNMF
-        # Normalize data (NNMF requires non-negative input.  The data is non-negative, but we will scale in the range of min-max of the features which is great for reconstruction of valid points)
+        # Normalize data (NNMF requires non-negative input.  The data is non-negative, but we will scale in the range of
+        # min-max of the features which is great for reconstruction of valid points)
         self.scaler_minmax = MinMaxScaler()
-        self.X_scaled = self.scaler_minmax.fit_transform(self.X)
+
+        # note that self.complete_hamiltonian_features_scaled has already been scaled by StandardScaler()
+        self.complete_hamiltonian_features_scaled_minmax = self.scaler_minmax.fit_transform(self.complete_hamiltonian_features_scaled)
+        
         self.nnmf = NMF(
             n_components=2,
             init='random',
             random_state=self.rng_seed,
             max_iter = 500
         )
-        self.nnmf_projected_data = self.nnmf.fit_transform(self.X_scaled)
+        self.nnmf_projected_data = self.nnmf.fit_transform(self.complete_hamiltonian_features_scaled_minmax)
         self.H = self.nnmf.components_
         
 
@@ -315,11 +326,13 @@ class MiniML:
         self.nnmf_components_plot_file_name = f"nnmf_components.png"
         plt.close()
 
-        self.reconstruction_error = np.sqrt(
-            np.sum(
-                (self.scaler_minmax.inverse_transform(self.nnmf.inverse_transform(self.nnmf_projected_data)) - self.X)**2
-            )
-        )
+
+        self.reconstruction_error = f"TODO: Check this implementation.  It needs to go through several inverse transforms. And be computed for self.complete_hamiltonian_features."
+        # self.reconstruction_error = np.sqrt(
+        #     np.sum(
+        #         (self.scaler_minmax.inverse_transform(self.nnmf.inverse_transform(self.nnmf_projected_data)) - self.X)**2
+        #     )
+        # )
 
 
 
