@@ -65,11 +65,15 @@
                     "num_logical_qubits": 5230,
                     "num_toffoli_gates_per_shot": 1955862117473,
                     "num_shots": 6,
-                    "hardware_failure_tolerance_per_shot": 0.00016673615357942762
+                    "hardware_failure_tolerance_per_shot": 0.00016673615357942762,
+                    "num_T_gates_per_shot": 488965529368,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := int(0.25*`num_toffoli_gates_per_shot`) per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/"
                 },
                 "physical": {
                     "num_physical_qubits": 39518600,
-                    "data_code_distance": 49
+                    "data_code_distance": 49,
+                    "num_logical_compiled_qubits": 0,
+                    "comment": "placeholder for `num_logical_compiled_qubits`."
                 }
             },
             "run_time": {
@@ -95,11 +99,15 @@
                     "num_logical_qubits": 5299,
                     "num_toffoli_gates_per_shot": 2039194039402,
                     "num_shots": 6,
-                    "hardware_failure_tolerance_per_shot": 0.00016673615357942762
+                    "hardware_failure_tolerance_per_shot": 0.00016673615357942762,
+                    "num_T_gates_per_shot": 509798509850,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := int(0.25*`num_toffoli_gates_per_shot`) per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/"
                 },
                 "physical": {
                     "num_physical_qubits": 40038600,
-                    "data_code_distance": 49
+                    "data_code_distance": 49,
+                    "num_logical_compiled_qubits": 0,
+                    "comment": "placeholder for `num_logical_compiled_qubits`."
                 }
             },
             "run_time": {
@@ -125,11 +133,15 @@
                     "num_logical_qubits": 5231,
                     "num_toffoli_gates_per_shot": 1820148044262,
                     "num_shots": 5,
-                    "hardware_failure_tolerance_per_shot": 0.000200080048033624
+                    "hardware_failure_tolerance_per_shot": 0.000200080048033624,
+                    "num_T_gates_per_shot": 455037011065,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := int(0.25*`num_toffoli_gates_per_shot`) per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/"
                 },
                 "physical": {
                     "num_physical_qubits": 39528600,
-                    "data_code_distance": 49
+                    "data_code_distance": 49,
+                    "num_logical_compiled_qubits": 0,
+                    "comment": "placeholder for `num_logical_compiled_qubits`."
                 }
             },
             "run_time": {
