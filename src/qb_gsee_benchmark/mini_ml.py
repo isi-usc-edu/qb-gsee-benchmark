@@ -55,6 +55,7 @@ from sklearn.feature_selection import RFE
 from sklearn.preprocessing import MinMaxScaler
 import random
 import shap
+import seaborn as sns # visualizing statistical data
 
 
 
@@ -520,6 +521,8 @@ class MiniML:
         output_file_name = os.path.join("./ml_artifacts/",self.nnmf_components_plot_file_name)
         self.nnmf_components_plot.savefig(output_file_name)
 
+        self.write_hamiltonian_feature_correlation_matrix_to_file()
+        
         try:
             output_file_name = os.path.join("./ml_artifacts/",self.shap_summary_plot_file_name)
             self.shap_summary_plot.savefig(output_file_name)
@@ -552,6 +555,39 @@ class MiniML:
         df = pd.concat([df_1, df_2], axis=1)
         output_file_name = os.path.join("./ml_artifacts/",f"probs_solver_{self.solver_uuid}.csv")
         df.to_csv(output_file_name, index=False)
+
+
+    def write_hamiltonian_feature_correlation_matrix_to_file(self) -> None:
+        """TODO: docstring"""
+        correlation_matrix = self.complete_hamiltonian_features.corr()
+        
+        fig = plt.figure()
+        sns.heatmap(
+            correlation_matrix,
+            # annot=True, # write the correlation value inside each cell
+            cmap='PiYG',
+            # fmt=".1f", # formatting floating point numbers
+            vmin=-1, # minimum correlation is -1
+            vmax=1 # maximum correlation is 1
+        )
+        plt.xticks(
+            ticks=range(len(correlation_matrix.columns)),
+            labels=correlation_matrix.columns, rotation=45
+        )
+        plt.yticks(
+            ticks=range(len(correlation_matrix.columns)),
+            labels=correlation_matrix.columns, rotation=0
+        )
+        plt.title('Hamiltonian Features Correlation Matrix')
+        # cbar = plt.colorbar()
+        # cbar.set_label("Correlation",rotation=270,x=1.25)
+        plt.tight_layout()
+        self.feature_correlation_matrix_plot = fig # store it.
+        self.feature_correlation_matrix_plot_file_name = f"hamiltonian_features_correlation_matrix_plot.png"
+        output_file_name = os.path.join("./ml_artifacts/",self.feature_correlation_matrix_plot_file_name)
+        self.feature_correlation_matrix_plot.savefig(output_file_name) # also write to file.
+        plt.close()
+            
     
     
 
