@@ -521,7 +521,9 @@ class MiniML:
         output_file_name = os.path.join("./ml_artifacts/",self.nnmf_components_plot_file_name)
         self.nnmf_components_plot.savefig(output_file_name)
 
-        self.write_hamiltonian_feature_correlation_matrix_to_file()
+        self.write_hamiltonian_feature_correlation_matrix_plot()
+
+        self.write_histograms_for_all_hamiltonian_features()
         
         try:
             output_file_name = os.path.join("./ml_artifacts/",self.shap_summary_plot_file_name)
@@ -557,7 +559,7 @@ class MiniML:
         df.to_csv(output_file_name, index=False)
 
 
-    def write_hamiltonian_feature_correlation_matrix_to_file(self) -> None:
+    def write_hamiltonian_feature_correlation_matrix_plot(self) -> None:
         """TODO: docstring"""
         correlation_matrix = self.complete_hamiltonian_features.corr()
         
@@ -587,8 +589,25 @@ class MiniML:
         output_file_name = os.path.join("./ml_artifacts/",self.feature_correlation_matrix_plot_file_name)
         self.feature_correlation_matrix_plot.savefig(output_file_name) # also write to file.
         plt.close()
-            
     
+    def write_histograms_for_all_hamiltonian_features(self) -> None:
+        """TODO: docstring"""
+        num_features = len(self.complete_hamiltonian_features.columns)
+
+        fig, axes = plt.subplots(num_features, 1, figsize=(8,6*num_features))
+
+        for i, feature in enumerate(self.complete_hamiltonian_features):
+            test = self.complete_hamiltonian_features[feature]
+            axes[i].hist(self.complete_hamiltonian_features[feature], bins=30)
+            axes[i].set_title(f"Histogram of {feature}")
+            axes[i].set_xlabel(feature)
+        plt.tight_layout()
+        self.histograms_of_all_hamiltonian_features_plot = fig
+        self.histograms_of_all_hamiltonian_features_plot_file_name = f"histograms_of_all_hamiltonian_features.png"
+        output_file_name = os.path.join("./ml_artifacts/",self.histograms_of_all_hamiltonian_features_plot_file_name)
+        self.histograms_of_all_hamiltonian_features_plot.savefig(output_file_name) # also write to file.
+        plt.close()
+        
     
 
 
