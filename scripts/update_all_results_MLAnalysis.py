@@ -39,7 +39,7 @@ def main(args: argparse.Namespace) -> None:
         hamiltonian_features_csv_file_name="Hamiltonian_features.csv",
         utility_estimation_csv_file_name="GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv",
         problem_instances_directory="../problem_instances",
-        solution_files_directory="../_private_working_folder/PRE_solution_files_20250124/",
+        solution_files_directory="../solution_files/",
         performance_metrics_directory="../performance_metrics"
     )
     
@@ -61,16 +61,16 @@ def main(args: argparse.Namespace) -> None:
     if args.SHAP_analysis:
         for solver_uuid in benchmark_data.ml_models_dict:
             benchmark_data.ml_models_dict[solver_uuid].run_shap_analysis()
-            Z0_allsolvers[solver_uuid] = benchmark_data.ml_models_dict[solver_uuid].Z0
-            shap_values_allsolvers[solver_uuid] = benchmark_data.ml_models_dict[solver_uuid].shap_values
+            solver_short_name = benchmark_data.ml_models_dict[solver_uuid].solver_short_name
+            Z0_allsolvers[solver_short_name] = benchmark_data.ml_models_dict[solver_uuid].Z0
+            shap_values_allsolvers[solver_short_name] = benchmark_data.ml_models_dict[solver_uuid].shap_values
 
-    #save for post_processing (could send it in directly too but wanted it saved for now)
+    #save for post_processing (could send it in directly too but wanted it saved so I can speed my development of post-processing)
     
     dicts = [Z0_allsolvers, shap_values_allsolvers]
-    with open('post_process.pkl', 'wb') as fp:
+    with open('post_process_short_names.pkl', 'wb') as fp:
         pickle.dump(dicts, fp)
    
-    
     
     for solver_uuid in benchmark_data.ml_models_dict:
         benchmark_data.ml_models_dict[solver_uuid].write_all_plots()
