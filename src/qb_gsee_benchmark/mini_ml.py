@@ -123,6 +123,7 @@ class MiniML:
             how="inner",
             suffixes=("","_duplicate_column")
         )
+        self.task_uuids = self.solver_labels["task_uuid"]
         self.shap_values = None # updated when .shap_analysis() called.
 
         
@@ -194,6 +195,8 @@ class MiniML:
         self.X = self.X.iloc[self.shuffled_keys]
         self.Y = self.Y.iloc[self.shuffled_keys]
         self.complete_hamiltonian_features.iloc[self.shuffled_keys]
+        
+        self.task_uuids.iloc[self.shuffled_keys]
 
 
 
@@ -404,7 +407,6 @@ class MiniML:
         positions = [0, 0.19, 0.21, 0.48, 0.5, 0.52, 0.79, 0.81, 1] 
         cmap = LinearSegmentedColormap.from_list("custom_red_blue", list(zip(positions, colors)))
         norm = Normalize(0,1)
-        #norm = plt.Normalize(np.min(colors),np.max(colors)) #normalized according to the probabilities in the decision space
         plt.scatter(
             x=XX.flatten(),
             y=YY.flatten(),
@@ -412,11 +414,12 @@ class MiniML:
             cmap=cmap,
             norm=norm
         )
-        #projected X,Y data
+        
+        #projected X data
         nnmf_transformed_X = self.nnmf.transform(self.ham_features_scaler_minmax.transform(self.X))
 
 
-        # plot black dots for allllll Hamiltonians
+        # plot white stars for allllll Hamiltonians
         nnmf_transformed_all_hams = self.nnmf.transform(self.ham_features_scaler_minmax.transform(self.complete_hamiltonian_features))
         plt.scatter(
             x=nnmf_transformed_all_hams[:,0], # NNMF component 1
@@ -533,10 +536,11 @@ class MiniML:
         Y_predicted = self.model.predict(self.X_train)
         self.probs = self.model.predict_proba(self.X_train)
 
-        df = pd.DataFrame(
-            {
-                self.X.columns[0]: self.X[self.X.columns[0]],
-                self.X.columns[1]: self.X[self.X.columns[1]],
+        nnmf_transformed_X = self.nnmf.transform(self.ham_features_scaler_minmax.transform(self.X))
+        df_2 = pd.DataFrame(
+            {   
+                "nnmf_component_1": nnmf_transformed_X[:,0],
+                "nnmf_component_2": nnmf_transformed_X[:,1],
                 "Y_train": self.Y_train,
                 "Y_predicted": Y_predicted,
                 "prob_class_0": self.probs[:,0],
@@ -544,6 +548,8 @@ class MiniML:
             }
         )
 
+        df_1 = pd.concat([self.task_uuids, self.X], axis=1)
+        df = pd.concat([df_1, df_2], axis=1)
         output_file_name = os.path.join("./ml_artifacts/",f"probs_solver_{self.solver_uuid}.csv")
         df.to_csv(output_file_name, index=False)
     
