@@ -83,14 +83,14 @@ UNUSED_FEATURES = [
     "number_of_terms"
 ]
 THRESHOLD_FOR_CONFIDENCE_OF_SOLVABILITY = 0.5
-LATENT_MODEL_NAME = "NNMF" # only NNMF is supported at this time.
+LATENT_MODEL_NAME = "PCA" # only NNMF or PCA.  But for the QB review, we only do PCA
 MODEL_NAME = "SVM" # only SVM is supported at this time.
 KFOLD_NUM = 5
 HYPOPT_CV = True
 PARAM_GRID = {
-    'C': [0.001, 0.1, 0.5, 1, 10, 50, 100],  
-    'gamma': [1, 0.1, 0.01, 0.001, 0.0001], 
-    'kernel': ['rbf', 'poly', 'linear']
+    'C': [0.001, 0.1, 0.5, 1, 10, 50, 100, 200],  
+    'gamma': [1, 0.1, 0.01, 0.001, 0.0001, 0.0005], 
+    'kernel': ['rbf', 'poly', 'linear', 'sigmoid']
 } 
 
 
@@ -114,7 +114,8 @@ class MiniML:
         self.hypopt_cv = HYPOPT_CV
         self.param_grid = PARAM_GRID
         self.kfold_num = KFOLD_NUM
-        self.threshold_for_confidence_of_solvability = THRESHOLD_FOR_CONFIDENCE_OF_SOLVABILITY                
+        self.threshold_for_confidence_of_solvability = THRESHOLD_FOR_CONFIDENCE_OF_SOLVABILITY      
+        self.complete_hamiltonian_features = hamiltonian_features_by_task_uuid        
         self.solver_labels = pd.merge(
             hamiltonian_features_by_task_uuid,
             solver_labels_by_task_uuid,
@@ -162,11 +163,14 @@ class MiniML:
         ## 
         num_unique_solver_uuids = self.solver_labels["solver_uuid"].nunique()
         assert num_unique_solver_uuids == 1, \
-            f"Error in solver labels: num_unique_solver_uuids={num_unique_solver_uuids} and should be 1."
+            f"Error: in solver labels, num_unique_solver_uuids={num_unique_solver_uuids} and should be 1."
         num_unique_solver_short_names = self.solver_labels["solver_short_name"].nunique()
         assert num_unique_solver_short_names == 1, \
-            f"Error in solver labels: num_unique_solver_short_names={num_unique_solver_short_names} and should be 1."
+            f"Error: in solver labels, num_unique_solver_short_names={num_unique_solver_short_names} and should be 1."
 
+        assert self.solver_labels["label"].nunique() > 1, \
+            f"Error: there is only one value for `label` (either all `True` or `False`), we can't compute an ML categorization model."
+        
         self.solver_uuid = self.solver_labels["solver_uuid"].values[0]
         self.solver_short_name = self.solver_labels["solver_short_name"].values[0]        
 
@@ -178,6 +182,9 @@ class MiniML:
         self.X = self.solver_labels.loc[:,FEATURES]
         self.Y = self.solver_labels.loc[:,"label"] # column header is `label`
         self.Y = self.Y.astype(bool) # enforce boolean type.
+
+        self.complete_hamiltonian_features = self.complete_hamiltonian_features.loc[:,FEATURES]
+        
         
     def __shuffle_labels(self) -> None:
         """TODO: docstring.
@@ -186,30 +193,43 @@ class MiniML:
         self.shuffled_keys = rng.permutation(range(0,len(self.X)))
         self.X = self.X.iloc[self.shuffled_keys]
         self.Y = self.Y.iloc[self.shuffled_keys]
+        self.complete_hamiltonian_features.iloc[self.shuffled_keys]
 
 
 
     def __remove_zero_variance_columns(self) -> list:
         """TODO: docstring.
-
         Returns:
             list: _description_
         """
-        varX = np.var(self.X, axis=0)
-        self.zero_variance_columns = self.X.columns[np.where(varX == 0)]
+        varX = np.var(self.complete_hamiltonian_features, axis=0)
+        self.zero_variance_columns = self.complete_hamiltonian_features.columns[np.where(varX == 0)]
+        
+        # drop from complete set of Ham features:
+        self.complete_hamiltonian_features = self.complete_hamiltonian_features.drop(self.zero_variance_columns, axis=1)
+        
+        # drop from X, where X is the (rows) subset of data we are constructing ML model on:
         self.X = self.X.drop(self.zero_variance_columns, axis=1)
+        
         if len(self.zero_variance_columns) > 0:
             logging.warning(f"zero variance columns: {self.zero_variance_columns} were removed.")
         return self.zero_variance_columns
+    
+
 
 
     def __scale_data(self) -> None:
         """TODO:docstring
         """
-        self.standard_scaler = StandardScaler()
-        self.X_scaled = self.standard_scaler.fit_transform(self.X)
+        self.ham_features_standard_scaler = StandardScaler()
+
+        # the scaler is based on ALLLLLL of the hamiltonian features.
+        self.ham_features_standard_scaler.fit(self.complete_hamiltonian_features)
+
+        # the scaler (based on all Ham features) is then applied to X.
+        self.X_scaled = self.ham_features_standard_scaler.transform(self.X)
         self.X_train = self.X_scaled
-        self.Y_train = self.Y # TODO: sklearn having issues with datatype... .astype(int).to_numpy()
+        self.Y_train = self.Y 
 
 
 
@@ -265,29 +285,43 @@ class MiniML:
         return self.f1_score
     
 
+
     def __get_projected_data(self) -> None:
         """TODO: docstring"""
-        assert self.latent_model_name == "NNMF", \
-            "Error: only NNMF is supported at this time."
+        assert self.latent_model_name == "PCA", \
+            "Error: only PCA is supported at this time."
 
-        # Apply NNMF
-        # Normalize data (NNMF requires non-negative input.  The data is non-negative, but we will scale in the range of min-max of the features which is great for reconstruction of valid points)
-        self.scaler_minmax = MinMaxScaler()
-        self.X_scaled = self.scaler_minmax.fit_transform(self.X)
-        self.nnmf = NMF(
-            n_components=2,
-            init='random',
-            random_state=self.rng_seed,
-            max_iter = 500
-        )
-        self.nnmf_projected_data = self.nnmf.fit_transform(self.X_scaled)
-        self.H = self.nnmf.components_
+        # Scale data
+        # Apply embedding transform
+
+        if self.latent_model_name == "PCA":
+            self.ham_features_embedding_scaler = StandardScaler()  #other choice is the minmax scaler which is a fine choice for PCA as well, but not for NNMF (just use minmax for NNMF). 
+            self.embedding = PCA(
+                n_components=2,
+                whiten = False  #because we have whitened it already (politically incorrect name though)
+            )
+        else: #NNMF
+            self.ham_features_embedding_scaler = MinMaxScaler()
+            self.embedding = NMF(
+                n_components=2,
+                init='random',
+                random_state=self.rng_seed,
+                max_iter = 500
+            )
+
+            
+        #scale it
+        self.complete_hamiltonian_features_scaled_for_embedding = self.ham_features_embedding_scaler.fit_transform(self.complete_hamiltonian_features)
+        
+        #transform it (that is, project it)
+        self.embedding_projected_data = self.embedding.fit_transform(self.complete_hamiltonian_features_scaled_for_embedding)
+        self.components = self.embedding.components_
         
 
         fig = plt.figure()
-        plt.title(f"NNMF Components")
-        plt.plot(self.H[0,:],'r-o')
-        plt.plot(self.H[1,:],'g-o')
+        plt.title(self.latent_model_name  + " Components")
+        plt.plot(self.components[0,:],'r-o')
+        plt.plot(self.components[1,:],'g-o')
         plt.legend(['Component 1', 'Component 2'])
         plt.xticks(np.arange(0,len(self.X.columns)))
         plt.xticks(rotation=30)
@@ -296,15 +330,17 @@ class MiniML:
             ha='right'
         )
         plt.tight_layout()
-        self.nnmf_components_plot = fig
-        self.nnmf_components_plot_file_name = f"nnmf_components.png"
+        self.embedding_components_plot = fig
+        self.embedding_components_plot_file_name = self.latent_model_name + "_components.png"
         plt.close()
 
-        self.reconstruction_error = np.sqrt(
-            np.sum(
-                (self.scaler_minmax.inverse_transform(self.nnmf.inverse_transform(self.nnmf_projected_data)) - self.X)**2
-            )
-        )
+
+        self.reconstruction_error = f"TODO: Check this implementation.  It needs to go through several inverse transforms. And be computed for self.complete_hamiltonian_features."
+        # self.reconstruction_error = np.sqrt(
+        #     np.sum(
+        #         (self.embedding.inverse_transform(self.ham_features_embedding_scaler.inverse_transform(complete_hamiltonian_features_scaled_for_embedding)) - self.X)**2
+        #     )
+        # )
 
 
 
@@ -316,41 +352,47 @@ class MiniML:
         
         """
 
-
         # latent_sc, latent_model, proj_data, recons_error = getProjectedData(X, latent_model_name, draw_plot) #just PCA or NNMF in this code.  The UI has more dimensionality reduction algms
-        # self.scaler_minmax, self.nnmf, self.nnmf_projected_data, self.reconstruction_error
+        # self.ham_features_scaler_minmax, self.nnmf, self.nnmf_projected_data, self.reconstruction_error
         #  recons_error = getProjectedData(X, latent_model_name, draw_plot) #just PCA or NNMF in this code.  The UI has more dimensionality reduction algms
 
 
+        # min and max in 2 dimensions of projected data.
         
-        # min and max in 2 dimensions of projected data
-        xminmax = np.arange(
-            np.min(self.nnmf_projected_data[:, 0]),
-            np.max(self.nnmf_projected_data[:, 0]),
-            0.1
-        )
-        yminmax = np.arange(
-            np.min(self.nnmf_projected_data[:, 1]),
-            np.max(self.nnmf_projected_data[:, 1]),
-            0.1
-        )
-
-        x = np.linspace(xminmax[0], xminmax[-1]+0.09,100)
-        y = np.linspace(yminmax[0], yminmax[-1]+0.09,100)
+        x_min = np.min(self.embedding_projected_data[:,0])
+        x_max = np.max(self.embedding_projected_data[:,0])
+        
+        y_min = np.min(self.embedding_projected_data[:,1])
+        y_max = np.max(self.embedding_projected_data[:,1])
+        
+        x = np.linspace(x_min, x_max + 0.09, 100) # 100 points evenly spaced
+        y = np.linspace(y_min, y_max + 0.09, 100)
         XX, YY = np.meshgrid(x, y)   
+        # NOTE: XX.shape is 100*100
 
-        newX = np.c_[XX.ravel(), YY.ravel()] #grid of projected data
+        grid_points = np.c_[XX.ravel(), YY.ravel()] # grid of projected data
+        # NOTE: nnmf_grid_points.shape is 10000*2
 
         # undo latent transformation
-        orig_dim_data = self.nnmf.inverse_transform(newX) #back to the original dimensionality undoing the rotation, centering, scaling and projection
-        # undo the scaling.
-        orig_dim_data = self.scaler_minmax.inverse_transform(orig_dim_data) #undo scaling
-
-        # SVM model was trained on centered and scaled data on the stats of X, so need to re-do that
-        orig_dim_data_for_pred = self.standard_scaler.transform(orig_dim_data) #(orig_dim_data-scaler.mean_)/np.sqrt(scaler.var_)
-        orig_probs = self.model.predict_proba(np.asarray(orig_dim_data_for_pred))
+        # back to the original dimensionality undoing to the reverse
+        back_projected_data = self.embedding.inverse_transform(grid_points) 
+        # NOTE: back_projected_data.shape is 10000*num_features (10000 from the 10000 grid points)
         
-        Z0 = orig_probs[:,1].reshape(XX.shape)
+        # undo the scaling:
+        back_projected_data = self.ham_features_embedding_scaler.inverse_transform(back_projected_data)
+        # now back_projected_data is in the original units/scale of Hamiltonian features.
+        # if PCA was used, it will have negative values
+
+        # However, ML model (SVM model) was trained on centered and scaled data... so transform again:
+        back_projected_data = self.ham_features_standard_scaler.transform(back_projected_data)
+        
+        # now run the back_projected_data through the model to get a probability of success between [0,1].
+        back_projected_data_probs = self.model.predict_proba(np.asarray(back_projected_data)) 
+        # NOTE: back_projected_data_probability_of_success.shape is 10000*2
+        # 10000 data points with [ Prob[Fail] , Prob[Solve] ] for each.
+        
+        Z0 = back_projected_data_probs[:,1].reshape(XX.shape) # index 1 is Prob[Solve]
+        # NOTE: Z0.shape is now 100*100... same shape as XX, YY.
         self.Z0 = Z0
         self.XX = XX
         self.YY = YY
@@ -371,20 +413,41 @@ class MiniML:
         plt.scatter(
             x=XX.flatten(),
             y=YY.flatten(),
-            c=Z0.flatten(),
+            c=Z0.flatten(), # this is the base/background color.
             cmap=cmap,
             norm=norm
         )
-        #projected training data
+
+        #projected X data
+        embedding_transformed_X = self.embedding.transform(self.ham_features_embedding_scaler.fit_transform(self.X))
+
+
+        # plot black dots for allllll Hamiltonians
+        #this was already computed, so using that
+        embedding_transformed_all_hams = self.embedding_projected_data
         plt.scatter(
-            x=self.nnmf_projected_data[:,0],
-            y=self.nnmf_projected_data[:,1],
-            c=self.Y,
-            s=50,
+            x=embedding_transformed_all_hams[:,0], # NNMF component 1
+            y=embedding_transformed_all_hams[:,1], # NNMF component 2
+            color="white",
+            edgecolors="black",
+            marker="*",
+            s=40 # default marker size is 50.  slightly smaller so circles below cover starts (where attempted)
+        )
+
+        # plot blue/red dots for hamiltonians with reference energies solved/failed.
+        # circles will cover stars where they appear.
+        plt.scatter(
+            x=embedding_transformed_X[:,0], # NNMF component 1
+            y=embedding_transformed_X[:,1], # NNMF component 2
+            c=self.Y, # Y is True=Solved=Blue, False=Failed=Red
+            s=50, # default marker size is 50.
             edgecolors='black',
             cmap=cmap,
             norm=norm
         )
+
+
+
         cbar = plt.colorbar()
         cbar.set_label("Probability that solver can estimate GSE (label==True)",rotation=270,x=1.25)
         plt.title(f"Solver {self.solver_short_name} ({self.solver_uuid[0:4]}...)\nEmbedding: {self.latent_model_name}")
@@ -394,8 +457,8 @@ class MiniML:
         plt.close()
             
 
-        result = np.where(orig_probs[:,1] > self.threshold_for_confidence_of_solvability)
-        self.ml_solvability_ratio = len(result[0])/len(orig_probs[:,1])
+        num_solved = np.sum(back_projected_data_probs[:,1] > self.threshold_for_confidence_of_solvability)
+        self.ml_solvability_ratio = num_solved/len(back_projected_data_probs)
         return self.ml_solvability_ratio
 
 
@@ -425,7 +488,7 @@ class MiniML:
         # NOTE: shap_values.shape = (num_rows, num_features, num_classes)
 
         shap.summary_plot(
-            shap_values,
+            shap_values[:,:,0],
             feature_names=self.X.columns, # X is the original pd.DataFrame, with column headers.
             plot_type="bar",
             show=False, # do not show plot to screen.  save it to file later.
@@ -448,8 +511,8 @@ class MiniML:
         #     self.X_train,
         #     matplotlib=True,
         #     show=False
-        # )        
-        
+        # )
+
 
     def write_all_plots(self) -> None:
         """TODO: docstring
@@ -458,8 +521,8 @@ class MiniML:
         output_file_name = os.path.join("./ml_artifacts/",self.solvability_surface_plot_file_name)
         self.solvability_surface_plot.savefig(output_file_name)
 
-        output_file_name = os.path.join("./ml_artifacts/",self.nnmf_components_plot_file_name)
-        self.nnmf_components_plot.savefig(output_file_name)
+        output_file_name = os.path.join("./ml_artifacts/",self.embedding_components_plot_file_name)
+        self.embedding_components_plot.savefig(output_file_name)
 
         try:
             output_file_name = os.path.join("./ml_artifacts/",self.shap_summary_plot_file_name)
