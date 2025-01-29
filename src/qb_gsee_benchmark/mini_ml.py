@@ -221,7 +221,7 @@ class MiniML:
     def __scale_data(self) -> None:
         """TODO:docstring
         """
-        self.ham_features_standard_scaler = StandardScaler()
+        self.ham_features_standard_scaler = StandardScaler()  #can use MinMaScaler here as well, but StrandardScaler works well.  Just depends on the data
 
         # the scaler is based on ALLLLLL of the hamiltonian features.
         self.ham_features_standard_scaler.fit(self.complete_hamiltonian_features)
@@ -295,7 +295,7 @@ class MiniML:
         # Apply embedding transform
 
         if self.latent_model_name == "PCA":
-            self.ham_features_embedding_scaler = StandardScaler()  #other choice is the minmax scaler which is a fine choice for PCA as well, but not for NNMF (just use minmax for NNMF). 
+            self.ham_features_embedding_scaler = MinMaxScaler()  #other choice is the minmax scaler which is a fine choice for PCA as well, but not for NNMF (just use minmax for NNMF). 
             self.embedding = PCA(
                 n_components=2,
                 whiten = False  #because we have whitened it already (politically incorrect name though)
@@ -419,7 +419,7 @@ class MiniML:
         )
 
         #projected X data
-        embedding_transformed_X = self.embedding.transform(self.ham_features_embedding_scaler.fit_transform(self.X))
+        embedding_transformed_X = self.embedding.transform(self.ham_features_embedding_scaler.transform(self.X))
 
 
         # plot black dots for allllll Hamiltonians
