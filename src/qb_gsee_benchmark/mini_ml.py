@@ -150,8 +150,14 @@ class MiniML:
             embedding_scaler=self.all_ham_features_minmax_scaler
         )
 
+        
+        self.ml_solvability_ratio = {} # dict with embedding names as keys.
         self.__compute_ratio_of_solved_to_unsolved(
             embedding=self.pca, # or self.nnmf
+            embedding_scaler=self.all_ham_features_minmax_scaler
+        )
+        self.__compute_ratio_of_solved_to_unsolved(
+            embedding=self.nnmf, # or self.nnmf
             embedding_scaler=self.all_ham_features_minmax_scaler
         )
 
@@ -499,11 +505,12 @@ class MiniML:
         cbar.set_label("Probability of solver success",rotation=270,x=1.25)
         plt.title(f"Solver {self.solver_short_name} ({self.solver_uuid[0:4]}...)\nEmbedding: {embedding_name}")
         plt.tight_layout()
-        self.plots.append((fig, f"plot_solver_{self.solver_uuid}.png"))
+        self.plots.append((fig, f"{embedding_name}_embedding_plot_solver_{self.solver_uuid}.png"))
         plt.close()
         
         num_solved = np.sum(back_projected_data_probs[:,1] > self.threshold_for_confidence_of_solvability)
-        self.ml_solvability_ratio = num_solved/len(back_projected_data_probs)
+        solvability_ratio = num_solved/len(back_projected_data_probs)
+        self.ml_solvability_ratio[embedding_name] = solvability_ratio
         return self.ml_solvability_ratio
 
 
@@ -633,17 +640,16 @@ class MiniML:
     
     def create_histograms_for_all_hamiltonian_features(self) -> None:
         """TODO: docstring"""
-        num_features = len(self.complete_hamiltonian_features.columns)
-
-        fig, axes = plt.subplots(num_features, 1, figsize=(8,6*num_features))
-
-        for i, feature in enumerate(self.complete_hamiltonian_features):
-            axes[i].hist(self.complete_hamiltonian_features[feature], bins=30)
-            axes[i].set_title(f"Histogram of {feature}")
-            axes[i].set_xlabel(feature)
-        plt.tight_layout()
-        self.plots.append((fig, f"histograms_of_all_hamiltonian_features.png"))
-        plt.close()
+        
+        for feature in self.features:
+            fig = plt.figure()
+            plt.hist(self.complete_hamiltonian_features[feature], bins=30)
+            plt.xlabel(feature)
+            plt.title(f"Hamiltonian features: histogram of {feature}")
+            plt.tight_layout()
+            self.plots.append((fig, f"hamiltonian_feature_histogram_{feature}.png"))
+            plt.close()
+        
         
     
 
