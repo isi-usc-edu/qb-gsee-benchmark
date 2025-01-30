@@ -1,14 +1,15 @@
 {
     "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/performance_metrics.schema.0.0.1.json",
-    "performance_metrics_uuid": "55960442-3a06-48c0-a7cb-4841d1f1f871",
+    "performance_metrics_uuid": "2a64a87c-df90-4c35-9f65-3f73a9572eca",
     "solver_short_name": "CCSD(T)",
     "solver_uuid": "c09217e6-d0f7-4b0f-81c4-79210b7ac878",
-    "creation_timestamp": "2025-01-28T17:07:42.747013+00:00",
+    "creation_timestamp": "2025-01-30T17:45:00.466432+00:00",
     "ml_metrics": {
-        "solvability_ratio": 0.8567,
+        "solvability_ratio": 0.6011,
+        "comment": "solvability ratio based on PCA embedding.",
         "f1_score": [
-            0.8795180722891566,
-            0.8666666666666667
+            0.8695652173913043,
+            0.864516129032258
         ],
         "ml_metrics_calculator_version": 1
     },
