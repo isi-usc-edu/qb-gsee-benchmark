@@ -359,7 +359,8 @@ class BenchmarkData:
                     hamiltonian_features_by_task_uuid=self.hamiltonian_features    
                 )
                 ml_scores_dict[solver_uuid] = {
-                    "solvability_ratio":mini_ml_model.ml_solvability_ratio,
+                    "solvability_ratio":mini_ml_model.ml_solvability_ratio["PCA"],
+                    "comment":"solvability ratio based on PCA embedding.",
                     "f1_score":list(mini_ml_model.f1_score),
                     "ml_metrics_calculator_version":1
                 }
