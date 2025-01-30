@@ -61,10 +61,8 @@ def main(args: argparse.Namespace) -> None:
     if args.shap_analysis:
         for solver_uuid in benchmark_data.ml_models_dict:
             try:
-                # if this is not for production, attempt to use cached shap values
-                try_to_use_cached_shap_values = not args.production
                 benchmark_data.ml_models_dict[solver_uuid].run_shap_analysis(
-                    try_to_use_cached_shap_values=try_to_use_cached_shap_values
+                    try_to_use_cached_shap_values=args.try_to_use_cached_shap_values
                 )
             except Exception as e:
                 print(f"Error: {e}")
@@ -152,6 +150,12 @@ if __name__ == "__main__":
         action="store_true",
         default=False,
         help="Run SHAP analysis and generate SHAP plots for ML models (WARNING: Takes a long time!)."
+    )
+    parser.add_argument(
+        "--try_to_use_cached_shap_values",
+        action="store_true",
+        default=False,
+        help="Attempt to use previously calculated SHAP values.  If cached values can't be loaded, then SHAP will run."
     )
     parser.add_argument(
         "--validate_json",
