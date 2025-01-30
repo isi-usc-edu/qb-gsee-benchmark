@@ -61,7 +61,11 @@ def main(args: argparse.Namespace) -> None:
     if args.shap_analysis:
         for solver_uuid in benchmark_data.ml_models_dict:
             try:
-                benchmark_data.ml_models_dict[solver_uuid].run_shap_analysis()
+                # if this is not for production, attempt to use cached shap values
+                try_to_use_cached_shap_values = not args.production
+                benchmark_data.ml_models_dict[solver_uuid].run_shap_analysis(
+                    try_to_use_cached_shap_values=try_to_use_cached_shap_values
+                )
             except Exception as e:
                 print(f"Error: {e}")
                 print(f"probably no ML model for {solver_uuid}")

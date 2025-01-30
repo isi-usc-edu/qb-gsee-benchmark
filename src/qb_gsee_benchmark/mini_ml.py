@@ -123,6 +123,7 @@ class MiniML:
             suffixes=("","_duplicate_column")
         )
         self.task_uuids = self.solver_labels["task_uuid"]
+        self.Z0_embedding = {}
         
         # plots is a list of tuples of the form (figure, file_name)
         # which is built up as methods are called.
@@ -406,12 +407,6 @@ class MiniML:
             float: The solvability ratio between 0 and 1.
         """
 
-        try:
-            embedding_name = embedding.name
-        except:
-            embedding_name = str(embedding)
-        
-
         embedded_data = embedding.transform(embedding_scaler.transform(self.complete_hamiltonian_features))
         
         x_min = np.min(embedded_data[:,0])
@@ -449,9 +444,11 @@ class MiniML:
         
         Z0 = back_projected_data_probs[:,1].reshape(XX.shape) # index 1 is Prob[Solve]
         # NOTE: Z0.shape is now 100*100... same shape as XX, YY.
-        self.Z0 = Z0
-        self.XX = XX
-        self.YY = YY
+        self.Z0_embedding[embedding.name] = {
+            "Z0":Z0,
+            "XX":XX,
+            "YY":YY
+        }
         
         # plot figure with training data, generated points
         fig = plt.figure()
@@ -503,14 +500,14 @@ class MiniML:
 
         cbar = plt.colorbar()
         cbar.set_label("Probability of solver success",rotation=270,x=1.25)
-        plt.title(f"Solver {self.solver_short_name} ({self.solver_uuid[0:4]}...)\nEmbedding: {embedding_name}")
+        plt.title(f"Solver {self.solver_short_name} ({self.solver_uuid[0:4]}...)\nEmbedding: {embedding.name}")
         plt.tight_layout()
-        self.plots.append((fig, f"{embedding_name}_embedding_plot_solver_{self.solver_uuid}.png"))
+        self.plots.append((fig, f"{embedding.name}_embedding_plot_solver_{self.solver_uuid}.png"))
         plt.close()
         
         num_solved = np.sum(back_projected_data_probs[:,1] > self.threshold_for_confidence_of_solvability)
         solvability_ratio = num_solved/len(back_projected_data_probs)
-        self.ml_solvability_ratio[embedding_name] = solvability_ratio
+        self.ml_solvability_ratio[embedding.name] = solvability_ratio
         return self.ml_solvability_ratio
 
 
@@ -518,21 +515,46 @@ class MiniML:
 
 
 
-    def run_shap_analysis(self):
+    def run_shap_analysis(
+            self,
+            try_to_use_cached_shap_values: bool=False
+        ):
         """TODO:docstring
         """
-        # explain all the predictions in the test set
-        explainer = shap.KernelExplainer(
-            model=self.svm.predict_proba, # a function.
-            data=self.X_svm_scaled, # X_scaled an np.ndarray
-            feature_names=self.X.columns, # X is original pandas.DataFrame
-            seed=self.rng_seed
-        )
-        shap_values = explainer.shap_values(
-            self.X_svm_scaled, # X_scaled an np.ndarray
-            nsamples=500
-        )
-        self.shap_values = shap_values
+
+        cached_shap_values_file_name = \
+            f"ml_artifacts/shap_values_solver_{self.solver_uuid}.npy"
+
+        if try_to_use_cached_shap_values:
+            # TODO: make this more robust.
+            try: 
+                self.shap_values = np.load(cached_shap_values_file_name)
+                run_shap_anyway = False
+            except:
+                logging.error(f"Error: can't load cached shap values {cached_shap_values_file_name}")
+                logging.info(f"Running SHAP anyway...")
+                run_shap_anyway = True
+
+
+        if run_shap_anyway:
+            # explain all the predictions in the test set
+            explainer = shap.KernelExplainer(
+                model=self.svm.predict_proba, # a function.
+                data=self.X_svm_scaled, # X_scaled an np.ndarray
+                feature_names=self.X.columns, # X is original pandas.DataFrame
+                seed=self.rng_seed
+            )
+            self.shap_values = explainer.shap_values(
+                self.X_svm_scaled, # X_scaled an np.ndarray
+                nsamples=500
+            )
+            np.save(
+                cached_shap_values_file_name,
+                self.shap_values
+            )
+
+
+
         # TODO: may put in kwarg nsamples=smaller_number into .shap_values().
         # TODO: Also consider using shap.sample(data, K) or shap.kmeans(data, K)
         # to summarize the background as K samples.
@@ -541,7 +563,7 @@ class MiniML:
 
         # TODO: standardize the ordering of the features
         shap.summary_plot(
-            shap_values[:,:,0],
+            self.shap_values[:,:,0],
             feature_names=self.X.columns, # X is the original pd.DataFrame, with column headers.
             plot_type="bar",
             show=False, # do not show plot to screen.  save it to file later.
