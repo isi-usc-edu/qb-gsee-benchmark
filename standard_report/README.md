@@ -1,16 +1,16 @@
 # GSEE Benchmark Standard Report
 
-Report based on data from 2025-01-28T17:07:42.747013+00:00
+Report based on data from 2025-01-30T17:45:00.466432+00:00
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
-Input data: `Hamiltonian_features.csv`, last modified Tue Jan 28 11:45:36 2025
+Input data: `Hamiltonian_features.csv`, last modified Wed Jan 29 10:24:10 2025
 
 Input data: `GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv`, last modified Thu Jan  9 12:11:19 2025
 
 Latest creation time for a `problem_instance.json` file: Mon Jan 27 11:42:37 2025
 
-Latest creation time for a `solution.json` file: Tue Jan 28 11:45:40 2025
+Latest creation time for a `solution.json` file: Thu Jan 30 12:27:04 2025
 
 # Problem Instance Summary Statistics
 
@@ -26,31 +26,65 @@ median number of orbitals: 42.0
 
 maximum number of orbitals: 135
 
-![Number of orbitals histogram](num_orbitals_histogram.png)
+![Number of orbitals histogram](supporting_artifacts/num_orbitals_histogram.png)
 
-![Utility estimate per Hamiltonian](num_orbitals_vs_utility.png)
+![Utility estimate per Hamiltonian](supporting_artifacts/num_orbitals_vs_utility.png)
 
 # Solver Summary Statistics
 
 number of unique participating solvers: 17
 
-![Solver scatter plot](solver_num_orbs_vs_runtime_scatter_plot.png)
+Solver: SHCI_opt/2dde727e-a881-44fa-aabf-bba6248e4baf, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 1.0}, F1 Score: [0.83333333 0.99342105]
+
+Solver: SHCI_pt_1e-4/4ed500f1-0650-41e3-af00-e4d0359394b4, ML Solvability Ratio: {'PCA': 0.9707, 'NNMF': 0.9859}, F1 Score: [0.71428571 0.97222222]
+
+Solver: SHCI_var_1e-4/7e730dfb-57ee-480b-a8a1-4b73f5f07c54, ML Solvability Ratio: {'PCA': 0.8691, 'NNMF': 0.8794}, F1 Score: [0.99212598 0.99470899]
+
+Solver: SHCI_pt_2e-4/ad964781-302e-4728-a26d-39918e0a6cdb, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 1.0}, F1 Score: [0.64516129 0.96140351]
+
+Solver: SHCI_pt_2e-5/c71b90bd-3250-4c0c-b4e7-fc9878f141f6, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 1.0}, F1 Score: [0.375      0.96666667]
+
+Solver: SHCI_pt_5e-5/d626506c-7aae-4ad6-802a-b29af5f2bb93, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 1.0}, F1 Score: [0.9375     0.99295775]
+
+Solver: SHCI_var_2e-4/0db183e3-a86d-491b-9125-599556e37c7a, ML Solvability Ratio: {'PCA': 0.3499, 'NNMF': 0.0833}, F1 Score: [0.95364238 0.95757576]
+
+Solver: SHCI_var_2e-5/86bfe50c-9342-4d54-bb68-abc8abd95688, ML Solvability Ratio: {'PCA': 0.5812, 'NNMF': 0.3942}, F1 Score: [0.8627451  0.97358491]
+
+Solver: SHCI_var_5e-5/01949b95-c427-4693-9134-01f47f688c09, ML Solvability Ratio: {'PCA': 0.6393, 'NNMF': 0.3549}, F1 Score: [0.83950617 0.94468085]
+
+Solver: DF_QPE/5dad4064-cd11-412f-85cb-d722afe3b3de, Model could not be calculated.
+
+Solver: CISD/418f060e-496b-4024-8d2d-9b1f8791e76d, ML Solvability Ratio: {'PCA': 0.0079, 'NNMF': 0.003}, F1 Score: [0.97826087 0.85      ]
+
+Solver: CCSD(T)/c09217e6-d0f7-4b0f-81c4-79210b7ac878, ML Solvability Ratio: {'PCA': 0.6011, 'NNMF': 0.8102}, F1 Score: [0.86956522 0.86451613]
+
+Solver: HF/5f5e617a-19c2-4d82-bebc-b2d6b3dcb012, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.98675497 0.71428571]
+
+Solver: MP2/b420358b-5def-41e6-8c5d-b9d93b6aecd2, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.98675497 0.71428571]
+
+Solver: CCSD/0a29e54f-bef9-4d19-bafa-d94b1c4b37aa, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0197}, F1 Score: [0.98867925 0.94117647]
+
+Solver: DMRG_Niagara_cluster_lowest_energy/16537433-9f4c-4eae-a65d-787dc3b35b59, ML Solvability Ratio: {'PCA': 0.5461, 'NNMF': 0.6106}, F1 Score: [0.96629213 0.98678414]
+
+Solver: DF_QPE/6f385080-934b-4cbb-b813-39c2cb61349e, Model could not be calculated.
+
+![Solver scatter plot](supporting_artifacts/solver_num_orbs_vs_runtime_scatter_plot.png)
 
 NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.
 
-![Solver scatter plot](solver_num_orbs_vs_log_runtime_scatter_plot.png)
+![Solver scatter plot](supporting_artifacts/solver_num_orbs_vs_log_runtime_scatter_plot.png)
 
 NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.
 
-![Quantum vs Classical scatter plot](quantum_vs_classical_solver_num_orbs_vs_log_runtime_scatter_plot.png)
+![Quantum vs Classical scatter plot](supporting_artifacts/quantum_vs_classical_solver_num_orbs_vs_log_runtime_scatter_plot.png)
 
 NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.
 
-![Solver logFCI scatter plot](log_fci_dim_vs_runtime_all_solvers_plot.png)
+![Solver logFCI scatter plot](supporting_artifacts/log_fci_dim_vs_runtime_all_solvers_plot.png)
 
 NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.
 
-![Solver logFCI scatter plot, log(runtime)](log_fci_dim_vs_log_runtime_all_solvers_plot.png)
+![Solver logFCI scatter plot, log(runtime)](supporting_artifacts/log_fci_dim_vs_log_runtime_all_solvers_plot.png)
 
 NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.
 
@@ -68,9 +102,9 @@ algorithm_details:SHCI with optimized orbitals followed by SHCI+PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 7adbdf90-dbaa-467f-b454-29336d2a218b
+performance_metrics_uuid: 8dbde2d7-1d3f-4c17-9c77-2edf63490d19
 
-creation_timestamp: 2025-01-28T17:07:42.747013+00:00
+creation_timestamp: 2025-01-30T17:45:00.466432+00:00
 
 number_of_problem_instances: 84
 
@@ -94,25 +128,29 @@ sum_of_run_time_of_attempted_tasks: 1553340.6179999998
 
 solvability_ratio: 1.0
 
+comment: solvability ratio based on PCA embedding.
+
 f1_score: [0.8333333333333334, 0.993421052631579]
 
 ml_metrics_calculator_version: 1
 
-![Solver success/failure plot](solver_2dde727e-a881-44fa-aabf-bba6248e4baf_plot.png)
+![Solver success/failure plot](supporting_artifacts/solver_2dde727e-a881-44fa-aabf-bba6248e4baf_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_2dde727e-a881-44fa-aabf-bba6248e4baf_plot.png)
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_2dde727e-a881-44fa-aabf-bba6248e4baf_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver utility capture](solver_2dde727e-a881-44fa-aabf-bba6248e4baf_utility_capture_plot.png)
+![Solver utility capture]supporting_artifacts/(solver_2dde727e-a881-44fa-aabf-bba6248e4baf_utility_capture_plot.png)
 
-![Solver miniML plot](plot_solver_2dde727e-a881-44fa-aabf-bba6248e4baf.png)
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_2dde727e-a881-44fa-aabf-bba6248e4baf.png)
 
-Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_2dde727e-a881-44fa-aabf-bba6248e4baf.png)
 
-![SHAP summary plot](shap_summary_plot_solver_2dde727e-a881-44fa-aabf-bba6248e4baf.png)
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_2dde727e-a881-44fa-aabf-bba6248e4baf.png)
 
 ## Solver SHCI_pt_1e-4, 4ed500f1-0650-41e3-af00-e4d0359394b4
 
@@ -128,9 +166,9 @@ algorithm_details:SHCI with eps_var 1e-4 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: befcfa2d-16e8-4dbb-995f-9fc52809fec2
+performance_metrics_uuid: ffb46f81-e8eb-46c3-8204-6a14b32b30ed
 
-creation_timestamp: 2025-01-28T17:07:42.747013+00:00
+creation_timestamp: 2025-01-30T17:45:00.466432+00:00
 
 number_of_problem_instances: 84
 
@@ -152,27 +190,31 @@ max_run_time_of_attempted_tasks: 77244.15200000002
 
 sum_of_run_time_of_attempted_tasks: 1863349.633000001
 
-solvability_ratio: 0.547
+solvability_ratio: 0.9707
 
-f1_score: [0.8, 0.9750889679715302]
+comment: solvability ratio based on PCA embedding.
+
+f1_score: [0.7142857142857143, 0.9722222222222222]
 
 ml_metrics_calculator_version: 1
 
-![Solver success/failure plot](solver_4ed500f1-0650-41e3-af00-e4d0359394b4_plot.png)
+![Solver success/failure plot](supporting_artifacts/solver_4ed500f1-0650-41e3-af00-e4d0359394b4_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_4ed500f1-0650-41e3-af00-e4d0359394b4_plot.png)
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_4ed500f1-0650-41e3-af00-e4d0359394b4_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver utility capture](solver_4ed500f1-0650-41e3-af00-e4d0359394b4_utility_capture_plot.png)
+![Solver utility capture]supporting_artifacts/(solver_4ed500f1-0650-41e3-af00-e4d0359394b4_utility_capture_plot.png)
 
-![Solver miniML plot](plot_solver_4ed500f1-0650-41e3-af00-e4d0359394b4.png)
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_4ed500f1-0650-41e3-af00-e4d0359394b4.png)
 
-Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_4ed500f1-0650-41e3-af00-e4d0359394b4.png)
 
-![SHAP summary plot](shap_summary_plot_solver_4ed500f1-0650-41e3-af00-e4d0359394b4.png)
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_4ed500f1-0650-41e3-af00-e4d0359394b4.png)
 
 ## Solver SHCI_var_1e-4, 7e730dfb-57ee-480b-a8a1-4b73f5f07c54
 
@@ -188,9 +230,9 @@ algorithm_details:SHCI with eps_var 1e-4
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 67964365-6d54-49eb-a188-c11a778a50ec
+performance_metrics_uuid: d8eada75-7c35-411f-8de3-0829015df276
 
-creation_timestamp: 2025-01-28T17:07:42.747013+00:00
+creation_timestamp: 2025-01-30T17:45:00.466432+00:00
 
 number_of_problem_instances: 84
 
@@ -212,27 +254,31 @@ max_run_time_of_attempted_tasks: 77244.15200000002
 
 sum_of_run_time_of_attempted_tasks: 1863349.633000001
 
-solvability_ratio: 0.9262
+solvability_ratio: 0.8691
 
-f1_score: [0.9841269841269841, 0.9894736842105263]
+comment: solvability ratio based on PCA embedding.
+
+f1_score: [0.9921259842519685, 0.9947089947089947]
 
 ml_metrics_calculator_version: 1
 
-![Solver success/failure plot](solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54_plot.png)
+![Solver success/failure plot](supporting_artifacts/solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54_plot.png)
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver utility capture](solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54_utility_capture_plot.png)
+![Solver utility capture]supporting_artifacts/(solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54_utility_capture_plot.png)
 
-![Solver miniML plot](plot_solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54.png)
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54.png)
 
-Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54.png)
 
-![SHAP summary plot](shap_summary_plot_solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54.png)
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54.png)
 
 ## Solver SHCI_pt_2e-4, ad964781-302e-4728-a26d-39918e0a6cdb
 
@@ -248,9 +294,9 @@ algorithm_details:SHCI with eps_var 2e-4 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 2657eba4-a179-4d81-a1af-9fc71ec31d0c
+performance_metrics_uuid: 9ff7cdc4-75a1-4f59-add9-1b73e9362e32
 
-creation_timestamp: 2025-01-28T17:07:42.747013+00:00
+creation_timestamp: 2025-01-30T17:45:00.466432+00:00
 
 number_of_problem_instances: 84
 
@@ -272,27 +318,31 @@ max_run_time_of_attempted_tasks: 77244.15200000002
 
 sum_of_run_time_of_attempted_tasks: 1863349.633000001
 
-solvability_ratio: 0.5184
+solvability_ratio: 1.0
 
-f1_score: [0.6486486486486487, 0.953405017921147]
+comment: solvability ratio based on PCA embedding.
+
+f1_score: [0.6451612903225806, 0.9614035087719298]
 
 ml_metrics_calculator_version: 1
 
-![Solver success/failure plot](solver_ad964781-302e-4728-a26d-39918e0a6cdb_plot.png)
+![Solver success/failure plot](supporting_artifacts/solver_ad964781-302e-4728-a26d-39918e0a6cdb_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_ad964781-302e-4728-a26d-39918e0a6cdb_plot.png)
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_ad964781-302e-4728-a26d-39918e0a6cdb_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver utility capture](solver_ad964781-302e-4728-a26d-39918e0a6cdb_utility_capture_plot.png)
+![Solver utility capture]supporting_artifacts/(solver_ad964781-302e-4728-a26d-39918e0a6cdb_utility_capture_plot.png)
 
-![Solver miniML plot](plot_solver_ad964781-302e-4728-a26d-39918e0a6cdb.png)
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_ad964781-302e-4728-a26d-39918e0a6cdb.png)
 
-Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_ad964781-302e-4728-a26d-39918e0a6cdb.png)
 
-![SHAP summary plot](shap_summary_plot_solver_ad964781-302e-4728-a26d-39918e0a6cdb.png)
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_ad964781-302e-4728-a26d-39918e0a6cdb.png)
 
 ## Solver SHCI_pt_2e-5, c71b90bd-3250-4c0c-b4e7-fc9878f141f6
 
@@ -308,9 +358,9 @@ algorithm_details:SHCI with eps_var 2e-5 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: cb2a5002-0658-4d82-be07-24f3bf003941
+performance_metrics_uuid: c8b06cd5-765a-4d01-8394-58cbe98b3be7
 
-creation_timestamp: 2025-01-28T17:07:42.747013+00:00
+creation_timestamp: 2025-01-30T17:45:00.466432+00:00
 
 number_of_problem_instances: 84
 
@@ -332,27 +382,31 @@ max_run_time_of_attempted_tasks: 77244.15200000002
 
 sum_of_run_time_of_attempted_tasks: 1863349.633000001
 
-solvability_ratio: 0.8922
+solvability_ratio: 1.0
 
-f1_score: [1.0, 1.0]
+comment: solvability ratio based on PCA embedding.
+
+f1_score: [0.375, 0.9666666666666667]
 
 ml_metrics_calculator_version: 1
 
-![Solver success/failure plot](solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6_plot.png)
+![Solver success/failure plot](supporting_artifacts/solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6_plot.png)
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver utility capture](solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6_utility_capture_plot.png)
+![Solver utility capture]supporting_artifacts/(solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6_utility_capture_plot.png)
 
-![Solver miniML plot](plot_solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6.png)
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6.png)
 
-Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6.png)
 
-![SHAP summary plot](shap_summary_plot_solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6.png)
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6.png)
 
 ## Solver SHCI_pt_5e-5, d626506c-7aae-4ad6-802a-b29af5f2bb93
 
@@ -368,9 +422,9 @@ algorithm_details:SHCI with eps_var 5e-5 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 9a4c296f-2c56-4d43-8ca5-b0d7724f156f
+performance_metrics_uuid: dca2c01a-ca56-45c7-a2c6-7eafcc6e63eb
 
-creation_timestamp: 2025-01-28T17:07:42.747013+00:00
+creation_timestamp: 2025-01-30T17:45:00.466432+00:00
 
 number_of_problem_instances: 84
 
@@ -392,27 +446,31 @@ max_run_time_of_attempted_tasks: 77244.15200000002
 
 sum_of_run_time_of_attempted_tasks: 1863349.633000001
 
-solvability_ratio: 0.482
+solvability_ratio: 1.0
 
-f1_score: [0.75, 0.971830985915493]
+comment: solvability ratio based on PCA embedding.
+
+f1_score: [0.9375, 0.9929577464788732]
 
 ml_metrics_calculator_version: 1
 
-![Solver success/failure plot](solver_d626506c-7aae-4ad6-802a-b29af5f2bb93_plot.png)
+![Solver success/failure plot](supporting_artifacts/solver_d626506c-7aae-4ad6-802a-b29af5f2bb93_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_d626506c-7aae-4ad6-802a-b29af5f2bb93_plot.png)
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_d626506c-7aae-4ad6-802a-b29af5f2bb93_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver utility capture](solver_d626506c-7aae-4ad6-802a-b29af5f2bb93_utility_capture_plot.png)
+![Solver utility capture]supporting_artifacts/(solver_d626506c-7aae-4ad6-802a-b29af5f2bb93_utility_capture_plot.png)
 
-![Solver miniML plot](plot_solver_d626506c-7aae-4ad6-802a-b29af5f2bb93.png)
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_d626506c-7aae-4ad6-802a-b29af5f2bb93.png)
 
-Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_d626506c-7aae-4ad6-802a-b29af5f2bb93.png)
 
-![SHAP summary plot](shap_summary_plot_solver_d626506c-7aae-4ad6-802a-b29af5f2bb93.png)
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_d626506c-7aae-4ad6-802a-b29af5f2bb93.png)
 
 ## Solver SHCI_var_2e-4, 0db183e3-a86d-491b-9125-599556e37c7a
 
@@ -428,9 +486,9 @@ algorithm_details:SHCI with eps_var 2e-4
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: dd15fb24-e981-4464-81ac-fa60a71d2b2e
+performance_metrics_uuid: e740bd1c-eab8-4fef-9062-b7ccd11a0334
 
-creation_timestamp: 2025-01-28T17:07:42.747013+00:00
+creation_timestamp: 2025-01-30T17:45:00.466432+00:00
 
 number_of_problem_instances: 84
 
@@ -452,27 +510,31 @@ max_run_time_of_attempted_tasks: 77244.15200000002
 
 sum_of_run_time_of_attempted_tasks: 1863349.633000001
 
-solvability_ratio: 0.3462
+solvability_ratio: 0.3499
 
-f1_score: [0.9864864864864865, 0.9880952380952381]
+comment: solvability ratio based on PCA embedding.
+
+f1_score: [0.9536423841059603, 0.9575757575757575]
 
 ml_metrics_calculator_version: 1
 
-![Solver success/failure plot](solver_0db183e3-a86d-491b-9125-599556e37c7a_plot.png)
+![Solver success/failure plot](supporting_artifacts/solver_0db183e3-a86d-491b-9125-599556e37c7a_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_0db183e3-a86d-491b-9125-599556e37c7a_plot.png)
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_0db183e3-a86d-491b-9125-599556e37c7a_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver utility capture](solver_0db183e3-a86d-491b-9125-599556e37c7a_utility_capture_plot.png)
+![Solver utility capture]supporting_artifacts/(solver_0db183e3-a86d-491b-9125-599556e37c7a_utility_capture_plot.png)
 
-![Solver miniML plot](plot_solver_0db183e3-a86d-491b-9125-599556e37c7a.png)
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_0db183e3-a86d-491b-9125-599556e37c7a.png)
 
-Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_0db183e3-a86d-491b-9125-599556e37c7a.png)
 
-![SHAP summary plot](shap_summary_plot_solver_0db183e3-a86d-491b-9125-599556e37c7a.png)
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_0db183e3-a86d-491b-9125-599556e37c7a.png)
 
 ## Solver SHCI_var_2e-5, 86bfe50c-9342-4d54-bb68-abc8abd95688
 
@@ -488,9 +550,9 @@ algorithm_details:SHCI with eps_var 2e-5
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: a94c949a-a859-4d07-b25c-28094afea9db
+performance_metrics_uuid: 23b952fc-495e-4ea8-be36-60eca9777f9c
 
-creation_timestamp: 2025-01-28T17:07:42.747013+00:00
+creation_timestamp: 2025-01-30T17:45:00.466432+00:00
 
 number_of_problem_instances: 84
 
@@ -512,27 +574,31 @@ max_run_time_of_attempted_tasks: 77244.15200000002
 
 sum_of_run_time_of_attempted_tasks: 1863349.633000001
 
-solvability_ratio: 0.592
+solvability_ratio: 0.5812
 
-f1_score: [0.8846153846153846, 0.9772727272727273]
+comment: solvability ratio based on PCA embedding.
+
+f1_score: [0.8627450980392157, 0.9735849056603774]
 
 ml_metrics_calculator_version: 1
 
-![Solver success/failure plot](solver_86bfe50c-9342-4d54-bb68-abc8abd95688_plot.png)
+![Solver success/failure plot](supporting_artifacts/solver_86bfe50c-9342-4d54-bb68-abc8abd95688_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_86bfe50c-9342-4d54-bb68-abc8abd95688_plot.png)
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_86bfe50c-9342-4d54-bb68-abc8abd95688_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver utility capture](solver_86bfe50c-9342-4d54-bb68-abc8abd95688_utility_capture_plot.png)
+![Solver utility capture]supporting_artifacts/(solver_86bfe50c-9342-4d54-bb68-abc8abd95688_utility_capture_plot.png)
 
-![Solver miniML plot](plot_solver_86bfe50c-9342-4d54-bb68-abc8abd95688.png)
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_86bfe50c-9342-4d54-bb68-abc8abd95688.png)
 
-Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_86bfe50c-9342-4d54-bb68-abc8abd95688.png)
 
-![SHAP summary plot](shap_summary_plot_solver_86bfe50c-9342-4d54-bb68-abc8abd95688.png)
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_86bfe50c-9342-4d54-bb68-abc8abd95688.png)
 
 ## Solver SHCI_var_5e-5, 01949b95-c427-4693-9134-01f47f688c09
 
@@ -548,9 +614,9 @@ algorithm_details:SHCI with eps_var 5e-5
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 48fc7a3a-bf8a-4fa4-b168-62de5ab1f49b
+performance_metrics_uuid: 8ff27cfa-5bd7-4482-b712-d4f6c7a01439
 
-creation_timestamp: 2025-01-28T17:07:42.747013+00:00
+creation_timestamp: 2025-01-30T17:45:00.466432+00:00
 
 number_of_problem_instances: 84
 
@@ -572,27 +638,31 @@ max_run_time_of_attempted_tasks: 77244.15200000002
 
 sum_of_run_time_of_attempted_tasks: 1863349.633000001
 
-solvability_ratio: 0.3443
+solvability_ratio: 0.6393
 
-f1_score: [0.85, 0.9491525423728814]
+comment: solvability ratio based on PCA embedding.
+
+f1_score: [0.8395061728395061, 0.9446808510638298]
 
 ml_metrics_calculator_version: 1
 
-![Solver success/failure plot](solver_01949b95-c427-4693-9134-01f47f688c09_plot.png)
+![Solver success/failure plot](supporting_artifacts/solver_01949b95-c427-4693-9134-01f47f688c09_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_01949b95-c427-4693-9134-01f47f688c09_plot.png)
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_01949b95-c427-4693-9134-01f47f688c09_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver utility capture](solver_01949b95-c427-4693-9134-01f47f688c09_utility_capture_plot.png)
+![Solver utility capture]supporting_artifacts/(solver_01949b95-c427-4693-9134-01f47f688c09_utility_capture_plot.png)
 
-![Solver miniML plot](plot_solver_01949b95-c427-4693-9134-01f47f688c09.png)
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_01949b95-c427-4693-9134-01f47f688c09.png)
 
-Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_01949b95-c427-4693-9134-01f47f688c09.png)
 
-![SHAP summary plot](shap_summary_plot_solver_01949b95-c427-4693-9134-01f47f688c09.png)
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_01949b95-c427-4693-9134-01f47f688c09.png)
 
 ## Solver DF_QPE, 5dad4064-cd11-412f-85cb-d722afe3b3de
 
@@ -612,9 +682,9 @@ logical_resource_estimate_solution_uuid:fc17e113-d2e0-49ab-955a-6fc08c6eb2f9
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: ff0f05ef-a965-43d1-8960-c8b0e3ca996d
+performance_metrics_uuid: a874f899-b02a-4a83-8590-9aae0fbd0179
 
-creation_timestamp: 2025-01-28T17:07:42.747013+00:00
+creation_timestamp: 2025-01-30T17:45:00.466432+00:00
 
 number_of_problem_instances: 84
 
@@ -644,21 +714,23 @@ ml_metrics_calculator_version: 1
 
 comment: All labels were either all `True` or all `False` and we cannot create an ML model with only one class.
 
-![Solver success/failure plot](solver_5dad4064-cd11-412f-85cb-d722afe3b3de_plot.png)
+![Solver success/failure plot](supporting_artifacts/solver_5dad4064-cd11-412f-85cb-d722afe3b3de_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_5dad4064-cd11-412f-85cb-d722afe3b3de_plot.png)
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_5dad4064-cd11-412f-85cb-d722afe3b3de_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver utility capture](solver_5dad4064-cd11-412f-85cb-d722afe3b3de_utility_capture_plot.png)
+![Solver utility capture]supporting_artifacts/(solver_5dad4064-cd11-412f-85cb-d722afe3b3de_utility_capture_plot.png)
 
-![Solver miniML plot](plot_solver_5dad4064-cd11-412f-85cb-d722afe3b3de.png)
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_5dad4064-cd11-412f-85cb-d722afe3b3de.png)
 
-Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_5dad4064-cd11-412f-85cb-d722afe3b3de.png)
 
-![SHAP summary plot](shap_summary_plot_solver_5dad4064-cd11-412f-85cb-d722afe3b3de.png)
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_5dad4064-cd11-412f-85cb-d722afe3b3de.png)
 
 ## Solver CISD, 418f060e-496b-4024-8d2d-9b1f8791e76d
 
@@ -674,9 +746,9 @@ algorithm_details:CISD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: f977a25c-b18a-47f4-b8e0-81979949b19f
+performance_metrics_uuid: 8af2957d-4b07-424f-a323-9161d8e16720
 
-creation_timestamp: 2025-01-28T17:07:42.747013+00:00
+creation_timestamp: 2025-01-30T17:45:00.466432+00:00
 
 number_of_problem_instances: 84
 
@@ -698,27 +770,31 @@ max_run_time_of_attempted_tasks: 62.58296537399292
 
 sum_of_run_time_of_attempted_tasks: 2929.870177745819
 
-solvability_ratio: 0.2773
+solvability_ratio: 0.0079
 
-f1_score: [0.9819494584837545, 0.8717948717948718]
+comment: solvability ratio based on PCA embedding.
+
+f1_score: [0.9782608695652174, 0.85]
 
 ml_metrics_calculator_version: 1
 
-![Solver success/failure plot](solver_418f060e-496b-4024-8d2d-9b1f8791e76d_plot.png)
+![Solver success/failure plot](supporting_artifacts/solver_418f060e-496b-4024-8d2d-9b1f8791e76d_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_418f060e-496b-4024-8d2d-9b1f8791e76d_plot.png)
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_418f060e-496b-4024-8d2d-9b1f8791e76d_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver utility capture](solver_418f060e-496b-4024-8d2d-9b1f8791e76d_utility_capture_plot.png)
+![Solver utility capture]supporting_artifacts/(solver_418f060e-496b-4024-8d2d-9b1f8791e76d_utility_capture_plot.png)
 
-![Solver miniML plot](plot_solver_418f060e-496b-4024-8d2d-9b1f8791e76d.png)
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_418f060e-496b-4024-8d2d-9b1f8791e76d.png)
 
-Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_418f060e-496b-4024-8d2d-9b1f8791e76d.png)
 
-![SHAP summary plot](shap_summary_plot_solver_418f060e-496b-4024-8d2d-9b1f8791e76d.png)
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_418f060e-496b-4024-8d2d-9b1f8791e76d.png)
 
 ## Solver CCSD(T), c09217e6-d0f7-4b0f-81c4-79210b7ac878
 
@@ -734,9 +810,9 @@ algorithm_details:CCSD(T)
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 55960442-3a06-48c0-a7cb-4841d1f1f871
+performance_metrics_uuid: 2a64a87c-df90-4c35-9f65-3f73a9572eca
 
-creation_timestamp: 2025-01-28T17:07:42.747013+00:00
+creation_timestamp: 2025-01-30T17:45:00.466432+00:00
 
 number_of_problem_instances: 84
 
@@ -758,27 +834,31 @@ max_run_time_of_attempted_tasks: 493.4080808162689
 
 sum_of_run_time_of_attempted_tasks: 13199.317583084106
 
-solvability_ratio: 0.8567
+solvability_ratio: 0.6011
 
-f1_score: [0.8795180722891566, 0.8666666666666667]
+comment: solvability ratio based on PCA embedding.
+
+f1_score: [0.8695652173913043, 0.864516129032258]
 
 ml_metrics_calculator_version: 1
 
-![Solver success/failure plot](solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_plot.png)
+![Solver success/failure plot](supporting_artifacts/solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_plot.png)
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver utility capture](solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_utility_capture_plot.png)
+![Solver utility capture]supporting_artifacts/(solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_utility_capture_plot.png)
 
-![Solver miniML plot](plot_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878.png)
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878.png)
 
-Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878.png)
 
-![SHAP summary plot](shap_summary_plot_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878.png)
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878.png)
 
 ## Solver HF, 5f5e617a-19c2-4d82-bebc-b2d6b3dcb012
 
@@ -794,9 +874,9 @@ algorithm_details:Hartree Fock
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: d3040414-62ea-470b-8694-23b30cbbe4d8
+performance_metrics_uuid: 454c3ce7-6f3b-47b3-b784-f9a2da023c3e
 
-creation_timestamp: 2025-01-28T17:07:42.747013+00:00
+creation_timestamp: 2025-01-30T17:45:00.466432+00:00
 
 number_of_problem_instances: 84
 
@@ -820,25 +900,29 @@ sum_of_run_time_of_attempted_tasks: 906.4860525131226
 
 solvability_ratio: 0.0
 
+comment: solvability ratio based on PCA embedding.
+
 f1_score: [0.9867549668874173, 0.7142857142857143]
 
 ml_metrics_calculator_version: 1
 
-![Solver success/failure plot](solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012_plot.png)
+![Solver success/failure plot](supporting_artifacts/solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012_plot.png)
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver utility capture](solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012_utility_capture_plot.png)
+![Solver utility capture]supporting_artifacts/(solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012_utility_capture_plot.png)
 
-![Solver miniML plot](plot_solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012.png)
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012.png)
 
-Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012.png)
 
-![SHAP summary plot](shap_summary_plot_solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012.png)
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012.png)
 
 ## Solver MP2, b420358b-5def-41e6-8c5d-b9d93b6aecd2
 
@@ -854,9 +938,9 @@ algorithm_details:MP2
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: e445e548-c86f-4d2f-8772-ae2f1a951f36
+performance_metrics_uuid: 31522f8f-1c01-4fec-9bdf-1c12aca7471d
 
-creation_timestamp: 2025-01-28T17:07:42.747013+00:00
+creation_timestamp: 2025-01-30T17:45:00.466432+00:00
 
 number_of_problem_instances: 84
 
@@ -880,25 +964,29 @@ sum_of_run_time_of_attempted_tasks: 94.7442626953125
 
 solvability_ratio: 0.0
 
+comment: solvability ratio based on PCA embedding.
+
 f1_score: [0.9867549668874173, 0.7142857142857143]
 
 ml_metrics_calculator_version: 1
 
-![Solver success/failure plot](solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2_plot.png)
+![Solver success/failure plot](supporting_artifacts/solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2_plot.png)
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver utility capture](solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2_utility_capture_plot.png)
+![Solver utility capture]supporting_artifacts/(solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2_utility_capture_plot.png)
 
-![Solver miniML plot](plot_solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2.png)
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2.png)
 
-Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2.png)
 
-![SHAP summary plot](shap_summary_plot_solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2.png)
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2.png)
 
 ## Solver CCSD, 0a29e54f-bef9-4d19-bafa-d94b1c4b37aa
 
@@ -914,9 +1002,9 @@ algorithm_details:CCSD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: b1019247-1377-4706-9522-5cb5407e5407
+performance_metrics_uuid: 2833f154-b15d-4549-9649-fd2bb6cd7d3b
 
-creation_timestamp: 2025-01-28T17:07:42.747013+00:00
+creation_timestamp: 2025-01-30T17:45:00.466432+00:00
 
 number_of_problem_instances: 84
 
@@ -938,27 +1026,31 @@ max_run_time_of_attempted_tasks: 485.1982181072235
 
 sum_of_run_time_of_attempted_tasks: 12252.72845697403
 
-solvability_ratio: 0.0154
+solvability_ratio: 0.0
 
-f1_score: [0.9777777777777777, 0.8695652173913043]
+comment: solvability ratio based on PCA embedding.
+
+f1_score: [0.9886792452830189, 0.9411764705882353]
 
 ml_metrics_calculator_version: 1
 
-![Solver success/failure plot](solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa_plot.png)
+![Solver success/failure plot](supporting_artifacts/solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa_plot.png)
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver utility capture](solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa_utility_capture_plot.png)
+![Solver utility capture]supporting_artifacts/(solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa_utility_capture_plot.png)
 
-![Solver miniML plot](plot_solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa.png)
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa.png)
 
-Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa.png)
 
-![SHAP summary plot](shap_summary_plot_solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa.png)
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa.png)
 
 ## Solver DMRG_Niagara_cluster_lowest_energy, 16537433-9f4c-4eae-a65d-787dc3b35b59
 
@@ -974,9 +1066,9 @@ algorithm_details:DMRG with the lowest variational energy obtained so far.
 
 software_details:Block2 v0.5.3rc16 with dmrghandler, commit version d603fdc6409fc194a416aa3a519362d5d91790d9 or later.
 
-performance_metrics_uuid: 9722e21e-c0ad-4112-b0fb-ce12fe834fbe
+performance_metrics_uuid: ba1f55ba-aa5a-406a-9405-8c62ee76c00a
 
-creation_timestamp: 2025-01-28T17:07:42.747013+00:00
+creation_timestamp: 2025-01-30T17:45:00.466432+00:00
 
 number_of_problem_instances: 84
 
@@ -998,27 +1090,31 @@ max_run_time_of_attempted_tasks: 80820.729907066
 
 sum_of_run_time_of_attempted_tasks: 2471726.9051446947
 
-solvability_ratio: 0.3405
+solvability_ratio: 0.5461
+
+comment: solvability ratio based on PCA embedding.
 
 f1_score: [0.9662921348314607, 0.986784140969163]
 
 ml_metrics_calculator_version: 1
 
-![Solver success/failure plot](solver_16537433-9f4c-4eae-a65d-787dc3b35b59_plot.png)
+![Solver success/failure plot](supporting_artifacts/solver_16537433-9f4c-4eae-a65d-787dc3b35b59_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_16537433-9f4c-4eae-a65d-787dc3b35b59_plot.png)
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_16537433-9f4c-4eae-a65d-787dc3b35b59_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver utility capture](solver_16537433-9f4c-4eae-a65d-787dc3b35b59_utility_capture_plot.png)
+![Solver utility capture]supporting_artifacts/(solver_16537433-9f4c-4eae-a65d-787dc3b35b59_utility_capture_plot.png)
 
-![Solver miniML plot](plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png)
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png)
 
-Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png)
 
-![SHAP summary plot](shap_summary_plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png)
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_16537433-9f4c-4eae-a65d-787dc3b35b59.png)
 
 ## Solver DF_QPE, 6f385080-934b-4cbb-b813-39c2cb61349e
 
@@ -1038,9 +1134,9 @@ logical_resource_estimate_solution_uuid:0b647970-5b30-47f0-bbca-1a83704b9e06
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: cae2d073-ae33-4ef3-8fde-e0b737f1f641
+performance_metrics_uuid: ee63a8ee-17b5-4e7f-bf29-176ee801c905
 
-creation_timestamp: 2025-01-28T17:07:42.747013+00:00
+creation_timestamp: 2025-01-30T17:45:00.466432+00:00
 
 number_of_problem_instances: 84
 
@@ -1070,33 +1166,81 @@ ml_metrics_calculator_version: 1
 
 comment: All labels were either all `True` or all `False` and we cannot create an ML model with only one class.
 
-![Solver success/failure plot](solver_6f385080-934b-4cbb-b813-39c2cb61349e_plot.png)
+![Solver success/failure plot](supporting_artifacts/solver_6f385080-934b-4cbb-b813-39c2cb61349e_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_6f385080-934b-4cbb-b813-39c2cb61349e_plot.png)
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_6f385080-934b-4cbb-b813-39c2cb61349e_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver utility capture](solver_6f385080-934b-4cbb-b813-39c2cb61349e_utility_capture_plot.png)
+![Solver utility capture]supporting_artifacts/(solver_6f385080-934b-4cbb-b813-39c2cb61349e_utility_capture_plot.png)
 
-![Solver miniML plot](plot_solver_6f385080-934b-4cbb-b813-39c2cb61349e.png)
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_6f385080-934b-4cbb-b813-39c2cb61349e.png)
 
-Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_6f385080-934b-4cbb-b813-39c2cb61349e.png)
 
-![SHAP summary plot](shap_summary_plot_solver_6f385080-934b-4cbb-b813-39c2cb61349e.png)
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
 
-# Non-negative matrix factorization (ML latent space)
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_6f385080-934b-4cbb-b813-39c2cb61349e.png)
 
-![NNMF plot](nnmf_components.png)
+# ML Feature Analysis
+
+![NNMF components plot](supporting_artifacts/nnmf_components.png)
 
 Features: ['max_vertex_degree', 'min_vertex_degree', 'mean_vertex_degree', 'std_dev_vertex_degree', 'max_weight', 'min_weight', 'mean_weight', 'std_dev_weight', 'max_edge_order', 'mean_edge_order', 'std_dev_edge_order', 'one_norm', 'log_fci_dim', 'n_elec', 'n_orbs', 'df_gap']
 
-Component 1: [0.36604788 0.3465517  0.3656555  0.36466294 0.49391307 0.
- 0.         0.07560829 0.70083452 0.73297542 0.69367903 0.39707278
- 0.62804024 0.33874397 0.7006798  0.57585866]
+NNMF Component 1: [0.35690922 0.38545468 0.35487749 0.35852601 0.51063391 0.
+ 0.         0.0515893  0.89395573 0.92611292 0.88423213 0.48450204
+ 0.86941452 0.49234596 0.89376327 0.49515561]
 
-Component 2: [0.         0.         0.         0.         0.06352889 1.09340886
- 0.56300493 0.44159773 0.05242832 0.01821226 0.07191467 0.
- 0.12812831 0.07525071 0.07071245 0.        ]
+NNMF Component 2: [0.         0.         0.         0.         0.05747991 1.00601694
+ 0.52355998 0.4045106  0.04642006 0.0127596  0.06203818 0.
+ 0.11068966 0.07250786 0.06174321 0.        ]
+
+![PCA components plot](supporting_artifacts/pca_components.png)
+
+Features: ['max_vertex_degree', 'min_vertex_degree', 'mean_vertex_degree', 'std_dev_vertex_degree', 'max_weight', 'min_weight', 'mean_weight', 'std_dev_weight', 'max_edge_order', 'mean_edge_order', 'std_dev_edge_order', 'one_norm', 'log_fci_dim', 'n_elec', 'n_orbs', 'df_gap']
+
+PCA Component 1: [-0.19469875 -0.1905585  -0.19330939 -0.19648849 -0.15688445  0.37161153
+  0.18959114  0.14129338 -0.34024927 -0.35312811 -0.33247843 -0.24744499
+ -0.25069969 -0.08107924 -0.33468266 -0.19367631]
+
+PCA Component 2: [ 0.19114047  0.13109532  0.18894197  0.19538013  0.01054327  0.67004575
+  0.35245706  0.22194563  0.141961    0.08731617  0.15593002  0.23400049
+ -0.09326605 -0.32024179  0.15208325  0.0928356 ]
+
+![Hamiltonian features correlation matrix](supporting_artifacts/hamiltonian_features_correlation_matrix_plot.png)
+
+![Histogram of Hamiltonian features: max_vertex_degree](supporting_artifacts/hamiltonian_feature_histogram_max_vertex_degree.png)
+
+![Histogram of Hamiltonian features: min_vertex_degree](supporting_artifacts/hamiltonian_feature_histogram_min_vertex_degree.png)
+
+![Histogram of Hamiltonian features: mean_vertex_degree](supporting_artifacts/hamiltonian_feature_histogram_mean_vertex_degree.png)
+
+![Histogram of Hamiltonian features: std_dev_vertex_degree](supporting_artifacts/hamiltonian_feature_histogram_std_dev_vertex_degree.png)
+
+![Histogram of Hamiltonian features: max_weight](supporting_artifacts/hamiltonian_feature_histogram_max_weight.png)
+
+![Histogram of Hamiltonian features: min_weight](supporting_artifacts/hamiltonian_feature_histogram_min_weight.png)
+
+![Histogram of Hamiltonian features: mean_weight](supporting_artifacts/hamiltonian_feature_histogram_mean_weight.png)
+
+![Histogram of Hamiltonian features: std_dev_weight](supporting_artifacts/hamiltonian_feature_histogram_std_dev_weight.png)
+
+![Histogram of Hamiltonian features: max_edge_order](supporting_artifacts/hamiltonian_feature_histogram_max_edge_order.png)
+
+![Histogram of Hamiltonian features: mean_edge_order](supporting_artifacts/hamiltonian_feature_histogram_mean_edge_order.png)
+
+![Histogram of Hamiltonian features: std_dev_edge_order](supporting_artifacts/hamiltonian_feature_histogram_std_dev_edge_order.png)
+
+![Histogram of Hamiltonian features: one_norm](supporting_artifacts/hamiltonian_feature_histogram_one_norm.png)
+
+![Histogram of Hamiltonian features: log_fci_dim](supporting_artifacts/hamiltonian_feature_histogram_log_fci_dim.png)
+
+![Histogram of Hamiltonian features: n_elec](supporting_artifacts/hamiltonian_feature_histogram_n_elec.png)
+
+![Histogram of Hamiltonian features: n_orbs](supporting_artifacts/hamiltonian_feature_histogram_n_orbs.png)
+
+![Histogram of Hamiltonian features: df_gap](supporting_artifacts/hamiltonian_feature_histogram_df_gap.png)
 
