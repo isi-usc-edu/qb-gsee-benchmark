@@ -28,12 +28,14 @@
 
 import argparse
 import logging
+from typing import Any 
 
 import os
 import shutil
 import sys, getopt
 import numpy as np
 import sklearn
+import sklearn.decomposition
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 import joblib # for saving the model
@@ -84,8 +86,6 @@ UNUSED_FEATURES = [
     "number_of_terms"
 ]
 THRESHOLD_FOR_CONFIDENCE_OF_SOLVABILITY = 0.5
-LATENT_MODEL_NAME = "NNMF" # only NNMF is supported at this time.
-MODEL_NAME = "SVM" # only SVM is supported at this time.
 KFOLD_NUM = 5
 HYPOPT_CV = True
 PARAM_GRID = {
@@ -109,8 +109,6 @@ class MiniML:
         
         self.rng_seed = rng_seed
         random.seed(self.rng_seed)
-        self.latent_model_name = LATENT_MODEL_NAME
-        self.model_name = MODEL_NAME
         self.features = FEATURES
         self.hypopt_cv = HYPOPT_CV
         self.param_grid = PARAM_GRID
@@ -125,8 +123,15 @@ class MiniML:
             suffixes=("","_duplicate_column")
         )
         self.task_uuids = self.solver_labels["task_uuid"]
-        self.shap_values = None # updated when .shap_analysis() called.
+        
+        # plots is a list of tuples of the form (figure, file_name)
+        # which is built up as methods are called.
+        self.plots = []
 
+        
+        # .shap_values are calculated when .shap_analysis() called later.
+        # .shap_analysis() is NOT called during .__init__().
+        self.shap_values = None 
         
         # order of operations matters!
         self.__validate_input_labels()
@@ -134,10 +139,30 @@ class MiniML:
         self.__shuffle_labels()
         self.__remove_zero_variance_columns()
         self.__scale_data()
-        self.__train_model()
+        self.__train_svm()
         self.__evaluate_model()
-        self.__get_projected_data()
-        self.__compute_ratio_of_solved_to_unsolved()
+        
+        self.__construct_nnmf_embedding(
+            embedding_scaler=self.all_ham_features_minmax_scaler
+        )
+        
+        self.__construct_pca_embedding(
+            embedding_scaler=self.all_ham_features_minmax_scaler
+        )
+
+        self.__compute_ratio_of_solved_to_unsolved(
+            embedding=self.pca, # or self.nnmf
+            embedding_scaler=self.all_ham_features_minmax_scaler
+        )
+
+        self.create_hamiltonian_feature_correlation_matrix_plot()
+        self.create_histograms_for_all_hamiltonian_features()
+
+        # NOTE: the following methods are called elsewhere to write out results:
+        # .write_all_plots()
+        # .write_probs_to_file()
+
+
 
         
 
@@ -181,11 +206,11 @@ class MiniML:
     def __filter_labels(self) -> None:
         """TODO: docstring.
         """
-        self.X = self.solver_labels.loc[:,FEATURES]
+        self.X = self.solver_labels.loc[:,self.features]
         self.Y = self.solver_labels.loc[:,"label"] # column header is `label`
         self.Y = self.Y.astype(bool) # enforce boolean type.
 
-        self.complete_hamiltonian_features = self.complete_hamiltonian_features.loc[:,FEATURES]
+        self.complete_hamiltonian_features = self.complete_hamiltonian_features.loc[:,self.features]
         
         
     def __shuffle_labels(self) -> None:
@@ -225,31 +250,37 @@ class MiniML:
     def __scale_data(self) -> None:
         """TODO:docstring
         """
-        self.ham_features_standard_scaler = StandardScaler()
 
-        # the scaler is based on ALLLLLL of the hamiltonian features.
-        self.ham_features_standard_scaler.fit(self.complete_hamiltonian_features)
-
+        # the SVM scaler is based on ALL of the Hamiltonian features.
+        self.svm_standard_scaler = StandardScaler()
+        self.svm_standard_scaler.fit(self.complete_hamiltonian_features)
+        
         # the scaler (based on all Ham features) is then applied to X.
-        self.X_scaled = self.ham_features_standard_scaler.transform(self.X)
-        self.X_train = self.X_scaled
-        self.Y_train = self.Y 
+        self.X_svm_scaled = self.svm_standard_scaler.transform(self.X)
+
+        # while .all_ham_features_standard_scaler will be the same value
+        # as .svm_standard_scaler, we create it for clarity/readability.
+        self.all_ham_features_standard_scaler = StandardScaler()
+        self.all_ham_features_standard_scaler.fit(self.complete_hamiltonian_features)
+
+        self.all_ham_features_minmax_scaler = MinMaxScaler()
+        self.all_ham_features_minmax_scaler.fit(self.complete_hamiltonian_features)
+
+        
 
 
-
-    def __train_model(self) -> None:
+    def __train_svm(self) -> None:
         """TODO: docstring"""
 
-        assert self.model_name =="SVM", "Error.  Only SVM is supported at this time."
-        self.model = SVC(
+        self.svm = SVC(
             random_state=self.rng_seed,
             class_weight='balanced'
         ) 
-        self.model.probability = True
+        self.svm.probability = True
 
-        if self.hypopt_cv: # TODO: maybe break this into a separate method.
-            self.model = GridSearchCV(
-                estimator=self.model,
+        if self.hypopt_cv:
+            self.svm = GridSearchCV(
+                estimator=self.svm,
                 param_grid=self.param_grid,
                 cv=self.kfold_num,
                 n_jobs=-1,
@@ -257,8 +288,8 @@ class MiniML:
                 error_score="raise"
             )
         
-        #SVM on centered and scaled data
-        self.model.fit(self.X_train, self.Y_train)
+        # SVM on centered and scaled data
+        self.svm.fit(self.X_svm_scaled, self.Y)
     
 
 
@@ -266,56 +297,50 @@ class MiniML:
         """TODO: docstring.  original:  This function returns the accuracy by the trained ML model ("model" with "model_name") on test_features with test_labels.
             Returns the f1-score (harmonic mean of precision and recall)
         """
-        Y_predicted = self.model.predict(self.X_train)
-        output = precision_recall_fscore_support(
-            self.Y_train,
+        Y_predicted = self.svm.predict(self.X_svm_scaled)
+        evaluation_results = precision_recall_fscore_support(
+            self.Y,
             Y_predicted
             # labels=np.array([0,1]) # results in this order.
         )
-        self.precision = output[0]
-        self.recall = output[1]
-        self.f1_score = output[2]
-        self.support = output[3]
+        self.precision = evaluation_results[0]
+        self.recall = evaluation_results[1]
+        self.f1_score = evaluation_results[2]
+        self.support = evaluation_results[3]
 
         self.precision_interpretation = f"Precision [class (target=False) , class (target=true) ]:  {100*self.precision[0]:.2f}%,  {100*self.precision[1]:.2f}"
         self.recall_interpretation = f"Recall [class (target=False) , class (target=true) ]:  {self.recall[0]:.2f}%,  {self.recall[1]:.2f}%"
         self.f1_score_interpretation = f"F1-score [class (target=False) , class (target=true) ]:  {self.f1_score[0]:.2f}%,  {self.f1_score[1]:.2f}%"
         
         self.classification_report = classification_report(
-            self.Y_train,
+            self.Y,
             Y_predicted
         )
 
         return self.f1_score
     
 
-    def __get_projected_data(self) -> None:
+    def __construct_nnmf_embedding(
+            self,
+            embedding_scaler: Any
+        ) -> None:
         """TODO: docstring"""
-        assert self.latent_model_name == "NNMF", \
-            "Error: only NNMF is supported at this time."
 
-        # Apply NNMF
-        # Normalize data
-        # NNMF requires non-negative input.  The data is non-negative, but we will scale in the range of
-        # min-max of the features which is great for reconstruction of valid points.
-        self.ham_features_scaler_minmax = MinMaxScaler()
-
-        self.complete_hamiltonian_features_scaled_minmax = self.ham_features_scaler_minmax.fit_transform(self.complete_hamiltonian_features)
-        
         self.nnmf = NMF(
             n_components=2,
             init='random',
             random_state=self.rng_seed,
             max_iter = 500
         )
-        self.nnmf_projected_data = self.nnmf.fit_transform(self.complete_hamiltonian_features_scaled_minmax)
+        self.nnmf.fit(embedding_scaler.transform(self.complete_hamiltonian_features))
+        self.nnmf.name = "NNMF"
         self.H = self.nnmf.components_
         
 
         fig = plt.figure()
         plt.title(f"NNMF Components")
-        plt.plot(self.H[0,:],'r-o')
-        plt.plot(self.H[1,:],'g-o')
+        plt.plot(self.nnmf.components_[0,:],'r-o')
+        plt.plot(self.nnmf.components_[1,:],'g-o')
         plt.legend(['Component 1', 'Component 2'])
         plt.xticks(np.arange(0,len(self.X.columns)))
         plt.xticks(rotation=30)
@@ -324,70 +349,96 @@ class MiniML:
             ha='right'
         )
         plt.tight_layout()
-        self.nnmf_components_plot = fig
-        self.nnmf_components_plot_file_name = f"nnmf_components.png"
+        self.plots.append((fig, f"nnmf_components.png"))
         plt.close()
 
 
-        self.reconstruction_error = f"TODO: Check this implementation.  It needs to go through several inverse transforms. And be computed for self.complete_hamiltonian_features."
-        # self.reconstruction_error = np.sqrt(
-        #     np.sum(
-        #         (self.ham_features_scaler_minmax.inverse_transform(self.nnmf.inverse_transform(self.nnmf_projected_data)) - self.X)**2
-        #     )
-        # )
+
+    def __construct_pca_embedding(
+            self,
+            embedding_scaler: Any
+        ) -> None:
+        """TODO: docstring"""
+        
+        self.pca = PCA(
+            n_components=2,
+            whiten=False # because we have whitened it already (politically incorrect name though)
+        )
+        self.pca.fit(embedding_scaler.transform(self.complete_hamiltonian_features))
+        self.pca.name = "PCA"
+
+        fig = plt.figure()
+        plt.title(f"PCA Components")
+        plt.plot(self.pca.components_[0,:],'r-o')
+        plt.plot(self.pca.components_[1,:],'g-o')
+        plt.legend(['Component 1', 'Component 2'])
+        plt.xticks(np.arange(0,len(self.X.columns)))
+        plt.xticks(rotation=30)
+        plt.gca().xaxis.set_ticklabels(
+            self.X.columns.to_list(),
+            ha='right'
+        )
+        plt.tight_layout()
+        self.plots.append((fig, f"pca_components.png"))
+        plt.close()
 
 
 
-    def __compute_ratio_of_solved_to_unsolved(self) -> float:
+
+    def __compute_ratio_of_solved_to_unsolved(
+            self,
+            embedding: Any,
+            embedding_scaler: Any
+        ) -> float:
+        """Compute the solvability ratio.
+
+        Args:
+            embedding (Any): In this case, pass in self.pca or self.nnmf.  It should have already been fitted!
+            scaler (Any): In this case, pass in self.ham_features_minmax_scaler or self.ham_features_standard_scaler.  It should have already been fitted!
+
+        Returns:
+            float: The solvability ratio between 0 and 1.
         """
-        TODO: docstring.  old one:  X here is the raw data.  It is uncentered and unscaled.  
-        
-        must have run self.__get_projected_data() first.
-        
-        """
 
-
-        # latent_sc, latent_model, proj_data, recons_error = getProjectedData(X, latent_model_name, draw_plot) #just PCA or NNMF in this code.  The UI has more dimensionality reduction algms
-        # self.ham_features_scaler_minmax, self.nnmf, self.nnmf_projected_data, self.reconstruction_error
-        #  recons_error = getProjectedData(X, latent_model_name, draw_plot) #just PCA or NNMF in this code.  The UI has more dimensionality reduction algms
-
-
+        try:
+            embedding_name = embedding.name
+        except:
+            embedding_name = str(embedding)
         
-        # min and max in 2 dimensions of projected data.
-        # note that self.nnmf_projected_data may be outside of the range [0,1].
-        # Hence, we take the min/max
-        x_min = np.min(self.nnmf_projected_data[:,0])
-        x_max = np.max(self.nnmf_projected_data[:,0])
+
+        embedded_data = embedding.transform(embedding_scaler.transform(self.complete_hamiltonian_features))
         
-        y_min = np.min(self.nnmf_projected_data[:,1])
-        y_max = np.max(self.nnmf_projected_data[:,1])
+        x_min = np.min(embedded_data[:,0])
+        x_max = np.max(embedded_data[:,0])
+        
+        y_min = np.min(embedded_data[:,1])
+        y_max = np.max(embedded_data[:,1])
         
         x = np.linspace(x_min, x_max + 0.09, 100) # 100 points evenly spaced
         y = np.linspace(y_min, y_max + 0.09, 100)
         XX, YY = np.meshgrid(x, y)   
         # NOTE: XX.shape is 100*100
 
-        nnmf_grid_points = np.c_[XX.ravel(), YY.ravel()] # grid of projected data
+        embedded_grid_points = np.c_[XX.ravel(), YY.ravel()] # grid of embedded data
         # NOTE: nnmf_grid_points.shape is 10000*2
 
         # undo latent transformation
-        # back to the original dimensionality undoing the rotation, centering, scaling and projection
-        back_projected_data = self.nnmf.inverse_transform(nnmf_grid_points) 
+        back_projected_data = embedding.inverse_transform(embedded_grid_points) 
         # NOTE: back_projected_data.shape is 10000*num_features (10000 from the 10000 grid points)
-        # now back_projected_data is MinMaxScaled in the range: [0,1]
-        # TODO: max is 1.3... which is larger than 1.  That may have to do with the extra 0.09 in the linspace.
         
-        # undo the minmax scaling:
-        back_projected_data = self.ham_features_scaler_minmax.inverse_transform(back_projected_data)
+        # undo the scaling scaling:
+        back_projected_data = embedding_scaler.inverse_transform(back_projected_data)
         # now back_projected_data is in the original units/scale of Hamiltonian features.
-        # TODO: this has some negative values.
-
-        # SVM model was trained on centered and scaled data... so transform again:
-        back_projected_data = self.ham_features_standard_scaler.transform(back_projected_data)
         
-        # now run the back_projected_data through the model to get a probability of success between [0,1].
-        back_projected_data_probs = self.model.predict_proba(np.asarray(back_projected_data)) 
-        # NOTE: back_projected_data_probability_of_success.shape is 10000*2
+        # SVM model was trained on centered and scaled data... so transform again:
+        back_projected_data = self.svm_standard_scaler.transform(back_projected_data)
+        
+        # now run the back_projected_data through the model
+        # to get a probability of success between [0,1].
+        back_projected_data_probs = self.svm.predict_proba(
+            np.asarray(back_projected_data)
+        )
+        # NOTE: back_projected_data_probs.shape is 10000*2
         # 10000 data points with [ Prob[Fail] , Prob[Solve] ] for each.
         
         Z0 = back_projected_data_probs[:,1].reshape(XX.shape) # index 1 is Prob[Solve]
@@ -416,26 +467,25 @@ class MiniML:
             norm=norm
         )
         
-        #projected X data
-        nnmf_transformed_X = self.nnmf.transform(self.ham_features_scaler_minmax.transform(self.X))
-
 
         # plot white stars for allllll Hamiltonians
-        nnmf_transformed_all_hams = self.nnmf.transform(self.ham_features_scaler_minmax.transform(self.complete_hamiltonian_features))
+        embedded_all_hams = embedding.transform(embedding_scaler.transform(self.complete_hamiltonian_features))
         plt.scatter(
-            x=nnmf_transformed_all_hams[:,0], # NNMF component 1
-            y=nnmf_transformed_all_hams[:,1], # NNMF component 2
+            x=embedded_all_hams[:,0], # component 1
+            y=embedded_all_hams[:,1], # component 2
             color="white",
             edgecolors="black",
             marker="*",
-            s=40 # default marker size is 50.  slightly smaller so circles below cover starts (where attempted)
+            s=40 # Slightly smaller than default marker size 50.
         )
+
 
         # plot blue/red dots for hamiltonians with reference energies solved/failed.
         # circles will cover stars where they appear.
+        embedded_X = embedding.transform(embedding_scaler.transform(self.X))
         plt.scatter(
-            x=nnmf_transformed_X[:,0], # NNMF component 1
-            y=nnmf_transformed_X[:,1], # NNMF component 2
+            x=embedded_X[:,0], # component 1
+            y=embedded_X[:,1], # component 2
             c=self.Y, # Y is True=Solved=Blue, False=Failed=Red
             s=50, # default marker size is 50.
             edgecolors='black',
@@ -446,14 +496,12 @@ class MiniML:
 
 
         cbar = plt.colorbar()
-        cbar.set_label("Probability that solver can estimate GSE (label==True)",rotation=270,x=1.25)
-        plt.title(f"Solver {self.solver_short_name} ({self.solver_uuid[0:4]}...)\nEmbedding: {self.latent_model_name}")
+        cbar.set_label("Probability of solver success",rotation=270,x=1.25)
+        plt.title(f"Solver {self.solver_short_name} ({self.solver_uuid[0:4]}...)\nEmbedding: {embedding_name}")
         plt.tight_layout()
-        self.solvability_surface_plot = fig
-        self.solvability_surface_plot_file_name = f"plot_solver_{self.solver_uuid}.png"
+        self.plots.append((fig, f"plot_solver_{self.solver_uuid}.png"))
         plt.close()
-            
-
+        
         num_solved = np.sum(back_projected_data_probs[:,1] > self.threshold_for_confidence_of_solvability)
         self.ml_solvability_ratio = num_solved/len(back_projected_data_probs)
         return self.ml_solvability_ratio
@@ -468,13 +516,13 @@ class MiniML:
         """
         # explain all the predictions in the test set
         explainer = shap.KernelExplainer(
-            model=self.model.predict_proba, # a function.
-            data=self.X_train, # X_train an np.ndarray
+            model=self.svm.predict_proba, # a function.
+            data=self.X_svm_scaled, # X_scaled an np.ndarray
             feature_names=self.X.columns, # X is original pandas.DataFrame
             seed=self.rng_seed
         )
         shap_values = explainer.shap_values(
-            self.X_train, # X_train an np.ndarray
+            self.X_svm_scaled, # X_scaled an np.ndarray
             nsamples=500
         )
         self.shap_values = shap_values
@@ -484,69 +532,63 @@ class MiniML:
         
         # NOTE: shap_values.shape = (num_rows, num_features, num_classes)
 
+        # TODO: standardize the ordering of the features
         shap.summary_plot(
             shap_values[:,:,0],
             feature_names=self.X.columns, # X is the original pd.DataFrame, with column headers.
             plot_type="bar",
             show=False, # do not show plot to screen.  save it to file later.
-            max_display=len(FEATURES)
+            max_display=len(self.features)
         )
-        plt.xlim([0,0.15]) # TODO: dynamically check to ensure this x-limit is large enough.
+        # plt.xlim([0,0.15]) # TODO: dynamically calculate the largest shap 
+        # value for ALL SOLVERs or probably pass the upper xlim in as an 
+        # argument to this method.
         plt.tight_layout()
-        self.shap_summary_plot = plt.gcf()
-        self.shap_summary_plot_file_name = f"shap_summary_plot_solver_{self.solver_uuid}.png"
-        self.shap_summary_plot.suptitle(f"SHAP summary plot {self.solver_short_name} ({self.solver_uuid[0:4]}...)")
+        plt.suptitle(f"SHAP summary plot {self.solver_short_name} ({self.solver_uuid[0:4]}...)")
+        shap_plot = plt.gcf()
+        shap_plot_file_name = f"shap_summary_plot_solver_{self.solver_uuid}.png"
+        self.plots.append((shap_plot, shap_plot_file_name))
         plt.close()
-        output_file_name = os.path.join("./ml_artifacts/",self.shap_summary_plot_file_name)
-        self.shap_summary_plot.savefig(output_file_name) # we write SHAP plots out upon creation unlike some other plots.
         
-        # shap.initjs()
-        # class_index = 1
-        # shap.force_plot(
-        #     explainer.expected_value[class_index],
-        #     shap_values[class_index],
-        #     self.X_train,
-        #     matplotlib=True,
-        #     show=False
-        # )        
+        # we write SHAP plots out upon creation unlike some other plots.
+        output_file_name = os.path.join("./ml_artifacts/",shap_plot_file_name)
+        shap_plot.savefig(output_file_name) 
+        
         
 
     def write_all_plots(self) -> None:
         """TODO: docstring
         """
-
-        output_file_name = os.path.join("./ml_artifacts/",self.solvability_surface_plot_file_name)
-        self.solvability_surface_plot.savefig(output_file_name)
-
-        output_file_name = os.path.join("./ml_artifacts/",self.nnmf_components_plot_file_name)
-        self.nnmf_components_plot.savefig(output_file_name)
-
-        self.write_hamiltonian_feature_correlation_matrix_plot()
-
-        self.write_histograms_for_all_hamiltonian_features()
+        for plot in self.plots:
+            fig, fig_file_name = plot
+            output_file_name = os.path.join("./ml_artifacts/",fig_file_name)
+            fig.savefig(output_file_name)
         
-        try:
-            output_file_name = os.path.join("./ml_artifacts/",self.shap_summary_plot_file_name)
-            self.shap_summary_plot.savefig(output_file_name)
-        except Exception as e:
-            logging.error(f"Error: failed to write SHAP plot.  Did you run SHAP analysis?")
+        if self.shap_values is None:
+            logging.warn(f"Warning:  did not write SHAP plot.  Did you run SHAP analysis?")
 
 
 
     
 
-    def write_probs_to_file(self) -> None:
+    def write_probs_to_file(
+            self,
+            embedding: Any,
+            embedding_scaler: Any
+        ) -> None:
         """TODO: docstring _summary_
         """
-        Y_predicted = self.model.predict(self.X_train)
-        self.probs = self.model.predict_proba(self.X_train)
+        Y_predicted = self.svm.predict(self.X_svm_scaled)
+        self.probs = self.svm.predict_proba(self.X_svm_scaled)
 
-        nnmf_transformed_X = self.nnmf.transform(self.ham_features_scaler_minmax.transform(self.X))
+        
+        embedded_X = embedding.transform(embedding_scaler.transform(self.X))
         df_2 = pd.DataFrame(
             {   
-                "nnmf_component_1": nnmf_transformed_X[:,0],
-                "nnmf_component_2": nnmf_transformed_X[:,1],
-                "Y_train": self.Y_train,
+                "embedding": [embedding.name]*len(self.probs),
+                "embedded_component_1": embedded_X[:,0],
+                "embedded_component_2": embedded_X[:,1],
+                "Y": self.Y,
                 "Y_predicted": Y_predicted,
                 "prob_class_0": self.probs[:,0],
                 "prob_class_1": self.probs[:,1]
@@ -559,7 +601,7 @@ class MiniML:
         df.to_csv(output_file_name, index=False)
 
 
-    def write_hamiltonian_feature_correlation_matrix_plot(self) -> None:
+    def create_hamiltonian_feature_correlation_matrix_plot(self) -> None:
         """TODO: docstring"""
         correlation_matrix = self.complete_hamiltonian_features.corr()
         
@@ -584,28 +626,23 @@ class MiniML:
         # cbar = plt.colorbar()
         # cbar.set_label("Correlation",rotation=270,x=1.25)
         plt.tight_layout()
-        self.feature_correlation_matrix_plot = fig # store it.
-        self.feature_correlation_matrix_plot_file_name = f"hamiltonian_features_correlation_matrix_plot.png"
-        output_file_name = os.path.join("./ml_artifacts/",self.feature_correlation_matrix_plot_file_name)
-        self.feature_correlation_matrix_plot.savefig(output_file_name) # also write to file.
+        self.plots.append((fig, f"hamiltonian_features_correlation_matrix_plot.png"))
         plt.close()
+
+
     
-    def write_histograms_for_all_hamiltonian_features(self) -> None:
+    def create_histograms_for_all_hamiltonian_features(self) -> None:
         """TODO: docstring"""
         num_features = len(self.complete_hamiltonian_features.columns)
 
         fig, axes = plt.subplots(num_features, 1, figsize=(8,6*num_features))
 
         for i, feature in enumerate(self.complete_hamiltonian_features):
-            test = self.complete_hamiltonian_features[feature]
             axes[i].hist(self.complete_hamiltonian_features[feature], bins=30)
             axes[i].set_title(f"Histogram of {feature}")
             axes[i].set_xlabel(feature)
         plt.tight_layout()
-        self.histograms_of_all_hamiltonian_features_plot = fig
-        self.histograms_of_all_hamiltonian_features_plot_file_name = f"histograms_of_all_hamiltonian_features.png"
-        output_file_name = os.path.join("./ml_artifacts/",self.histograms_of_all_hamiltonian_features_plot_file_name)
-        self.histograms_of_all_hamiltonian_features_plot.savefig(output_file_name) # also write to file.
+        self.plots.append((fig, f"histograms_of_all_hamiltonian_features.png"))
         plt.close()
         
     

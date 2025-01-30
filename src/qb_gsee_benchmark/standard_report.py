@@ -697,12 +697,12 @@ class StandardReport:
                 file.write(f"![SHAP summary plot](shap_summary_plot_solver_{solver_uuid}.png)\n\n")
         
             # at the end of the file, write out NNMF information for ML models:
-            file.write(f"# Non-negative matrix factorization (ML latent space)\n\n")
-            file.write(f"![NNMF plot](nnmf_components.png)\n\n")
-            solver_uuid = list(self.benchmark_data.solvers_dict.keys())[0]# just get the first solver_uuid.
-            file.write(f"Features: {self.benchmark_data.ml_models_dict[solver_uuid].features}\n\n")
-            for i in range(2):
-                file.write(f"Component {i+1}: {self.benchmark_data.ml_models_dict[solver_uuid].H[i]}\n\n")
+            # file.write(f"# Non-negative matrix factorization (ML latent space)\n\n")
+            # file.write(f"![NNMF plot](nnmf_components.png)\n\n")
+            # solver_uuid = list(self.benchmark_data.solvers_dict.keys())[0]# just get the first solver_uuid.
+            # file.write(f"Features: {self.benchmark_data.ml_models_dict[solver_uuid].features}\n\n")
+            # for i in range(2):
+            #     file.write(f"Component {i+1}: {self.benchmark_data.ml_models_dict[solver_uuid].H[i]}\n\n")
     
 
 

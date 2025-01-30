@@ -28,10 +28,12 @@ from qb_gsee_benchmark.utils import clear_or_create_output_directory
 
 def main(args: argparse.Namespace) -> None:
 
-    if args.DRYRUN_or_PRODUCTION == "DRYRUN" or args.DRYRUN_or_PRODUCTION == "PRODUCTION":
-        print("starting...")
-    else:
-        raise ValueError("user should type either DRYRUN or PRODUCTION as CLI argument.")
+    if args.production:
+        args.temp_results = False
+        args.validate_json = True
+        args.shap_analysis = True
+        args.data_to_csv = True
+    
 
 
     benchmark_data = BenchmarkData(
@@ -42,30 +44,38 @@ def main(args: argparse.Namespace) -> None:
         performance_metrics_directory="../performance_metrics"
     )
     
-    benchmark_data.to_csv(
-        f"all_data_{benchmark_data.datestamp}.csv"
-    )
-
+    
     benchmark_data.calculate_performance_metrics()
 
-    benchmark_data.validate_all_json_objects(
-        local_resolver_directory="../schemas"
-    )
-    print(f"All JSON files are OK!")
+    if args.data_to_csv:
+        benchmark_data.to_csv(
+            f"all_data_{benchmark_data.datestamp}.csv"
+        )
 
+    if args.validate_json:
+        benchmark_data.validate_all_json_objects(
+            local_resolver_directory="../schemas"
+        )
+        print(f"All JSON files are OK!")
 
-    if args.SHAP_analysis:
+    if args.shap_analysis:
         for solver_uuid in benchmark_data.ml_models_dict:
             try:
                 benchmark_data.ml_models_dict[solver_uuid].run_shap_analysis()
             except Exception as e:
                 print(f"Error: {e}")
                 print(f"probably no ML model for {solver_uuid}")
-    
+
+
+    # writing out ML plots in the /ml_artifacts directory.
     for solver_uuid in benchmark_data.ml_models_dict:
         try:
-            benchmark_data.ml_models_dict[solver_uuid].write_all_plots()
-            benchmark_data.ml_models_dict[solver_uuid].write_probs_to_file()
+            ml_model = benchmark_data.ml_models_dict[solver_uuid]
+            ml_model.write_all_plots()
+            ml_model.write_probs_to_file(
+                embedding=ml_model.pca, # or .nnmf
+                embedding_scaler=ml_model.all_ham_features_minmax_scaler
+            )
         except Exception as e:
             print(f"Error: {e}")
             print(f"probably no ML model for {solver_uuid}")
@@ -73,9 +83,22 @@ def main(args: argparse.Namespace) -> None:
             
 
 
-
-
-    if args.DRYRUN_or_PRODUCTION == "DRYRUN":
+    
+    
+    if args.production:
+        benchmark_data.write_performance_metrics_json_files(
+            output_directory=benchmark_data.performance_metrics_directory
+        )
+        resource_estimate_files_dir = f"resource_estimate_files_{benchmark_data.datestamp}"
+        benchmark_data.write_sponsor_resource_estimate_files(
+            output_directory=resource_estimate_files_dir
+        )
+        StandardReport(
+            benchmark_data=benchmark_data,
+            standard_report_output_directory="../standard_report"
+        )
+    
+    if args.temp_results:
         temp_results_dir = "temp_results"
         clear_or_create_output_directory(temp_results_dir)
         benchmark_data.write_performance_metrics_json_files(
@@ -89,21 +112,9 @@ def main(args: argparse.Namespace) -> None:
             benchmark_data=benchmark_data,
             standard_report_output_directory=os.path.join(temp_results_dir,"standard_report")
         )
-    elif args.DRYRUN_or_PRODUCTION == "PRODUCTION":
-        benchmark_data.write_performance_metrics_json_files(
-            output_directory=benchmark_data.performance_metrics_directory
-        )
-        resource_estimate_files_dir = f"resource_estimate_files_{benchmark_data.datestamp}"
-        benchmark_data.write_sponsor_resource_estimate_files(
-            output_directory=resource_estimate_files_dir
-        )
-        StandardReport(
-            benchmark_data=benchmark_data,
-            standard_report_output_directory="../standard_report"
-        )
-    else:
-        print("No action taken.  Select: DRYRUN or PRODUCTION.")
 
+    
+    print("done.")
     print(benchmark_data)
 
 
@@ -121,15 +132,34 @@ if __name__ == "__main__":
     )
     
     parser.add_argument(
-        "DRYRUN_or_PRODUCTION", 
-        type=str, 
-        help="typing DRYRUN places results in a temporary folder nearby for review.  PRODUCTION overwrites results."
-    )
-    parser.add_argument(
-        "--SHAP_analysis",
+        "--production", 
         action="store_true",
         default=False,
-        help="Run SHAP analysis and generate SHAP plots for ML models (WARNING: Take a long time!!)"
+        help="WARNING: This overrides any other options.  This does everything and overwrites the results in /standard_report."
+    )
+    parser.add_argument(
+        "--temp_results",
+        action="store_true",
+        default=False,
+        help="Place results into /temp_results for review."
+    )
+    parser.add_argument(
+        "--shap_analysis",
+        action="store_true",
+        default=False,
+        help="Run SHAP analysis and generate SHAP plots for ML models (WARNING: Takes a long time!)."
+    )
+    parser.add_argument(
+        "--validate_json",
+        action="store_true",
+        default=False,
+        help="Validate all JSON files."
+    )
+    parser.add_argument(
+        "--data_to_csv",
+        action="store_true",
+        default=False,
+        help="Write all benchmark data to all_data_YYYYMMDD.csv file."
     )
 
 
