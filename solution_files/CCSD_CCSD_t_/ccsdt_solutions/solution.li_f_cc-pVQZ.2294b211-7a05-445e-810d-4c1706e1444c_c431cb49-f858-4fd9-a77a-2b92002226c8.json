@@ -1,0 +1,52 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+  "solution_uuid": "c431cb49-f858-4fd9-a77a-2b92002226c8",
+  "problem_instance_uuid": "2294b211-7a05-445e-810d-4c1706e1444c",
+  "creation_timestamp": "2025-01-31T19:32:32.210191+00:00",
+  "latest_update_timestamp": "2025-01-31T19:32:32.210191+00:00",
+  "contact_info": [
+    {
+      "name": "Mohammad Reza Jangrouei",
+      "email": "m.r.jangrouei@gmail.com",
+      "institution": "University Of Toronto"
+    }
+  ],
+  "is_resource_estimate": false,
+  "solution_data": [
+    {
+      "task_uuid": "91dc47f6-fcbc-4980-a142-2d8810122a05",
+      "energy": -107.2386972258,
+      "energy_units": "Hartree",
+      "run_time": {
+        "overall_time": {
+          "seconds": 11.7226
+        }
+      },
+      "run_time_cpu": {
+        "overall_time": {
+          "seconds": 11.7226
+        }
+      },
+      "solution_details": {}
+    }
+  ],
+  "solver_details": {
+    "solver_uuid": "e534a7c2-00a9-4587-b0c2-9d2a6af08340",
+    "solver_short_name": "CCSD(T)",
+    "compute_hardware_type": "classical_computer",
+    "classical_hardware_details": {
+      "computing_environment_name": "Local Desktop",
+      "cpu_description": "Intel(R) Core(TM) i5-7500 CPU @ 3.40GHz",
+      "ram_available_gb": 7.6,
+      "clock_speed": "3.4 GHz",
+      "total_num_cores": 4
+    },
+    "algorithm_details": {
+      "description": "Coupled Cluster Singles, Doubles, and perturbative Triples [CCSD(T)]"
+    },
+    "software_details": {
+      "description": "PySCF 2.8.0"
+    }
+  },
+  "digital_signature": null
+}

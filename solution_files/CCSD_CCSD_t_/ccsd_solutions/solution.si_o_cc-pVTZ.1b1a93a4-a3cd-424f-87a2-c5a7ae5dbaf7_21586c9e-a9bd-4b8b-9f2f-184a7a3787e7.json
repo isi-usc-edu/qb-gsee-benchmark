@@ -1,0 +1,52 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+  "solution_uuid": "21586c9e-a9bd-4b8b-9f2f-184a7a3787e7",
+  "problem_instance_uuid": "1b1a93a4-a3cd-424f-87a2-c5a7ae5dbaf7",
+  "creation_timestamp": "2025-01-31T19:32:32.465296+00:00",
+  "latest_update_timestamp": "2025-01-31T19:32:32.465296+00:00",
+  "contact_info": [
+    {
+      "name": "Mohammad Reza Jangrouei",
+      "email": "m.r.jangrouei@gmail.com",
+      "institution": "University Of Toronto"
+    }
+  ],
+  "is_resource_estimate": false,
+  "solution_data": [
+    {
+      "task_uuid": "96ad725c-f4c5-40b3-8bd5-e22bf373e1b7",
+      "energy": -363.8789474248,
+      "energy_units": "Hartree",
+      "run_time": {
+        "overall_time": {
+          "seconds": 22.4437
+        }
+      },
+      "run_time_cpu": {
+        "overall_time": {
+          "seconds": 22.4437
+        }
+      },
+      "solution_details": {}
+    }
+  ],
+  "solver_details": {
+    "solver_uuid": "77bb1af4-9091-4788-9b73-6bf34b3ec426",
+    "solver_short_name": "CCSD",
+    "compute_hardware_type": "classical_computer",
+    "classical_hardware_details": {
+      "computing_environment_name": "Local Desktop",
+      "cpu_description": "Intel(R) Core(TM) i5-7500 CPU @ 3.40GHz",
+      "ram_available_gb": 7.6,
+      "clock_speed": "3.4 GHz",
+      "total_num_cores": 4
+    },
+    "algorithm_details": {
+      "description": "Coupled Cluster Singles and Doubles"
+    },
+    "software_details": {
+      "description": "PySCF 2.8.0"
+    }
+  },
+  "digital_signature": null
+}
