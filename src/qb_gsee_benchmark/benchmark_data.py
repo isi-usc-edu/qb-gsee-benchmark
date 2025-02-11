@@ -26,8 +26,11 @@ from uuid import uuid4
 
 import requests
 
+import seaborn as sns
 import pandas as pd
 import numpy as np
+from sklearn.metrics import pairwise_distances
+import matplotlib.pyplot as plt
 
 
 from qb_gsee_benchmark.utils import load_json_files
@@ -80,15 +83,23 @@ class BenchmarkData:
 
         # Calculations and data collation:
         # Order of operations matters!
-        #1:
         self.identify_unique_participating_solvers()
-        #2:
         self.calculate_solver_success_labels()
-        #3:
+        self.calculate_ml_scores()
+        self.calculate_all_shap_values(try_to_use_cached_shap_values=True)
+        self.write_all_ml_artifacts()
+        self.ml_post_processing()
         self.flatten_benchmark_data()
-        #4:
+        self.calculate_performance_metrics()
         self.calculate_sponsor_resource_estimates()
 
+        # NOTE: Not done automatically; called later:
+        # self.validate_all_json_objects(local_resolver_directory="../schemas")
+        # self.write_performance_metrics_json_files()
+        # self.write_sponsor_resource_estimate_files(**kwargs)
+
+
+        
 
 
 
@@ -100,7 +111,7 @@ class BenchmarkData:
 
 
 
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         return f"benchmark data with {len(self.problem_instance_list)} problem instances, and {len(self.solution_list)} solutions, submitted by {len(self.solvers_df)} solvers."
         
 
@@ -128,13 +139,13 @@ class BenchmarkData:
             name = listy[0]
             the_list = listy[1]
             if the_list is None:
-                print(f"{name} is None.")
+                logging.warning(f"JSON object list {name} is None.")
                 # this may happen if performance metrics have not yet been calculated.
             elif the_list ==[]:
-                print(f"{name} is empty.")
+                logging.warning(f"JSON object list {name} is empty.")
                 # this may happen if there are no resource estimates.
             else:
-                print(f"validating {name}...")
+                logging.info(f"validating JSON object list {name}...")
                 schema_url = the_list[0]["$schema"]
                 schema = requests.get(schema_url).json()
                 for json_dict in the_list:
@@ -336,10 +347,8 @@ class BenchmarkData:
 
 
 
-    def calculate_ml_scores(
-            self,
-        ) -> dict:
-        """TODO: `miniML.py` takes about 15 minutes.
+    def calculate_ml_scores(self) -> dict:
+        """TODO: docstring
 
         Returns:
             dict: _description_
@@ -365,7 +374,7 @@ class BenchmarkData:
                     "ml_metrics_calculator_version":1
                 }
             except Exception as e:
-                logging.error(f'Error: {e}', exc_info=True)
+                logging.error(f'{e}', exc_info=True)
                 mini_ml_model = "Model could not be calculated."
                 ml_scores_dict[solver_uuid] = {
                     "solvability_ratio":None,
@@ -383,6 +392,174 @@ class BenchmarkData:
 
 
 
+    def calculate_all_shap_values(
+            self,
+            try_to_use_cached_shap_values: bool
+        ) -> None:
+        """TODO: docstring"""
+        for solver_uuid in self.ml_models_dict:
+            try:
+                self.ml_models_dict[solver_uuid].run_shap_analysis(
+                    try_to_use_cached_shap_values=try_to_use_cached_shap_values
+                )
+            except Exception as e:
+                logging.error(f"{e}")
+                logging.warning(f"probably no ML model for {solver_uuid}")
+            
+
+
+
+
+
+
+    def ml_post_processing(self) -> None:
+        """TODO: docstring"""
+
+        Z0_embedding = {}
+        shap_values = {}
+        solver_short_names = {}
+        for solver_uuid, ml_model in self.ml_models_dict.items():
+            # aggregate all Z0 (ml solvability plot values)
+            try:
+                shap_values[solver_uuid] = ml_model.shap_values
+                Z0_embedding[solver_uuid] = ml_model.Z0_embedding["PCA"]["Z0"] # only PCA at this time.
+                num_features = len(ml_model.features)
+                solver_short_names[solver_uuid] = ml_model.solver_short_name
+            except Exception as e:
+                logging.error(f"{e}")
+                logging.warning(f"probably no ML model for {solver_uuid}")
+        
+        
+        shap_values_stack_up = np.array(list(shap_values.values()))
+        # shap_values_stack_up is num_solver x num_ml_input_vectors x num_features x 2
+        
+        num_solvers = len(Z0_embedding)
+
+
+        Z0_stack_up = np.array(list(Z0_embedding.values()))
+        # Each Z0 is 100x100 (the size of the 2D embedding)
+        # Z0_stack_up.shape is num_solvers x 100 x 100
+
+        Z0_stack_up = Z0_stack_up.reshape(Z0_stack_up.shape[0],-1)
+        # Z0_stack_up.shape is now num_solvers x 10000 (where 100x100=10000)
+        # The 100x100 has been flattened. 
+
+        
+
+        sub_sample = 10
+        num_grid_values = Z0_stack_up.shape[1]/sub_sample
+        area_summary = np.zeros((num_solvers, int(num_grid_values)))
+        shap_summary = np.zeros((num_solvers, num_features))
+        
+
+        classification = 1 # or may be 0.  Either way.
+
+        for solver_index in range(num_solvers):
+            shap_summary[solver_index,:] = \
+                np.mean(
+                    np.abs(
+                        shap_values_stack_up[solver_index, :, :, classification]
+                    ), 
+                    axis=0 # mean along the num_ml_input_vectors dimension.
+                )
+            
+
+            temp_area = Z0_stack_up[solver_index, :]
+            area_summary[solver_index, :] = temp_area[::sub_sample]
+
+        data = {
+            "Area_Summary":area_summary,
+            "SHAP_summary":shap_summary
+        }
+        for title, X in data.items(): # area and SHAP at this time.
+            # X is shape num_solvers x num_sub_sampled_data_points
+            similarity_matrix = np.exp(-pairwise_distances(X)**2 / (2*0.1**2))
+            self.create_similarity_matrix_plot(
+                title=title,
+                similarity_matrix=similarity_matrix,
+                solver_short_names=list(solver_short_names.values())
+            )
+            self.create_solver_spectral_clustering_plot(
+                title=title,
+                similarity_matrix=similarity_matrix,
+                solver_short_names=list(solver_short_names.values())
+            )
+
+
+    
+    def create_solver_spectral_clustering_plot(
+            self,
+            title: str,
+            similarity_matrix: np.ndarray,
+            solver_short_names: list
+        ) -> None:
+        """TODO: docstring"""
+        u, s, vh = np.linalg.svd(similarity_matrix, full_matrices=True)
+        proj=u*similarity_matrix
+
+        fig = plt.figure()
+        plt.title(f"Solver points in PCA space\n(PCA space of {title})")
+        
+        # TODO: make this list of colors more general wrt num_solvers
+        colors = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray']
+        for i in range(len(solver_short_names)):
+            plt.scatter(
+                proj[i,0],
+                proj[i,1],
+                marker="o",
+                c=colors[i],
+                label=solver_short_names[i]
+            )
+        plt.xlabel("Axis of Dissimilarity 1")
+        plt.ylabel("Axis of Dissimilarity 2")
+        plt.tight_layout()
+        fig.savefig(f"ml_artifacts/solver_similarity_in_PCA_space_of_{title.lower()}.png")
+        plt.close()
+
+        
+
+
+
+
+
+
+    def create_similarity_matrix_plot(
+            self,
+            title: str,
+            similarity_matrix: np.ndarray,
+            solver_short_names: list
+        ) -> None:
+        """TODO: docstring"""
+        sim_df = pd.DataFrame(
+            data=similarity_matrix,
+            columns=solver_short_names
+        )
+        g = sns.clustermap(
+            sim_df,
+            metric="euclidean",
+            standard_scale=1,
+            method="ward",
+            cmap="coolwarm",
+        )
+        g.ax_heatmap.set_yticklabels(g.ax_heatmap.get_xticklabels())
+        plt.setp(
+            g.ax_heatmap.get_xticklabels(),
+            rotation=45,
+            ha="right",
+            rotation_mode="anchor"
+        ) 
+        plt.setp(
+            g.ax_heatmap.get_yticklabels(),
+            rotation=0,
+            rotation_mode="anchor"
+        ) 
+        plt.title(f"Solver similarity matrix\n(based on {title})")
+        plt.tight_layout()
+        
+        g.savefig(f"ml_artifacts/solver_similarity_matrix_{title.lower()}.png")
+        plt.close()
+
+        
 
 
 
@@ -392,9 +569,20 @@ class BenchmarkData:
 
 
 
-
-
-
+    def write_all_ml_artifacts(self) -> None:
+        """TODO: docstring"""
+        for solver_uuid in self.ml_models_dict:
+            try:
+                ml_model = self.ml_models_dict[solver_uuid]
+                ml_model.write_all_plots()
+                ml_model.write_probs_to_file(
+                    embedding=ml_model.pca, # or .nnmf
+                    embedding_scaler=ml_model.all_ham_features_minmax_scaler
+                )
+            except Exception as e:
+                logging.error(f"{e}")
+                logging.warning(f"probably no ML model for {solver_uuid}")
+        
 
 
 
@@ -575,8 +763,8 @@ class BenchmarkData:
                             try:
                                 d["solved_within_accuracy_requirement"] = bool(np.abs(d["reported_energy"] - d["reference_energy"]) < d["accuracy_tol"])
                             except Exception as e:
-                                logging.error(f'Error: {e}', exc_info=True)
-                                logging.warning(f"warning!  no energy target specified in task {task_uuid}.  reference_energy={d['reference_energy']}")
+                                logging.error(f'{e}', exc_info=True)
+                                logging.warning(f"No energy target specified in task {task_uuid}.  reference_energy={d['reference_energy']}")
                                 d["solved_within_accuracy_requirement"] = False
                             
                             # TODO: issue-44.  handle case when more than one solution submitted by
@@ -784,9 +972,6 @@ class BenchmarkData:
             list: _description_
         """
         
-        # first call/calculate ml scores.
-        self.calculate_ml_scores()
-
         # clear/init
         self.performance_metrics_list = [] 
 

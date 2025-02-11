@@ -78,19 +78,7 @@ See [`PRE_config.json`](PRE_config.json) for an example PRE config file.
 
 ## Updating all results.
 
-`./update_all_results.py`
-
-```bash
-usage: update_all_results.py [-h] DRYRUN_or_PRODUCTION
-
-Update all results.
-
-positional arguments:
-  DRYRUN_or_PRODUCTION  typing DRYRUN places results in a temporary folder nearby for review. PRODUCTION overwrites results.
-
-options:
-  -h, --help            show this help message and exit
-```
+`./update_all_results.py --help` for instructions.
 
 This script will ingest
 1. `problem_instance.json` files,

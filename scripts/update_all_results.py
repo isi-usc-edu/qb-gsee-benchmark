@@ -16,6 +16,7 @@
 
 
 import os
+import logging
 import argparse
 
 from qb_gsee_benchmark.benchmark_data import BenchmarkData
@@ -23,16 +24,36 @@ from qb_gsee_benchmark.standard_report import StandardReport
 from qb_gsee_benchmark.utils import clear_or_create_output_directory
 
 
+# logging configuration:
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+console_handler = logging.StreamHandler()
+file_handler = logging.FileHandler(
+    "update_all_results.log.txt",
+    mode="w"
+)
+formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+handlers = [console_handler, file_handler]
+for h in handlers:
+    h.setFormatter(formatter)
+    logger.addHandler(h)
+
+
+
 
 
 
 def main(args: argparse.Namespace) -> None:
+    logging.info(f"started...")
 
     if args.production:
+        # fix/override other options: 
         args.temp_results = False
         args.validate_json = True
         args.shap_analysis = True
         args.data_to_csv = True
+
+    
     
 
 
@@ -45,43 +66,19 @@ def main(args: argparse.Namespace) -> None:
     )
     
     
-    benchmark_data.calculate_performance_metrics()
-
     if args.data_to_csv:
         benchmark_data.to_csv(
             f"all_data_{benchmark_data.datestamp}.csv"
         )
 
     if args.validate_json:
+        logging.info(f"")
         benchmark_data.validate_all_json_objects(
             local_resolver_directory="../schemas"
         )
-        print(f"All JSON files are OK!")
+        logging.info(f"All JSON files are OK!")
 
-    if args.shap_analysis:
-        for solver_uuid in benchmark_data.ml_models_dict:
-            try:
-                benchmark_data.ml_models_dict[solver_uuid].run_shap_analysis(
-                    try_to_use_cached_shap_values=args.try_to_use_cached_shap_values
-                )
-            except Exception as e:
-                print(f"Error: {e}")
-                print(f"probably no ML model for {solver_uuid}")
-
-
-    # writing out ML plots in the /ml_artifacts directory.
-    for solver_uuid in benchmark_data.ml_models_dict:
-        try:
-            ml_model = benchmark_data.ml_models_dict[solver_uuid]
-            ml_model.write_all_plots()
-            ml_model.write_probs_to_file(
-                embedding=ml_model.pca, # or .nnmf
-                embedding_scaler=ml_model.all_ham_features_minmax_scaler
-            )
-        except Exception as e:
-            print(f"Error: {e}")
-            print(f"probably no ML model for {solver_uuid}")
-        
+    
             
 
 
@@ -114,10 +111,11 @@ def main(args: argparse.Namespace) -> None:
             benchmark_data=benchmark_data,
             standard_report_output_directory=os.path.join(temp_results_dir,"standard_report")
         )
-
     
-    print("done.")
-    print(benchmark_data)
+    
+    
+    logging.info("done.")
+    logging.info(f"{str(benchmark_data)}")
 
 
 
@@ -144,18 +142,6 @@ if __name__ == "__main__":
         action="store_true",
         default=False,
         help="Place results into /temp_results for review."
-    )
-    parser.add_argument(
-        "--shap_analysis",
-        action="store_true",
-        default=False,
-        help="Run SHAP analysis and generate SHAP plots for ML models (WARNING: Takes a long time!)."
-    )
-    parser.add_argument(
-        "--try_to_use_cached_shap_values",
-        action="store_true",
-        default=False,
-        help="Attempt to use previously calculated SHAP values.  If cached values can't be loaded, then SHAP will run."
     )
     parser.add_argument(
         "--validate_json",
