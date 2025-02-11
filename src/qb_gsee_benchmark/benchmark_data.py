@@ -31,7 +31,7 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics import pairwise_distances
 import matplotlib.pyplot as plt
-
+from matplotlib.colors import cnames as color_names
 
 from qb_gsee_benchmark.utils import load_json_files
 from qb_gsee_benchmark.utils import clear_or_create_output_directory
@@ -500,8 +500,13 @@ class BenchmarkData:
         fig = plt.figure()
         plt.title(f"Solver points in PCA space\n(PCA space of {title})")
         
-        # TODO: make this list of colors more general wrt num_solvers
-        colors = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray']
+        num_solvers = len(solver_short_names)
+        p_list = np.random.permutation(num_solvers)
+        colors = [ list(color_names.keys())[i] for i in p_list ]
+        # use "normal" colors first except for blue, red, and black
+        # ... then dig deep into the color list.
+        colors = ['c', 'm', 'y', 'g', 'w'] + colors
+
         for i in range(len(solver_short_names)):
             plt.scatter(
                 proj[i,0],

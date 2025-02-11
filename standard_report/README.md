@@ -1,6 +1,6 @@
 # GSEE Benchmark Standard Report
 
-Report based on data from 2025-01-30T17:45:00.466432+00:00
+Report based on data from 2025-02-11T14:17:47.615513+00:00
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
@@ -10,7 +10,7 @@ Input data: `GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv`, last mo
 
 Latest creation time for a `problem_instance.json` file: Mon Jan 27 11:42:37 2025
 
-Latest creation time for a `solution.json` file: Thu Jan 30 12:27:04 2025
+Latest creation time for a `solution.json` file: Tue Feb 11 09:05:20 2025
 
 # Problem Instance Summary Statistics
 
@@ -102,9 +102,9 @@ algorithm_details:SHCI with optimized orbitals followed by SHCI+PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 8dbde2d7-1d3f-4c17-9c77-2edf63490d19
+performance_metrics_uuid: 033beb97-92f8-40f4-8ebd-3fe645f3a33e
 
-creation_timestamp: 2025-01-30T17:45:00.466432+00:00
+creation_timestamp: 2025-02-11T14:17:47.615513+00:00
 
 number_of_problem_instances: 84
 
@@ -166,9 +166,9 @@ algorithm_details:SHCI with eps_var 1e-4 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: ffb46f81-e8eb-46c3-8204-6a14b32b30ed
+performance_metrics_uuid: 2d4d2ebd-f2bc-4f27-a14c-8434e6caa859
 
-creation_timestamp: 2025-01-30T17:45:00.466432+00:00
+creation_timestamp: 2025-02-11T14:17:47.615513+00:00
 
 number_of_problem_instances: 84
 
@@ -230,9 +230,9 @@ algorithm_details:SHCI with eps_var 1e-4
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: d8eada75-7c35-411f-8de3-0829015df276
+performance_metrics_uuid: 10f22256-d455-4655-b1cb-03bb30979576
 
-creation_timestamp: 2025-01-30T17:45:00.466432+00:00
+creation_timestamp: 2025-02-11T14:17:47.615513+00:00
 
 number_of_problem_instances: 84
 
@@ -294,9 +294,9 @@ algorithm_details:SHCI with eps_var 2e-4 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 9ff7cdc4-75a1-4f59-add9-1b73e9362e32
+performance_metrics_uuid: 6cb3879c-b0e6-481a-b25c-4304d5f4db88
 
-creation_timestamp: 2025-01-30T17:45:00.466432+00:00
+creation_timestamp: 2025-02-11T14:17:47.615513+00:00
 
 number_of_problem_instances: 84
 
@@ -358,9 +358,9 @@ algorithm_details:SHCI with eps_var 2e-5 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: c8b06cd5-765a-4d01-8394-58cbe98b3be7
+performance_metrics_uuid: 6dfc5696-0c6c-49d2-9749-433c1bbf7784
 
-creation_timestamp: 2025-01-30T17:45:00.466432+00:00
+creation_timestamp: 2025-02-11T14:17:47.615513+00:00
 
 number_of_problem_instances: 84
 
@@ -422,9 +422,9 @@ algorithm_details:SHCI with eps_var 5e-5 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: dca2c01a-ca56-45c7-a2c6-7eafcc6e63eb
+performance_metrics_uuid: 467e9815-566e-4263-aea5-07dcbf626a07
 
-creation_timestamp: 2025-01-30T17:45:00.466432+00:00
+creation_timestamp: 2025-02-11T14:17:47.615513+00:00
 
 number_of_problem_instances: 84
 
@@ -486,9 +486,9 @@ algorithm_details:SHCI with eps_var 2e-4
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: e740bd1c-eab8-4fef-9062-b7ccd11a0334
+performance_metrics_uuid: 50e426a2-d5d6-40d2-adfd-426d9b778698
 
-creation_timestamp: 2025-01-30T17:45:00.466432+00:00
+creation_timestamp: 2025-02-11T14:17:47.615513+00:00
 
 number_of_problem_instances: 84
 
@@ -550,9 +550,9 @@ algorithm_details:SHCI with eps_var 2e-5
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 23b952fc-495e-4ea8-be36-60eca9777f9c
+performance_metrics_uuid: eb26f8df-2ae8-4037-a0d0-60b8e64d0d37
 
-creation_timestamp: 2025-01-30T17:45:00.466432+00:00
+creation_timestamp: 2025-02-11T14:17:47.615513+00:00
 
 number_of_problem_instances: 84
 
@@ -614,9 +614,9 @@ algorithm_details:SHCI with eps_var 5e-5
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 8ff27cfa-5bd7-4482-b712-d4f6c7a01439
+performance_metrics_uuid: b06598e1-3d2a-424b-8277-aca3d7e09d7d
 
-creation_timestamp: 2025-01-30T17:45:00.466432+00:00
+creation_timestamp: 2025-02-11T14:17:47.615513+00:00
 
 number_of_problem_instances: 84
 
@@ -682,9 +682,9 @@ logical_resource_estimate_solution_uuid:fc17e113-d2e0-49ab-955a-6fc08c6eb2f9
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: a874f899-b02a-4a83-8590-9aae0fbd0179
+performance_metrics_uuid: 7564bb11-09d9-4667-a1d8-9b2ae080837d
 
-creation_timestamp: 2025-01-30T17:45:00.466432+00:00
+creation_timestamp: 2025-02-11T14:17:47.615513+00:00
 
 number_of_problem_instances: 84
 
@@ -746,9 +746,9 @@ algorithm_details:CISD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 8af2957d-4b07-424f-a323-9161d8e16720
+performance_metrics_uuid: 80d4d65f-447f-43d1-af55-42ef8f71f0fe
 
-creation_timestamp: 2025-01-30T17:45:00.466432+00:00
+creation_timestamp: 2025-02-11T14:17:47.615513+00:00
 
 number_of_problem_instances: 84
 
@@ -810,9 +810,9 @@ algorithm_details:CCSD(T)
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 2a64a87c-df90-4c35-9f65-3f73a9572eca
+performance_metrics_uuid: e1124422-d92a-4721-886b-d26e6043ac96
 
-creation_timestamp: 2025-01-30T17:45:00.466432+00:00
+creation_timestamp: 2025-02-11T14:17:47.615513+00:00
 
 number_of_problem_instances: 84
 
@@ -874,9 +874,9 @@ algorithm_details:Hartree Fock
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 454c3ce7-6f3b-47b3-b784-f9a2da023c3e
+performance_metrics_uuid: 6ffcf51c-4ecd-469d-8124-5e2f32d6e37b
 
-creation_timestamp: 2025-01-30T17:45:00.466432+00:00
+creation_timestamp: 2025-02-11T14:17:47.615513+00:00
 
 number_of_problem_instances: 84
 
@@ -938,9 +938,9 @@ algorithm_details:MP2
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 31522f8f-1c01-4fec-9bdf-1c12aca7471d
+performance_metrics_uuid: 4c7047b8-9f24-497f-8275-911c9daed47b
 
-creation_timestamp: 2025-01-30T17:45:00.466432+00:00
+creation_timestamp: 2025-02-11T14:17:47.615513+00:00
 
 number_of_problem_instances: 84
 
@@ -1002,9 +1002,9 @@ algorithm_details:CCSD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 2833f154-b15d-4549-9649-fd2bb6cd7d3b
+performance_metrics_uuid: d82e1095-10a7-45d2-83ed-00d5eec1c220
 
-creation_timestamp: 2025-01-30T17:45:00.466432+00:00
+creation_timestamp: 2025-02-11T14:17:47.615513+00:00
 
 number_of_problem_instances: 84
 
@@ -1066,9 +1066,9 @@ algorithm_details:DMRG with the lowest variational energy obtained so far.
 
 software_details:Block2 v0.5.3rc16 with dmrghandler, commit version d603fdc6409fc194a416aa3a519362d5d91790d9 or later.
 
-performance_metrics_uuid: ba1f55ba-aa5a-406a-9405-8c62ee76c00a
+performance_metrics_uuid: d226e8b2-7500-4ef0-87c0-327113b74d02
 
-creation_timestamp: 2025-01-30T17:45:00.466432+00:00
+creation_timestamp: 2025-02-11T14:17:47.615513+00:00
 
 number_of_problem_instances: 84
 
@@ -1134,9 +1134,9 @@ logical_resource_estimate_solution_uuid:0b647970-5b30-47f0-bbca-1a83704b9e06
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: ee63a8ee-17b5-4e7f-bf29-176ee801c905
+performance_metrics_uuid: 606d7890-fabf-40d2-bb58-90893f1a3e1f
 
-creation_timestamp: 2025-01-30T17:45:00.466432+00:00
+creation_timestamp: 2025-02-11T14:17:47.615513+00:00
 
 number_of_problem_instances: 84
 
@@ -1209,6 +1209,14 @@ PCA Component 1: [-0.19469875 -0.1905585  -0.19330939 -0.19648849 -0.15688445  0
 PCA Component 2: [ 0.19114047  0.13109532  0.18894197  0.19538013  0.01054327  0.67004575
   0.35245706  0.22194563  0.141961    0.08731617  0.15593002  0.23400049
  -0.09326605 -0.32024179  0.15208325  0.0928356 ]
+
+![solver similarity: PCA space of area](supporting_artifacts/solver_similarity_in_PCA_space_of_area_summary.png)
+
+![solver similarity: PCA space of SHAP](supporting_artifacts/solver_similarity_in_PCA_space_of_shap_summary.png)
+
+![solver similarity: matrix/area](supporting_artifacts/solver_similarity_matrix_area_summary.png)
+
+![solver similarity: matrix/SHAP values](supporting_artifacts/solver_similarity_matrix_shap_summary.png)
 
 ![Hamiltonian features correlation matrix](supporting_artifacts/hamiltonian_features_correlation_matrix_plot.png)
 
