@@ -195,7 +195,7 @@ def get_lqre(
                 {
                     "task_uuid": task["task_uuid"],
                     "error_bound": error_tolerance,
-                    "confidence_level": failure_tolerance,
+                    "confidence_level": 1 - failure_tolerance,
                     "quantum_resources": {
                         "logical": {
                             "num_logical_qubits": logical_resources["LogicalQubits"],
