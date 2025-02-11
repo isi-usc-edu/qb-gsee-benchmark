@@ -541,6 +541,7 @@ class BenchmarkData:
             method="ward",
             cmap="coolwarm",
         )
+        plt.title(f"Solver similarity matrix\n(based on {title})")
         g.ax_heatmap.set_yticklabels(g.ax_heatmap.get_xticklabels())
         plt.setp(
             g.ax_heatmap.get_xticklabels(),
@@ -553,7 +554,6 @@ class BenchmarkData:
             rotation=0,
             rotation_mode="anchor"
         ) 
-        plt.title(f"Solver similarity matrix\n(based on {title})")
         plt.tight_layout()
         
         g.savefig(f"ml_artifacts/solver_similarity_matrix_{title.lower()}.png")
@@ -1060,8 +1060,8 @@ class BenchmarkData:
             
             for problem_instance_uuid in problem_instance_uuid_list:
                 df_filtered = df[df["problem_instance_uuid"]==problem_instance_uuid]
-                logging.info(f"problem_instance_uuid: {problem_instance_uuid}")
-                logging.info(f"number of tasks: {len(df_filtered)}")
+                # logging.info(f"problem_instance_uuid: {problem_instance_uuid}")
+                # logging.info(f"number of tasks: {len(df_filtered)}")
                 
                 # TODO: PRIORITY:  issue #44: handle situation where one solver has more than one solution_uuid for a single problem_uuid
                 assert df_filtered["solution_uuid"].nunique() <= 1, "issue #44:  we have more than one solution_uuid for a (solver_uuid,problem_uuid) pair."

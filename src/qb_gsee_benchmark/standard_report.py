@@ -724,6 +724,12 @@ class StandardReport:
             file.write(f"Features: {ml_model.features}\n\n")
             for i in range(2):
                 file.write(f"PCA Component {i+1}: {ml_model.pca.components_[i]}\n\n")
+
+            file.write(f"![solver similarity: PCA space of area]({self.artifact_directory}/solver_similarity_in_PCA_space_of_area_summary.png)\n\n")
+            file.write(f"![solver similarity: PCA space of SHAP]({self.artifact_directory}/solver_similarity_in_PCA_space_of_shap_summary.png)\n\n")
+            file.write(f"![solver similarity: matrix/area]({self.artifact_directory}/solver_similarity_matrix_area_summary.png)\n\n")
+            file.write(f"![solver similarity: matrix/SHAP values]({self.artifact_directory}/solver_similarity_matrix_shap_summary.png)\n\n")
+            
                 
             file.write(f"![Hamiltonian features correlation matrix]({self.artifact_directory}/hamiltonian_features_correlation_matrix_plot.png)\n\n")
             for feature in ml_model.features:

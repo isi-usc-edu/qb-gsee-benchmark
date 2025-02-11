@@ -178,7 +178,7 @@ class MiniML:
 
 
 
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         return f"""mini ML model for {self.solver_short_name} ({self.solver_uuid}).
             f1_score: {self.f1_score}.
             ml_solvability_ratio: {self.ml_solvability_ratio}.  
@@ -517,7 +517,7 @@ class MiniML:
 
     def run_shap_analysis(
             self,
-            try_to_use_cached_shap_values: bool=False
+            try_to_use_cached_shap_values: bool
         ):
         """TODO:docstring
         """
@@ -529,10 +529,12 @@ class MiniML:
             # TODO: make this more robust.
             try: 
                 self.shap_values = np.load(cached_shap_values_file_name)
+                logging.warning(f"Using cached SHAP values from {cached_shap_values_file_name}")
+                logging.info(f"If you do NOT want to use cached SHAP values, delete the file(s) from /ml_artifacts.")
                 run_shap_anyway = False
             except:
-                logging.error(f"Error: can't load cached shap values {cached_shap_values_file_name}")
-                logging.info(f"Running SHAP anyway...")
+                logging.error(f"Can't load cached shap values {cached_shap_values_file_name}")
+                logging.warning(f"Running SHAP anyway...")
                 run_shap_anyway = True
 
 

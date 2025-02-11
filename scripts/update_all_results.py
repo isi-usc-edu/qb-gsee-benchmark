@@ -18,6 +18,7 @@
 import os
 import logging
 import argparse
+import sys
 
 from qb_gsee_benchmark.benchmark_data import BenchmarkData
 from qb_gsee_benchmark.standard_report import StandardReport 
@@ -44,15 +45,23 @@ for h in handlers:
 
 
 def main(args: argparse.Namespace) -> None:
-    logging.info(f"started...")
+    
+    if not args.production and not args.temp_results:
+        logging.error(f"User did not specify --production or --temp_results.  See --help for usage.")
+        logging.info(f"Exiting.")
+        sys.exit(1)
 
+
+
+    logging.info(f"Started...")
     if args.production:
         # fix/override other options: 
         args.temp_results = False
         args.validate_json = True
         args.shap_analysis = True
         args.data_to_csv = True
-
+    
+    
     
     
 
@@ -114,7 +123,7 @@ def main(args: argparse.Namespace) -> None:
     
     
     
-    logging.info("done.")
+    logging.info("Done.")
     logging.info(f"{str(benchmark_data)}")
 
 
