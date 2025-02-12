@@ -18,11 +18,14 @@ import os
 import shutil
 from urllib.parse import urlparse
 
+import certifi
+
 from typing import Any
 import logging
 import json
 import datetime
 from pathlib import Path
+import time
 
 from jsonschema import validate as _validate
 from jsonschema import RefResolver
@@ -38,27 +41,52 @@ from pyscf.tools import fcidump
 
 
 
-def _fetch_file_from_sftp(
-    url: str, local_path: str, ppk_path: str, username: str, port=22
+def fetch_file_from_sftp(
+    url: str, local_path: str, ppk_path: str, username: str, port: int=22
 ):
+    """A utility function based on `paramiko` to fetch a file from an SFTP server.
+
+    Args:
+        url (str): The URL for the remote file.
+        local_path (str): the/local/relative/path where the file will be saved.
+        ppk_path (str): the/relative/path/to/the ppk authentication file
+        username (str): username associated with the ppk authentication file.
+        port (int, optional): SFTP port. Defaults to 22.
+    """
 
     parsed_url = urlparse(url)
     hostname = parsed_url.hostname
     remote_path = parsed_url.path.lstrip("/")
 
-    with paramiko.SSHClient() as client:
-        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        client.connect(
-            hostname=hostname,
-            port=port,
-            username=username,
-            key_filename=ppk_path,
-        )
+    num_attempts = 3
+    for attempt in range(1,num_attempts+1):
+        try:
+            logging.info(f"SFTP attempt {attempt}/{num_attempts}...")
+            with paramiko.SSHClient() as client:
+                client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                
+                client.connect(
+                    hostname=hostname,
+                    port=port,
+                    username=username,
+                    key_filename=ppk_path,
+                    banner_timeout=3,
+                    timeout=3,
+                    auth_timeout=3,
+                    channel_timeout=3
+                )
 
-        with client.open_sftp() as sftp:
-            print(f"Downloading {remote_path} to {local_path}...")
-            sftp.get(remote_path, local_path)
+                with client.open_sftp() as sftp:
+                    logging.info(f"Downloading {remote_path} to {local_path}...")
+                    sftp.get(remote_path, local_path)
+                
+                break # successfully downloaded file.
+        except Exception as e:
+            logging.error(f"{e}", exc_info=True)
+            time.sleep(3)
 
+
+            
 
 
 
@@ -98,7 +126,7 @@ def clear_or_create_output_directory(output_directory: str) -> None:
 
 def retrieve_fcidump_from_sftp(url: str, username: str, ppk_path: str, port=22) -> dict:
     filename = os.path.basename(urlparse(url).path)
-    _fetch_file_from_sftp(
+    fetch_file_from_sftp(
         url=url, username=username, ppk_path=ppk_path, local_path=filename, port=port
     )
     fcidump_filename = filename.replace(".gz", "")
@@ -132,7 +160,7 @@ def validate_list_of_json_objects(
             schema = json.load(schema_file)
     else:
         schema_url = json_object_list[0]["$schema"]
-        schema = requests.get(schema_url).json()
+        schema = requests.get(schema_url, verify=certifi.where()).json()
     for json_dict in json_object_list:
         validate_json(
             json_dict=json_dict,
