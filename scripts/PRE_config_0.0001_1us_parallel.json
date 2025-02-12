@@ -1,0 +1,17 @@
+{
+  "solver_uuid": "4b07b89f-c66f-4e72-8c24-df3e4222cb41",
+  "quantum_hardware_parameters": {
+    "num_factories": 4,
+    "physical_error_rate": 1e-4,
+    "cycle_time_microseconds": 1,
+    "parallelize_shots": true
+  },
+  "quantum_hardware_description": "Optimistic superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494. Assumes that enough QPUs are available to run all shots in parallel.",
+  "contact_info": [
+    {
+      "name": "Max Radin",
+      "email": "radin.max@gmail.com",
+      "institution": "L3Harris"
+    }
+  ]
+}
