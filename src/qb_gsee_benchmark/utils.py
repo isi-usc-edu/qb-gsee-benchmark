@@ -124,7 +124,24 @@ def clear_or_create_output_directory(output_directory: str) -> None:
 
 
 
-def retrieve_fcidump_from_sftp(url: str, username: str, ppk_path: str, port=22) -> dict:
+def retrieve_fcidump_from_sftp(
+        url: str,
+        username: str,
+        ppk_path: str,
+        port=22
+    ) -> dict:
+    """Fetch an FCIDUMP file from the SFTP server, decompress it, read it,
+     and return the `fci` object. 
+
+    Args:
+        url (str): URL to the FCIDUMP file.  E.g., "sftp://www.l3harris.com/some_fcidump_file.gz"
+        username (str): Username assocated with the key file
+        ppk_path (str): The/path/to/the/key/file
+        port (int, optional): TCP port number. Defaults to 22 (standard SCP/SFTP/SSH).
+
+    Returns:
+        dict: The `fci` object.
+    """
     filename = os.path.basename(urlparse(url).path)
     fetch_file_from_sftp(
         url=url, username=username, ppk_path=ppk_path, local_path=filename, port=port
@@ -152,7 +169,21 @@ def validate_list_of_json_objects(
         local_resolver_directory: str,
         local_schema_file: str=None
     ) -> None:
-    """TODO: docstring.  no output implies success!
+    """Given a `list` of `dict` objects (representations of JSON objects) that 
+    should all adhere to the same $schema, run through the list and validate 
+    each object per the `$schema`.
+
+    Note: 
+        All objects in the list should adhere to the same $schema.
+
+    Note: 
+        Unless a `local_schema_file` is provided, the function will HTTPS fetch
+        the $schema according to the first object in the list.
+
+    Args:
+        json_object_list (list): A list of `dict` objects representing the JSON objects.
+        local_resolver_directory (str): path/to/directory to resolve $refs in $schema.
+        local_schema_file (str, optional): path/to/a/JSON/schema/file. Defaults to None.
     """
 
     if local_schema_file is not None:

@@ -105,7 +105,14 @@ class MiniML:
         hamiltonian_features_by_task_uuid: pd.DataFrame,
         rng_seed: int=RNG_SEED
     ) -> None:
-        """TODO: docstring"""
+        """Initialize a MiniML object.  A variety of calculations are performed
+        upon initialization.
+
+        Args:
+            solver_labels_by_task_uuid (pd.DataFrame): True/False (success/failure) labels for 1 solver for each task.
+            hamiltonian_features_by_task_uuid (pd.DataFrame): The input features of each task (Hamiltonian)
+            rng_seed (int, optional): Random number generator seed to force consistent results. Defaults to RNG_SEED.
+        """
         
         self.rng_seed = rng_seed
         random.seed(self.rng_seed)
@@ -190,7 +197,8 @@ class MiniML:
 
 
     def __validate_input_labels(self) -> None:
-        """TODO: docstring"""
+        """Simple validation of inputs to the model.
+        """
         # check for only one solver_uuid
         # check for only one solver_short_name
         # other checks... 
@@ -211,7 +219,8 @@ class MiniML:
 
         
     def __filter_labels(self) -> None:
-        """TODO: docstring.
+        """The solver labels have many columns (features).  We have selected a subset of 
+        columns (features) to use for the model.  
         """
         self.X = self.solver_labels.loc[:,self.features]
         self.Y = self.solver_labels.loc[:,"label"] # column header is `label`
@@ -221,7 +230,7 @@ class MiniML:
         
         
     def __shuffle_labels(self) -> None:
-        """TODO: docstring.
+        """Shuffling the rows (input vectors).
         """
         rng = np.random.default_rng(seed=self.rng_seed) 
         self.shuffled_keys = rng.permutation(range(0,len(self.X)))
@@ -234,9 +243,14 @@ class MiniML:
 
 
     def __remove_zero_variance_columns(self) -> list:
-        """TODO: docstring.
+        """Any columns (features) that have a zero variance are removed/not used
+        in the model.
+
+        Note:
+            self.zero_variance_columns records which columns were removed.
+
         Returns:
-            list: _description_
+            list: A list of the features that had zero variance and were removed.
         """
         varX = np.var(self.complete_hamiltonian_features, axis=0)
         self.zero_variance_columns = self.complete_hamiltonian_features.columns[np.where(varX == 0)]
@@ -255,8 +269,15 @@ class MiniML:
 
 
     def __scale_data(self) -> None:
-        """TODO:docstring
+        """Scale data in various ways.
+        
+        Note: 
+            The following are created and fitted and used later:
+            self.svm_standard_scaler
+            self.all_ham_features_standard_scaler
+            self.all_ham_features_minmax_scaler
         """
+
 
         # the SVM scaler is based on ALL of the Hamiltonian features.
         self.svm_standard_scaler = StandardScaler()
@@ -277,7 +298,12 @@ class MiniML:
 
 
     def __train_svm(self) -> None:
-        """TODO: docstring"""
+        """`self.svm` is trained on `self.svm_scaled_X` input data.
+
+        Note:
+            self.Y are the True/False labels
+            self.svm_scaled_X are the Hamiltonian features for each task (scaled).
+        """
 
         self.svm = SVC(
             random_state=self.rng_seed,
@@ -301,8 +327,13 @@ class MiniML:
 
 
     def __evaluate_model(self) -> np.ndarray:
-        """TODO: docstring.  original:  This function returns the accuracy by the trained ML model ("model" with "model_name") on test_features with test_labels.
-            Returns the f1-score (harmonic mean of precision and recall)
+        """Evaluate the accurac of the model and return the F1 score.
+
+        Note:
+            self.f1_score is updated in place.
+
+        Returns:
+            np.ndarray: The F1 score.
         """
         Y_predicted = self.svm.predict(self.X_svm_scaled)
         evaluation_results = precision_recall_fscore_support(
@@ -331,7 +362,11 @@ class MiniML:
             self,
             embedding_scaler: Any
         ) -> None:
-        """TODO: docstring"""
+        """Construct the nonnegative matrix factorization embedding based on the Hamiltonian features.
+
+        Args:
+            embedding_scaler (Any): Typically `self.all_ham_features_minmax_scaler`, but may be another scaler.
+        """
 
         self.nnmf = NMF(
             n_components=2,
@@ -365,7 +400,11 @@ class MiniML:
             self,
             embedding_scaler: Any
         ) -> None:
-        """TODO: docstring"""
+        """Construct the nonnegative matrix factorization embedding based on the Hamiltonian features.
+
+        Args:
+            embedding_scaler (Any): Typically `self.all_ham_features_minmax_scaler`, but may be another scaler.
+        """
         
         self.pca = PCA(
             n_components=2,
@@ -519,7 +558,18 @@ class MiniML:
             self,
             try_to_use_cached_shap_values: bool
         ):
-        """TODO:docstring
+        """Run SHAP analysis on model to determine which features have the most impact
+        on model.
+
+        Warning:
+            SHAP analysis takes a while to run.
+
+        Note:
+            If cached SHAP values cannot be found, it will run SHAP analysis anyway
+            and save freshly calculated SHAP values for next time.
+
+        Args:
+            try_to_use_cached_shap_values (bool): Toggle usage of cached SHAP values.
         """
 
         cached_shap_values_file_name = \
@@ -588,8 +638,9 @@ class MiniML:
         
 
     def write_all_plots(self) -> None:
-        """TODO: docstring
-        """
+        """During the initialization of the ML model a variety of plots were
+        created.  This method writes all plots to disk in the `ml_artifacts`
+        folder."""
         for plot in self.plots:
             fig, fig_file_name = plot
             output_file_name = os.path.join("./ml_artifacts/",fig_file_name)
