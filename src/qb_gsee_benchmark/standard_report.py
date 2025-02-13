@@ -119,8 +119,9 @@ class StandardReport:
 
 
     def create_plot_histogram_of_number_of_orbitals(self) -> None:
-        """TODO: docstring
+        """Creates a histogram plot of all the Hamiltonians by number of orbitals.
         """
+
         df = self.benchmark_data.hamiltonian_features
         plt.figure()
         plt.hist(
@@ -151,8 +152,10 @@ class StandardReport:
 
 
     def create_plot_num_orbitals_vs_utility_for_each_hamiltonian(self) -> None:
-        """TODO: docstring
+        """Create a scatter plot where each point is Hamiltonian and the position
+        is (num_orbitals, utility)
         """
+
         # note that utility estimate data is repeated for each solver_uuid in `data`
         # just pick the first solver_uuid and filter by that.  
         # that filter provides a list of all Hamiltonians with no double counting.
@@ -186,7 +189,9 @@ class StandardReport:
 
 
     def create_plot_num_orbitals_vs_run_time_for_all_solvers(self) -> None:
-        """TODO: docstring
+        """Create a scatter plot of all solvers where each point
+        is one solver's attempt at a Hamiltonian.  Solvers are plotted
+        with different colors.  
         """
         df = self.benchmark_data.all_data_df
         plt.figure()
@@ -254,7 +259,9 @@ class StandardReport:
 
 
     def create_plot_log_fci_dim_vs_run_time_for_all_solvers(self) -> None:
-        """TODO: docstring
+        """Create a scatter plot of all solvers where each point
+        is one solver's attempt at a Hamiltonian.  Solvers are plotted
+        with different colors.  
         """
         df = self.benchmark_data.all_data_df
         plt.figure()
@@ -325,7 +332,9 @@ class StandardReport:
 
 
     def create_plot_quantum_vs_classical_num_orbitals_vs_run_time(self) -> None:
-        """TODO: docstring
+        """ Create a scatter plot of all solvers where each point
+        is one solver's attempt at a Hamiltonian.  Quantum solvers are blue
+        and classical solvers are red.  
         """
         df = self.benchmark_data.all_data_df
         plt.figure()
@@ -411,7 +420,9 @@ class StandardReport:
 
 
     def create_plot_num_orbitals_vs_run_time_for_each_solver(self) -> None:
-        """TODO: docstring"""
+        """Create ONE scatter plot FOR ONE solver where each point
+        is one solver's attempt at a Hamiltonian.  This creates num_solvers plots.
+        """
         for solver_uuid in self.benchmark_data.solvers_dict:
             df = self.benchmark_data.all_data_df
             df = df[df["solver_uuid"]==solver_uuid] # filter to solver_uuid
@@ -458,7 +469,9 @@ class StandardReport:
 
 
     def create_plot_log_fci_dim_vs_run_time_for_each_solver(self) -> None:
-        """TODO: docstring"""
+        """Create ONE scatter plot FOR ONE solver where each point
+        is one solver's attempt at a Hamiltonian.  This creates num_solvers plots.
+        """
         for solver_uuid in self.benchmark_data.solvers_dict:
             df = self.benchmark_data.all_data_df
             df = df[df["solver_uuid"]==solver_uuid] # filter to solver_uuid
@@ -511,7 +524,9 @@ class StandardReport:
 
 
     def create_plot_utility_capture_for_each_solver(self) -> None:
-        """TODO: docstring"""
+        """Create ONE scatter plot FOR ONE solver where each point
+        is one solver's attempt at a Hamiltonian.  This creates num_solvers plots.
+        """
         
         for solver_uuid in self.benchmark_data.solvers_dict:
             df = self.benchmark_data.all_data_df
@@ -742,7 +757,8 @@ class StandardReport:
 
 
     def convert_readme_markdown_to_html(self) -> None:
-        """TODO: docstring"""
+        """First, we need to convert the README.md file to HTML.  In a later
+        method we will convert the HTML to PDF."""
         readme_file = os.path.join(self.standard_report_output_directory, "README.md") 
         with open(readme_file, "r") as md_file:
             md_content = md_file.read()
@@ -761,7 +777,10 @@ class StandardReport:
 
 
     def convert_readme_html_to_pdf(self) -> None:
-        """TODO: docstring ... depends on HTML"""
+        """We first converted the README.md to HTML in an earlier method. This
+        method converts the HTML to a PDF.
+        """
+
         readme_html_file = os.path.join(self.standard_report_output_directory, "index.html")
         readme_pdf_file = os.path.join(
             self.standard_report_output_directory,

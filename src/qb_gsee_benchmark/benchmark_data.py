@@ -126,7 +126,13 @@ class BenchmarkData:
             self,
             local_resolver_directory: str
         ) -> None:
-        """TODO: docstring.  no errors implies success!!
+        """Validate all JSON objects (which are currently dictionaries stored in a list).
+
+        Note:
+            This method fetches the $schema from the FIRST JSON object in each list and uses it for all the rest of the objects in the list.
+
+        Args:
+            local_resolver_directory (str): relative/path/to/the files to resolve $refs in schema.
         """
         
         lists = [
@@ -348,10 +354,14 @@ class BenchmarkData:
 
 
     def calculate_ml_scores(self) -> dict:
-        """TODO: docstring
+        """Uses the `MiniML` class to calculate ML models for each solver. 
+
+        Note:
+            self.ml_models_dict is updated in place.
+            self.ml_score_dict is updated in place.
 
         Returns:
-            dict: _description_
+            dict: a dictionary with keys of solver_uuid and values of ML scores.
         """
 
         ml_scores_dict = {}
@@ -396,7 +406,19 @@ class BenchmarkData:
             self,
             try_to_use_cached_shap_values: bool
         ) -> None:
-        """TODO: docstring"""
+        """Calculates all SHAP values (how much each feature influences the ML Model).
+
+        Warning:
+            SHAP value calculation takes a little while.
+
+        Note:
+            If trying to use cached SHAP values and they don't exist, SHAP analysis
+            will be run anyway and updated SHAP values will be written to disk for
+            the next time.
+
+        Args:
+            try_to_use_cached_shap_values (bool): Toggle usage of cached SHAP values.
+        """
         for solver_uuid in self.ml_models_dict:
             try:
                 self.ml_models_dict[solver_uuid].run_shap_analysis(
@@ -413,7 +435,8 @@ class BenchmarkData:
 
 
     def ml_post_processing(self) -> None:
-        """TODO: docstring"""
+        """After ML models have been created, compare similarities of solvers.
+        """
 
         Z0_embedding = {}
         shap_values = {}
@@ -493,7 +516,13 @@ class BenchmarkData:
             similarity_matrix: np.ndarray,
             solver_short_names: list
         ) -> None:
-        """TODO: docstring"""
+        """Creates a spectral clustering plot showing the similarity of solvers.
+
+        Args:
+            title (str): The title of the plot
+            similarity_matrix (np.ndarray): A similarity matrix of solvers
+            solver_short_names (list): A list of human-readable short names for solvers (instead of UUIDs)
+        """
         u, s, vh = np.linalg.svd(similarity_matrix, full_matrices=True)
         proj=u*similarity_matrix
 
@@ -534,7 +563,13 @@ class BenchmarkData:
             similarity_matrix: np.ndarray,
             solver_short_names: list
         ) -> None:
-        """TODO: docstring"""
+        """Creates a matrix heatmap plot showing the similarity of solvers.
+
+        Args:
+            title (str): The title of the plot
+            similarity_matrix (np.ndarray): A similarity matrix of solvers
+            solver_short_names (list): A list of human-readable short names for solvers (instead of UUIDs)
+        """
         sim_df = pd.DataFrame(
             data=similarity_matrix,
             columns=solver_short_names
@@ -575,7 +610,10 @@ class BenchmarkData:
 
 
     def write_all_ml_artifacts(self) -> None:
-        """TODO: docstring"""
+        """During the creation of all ML models, a variety of plots and artifacts
+        are produced.  This specifically writes all plots and artifacts to disk in the
+        `/ml_artifacts` directory.
+        """
         for solver_uuid in self.ml_models_dict:
             try:
                 ml_model = self.ml_models_dict[solver_uuid]
@@ -956,7 +994,14 @@ class BenchmarkData:
 
 
     def read_performance_metrics_json_files(self) -> list:
-        """TODO: docstring
+        """Read in `performance_metrics.json` files.
+
+        Note:
+            self.performance_metrics_list is updated in place.
+
+        Returns:
+            list: A list of dictionaries. Each dictionary is a representation of 
+            the JSON file.
         """
         self.performance_metrics_list = load_json_files(
             search_dir=self.performance_metrics_directory
@@ -971,10 +1016,15 @@ class BenchmarkData:
 
 
     def calculate_performance_metrics(self) -> list:
-        """TODO: docstring
+        """Calculate performance metrics for each solver. For each solver, a 
+        dictionary is created containing all of the performance metrics
+
+        Note:
+            self.performance_metrics_list is updated in place.
 
         Returns:
-            list: _description_
+            list: A list of dictionaries where each dictionary contains the
+            performance metrics for the solver. 
         """
         
         # clear/init
@@ -1147,11 +1197,16 @@ class BenchmarkData:
             self,
             output_directory: str
         ) -> None:
-        """TODO: docstring
+        """Write out the dictionary objects in `self.performance_metrics_list`
+        as JSON files to the `output_directory`
 
+        Warning:
+            self.performance_metrics_list should be up-to-date.
+        
         Args:
-            output_directory (str): _description_
+            output_directory (str): relative/path/to/where/the/JSON/files/will/go
         """
+
         clear_or_create_output_directory(output_directory=output_directory)
         
         for pm in self.performance_metrics_list:
