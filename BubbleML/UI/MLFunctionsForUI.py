@@ -279,17 +279,6 @@ def trainML(ui_self, X,Y,model_name, hypopt_cv):
 
     X_train = X #will be scaling this for svm
     y_train = Y
-
-    if ui_self.train_on_reduceddim_data == 0:
-        X_train = X
-    else:
-        #first check if latent space computation was run
-        if ui_self.proj_data == []:  #this should be checked when training on latent space was asked for.  But checking again
-            ui_self.train_on_reduceddim_data = 0
-            print("Latent space computation was not run. Training  model on original HighDimData")
-
-        else:
-            X_train = ui_self.proj_data
     
 
     if model_name == 'Random Forest':
@@ -314,12 +303,11 @@ def trainML(ui_self, X,Y,model_name, hypopt_cv):
         X_sc = sc.fit_transform(X_train)
         
         #save the standard scaler 
-        ui_self.svm_scaler = sc
         X_train = X_sc
 
-        param_grid = {'C': [0.001, 0.1, 1, 10, 100],  
+        param_grid = {'C': [0.001, 0.1, 0.5, 1, 10, 50, 100],  
             'gamma': [1, 0.1, 0.01, 0.001, 0.0001], 
-            'kernel': ['rbf', 'poly']}  #add linear
+            'kernel': ['rbf', 'poly', 'linear']}  #add linear
     
     if hypopt_cv == 0:
         #uses all the data for train and tests on the same data
@@ -348,10 +336,10 @@ def trainML(ui_self, X,Y,model_name, hypopt_cv):
             df = pd.DataFrame(data, columns=['Og Feature 1','Og Feature 2', 'Proj 1','Proj 2', 'Labels', 'Predictions at 50%', 'Prob Class 0', 'Prob Class 1' ])             
             df.to_csv('probs.csv')
     
-    return model, accuracy
+    return sc, model, accuracy
 
 
-def create_uncertainity_plot_values(learned_model_name, learned_model, latent_model, proj_data, train_on_reduceddim_data, latent_scaler, ml_scaler):
+def create_uncertainity_plot_values(learned_model_name, learned_model, latent_model, proj_data, latent_scaler, ml_scaler):
     '''
     This function used the ML nodel ("learned model" with name "learned_model_name") to predict the class with uncertainity for
     every point for the projected data ("proj_data") of the latent space ("latent_model" with name "latent_axes_name") with axes "latent_axes".
@@ -363,25 +351,23 @@ def create_uncertainity_plot_values(learned_model_name, learned_model, latent_mo
     xminmax = np.arange(np.min(proj_data[:, 0]), np.max(proj_data[:, 0]), 0.1)
     yminmax = np.arange(np.min(proj_data[:, 1]), np.max(proj_data[:, 1]), 0.1)
 
-    x = np.linspace(xminmax[0], xminmax[-1],100)
-    y = np.linspace(yminmax[0], yminmax[-1],100)
+    x = np.linspace(xminmax[0], xminmax[-1] + 0.09,100)
+    y = np.linspace(yminmax[0], yminmax[-1] + 0.09,100)
     XX, YY = np.meshgrid(x, y)
    
     newX = np.c_[XX.ravel(), YY.ravel()]
   
-    if train_on_reduceddim_data == 0:
-        #we have to undo the transform and the scaling (in that order) to get the projected points to the original feature space
+    #we have to undo the transform and the scaling (in that order) to get the projected points to the original feature space
 
-        #first, undo transform of latent space
-        newX_untransformed = latent_model.inverse_transform(newX)
+    #first, undo transform of latent space
+    newX_untransformed = latent_model.inverse_transform(newX)
 
-        #next, undo the scaling of the latent space.
-        orig_dim_data = latent_scaler.inverse_transform(newX_untransformed)
-    else:  #train on the projected data
-        orig_dim_data = newX
-
+    #next, undo the scaling of the latent space.
+    orig_dim_data = latent_scaler.inverse_transform(newX_untransformed)
+ 
 
     #if learned_model was SVM, it was trained on centered and scaled data, so we have to scale the new data
+    #Random Forest was run without being scaled.
     if learned_model_name == 'Support Vector Machine':
 
         #standardize data per ml_scaler
@@ -526,7 +512,7 @@ def compute_amenability_vectors(X, target_vec, startPt, endPt, latent_model, can
     start_pt = np.expand_dims(startPt, axis=0)
     end_pt = np.expand_dims(endPt,axis=0)
     
-    eps = 0.6
+    eps = 0.3
     step_size = 0.3
 
     starts = start_pt
