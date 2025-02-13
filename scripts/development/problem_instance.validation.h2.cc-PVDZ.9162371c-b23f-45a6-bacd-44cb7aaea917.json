@@ -1,0 +1,64 @@
+{
+    "problem_instance_uuid": "9162371c-b23f-45a6-bacd-44cb7aaea917",
+    "short_name": "validation.h2.cc-PVDZ",
+    "tasks": [
+        {
+            "task_uuid": "4e1617a3-7a5f-4c86-99b6-4cfc8b547197",
+            "features": {
+                "molecule_name": "h2.cc-PVDZ",
+                "geometry": "H -0.3705 0 0\nH 0.3705 0 0",
+                "geometry_units": "angstrom",
+                "basis_set": "cc-PVDZ",
+                "charge": 0,
+                "multiplicity": 2,
+                "num_electrons": 2,
+                "num_orbitals": 10,
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 2592000,
+                "absolute_accuracy_threshold": 0.00159362,
+                "absolute_accuracy_threshold_energy_units": "Hartree",
+                "reference_energy": -999999999999,
+                "reference_energy_units": "Hartree",
+                "reference_energy_source": "XXXXXXXXXXXXXX",
+                "reference_energy_method": "XXXXXXXXXXXXXX"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "bbcd09f2-8a89-4f35-9577-7851a76ea17c",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/validation_instances/validation.h2.cc-PVDZ.bbcd09f2-8a89-4f35-9577-7851a76ea17c.fcidump.gz",
+                    "instance_data_checksum": "bc3386744ff812262d683635b9c166b340d05a93",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        }
+    ],
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+    "references": [],
+    "creation_timestamp": "2025-02-13T18:19:28.832341+00:00",
+    "latest_update_timestamp": "2025-02-13T18:19:28.832362+00:00",
+    "calendar_due_date": null,
+    "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "contact_info": [
+        {
+            "name": "BOBQAT Team",
+            "email": "bobqat@l3harris.com",
+            "institution": "L3Harris Technologies, Inc.",
+            "website": "www.l3harris.com"
+        },
+        {
+            "name": "Joshua T. Cantin",
+            "email": "joshua.cantin@utoronto.ca",
+            "institution": "University of Toronto at Scarborough"
+        }
+    ],
+    "status": "in_force",
+    "superseded_by": null,
+    "problem_type": "GSEE",
+    "application_domain": "QC"
+}
