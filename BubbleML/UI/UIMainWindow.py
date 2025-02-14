@@ -9,9 +9,9 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationTool
 from matplotlib.figure import Figure
 
 import pandas as pd
-from PandasModel import PandasModel
 import numpy as np
 import pickle
+from PandasModel import PandasModel
 
 import MLFunctionsForUI
 mpl.use("Qt5Agg")
@@ -56,9 +56,6 @@ class UIMainWindow(object):
         
         self.canvasLatent = MplCanvas(self, width=6, height=5, dpi=100) #figure in Latent Tab
         self.canvasML = MplCanvas(self, width=6, height=5, dpi=100) #figure in ML tab
-        
-
-        
         
 
         self.cbML = [] #colorbar in ML tab
@@ -617,7 +614,7 @@ class UIMainWindow(object):
         
         if X_is_good and Y_is_good:
             acc_str  = ' '
-            self.MLModel, self.MLModel_accuracy = MLFunctionsForUI.trainML(self, self.X,self.Y,self.ML_model_name, self.HypOptCV)
+            self.MLscaler, self.MLModel, self.MLModel_accuracy = MLFunctionsForUI.trainML(self, self.X,self.Y,self.ML_model_name, self.HypOptCV)
             acc_str = ' {:0.2f}%, ' ' {:0.2f}%.'.format(self.MLModel_accuracy[0]*100, self.MLModel_accuracy[1]*100)
             
 
@@ -648,8 +645,9 @@ class UIMainWindow(object):
                 self.latentPlotButtonClicked()
             
             #compute the uncertainty values for point in the 2D latent space.
-            XX, YY, Z0, novelX, prob  = MLFunctionsForUI.create_uncertainity_plot_values(self.ML_model_name, self.MLModel, self.latent_model, self.proj_data, self.train_on_reduceddim_data, self.latent_scaler, self.svm_scaler)
+            XX, YY, Z0, novelX_2D, novelX, prob  = MLFunctionsForUI.create_uncertainity_plot_values(self.ML_model_name, self.MLModel, self.latent_model, self.proj_data, self.latent_scaler, self.MLscaler)
             self.prob = prob
+            self.novelX_2D = pd.DataFrame(novelX_2D,columns = ['proj 1','proj 2'])
 
             #make a dataframe for novelX with uncertainty
             if self.train_on_reduceddim_data == 0:
@@ -663,10 +661,10 @@ class UIMainWindow(object):
 
             self.MLVisualizationPlot(XX, YY, Z0)
             #print solvability ratio
-            conf_thresh = 0.75
+            conf_thresh = 0.5
             result =   np.where(self.prob[:,1] > conf_thresh)
             ratio_str = str(len(result[0])/len(self.prob[:,1]))
-            self.ui.MLResults.setText('Solvability ratio in embedding [Number of point solvable >= 75% / total number of points] with model: ' + ratio_str)
+            self.ui.MLResults.setText('Solvability ratio in embedding [Number of point solvable >= 5% / total number of points] with model: ' + ratio_str)
 
             # copy the visualization onto the Active Learning Tab plot
             self.ALVisualizationPlot(XX, YY, Z0)
@@ -676,9 +674,6 @@ class UIMainWindow(object):
             self.ui.MLResults.update()
 
         
-
-
-    
     def MLVisualizationPlot(self, XX, YY, Z0):
         '''
         Plot the train data and the uncertainty values in the 2D latent space with 2D values XX, YY.
@@ -690,7 +685,7 @@ class UIMainWindow(object):
         cmap = plt.cm.bwr_r
         
         norm = plt.Normalize(0,1)
-        norm = plt.Normalize(np.min(colors),np.max(colors)) #normalized according to the probabilities in the decision space
+        #norm = plt.Normalize(np.min(colors),np.max(colors)) #normalized according to the probabilities in the decision space
         x=XX.flatten()
         np.append(x,self.proj_data[:,0])
         y=YY.flatten()
@@ -983,7 +978,7 @@ class UIMainWindow(object):
         Generate path from selected start pt to selected end point
         '''
         
-        self.pathPoints, self.arrowsOnPlot = MLFunctionsForUI.compute_amenability_vectors(self.X, self.Y, self.startPt, self.endPt, self.latent_model,self.canvasAL, self.novelX, 'AL')
+        self.pathPoints, self.arrowsOnPlot = MLFunctionsForUI.compute_amenability_vectors(self.startPt, self.endPt, self.canvasAL, self.novelX_2D, self.prob[:,1], 'AL')
 
 
     def clearPath_btn_Clicked(self):
