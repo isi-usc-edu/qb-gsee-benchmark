@@ -16,7 +16,6 @@ UIMainwindow implements all the widget functions
 from UIMainWindow import *
 
 
-os.chdir('/Users/rnsundareswara/Desktop/QBG/Code/QBG_HRL/ChemicalFrontier/UI/MLTool/user-interface-for-machine-learning')
 
 if __name__ == "__main__":
         
