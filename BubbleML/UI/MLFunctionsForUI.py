@@ -16,8 +16,7 @@ from sklearn.metrics import balanced_accuracy_score
 from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import classification_report, confusion_matrix 
 from sklearn.model_selection import cross_val_score
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 
 #helper functions for UI
@@ -118,14 +117,13 @@ def proj_pca(X):
     Returns the scaler ("sc"), latent model ("pca"), latent axes ("pca_axes") and the projected data ("proj_data2")
     '''
 
-    pca = PCA(n_components = 2,whiten=True) # want all the components for now.   rows are components, cols are coefficients
-    proj_data2 = pca.fit_transform(X)
-
-    ##### for verification
-    
     sc = StandardScaler() 
     X_sc = sc.fit_transform(X)
+    pca = PCA(n_components = 2) # want all the components for now.   rows are components, cols are coefficients
+    proj_data2 = pca.fit_transform(X_sc)
     pca_axes = pca.components_  #whitened checked np.diag(np.matmul(pca_axes,np.transpose(pca_axes))) 
+
+    ##### for verification
     proj_data = np.matmul(X_sc,np.transpose(pca_axes))  #if multipled by -1, it will be the same as proj_data2
     #####
 
@@ -277,23 +275,16 @@ def trainML(ui_self, X,Y,model_name, hypopt_cv):
     base_model = []
     base_accuracy = []
 
-    X_train = X #will be scaling this for svm
+    X_train = X #will be scaling this for SVM and Random Forest (even through Random Forest is less likely to benefit from it)
     y_train = Y
-
-    if ui_self.train_on_reduceddim_data == 0:
-        X_train = X
-    else:
-        #first check if latent space computation was run
-        if ui_self.proj_data == []:  #this should be checked when training on latent space was asked for.  But checking again
-            ui_self.train_on_reduceddim_data = 0
-            print("Latent space computation was not run. Training  model on original HighDimData")
-
-        else:
-            X_train = ui_self.proj_data
+    sc = StandardScaler() 
+    X_sc = sc.fit_transform(X_train)
+    X_train = X_sc
+        
     
 
+    #define the param grid
     if model_name == 'Random Forest':
-        
         model = RandomForestClassifier(random_state = 6)
         #if hyperoptimization is turned on (checked later)
         param_grid = {
@@ -308,18 +299,10 @@ def trainML(ui_self, X,Y,model_name, hypopt_cv):
         from sklearn.svm import SVC
         model = SVC(random_state=42) 
         model.probability = True
-        from sklearn.preprocessing import StandardScaler
     
-        sc = StandardScaler() 
-        X_sc = sc.fit_transform(X_train)
-        
-        #save the standard scaler 
-        ui_self.svm_scaler = sc
-        X_train = X_sc
-
-        param_grid = {'C': [0.001, 0.1, 1, 10, 100],  
+        param_grid = {'C': [0.001, 0.1, 0.5, 1, 10, 50, 100],  
             'gamma': [1, 0.1, 0.01, 0.001, 0.0001], 
-            'kernel': ['rbf', 'poly']}  #add linear
+            'kernel': ['rbf', 'poly', 'linear']}  #add linear
     
     if hypopt_cv == 0:
         #uses all the data for train and tests on the same data
@@ -348,10 +331,10 @@ def trainML(ui_self, X,Y,model_name, hypopt_cv):
             df = pd.DataFrame(data, columns=['Og Feature 1','Og Feature 2', 'Proj 1','Proj 2', 'Labels', 'Predictions at 50%', 'Prob Class 0', 'Prob Class 1' ])             
             df.to_csv('probs.csv')
     
-    return model, accuracy
+    return sc, model, accuracy
 
 
-def create_uncertainity_plot_values(learned_model_name, learned_model, latent_model, proj_data, train_on_reduceddim_data, latent_scaler, ml_scaler):
+def create_uncertainity_plot_values(learned_model_name, learned_model, latent_model, proj_data, latent_scaler, ml_scaler):
     '''
     This function used the ML nodel ("learned model" with name "learned_model_name") to predict the class with uncertainity for
     every point for the projected data ("proj_data") of the latent space ("latent_model" with name "latent_axes_name") with axes "latent_axes".
@@ -363,42 +346,36 @@ def create_uncertainity_plot_values(learned_model_name, learned_model, latent_mo
     xminmax = np.arange(np.min(proj_data[:, 0]), np.max(proj_data[:, 0]), 0.1)
     yminmax = np.arange(np.min(proj_data[:, 1]), np.max(proj_data[:, 1]), 0.1)
 
-    x = np.linspace(xminmax[0], xminmax[-1],100)
-    y = np.linspace(yminmax[0], yminmax[-1],100)
+    x = np.linspace(xminmax[0], xminmax[-1] + 0.09,100)
+    y = np.linspace(yminmax[0], yminmax[-1] + 0.09,100)
     XX, YY = np.meshgrid(x, y)
    
     newX = np.c_[XX.ravel(), YY.ravel()]
   
-    if train_on_reduceddim_data == 0:
-        #we have to undo the transform and the scaling (in that order) to get the projected points to the original feature space
+    #we have to undo the transform and the scaling (in that order) to get the projected points to the original feature space
 
-        #first, undo transform of latent space
-        newX_untransformed = latent_model.inverse_transform(newX)
+    #first, undo transform of latent space
+    newX_untransformed = latent_model.inverse_transform(newX)
 
-        #next, undo the scaling of the latent space.
-        orig_dim_data = latent_scaler.inverse_transform(newX_untransformed)
-    else:  #train on the projected data
-        orig_dim_data = newX
+    #next, undo the scaling of the latent space.
+    orig_dim_data = latent_scaler.inverse_transform(newX_untransformed)
+ 
 
+    #ML trained on centered and scaled data, so we have to scale the new data
+    #Random Forest was run without being scaled.
+   
 
-    #if learned_model was SVM, it was trained on centered and scaled data, so we have to scale the new data
-    if learned_model_name == 'Support Vector Machine':
-
-        #standardize data per ml_scaler
-        orig_dim_data_for_pred = ml_scaler.transform(orig_dim_data)   
-        #same as above (verification)
-        #orig_dim_data_for_pred = (orig_dim_data-scaler.mean_)/np.sqrt(scaler.var_)  
-    else: #Random Forest did not need scaling
-        orig_dim_data_for_pred = orig_dim_data
+    #standardize data per ml_scaler
+    orig_dim_data_for_pred = ml_scaler.transform(orig_dim_data)   
+    #same as above (verification)
+    #orig_dim_data_for_pred = (orig_dim_data-scaler.mean_)/np.sqrt(scaler.var_)  
 
                                   
     prob = learned_model.predict_proba(np.asarray(orig_dim_data_for_pred))
     Z0 = prob[:,1].reshape(XX.shape)
-
-
     
     
-    return XX, YY, Z0, orig_dim_data, prob
+    return XX, YY, Z0, newX, orig_dim_data, prob
 
 
 
@@ -433,7 +410,7 @@ def getBestChoice(start_pt, dir_vec_norm, novelX_2D, prob_class1):
     #this is still being refined.  But basically, we would like the best choice (i.e. more confident, among the about 40 degrees of the direction)
 
     resolution = 5
-    spectrum = 30 # +/- 30 radians around dir_vec in resolution of 5 degrees
+    spectrum = 30 # +/- 30 degrees around dir_vec in resolution of 5 degrees
 
     r = np.arange(-spectrum,spectrum,resolution)
     new_start_pt_arr = np.zeros((len(r),2))
@@ -454,7 +431,7 @@ def getBestChoice(start_pt, dir_vec_norm, novelX_2D, prob_class1):
         
         
         #now get the uncertainty of the pt
-        prob_class1_arr[count] = float(prob_class1.iloc[ind])
+        prob_class1_arr[count] = float(prob_class1[ind])
         #canvas.axes.annotate("", new_start_pt_arr[count], xytext = start_pt[0], arrowprops=dict(arrowstyle="->"))
         #canvas.draw()
 
@@ -463,7 +440,7 @@ def getBestChoice(start_pt, dir_vec_norm, novelX_2D, prob_class1):
     return new_start_pt_arr[ind].reshape(1,2)    
     
 
-def compute_amenability_vectors(X, target_vec, startPt, endPt, latent_model, canvas, novelX_with_uncertainty, whichCanvas):
+def compute_amenability_vectors(startPt, endPt, canvas, novelX_2D, uncertainty, whichCanvas):
     '''
     This method comptutes vectors at every point along a path that searches for a most likely path (based on P(solver = True | X) given a start and an end point.
     At every point, it considers a sweep of directions and chooses the direction with the highest P(solver = True | X) until 
@@ -490,11 +467,11 @@ def compute_amenability_vectors(X, target_vec, startPt, endPt, latent_model, can
     #   2. As part of the UI, once can choose the start point, the cluster (or a singleton point) and the threshold for the travel path
 
     # 1.  
-    target_vec_true = np.where(target_vec == 1)
-    target_vec_false = np.where(target_vec == 0)
+    #target_vec_true = np.where(target_vec == 1)
+    #target_vec_false = np.where(target_vec == 0)
 
-    X_target_true = X.iloc[np.squeeze(target_vec_true),:]
-    X_target_false = X.iloc[np.squeeze(target_vec_false),:]
+    #X_target_true = X.iloc[np.squeeze(target_vec_true),:]
+    #X_target_false = X.iloc[np.squeeze(target_vec_false),:]
 
     '''
     #2. Create groups of solvability
@@ -526,17 +503,12 @@ def compute_amenability_vectors(X, target_vec, startPt, endPt, latent_model, can
     start_pt = np.expand_dims(startPt, axis=0)
     end_pt = np.expand_dims(endPt,axis=0)
     
-    eps = 0.6
+    eps = 0.5
     step_size = 0.3
 
     starts = start_pt
     arrowsOnPlots = list()
     
-    
-    if whichCanvas == 'AL':
-        novelX_2D = latent_model.transform(novelX_with_uncertainty.iloc[:,:-1])
-        uncertainty = novelX_with_uncertainty.iloc[:,-1]
-
 
     amenability_vec = end_pt - start_pt
     
@@ -550,7 +522,7 @@ def compute_amenability_vectors(X, target_vec, startPt, endPt, latent_model, can
             choice_vec = getBestChoice(start_pt, amenability_vec_norm, novelX_2D, uncertainty)
             new_start = choice_vec
         else:
-            v = 0.01 # variance v for noise
+            v = 0.05 # variance v for noise
             noise_vec = getNoiseVec(v)
             new_start = start_pt + (step_size * amenability_vec_norm) #+ noise_vec
         
