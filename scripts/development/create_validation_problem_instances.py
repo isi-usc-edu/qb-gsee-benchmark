@@ -18,7 +18,10 @@
 from qb_gsee_benchmark.utils import iso8601_timestamp
 from qb_gsee_benchmark.utils import validate_json
 from qb_gsee_benchmark.utils import get_file_sha1sum
-from pyscf import gto, scf, fci
+from pyscf import gto, scf, fci, lib
+# set the number of threads PySCF uses to 1 (no multithreading)
+lib.num_threads(1)
+
 from pyscf.tools import fcidump
 import gzip
 import shutil
@@ -66,7 +69,7 @@ instances = []
 problem_instance_uuid = "3aa01b76-53e2-49e8-bc05-72875168a00a"
 task_uuid = "4e1617a3-7a5f-4c86-99b6-4cfc8b547197"
 instance_data_object_uuid = "0b245a9c-7561-423d-bd50-8958b3625a94"
-molecule_name = "h.cc-PVDZ"
+molecule_name = "H.cc-PVDZ"
 short_name = f"validation.{molecule_name}"
 instances.append({
     "problem_instance_uuid":problem_instance_uuid,
@@ -80,7 +83,8 @@ instances.append({
                 "geometry_units": "angstrom",
                 "basis_set": "cc-PVDZ",
                 "charge": 0,
-                "multiplicity": 1,
+                # "multiplicity": 2,
+                "spin": 1, 
                 "num_electrons": "UPDATED-LATER",
                 "num_orbitals": "UPDATED-LATER"
             },
@@ -89,10 +93,10 @@ instances.append({
                 "time_limit_seconds": 2592000,
                 "absolute_accuracy_threshold": 0.00159362,
                 "absolute_accuracy_threshold_energy_units": "Hartree",
-                "reference_energy": -0.5,
+                "reference_energy": "UPDATED-LATER",
                 "reference_energy_units": "Hartree",
-                "reference_energy_source": "XXXXXXXXXXXXXX",
-                "reference_energy_method": "XXXXXXXXXXXXXX"
+                "reference_energy_source": "Exact FCI solution in PySCF 2.8.0, with multithreading disabled.",
+                "reference_energy_method": "Exact FCI solution in PySCF 2.8.0, with multithreading disabled."
             },
             "supporting_files": [
                 {
@@ -115,7 +119,7 @@ instances.append({
 problem_instance_uuid = "9162371c-b23f-45a6-bacd-44cb7aaea917"
 task_uuid = "4e1617a3-7a5f-4c86-99b6-4cfc8b547197"
 instance_data_object_uuid = "bbcd09f2-8a89-4f35-9577-7851a76ea17c"
-molecule_name = "h2.cc-PVDZ"
+molecule_name = "H2.cc-PVDZ"
 short_name = f"validation.{molecule_name}"
 instances.append({
     "problem_instance_uuid":problem_instance_uuid,
@@ -125,11 +129,12 @@ instances.append({
             "task_uuid": task_uuid,
             "features": {
                 "molecule_name": molecule_name,
-                "geometry": "H -0.3705 0 0\nH 0.3705 0 0",
+                "geometry": "H -0.3705 0 0; H 0.3705 0 0",
                 "geometry_units": "angstrom",
                 "basis_set": "cc-PVDZ", 
                 "charge": 0,
-                "multiplicity": 2,
+                "multiplicity": 1,
+                "spin": 0, 
                 "num_electrons": "UPDATED-LATER",
                 "num_orbitals": "UPDATED-LATER",
                 "utility_scale":False
@@ -139,10 +144,10 @@ instances.append({
                 "time_limit_seconds": 2592000,
                 "absolute_accuracy_threshold": 0.00159362,
                 "absolute_accuracy_threshold_energy_units": "Hartree",
-                "reference_energy": -999999999999,
+                "reference_energy": "UPDATED-LATER",
                 "reference_energy_units": "Hartree",
-                "reference_energy_source": "XXXXXXXXXXXXXX",
-                "reference_energy_method": "XXXXXXXXXXXXXX"
+                "reference_energy_source": "Exact FCI solution in PySCF 2.8.0, with multithreading disabled.",
+                "reference_energy_method": "Exact FCI solution in PySCF 2.8.0, with multithreading disabled."
             },
             "supporting_files": [
                 {
@@ -166,7 +171,7 @@ instances.append({
 problem_instance_uuid = "036fc218-6a9c-4d49-88a4-930f5ebb5ae6"
 task_uuid = "3e803f97-2478-4630-a7a3-12fbc69f7666"
 instance_data_object_uuid = "00243a50-3f5c-44da-99c8-021ac2214cba"
-molecule_name = "he.cc-PVDZ"
+molecule_name = "He.cc-PVDZ"
 short_name = f"validation.{molecule_name}"
 instances.append({
     "problem_instance_uuid":problem_instance_uuid,
@@ -180,7 +185,8 @@ instances.append({
                 "geometry_units": "angstrom",
                 "basis_set": "cc-PVDZ", 
                 "charge": 0,
-                "multiplicity": 2,
+                "multiplicity": 1,
+                "spin": 0,
                 "num_electrons": "UPDATED-LATER",
                 "num_orbitals": "UPDATED-LATER",
                 "utility_scale":False
@@ -190,10 +196,10 @@ instances.append({
                 "time_limit_seconds": 2592000,
                 "absolute_accuracy_threshold": 0.00159362,
                 "absolute_accuracy_threshold_energy_units": "Hartree",
-                "reference_energy": -999999999999,
+                "reference_energy": "UPDATED-LATER",
                 "reference_energy_units": "Hartree",
-                "reference_energy_source": "XXXXXXXXXXXXXX",
-                "reference_energy_method": "XXXXXXXXXXXXXX"
+                "reference_energy_source": "Exact FCI solution in PySCF 2.8.0, with multithreading disabled.",
+                "reference_energy_method": "Exact FCI solution in PySCF 2.8.0, with multithreading disabled."
             },
             "supporting_files": [
                 {
@@ -214,6 +220,56 @@ instances.append({
 
 
 
+
+
+
+
+################################################################################
+# LiH instance:
+problem_instance_uuid = "00ec23d5-3e17-46d3-a8b6-9ceff1826377"
+task_uuid = "2b2eefc4-9c8c-4a02-b621-059774f620c4"
+instance_data_object_uuid = "7298a64d-1574-42d7-b092-3e9f686ec162"
+molecule_name = "LiH.cc-PVDZ"
+short_name = f"validation.{molecule_name}"
+instances.append({
+    "problem_instance_uuid":problem_instance_uuid,
+    "short_name":short_name,
+    "tasks": [
+        {
+            "task_uuid": task_uuid,
+            "features": {
+                "molecule_name": molecule_name,
+                "geometry":"Li 0 0 0; H 0 0 1.596",
+                "geometry_units": "angstrom",
+                "basis_set": "cc-PVDZ", 
+                "charge": 0,
+                "multiplicity": 1,
+                "spin": 0,
+                "num_electrons": "UPDATED-LATER",
+                "num_orbitals": "UPDATED-LATER",
+                "utility_scale":False
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 2592000,
+                "absolute_accuracy_threshold": 0.00159362,
+                "absolute_accuracy_threshold_energy_units": "Hartree",
+                "reference_energy": "UPDATED-LATER",
+                "reference_energy_units": "Hartree",
+                "reference_energy_source": "Exact FCI solution in PySCF 2.8.0, with multithreading disabled.",
+                "reference_energy_method": "Exact FCI solution in PySCF 2.8.0, with multithreading disabled."
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": instance_data_object_uuid,
+                    "instance_data_object_url": f"sftp://sftp.l3harris.com/gsee/validation_instances/{short_name}.{instance_data_object_uuid}.fcidump.gz",
+                    "instance_data_checksum": "TO-BE-UPDATED",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        }
+    ]
+})
 
 
 
@@ -255,12 +311,12 @@ for instance in instances:
     fcidump_file_list.append(fcidump_file_name)
 
     features = instance["tasks"][0]["features"]
-    
+
     mol = gto.M(
         atom=features["geometry"],
         basis=features["basis_set"],
         unit=features["geometry_units"], # should be angstrom
-        spin=features["multiplicity"],
+        spin=features["spin"],
         charge=features["charge"]
     )
     mol.build()
@@ -298,23 +354,30 @@ for instance in instances:
     fci_params = fcidump.read(fcidump_file_name)
 
     # update fields straight from the FCIDUMP info:
-    instance["tasks"][0]["features"]["num_electrons"] = fci_params["NELEC"]
-    instance["tasks"][0]["features"]["num_orbitals"] = fci_params["NORB"]
+    instance["tasks"][0]["features"]["num_electrons"] = fci_params["NELEC"] # update JSON
+    instance["tasks"][0]["features"]["num_orbitals"] = fci_params["NORB"] # udpate JSON
 
     # update file checksums
     sha1sum = get_file_sha1sum(fcidump_file_name + ".gz")
     instance["tasks"][0]["supporting_files"][0]["instance_data_checksum"] = sha1sum
 
+    
     # solve for GSEE using FCI for funsies:
     mf = fcidump.to_scf(fcidump_file_name)
+    mf.max_cycle = 10000
+    mf.conv_tol = 1e-16
     mf.kernel()
     print(f"HF energy: {mf.e_tot}")
 
-    # Solve for GSE using CCSD:
+    # Solve for GSE using FCI:
     fci_solver = fci.FCI(mf)
+    fci_solver.max_cycle = 10000
+    fci_solver.max_memory = 8192 
+    fci_solver.conv_tol = 1e-14
+    fci_solver.conv_tol_residual = 1e-14
     energy, _ = fci_solver.kernel()
     print(f"FCI energy: {energy}")
-
+    instance["tasks"][0]["requirements"]["reference_energy"] = energy # update in JSON.
 
 
 
@@ -346,3 +409,8 @@ for instance in instances:
 # delete the uncompressed FCIDUMP files to avoid confusion:
 for fcidump_file in fcidump_file_list:
     os.remove(fcidump_file)
+
+
+for fcidump_file in fcidump_file_list:
+    sha1sum = get_file_sha1sum(fcidump_file + ".gz")
+    print(f"{fcidump_file}.gz sha1sum: {sha1sum}")

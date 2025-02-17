@@ -1,16 +1,17 @@
 {
     "problem_instance_uuid": "036fc218-6a9c-4d49-88a4-930f5ebb5ae6",
-    "short_name": "validation.he.cc-PVDZ",
+    "short_name": "validation.He.cc-PVDZ",
     "tasks": [
         {
             "task_uuid": "3e803f97-2478-4630-a7a3-12fbc69f7666",
             "features": {
-                "molecule_name": "he.cc-PVDZ",
+                "molecule_name": "He.cc-PVDZ",
                 "geometry": "He 0 0 0",
                 "geometry_units": "angstrom",
                 "basis_set": "cc-PVDZ",
                 "charge": 0,
-                "multiplicity": 2,
+                "multiplicity": 1,
+                "spin": 0,
                 "num_electrons": 2,
                 "num_orbitals": 5,
                 "utility_scale": false
@@ -20,16 +21,16 @@
                 "time_limit_seconds": 2592000,
                 "absolute_accuracy_threshold": 0.00159362,
                 "absolute_accuracy_threshold_energy_units": "Hartree",
-                "reference_energy": -999999999999,
+                "reference_energy": -2.8875948310909347,
                 "reference_energy_units": "Hartree",
-                "reference_energy_source": "XXXXXXXXXXXXXX",
-                "reference_energy_method": "XXXXXXXXXXXXXX"
+                "reference_energy_source": "Exact FCI solution in PySCF 2.8.0, with multithreading disabled.",
+                "reference_energy_method": "Exact FCI solution in PySCF 2.8.0, with multithreading disabled."
             },
             "supporting_files": [
                 {
                     "instance_data_object_uuid": "00243a50-3f5c-44da-99c8-021ac2214cba",
-                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/validation_instances/validation.he.cc-PVDZ.00243a50-3f5c-44da-99c8-021ac2214cba.fcidump.gz",
-                    "instance_data_checksum": "4053fd14386743897c59fa8fec9154144243fa52",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/validation_instances/validation.He.cc-PVDZ.00243a50-3f5c-44da-99c8-021ac2214cba.fcidump.gz",
+                    "instance_data_checksum": "f4895540e5873501d295e2c2ad417dc3068491d1",
                     "instance_data_checksum_type": "sha1sum"
                 }
             ]
@@ -37,8 +38,8 @@
     ],
     "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
     "references": [],
-    "creation_timestamp": "2025-02-13T18:19:28.832341+00:00",
-    "latest_update_timestamp": "2025-02-13T18:19:28.832362+00:00",
+    "creation_timestamp": "2025-02-17T16:08:28.207353+00:00",
+    "latest_update_timestamp": "2025-02-17T16:08:28.207370+00:00",
     "calendar_due_date": null,
     "license": {
         "name": "Apache 2.0",

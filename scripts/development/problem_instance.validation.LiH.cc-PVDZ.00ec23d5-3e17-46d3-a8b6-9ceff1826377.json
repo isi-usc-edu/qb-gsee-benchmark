@@ -1,34 +1,36 @@
 {
-    "problem_instance_uuid": "3aa01b76-53e2-49e8-bc05-72875168a00a",
-    "short_name": "validation.h.cc-PVDZ",
+    "problem_instance_uuid": "00ec23d5-3e17-46d3-a8b6-9ceff1826377",
+    "short_name": "validation.LiH.cc-PVDZ",
     "tasks": [
         {
-            "task_uuid": "4e1617a3-7a5f-4c86-99b6-4cfc8b547197",
+            "task_uuid": "2b2eefc4-9c8c-4a02-b621-059774f620c4",
             "features": {
-                "molecule_name": "h.cc-PVDZ",
-                "geometry": "H 0 0 0",
+                "molecule_name": "LiH.cc-PVDZ",
+                "geometry": "Li 0 0 0; H 0 0 1.596",
                 "geometry_units": "angstrom",
                 "basis_set": "cc-PVDZ",
                 "charge": 0,
                 "multiplicity": 1,
-                "num_electrons": 1,
-                "num_orbitals": 5
+                "spin": 0,
+                "num_electrons": 4,
+                "num_orbitals": 19,
+                "utility_scale": false
             },
             "requirements": {
                 "probability_of_success": 0.99,
                 "time_limit_seconds": 2592000,
                 "absolute_accuracy_threshold": 0.00159362,
                 "absolute_accuracy_threshold_energy_units": "Hartree",
-                "reference_energy": -0.5,
+                "reference_energy": -8.014732559828683,
                 "reference_energy_units": "Hartree",
-                "reference_energy_source": "XXXXXXXXXXXXXX",
-                "reference_energy_method": "XXXXXXXXXXXXXX"
+                "reference_energy_source": "Exact FCI solution in PySCF 2.8.0, with multithreading disabled.",
+                "reference_energy_method": "Exact FCI solution in PySCF 2.8.0, with multithreading disabled."
             },
             "supporting_files": [
                 {
-                    "instance_data_object_uuid": "0b245a9c-7561-423d-bd50-8958b3625a94",
-                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/validation_instances/validation.h.cc-PVDZ.0b245a9c-7561-423d-bd50-8958b3625a94.fcidump.gz",
-                    "instance_data_checksum": "cdd8e28045a068e3c6458987fac41239509837bc",
+                    "instance_data_object_uuid": "7298a64d-1574-42d7-b092-3e9f686ec162",
+                    "instance_data_object_url": "sftp://sftp.l3harris.com/gsee/validation_instances/validation.LiH.cc-PVDZ.7298a64d-1574-42d7-b092-3e9f686ec162.fcidump.gz",
+                    "instance_data_checksum": "0246d2ba1a1c22ed75c4276a35ceeda4add180d9",
                     "instance_data_checksum_type": "sha1sum"
                 }
             ]
@@ -36,8 +38,8 @@
     ],
     "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
     "references": [],
-    "creation_timestamp": "2025-02-13T18:19:28.832341+00:00",
-    "latest_update_timestamp": "2025-02-13T18:19:28.832362+00:00",
+    "creation_timestamp": "2025-02-17T16:08:28.207353+00:00",
+    "latest_update_timestamp": "2025-02-17T16:08:28.207370+00:00",
     "calendar_due_date": null,
     "license": {
         "name": "Apache 2.0",
