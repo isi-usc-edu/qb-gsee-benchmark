@@ -21,7 +21,6 @@ from qb_gsee_benchmark.utils import get_file_sha1sum
 from pyscf import gto, scf, fci, lib
 # set the number of threads PySCF uses to 1 (no multithreading)
 lib.num_threads(1)
-
 from pyscf.tools import fcidump
 import gzip
 import shutil
@@ -76,7 +75,7 @@ instances.append({
     "short_name":short_name,
     "tasks": [
         {
-            "task_uuid": "4e1617a3-7a5f-4c86-99b6-4cfc8b547197",
+            "task_uuid": task_uuid,
             "features": {
                 "molecule_name": molecule_name,
                 "geometry": "H 0 0 0",
@@ -117,7 +116,7 @@ instances.append({
 ################################################################################
 # H2 instance:
 problem_instance_uuid = "9162371c-b23f-45a6-bacd-44cb7aaea917"
-task_uuid = "4e1617a3-7a5f-4c86-99b6-4cfc8b547197"
+task_uuid = "f847059f-a89f-4008-9ae1-39847c899e75"
 instance_data_object_uuid = "bbcd09f2-8a89-4f35-9577-7851a76ea17c"
 molecule_name = "H2.cc-PVDZ"
 short_name = f"validation.{molecule_name}"
@@ -336,7 +335,8 @@ for instance in instances:
 # create compressed versions of the FCIDUMP files:
 for fcidump_file in fcidump_file_list:
     with open(fcidump_file, "rb") as f_in:
-        with gzip.open(fcidump_file + ".gz", "wb") as f_out:
+        # note that we set kwarg mtime=0 for consistent hash of .gz file.
+        with gzip.GzipFile(fcidump_file + ".gz", "wb", mtime=0) as f_out:
             shutil.copyfileobj(f_in, f_out)
 
 
@@ -348,22 +348,30 @@ for fcidump_file in fcidump_file_list:
 for instance in instances:
     short_name = instance["short_name"]
     data_uuid = instance["tasks"][0]["supporting_files"][0]["instance_data_object_uuid"]
-    fcidump_file_name = f"{short_name}.{data_uuid}.fcidump"
+    fcidump_file_name_gz = f"{short_name}.{data_uuid}.fcidump.gz"
+
+    # unzip to "temp.fcidump" file:
+    with gzip.GzipFile(filename=fcidump_file_name_gz ,mode="rb") as f_in:
+        with open("temp.fcidump","wb") as f_out:
+            shutil.copyfileobj(f_in, f_out)
+
 
     print("\n\nsolving for GSE based on the FCIDUMP file alone:")
-    fci_params = fcidump.read(fcidump_file_name)
+    print(f"{fcidump_file_name_gz}")
+    fci_params = fcidump.read("temp.fcidump")
 
     # update fields straight from the FCIDUMP info:
     instance["tasks"][0]["features"]["num_electrons"] = fci_params["NELEC"] # update JSON
     instance["tasks"][0]["features"]["num_orbitals"] = fci_params["NORB"] # udpate JSON
 
     # update file checksums
-    sha1sum = get_file_sha1sum(fcidump_file_name + ".gz")
+    sha1sum = get_file_sha1sum(fcidump_file_name_gz)
     instance["tasks"][0]["supporting_files"][0]["instance_data_checksum"] = sha1sum
+    print(f"{fcidump_file_name_gz} sha1sum: {sha1sum}")
 
     
-    # solve for GSEE using FCI for funsies:
-    mf = fcidump.to_scf(fcidump_file_name)
+    # solve for GSEE using FCI for reference_energy:
+    mf = fcidump.to_scf("temp.fcidump")
     mf.max_cycle = 10000
     mf.conv_tol = 1e-16
     mf.kernel()
@@ -378,6 +386,9 @@ for instance in instances:
     energy, _ = fci_solver.kernel()
     print(f"FCI energy: {energy}")
     instance["tasks"][0]["requirements"]["reference_energy"] = energy # update in JSON.
+
+    # remove temp.fcidump file created during the decompression
+    os.remove("temp.fcidump")
 
 
 
@@ -402,15 +413,25 @@ for instance in instances:
             )
 
 
+################################################################################
+# check for consistency in the FCIDUMP files
+print("\n")
+for fcidump_file in fcidump_file_list:
+    sha1sum = get_file_sha1sum(fcidump_file)
+    print(f"{fcidump_file} sha1sum: {sha1sum}")
     
-    
+
+
 
 ################################################################################
-# delete the uncompressed FCIDUMP files to avoid confusion:
-for fcidump_file in fcidump_file_list:
-    os.remove(fcidump_file)
-
-
+# check for consistency in the .gz files.
+print("\n")
 for fcidump_file in fcidump_file_list:
     sha1sum = get_file_sha1sum(fcidump_file + ".gz")
     print(f"{fcidump_file}.gz sha1sum: {sha1sum}")
+
+
+################################################################################
+# Finally delete the uncompressed FCIDUMP files to avoid confusion:
+for fcidump_file in fcidump_file_list:
+    os.remove(fcidump_file)
