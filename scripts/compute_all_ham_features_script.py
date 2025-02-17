@@ -132,11 +132,11 @@ def main(args):
 
 
     finished_all_hamiltonians = False # init
-    max_num_orbitals = 10 # init.  we will complete the "small" Hamiltonians first
+    max_num_orbitals = 20 # init.  we will complete the "small" Hamiltonians first
     # and increase the `max_num_orbitals` later to finish off the large Hamiltonians.
     
     while not finished_all_hamiltonians:
-        max_num_orbitals += 5 # increase the size of Hamiltonians considered in each loop.
+        max_num_orbitals += 10 # increase the size of Hamiltonians considered in each loop.
         finished_all_hamiltonians = True # reset... update to `False` if we skip one due to its large size.
         
         # random.shuffle(problem_instance_files) # randomize order of problem instances processed.
