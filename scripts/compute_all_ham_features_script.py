@@ -15,6 +15,9 @@
 # limitations under the License.
 
 
+from qb_gsee_benchmark.utils import fetch_file_from_sftp
+from qb_gsee_benchmark.utils import load_json_files
+
 import os
 import argparse
 import datetime
@@ -51,55 +54,6 @@ for h in handlers:
     logger.addHandler(h)
 
 
-
-import paramiko # for SSH/SFTP
-paramiko.common.logging.basicConfig(level=paramiko.common.DEBUG)
-def fetch_file_from_sftp(
-        url=None,
-        local_path=None,
-        ppk_path=None,
-        username=None,
-        port=22
-    ):
-    """TODO: docstring
-
-    Args:
-        url (_type_, optional): _description_. Defaults to None.
-        local_path (_type_, optional): _description_. Defaults to None.
-        ppk_path (_type_, optional): _description_. Defaults to None.
-        username (_type_, optional): _description_. Defaults to None.
-        port (_type_, optional): _description_. Defaults to 22.
-    """
-
-
-    parsed_url = urlparse(url)
-    hostname = parsed_url.hostname
-    remote_path = parsed_url.path.lstrip("/")
-
-    try:
-        # Create an SSH client
-        with paramiko.SSHClient() as client:
-            client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-            
-            # Connect using the private key file (.ppk)
-            client.connect(
-                hostname=hostname, 
-                port=port, 
-                username=username, 
-                key_filename=ppk_path,
-                banner_timeout=10,
-                timeout=5,
-                auth_timeout=5,
-                channel_timeout=5
-            )
-
-            # Open an SFTP session
-            with client.open_sftp() as sftp:
-                sftp.get(remote_path, local_path)
-
-        logging.info(f"File fetched successfully from {hostname}")
-    except Exception as e:
-        logging.error(f"Error: {e}")
 
 
 
@@ -171,41 +125,23 @@ def main(args):
         shutil.copy2(args.ham_features_file, back_up_file_name)
 
 
-
-    problem_instance_files = os.listdir(input_dir)
-    logging.info(f"parsing {len(problem_instance_files)} files in the input directory")
-    for p in problem_instance_files:
-        logging.info(f"file: {p}")
+    problem_instance_list = load_json_files(args.input_dir)
+    logging.info(f"loaded {len(problem_instance_list)} problem instances.")
 
     num_orbitals_cheat_sheet = pd.read_csv("num_orbitals_cheat_sheet.csv")
 
 
     finished_all_hamiltonians = False # init
-    max_num_orbitals = 10 # init.  we will complete the "small" Hamiltonians first
+    max_num_orbitals = 20 # init.  we will complete the "small" Hamiltonians first
     # and increase the `max_num_orbitals` later to finish off the large Hamiltonians.
     
     while not finished_all_hamiltonians:
-        max_num_orbitals += 5 # increase the size of Hamiltonians considered in each loop.
+        max_num_orbitals += 10 # increase the size of Hamiltonians considered in each loop.
         finished_all_hamiltonians = True # reset... update to `False` if we skip one due to its large size.
         
         # random.shuffle(problem_instance_files) # randomize order of problem instances processed.
 
-        for problem_instance_file_name in problem_instance_files:
-            problem_instance_path = input_dir + problem_instance_file_name
-            logging.info(f"parsing {problem_instance_path}")
-            
-            
-            with open(problem_instance_path, "r") as jf:
-                # load data from file as a Python dictionary object:
-                # Try... because we may have non-JSON files that we will skip.
-                try:
-                    problem_instance = json.load(jf)
-                except Exception as e:
-                    logging.error(f'Error: {e}', exc_info=True)
-                    continue # to next json file.
-            
-            
-            
+        for problem_instance in problem_instance_list:
             problem_instance_uuid = problem_instance["problem_instance_uuid"]
             problem_instance_short_name = problem_instance["short_name"]
             logging.info(f"problem_instance UUID: {problem_instance_uuid}")

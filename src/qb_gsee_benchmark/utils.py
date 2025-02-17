@@ -38,6 +38,42 @@ import numpy as np
 import paramiko
 from pyscf.tools import fcidump
 
+import hashlib
+
+
+
+
+
+
+
+
+
+def get_file_sha1sum(file_name: str, verbose: bool=False) -> str:
+    hasher = hashlib.new("sha1")
+    with open(file_name, "rb") as file:
+        buffer = file.read(65536) # buffer size in bytes
+        while len(buffer) > 0:
+            hasher.update(buffer)
+            buffer = file.read(65536)
+    hash = hasher.hexdigest()
+    if verbose:
+        print(f"sha1sum of {file_name}: {hash}")
+    return hash
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -235,7 +271,7 @@ def validate_json(
         else:
             # no schema provided... fetch it from URL.        
             schema_url = json_dict["$schema"]
-            schema = requests.get(schema_url).json()
+            schema = requests.get(schema_url, verify=certifi.where()).json()
             base_url = "/".join(schema_url.split("/")[:-1]) + "/"
             resolver = RefResolver(base_uri=base_url, referrer=schema)
     
