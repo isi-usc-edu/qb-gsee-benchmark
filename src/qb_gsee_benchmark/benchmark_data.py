@@ -92,6 +92,8 @@ class BenchmarkData:
         self.flatten_benchmark_data()
         self.calculate_performance_metrics()
         self.calculate_sponsor_resource_estimates()
+    
+        
 
         # NOTE: Not done automatically; called later:
         # self.validate_all_json_objects(local_resolver_directory="../schemas")
@@ -626,6 +628,7 @@ class BenchmarkData:
                 logging.error(f"{e}")
                 logging.warning(f"probably no ML model for {solver_uuid}")
         
+        self.write_data_for_bubble_ml_gui(output_directory="ml_artifacts/")
 
 
 
@@ -1215,7 +1218,51 @@ class BenchmarkData:
             with open(output_path, "w") as output:
                 json.dump(pm, output, indent=4)
 
+    
 
+    def write_data_for_bubble_ml_gui(
+            self,
+            output_directory: str
+        ) -> None:
+        """To facilitate BubbleML analysis, the benchmark data is flattened into
+        a CSV file with columns with the `True` `False` labels their performance.
+        Creates a file named `<output_directory>/data_for_BubbleML.csv`.
+        
+        Depends:
+            BenchmarkData.aggregated_solver_labels_df (pd.DataFrame):
+        
+        Args:
+            output_directory (str): relative/path/for/outout.  Usually /ml_artifacts.
+        """
+
+        self.data_for_bubble_ml_df = self.hamiltonian_features.copy() # copy/init as Hamiltonian features.
+
+        for solver_uuid in self.solvers_dict:
+            solver = self.solvers_dict[solver_uuid]
+            solver_short_name = solver["solver_short_name"]
+            solver_name_concat = f"{solver_short_name}-({solver_uuid[:4]})" # first 4 characters of UUID.
+            df = self.aggregated_solver_labels_df
+            df = df[df["solver_uuid"]==solver_uuid] # filter data to solver_uuid
+            df = df[["task_uuid", "label"]] # select only those columns/fields
+            df = df.rename(columns={"label":solver_name_concat}) # rename the generic "label" column to the solver name.
+            
+            # merge solver True/False results as NEW COLUMN in data_for_bubble_ml_df
+            self.data_for_bubble_ml_df = pd.merge(
+                self.data_for_bubble_ml_df,
+                df,
+                on="task_uuid",
+                how="outer" # create a df with empty NaN cells for missing data   
+            )
+            # NOTE: we should NOT have missing data at this point.  If we do,
+            # empty/NaN cell True/False labels for the solver should raise an
+            # error during BubbleML analysis and alert us to the problem.
+
+        # remove the DF Eigenvalues (df_eigs) column which contains large vectors as strings.
+        self.data_for_bubble_ml_df = self.data_for_bubble_ml_df.drop("df_eigs", axis=1)
+
+        # write out data to CSV:
+        output_path = os.path.join(output_directory, "data_for_BubbleML.csv")
+        self.data_for_bubble_ml_df.to_csv(output_path)
 
 
 
