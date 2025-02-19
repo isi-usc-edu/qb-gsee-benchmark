@@ -713,7 +713,7 @@ class StandardReport:
                 file.write(f"Note: plot only contains `attempted` tasks.\n\n")
                 file.write(f"![Solver success/failure logFCI plot]({self.artifact_directory}/log_fci_dim_vs_runtime_solver_{solver_uuid}_plot.png)\n\n")
                 file.write(f"Note: plot only contains `attempted` tasks.\n\n")
-                file.write(f"![Solver utility capture]{self.artifact_directory}/(solver_{solver_uuid}_utility_capture_plot.png)\n\n")
+                file.write(f"![Solver utility capture]({self.artifact_directory}/solver_{solver_uuid}_utility_capture_plot.png)\n\n")
                 file.write(f"![Solver PCA plot]({self.artifact_directory}/PCA_embedding_plot_solver_{solver_uuid}.png)\n\n")
                 file.write(f"![Solver NNMF plot]({self.artifact_directory}/NNMF_embedding_plot_solver_{solver_uuid}.png)\n\n")
                 file.write(f"Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.\n\n")
