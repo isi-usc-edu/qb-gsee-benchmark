@@ -127,12 +127,12 @@ def get_pqre(solution_lre: dict, config: dict) -> dict[str, Any]:
             logging.info(
                 f"Physical resource estimation time: {(physical_resource_estimation_end - physical_resource_estimation_start).total_seconds()} seconds."
             )
-            algorithm_runtime_seconds = (
-                cost.duration_hr
-                * 60
-                * 60
-                * task_solution["quantum_resources"]["logical"]["num_shots"]
-            )
+            algorithm_runtime_seconds = cost.duration_hr * 60 * 60
+            if not config["quantum_hardware_parameters"]["parallelize_shots"]:
+                algorithm_runtime_seconds = (
+                    algorithm_runtime_seconds
+                    * task_solution["quantum_resources"]["logical"]["num_shots"]
+                )
             num_physical_qubits = cost.footprint
             task_solution["run_time"]["algorithm_run_time"] = {
                 "seconds": algorithm_runtime_seconds,
@@ -152,6 +152,9 @@ def get_pqre(solution_lre: dict, config: dict) -> dict[str, Any]:
                     task_solution["quantum_resources"]["logical"]["num_logical_qubits"]
                     * (1 + data_block.routing_overhead)
                 ),
+                "num_qpus": 1
+                if not config["quantum_hardware_parameters"]["parallelize_shots"]
+                else task_solution["quantum_resources"]["logical"]["num_shots"],
             }
             solution_pre["solution_data"].append(task_solution)
         except NoFactoriesFoundError:

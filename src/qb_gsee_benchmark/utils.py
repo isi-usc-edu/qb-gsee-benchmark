@@ -18,11 +18,14 @@ import os
 import shutil
 from urllib.parse import urlparse
 
+import certifi
+
 from typing import Any
 import logging
 import json
 import datetime
 from pathlib import Path
+import time
 
 from jsonschema import validate as _validate
 from jsonschema import RefResolver
@@ -35,30 +38,91 @@ import numpy as np
 import paramiko
 from pyscf.tools import fcidump
 
+import hashlib
 
 
 
-def _fetch_file_from_sftp(
-    url: str, local_path: str, ppk_path: str, username: str, port=22
+
+
+
+
+
+
+def get_file_sha1sum(file_name: str, verbose: bool=False) -> str:
+    hasher = hashlib.new("sha1")
+    with open(file_name, "rb") as file:
+        buffer = file.read(65536) # buffer size in bytes
+        while len(buffer) > 0:
+            hasher.update(buffer)
+            buffer = file.read(65536)
+    hash = hasher.hexdigest()
+    if verbose:
+        print(f"sha1sum of {file_name}: {hash}")
+    return hash
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def fetch_file_from_sftp(
+    url: str, local_path: str, ppk_path: str, username: str, port: int=22
 ):
+    """A utility function based on `paramiko` to fetch a file from an SFTP server.
+
+    Args:
+        url (str): The URL for the remote file.
+        local_path (str): the/local/relative/path where the file will be saved.
+        ppk_path (str): the/relative/path/to/the ppk authentication file
+        username (str): username associated with the ppk authentication file.
+        port (int, optional): SFTP port. Defaults to 22.
+    """
 
     parsed_url = urlparse(url)
     hostname = parsed_url.hostname
     remote_path = parsed_url.path.lstrip("/")
 
-    with paramiko.SSHClient() as client:
-        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        client.connect(
-            hostname=hostname,
-            port=port,
-            username=username,
-            key_filename=ppk_path,
-        )
+    num_attempts = 3
+    for attempt in range(1,num_attempts+1):
+        try:
+            logging.info(f"SFTP attempt {attempt}/{num_attempts}...")
+            with paramiko.SSHClient() as client:
+                client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                
+                client.connect(
+                    hostname=hostname,
+                    port=port,
+                    username=username,
+                    key_filename=ppk_path,
+                    banner_timeout=3,
+                    timeout=3,
+                    auth_timeout=3,
+                    channel_timeout=3
+                )
 
-        with client.open_sftp() as sftp:
-            print(f"Downloading {remote_path} to {local_path}...")
-            sftp.get(remote_path, local_path)
+                with client.open_sftp() as sftp:
+                    logging.info(f"Downloading {remote_path} to {local_path}...")
+                    sftp.get(remote_path, local_path)
+                
+                break # successfully downloaded file.
+        except Exception as e:
+            logging.error(f"{e}", exc_info=True)
+            time.sleep(3)
 
+
+            
 
 
 
@@ -96,9 +160,26 @@ def clear_or_create_output_directory(output_directory: str) -> None:
 
 
 
-def retrieve_fcidump_from_sftp(url: str, username: str, ppk_path: str, port=22) -> dict:
+def retrieve_fcidump_from_sftp(
+        url: str,
+        username: str,
+        ppk_path: str,
+        port=22
+    ) -> dict:
+    """Fetch an FCIDUMP file from the SFTP server, decompress it, read it,
+     and return the `fci` object. 
+
+    Args:
+        url (str): URL to the FCIDUMP file.  E.g., "sftp://www.l3harris.com/some_fcidump_file.gz"
+        username (str): Username assocated with the key file
+        ppk_path (str): The/path/to/the/key/file
+        port (int, optional): TCP port number. Defaults to 22 (standard SCP/SFTP/SSH).
+
+    Returns:
+        dict: The `fci` object.
+    """
     filename = os.path.basename(urlparse(url).path)
-    _fetch_file_from_sftp(
+    fetch_file_from_sftp(
         url=url, username=username, ppk_path=ppk_path, local_path=filename, port=port
     )
     fcidump_filename = filename.replace(".gz", "")
@@ -124,7 +205,21 @@ def validate_list_of_json_objects(
         local_resolver_directory: str,
         local_schema_file: str=None
     ) -> None:
-    """TODO: docstring.  no output implies success!
+    """Given a `list` of `dict` objects (representations of JSON objects) that 
+    should all adhere to the same $schema, run through the list and validate 
+    each object per the `$schema`.
+
+    Note: 
+        All objects in the list should adhere to the same $schema.
+
+    Note: 
+        Unless a `local_schema_file` is provided, the function will HTTPS fetch
+        the $schema according to the first object in the list.
+
+    Args:
+        json_object_list (list): A list of `dict` objects representing the JSON objects.
+        local_resolver_directory (str): path/to/directory to resolve $refs in $schema.
+        local_schema_file (str, optional): path/to/a/JSON/schema/file. Defaults to None.
     """
 
     if local_schema_file is not None:
@@ -132,7 +227,7 @@ def validate_list_of_json_objects(
             schema = json.load(schema_file)
     else:
         schema_url = json_object_list[0]["$schema"]
-        schema = requests.get(schema_url).json()
+        schema = requests.get(schema_url, verify=certifi.where()).json()
     for json_dict in json_object_list:
         validate_json(
             json_dict=json_dict,
@@ -176,7 +271,7 @@ def validate_json(
         else:
             # no schema provided... fetch it from URL.        
             schema_url = json_dict["$schema"]
-            schema = requests.get(schema_url).json()
+            schema = requests.get(schema_url, verify=certifi.where()).json()
             base_url = "/".join(schema_url.split("/")[:-1]) + "/"
             resolver = RefResolver(base_uri=base_url, referrer=schema)
     

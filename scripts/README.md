@@ -71,26 +71,14 @@ options:
 This script ingests solution files containing logical resource estimates and generates new solution files that contain physical resource estimates.
 Note that these solution files will have new solution IDs that differ from the input LRE solution files.
 It is also recommended to specify a solver UUID in the PRE config file that is different from the solver UUID for the LRE.
-See [`PRE_config.json`](PRE_config.json) for an example PRE config file.
+See [`PRE_config_0.0001_1us.json`](PRE_config_0.0001_1us.json) for an example PRE config file.
 
 
 
 
 ## Updating all results.
 
-`./update_all_results.py`
-
-```bash
-usage: update_all_results.py [-h] DRYRUN_or_PRODUCTION
-
-Update all results.
-
-positional arguments:
-  DRYRUN_or_PRODUCTION  typing DRYRUN places results in a temporary folder nearby for review. PRODUCTION overwrites results.
-
-options:
-  -h, --help            show this help message and exit
-```
+`./update_all_results.py --help` for instructions.
 
 This script will ingest
 1. `problem_instance.json` files,

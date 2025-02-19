@@ -26,9 +26,12 @@ from uuid import uuid4
 
 import requests
 
+import seaborn as sns
 import pandas as pd
 import numpy as np
-
+from sklearn.metrics import pairwise_distances
+import matplotlib.pyplot as plt
+from matplotlib.colors import cnames as color_names
 
 from qb_gsee_benchmark.utils import load_json_files
 from qb_gsee_benchmark.utils import clear_or_create_output_directory
@@ -80,14 +83,25 @@ class BenchmarkData:
 
         # Calculations and data collation:
         # Order of operations matters!
-        #1:
         self.identify_unique_participating_solvers()
-        #2:
         self.calculate_solver_success_labels()
-        #3:
+        self.calculate_ml_scores()
+        self.calculate_all_shap_values(try_to_use_cached_shap_values=True)
+        self.write_all_ml_artifacts()
+        self.ml_post_processing()
         self.flatten_benchmark_data()
-        #4:
+        self.calculate_performance_metrics()
         self.calculate_sponsor_resource_estimates()
+    
+        
+
+        # NOTE: Not done automatically; called later:
+        # self.validate_all_json_objects(local_resolver_directory="../schemas")
+        # self.write_performance_metrics_json_files()
+        # self.write_sponsor_resource_estimate_files(**kwargs)
+
+
+        
 
 
 
@@ -99,8 +113,7 @@ class BenchmarkData:
 
 
 
-
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         return f"benchmark data with {len(self.problem_instance_list)} problem instances, and {len(self.solution_list)} solutions, submitted by {len(self.solvers_df)} solvers."
         
 
@@ -115,7 +128,13 @@ class BenchmarkData:
             self,
             local_resolver_directory: str
         ) -> None:
-        """TODO: docstring.  no errors implies success!!
+        """Validate all JSON objects (which are currently dictionaries stored in a list).
+
+        Note:
+            This method fetches the $schema from the FIRST JSON object in each list and uses it for all the rest of the objects in the list.
+
+        Args:
+            local_resolver_directory (str): relative/path/to/the files to resolve $refs in schema.
         """
         
         lists = [
@@ -128,13 +147,13 @@ class BenchmarkData:
             name = listy[0]
             the_list = listy[1]
             if the_list is None:
-                print(f"{name} is None.")
+                logging.warning(f"JSON object list {name} is None.")
                 # this may happen if performance metrics have not yet been calculated.
             elif the_list ==[]:
-                print(f"{name} is empty.")
+                logging.warning(f"JSON object list {name} is empty.")
                 # this may happen if there are no resource estimates.
             else:
-                print(f"validating {name}...")
+                logging.info(f"validating JSON object list {name}...")
                 schema_url = the_list[0]["$schema"]
                 schema = requests.get(schema_url).json()
                 for json_dict in the_list:
@@ -336,13 +355,15 @@ class BenchmarkData:
 
 
 
-    def calculate_ml_scores(
-            self,
-        ) -> dict:
-        """TODO: `miniML.py` takes about 15 minutes.
+    def calculate_ml_scores(self) -> dict:
+        """Uses the `MiniML` class to calculate ML models for each solver. 
+
+        Note:
+            self.ml_models_dict is updated in place.
+            self.ml_score_dict is updated in place.
 
         Returns:
-            dict: _description_
+            dict: a dictionary with keys of solver_uuid and values of ML scores.
         """
 
         ml_scores_dict = {}
@@ -359,12 +380,13 @@ class BenchmarkData:
                     hamiltonian_features_by_task_uuid=self.hamiltonian_features    
                 )
                 ml_scores_dict[solver_uuid] = {
-                    "solvability_ratio":mini_ml_model.ml_solvability_ratio,
+                    "solvability_ratio":mini_ml_model.ml_solvability_ratio["PCA"],
+                    "comment":"solvability ratio based on PCA embedding.",
                     "f1_score":list(mini_ml_model.f1_score),
                     "ml_metrics_calculator_version":1
                 }
             except Exception as e:
-                logging.error(f'Error: {e}', exc_info=True)
+                logging.error(f'{e}', exc_info=True)
                 mini_ml_model = "Model could not be calculated."
                 ml_scores_dict[solver_uuid] = {
                     "solvability_ratio":None,
@@ -382,6 +404,204 @@ class BenchmarkData:
 
 
 
+    def calculate_all_shap_values(
+            self,
+            try_to_use_cached_shap_values: bool
+        ) -> None:
+        """Calculates all SHAP values (how much each feature influences the ML Model).
+
+        Warning:
+            SHAP value calculation takes a little while.
+
+        Note:
+            If trying to use cached SHAP values and they don't exist, SHAP analysis
+            will be run anyway and updated SHAP values will be written to disk for
+            the next time.
+
+        Args:
+            try_to_use_cached_shap_values (bool): Toggle usage of cached SHAP values.
+        """
+        for solver_uuid in self.ml_models_dict:
+            try:
+                self.ml_models_dict[solver_uuid].run_shap_analysis(
+                    try_to_use_cached_shap_values=try_to_use_cached_shap_values
+                )
+            except Exception as e:
+                logging.error(f"{e}")
+                logging.warning(f"probably no ML model for {solver_uuid}")
+            
+
+
+
+
+
+
+    def ml_post_processing(self) -> None:
+        """After ML models have been created, compare similarities of solvers.
+        """
+
+        Z0_embedding = {}
+        shap_values = {}
+        solver_short_names = {}
+        for solver_uuid, ml_model in self.ml_models_dict.items():
+            # aggregate all Z0 (ml solvability plot values)
+            try:
+                shap_values[solver_uuid] = ml_model.shap_values
+                Z0_embedding[solver_uuid] = ml_model.Z0_embedding["PCA"]["Z0"] # only PCA at this time.
+                num_features = len(ml_model.features)
+                solver_short_names[solver_uuid] = ml_model.solver_short_name
+            except Exception as e:
+                logging.error(f"{e}")
+                logging.warning(f"probably no ML model for {solver_uuid}")
+        
+        
+        shap_values_stack_up = np.array(list(shap_values.values()))
+        # shap_values_stack_up is num_solver x num_ml_input_vectors x num_features x 2
+        
+        num_solvers = len(Z0_embedding)
+
+
+        Z0_stack_up = np.array(list(Z0_embedding.values()))
+        # Each Z0 is 100x100 (the size of the 2D embedding)
+        # Z0_stack_up.shape is num_solvers x 100 x 100
+
+        Z0_stack_up = Z0_stack_up.reshape(Z0_stack_up.shape[0],-1)
+        # Z0_stack_up.shape is now num_solvers x 10000 (where 100x100=10000)
+        # The 100x100 has been flattened. 
+
+        
+
+        sub_sample = 10
+        num_grid_values = Z0_stack_up.shape[1]/sub_sample
+        area_summary = np.zeros((num_solvers, int(num_grid_values)))
+        shap_summary = np.zeros((num_solvers, num_features))
+        
+
+        classification = 1 # or may be 0.  Either way.
+
+        for solver_index in range(num_solvers):
+            shap_summary[solver_index,:] = \
+                np.mean(
+                    np.abs(
+                        shap_values_stack_up[solver_index, :, :, classification]
+                    ), 
+                    axis=0 # mean along the num_ml_input_vectors dimension.
+                )
+            
+
+            temp_area = Z0_stack_up[solver_index, :]
+            area_summary[solver_index, :] = temp_area[::sub_sample]
+
+        data = {
+            "Area_Summary":area_summary,
+            "SHAP_summary":shap_summary
+        }
+        for title, X in data.items(): # area and SHAP at this time.
+            # X is shape num_solvers x num_sub_sampled_data_points
+            similarity_matrix = np.exp(-pairwise_distances(X)**2 / (2*0.1**2))
+            self.create_similarity_matrix_plot(
+                title=title,
+                similarity_matrix=similarity_matrix,
+                solver_short_names=list(solver_short_names.values())
+            )
+            self.create_solver_spectral_clustering_plot(
+                title=title,
+                similarity_matrix=similarity_matrix,
+                solver_short_names=list(solver_short_names.values())
+            )
+
+
+    
+    def create_solver_spectral_clustering_plot(
+            self,
+            title: str,
+            similarity_matrix: np.ndarray,
+            solver_short_names: list
+        ) -> None:
+        """Creates a spectral clustering plot showing the similarity of solvers.
+
+        Args:
+            title (str): The title of the plot
+            similarity_matrix (np.ndarray): A similarity matrix of solvers
+            solver_short_names (list): A list of human-readable short names for solvers (instead of UUIDs)
+        """
+        u, s, vh = np.linalg.svd(similarity_matrix, full_matrices=True)
+        proj=u*similarity_matrix
+
+        fig = plt.figure()
+        plt.title(f"Solver points in PCA space\n(PCA space of {title})")
+        
+        num_solvers = len(solver_short_names)
+        p_list = np.random.permutation(num_solvers)
+        colors = [ list(color_names.keys())[i] for i in p_list ]
+        # use "normal" colors first except for blue, red, and black
+        # ... then dig deep into the color list.
+        colors = ['c', 'm', 'y', 'g', 'w'] + colors
+
+        for i in range(len(solver_short_names)):
+            plt.scatter(
+                proj[i,0],
+                proj[i,1],
+                marker="o",
+                c=colors[i],
+                label=solver_short_names[i]
+            )
+        plt.xlabel("Axis of Dissimilarity 1")
+        plt.ylabel("Axis of Dissimilarity 2")
+        plt.tight_layout()
+        fig.savefig(f"ml_artifacts/solver_similarity_in_PCA_space_of_{title.lower()}.png")
+        plt.close()
+
+        
+
+
+
+
+
+
+    def create_similarity_matrix_plot(
+            self,
+            title: str,
+            similarity_matrix: np.ndarray,
+            solver_short_names: list
+        ) -> None:
+        """Creates a matrix heatmap plot showing the similarity of solvers.
+
+        Args:
+            title (str): The title of the plot
+            similarity_matrix (np.ndarray): A similarity matrix of solvers
+            solver_short_names (list): A list of human-readable short names for solvers (instead of UUIDs)
+        """
+        sim_df = pd.DataFrame(
+            data=similarity_matrix,
+            columns=solver_short_names
+        )
+        g = sns.clustermap(
+            sim_df,
+            metric="euclidean",
+            standard_scale=1,
+            method="ward",
+            cmap="coolwarm",
+        )
+        plt.title(f"Solver similarity matrix\n(based on {title})")
+        g.ax_heatmap.set_yticklabels(g.ax_heatmap.get_xticklabels())
+        plt.setp(
+            g.ax_heatmap.get_xticklabels(),
+            rotation=45,
+            ha="right",
+            rotation_mode="anchor"
+        ) 
+        plt.setp(
+            g.ax_heatmap.get_yticklabels(),
+            rotation=0,
+            rotation_mode="anchor"
+        ) 
+        plt.tight_layout()
+        
+        g.savefig(f"ml_artifacts/solver_similarity_matrix_{title.lower()}.png")
+        plt.close()
+
+        
 
 
 
@@ -391,9 +611,24 @@ class BenchmarkData:
 
 
 
-
-
-
+    def write_all_ml_artifacts(self) -> None:
+        """During the creation of all ML models, a variety of plots and artifacts
+        are produced.  This specifically writes all plots and artifacts to disk in the
+        `/ml_artifacts` directory.
+        """
+        for solver_uuid in self.ml_models_dict:
+            try:
+                ml_model = self.ml_models_dict[solver_uuid]
+                ml_model.write_all_plots()
+                ml_model.write_probs_to_file(
+                    embedding=ml_model.pca, # or .nnmf
+                    embedding_scaler=ml_model.all_ham_features_minmax_scaler
+                )
+            except Exception as e:
+                logging.error(f"{e}")
+                logging.warning(f"probably no ML model for {solver_uuid}")
+        
+        self.write_data_for_bubble_ml_gui(output_directory="ml_artifacts/")
 
 
 
@@ -574,8 +809,8 @@ class BenchmarkData:
                             try:
                                 d["solved_within_accuracy_requirement"] = bool(np.abs(d["reported_energy"] - d["reference_energy"]) < d["accuracy_tol"])
                             except Exception as e:
-                                logging.error(f'Error: {e}', exc_info=True)
-                                logging.warning(f"warning!  no energy target specified in task {task_uuid}.  reference_energy={d['reference_energy']}")
+                                logging.error(f'{e}', exc_info=True)
+                                logging.warning(f"No energy target specified in task {task_uuid}.  reference_energy={d['reference_energy']}")
                                 d["solved_within_accuracy_requirement"] = False
                             
                             # TODO: issue-44.  handle case when more than one solution submitted by
@@ -656,7 +891,9 @@ class BenchmarkData:
         clear_or_create_output_directory(output_directory=output_directory)
 
         for re in self.sponsor_resource_estimate_list:
-            resource_estimate_file_name = f"resource_estimate.gsee.{re['name']}.{re['size']}.{re['id']}.json"
+            # TODO: fairly hacky way to get back solver_uuid/task_uuid... 
+            _ , solver_uuid , _ , task_uuid = re["id"].split(".")
+            resource_estimate_file_name = f"resource_estimate.gsee.solver.{solver_uuid}.{re['name']}.{re['size']}.{task_uuid}.json"
             output_path = os.path.join(output_directory, resource_estimate_file_name)
             with open(output_path, "w") as output:
                 json.dump(re, output, indent=4)
@@ -699,7 +936,7 @@ class BenchmarkData:
                 # translate lots of our fields to sponsor-schema fields:
                 re = {}
                 re["$schema"] = "https://raw.githubusercontent.com/rroodll/QB-Estimate-Reporting/main/schema/resource_estimate_schema.json"
-                re["id"] = d["task_uuid"]
+                re["id"] = f"solver.{d['solver_uuid']}.task.{d['task_uuid']}"
                 re["name"] = d['problem_instance_short_name']
                 re["category"] = "industrial" #enum
                 re["size"] = f"{d['num_orbitals']}_orbitals"
@@ -760,7 +997,14 @@ class BenchmarkData:
 
 
     def read_performance_metrics_json_files(self) -> list:
-        """TODO: docstring
+        """Read in `performance_metrics.json` files.
+
+        Note:
+            self.performance_metrics_list is updated in place.
+
+        Returns:
+            list: A list of dictionaries. Each dictionary is a representation of 
+            the JSON file.
         """
         self.performance_metrics_list = load_json_files(
             search_dir=self.performance_metrics_directory
@@ -775,15 +1019,17 @@ class BenchmarkData:
 
 
     def calculate_performance_metrics(self) -> list:
-        """TODO: docstring
+        """Calculate performance metrics for each solver. For each solver, a 
+        dictionary is created containing all of the performance metrics
+
+        Note:
+            self.performance_metrics_list is updated in place.
 
         Returns:
-            list: _description_
+            list: A list of dictionaries where each dictionary contains the
+            performance metrics for the solver. 
         """
         
-        # first call/calculate ml scores.
-        self.calculate_ml_scores()
-
         # clear/init
         self.performance_metrics_list = [] 
 
@@ -872,8 +1118,8 @@ class BenchmarkData:
             
             for problem_instance_uuid in problem_instance_uuid_list:
                 df_filtered = df[df["problem_instance_uuid"]==problem_instance_uuid]
-                logging.info(f"problem_instance_uuid: {problem_instance_uuid}")
-                logging.info(f"number of tasks: {len(df_filtered)}")
+                # logging.info(f"problem_instance_uuid: {problem_instance_uuid}")
+                # logging.info(f"number of tasks: {len(df_filtered)}")
                 
                 # TODO: PRIORITY:  issue #44: handle situation where one solver has more than one solution_uuid for a single problem_uuid
                 assert df_filtered["solution_uuid"].nunique() <= 1, "issue #44:  we have more than one solution_uuid for a (solver_uuid,problem_uuid) pair."
@@ -954,11 +1200,16 @@ class BenchmarkData:
             self,
             output_directory: str
         ) -> None:
-        """TODO: docstring
+        """Write out the dictionary objects in `self.performance_metrics_list`
+        as JSON files to the `output_directory`
 
+        Warning:
+            self.performance_metrics_list should be up-to-date.
+        
         Args:
-            output_directory (str): _description_
+            output_directory (str): relative/path/to/where/the/JSON/files/will/go
         """
+
         clear_or_create_output_directory(output_directory=output_directory)
         
         for pm in self.performance_metrics_list:
@@ -967,7 +1218,51 @@ class BenchmarkData:
             with open(output_path, "w") as output:
                 json.dump(pm, output, indent=4)
 
+    
 
+    def write_data_for_bubble_ml_gui(
+            self,
+            output_directory: str
+        ) -> None:
+        """To facilitate BubbleML analysis, the benchmark data is flattened into
+        a CSV file with columns with the `True` `False` labels their performance.
+        Creates a file named `<output_directory>/data_for_BubbleML.csv`.
+        
+        Depends:
+            BenchmarkData.aggregated_solver_labels_df (pd.DataFrame):
+        
+        Args:
+            output_directory (str): relative/path/for/outout.  Usually /ml_artifacts.
+        """
+
+        self.data_for_bubble_ml_df = self.hamiltonian_features.copy() # copy/init as Hamiltonian features.
+
+        for solver_uuid in self.solvers_dict:
+            solver = self.solvers_dict[solver_uuid]
+            solver_short_name = solver["solver_short_name"]
+            solver_name_concat = f"{solver_short_name}-({solver_uuid[:4]})" # first 4 characters of UUID.
+            df = self.aggregated_solver_labels_df
+            df = df[df["solver_uuid"]==solver_uuid] # filter data to solver_uuid
+            df = df[["task_uuid", "label"]] # select only those columns/fields
+            df = df.rename(columns={"label":solver_name_concat}) # rename the generic "label" column to the solver name.
+            
+            # merge solver True/False results as NEW COLUMN in data_for_bubble_ml_df
+            self.data_for_bubble_ml_df = pd.merge(
+                self.data_for_bubble_ml_df,
+                df,
+                on="task_uuid",
+                how="outer" # create a df with empty NaN cells for missing data   
+            )
+            # NOTE: we should NOT have missing data at this point.  If we do,
+            # empty/NaN cell True/False labels for the solver should raise an
+            # error during BubbleML analysis and alert us to the problem.
+
+        # remove the DF Eigenvalues (df_eigs) column which contains large vectors as strings.
+        self.data_for_bubble_ml_df = self.data_for_bubble_ml_df.drop("df_eigs", axis=1)
+
+        # write out data to CSV:
+        output_path = os.path.join(output_directory, "data_for_BubbleML.csv")
+        self.data_for_bubble_ml_df.to_csv(output_path)
 
 
 

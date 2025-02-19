@@ -1,6 +1,17 @@
 # private working folder that doesn't get pushed to repo:
 *_private_working_folder*
+
+# other repository usage/cleanup
 *.vscode*
+.DS_Store
+
+
+# avoid pushing key material to repo:
+darpa-qb-key*
+*.pem
+*.ppk
+
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -66,6 +66,13 @@ class StandardReport:
         self.standard_report_output_directory = standard_report_output_directory
         clear_or_create_output_directory(output_directory=self.standard_report_output_directory)
 
+        self.artifact_directory = "supporting_artifacts"
+        self.full_artifact_directory_path = os.path.join(
+            self.standard_report_output_directory,
+            self.artifact_directory
+        )
+        clear_or_create_output_directory(output_directory=self.full_artifact_directory_path)
+
         # write out flattened data to output_directory
         o_path = os.path.join(
             self.standard_report_output_directory,
@@ -79,7 +86,7 @@ class StandardReport:
         # BenchmarkData.calculate_performance_metrics() was last called.
         shutil.copytree(
             "ml_artifacts",
-            self.standard_report_output_directory,
+            self.full_artifact_directory_path,
             dirs_exist_ok=True
         )
 
@@ -112,8 +119,9 @@ class StandardReport:
 
 
     def create_plot_histogram_of_number_of_orbitals(self) -> None:
-        """TODO: docstring
+        """Creates a histogram plot of all the Hamiltonians by number of orbitals.
         """
+
         df = self.benchmark_data.hamiltonian_features
         plt.figure()
         plt.hist(
@@ -126,7 +134,7 @@ class StandardReport:
         plt.ylabel("Number of Hamiltonians")
         plt.title("Histogram of Number of Spatial Orbitals")
         plt.savefig(os.path.join(
-            self.standard_report_output_directory,
+            self.full_artifact_directory_path,
             f"num_orbitals_histogram.png")
         )
         plt.close()
@@ -144,8 +152,10 @@ class StandardReport:
 
 
     def create_plot_num_orbitals_vs_utility_for_each_hamiltonian(self) -> None:
-        """TODO: docstring
+        """Create a scatter plot where each point is Hamiltonian and the position
+        is (num_orbitals, utility)
         """
+
         # note that utility estimate data is repeated for each solver_uuid in `data`
         # just pick the first solver_uuid and filter by that.  
         # that filter provides a list of all Hamiltonians with no double counting.
@@ -163,7 +173,7 @@ class StandardReport:
         plt.xlim(0,10*np.ceil(max(df["num_orbitals"])/10))
         plt.ylabel("Utility estimate in USD")
         plt.savefig(os.path.join(
-            self.standard_report_output_directory,
+            self.full_artifact_directory_path,
             f"num_orbitals_vs_utility.png")
         )
         plt.close()
@@ -179,7 +189,9 @@ class StandardReport:
 
 
     def create_plot_num_orbitals_vs_run_time_for_all_solvers(self) -> None:
-        """TODO: docstring
+        """Create a scatter plot of all solvers where each point
+        is one solver's attempt at a Hamiltonian.  Solvers are plotted
+        with different colors.  
         """
         df = self.benchmark_data.all_data_df
         plt.figure()
@@ -222,20 +234,20 @@ class StandardReport:
             )
             series_counter += 1
         # plot in linear run time y-scale:
-        plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+        # plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
         plt.tight_layout()
         plt.savefig(os.path.join(
-            self.standard_report_output_directory,
+            self.full_artifact_directory_path,
             f"solver_num_orbs_vs_runtime_scatter_plot.png")
         )
 
         # plot in log(run time) y-scale:
         plt.yscale("log")
         plt.ylabel("Overall run time in seconds (log)")
-        plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+        # plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
         plt.tight_layout()
         plt.savefig(os.path.join(
-            self.standard_report_output_directory,
+            self.full_artifact_directory_path,
             f"solver_num_orbs_vs_log_runtime_scatter_plot.png")
         )
 
@@ -247,7 +259,9 @@ class StandardReport:
 
 
     def create_plot_log_fci_dim_vs_run_time_for_all_solvers(self) -> None:
-        """TODO: docstring
+        """Create a scatter plot of all solvers where each point
+        is one solver's attempt at a Hamiltonian.  Solvers are plotted
+        with different colors.  
         """
         df = self.benchmark_data.all_data_df
         plt.figure()
@@ -290,20 +304,20 @@ class StandardReport:
             )
             series_counter += 1
         # plot in linear run time y-scale:
-        plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+        # plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
         plt.tight_layout()
         plt.savefig(os.path.join(
-            self.standard_report_output_directory,
+            self.full_artifact_directory_path,
             f"log_fci_dim_vs_runtime_all_solvers_plot.png")
         )
 
         # plot in log(run time) y-scale:
         plt.yscale("log")
         plt.ylabel("Overall run time in seconds (log)")
-        plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+        # plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
         plt.tight_layout()
         plt.savefig(os.path.join(
-            self.standard_report_output_directory,
+            self.full_artifact_directory_path,
             f"log_fci_dim_vs_log_runtime_all_solvers_plot.png")
         )
 
@@ -318,7 +332,9 @@ class StandardReport:
 
 
     def create_plot_quantum_vs_classical_num_orbitals_vs_run_time(self) -> None:
-        """TODO: docstring
+        """ Create a scatter plot of all solvers where each point
+        is one solver's attempt at a Hamiltonian.  Quantum solvers are blue
+        and classical solvers are red.  
         """
         df = self.benchmark_data.all_data_df
         plt.figure()
@@ -370,20 +386,20 @@ class StandardReport:
 
 
         # plot in linear run time y-scale:
-        plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+        # plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
         plt.tight_layout()
         plt.savefig(os.path.join(
-            self.standard_report_output_directory,
+            self.full_artifact_directory_path,
             f"quantum_vs_classical_solver_num_orbs_vs_runtime_scatter_plot.png")
         )
 
         # plot in log(run time) y-scale:
         plt.yscale("log")
         plt.ylabel("Overall run time in seconds (log)")
-        plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
+        # plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
         plt.tight_layout()
         plt.savefig(os.path.join(
-            self.standard_report_output_directory,
+            self.full_artifact_directory_path,
             f"quantum_vs_classical_solver_num_orbs_vs_log_runtime_scatter_plot.png")
         )
 
@@ -404,7 +420,9 @@ class StandardReport:
 
 
     def create_plot_num_orbitals_vs_run_time_for_each_solver(self) -> None:
-        """TODO: docstring"""
+        """Create ONE scatter plot FOR ONE solver where each point
+        is one solver's attempt at a Hamiltonian.  This creates num_solvers plots.
+        """
         for solver_uuid in self.benchmark_data.solvers_dict:
             df = self.benchmark_data.all_data_df
             df = df[df["solver_uuid"]==solver_uuid] # filter to solver_uuid
@@ -441,7 +459,7 @@ class StandardReport:
             plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
             plt.tight_layout()
             plt.savefig(os.path.join(
-                self.standard_report_output_directory,
+                self.full_artifact_directory_path,
                 f"solver_{solver_uuid}_plot.png")
             )
 
@@ -451,7 +469,9 @@ class StandardReport:
 
 
     def create_plot_log_fci_dim_vs_run_time_for_each_solver(self) -> None:
-        """TODO: docstring"""
+        """Create ONE scatter plot FOR ONE solver where each point
+        is one solver's attempt at a Hamiltonian.  This creates num_solvers plots.
+        """
         for solver_uuid in self.benchmark_data.solvers_dict:
             df = self.benchmark_data.all_data_df
             df = df[df["solver_uuid"]==solver_uuid] # filter to solver_uuid
@@ -489,7 +509,7 @@ class StandardReport:
             plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
             plt.tight_layout()
             plt.savefig(os.path.join(
-                self.standard_report_output_directory,
+                self.full_artifact_directory_path,
                 f"log_fci_dim_vs_runtime_solver_{solver_uuid}_plot.png")
             )
 
@@ -504,7 +524,9 @@ class StandardReport:
 
 
     def create_plot_utility_capture_for_each_solver(self) -> None:
-        """TODO: docstring"""
+        """Create ONE scatter plot FOR ONE solver where each point
+        is one solver's attempt at a Hamiltonian.  This creates num_solvers plots.
+        """
         
         for solver_uuid in self.benchmark_data.solvers_dict:
             df = self.benchmark_data.all_data_df
@@ -548,7 +570,7 @@ class StandardReport:
             plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
             plt.tight_layout()
             plt.savefig(os.path.join(
-                self.standard_report_output_directory,
+                self.full_artifact_directory_path,
                 f"solver_{solver_uuid}_utility_capture_plot.png")
             )
 
@@ -608,28 +630,39 @@ class StandardReport:
             file.write(f"minimum number of orbitals: {np.min(df['num_orbitals'])}\n\n")
             file.write(f"median number of orbitals: {np.median(df['num_orbitals'])}\n\n")
             file.write(f"maximum number of orbitals: {np.max(df['num_orbitals'])}\n\n")
-            file.write(f"![Number of orbitals histogram](num_orbitals_histogram.png)\n\n")
-            file.write(f"![Utility estimate per Hamiltonian](num_orbitals_vs_utility.png)\n\n")
+            file.write(f"![Number of orbitals histogram]({self.artifact_directory}/num_orbitals_histogram.png)\n\n")
+            file.write(f"![Utility estimate per Hamiltonian]({self.artifact_directory}/num_orbitals_vs_utility.png)\n\n")
             
             
 
 
             file.write(f"# Solver Summary Statistics\n\n")
             file.write(f"number of unique participating solvers: {df['solver_uuid'].nunique()}\n\n")
+
+            for solver_uuid in self.benchmark_data.ml_models_dict:
+                solver_short_name = self.benchmark_data.solvers_dict[solver_uuid]["solver_short_name"]
+
+                ml_model = self.benchmark_data.ml_models_dict[solver_uuid]
+                if isinstance(ml_model, str):
+                    # probably an error that we couldn't calculate the model.
+                    verbiage = f"Solver: {solver_short_name}/{solver_uuid}, {ml_model}"
+                else:
+                    verbiage = f"Solver: {solver_short_name}/{solver_uuid}, ML Solvability Ratio: {ml_model.ml_solvability_ratio}, F1 Score: {ml_model.f1_score}"
+                file.write(f"{verbiage}\n\n")
             
-            file.write(f"![Solver scatter plot](solver_num_orbs_vs_runtime_scatter_plot.png)\n\n")
+            file.write(f"![Solver scatter plot]({self.artifact_directory}/solver_num_orbs_vs_runtime_scatter_plot.png)\n\n")
             file.write(f"NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.\n\n")
             
-            file.write(f"![Solver scatter plot](solver_num_orbs_vs_log_runtime_scatter_plot.png)\n\n")
+            file.write(f"![Solver scatter plot]({self.artifact_directory}/solver_num_orbs_vs_log_runtime_scatter_plot.png)\n\n")
             file.write(f"NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.\n\n")
             
-            file.write(f"![Quantum vs Classical scatter plot](quantum_vs_classical_solver_num_orbs_vs_log_runtime_scatter_plot.png)\n\n")
+            file.write(f"![Quantum vs Classical scatter plot]({self.artifact_directory}/quantum_vs_classical_solver_num_orbs_vs_log_runtime_scatter_plot.png)\n\n")
             file.write(f"NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.\n\n")
             
-            file.write(f"![Solver logFCI scatter plot](log_fci_dim_vs_runtime_all_solvers_plot.png)\n\n")
+            file.write(f"![Solver logFCI scatter plot]({self.artifact_directory}/log_fci_dim_vs_runtime_all_solvers_plot.png)\n\n")
             file.write(f"NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.\n\n")
             
-            file.write(f"![Solver logFCI scatter plot, log(runtime)](log_fci_dim_vs_log_runtime_all_solvers_plot.png)\n\n")
+            file.write(f"![Solver logFCI scatter plot, log(runtime)]({self.artifact_directory}/log_fci_dim_vs_log_runtime_all_solvers_plot.png)\n\n")
             file.write(f"NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.\n\n")
             
             
@@ -676,25 +709,47 @@ class StandardReport:
                             file.write(f"{kk}: {vv}\n\n")
                 
                 # writing out plots:
-                file.write(f"![Solver success/failure plot](solver_{solver_uuid}_plot.png)\n\n")
+                file.write(f"![Solver success/failure plot]({self.artifact_directory}/solver_{solver_uuid}_plot.png)\n\n")
                 file.write(f"Note: plot only contains `attempted` tasks.\n\n")
-                file.write(f"![Solver success/failure logFCI plot](log_fci_dim_vs_runtime_solver_{solver_uuid}_plot.png)\n\n")
+                file.write(f"![Solver success/failure logFCI plot]({self.artifact_directory}/log_fci_dim_vs_runtime_solver_{solver_uuid}_plot.png)\n\n")
                 file.write(f"Note: plot only contains `attempted` tasks.\n\n")
-                file.write(f"![Solver utility capture](solver_{solver_uuid}_utility_capture_plot.png)\n\n")
-                file.write(f"![Solver miniML plot](plot_solver_{solver_uuid}.png)\n\n")
-                file.write(f"Note: ML surface plot is based on Hamiltonians where a `reference_energy` was provided. (`attempted` may be `True` or `False`.)\n\n")
-                file.write(f"![SHAP summary plot](shap_summary_plot_solver_{solver_uuid}.png)\n\n")
-        
+                file.write(f"![Solver utility capture]{self.artifact_directory}/(solver_{solver_uuid}_utility_capture_plot.png)\n\n")
+                file.write(f"![Solver PCA plot]({self.artifact_directory}/PCA_embedding_plot_solver_{solver_uuid}.png)\n\n")
+                file.write(f"![Solver NNMF plot]({self.artifact_directory}/NNMF_embedding_plot_solver_{solver_uuid}.png)\n\n")
+                file.write(f"Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.\n\n")
+                file.write(f"![SHAP summary plot]({self.artifact_directory}/shap_summary_plot_solver_{solver_uuid}.png)\n\n")
+            
             # at the end of the file, write out NNMF information for ML models:
-            file.write(f"# Non-negative matrix factorization (ML latent space)\n\n")
-            file.write(f"![NNMF plot](nnmf_components.png)\n\n")
-            solver_uuid = list(self.benchmark_data.solvers_dict.keys())[0]# just get the first solver_uuid.
-            file.write(f"Features: {self.benchmark_data.ml_models_dict[solver_uuid].features}\n\n")
+            file.write(f"# ML Feature Analysis\n\n")
+
+            # find one solver_uuid that has an ML model (all of the following results will be the same)
+            for solver_uuid in self.benchmark_data.ml_models_dict:
+                if isinstance(self.benchmark_data.ml_models_dict[solver_uuid], str):
+                    continue # try the next one.
+                else:
+                    ml_model = self.benchmark_data.ml_models_dict[solver_uuid]
+                    break # found a solver_uuid with an ML model.
+                    
+            file.write(f"![NNMF components plot]({self.artifact_directory}/nnmf_components.png)\n\n")
+            file.write(f"Features: {ml_model.features}\n\n")
             for i in range(2):
-                file.write(f"Component {i+1}: {self.benchmark_data.ml_models_dict[solver_uuid].H[i]}\n\n")
-    
+                file.write(f"NNMF Component {i+1}: {ml_model.H[i]}\n\n")
+            
+            file.write(f"![PCA components plot]({self.artifact_directory}/pca_components.png)\n\n")
+            file.write(f"Features: {ml_model.features}\n\n")
+            for i in range(2):
+                file.write(f"PCA Component {i+1}: {ml_model.pca.components_[i]}\n\n")
 
-
+            file.write(f"![solver similarity: PCA space of area]({self.artifact_directory}/solver_similarity_in_PCA_space_of_area_summary.png)\n\n")
+            file.write(f"![solver similarity: PCA space of SHAP]({self.artifact_directory}/solver_similarity_in_PCA_space_of_shap_summary.png)\n\n")
+            file.write(f"![solver similarity: matrix/area]({self.artifact_directory}/solver_similarity_matrix_area_summary.png)\n\n")
+            file.write(f"![solver similarity: matrix/SHAP values]({self.artifact_directory}/solver_similarity_matrix_shap_summary.png)\n\n")
+            
+                
+            file.write(f"![Hamiltonian features correlation matrix]({self.artifact_directory}/hamiltonian_features_correlation_matrix_plot.png)\n\n")
+            for feature in ml_model.features:
+                file.write(f"![Histogram of Hamiltonian features: {feature}]({self.artifact_directory}/hamiltonian_feature_histogram_{feature}.png)\n\n")
+            
 
 
 
@@ -702,7 +757,8 @@ class StandardReport:
 
 
     def convert_readme_markdown_to_html(self) -> None:
-        """TODO: docstring"""
+        """First, we need to convert the README.md file to HTML.  In a later
+        method we will convert the HTML to PDF."""
         readme_file = os.path.join(self.standard_report_output_directory, "README.md") 
         with open(readme_file, "r") as md_file:
             md_content = md_file.read()
@@ -721,7 +777,10 @@ class StandardReport:
 
 
     def convert_readme_html_to_pdf(self) -> None:
-        """TODO: docstring ... depends on HTML"""
+        """We first converted the README.md to HTML in an earlier method. This
+        method converts the HTML to a PDF.
+        """
+
         readme_html_file = os.path.join(self.standard_report_output_directory, "index.html")
         readme_pdf_file = os.path.join(
             self.standard_report_output_directory,

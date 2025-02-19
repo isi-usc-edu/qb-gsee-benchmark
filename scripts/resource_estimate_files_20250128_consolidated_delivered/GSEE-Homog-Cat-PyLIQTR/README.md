@@ -1,0 +1,1 @@
+The physical resource estimate (PRE) script we use to convert the logical resource estimates (LRE) fails to find a physical architecture for some LREs generated with PyLIQTR.  Hence, the `GSEE-Homog-Cat-OpenFermion` folder contains 3 additional resource estimates.

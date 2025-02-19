@@ -55,7 +55,7 @@ def get_num_shots(square_overlap: float, failure_tolerance: float):
 
 def get_failure_tolerance_per_shot(
     failure_tolerance: float, num_shots: int
-) -> tuple[QubitizedPhaseEstimation, int, float]:
+) -> float:
     """Get the allowable failure rate per shot.
 
     Generalizes Eq. 18 in arXiv:2406.06335v1 to consider any failure mode.
@@ -77,7 +77,7 @@ def get_df_qpe_circuit(
     failure_tolerance: float,
     sf_threshold: float,
     df_threshold: float,
-):
+)-> tuple[QubitizedPhaseEstimation, int, float]:
     """Get the QPE circuit for a given PySCF FCI object.
 
     This uses an algorithm performance model based on that described in

@@ -35,6 +35,20 @@ from qb_gsee_benchmark.qre import get_df_qpe_circuit
 from qb_gsee_benchmark.utils import retrieve_fcidump_from_sftp
 from qb_gsee_benchmark.utils import iso8601_timestamp
 
+DOUBLE_FACTORIZED_ATTRIBUTES = [
+    "L",
+    "nL",
+    "nXi",
+    "nLXi",
+    "phase_gradient_eps",
+    "energy_error",
+    "step_error",
+    "bits_rot_givens",
+    "keep_bitsize",
+    "keep_bitsize_outer",
+    "outer_prep_eps",
+    "alpha",
+]
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -176,11 +190,12 @@ def get_lqre(
             ).total_seconds()
             logging.info(f"Resource estimation time (seconds): {LRE_calc_time}")
 
+            block_encoding = circuit._block_encoding
             solution_data.append(
                 {
                     "task_uuid": task["task_uuid"],
                     "error_bound": error_tolerance,
-                    "confidence_level": failure_tolerance,
+                    "confidence_level": 1 - failure_tolerance,
                     "quantum_resources": {
                         "logical": {
                             "num_logical_qubits": logical_resources["LogicalQubits"],
@@ -188,6 +203,14 @@ def get_lqre(
                             "num_shots": math.ceil(num_shots),
                             "hardware_failure_tolerance_per_shot": hardware_failure_tolerance_per_shot,
                         }
+                    },
+                    "solution_details": {
+                        "block_encoding_details": {
+                            attribute: getattr(block_encoding, attribute)
+                            for attribute in DOUBLE_FACTORIZED_ATTRIBUTES
+                        },
+                        "overlap": overlap,
+                        "num_bits_precision_qpe": circuit._prec,
                     },
                     "run_time": {
                         "preprocessing_time": {
@@ -208,7 +231,6 @@ def get_lqre(
                 }
             )
 
-    
     solver_details = {
         "solver_uuid": config["solver_uuid"],
         "solver_short_name": "DF_QPE",
@@ -241,6 +263,7 @@ def get_lqre(
 
     return results
 
+
 def get_solved_problem_uuids(config: dict[str, Any], output_dir: str) -> set[str]:
     existing_output_files = os.listdir(args.output_dir)
     print(output_dir)
@@ -272,6 +295,7 @@ def get_solved_problem_uuids(config: dict[str, Any], output_dir: str) -> set[str
         f"found {len(solved_problem_uuids)} existing solutions for this solver."
     )
     return set(solved_problem_uuids)
+
 
 def main(args: argparse.Namespace) -> None:
 

@@ -378,6 +378,7 @@ def create_solution_files(
     contact_info,
     solver_details,
 ):
+    saved_files = []
     for prob_inst_uuid, prob_inst_data in prob_inst_data_sol_dict.items():
         solution_file_uuid = str(uuid.uuid4())
         print(prob_inst_data.keys())
@@ -451,6 +452,8 @@ def create_solution_files(
             json.dump(prob_inst_sol_data, f, indent=4)
             print(f"Saved {prob_inst_sol_file}")
         prob_inst_data["file_name"] = prob_inst_sol_file
+        saved_files.append(prob_inst_sol_file)
+    return saved_files
 
 def validate_solution_files(json_solution_schema_url, prob_inst_data_sol_dict):
     # Validate the solution json files against the schema
