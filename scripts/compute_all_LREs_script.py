@@ -34,6 +34,7 @@ from pyLIQTR.utils.resource_analysis import estimate_resources
 from qb_gsee_benchmark.qre import get_df_qpe_circuit
 from qb_gsee_benchmark.utils import retrieve_fcidump_from_sftp
 from qb_gsee_benchmark.utils import iso8601_timestamp
+from qb_gsee_benchmark.utils import load_json_files
 
 DOUBLE_FACTORIZED_ATTRIBUTES = [
     "L",
@@ -308,37 +309,41 @@ def main(args: argparse.Namespace) -> None:
 
     input_dir = args.input_dir
 
-    problem_instance_files = os.listdir(input_dir)
-    logging.info(f"parsing {len(problem_instance_files)} files in the input directory")
-    for p in problem_instance_files:
-        logging.info(f"file: {p}")
+    problem_instances = load_json_files(input_dir)
+    logging.info(f"parsing {len(problem_instances)} files in the input directory")
+    for p in problem_instances:
+        short_name = p["short_name"]
+        problem_instance_uuid = p["problem_instance_uuid"]
+        logging.info(f"problem instance: {short_name}, {problem_instance_uuid}")
 
     solved_problem_uuids = get_solved_problem_uuids(config, args.output_dir)
 
-    for problem_instance_file_name in problem_instance_files:
-        problem_instance_path = os.path.join(input_dir, problem_instance_file_name)
-        logging.info(f"parsing {problem_instance_path}")
-        with open(problem_instance_path, "r") as jf:
-            problem_instance = json.load(jf)
-
-            if problem_instance["problem_instance_uuid"] in solved_problem_uuids:
-                logging.info(
-                    f"skipping {problem_instance['problem_instance_uuid']} because it already has a solution with the same solver UUID and algorithm details."
-                )
-                continue
-
-            resource_estimate = get_lqre(
-                problem_instance, args.sftp_username, args.sftp_key_file, config=config
+    for problem_instance in problem_instances:
+        short_name = p["short_name"]
+        problem_instance_uuid = p["problem_instance_uuid"]
+        logging.info(f"parsing: {short_name}, {problem_instance_uuid}")
+        
+        if problem_instance["problem_instance_uuid"] in solved_problem_uuids:
+            logging.info(
+                f"skipping {problem_instance['problem_instance_uuid']} because it already has a solution with the same solver UUID and algorithm details."
             )
-            if len(resource_estimate["solution_data"]) > 0:
-                with open(
-                    os.path.join(
-                        args.output_dir,
-                        f"{problem_instance['problem_instance_uuid']}_sol_{resource_estimate['solution_uuid']}.json",
-                    ),
-                    "w",
-                ) as f:
-                    json.dump(resource_estimate, f, indent=4)
+            continue
+        
+        resource_estimate = get_lqre(
+            problem_instance, 
+            args.sftp_username, 
+            args.sftp_key_file, 
+            config=config
+        )
+        if len(resource_estimate["solution_data"]) > 0:
+            with open(
+                os.path.join(
+                    args.output_dir,
+                    f"{problem_instance['problem_instance_uuid']}_sol_{resource_estimate['solution_uuid']}.json",
+                ),
+                "w",
+            ) as f:
+                json.dump(resource_estimate, f, indent=4)
 
     # Print overall time.
     # ===============================================================
