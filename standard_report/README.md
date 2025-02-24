@@ -1,28 +1,28 @@
 # GSEE Benchmark Standard Report
 
-Report based on data from 2025-02-19T18:26:13.854054+00:00
+Report based on data from 2025-02-24T20:41:03.349036+00:00
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
-Input data: `Hamiltonian_features.csv`, last modified Wed Feb 19 07:47:55 2025
+Input data: `Hamiltonian_features.csv`, last modified Mon Feb 24 12:56:15 2025
 
 Input data: `GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv`, last modified Mon Jan 27 08:10:10 2025
 
-Latest creation time for a `problem_instance.json` file: Wed Feb 19 12:32:46 2025
+Latest creation time for a `problem_instance.json` file: Mon Feb 24 12:56:15 2025
 
-Latest creation time for a `solution.json` file: Tue Feb 18 15:25:53 2025
+Latest creation time for a `solution.json` file: Mon Feb 24 14:43:26 2025
 
 # Problem Instance Summary Statistics
 
-number of `problem_instances`: 88.
+number of `problem_instances`: 68.
 
 `problem_instance.json` with the most tasks: 30 (hubbard_square/614c4444-a31a-4348-b24d-01040208651c)
 
-number of Hamiltonians (i.e., tasks) we have features calculated for: 280
+number of Hamiltonians (i.e., tasks) we have features calculated for: 228
 
 minimum number of orbitals: 5
 
-median number of orbitals: 42.0
+median number of orbitals: 36.0
 
 maximum number of orbitals: 135
 
@@ -34,47 +34,47 @@ maximum number of orbitals: 135
 
 number of unique participating solvers: 21
 
-Solver: DF_QPE/2610d8de-bd3a-469e-9a80-473e8988755f, Model could not be calculated.
+Solver: SHCI_opt/2dde727e-a881-44fa-aabf-bba6248e4baf, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 1.0}, F1 Score: [0.85714286 0.98947368]
 
-Solver: SHCI_opt/2dde727e-a881-44fa-aabf-bba6248e4baf, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 1.0}, F1 Score: [0.69230769 0.97315436]
+Solver: DF_QPE/2610d8de-bd3a-469e-9a80-473e8988755f, ML Solvability Ratio: {'PCA': 0.0716, 'NNMF': 0.0}, F1 Score: [1. 1.]
 
-Solver: DF_QPE/4b07b89f-c66f-4e72-8c24-df3e4222cb41, Model could not be calculated.
+Solver: SHCI_pt_1e-4/4ed500f1-0650-41e3-af00-e4d0359394b4, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 1.0}, F1 Score: [0.70588235 0.96323529]
 
-Solver: SHCI_pt_1e-4/4ed500f1-0650-41e3-af00-e4d0359394b4, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 1.0}, F1 Score: [0.66666667 0.96219931]
+Solver: SHCI_var_1e-4/7e730dfb-57ee-480b-a8a1-4b73f5f07c54, ML Solvability Ratio: {'PCA': 0.6661, 'NNMF': 0.7848}, F1 Score: [0.98484848 0.98850575]
 
-Solver: SHCI_var_1e-4/7e730dfb-57ee-480b-a8a1-4b73f5f07c54, ML Solvability Ratio: {'PCA': 0.3758, 'NNMF': 0.0115}, F1 Score: [0.95588235 0.96808511]
+Solver: SHCI_pt_2e-4/ad964781-302e-4728-a26d-39918e0a6cdb, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 1.0}, F1 Score: [0.64864865 0.95167286]
 
-Solver: SHCI_pt_2e-4/ad964781-302e-4728-a26d-39918e0a6cdb, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 1.0}, F1 Score: [0.72413793 0.93984962]
+Solver: SHCI_pt_2e-5/c71b90bd-3250-4c0c-b4e7-fc9878f141f6, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 0.8735}, F1 Score: [0.74285714 0.96678967]
 
-Solver: SHCI_pt_2e-5/c71b90bd-3250-4c0c-b4e7-fc9878f141f6, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 1.0}, F1 Score: [0.3        0.95394737]
+Solver: SHCI_pt_5e-5/d626506c-7aae-4ad6-802a-b29af5f2bb93, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 1.0}, F1 Score: [0.8        0.97416974]
 
-Solver: SHCI_pt_5e-5/d626506c-7aae-4ad6-802a-b29af5f2bb93, ML Solvability Ratio: {'PCA': 0.991, 'NNMF': 0.6864}, F1 Score: [0.7        0.95774648]
+Solver: SHCI_var_2e-4/0db183e3-a86d-491b-9125-599556e37c7a, ML Solvability Ratio: {'PCA': 0.7146, 'NNMF': 0.7963}, F1 Score: [0.98630137 0.9875    ]
 
-Solver: SHCI_var_2e-4/0db183e3-a86d-491b-9125-599556e37c7a, ML Solvability Ratio: {'PCA': 0.2602, 'NNMF': 0.452}, F1 Score: [0.96815287 0.97005988]
+Solver: SHCI_var_2e-5/86bfe50c-9342-4d54-bb68-abc8abd95688, ML Solvability Ratio: {'PCA': 0.5598, 'NNMF': 0.5682}, F1 Score: [0.81967213 0.95510204]
 
-Solver: SHCI_var_2e-5/86bfe50c-9342-4d54-bb68-abc8abd95688, ML Solvability Ratio: {'PCA': 0.5692, 'NNMF': 0.5177}, F1 Score: [0.83333333 0.96212121]
+Solver: SHCI_var_5e-5/01949b95-c427-4693-9134-01f47f688c09, ML Solvability Ratio: {'PCA': 0.9462, 'NNMF': 0.7526}, F1 Score: [0.95454545 0.98165138]
 
-Solver: SHCI_var_5e-5/01949b95-c427-4693-9134-01f47f688c09, ML Solvability Ratio: {'PCA': 0.5156, 'NNMF': 0.4165}, F1 Score: [0.80952381 0.93333333]
+Solver: DF_QPE/5dad4064-cd11-412f-85cb-d722afe3b3de, ML Solvability Ratio: {'PCA': 0.0394, 'NNMF': 0.0199}, F1 Score: [1. 1.]
 
-Solver: DF_QPE/5d768520-b3d0-4292-bbb4-9776fa128107, Model could not be calculated.
+Solver: CISD/418f060e-496b-4024-8d2d-9b1f8791e76d, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0139}, F1 Score: [0.97744361 0.85      ]
 
-Solver: DF_QPE/5dad4064-cd11-412f-85cb-d722afe3b3de, Model could not be calculated.
+Solver: HF/5f5e617a-19c2-4d82-bebc-b2d6b3dcb012, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.98630137 0.71428571]
 
-Solver: CISD/418f060e-496b-4024-8d2d-9b1f8791e76d, ML Solvability Ratio: {'PCA': 0.0498, 'NNMF': 0.012}, F1 Score: [0.97526502 0.82926829]
+Solver: MP2/b420358b-5def-41e6-8c5d-b9d93b6aecd2, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.98630137 0.71428571]
 
-Solver: CCSD(T)/c09217e6-d0f7-4b0f-81c4-79210b7ac878, ML Solvability Ratio: {'PCA': 0.2424, 'NNMF': 0.5231}, F1 Score: [0.92397661 0.91503268]
+Solver: CCSD/0a29e54f-bef9-4d19-bafa-d94b1c4b37aa, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0232}, F1 Score: [0.97637795 0.88461538]
 
-Solver: HF/5f5e617a-19c2-4d82-bebc-b2d6b3dcb012, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.98709677 0.71428571]
+Solver: CCSD(T)/c09217e6-d0f7-4b0f-81c4-79210b7ac878, ML Solvability Ratio: {'PCA': 0.305, 'NNMF': 0.4969}, F1 Score: [0.95121951 0.94366197]
 
-Solver: MP2/b420358b-5def-41e6-8c5d-b9d93b6aecd2, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.98709677 0.71428571]
+Solver: DF_QPE/5d768520-b3d0-4292-bbb4-9776fa128107, ML Solvability Ratio: {'PCA': 0.0394, 'NNMF': 0.0199}, F1 Score: [1. 1.]
 
-Solver: CCSD/0a29e54f-bef9-4d19-bafa-d94b1c4b37aa, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0164}, F1 Score: [0.98529412 0.92307692]
+Solver: DF_QPE/f6b36bde-be4a-4eee-975b-2c5f7e553f5f, ML Solvability Ratio: {'PCA': 0.013, 'NNMF': 0.0006}, F1 Score: [0.99319728 0.83333333]
 
-Solver: DMRG_Niagara_cluster_lowest_energy/16537433-9f4c-4eae-a65d-787dc3b35b59, ML Solvability Ratio: {'PCA': 0.6263, 'NNMF': 0.4481}, F1 Score: [0.91836735 0.96460177]
+Solver: DF_QPE/4b07b89f-c66f-4e72-8c24-df3e4222cb41, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [1. 1.]
+
+Solver: DMRG_Niagara_cluster_lowest_energy/16537433-9f4c-4eae-a65d-787dc3b35b59, ML Solvability Ratio: {'PCA': 0.4126, 'NNMF': 0.3022}, F1 Score: [0.91304348 0.96261682]
 
 Solver: DF_QPE/6f385080-934b-4cbb-b813-39c2cb61349e, Model could not be calculated.
-
-Solver: DF_QPE/f6b36bde-be4a-4eee-975b-2c5f7e553f5f, Model could not be calculated.
 
 ![Solver scatter plot](supporting_artifacts/solver_num_orbs_vs_runtime_scatter_plot.png)
 
@@ -96,74 +96,6 @@ NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicat
 
 NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.
 
-## Solver DF_QPE, 2610d8de-bd3a-469e-9a80-473e8988755f
-
-solver_uuid:2610d8de-bd3a-469e-9a80-473e8988755f
-
-solver_short_name:DF_QPE
-
-compute_hardware_type:quantum_computer
-
-algorithm_details:{'algorithm_description': 'Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.', 'algorithm_parameters': {'overlap_csv': 'overlaps.csv', 'sf_threshold': 1e-12, 'df_threshold': 0.001, 'max_orbitals': 70}}
-
-software_details:[{'software_name': 'pyLIQTR', 'software_version': '1.3.4'}, {'software_name': 'qb-gsee-benchmark', 'software_version': '0.1.0a2.dev193+g879c00d'}, {'software_name': 'Python', 'software_version': '3.10.12 (main, Nov  6 2024, 20:22:13) [GCC 11.4.0]'}, {'software_name': 'qualtran', 'software_version': '0.4.0'}]
-
-quantum_hardware_details:{'quantum_hardware_description': 'Ultra-optimistic hardware model based on the superconducting architecture described in https://arxiv.org/abs/2011.03494.', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 0.0001, 'cycle_time_microseconds': 0.1, 'parallelize_shots': False}}
-
-logical_resource_estimate_solution_uuid:0be09ef6-6f34-4b70-a7e7-580d1c539c7c
-
-logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
-
-performance_metrics_uuid: 0a8978eb-4f5d-4980-a461-41c3658e0bf7
-
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
-
-number_of_problem_instances: 88
-
-number_of_problem_instances_attempted: 22
-
-number_of_problem_instances_solved: 0
-
-number_of_tasks: 280
-
-number_of_tasks_attempted: 154
-
-number_of_tasks_solved: 1
-
-number_of_tasks_solved_within_run_time_limit: 1
-
-number_of_tasks_solved_within_accuracy_threshold: 154
-
-max_run_time_of_attempted_tasks: 139406856747.7868
-
-sum_of_run_time_of_attempted_tasks: 1565254226637.0498
-
-solvability_ratio: None
-
-f1_score: None
-
-ml_metrics_calculator_version: 1
-
-comment: All labels were either all `True` or all `False` and we cannot create an ML model with only one class.
-
-![Solver success/failure plot](supporting_artifacts/solver_2610d8de-bd3a-469e-9a80-473e8988755f_plot.png)
-
-Note: plot only contains `attempted` tasks.
-
-![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_2610d8de-bd3a-469e-9a80-473e8988755f_plot.png)
-
-Note: plot only contains `attempted` tasks.
-
-![Solver utility capture](supporting_artifacts/solver_2610d8de-bd3a-469e-9a80-473e8988755f_utility_capture_plot.png)
-
-![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_2610d8de-bd3a-469e-9a80-473e8988755f.png)
-
-![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_2610d8de-bd3a-469e-9a80-473e8988755f.png)
-
-Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
-
-![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_2610d8de-bd3a-469e-9a80-473e8988755f.png)
-
 ## Solver SHCI_opt, 2dde727e-a881-44fa-aabf-bba6248e4baf
 
 solver_uuid:2dde727e-a881-44fa-aabf-bba6248e4baf
@@ -178,35 +110,35 @@ algorithm_details:SHCI with optimized orbitals followed by SHCI+PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: c2d64bfd-66fc-43e0-a278-d4c0ed5be58a
+performance_metrics_uuid: 999f842a-3dd5-40cc-92a4-714ef3b1e5b8
 
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
 
-number_of_problem_instances: 88
+number_of_problem_instances: 68
 
-number_of_problem_instances_attempted: 80
+number_of_problem_instances_attempted: 62
 
 number_of_problem_instances_solved: 33
 
-number_of_tasks: 280
+number_of_tasks: 228
 
-number_of_tasks_attempted: 265
+number_of_tasks_attempted: 222
 
-number_of_tasks_solved: 153
+number_of_tasks_solved: 144
 
-number_of_tasks_solved_within_run_time_limit: 265
+number_of_tasks_solved_within_run_time_limit: 222
 
-number_of_tasks_solved_within_accuracy_threshold: 153
+number_of_tasks_solved_within_accuracy_threshold: 144
 
 max_run_time_of_attempted_tasks: 57334.2
 
-sum_of_run_time_of_attempted_tasks: 1553340.6179999998
+sum_of_run_time_of_attempted_tasks: 1100315.9169999997
 
 solvability_ratio: 1.0
 
 comment: solvability ratio based on PCA embedding.
 
-f1_score: [0.6923076923076923, 0.9731543624161074]
+f1_score: [0.8571428571428571, 0.9894736842105263]
 
 ml_metrics_calculator_version: 1
 
@@ -228,9 +160,9 @@ Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can
 
 ![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_2dde727e-a881-44fa-aabf-bba6248e4baf.png)
 
-## Solver DF_QPE, 4b07b89f-c66f-4e72-8c24-df3e4222cb41
+## Solver DF_QPE, 2610d8de-bd3a-469e-9a80-473e8988755f
 
-solver_uuid:4b07b89f-c66f-4e72-8c24-df3e4222cb41
+solver_uuid:2610d8de-bd3a-469e-9a80-473e8988755f
 
 solver_short_name:DF_QPE
 
@@ -240,61 +172,61 @@ algorithm_details:{'algorithm_description': 'Double factorized QPE resource esti
 
 software_details:[{'software_name': 'pyLIQTR', 'software_version': '1.3.4'}, {'software_name': 'qb-gsee-benchmark', 'software_version': '0.1.0a2.dev193+g879c00d'}, {'software_name': 'Python', 'software_version': '3.10.12 (main, Nov  6 2024, 20:22:13) [GCC 11.4.0]'}, {'software_name': 'qualtran', 'software_version': '0.4.0'}]
 
-quantum_hardware_details:{'quantum_hardware_description': 'Optimistic superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494. Assumes that enough QPUs are available to run all shots in parallel.', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 0.0001, 'cycle_time_microseconds': 1, 'parallelize_shots': True}}
+quantum_hardware_details:{'quantum_hardware_description': 'Ultra-optimistic hardware model based on the superconducting architecture described in https://arxiv.org/abs/2011.03494.', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 0.0001, 'cycle_time_microseconds': 0.1, 'parallelize_shots': False}}
 
-logical_resource_estimate_solution_uuid:56513b7a-4644-4a2c-9467-46a2ba6ec2a8
+logical_resource_estimate_solution_uuid:2f90da87-a699-4de4-98ad-a78231385822
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: 72a0df89-1863-4a95-87d8-e5ac46e4fb6d
+performance_metrics_uuid: f482dfe8-2212-4c36-970c-025b4dc34b22
 
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
 
-number_of_problem_instances: 88
+number_of_problem_instances: 68
 
 number_of_problem_instances_attempted: 22
 
-number_of_problem_instances_solved: 0
+number_of_problem_instances_solved: 3
 
-number_of_tasks: 280
+number_of_tasks: 228
 
-number_of_tasks_attempted: 154
+number_of_tasks_attempted: 131
 
-number_of_tasks_solved: 0
+number_of_tasks_solved: 4
 
-number_of_tasks_solved_within_run_time_limit: 0
+number_of_tasks_solved_within_run_time_limit: 4
 
-number_of_tasks_solved_within_accuracy_threshold: 154
+number_of_tasks_solved_within_accuracy_threshold: 131
 
-max_run_time_of_attempted_tasks: 28597112908.874496
+max_run_time_of_attempted_tasks: 139406856747.7868
 
-sum_of_run_time_of_attempted_tasks: 502121568076.6234
+sum_of_run_time_of_attempted_tasks: 1131474650773.224
 
-solvability_ratio: None
+solvability_ratio: 0.0716
 
-f1_score: None
+comment: solvability ratio based on PCA embedding.
+
+f1_score: [1.0, 1.0]
 
 ml_metrics_calculator_version: 1
 
-comment: All labels were either all `True` or all `False` and we cannot create an ML model with only one class.
-
-![Solver success/failure plot](supporting_artifacts/solver_4b07b89f-c66f-4e72-8c24-df3e4222cb41_plot.png)
+![Solver success/failure plot](supporting_artifacts/solver_2610d8de-bd3a-469e-9a80-473e8988755f_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_4b07b89f-c66f-4e72-8c24-df3e4222cb41_plot.png)
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_2610d8de-bd3a-469e-9a80-473e8988755f_plot.png)
 
 Note: plot only contains `attempted` tasks.
 
-![Solver utility capture](supporting_artifacts/solver_4b07b89f-c66f-4e72-8c24-df3e4222cb41_utility_capture_plot.png)
+![Solver utility capture](supporting_artifacts/solver_2610d8de-bd3a-469e-9a80-473e8988755f_utility_capture_plot.png)
 
-![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_4b07b89f-c66f-4e72-8c24-df3e4222cb41.png)
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_2610d8de-bd3a-469e-9a80-473e8988755f.png)
 
-![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_4b07b89f-c66f-4e72-8c24-df3e4222cb41.png)
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_2610d8de-bd3a-469e-9a80-473e8988755f.png)
 
 Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
 
-![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_4b07b89f-c66f-4e72-8c24-df3e4222cb41.png)
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_2610d8de-bd3a-469e-9a80-473e8988755f.png)
 
 ## Solver SHCI_pt_1e-4, 4ed500f1-0650-41e3-af00-e4d0359394b4
 
@@ -310,35 +242,35 @@ algorithm_details:SHCI with eps_var 1e-4 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 940b2f10-5718-452b-8f0c-61d4b5faf1ea
+performance_metrics_uuid: 336e206c-5eae-4c62-98fb-de83e6b61f58
 
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
 
-number_of_problem_instances: 88
+number_of_problem_instances: 68
 
-number_of_problem_instances_attempted: 83
+number_of_problem_instances_attempted: 64
 
 number_of_problem_instances_solved: 22
 
-number_of_tasks: 280
+number_of_tasks: 228
 
-number_of_tasks_attempted: 275
+number_of_tasks_attempted: 224
 
-number_of_tasks_solved: 140
+number_of_tasks_solved: 131
 
-number_of_tasks_solved_within_run_time_limit: 273
+number_of_tasks_solved_within_run_time_limit: 223
 
-number_of_tasks_solved_within_accuracy_threshold: 140
+number_of_tasks_solved_within_accuracy_threshold: 131
 
 max_run_time_of_attempted_tasks: 77244.15200000002
 
-sum_of_run_time_of_attempted_tasks: 1863349.633000001
+sum_of_run_time_of_attempted_tasks: 1220720.12
 
 solvability_ratio: 1.0
 
 comment: solvability ratio based on PCA embedding.
 
-f1_score: [0.6666666666666666, 0.9621993127147767]
+f1_score: [0.7058823529411765, 0.9632352941176471]
 
 ml_metrics_calculator_version: 1
 
@@ -374,35 +306,35 @@ algorithm_details:SHCI with eps_var 1e-4
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 0de6d309-91f1-44e3-938c-0637a8e4247b
+performance_metrics_uuid: 8f799fe4-3f49-482a-9b07-0c3a32139531
 
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
 
-number_of_problem_instances: 88
+number_of_problem_instances: 68
 
-number_of_problem_instances_attempted: 83
+number_of_problem_instances_attempted: 64
 
 number_of_problem_instances_solved: 13
 
-number_of_tasks: 280
+number_of_tasks: 228
 
-number_of_tasks_attempted: 275
+number_of_tasks_attempted: 224
 
-number_of_tasks_solved: 95
+number_of_tasks_solved: 87
 
-number_of_tasks_solved_within_run_time_limit: 273
+number_of_tasks_solved_within_run_time_limit: 223
 
-number_of_tasks_solved_within_accuracy_threshold: 95
+number_of_tasks_solved_within_accuracy_threshold: 87
 
 max_run_time_of_attempted_tasks: 77244.15200000002
 
-sum_of_run_time_of_attempted_tasks: 1863349.633000001
+sum_of_run_time_of_attempted_tasks: 1220720.12
 
-solvability_ratio: 0.3758
+solvability_ratio: 0.6661
 
 comment: solvability ratio based on PCA embedding.
 
-f1_score: [0.9558823529411765, 0.9680851063829787]
+f1_score: [0.9848484848484849, 0.9885057471264368]
 
 ml_metrics_calculator_version: 1
 
@@ -438,35 +370,35 @@ algorithm_details:SHCI with eps_var 2e-4 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: f69a261a-fb4d-49bb-a2b6-9127710c71c4
+performance_metrics_uuid: 6c97e0b0-8103-4dc6-8331-b131efaf320c
 
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
 
-number_of_problem_instances: 88
+number_of_problem_instances: 68
 
-number_of_problem_instances_attempted: 83
+number_of_problem_instances_attempted: 64
 
 number_of_problem_instances_solved: 22
 
-number_of_tasks: 280
+number_of_tasks: 228
 
-number_of_tasks_attempted: 275
+number_of_tasks_attempted: 224
 
-number_of_tasks_solved: 137
+number_of_tasks_solved: 128
 
-number_of_tasks_solved_within_run_time_limit: 273
+number_of_tasks_solved_within_run_time_limit: 223
 
-number_of_tasks_solved_within_accuracy_threshold: 137
+number_of_tasks_solved_within_accuracy_threshold: 128
 
 max_run_time_of_attempted_tasks: 77244.15200000002
 
-sum_of_run_time_of_attempted_tasks: 1863349.633000001
+sum_of_run_time_of_attempted_tasks: 1220720.12
 
 solvability_ratio: 1.0
 
 comment: solvability ratio based on PCA embedding.
 
-f1_score: [0.7241379310344828, 0.9398496240601504]
+f1_score: [0.6486486486486487, 0.9516728624535316]
 
 ml_metrics_calculator_version: 1
 
@@ -502,35 +434,35 @@ algorithm_details:SHCI with eps_var 2e-5 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 654ee62d-1812-4a83-bc37-e1c420ac4b53
+performance_metrics_uuid: d8fc853e-919b-4635-a03b-eedb9c97449f
 
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
 
-number_of_problem_instances: 88
+number_of_problem_instances: 68
 
-number_of_problem_instances_attempted: 83
+number_of_problem_instances_attempted: 64
 
 number_of_problem_instances_solved: 26
 
-number_of_tasks: 280
+number_of_tasks: 228
 
-number_of_tasks_attempted: 275
+number_of_tasks_attempted: 224
 
-number_of_tasks_solved: 145
+number_of_tasks_solved: 136
 
-number_of_tasks_solved_within_run_time_limit: 273
+number_of_tasks_solved_within_run_time_limit: 223
 
-number_of_tasks_solved_within_accuracy_threshold: 145
+number_of_tasks_solved_within_accuracy_threshold: 136
 
 max_run_time_of_attempted_tasks: 77244.15200000002
 
-sum_of_run_time_of_attempted_tasks: 1863349.633000001
+sum_of_run_time_of_attempted_tasks: 1220720.12
 
 solvability_ratio: 1.0
 
 comment: solvability ratio based on PCA embedding.
 
-f1_score: [0.3, 0.9539473684210527]
+f1_score: [0.7428571428571429, 0.966789667896679]
 
 ml_metrics_calculator_version: 1
 
@@ -566,35 +498,35 @@ algorithm_details:SHCI with eps_var 5e-5 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 1c93c3f6-3af1-448b-a64b-2e9b1c6f4306
+performance_metrics_uuid: 60f4198c-01c5-4753-94d2-e417ca07abc7
 
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
 
-number_of_problem_instances: 88
+number_of_problem_instances: 68
 
-number_of_problem_instances_attempted: 83
+number_of_problem_instances_attempted: 64
 
 number_of_problem_instances_solved: 24
 
-number_of_tasks: 280
+number_of_tasks: 228
 
-number_of_tasks_attempted: 275
+number_of_tasks_attempted: 224
 
-number_of_tasks_solved: 143
+number_of_tasks_solved: 134
 
-number_of_tasks_solved_within_run_time_limit: 273
+number_of_tasks_solved_within_run_time_limit: 223
 
-number_of_tasks_solved_within_accuracy_threshold: 143
+number_of_tasks_solved_within_accuracy_threshold: 134
 
 max_run_time_of_attempted_tasks: 77244.15200000002
 
-sum_of_run_time_of_attempted_tasks: 1863349.633000001
+sum_of_run_time_of_attempted_tasks: 1220720.12
 
-solvability_ratio: 0.991
+solvability_ratio: 1.0
 
 comment: solvability ratio based on PCA embedding.
 
-f1_score: [0.7, 0.9577464788732394]
+f1_score: [0.8, 0.974169741697417]
 
 ml_metrics_calculator_version: 1
 
@@ -630,35 +562,35 @@ algorithm_details:SHCI with eps_var 2e-4
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: eaa18840-7921-4dc2-ba8f-dea6bd24ee52
+performance_metrics_uuid: cd5ec27a-fd46-4e4b-9a20-7598267424ee
 
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
 
-number_of_problem_instances: 88
+number_of_problem_instances: 68
 
-number_of_problem_instances_attempted: 83
+number_of_problem_instances_attempted: 64
 
 number_of_problem_instances_solved: 13
 
-number_of_tasks: 280
+number_of_tasks: 228
 
-number_of_tasks_attempted: 275
+number_of_tasks_attempted: 224
 
-number_of_tasks_solved: 84
+number_of_tasks_solved: 79
 
-number_of_tasks_solved_within_run_time_limit: 273
+number_of_tasks_solved_within_run_time_limit: 223
 
-number_of_tasks_solved_within_accuracy_threshold: 84
+number_of_tasks_solved_within_accuracy_threshold: 79
 
 max_run_time_of_attempted_tasks: 77244.15200000002
 
-sum_of_run_time_of_attempted_tasks: 1863349.633000001
+sum_of_run_time_of_attempted_tasks: 1220720.12
 
-solvability_ratio: 0.2602
+solvability_ratio: 0.7146
 
 comment: solvability ratio based on PCA embedding.
 
-f1_score: [0.9681528662420382, 0.9700598802395209]
+f1_score: [0.9863013698630136, 0.9875]
 
 ml_metrics_calculator_version: 1
 
@@ -694,35 +626,35 @@ algorithm_details:SHCI with eps_var 2e-5
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 18643df5-e1cf-4d9d-857a-c75df1b26491
+performance_metrics_uuid: ff1b052f-4cb0-4fe8-a7be-b034d2968b77
 
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
 
-number_of_problem_instances: 88
+number_of_problem_instances: 68
 
-number_of_problem_instances_attempted: 83
+number_of_problem_instances_attempted: 64
 
 number_of_problem_instances_solved: 18
 
-number_of_tasks: 280
+number_of_tasks: 228
 
-number_of_tasks_attempted: 275
+number_of_tasks_attempted: 224
 
-number_of_tasks_solved: 133
+number_of_tasks_solved: 124
 
-number_of_tasks_solved_within_run_time_limit: 273
+number_of_tasks_solved_within_run_time_limit: 223
 
-number_of_tasks_solved_within_accuracy_threshold: 133
+number_of_tasks_solved_within_accuracy_threshold: 124
 
 max_run_time_of_attempted_tasks: 77244.15200000002
 
-sum_of_run_time_of_attempted_tasks: 1863349.633000001
+sum_of_run_time_of_attempted_tasks: 1220720.12
 
-solvability_ratio: 0.5692
+solvability_ratio: 0.5598
 
 comment: solvability ratio based on PCA embedding.
 
-f1_score: [0.8333333333333334, 0.9621212121212122]
+f1_score: [0.819672131147541, 0.9551020408163265]
 
 ml_metrics_calculator_version: 1
 
@@ -758,35 +690,35 @@ algorithm_details:SHCI with eps_var 5e-5
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 52133230-0a24-43db-9244-e19d08808c75
+performance_metrics_uuid: 47ddbf8c-3195-4a58-b3ce-36862dd198bc
 
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
 
-number_of_problem_instances: 88
+number_of_problem_instances: 68
 
-number_of_problem_instances_attempted: 83
+number_of_problem_instances_attempted: 64
 
 number_of_problem_instances_solved: 14
 
-number_of_tasks: 280
+number_of_tasks: 228
 
-number_of_tasks_attempted: 275
+number_of_tasks_attempted: 224
 
-number_of_tasks_solved: 120
+number_of_tasks_solved: 111
 
-number_of_tasks_solved_within_run_time_limit: 273
+number_of_tasks_solved_within_run_time_limit: 223
 
-number_of_tasks_solved_within_accuracy_threshold: 120
+number_of_tasks_solved_within_accuracy_threshold: 111
 
 max_run_time_of_attempted_tasks: 77244.15200000002
 
-sum_of_run_time_of_attempted_tasks: 1863349.633000001
+sum_of_run_time_of_attempted_tasks: 1220720.12
 
-solvability_ratio: 0.5156
+solvability_ratio: 0.9462
 
 comment: solvability ratio based on PCA embedding.
 
-f1_score: [0.8095238095238095, 0.9333333333333333]
+f1_score: [0.9545454545454546, 0.981651376146789]
 
 ml_metrics_calculator_version: 1
 
@@ -808,74 +740,6 @@ Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can
 
 ![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_01949b95-c427-4693-9134-01f47f688c09.png)
 
-## Solver DF_QPE, 5d768520-b3d0-4292-bbb4-9776fa128107
-
-solver_uuid:5d768520-b3d0-4292-bbb4-9776fa128107
-
-solver_short_name:DF_QPE
-
-compute_hardware_type:quantum_computer
-
-algorithm_details:{'algorithm_description': 'Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.', 'algorithm_parameters': {'overlap_csv': 'overlaps.csv', 'sf_threshold': 1e-12, 'df_threshold': 0.001, 'max_orbitals': 70}}
-
-software_details:[{'software_name': 'pyLIQTR', 'software_version': '1.3.4'}, {'software_name': 'qb-gsee-benchmark', 'software_version': '0.1.0a2.dev193+g879c00d'}, {'software_name': 'Python', 'software_version': '3.10.12 (main, Nov  6 2024, 20:22:13) [GCC 11.4.0]'}, {'software_name': 'qualtran', 'software_version': '0.4.0'}]
-
-quantum_hardware_details:{'quantum_hardware_description': 'Superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494 with an extremely optimistic physical error rate.', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 1e-06, 'cycle_time_microseconds': 1, 'parallelize_shots': False}}
-
-logical_resource_estimate_solution_uuid:e5377ec1-7a7f-4559-8336-548da65ea6e0
-
-logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
-
-performance_metrics_uuid: 1b8ba5ef-de6e-44ef-8b9c-54a488aec314
-
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
-
-number_of_problem_instances: 88
-
-number_of_problem_instances_attempted: 24
-
-number_of_problem_instances_solved: 0
-
-number_of_tasks: 280
-
-number_of_tasks_attempted: 166
-
-number_of_tasks_solved: 0
-
-number_of_tasks_solved_within_run_time_limit: 0
-
-number_of_tasks_solved_within_accuracy_threshold: 166
-
-max_run_time_of_attempted_tasks: 3.667583349758134e+17
-
-sum_of_run_time_of_attempted_tasks: 4.0384302123797466e+17
-
-solvability_ratio: None
-
-f1_score: None
-
-ml_metrics_calculator_version: 1
-
-comment: All labels were either all `True` or all `False` and we cannot create an ML model with only one class.
-
-![Solver success/failure plot](supporting_artifacts/solver_5d768520-b3d0-4292-bbb4-9776fa128107_plot.png)
-
-Note: plot only contains `attempted` tasks.
-
-![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_5d768520-b3d0-4292-bbb4-9776fa128107_plot.png)
-
-Note: plot only contains `attempted` tasks.
-
-![Solver utility capture](supporting_artifacts/solver_5d768520-b3d0-4292-bbb4-9776fa128107_utility_capture_plot.png)
-
-![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_5d768520-b3d0-4292-bbb4-9776fa128107.png)
-
-![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_5d768520-b3d0-4292-bbb4-9776fa128107.png)
-
-Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
-
-![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_5d768520-b3d0-4292-bbb4-9776fa128107.png)
-
 ## Solver DF_QPE, 5dad4064-cd11-412f-85cb-d722afe3b3de
 
 solver_uuid:5dad4064-cd11-412f-85cb-d722afe3b3de
@@ -890,41 +754,41 @@ software_details:[{'software_name': 'pyLIQTR', 'software_version': '1.3.4'}, {'s
 
 quantum_hardware_details:{'quantum_hardware_description': 'Optimistic superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494.', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 0.0001, 'cycle_time_microseconds': 1, 'parallelize_shots': False}}
 
-logical_resource_estimate_solution_uuid:e54dd6a9-6481-452a-a6e9-31c8e53cdb75
+logical_resource_estimate_solution_uuid:21b3da35-cc33-454b-bd67-8b2f50953c9a
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: e14406a3-3271-4d83-b884-3c3631e8dc17
+performance_metrics_uuid: 6d1111d9-39ea-44a7-a57c-410c6bcdf1bc
 
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
 
-number_of_problem_instances: 88
+number_of_problem_instances: 68
 
 number_of_problem_instances_attempted: 22
 
-number_of_problem_instances_solved: 0
+number_of_problem_instances_solved: 2
 
-number_of_tasks: 280
+number_of_tasks: 228
 
-number_of_tasks_attempted: 154
+number_of_tasks_attempted: 131
 
-number_of_tasks_solved: 0
+number_of_tasks_solved: 2
 
-number_of_tasks_solved_within_run_time_limit: 0
+number_of_tasks_solved_within_run_time_limit: 2
 
-number_of_tasks_solved_within_accuracy_threshold: 154
+number_of_tasks_solved_within_accuracy_threshold: 131
 
 max_run_time_of_attempted_tasks: 1394068547267.4111
 
-sum_of_run_time_of_attempted_tasks: 15652541022388.93
+sum_of_run_time_of_attempted_tasks: 11314745416246.352
 
-solvability_ratio: None
+solvability_ratio: 0.0394
 
-f1_score: None
+comment: solvability ratio based on PCA embedding.
+
+f1_score: [1.0, 1.0]
 
 ml_metrics_calculator_version: 1
-
-comment: All labels were either all `True` or all `False` and we cannot create an ML model with only one class.
 
 ![Solver success/failure plot](supporting_artifacts/solver_5dad4064-cd11-412f-85cb-d722afe3b3de_plot.png)
 
@@ -958,35 +822,35 @@ algorithm_details:CISD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 7e530c12-a17e-44c1-a57c-432ec044bfa4
+performance_metrics_uuid: 0a5c9d8b-baf9-4438-bdf9-7b85c9960130
 
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
 
-number_of_problem_instances: 88
+number_of_problem_instances: 68
 
-number_of_problem_instances_attempted: 84
+number_of_problem_instances_attempted: 64
 
 number_of_problem_instances_solved: 9
 
-number_of_tasks: 280
+number_of_tasks: 228
 
-number_of_tasks_attempted: 276
+number_of_tasks_attempted: 224
 
 number_of_tasks_solved: 17
 
-number_of_tasks_solved_within_run_time_limit: 276
+number_of_tasks_solved_within_run_time_limit: 224
 
 number_of_tasks_solved_within_accuracy_threshold: 17
 
 max_run_time_of_attempted_tasks: 62.58296537399292
 
-sum_of_run_time_of_attempted_tasks: 2929.870177745819
+sum_of_run_time_of_attempted_tasks: 2141.729572057724
 
-solvability_ratio: 0.0498
+solvability_ratio: 0.0
 
 comment: solvability ratio based on PCA embedding.
 
-f1_score: [0.9752650176678446, 0.8292682926829268]
+f1_score: [0.9774436090225563, 0.85]
 
 ml_metrics_calculator_version: 1
 
@@ -1008,70 +872,6 @@ Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can
 
 ![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_418f060e-496b-4024-8d2d-9b1f8791e76d.png)
 
-## Solver CCSD(T), c09217e6-d0f7-4b0f-81c4-79210b7ac878
-
-solver_uuid:c09217e6-d0f7-4b0f-81c4-79210b7ac878
-
-solver_short_name:CCSD(T)
-
-compute_hardware_type:classical_computer
-
-classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}
-
-algorithm_details:CCSD(T)
-
-software_details:pyscf (https://github.com/pyscf/pyscf).
-
-performance_metrics_uuid: 862a9612-50aa-4ad5-b803-96c220651957
-
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
-
-number_of_problem_instances: 88
-
-number_of_problem_instances_attempted: 79
-
-number_of_problem_instances_solved: 19
-
-number_of_tasks: 280
-
-number_of_tasks_attempted: 264
-
-number_of_tasks_solved: 71
-
-number_of_tasks_solved_within_run_time_limit: 264
-
-number_of_tasks_solved_within_accuracy_threshold: 71
-
-max_run_time_of_attempted_tasks: 493.4080808162689
-
-sum_of_run_time_of_attempted_tasks: 13199.317583084106
-
-solvability_ratio: 0.2424
-
-comment: solvability ratio based on PCA embedding.
-
-f1_score: [0.9239766081871345, 0.9150326797385621]
-
-ml_metrics_calculator_version: 1
-
-![Solver success/failure plot](supporting_artifacts/solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_plot.png)
-
-Note: plot only contains `attempted` tasks.
-
-![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_plot.png)
-
-Note: plot only contains `attempted` tasks.
-
-![Solver utility capture](supporting_artifacts/solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_utility_capture_plot.png)
-
-![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878.png)
-
-![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878.png)
-
-Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
-
-![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878.png)
-
 ## Solver HF, 5f5e617a-19c2-4d82-bebc-b2d6b3dcb012
 
 solver_uuid:5f5e617a-19c2-4d82-bebc-b2d6b3dcb012
@@ -1086,35 +886,35 @@ algorithm_details:Hartree Fock
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 0f5ad36d-f43c-4ffa-b65c-b29f35773a8a
+performance_metrics_uuid: 428a4869-d721-40d2-8409-92b803e029e4
 
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
 
-number_of_problem_instances: 88
+number_of_problem_instances: 68
 
-number_of_problem_instances_attempted: 84
+number_of_problem_instances_attempted: 64
 
 number_of_problem_instances_solved: 5
 
-number_of_tasks: 280
+number_of_tasks: 228
 
-number_of_tasks_attempted: 276
+number_of_tasks_attempted: 224
 
 number_of_tasks_solved: 5
 
-number_of_tasks_solved_within_run_time_limit: 276
+number_of_tasks_solved_within_run_time_limit: 224
 
 number_of_tasks_solved_within_accuracy_threshold: 5
 
 max_run_time_of_attempted_tasks: 20.338801622390747
 
-sum_of_run_time_of_attempted_tasks: 906.4860525131226
+sum_of_run_time_of_attempted_tasks: 798.9929344654083
 
 solvability_ratio: 0.0
 
 comment: solvability ratio based on PCA embedding.
 
-f1_score: [0.9870967741935484, 0.7142857142857143]
+f1_score: [0.9863013698630136, 0.7142857142857143]
 
 ml_metrics_calculator_version: 1
 
@@ -1150,35 +950,35 @@ algorithm_details:MP2
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 0fe19268-d797-46f3-997d-841eb8ed2e78
+performance_metrics_uuid: 6d5f0bee-b9ce-4f5a-9ab7-bc3ead209aa5
 
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
 
-number_of_problem_instances: 88
+number_of_problem_instances: 68
 
-number_of_problem_instances_attempted: 81
+number_of_problem_instances_attempted: 61
 
 number_of_problem_instances_solved: 5
 
-number_of_tasks: 280
+number_of_tasks: 228
 
-number_of_tasks_attempted: 268
+number_of_tasks_attempted: 216
 
 number_of_tasks_solved: 5
 
-number_of_tasks_solved_within_run_time_limit: 268
+number_of_tasks_solved_within_run_time_limit: 216
 
 number_of_tasks_solved_within_accuracy_threshold: 5
 
 max_run_time_of_attempted_tasks: 2.230440139770508
 
-sum_of_run_time_of_attempted_tasks: 94.7442626953125
+sum_of_run_time_of_attempted_tasks: 78.34016704559326
 
 solvability_ratio: 0.0
 
 comment: solvability ratio based on PCA embedding.
 
-f1_score: [0.9870967741935484, 0.7142857142857143]
+f1_score: [0.9863013698630136, 0.7142857142857143]
 
 ml_metrics_calculator_version: 1
 
@@ -1214,35 +1014,35 @@ algorithm_details:CCSD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 99cc28f3-fd40-4dd6-9eef-fd8f7da170e1
+performance_metrics_uuid: c7ae3036-7db4-4bc2-9bad-a7749598904a
 
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
 
-number_of_problem_instances: 88
+number_of_problem_instances: 68
 
-number_of_problem_instances_attempted: 79
+number_of_problem_instances_attempted: 60
 
 number_of_problem_instances_solved: 10
 
-number_of_tasks: 280
+number_of_tasks: 228
 
-number_of_tasks_attempted: 264
+number_of_tasks_attempted: 213
 
-number_of_tasks_solved: 24
+number_of_tasks_solved: 23
 
-number_of_tasks_solved_within_run_time_limit: 264
+number_of_tasks_solved_within_run_time_limit: 213
 
-number_of_tasks_solved_within_accuracy_threshold: 24
+number_of_tasks_solved_within_accuracy_threshold: 23
 
-max_run_time_of_attempted_tasks: 485.1982181072235
+max_run_time_of_attempted_tasks: 460.71552085876465
 
-sum_of_run_time_of_attempted_tasks: 12252.72845697403
+sum_of_run_time_of_attempted_tasks: 7092.587965488434
 
 solvability_ratio: 0.0
 
 comment: solvability ratio based on PCA embedding.
 
-f1_score: [0.9852941176470589, 0.9230769230769231]
+f1_score: [0.9763779527559056, 0.8846153846153846]
 
 ml_metrics_calculator_version: 1
 
@@ -1264,6 +1064,274 @@ Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can
 
 ![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa.png)
 
+## Solver CCSD(T), c09217e6-d0f7-4b0f-81c4-79210b7ac878
+
+solver_uuid:c09217e6-d0f7-4b0f-81c4-79210b7ac878
+
+solver_short_name:CCSD(T)
+
+compute_hardware_type:classical_computer
+
+classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}
+
+algorithm_details:CCSD(T)
+
+software_details:pyscf (https://github.com/pyscf/pyscf).
+
+performance_metrics_uuid: 1f1018fb-0b50-4b5b-95b0-d9523d77e030
+
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
+
+number_of_problem_instances: 68
+
+number_of_problem_instances_attempted: 60
+
+number_of_problem_instances_solved: 19
+
+number_of_tasks: 228
+
+number_of_tasks_attempted: 213
+
+number_of_tasks_solved: 67
+
+number_of_tasks_solved_within_run_time_limit: 213
+
+number_of_tasks_solved_within_accuracy_threshold: 67
+
+max_run_time_of_attempted_tasks: 469.1432478427887
+
+sum_of_run_time_of_attempted_tasks: 7912.881755828857
+
+solvability_ratio: 0.305
+
+comment: solvability ratio based on PCA embedding.
+
+f1_score: [0.9512195121951219, 0.9436619718309859]
+
+ml_metrics_calculator_version: 1
+
+![Solver success/failure plot](supporting_artifacts/solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver utility capture](supporting_artifacts/solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_utility_capture_plot.png)
+
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878.png)
+
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878.png)
+
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878.png)
+
+## Solver DF_QPE, 5d768520-b3d0-4292-bbb4-9776fa128107
+
+solver_uuid:5d768520-b3d0-4292-bbb4-9776fa128107
+
+solver_short_name:DF_QPE
+
+compute_hardware_type:quantum_computer
+
+algorithm_details:{'algorithm_description': 'Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.', 'algorithm_parameters': {'overlap_csv': 'overlaps.csv', 'sf_threshold': 1e-12, 'df_threshold': 0.001, 'max_orbitals': 70}}
+
+software_details:[{'software_name': 'pyLIQTR', 'software_version': '1.3.4'}, {'software_name': 'qb-gsee-benchmark', 'software_version': '0.1.0a2.dev193+g879c00d'}, {'software_name': 'Python', 'software_version': '3.10.12 (main, Nov  6 2024, 20:22:13) [GCC 11.4.0]'}, {'software_name': 'qualtran', 'software_version': '0.4.0'}]
+
+quantum_hardware_details:{'quantum_hardware_description': 'Superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494 with an extremely optimistic physical error rate.', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 1e-06, 'cycle_time_microseconds': 1, 'parallelize_shots': False}}
+
+logical_resource_estimate_solution_uuid:6a6781f9-bc5c-4fb6-b21b-268ce527c900
+
+logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
+
+performance_metrics_uuid: e5bc538e-984d-47f7-b03d-af2d2656f900
+
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
+
+number_of_problem_instances: 68
+
+number_of_problem_instances_attempted: 24
+
+number_of_problem_instances_solved: 2
+
+number_of_tasks: 228
+
+number_of_tasks_attempted: 137
+
+number_of_tasks_solved: 2
+
+number_of_tasks_solved_within_run_time_limit: 2
+
+number_of_tasks_solved_within_accuracy_threshold: 137
+
+max_run_time_of_attempted_tasks: 143762960615180.72
+
+sum_of_run_time_of_attempted_tasks: 164517943847731.3
+
+solvability_ratio: 0.0394
+
+comment: solvability ratio based on PCA embedding.
+
+f1_score: [1.0, 1.0]
+
+ml_metrics_calculator_version: 1
+
+![Solver success/failure plot](supporting_artifacts/solver_5d768520-b3d0-4292-bbb4-9776fa128107_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_5d768520-b3d0-4292-bbb4-9776fa128107_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver utility capture](supporting_artifacts/solver_5d768520-b3d0-4292-bbb4-9776fa128107_utility_capture_plot.png)
+
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_5d768520-b3d0-4292-bbb4-9776fa128107.png)
+
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_5d768520-b3d0-4292-bbb4-9776fa128107.png)
+
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_5d768520-b3d0-4292-bbb4-9776fa128107.png)
+
+## Solver DF_QPE, f6b36bde-be4a-4eee-975b-2c5f7e553f5f
+
+solver_uuid:f6b36bde-be4a-4eee-975b-2c5f7e553f5f
+
+solver_short_name:DF_QPE
+
+compute_hardware_type:quantum_computer
+
+algorithm_details:{'algorithm_description': 'Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.', 'algorithm_parameters': {'overlap_csv': 'overlaps.csv', 'sf_threshold': 1e-12, 'df_threshold': 0.001, 'max_orbitals': 70}}
+
+software_details:[{'software_name': 'pyLIQTR', 'software_version': '1.3.4'}, {'software_name': 'qb-gsee-benchmark', 'software_version': '0.1.0a2.dev193+g879c00d'}, {'software_name': 'Python', 'software_version': '3.10.12 (main, Nov  6 2024, 20:22:13) [GCC 11.4.0]'}, {'software_name': 'qualtran', 'software_version': '0.4.0'}]
+
+quantum_hardware_details:{'quantum_hardware_description': 'Ultra-optimistic hardware model based on the superconducting architecture described in https://arxiv.org/abs/2011.03494.', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 1e-06, 'cycle_time_microseconds': 0.1, 'parallelize_shots': False}}
+
+logical_resource_estimate_solution_uuid:d837d3d6-c954-495f-8f87-d93f85f1be21
+
+logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
+
+performance_metrics_uuid: d544e734-d678-4f16-863c-34b9d2084f40
+
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
+
+number_of_problem_instances: 68
+
+number_of_problem_instances_attempted: 24
+
+number_of_problem_instances_solved: 4
+
+number_of_tasks: 228
+
+number_of_tasks_attempted: 137
+
+number_of_tasks_solved: 5
+
+number_of_tasks_solved_within_run_time_limit: 5
+
+number_of_tasks_solved_within_accuracy_threshold: 137
+
+max_run_time_of_attempted_tasks: 14376296065792.11
+
+sum_of_run_time_of_attempted_tasks: 16451794516511.004
+
+solvability_ratio: 0.013
+
+comment: solvability ratio based on PCA embedding.
+
+f1_score: [0.9931972789115646, 0.8333333333333334]
+
+ml_metrics_calculator_version: 1
+
+![Solver success/failure plot](supporting_artifacts/solver_f6b36bde-be4a-4eee-975b-2c5f7e553f5f_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_f6b36bde-be4a-4eee-975b-2c5f7e553f5f_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver utility capture](supporting_artifacts/solver_f6b36bde-be4a-4eee-975b-2c5f7e553f5f_utility_capture_plot.png)
+
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_f6b36bde-be4a-4eee-975b-2c5f7e553f5f.png)
+
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_f6b36bde-be4a-4eee-975b-2c5f7e553f5f.png)
+
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_f6b36bde-be4a-4eee-975b-2c5f7e553f5f.png)
+
+## Solver DF_QPE, 4b07b89f-c66f-4e72-8c24-df3e4222cb41
+
+solver_uuid:4b07b89f-c66f-4e72-8c24-df3e4222cb41
+
+solver_short_name:DF_QPE
+
+compute_hardware_type:quantum_computer
+
+algorithm_details:{'algorithm_description': 'Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.', 'algorithm_parameters': {'overlap_csv': 'overlaps.csv', 'sf_threshold': 1e-12, 'df_threshold': 0.001, 'max_orbitals': 70}}
+
+software_details:[{'software_name': 'pyLIQTR', 'software_version': '1.3.4'}, {'software_name': 'qb-gsee-benchmark', 'software_version': '0.1.0a2.dev193+g879c00d'}, {'software_name': 'Python', 'software_version': '3.10.12 (main, Nov  6 2024, 20:22:13) [GCC 11.4.0]'}, {'software_name': 'qualtran', 'software_version': '0.4.0'}]
+
+quantum_hardware_details:{'quantum_hardware_description': 'Optimistic superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494. Assumes that enough QPUs are available to run all shots in parallel.', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 0.0001, 'cycle_time_microseconds': 1, 'parallelize_shots': True}}
+
+logical_resource_estimate_solution_uuid:94b387a7-0256-4b81-aff5-d0f69eb5656c
+
+logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
+
+performance_metrics_uuid: 9b81e277-8de8-4af2-8ceb-7fa1eb01caa9
+
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
+
+number_of_problem_instances: 68
+
+number_of_problem_instances_attempted: 22
+
+number_of_problem_instances_solved: 3
+
+number_of_tasks: 228
+
+number_of_tasks_attempted: 131
+
+number_of_tasks_solved: 3
+
+number_of_tasks_solved_within_run_time_limit: 3
+
+number_of_tasks_solved_within_accuracy_threshold: 131
+
+max_run_time_of_attempted_tasks: 28597112908.874496
+
+sum_of_run_time_of_attempted_tasks: 407899131893.85156
+
+solvability_ratio: 0.0
+
+comment: solvability ratio based on PCA embedding.
+
+f1_score: [1.0, 1.0]
+
+ml_metrics_calculator_version: 1
+
+![Solver success/failure plot](supporting_artifacts/solver_4b07b89f-c66f-4e72-8c24-df3e4222cb41_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_4b07b89f-c66f-4e72-8c24-df3e4222cb41_plot.png)
+
+Note: plot only contains `attempted` tasks.
+
+![Solver utility capture](supporting_artifacts/solver_4b07b89f-c66f-4e72-8c24-df3e4222cb41_utility_capture_plot.png)
+
+![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_4b07b89f-c66f-4e72-8c24-df3e4222cb41.png)
+
+![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_4b07b89f-c66f-4e72-8c24-df3e4222cb41.png)
+
+Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
+
+![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_4b07b89f-c66f-4e72-8c24-df3e4222cb41.png)
+
 ## Solver DMRG_Niagara_cluster_lowest_energy, 16537433-9f4c-4eae-a65d-787dc3b35b59
 
 solver_uuid:16537433-9f4c-4eae-a65d-787dc3b35b59
@@ -1278,35 +1346,35 @@ algorithm_details:DMRG with the lowest variational energy obtained so far.
 
 software_details:Block2 v0.5.3rc16 with dmrghandler, commit version d603fdc6409fc194a416aa3a519362d5d91790d9 or later.
 
-performance_metrics_uuid: ec7c30bb-7176-4860-8aab-823e8e7d72bd
+performance_metrics_uuid: 11a3a03a-fddf-439e-b11a-fc185adf19ff
 
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
 
-number_of_problem_instances: 88
+number_of_problem_instances: 68
 
-number_of_problem_instances_attempted: 84
+number_of_problem_instances_attempted: 68
 
-number_of_problem_instances_solved: 9
+number_of_problem_instances_solved: 13
 
-number_of_tasks: 280
+number_of_tasks: 228
 
-number_of_tasks_attempted: 276
+number_of_tasks_attempted: 228
 
-number_of_tasks_solved: 112
+number_of_tasks_solved: 107
 
-number_of_tasks_solved_within_run_time_limit: 276
+number_of_tasks_solved_within_run_time_limit: 228
 
-number_of_tasks_solved_within_accuracy_threshold: 112
+number_of_tasks_solved_within_accuracy_threshold: 107
 
 max_run_time_of_attempted_tasks: 80820.729907066
 
-sum_of_run_time_of_attempted_tasks: 2471726.9051446947
+sum_of_run_time_of_attempted_tasks: 1841774.710900084
 
-solvability_ratio: 0.6263
+solvability_ratio: 0.4126
 
 comment: solvability ratio based on PCA embedding.
 
-f1_score: [0.9183673469387755, 0.9646017699115044]
+f1_score: [0.9130434782608695, 0.9626168224299065]
 
 ml_metrics_calculator_version: 1
 
@@ -1346,17 +1414,17 @@ logical_resource_estimate_solution_uuid:0b647970-5b30-47f0-bbca-1a83704b9e06
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: e6ebd73e-ec25-4320-a917-e2faddf1c9db
+performance_metrics_uuid: 7902fb49-8240-42c8-8ac3-93ee3a185fcd
 
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
+creation_timestamp: 2025-02-24T20:41:03.349036+00:00
 
-number_of_problem_instances: 88
+number_of_problem_instances: 68
 
 number_of_problem_instances_attempted: 3
 
 number_of_problem_instances_solved: 0
 
-number_of_tasks: 280
+number_of_tasks: 228
 
 number_of_tasks_attempted: 23
 
@@ -1396,99 +1464,31 @@ Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can
 
 ![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_6f385080-934b-4cbb-b813-39c2cb61349e.png)
 
-## Solver DF_QPE, f6b36bde-be4a-4eee-975b-2c5f7e553f5f
-
-solver_uuid:f6b36bde-be4a-4eee-975b-2c5f7e553f5f
-
-solver_short_name:DF_QPE
-
-compute_hardware_type:quantum_computer
-
-algorithm_details:{'algorithm_description': 'Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.', 'algorithm_parameters': {'overlap_csv': 'overlaps.csv', 'sf_threshold': 1e-12, 'df_threshold': 0.001, 'max_orbitals': 70}}
-
-software_details:[{'software_name': 'pyLIQTR', 'software_version': '1.3.4'}, {'software_name': 'qb-gsee-benchmark', 'software_version': '0.1.0a2.dev193+g879c00d'}, {'software_name': 'Python', 'software_version': '3.10.12 (main, Nov  6 2024, 20:22:13) [GCC 11.4.0]'}, {'software_name': 'qualtran', 'software_version': '0.4.0'}]
-
-quantum_hardware_details:{'quantum_hardware_description': 'Ultra-optimistic hardware model based on the superconducting architecture described in https://arxiv.org/abs/2011.03494.', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 1e-06, 'cycle_time_microseconds': 0.1, 'parallelize_shots': False}}
-
-logical_resource_estimate_solution_uuid:98855a22-d8cf-42a7-9a18-35f99e820882
-
-logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
-
-performance_metrics_uuid: fec0829e-be72-4e83-8a3b-d55c8cef4348
-
-creation_timestamp: 2025-02-19T18:26:13.854054+00:00
-
-number_of_problem_instances: 88
-
-number_of_problem_instances_attempted: 24
-
-number_of_problem_instances_solved: 0
-
-number_of_tasks: 280
-
-number_of_tasks_attempted: 166
-
-number_of_tasks_solved: 1
-
-number_of_tasks_solved_within_run_time_limit: 1
-
-number_of_tasks_solved_within_accuracy_threshold: 166
-
-max_run_time_of_attempted_tasks: 3.667583349758435e+16
-
-sum_of_run_time_of_attempted_tasks: 4.03843021239543e+16
-
-solvability_ratio: None
-
-f1_score: None
-
-ml_metrics_calculator_version: 1
-
-comment: All labels were either all `True` or all `False` and we cannot create an ML model with only one class.
-
-![Solver success/failure plot](supporting_artifacts/solver_f6b36bde-be4a-4eee-975b-2c5f7e553f5f_plot.png)
-
-Note: plot only contains `attempted` tasks.
-
-![Solver success/failure logFCI plot](supporting_artifacts/log_fci_dim_vs_runtime_solver_f6b36bde-be4a-4eee-975b-2c5f7e553f5f_plot.png)
-
-Note: plot only contains `attempted` tasks.
-
-![Solver utility capture](supporting_artifacts/solver_f6b36bde-be4a-4eee-975b-2c5f7e553f5f_utility_capture_plot.png)
-
-![Solver PCA plot](supporting_artifacts/PCA_embedding_plot_solver_f6b36bde-be4a-4eee-975b-2c5f7e553f5f.png)
-
-![Solver NNMF plot](supporting_artifacts/NNMF_embedding_plot_solver_f6b36bde-be4a-4eee-975b-2c5f7e553f5f.png)
-
-Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can be labeled as solved or failed-to-solve. A task with a `reference_energy` that was NOT `attempted` is labeled as a failed-to-solve.  White stars indicate Hamiltonians for which we do not have a `reference_energy`.
-
-![SHAP summary plot](supporting_artifacts/shap_summary_plot_solver_f6b36bde-be4a-4eee-975b-2c5f7e553f5f.png)
-
 # ML Feature Analysis
 
 ![NNMF components plot](supporting_artifacts/nnmf_components.png)
 
 Features: ['max_vertex_degree', 'min_vertex_degree', 'mean_vertex_degree', 'std_dev_vertex_degree', 'max_weight', 'min_weight', 'mean_weight', 'std_dev_weight', 'max_edge_order', 'mean_edge_order', 'std_dev_edge_order', 'one_norm', 'log_fci_dim', 'n_elec', 'n_orbs', 'df_gap']
 
-NNMF Component 1: [0.35399743 0.3835676  0.3520002  0.35554304 0.51256815 0.
- 0.         0.04877227 0.91405015 0.93106994 0.90369122 0.48147271
- 0.92382446 0.53848377 0.90084819 0.49628833]
+NNMF Component 1: [0.44176701 0.45449395 0.45163263 0.4206377  0.51199883 0.
+ 0.         0.04944855 0.87023998 0.88722992 0.85986962 0.45957332
+ 0.87154483 0.56686512 0.8574673  0.51617008]
 
-NNMF Component 2: [0.         0.         0.         0.         0.05545497 0.99860891
- 0.5229628  0.40516152 0.06735171 0.01538102 0.08181161 0.
- 0.16970458 0.1141114  0.06725901 0.        ]
+NNMF Component 2: [0.         0.         0.         0.         0.05545233 1.03487444
+ 0.54168445 0.41821312 0.07259491 0.01856936 0.0876162  0.
+ 0.1752886  0.11462803 0.07264437 0.        ]
 
 ![PCA components plot](supporting_artifacts/pca_components.png)
 
 Features: ['max_vertex_degree', 'min_vertex_degree', 'mean_vertex_degree', 'std_dev_vertex_degree', 'max_weight', 'min_weight', 'mean_weight', 'std_dev_weight', 'max_edge_order', 'mean_edge_order', 'std_dev_edge_order', 'one_norm', 'log_fci_dim', 'n_elec', 'n_orbs', 'df_gap']
 
-PCA Component 1: [-0.19606441 -0.19210755 -0.19466848 -0.19785564 -0.16044022  0.36889367
-  0.19151328  0.14329659 -0.33728001 -0.35642778 -0.32990174 -0.24968252
- -0.24098618 -0.08184379 -0.3368266  -0.19589773]
+PCA Component 1: [-0.22922229 -0.21461603 -0.23398401 -0.21923522 -0.16402432  0.39183587
+  0.20302013  0.14659357 -0.3134204  -0.33485059 -0.30553226 -0.22630863
+ -0.2258685  -0.10070305 -0.31226268 -0.20457232]
 
-PCA Component 2: [ 0.19190723  0.13407095  0.18973626  0.19607885  0.00984172  0.68373267
-  0.35862773  0.22441087  0.13916663  0.0865819   0.15316911  0.2317319
- -0.07481991 -0.29008347  0.15152307  0.08636324]
+PCA Component 2: [ 0.22146419  0.13713247  0.22479465  0.21502049  0.02836024  0.66237732
+  0.34970611  0.22348305  0.1309698   0.08010198  0.14460543  0.21623573
+ -0.07605394 -0.30861836  0.14283042  0.10453104]
 
 ![solver similarity: PCA space of area](supporting_artifacts/solver_similarity_in_PCA_space_of_area_summary.png)
 
