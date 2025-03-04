@@ -21,9 +21,9 @@
   </property>
   <layout class="QFormLayout" name="formLayout">
    <item row="0" column="0" colspan="2">
-    <widget class="QTabWidget" name="tabWidget">
+    <widget class="QTabWidget" name="targetWidget_2">
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="usesScrollButtons">
       <bool>true</bool>
@@ -86,9 +86,9 @@
       <widget class="QFrame" name="frame_predictors">
        <property name="geometry">
         <rect>
-         <x>110</x>
+         <x>120</x>
          <y>420</y>
-         <width>251</width>
+         <width>231</width>
          <height>221</height>
         </rect>
        </property>
@@ -120,16 +120,16 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Select Predictors</string>
+         <string>Select Predictors </string>
         </property>
        </widget>
        <widget class="QListWidget" name="predictorList">
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>30</y>
-          <width>231</width>
-          <height>181</height>
+          <y>40</y>
+          <width>211</width>
+          <height>171</height>
          </rect>
         </property>
         <property name="editTriggers">
@@ -149,9 +149,9 @@
       <widget class="QFrame" name="frame_target">
        <property name="geometry">
         <rect>
-         <x>410</x>
+         <x>400</x>
          <y>420</y>
-         <width>251</width>
+         <width>231</width>
          <height>221</height>
         </rect>
        </property>
@@ -172,7 +172,7 @@
          <rect>
           <x>10</x>
           <y>10</y>
-          <width>111</width>
+          <width>131</width>
           <height>16</height>
          </rect>
         </property>
@@ -190,35 +190,17 @@
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>30</y>
-          <width>231</width>
-          <height>181</height>
+          <y>40</y>
+          <width>211</width>
+          <height>171</height>
          </rect>
-        </property>
-        <property name="editTriggers">
-         <set>QAbstractItemView::NoEditTriggers</set>
-        </property>
-        <property name="showDropIndicator" stdset="0">
-         <bool>false</bool>
-        </property>
-        <property name="alternatingRowColors">
-         <bool>true</bool>
-        </property>
-        <property name="selectionMode">
-         <enum>QAbstractItemView::SingleSelection</enum>
-        </property>
-        <property name="selectionBehavior">
-         <enum>QAbstractItemView::SelectItems</enum>
-        </property>
-        <property name="itemAlignment">
-         <set>Qt::AlignLeading</set>
         </property>
        </widget>
       </widget>
       <widget class="QPushButton" name="setPredictorsButton">
        <property name="geometry">
         <rect>
-         <x>160</x>
+         <x>150</x>
          <y>650</y>
          <width>151</width>
          <height>32</height>
@@ -237,7 +219,7 @@
       <widget class="QPushButton" name="setTargetButton">
        <property name="geometry">
         <rect>
-         <x>460</x>
+         <x>440</x>
          <y>650</y>
          <width>151</width>
          <height>32</height>
@@ -256,10 +238,10 @@
       <widget class="QFrame" name="frame">
        <property name="geometry">
         <rect>
-         <x>690</x>
-         <y>440</y>
-         <width>251</width>
-         <height>191</height>
+         <x>710</x>
+         <y>420</y>
+         <width>211</width>
+         <height>221</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -277,7 +259,7 @@
        <widget class="QLabel" name="label">
         <property name="geometry">
          <rect>
-          <x>10</x>
+          <x>20</x>
           <y>10</y>
           <width>58</width>
           <height>16</height>
@@ -298,11 +280,29 @@
          <rect>
           <x>20</x>
           <y>40</y>
-          <width>221</width>
+          <width>171</width>
           <height>141</height>
          </rect>
         </property>
        </widget>
+      </widget>
+      <widget class="QLabel" name="prototypeLabel_DataTab">
+       <property name="geometry">
+        <rect>
+         <x>780</x>
+         <y>10</y>
+         <width>221</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>This is a working prototype</string>
+       </property>
       </widget>
      </widget>
      <widget class="QWidget" name="visualization_tab_2">
@@ -323,7 +323,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>250</y>
+         <y>300</y>
          <width>221</width>
          <height>41</height>
         </rect>
@@ -333,7 +333,7 @@
        <property name="geometry">
         <rect>
          <x>250</x>
-         <y>60</y>
+         <y>110</y>
          <width>661</width>
          <height>471</height>
         </rect>
@@ -368,6 +368,24 @@
         <string>Color code by target</string>
        </property>
       </widget>
+      <widget class="QLabel" name="prototypeLabel_VizTab">
+       <property name="geometry">
+        <rect>
+         <x>780</x>
+         <y>10</y>
+         <width>221</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>This is a working prototype</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="latent_tab_3">
       <attribute name="title">
@@ -376,18 +394,18 @@
       <widget class="QGraphicsView" name="latentPlot">
        <property name="geometry">
         <rect>
-         <x>280</x>
+         <x>300</x>
          <y>40</y>
-         <width>681</width>
-         <height>521</height>
+         <width>511</width>
+         <height>391</height>
         </rect>
        </property>
       </widget>
       <widget class="QLabel" name="latentLabel">
        <property name="geometry">
         <rect>
-         <x>530</x>
-         <y>20</y>
+         <x>480</x>
+         <y>10</y>
          <width>141</width>
          <height>21</height>
         </rect>
@@ -585,10 +603,10 @@
       <widget class="QTextEdit" name="textEdit">
        <property name="geometry">
         <rect>
-         <x>670</x>
-         <y>580</y>
-         <width>291</width>
-         <height>111</height>
+         <x>830</x>
+         <y>80</y>
+         <width>161</width>
+         <height>241</height>
         </rect>
        </property>
        <property name="html">
@@ -840,7 +858,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <widget class="QFrame" name="frame_6">
        <property name="geometry">
         <rect>
-         <x>290</x>
+         <x>50</x>
          <y>580</y>
          <width>161</width>
          <height>111</height>
@@ -901,6 +919,52 @@ li.checked::marker { content: &quot;\2612&quot;; }
         </property>
        </widget>
       </widget>
+      <widget class="QLabel" name="prototypeLabel_LatentTab">
+       <property name="geometry">
+        <rect>
+         <x>780</x>
+         <y>10</y>
+         <width>221</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>This is a working prototype</string>
+       </property>
+      </widget>
+      <widget class="QGraphicsView" name="latentCoeffPlot">
+       <property name="geometry">
+        <rect>
+         <x>300</x>
+         <y>480</y>
+         <width>651</width>
+         <height>201</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="latentCoeffLabel">
+       <property name="geometry">
+        <rect>
+         <x>430</x>
+         <y>450</y>
+         <width>331</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>        Latent Axis Coefficients (for PCA or NNMF)</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="ML_tab_4">
       <attribute name="title">
@@ -933,61 +997,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <property name="text">
         <string>ML Decision Boundary Confidence</string>
        </property>
-      </widget>
-      <widget class="QFrame" name="MLMetric_frame">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>620</y>
-         <width>261</width>
-         <height>81</height>
-        </rect>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-       <widget class="QLabel" name="MLMetric_framelabel">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>251</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Metric Feature Manipulation (incomplete)</string>
-        </property>
-       </widget>
-       <widget class="QSlider" name="horizontalSlider">
-        <property name="geometry">
-         <rect>
-          <x>140</x>
-          <y>40</y>
-          <width>111</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_2">
-        <property name="geometry">
-         <rect>
-          <x>7</x>
-          <y>40</y>
-          <width>71</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>log fci_size</string>
-        </property>
-       </widget>
       </widget>
       <widget class="QFrame" name="MLframe">
        <property name="geometry">
@@ -1200,11 +1209,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <string>Original HighDim Data</string>
          </property>
         </item>
-        <item>
-         <property name="text">
-          <string>Latent Space Data</string>
-         </property>
-        </item>
        </widget>
       </widget>
       <widget class="QTextEdit" name="MLResults">
@@ -1225,6 +1229,88 @@ li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;ML Results&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="prototypeLabel_MLTab">
+       <property name="geometry">
+        <rect>
+         <x>780</x>
+         <y>10</y>
+         <width>221</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>This is a working prototype</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Feature Importance</string>
+      </attribute>
+      <widget class="QGraphicsView" name="FeatureImpPlot">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>60</y>
+         <width>681</width>
+         <height>511</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>430</x>
+         <y>20</y>
+         <width>301</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>  Feature Importance through SHAP</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="shapPlotButton">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>290</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Compute SHAP</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="prototypeLabel_DataTab_2">
+       <property name="geometry">
+        <rect>
+         <x>780</x>
+         <y>10</y>
+         <width>221</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>This is a working prototype</string>
        </property>
       </widget>
      </widget>
@@ -1279,6 +1365,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
        </property>
       </widget>
       <widget class="QPushButton" name="SaveChkdPtsBtn">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>540</x>
@@ -1339,6 +1428,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <enum>QFrame::Raised</enum>
        </property>
        <widget class="QCheckBox" name="uncertainty_checkBox">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -1386,6 +1478,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
         </property>
        </widget>
        <widget class="QPushButton" name="selectStart_btn">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>32</x>
@@ -1399,6 +1494,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
         </property>
        </widget>
        <widget class="QPushButton" name="selectEnd_btn">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>32</x>
@@ -1412,6 +1510,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
         </property>
        </widget>
        <widget class="QPushButton" name="genPath_btn">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>29</x>
@@ -1425,6 +1526,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
         </property>
        </widget>
        <widget class="QPushButton" name="clearPath_btn">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>29</x>
@@ -1438,6 +1542,24 @@ li.checked::marker { content: &quot;\2612&quot;; }
         </property>
        </widget>
       </widget>
+      <widget class="QLabel" name="prototypeLabel_ActiveLearningTab">
+       <property name="geometry">
+        <rect>
+         <x>780</x>
+         <y>10</y>
+         <width>221</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>This is a working prototype</string>
+       </property>
+      </widget>
      </widget>
     </widget>
    </item>
@@ -1445,7 +1567,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
  </widget>
  <tabstops>
   <tabstop>load_dataButton</tabstop>
-  <tabstop>tabWidget</tabstop>
+  <tabstop>targetWidget_2</tabstop>
   <tabstop>loadData_lineEdit</tabstop>
  </tabstops>
  <resources/>
