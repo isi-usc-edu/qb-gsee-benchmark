@@ -1,7 +1,7 @@
 import sys
 
 from PyQt5 import uic, QtWidgets, QtCore, QtGui
-from PyQt5.QtWidgets import QListWidget, QListWidgetItem, QComboBox, QGraphicsScene, QVBoxLayout, QTableWidget, QTableWidgetItem
+from PyQt5.QtWidgets import QWidget, QListWidget, QListWidgetItem, QRadioButton, QCheckBox, QButtonGroup, QComboBox, QGraphicsScene, QVBoxLayout, QTableWidget, QTableWidgetItem
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -9,11 +9,14 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationTool
 from matplotlib.figure import Figure
 
 import pandas as pd
-from PandasModel import PandasModel
 import numpy as np
 import pickle
+from PandasModel import PandasModel
 
 import MLFunctionsForUI
+import shap
+from PIL import Image 
+
 mpl.use("Qt5Agg")
 
 # class for figures
@@ -28,6 +31,46 @@ class MplCanvas(FigureCanvasQTAgg):
         self.axes = fig.add_subplot(111)
         super(MplCanvas, self).__init__(fig)
 
+    def drawSHAPPlot(self, shap_values, columns, target_name):
+
+        self.axes.clear()
+        shap.summary_plot(
+            shap_values,
+            feature_names=columns, 
+            plot_type="bar",
+            show=False, # do not show plot to screen for now.
+            max_display=len(columns)
+        )
+        #save to file
+        temp_file_name = 'shap_plot.png' 
+        plt.savefig(temp_file_name, bbox_inches = 'tight', dpi=300)
+
+        #re-open to display on the image
+        img = Image.open(temp_file_name)
+        self.axes.imshow(img)
+        self.axes.set_title('Feature Importance via SHAP: \n' + 'For Prediction of '+ target_name)
+        self.axes.axis("off")
+        self.draw_idle()
+        #plt.show()
+
+class ExclusiveListWidget(QtWidgets.QListWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.itemChanged.connect(self.on_item_changed)
+
+    def populate_list(self, features):
+        for item in features:
+            list_item = QtWidgets.QListWidgetItem(item)
+            list_item.setFlags(list_item.flags() | QtCore.Qt.ItemIsUserCheckable)
+            list_item.setCheckState(QtCore.Qt.Unchecked)
+            self.addItem(list_item)
+
+    def on_item_changed(self, changed_item):
+        if changed_item.checkState() == QtCore.Qt.Checked:
+            for i in range(self.count()):
+                item = self.item(i)
+                if item is not changed_item:
+                    item.setCheckState(QtCore.Qt.Unchecked)
 
 
 class UIMainWindow(object):
@@ -52,17 +95,19 @@ class UIMainWindow(object):
         
         #viualization tab
         self.canvas2d = MplCanvas(self, width=5, height=4, dpi=100)
-        
-        
-        self.canvasLatent = MplCanvas(self, width=6, height=5, dpi=100) #figure in Latent Tab
-        self.canvasML = MplCanvas(self, width=6, height=5, dpi=100) #figure in ML tab
-        
 
+        #latent tab
+        self.canvasLatent = MplCanvas(self, dpi=100) #figure in Latent Tab
+        self.canvasLatentCoeff = MplCanvas(self, width = 6, height = 9, dpi=100) #figure in Latent Tab for latent axes visualization
         
-        
-
+        #ML tab
+        self.canvasML = MplCanvas(self, width=6, height=6, dpi=100) #figure in ML tab
         self.cbML = [] #colorbar in ML tab
 
+        #Feature Importance tab
+        self.canvasFeatureImp = MplCanvas(self, width=6, height=5, dpi=100) #figure in ML tab
+
+        #AL tab
         self.canvasAL = MplCanvas(self, width=6, height=5, dpi=100) # Figure in Active Learning (AL) plot
         self.cbAL = [] #colorbar
         
@@ -117,6 +162,20 @@ class UIMainWindow(object):
         sceneLatent.addWidget(self.canvasLatent)
         self.sceneLatent = sceneLatent
         self.ui.latentPlot.setScene(self.sceneLatent)
+        # Latent Coefficients plot
+        self.canvasLatentCoeff.axes.grid(True)
+        sceneLatentCoeff = QtWidgets.QGraphicsScene()
+        sceneLatentCoeff.addWidget(self.canvasLatentCoeff)
+        self.sceneLatentCoeff = sceneLatentCoeff
+        self.ui.latentCoeffPlot.setScene(self.sceneLatentCoeff)
+
+        #Feature Importance Tab
+        self.canvasFeatureImp.axes.grid(True)
+        sceneFeatureImp = QtWidgets.QGraphicsScene()
+        sceneFeatureImp.addWidget(self.canvasFeatureImp)
+        self.sceneFeatureImp = sceneFeatureImp
+        self.ui.FeatureImpPlot.setScene(self.sceneFeatureImp)
+
 
         # ML tab
         self.canvasML.axes.grid(True)
@@ -171,7 +230,11 @@ class UIMainWindow(object):
         self.ui.MLModelSaveButton.clicked.connect(self.MLModelSaveButtonClicked)
         self.ui.MLModelUploadButton.clicked.connect(self.MLModelUploadButtonClicked)
 
-        # Tab 5: Active Learning Tab
+
+        #Tab 5: Feature Importance Tab
+        self.ui.shapPlotButton.clicked.connect(self.shapPlotButtonClicked)
+
+        # Tab 6: Active Learning Tab
         self.ui.HighlightChkdPtsBtn.clicked.connect(self.HighlightChkdPtsBtnClicked)
         self.ui.selectStart_btn.clicked.connect(self.selectStart_btn_Clicked)
         self.ui.selectEnd_btn.clicked.connect(self.selectEnd_btn_Clicked)
@@ -229,21 +292,29 @@ class UIMainWindow(object):
             
             self.ui.predictorList.addItem(list_item)
      
+
      
     def setTargetList(self, features):
         '''
         This method takes the "features" and puts checkboxes next to them so that the user can click on which they would like 
         to use as the target.
+        Adding a QButtonGroup to manage exclusivity among the checkboxes
         '''
-         
-        for count, item in enumerate(features):
-            list_item = QListWidgetItem()
-            list_item.setText(item)
-            
-            list_item.setFlags(list_item.flags() | QtCore.Qt.ItemIsUserCheckable)
-            list_item.setCheckState(QtCore.Qt.Unchecked)
-            
-            self.ui.targetList.addItem(list_item)
+
+        geometry = self.ui.targetList.geometry()
+
+        # Remove the old targetList from the UI to avoid conflicts
+        self.ui.targetList.setParent(None)
+
+        # Create and assign the new ExclusiveListWidget inside the frame
+        self.ui.targetList = ExclusiveListWidget(self.ui.frame_target)
+        self.ui.targetList.setGeometry(geometry)
+        self.ui.targetList.show()  # Ensure it is visible
+
+
+        # Populate the list with items
+        self.ui.targetList.populate_list(features)
+        
 
 
     #  filling in other fields once the file is loaded
@@ -272,6 +343,18 @@ class UIMainWindow(object):
         self.setPlotYaxisDropdown(df.columns)
         #plot the first feature against the second as default
         self.dataVisualizationPlot()
+
+
+        #also load the problem instance short name (for visualization in the hover feature)
+        #first we need to check if there is a variable with that column
+        col_name = 'problem_instance_short_name'
+        if col_name in df.columns:
+            self.problem_instance_short_name = df[col_name]
+        else:
+            string_to_repeat = "No short name present"
+            num_repetitions = len(df)
+            repeated_list = [string_to_repeat] * num_repetitions
+            self.problem_instance_short_name = pd.Series(repeated_list)
 
 
     def setPredictorsButtonClicked(self):
@@ -303,7 +386,7 @@ class UIMainWindow(object):
 
         '''
         This method sets the target after they have been chosen by the user.
-        It does not have error correction to make sure that only one target is always selected.
+        Adding a 
         '''
 
         checked_items = []
@@ -418,9 +501,7 @@ class UIMainWindow(object):
         self.canvasLatent.axes.cla()
         self.canvasLatent.draw()
         
-        #fig.canvas = self.canvasLatent
-        #ax = self.canvasLatent.axes
-        #colors = self.Y
+      
         if self.ui.colorcode_actualLabels_checkbox.checkState()  == QtCore.Qt.Checked:
             cmap = plt.cm.bwr_r
             norm = plt.Normalize(0,1)
@@ -438,7 +519,7 @@ class UIMainWindow(object):
         else:
             legend1 = self.canvasLatent.axes.legend(*scatter_obj.legend_elements(),loc="upper right", title = 'Cluster id')
 
-        #self.canvasLatent.axes.scatter = scatter_obj
+        
         dim_reduction_name = self.latent_name
         self.canvasLatent.axes.set_title(dim_reduction_name)
         self.canvasLatent.axes.set_xlabel(dim_reduction_name + '1')
@@ -447,12 +528,23 @@ class UIMainWindow(object):
         annotation = MLFunctionsForUI.annotate_axis(self.canvasLatent.axes)
         annotation.set_visible(False)
         
-        self.canvasLatent.mpl_connect('motion_notify_event', lambda event: MLFunctionsForUI.motion_hover(event, self.canvasLatent, self.canvasLatent.axes, annotation, scatter_obj,cmap,norm,colors,self.X,self.clusterLabels))
-
+        self.canvasLatent.mpl_connect('motion_notify_event', lambda event: MLFunctionsForUI.motion_hover(event, self.canvasLatent, self.canvasLatent.axes, annotation, scatter_obj,cmap,norm,colors,self.X,self.clusterLabels, self.problem_instance_short_name))
         self.canvasLatent.draw()
         
-
+        #now draw the latent axes coefficients plot
+        self.canvasLatentCoeff.axes.cla()
+        self.canvasLatentCoeff.draw()
         
+        self.canvasLatentCoeff.axes.set_title(dim_reduction_name + ' Components')
+        self.canvasLatentCoeff.axes.plot(self.latent_axes[0,:],'r-o')
+        self.canvasLatentCoeff.axes.plot(self.latent_axes[1,:],'g-o')
+        self.canvasLatentCoeff.axes.legend(['Component 1', 'Component 2'])
+        self.canvasLatentCoeff.axes.set_xticks(np.arange(0,len(self.X.columns)))
+        self.canvasLatentCoeff.axes.xaxis.set_ticklabels(self.X.columns.to_list(),rotation=30,ha = 'right')
+        #self.canvasLatentCoeff.figure.tight_layout()
+        self.canvasLatentCoeff.draw()
+     
+
     def latent_comboBoxChanged(self):
         '''
         This method is called when the user changes the combo Box for choosing the latent space model.
@@ -468,8 +560,8 @@ class UIMainWindow(object):
     def ColorCodeLatentPlotByLabels(self):
         colors = self.Y.tolist()
         
-        self.ui.colorcode_actualLabels_checkbox.setCheckState(QtCore.Qt.CheckState.Checked) #uncheck the actual labels
-        self.ui.colorcode_clusterLabels_checkbox.setCheckState(QtCore.Qt.CheckState.Unchecked)  #check the cluster labels
+        self.ui.colorcode_actualLabels_checkbox.setCheckState(QtCore.Qt.CheckState.Checked) #check the actual labels
+        self.ui.colorcode_clusterLabels_checkbox.setCheckState(QtCore.Qt.CheckState.Unchecked)  #uncheck the cluster labels
         self.latentPlotVisualization(colors)
 
     def ColorCodeLatentPlotByClusters(self):
@@ -492,11 +584,11 @@ class UIMainWindow(object):
         self.latent_name = self.ui.latent_comboBox.currentText() #get model name that user set
 
         if self.latent_name == 'Principal Component Analysis (PCA)':
-            latent_sc, latent_model, latent_axes,proj_data = MLFunctionsForUI.proj_pca(self.X)
+            latent_sc, latent_model, latent_axes, proj_data = MLFunctionsForUI.proj_pca(self.X)
             
         
         elif  self.latent_name == 'Non-Negative Matrix Factorization (NNMF)':
-            latent_sc, latent_model, latent_axes,proj_data = MLFunctionsForUI.proj_nnmf(self.X)
+            latent_sc, latent_model, latent_axes, proj_data = MLFunctionsForUI.proj_nnmf(self.X)
 
 
         else: #UMAP
@@ -617,7 +709,7 @@ class UIMainWindow(object):
         
         if X_is_good and Y_is_good:
             acc_str  = ' '
-            self.MLModel, self.MLModel_accuracy = MLFunctionsForUI.trainML(self, self.X,self.Y,self.ML_model_name, self.HypOptCV)
+            self.MLscaler, self.MLModel, self.MLModel_accuracy, self.X_train = MLFunctionsForUI.trainML(self, self.X,self.Y,self.ML_model_name, self.HypOptCV)
             acc_str = ' {:0.2f}%, ' ' {:0.2f}%.'.format(self.MLModel_accuracy[0]*100, self.MLModel_accuracy[1]*100)
             
 
@@ -648,8 +740,9 @@ class UIMainWindow(object):
                 self.latentPlotButtonClicked()
             
             #compute the uncertainty values for point in the 2D latent space.
-            XX, YY, Z0, novelX, prob  = MLFunctionsForUI.create_uncertainity_plot_values(self.ML_model_name, self.MLModel, self.latent_model, self.proj_data, self.train_on_reduceddim_data, self.latent_scaler, self.svm_scaler)
+            XX, YY, Z0, novelX_2D, novelX, prob  = MLFunctionsForUI.create_uncertainity_plot_values(self.ML_model_name, self.MLModel, self.latent_model, self.proj_data, self.latent_scaler, self.MLscaler, self.predictors)
             self.prob = prob
+            self.novelX_2D = pd.DataFrame(novelX_2D,columns = ['proj 1','proj 2'])
 
             #make a dataframe for novelX with uncertainty
             if self.train_on_reduceddim_data == 0:
@@ -663,22 +756,20 @@ class UIMainWindow(object):
 
             self.MLVisualizationPlot(XX, YY, Z0)
             #print solvability ratio
-            conf_thresh = 0.75
+            conf_thresh = 0.5
             result =   np.where(self.prob[:,1] > conf_thresh)
             ratio_str = str(len(result[0])/len(self.prob[:,1]))
-            self.ui.MLResults.setText('Solvability ratio in embedding [Number of point solvable >= 75% / total number of points] with model: ' + ratio_str)
+            self.ui.MLResults.setText('Solvability ratio in embedding [Number of point solvable >= 50% / total number of points] with model: ' + ratio_str)
 
             # copy the visualization onto the Active Learning Tab plot
             self.ALVisualizationPlot(XX, YY, Z0)
+
 
         else:
             self.ui.MLResults.setText('Please click on the Train button with the desired ML model first')
             self.ui.MLResults.update()
 
         
-
-
-    
     def MLVisualizationPlot(self, XX, YY, Z0):
         '''
         Plot the train data and the uncertainty values in the 2D latent space with 2D values XX, YY.
@@ -690,13 +781,13 @@ class UIMainWindow(object):
         cmap = plt.cm.bwr_r
         
         norm = plt.Normalize(0,1)
-        norm = plt.Normalize(np.min(colors),np.max(colors)) #normalized according to the probabilities in the decision space
+        #norm = plt.Normalize(np.min(colors),np.max(colors)) #normalized according to the probabilities in the decision space
         x=XX.flatten()
-        np.append(x,self.proj_data[:,0])
+        x = np.append(x,self.proj_data[:,0])
         y=YY.flatten()
-        np.append(x,self.proj_data[:,1])
+        y = np.append(y,self.proj_data[:,1])
         
-        np.append(colors, self.data[self.target])
+        colors = np.append(colors, self.data[self.target])
         
             
         scatter_obj = MLFunctionsForUI.create_scatter_obj(x=x,y=y, colors=colors, cmap=cmap, norm=norm, ax=self.canvasML.axes)
@@ -717,10 +808,10 @@ class UIMainWindow(object):
             self.cbML.remove()
             self.canvasML.draw()
             self.cbML = self.canvasML.figure.colorbar(scatter_obj)
-            self.cbML.ax.set_ylabel('Probability of CCSD = True',rotation=270)
+            self.cbML.ax.set_ylabel(['Probability of solver = True'],rotation=270)
         else: #first time drawing a colorbar
             self.cbML = self.canvasML.figure.colorbar(scatter_obj)
-            self.cbML.ax.set_ylabel('Probability of CCSD = True',rotation=270,x=1.25)
+            self.cbML.ax.set_ylabel('Probability of solver = True',rotation=270,x=1.25)
       
         if self.HypOptCV == 0:
             self.canvasML.axes.set_title(self.target + ' classification learned \n' + self.ML_model_name + '.  Visualized in ' + self.latent_name)
@@ -731,7 +822,20 @@ class UIMainWindow(object):
         annotation.set_visible(False)
         self.canvasML.draw()
 
-        self.canvasML.mpl_connect('motion_notify_event', lambda event: MLFunctionsForUI.motion_hover(event, self.canvasML, self.canvasML.axes, annotation, scatter_obj,cmap,norm,colors,self.novelX.iloc[:,:-1],[]))
+        #problem_instance_short_names only exist for training data.  We do not have them for the novel, generated molecules
+        #So, we need to add "no short name" to the novel molecules
+        string_to_repeat = "No short name"
+        num_repetitions = XX.size
+        repeated_list = [string_to_repeat] * num_repetitions
+        self.novel_problem_instance_short_name = pd.Series(repeated_list)
+        self.novel_problem_instance_short_name = pd.concat([self.novel_problem_instance_short_name,self.problem_instance_short_name], ignore_index = True)
+
+
+        #temporarily add the training data to the points to be displayed in the annotation box during hovering
+        highDimPoints = self.novelX.iloc[:,:-1] #not sending the last column which is the probability / uncertainty as this is already sent with the 'colors' variable
+        highDimPoints = pd.concat([highDimPoints, self.X], ignore_index = True)
+        #since the training data is appended at the end of the novel data, we will add the traning data's short names to the novel data's short names
+        self.canvasML.mpl_connect('motion_notify_event', lambda event: MLFunctionsForUI.motion_hover(event, self.canvasML, self.canvasML.axes, annotation, scatter_obj,cmap,norm,colors,highDimPoints,[], self.novel_problem_instance_short_name))
         
         self.canvasML.draw()
         self.canvasML.axes.set_title(self.target + ' Classification Learned by ' + self.ML_model_name + ' \n visualized in latent space: ' + self.latent_name)
@@ -796,9 +900,9 @@ class UIMainWindow(object):
 
         print("File uploaded")
 
-        #right now, all the saved models are cross-validated models, so let's save the first estimator
-        self.ML_model_name = model_saved[0]
-        self.MLModel = model_saved[1]
+        
+        self.ML_model_name = model_saved[0]  #model_name
+        self.MLModel = model_saved[1] #model
         #change in the UI menu
         if self.ML_model_name == 'Random Forest':
             self.ui.MLOptions.setCurrentIndex(0)
@@ -820,9 +924,40 @@ class UIMainWindow(object):
         self.ui.MLResults.setText('Uploaded Trained Model: ' +  fn + " with accuracy = " + str(self.MLModel_accuracy) + " on target: " + self.target)
         
         
-      #############################  
+        #############################  
 
+
+    ####### Feature Importance Tab ###########
+
+    def shapPlotButtonClicked(self):
+
+        self.canvasFeatureImp.axes.cla()
+        self.canvasFeatureImp.axes.set_title('Feature Importance via SHAP: \n' + 'For Prediction of '+ self.target)
+       
+        #compute SHAP values for current prediction and plot.
+        self.explainer, self.shap_values = MLFunctionsForUI.computeSHAPValues(self.ML_model_name, self.HypOptCV, self.MLModel, self.X_train, self.X.columns)
+
+        '''
+        shap.summary_plot(
+            self.shap_values,
+            feature_names=self.X.columns, 
+            plot_type="bar",
+            show=False, # do not show plot to screen for now.
+            max_display=len(self.X.columns)
+        )
+        '''
         
+        
+        self.canvasFeatureImp.drawSHAPPlot(self.shap_values, self.X.columns, self.target)
+        self.canvasFeatureImp.draw()
+
+        #self.canvasFeatureImp.axes.imshow(self.fig2img(self.canvasFeatureImp.figure)) # Add the SHAP plot as an image to the Matplotlib axes
+        #self.canvasFeatureImp.axes.axis('off') # Turn off axes for cleaner look
+        #self.canvasFeatureImp.axes.draw()
+
+
+
+
     #########  Active Learning (AL) Tab #############
 
     def ALVisualizationPlot(self, XX, YY, Z0):
@@ -850,10 +985,10 @@ class UIMainWindow(object):
             self.cbAL.remove()
             self.canvasAL.draw()
             self.cbAL = self.canvasAL.figure.colorbar(scatter_obj)
-            self.cbAL.ax.set_ylabel('Probability of CCSD = True',rotation=270)
+            self.cbAL.ax.set_ylabel('Probability of solver = True',rotation=270)
         else: #first time drawing a colorbar
             self.cbAL = self.canvasAL.figure.colorbar(scatter_obj)
-            self.cbAL.ax.set_ylabel('Probability of CCSD = True',rotation=270,x=1.25)
+            self.cbAL.ax.set_ylabel('Probability of solver = True',rotation=270,x=1.25)
       
         if self.HypOptCV == 0:
             self.canvasAL.axes.set_title(self.target + ' classification learned \n' + self.ML_model_name + '.  Visualized in ' + self.latent_name)
@@ -864,7 +999,7 @@ class UIMainWindow(object):
         annotation.set_visible(False)
         self.canvasAL.draw()
 
-        self.canvasAL.mpl_connect('motion_notify_event', lambda event: MLFunctionsForUI.motion_hover(event, self.canvasAL, self.canvasAL.axes, annotation, scatter_obj,cmap,norm,colors,self.novelX.iloc[:,:-1],[]))
+        self.canvasAL.mpl_connect('motion_notify_event', lambda event: MLFunctionsForUI.motion_hover(event, self.canvasAL, self.canvasAL.axes, annotation, scatter_obj,cmap,norm,colors,self.novelX.iloc[:,:-1],[], self.novel_problem_instance_short_name))
         self.canvasAL.draw()
         self.canvasAL.axes.set_title(self.target +' Classification Learned by ' + self.ML_model_name + ' \n visualized in latent space: ' + self.latent_name)
 
@@ -876,13 +1011,13 @@ class UIMainWindow(object):
         This method allows the user to check on points in the QueryTable and see them plotted on the 
         Active Learning plot's 2D plot.
         '''
-        #highlight with an 'x' on the checked buttonns from the table
+        #highlight with an 'x' on the checked buttons from the table
 
         #1. first get the checked points
         points = self.getQueryTableCheckedPoints(self.ui.queryTable)
 
         #2. transform into 2D
-        points2D = MLFunctionsForUI.transform_points_using_latent_space(points, self.latent_name, self.latent_model)
+        points2D = MLFunctionsForUI.transform_points_using_latent_space(points, self.latent_name, self.latent_model, self.latent_scaler)
 
         #3. plot an 'x' on these points in the AL plot.
         self.canvasAL.axes.scatter(x=points2D[:,0], y=points2D[:,1], c='black',s=50, marker = '*') #just so this is bigger on top of the last plot command
@@ -983,7 +1118,7 @@ class UIMainWindow(object):
         Generate path from selected start pt to selected end point
         '''
         
-        self.pathPoints, self.arrowsOnPlot = MLFunctionsForUI.compute_amenability_vectors(self.X, self.Y, self.startPt, self.endPt, self.latent_model,self.canvasAL, self.novelX, 'AL')
+        self.pathPoints, self.arrowsOnPlot = MLFunctionsForUI.compute_amenability_vectors(self.startPt, self.endPt, self.canvasAL, self.novelX_2D, self.prob[:,1], 'AL')
 
 
     def clearPath_btn_Clicked(self):

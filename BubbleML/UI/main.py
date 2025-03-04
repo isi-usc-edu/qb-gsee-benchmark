@@ -2,21 +2,17 @@
 import sys
 import os
 import random
-random.seed(0)
+random.seed(6)
 
 # conda environment is UIenv
-from PyQt5 import uic, QtWidgets, QtCore, QtGui
-from PyQt5.QtWidgets import QListWidget, QListWidgetItem, QComboBox, QGraphicsScene
+from PyQt5 import QtWidgets
 
-
+from UIMainWindow import * 
 '''
 UIMainwindow implements all the widget functions
 '''
 
-from UIMainWindow import *
-
-
-os.chdir('/Users/rnsundareswara/Desktop/QBG/Code/QBG_HRL/ChemicalFrontier/UI/MLTool/user-interface-for-machine-learning')
+#os.chdir('/Users/rnsundareswara/Desktop/QBG/Code/QBG_HRL/ChemicalFrontier/UI/MLTool/qb-gsee-benchmark/qb-gsee-benchmark/BubbleML/UI')
 
 if __name__ == "__main__":
         
