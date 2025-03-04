@@ -17,7 +17,7 @@ from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import classification_report, confusion_matrix 
 from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
-
+import shap
 
 #helper functions for UI
 def create_scatter_obj(x, y, colors, cmap, norm, ax):
@@ -56,7 +56,7 @@ def annotate_axis(ax):
 
 
 
-def motion_hover(event,canvas, ax,annotation,scatter,cmap,norm,colors,highDimPoints, clusterLabels):
+def motion_hover(event,canvas, ax,annotation,scatter,cmap,norm,colors, highDimPoints, clusterLabels, short_names):
 
     '''
     Implments the ability to hover over a 2D point in axis ax and have the point's original dimension
@@ -80,8 +80,13 @@ def motion_hover(event,canvas, ax,annotation,scatter,cmap,norm,colors,highDimPoi
             data_point_location = scatter.get_offsets()[annotation_index['ind'][0]]
             annotation.xy = data_point_location
 
+            #high dimensional point
             pt = highDimPoints.iloc[index_of_hover_pt,:]
         
+            #problem instance short name
+            pt['short_name'] = short_names[index_of_hover_pt]
+
+            #cluser label or probability of prediction label
             if clusterLabels == []:
                 txt2display = pt.to_string() + '\n' + "prob = " + str(colors[annotation_index['ind'][0]])
             else:
@@ -138,7 +143,7 @@ def proj_nnmf(X):
 
     scaler_minmax = MinMaxScaler()
     X_scaled = scaler_minmax.fit_transform(X)
-    nnmf = NMF(n_components=2, init='random', random_state=42,max_iter = 500)
+    nnmf = NMF(n_components=2, init='random', random_state=6,max_iter = 500)
     proj_data = nnmf.fit_transform(X_scaled)
     nnmf_axes = nnmf.components_
 
@@ -150,7 +155,7 @@ def proj_nnmf(X):
 def perform_umap(X, ui_n_neigh, ui_min_dist):
     '''
     Use Uniform Manifold Approximation Projection as the latent space to project X 
-    parameters are input in the UI: number of nrighbors in the high-dimensional space (ui_n_neigh)
+    parameters are input in the UI: number of neighbors in the high-dimensional space (ui_n_neigh)
     and minimum distance in the low dimensional space (ui_min_dist).
 
     Returns the comptued umap model (reducer2D), umap_axes, and the projected data ("reduced_data")
@@ -162,7 +167,7 @@ def perform_umap(X, ui_n_neigh, ui_min_dist):
     sc = StandardScaler() 
     X_sc = sc.fit_transform(X)
 
-    reducer2D = umap.UMAP(random_state=42, n_components=2,n_neighbors=n_neighbors,min_dist = min_dist)
+    reducer2D = umap.UMAP(random_state=6, n_components=2,n_neighbors=n_neighbors,min_dist = min_dist)
     reducer2D.fit(X_sc)
     reduced_data = reducer2D.transform(X_sc)
 
@@ -171,15 +176,21 @@ def perform_umap(X, ui_n_neigh, ui_min_dist):
     return sc, reducer2D, umap_axes, reduced_data
 
 
-def transform_points_using_latent_space(X, latent_space_name, latent_space):
+def transform_points_using_latent_space(X, latent_space_name, latent_space, latent_scaler):
 
     '''
-    Use the computed latent_space with latent_space_name to project X
+    Use the computed latent_space to project X
     Returns the projected points (points2D) in the latent space.
     '''
 
     print("Projecting points with " ,latent_space_name)
-    points2D = latent_space.transform(X)      
+    
+   
+    #scale according to latent space scaler
+    X_scaled = latent_scaler.transform(X)
+
+    #next, transform
+    points2D = latent_space.transform(X_scaled)      
 
     return points2D
 
@@ -297,7 +308,7 @@ def trainML(ui_self, X,Y,model_name, hypopt_cv):
         }
     else:
         from sklearn.svm import SVC
-        model = SVC(random_state=42) 
+        model = SVC(random_state=6) 
         model.probability = True
     
         param_grid = {'C': [0.001, 0.1, 0.5, 1, 10, 50, 100],  
@@ -331,10 +342,10 @@ def trainML(ui_self, X,Y,model_name, hypopt_cv):
             df = pd.DataFrame(data, columns=['Og Feature 1','Og Feature 2', 'Proj 1','Proj 2', 'Labels', 'Predictions at 50%', 'Prob Class 0', 'Prob Class 1' ])             
             df.to_csv('probs.csv')
     
-    return sc, model, accuracy
+    return sc, model, accuracy, X_train
 
 
-def create_uncertainity_plot_values(learned_model_name, learned_model, latent_model, proj_data, latent_scaler, ml_scaler):
+def create_uncertainity_plot_values(learned_model_name, learned_model, latent_model, proj_data, latent_scaler, ml_scaler, predictor_names):
     '''
     This function used the ML nodel ("learned model" with name "learned_model_name") to predict the class with uncertainity for
     every point for the projected data ("proj_data") of the latent space ("latent_model" with name "latent_axes_name") with axes "latent_axes".
@@ -366,6 +377,7 @@ def create_uncertainity_plot_values(learned_model_name, learned_model, latent_mo
    
 
     #standardize data per ml_scaler
+    orig_dim_data = pd.DataFrame(orig_dim_data, columns = predictor_names)
     orig_dim_data_for_pred = ml_scaler.transform(orig_dim_data)   
     #same as above (verification)
     #orig_dim_data_for_pred = (orig_dim_data-scaler.mean_)/np.sqrt(scaler.var_)  
@@ -378,6 +390,35 @@ def create_uncertainity_plot_values(learned_model_name, learned_model, latent_mo
     return XX, YY, Z0, newX, orig_dim_data, prob
 
 
+def computeSHAPValues(ML_model_name, hypopt, MLModel, X_data, predictors):
+
+    #compute SHAP values for the associated predictor
+
+    if ML_model_name == 'Random Forest':
+        if hypopt == 1:
+            explainer = shap.TreeExplainer(
+            model = MLModel.best_estimator_, # best estimator from the cross-validated model
+            data = X_data, # X_scaled an np.ndarray
+            feature_names = predictors
+        )
+        else:
+            explainer = shap.TreeExplainer(
+            model = MLModel,
+            data = X_data, # X_scaled an np.ndarray
+            feature_names = predictors,
+            check_additivity=False
+        )
+        shap_values = explainer.shap_values(X_data,check_additivity=False)
+    else:
+        explainer = shap.KernelExplainer(
+                model = MLModel.predict_proba, # a function.
+                data = X_data, # X_scaled an np.ndarray
+                feature_names = predictors
+            )
+        shap_values = explainer.shap_values(X_data, nsamples=500)
+        
+    
+    return explainer, shap_values
 
 
 def getNoiseVec(v):
