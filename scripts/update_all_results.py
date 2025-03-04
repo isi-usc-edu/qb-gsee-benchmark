@@ -19,6 +19,7 @@ import os
 import logging
 import argparse
 import sys
+import shutil
 
 from qb_gsee_benchmark.benchmark_data import BenchmarkData
 from qb_gsee_benchmark.standard_report import StandardReport 
@@ -105,6 +106,13 @@ def main(args: argparse.Namespace) -> None:
             benchmark_data=benchmark_data,
             standard_report_output_directory="../standard_report"
         )
+        # copy `data_for_BubbleML.csv` to BubbleML/UI folder
+        # TODO: remove this block whenever BubbleML is integrated with /src.
+        try:
+            shutil.copy2("ml_artifacts/data_for_BubbleML.csv", "../BubbleML/UI/")
+        except Exception as e:
+            print(f"Error: {e}")
+            print(f"Attempted to copy file with relative paths.  Maybe you are running this script from a different working directory.")
     
     if args.temp_results:
         temp_results_dir = "temp_results"

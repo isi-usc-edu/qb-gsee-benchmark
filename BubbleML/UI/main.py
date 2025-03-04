@@ -1,10 +1,28 @@
+#!/usr/bin/env python3
+
+# Copyright 2025  HRL Laboratories, LLC.
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+
+# http://www.apache.org/licenses/LICENSE-2.0
+
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+
 
 import sys
 import os
 import random
 random.seed(6)
 
-# conda environment is UIenv
+
 from PyQt5 import QtWidgets
 
 from UIMainWindow import * 
@@ -12,7 +30,6 @@ from UIMainWindow import *
 UIMainwindow implements all the widget functions
 '''
 
-#os.chdir('/Users/rnsundareswara/Desktop/QBG/Code/QBG_HRL/ChemicalFrontier/UI/MLTool/qb-gsee-benchmark/qb-gsee-benchmark/BubbleML/UI')
 
 if __name__ == "__main__":
         

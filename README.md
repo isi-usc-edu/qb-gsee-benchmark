@@ -56,7 +56,7 @@ As a **maintainer of this repository**, I want to ensure all artifacts and resul
 - All outputs from the scripts are based on the `problem_instances.json` and `solution.json` files.
 
 
-All users may also be interested in the "Bubble ML" GUI/tool for advanced performance exploration through the space of Hamiltonians.  
+All users may also be interested in the [Bubble ML](/BubbleML/UI/README.md) GUI/tool for exploring the latent space of all Hamiltonians and solver performance.  
 
 
 ## Installation
