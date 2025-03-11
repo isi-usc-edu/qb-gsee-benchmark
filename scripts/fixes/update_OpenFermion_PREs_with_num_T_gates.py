@@ -17,25 +17,17 @@
 
 
 from qb_gsee_benchmark.utils import validate_json
-
-
 import json
-import sys
 import os
-import datetime
-
-import time
-# additional package(s)
-import jsonschema
 
 
 
 input_directory = "../../solution_files/PRE_solution_files_20250304"
 
-local_schema_file = "../../schemas/solution.schema.0.0.1.json"
+local_schema_file = "/home/labuser/Projects/qb-gsee-benchmark/schemas/solution.schema.0.0.1.json"
 with open(local_schema_file, "r") as schema_file:
-    schema = json.load(schema_file)
-local_resolver_directory = "../../schemas"
+    local_schema = json.load(schema_file)
+local_resolver_directory = "/home/labuser/Projects/qb-gsee-benchmark/schemas"
 
 output_directory = "../../solution_files/PRE_solution_files_20250304"
 
@@ -47,30 +39,20 @@ for json_file in json_files:
     with open(json_file_path, "r") as jf:
         d = json.load(jf)
     for i in range(len(d["solution_data"])):
-        num_toffoli_gates_per_shot = d["solution_data"][i]["quantum_resources"]["logical"]["num_toffoli_gates_per_shot"]    
-        num_T_gates_per_shot = 4*num_toffoli_gates_per_shot
-        d["solution_data"][i]["quantum_resources"]["logical"]["num_T_gates_per_shot"] = num_T_gates_per_shot
-        comment = "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/"
-        d["solution_data"][i]["quantum_resources"]["logical"]["comment"] = comment
+        # num_toffoli_gates_per_shot = d["solution_data"][i]["quantum_resources"]["logical"]["num_toffoli_gates_per_shot"]    
+        # num_T_gates_per_shot = 4*num_toffoli_gates_per_shot
+        # d["solution_data"][i]["quantum_resources"]["logical"]["num_T_gates_per_shot"] = num_T_gates_per_shot
+        # comment = "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/"
+        # d["solution_data"][i]["quantum_resources"]["logical"]["comment"] = comment
         
-        
-        
-        # "task_uuid": "2b2eefc4-9c8c-4a02-b621-059774f620c4",
-        #     "error_bound": 0.00159362,
-        #     "confidence_level": 0.99,
-        #     "quantum_resources": {
-        #         "logical": {
-        #             "num_logical_qubits": 804,
-        #             "num_toffoli_gates_per_shot": 15302709200,
-        #             "num_T_gates_per_shot": 61210836800,
-        #             "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
-                  
-
-
+        try:
+            k = d["solution_data"][i]["quantum_resources"]["physical"]["num_logical_compiled_qubits"] # see if the value is there.
+        except Exception as e:
+            d["solution_data"][i]["quantum_resources"]["physical"]["num_logical_compiled_qubits"] = None # replace with None/null.
     validate_json(
         json_dict=d,
-        schema=schema,
-        local_resolver_directory="../../schemas"
+        schema=local_schema,
+        local_resolver_directory=local_resolver_directory
     )
 
 

@@ -152,8 +152,14 @@
                                     "num_logical_compiled_qubits": {
                                         "title": "Number of Logical Compiled Qubits",
                                         "description": "The number of logical compiled qubits.",
-                                        "type": "integer",
-                                        "minimum": 0
+                                        "anyOf": [
+                                            {
+                                                "type": "integer"
+                                            },
+                                            {
+                                                "type": "null"
+                                            }
+                                        ]
                                     },
                                     "num_qpus": {
                                         "title": "Number of QPUs",
