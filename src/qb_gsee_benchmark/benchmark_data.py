@@ -381,7 +381,7 @@ class BenchmarkData:
                 )
                 ml_scores_dict[solver_uuid] = {
                     "solvability_ratio":mini_ml_model.ml_solvability_ratio["PCA"],
-                    "comment":"solvability ratio based on PCA embedding.",
+                    "comments":", ".join(mini_ml_model.ml_model_notes),
                     "f1_score":list(mini_ml_model.f1_score),
                     "ml_metrics_calculator_version":1
                 }
@@ -819,6 +819,8 @@ class BenchmarkData:
                             # TODO: check calendar due date submission.
                             
                         d["label"] = d["solved_within_run_time"] and d["solved_within_accuracy_requirement"]
+                        if d["label"]:
+                            logging.info(f"solver: {solver_short_name}/{solver_uuid} solved {task_uuid}")
                             
 
                     # translate values for sponsor RE field names
@@ -1241,7 +1243,7 @@ class BenchmarkData:
         for solver_uuid in self.solvers_dict:
             solver = self.solvers_dict[solver_uuid]
             solver_short_name = solver["solver_short_name"]
-            solver_name_concat = f"{solver_short_name}-({solver_uuid[:4]})" # first 4 characters of UUID.
+            solver_name_concat = f"{solver_short_name}-({solver_uuid[0:6]})" # first 6 characters of UUID.
             df = self.aggregated_solver_labels_df
             df = df[df["solver_uuid"]==solver_uuid] # filter data to solver_uuid
             df = df[["task_uuid", "label"]] # select only those columns/fields

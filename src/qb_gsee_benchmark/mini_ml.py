@@ -130,6 +130,8 @@ class MiniML:
         self.task_uuids = self.solver_labels["task_uuid"]
         self.Z0_embedding = {}
         
+        self.ml_model_notes = ["solvability ratio based on PCA embedding."]
+
         # plots is a list of tuples of the form (figure, file_name)
         # which is built up as methods are called.
         self.plots = []
@@ -303,24 +305,36 @@ class MiniML:
             self.svm_scaled_X are the Hamiltonian features for each task (scaled).
         """
 
-        self.svm = SVC(
-            random_state=self.rng_seed,
-            class_weight='balanced'
-        ) 
-        self.svm.probability = True
 
-        if self.hypopt_cv:
-            self.svm = GridSearchCV(
-                estimator=self.svm,
-                param_grid=self.param_grid,
-                cv=self.kfold_num,
-                n_jobs=-1,
-                verbose=2,
-                error_score="raise"
-            )
-        
-        # SVM on centered and scaled data
-        self.svm.fit(self.X_svm_scaled, self.Y)
+
+        try:
+            self.svm = SVC(
+                random_state=self.rng_seed,
+                class_weight='balanced'
+            ) 
+            self.svm.probability = True
+            if self.hypopt_cv:
+                self.svm = GridSearchCV(
+                    estimator=self.svm,
+                    param_grid=self.param_grid,
+                    cv=self.kfold_num,
+                    n_jobs=-1,
+                    verbose=2,
+                    error_score="raise"
+                )
+            # SVM on centered and scaled data
+            self.svm.fit(self.X_svm_scaled, self.Y)
+        except Exception as e:
+            # TODO: clarify this workflow.
+            logging.error(f"{e}")
+            logging.info(f"Attempting to compute SVM without GirdSearchCV")
+            self.svm = SVC(
+                random_state=self.rng_seed,
+                class_weight='balanced'
+            ) 
+            self.svm.probability = True
+            self.svm.fit(self.X_svm_scaled, self.Y)
+            self.ml_model_notes.append("ML model calculated without `GridSearchCV`")
     
 
 
@@ -537,7 +551,7 @@ class MiniML:
 
         cbar = plt.colorbar()
         cbar.set_label("Probability of solver success",rotation=270,x=1.25)
-        plt.title(f"Solver {self.solver_short_name} ({self.solver_uuid[0:4]}...)\nEmbedding: {embedding.name}")
+        plt.title(f"Solver {self.solver_short_name} ({self.solver_uuid[:6]}...)\nEmbedding: {embedding.name}")
         plt.tight_layout()
         self.plots.append((fig, f"{embedding.name}_embedding_plot_solver_{self.solver_uuid}.png"))
         plt.close()
@@ -623,7 +637,7 @@ class MiniML:
         # value for ALL SOLVERs or probably pass the upper xlim in as an 
         # argument to this method.
         plt.tight_layout()
-        plt.suptitle(f"SHAP summary plot {self.solver_short_name} ({self.solver_uuid[0:4]}...)")
+        plt.suptitle(f"SHAP summary plot {self.solver_short_name} ({self.solver_uuid[:6]}...)")
         shap_plot = plt.gcf()
         shap_plot_file_name = f"shap_summary_plot_solver_{self.solver_uuid}.png"
         self.plots.append((shap_plot, shap_plot_file_name))
