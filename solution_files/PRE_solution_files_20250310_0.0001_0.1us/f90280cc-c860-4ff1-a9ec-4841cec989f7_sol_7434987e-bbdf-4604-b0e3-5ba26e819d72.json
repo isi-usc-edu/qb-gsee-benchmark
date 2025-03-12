@@ -1,0 +1,169 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "7434987e-bbdf-4604-b0e3-5ba26e819d72",
+    "problem_instance_uuid": "f90280cc-c860-4ff1-a9ec-4841cec989f7",
+    "creation_timestamp": "2025-03-12T15:19:27.774798+00:00",
+    "is_resource_estimate": true,
+    "contact_info": [
+        {
+            "name": "Max Radin",
+            "email": "radin.max@gmail.com",
+            "institution": "L3Harris"
+        }
+    ],
+    "compute_hardware_type": "quantum_computer",
+    "solver_details": {
+        "solver_uuid": "2610d8de-bd3a-469e-9a80-473e8988755f",
+        "solver_short_name": "DF_QPE",
+        "compute_hardware_type": "quantum_computer",
+        "algorithm_details": {
+            "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
+            "algorithm_parameters": {
+                "overlap_csv": "overlaps.csv",
+                "sf_threshold": 1e-12,
+                "df_threshold": 0.001,
+                "max_orbitals": 70
+            }
+        },
+        "software_details": [
+            {
+                "software_name": "pyLIQTR",
+                "software_version": "1.3.6"
+            },
+            {
+                "software_name": "qb-gsee-benchmark",
+                "software_version": "0.1.0a3.dev68+g2b90efd"
+            },
+            {
+                "software_name": "Python",
+                "software_version": "3.10.12 (main, Feb  4 2025, 14:57:36) [GCC 11.4.0]"
+            },
+            {
+                "software_name": "qualtran",
+                "software_version": "0.4.0"
+            }
+        ],
+        "quantum_hardware_details": {
+            "quantum_hardware_description": "Ultra-optimistic hardware model based on the superconducting architecture described in https://arxiv.org/abs/2011.03494.",
+            "quantum_hardware_parameters": {
+                "num_factories": 4,
+                "physical_error_rate": 0.0001,
+                "cycle_time_microseconds": 0.1,
+                "parallelize_shots": false
+            }
+        },
+        "logical_resource_estimate_solution_uuid": "2d0d52e4-6292-409b-89d0-5f17eb9d4f1a",
+        "logical_resource_estimate_solver_uuid": "f2d73e1f-3058-43c4-a634-b6c267c84ff1"
+    },
+    "digital_signature": null,
+    "solution_data": [
+        {
+            "task_uuid": "886855d3-f1a7-4004-a736-417360e81d0a",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1352,
+                    "num_T_gates_per_shot": 23792776645264,
+                    "num_shots": 15,
+                    "hardware_failure_tolerance_per_shot": 6.669779784185259e-05
+                },
+                "physical": {
+                    "num_physical_qubits": 2066968,
+                    "distillation_layer_1_code_distance": 11,
+                    "distillation_layer_2_code_distance": 19,
+                    "data_code_distance": 21,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 278272,
+                    "num_logical_compiled_qubits": 2028,
+                    "num_qpus": 1
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 395,
+                    "nL": 9,
+                    "nXi": 5,
+                    "nLXi": 14,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 1.1719826870734237e-07,
+                    "bits_rot_givens": 34,
+                    "keep_bitsize": 26,
+                    "keep_bitsize_outer": 15,
+                    "outer_prep_eps": 1.1719826870734237e-07,
+                    "alpha": 906.5094092697755
+                },
+                "overlap": 0.6144775268422011,
+                "num_bits_precision_qpe": 26
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-10T18:08:16.994872+00:00",
+                    "wall_clock_stop_time": "2025-03-10T18:11:51.717681+00:00",
+                    "seconds": 214.722809
+                },
+                "algorithm_run_time": {
+                    "seconds": 666941270.3375565
+                },
+                "overall_time": {
+                    "seconds": 666941485.0603654
+                }
+            }
+        },
+        {
+            "task_uuid": "57830810-1133-4c19-9a19-30183dd86a9f",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2719,
+                    "num_T_gates_per_shot": 1220501393378944,
+                    "num_shots": 19,
+                    "hardware_failure_tolerance_per_shot": 5.2656525890371064e-05
+                },
+                "physical": {
+                    "num_physical_qubits": 4688062,
+                    "distillation_layer_1_code_distance": 13,
+                    "distillation_layer_2_code_distance": 21,
+                    "data_code_distance": 23,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 372480,
+                    "num_logical_compiled_qubits": 4078,
+                    "num_qpus": 1
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 1346,
+                    "nL": 11,
+                    "nXi": 6,
+                    "nLXi": 17,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 2.925290078284814e-08,
+                    "bits_rot_givens": 37,
+                    "keep_bitsize": 28,
+                    "keep_bitsize_outer": 15,
+                    "outer_prep_eps": 2.925290078284814e-08,
+                    "alpha": 3631.8221608855233
+                },
+                "overlap": 0.5561545970692378,
+                "num_bits_precision_qpe": 29
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-10T18:12:40.795524+00:00",
+                    "wall_clock_stop_time": "2025-03-10T19:18:56.498445+00:00",
+                    "seconds": 3975.702921
+                },
+                "algorithm_run_time": {
+                    "seconds": 50872023702.776115
+                },
+                "overall_time": {
+                    "seconds": 50872027678.479034
+                }
+            }
+        }
+    ]
+}

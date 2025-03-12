@@ -1,0 +1,925 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "9e8c84f0-4cdc-47b9-81d6-caf08854036b",
+    "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
+    "creation_timestamp": "2025-03-12T15:19:24.264144+00:00",
+    "is_resource_estimate": true,
+    "contact_info": [
+        {
+            "name": "Max Radin",
+            "email": "radin.max@gmail.com",
+            "institution": "L3Harris"
+        }
+    ],
+    "compute_hardware_type": "quantum_computer",
+    "solver_details": {
+        "solver_uuid": "5d768520-b3d0-4292-bbb4-9776fa128107",
+        "solver_short_name": "DF_QPE",
+        "compute_hardware_type": "quantum_computer",
+        "algorithm_details": {
+            "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
+            "algorithm_parameters": {
+                "overlap_csv": "overlaps.csv",
+                "sf_threshold": 1e-12,
+                "df_threshold": 0.001,
+                "max_orbitals": 70
+            }
+        },
+        "software_details": [
+            {
+                "software_name": "pyLIQTR",
+                "software_version": "1.3.6"
+            },
+            {
+                "software_name": "qb-gsee-benchmark",
+                "software_version": "0.1.0a3.dev68+g2b90efd"
+            },
+            {
+                "software_name": "Python",
+                "software_version": "3.10.12 (main, Feb  4 2025, 14:57:36) [GCC 11.4.0]"
+            },
+            {
+                "software_name": "qualtran",
+                "software_version": "0.4.0"
+            }
+        ],
+        "quantum_hardware_details": {
+            "quantum_hardware_description": "Superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494 with an extremely optimistic physical error rate.",
+            "quantum_hardware_parameters": {
+                "num_factories": 4,
+                "physical_error_rate": 1e-06,
+                "cycle_time_microseconds": 1,
+                "parallelize_shots": false
+            }
+        },
+        "logical_resource_estimate_solution_uuid": "3d991fef-c85c-48a3-87f0-095a1b85d1ce",
+        "logical_resource_estimate_solver_uuid": "f2d73e1f-3058-43c4-a634-b6c267c84ff1"
+    },
+    "digital_signature": null,
+    "solution_data": [
+        {
+            "task_uuid": "aaae8d93-cb88-41ee-8f11-c70cc9b0d7fb",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2251,
+                    "num_T_gates_per_shot": 596377415454208,
+                    "num_shots": 124,
+                    "hardware_failure_tolerance_per_shot": 8.068518526638258e-06
+                },
+                "physical": {
+                    "num_physical_qubits": 923474,
+                    "distillation_layer_1_code_distance": 7,
+                    "distillation_layer_2_code_distance": 11,
+                    "data_code_distance": 11,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 106240,
+                    "num_logical_compiled_qubits": 3376,
+                    "num_qpus": 1
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 1379,
+                    "nL": 11,
+                    "nXi": 6,
+                    "nLXi": 17,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 8.842466003654926e-08,
+                    "bits_rot_givens": 35,
+                    "keep_bitsize": 26,
+                    "keep_bitsize_outer": 14,
+                    "outer_prep_eps": 8.842466003654926e-08,
+                    "alpha": 1201.4898704662228
+                },
+                "overlap": 0.2329620418714725,
+                "num_bits_precision_qpe": 28
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-11T09:24:53.261765+00:00",
+                    "wall_clock_stop_time": "2025-03-11T10:03:27.080066+00:00",
+                    "seconds": 2313.818301
+                },
+                "algorithm_run_time": {
+                    "seconds": 901275369105.1719
+                },
+                "overall_time": {
+                    "seconds": 901275371418.9902
+                }
+            }
+        },
+        {
+            "task_uuid": "5547bb48-fac6-4426-91ad-c4853ce421aa",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2883,
+                    "num_T_gates_per_shot": 2206708025790312,
+                    "num_shots": 269,
+                    "hardware_failure_tolerance_per_shot": 3.719325178397348e-06
+                },
+                "physical": {
+                    "num_physical_qubits": 1568090,
+                    "distillation_layer_1_code_distance": 7,
+                    "distillation_layer_2_code_distance": 11,
+                    "data_code_distance": 13,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 106240,
+                    "num_logical_compiled_qubits": 4324,
+                    "num_qpus": 1
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 2033,
+                    "nL": 11,
+                    "nXi": 7,
+                    "nLXi": 18,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 6.183842858605482e-08,
+                    "bits_rot_givens": 36,
+                    "keep_bitsize": 27,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 6.183842858605482e-08,
+                    "alpha": 1718.04710699411
+                },
+                "overlap": 0.1593559136751708,
+                "num_bits_precision_qpe": 29
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-11T10:08:07.716986+00:00",
+                    "wall_clock_stop_time": "2025-03-11T11:57:52.381878+00:00",
+                    "seconds": 6584.664892
+                },
+                "algorithm_run_time": {
+                    "seconds": 7234554343301.926
+                },
+                "overall_time": {
+                    "seconds": 7234554349886.591
+                }
+            }
+        },
+        {
+            "task_uuid": "db75bf65-181b-40c2-b978-26453437c2b0",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2252,
+                    "num_T_gates_per_shot": 307197938503040,
+                    "num_shots": 31,
+                    "hardware_failure_tolerance_per_shot": 3.227368350267046e-05
+                },
+                "physical": {
+                    "num_physical_qubits": 923716,
+                    "distillation_layer_1_code_distance": 7,
+                    "distillation_layer_2_code_distance": 11,
+                    "data_code_distance": 11,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 106240,
+                    "num_logical_compiled_qubits": 3378,
+                    "num_qpus": 1
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 1421,
+                    "nL": 11,
+                    "nXi": 6,
+                    "nLXi": 17,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 8.347408040127859e-08,
+                    "bits_rot_givens": 35,
+                    "keep_bitsize": 27,
+                    "keep_bitsize_outer": 14,
+                    "outer_prep_eps": 8.347408040127859e-08,
+                    "alpha": 1272.7463761518245
+                },
+                "overlap": 0.4496124185294072,
+                "num_bits_precision_qpe": 27
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-11T12:08:07.266789+00:00",
+                    "wall_clock_stop_time": "2025-03-11T12:46:45.894413+00:00",
+                    "seconds": 2318.627624
+                },
+                "algorithm_run_time": {
+                    "seconds": 116063221140.6798
+                },
+                "overall_time": {
+                    "seconds": 116063223459.30742
+                }
+            }
+        },
+        {
+            "task_uuid": "ab482d50-9a85-48d9-aa17-83dcbb38614b",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2846,
+                    "num_T_gates_per_shot": 1098343396675520,
+                    "num_shots": 35,
+                    "hardware_failure_tolerance_per_shot": 2.8585315248741416e-05
+                },
+                "physical": {
+                    "num_physical_qubits": 1139338,
+                    "distillation_layer_1_code_distance": 7,
+                    "distillation_layer_2_code_distance": 11,
+                    "data_code_distance": 11,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 106240,
+                    "num_logical_compiled_qubits": 4269,
+                    "num_qpus": 1
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 2052,
+                    "nL": 12,
+                    "nXi": 7,
+                    "nLXi": 18,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 6.147356619458417e-08,
+                    "bits_rot_givens": 36,
+                    "keep_bitsize": 27,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 6.147356619458417e-08,
+                    "alpha": 1728.2441854283254
+                },
+                "overlap": 0.4269009231326315,
+                "num_bits_precision_qpe": 28
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-11T12:51:32.891631+00:00",
+                    "wall_clock_stop_time": "2025-03-11T14:34:30.205896+00:00",
+                    "seconds": 6177.314265
+                },
+                "algorithm_run_time": {
+                    "seconds": 468512105144.4014
+                },
+                "overall_time": {
+                    "seconds": 468512111321.7157
+                }
+            }
+        },
+        {
+            "task_uuid": "b628f4be-582f-4f23-96eb-c8b9e0005e4a",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1277,
+                    "num_T_gates_per_shot": 8059858454976,
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025009380472507114
+                },
+                "physical": {
+                    "num_physical_qubits": 369528,
+                    "distillation_layer_1_code_distance": 5,
+                    "distillation_layer_2_code_distance": 9,
+                    "data_code_distance": 9,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 59136,
+                    "num_logical_compiled_qubits": 1915,
+                    "num_qpus": 1
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 487,
+                    "nL": 9,
+                    "nXi": 5,
+                    "nLXi": 14,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 2.877530047472891e-07,
+                    "bits_rot_givens": 33,
+                    "keep_bitsize": 25,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 2.877530047472891e-07,
+                    "alpha": 369.21016142520136
+                },
+                "overlap": 0.9169804343466676,
+                "num_bits_precision_qpe": 24
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-11T14:44:29.336873+00:00",
+                    "wall_clock_stop_time": "2025-03-11T14:47:58.366276+00:00",
+                    "seconds": 209.029403
+                },
+                "algorithm_run_time": {
+                    "seconds": 288139939.765392
+                },
+                "overall_time": {
+                    "seconds": 288140148.794795
+                }
+            }
+        },
+        {
+            "task_uuid": "c436c481-00d1-49ec-8d0e-0a5e83a8df19",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1826,
+                    "num_T_gates_per_shot": 43361385843640,
+                    "num_shots": 5,
+                    "hardware_failure_tolerance_per_shot": 0.000200080048033624
+                },
+                "physical": {
+                    "num_physical_qubits": 721974,
+                    "distillation_layer_1_code_distance": 5,
+                    "distillation_layer_2_code_distance": 9,
+                    "data_code_distance": 11,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 59136,
+                    "num_logical_compiled_qubits": 2739,
+                    "num_qpus": 1
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 960,
+                    "nL": 10,
+                    "nXi": 6,
+                    "nLXi": 16,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 1.555795394528337e-07,
+                    "bits_rot_givens": 34,
+                    "keep_bitsize": 26,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 1.555795394528337e-07,
+                    "alpha": 682.8747128766378
+                },
+                "overlap": 0.9029863738059232,
+                "num_bits_precision_qpe": 25
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-11T14:48:36.747790+00:00",
+                    "wall_clock_stop_time": "2025-03-11T15:05:22.118719+00:00",
+                    "seconds": 1005.370929
+                },
+                "algorithm_run_time": {
+                    "seconds": 1937711929.8876648
+                },
+                "overall_time": {
+                    "seconds": 1937712935.2585938
+                }
+            }
+        },
+        {
+            "task_uuid": "349e9cbe-d675-411f-b6b8-be846c27902c",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2249,
+                    "num_T_gates_per_shot": 522143200710144,
+                    "num_shots": 106,
+                    "hardware_failure_tolerance_per_shot": 9.438637848080411e-06
+                },
+                "physical": {
+                    "num_physical_qubits": 922748,
+                    "distillation_layer_1_code_distance": 7,
+                    "distillation_layer_2_code_distance": 11,
+                    "data_code_distance": 11,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 106240,
+                    "num_logical_compiled_qubits": 3373,
+                    "num_qpus": 1
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 1220,
+                    "nL": 11,
+                    "nXi": 6,
+                    "nLXi": 17,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 1.0447045624496184e-07,
+                    "bits_rot_givens": 35,
+                    "keep_bitsize": 26,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 1.0447045624496184e-07,
+                    "alpha": 1016.9509845369026
+                },
+                "overlap": 0.2518945485439342,
+                "num_bits_precision_qpe": 28
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-11T15:07:37.793103+00:00",
+                    "wall_clock_stop_time": "2025-03-11T15:44:42.790834+00:00",
+                    "seconds": 2224.997731
+                },
+                "algorithm_run_time": {
+                    "seconds": 674543747417.4174
+                },
+                "overall_time": {
+                    "seconds": 674543749642.415
+                }
+            }
+        },
+        {
+            "task_uuid": "3eccbccf-e84a-44b9-b775-cef772cd84f0",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2842,
+                    "num_T_gates_per_shot": 1971453339635560,
+                    "num_shots": 189,
+                    "hardware_failure_tolerance_per_shot": 5.293638547287927e-06
+                },
+                "physical": {
+                    "num_physical_qubits": 1547134,
+                    "distillation_layer_1_code_distance": 7,
+                    "distillation_layer_2_code_distance": 11,
+                    "data_code_distance": 13,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 106240,
+                    "num_logical_compiled_qubits": 4263,
+                    "num_qpus": 1
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 1849,
+                    "nL": 11,
+                    "nXi": 7,
+                    "nLXi": 17,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 7.247783133382033e-08,
+                    "bits_rot_givens": 36,
+                    "keep_bitsize": 27,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 7.247783133382033e-08,
+                    "alpha": 1465.8459197544719
+                },
+                "overlap": 0.1898026758125691,
+                "num_bits_precision_qpe": 29
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-11T15:48:43.069646+00:00",
+                    "wall_clock_stop_time": "2025-03-11T17:30:02.368591+00:00",
+                    "seconds": 6079.298945
+                },
+                "algorithm_run_time": {
+                    "seconds": 4541119552016.785
+                },
+                "overall_time": {
+                    "seconds": 4541119558096.084
+                }
+            }
+        },
+        {
+            "task_uuid": "4c240146-6b8b-4fa5-88e4-41cbd39c8ac3",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1277,
+                    "num_T_gates_per_shot": 8174883047872,
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025009380472507114
+                },
+                "physical": {
+                    "num_physical_qubits": 369528,
+                    "distillation_layer_1_code_distance": 5,
+                    "distillation_layer_2_code_distance": 9,
+                    "data_code_distance": 9,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 59136,
+                    "num_logical_compiled_qubits": 1915,
+                    "num_qpus": 1
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 494,
+                    "nL": 9,
+                    "nXi": 5,
+                    "nLXi": 14,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 2.756185998902118e-07,
+                    "bits_rot_givens": 33,
+                    "keep_bitsize": 25,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 2.756185998902118e-07,
+                    "alpha": 385.4650352902629
+                },
+                "overlap": 0.9211340347506228,
+                "num_bits_precision_qpe": 24
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-11T17:38:59.581488+00:00",
+                    "wall_clock_stop_time": "2025-03-11T17:42:30.264802+00:00",
+                    "seconds": 210.683314
+                },
+                "algorithm_run_time": {
+                    "seconds": 292252068.961424
+                },
+                "overall_time": {
+                    "seconds": 292252279.644738
+                }
+            }
+        },
+        {
+            "task_uuid": "c582e543-075c-4fa1-b189-5e7455286d82",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1826,
+                    "num_T_gates_per_shot": 44864087526328,
+                    "num_shots": 5,
+                    "hardware_failure_tolerance_per_shot": 0.000200080048033624
+                },
+                "physical": {
+                    "num_physical_qubits": 721974,
+                    "distillation_layer_1_code_distance": 5,
+                    "distillation_layer_2_code_distance": 9,
+                    "data_code_distance": 11,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 59136,
+                    "num_logical_compiled_qubits": 2739,
+                    "num_qpus": 1
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 994,
+                    "nL": 10,
+                    "nXi": 6,
+                    "nLXi": 16,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 1.5041177586101951e-07,
+                    "bits_rot_givens": 34,
+                    "keep_bitsize": 26,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 1.5041177586101951e-07,
+                    "alpha": 706.336539976101
+                },
+                "overlap": 0.9019915910495648,
+                "num_bits_precision_qpe": 25
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-11T17:43:08.623243+00:00",
+                    "wall_clock_stop_time": "2025-03-11T17:59:51.334297+00:00",
+                    "seconds": 1002.711054
+                },
+                "algorithm_run_time": {
+                    "seconds": 2004863911.332785
+                },
+                "overall_time": {
+                    "seconds": 2004864914.043839
+                }
+            }
+        },
+        {
+            "task_uuid": "3fa3940d-8a68-44ae-9223-7346404651e6",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1277,
+                    "num_T_gates_per_shot": 8174883047872,
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025009380472507114
+                },
+                "physical": {
+                    "num_physical_qubits": 369528,
+                    "distillation_layer_1_code_distance": 5,
+                    "distillation_layer_2_code_distance": 9,
+                    "data_code_distance": 9,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 59136,
+                    "num_logical_compiled_qubits": 1915,
+                    "num_qpus": 1
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 494,
+                    "nL": 9,
+                    "nXi": 5,
+                    "nLXi": 14,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 2.6867784351698604e-07,
+                    "bits_rot_givens": 33,
+                    "keep_bitsize": 25,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 2.6867784351698604e-07,
+                    "alpha": 395.42275590215047
+                },
+                "overlap": 0.92078704607746,
+                "num_bits_precision_qpe": 24
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-11T18:02:06.583229+00:00",
+                    "wall_clock_stop_time": "2025-03-11T18:05:43.837579+00:00",
+                    "seconds": 217.25435
+                },
+                "algorithm_run_time": {
+                    "seconds": 292252068.961424
+                },
+                "overall_time": {
+                    "seconds": 292252286.215774
+                }
+            }
+        },
+        {
+            "task_uuid": "eadd62e9-ee3d-4193-94de-7735a529edce",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1826,
+                    "num_T_gates_per_shot": 45617585851320,
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025009380472507114
+                },
+                "physical": {
+                    "num_physical_qubits": 721974,
+                    "distillation_layer_1_code_distance": 5,
+                    "distillation_layer_2_code_distance": 9,
+                    "data_code_distance": 11,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 59136,
+                    "num_logical_compiled_qubits": 2739,
+                    "num_qpus": 1
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 1012,
+                    "nL": 10,
+                    "nXi": 6,
+                    "nLXi": 16,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 1.4753843959191346e-07,
+                    "bits_rot_givens": 34,
+                    "keep_bitsize": 26,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 1.4753843959191346e-07,
+                    "alpha": 720.0925645356792
+                },
+                "overlap": 0.9093486600916164,
+                "num_bits_precision_qpe": 25
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-11T18:06:22.589030+00:00",
+                    "wall_clock_stop_time": "2025-03-11T18:23:18.907211+00:00",
+                    "seconds": 1016.318181
+                },
+                "algorithm_run_time": {
+                    "seconds": 1630828694.1846921
+                },
+                "overall_time": {
+                    "seconds": 1630829710.5028732
+                }
+            }
+        },
+        {
+            "task_uuid": "b900c4a3-fe87-4df7-96b7-2767ccdc1d56",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1277,
+                    "num_T_gates_per_shot": 8170722298304,
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025009380472507114
+                },
+                "physical": {
+                    "num_physical_qubits": 369528,
+                    "distillation_layer_1_code_distance": 5,
+                    "distillation_layer_2_code_distance": 9,
+                    "data_code_distance": 9,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 59136,
+                    "num_logical_compiled_qubits": 1915,
+                    "num_qpus": 1
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 494,
+                    "nL": 9,
+                    "nXi": 5,
+                    "nLXi": 14,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 2.6856548171875504e-07,
+                    "bits_rot_givens": 33,
+                    "keep_bitsize": 25,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 2.6856548171875504e-07,
+                    "alpha": 395.5881919501127
+                },
+                "overlap": 0.9214381117694072,
+                "num_bits_precision_qpe": 24
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-11T18:25:34.610794+00:00",
+                    "wall_clock_stop_time": "2025-03-11T18:29:04.833643+00:00",
+                    "seconds": 210.222849
+                },
+                "algorithm_run_time": {
+                    "seconds": 292103322.16436803
+                },
+                "overall_time": {
+                    "seconds": 292103532.38721704
+                }
+            }
+        },
+        {
+            "task_uuid": "7fc4c1d7-3469-40a3-9cd8-4354b6acf01d",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1826,
+                    "num_T_gates_per_shot": 45704827374520,
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025009380472507114
+                },
+                "physical": {
+                    "num_physical_qubits": 721974,
+                    "distillation_layer_1_code_distance": 5,
+                    "distillation_layer_2_code_distance": 9,
+                    "data_code_distance": 11,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 59136,
+                    "num_logical_compiled_qubits": 2739,
+                    "num_qpus": 1
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 1014,
+                    "nL": 10,
+                    "nXi": 6,
+                    "nLXi": 16,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 1.4882687345023216e-07,
+                    "bits_rot_givens": 34,
+                    "keep_bitsize": 26,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 1.4882687345023216e-07,
+                    "alpha": 713.8585315296605
+                },
+                "overlap": 0.9084901830330712,
+                "num_bits_precision_qpe": 25
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-11T18:29:43.336680+00:00",
+                    "wall_clock_stop_time": "2025-03-11T18:46:41.007816+00:00",
+                    "seconds": 1017.671136
+                },
+                "algorithm_run_time": {
+                    "seconds": 1633947578.6390922
+                },
+                "overall_time": {
+                    "seconds": 1633948596.310228
+                }
+            }
+        },
+        {
+            "task_uuid": "09b81c3d-aee1-4bc3-98ce-a72da477b108",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1038,
+                    "num_T_gates_per_shot": 9189418076712,
+                    "num_shots": 51,
+                    "hardware_failure_tolerance_per_shot": 1.961746117473684e-05
+                },
+                "physical": {
+                    "num_physical_qubits": 435930,
+                    "distillation_layer_1_code_distance": 5,
+                    "distillation_layer_2_code_distance": 9,
+                    "data_code_distance": 11,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 59136,
+                    "num_logical_compiled_qubits": 1557,
+                    "num_qpus": 1
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 324,
+                    "nL": 9,
+                    "nXi": 5,
+                    "nLXi": 13,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 4.7382905840863847e-07,
+                    "bits_rot_givens": 32,
+                    "keep_bitsize": 24,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 4.7382905840863847e-07,
+                    "alpha": 224.2186954302599
+                },
+                "overlap": 0.3575555133377897,
+                "num_bits_precision_qpe": 25
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-11T18:48:55.546868+00:00",
+                    "wall_clock_stop_time": "2025-03-11T18:50:21.681269+00:00",
+                    "seconds": 86.134401
+                },
+                "algorithm_run_time": {
+                    "seconds": 4188651627.0913143
+                },
+                "overall_time": {
+                    "seconds": 4188651713.225715
+                }
+            }
+        },
+        {
+            "task_uuid": "87d59f7c-e397-42dc-aa6e-00200d8697aa",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1607,
+                    "num_T_gates_per_shot": 123078998756520,
+                    "num_shots": 90,
+                    "hardware_failure_tolerance_per_shot": 1.1116608583217058e-05
+                },
+                "physical": {
+                    "num_physical_qubits": 689702,
+                    "distillation_layer_1_code_distance": 7,
+                    "distillation_layer_2_code_distance": 11,
+                    "data_code_distance": 11,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 106240,
+                    "num_logical_compiled_qubits": 2410,
+                    "num_qpus": 1
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 772,
+                    "nL": 10,
+                    "nXi": 6,
+                    "nLXi": 15,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 2.1087337305221203e-07,
+                    "bits_rot_givens": 34,
+                    "keep_bitsize": 25,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 2.1087337305221203e-07,
+                    "alpha": 503.81578193387224
+                },
+                "overlap": 0.2723808603059062,
+                "num_bits_precision_qpe": 27
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-11T18:50:40.003190+00:00",
+                    "wall_clock_stop_time": "2025-03-11T19:00:03.286718+00:00",
+                    "seconds": 563.283528
+                },
+                "algorithm_run_time": {
+                    "seconds": 135002276761.05792
+                },
+                "overall_time": {
+                    "seconds": 135002277324.34145
+                }
+            }
+        }
+    ]
+}
