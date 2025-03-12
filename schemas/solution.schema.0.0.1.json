@@ -11,6 +11,7 @@
         "solution_data",
         "solver_details",
         "digital_signature",
+        "is_resource_estimate",
         "$schema"
     ],
     "properties": {
@@ -75,12 +76,28 @@
             "items": {
                 "type": "object",
                 "required": [
-                    "task_uuid"
+                    "task_uuid",
+                    "run_time"
                 ],
                 "properties": {
-                    "task_uuid": {
-                        "title": "Instance Data Object UUID",
-                        "$ref": "uuid.schema.json"
+                    "energy": {
+                        "title": "Energy",
+                        "description": "The Ground State Energy as reported by the solver in Hartree.",
+                        "oneOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "energy_units": {
+                        "title": "Energy Units (Hartree)",
+                        "description": "The energy units of the ground-state energy reported by the solver: Hartree.  (The only choice is Hartree at this time.)",
+                        "enum": [
+                            "Hartree"
+                        ]
                     },
                     "error_bound": {
                         "title": "Error Bound",
@@ -111,6 +128,9 @@
                         "title": "Quantum Resources",
                         "description": "Quantum resources used by the test performer.",
                         "type": "object",
+                        "required": [
+                            "logical"
+                        ],
                         "properties": {
                             "physical": {
                                 "title": "Physical Quantum Resources",
@@ -132,8 +152,14 @@
                                     "num_logical_compiled_qubits": {
                                         "title": "Number of Logical Compiled Qubits",
                                         "description": "The number of logical compiled qubits.",
-                                        "type": "integer",
-                                        "minimum": 0
+                                        "anyOf": [
+                                            {
+                                                "type": "integer"
+                                            },
+                                            {
+                                                "type": "null"
+                                            }
+                                        ]
                                     },
                                     "num_qpus": {
                                         "title": "Number of QPUs",
@@ -147,6 +173,11 @@
                                 "title": "Logical Quantum Resources",
                                 "description": "Logical quantum resources used by the test performer.",
                                 "type": "object",
+                                "required": [
+                                    "num_logical_qubits",
+                                    "num_T_gates_per_shot",
+                                    "num_shots"
+                                ],
                                 "properties": {
                                     "num_logical_qubits": {
                                         "title": "Number of Logical Qubits",
@@ -155,13 +186,13 @@
                                         "minimum": 0
                                     },
                                     "num_T_gates_per_shot": {
-                                        "title": "Number of T-Gates",
+                                        "title": "Number of T Gates",
                                         "description": "The total number of T-gates used by the solver per shot.",
                                         "type": "integer",
                                         "minimum": 0
                                     },
                                     "num_toffoli_gates_per_shot": {
-                                        "title": "Number of T-Gates",
+                                        "title": "Number of Toffoli Gates",
                                         "description": "The total number of Toffoli gates used by the solver per shot.",
                                         "type": "integer",
                                         "minimum": 0
@@ -192,6 +223,9 @@
                         "title": "Wall Clock Runtime",
                         "description": "A breakdown of start/stop wall clock time(s) reported according to ISO 8601 in UTC and duration in seconds.  run_time is broken down into (1) overall_time, (2) preprocessing_time, (3), algorithm_run_time, and (4) postprocessing_time.  See descriptions of each object.",
                         "type": "object",
+                        "required": [
+                            "overall_time"
+                        ],
                         "properties": {
                             "overall_time": {
                                 "title": "Overall Wall Clock Time",
@@ -294,6 +328,10 @@
                                 }
                             }
                         }
+                    },
+                    "task_uuid": {
+                        "title": "Instance Data Object UUID",
+                        "$ref": "uuid.schema.json"
                     }
                 }
             }
@@ -386,58 +424,36 @@
                     "type": "null"
                 }
             ]
-        },
-        "if": {
-            "required": [
-                "is_resource_estimate"
-            ],
-            "properties": {
-                "is_resource_estimate": {
-                    "const": true
+        }
+    },
+    "if": {
+        "properties": {
+            "is_resource_estimate": {
+                "const": false
+            }
+        }
+    },
+    "then": {
+        "properties": {
+            "solution_data": {
+                "items": {
+                    "required": [
+                        "energy",
+                        "energy_units"
+                    ]
                 }
             }
-        },
-        "then": {
-            "properties": {
-                "solution_data": {
-                    "items": {
-                        "required": [
-                            "error_bound",
-                            "confidence_level"
-                        ]
-                    }
-                }
-            }
-        },
-        "else": {
-            "properties": {
-                "solution_data": {
-                    "items": {
-                        "required": [
-                            "energy",
-                            "energy_units",
-                            "run_time"
-                        ],
-                        "properties": {
-                            "energy": {
-                                "title": "Energy",
-                                "description": "The Ground State Energy as reported by the solver in Hartree.",
-                                "type": "number"
-                            },
-                            "energy_units": {
-                                "title": "Energy Units (Hartree)",
-                                "description": "The energy units of the ground-state energy reported by the solver: Hartree.  (The only choice is Hartree at this time.)",
-                                "enum":[
-                                    "Hartree"
-                                ]
-                            },
-                            "run_time": {
-                                "required": [
-                                    "overall_time"
-                                ]
-                            }
-                        }
-                    }
+        }
+    },
+    "else": {
+        "properties": {
+            "solution_data": {
+                "items": {
+                    "required": [
+                        "error_bound",
+                        "confidence_level",
+                        "quantum_resources"
+                    ]
                 }
             }
         }
