@@ -1,0 +1,84 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "f44f6ca6-2c0b-4f67-8862-d1708bdf55e3",
+    "problem_instance_uuid": "11c8be98-d9c9-40ea-8d88-ea8c555028f6",
+    "creation_timestamp": "2025-03-12T07:40:02.069854+00:00",
+    "is_resource_estimate": true,
+    "contact_info": [
+        {
+            "name": "Max Radin",
+            "email": "radin.max@gmail.com",
+            "institution": "L3Harris"
+        }
+    ],
+    "solution_data": [
+        {
+            "task_uuid": "9d82f7d4-165d-4499-8add-361a770d1d44",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2266,
+                    "num_T_gates_per_shot": 156212792396968,
+                    "num_shots": 3,
+                    "hardware_failure_tolerance_per_shot": 0.0003334445062139757
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 858,
+                    "nL": 10,
+                    "nXi": 6,
+                    "nLXi": 16,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 4.290156984874551e-08,
+                    "bits_rot_givens": 36,
+                    "keep_bitsize": 27,
+                    "keep_bitsize_outer": 15,
+                    "outer_prep_eps": 4.290156984874551e-08,
+                    "alpha": 2476.3973371580473
+                },
+                "overlap": 0.9738115234937592,
+                "num_bits_precision_qpe": 27
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-12T03:15:44.031092+00:00",
+                    "wall_clock_stop_time": "2025-03-12T03:36:53.405999+00:00",
+                    "seconds": 1269.374907
+                }
+            }
+        }
+    ],
+    "compute_hardware_type": "quantum_computer",
+    "solver_details": {
+        "solver_uuid": "f2d73e1f-3058-43c4-a634-b6c267c84ff1",
+        "solver_short_name": "DF_QPE",
+        "compute_hardware_type": "quantum_computer",
+        "algorithm_details": {
+            "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
+            "algorithm_parameters": {
+                "overlap_csv": "overlaps.csv",
+                "sf_threshold": 1e-12,
+                "df_threshold": 0.001,
+                "max_orbitals": 70
+            }
+        },
+        "software_details": [
+            {
+                "software_name": "pyLIQTR",
+                "software_version": "1.3.6"
+            },
+            {
+                "software_name": "qb-gsee-benchmark",
+                "software_version": "0.1.0a3.dev68+g2b90efd"
+            },
+            {
+                "software_name": "Python",
+                "software_version": "3.10.12 (main, Feb  4 2025, 14:57:36) [GCC 11.4.0]"
+            }
+        ]
+    },
+    "digital_signature": null
+}
