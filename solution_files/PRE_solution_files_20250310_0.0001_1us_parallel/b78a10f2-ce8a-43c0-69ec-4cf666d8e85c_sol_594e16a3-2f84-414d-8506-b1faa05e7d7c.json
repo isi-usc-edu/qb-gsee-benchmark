@@ -1,0 +1,547 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "594e16a3-2f84-414d-8506-b1faa05e7d7c",
+    "problem_instance_uuid": "b78a10f2-ce8a-43c0-69ec-4cf666d8e85c",
+    "creation_timestamp": "2025-03-12T15:19:38.871634+00:00",
+    "is_resource_estimate": true,
+    "contact_info": [
+        {
+            "name": "Max Radin",
+            "email": "radin.max@gmail.com",
+            "institution": "L3Harris"
+        }
+    ],
+    "compute_hardware_type": "quantum_computer",
+    "solver_details": {
+        "solver_uuid": "4b07b89f-c66f-4e72-8c24-df3e4222cb41",
+        "solver_short_name": "DF_QPE",
+        "compute_hardware_type": "quantum_computer",
+        "algorithm_details": {
+            "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
+            "algorithm_parameters": {
+                "overlap_csv": "overlaps.csv",
+                "sf_threshold": 1e-12,
+                "df_threshold": 0.001,
+                "max_orbitals": 70
+            }
+        },
+        "software_details": [
+            {
+                "software_name": "pyLIQTR",
+                "software_version": "1.3.6"
+            },
+            {
+                "software_name": "qb-gsee-benchmark",
+                "software_version": "0.1.0a3.dev68+g2b90efd"
+            },
+            {
+                "software_name": "Python",
+                "software_version": "3.10.12 (main, Feb  4 2025, 14:57:36) [GCC 11.4.0]"
+            },
+            {
+                "software_name": "qualtran",
+                "software_version": "0.4.0"
+            }
+        ],
+        "quantum_hardware_details": {
+            "quantum_hardware_description": "Optimistic superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494. Assumes that enough QPUs are available to run all shots in parallel.",
+            "quantum_hardware_parameters": {
+                "num_factories": 4,
+                "physical_error_rate": 0.0001,
+                "cycle_time_microseconds": 1,
+                "parallelize_shots": true
+            }
+        },
+        "logical_resource_estimate_solution_uuid": "29e766ab-c8a7-48d6-91af-e39841967b37",
+        "logical_resource_estimate_solver_uuid": "f2d73e1f-3058-43c4-a634-b6c267c84ff1"
+    },
+    "digital_signature": null,
+    "solution_data": [
+        {
+            "task_uuid": "4357d5bb-ed2b-466a-947b-e868afb81d3d",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 312,
+                    "num_T_gates_per_shot": 10374612008,
+                    "num_shots": 2,
+                    "hardware_failure_tolerance_per_shot": 0.0005001250625390474
+                },
+                "physical": {
+                    "num_physical_qubits": 452520,
+                    "distillation_layer_1_code_distance": 9,
+                    "distillation_layer_2_code_distance": 15,
+                    "data_code_distance": 17,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 182016,
+                    "num_logical_compiled_qubits": 468,
+                    "num_qpus": 2
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 19,
+                    "nL": 5,
+                    "nXi": 3,
+                    "nLXi": 7,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 5.724984507755905e-06,
+                    "bits_rot_givens": 26,
+                    "keep_bitsize": 20,
+                    "keep_bitsize_outer": 14,
+                    "outer_prep_eps": 5.724984507755905e-06,
+                    "alpha": 18.557488354667726
+                },
+                "overlap": 0.989787576332472,
+                "num_bits_precision_qpe": 19
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-10T21:36:50.504404+00:00",
+                    "wall_clock_stop_time": "2025-03-10T21:36:51.821519+00:00",
+                    "seconds": 1.317115
+                },
+                "algorithm_run_time": {
+                    "seconds": 160158.072874
+                },
+                "overall_time": {
+                    "seconds": 160159.38998900002
+                }
+            }
+        },
+        {
+            "task_uuid": "b164af91-a758-445c-8e78-610ffd2ad795",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 431,
+                    "num_T_gates_per_shot": 74096575976,
+                    "num_shots": 3,
+                    "hardware_failure_tolerance_per_shot": 0.0003334445062139757
+                },
+                "physical": {
+                    "num_physical_qubits": 572366,
+                    "distillation_layer_1_code_distance": 9,
+                    "distillation_layer_2_code_distance": 17,
+                    "data_code_distance": 17,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 198400,
+                    "num_logical_compiled_qubits": 646,
+                    "num_qpus": 3
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 44,
+                    "nL": 6,
+                    "nXi": 4,
+                    "nLXi": 9,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 1.986306053096963e-06,
+                    "bits_rot_givens": 28,
+                    "keep_bitsize": 22,
+                    "keep_bitsize_outer": 14,
+                    "outer_prep_eps": 1.986306053096963e-06,
+                    "alpha": 53.48688998238032
+                },
+                "overlap": 0.981386870357194,
+                "num_bits_precision_qpe": 21
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-10T21:36:53.027185+00:00",
+                    "wall_clock_stop_time": "2025-03-10T21:36:55.930826+00:00",
+                    "seconds": 2.903641
+                },
+                "algorithm_run_time": {
+                    "seconds": 1143865.89163
+                },
+                "overall_time": {
+                    "seconds": 1143868.795271
+                }
+            }
+        },
+        {
+            "task_uuid": "28bd4997-c04c-4914-9984-0101713041fe",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 620,
+                    "num_T_gates_per_shot": 301939558112,
+                    "num_shots": 2,
+                    "hardware_failure_tolerance_per_shot": 0.0005001250625390474
+                },
+                "physical": {
+                    "num_physical_qubits": 931300,
+                    "distillation_layer_1_code_distance": 11,
+                    "distillation_layer_2_code_distance": 17,
+                    "data_code_distance": 19,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 259840,
+                    "num_logical_compiled_qubits": 930,
+                    "num_qpus": 2
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 104,
+                    "nL": 7,
+                    "nXi": 4,
+                    "nLXi": 11,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 1.0828426959378095e-06,
+                    "bits_rot_givens": 30,
+                    "keep_bitsize": 23,
+                    "keep_bitsize_outer": 14,
+                    "outer_prep_eps": 1.0828426959378095e-06,
+                    "alpha": 98.11335823004441
+                },
+                "overlap": 0.9845720986810352,
+                "num_bits_precision_qpe": 22
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-10T21:36:57.663761+00:00",
+                    "wall_clock_stop_time": "2025-03-10T21:37:06.935372+00:00",
+                    "seconds": 9.271611
+                },
+                "algorithm_run_time": {
+                    "seconds": 5642495.492218001
+                },
+                "overall_time": {
+                    "seconds": 5642504.763829001
+                }
+            }
+        },
+        {
+            "task_uuid": "dcf2b441-b297-4a89-ae18-5778ec2d674d",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 536,
+                    "num_T_gates_per_shot": 113332192912,
+                    "num_shots": 2,
+                    "hardware_failure_tolerance_per_shot": 0.0005001250625390474
+                },
+                "physical": {
+                    "num_physical_qubits": 663112,
+                    "distillation_layer_1_code_distance": 9,
+                    "distillation_layer_2_code_distance": 17,
+                    "data_code_distance": 17,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 198400,
+                    "num_logical_compiled_qubits": 804,
+                    "num_qpus": 2
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 77,
+                    "nL": 7,
+                    "nXi": 4,
+                    "nLXi": 10,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 1.6799968926971619e-06,
+                    "bits_rot_givens": 29,
+                    "keep_bitsize": 22,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 1.6799968926971619e-06,
+                    "alpha": 63.239005854806976
+                },
+                "overlap": 0.9895424245472751,
+                "num_bits_precision_qpe": 21
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-10T21:37:10.724898+00:00",
+                    "wall_clock_stop_time": "2025-03-10T21:37:16.190664+00:00",
+                    "seconds": 5.465766
+                },
+                "algorithm_run_time": {
+                    "seconds": 1749565.728079
+                },
+                "overall_time": {
+                    "seconds": 1749571.1938450001
+                }
+            }
+        },
+        {
+            "task_uuid": "6346b7fe-a4a5-4b10-a79b-706d4339923e",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1355,
+                    "num_T_gates_per_shot": 9684262062912,
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025009380472507114
+                },
+                "physical": {
+                    "num_physical_qubits": 2071378,
+                    "distillation_layer_1_code_distance": 11,
+                    "distillation_layer_2_code_distance": 19,
+                    "data_code_distance": 21,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 278272,
+                    "num_logical_compiled_qubits": 2032,
+                    "num_qpus": 4
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 557,
+                    "nL": 10,
+                    "nXi": 6,
+                    "nLXi": 15,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 2.531941192102838e-07,
+                    "bits_rot_givens": 33,
+                    "keep_bitsize": 25,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 2.531941192102838e-07,
+                    "alpha": 419.6042691066508
+                },
+                "overlap": 0.9210307628364096,
+                "num_bits_precision_qpe": 24
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-10T21:37:19.327179+00:00",
+                    "wall_clock_stop_time": "2025-03-10T21:41:56.354624+00:00",
+                    "seconds": 277.027445
+                },
+                "algorithm_run_time": {
+                    "seconds": 180974647.300668
+                },
+                "overall_time": {
+                    "seconds": 180974924.328113
+                }
+            }
+        },
+        {
+            "task_uuid": "68db6781-dd54-43c4-b667-7b754c4d5cdb",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 968,
+                    "num_T_gates_per_shot": 1865777416536,
+                    "num_shots": 3,
+                    "hardware_failure_tolerance_per_shot": 0.0003334445062139757
+                },
+                "physical": {
+                    "num_physical_qubits": 1308184,
+                    "distillation_layer_1_code_distance": 11,
+                    "distillation_layer_2_code_distance": 17,
+                    "data_code_distance": 19,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 259840,
+                    "num_logical_compiled_qubits": 1452,
+                    "num_qpus": 3
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 274,
+                    "nL": 9,
+                    "nXi": 5,
+                    "nLXi": 13,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 4.5274517310466827e-07,
+                    "bits_rot_givens": 32,
+                    "keep_bitsize": 24,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 4.5274517310466827e-07,
+                    "alpha": 234.66033354876177
+                },
+                "overlap": 0.9506539091252104,
+                "num_bits_precision_qpe": 23
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-10T21:42:42.107208+00:00",
+                    "wall_clock_stop_time": "2025-03-10T21:43:42.718926+00:00",
+                    "seconds": 60.611718
+                },
+                "algorithm_run_time": {
+                    "seconds": 34866715.471517004
+                },
+                "overall_time": {
+                    "seconds": 34866776.083235
+                }
+            }
+        },
+        {
+            "task_uuid": "d3ecd428-ee03-4d8b-aa14-af4d935781ed",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1826,
+                    "num_T_gates_per_shot": 44798589275064,
+                    "num_shots": 5,
+                    "hardware_failure_tolerance_per_shot": 0.000200080048033624
+                },
+                "physical": {
+                    "num_physical_qubits": 2694070,
+                    "distillation_layer_1_code_distance": 11,
+                    "distillation_layer_2_code_distance": 19,
+                    "data_code_distance": 21,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 278272,
+                    "num_logical_compiled_qubits": 2739,
+                    "num_qpus": 5
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 995,
+                    "nL": 10,
+                    "nXi": 6,
+                    "nLXi": 16,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 1.3957843017270206e-07,
+                    "bits_rot_givens": 34,
+                    "keep_bitsize": 26,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 1.3957843017270206e-07,
+                    "alpha": 761.1586776114309
+                },
+                "overlap": 0.8882090620400142,
+                "num_bits_precision_qpe": 25
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-10T21:43:57.970121+00:00",
+                    "wall_clock_stop_time": "2025-03-10T22:00:39.676558+00:00",
+                    "seconds": 1001.706437
+                },
+                "algorithm_run_time": {
+                    "seconds": 837173637.077759
+                },
+                "overall_time": {
+                    "seconds": 837174638.784196
+                }
+            }
+        },
+        {
+            "task_uuid": "89253c8f-0f01-4046-a138-1bada22f0a6a",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 877,
+                    "num_T_gates_per_shot": 1496536058016,
+                    "num_shots": 3,
+                    "hardware_failure_tolerance_per_shot": 0.0003334445062139757
+                },
+                "physical": {
+                    "num_physical_qubits": 1209992,
+                    "distillation_layer_1_code_distance": 11,
+                    "distillation_layer_2_code_distance": 17,
+                    "data_code_distance": 19,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 259840,
+                    "num_logical_compiled_qubits": 1315,
+                    "num_qpus": 3
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 230,
+                    "nL": 8,
+                    "nXi": 5,
+                    "nLXi": 13,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 5.46104680382106e-07,
+                    "bits_rot_givens": 31,
+                    "keep_bitsize": 24,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 5.46104680382106e-07,
+                    "alpha": 194.5438981753406
+                },
+                "overlap": 0.9716893407042688,
+                "num_bits_precision_qpe": 23
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-10T22:02:52.642550+00:00",
+                    "wall_clock_stop_time": "2025-03-10T22:03:34.957645+00:00",
+                    "seconds": 42.315095
+                },
+                "algorithm_run_time": {
+                    "seconds": 27966517.584174003
+                },
+                "overall_time": {
+                    "seconds": 27966559.899269003
+                }
+            }
+        },
+        {
+            "task_uuid": "842d2152-2f91-4dce-b088-7ed26afb2381",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1718,
+                    "num_T_gates_per_shot": 37455671593912,
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025009380472507114
+                },
+                "physical": {
+                    "num_physical_qubits": 2551186,
+                    "distillation_layer_1_code_distance": 11,
+                    "distillation_layer_2_code_distance": 19,
+                    "data_code_distance": 21,
+                    "data_routing_overhead": 0.5,
+                    "num_factory_physical_qubits": 278272,
+                    "num_logical_compiled_qubits": 2577,
+                    "num_qpus": 4
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 882,
+                    "nL": 10,
+                    "nXi": 6,
+                    "nLXi": 16,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 1.5649648987068168e-07,
+                    "bits_rot_givens": 34,
+                    "keep_bitsize": 26,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 1.5649648987068168e-07,
+                    "alpha": 678.8735863732416
+                },
+                "overlap": 0.9074501114922904,
+                "num_bits_precision_qpe": 25
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-03-10T22:03:46.727959+00:00",
+                    "wall_clock_stop_time": "2025-03-10T22:16:16.359394+00:00",
+                    "seconds": 749.631435
+                },
+                "algorithm_run_time": {
+                    "seconds": 699952862.911231
+                },
+                "overall_time": {
+                    "seconds": 699953612.5426661
+                }
+            }
+        }
+    ]
+}

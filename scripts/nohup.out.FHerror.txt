@@ -1,0 +1,222 @@
+
+
+
+Notes:  this is the error log from a run of the compute_all_LREs_script on 12-March 2025.
+
+PyLIQTR seems to have a problem with the Hubbard instances.
+
+starting command:  nohup ./compute_all_LREs_script.py --LRE_config_file LRE_config_overlaps.json --input_dir ../problem_instances/ --output_dir ./LRE_solution_files_before_PRE_20250310/ --sftp_username darpa-qb --sftp_key_file ~/.ssh/darpa-qb-key.pem & 
+
+
+
+
+
+
+
+
+2025-03-12 13:28:28,283 - INFO - ===============================================
+2025-03-12 13:28:28,283 - INFO - overall start time: 2025-03-12 13:28:28.283279
+2025-03-12 13:28:28,283 - INFO - input directory: ../problem_instances/
+2025-03-12 13:28:28,290 - INFO - parsing 68 files in the input directory
+2025-03-12 13:28:28,290 - INFO - problem instance: validation.H.cc-PVDZ, 3aa01b76-53e2-49e8-bc05-72875168a00a
+2025-03-12 13:28:28,291 - INFO - problem instance: validation.He.cc-PVDZ, 036fc218-6a9c-4d49-88a4-930f5ebb5ae6
+2025-03-12 13:28:28,291 - INFO - problem instance: validation.H2.cc-PVDZ, 9162371c-b23f-45a6-bacd-44cb7aaea917
+2025-03-12 13:28:28,291 - INFO - problem instance: validation.LiH.cc-PVDZ, 00ec23d5-3e17-46d3-a8b6-9ceff1826377
+2025-03-12 13:28:28,291 - INFO - problem instance: hubbard_square, 614c4444-a31a-4348-b24d-01040208651c
+2025-03-12 13:28:28,291 - INFO - problem instance: hubbard_chain, c2009f9f-4738-4919-9295-5f9231ca5199
+2025-03-12 13:28:28,291 - INFO - problem instance: cl2_0, 0e393c20-3915-42b9-a8aa-29bf53548269
+2025-03-12 13:28:28,291 - INFO - problem instance: na2_0, edb1dfc4-c9d0-41ce-902a-2cfcf97c0c76
+2025-03-12 13:28:28,291 - INFO - problem instance: h2_s_0, 208f2e50-2b56-4e72-815a-cba5cec1264c
+2025-03-12 13:28:28,291 - INFO - problem instance: na_cl_0, 3f141f05-532b-478d-b38a-2ae07baadc88
+2025-03-12 13:28:28,291 - INFO - problem instance: li_f_0, e48e7467-1fcd-478b-a599-f4ce881c57b9
+2025-03-12 13:28:28,291 - INFO - problem instance: li_h_0, 6d355019-13aa-41fc-a530-31d5f968ba22
+2025-03-12 13:28:28,291 - INFO - problem instance: li2_0, 3301a356-21a9-472b-8021-f02f4d2c9eec
+2025-03-12 13:28:28,291 - INFO - problem instance: h_f_0, 892e3341-7186-44c6-9a1a-20f270ddc8b8
+2025-03-12 13:28:28,291 - INFO - problem instance: n_h3_0, 127cfea5-8a7d-45a0-9012-949816a0b8d9
+2025-03-12 13:28:28,291 - INFO - problem instance: be_0, 19cada59-64cc-466c-8809-782a4f574dcc
+2025-03-12 13:28:28,291 - INFO - problem instance: f2_0, e3e78b41-577d-4536-a63f-7e968eeb6493
+2025-03-12 13:28:28,291 - INFO - problem instance: n2_0, 9bd9cde6-6daa-441a-984e-ae1c1c051e91
+2025-03-12 13:28:28,291 - INFO - problem instance: p2_0, 2e61ba35-b6b0-42b5-b3e8-d25bd83145ba
+2025-03-12 13:28:28,291 - INFO - problem instance: si_o_0, 68f1a091-8652-4095-ba31-56f0e02e27d3
+2025-03-12 13:28:28,291 - INFO - problem instance: h2_o_0, 9b8083ab-ea59-47db-894c-95a0d2ba3cb6
+2025-03-12 13:28:28,291 - INFO - problem instance: c_h4_0, e0f6ed02-6502-454b-bf2c-e7994e0510f4
+2025-03-12 13:28:28,291 - INFO - problem instance: c_o_0, 1c3155e0-3679-4eff-bed0-57a1082672c3
+2025-03-12 13:28:28,291 - INFO - problem instance: c_s_0, f90280cc-c860-4ff1-a9ec-4841cec989f7
+2025-03-12 13:28:28,291 - INFO - problem instance: h_cl_0, 586ce6a9-1876-459e-9b6c-be8bb1c4d1a5
+2025-03-12 13:28:28,291 - INFO - problem instance: c_o2_0, 3987b2dd-25bc-44e2-b516-dbc3f670a9c3
+2025-03-12 13:28:28,291 - INFO - problem instance: blue_dimer, dc8bdc56-5ebd-4996-6b81-81b1a06d8c76
+2025-03-12 13:28:28,291 - INFO - problem instance: mn_mono, cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8
+2025-03-12 13:28:28,291 - INFO - problem instance: mo_n2, 664ec8e4-09d5-41cc-6266-ddb26219366f
+2025-03-12 13:28:28,291 - INFO - problem instance: ru_macho, b78a10f2-ce8a-43c0-69ec-4cf666d8e85c
+2025-03-12 13:28:28,291 - INFO - problem instance: fe_red, a8895776-3583-4884-fbc7-d6f9df21a7ac
+2025-03-12 13:28:28,291 - INFO - problem instance: ru_mono, 7213642b-5f16-48be-d5e5-2bc42ebb8526
+2025-03-12 13:28:28,292 - INFO - problem instance: mo2_n2, 90d4e4fc-1216-4846-b45f-198c0530e29b
+2025-03-12 13:28:28,292 - INFO - problem instance: mo_n2_pincer, 8a3787cc-d3d0-42a8-d9a9-7de2aed45208
+2025-03-12 13:28:28,292 - INFO - problem instance: planted_solution_0011, 766ba2da-e72a-4e03-a739-f97269026fc4
+2025-03-12 13:28:28,292 - INFO - problem instance: planted_solution_0008, b57eb979-5c09-4974-97b4-5862e109a1ae
+2025-03-12 13:28:28,292 - INFO - problem instance: planted_solution_0010, bf3fb654-72c7-4fd4-bfd1-9ffef5aaebd8
+2025-03-12 13:28:28,292 - INFO - problem instance: planted_solution_0006, 42958a3e-8b35-4992-acd8-6711848066c1
+2025-03-12 13:28:28,292 - INFO - problem instance: planted_solution_0003, a37c86c0-1937-4f05-83ab-08a5fd104b7e
+2025-03-12 13:28:28,292 - INFO - problem instance: planted_solution_0009, 8db449b1-265b-4a66-b965-a2b4833a88d1
+2025-03-12 13:28:28,292 - INFO - problem instance: planted_solution_0001, 3d3b9e8a-7842-4ca1-bd82-eddb9804972d
+2025-03-12 13:28:28,292 - INFO - problem instance: planted_solution_0007, 3aaf0bb4-b412-4746-922a-c380b4024d00
+2025-03-12 13:28:28,292 - INFO - problem instance: planted_solution_0002, 00043d56-ed63-4266-907c-99c95c51b9db
+2025-03-12 13:28:28,292 - INFO - problem instance: planted_solution_0004, e0adafc5-789e-43e6-8f9e-e718da28de3a
+2025-03-12 13:28:28,292 - INFO - problem instance: planted_solution_0005, 7e0fb928-b0a9-4b44-89f1-7e0ee3b2bb13
+2025-03-12 13:28:28,292 - INFO - problem instance: Cu_0, 1448d27d-bfa9-470f-a6c8-864a295b66f4
+2025-03-12 13:28:28,292 - INFO - problem instance: Cr_1, 02a8c4e9-9d15-4742-b4cc-7f47f69da0e5
+2025-03-12 13:28:28,292 - INFO - problem instance: Ti_1, 9823b0dd-87b6-4793-9741-e8cbcf2b50c0
+2025-03-12 13:28:28,292 - INFO - problem instance: V_0, a14a1e28-71c5-4e23-bf6e-dd9662a6df58
+2025-03-12 13:28:28,292 - INFO - problem instance: CuO_0, 886ad5bf-d487-48c8-b08c-c9f82b84ed5d
+2025-03-12 13:28:28,292 - INFO - problem instance: TiO_0, 0b91f99e-8de5-415d-a78e-f80e45d621ca
+2025-03-12 13:28:28,292 - INFO - problem instance: FeO_0, 55d0ed82-0560-4448-8459-c2ba00654d9d
+2025-03-12 13:28:28,292 - INFO - problem instance: Sc_0, 67f72316-2262-44fb-8c0a-e159e1cd0cf0
+2025-03-12 13:28:28,292 - INFO - problem instance: Mn_0, bc202949-d76c-4962-b937-5c12b298b8b4
+2025-03-12 13:28:28,292 - INFO - problem instance: Fe_0, 05abb33d-ecea-406f-8832-31a814b26dfd
+2025-03-12 13:28:28,292 - INFO - problem instance: Cu_1, d5c7ab73-dfc1-499e-9027-601476004107
+2025-03-12 13:28:28,292 - INFO - problem instance: O_1, d712afaf-6ec4-42d9-b5fd-1edee3ec1046
+2025-03-12 13:28:28,292 - INFO - problem instance: Fe_1, 33c9a058-7a67-454c-856c-2519ba55b44d
+2025-03-12 13:28:28,292 - INFO - problem instance: ScO_0, 7437abf0-1394-47ce-9218-d181f1732112
+2025-03-12 13:28:28,292 - INFO - problem instance: Mn_1, 11c8be98-d9c9-40ea-8d88-ea8c555028f6
+2025-03-12 13:28:28,292 - INFO - problem instance: V_1, 18e1973e-d6cf-48d6-9ca4-c1af21ff7c98
+2025-03-12 13:28:28,292 - INFO - problem instance: Ti_0, c1e4c7dd-2dc4-4dd0-889d-fb34f602965a
+2025-03-12 13:28:28,292 - INFO - problem instance: CrO_0, 2140edd4-8eb3-4270-b753-278334998e3d
+2025-03-12 13:28:28,293 - INFO - problem instance: Cr_0, b8fe08a4-82fe-4636-9812-b1e0666f95b5
+2025-03-12 13:28:28,293 - INFO - problem instance: Sc_1, c6ab4ddb-efe8-46d6-9fc4-90901c08d9a7
+2025-03-12 13:28:28,293 - INFO - problem instance: O_0, 162f41da-af43-427c-a8bc-ae9fa97ace95
+2025-03-12 13:28:28,293 - INFO - problem instance: VO_0, bcc86483-2a7e-4271-b6fc-238ef5e682f6
+2025-03-12 13:28:28,293 - INFO - problem instance: MnO_0, e2212cdf-adef-454a-b218-05041d723c55
+2025-03-12 13:28:28,293 - INFO - parsing 59 files in the output directory
+2025-03-12 13:28:28,298 - INFO - found 59 existing solutions for this solver.
+2025-03-12 13:28:28,298 - INFO - parsing: MnO_0, e2212cdf-adef-454a-b218-05041d723c55
+2025-03-12 13:28:28,298 - INFO - skipping 3aa01b76-53e2-49e8-bc05-72875168a00a because it already has a solution with the same solver UUID and algorithm details.
+2025-03-12 13:28:28,298 - INFO - parsing: MnO_0, e2212cdf-adef-454a-b218-05041d723c55
+2025-03-12 13:28:28,298 - INFO - skipping 036fc218-6a9c-4d49-88a4-930f5ebb5ae6 because it already has a solution with the same solver UUID and algorithm details.
+2025-03-12 13:28:28,298 - INFO - parsing: MnO_0, e2212cdf-adef-454a-b218-05041d723c55
+2025-03-12 13:28:28,298 - INFO - skipping 9162371c-b23f-45a6-bacd-44cb7aaea917 because it already has a solution with the same solver UUID and algorithm details.
+2025-03-12 13:28:28,298 - INFO - parsing: MnO_0, e2212cdf-adef-454a-b218-05041d723c55
+2025-03-12 13:28:28,298 - INFO - skipping 00ec23d5-3e17-46d3-a8b6-9ceff1826377 because it already has a solution with the same solver UUID and algorithm details.
+2025-03-12 13:28:28,298 - INFO - parsing: MnO_0, e2212cdf-adef-454a-b218-05041d723c55
+2025-03-12 13:28:28,298 - INFO - problem_instance UUID: 614c4444-a31a-4348-b24d-01040208651c
+2025-03-12 13:28:28,298 - INFO - problem_instance short name: hubbard_square
+2025-03-12 13:28:28,298 - INFO - contains 30 associated Hamiltonians.
+2025-03-12 13:28:28,313 - INFO - Analyzing task 0a4f3801-33b8-4e3f-89a9-d5c7d6ef9b4a...
+2025-03-12 13:28:28,313 - INFO - number of supporting files: 1
+2025-03-12 13:28:28,314 - INFO - supporting data file UUID: bb8a78a4-b713-4c02-b86d-cb7502090249.
+2025-03-12 13:28:28,314 - INFO - supporting data file URL: sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_3.5981_ms_0.bb8a78a4-b713-4c02-b86d-cb7502090249.gz.
+2025-03-12 13:28:28,314 - INFO - assuming FCIDUMP_L_16_Nf_4_U_3.5981_ms_0.bb8a78a4-b713-4c02-b86d-cb7502090249.gz is an FCIDUMP file.
+2025-03-12 13:28:28,314 - INFO - SFTP downloading file sftp://sftp.l3harris.com/gsee/FCIDUMP_L_16_Nf_4_U_3.5981_ms_0.bb8a78a4-b713-4c02-b86d-cb7502090249.gz...attempt 1/10
+2025-03-12 13:28:28,314 - INFO - SFTP attempt 1/3...
+2025-03-12 13:28:28,358 - INFO - Connected (version 2.0, client 0)
+2025-03-12 13:28:28,887 - INFO - Authentication (publickey) successful!
+2025-03-12 13:28:28,901 - INFO - [chan 0] Opened sftp connection (server version 3)
+2025-03-12 13:28:28,901 - INFO - Downloading gsee/FCIDUMP_L_16_Nf_4_U_3.5981_ms_0.bb8a78a4-b713-4c02-b86d-cb7502090249.gz to FCIDUMP_L_16_Nf_4_U_3.5981_ms_0.bb8a78a4-b713-4c02-b86d-cb7502090249.gz...
+2025-03-12 13:28:28,941 - INFO - [chan 0] sftp session closed.
+2025-03-12 13:28:28,942 - INFO - ===============================================
+2025-03-12 13:28:28,943 - INFO - Calculating Logical Resource Estimate...
+/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/pyLIQTR/utils/df_utils.py:154: UserWarning: one-body tensor spin-orbit couplings are not 0. This should not affect the DoubleFactorized resource estimates.
+  obt = get_obt(h1b, spin_orb=spin_orb)
+2025-03-12 13:29:37,462 - INFO - Circuit initialization time: 68.519467 seconds.
+2025-03-12 13:29:37,462 - INFO - Estimating logical resources...
+/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/pyLIQTR/BlockEncodings/DoubleFactorized.py:183: RuntimeWarning: divide by zero encountered in log2
+  floor_n_Xi = np.floor(np.log2(Xi_l_data_with_1B))
+/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/pyLIQTR/BlockEncodings/DoubleFactorized.py:184: RuntimeWarning: invalid value encountered in divide
+  rotation_angles = 2*np.arccos(1-2**floor_n_Xi / Xi_l_data_with_1B)
+./LRE_solution_files_before_PRE_20250310/
+['3aa01b76-53e2-49e8-bc05-72875168a00a_sol_a128dd65-4083-4772-8bd3-25472a2e757d.json', '90d4e4fc-1216-4846-b45f-198c0530e29b_sol_19a4f956-ba6b-45a7-aec4-de88a1f6fbc0.json', '1c3155e0-3679-4eff-bed0-57a1082672c3_sol_0bee6663-d185-439a-8fa3-79617f23b8f4.json', 'b8fe08a4-82fe-4636-9812-b1e0666f95b5_sol_5e621461-5f5b-40a8-96e8-4971ded88948.json', 'e48e7467-1fcd-478b-a599-f4ce881c57b9_sol_26eee4b9-ddcc-4917-a7ce-a2c3f6d737d5.json', '11c8be98-d9c9-40ea-8d88-ea8c555028f6_sol_f44f6ca6-2c0b-4f67-8862-d1708bdf55e3.json', '766ba2da-e72a-4e03-a739-f97269026fc4_sol_6f75e090-1c7e-45a4-b5bc-41b0cfd5a573.json', 'edb1dfc4-c9d0-41ce-902a-2cfcf97c0c76_sol_4a80e830-fbfa-4017-8341-46041fb9710d.json', 'b57eb979-5c09-4974-97b4-5862e109a1ae_sol_b7e6b655-ce20-4afd-b946-4986623f7c5d.json', '7e0fb928-b0a9-4b44-89f1-7e0ee3b2bb13_sol_4db48bd8-47da-4a97-b6b1-8866d81a04ba.json', 'e3e78b41-577d-4536-a63f-7e968eeb6493_sol_80e5ccbb-0adc-420a-94ea-b21867e7d873.json', '6d355019-13aa-41fc-a530-31d5f968ba22_sol_7874bb17-5d51-4db1-80b3-e02b2626c2fc.json', 'a14a1e28-71c5-4e23-bf6e-dd9662a6df58_sol_cefb6c01-d219-42dc-b340-ab586d6b53a4.json', '3d3b9e8a-7842-4ca1-bd82-eddb9804972d_sol_cd770313-01a6-4841-b82c-feff01cfd1d7.json', '9162371c-b23f-45a6-bacd-44cb7aaea917_sol_9e6cb8e1-d366-4679-91fa-5781e91552c5.json', 'f90280cc-c860-4ff1-a9ec-4841cec989f7_sol_2d0d52e4-6292-409b-89d0-5f17eb9d4f1a.json', '892e3341-7186-44c6-9a1a-20f270ddc8b8_sol_0d8a2666-d9ce-4526-90a2-4890531d5236.json', 'c1e4c7dd-2dc4-4dd0-889d-fb34f602965a_sol_7d3ac567-750a-49c4-af6b-f6652f870959.json', '9b8083ab-ea59-47db-894c-95a0d2ba3cb6_sol_3bbad7f9-d8ed-435c-9f02-1ef5b9df52a3.json', '9823b0dd-87b6-4793-9741-e8cbcf2b50c0_sol_9d15dfe2-3aba-459f-b96c-836906a79301.json', '9bd9cde6-6daa-441a-984e-ae1c1c051e91_sol_2f80e127-dacd-48dc-b532-7860962da674.json', 'dc8bdc56-5ebd-4996-6b81-81b1a06d8c76_sol_7afb5120-858b-4586-a079-d91b1ebd746b.json', '05abb33d-ecea-406f-8832-31a814b26dfd_sol_5ed24527-1892-46f9-8a7a-a9fe92993b48.json', 'a37c86c0-1937-4f05-83ab-08a5fd104b7e_sol_608bffed-be36-4414-ab5c-fd3ee6838530.json', '42958a3e-8b35-4992-acd8-6711848066c1_sol_aa8aebd0-fb71-41b8-a20e-43e83369dd52.json', '1448d27d-bfa9-470f-a6c8-864a295b66f4_sol_885e2660-55e7-4c29-b948-55918439152d.json', 'a8895776-3583-4884-fbc7-d6f9df21a7ac_sol_dd37b5f5-a089-455b-92fd-563e5a78a1cb.json', '3f141f05-532b-478d-b38a-2ae07baadc88_sol_ce296b29-5026-4b14-ba76-c131ef6d354e.json', '3301a356-21a9-472b-8021-f02f4d2c9eec_sol_57654d29-10a5-4e27-a591-b8f0d5cec34d.json', 'cb40f3f7-ffe8-40e8-4544-f26aad5a8bd8_sol_ca20bf78-a4ce-452d-a36c-8c5015523dc8.json', '8a3787cc-d3d0-42a8-d9a9-7de2aed45208_sol_3d991fef-c85c-48a3-87f0-095a1b85d1ce.json', 'e0f6ed02-6502-454b-bf2c-e7994e0510f4_sol_e476826c-10f7-4ef8-b683-a6201a8e9e23.json', '8db449b1-265b-4a66-b965-a2b4833a88d1_sol_bdeaafb9-f10a-42cb-b9c8-5ff3be3390af.json', '664ec8e4-09d5-41cc-6266-ddb26219366f_sol_c618fa6c-0c07-4ddf-a6f1-3e9232519e1d.json', 'bf3fb654-72c7-4fd4-bfd1-9ffef5aaebd8_sol_d610056d-e5cf-4168-8bc5-f58744be5c1c.json', '3aaf0bb4-b412-4746-922a-c380b4024d00_sol_3432f2d6-7048-46cd-bff4-5f3110177ddc.json', '127cfea5-8a7d-45a0-9012-949816a0b8d9_sol_9bdcd7d6-a561-4fe0-abd6-dbf28b186c52.json', '036fc218-6a9c-4d49-88a4-930f5ebb5ae6_sol_3b3c40ec-29d8-4b78-9bf8-52adcd163184.json', '00043d56-ed63-4266-907c-99c95c51b9db_sol_0b52167c-c35a-4cf9-a0ad-bc85c06fac5f.json', '586ce6a9-1876-459e-9b6c-be8bb1c4d1a5_sol_b38ef522-b636-4e49-9e75-b3dc9955f58b.json', 'd5c7ab73-dfc1-499e-9027-601476004107_sol_dbdd7579-e325-40fe-a3e8-22ce6d31ebde.json', '208f2e50-2b56-4e72-815a-cba5cec1264c_sol_062c33d2-a344-41d0-881d-35d4803b335a.json', '33c9a058-7a67-454c-856c-2519ba55b44d_sol_e2a7e169-6ce3-4afd-909f-04daa4907928.json', '02a8c4e9-9d15-4742-b4cc-7f47f69da0e5_sol_22e459ac-2310-466a-9f68-bd0034872d2f.json', 'bc202949-d76c-4962-b937-5c12b298b8b4_sol_253fb445-467d-4148-b020-ae4dcf4ba007.json', '18e1973e-d6cf-48d6-9ca4-c1af21ff7c98_sol_01753e1b-6e96-4bb1-aea7-c6a75bb35089.json', '2e61ba35-b6b0-42b5-b3e8-d25bd83145ba_sol_5b02edf1-3716-47d0-8f87-d923c278efe1.json', '0e393c20-3915-42b9-a8aa-29bf53548269_sol_d74792f1-e644-47de-9d13-bb3a9d83a0d9.json', 'd712afaf-6ec4-42d9-b5fd-1edee3ec1046_sol_dbeb90dd-d88a-4c79-bf26-6da46a960849.json', '162f41da-af43-427c-a8bc-ae9fa97ace95_sol_08b4cb74-0238-4029-935b-910448f4215e.json', '68f1a091-8652-4095-ba31-56f0e02e27d3_sol_f31321dc-37fe-4806-a79b-a0e87d8d6c4e.json', 'e0adafc5-789e-43e6-8f9e-e718da28de3a_sol_9e78584f-9be2-4c0d-91d6-c46278b1b19b.json', '7213642b-5f16-48be-d5e5-2bc42ebb8526_sol_7d2dadd5-bec8-46e0-b3d2-82d5f8111940.json', '3987b2dd-25bc-44e2-b516-dbc3f670a9c3_sol_743739d9-f806-4819-9471-50f8c552b439.json', '67f72316-2262-44fb-8c0a-e159e1cd0cf0_sol_6ca4332a-3822-4709-8e22-43daa82534ae.json', '19cada59-64cc-466c-8809-782a4f574dcc_sol_0c6d6b4c-bbb6-45c2-abdc-2daa0b984400.json', 'c6ab4ddb-efe8-46d6-9fc4-90901c08d9a7_sol_1bd1e255-2f94-4a8a-9e92-9b05a68579d4.json', 'b78a10f2-ce8a-43c0-69ec-4cf666d8e85c_sol_29e766ab-c8a7-48d6-91af-e39841967b37.json', '00ec23d5-3e17-46d3-a8b6-9ceff1826377_sol_32037675-e2b9-46d5-9920-ec47386ceaf3.json']
+Parsing FCIDUMP_L_16_Nf_4_U_3.5981_ms_0.bb8a78a4-b713-4c02-b86d-cb7502090249
+Detected IPython. Loading juliacall extension. See https://juliapy.github.io/PythonCall.jl/stable/compat/#IPython
+Traceback (most recent call last):
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/qualtran/_infra/gate_with_registers.py", line 291, in decompose_bloq
+    return Bloq.decompose_bloq(self)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/qualtran/_infra/bloq.py", line 142, in decompose_bloq
+    return _decompose_from_build_composite_bloq(self)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/qualtran/_infra/bloq.py", line 51, in _decompose_from_build_composite_bloq
+    out_soqs = bloq.build_composite_bloq(bb=bb, **initial_soqs)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/qualtran/_infra/bloq.py", line 126, in build_composite_bloq
+    raise DecomposeNotImplementedError(f"{self} does not declare a decomposition.")
+qualtran._infra.bloq.DecomposeNotImplementedError: DoubleFactorized does not declare a decomposition.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/labuser/Projects/qb-gsee-benchmark/scripts/./compute_all_LREs_script.py", line 402, in <module>
+    main(args)
+  File "/home/labuser/Projects/qb-gsee-benchmark/scripts/./compute_all_LREs_script.py", line 332, in main
+    resource_estimate = get_lqre(
+  File "/home/labuser/Projects/qb-gsee-benchmark/scripts/./compute_all_LREs_script.py", line 187, in get_lqre
+    logical_resources = estimate_resources(circuit.circuit)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/pyLIQTR/utils/resource_analysis.py", line 126, in estimate_resources
+    t_cliff_rot_resources = pylqt_t_complexity(circuit_element)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/pyLIQTR/utils/resource_analysis.py", line 86, in pylqt_t_complexity
+    thisComplexity = _pylqt_t_complexity_for_gate_or_op(op)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/cachetools/_decorators.py", line 52, in wrapper
+    v = func(*args, **kwargs)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/pyLIQTR/utils/resource_analysis.py", line 67, in _pylqt_t_complexity_for_gate_or_op
+    return _t_complexity_from_strategies(gate_or_op, strategies)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/qualtran/cirq_interop/t_complexity_protocol.py", line 204, in _t_complexity_from_strategies
+    ret = strategy(stc)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/qualtran/cirq_interop/t_complexity_protocol.py", line 84, in _from_explicit_annotation
+    result = estimator()
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/pyLIQTR/qubitization/phase_estimation.py", line 181, in _t_complexity_
+    walk_cost        =  t_complexity( QubitizedWalkOperator( self._block_encoding ))
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/pyLIQTR/utils/resource_analysis.py", line 81, in pylqt_t_complexity
+    ret = _pylqt_t_complexity_for_gate_or_op(stc)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/cachetools/_decorators.py", line 52, in wrapper
+    v = func(*args, **kwargs)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/pyLIQTR/utils/resource_analysis.py", line 67, in _pylqt_t_complexity_for_gate_or_op
+    return _t_complexity_from_strategies(gate_or_op, strategies)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/qualtran/cirq_interop/t_complexity_protocol.py", line 204, in _t_complexity_from_strategies
+    ret = strategy(stc)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/qualtran/cirq_interop/t_complexity_protocol.py", line 84, in _from_explicit_annotation
+    result = estimator()
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/pyLIQTR/qubitization/qubitized_gates.py", line 393, in _t_complexity_
+    encoding_cost  =  t_complexity(self._block_encoding)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/pyLIQTR/utils/resource_analysis.py", line 81, in pylqt_t_complexity
+    ret = _pylqt_t_complexity_for_gate_or_op(stc)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/cachetools/_decorators.py", line 52, in wrapper
+    v = func(*args, **kwargs)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/pyLIQTR/utils/resource_analysis.py", line 67, in _pylqt_t_complexity_for_gate_or_op
+    return _t_complexity_from_strategies(gate_or_op, strategies)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/qualtran/cirq_interop/t_complexity_protocol.py", line 204, in _t_complexity_from_strategies
+    ret = strategy(stc)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/pyLIQTR/utils/resource_analysis.py", line 37, in _plyqt_from_bloq_build_call_graph
+    callee_counts = get_bloq_callee_counts(bloq=stc, generalizer=cirq_to_bloqs)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/qualtran/resource_counting/_call_graph.py", line 118, in get_bloq_callee_counts
+    return _generalize_callees(bloq.build_call_graph(ssa), generalizer)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/qualtran/_infra/bloq.py", line 297, in build_call_graph
+    return self.decompose_bloq().build_call_graph(ssa)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/qualtran/_infra/gate_with_registers.py", line 293, in decompose_bloq
+    return decompose_from_cirq_style_method(self)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/qualtran/cirq_interop/_cirq_to_bloq.py", line 602, in decompose_from_cirq_style_method
+    return cirq_optree_to_cbloq(
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/qualtran/cirq_interop/_cirq_to_bloq.py", line 479, in cirq_optree_to_cbloq
+    circuit = cirq.Circuit(optree)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/cirq/circuits/circuit.py", line 1771, in __init__
+    flattened_contents = tuple(ops.flatten_to_ops_or_moments(contents))
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/cirq/ops/op_tree.py", line 134, in flatten_to_ops_or_moments
+    yield from flatten_to_ops_or_moments(subtree)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/cirq/ops/op_tree.py", line 133, in flatten_to_ops_or_moments
+    for subtree in root:
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/pyLIQTR/BlockEncodings/DoubleFactorized.py", line 240, in decompose_from_registers
+    l_neq_0_data,Xi_l_data_with_1B,offset_data,rot_data = self.compute_data_l()
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/pyLIQTR/BlockEncodings/DoubleFactorized.py", line 186, in compute_data_l
+    rot_data = approx_angles_as_ints_with_br_bits(rotation_angles,self.br)
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/pyLIQTR/BlockEncodings/DoubleFactorized.py", line 391, in approx_angles_as_ints_with_br_bits
+    binary_angle = [*iter_bits_fixed_point(angle,width=br,signed=False)]
+  File "/home/labuser/Projects/qb-gsee-benchmark/.venv/lib/python3.10/site-packages/qualtran/cirq_interop/bit_tools.py", line 83, in iter_bits_fixed_point
+    assert lb <= val <= 1, f"{val} must be between [{lb}, 1]"
+AssertionError: nan must be between [0, 1]
+┌ Warning: attempting to remove probably stale pidfile
+│   path = "/home/labuser/.julia/registries/.pid"
+└ @ FileWatching.Pidfile ~/Projects/qb-gsee-benchmark/.venv/julia_env/pyjuliapkg/install/share/julia/stdlib/v1.9/FileWatching/src/pidfile.jl:244
+    Updating registry at `~/.julia/registries/General.toml`
+   Resolving package versions...
+  No Changes to `~/Projects/qb-gsee-benchmark/.venv/julia_env/Project.toml`
+  No Changes to `~/Projects/qb-gsee-benchmark/.venv/julia_env/Manifest.toml`
+   Resolving package versions...
+  No Changes to `~/Projects/qb-gsee-benchmark/.venv/julia_env/Project.toml`
+  No Changes to `~/Projects/qb-gsee-benchmark/.venv/julia_env/Manifest.toml`
+   Resolving package versions...
+  No Changes to `~/Projects/qb-gsee-benchmark/.venv/julia_env/Project.toml`
+  No Changes to `~/Projects/qb-gsee-benchmark/.venv/julia_env/Manifest.toml`

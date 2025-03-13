@@ -221,7 +221,7 @@ class StandardReport:
                 color=colors[series_counter],
                 edgecolor="black",
                 marker="^", # triangle up for success.
-                label=f"Success {solver_short_name} ({solver_uuid[:4]}...)"
+                label=f"Success {solver_short_name} ({solver_uuid[:6]}...)"
             )
             df_failed = df[df["label"]==False] # filter by failed to solve
             plt.scatter(
@@ -230,7 +230,7 @@ class StandardReport:
                 color=colors[series_counter],
                 marker="v", # triangle down for failure.
                 edgecolor="black",
-                label=f"Failed {solver_short_name} ({solver_uuid[:4]}...)"
+                label=f"Failed {solver_short_name} ({solver_uuid[:6]}...)"
             )
             series_counter += 1
         # plot in linear run time y-scale:
@@ -291,7 +291,7 @@ class StandardReport:
                 color=colors[series_counter],
                 edgecolor="black",
                 marker="^", # triangle up for success.
-                label=f"Success {solver_short_name} ({solver_uuid[:4]}...)"
+                label=f"Success {solver_short_name} ({solver_uuid[:6]}...)"
             )
             df_failed = df[df["label"]==False] # filter by failed to solve
             plt.scatter(
@@ -300,7 +300,7 @@ class StandardReport:
                 color=colors[series_counter],
                 marker="v", # triangle down for failure.
                 edgecolor="black",
-                label=f"Failed {solver_short_name} ({solver_uuid[:4]}...)"
+                label=f"Failed {solver_short_name} ({solver_uuid[:6]}...)"
             )
             series_counter += 1
         # plot in linear run time y-scale:
@@ -429,7 +429,7 @@ class StandardReport:
             solver_short_name = self.benchmark_data.solvers_dict[solver_uuid]["solver_short_name"]
                         
             plt.figure()
-            plt.title(f"Run time for {solver_short_name}/{solver_uuid[:4]}...")
+            plt.title(f"Run time for {solver_short_name}/{solver_uuid[:6]}...")
             plt.xlabel("Number of spatial orbitals")
             plt.xlim(0,10*np.ceil(max(df["num_orbitals"])/10))
             plt.ylabel("Overall run time in seconds")
@@ -443,7 +443,7 @@ class StandardReport:
                 color="blue", # blue for success
                 marker="^", # triangle up for success.
                 edgecolor="black",
-                label=f"Task success {solver_short_name} ({solver_uuid[:4]}...)"
+                label=f"Task success {solver_short_name} ({solver_uuid[:6]}...)"
             )
             
             df_failed = df[df["label"]==False] # failed to solve the task
@@ -453,7 +453,7 @@ class StandardReport:
                 color="red", # red for failure
                 marker="v", # triangle down for failure.
                 edgecolor="black",
-                label=f"Task failed {solver_short_name} ({solver_uuid[:4]}...)"
+                label=f"Task failed {solver_short_name} ({solver_uuid[:6]}...)"
             )
             
             plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
@@ -480,7 +480,7 @@ class StandardReport:
             solver_short_name = self.benchmark_data.solvers_dict[solver_uuid]["solver_short_name"]
                         
             plt.figure()
-            plt.title(f"Run time for {solver_short_name}/{solver_uuid[:4]}...")
+            plt.title(f"Run time for {solver_short_name}/{solver_uuid[:6]}...")
             plt.xlabel("log(FCI size)")
             plt.xlim([0,self.benchmark_data.all_data_df["log_fci_dim"].max()])
             plt.ylabel("Overall run time in seconds")
@@ -493,7 +493,7 @@ class StandardReport:
                 color="blue", # blue for success
                 marker="^", # triangle up for success.
                 edgecolor="black",
-                label=f"Task success {solver_short_name} ({solver_uuid[:4]}...)"
+                label=f"Task success {solver_short_name} ({solver_uuid[:6]}...)"
             )
             
             df_failed = df[df["label"]==False] # failed to solve the task
@@ -503,7 +503,7 @@ class StandardReport:
                 color="red", # red for failure
                 marker="v", # triangle down for failure.
                 edgecolor="black",
-                label=f"Task failed {solver_short_name} ({solver_uuid[:4]}...)"
+                label=f"Task failed {solver_short_name} ({solver_uuid[:6]}...)"
             )
             
             plt.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=1)
@@ -539,7 +539,7 @@ class StandardReport:
             solver_short_name = self.benchmark_data.solvers_dict[solver_uuid]["solver_short_name"]
             plt.figure()
             plt.title(f"""
-                Utility capture from {solver_short_name}/{solver_uuid[:4]}... \n
+                Utility capture from {solver_short_name}/{solver_uuid[:6]}... \n
                 (captured: ${captured_utility:.1e}/{total_utility:.1e}, approximately {captured_percent:.1e}%)            
                 """)
             plt.xlabel("Number of spatial orbitals")
@@ -553,7 +553,7 @@ class StandardReport:
                 color="blue", # blue for success
                 marker="^", # triangle up for success.
                 edgecolor="black",
-                label=f"Task success {solver_short_name} ({solver_uuid[:4]}...)"
+                label=f"Task success {solver_short_name} ({solver_uuid[:6]}...)"
             )
             
             df_failed = df[df["label"]==False] # failed to solve the task
@@ -563,7 +563,7 @@ class StandardReport:
                 color="red", # red for failure
                 marker="v", # triangle down for failure.
                 edgecolor="black",
-                label=f"Task failed {solver_short_name} ({solver_uuid[:4]}...)"
+                label=f"Task failed {solver_short_name} ({solver_uuid[:6]}...)"
             )
 
             
