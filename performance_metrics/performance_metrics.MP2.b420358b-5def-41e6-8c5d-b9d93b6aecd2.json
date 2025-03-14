@@ -1,29 +1,29 @@
 {
     "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/performance_metrics.schema.0.0.1.json",
-    "performance_metrics_uuid": "e06c981e-7e3b-449f-a9a9-e8f335e5f803",
+    "performance_metrics_uuid": "ecc26c93-2d41-4493-94f6-c89c10daa291",
     "solver_short_name": "MP2",
     "solver_uuid": "b420358b-5def-41e6-8c5d-b9d93b6aecd2",
-    "creation_timestamp": "2025-03-12T17:03:13.578128+00:00",
+    "creation_timestamp": "2025-03-14T12:02:28.971006+00:00",
     "ml_metrics": {
         "solvability_ratio": 0.0,
         "comments": "solvability ratio based on PCA embedding.",
         "f1_score": [
-            0.9863013698630136,
-            0.7142857142857143
+            0.0,
+            0.07547169811320754
         ],
         "ml_metrics_calculator_version": 1
     },
     "top_level_results": {
         "number_of_problem_instances": 68,
-        "number_of_problem_instances_attempted": 61,
-        "number_of_problem_instances_solved": 5,
+        "number_of_problem_instances_attempted": 65,
+        "number_of_problem_instances_solved": 6,
         "number_of_tasks": 228,
-        "number_of_tasks_attempted": 216,
-        "number_of_tasks_solved": 5,
-        "number_of_tasks_solved_within_run_time_limit": 216,
-        "number_of_tasks_solved_within_accuracy_threshold": 5,
+        "number_of_tasks_attempted": 220,
+        "number_of_tasks_solved": 6,
+        "number_of_tasks_solved_within_run_time_limit": 220,
+        "number_of_tasks_solved_within_accuracy_threshold": 6,
         "max_run_time_of_attempted_tasks": 2.230440139770508,
-        "sum_of_run_time_of_attempted_tasks": 78.34016704559326
+        "sum_of_run_time_of_attempted_tasks": 78.57580351829529
     },
     "results_by_problem_instance": [
         {
@@ -340,15 +340,15 @@
         },
         {
             "problem_instance_uuid": "00ec23d5-3e17-46d3-a8b6-9ceff1826377",
-            "solution_uuid": null,
+            "solution_uuid": "2fcb0800-2b47-4cd7-a8a7-ec86f6191cd4",
             "number_of_tasks": 1,
-            "number_of_tasks_attempted": 0,
-            "number_of_tasks_solved_within_runtime_limit": 0,
+            "number_of_tasks_attempted": 1,
+            "number_of_tasks_solved_within_runtime_limit": 1,
             "number_of_tasks_solved_within_accuracy_requirement": 0,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": null,
-            "max_run_time_of_attempted_tasks": null,
-            "solution_submitted_by_due_date": false
+            "sum_of_run_time_of_attempted_tasks": 0.10635924339294434,
+            "max_run_time_of_attempted_tasks": 0.10635924339294434,
+            "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "9823b0dd-87b6-4793-9741-e8cbcf2b50c0",
@@ -400,15 +400,15 @@
         },
         {
             "problem_instance_uuid": "036fc218-6a9c-4d49-88a4-930f5ebb5ae6",
-            "solution_uuid": null,
+            "solution_uuid": "dea946ad-bce4-461b-a2f5-4c50fa35f696",
             "number_of_tasks": 1,
-            "number_of_tasks_attempted": 0,
-            "number_of_tasks_solved_within_runtime_limit": 0,
+            "number_of_tasks_attempted": 1,
+            "number_of_tasks_solved_within_runtime_limit": 1,
             "number_of_tasks_solved_within_accuracy_requirement": 0,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": null,
-            "max_run_time_of_attempted_tasks": null,
-            "solution_submitted_by_due_date": false
+            "sum_of_run_time_of_attempted_tasks": 0.05739021301269531,
+            "max_run_time_of_attempted_tasks": 0.05739021301269531,
+            "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "e3e78b41-577d-4536-a63f-7e968eeb6493",
@@ -484,15 +484,15 @@
         },
         {
             "problem_instance_uuid": "3aa01b76-53e2-49e8-bc05-72875168a00a",
-            "solution_uuid": null,
+            "solution_uuid": "e729df48-10a6-4c25-a9ca-926e2857ef90",
             "number_of_tasks": 1,
-            "number_of_tasks_attempted": 0,
-            "number_of_tasks_solved_within_runtime_limit": 0,
-            "number_of_tasks_solved_within_accuracy_requirement": 0,
-            "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": null,
-            "max_run_time_of_attempted_tasks": null,
-            "solution_submitted_by_due_date": false
+            "number_of_tasks_attempted": 1,
+            "number_of_tasks_solved_within_runtime_limit": 1,
+            "number_of_tasks_solved_within_accuracy_requirement": 1,
+            "number_of_tasks_solved": 1,
+            "sum_of_run_time_of_attempted_tasks": 0.022669315338134766,
+            "max_run_time_of_attempted_tasks": 0.022669315338134766,
+            "solution_submitted_by_due_date": true
         },
         {
             "problem_instance_uuid": "9b8083ab-ea59-47db-894c-95a0d2ba3cb6",
@@ -832,15 +832,15 @@
         },
         {
             "problem_instance_uuid": "9162371c-b23f-45a6-bacd-44cb7aaea917",
-            "solution_uuid": null,
+            "solution_uuid": "d1348c4c-a534-47e8-98e4-9a8fbaa13bc7",
             "number_of_tasks": 1,
-            "number_of_tasks_attempted": 0,
-            "number_of_tasks_solved_within_runtime_limit": 0,
+            "number_of_tasks_attempted": 1,
+            "number_of_tasks_solved_within_runtime_limit": 1,
             "number_of_tasks_solved_within_accuracy_requirement": 0,
             "number_of_tasks_solved": 0,
-            "sum_of_run_time_of_attempted_tasks": null,
-            "max_run_time_of_attempted_tasks": null,
-            "solution_submitted_by_due_date": false
+            "sum_of_run_time_of_attempted_tasks": 0.04921770095825195,
+            "max_run_time_of_attempted_tasks": 0.04921770095825195,
+            "solution_submitted_by_due_date": true
         }
     ],
     "results_by_task": [
@@ -1255,12 +1255,12 @@
             "task_uuid": "2b2eefc4-9c8c-4a02-b621-059774f620c4",
             "problem_instance_uuid": "00ec23d5-3e17-46d3-a8b6-9ceff1826377",
             "instance_data_object_uuid": "7298a64d-1574-42d7-b092-3e9f686ec162",
-            "solution_uuid": null,
-            "attempted": false,
-            "solved_within_run_time": false,
+            "solution_uuid": "2fcb0800-2b47-4cd7-a8a7-ec86f6191cd4",
+            "attempted": true,
+            "solved_within_run_time": true,
             "solved_within_accuracy_requirement": false,
             "solved": false,
-            "overall_run_time_seconds": null
+            "overall_run_time_seconds": 0.10635924339294434
         },
         {
             "task_uuid": "2cd76a23-0514-458a-b588-94e2d10564d3",
@@ -1387,12 +1387,12 @@
             "task_uuid": "3e803f97-2478-4630-a7a3-12fbc69f7666",
             "problem_instance_uuid": "036fc218-6a9c-4d49-88a4-930f5ebb5ae6",
             "instance_data_object_uuid": "00243a50-3f5c-44da-99c8-021ac2214cba",
-            "solution_uuid": null,
-            "attempted": false,
-            "solved_within_run_time": false,
+            "solution_uuid": "dea946ad-bce4-461b-a2f5-4c50fa35f696",
+            "attempted": true,
+            "solved_within_run_time": true,
             "solved_within_accuracy_requirement": false,
             "solved": false,
-            "overall_run_time_seconds": null
+            "overall_run_time_seconds": 0.05739021301269531
         },
         {
             "task_uuid": "3eccbccf-e84a-44b9-b775-cef772cd84f0",
@@ -1552,12 +1552,12 @@
             "task_uuid": "4e1617a3-7a5f-4c86-99b6-4cfc8b547197",
             "problem_instance_uuid": "3aa01b76-53e2-49e8-bc05-72875168a00a",
             "instance_data_object_uuid": "0b245a9c-7561-423d-bd50-8958b3625a94",
-            "solution_uuid": null,
-            "attempted": false,
-            "solved_within_run_time": false,
-            "solved_within_accuracy_requirement": false,
-            "solved": false,
-            "overall_run_time_seconds": null
+            "solution_uuid": "e729df48-10a6-4c25-a9ca-926e2857ef90",
+            "attempted": true,
+            "solved_within_run_time": true,
+            "solved_within_accuracy_requirement": true,
+            "solved": true,
+            "overall_run_time_seconds": 0.022669315338134766
         },
         {
             "task_uuid": "4e395cc5-b5d2-4b82-95a2-1276262386c8",
@@ -3268,12 +3268,12 @@
             "task_uuid": "f847059f-a89f-4008-9ae1-39847c899e75",
             "problem_instance_uuid": "9162371c-b23f-45a6-bacd-44cb7aaea917",
             "instance_data_object_uuid": "bbcd09f2-8a89-4f35-9577-7851a76ea17c",
-            "solution_uuid": null,
-            "attempted": false,
-            "solved_within_run_time": false,
+            "solution_uuid": "d1348c4c-a534-47e8-98e4-9a8fbaa13bc7",
+            "attempted": true,
+            "solved_within_run_time": true,
             "solved_within_accuracy_requirement": false,
             "solved": false,
-            "overall_run_time_seconds": null
+            "overall_run_time_seconds": 0.04921770095825195
         },
         {
             "task_uuid": "f936469c-1d1e-4295-a006-84a778c1714c",
