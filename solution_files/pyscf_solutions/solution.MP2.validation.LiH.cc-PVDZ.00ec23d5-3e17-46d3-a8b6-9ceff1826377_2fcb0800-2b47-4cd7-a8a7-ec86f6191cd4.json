@@ -1,0 +1,47 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "2fcb0800-2b47-4cd7-a8a7-ec86f6191cd4",
+    "problem_instance_uuid": "00ec23d5-3e17-46d3-a8b6-9ceff1826377",
+    "creation_timestamp": "2025-03-14T11:03:12.754965Z",
+    "contact_info": [
+        {
+            "name": "Matthew Otten",
+            "email": "mjotten@wisc.edu",
+            "institution": "University of Wisconsin -- Madison"
+        }
+    ],
+    "is_resource_estimate": false,
+    "solution_data": [
+        {
+            "task_uuid": "2b2eefc4-9c8c-4a02-b621-059774f620c4",
+            "energy": -8.006434730292302,
+            "energy_units": "Hartree",
+            "run_time": {
+                "overall_time": {
+                    "seconds": 0.10635924339294434
+                }
+            },
+            "run_time_cpu": {
+                "overall_time": {
+                    "seconds": 13.613983154296875
+                }
+            },
+            "solution_details": {}
+        }
+    ],
+    "solver_details": {
+        "solver_uuid": "b420358b-5def-41e6-8c5d-b9d93b6aecd2",
+        "solver_short_name": "MP2",
+        "compute_hardware_type": "classical_computer",
+        "classical_hardware_details": {
+            "computing_environment_name": "LCRC Improv (per node)",
+            "cpu_description": "2x AMD EPYC 7713 64C",
+            "ram_available_gb": "256GB",
+            "clock_speed": "2 GHz",
+            "total_num_cores": 128
+        },
+        "algorithm_details": "MP2",
+        "software_details": "pyscf (https://github.com/pyscf/pyscf)."
+    },
+    "digital_signature": null
+}
