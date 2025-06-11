@@ -1,0 +1,803 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "63f4384b-4737-4120-a1c4-848d56b8b7b8",
+    "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
+    "creation_timestamp": "2025-05-30T12:36:13.362466+00:00",
+    "is_resource_estimate": true,
+    "contact_info": [
+        {
+            "name": "Joshua T. Cantin",
+            "email": "joshua.cantin@utoronto.ca",
+            "institution": "University of Toronto at Scarborough"
+        },
+        {
+            "name": "Aritra S. Brahmachari",
+            "email": "asb20ms082@iiserkol.ac.in",
+            "institution": "Indian Institute of Science Education and Research, Kolkata, West Bengal, India"
+        }
+    ],
+    "compute_hardware_type": "quantum_computer",
+    "solver_details": {
+        "solver_uuid": "b8ed03bd-9c3e-4d07-80af-8f77f0e7c2ac",
+        "solver_short_name": "THC_BLISS_QPE",
+        "compute_hardware_type": "quantum_computer",
+        "algorithm_details": {
+            "algorithm_description": "",
+            "algorithm_parameters": {
+                "overlap_csv": "overlaps.csv"
+            },
+            "description": "Tensor Hypercontraction + BLock Invariant Symmetry Shift (BLISS) QPE resource estimates based on methodology in arXiv:2406.06335v2, which is a modified form of the method in arXiv: 2501.06165. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and this DMRG runtime is not included in the classical compute costs."
+        },
+        "software_details": [
+            {
+                "software_name": "benchq",
+                "software_version": "0.7.1.dev10+g80b8279.d20250116"
+            },
+            {
+                "software_name": "openfermion",
+                "software_version": "1.6.1"
+            },
+            {
+                "software_name": "Python",
+                "software_version": "3.12.2"
+            },
+            {
+                "software_name": "JAX",
+                "software_version": "0.4.31"
+            },
+            {
+                "software_name": "benchq",
+                "software_version": "0.1.dev153+g3d429cb.d20250508"
+            }
+        ],
+        "logical_resource_estimate_solution_uuid": "fd9fd934-0256-494b-b973-5a816ce69fe8",
+        "quantum_hardware_details": {
+            "quantum_hardware_description": "Superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494. Used with THC+BLISS.",
+            "quantum_hardware_parameters": {
+                "num_factories": 4,
+                "physical_error_rate": 0.001,
+                "cycle_time_microseconds": 1
+            }
+        },
+        "logical_resource_estimate_solver_uuid": "12fbca08-3df3-4f3e-b7fd-c535b6b44b1c"
+    },
+    "digital_signature": null,
+    "solution_data": [
+        {
+            "task_uuid": "aaae8d93-cb88-41ee-8f11-c70cc9b0d7fb",
+            "error_bound": 0.001,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2090,
+                    "num_toffoli_gates_per_shot": 747194346045,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
+                    "num_shots": 124,
+                    "hardware_failure_tolerance_per_shot": 8.07e-06,
+                    "num_T_gates_per_shot": 2988777384180
+                },
+                "physical": {
+                    "num_physical_qubits": 17247680,
+                    "data_code_distance": 51,
+                    "magic_state_factory_name": "(15-to-1)^6_17,7,7 x (15-to-1)_41,17,17",
+                    "data_routing_overhead": 0.5,
+                    "num_logical_compiled_qubits": 3135
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "to_fill": 0
+                },
+                "overlap": 0.2329620418714725,
+                "thc_bliss_penalty_parameter": 0.007,
+                "decomposition_ccsd_t_error_millihartree": 0.32,
+                "decomposition_l2_norm_error_hartree": 0.02,
+                "reference_double_factorization_decomposition_ccsd_t_error_millihartree": 0.001,
+                "reference_double_factorization_decomposition_l2_norm_error_hartree": 0.01
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
+                    "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
+                    "seconds": 0
+                },
+                "algorithm_run_time": {
+                    "seconds": 11859468660.42624
+                },
+                "overall_time": {
+                    "seconds": 11859468660.42624
+                }
+            }
+        },
+        {
+            "task_uuid": "5547bb48-fac6-4426-91ad-c4853ce421aa",
+            "error_bound": 0.001,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 3251,
+                    "num_toffoli_gates_per_shot": 1997581388448,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
+                    "num_shots": 269,
+                    "hardware_failure_tolerance_per_shot": 3.72e-06,
+                    "num_T_gates_per_shot": 7990325553792
+                },
+                "physical": {
+                    "num_physical_qubits": 28736264,
+                    "data_code_distance": 53,
+                    "magic_state_factory_name": "(15-to-1)^6_17,7,7 x (15-to-1)_41,17,17",
+                    "data_routing_overhead": 0.5,
+                    "num_logical_compiled_qubits": 4877
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "to_fill": 0
+                },
+                "overlap": 0.1593559136751708,
+                "thc_bliss_penalty_parameter": 0.01,
+                "decomposition_ccsd_t_error_millihartree": 0.26,
+                "decomposition_l2_norm_error_hartree": 0.02,
+                "reference_double_factorization_decomposition_ccsd_t_error_millihartree": 0.38,
+                "reference_double_factorization_decomposition_l2_norm_error_hartree": 0.01
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
+                    "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
+                    "seconds": 0
+                },
+                "algorithm_run_time": {
+                    "seconds": 68780722367.04153
+                },
+                "overall_time": {
+                    "seconds": 68780722367.04153
+                }
+            }
+        },
+        {
+            "task_uuid": "db75bf65-181b-40c2-b978-26453437c2b0",
+            "error_bound": 0.001,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2088,
+                    "num_toffoli_gates_per_shot": 379230473640,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
+                    "num_shots": 31,
+                    "hardware_failure_tolerance_per_shot": 3.23e-05,
+                    "num_T_gates_per_shot": 1516921894560
+                },
+                "physical": {
+                    "num_physical_qubits": 15953600,
+                    "data_code_distance": 49,
+                    "magic_state_factory_name": "(15-to-1)^6_17,7,7 x (15-to-1)_41,17,17",
+                    "data_routing_overhead": 0.5,
+                    "num_logical_compiled_qubits": 3132
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "to_fill": 0
+                },
+                "overlap": 0.4496124185294072,
+                "thc_bliss_penalty_parameter": 0.007,
+                "decomposition_ccsd_t_error_millihartree": 0.16,
+                "decomposition_l2_norm_error_hartree": 0.02,
+                "reference_double_factorization_decomposition_ccsd_t_error_millihartree": 0.25,
+                "reference_double_factorization_decomposition_l2_norm_error_hartree": 0.01
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
+                    "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
+                    "seconds": 0
+                },
+                "algorithm_run_time": {
+                    "seconds": 1504786519.4035199
+                },
+                "overall_time": {
+                    "seconds": 1504786519.4035199
+                }
+            }
+        },
+        {
+            "task_uuid": "ab482d50-9a85-48d9-aa17-83dcbb38614b",
+            "error_bound": 0.001,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 3113,
+                    "num_toffoli_gates_per_shot": 703900475222,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
+                    "num_shots": 35,
+                    "hardware_failure_tolerance_per_shot": 2.86e-05,
+                    "num_T_gates_per_shot": 2815601900888
+                },
+                "physical": {
+                    "num_physical_qubits": 23643600,
+                    "data_code_distance": 49,
+                    "magic_state_factory_name": "(15-to-1)^6_17,7,7 x (15-to-1)_41,17,17",
+                    "data_routing_overhead": 0.5,
+                    "num_logical_compiled_qubits": 4670
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "to_fill": 0
+                },
+                "overlap": 0.4269009231326315,
+                "thc_bliss_penalty_parameter": 0.007,
+                "decomposition_ccsd_t_error_millihartree": 0.01,
+                "decomposition_l2_norm_error_hartree": 0.02,
+                "reference_double_factorization_decomposition_ccsd_t_error_millihartree": 0.13,
+                "reference_double_factorization_decomposition_l2_norm_error_hartree": 0.01
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
+                    "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
+                    "seconds": 0
+                },
+                "algorithm_run_time": {
+                    "seconds": 3153474128.99456
+                },
+                "overall_time": {
+                    "seconds": 3153474128.99456
+                }
+            }
+        },
+        {
+            "task_uuid": "b628f4be-582f-4f23-96eb-c8b9e0005e4a",
+            "error_bound": 0.001,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1192,
+                    "num_toffoli_gates_per_shot": 30736678908,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025,
+                    "num_T_gates_per_shot": 122946715632
+                },
+                "physical": {
+                    "num_physical_qubits": 7860416,
+                    "data_code_distance": 45,
+                    "magic_state_factory_name": "(15-to-1)^6_17,7,7 x (15-to-1)_41,17,17",
+                    "data_routing_overhead": 0.5,
+                    "num_logical_compiled_qubits": 1788
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "to_fill": 0
+                },
+                "overlap": 0.9169804343466676,
+                "thc_bliss_penalty_parameter": 0.003,
+                "decomposition_ccsd_t_error_millihartree": 0.06,
+                "decomposition_l2_norm_error_hartree": 0.01,
+                "reference_double_factorization_decomposition_ccsd_t_error_millihartree": 0.13,
+                "reference_double_factorization_decomposition_l2_norm_error_hartree": 0.008
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
+                    "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
+                    "seconds": 0
+                },
+                "algorithm_run_time": {
+                    "seconds": 15737179.600895999
+                },
+                "overall_time": {
+                    "seconds": 15737179.600895999
+                }
+            }
+        },
+        {
+            "task_uuid": "c436c481-00d1-49ec-8d0e-0a5e83a8df19",
+            "error_bound": 0.001,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1697,
+                    "num_toffoli_gates_per_shot": 88796853516,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
+                    "num_shots": 5,
+                    "hardware_failure_tolerance_per_shot": 0.0002,
+                    "num_T_gates_per_shot": 355187414064
+                },
+                "physical": {
+                    "num_physical_qubits": 11068272,
+                    "data_code_distance": 45,
+                    "magic_state_factory_name": "(15-to-1)^6_17,7,7 x (15-to-1)_41,17,17",
+                    "data_routing_overhead": 0.5,
+                    "num_logical_compiled_qubits": 2546
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "to_fill": 0
+                },
+                "overlap": 0.9029863738059232,
+                "thc_bliss_penalty_parameter": 0.07,
+                "decomposition_ccsd_t_error_millihartree": 0.18,
+                "decomposition_l2_norm_error_hartree": 0.02,
+                "reference_double_factorization_decomposition_ccsd_t_error_millihartree": 0.29,
+                "reference_double_factorization_decomposition_l2_norm_error_hartree": 0.009
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
+                    "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
+                    "seconds": 0
+                },
+                "algorithm_run_time": {
+                    "seconds": 56829986.25024
+                },
+                "overall_time": {
+                    "seconds": 56829986.25024
+                }
+            }
+        },
+        {
+            "task_uuid": "349e9cbe-d675-411f-b6b8-be846c27902c",
+            "error_bound": 0.001,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2093,
+                    "num_toffoli_gates_per_shot": 872066299382,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
+                    "num_shots": 106,
+                    "hardware_failure_tolerance_per_shot": 9.44e-06,
+                    "num_T_gates_per_shot": 3488265197528
+                },
+                "physical": {
+                    "num_physical_qubits": 17274720,
+                    "data_code_distance": 51,
+                    "magic_state_factory_name": "(15-to-1)^6_17,7,7 x (15-to-1)_41,17,17",
+                    "data_routing_overhead": 0.5,
+                    "num_logical_compiled_qubits": 3140
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "to_fill": 0
+                },
+                "overlap": 0.2518945485439342,
+                "thc_bliss_penalty_parameter": 0.003,
+                "decomposition_ccsd_t_error_millihartree": null,
+                "decomposition_l2_norm_error_hartree": 0.01,
+                "reference_double_factorization_decomposition_ccsd_t_error_millihartree": null,
+                "reference_double_factorization_decomposition_l2_norm_error_hartree": 0.01
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
+                    "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
+                    "seconds": 0
+                },
+                "algorithm_run_time": {
+                    "seconds": 11832195550.014977
+                },
+                "overall_time": {
+                    "seconds": 11832195550.014977
+                }
+            }
+        },
+        {
+            "task_uuid": "3eccbccf-e84a-44b9-b775-cef772cd84f0",
+            "error_bound": 0.001,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 3249,
+                    "num_toffoli_gates_per_shot": 1823051602146,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
+                    "num_shots": 189,
+                    "hardware_failure_tolerance_per_shot": 5.29e-06,
+                    "num_T_gates_per_shot": 7292206408584
+                },
+                "physical": {
+                    "num_physical_qubits": 28718768,
+                    "data_code_distance": 53,
+                    "magic_state_factory_name": "(15-to-1)^6_17,7,7 x (15-to-1)_41,17,17",
+                    "data_routing_overhead": 0.5,
+                    "num_logical_compiled_qubits": 4874
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "to_fill": 0
+                },
+                "overlap": 0.1898026758125691,
+                "thc_bliss_penalty_parameter": 0.003,
+                "decomposition_ccsd_t_error_millihartree": 0.14,
+                "decomposition_l2_norm_error_hartree": 0.02,
+                "reference_double_factorization_decomposition_ccsd_t_error_millihartree": 0.33,
+                "reference_double_factorization_decomposition_l2_norm_error_hartree": 0.01
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
+                    "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
+                    "seconds": 0
+                },
+                "algorithm_run_time": {
+                    "seconds": 44103264359.11603
+                },
+                "overall_time": {
+                    "seconds": 44103264359.11603
+                }
+            }
+        },
+        {
+            "task_uuid": "4c240146-6b8b-4fa5-88e4-41cbd39c8ac3",
+            "error_bound": 0.001,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1485,
+                    "num_toffoli_gates_per_shot": 31578892800,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025,
+                    "num_T_gates_per_shot": 126315571200
+                },
+                "physical": {
+                    "num_physical_qubits": 9722496,
+                    "data_code_distance": 45,
+                    "magic_state_factory_name": "(15-to-1)^6_17,7,7 x (15-to-1)_41,17,17",
+                    "data_routing_overhead": 0.5,
+                    "num_logical_compiled_qubits": 2228
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "to_fill": 0
+                },
+                "overlap": 0.9211340347506228,
+                "thc_bliss_penalty_parameter": 0.07,
+                "decomposition_ccsd_t_error_millihartree": 0.19,
+                "decomposition_l2_norm_error_hartree": 0.01,
+                "reference_double_factorization_decomposition_ccsd_t_error_millihartree": 0.15,
+                "reference_double_factorization_decomposition_l2_norm_error_hartree": 0.007
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
+                    "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
+                    "seconds": 0
+                },
+                "algorithm_run_time": {
+                    "seconds": 16168393.113599999
+                },
+                "overall_time": {
+                    "seconds": 16168393.113599999
+                }
+            }
+        },
+        {
+            "task_uuid": "c582e543-075c-4fa1-b189-5e7455286d82",
+            "error_bound": 0.001,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1697,
+                    "num_toffoli_gates_per_shot": 81729593739,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
+                    "num_shots": 5,
+                    "hardware_failure_tolerance_per_shot": 0.0002,
+                    "num_T_gates_per_shot": 326918374956
+                },
+                "physical": {
+                    "num_physical_qubits": 11068272,
+                    "data_code_distance": 45,
+                    "magic_state_factory_name": "(15-to-1)^6_17,7,7 x (15-to-1)_41,17,17",
+                    "data_routing_overhead": 0.5,
+                    "num_logical_compiled_qubits": 2546
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "to_fill": 0
+                },
+                "overlap": 0.9019915910495648,
+                "thc_bliss_penalty_parameter": 0.03,
+                "decomposition_ccsd_t_error_millihartree": 0.42,
+                "decomposition_l2_norm_error_hartree": 0.03,
+                "reference_double_factorization_decomposition_ccsd_t_error_millihartree": 0.23,
+                "reference_double_factorization_decomposition_l2_norm_error_hartree": 0.008
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
+                    "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
+                    "seconds": 0
+                },
+                "algorithm_run_time": {
+                    "seconds": 52306939.992960006
+                },
+                "overall_time": {
+                    "seconds": 52306939.992960006
+                }
+            }
+        },
+        {
+            "task_uuid": "3fa3940d-8a68-44ae-9223-7346404651e6",
+            "error_bound": 0.001,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1485,
+                    "num_toffoli_gates_per_shot": 33252520909,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025,
+                    "num_T_gates_per_shot": 133010083636
+                },
+                "physical": {
+                    "num_physical_qubits": 9722496,
+                    "data_code_distance": 45,
+                    "magic_state_factory_name": "(15-to-1)^6_17,7,7 x (15-to-1)_41,17,17",
+                    "data_routing_overhead": 0.5,
+                    "num_logical_compiled_qubits": 2228
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "to_fill": 0
+                },
+                "overlap": 0.92078704607746,
+                "thc_bliss_penalty_parameter": 0.07,
+                "decomposition_ccsd_t_error_millihartree": 0.07,
+                "decomposition_l2_norm_error_hartree": 0.008,
+                "reference_double_factorization_decomposition_ccsd_t_error_millihartree": 0.03,
+                "reference_double_factorization_decomposition_l2_norm_error_hartree": 0.008
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
+                    "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
+                    "seconds": 0
+                },
+                "algorithm_run_time": {
+                    "seconds": 17025290.705408
+                },
+                "overall_time": {
+                    "seconds": 17025290.705408
+                }
+            }
+        },
+        {
+            "task_uuid": "eadd62e9-ee3d-4193-94de-7735a529edce",
+            "error_bound": 0.001,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1697,
+                    "num_toffoli_gates_per_shot": 72713318531,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025,
+                    "num_T_gates_per_shot": 290853274124
+                },
+                "physical": {
+                    "num_physical_qubits": 11068272,
+                    "data_code_distance": 45,
+                    "magic_state_factory_name": "(15-to-1)^6_17,7,7 x (15-to-1)_41,17,17",
+                    "data_routing_overhead": 0.5,
+                    "num_logical_compiled_qubits": 2546
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "to_fill": 0
+                },
+                "overlap": 0.9093486600916164,
+                "thc_bliss_penalty_parameter": 0.03,
+                "decomposition_ccsd_t_error_millihartree": 0.36,
+                "decomposition_l2_norm_error_hartree": 0.02,
+                "reference_double_factorization_decomposition_ccsd_t_error_millihartree": 0.12,
+                "reference_double_factorization_decomposition_l2_norm_error_hartree": 0.008
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
+                    "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
+                    "seconds": 0
+                },
+                "algorithm_run_time": {
+                    "seconds": 37229219.087872
+                },
+                "overall_time": {
+                    "seconds": 37229219.087872
+                }
+            }
+        },
+        {
+            "task_uuid": "b900c4a3-fe87-4df7-96b7-2767ccdc1d56",
+            "error_bound": 0.001,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1193,
+                    "num_toffoli_gates_per_shot": 34273290081,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025,
+                    "num_T_gates_per_shot": 137093160324
+                },
+                "physical": {
+                    "num_physical_qubits": 7868880,
+                    "data_code_distance": 45,
+                    "magic_state_factory_name": "(15-to-1)^6_17,7,7 x (15-to-1)_41,17,17",
+                    "data_routing_overhead": 0.5,
+                    "num_logical_compiled_qubits": 1790
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "to_fill": 0
+                },
+                "overlap": 0.9214381117694072,
+                "thc_bliss_penalty_parameter": 0.07,
+                "decomposition_ccsd_t_error_millihartree": 0.06,
+                "decomposition_l2_norm_error_hartree": 0.009,
+                "reference_double_factorization_decomposition_ccsd_t_error_millihartree": 0.16,
+                "reference_double_factorization_decomposition_l2_norm_error_hartree": 0.007
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
+                    "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
+                    "seconds": 0
+                },
+                "algorithm_run_time": {
+                    "seconds": 17547924.521472
+                },
+                "overall_time": {
+                    "seconds": 17547924.521472
+                }
+            }
+        },
+        {
+            "task_uuid": "7fc4c1d7-3469-40a3-9cd8-4354b6acf01d",
+            "error_bound": 0.001,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1697,
+                    "num_toffoli_gates_per_shot": 344001466788,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025,
+                    "num_T_gates_per_shot": 1376005867152
+                },
+                "physical": {
+                    "num_physical_qubits": 12025568,
+                    "data_code_distance": 47,
+                    "magic_state_factory_name": "(15-to-1)^6_17,7,7 x (15-to-1)_41,17,17",
+                    "data_routing_overhead": 0.5,
+                    "num_logical_compiled_qubits": 2546
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "to_fill": 0
+                },
+                "overlap": 0.9084901830330712,
+                "thc_bliss_penalty_parameter": 0.01,
+                "decomposition_ccsd_t_error_millihartree": 0.07,
+                "decomposition_l2_norm_error_hartree": 0.01,
+                "reference_double_factorization_decomposition_ccsd_t_error_millihartree": 0.001,
+                "reference_double_factorization_decomposition_l2_norm_error_hartree": 0.008
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
+                    "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
+                    "seconds": 0
+                },
+                "algorithm_run_time": {
+                    "seconds": 176128750.99545598
+                },
+                "overall_time": {
+                    "seconds": 176128750.99545598
+                }
+            }
+        },
+        {
+            "task_uuid": "09b81c3d-aee1-4bc3-98ce-a72da477b108",
+            "error_bound": 0.001,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1004,
+                    "num_toffoli_gates_per_shot": 77761365316,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
+                    "num_shots": 51,
+                    "hardware_failure_tolerance_per_shot": 1.96e-05,
+                    "num_T_gates_per_shot": 311045461264
+                },
+                "physical": {
+                    "num_physical_qubits": 7233248,
+                    "data_code_distance": 47,
+                    "magic_state_factory_name": "(15-to-1)^6_17,7,7 x (15-to-1)_41,17,17",
+                    "data_routing_overhead": 0.5,
+                    "num_logical_compiled_qubits": 1506
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "to_fill": 0
+                },
+                "overlap": 0.3575555133377897,
+                "thc_bliss_penalty_parameter": 0.01,
+                "decomposition_ccsd_t_error_millihartree": 0.03,
+                "decomposition_l2_norm_error_hartree": 0.01,
+                "reference_double_factorization_decomposition_ccsd_t_error_millihartree": 0.08,
+                "reference_double_factorization_decomposition_l2_norm_error_hartree": 0.007
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
+                    "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
+                    "seconds": 0
+                },
+                "algorithm_run_time": {
+                    "seconds": 507626192.782848
+                },
+                "overall_time": {
+                    "seconds": 507626192.782848
+                }
+            }
+        },
+        {
+            "task_uuid": "87d59f7c-e397-42dc-aa6e-00200d8697aa",
+            "error_bound": 0.001,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1576,
+                    "num_toffoli_gates_per_shot": 246164450580,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
+                    "num_shots": 90,
+                    "hardware_failure_tolerance_per_shot": 1.11e-05,
+                    "num_T_gates_per_shot": 984657802320
+                },
+                "physical": {
+                    "num_physical_qubits": 12113600,
+                    "data_code_distance": 49,
+                    "magic_state_factory_name": "(15-to-1)^6_17,7,7 x (15-to-1)_41,17,17",
+                    "data_routing_overhead": 0.5,
+                    "num_logical_compiled_qubits": 2364
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "to_fill": 0
+                },
+                "overlap": 0.2723808603059062,
+                "thc_bliss_penalty_parameter": 0.01,
+                "decomposition_ccsd_t_error_millihartree": 0.08,
+                "decomposition_l2_norm_error_hartree": 0.01,
+                "reference_double_factorization_decomposition_ccsd_t_error_millihartree": 0.03,
+                "reference_double_factorization_decomposition_l2_norm_error_hartree": 0.008
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
+                    "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
+                    "seconds": 0
+                },
+                "algorithm_run_time": {
+                    "seconds": 2835814470.6815996
+                },
+                "overall_time": {
+                    "seconds": 2835814470.6815996
+                }
+            }
+        }
+    ]
+}
