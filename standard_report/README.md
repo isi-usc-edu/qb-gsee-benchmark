@@ -1,6 +1,6 @@
 # GSEE Benchmark Standard Report
 
-Report based on data from 2025-06-12T19:01:55.229931+00:00
+Report based on data from 2025-06-12T20:42:55.603395+00:00
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
@@ -10,7 +10,7 @@ Input data: `GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv`, last mo
 
 Latest creation time for a `problem_instance.json` file: Thu Jun 12 14:47:26 2025
 
-Latest creation time for a `solution.json` file: Thu Jun 12 15:00:29 2025
+Latest creation time for a `solution.json` file: Thu Jun 12 16:36:35 2025
 
 # Problem Instance Summary Statistics
 
@@ -114,9 +114,9 @@ algorithm_details:DMRG with the lowest variational energy obtained so far.
 
 software_details:Block2 v0.5.3rc16 with dmrghandler, commit version d603fdc6409fc194a416aa3a519362d5d91790d9 or later.
 
-performance_metrics_uuid: e7eafbe2-b87c-40b6-bd76-14343602adfe
+performance_metrics_uuid: 1bc901e4-ab02-4414-b4fa-daaf368a889c
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -182,9 +182,9 @@ logical_resource_estimate_solution_uuid:36607deb-5926-4a05-9121-7299e371d1e6
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: 0c644468-2d8b-41a5-abec-9956af2ea259
+performance_metrics_uuid: 4a5c63ad-147c-401c-827f-99dcaf6d6d1f
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -250,9 +250,9 @@ logical_resource_estimate_solution_uuid:0b52167c-c35a-4cf9-a0ad-bc85c06fac5f
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: b32d72d6-6c50-4fbb-8753-f6ba96e5f7be
+performance_metrics_uuid: fa89b48e-4300-4ca4-885e-27477228d154
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -318,9 +318,9 @@ logical_resource_estimate_solution_uuid:0b52167c-c35a-4cf9-a0ad-bc85c06fac5f
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: 7f52a0c0-067f-4dc5-abf9-02500cbd0b95
+performance_metrics_uuid: 6f7eacb5-5565-474a-9d2a-fb46ba16dd45
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -386,9 +386,9 @@ logical_resource_estimate_solution_uuid:32037675-e2b9-46d5-9920-ec47386ceaf3
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: 1658ede7-0e96-4cc5-b1ca-2a59b1383c08
+performance_metrics_uuid: 340f1c34-9915-474a-98eb-53be283a7e04
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -454,9 +454,9 @@ logical_resource_estimate_solution_uuid:32037675-e2b9-46d5-9920-ec47386ceaf3
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: c019f4ca-225c-472a-b94a-47af8dea14b6
+performance_metrics_uuid: aa79a488-9f5e-4ef4-a37d-7e3c0d93604f
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -522,9 +522,9 @@ logical_resource_estimate_solution_uuid:32037675-e2b9-46d5-9920-ec47386ceaf3
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: 77a5bd54-1a87-4924-a04e-cee3975f4403
+performance_metrics_uuid: a5a3e609-4155-4cb6-ab87-9febc872972d
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -586,9 +586,9 @@ algorithm_details:CCSD(T)
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 0ff8e493-a908-43b5-8b36-17a5244f67a3
+performance_metrics_uuid: 1d0304da-c8cb-422c-ae15-8b494ecd1fb6
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -650,9 +650,9 @@ algorithm_details:CCSD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 4652f119-65e6-411a-bc2a-9afbeff9f7da
+performance_metrics_uuid: 570268fe-a401-4b16-ba5a-fdcf40f90882
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -714,9 +714,9 @@ algorithm_details:CISD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: cb44ce7e-f20d-4a90-8806-d590745e7bc3
+performance_metrics_uuid: 83456b41-c038-4fd4-8639-e5373fe394f0
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -778,9 +778,9 @@ algorithm_details:Hartree Fock
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 54d3eed8-ed96-4446-be26-d61a91a6abdb
+performance_metrics_uuid: 8a4b3310-3ff1-4edd-9eba-4e1ee2c65a5d
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -842,9 +842,9 @@ algorithm_details:MP2
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: cf29065e-4dd7-49d4-a0e0-97b6184c1629
+performance_metrics_uuid: c8e8b995-8d22-48d4-9737-a44486bdc217
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -906,9 +906,9 @@ algorithm_details:SHCI with optimized orbitals followed by SHCI+PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: bcd2e62d-e55b-44ff-b471-0e8da7f324ca
+performance_metrics_uuid: 819c2f9e-f6ee-4174-9a30-304068b6902b
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -970,9 +970,9 @@ algorithm_details:SHCI with eps_var 1e-4 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 44bd4496-ea56-4746-a51d-2b8488814d12
+performance_metrics_uuid: af24371d-13ea-4d50-a8a1-528966af7d0b
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -1034,9 +1034,9 @@ algorithm_details:SHCI with eps_var 2e-4 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: d0f71423-75ff-43aa-876b-8d0ead91e34c
+performance_metrics_uuid: c9424a23-c810-4bc1-8f85-7f383fe7e76c
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -1098,9 +1098,9 @@ algorithm_details:SHCI with eps_var 2e-5 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 0018a2dd-5ebd-4a33-b906-9d37518f6cf9
+performance_metrics_uuid: b3f79610-07f1-429b-89c4-71233339c172
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -1162,9 +1162,9 @@ algorithm_details:SHCI with eps_var 5e-5 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 178fd955-d8b6-4b4e-9614-07c184eb7091
+performance_metrics_uuid: a80dcd6c-68c1-49e4-b8f3-6031f0d1a982
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -1226,9 +1226,9 @@ algorithm_details:SHCI with eps_var 1e-4
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 57c2cdbe-f0d1-4c13-812c-1ae890ffe64c
+performance_metrics_uuid: be2723ac-28b2-477f-bb6e-038cbb15b607
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -1290,9 +1290,9 @@ algorithm_details:SHCI with eps_var 2e-4
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: cc5588ac-5fa1-4a85-82b5-b681e28dc51c
+performance_metrics_uuid: 55d8b672-34e8-4e7d-8757-47221d6a5f54
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -1354,9 +1354,9 @@ algorithm_details:SHCI with eps_var 2e-5
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 375c87ed-fcbf-42f8-b10b-f029c93efeac
+performance_metrics_uuid: d3b49c36-b913-4059-9bad-a1bde21d75fb
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -1418,9 +1418,9 @@ algorithm_details:SHCI with eps_var 5e-5
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 880e8490-c563-47fb-82a4-7c2322e87b74
+performance_metrics_uuid: 989dfca2-b618-4b4d-a845-2b1ed2de12f8
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -1486,9 +1486,9 @@ quantum_hardware_details:{'quantum_hardware_description': 'Superconducting hardw
 
 logical_resource_estimate_solver_uuid:12fbca08-3df3-4f3e-b7fd-c535b6b44b1c
 
-performance_metrics_uuid: a7c56f90-d7b1-4085-8bd9-72cfa19c8eff
+performance_metrics_uuid: 0f12e038-d6a0-43b7-b756-b1046bb61b4a
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
@@ -1554,9 +1554,9 @@ quantum_hardware_details:{'quantum_hardware_description': 'Superconducting hardw
 
 logical_resource_estimate_solver_uuid:d6f49cca-6f10-4de8-bc94-4c6fe4d23296
 
-performance_metrics_uuid: 0c88a18e-ae51-459a-9858-cfafaba6549a
+performance_metrics_uuid: cc1c4533-28d0-43d4-9f3e-9343f6db3f27
 
-creation_timestamp: 2025-06-12T19:01:55.229931+00:00
+creation_timestamp: 2025-06-12T20:42:55.603395+00:00
 
 number_of_problem_instances: 68
 
