@@ -3,6 +3,7 @@
     "solution_uuid": "63f4384b-4737-4120-a1c4-848d56b8b7b8",
     "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
     "creation_timestamp": "2025-05-30T12:36:13.362466+00:00",
+    "latest_update_timestamp": "2025-06-12T18:42:03.647416+00:00",
     "is_resource_estimate": true,
     "contact_info": [
         {
@@ -19,14 +20,14 @@
     "compute_hardware_type": "quantum_computer",
     "solver_details": {
         "solver_uuid": "b8ed03bd-9c3e-4d07-80af-8f77f0e7c2ac",
-        "solver_short_name": "THC_BLISS_QPE",
+        "solver_short_name": "THC_BLISS_QPE_1mHa",
         "compute_hardware_type": "quantum_computer",
         "algorithm_details": {
             "algorithm_description": "",
             "algorithm_parameters": {
                 "overlap_csv": "overlaps.csv"
             },
-            "description": "Tensor Hypercontraction + BLock Invariant Symmetry Shift (BLISS) QPE resource estimates based on methodology in arXiv:2406.06335v2, which is a modified form of the method in arXiv: 2501.06165. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and this DMRG runtime is not included in the classical compute costs."
+            "description": "Tensor Hypercontraction + BLock Invariant Symmetry Shift (BLISS) QPE resource estimates for 1mHa accuracy (more stringent than benchmark-requested 1.59 mHa accuracy) based on methodology in arXiv:2406.06335v2, which is a modified form of the method in arXiv: 2501.06165. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and this DMRG runtime is not included in the classical compute costs."
         },
         "software_details": [
             {
@@ -99,7 +100,9 @@
                 "preprocessing_time": {
                     "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
                     "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
-                    "seconds": 0
+                    "seconds": 45900.0,
+                    "note": "Preprocessing time is an upper bound based on time for task 3eccbccf-e84a-44b9-b775-cef772cd84f0. Intel i5 12 core processor with 12 GB RAM.",
+                    "cpu_time_seconds": 492360.00000000006
                 },
                 "algorithm_run_time": {
                     "seconds": 11859468660.42624
@@ -145,7 +148,9 @@
                 "preprocessing_time": {
                     "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
                     "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
-                    "seconds": 0
+                    "seconds": 45900.0,
+                    "note": "Preprocessing time is an upper bound based on time for task 3eccbccf-e84a-44b9-b775-cef772cd84f0. Intel i5 12 core processor with 12 GB RAM.",
+                    "cpu_time_seconds": 492360.00000000006
                 },
                 "algorithm_run_time": {
                     "seconds": 68780722367.04153
@@ -191,7 +196,9 @@
                 "preprocessing_time": {
                     "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
                     "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
-                    "seconds": 0
+                    "seconds": 45900.0,
+                    "note": "Preprocessing time is an upper bound based on time for task 3eccbccf-e84a-44b9-b775-cef772cd84f0. Intel i5 12 core processor with 12 GB RAM.",
+                    "cpu_time_seconds": 492360.00000000006
                 },
                 "algorithm_run_time": {
                     "seconds": 1504786519.4035199
@@ -237,7 +244,9 @@
                 "preprocessing_time": {
                     "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
                     "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
-                    "seconds": 0
+                    "seconds": 45900.0,
+                    "note": "Preprocessing time is an upper bound based on time for task 3eccbccf-e84a-44b9-b775-cef772cd84f0. Intel i5 12 core processor with 12 GB RAM.",
+                    "cpu_time_seconds": 492360.00000000006
                 },
                 "algorithm_run_time": {
                     "seconds": 3153474128.99456
@@ -283,7 +292,9 @@
                 "preprocessing_time": {
                     "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
                     "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
-                    "seconds": 0
+                    "seconds": 45900.0,
+                    "note": "Preprocessing time is an upper bound based on time for task 3eccbccf-e84a-44b9-b775-cef772cd84f0. Intel i5 12 core processor with 12 GB RAM.",
+                    "cpu_time_seconds": 492360.00000000006
                 },
                 "algorithm_run_time": {
                     "seconds": 15737179.600895999
@@ -329,7 +340,9 @@
                 "preprocessing_time": {
                     "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
                     "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
-                    "seconds": 0
+                    "seconds": 45900.0,
+                    "note": "Preprocessing time is an upper bound based on time for task 3eccbccf-e84a-44b9-b775-cef772cd84f0. Intel i5 12 core processor with 12 GB RAM.",
+                    "cpu_time_seconds": 492360.00000000006
                 },
                 "algorithm_run_time": {
                     "seconds": 56829986.25024
@@ -375,7 +388,9 @@
                 "preprocessing_time": {
                     "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
                     "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
-                    "seconds": 0
+                    "seconds": 45900.0,
+                    "note": "Preprocessing time is an upper bound based on time for task 3eccbccf-e84a-44b9-b775-cef772cd84f0. Intel i5 12 core processor with 12 GB RAM.",
+                    "cpu_time_seconds": 492360.00000000006
                 },
                 "algorithm_run_time": {
                     "seconds": 11832195550.014977
@@ -421,7 +436,9 @@
                 "preprocessing_time": {
                     "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
                     "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
-                    "seconds": 0
+                    "seconds": 45900.0,
+                    "note": "Preprocessing time is an upper bound based on time for task 3eccbccf-e84a-44b9-b775-cef772cd84f0. Intel i5 12 core processor with 12 GB RAM.",
+                    "cpu_time_seconds": 492360.00000000006
                 },
                 "algorithm_run_time": {
                     "seconds": 44103264359.11603
@@ -467,7 +484,9 @@
                 "preprocessing_time": {
                     "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
                     "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
-                    "seconds": 0
+                    "seconds": 45900.0,
+                    "note": "Preprocessing time is an upper bound based on time for task 3eccbccf-e84a-44b9-b775-cef772cd84f0. Intel i5 12 core processor with 12 GB RAM.",
+                    "cpu_time_seconds": 492360.00000000006
                 },
                 "algorithm_run_time": {
                     "seconds": 16168393.113599999
@@ -513,7 +532,9 @@
                 "preprocessing_time": {
                     "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
                     "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
-                    "seconds": 0
+                    "seconds": 45900.0,
+                    "note": "Preprocessing time is an upper bound based on time for task 3eccbccf-e84a-44b9-b775-cef772cd84f0. Intel i5 12 core processor with 12 GB RAM.",
+                    "cpu_time_seconds": 492360.00000000006
                 },
                 "algorithm_run_time": {
                     "seconds": 52306939.992960006
@@ -559,7 +580,9 @@
                 "preprocessing_time": {
                     "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
                     "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
-                    "seconds": 0
+                    "seconds": 45900.0,
+                    "note": "Preprocessing time is an upper bound based on time for task 3eccbccf-e84a-44b9-b775-cef772cd84f0. Intel i5 12 core processor with 12 GB RAM.",
+                    "cpu_time_seconds": 492360.00000000006
                 },
                 "algorithm_run_time": {
                     "seconds": 17025290.705408
@@ -605,7 +628,9 @@
                 "preprocessing_time": {
                     "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
                     "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
-                    "seconds": 0
+                    "seconds": 45900.0,
+                    "note": "Preprocessing time is an upper bound based on time for task 3eccbccf-e84a-44b9-b775-cef772cd84f0. Intel i5 12 core processor with 12 GB RAM.",
+                    "cpu_time_seconds": 492360.00000000006
                 },
                 "algorithm_run_time": {
                     "seconds": 37229219.087872
@@ -651,7 +676,9 @@
                 "preprocessing_time": {
                     "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
                     "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
-                    "seconds": 0
+                    "seconds": 45900.0,
+                    "note": "Preprocessing time is an upper bound based on time for task 3eccbccf-e84a-44b9-b775-cef772cd84f0. Intel i5 12 core processor with 12 GB RAM.",
+                    "cpu_time_seconds": 492360.00000000006
                 },
                 "algorithm_run_time": {
                     "seconds": 17547924.521472
@@ -697,7 +724,9 @@
                 "preprocessing_time": {
                     "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
                     "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
-                    "seconds": 0
+                    "seconds": 45900.0,
+                    "note": "Preprocessing time is an upper bound based on time for task 3eccbccf-e84a-44b9-b775-cef772cd84f0. Intel i5 12 core processor with 12 GB RAM.",
+                    "cpu_time_seconds": 492360.00000000006
                 },
                 "algorithm_run_time": {
                     "seconds": 176128750.99545598
@@ -743,7 +772,9 @@
                 "preprocessing_time": {
                     "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
                     "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
-                    "seconds": 0
+                    "seconds": 45900.0,
+                    "note": "Preprocessing time is an upper bound based on time for task 3eccbccf-e84a-44b9-b775-cef772cd84f0. Intel i5 12 core processor with 12 GB RAM.",
+                    "cpu_time_seconds": 492360.00000000006
                 },
                 "algorithm_run_time": {
                     "seconds": 507626192.782848
@@ -789,7 +820,9 @@
                 "preprocessing_time": {
                     "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
                     "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
-                    "seconds": 0
+                    "seconds": 45900.0,
+                    "note": "Preprocessing time is an upper bound based on time for task 3eccbccf-e84a-44b9-b775-cef772cd84f0. Intel i5 12 core processor with 12 GB RAM.",
+                    "cpu_time_seconds": 492360.00000000006
                 },
                 "algorithm_run_time": {
                     "seconds": 2835814470.6815996
