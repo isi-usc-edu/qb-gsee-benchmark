@@ -1,0 +1,215 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "d54a7b71-8150-442d-92eb-8c42a3b82c51",
+    "problem_instance_uuid": "90d4e4fc-1216-4846-b45f-198c0530e29b",
+    "creation_timestamp": "2025-05-30T12:35:53.247149+00:00",
+    "latest_update_timestamp": "2025-06-12T20:33:38.478788+00:00",
+    "is_resource_estimate": true,
+    "contact_info": [
+        {
+            "name": "Joshua T. Cantin",
+            "email": "joshua.cantin@utoronto.ca",
+            "institution": "University of Toronto at Scarborough"
+        },
+        {
+            "name": "Aritra S. Brahmachari",
+            "email": "asb20ms082@iiserkol.ac.in",
+            "institution": "Indian Institute of Science Education and Research, Kolkata, West Bengal, India"
+        }
+    ],
+    "compute_hardware_type": "quantum_computer",
+    "solver_details": {
+        "solver_uuid": "18c187af-3e5b-4e6c-87fd-73c26fd48a60",
+        "solver_short_name": "THC_QPE_1mHa",
+        "compute_hardware_type": "quantum_computer",
+        "algorithm_details": {
+            "algorithm_description": "Tensor Hypercontraction QPE resource estimates based on methodology of arXiv:2011.03494. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
+            "algorithm_parameters": {
+                "overlap_csv": "overlaps.csv"
+            },
+            "description": "Tensor Hypercontraction QPE resource estimates for 1mHa accuracy (more stringent than benchmark-requested 1.59 mHa accuracy) based on methodology of arXiv:2011.03494. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs."
+        },
+        "software_details": [
+            {
+                "software_name": "benchq",
+                "software_version": "0.7.1.dev10+g80b8279.d20250116"
+            },
+            {
+                "software_name": "openfermion",
+                "software_version": "1.6.1"
+            },
+            {
+                "software_name": "Python",
+                "software_version": "3.12.2"
+            },
+            {
+                "software_name": "JAX",
+                "software_version": "0.4.31"
+            },
+            {
+                "software_name": "benchq",
+                "software_version": "0.1.dev153+g3d429cb.d20250508"
+            }
+        ],
+        "logical_resource_estimate_solution_uuid": "6e19fd84-aeb8-480b-92c4-3a05352af383",
+        "quantum_hardware_details": {
+            "quantum_hardware_description": "Superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494. Used with THC.",
+            "quantum_hardware_parameters": {
+                "num_factories": 4,
+                "physical_error_rate": 0.001,
+                "cycle_time_microseconds": 1
+            }
+        },
+        "logical_resource_estimate_solver_uuid": "d6f49cca-6f10-4de8-bc94-4c6fe4d23296"
+    },
+    "digital_signature": null,
+    "solution_data": [
+        {
+            "task_uuid": "e3a07092-d1e5-4867-a4d7-d0258f9df6db",
+            "error_bound": 0.001,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 3179,
+                    "num_toffoli_gates_per_shot": 811446110548,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
+                    "num_shots": 6,
+                    "hardware_failure_tolerance_per_shot": 0.000167,
+                    "num_T_gates_per_shot": 3245784442192
+                },
+                "physical": {
+                    "num_physical_qubits": 24138600,
+                    "data_code_distance": 49,
+                    "magic_state_factory_name": "(15-to-1)^6_17,7,7 x (15-to-1)_41,17,17",
+                    "data_routing_overhead": 0.5,
+                    "num_logical_compiled_qubits": 4769
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "to_fill": 0
+                },
+                "overlap": 0.8567759312071886,
+                "decomposition_ccsd_t_error_millihartree": 0.46,
+                "decomposition_error_l2_norm_hartree": 0.09,
+                "decomposition_l1_norm_hartree": 610.8,
+                "thc_rank": 463,
+                "reference_double_factorization_decomposition_ccsd_t_error_millihartree": 0.47,
+                "reference_double_factorization_decomposition_error_l2_norm_hartree": 0.01
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
+                    "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
+                    "seconds": 14160.0,
+                    "note": "Preprocessing time is an upper bound based on time for task 3eccbccf-e84a-44b9-b775-cef772cd84f0. Intel i5 12 core processor with 12 GB RAM.",
+                    "cpu_time_seconds": 151920.0
+                },
+                "algorithm_run_time": {
+                    "seconds": 623190612.900864
+                },
+                "overall_time": {
+                    "seconds": 623204772.900864
+                }
+            }
+        },
+        {
+            "task_uuid": "138733f0-08f5-4077-b848-813c8ec53c79",
+            "error_bound": 0.001,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 3181,
+                    "num_toffoli_gates_per_shot": 830934641440,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
+                    "num_shots": 6,
+                    "hardware_failure_tolerance_per_shot": 0.000167,
+                    "num_T_gates_per_shot": 3323738565760
+                },
+                "physical": {
+                    "num_physical_qubits": 24153600,
+                    "data_code_distance": 49,
+                    "magic_state_factory_name": "(15-to-1)^6_17,7,7 x (15-to-1)_41,17,17",
+                    "data_routing_overhead": 0.5,
+                    "num_logical_compiled_qubits": 4772
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "to_fill": 0
+                },
+                "overlap": 0.860263246977401,
+                "decomposition_ccsd_t_error_millihartree": 0.5,
+                "decomposition_error_l2_norm_hartree": 0.09,
+                "decomposition_l1_norm_hartree": 611.1,
+                "thc_rank": 490,
+                "reference_double_factorization_decomposition_ccsd_t_error_millihartree": 0.54,
+                "reference_double_factorization_decomposition_error_l2_norm_hartree": 0.01
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
+                    "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
+                    "seconds": 14160.0,
+                    "note": "Preprocessing time is an upper bound based on time for task 3eccbccf-e84a-44b9-b775-cef772cd84f0. Intel i5 12 core processor with 12 GB RAM.",
+                    "cpu_time_seconds": 151920.0
+                },
+                "algorithm_run_time": {
+                    "seconds": 638157804.6259199
+                },
+                "overall_time": {
+                    "seconds": 638171964.6259199
+                }
+            }
+        },
+        {
+            "task_uuid": "79b74ad4-afa8-458f-87a3-a5ec339056c6",
+            "error_bound": 0.001,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 3179,
+                    "num_toffoli_gates_per_shot": 742933985024,
+                    "comment": "`num_toffoli_gates_per_shot` calculated by OpenFermion.  `num_T_gates_per_shot` estimated as `num_T_gates_per_shot` := 4*`num_toffoli_gates_per_shot` per https://quantum-journal.org/papers/q-2019-12-02-208/pdf/",
+                    "num_shots": 5,
+                    "hardware_failure_tolerance_per_shot": 0.0002,
+                    "num_T_gates_per_shot": 2971735940096
+                },
+                "physical": {
+                    "num_physical_qubits": 24138600,
+                    "data_code_distance": 49,
+                    "magic_state_factory_name": "(15-to-1)^6_17,7,7 x (15-to-1)_41,17,17",
+                    "data_routing_overhead": 0.5,
+                    "num_logical_compiled_qubits": 4769
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "to_fill": 0
+                },
+                "overlap": 0.8672573920779192,
+                "decomposition_ccsd_t_error_millihartree": 0.33,
+                "decomposition_error_l2_norm_hartree": 0.09,
+                "decomposition_l1_norm_hartree": 606.6,
+                "thc_rank": 483,
+                "reference_double_factorization_decomposition_ccsd_t_error_millihartree": 0.61,
+                "reference_double_factorization_decomposition_error_l2_norm_hartree": 0.01
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2025-05-29T00:00:00.000000+00:00",
+                    "wall_clock_stop_time": "2025-05-29T00:00:00.000000+00:00",
+                    "seconds": 14160.0,
+                    "note": "Preprocessing time is an upper bound based on time for task 3eccbccf-e84a-44b9-b775-cef772cd84f0. Intel i5 12 core processor with 12 GB RAM.",
+                    "cpu_time_seconds": 151920.0
+                },
+                "algorithm_run_time": {
+                    "seconds": 475477750.41536
+                },
+                "overall_time": {
+                    "seconds": 475491910.41536
+                }
+            }
+        }
+    ]
+}
