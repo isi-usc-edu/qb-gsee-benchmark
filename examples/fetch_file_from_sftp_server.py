@@ -40,7 +40,7 @@ from qb_gsee_benchmark.utils import fetch_file_from_sftp
 
 
 # This URL is from one `problem_instance.json` file:
-url = "sftp://sftp.l3harris.com/gsee/FCIDUMP_benzene_sto-3g_4c655f65-1899-469c-975a-a3caec750697.gz"
+url = "sftp://sftp.l3harris.com/gsee/small_molecules/fcidump.c_h4_cc-pVDZ.a7321b5d-4730-4ace-9ff8-734ec07f3fef.gz"
 
 
 # Here we copy the last part of the URL to use as the local file name.
