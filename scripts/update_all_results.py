@@ -47,6 +47,8 @@ for h in handlers:
 
 def main(args: argparse.Namespace) -> None:
     
+
+
     if not args.production and not args.temp_results:
         logging.error(f"User did not specify --production or --temp_results.  See --help for usage.")
         logging.info(f"Exiting.")
@@ -63,7 +65,9 @@ def main(args: argparse.Namespace) -> None:
         args.data_to_csv = True
     
     
-    
+    if args.temp_results:
+        temp_results_dir = "temp_results"
+        clear_or_create_output_directory(temp_results_dir)
     
 
 
@@ -75,11 +79,7 @@ def main(args: argparse.Namespace) -> None:
         performance_metrics_directory="../performance_metrics"
     )
     
-    
-    if args.data_to_csv:
-        benchmark_data.to_csv(
-            f"all_data_{benchmark_data.datestamp}.csv"
-        )
+
 
     if args.validate_json:
         logging.info(f"")
@@ -88,6 +88,14 @@ def main(args: argparse.Namespace) -> None:
         )
         logging.info(f"All JSON files are OK!")
 
+
+    
+    if args.data_to_csv:
+        benchmark_data.to_csv(
+            f"all_data_{benchmark_data.datestamp}.csv"
+        )
+
+  
     
             
 
