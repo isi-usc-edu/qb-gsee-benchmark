@@ -44,12 +44,12 @@ title('Correlation Matrix');
 
 % Custom colormap
 nColors = 256;
-breaks = [-1, -0.8, 0, 0.8, 1];
+breaks = [-1, -0.1, 0, 0.1, 1];
 colors = [
     0.5 0   0; % dark red
-    1   0.9 0.9; % light red
-    1   0.6 0.6; 
-    0.9 0.9 1; % light blue
+    1   1  1; 
+    1   1 1;
+    1   1  1; 
     0   0   0.5 % dark blue
 ];
 x = linspace(-1, 1, nColors)';
