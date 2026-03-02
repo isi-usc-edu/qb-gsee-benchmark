@@ -168,9 +168,9 @@ Run the script:
 ./compute_all_PREs_script.py --help
 ```
 
-Note that there is also a the script consumes all LRE input files in the input folder and calculates PREs for each based on the `PRE_config_file` argument.  In production, we also have `compute_all_PREs_for_all_PRE_configs.sh` shell script that calls the `./compute_all_PREs_script.py` repeatedly with different PRE config files.
+Note that there is also a script consumes all LRE input files in the input folder and calculates PREs for each based on the `PRE_config_file` argument.  In production, we also have `compute_all_PREs_for_all_PRE_configs.sh` shell script that calls the `./compute_all_PREs_script.py` repeatedly with different PRE config files.
 
-We will use the `PRE_config_0.0001_1us_parallel.json`.  The description inside of the config file states "Optimistic superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494. Assumes that enough QPUs are available to run all shots in parallel."  (So we area only calculating wall-clock run time for one execution of the DF-QPE circuit, with some additional assumptions on hardware, error correction, error rate, etc.)
+We will use the `PRE_config_0.0001_1us_parallel.json`.  The description inside of the config file states "Optimistic superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494. Assumes that enough QPUs are available to run all shots in parallel."  (So we are only calculating wall-clock run time for one execution of the DF-QPE circuit, with some additional assumptions on hardware, error correction, error rate, etc.)
 
 Create an empty output directory `temp_PRE_YYYYMMDD` and call the script approximately as
 ```
@@ -211,7 +211,7 @@ Investigate the output JSON file and note that it now contains `run_time/overall
 ```
 Note: results from 24-Feb 2026, PyLIQTR version 1.4.2.  Your results may vary slightly as PyLIQTR is refined.
 
-In production, these new physical resource estimate `solution.json` files should be manually moved to the `solution_files` folder, possibly replacing (updating) the PRE solutions that currently live there.
+In production, these new physical resource estimate `solution.json` files should be manually moved to the `solution_files` folder, possibly replacing (updating) the PRE solutions that currently live there.  
 
 
 
