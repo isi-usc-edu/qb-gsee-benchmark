@@ -88,6 +88,7 @@ def get_lqre(
     results: dict[str, Any] = {}
 
     for task in problem_instance["tasks"]:
+        task_uuid = task["task_uuid"]
         if not config["algorithm_parameters"].get("overlap") and not overlaps.get(
             task["task_uuid"]
         ):
@@ -182,88 +183,100 @@ def get_lqre(
             logging.info(
                 f"Circuit initialization time: {(circuit_generation_end_time - circuit_generation_start_time).total_seconds()} seconds."
             )
-            logging.info(f"Estimating logical resources...")
-            resource_estimation_start_time = datetime.datetime.now()
-            logical_resources = estimate_resources(circuit.circuit)
-            resource_estimation_end_time = datetime.datetime.now()
-            LRE_calc_time = (
-                resource_estimation_end_time - resource_estimation_start_time
-            ).total_seconds()
-            logging.info(f"Resource estimation time (seconds): {LRE_calc_time}")
+            
+            
+            lre_success = True
+            try:
+                logging.info(f"Estimating logical resources...")
+                resource_estimation_start_time = datetime.datetime.now()
+                logical_resources = estimate_resources(circuit.circuit)
+                resource_estimation_end_time = datetime.datetime.now()
+                LRE_calc_time = (
+                    resource_estimation_end_time - resource_estimation_start_time
+                ).total_seconds()
+                logging.info(f"Resource estimation time (seconds): {LRE_calc_time}")
+            except Exception as e:
+                logging.error(f'Error: {e}', exc_info=True)
+                LRE_calc_time = None
+                logging.info(f"failed to calculate LREs for {problem_instance_short_name}, task {task_uuid}")
+                logging.info(f"moving on...")
+                lre_success = False
+                
 
-            block_encoding = circuit._block_encoding
-            solution_data.append(
-                {
-                    "task_uuid": task["task_uuid"],
-                    "error_bound": error_tolerance,
-                    "confidence_level": 1 - failure_tolerance,
-                    "quantum_resources": {
-                        "logical": {
-                            "num_logical_qubits": logical_resources["LogicalQubits"],
-                            "num_T_gates_per_shot": logical_resources["T"],
-                            "num_shots": math.ceil(num_shots),
-                            "hardware_failure_tolerance_per_shot": hardware_failure_tolerance_per_shot,
-                        }
-                    },
-                    "solution_details": {
-                        "block_encoding_details": {
-                            attribute: getattr(block_encoding, attribute)
-                            for attribute in DOUBLE_FACTORIZED_ATTRIBUTES
+            if lre_success:
+                block_encoding = circuit._block_encoding
+                solution_data.append(
+                    {
+                        "task_uuid": task["task_uuid"],
+                        "error_bound": error_tolerance,
+                        "confidence_level": 1 - failure_tolerance,
+                        "quantum_resources": {
+                            "logical": {
+                                "num_logical_qubits": logical_resources["LogicalQubits"],
+                                "num_T_gates_per_shot": logical_resources["T"],
+                                "num_shots": math.ceil(num_shots),
+                                "hardware_failure_tolerance_per_shot": hardware_failure_tolerance_per_shot,
+                            }
                         },
-                        "overlap": overlap,
-                        "num_bits_precision_qpe": circuit._prec,
-                    },
-                    "run_time": {
-                        "preprocessing_time": {
-                            "wall_clock_start_time": circuit_generation_start_time.strftime(
-                                "%Y-%m-%dT%H:%M:%S.%f"
-                            )
-                            + "+00:00",
-                            "wall_clock_stop_time": circuit_generation_end_time.strftime(
-                                "%Y-%m-%dT%H:%M:%S.%f"
-                            )
-                            + "+00:00",
-                            "seconds": (
-                                circuit_generation_end_time
-                                - circuit_generation_start_time
-                            ).total_seconds(),
+                        "solution_details": {
+                            "block_encoding_details": {
+                                attribute: getattr(block_encoding, attribute)
+                                for attribute in DOUBLE_FACTORIZED_ATTRIBUTES
+                            },
+                            "overlap": overlap,
+                            "num_bits_precision_qpe": circuit._prec,
                         },
-                    },
-                }
-            )
+                        "run_time": {
+                            "preprocessing_time": {
+                                "wall_clock_start_time": circuit_generation_start_time.strftime(
+                                    "%Y-%m-%dT%H:%M:%S.%f"
+                                )
+                                + "+00:00",
+                                "wall_clock_stop_time": circuit_generation_end_time.strftime(
+                                    "%Y-%m-%dT%H:%M:%S.%f"
+                                )
+                                + "+00:00",
+                                "seconds": (
+                                    circuit_generation_end_time
+                                    - circuit_generation_start_time
+                                ).total_seconds(),
+                            },
+                        },
+                    }
+                )
 
-    solver_details = {
-        "solver_uuid": config["solver_uuid"],
-        "solver_short_name": "DF_QPE",
-        "compute_hardware_type": "quantum_computer",
-        "algorithm_details": {
-            "algorithm_description": config["algorithm_description"],
-            "algorithm_parameters": config["algorithm_parameters"],
-        },
-        "software_details": [
-            {"software_name": "pyLIQTR", "software_version": version("pyLIQTR")},
-            {
-                "software_name": "qb-gsee-benchmark",
-                "software_version": version("qb-gsee-benchmark"),
+        solver_details = {
+            "solver_uuid": config["solver_uuid"],
+            "solver_short_name": "DF_QPE",
+            "compute_hardware_type": "quantum_computer",
+            "algorithm_details": {
+                "algorithm_description": config["algorithm_description"],
+                "algorithm_parameters": config["algorithm_parameters"],
             },
-            {"software_name": "Python", "software_version": sys.version},
-        ],
-    }
-    results = {
-        "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/solution.schema.0.0.1.json",
-        "solution_uuid": str(uuid4()),
-        "problem_instance_uuid": problem_instance["problem_instance_uuid"],
-        "creation_timestamp": iso8601_timestamp(),
-        "is_resource_estimate": True,
-        "contact_info": config["contact_info"],
-        "solution_data": solution_data,
-        "compute_hardware_type": "quantum_computer",
-        "solver_details": solver_details,
-        "digital_signature": None,
-    }
+            "software_details": [
+                {"software_name": "pyLIQTR", "software_version": version("pyLIQTR")},
+                {
+                    "software_name": "qb-gsee-benchmark",
+                    "software_version": version("qb-gsee-benchmark"),
+                },
+                {"software_name": "Python", "software_version": sys.version},
+            ],
+        }
+        results = {
+            "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/solution.schema.0.0.1.json",
+            "solution_uuid": str(uuid4()),
+            "problem_instance_uuid": problem_instance["problem_instance_uuid"],
+            "creation_timestamp": iso8601_timestamp(),
+            "is_resource_estimate": True,
+            "contact_info": config["contact_info"],
+            "solution_data": solution_data,
+            "compute_hardware_type": "quantum_computer",
+            "solver_details": solver_details,
+            "digital_signature": None,
+        }
 
     return results
-
+        
 
 def get_solved_problem_uuids(config: dict[str, Any], output_dir: str) -> set[str]:
     existing_output_files = os.listdir(args.output_dir)
@@ -335,7 +348,10 @@ def main(args: argparse.Namespace) -> None:
             args.sftp_key_file, 
             config=config
         )
-        if len(resource_estimate["solution_data"]) > 0:
+
+        # write out the file if at least one successful LRE was 
+        # calculated/returned from the `get_lqre` method
+        if len(resource_estimate["solution_data"]) > 0: 
             with open(
                 os.path.join(
                     args.output_dir,
