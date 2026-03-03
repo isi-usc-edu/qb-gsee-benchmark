@@ -24,6 +24,8 @@ A_normalized = (A - mean(A,1)) ./ std(A, 0,1);
 
 R = corr(A_normalized);
 
+R(isnan(R)) = 0; % Replace NaN elements with 0 (happends for any uniform column)
+R(logical(eye(size(R)))) = 1; % Force diagonal elements to 1
 
 fig = figure(222);
 fig.set('WindowState', 'maximized');
