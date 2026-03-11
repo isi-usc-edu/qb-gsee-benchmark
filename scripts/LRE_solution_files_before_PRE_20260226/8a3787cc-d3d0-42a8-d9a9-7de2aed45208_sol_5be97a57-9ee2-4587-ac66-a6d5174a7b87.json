@@ -1,0 +1,654 @@
+{
+    "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/refs/heads/main/schemas/solution.schema.0.0.1.json",
+    "solution_uuid": "5be97a57-9ee2-4587-ac66-a6d5174a7b87",
+    "problem_instance_uuid": "8a3787cc-d3d0-42a8-d9a9-7de2aed45208",
+    "creation_timestamp": "2026-03-04T04:28:27.872303+00:00",
+    "is_resource_estimate": true,
+    "contact_info": [
+        {
+            "name": "Max Radin",
+            "email": "radin.max@gmail.com",
+            "institution": "L3Harris"
+        }
+    ],
+    "solution_data": [
+        {
+            "task_uuid": "aaae8d93-cb88-41ee-8f11-c70cc9b0d7fb",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2252,
+                    "num_T_gates_per_shot": 596377415454208,
+                    "num_shots": 124,
+                    "hardware_failure_tolerance_per_shot": 8.068518526638258e-06
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 1379,
+                    "nL": 11,
+                    "nXi": 6,
+                    "nLXi": 17,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 8.842466003654926e-08,
+                    "bits_rot_givens": 35,
+                    "keep_bitsize": 26,
+                    "keep_bitsize_outer": 14,
+                    "outer_prep_eps": 8.842466003654926e-08,
+                    "alpha": 1201.4898704662228
+                },
+                "overlap": 0.2329620418714725,
+                "num_bits_precision_qpe": 28
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2026-03-03T14:42:05.300317+00:00",
+                    "wall_clock_stop_time": "2026-03-03T15:16:21.788901+00:00",
+                    "seconds": 2056.488584
+                }
+            }
+        },
+        {
+            "task_uuid": "5547bb48-fac6-4426-91ad-c4853ce421aa",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2884,
+                    "num_T_gates_per_shot": 2206708025790312,
+                    "num_shots": 269,
+                    "hardware_failure_tolerance_per_shot": 3.719325178397348e-06
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 2033,
+                    "nL": 11,
+                    "nXi": 7,
+                    "nLXi": 18,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 6.183842858605482e-08,
+                    "bits_rot_givens": 36,
+                    "keep_bitsize": 27,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 6.183842858605482e-08,
+                    "alpha": 1718.04710699411
+                },
+                "overlap": 0.1593559136751708,
+                "num_bits_precision_qpe": 29
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2026-03-03T15:21:21.047691+00:00",
+                    "wall_clock_stop_time": "2026-03-03T17:00:45.551459+00:00",
+                    "seconds": 5964.503768
+                }
+            }
+        },
+        {
+            "task_uuid": "db75bf65-181b-40c2-b978-26453437c2b0",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2253,
+                    "num_T_gates_per_shot": 307197938503040,
+                    "num_shots": 31,
+                    "hardware_failure_tolerance_per_shot": 3.227368350267046e-05
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 1421,
+                    "nL": 11,
+                    "nXi": 6,
+                    "nLXi": 17,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 8.347408040127859e-08,
+                    "bits_rot_givens": 35,
+                    "keep_bitsize": 27,
+                    "keep_bitsize_outer": 14,
+                    "outer_prep_eps": 8.347408040127859e-08,
+                    "alpha": 1272.7463761518245
+                },
+                "overlap": 0.4496124185294072,
+                "num_bits_precision_qpe": 27
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2026-03-03T17:11:09.067509+00:00",
+                    "wall_clock_stop_time": "2026-03-03T17:46:01.470696+00:00",
+                    "seconds": 2092.403187
+                }
+            }
+        },
+        {
+            "task_uuid": "ab482d50-9a85-48d9-aa17-83dcbb38614b",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2847,
+                    "num_T_gates_per_shot": 1098343396675520,
+                    "num_shots": 35,
+                    "hardware_failure_tolerance_per_shot": 2.8585315248741416e-05
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 2052,
+                    "nL": 12,
+                    "nXi": 7,
+                    "nLXi": 18,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 6.147356619458417e-08,
+                    "bits_rot_givens": 36,
+                    "keep_bitsize": 27,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 6.147356619458417e-08,
+                    "alpha": 1728.2441854283254
+                },
+                "overlap": 0.4269009231326315,
+                "num_bits_precision_qpe": 28
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2026-03-03T17:50:41.586643+00:00",
+                    "wall_clock_stop_time": "2026-03-03T19:22:16.023526+00:00",
+                    "seconds": 5494.436883
+                }
+            }
+        },
+        {
+            "task_uuid": "b628f4be-582f-4f23-96eb-c8b9e0005e4a",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1278,
+                    "num_T_gates_per_shot": 8059858454976,
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025009380472507114
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 487,
+                    "nL": 9,
+                    "nXi": 5,
+                    "nLXi": 14,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 2.877530047472891e-07,
+                    "bits_rot_givens": 33,
+                    "keep_bitsize": 25,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 2.877530047472891e-07,
+                    "alpha": 369.21016142520136
+                },
+                "overlap": 0.9169804343466676,
+                "num_bits_precision_qpe": 24
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2026-03-03T19:32:04.012477+00:00",
+                    "wall_clock_stop_time": "2026-03-03T19:35:07.005524+00:00",
+                    "seconds": 182.993047
+                }
+            }
+        },
+        {
+            "task_uuid": "c436c481-00d1-49ec-8d0e-0a5e83a8df19",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1827,
+                    "num_T_gates_per_shot": 43361385843640,
+                    "num_shots": 5,
+                    "hardware_failure_tolerance_per_shot": 0.000200080048033624
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 960,
+                    "nL": 10,
+                    "nXi": 6,
+                    "nLXi": 16,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 1.555795394528337e-07,
+                    "bits_rot_givens": 34,
+                    "keep_bitsize": 26,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 1.555795394528337e-07,
+                    "alpha": 682.8747128766378
+                },
+                "overlap": 0.9029863738059232,
+                "num_bits_precision_qpe": 25
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2026-03-03T19:35:43.693876+00:00",
+                    "wall_clock_stop_time": "2026-03-03T19:50:37.364920+00:00",
+                    "seconds": 893.671044
+                }
+            }
+        },
+        {
+            "task_uuid": "349e9cbe-d675-411f-b6b8-be846c27902c",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2250,
+                    "num_T_gates_per_shot": 522143200710144,
+                    "num_shots": 106,
+                    "hardware_failure_tolerance_per_shot": 9.438637848080411e-06
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 1220,
+                    "nL": 11,
+                    "nXi": 6,
+                    "nLXi": 17,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 1.0447045624496184e-07,
+                    "bits_rot_givens": 35,
+                    "keep_bitsize": 26,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 1.0447045624496184e-07,
+                    "alpha": 1016.9509845369026
+                },
+                "overlap": 0.2518945485439342,
+                "num_bits_precision_qpe": 28
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2026-03-03T19:52:48.344829+00:00",
+                    "wall_clock_stop_time": "2026-03-03T20:26:09.065108+00:00",
+                    "seconds": 2000.720279
+                }
+            }
+        },
+        {
+            "task_uuid": "3eccbccf-e84a-44b9-b775-cef772cd84f0",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 2843,
+                    "num_T_gates_per_shot": 1971453339635560,
+                    "num_shots": 189,
+                    "hardware_failure_tolerance_per_shot": 5.293638547287927e-06
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 1849,
+                    "nL": 11,
+                    "nXi": 7,
+                    "nLXi": 17,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 7.247783133382033e-08,
+                    "bits_rot_givens": 36,
+                    "keep_bitsize": 27,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 7.247783133382033e-08,
+                    "alpha": 1465.8459197544719
+                },
+                "overlap": 0.1898026758125691,
+                "num_bits_precision_qpe": 29
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2026-03-03T20:30:13.788294+00:00",
+                    "wall_clock_stop_time": "2026-03-03T22:02:38.813561+00:00",
+                    "seconds": 5545.025267
+                }
+            }
+        },
+        {
+            "task_uuid": "4c240146-6b8b-4fa5-88e4-41cbd39c8ac3",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1278,
+                    "num_T_gates_per_shot": 8174883047872,
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025009380472507114
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 494,
+                    "nL": 9,
+                    "nXi": 5,
+                    "nLXi": 14,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 2.756185998902118e-07,
+                    "bits_rot_givens": 33,
+                    "keep_bitsize": 25,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 2.756185998902118e-07,
+                    "alpha": 385.4650352902629
+                },
+                "overlap": 0.9211340347506228,
+                "num_bits_precision_qpe": 24
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2026-03-03T22:11:38.551351+00:00",
+                    "wall_clock_stop_time": "2026-03-03T22:14:51.292880+00:00",
+                    "seconds": 192.741529
+                }
+            }
+        },
+        {
+            "task_uuid": "c582e543-075c-4fa1-b189-5e7455286d82",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1827,
+                    "num_T_gates_per_shot": 44864087526328,
+                    "num_shots": 5,
+                    "hardware_failure_tolerance_per_shot": 0.000200080048033624
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 994,
+                    "nL": 10,
+                    "nXi": 6,
+                    "nLXi": 16,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 1.5041177586101951e-07,
+                    "bits_rot_givens": 34,
+                    "keep_bitsize": 26,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 1.5041177586101951e-07,
+                    "alpha": 706.336539976101
+                },
+                "overlap": 0.9019915910495648,
+                "num_bits_precision_qpe": 25
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2026-03-03T22:15:33.462523+00:00",
+                    "wall_clock_stop_time": "2026-03-03T22:31:07.163442+00:00",
+                    "seconds": 933.700919
+                }
+            }
+        },
+        {
+            "task_uuid": "3fa3940d-8a68-44ae-9223-7346404651e6",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1278,
+                    "num_T_gates_per_shot": 8174883047872,
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025009380472507114
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 494,
+                    "nL": 9,
+                    "nXi": 5,
+                    "nLXi": 14,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 2.6867784351698604e-07,
+                    "bits_rot_givens": 33,
+                    "keep_bitsize": 25,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 2.6867784351698604e-07,
+                    "alpha": 395.42275590215047
+                },
+                "overlap": 0.92078704607746,
+                "num_bits_precision_qpe": 24
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2026-03-03T22:33:21.665939+00:00",
+                    "wall_clock_stop_time": "2026-03-03T22:36:41.997614+00:00",
+                    "seconds": 200.331675
+                }
+            }
+        },
+        {
+            "task_uuid": "eadd62e9-ee3d-4193-94de-7735a529edce",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1827,
+                    "num_T_gates_per_shot": 45617585851320,
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025009380472507114
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 1012,
+                    "nL": 10,
+                    "nXi": 6,
+                    "nLXi": 16,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 1.4753843959191346e-07,
+                    "bits_rot_givens": 34,
+                    "keep_bitsize": 26,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 1.4753843959191346e-07,
+                    "alpha": 720.0925645356792
+                },
+                "overlap": 0.9093486600916164,
+                "num_bits_precision_qpe": 25
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2026-03-03T22:37:23.698457+00:00",
+                    "wall_clock_stop_time": "2026-03-03T22:52:56.562141+00:00",
+                    "seconds": 932.863684
+                }
+            }
+        },
+        {
+            "task_uuid": "b900c4a3-fe87-4df7-96b7-2767ccdc1d56",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1278,
+                    "num_T_gates_per_shot": 8170722298304,
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025009380472507114
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 494,
+                    "nL": 9,
+                    "nXi": 5,
+                    "nLXi": 14,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 2.6856548171875504e-07,
+                    "bits_rot_givens": 33,
+                    "keep_bitsize": 25,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 2.6856548171875504e-07,
+                    "alpha": 395.5881919501127
+                },
+                "overlap": 0.9214381117694072,
+                "num_bits_precision_qpe": 24
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2026-03-03T22:55:13.173710+00:00",
+                    "wall_clock_stop_time": "2026-03-03T22:58:26.336871+00:00",
+                    "seconds": 193.163161
+                }
+            }
+        },
+        {
+            "task_uuid": "7fc4c1d7-3469-40a3-9cd8-4354b6acf01d",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1827,
+                    "num_T_gates_per_shot": 45704827374520,
+                    "num_shots": 4,
+                    "hardware_failure_tolerance_per_shot": 0.00025009380472507114
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 1014,
+                    "nL": 10,
+                    "nXi": 6,
+                    "nLXi": 16,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 1.4882687345023216e-07,
+                    "bits_rot_givens": 34,
+                    "keep_bitsize": 26,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 1.4882687345023216e-07,
+                    "alpha": 713.8585315296605
+                },
+                "overlap": 0.9084901830330712,
+                "num_bits_precision_qpe": 25
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2026-03-03T22:59:04.788446+00:00",
+                    "wall_clock_stop_time": "2026-03-03T23:14:39.524512+00:00",
+                    "seconds": 934.736066
+                }
+            }
+        },
+        {
+            "task_uuid": "09b81c3d-aee1-4bc3-98ce-a72da477b108",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1039,
+                    "num_T_gates_per_shot": 9189418076712,
+                    "num_shots": 51,
+                    "hardware_failure_tolerance_per_shot": 1.961746117473684e-05
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 324,
+                    "nL": 9,
+                    "nXi": 5,
+                    "nLXi": 13,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 4.7382905840863847e-07,
+                    "bits_rot_givens": 32,
+                    "keep_bitsize": 24,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 4.7382905840863847e-07,
+                    "alpha": 224.2186954302599
+                },
+                "overlap": 0.3575555133377897,
+                "num_bits_precision_qpe": 25
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2026-03-03T23:16:54.373670+00:00",
+                    "wall_clock_stop_time": "2026-03-03T23:18:14.272634+00:00",
+                    "seconds": 79.898964
+                }
+            }
+        },
+        {
+            "task_uuid": "87d59f7c-e397-42dc-aa6e-00200d8697aa",
+            "error_bound": 0.00159362,
+            "confidence_level": 0.99,
+            "quantum_resources": {
+                "logical": {
+                    "num_logical_qubits": 1608,
+                    "num_T_gates_per_shot": 123078998756520,
+                    "num_shots": 90,
+                    "hardware_failure_tolerance_per_shot": 1.1116608583217058e-05
+                }
+            },
+            "solution_details": {
+                "block_encoding_details": {
+                    "L": 772,
+                    "nL": 10,
+                    "nXi": 6,
+                    "nLXi": 15,
+                    "phase_gradient_eps": 1e-10,
+                    "energy_error": 0.0010624133333333335,
+                    "step_error": 2.1087337305221203e-07,
+                    "bits_rot_givens": 34,
+                    "keep_bitsize": 25,
+                    "keep_bitsize_outer": 13,
+                    "outer_prep_eps": 2.1087337305221203e-07,
+                    "alpha": 503.81578193387224
+                },
+                "overlap": 0.2723808603059062,
+                "num_bits_precision_qpe": 27
+            },
+            "run_time": {
+                "preprocessing_time": {
+                    "wall_clock_start_time": "2026-03-03T23:18:33.499317+00:00",
+                    "wall_clock_stop_time": "2026-03-03T23:27:05.968078+00:00",
+                    "seconds": 512.468761
+                }
+            }
+        }
+    ],
+    "compute_hardware_type": "quantum_computer",
+    "solver_details": {
+        "solver_uuid": "f2d73e1f-3058-43c4-a634-b6c267c84ff1",
+        "solver_short_name": "DF_QPE",
+        "compute_hardware_type": "quantum_computer",
+        "algorithm_details": {
+            "algorithm_description": "Double factorized QPE resource estimates based on methodology of arXiv:2406.06335. Note that the truncation error is not included in the error bounds and that the SCF compute time is not included in the preprocessing time. Ground-state overlap is taken to be that estimated for the dominant CSF as estimated by DMRG and that this DMRG runtime is not included in the classical compute costs.",
+            "algorithm_parameters": {
+                "overlap_csv": "overlaps.csv",
+                "sf_threshold": 1e-12,
+                "df_threshold": 0.001,
+                "max_orbitals": 70
+            }
+        },
+        "software_details": [
+            {
+                "software_name": "pyLIQTR",
+                "software_version": "1.4.2"
+            },
+            {
+                "software_name": "qb-gsee-benchmark",
+                "software_version": "0.1.0a3.dev107+gc9c6ccda3.d20260302"
+            },
+            {
+                "software_name": "Python",
+                "software_version": "3.12.2 (main, Feb 26 2026, 10:21:15) [GCC 11.4.0]"
+            }
+        ]
+    },
+    "digital_signature": null
+}
