@@ -133,9 +133,10 @@ def get_lqre(
             if protocol == "https":
                 file_path = download_file_via_https(url=fcidump_url)
             elif protocol == "sftp":
+                file_path = os.path.basename(urlparse(fcidump_url).path)
                 file_path = fetch_file_from_sftp(
                     url=fcidump_url,
-                    local_path=XXXXXX,
+                    local_path=file_path,
                     ppk_path=sftp_key_file,
                     username=sftp_username
                 )
@@ -146,11 +147,11 @@ def get_lqre(
             # compare the sha1sum to that reported in the problem instance
             if supporting_file["instance_data_checksum_type"] != "sha1sum":
                 raise Exception(f"Unsupported file checksum {supporting_file['instance_data_checksum_type']}.  `sha1sum` is supported.")
-            
-            if not compare_file_sha1sum(
+            same_checksum = compare_file_sha1sum(
                 file_path=file_path, 
                 comparison_hash=supporting_file["instance_data_checksum"]
-            ):
+            )
+            if not same_checksum:
                 raise Exception(f"File sha1sum does not match that reported in the problem instance.")
 
             # decompress the file
