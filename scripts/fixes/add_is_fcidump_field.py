@@ -17,72 +17,76 @@
 
 
 from qb_gsee_benchmark.utils import validate_json
-
-
 import json
-import sys
 import os
-import datetime
-
-import time
-# additional package(s)
-import jsonschema
+import shutil
 
 
 
-input_directory = "../../problem_instances"
 
+   
+
+#### fields for validating the JSON later:
 local_schema_file = "../../schemas/problem_instance.schema.0.0.1.json"
 with open(local_schema_file, "r") as schema_file:
     schema = json.load(schema_file)
 local_resolver_directory = "../../schemas"
 
-output_directory = "../../problem_instances"
 
-json_files = os.listdir(input_directory)
-for json_file in json_files:
-    ################################################
-    #### read in .json file
-    json_file_path = os.path.join(input_directory, json_file)
-    with open(json_file_path, "r") as jf:
-        json_dict = json.load(jf)
-    
+src_root = "../../problem_instances" 
+dst_root = "../../TEMP_problem_instances" # revamped JSON files will be output here for inspection.
+
+# Delete the destination directory and all its contents if it exists
+if os.path.exists(dst_root):
+    print(f"Deleting existing destination directory: {dst_root}")
+    shutil.rmtree(dst_root)
 
 
-    ################################################
-    # adding the "is_fcidump_file" flag/indicator
-    for task in json_dict["tasks"]:
-        for supporting_file in task["supporting_files"]:
-            file_url = supporting_file["instance_data_object_url"]
-            if "fcidump" in file_url.lower():
-                 supporting_file["is_fcidump_file"] = True
-            else:
-                 supporting_file["is_fcidump_file"] = False
-
-    
-
-
-    validate_json(
-        json_dict=json_dict,
-        schema=schema,
-        local_resolver_directory="../../schemas"
-    )
+for dirpath, _, filenames in os.walk(src_root):
+    for filename in filenames:
+        if filename.lower().endswith('.json'):
+            src_file_path = os.path.join(dirpath, filename)
+            # Compute relative path and destination path
+            rel_path = os.path.relpath(src_file_path, src_root)
+            dst_file_path = os.path.join(dst_root, rel_path)
+            dst_dir = os.path.dirname(dst_file_path)
+            os.makedirs(dst_dir, exist_ok=True)
+            try:
+                ##### load in OLD JSON data
+                with open(src_file_path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
 
 
-
-    ########################################################
-    #### write out the updated .json file
-    output_json_file_path = os.path.join(output_directory, json_file)
-    with open(output_json_file_path, "w") as output_json_file:
-            json.dump(
-                problem_instance,
-                output_json_file,
-                indent=4
-            )
+                ###### update/fix it:
+                for task in data["tasks"]:
+                    for supporting_file in task["supporting_files"]:
+                        file_url = supporting_file["instance_data_object_url"]
+                        if "fcidump" in file_url.lower():
+                            supporting_file["is_fcidump_file"] = True
+                        else:
+                            supporting_file["is_fcidump_file"] = False
 
 
-    
-    
+
+                ##### validate the JSON
+                validate_json(
+                    json_dict=data,
+                    schema=schema,
+                    local_resolver_directory="../../schemas"
+                )
+
+
+                ##### write out updated JSON to NEW destination path
+                with open(dst_file_path, 'w', encoding='utf-8') as f:
+                    json.dump(data, f, indent=2, ensure_ascii=False)
+
+
+                ##### brag about it:
+                print(f"Updated: {dst_file_path}")
+
+            except Exception as e:
+                print(f"Error processing {src_file_path}: {e}")
+
 
 
 
