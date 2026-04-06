@@ -173,7 +173,8 @@
                                 "instance_data_object_uuid",
                                 "instance_data_object_url",
                                 "instance_data_checksum_type",
-                                "instance_data_checksum"
+                                "instance_data_checksum",
+                                "is_fcidump_file"
                             ],
                             "properties": {
                                 "instance_data_object_uuid": {
@@ -187,18 +188,21 @@
                                 },
                                 "instance_data_checksum_type": {
                                     "title": "Instance Data Checksum Type",
-                                    "description": "One of \n\n`sha1sum`\n`sha256sum`\n`md5sum`",
+                                    "description": "Only `sha1sum` is supported at this time.",
                                     "type": "string",
                                     "enum": [
-                                        "sha1sum",
-                                        "sha256sum",
-                                        "md5sum"
+                                        "sha1sum"
                                     ]
                                 },
                                 "instance_data_checksum": {
                                     "title": "Instance Data Checksum String",
                                     "description": "a string containing the checksum of the data file.",
                                     "type": "string"
+                                },
+                                "is_fcidump_file": {
+                                    "title": "Is FCIDUMP file indicator",
+                                    "description": "a boolean value to identify if the file is an FCIDUMP file or another supporting file type.",
+                                    "type": "boolean"
                                 }
                             }
                         }

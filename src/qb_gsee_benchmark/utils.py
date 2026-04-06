@@ -12,15 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
+import zipfile 
 import gzip
 import os
 import shutil
+import tempfile
 from urllib.parse import urlparse
 
 import certifi
 
-from typing import Any
+from typing import Tuple, Any
 import logging
 import json
 import datetime
@@ -62,24 +63,16 @@ def get_file_sha1sum(file_name: str, verbose: bool=False) -> str:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+def compare_file_sha1sum(file_path: str, comparison_hash: str, verbose: bool=False) -> bool:
+    file_hash = get_file_sha1sum(file_path)
+    return file_hash.lower() == comparison_hash.lower()
 
 
 
 
 def fetch_file_from_sftp(
-    url: str, local_path: str, ppk_path: str, username: str, port: int=22
-):
+    url: str, local_path: str, ppk_path: str, username: str, port: int=22, num_attempts: int=3
+) -> str:
     """A utility function based on `paramiko` to fetch a file from an SFTP server.
 
     Args:
@@ -88,13 +81,13 @@ def fetch_file_from_sftp(
         ppk_path (str): the/relative/path/to/the ppk authentication file
         username (str): username associated with the ppk authentication file.
         port (int, optional): SFTP port. Defaults to 22.
+        num_attempts (int, optional):  Defaults to 3.
     """
 
     parsed_url = urlparse(url)
     hostname = parsed_url.hostname
     remote_path = parsed_url.path.lstrip("/")
 
-    num_attempts = 3
     for attempt in range(1,num_attempts+1):
         try:
             logging.info(f"SFTP attempt {attempt}/{num_attempts}...")
@@ -116,20 +109,17 @@ def fetch_file_from_sftp(
                     logging.info(f"Downloading {remote_path} to {local_path}...")
                     sftp.get(remote_path, local_path)
                 
-                break # successfully downloaded file.
+                # successfully downloaded file.
+                return local_path 
+            
         except Exception as e:
             logging.error(f"{e}", exc_info=True)
-            time.sleep(3)
+            time.sleep(5)
+    
+    raise Exception(f"Failed to get file from SFTP server after {num_attempts} attempts.")
 
 
-            
-
-
-
-
-
-
-
+        
 
 
 
@@ -195,7 +185,105 @@ def retrieve_fcidump_from_sftp(
 
 
 
+def download_file_via_https(url: str, dest_folder: str='.', num_attempts: int=3) -> str:
+    """Download a file from an HTTPS URL, inferring the filename from the
+    Content-Disposition header if available, otherwise from the URL.
+    Saves the file to dest_folder (default: current directory).
+    Returns the path to the downloaded file.
 
+    Args:
+        url (str): _description_
+        dest_folder (str, optional): _description_. Defaults to '.'.
+        num_attempts (int, optional): _description_. Defaults to 3.
+
+    Raises:
+        ValueError: If the filename could not be determined.
+
+    Returns:
+        str: the path to the downloaded file.
+    """
+
+    response = requests.get(url, stream=True)
+    response.raise_for_status()
+
+    # Try to get filename from Content-Disposition
+    filename = None
+    cd = response.headers.get('content-disposition')
+    if cd:
+        import re
+        fname_match = re.findall('filename="?([^"]+)"?', cd)
+        if fname_match:
+            filename = fname_match[0]
+
+    # Fallback: get filename from URL
+    if filename is None:
+        parsed_url = urlparse(url)
+        filename = os.path.basename(parsed_url.path)
+
+    if filename is None:
+        raise ValueError("Could not determine filename from Content-Disposition or URL path.")
+
+    # Ensure destination folder exists
+    os.makedirs(dest_folder, exist_ok=True)
+    file_path = os.path.join(dest_folder, filename)
+
+    # Download the file in chunks
+    with open(file_path, 'wb') as f:
+        for chunk in response.iter_content(chunk_size=8192):
+            if chunk:
+                f.write(chunk)
+
+    return file_path
+
+
+
+
+def determine_url_protocol(url: str) -> str:
+    parsed = urlparse(url)
+    return parsed.scheme.lower()
+
+
+
+def decompress_file(file_path: str) -> str:
+    """
+    Unzips or ungzips the given file_path if it is a .zip or .gz file.
+    Deletes the original compressed file after extraction.
+    Returns the path(s) to the extracted file.
+    In the case of a .zip file, if there is more than one file in the extracted
+    folder, this method raises an error.
+    If the file is neither .zip nor .gz, does nothing and returns the original file_path.
+    """
+    if file_path.endswith('.gz'):
+        # Remove .gz extension for output file
+        out_path = file_path[:-3]
+        with gzip.open(file_path, 'rb') as f_in, open(out_path, 'wb') as f_out:
+            shutil.copyfileobj(f_in, f_out)
+        os.remove(file_path) # delete original compressed file.
+        return out_path # return new file path
+
+    elif file_path.endswith('.zip'):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            with zipfile.ZipFile(file_path, 'r') as zip_ref:
+                zip_ref.extractall(tmpdir)
+                extracted_files = [
+                    os.path.join(tmpdir, name) for name in zip_ref.namelist()
+                    if not name.endswith('/')  # skip directories
+                ]
+            if len(extracted_files) != 1:
+                os.remove(file_path)
+                # Clean up is automatic with TemporaryDirectory
+                raise ValueError(f"Expected exactly one file in zip, found {len(extracted_files)}")
+            # Move the file to the original directory
+            single_file = extracted_files[0]
+            out_path = os.path.join(os.path.dirname(file_path), os.path.basename(single_file))
+            shutil.move(single_file, out_path)
+        
+        os.remove(file_path) # delete original file
+        return out_path # return new file path.
+
+    else:
+        # Not a .gz or .zip file.  Do nothing.
+        return file_path # return original file path.
 
 
 
