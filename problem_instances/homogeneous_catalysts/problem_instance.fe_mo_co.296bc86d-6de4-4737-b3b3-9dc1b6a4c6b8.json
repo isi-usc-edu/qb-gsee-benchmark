@@ -3,9 +3,9 @@
     "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
     "problem_type": "GSEE",
     "application_domain": "QC",
-    "creation_timestamp": "2026-03-13T18:48:06.456295843Z",
-    "latest_update_timestamp": "2026-03-13T18:48:06.456295843Z",
-    "calendar_due_date": "2126-03-13T18:48:06.456295843Z",
+    "creation_timestamp": "2026-03-13T18:48:06.456295+00:00",
+    "latest_update_timestamp": "2026-03-31T19:34:42.795102+00:00",
+    "calendar_due_date": "2126-03-13T18:48:06.456295+00:00",
     "status": "in_force",
     "superseded_by": null,
     "contact_info": [
@@ -18,10 +18,17 @@
             }
         },
         {
+            "name": "Matthias Troyer",
+            "institution": "Microsoft",
+            "other_info": {
+                "Tutorial with 54-orbital FCIDUMP": "https://learn.microsoft.com/en-us/azure/quantum/tutorial-resource-estimator-chemistry"
+            }
+        },
+        {
             "name": "Zhendong Li",
             "institution": "Beijing Normal University",
             "other_info": {
-                "GitHub repository": "https://github.com/zhendongli2008/Active-space-model-for-FeMoco"
+                "GitHub repository with 76-orbital FCIDUMP": "https://github.com/zhendongli2008/Active-space-model-for-FeMoco"
             }
         }
     ],
@@ -30,10 +37,94 @@
         "url": "http://www.apache.org/licenses/LICENSE-2.0"
     },
     "references": [
+        "Proc. Natl. Acad. Sci. U.S.A. 114 (29), 7555 (2017), https://doi.org/10.1073/pnas.1619152114, https://learn.microsoft.com/en-us/azure/quantum/tutorial-resource-estimator-chemistry, retrieved 31-March 2026",
         "Chem. J. Phys. 150, 024302 (2019), https://doi.org/10.1063/1.5063376, https://github.com/zhendongli2008/Active-space-model-for-FeMoco, retrieved 16-March 2026"
     ],
     "short_name": "fe_mo_co",
     "tasks": [
+        {
+            "task_uuid": "34e0f543-0f23-405b-b06f-4be3cd556f9b",
+            "features": {
+                "software_used": "TURBOMOLE V6.4 (structure optimization) and MOLCAS (molecular orbital integrals)",
+                "molecule_name": "fe_mo_co_54",
+                "geometry_units": "angstrom",
+                "geometry": [
+                    "S 0.193509 -1.756174 -6.077728",
+                    "FE -0.073029 0.147462 -7.060398",
+                    "S -0.155670 -0.304014 -9.055299",
+                    "FE -1.194342 -0.633669 -4.857848",
+                    "C 0.097884 0.293121 -3.822079",
+                    "FE 0.330922 1.682738 -2.639449",
+                    "S 0.144858 3.427365 -3.756994",
+                    "FE 0.000866 1.806617 -5.056623",
+                    "S -1.759709 1.058486 -6.097784",
+                    "FE 1.393308 -0.388901 -4.927653",
+                    "S 2.935549 -1.083502 -3.683191",
+                    "FE 1.581418 -0.451806 -2.290305",
+                    "S 1.643565 1.242708 -0.922047",
+                    "MO -0.046077 -0.172415 0.259925",
+                    "O -0.081763 1.100331 1.760010",
+                    "FE -0.867802 -0.634367 -2.449654",
+                    "S -1.333714 1.160052 -1.286619",
+                    "S -2.410505 -1.577384 -3.437041",
+                    "S 1.630797 1.240870 -6.345822",
+                    "S 0.353345 -1.960563 -1.213579",
+                    "N 1.652155 -0.910661 1.409953",
+                    "O -1.541962 -0.693648 1.167835",
+                    "C -2.111338 -0.028674 2.280713",
+                    "C -0.152453 1.144086 -10.129068",
+                    "C -1.083149 1.057101 2.683832",
+                    "H -3.060803 0.437015 2.003587",
+                    "H -2.276775 -0.745389 3.087505",
+                    "O -1.167081 1.740174 3.642482",
+                    "H 0.625836 0.971552 -10.878592",
+                    "H -1.119129 1.154099 -10.642807",
+                    "H 0.015059 2.077284 -9.598730",
+                    "C 2.339711 -0.178076 2.302234",
+                    "N 3.244459 -0.944382 2.902881",
+                    "C 3.160159 -2.227901 2.407388",
+                    "C 2.176178 -2.202712 1.475167",
+                    "H 1.794821 -3.019854 0.890693",
+                    "H 3.781670 -3.031530 2.764468",
+                    "H 3.882526 -0.630293 3.624464",
+                    "H 2.182421 0.864873 2.517705"
+                ],
+                "basis_set": {
+                    "Fe": "def2-TZVP",
+                    "Mo": "def2-TZVP",
+                    "S": "def2-TZVP",
+                    "C": "def2-TZVP",
+                    "H": "def2-TZVP",
+                    "O": "def2-TZVP",
+                    "N": "def2-TZVP"
+                },
+                "charge": 3,
+                "spin": 0,
+                "density functional": "B3LYP",
+                "effective core potential": "Only for Mo atom",
+                "supplementary information": "https://www.pnas.org/doi/suppl/10.1073/pnas.1619152114/suppl_file/pnas.1619152114.sapp.pdf",
+                "utility_scale": false
+            },
+            "requirements": {
+                "probability_of_success": 0.99,
+                "time_limit_seconds": 86400,
+                "absolute_accuracy_threshold": 0.00159362,
+                "absolute_accuracy_threshold_energy_units": "Hartree",
+                "energy_target": 0.99,
+                "reference_energy": -13482.181,
+                "reference_energy_units": "Hartree",
+                "reference_energy_source": "https://doi.org/10.1063/1.5063376",
+                "reference_energy_method": "Average of extrapolated DMRG and SHCI"
+            },
+            "supporting_files": [
+                {
+                    "instance_data_object_uuid": "5b79eb50-96c4-4866-80c0-b153916ddb95",
+                    "instance_data_object_url": "https://aka.ms/fcidump/nitrogenase-54e-54o",
+                    "instance_data_checksum": "a518e9e4bd57eb52563df44df852969d227c5123",
+                    "instance_data_checksum_type": "sha1sum"
+                }
+            ]
+        },
         {
             "task_uuid": "c6e29566-d374-4bbd-88cb-32190117a7eb",
             "features": {
@@ -302,6 +393,6 @@
                     "instance_data_checksum_type": "sha1sum"
                 }
             ]
-        }
+        }        
     ]
 }
