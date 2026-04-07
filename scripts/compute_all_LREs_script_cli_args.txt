@@ -1,10 +1,13 @@
 # with no-nohup
-./compute_all_LREs_script.py -i ../problem_instances/ -o ./temp_LRE_solution_files/ --LRE_config_file LRE_config_overlaps.json --sftp_username darpa-qb --sftp_key_file ~/.ssh/darpa-qb-key.ppk
+./compute_all_LREs_script.py -i ../problem_instances/ -o ./temp_LRE_solution_files/ --LRE_config_file LRE_config_overlaps.json --sftp_username darpa-qb --sftp_key_file ~/.ssh/darpa-qb-key.pem
+
+
+nohup ./compute_all_LREs_script.py -i TEMP_problem_instances -o LRE_solution_files_before_PRE_20260406 --LRE_config_file LRE_config_overlaps.json --sftp_username darpa-qb --sftp_key_file ~/.ssh/darpa-qb-key.pem &
 
 
 
 # with nohup
-nohup ./compute_all_LREs_script.py -i ../problem_instances/ -o ./temp_LRE_solution_files/ --LRE_config_file LRE_config_overlaps.json --sftp_username darpa-qb --sftp_key_file ~/.ssh/darpa-qb-key.ppk &
+nohup ./compute_all_LREs_script.py -i ../problem_instances/ -o ./temp_LRE_solution_files/ --LRE_config_file LRE_config_overlaps.json --sftp_username darpa-qb --sftp_key_file ~/.ssh/darpa-qb-key.pem &
 
 
 

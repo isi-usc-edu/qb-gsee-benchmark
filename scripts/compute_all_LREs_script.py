@@ -31,8 +31,15 @@ import time
 import pandas as pd
 from pyLIQTR.utils.resource_analysis import estimate_resources
 
+from pyscf.tools import fcidump
+
 from qb_gsee_benchmark.qre import get_df_qpe_circuit
 from qb_gsee_benchmark.utils import retrieve_fcidump_from_sftp
+from qb_gsee_benchmark.utils import fetch_file_from_sftp
+from qb_gsee_benchmark.utils import download_file_via_https
+from qb_gsee_benchmark.utils import compare_file_sha1sum
+from qb_gsee_benchmark.utils import decompress_file
+from qb_gsee_benchmark.utils import determine_url_protocol
 from qb_gsee_benchmark.utils import iso8601_timestamp
 from qb_gsee_benchmark.utils import load_json_files
 
@@ -63,8 +70,12 @@ for h in handlers:
 
 
 def get_lqre(
-    problem_instance: dict, username: str, ppk_path: str, config: dict
-) -> dict[str, Any]:
+        problem_instance: dict,
+        config: dict,
+        sftp_username: str,
+        sftp_key_file: str
+    ) -> dict[str, Any]:
+
     problem_instance_uuid = problem_instance["problem_instance_uuid"]
     problem_instance_short_name = problem_instance["short_name"]
     logging.info(f"problem_instance UUID: {problem_instance_uuid}")
@@ -88,6 +99,8 @@ def get_lqre(
     results: dict[str, Any] = {}
 
     for task in problem_instance["tasks"]:
+        # TODO: check to see if we have already processed this task
+
         task_uuid = task["task_uuid"]
         if not config["algorithm_parameters"].get("overlap") and not overlaps.get(
             task["task_uuid"]
@@ -103,51 +116,55 @@ def get_lqre(
         logging.info(f"number of supporting files: {num_supporting_files}")
 
         for supporting_file in task["supporting_files"]:
-            # flush log buffer to log file
-            file_handler.flush()
+            file_handler.flush() # flush log buffer to log file
 
             fcidump_uuid = supporting_file["instance_data_object_uuid"]
             fcidump_url = supporting_file["instance_data_object_url"]
             logging.info(f"supporting data file UUID: {fcidump_uuid}.")
             logging.info(f"supporting data file URL: {fcidump_url}.")
 
-            parsed_url = urlparse(fcidump_url)
-            fcidump_file_name = parsed_url.path.split("/")[-1]
-
-            # TODO: fix hacky way of only grabbing FCIDUMP files:
-            if "fcidump".lower() in fcidump_file_name.lower():
-                logging.info(f"assuming {fcidump_file_name} is an FCIDUMP file.")
-            else:
-                logging.info(
-                    f"assuming {fcidump_file_name} is NOT an FCIDUMP file.  SKIPPING!"
-                )
+            if not supporting_file["is_fcidump_file"]:
+                logging.info("Supporting file is NOT an FCIDUMP file.  Moving to next file...")
                 continue
 
-            # TODO: check to see if we have already processed this FCIDUMP file.
-            sftp_attempt = 1
-            max_sftp_attempts = 10
-            while sftp_attempt <= max_sftp_attempts:
-                try:
-                    logging.info(f"SFTP downloading file {fcidump_url}...attempt {sftp_attempt}/{max_sftp_attempts}")
-                    fci = retrieve_fcidump_from_sftp(
-                        url=fcidump_url,
-                        username=username,
-                        ppk_path=ppk_path,
-                        port=22,
-                    )
-                    break
-                except Exception as e:
-                    logging.error(f'Error: {e}', exc_info=True)
-                    logging.info(f"Sleeping for 5 seconds and trying again...")
-                    time.sleep(5)
-                    sftp_attempt += 1
-                    continue
             
-            if sftp_attempt > max_sftp_attempts:
-                logging.error(f"Error: failed to SFTP fetch file.")
-                sys.exit(1)
+            # Download the file:            
+            protocol = determine_url_protocol(fcidump_url)
+            if protocol == "https":
+                file_path = download_file_via_https(url=fcidump_url)
+            elif protocol == "sftp":
+                file_path = os.path.basename(urlparse(fcidump_url).path)
+                file_path = fetch_file_from_sftp(
+                    url=fcidump_url,
+                    local_path=file_path,
+                    ppk_path=sftp_key_file,
+                    username=sftp_username
+                )
+            else:
+                raise Exception(f"Unsupported {protocol=}.  HTTPS and SFTP are supported.")
 
 
+            # compare the sha1sum to that reported in the problem instance
+            if supporting_file["instance_data_checksum_type"] != "sha1sum":
+                raise Exception(f"Unsupported file checksum {supporting_file['instance_data_checksum_type']}.  `sha1sum` is supported.")
+            same_checksum = compare_file_sha1sum(
+                file_path=file_path, 
+                comparison_hash=supporting_file["instance_data_checksum"]
+            )
+            if not same_checksum:
+                raise Exception(f"File sha1sum does not match that reported in the problem instance.")
+
+            # decompress the file
+            file_path = decompress_file(file_path)
+
+
+            # read the file as an FCIDUMP file
+            fci = fcidump.read(filename=file_path)
+
+            # remove the file (cleanup)
+            os.remove(file_path)
+            
+            # begin the analysis of the FCI data:
             num_orbitals = fci["H1"].shape[0]
             if num_orbitals > config["algorithm_parameters"]["max_orbitals"]:
                 logging.info(
@@ -343,10 +360,10 @@ def main(args: argparse.Namespace) -> None:
             continue
         
         resource_estimate = get_lqre(
-            problem_instance, 
-            args.sftp_username, 
-            args.sftp_key_file, 
-            config=config
+            problem_instance=problem_instance, 
+            config=config,
+            sftp_username=args.sftp_username, 
+            sftp_key_file=args.sftp_key_file, 
         )
 
         # write out the file if at least one successful LRE was 
