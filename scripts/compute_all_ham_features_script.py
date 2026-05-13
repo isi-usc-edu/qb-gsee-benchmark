@@ -315,8 +315,12 @@ def main(args):
                             logging.warning("WARNING! we are updating the FCIDUMP for Femoco-54e-54o by inserting the MS2 parameter!!!")
                             text = Path(fcidump_file_path).read_text()
 
-                            # we are using MS2=0 due to table 5 from the supplemental
+                            # MS2 is 2*M_S (The spin projection quantum number multiplied by 2)
+                            # M_S = 1/2 (N_alpha - N_beta)
+                            # N_alpha - N_beta is spin S.  
+                            # from table 5 from the supplemental
                             # information:  https://www.pnas.org/action/downloadSupplement?doi=10.1073%2Fpnas.1619152114&file=pnas.1619152114.sapp.pdf
+                            # we have that S=0.  So then M_S=0 and MS2=2*M_S=0.
                             if "MS2=0," not in text:
                                 target = "NORB=54," # we will insert the "MS2=0," property after the "NORB=54," property
                                 assert target in text, "Error trying to fixup FCIDUMP file for nitrogenase-54e-54o."
