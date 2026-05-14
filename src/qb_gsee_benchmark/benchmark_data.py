@@ -140,7 +140,7 @@ class BenchmarkData:
         lists = [
             ("problem instances", self.problem_instance_list),
             ("solutions", self.solution_list),
-            ("resource estimates", self.sponsor_resource_estimate_list),
+            #("resource estimates", self.sponsor_resource_estimate_list),
             ("performance metrics", self.performance_metrics_list)
         ]
         for listy in lists:

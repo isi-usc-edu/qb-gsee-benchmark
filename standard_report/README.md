@@ -1,30 +1,28 @@
 # GSEE Benchmark Standard Report
 
-Report based on data from 2026-04-07T11:49:13.945074+00:00
+Report based on data from 2026-05-14T19:00:21.508451+00:00
 
 [https://github.com/isi-usc-edu/qb-gsee-benchmark](https://github.com/isi-usc-edu/qb-gsee-benchmark)
 
-Input data: `Hamiltonian_features.csv`, last modified Thu Feb 26 10:38:50 2026
-
-WARNING!  We only have features calculated for                             228/230 Hamiltonians.                             This report is based on partial results!
+Input data: `Hamiltonian_features.csv`, last modified Thu May 14 14:59:36 2026
 
 Input data: `GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv`, last modified Thu Feb 26 10:38:50 2026
 
-Latest creation time for a `problem_instance.json` file: Mon Apr  6 15:20:37 2026
+Latest creation time for a `problem_instance.json` file: Tue Apr  7 08:08:02 2026
 
-Latest creation time for a `solution.json` file: Tue Apr  7 07:43:14 2026
+Latest creation time for a `solution.json` file: Tue Apr  7 08:08:02 2026
 
 # Problem Instance Summary Statistics
 
-number of `problem_instances`: 69.
+number of `problem_instances`: 67.
 
-`problem_instance.json` with the most tasks: 30 (hubbard_square/614c4444-a31a-4348-b24d-01040208651c)
+`problem_instance.json` with the most tasks: 16 (mo_n2_pincer/8a3787cc-d3d0-42a8-d9a9-7de2aed45208)
 
-number of Hamiltonians (i.e., tasks) we have features calculated for: 228
+number of Hamiltonians (i.e., tasks) we have features calculated for: 184
 
 minimum number of orbitals: 5
 
-median number of orbitals: 36.0
+median number of orbitals: 50.5
 
 maximum number of orbitals: 135
 
@@ -36,51 +34,51 @@ maximum number of orbitals: 135
 
 number of unique participating solvers: 23
 
-Solver: SHCI_opt/2dde727e-a881-44fa-aabf-bba6248e4baf, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 1.0}, F1 Score: [0.83333333 0.99319728]
+Solver: SHCI_opt/2dde727e-a881-44fa-aabf-bba6248e4baf, ML Solvability Ratio: {'PCA': 0.9028, 'NNMF': 0.9706}, F1 Score: [1. 1.]
 
-Solver: DF_QPE/5dad4064-cd11-412f-85cb-d722afe3b3de, ML Solvability Ratio: {'PCA': 0.0394, 'NNMF': 0.0199}, F1 Score: [1. 1.]
+Solver: DF_QPE/5dad4064-cd11-412f-85cb-d722afe3b3de, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [1. 1.]
 
 Solver: THC_BLISS_QPE_1mHa/b8ed03bd-9c3e-4d07-80af-8f77f0e7c2ac, Model could not be calculated.
 
-Solver: DF_QPE/2610d8de-bd3a-469e-9a80-473e8988755f, ML Solvability Ratio: {'PCA': 0.0716, 'NNMF': 0.0}, F1 Score: [1. 1.]
+Solver: DF_QPE/2610d8de-bd3a-469e-9a80-473e8988755f, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [1. 1.]
 
-Solver: SHCI_pt_1e-4/4ed500f1-0650-41e3-af00-e4d0359394b4, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 1.0}, F1 Score: [0.71428571 0.97122302]
+Solver: SHCI_pt_1e-4/4ed500f1-0650-41e3-af00-e4d0359394b4, ML Solvability Ratio: {'PCA': 0.8021, 'NNMF': 0.7755}, F1 Score: [0.84210526 0.96808511]
 
-Solver: SHCI_var_1e-4/7e730dfb-57ee-480b-a8a1-4b73f5f07c54, ML Solvability Ratio: {'PCA': 0.6562, 'NNMF': 0.7836}, F1 Score: [0.98387097 0.98901099]
+Solver: SHCI_var_1e-4/7e730dfb-57ee-480b-a8a1-4b73f5f07c54, ML Solvability Ratio: {'PCA': 0.3803, 'NNMF': 0.3745}, F1 Score: [0.94230769 0.95081967]
 
-Solver: SHCI_pt_2e-4/ad964781-302e-4728-a26d-39918e0a6cdb, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 0.9868}, F1 Score: [0.89361702 0.98069498]
+Solver: SHCI_pt_2e-4/ad964781-302e-4728-a26d-39918e0a6cdb, ML Solvability Ratio: {'PCA': 0.8021, 'NNMF': 0.7755}, F1 Score: [0.84210526 0.96808511]
 
-Solver: SHCI_pt_2e-5/c71b90bd-3250-4c0c-b4e7-fc9878f141f6, ML Solvability Ratio: {'PCA': 0.9317, 'NNMF': 0.5441}, F1 Score: [0.76470588 0.97058824]
+Solver: SHCI_pt_2e-5/c71b90bd-3250-4c0c-b4e7-fc9878f141f6, ML Solvability Ratio: {'PCA': 0.807, 'NNMF': 0.7788}, F1 Score: [0.92857143 0.98989899]
 
-Solver: SHCI_pt_5e-5/d626506c-7aae-4ad6-802a-b29af5f2bb93, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 1.0}, F1 Score: [0.9375     0.99270073]
+Solver: SHCI_pt_5e-5/d626506c-7aae-4ad6-802a-b29af5f2bb93, ML Solvability Ratio: {'PCA': 0.7036, 'NNMF': 0.466}, F1 Score: [0.90909091 0.98445596]
 
-Solver: SHCI_var_2e-4/0db183e3-a86d-491b-9125-599556e37c7a, ML Solvability Ratio: {'PCA': 0.8125, 'NNMF': 0.8487}, F1 Score: [0.99280576 0.99401198]
+Solver: SHCI_var_2e-4/0db183e3-a86d-491b-9125-599556e37c7a, ML Solvability Ratio: {'PCA': 0.2838, 'NNMF': 0.1391}, F1 Score: [0.93103448 0.92727273]
 
-Solver: SHCI_var_2e-5/86bfe50c-9342-4d54-bb68-abc8abd95688, ML Solvability Ratio: {'PCA': 0.6486, 'NNMF': 0.4057}, F1 Score: [0.88      0.9765625]
+Solver: SHCI_var_2e-5/86bfe50c-9342-4d54-bb68-abc8abd95688, ML Solvability Ratio: {'PCA': 0.5218, 'NNMF': 0.3492}, F1 Score: [0.84210526 0.94674556]
 
-Solver: SHCI_var_5e-5/01949b95-c427-4693-9134-01f47f688c09, ML Solvability Ratio: {'PCA': 0.8749, 'NNMF': 0.391}, F1 Score: [0.83950617 0.94222222]
+Solver: SHCI_var_5e-5/01949b95-c427-4693-9134-01f47f688c09, ML Solvability Ratio: {'PCA': 0.4131, 'NNMF': 0.2482}, F1 Score: [0.86075949 0.92517007]
 
 Solver: THC_QPE_1mHa/18c187af-3e5b-4e6c-87fd-73c26fd48a60, Model could not be calculated.
 
-Solver: CISD/418f060e-496b-4024-8d2d-9b1f8791e76d, ML Solvability Ratio: {'PCA': 0.0233, 'NNMF': 0.0051}, F1 Score: [0.98069498 0.89361702]
+Solver: CISD/418f060e-496b-4024-8d2d-9b1f8791e76d, ML Solvability Ratio: {'PCA': 0.0217, 'NNMF': 0.1262}, F1 Score: [0.97777778 0.91304348]
 
-Solver: CCSD/0a29e54f-bef9-4d19-bafa-d94b1c4b37aa, ML Solvability Ratio: {'PCA': 0.011, 'NNMF': 0.0418}, F1 Score: [0.98795181 0.94736842]
+Solver: CCSD/0a29e54f-bef9-4d19-bafa-d94b1c4b37aa, ML Solvability Ratio: {'PCA': 0.048, 'NNMF': 0.1418}, F1 Score: [0.98245614 0.94545455]
 
-Solver: HF/5f5e617a-19c2-4d82-bebc-b2d6b3dcb012, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.        0.0754717]
+Solver: HF/5f5e617a-19c2-4d82-bebc-b2d6b3dcb012, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.         0.10084034]
 
-Solver: MP2/b420358b-5def-41e6-8c5d-b9d93b6aecd2, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.        0.0754717]
+Solver: MP2/b420358b-5def-41e6-8c5d-b9d93b6aecd2, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.         0.10084034]
 
-Solver: CCSD(T)/c09217e6-d0f7-4b0f-81c4-79210b7ac878, ML Solvability Ratio: {'PCA': 0.2847, 'NNMF': 0.092}, F1 Score: [0.96855346 0.96598639]
+Solver: CCSD(T)/c09217e6-d0f7-4b0f-81c4-79210b7ac878, ML Solvability Ratio: {'PCA': 0.9196, 'NNMF': 0.8976}, F1 Score: [0.96969697 0.97637795]
 
-Solver: DF_QPE/7c8ef984-4d3a-4468-8900-e0da3bd8b22d, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.93706294 0.1       ]
+Solver: DF_QPE/7c8ef984-4d3a-4468-8900-e0da3bd8b22d, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.92307692 0.11111111]
 
-Solver: DF_QPE/5d768520-b3d0-4292-bbb4-9776fa128107, ML Solvability Ratio: {'PCA': 0.0394, 'NNMF': 0.0199}, F1 Score: [1. 1.]
+Solver: DF_QPE/5d768520-b3d0-4292-bbb4-9776fa128107, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [1. 1.]
 
-Solver: DF_QPE/f6b36bde-be4a-4eee-975b-2c5f7e553f5f, ML Solvability Ratio: {'PCA': 0.013, 'NNMF': 0.0006}, F1 Score: [0.99319728 0.83333333]
+Solver: DF_QPE/f6b36bde-be4a-4eee-975b-2c5f7e553f5f, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.98630137 0.57142857]
 
-Solver: DMRG_Niagara_cluster_lowest_energy/16537433-9f4c-4eae-a65d-787dc3b35b59, ML Solvability Ratio: {'PCA': 0.4126, 'NNMF': 0.3022}, F1 Score: [0.91304348 0.96261682]
+Solver: DMRG_Niagara_cluster_lowest_energy/16537433-9f4c-4eae-a65d-787dc3b35b59, ML Solvability Ratio: {'PCA': 0.386, 'NNMF': 0.203}, F1 Score: [0.96774194 0.97744361]
 
-Solver: DF_QPE/4b07b89f-c66f-4e72-8c24-df3e4222cb41, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [1. 1.]
+Solver: DF_QPE/4b07b89f-c66f-4e72-8c24-df3e4222cb41, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.99547511 0.8       ]
 
 ![Solver scatter plot](supporting_artifacts/solver_num_orbs_vs_runtime_scatter_plot.png)
 
@@ -116,35 +114,35 @@ algorithm_details:SHCI with optimized orbitals followed by SHCI+PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 893a513f-db89-49dc-bac7-849d93ea2696
+performance_metrics_uuid: d719483e-36f0-491e-91c5-e67042c77323
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 66
+number_of_problem_instances_attempted: 64
 
 number_of_problem_instances_solved: 37
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 226
+number_of_tasks_attempted: 180
 
-number_of_tasks_solved: 148
+number_of_tasks_solved: 108
 
-number_of_tasks_solved_within_run_time_limit: 226
+number_of_tasks_solved_within_run_time_limit: 180
 
-number_of_tasks_solved_within_accuracy_threshold: 148
+number_of_tasks_solved_within_accuracy_threshold: 108
 
 max_run_time_of_attempted_tasks: 57334.2
 
-sum_of_run_time_of_attempted_tasks: 1100317.592
+sum_of_run_time_of_attempted_tasks: 975847.098
 
-solvability_ratio: 1.0
+solvability_ratio: 0.9028
 
 comments: solvability ratio based on PCA embedding.
 
-f1_score: [0.8333333333333334, 0.9931972789115646]
+f1_score: [1.0, 1.0]
 
 ml_metrics_calculator_version: 1
 
@@ -184,31 +182,31 @@ logical_resource_estimate_solution_uuid:0d495e30-978f-4e99-848a-9fe3a8b51de4
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: 3464efbe-c0ba-4b27-b78e-a6ccd68a7022
+performance_metrics_uuid: 13bf70ec-b7de-41fa-87cb-32f2eac4fc8f
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 22
+number_of_problem_instances_attempted: 23
 
 number_of_problem_instances_solved: 2
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 131
+number_of_tasks_attempted: 133
 
 number_of_tasks_solved: 2
 
 number_of_tasks_solved_within_run_time_limit: 2
 
-number_of_tasks_solved_within_accuracy_threshold: 131
+number_of_tasks_solved_within_accuracy_threshold: 133
 
 max_run_time_of_attempted_tasks: 1394057079996.7158
 
-sum_of_run_time_of_attempted_tasks: 10701894017855.469
+sum_of_run_time_of_attempted_tasks: 10996408382832.924
 
-solvability_ratio: 0.0394
+solvability_ratio: 0.0
 
 comments: solvability ratio based on PCA embedding.
 
@@ -252,17 +250,17 @@ quantum_hardware_details:{'quantum_hardware_description': 'Superconducting hardw
 
 logical_resource_estimate_solver_uuid:12fbca08-3df3-4f3e-b7fd-c535b6b44b1c
 
-performance_metrics_uuid: aa39510d-ca57-48e1-a881-de960aeaf4e7
+performance_metrics_uuid: e1c93c8d-ed85-4db3-ba2e-04a75c03ee6f
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
 number_of_problem_instances_attempted: 3
 
 number_of_problem_instances_solved: 0
 
-number_of_tasks: 228
+number_of_tasks: 184
 
 number_of_tasks_attempted: 23
 
@@ -320,31 +318,31 @@ logical_resource_estimate_solution_uuid:c7dddc47-261a-40a9-af26-b53cf209f8e2
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: eafbbcf3-fb95-479c-ae43-e8aef41199f0
+performance_metrics_uuid: 514dbccc-e71b-4642-ad9e-29a5702da826
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 22
+number_of_problem_instances_attempted: 23
 
 number_of_problem_instances_solved: 3
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 131
+number_of_tasks_attempted: 133
 
 number_of_tasks_solved: 4
 
 number_of_tasks_solved_within_run_time_limit: 4
 
-number_of_tasks_solved_within_accuracy_threshold: 131
+number_of_tasks_solved_within_accuracy_threshold: 133
 
 max_run_time_of_attempted_tasks: 139405709800.31985
 
-sum_of_run_time_of_attempted_tasks: 1070189503968.0303
+sum_of_run_time_of_attempted_tasks: 1099640949950.695
 
-solvability_ratio: 0.0716
+solvability_ratio: 0.0
 
 comments: solvability ratio based on PCA embedding.
 
@@ -384,35 +382,35 @@ algorithm_details:SHCI with eps_var 1e-4 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 847c56c2-13f8-4500-a4f7-dbfaae4ad00f
+performance_metrics_uuid: 482d9a28-d3c6-401b-b943-d3238172a1c0
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 68
+number_of_problem_instances_attempted: 66
 
 number_of_problem_instances_solved: 26
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 228
+number_of_tasks_attempted: 182
 
-number_of_tasks_solved: 135
+number_of_tasks_solved: 95
 
-number_of_tasks_solved_within_run_time_limit: 227
+number_of_tasks_solved_within_run_time_limit: 181
 
-number_of_tasks_solved_within_accuracy_threshold: 135
+number_of_tasks_solved_within_accuracy_threshold: 95
 
 max_run_time_of_attempted_tasks: 77244.15200000002
 
-sum_of_run_time_of_attempted_tasks: 1220721.795
+sum_of_run_time_of_attempted_tasks: 1096251.301
 
-solvability_ratio: 1.0
+solvability_ratio: 0.8021
 
 comments: solvability ratio based on PCA embedding.
 
-f1_score: [0.7142857142857143, 0.9712230215827338]
+f1_score: [0.8421052631578947, 0.9680851063829787]
 
 ml_metrics_calculator_version: 1
 
@@ -448,35 +446,35 @@ algorithm_details:SHCI with eps_var 1e-4
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 6544e8ad-c53a-4baa-882c-87305cd760ce
+performance_metrics_uuid: 3cde5923-7c75-4714-9910-9cd9ff961e87
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 68
+number_of_problem_instances_attempted: 66
 
 number_of_problem_instances_solved: 17
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 228
+number_of_tasks_attempted: 182
 
-number_of_tasks_solved: 91
+number_of_tasks_solved: 62
 
-number_of_tasks_solved_within_run_time_limit: 227
+number_of_tasks_solved_within_run_time_limit: 181
 
-number_of_tasks_solved_within_accuracy_threshold: 91
+number_of_tasks_solved_within_accuracy_threshold: 62
 
 max_run_time_of_attempted_tasks: 77244.15200000002
 
-sum_of_run_time_of_attempted_tasks: 1220721.795
+sum_of_run_time_of_attempted_tasks: 1096251.301
 
-solvability_ratio: 0.6562
+solvability_ratio: 0.3803
 
 comments: solvability ratio based on PCA embedding.
 
-f1_score: [0.9838709677419355, 0.989010989010989]
+f1_score: [0.9423076923076923, 0.9508196721311475]
 
 ml_metrics_calculator_version: 1
 
@@ -512,35 +510,35 @@ algorithm_details:SHCI with eps_var 2e-4 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 7e8b6a02-3194-4340-84ef-0a4632293897
+performance_metrics_uuid: c1bf28e1-ec27-48a7-a9d2-6be8dcee6a4a
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 68
+number_of_problem_instances_attempted: 66
 
 number_of_problem_instances_solved: 26
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 228
+number_of_tasks_attempted: 182
 
-number_of_tasks_solved: 132
+number_of_tasks_solved: 95
 
-number_of_tasks_solved_within_run_time_limit: 227
+number_of_tasks_solved_within_run_time_limit: 181
 
-number_of_tasks_solved_within_accuracy_threshold: 132
+number_of_tasks_solved_within_accuracy_threshold: 95
 
 max_run_time_of_attempted_tasks: 77244.15200000002
 
-sum_of_run_time_of_attempted_tasks: 1220721.795
+sum_of_run_time_of_attempted_tasks: 1096251.301
 
-solvability_ratio: 1.0
+solvability_ratio: 0.8021
 
 comments: solvability ratio based on PCA embedding.
 
-f1_score: [0.8936170212765957, 0.9806949806949807]
+f1_score: [0.8421052631578947, 0.9680851063829787]
 
 ml_metrics_calculator_version: 1
 
@@ -576,35 +574,35 @@ algorithm_details:SHCI with eps_var 2e-5 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 2e0c80f5-163d-4662-86cd-e20875dbd2b9
+performance_metrics_uuid: 5e5324f7-2007-4ad8-9d88-a5195bf31dfc
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 68
+number_of_problem_instances_attempted: 66
 
 number_of_problem_instances_solved: 30
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 228
+number_of_tasks_attempted: 182
 
-number_of_tasks_solved: 140
+number_of_tasks_solved: 100
 
-number_of_tasks_solved_within_run_time_limit: 227
+number_of_tasks_solved_within_run_time_limit: 181
 
-number_of_tasks_solved_within_accuracy_threshold: 140
+number_of_tasks_solved_within_accuracy_threshold: 100
 
 max_run_time_of_attempted_tasks: 77244.15200000002
 
-sum_of_run_time_of_attempted_tasks: 1220721.795
+sum_of_run_time_of_attempted_tasks: 1096251.301
 
-solvability_ratio: 0.9317
+solvability_ratio: 0.807
 
 comments: solvability ratio based on PCA embedding.
 
-f1_score: [0.7647058823529411, 0.9705882352941176]
+f1_score: [0.9285714285714286, 0.98989898989899]
 
 ml_metrics_calculator_version: 1
 
@@ -640,35 +638,35 @@ algorithm_details:SHCI with eps_var 5e-5 + PT
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 985d7c5e-5b4d-46e0-b376-038d0d8c89a2
+performance_metrics_uuid: ce4b587b-39d0-46ae-92bf-8f800805f3dd
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 68
+number_of_problem_instances_attempted: 66
 
 number_of_problem_instances_solved: 28
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 228
+number_of_tasks_attempted: 182
 
-number_of_tasks_solved: 138
+number_of_tasks_solved: 98
 
-number_of_tasks_solved_within_run_time_limit: 227
+number_of_tasks_solved_within_run_time_limit: 181
 
-number_of_tasks_solved_within_accuracy_threshold: 138
+number_of_tasks_solved_within_accuracy_threshold: 98
 
 max_run_time_of_attempted_tasks: 77244.15200000002
 
-sum_of_run_time_of_attempted_tasks: 1220721.795
+sum_of_run_time_of_attempted_tasks: 1096251.301
 
-solvability_ratio: 1.0
+solvability_ratio: 0.7036
 
 comments: solvability ratio based on PCA embedding.
 
-f1_score: [0.9375, 0.9927007299270073]
+f1_score: [0.9090909090909091, 0.9844559585492227]
 
 ml_metrics_calculator_version: 1
 
@@ -704,35 +702,35 @@ algorithm_details:SHCI with eps_var 2e-4
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 690b05dd-1a65-4dbe-bb62-e87586bffe96
+performance_metrics_uuid: 1f8cdd4f-5ac2-4cb2-b81a-99b565bd5573
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 68
+number_of_problem_instances_attempted: 66
 
 number_of_problem_instances_solved: 17
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 228
+number_of_tasks_attempted: 182
 
-number_of_tasks_solved: 83
+number_of_tasks_solved: 55
 
-number_of_tasks_solved_within_run_time_limit: 227
+number_of_tasks_solved_within_run_time_limit: 181
 
-number_of_tasks_solved_within_accuracy_threshold: 83
+number_of_tasks_solved_within_accuracy_threshold: 55
 
 max_run_time_of_attempted_tasks: 77244.15200000002
 
-sum_of_run_time_of_attempted_tasks: 1220721.795
+sum_of_run_time_of_attempted_tasks: 1096251.301
 
-solvability_ratio: 0.8125
+solvability_ratio: 0.2838
 
 comments: solvability ratio based on PCA embedding.
 
-f1_score: [0.9928057553956835, 0.9940119760479041]
+f1_score: [0.9310344827586207, 0.9272727272727272]
 
 ml_metrics_calculator_version: 1
 
@@ -768,35 +766,35 @@ algorithm_details:SHCI with eps_var 2e-5
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 29eba818-cc4f-4ff5-8370-4be33a163940
+performance_metrics_uuid: 564020f6-5a56-4029-854c-d913f091e445
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 68
+number_of_problem_instances_attempted: 66
 
 number_of_problem_instances_solved: 22
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 228
+number_of_tasks_attempted: 182
 
-number_of_tasks_solved: 128
+number_of_tasks_solved: 88
 
-number_of_tasks_solved_within_run_time_limit: 227
+number_of_tasks_solved_within_run_time_limit: 181
 
-number_of_tasks_solved_within_accuracy_threshold: 128
+number_of_tasks_solved_within_accuracy_threshold: 88
 
 max_run_time_of_attempted_tasks: 77244.15200000002
 
-sum_of_run_time_of_attempted_tasks: 1220721.795
+sum_of_run_time_of_attempted_tasks: 1096251.301
 
-solvability_ratio: 0.6486
+solvability_ratio: 0.5218
 
 comments: solvability ratio based on PCA embedding.
 
-f1_score: [0.88, 0.9765625]
+f1_score: [0.8421052631578947, 0.9467455621301775]
 
 ml_metrics_calculator_version: 1
 
@@ -832,35 +830,35 @@ algorithm_details:SHCI with eps_var 5e-5
 
 software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).
 
-performance_metrics_uuid: 47cc69ca-1a45-403d-9b40-485fbd2de2de
+performance_metrics_uuid: ef3344ec-2cb3-4ce5-bb81-8773d324e9f2
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 68
+number_of_problem_instances_attempted: 66
 
 number_of_problem_instances_solved: 18
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 228
+number_of_tasks_attempted: 182
 
-number_of_tasks_solved: 115
+number_of_tasks_solved: 75
 
-number_of_tasks_solved_within_run_time_limit: 227
+number_of_tasks_solved_within_run_time_limit: 181
 
-number_of_tasks_solved_within_accuracy_threshold: 115
+number_of_tasks_solved_within_accuracy_threshold: 75
 
 max_run_time_of_attempted_tasks: 77244.15200000002
 
-sum_of_run_time_of_attempted_tasks: 1220721.795
+sum_of_run_time_of_attempted_tasks: 1096251.301
 
-solvability_ratio: 0.8749
+solvability_ratio: 0.4131
 
 comments: solvability ratio based on PCA embedding.
 
-f1_score: [0.8395061728395061, 0.9422222222222222]
+f1_score: [0.8607594936708861, 0.9251700680272109]
 
 ml_metrics_calculator_version: 1
 
@@ -900,17 +898,17 @@ quantum_hardware_details:{'quantum_hardware_description': 'Superconducting hardw
 
 logical_resource_estimate_solver_uuid:d6f49cca-6f10-4de8-bc94-4c6fe4d23296
 
-performance_metrics_uuid: 6c609ec0-8165-4dc6-8cf5-2b58872cf3b0
+performance_metrics_uuid: 9a77ed4f-4ccf-4c16-840a-074a348329bf
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
 number_of_problem_instances_attempted: 3
 
 number_of_problem_instances_solved: 0
 
-number_of_tasks: 228
+number_of_tasks: 184
 
 number_of_tasks_attempted: 23
 
@@ -964,35 +962,35 @@ algorithm_details:CISD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 8b5f1d92-42d7-4e2a-8f9f-c8d31a984c0e
+performance_metrics_uuid: 64abdae4-162e-466f-95af-c76ee1ad5d82
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 68
+number_of_problem_instances_attempted: 66
 
 number_of_problem_instances_solved: 13
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 228
+number_of_tasks_attempted: 182
 
 number_of_tasks_solved: 21
 
-number_of_tasks_solved_within_run_time_limit: 228
+number_of_tasks_solved_within_run_time_limit: 182
 
 number_of_tasks_solved_within_accuracy_threshold: 21
 
 max_run_time_of_attempted_tasks: 62.58296537399292
 
-sum_of_run_time_of_attempted_tasks: 2147.015964984894
+sum_of_run_time_of_attempted_tasks: 2112.998790025711
 
-solvability_ratio: 0.0233
+solvability_ratio: 0.0217
 
 comments: solvability ratio based on PCA embedding.
 
-f1_score: [0.9806949806949807, 0.8936170212765957]
+f1_score: [0.9777777777777777, 0.9130434782608695]
 
 ml_metrics_calculator_version: 1
 
@@ -1028,35 +1026,35 @@ algorithm_details:CCSD
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: c9f318cd-53a5-4b3d-8232-dcc6836d8513
+performance_metrics_uuid: a34a5668-3bf3-4ad4-a636-829488b2df51
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 64
+number_of_problem_instances_attempted: 63
 
 number_of_problem_instances_solved: 14
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 217
+number_of_tasks_attempted: 174
 
-number_of_tasks_solved: 27
+number_of_tasks_solved: 26
 
-number_of_tasks_solved_within_run_time_limit: 217
+number_of_tasks_solved_within_run_time_limit: 174
 
-number_of_tasks_solved_within_accuracy_threshold: 27
+number_of_tasks_solved_within_accuracy_threshold: 26
 
 max_run_time_of_attempted_tasks: 460.71552085876465
 
-sum_of_run_time_of_attempted_tasks: 7096.755430221558
+sum_of_run_time_of_attempted_tasks: 6873.791479110718
 
-solvability_ratio: 0.011
+solvability_ratio: 0.048
 
 comments: solvability ratio based on PCA embedding.
 
-f1_score: [0.9879518072289156, 0.9473684210526315]
+f1_score: [0.9824561403508771, 0.9454545454545454]
 
 ml_metrics_calculator_version: 1
 
@@ -1092,35 +1090,35 @@ algorithm_details:Hartree Fock
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: b057f3ad-d81d-4a94-b777-6c9f688ebee3
+performance_metrics_uuid: 4d81a24d-830a-4051-b929-cae3d97aa7b1
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 68
+number_of_problem_instances_attempted: 66
 
 number_of_problem_instances_solved: 6
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 228
+number_of_tasks_attempted: 182
 
 number_of_tasks_solved: 6
 
-number_of_tasks_solved_within_run_time_limit: 228
+number_of_tasks_solved_within_run_time_limit: 182
 
 number_of_tasks_solved_within_accuracy_threshold: 6
 
 max_run_time_of_attempted_tasks: 20.338801622390747
 
-sum_of_run_time_of_attempted_tasks: 800.5601267814636
+sum_of_run_time_of_attempted_tasks: 686.8769178390503
 
 solvability_ratio: 0.0
 
 comments: solvability ratio based on PCA embedding.
 
-f1_score: [0.0, 0.07547169811320754]
+f1_score: [0.0, 0.10084033613445378]
 
 ml_metrics_calculator_version: 1
 
@@ -1156,35 +1154,35 @@ algorithm_details:MP2
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 160b9ff1-91a6-495b-ad5b-440dc6dcafba
+performance_metrics_uuid: aa4dcfaf-cd7a-4731-a048-05949cf167b7
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 65
+number_of_problem_instances_attempted: 63
 
 number_of_problem_instances_solved: 6
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 220
+number_of_tasks_attempted: 174
 
 number_of_tasks_solved: 6
 
-number_of_tasks_solved_within_run_time_limit: 220
+number_of_tasks_solved_within_run_time_limit: 174
 
 number_of_tasks_solved_within_accuracy_threshold: 6
 
 max_run_time_of_attempted_tasks: 2.230440139770508
 
-sum_of_run_time_of_attempted_tasks: 78.57580351829529
+sum_of_run_time_of_attempted_tasks: 71.48596668243408
 
 solvability_ratio: 0.0
 
 comments: solvability ratio based on PCA embedding.
 
-f1_score: [0.0, 0.07547169811320754]
+f1_score: [0.0, 0.10084033613445378]
 
 ml_metrics_calculator_version: 1
 
@@ -1220,35 +1218,35 @@ algorithm_details:CCSD(T)
 
 software_details:pyscf (https://github.com/pyscf/pyscf).
 
-performance_metrics_uuid: 46e4f2aa-02ab-4b16-9aff-a5270844377c
+performance_metrics_uuid: 1ef975d0-66e6-4b4d-85da-2ff98e605b63
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 64
+number_of_problem_instances_attempted: 63
 
 number_of_problem_instances_solved: 23
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 217
+number_of_tasks_attempted: 174
 
-number_of_tasks_solved: 71
+number_of_tasks_solved: 64
 
-number_of_tasks_solved_within_run_time_limit: 217
+number_of_tasks_solved_within_run_time_limit: 174
 
-number_of_tasks_solved_within_accuracy_threshold: 71
+number_of_tasks_solved_within_accuracy_threshold: 64
 
 max_run_time_of_attempted_tasks: 469.1432478427887
 
-sum_of_run_time_of_attempted_tasks: 7918.634609699249
+sum_of_run_time_of_attempted_tasks: 7687.804200410843
 
-solvability_ratio: 0.2847
+solvability_ratio: 0.9196
 
 comments: solvability ratio based on PCA embedding.
 
-f1_score: [0.9685534591194969, 0.9659863945578231]
+f1_score: [0.9696969696969697, 0.9763779527559056]
 
 ml_metrics_calculator_version: 1
 
@@ -1288,17 +1286,17 @@ logical_resource_estimate_solution_uuid:e135679c-e314-4808-9634-252bc376d295
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: 37c032ef-a69e-426e-925b-8dd39c45e2e1
+performance_metrics_uuid: 996168f0-ea98-43a5-ab93-f7243ccdd5d7
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
 number_of_problem_instances_attempted: 4
 
 number_of_problem_instances_solved: 1
 
-number_of_tasks: 228
+number_of_tasks: 184
 
 number_of_tasks_attempted: 24
 
@@ -1316,7 +1314,7 @@ solvability_ratio: 0.0
 
 comments: solvability ratio based on PCA embedding., ML model calculated without `GridSearchCV`
 
-f1_score: [0.9370629370629371, 0.1]
+f1_score: [0.9230769230769231, 0.1111111111111111]
 
 ml_metrics_calculator_version: 1
 
@@ -1356,31 +1354,31 @@ logical_resource_estimate_solution_uuid:27aa9788-c0c7-4f8e-ba5b-315099c05240
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: 081f384b-cdcd-42de-8dc7-5117b0876996
+performance_metrics_uuid: 02a33104-045e-405e-93ea-cfb0d6fb5bfb
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 24
+number_of_problem_instances_attempted: 25
 
 number_of_problem_instances_solved: 2
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 137
+number_of_tasks_attempted: 139
 
 number_of_tasks_solved: 2
 
 number_of_tasks_solved_within_run_time_limit: 2
 
-number_of_tasks_solved_within_accuracy_threshold: 137
+number_of_tasks_solved_within_accuracy_threshold: 139
 
 max_run_time_of_attempted_tasks: 71881480309304.23
 
-sum_of_run_time_of_attempted_tasks: 92303779438561.5
+sum_of_run_time_of_attempted_tasks: 92452303180814.38
 
-solvability_ratio: 0.0394
+solvability_ratio: 0.0
 
 comments: solvability ratio based on PCA embedding.
 
@@ -1424,35 +1422,35 @@ logical_resource_estimate_solution_uuid:712bb942-1d58-4bfb-bdee-a7635f0b9cd7
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: 4fa841cf-519c-450a-8236-3921084a2b2f
+performance_metrics_uuid: 13cf01f0-8705-43a4-b222-557526a62ded
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 24
+number_of_problem_instances_attempted: 25
 
 number_of_problem_instances_solved: 4
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 137
+number_of_tasks_attempted: 139
 
 number_of_tasks_solved: 5
 
 number_of_tasks_solved_within_run_time_limit: 5
 
-number_of_tasks_solved_within_accuracy_threshold: 137
+number_of_tasks_solved_within_accuracy_threshold: 139
 
 max_run_time_of_attempted_tasks: 7188148034586.839
 
-sum_of_run_time_of_attempted_tasks: 9230378066161.62
+sum_of_run_time_of_attempted_tasks: 9245230449871.828
 
-solvability_ratio: 0.013
+solvability_ratio: 0.0
 
 comments: solvability ratio based on PCA embedding.
 
-f1_score: [0.9931972789115646, 0.8333333333333334]
+f1_score: [0.9863013698630136, 0.5714285714285714]
 
 ml_metrics_calculator_version: 1
 
@@ -1488,35 +1486,35 @@ algorithm_details:DMRG with the lowest variational energy obtained so far.
 
 software_details:Block2 v0.5.3rc16 with dmrghandler, commit version d603fdc6409fc194a416aa3a519362d5d91790d9 or later.
 
-performance_metrics_uuid: 92ff5607-577f-42c6-b3bb-9e5b208a799c
+performance_metrics_uuid: 9ba76779-7ad2-4901-8dce-3c7cd6a13753
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 68
+number_of_problem_instances_attempted: 66
 
 number_of_problem_instances_solved: 13
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 228
+number_of_tasks_attempted: 182
 
-number_of_tasks_solved: 107
+number_of_tasks_solved: 67
 
-number_of_tasks_solved_within_run_time_limit: 228
+number_of_tasks_solved_within_run_time_limit: 182
 
-number_of_tasks_solved_within_accuracy_threshold: 107
+number_of_tasks_solved_within_accuracy_threshold: 67
 
 max_run_time_of_attempted_tasks: 80820.729907066
 
-sum_of_run_time_of_attempted_tasks: 1841774.7109000839
+sum_of_run_time_of_attempted_tasks: 1826529.25386094
 
-solvability_ratio: 0.4126
+solvability_ratio: 0.386
 
 comments: solvability ratio based on PCA embedding.
 
-f1_score: [0.9130434782608695, 0.9626168224299065]
+f1_score: [0.967741935483871, 0.9774436090225563]
 
 ml_metrics_calculator_version: 1
 
@@ -1556,35 +1554,35 @@ logical_resource_estimate_solution_uuid:612747d5-61ee-40cd-b440-0ad59c064c04
 
 logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1
 
-performance_metrics_uuid: e44fd108-4cc3-4502-b566-98ef9b403631
+performance_metrics_uuid: 9c99f40e-d05a-4a88-ad36-8044dffc059c
 
-creation_timestamp: 2026-04-07T11:49:13.945074+00:00
+creation_timestamp: 2026-05-14T19:00:21.508451+00:00
 
-number_of_problem_instances: 68
+number_of_problem_instances: 67
 
-number_of_problem_instances_attempted: 22
+number_of_problem_instances_attempted: 23
 
 number_of_problem_instances_solved: 3
 
-number_of_tasks: 228
+number_of_tasks: 184
 
-number_of_tasks_attempted: 131
+number_of_tasks_attempted: 133
 
 number_of_tasks_solved: 3
 
 number_of_tasks_solved_within_run_time_limit: 3
 
-number_of_tasks_solved_within_accuracy_threshold: 131
+number_of_tasks_solved_within_accuracy_threshold: 133
 
-max_run_time_of_attempted_tasks: 26774752769.01683
+max_run_time_of_attempted_tasks: 27517246880.125843
 
-sum_of_run_time_of_attempted_tasks: 381759342046.6917
+sum_of_run_time_of_attempted_tasks: 423832831791.01337
 
 solvability_ratio: 0.0
 
 comments: solvability ratio based on PCA embedding.
 
-f1_score: [1.0, 1.0]
+f1_score: [0.995475113122172, 0.8]
 
 ml_metrics_calculator_version: 1
 
@@ -1612,25 +1610,25 @@ Note: `attempted` may be `True` or `False`.  Tasks with a `reference_energy` can
 
 Features: ['max_vertex_degree', 'min_vertex_degree', 'mean_vertex_degree', 'std_dev_vertex_degree', 'max_weight', 'min_weight', 'mean_weight', 'std_dev_weight', 'max_edge_order', 'mean_edge_order', 'std_dev_edge_order', 'one_norm', 'log_fci_dim', 'n_elec', 'n_orbs', 'df_gap']
 
-NNMF Component 1: [0.44176701 0.45449395 0.45163263 0.4206377  0.51199883 0.
- 0.         0.04944855 0.87023998 0.88722992 0.85986962 0.45957332
- 0.87154483 0.56686512 0.8574673  0.51617008]
+NNMF Component 1: [0.03745208 0.21516493 0.04107935 0.02808182 0.33905073 0.00185411
+ 0.01484    0.08651885 0.55613848 0.58830985 0.5442858  0.
+ 1.12818961 1.01905998 0.5323174  0.115369  ]
 
-NNMF Component 2: [0.         0.         0.         0.         0.05545233 1.03487444
- 0.54168445 0.41821312 0.07259491 0.01856936 0.0876162  0.
- 0.1752886  0.11462803 0.07264437 0.        ]
+NNMF Component 2: [0.42590339 0.35405    0.43390494 0.40922594 0.34180125 0.
+ 0.00081299 0.02198064 0.6037736  0.60302563 0.59960665 0.45485798
+ 0.34001469 0.         0.60246848 0.45272373]
 
 ![PCA components plot](supporting_artifacts/pca_components.png)
 
 Features: ['max_vertex_degree', 'min_vertex_degree', 'mean_vertex_degree', 'std_dev_vertex_degree', 'max_weight', 'min_weight', 'mean_weight', 'std_dev_weight', 'max_edge_order', 'mean_edge_order', 'std_dev_edge_order', 'one_norm', 'log_fci_dim', 'n_elec', 'n_orbs', 'df_gap']
 
-PCA Component 1: [-0.22922229 -0.21461603 -0.23398401 -0.21923522 -0.16402432  0.39183587
-  0.20302013  0.14659357 -0.3134204  -0.33485059 -0.30553226 -0.22630863
- -0.2258685  -0.10070305 -0.31226268 -0.20457232]
+PCA Component 1: [ 0.30636115  0.26305785  0.31222235  0.29416036  0.13887147 -0.02010789
+ -0.03188961 -0.04146377  0.34053294  0.33354463  0.34055038  0.29044829
+  0.20123208  0.00217411  0.34536166  0.20780103]
 
-PCA Component 2: [ 0.22146419  0.13713247  0.22479465  0.21502049  0.02836024  0.66237732
-  0.34970611  0.22348305  0.1309698   0.08010198  0.14460543  0.21623573
- -0.07605394 -0.30861836  0.14283042  0.10453104]
+PCA Component 2: [ 0.01874822  0.14481938  0.02091595  0.01334236 -0.39580411 -0.03719602
+ -0.07152145 -0.19349572  0.00971009  0.01341835  0.01015107 -0.18947978
+  0.48160168  0.63411357  0.00901645 -0.32719802]
 
 ![solver similarity: PCA space of area](supporting_artifacts/solver_similarity_in_PCA_space_of_area_summary.png)
 
