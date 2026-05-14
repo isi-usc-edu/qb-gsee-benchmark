@@ -17,6 +17,10 @@
 
 from qb_gsee_benchmark.utils import fetch_file_from_sftp
 from qb_gsee_benchmark.utils import load_json_files
+from qb_gsee_benchmark.utils import download_file_via_https
+from qb_gsee_benchmark.utils import compare_file_sha1sum
+from qb_gsee_benchmark.utils import decompress_file
+from qb_gsee_benchmark.utils import determine_url_protocol
 
 import os
 import argparse
@@ -28,6 +32,7 @@ import random
 import copy
 from urllib.parse import urlparse
 import time
+from pathlib import Path
 import sys
 sys.path.append("../")
 sys.path.append("../Hamiltonian_features/experimental/fast_double_factorization_features")
@@ -128,8 +133,6 @@ def main(args):
     problem_instance_list = load_json_files(args.input_dir)
     logging.info(f"loaded {len(problem_instance_list)} problem instances.")
 
-    num_orbitals_cheat_sheet = pd.read_csv("num_orbitals_cheat_sheet.csv")
-
 
     finished_all_hamiltonians = False # init
     max_num_orbitals = 20 # init.  we will complete the "small" Hamiltonians first
@@ -159,7 +162,6 @@ def main(args):
                 try:
                     num_orbitals = task["features"]["num_orbitals"]
                 except Exception as e:
-                    logging.error(f'Error: {e}', exc_info=True)
                     logging.info(f"problem instance does not explicitly state the number of orbitals.")
 
 
@@ -194,7 +196,7 @@ def main(args):
                 else:
                     if num_orbitals > max_num_orbitals:
                         logging.info(f"number of orbitals:  {num_orbitals}")
-                        logging.info(f"too many orbitals!  we are only considering max_num_orbitals {max_num_orbitals}.")
+                        logging.info(f"too many orbitals!  we are only considering max_num_orbitals {max_num_orbitals} at this stage.")
                         logging.info(f"skipping this Hamiltonian for now now.  We will revisit it later.")
                         finished_all_hamiltonians = False # reset this to False, so we increase max_num_orbitals and try again later.
                         logging.info(f"moving on ...")
@@ -208,21 +210,17 @@ def main(args):
                 num_supporting_files = len(task["supporting_files"])
                 logging.info(f"number of supporting files: {num_supporting_files}")
                 for supporting_file in task["supporting_files"]:
-                    
-                    instance_data_object_uuid = supporting_file["instance_data_object_uuid"]
-                    instance_data_object_url = supporting_file["instance_data_object_url"]
-                    logging.info(f"supporting data file UUID: {instance_data_object_uuid}.")
-                    logging.info(f"supporting data file URL: {instance_data_object_url}.")
-
-                    parsed_url = urlparse(instance_data_object_url)
-                    instance_data_object_file_name = parsed_url.path.split("/")[-1]
 
 
-                    #TODO: fix hacky way of only grabbing FCIDUMP files:
-                    if "fcidump" in instance_data_object_file_name.lower():
-                        logging.info(f"assuming {instance_data_object_file_name} is an FCIDUMP file.")
-                    else:
-                        logging.info(f"assuming {instance_data_object_file_name} is NOT an FCIDUMP file.  SKIPPING!")
+                    file_handler.flush() # flush log buffer to log file
+
+                    fcidump_uuid = supporting_file["instance_data_object_uuid"]
+                    fcidump_url = supporting_file["instance_data_object_url"]
+                    logging.info(f"supporting data file UUID: {fcidump_uuid}.")
+                    logging.info(f"supporting data file URL: {fcidump_url}.")
+
+                    if not supporting_file["is_fcidump_file"]:
+                        logging.info("Supporting file is NOT an FCIDUMP file.  Moving to next file...")
                         continue
 
 
@@ -236,53 +234,64 @@ def main(args):
                         # empty features database... we will process the FCIDUMP
                         logging.info(f"Hamiltonian features database is empty.")
                     else:
-                        if instance_data_object_uuid in ham_features_df_database["instance_data_object_uuid"].values:
-                            logging.info(f"instance_data_object_uuid {instance_data_object_uuid} is already in the feature database.  Skipping it!")
+                        if fcidump_uuid in ham_features_df_database["instance_data_object_uuid"].values:
+                            logging.info(f"instance_data_object_uuid {fcidump_uuid} is already in the feature database.  Skipping it!")
                             continue
                         else:
-                            logging.info(f"did NOT find instance_data_object_uuid {instance_data_object_uuid} in database.")
+                            logging.info(f"did NOT find instance_data_object_uuid {fcidump_uuid} in database.")
                             
                     # proceed to process the FCIDUMP file...
-                    logging.info(f"Processing instance_data_object_uuid {instance_data_object_uuid} ...")
-                    
+                    time_check(overall_start_time)
+                    logging.info(f"Processing instance_data_object_uuid {fcidump_uuid} ...")
 
-
-
-                    # SFTP download the FCIDUMP file
-                    #===============================================================
-                    logging.info(f"SFTP downloading file {instance_data_object_url}...")
-                    fetch_file_from_sftp(
-                        url=instance_data_object_url,
-                        username=args.sftp_username,
-                        ppk_path=args.sftp_key_file, 
-                        local_path=instance_data_object_file_name,
-                        port=22
-                    )
-                    
-
-                    # Decompress the FCIDUMP file (if detected)
-                    #===============================================================
-                    # TODO: fix hacky way of detecting the file is compressed:
-                    if ".gz".lower() in instance_data_object_file_name.lower():
-                        logging.info(f"decompressing file {instance_data_object_file_name}...")
-                        instance_data_object_file_name_gz = instance_data_object_file_name
-                        instance_data_object_file_name = instance_data_object_file_name.split(".gz")[0] # update file name with no .gz
-                        
-                        with gzip.open(instance_data_object_file_name_gz, "rb") as f_in:
-                            with open(instance_data_object_file_name, "wb") as f_out:
-                                shutil.copyfileobj(f_in, f_out)
-                        
-                        os.remove(instance_data_object_file_name_gz)
+                    # Download the file:            
+                    protocol = determine_url_protocol(fcidump_url)
+                    if protocol == "https":
+                        fcidump_file_path = download_file_via_https(url=fcidump_url)
+                    elif protocol == "sftp":
+                        fcidump_file_path = os.path.basename(urlparse(fcidump_url).path)
+                        fcidump_file_path = fetch_file_from_sftp(
+                            url=fcidump_url,
+                            local_path=fcidump_file_path,
+                            ppk_path=sftp_key_file,
+                            username=sftp_username
+                        )
                     else:
-                        logging.info(f"assuming file {instance_data_object_file_name} is NOT compressed.")
+                        raise Exception(f"Unsupported {protocol=}.  HTTPS and SFTP are supported.")
+                    logging.info(f"downloaded FCIDUMP file {fcidump_file_path}.")
+
+                    
+
+                    # compare the sha1sum to that reported in the problem instance
+                    if supporting_file["instance_data_checksum_type"] != "sha1sum":
+                        raise Exception(f"Unsupported file checksum {supporting_file['instance_data_checksum_type']}.  `sha1sum` is supported.")
+                    same_checksum = compare_file_sha1sum(
+                        file_path=fcidump_file_path, 
+                        comparison_hash=supporting_file["instance_data_checksum"]
+                    )
+                    if not same_checksum:
+                        raise Exception(f"File sha1sum does not match that reported in the problem instance.")
+
+                    # decompress the file
+                    fcidump_file_path = decompress_file(fcidump_file_path)
+
+                    # read the FCIDUMP file
+                    data = fcidump.read(filename=fcidump_file_path)
+                    
+                    if num_orbitals is not None:
+                        assert num_orbitals == data['NORB'], "Error: the number or orbitals listed in the FCIDUMP file doesn't match the number listed in the problem instance JSON file!";
 
 
-
+                    
                     if num_orbitals is None:
-                        logging.info(f"we need to read the FCIDUMP file to determine num_orbitals...")
-                        data = fcidump.read(instance_data_object_file_name)
+                        # problem instance didn't specify... AND the cheat sheet
+                        # didn't have the value... we will update the cheat sheet.
+
+                        # set the value of num_orbitals to that listed in the FCIDUMP file
                         num_orbitals = data['NORB']
                         logging.info(f"num_orbitals: {num_orbitals}")    
+                        
+                        # update the cheat sheet
                         append_to_csv_database(
                             df=pd.DataFrame(
                                     [
@@ -296,17 +305,28 @@ def main(args):
                         )
                     
                     
-                    time_check(overall_start_time)
+                    # TODO:
+                    # This is unfortunate. The FCIDUMP file for FeMoco-54e-54o
+                    # published by Microsoft at https://aka.ms/fcidump/nitrogenase-54e-54o
+                    # does not have the MS2 parameter in it.  So we have this
+                    # hacky way of inserting it here.  C'est la vie.
+                    if "nitrogenase-54e-54o.fcidump" in fcidump_file_path:
+                        if "MS2" not in data.keys():
+                            logging.warning("WARNING! we are updating the FCIDUMP for Femoco-54e-54o by inserting the MS2 parameter!!!")
+                            text = Path(fcidump_file_path).read_text()
 
-                    if num_orbitals > max_num_orbitals:
-                        logging.info(f"number of orbitals:  {num_orbitals}")
-                        logging.info(f"too many orbitals!  we are only considering max_num_orbitals {max_num_orbitals}.")
-                        logging.info(f"skipping this Hamiltonian for now now.  We will revisit it later.")
-                        finished_all_hamiltonians = False # reset this to False, so we increase max_num_orbitals and try again later.
-                        logging.info(f"cleaning up: removing file {os.remove(instance_data_object_file_name_gz)}")
-                        os.remove(instance_data_object_file_name_gz)
-                        logging.info(f"moving on ...")
-                        continue
+                            # MS2 is 2*M_S (The spin projection quantum number multiplied by 2)
+                            # M_S = 1/2 (N_alpha - N_beta)
+                            # N_alpha - N_beta is spin S.  
+                            # from table 5 from the supplemental
+                            # information:  https://www.pnas.org/action/downloadSupplement?doi=10.1073%2Fpnas.1619152114&file=pnas.1619152114.sapp.pdf
+                            # we have that S=0.  So then M_S=0 and MS2=2*M_S=0.
+                            if "MS2=0," not in text:
+                                target = "NORB=54," # we will insert the "MS2=0," property after the "NORB=54," property
+                                assert target in text, "Error trying to fixup FCIDUMP file for nitrogenase-54e-54o."
+                                text = text.replace(target, target + "MS2=0,", 1)
+                                Path(fcidump_file_path).write_text(text)
+                                    
 
 
                     
@@ -317,9 +337,9 @@ def main(args):
                     ham_features = {}
                     ham_features_start_time = datetime.datetime.now()
                     ham_features = compute_ham_features_csv(
-                        filename=instance_data_object_file_name,
-                        save=False,
-                        csv_filename=None,
+                        filename=fcidump_file_path,
+                        save=False, # do not save
+                        csv_filename="WE_ARE_NOT_SAVING_THE_FILE_HERE.csv",
                         verbose_logging=True
                     )
                     ham_features_stop_time = datetime.datetime.now()
@@ -331,29 +351,26 @@ def main(args):
                     ham_features["problem_instance_uuid"] = problem_instance_uuid
                     ham_features["problem_instance_short_name"] = problem_instance_short_name
                     ham_features["task_uuid"] = task_uuid
-                    ham_features["instance_data_object_uuid"] = instance_data_object_uuid
-                    ham_features["instance_data_object_file_name"] = instance_data_object_file_name
-                    ham_features["instance_data_object_url"] = instance_data_object_url
+                    ham_features["instance_data_object_uuid"] = fcidump_uuid
+                    ham_features["instance_data_object_file_name"] =  os.path.basename(fcidump_file_path)
+                    ham_features["instance_data_object_url"] = fcidump_url
                     ham_features["date_of_calculation"] = str(ham_features_stop_time)
                     ham_features["version_of_features_calculation_script"] = 1
                     ham_features["ham_features_calc_time"] = ham_features_calc_time
 
 
-
-
-
                     # Back up df_eigs to a file. 
                     # Sometimes the array is shortened in string representation...
                     # we want all the eigs!
-                    df_eigs_file = f"df_eigs.{instance_data_object_uuid}.bin"
-                    ham_features["df_eigs"].tofile(f"double_factorized_eigs.{instance_data_object_uuid}.bin")
+                    df_eigs_file = f"df_eigs.{fcidump_uuid}.bin"
+                    ham_features["df_eigs"].tofile(f"double_factorized_eigs.{fcidump_uuid}.bin")
                     logging.info(f"wrote df_eigs to file: {df_eigs_file}")
 
 
                     # Clean up
                     #===============================================================
-                    logging.info(f"deleting file {instance_data_object_file_name}.")
-                    os.remove(instance_data_object_file_name)
+                    logging.info(f"deleting file {fcidump_file_path}.")
+                    os.remove(os.path.basename(fcidump_file_path))
 
 
                     # Append/Write out features .csv file
