@@ -1,45 +1,44 @@
 <h1>GSEE Benchmark Standard Report</h1>
-<p>Report based on data from 2026-04-07T11:49:13.945074+00:00</p>
+<p>Report based on data from 2026-05-14T19:00:21.508451+00:00</p>
 <p><a href="https://github.com/isi-usc-edu/qb-gsee-benchmark">https://github.com/isi-usc-edu/qb-gsee-benchmark</a></p>
-<p>Input data: <code>Hamiltonian_features.csv</code>, last modified Thu Feb 26 10:38:50 2026</p>
-<p>WARNING!  We only have features calculated for                             228/230 Hamiltonians.                             This report is based on partial results!</p>
+<p>Input data: <code>Hamiltonian_features.csv</code>, last modified Thu May 14 14:59:36 2026</p>
 <p>Input data: <code>GSEE-HC_utility_estimates_all_instances_task_uuids_v2.csv</code>, last modified Thu Feb 26 10:38:50 2026</p>
-<p>Latest creation time for a <code>problem_instance.json</code> file: Mon Apr  6 15:20:37 2026</p>
-<p>Latest creation time for a <code>solution.json</code> file: Tue Apr  7 07:43:14 2026</p>
+<p>Latest creation time for a <code>problem_instance.json</code> file: Tue Apr  7 08:08:02 2026</p>
+<p>Latest creation time for a <code>solution.json</code> file: Tue Apr  7 08:08:02 2026</p>
 <h1>Problem Instance Summary Statistics</h1>
-<p>number of <code>problem_instances</code>: 69.</p>
-<p><code>problem_instance.json</code> with the most tasks: 30 (hubbard_square/614c4444-a31a-4348-b24d-01040208651c)</p>
-<p>number of Hamiltonians (i.e., tasks) we have features calculated for: 228</p>
+<p>number of <code>problem_instances</code>: 67.</p>
+<p><code>problem_instance.json</code> with the most tasks: 16 (mo_n2_pincer/8a3787cc-d3d0-42a8-d9a9-7de2aed45208)</p>
+<p>number of Hamiltonians (i.e., tasks) we have features calculated for: 184</p>
 <p>minimum number of orbitals: 5</p>
-<p>median number of orbitals: 36.0</p>
+<p>median number of orbitals: 50.5</p>
 <p>maximum number of orbitals: 135</p>
 <p><img alt="Number of orbitals histogram" src="supporting_artifacts/num_orbitals_histogram.png" /></p>
 <p><img alt="Utility estimate per Hamiltonian" src="supporting_artifacts/num_orbitals_vs_utility.png" /></p>
 <h1>Solver Summary Statistics</h1>
 <p>number of unique participating solvers: 23</p>
-<p>Solver: SHCI_opt/2dde727e-a881-44fa-aabf-bba6248e4baf, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 1.0}, F1 Score: [0.83333333 0.99319728]</p>
-<p>Solver: DF_QPE/5dad4064-cd11-412f-85cb-d722afe3b3de, ML Solvability Ratio: {'PCA': 0.0394, 'NNMF': 0.0199}, F1 Score: [1. 1.]</p>
+<p>Solver: SHCI_opt/2dde727e-a881-44fa-aabf-bba6248e4baf, ML Solvability Ratio: {'PCA': 0.9028, 'NNMF': 0.9706}, F1 Score: [1. 1.]</p>
+<p>Solver: DF_QPE/5dad4064-cd11-412f-85cb-d722afe3b3de, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [1. 1.]</p>
 <p>Solver: THC_BLISS_QPE_1mHa/b8ed03bd-9c3e-4d07-80af-8f77f0e7c2ac, Model could not be calculated.</p>
-<p>Solver: DF_QPE/2610d8de-bd3a-469e-9a80-473e8988755f, ML Solvability Ratio: {'PCA': 0.0716, 'NNMF': 0.0}, F1 Score: [1. 1.]</p>
-<p>Solver: SHCI_pt_1e-4/4ed500f1-0650-41e3-af00-e4d0359394b4, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 1.0}, F1 Score: [0.71428571 0.97122302]</p>
-<p>Solver: SHCI_var_1e-4/7e730dfb-57ee-480b-a8a1-4b73f5f07c54, ML Solvability Ratio: {'PCA': 0.6562, 'NNMF': 0.7836}, F1 Score: [0.98387097 0.98901099]</p>
-<p>Solver: SHCI_pt_2e-4/ad964781-302e-4728-a26d-39918e0a6cdb, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 0.9868}, F1 Score: [0.89361702 0.98069498]</p>
-<p>Solver: SHCI_pt_2e-5/c71b90bd-3250-4c0c-b4e7-fc9878f141f6, ML Solvability Ratio: {'PCA': 0.9317, 'NNMF': 0.5441}, F1 Score: [0.76470588 0.97058824]</p>
-<p>Solver: SHCI_pt_5e-5/d626506c-7aae-4ad6-802a-b29af5f2bb93, ML Solvability Ratio: {'PCA': 1.0, 'NNMF': 1.0}, F1 Score: [0.9375     0.99270073]</p>
-<p>Solver: SHCI_var_2e-4/0db183e3-a86d-491b-9125-599556e37c7a, ML Solvability Ratio: {'PCA': 0.8125, 'NNMF': 0.8487}, F1 Score: [0.99280576 0.99401198]</p>
-<p>Solver: SHCI_var_2e-5/86bfe50c-9342-4d54-bb68-abc8abd95688, ML Solvability Ratio: {'PCA': 0.6486, 'NNMF': 0.4057}, F1 Score: [0.88      0.9765625]</p>
-<p>Solver: SHCI_var_5e-5/01949b95-c427-4693-9134-01f47f688c09, ML Solvability Ratio: {'PCA': 0.8749, 'NNMF': 0.391}, F1 Score: [0.83950617 0.94222222]</p>
+<p>Solver: DF_QPE/2610d8de-bd3a-469e-9a80-473e8988755f, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [1. 1.]</p>
+<p>Solver: SHCI_pt_1e-4/4ed500f1-0650-41e3-af00-e4d0359394b4, ML Solvability Ratio: {'PCA': 0.8021, 'NNMF': 0.7755}, F1 Score: [0.84210526 0.96808511]</p>
+<p>Solver: SHCI_var_1e-4/7e730dfb-57ee-480b-a8a1-4b73f5f07c54, ML Solvability Ratio: {'PCA': 0.3803, 'NNMF': 0.3745}, F1 Score: [0.94230769 0.95081967]</p>
+<p>Solver: SHCI_pt_2e-4/ad964781-302e-4728-a26d-39918e0a6cdb, ML Solvability Ratio: {'PCA': 0.8021, 'NNMF': 0.7755}, F1 Score: [0.84210526 0.96808511]</p>
+<p>Solver: SHCI_pt_2e-5/c71b90bd-3250-4c0c-b4e7-fc9878f141f6, ML Solvability Ratio: {'PCA': 0.807, 'NNMF': 0.7788}, F1 Score: [0.92857143 0.98989899]</p>
+<p>Solver: SHCI_pt_5e-5/d626506c-7aae-4ad6-802a-b29af5f2bb93, ML Solvability Ratio: {'PCA': 0.7036, 'NNMF': 0.466}, F1 Score: [0.90909091 0.98445596]</p>
+<p>Solver: SHCI_var_2e-4/0db183e3-a86d-491b-9125-599556e37c7a, ML Solvability Ratio: {'PCA': 0.2838, 'NNMF': 0.1391}, F1 Score: [0.93103448 0.92727273]</p>
+<p>Solver: SHCI_var_2e-5/86bfe50c-9342-4d54-bb68-abc8abd95688, ML Solvability Ratio: {'PCA': 0.5218, 'NNMF': 0.3492}, F1 Score: [0.84210526 0.94674556]</p>
+<p>Solver: SHCI_var_5e-5/01949b95-c427-4693-9134-01f47f688c09, ML Solvability Ratio: {'PCA': 0.4131, 'NNMF': 0.2482}, F1 Score: [0.86075949 0.92517007]</p>
 <p>Solver: THC_QPE_1mHa/18c187af-3e5b-4e6c-87fd-73c26fd48a60, Model could not be calculated.</p>
-<p>Solver: CISD/418f060e-496b-4024-8d2d-9b1f8791e76d, ML Solvability Ratio: {'PCA': 0.0233, 'NNMF': 0.0051}, F1 Score: [0.98069498 0.89361702]</p>
-<p>Solver: CCSD/0a29e54f-bef9-4d19-bafa-d94b1c4b37aa, ML Solvability Ratio: {'PCA': 0.011, 'NNMF': 0.0418}, F1 Score: [0.98795181 0.94736842]</p>
-<p>Solver: HF/5f5e617a-19c2-4d82-bebc-b2d6b3dcb012, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.        0.0754717]</p>
-<p>Solver: MP2/b420358b-5def-41e6-8c5d-b9d93b6aecd2, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.        0.0754717]</p>
-<p>Solver: CCSD(T)/c09217e6-d0f7-4b0f-81c4-79210b7ac878, ML Solvability Ratio: {'PCA': 0.2847, 'NNMF': 0.092}, F1 Score: [0.96855346 0.96598639]</p>
-<p>Solver: DF_QPE/7c8ef984-4d3a-4468-8900-e0da3bd8b22d, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.93706294 0.1       ]</p>
-<p>Solver: DF_QPE/5d768520-b3d0-4292-bbb4-9776fa128107, ML Solvability Ratio: {'PCA': 0.0394, 'NNMF': 0.0199}, F1 Score: [1. 1.]</p>
-<p>Solver: DF_QPE/f6b36bde-be4a-4eee-975b-2c5f7e553f5f, ML Solvability Ratio: {'PCA': 0.013, 'NNMF': 0.0006}, F1 Score: [0.99319728 0.83333333]</p>
-<p>Solver: DMRG_Niagara_cluster_lowest_energy/16537433-9f4c-4eae-a65d-787dc3b35b59, ML Solvability Ratio: {'PCA': 0.4126, 'NNMF': 0.3022}, F1 Score: [0.91304348 0.96261682]</p>
-<p>Solver: DF_QPE/4b07b89f-c66f-4e72-8c24-df3e4222cb41, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [1. 1.]</p>
+<p>Solver: CISD/418f060e-496b-4024-8d2d-9b1f8791e76d, ML Solvability Ratio: {'PCA': 0.0217, 'NNMF': 0.1262}, F1 Score: [0.97777778 0.91304348]</p>
+<p>Solver: CCSD/0a29e54f-bef9-4d19-bafa-d94b1c4b37aa, ML Solvability Ratio: {'PCA': 0.048, 'NNMF': 0.1418}, F1 Score: [0.98245614 0.94545455]</p>
+<p>Solver: HF/5f5e617a-19c2-4d82-bebc-b2d6b3dcb012, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.         0.10084034]</p>
+<p>Solver: MP2/b420358b-5def-41e6-8c5d-b9d93b6aecd2, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.         0.10084034]</p>
+<p>Solver: CCSD(T)/c09217e6-d0f7-4b0f-81c4-79210b7ac878, ML Solvability Ratio: {'PCA': 0.9196, 'NNMF': 0.8976}, F1 Score: [0.96969697 0.97637795]</p>
+<p>Solver: DF_QPE/7c8ef984-4d3a-4468-8900-e0da3bd8b22d, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.92307692 0.11111111]</p>
+<p>Solver: DF_QPE/5d768520-b3d0-4292-bbb4-9776fa128107, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [1. 1.]</p>
+<p>Solver: DF_QPE/f6b36bde-be4a-4eee-975b-2c5f7e553f5f, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.98630137 0.57142857]</p>
+<p>Solver: DMRG_Niagara_cluster_lowest_energy/16537433-9f4c-4eae-a65d-787dc3b35b59, ML Solvability Ratio: {'PCA': 0.386, 'NNMF': 0.203}, F1 Score: [0.96774194 0.97744361]</p>
+<p>Solver: DF_QPE/4b07b89f-c66f-4e72-8c24-df3e4222cb41, ML Solvability Ratio: {'PCA': 0.0, 'NNMF': 0.0}, F1 Score: [0.99547511 0.8       ]</p>
 <p><img alt="Solver scatter plot" src="supporting_artifacts/solver_num_orbs_vs_runtime_scatter_plot.png" /></p>
 <p>NOTE: only <code>attempted</code> tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.</p>
 <p><img alt="Solver scatter plot" src="supporting_artifacts/solver_num_orbs_vs_log_runtime_scatter_plot.png" /></p>
@@ -57,21 +56,21 @@
 <p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
 <p>algorithm_details:SHCI with optimized orbitals followed by SHCI+PT</p>
 <p>software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).</p>
-<p>performance_metrics_uuid: 893a513f-db89-49dc-bac7-849d93ea2696</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 66</p>
+<p>performance_metrics_uuid: d719483e-36f0-491e-91c5-e67042c77323</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 64</p>
 <p>number_of_problem_instances_solved: 37</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 226</p>
-<p>number_of_tasks_solved: 148</p>
-<p>number_of_tasks_solved_within_run_time_limit: 226</p>
-<p>number_of_tasks_solved_within_accuracy_threshold: 148</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 180</p>
+<p>number_of_tasks_solved: 108</p>
+<p>number_of_tasks_solved_within_run_time_limit: 180</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 108</p>
 <p>max_run_time_of_attempted_tasks: 57334.2</p>
-<p>sum_of_run_time_of_attempted_tasks: 1100317.592</p>
-<p>solvability_ratio: 1.0</p>
+<p>sum_of_run_time_of_attempted_tasks: 975847.098</p>
+<p>solvability_ratio: 0.9028</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
-<p>f1_score: [0.8333333333333334, 0.9931972789115646]</p>
+<p>f1_score: [1.0, 1.0]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver success/failure plot" src="supporting_artifacts/solver_2dde727e-a881-44fa-aabf-bba6248e4baf_plot.png" /></p>
 <p>Note: plot only contains <code>attempted</code> tasks.</p>
@@ -91,19 +90,19 @@
 <p>quantum_hardware_details:{'quantum_hardware_description': 'Optimistic superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494.', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 0.0001, 'cycle_time_microseconds': 1, 'parallelize_shots': False}}</p>
 <p>logical_resource_estimate_solution_uuid:0d495e30-978f-4e99-848a-9fe3a8b51de4</p>
 <p>logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1</p>
-<p>performance_metrics_uuid: 3464efbe-c0ba-4b27-b78e-a6ccd68a7022</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 22</p>
+<p>performance_metrics_uuid: 13bf70ec-b7de-41fa-87cb-32f2eac4fc8f</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 23</p>
 <p>number_of_problem_instances_solved: 2</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 131</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 133</p>
 <p>number_of_tasks_solved: 2</p>
 <p>number_of_tasks_solved_within_run_time_limit: 2</p>
-<p>number_of_tasks_solved_within_accuracy_threshold: 131</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 133</p>
 <p>max_run_time_of_attempted_tasks: 1394057079996.7158</p>
-<p>sum_of_run_time_of_attempted_tasks: 10701894017855.469</p>
-<p>solvability_ratio: 0.0394</p>
+<p>sum_of_run_time_of_attempted_tasks: 10996408382832.924</p>
+<p>solvability_ratio: 0.0</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
 <p>f1_score: [1.0, 1.0]</p>
 <p>ml_metrics_calculator_version: 1</p>
@@ -125,12 +124,12 @@
 <p>logical_resource_estimate_solution_uuid:fd9fd934-0256-494b-b973-5a816ce69fe8</p>
 <p>quantum_hardware_details:{'quantum_hardware_description': 'Superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494. Used with THC+BLISS.', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 0.001, 'cycle_time_microseconds': 1}}</p>
 <p>logical_resource_estimate_solver_uuid:12fbca08-3df3-4f3e-b7fd-c535b6b44b1c</p>
-<p>performance_metrics_uuid: aa39510d-ca57-48e1-a881-de960aeaf4e7</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
+<p>performance_metrics_uuid: e1c93c8d-ed85-4db3-ba2e-04a75c03ee6f</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
 <p>number_of_problem_instances_attempted: 3</p>
 <p>number_of_problem_instances_solved: 0</p>
-<p>number_of_tasks: 228</p>
+<p>number_of_tasks: 184</p>
 <p>number_of_tasks_attempted: 23</p>
 <p>number_of_tasks_solved: 0</p>
 <p>number_of_tasks_solved_within_run_time_limit: 0</p>
@@ -159,19 +158,19 @@
 <p>quantum_hardware_details:{'quantum_hardware_description': 'Ultra-optimistic hardware model based on the superconducting architecture described in https://arxiv.org/abs/2011.03494.', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 0.0001, 'cycle_time_microseconds': 0.1, 'parallelize_shots': False}}</p>
 <p>logical_resource_estimate_solution_uuid:c7dddc47-261a-40a9-af26-b53cf209f8e2</p>
 <p>logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1</p>
-<p>performance_metrics_uuid: eafbbcf3-fb95-479c-ae43-e8aef41199f0</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 22</p>
+<p>performance_metrics_uuid: 514dbccc-e71b-4642-ad9e-29a5702da826</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 23</p>
 <p>number_of_problem_instances_solved: 3</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 131</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 133</p>
 <p>number_of_tasks_solved: 4</p>
 <p>number_of_tasks_solved_within_run_time_limit: 4</p>
-<p>number_of_tasks_solved_within_accuracy_threshold: 131</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 133</p>
 <p>max_run_time_of_attempted_tasks: 139405709800.31985</p>
-<p>sum_of_run_time_of_attempted_tasks: 1070189503968.0303</p>
-<p>solvability_ratio: 0.0716</p>
+<p>sum_of_run_time_of_attempted_tasks: 1099640949950.695</p>
+<p>solvability_ratio: 0.0</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
 <p>f1_score: [1.0, 1.0]</p>
 <p>ml_metrics_calculator_version: 1</p>
@@ -191,21 +190,21 @@
 <p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
 <p>algorithm_details:SHCI with eps_var 1e-4 + PT</p>
 <p>software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).</p>
-<p>performance_metrics_uuid: 847c56c2-13f8-4500-a4f7-dbfaae4ad00f</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 68</p>
+<p>performance_metrics_uuid: 482d9a28-d3c6-401b-b943-d3238172a1c0</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 66</p>
 <p>number_of_problem_instances_solved: 26</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 228</p>
-<p>number_of_tasks_solved: 135</p>
-<p>number_of_tasks_solved_within_run_time_limit: 227</p>
-<p>number_of_tasks_solved_within_accuracy_threshold: 135</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 182</p>
+<p>number_of_tasks_solved: 95</p>
+<p>number_of_tasks_solved_within_run_time_limit: 181</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 95</p>
 <p>max_run_time_of_attempted_tasks: 77244.15200000002</p>
-<p>sum_of_run_time_of_attempted_tasks: 1220721.795</p>
-<p>solvability_ratio: 1.0</p>
+<p>sum_of_run_time_of_attempted_tasks: 1096251.301</p>
+<p>solvability_ratio: 0.8021</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
-<p>f1_score: [0.7142857142857143, 0.9712230215827338]</p>
+<p>f1_score: [0.8421052631578947, 0.9680851063829787]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver success/failure plot" src="supporting_artifacts/solver_4ed500f1-0650-41e3-af00-e4d0359394b4_plot.png" /></p>
 <p>Note: plot only contains <code>attempted</code> tasks.</p>
@@ -223,21 +222,21 @@
 <p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
 <p>algorithm_details:SHCI with eps_var 1e-4</p>
 <p>software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).</p>
-<p>performance_metrics_uuid: 6544e8ad-c53a-4baa-882c-87305cd760ce</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 68</p>
+<p>performance_metrics_uuid: 3cde5923-7c75-4714-9910-9cd9ff961e87</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 66</p>
 <p>number_of_problem_instances_solved: 17</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 228</p>
-<p>number_of_tasks_solved: 91</p>
-<p>number_of_tasks_solved_within_run_time_limit: 227</p>
-<p>number_of_tasks_solved_within_accuracy_threshold: 91</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 182</p>
+<p>number_of_tasks_solved: 62</p>
+<p>number_of_tasks_solved_within_run_time_limit: 181</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 62</p>
 <p>max_run_time_of_attempted_tasks: 77244.15200000002</p>
-<p>sum_of_run_time_of_attempted_tasks: 1220721.795</p>
-<p>solvability_ratio: 0.6562</p>
+<p>sum_of_run_time_of_attempted_tasks: 1096251.301</p>
+<p>solvability_ratio: 0.3803</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
-<p>f1_score: [0.9838709677419355, 0.989010989010989]</p>
+<p>f1_score: [0.9423076923076923, 0.9508196721311475]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver success/failure plot" src="supporting_artifacts/solver_7e730dfb-57ee-480b-a8a1-4b73f5f07c54_plot.png" /></p>
 <p>Note: plot only contains <code>attempted</code> tasks.</p>
@@ -255,21 +254,21 @@
 <p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
 <p>algorithm_details:SHCI with eps_var 2e-4 + PT</p>
 <p>software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).</p>
-<p>performance_metrics_uuid: 7e8b6a02-3194-4340-84ef-0a4632293897</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 68</p>
+<p>performance_metrics_uuid: c1bf28e1-ec27-48a7-a9d2-6be8dcee6a4a</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 66</p>
 <p>number_of_problem_instances_solved: 26</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 228</p>
-<p>number_of_tasks_solved: 132</p>
-<p>number_of_tasks_solved_within_run_time_limit: 227</p>
-<p>number_of_tasks_solved_within_accuracy_threshold: 132</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 182</p>
+<p>number_of_tasks_solved: 95</p>
+<p>number_of_tasks_solved_within_run_time_limit: 181</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 95</p>
 <p>max_run_time_of_attempted_tasks: 77244.15200000002</p>
-<p>sum_of_run_time_of_attempted_tasks: 1220721.795</p>
-<p>solvability_ratio: 1.0</p>
+<p>sum_of_run_time_of_attempted_tasks: 1096251.301</p>
+<p>solvability_ratio: 0.8021</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
-<p>f1_score: [0.8936170212765957, 0.9806949806949807]</p>
+<p>f1_score: [0.8421052631578947, 0.9680851063829787]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver success/failure plot" src="supporting_artifacts/solver_ad964781-302e-4728-a26d-39918e0a6cdb_plot.png" /></p>
 <p>Note: plot only contains <code>attempted</code> tasks.</p>
@@ -287,21 +286,21 @@
 <p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
 <p>algorithm_details:SHCI with eps_var 2e-5 + PT</p>
 <p>software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).</p>
-<p>performance_metrics_uuid: 2e0c80f5-163d-4662-86cd-e20875dbd2b9</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 68</p>
+<p>performance_metrics_uuid: 5e5324f7-2007-4ad8-9d88-a5195bf31dfc</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 66</p>
 <p>number_of_problem_instances_solved: 30</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 228</p>
-<p>number_of_tasks_solved: 140</p>
-<p>number_of_tasks_solved_within_run_time_limit: 227</p>
-<p>number_of_tasks_solved_within_accuracy_threshold: 140</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 182</p>
+<p>number_of_tasks_solved: 100</p>
+<p>number_of_tasks_solved_within_run_time_limit: 181</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 100</p>
 <p>max_run_time_of_attempted_tasks: 77244.15200000002</p>
-<p>sum_of_run_time_of_attempted_tasks: 1220721.795</p>
-<p>solvability_ratio: 0.9317</p>
+<p>sum_of_run_time_of_attempted_tasks: 1096251.301</p>
+<p>solvability_ratio: 0.807</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
-<p>f1_score: [0.7647058823529411, 0.9705882352941176]</p>
+<p>f1_score: [0.9285714285714286, 0.98989898989899]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver success/failure plot" src="supporting_artifacts/solver_c71b90bd-3250-4c0c-b4e7-fc9878f141f6_plot.png" /></p>
 <p>Note: plot only contains <code>attempted</code> tasks.</p>
@@ -319,21 +318,21 @@
 <p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
 <p>algorithm_details:SHCI with eps_var 5e-5 + PT</p>
 <p>software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).</p>
-<p>performance_metrics_uuid: 985d7c5e-5b4d-46e0-b376-038d0d8c89a2</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 68</p>
+<p>performance_metrics_uuid: ce4b587b-39d0-46ae-92bf-8f800805f3dd</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 66</p>
 <p>number_of_problem_instances_solved: 28</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 228</p>
-<p>number_of_tasks_solved: 138</p>
-<p>number_of_tasks_solved_within_run_time_limit: 227</p>
-<p>number_of_tasks_solved_within_accuracy_threshold: 138</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 182</p>
+<p>number_of_tasks_solved: 98</p>
+<p>number_of_tasks_solved_within_run_time_limit: 181</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 98</p>
 <p>max_run_time_of_attempted_tasks: 77244.15200000002</p>
-<p>sum_of_run_time_of_attempted_tasks: 1220721.795</p>
-<p>solvability_ratio: 1.0</p>
+<p>sum_of_run_time_of_attempted_tasks: 1096251.301</p>
+<p>solvability_ratio: 0.7036</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
-<p>f1_score: [0.9375, 0.9927007299270073]</p>
+<p>f1_score: [0.9090909090909091, 0.9844559585492227]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver success/failure plot" src="supporting_artifacts/solver_d626506c-7aae-4ad6-802a-b29af5f2bb93_plot.png" /></p>
 <p>Note: plot only contains <code>attempted</code> tasks.</p>
@@ -351,21 +350,21 @@
 <p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
 <p>algorithm_details:SHCI with eps_var 2e-4</p>
 <p>software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).</p>
-<p>performance_metrics_uuid: 690b05dd-1a65-4dbe-bb62-e87586bffe96</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 68</p>
+<p>performance_metrics_uuid: 1f8cdd4f-5ac2-4cb2-b81a-99b565bd5573</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 66</p>
 <p>number_of_problem_instances_solved: 17</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 228</p>
-<p>number_of_tasks_solved: 83</p>
-<p>number_of_tasks_solved_within_run_time_limit: 227</p>
-<p>number_of_tasks_solved_within_accuracy_threshold: 83</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 182</p>
+<p>number_of_tasks_solved: 55</p>
+<p>number_of_tasks_solved_within_run_time_limit: 181</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 55</p>
 <p>max_run_time_of_attempted_tasks: 77244.15200000002</p>
-<p>sum_of_run_time_of_attempted_tasks: 1220721.795</p>
-<p>solvability_ratio: 0.8125</p>
+<p>sum_of_run_time_of_attempted_tasks: 1096251.301</p>
+<p>solvability_ratio: 0.2838</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
-<p>f1_score: [0.9928057553956835, 0.9940119760479041]</p>
+<p>f1_score: [0.9310344827586207, 0.9272727272727272]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver success/failure plot" src="supporting_artifacts/solver_0db183e3-a86d-491b-9125-599556e37c7a_plot.png" /></p>
 <p>Note: plot only contains <code>attempted</code> tasks.</p>
@@ -383,21 +382,21 @@
 <p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
 <p>algorithm_details:SHCI with eps_var 2e-5</p>
 <p>software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).</p>
-<p>performance_metrics_uuid: 29eba818-cc4f-4ff5-8370-4be33a163940</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 68</p>
+<p>performance_metrics_uuid: 564020f6-5a56-4029-854c-d913f091e445</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 66</p>
 <p>number_of_problem_instances_solved: 22</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 228</p>
-<p>number_of_tasks_solved: 128</p>
-<p>number_of_tasks_solved_within_run_time_limit: 227</p>
-<p>number_of_tasks_solved_within_accuracy_threshold: 128</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 182</p>
+<p>number_of_tasks_solved: 88</p>
+<p>number_of_tasks_solved_within_run_time_limit: 181</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 88</p>
 <p>max_run_time_of_attempted_tasks: 77244.15200000002</p>
-<p>sum_of_run_time_of_attempted_tasks: 1220721.795</p>
-<p>solvability_ratio: 0.6486</p>
+<p>sum_of_run_time_of_attempted_tasks: 1096251.301</p>
+<p>solvability_ratio: 0.5218</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
-<p>f1_score: [0.88, 0.9765625]</p>
+<p>f1_score: [0.8421052631578947, 0.9467455621301775]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver success/failure plot" src="supporting_artifacts/solver_86bfe50c-9342-4d54-bb68-abc8abd95688_plot.png" /></p>
 <p>Note: plot only contains <code>attempted</code> tasks.</p>
@@ -415,21 +414,21 @@
 <p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
 <p>algorithm_details:SHCI with eps_var 5e-5</p>
 <p>software_details:SHCI Arrow Code (https://github.com/QMC-Cornell/shci).</p>
-<p>performance_metrics_uuid: 47cc69ca-1a45-403d-9b40-485fbd2de2de</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 68</p>
+<p>performance_metrics_uuid: ef3344ec-2cb3-4ce5-bb81-8773d324e9f2</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 66</p>
 <p>number_of_problem_instances_solved: 18</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 228</p>
-<p>number_of_tasks_solved: 115</p>
-<p>number_of_tasks_solved_within_run_time_limit: 227</p>
-<p>number_of_tasks_solved_within_accuracy_threshold: 115</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 182</p>
+<p>number_of_tasks_solved: 75</p>
+<p>number_of_tasks_solved_within_run_time_limit: 181</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 75</p>
 <p>max_run_time_of_attempted_tasks: 77244.15200000002</p>
-<p>sum_of_run_time_of_attempted_tasks: 1220721.795</p>
-<p>solvability_ratio: 0.8749</p>
+<p>sum_of_run_time_of_attempted_tasks: 1096251.301</p>
+<p>solvability_ratio: 0.4131</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
-<p>f1_score: [0.8395061728395061, 0.9422222222222222]</p>
+<p>f1_score: [0.8607594936708861, 0.9251700680272109]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver success/failure plot" src="supporting_artifacts/solver_01949b95-c427-4693-9134-01f47f688c09_plot.png" /></p>
 <p>Note: plot only contains <code>attempted</code> tasks.</p>
@@ -449,12 +448,12 @@
 <p>logical_resource_estimate_solution_uuid:f9a5bd95-6968-4078-b115-88e5b7a7ddcb</p>
 <p>quantum_hardware_details:{'quantum_hardware_description': 'Superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494. Used with THC.', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 0.001, 'cycle_time_microseconds': 1}}</p>
 <p>logical_resource_estimate_solver_uuid:d6f49cca-6f10-4de8-bc94-4c6fe4d23296</p>
-<p>performance_metrics_uuid: 6c609ec0-8165-4dc6-8cf5-2b58872cf3b0</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
+<p>performance_metrics_uuid: 9a77ed4f-4ccf-4c16-840a-074a348329bf</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
 <p>number_of_problem_instances_attempted: 3</p>
 <p>number_of_problem_instances_solved: 0</p>
-<p>number_of_tasks: 228</p>
+<p>number_of_tasks: 184</p>
 <p>number_of_tasks_attempted: 23</p>
 <p>number_of_tasks_solved: 0</p>
 <p>number_of_tasks_solved_within_run_time_limit: 0</p>
@@ -481,21 +480,21 @@
 <p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
 <p>algorithm_details:CISD</p>
 <p>software_details:pyscf (https://github.com/pyscf/pyscf).</p>
-<p>performance_metrics_uuid: 8b5f1d92-42d7-4e2a-8f9f-c8d31a984c0e</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 68</p>
+<p>performance_metrics_uuid: 64abdae4-162e-466f-95af-c76ee1ad5d82</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 66</p>
 <p>number_of_problem_instances_solved: 13</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 228</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 182</p>
 <p>number_of_tasks_solved: 21</p>
-<p>number_of_tasks_solved_within_run_time_limit: 228</p>
+<p>number_of_tasks_solved_within_run_time_limit: 182</p>
 <p>number_of_tasks_solved_within_accuracy_threshold: 21</p>
 <p>max_run_time_of_attempted_tasks: 62.58296537399292</p>
-<p>sum_of_run_time_of_attempted_tasks: 2147.015964984894</p>
-<p>solvability_ratio: 0.0233</p>
+<p>sum_of_run_time_of_attempted_tasks: 2112.998790025711</p>
+<p>solvability_ratio: 0.0217</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
-<p>f1_score: [0.9806949806949807, 0.8936170212765957]</p>
+<p>f1_score: [0.9777777777777777, 0.9130434782608695]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver success/failure plot" src="supporting_artifacts/solver_418f060e-496b-4024-8d2d-9b1f8791e76d_plot.png" /></p>
 <p>Note: plot only contains <code>attempted</code> tasks.</p>
@@ -513,21 +512,21 @@
 <p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
 <p>algorithm_details:CCSD</p>
 <p>software_details:pyscf (https://github.com/pyscf/pyscf).</p>
-<p>performance_metrics_uuid: c9f318cd-53a5-4b3d-8232-dcc6836d8513</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 64</p>
+<p>performance_metrics_uuid: a34a5668-3bf3-4ad4-a636-829488b2df51</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 63</p>
 <p>number_of_problem_instances_solved: 14</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 217</p>
-<p>number_of_tasks_solved: 27</p>
-<p>number_of_tasks_solved_within_run_time_limit: 217</p>
-<p>number_of_tasks_solved_within_accuracy_threshold: 27</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 174</p>
+<p>number_of_tasks_solved: 26</p>
+<p>number_of_tasks_solved_within_run_time_limit: 174</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 26</p>
 <p>max_run_time_of_attempted_tasks: 460.71552085876465</p>
-<p>sum_of_run_time_of_attempted_tasks: 7096.755430221558</p>
-<p>solvability_ratio: 0.011</p>
+<p>sum_of_run_time_of_attempted_tasks: 6873.791479110718</p>
+<p>solvability_ratio: 0.048</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
-<p>f1_score: [0.9879518072289156, 0.9473684210526315]</p>
+<p>f1_score: [0.9824561403508771, 0.9454545454545454]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver success/failure plot" src="supporting_artifacts/solver_0a29e54f-bef9-4d19-bafa-d94b1c4b37aa_plot.png" /></p>
 <p>Note: plot only contains <code>attempted</code> tasks.</p>
@@ -545,21 +544,21 @@
 <p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
 <p>algorithm_details:Hartree Fock</p>
 <p>software_details:pyscf (https://github.com/pyscf/pyscf).</p>
-<p>performance_metrics_uuid: b057f3ad-d81d-4a94-b777-6c9f688ebee3</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 68</p>
+<p>performance_metrics_uuid: 4d81a24d-830a-4051-b929-cae3d97aa7b1</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 66</p>
 <p>number_of_problem_instances_solved: 6</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 228</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 182</p>
 <p>number_of_tasks_solved: 6</p>
-<p>number_of_tasks_solved_within_run_time_limit: 228</p>
+<p>number_of_tasks_solved_within_run_time_limit: 182</p>
 <p>number_of_tasks_solved_within_accuracy_threshold: 6</p>
 <p>max_run_time_of_attempted_tasks: 20.338801622390747</p>
-<p>sum_of_run_time_of_attempted_tasks: 800.5601267814636</p>
+<p>sum_of_run_time_of_attempted_tasks: 686.8769178390503</p>
 <p>solvability_ratio: 0.0</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
-<p>f1_score: [0.0, 0.07547169811320754]</p>
+<p>f1_score: [0.0, 0.10084033613445378]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver success/failure plot" src="supporting_artifacts/solver_5f5e617a-19c2-4d82-bebc-b2d6b3dcb012_plot.png" /></p>
 <p>Note: plot only contains <code>attempted</code> tasks.</p>
@@ -577,21 +576,21 @@
 <p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
 <p>algorithm_details:MP2</p>
 <p>software_details:pyscf (https://github.com/pyscf/pyscf).</p>
-<p>performance_metrics_uuid: 160b9ff1-91a6-495b-ad5b-440dc6dcafba</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 65</p>
+<p>performance_metrics_uuid: aa4dcfaf-cd7a-4731-a048-05949cf167b7</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 63</p>
 <p>number_of_problem_instances_solved: 6</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 220</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 174</p>
 <p>number_of_tasks_solved: 6</p>
-<p>number_of_tasks_solved_within_run_time_limit: 220</p>
+<p>number_of_tasks_solved_within_run_time_limit: 174</p>
 <p>number_of_tasks_solved_within_accuracy_threshold: 6</p>
 <p>max_run_time_of_attempted_tasks: 2.230440139770508</p>
-<p>sum_of_run_time_of_attempted_tasks: 78.57580351829529</p>
+<p>sum_of_run_time_of_attempted_tasks: 71.48596668243408</p>
 <p>solvability_ratio: 0.0</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
-<p>f1_score: [0.0, 0.07547169811320754]</p>
+<p>f1_score: [0.0, 0.10084033613445378]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver success/failure plot" src="supporting_artifacts/solver_b420358b-5def-41e6-8c5d-b9d93b6aecd2_plot.png" /></p>
 <p>Note: plot only contains <code>attempted</code> tasks.</p>
@@ -609,21 +608,21 @@
 <p>classical_hardware_details:{'computing_environment_name': 'LCRC Improv (per node)', 'cpu_description': '2x AMD EPYC 7713 64C', 'ram_available_gb': '256GB', 'clock_speed': '2 GHz', 'total_num_cores': 128}</p>
 <p>algorithm_details:CCSD(T)</p>
 <p>software_details:pyscf (https://github.com/pyscf/pyscf).</p>
-<p>performance_metrics_uuid: 46e4f2aa-02ab-4b16-9aff-a5270844377c</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 64</p>
+<p>performance_metrics_uuid: 1ef975d0-66e6-4b4d-85da-2ff98e605b63</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 63</p>
 <p>number_of_problem_instances_solved: 23</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 217</p>
-<p>number_of_tasks_solved: 71</p>
-<p>number_of_tasks_solved_within_run_time_limit: 217</p>
-<p>number_of_tasks_solved_within_accuracy_threshold: 71</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 174</p>
+<p>number_of_tasks_solved: 64</p>
+<p>number_of_tasks_solved_within_run_time_limit: 174</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 64</p>
 <p>max_run_time_of_attempted_tasks: 469.1432478427887</p>
-<p>sum_of_run_time_of_attempted_tasks: 7918.634609699249</p>
-<p>solvability_ratio: 0.2847</p>
+<p>sum_of_run_time_of_attempted_tasks: 7687.804200410843</p>
+<p>solvability_ratio: 0.9196</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
-<p>f1_score: [0.9685534591194969, 0.9659863945578231]</p>
+<p>f1_score: [0.9696969696969697, 0.9763779527559056]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver success/failure plot" src="supporting_artifacts/solver_c09217e6-d0f7-4b0f-81c4-79210b7ac878_plot.png" /></p>
 <p>Note: plot only contains <code>attempted</code> tasks.</p>
@@ -643,12 +642,12 @@
 <p>quantum_hardware_details:{'quantum_hardware_description': 'Superconducting hardware model based on the optimistic model described in https://arxiv.org/abs/2011.03494.', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 0.0001, 'cycle_time_microseconds': 1}}</p>
 <p>logical_resource_estimate_solution_uuid:e135679c-e314-4808-9634-252bc376d295</p>
 <p>logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1</p>
-<p>performance_metrics_uuid: 37c032ef-a69e-426e-925b-8dd39c45e2e1</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
+<p>performance_metrics_uuid: 996168f0-ea98-43a5-ab93-f7243ccdd5d7</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
 <p>number_of_problem_instances_attempted: 4</p>
 <p>number_of_problem_instances_solved: 1</p>
-<p>number_of_tasks: 228</p>
+<p>number_of_tasks: 184</p>
 <p>number_of_tasks_attempted: 24</p>
 <p>number_of_tasks_solved: 1</p>
 <p>number_of_tasks_solved_within_run_time_limit: 1</p>
@@ -657,7 +656,7 @@
 <p>sum_of_run_time_of_attempted_tasks: 4206142119.554202</p>
 <p>solvability_ratio: 0.0</p>
 <p>comments: solvability ratio based on PCA embedding., ML model calculated without <code>GridSearchCV</code></p>
-<p>f1_score: [0.9370629370629371, 0.1]</p>
+<p>f1_score: [0.9230769230769231, 0.1111111111111111]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver success/failure plot" src="supporting_artifacts/solver_7c8ef984-4d3a-4468-8900-e0da3bd8b22d_plot.png" /></p>
 <p>Note: plot only contains <code>attempted</code> tasks.</p>
@@ -677,19 +676,19 @@
 <p>quantum_hardware_details:{'quantum_hardware_description': 'Superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494 with an extremely optimistic physical error rate.', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 1e-06, 'cycle_time_microseconds': 1, 'parallelize_shots': False}}</p>
 <p>logical_resource_estimate_solution_uuid:27aa9788-c0c7-4f8e-ba5b-315099c05240</p>
 <p>logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1</p>
-<p>performance_metrics_uuid: 081f384b-cdcd-42de-8dc7-5117b0876996</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 24</p>
+<p>performance_metrics_uuid: 02a33104-045e-405e-93ea-cfb0d6fb5bfb</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 25</p>
 <p>number_of_problem_instances_solved: 2</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 137</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 139</p>
 <p>number_of_tasks_solved: 2</p>
 <p>number_of_tasks_solved_within_run_time_limit: 2</p>
-<p>number_of_tasks_solved_within_accuracy_threshold: 137</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 139</p>
 <p>max_run_time_of_attempted_tasks: 71881480309304.23</p>
-<p>sum_of_run_time_of_attempted_tasks: 92303779438561.5</p>
-<p>solvability_ratio: 0.0394</p>
+<p>sum_of_run_time_of_attempted_tasks: 92452303180814.38</p>
+<p>solvability_ratio: 0.0</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
 <p>f1_score: [1.0, 1.0]</p>
 <p>ml_metrics_calculator_version: 1</p>
@@ -711,21 +710,21 @@
 <p>quantum_hardware_details:{'quantum_hardware_description': 'Ultra-optimistic hardware model based on the superconducting architecture described in https://arxiv.org/abs/2011.03494.', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 1e-06, 'cycle_time_microseconds': 0.1, 'parallelize_shots': False}}</p>
 <p>logical_resource_estimate_solution_uuid:712bb942-1d58-4bfb-bdee-a7635f0b9cd7</p>
 <p>logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1</p>
-<p>performance_metrics_uuid: 4fa841cf-519c-450a-8236-3921084a2b2f</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 24</p>
+<p>performance_metrics_uuid: 13cf01f0-8705-43a4-b222-557526a62ded</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 25</p>
 <p>number_of_problem_instances_solved: 4</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 137</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 139</p>
 <p>number_of_tasks_solved: 5</p>
 <p>number_of_tasks_solved_within_run_time_limit: 5</p>
-<p>number_of_tasks_solved_within_accuracy_threshold: 137</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 139</p>
 <p>max_run_time_of_attempted_tasks: 7188148034586.839</p>
-<p>sum_of_run_time_of_attempted_tasks: 9230378066161.62</p>
-<p>solvability_ratio: 0.013</p>
+<p>sum_of_run_time_of_attempted_tasks: 9245230449871.828</p>
+<p>solvability_ratio: 0.0</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
-<p>f1_score: [0.9931972789115646, 0.8333333333333334]</p>
+<p>f1_score: [0.9863013698630136, 0.5714285714285714]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver success/failure plot" src="supporting_artifacts/solver_f6b36bde-be4a-4eee-975b-2c5f7e553f5f_plot.png" /></p>
 <p>Note: plot only contains <code>attempted</code> tasks.</p>
@@ -743,21 +742,21 @@
 <p>classical_hardware_details:{'computing_environment_name': 'Niagara Cluster, Compute Canada', 'cpu_description': '40 Intel "Skylake" cores at 2.4 GHz or 40 Intel "CascadeLake" cores at 2.5 GHz', 'ram_available_gb': '202 GB (188 GiB)', 'clock_speed': '2.4 GHz or 2.5 GHz', 'total_num_cores': 40}</p>
 <p>algorithm_details:DMRG with the lowest variational energy obtained so far.</p>
 <p>software_details:Block2 v0.5.3rc16 with dmrghandler, commit version d603fdc6409fc194a416aa3a519362d5d91790d9 or later.</p>
-<p>performance_metrics_uuid: 92ff5607-577f-42c6-b3bb-9e5b208a799c</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 68</p>
+<p>performance_metrics_uuid: 9ba76779-7ad2-4901-8dce-3c7cd6a13753</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 66</p>
 <p>number_of_problem_instances_solved: 13</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 228</p>
-<p>number_of_tasks_solved: 107</p>
-<p>number_of_tasks_solved_within_run_time_limit: 228</p>
-<p>number_of_tasks_solved_within_accuracy_threshold: 107</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 182</p>
+<p>number_of_tasks_solved: 67</p>
+<p>number_of_tasks_solved_within_run_time_limit: 182</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 67</p>
 <p>max_run_time_of_attempted_tasks: 80820.729907066</p>
-<p>sum_of_run_time_of_attempted_tasks: 1841774.7109000839</p>
-<p>solvability_ratio: 0.4126</p>
+<p>sum_of_run_time_of_attempted_tasks: 1826529.25386094</p>
+<p>solvability_ratio: 0.386</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
-<p>f1_score: [0.9130434782608695, 0.9626168224299065]</p>
+<p>f1_score: [0.967741935483871, 0.9774436090225563]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver success/failure plot" src="supporting_artifacts/solver_16537433-9f4c-4eae-a65d-787dc3b35b59_plot.png" /></p>
 <p>Note: plot only contains <code>attempted</code> tasks.</p>
@@ -777,21 +776,21 @@
 <p>quantum_hardware_details:{'quantum_hardware_description': 'Optimistic superconducting hardware model based on that described in https://arxiv.org/abs/2011.03494. Assumes that enough QPUs are available to run all shots in parallel.', 'quantum_hardware_parameters': {'num_factories': 4, 'physical_error_rate': 0.0001, 'cycle_time_microseconds': 1, 'parallelize_shots': True}}</p>
 <p>logical_resource_estimate_solution_uuid:612747d5-61ee-40cd-b440-0ad59c064c04</p>
 <p>logical_resource_estimate_solver_uuid:f2d73e1f-3058-43c4-a634-b6c267c84ff1</p>
-<p>performance_metrics_uuid: e44fd108-4cc3-4502-b566-98ef9b403631</p>
-<p>creation_timestamp: 2026-04-07T11:49:13.945074+00:00</p>
-<p>number_of_problem_instances: 68</p>
-<p>number_of_problem_instances_attempted: 22</p>
+<p>performance_metrics_uuid: 9c99f40e-d05a-4a88-ad36-8044dffc059c</p>
+<p>creation_timestamp: 2026-05-14T19:00:21.508451+00:00</p>
+<p>number_of_problem_instances: 67</p>
+<p>number_of_problem_instances_attempted: 23</p>
 <p>number_of_problem_instances_solved: 3</p>
-<p>number_of_tasks: 228</p>
-<p>number_of_tasks_attempted: 131</p>
+<p>number_of_tasks: 184</p>
+<p>number_of_tasks_attempted: 133</p>
 <p>number_of_tasks_solved: 3</p>
 <p>number_of_tasks_solved_within_run_time_limit: 3</p>
-<p>number_of_tasks_solved_within_accuracy_threshold: 131</p>
-<p>max_run_time_of_attempted_tasks: 26774752769.01683</p>
-<p>sum_of_run_time_of_attempted_tasks: 381759342046.6917</p>
+<p>number_of_tasks_solved_within_accuracy_threshold: 133</p>
+<p>max_run_time_of_attempted_tasks: 27517246880.125843</p>
+<p>sum_of_run_time_of_attempted_tasks: 423832831791.01337</p>
 <p>solvability_ratio: 0.0</p>
 <p>comments: solvability ratio based on PCA embedding.</p>
-<p>f1_score: [1.0, 1.0]</p>
+<p>f1_score: [0.995475113122172, 0.8]</p>
 <p>ml_metrics_calculator_version: 1</p>
 <p><img alt="Solver success/failure plot" src="supporting_artifacts/solver_4b07b89f-c66f-4e72-8c24-df3e4222cb41_plot.png" /></p>
 <p>Note: plot only contains <code>attempted</code> tasks.</p>
@@ -805,20 +804,20 @@
 <h1>ML Feature Analysis</h1>
 <p><img alt="NNMF components plot" src="supporting_artifacts/nnmf_components.png" /></p>
 <p>Features: ['max_vertex_degree', 'min_vertex_degree', 'mean_vertex_degree', 'std_dev_vertex_degree', 'max_weight', 'min_weight', 'mean_weight', 'std_dev_weight', 'max_edge_order', 'mean_edge_order', 'std_dev_edge_order', 'one_norm', 'log_fci_dim', 'n_elec', 'n_orbs', 'df_gap']</p>
-<p>NNMF Component 1: [0.44176701 0.45449395 0.45163263 0.4206377  0.51199883 0.
- 0.         0.04944855 0.87023998 0.88722992 0.85986962 0.45957332
- 0.87154483 0.56686512 0.8574673  0.51617008]</p>
-<p>NNMF Component 2: [0.         0.         0.         0.         0.05545233 1.03487444
- 0.54168445 0.41821312 0.07259491 0.01856936 0.0876162  0.
- 0.1752886  0.11462803 0.07264437 0.        ]</p>
+<p>NNMF Component 1: [0.03745208 0.21516493 0.04107935 0.02808182 0.33905073 0.00185411
+ 0.01484    0.08651885 0.55613848 0.58830985 0.5442858  0.
+ 1.12818961 1.01905998 0.5323174  0.115369  ]</p>
+<p>NNMF Component 2: [0.42590339 0.35405    0.43390494 0.40922594 0.34180125 0.
+ 0.00081299 0.02198064 0.6037736  0.60302563 0.59960665 0.45485798
+ 0.34001469 0.         0.60246848 0.45272373]</p>
 <p><img alt="PCA components plot" src="supporting_artifacts/pca_components.png" /></p>
 <p>Features: ['max_vertex_degree', 'min_vertex_degree', 'mean_vertex_degree', 'std_dev_vertex_degree', 'max_weight', 'min_weight', 'mean_weight', 'std_dev_weight', 'max_edge_order', 'mean_edge_order', 'std_dev_edge_order', 'one_norm', 'log_fci_dim', 'n_elec', 'n_orbs', 'df_gap']</p>
-<p>PCA Component 1: [-0.22922229 -0.21461603 -0.23398401 -0.21923522 -0.16402432  0.39183587
-  0.20302013  0.14659357 -0.3134204  -0.33485059 -0.30553226 -0.22630863
- -0.2258685  -0.10070305 -0.31226268 -0.20457232]</p>
-<p>PCA Component 2: [ 0.22146419  0.13713247  0.22479465  0.21502049  0.02836024  0.66237732
-  0.34970611  0.22348305  0.1309698   0.08010198  0.14460543  0.21623573
- -0.07605394 -0.30861836  0.14283042  0.10453104]</p>
+<p>PCA Component 1: [ 0.30636115  0.26305785  0.31222235  0.29416036  0.13887147 -0.02010789
+ -0.03188961 -0.04146377  0.34053294  0.33354463  0.34055038  0.29044829
+  0.20123208  0.00217411  0.34536166  0.20780103]</p>
+<p>PCA Component 2: [ 0.01874822  0.14481938  0.02091595  0.01334236 -0.39580411 -0.03719602
+ -0.07152145 -0.19349572  0.00971009  0.01341835  0.01015107 -0.18947978
+  0.48160168  0.63411357  0.00901645 -0.32719802]</p>
 <p><img alt="solver similarity: PCA space of area" src="supporting_artifacts/solver_similarity_in_PCA_space_of_area_summary.png" /></p>
 <p><img alt="solver similarity: PCA space of SHAP" src="supporting_artifacts/solver_similarity_in_PCA_space_of_shap_summary.png" /></p>
 <p><img alt="solver similarity: matrix/area" src="supporting_artifacts/solver_similarity_matrix_area_summary.png" /></p>

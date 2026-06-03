@@ -430,7 +430,7 @@ def get_latest_ctime_within_dir(search_dir: str) -> float:
 
 
 
-def load_json_files(search_dir: str) -> list:
+def load_json_files(search_dir: str) -> list[dict]:
     """Searches through `search_dir` and subdirectories to read in all JSON files.
 
     Args:
