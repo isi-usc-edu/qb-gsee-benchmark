@@ -1,4 +1,5 @@
 import json
+import shlex
 import sys
 from pathlib import Path
 
@@ -6,6 +7,7 @@ import pytest
 
 from qb_gsee_benchmark.solvers import pyscf_adapter
 from qb_gsee_benchmark.solvers import shci_adapter
+from qb_gsee_benchmark.solvers.ipie_afqmc import adapter as ipie_adapter
 from qb_gsee_benchmark.solvers.base import RUN_MANIFEST
 from qb_gsee_benchmark.solvers.base import RunManifest
 from qb_gsee_benchmark.solvers.base import SolverResources
@@ -27,6 +29,19 @@ H2_FCIDUMP = (
     / "validation.H2.cc-PVDZ.bbcd09f2-8a89-4f35-9577-7851a76ea17c.fcidump.gz"
 )
 H2_TASK_UUID = "f847059f-a89f-4008-9ae1-39847c899e75"
+LIH_PROBLEM_INSTANCE = (
+    REPO_ROOT
+    / "problem_instances"
+    / "validation_instances"
+    / "problem_instance.validation.LiH.cc-PVDZ.00ec23d5-3e17-46d3-a8b6-9ceff1826377.json"
+)
+LIH_FCIDUMP = (
+    REPO_ROOT
+    / "scripts"
+    / "development"
+    / "validation.LiH.cc-PVDZ.7298a64d-1574-42d7-b092-3e9f686ec162.fcidump.gz"
+)
+LIH_TASK_UUID = "2b2eefc4-9c8c-4a02-b621-059774f620c4"
 H2_PYSCF_GOLDEN = [
     ("HF", "5f5e617a-19c2-4d82-bebc-b2d6b3dcb012", -1.1287110109153249),
     ("MP2", "b420358b-5def-41e6-8c5d-b9d93b6aecd2", -1.155091625687221),
@@ -210,6 +225,100 @@ def test_shci_harvest_missing_raw_output_marks_not_attempted(tmp_path):
     assert data["solution_details"]["attempted"] is False
     assert data["solution_details"]["not_attempted_reason"] == reason
     assert solution["solver_details"]["solver_short_name"] == "SHCI_pt_2e-5"
+
+
+
+def test_ipie_adapter_runs_configured_external_command(tmp_path):
+    run_dir = tmp_path / "ipie-command"
+    code = (
+        "import json; "
+        "json.dump(dict(energy=-1.2345, error_bound=0.0007, "
+        "confidence_level=0.95), open('ipie_result.json', 'w'))"
+    )
+    command = f"{sys.executable} -c {shlex.quote(code)}"
+
+    manifest = ipie_adapter.prepare(
+        problem_instance_path=H2_PROBLEM_INSTANCE,
+        task_uuid=H2_TASK_UUID,
+        fcidump_path=H2_FCIDUMP,
+        run_dir=run_dir,
+        config=ipie_adapter.IPIEConfig(
+            variant="ipie_msd_trial",
+            num_threads=2,
+            num_walkers=64,
+            timestep=0.01,
+            num_steps_per_block=5,
+            num_blocks=7,
+            determinant_count=128,
+            command_template=command,
+        ),
+        overwrite=True,
+    )
+    raw_output = ipie_adapter.run(run_dir)
+    solution = ipie_adapter.harvest(run_dir)
+
+    data = solution["solution_data"][0]
+    assert manifest.resources.gpus == 1
+    assert raw_output["status"] == "completed"
+    assert raw_output["energy"] == -1.2345
+    assert raw_output["error_bound"] == 0.0007
+    assert raw_output["confidence_level"] == 0.95
+    assert (run_dir / "ipie.stdout").exists()
+    assert solution["solver_details"]["solver_uuid"] == (
+        ipie_adapter.SOLVER_VARIANTS["ipie_msd_trial"]["solver_uuid"]
+    )
+    assert solution["solver_details"]["solver_short_name"] == "ipie_msd_trial"
+    assert data["energy"] == -1.2345
+    assert data["error_bound"] == 0.0007
+    assert data["confidence_level"] == 0.95
+    assert data["solution_details"]["trial_wavefunction"] == "MSD"
+    assert data["solution_details"]["determinant_count"] == 128
+
+
+def test_ipie_harvest_missing_raw_output_marks_not_attempted(tmp_path):
+    run_dir = tmp_path / "ipie-missing-raw"
+    reason = "scheduler exhausted GPU allocation before ipie produced raw output"
+
+    ipie_adapter.prepare(
+        problem_instance_path=H2_PROBLEM_INSTANCE,
+        task_uuid=H2_TASK_UUID,
+        fcidump_path=H2_FCIDUMP,
+        run_dir=run_dir,
+        config=ipie_adapter.IPIEConfig(variant="ipie_uhf_trial"),
+        overwrite=True,
+    )
+    solution = ipie_adapter.harvest(run_dir, not_attempted_reason=reason)
+
+    raw_output = json.loads((run_dir / "raw_output.json").read_text())
+    data = solution["solution_data"][0]
+    assert raw_output["status"] == "not_attempted"
+    assert raw_output["error_message"] == reason
+    assert data["energy"] is None
+    assert "error_bound" not in data
+    assert data["solution_details"]["attempted"] is False
+    assert data["solution_details"]["not_attempted_reason"] == reason
+    assert solution["solver_details"]["solver_short_name"] == "ipie_uhf_trial"
+
+
+def test_ipie_adapter_smoke_exercises_h2_and_lih(tmp_path):
+    run_dir = tmp_path / "ipie-smoke"
+
+    summary = ipie_adapter.smoke_test(run_dir=run_dir)
+
+    assert set(summary["solutions"]) == {"H2", "LiH"}
+    assert (run_dir / "H2" / "solution.json").exists()
+    assert (run_dir / "LiH" / "solution.json").exists()
+    h2_data = summary["solutions"]["H2"]["solution_data"][0]
+    lih_data = summary["solutions"]["LiH"]["solution_data"][0]
+    assert h2_data["task_uuid"] == H2_TASK_UUID
+    assert lih_data["task_uuid"] == LIH_TASK_UUID
+    for solution in summary["solutions"].values():
+        data = solution["solution_data"][0]
+        assert solution["solver_details"]["solver_short_name"] == "ipie_uhf_trial"
+        assert data["error_bound"] == pytest.approx(1.0e-6)
+        assert data["confidence_level"] == pytest.approx(
+            ipie_adapter.DEFAULT_CONFIDENCE_LEVEL
+        )
 
 
 def test_repo_layer_does_not_reference_hpc_site_layer():

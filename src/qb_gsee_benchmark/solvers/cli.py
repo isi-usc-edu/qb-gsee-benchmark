@@ -22,6 +22,7 @@ from pathlib import Path
 
 from qb_gsee_benchmark.solvers import pyscf_adapter
 from qb_gsee_benchmark.solvers import shci_adapter
+from qb_gsee_benchmark.solvers.ipie_afqmc import adapter as ipie_adapter
 from qb_gsee_benchmark.solvers.base import load_manifest
 
 
@@ -55,6 +56,30 @@ def main(argv: list[str] | None = None) -> int:
     prepare_shci.add_argument("--no-optimized-orbitals", action="store_true")
     prepare_shci.add_argument("--overwrite", action="store_true")
 
+    prepare_ipie = subparsers.add_parser("prepare-ipie")
+    prepare_ipie.add_argument("--problem-instance", required=True)
+    prepare_ipie.add_argument("--task-uuid", required=True)
+    prepare_ipie.add_argument("--fcidump", required=True)
+    prepare_ipie.add_argument("--run-dir", required=True)
+    prepare_ipie.add_argument("--variant", default="ipie_uhf_trial")
+    prepare_ipie.add_argument("--num-threads", type=int, default=1)
+    prepare_ipie.add_argument("--num-walkers", type=int, default=512)
+    prepare_ipie.add_argument("--timestep", type=float, default=0.005)
+    prepare_ipie.add_argument("--num-steps-per-block", type=int, default=25)
+    prepare_ipie.add_argument("--num-blocks", type=int, default=1000)
+    prepare_ipie.add_argument("--trial-wavefunction")
+    prepare_ipie.add_argument("--determinant-count", type=int)
+    prepare_ipie.add_argument("--command-template")
+    prepare_ipie.add_argument("--result-json", default="ipie_result.json")
+    prepare_ipie.add_argument(
+        "--confidence-level",
+        type=float,
+        default=ipie_adapter.DEFAULT_CONFIDENCE_LEVEL,
+    )
+    prepare_ipie.add_argument("--random-seed", type=int)
+    prepare_ipie.add_argument("--no-phaseless", action="store_true")
+    prepare_ipie.add_argument("--overwrite", action="store_true")
+
     run_cmd = subparsers.add_parser("run")
     run_cmd.add_argument("--run-dir", required=True)
 
@@ -69,6 +94,9 @@ def main(argv: list[str] | None = None) -> int:
 
     smoke_shci = subparsers.add_parser("smoke-shci")
     smoke_shci.add_argument("--run-dir")
+
+    smoke_ipie = subparsers.add_parser("smoke-ipie")
+    smoke_ipie.add_argument("--run-dir")
 
     args = parser.parse_args(argv)
 
@@ -113,6 +141,32 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(manifest.to_dict(), indent=2, sort_keys=True))
         return 0
 
+    if args.command == "prepare-ipie":
+        manifest = ipie_adapter.prepare(
+            problem_instance_path=args.problem_instance,
+            task_uuid=args.task_uuid,
+            fcidump_path=args.fcidump,
+            run_dir=args.run_dir,
+            config=ipie_adapter.IPIEConfig(
+                variant=args.variant,
+                num_threads=args.num_threads,
+                num_walkers=args.num_walkers,
+                timestep=args.timestep,
+                num_steps_per_block=args.num_steps_per_block,
+                num_blocks=args.num_blocks,
+                trial_wavefunction=args.trial_wavefunction,
+                determinant_count=args.determinant_count,
+                command_template=args.command_template,
+                result_json=args.result_json,
+                confidence_level=args.confidence_level,
+                phaseless=not args.no_phaseless,
+                random_seed=args.random_seed,
+            ),
+            overwrite=args.overwrite,
+        )
+        print(json.dumps(manifest.to_dict(), indent=2, sort_keys=True))
+        return 0
+
     if args.command == "run":
         manifest = load_manifest(args.run_dir)
         if manifest.adapter == pyscf_adapter.ADAPTER_NAME:
@@ -120,6 +174,9 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if manifest.adapter == shci_adapter.ADAPTER_NAME:
             shci_adapter.run(args.run_dir)
+            return 0
+        if manifest.adapter == ipie_adapter.ADAPTER_NAME:
+            ipie_adapter.run(args.run_dir)
             return 0
         raise ValueError(f"Unsupported adapter {manifest.adapter}")
 
@@ -144,6 +201,15 @@ def main(argv: list[str] | None = None) -> int:
             )
             print(json.dumps(solution, indent=2, sort_keys=True))
             return 0
+        if manifest.adapter == ipie_adapter.ADAPTER_NAME:
+            solution = ipie_adapter.harvest(
+                args.run_dir,
+                output_path=output,
+                schema_dir=args.schema_dir,
+                not_attempted_reason=args.not_attempted_reason,
+            )
+            print(json.dumps(solution, indent=2, sort_keys=True))
+            return 0
         raise ValueError(f"Unsupported adapter {manifest.adapter}")
 
     if args.command == "smoke-pyscf":
@@ -152,6 +218,10 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "smoke-shci":
         shci_adapter.smoke_test(run_dir=args.run_dir)
+        return 0
+
+    if args.command == "smoke-ipie":
+        ipie_adapter.smoke_test(run_dir=args.run_dir)
         return 0
 
     raise ValueError(f"Unsupported command {args.command}")
