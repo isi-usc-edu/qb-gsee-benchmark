@@ -1,0 +1,515 @@
+# Copyright 2026 L3Harris Technologies, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+"""Reference PySCF adapter for the solver harness.
+
+This adapter proves the H1 run-directory contract on local validation
+instances. It implements the benchmark's existing PySCF suite shape
+(``HF``, ``MP2``, ``CISD``, ``CCSD``, and ``CCSD(T)``) plus direct ``FCI`` for
+schema-valid validation smoke tests. The site layer only executes ``run.sh`` and
+later calls ``harvest()``; no PBS or cluster-specific state belongs here.
+"""
+
+from __future__ import annotations
+
+import gzip
+import platform
+import shutil
+import tempfile
+import time
+import traceback
+import uuid
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
+
+import pyscf
+from pyscf import cc
+from pyscf import ci
+from pyscf import fci
+from pyscf import lib
+from pyscf import mp
+from pyscf.tools import fcidump
+
+from qb_gsee_benchmark.solvers.base import RAW_OUTPUT
+from qb_gsee_benchmark.solvers.base import RUN_MANIFEST
+from qb_gsee_benchmark.solvers.base import SOLUTION_OUTPUT
+from qb_gsee_benchmark.solvers.base import RunManifest
+from qb_gsee_benchmark.solvers.base import SolverResources
+from qb_gsee_benchmark.solvers.base import default_schema_dir
+from qb_gsee_benchmark.solvers.base import load_manifest
+from qb_gsee_benchmark.solvers.base import load_problem_instance_task
+from qb_gsee_benchmark.solvers.base import new_run_id
+from qb_gsee_benchmark.solvers.base import read_json
+from qb_gsee_benchmark.solvers.base import repo_root
+from qb_gsee_benchmark.solvers.base import write_executable
+from qb_gsee_benchmark.solvers.base import write_json
+from qb_gsee_benchmark.solvers.base import write_manifest
+from qb_gsee_benchmark.solvers.base import write_validated_solution
+from qb_gsee_benchmark.utils import iso8601_timestamp
+
+ADAPTER_NAME = "pyscf_reference"
+ADAPTER_VERSION = "0.1.0"
+
+SOLVER_UUIDS = {
+    "HF": "5f5e617a-19c2-4d82-bebc-b2d6b3dcb012",
+    "MP2": "b420358b-5def-41e6-8c5d-b9d93b6aecd2",
+    "CISD": "418f060e-496b-4024-8d2d-9b1f8791e76d",
+    "CCSD": "0a29e54f-bef9-4d19-bafa-d94b1c4b37aa",
+    "CCSD(T)": "c09217e6-d0f7-4b0f-81c4-79210b7ac878",
+    "FCI": str(uuid.uuid5(uuid.NAMESPACE_URL, "qb-gsee-benchmark:pyscf:fci:v1")),
+}
+
+
+@dataclass(frozen=True)
+class PySCFConfig:
+    method: str = "FCI"
+    num_threads: int = 1
+    energy_units: str = "Hartree"
+    solver_uuid: str | None = None
+    solver_short_name: str | None = None
+
+    def normalized_method(self) -> str:
+        return self.method.strip().upper()
+
+    def to_dict(self) -> dict[str, Any]:
+        method = self.normalized_method()
+        if method not in SOLVER_UUIDS:
+            raise ValueError(f"Unsupported PySCF harness method: {method}")
+        return {
+            "method": method,
+            "num_threads": self.num_threads,
+            "energy_units": self.energy_units,
+            "solver_uuid": self.solver_uuid or SOLVER_UUIDS[method],
+            "solver_short_name": self.solver_short_name or method,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> "PySCFConfig":
+        return cls(
+            method=str(data.get("method", "FCI")),
+            num_threads=int(data.get("num_threads", 1)),
+            energy_units=str(data.get("energy_units", "Hartree")),
+            solver_uuid=data.get("solver_uuid"),
+            solver_short_name=data.get("solver_short_name"),
+        )
+
+
+def prepare(
+    problem_instance_path: str | Path,
+    task_uuid: str,
+    fcidump_path: str | Path,
+    run_dir: str | Path,
+    config: PySCFConfig | None = None,
+    resources: SolverResources | None = None,
+    overwrite: bool = False,
+) -> RunManifest:
+    """Create a self-contained PySCF run directory."""
+
+    config = config or PySCFConfig()
+    config_dict = config.to_dict()
+    method = config.normalized_method()
+    if method not in SOLVER_UUIDS:
+        raise ValueError(f"Unsupported PySCF harness method: {method}")
+
+    run_path = Path(run_dir)
+    if run_path.exists() and any(run_path.iterdir()) and not overwrite:
+        raise FileExistsError(f"{run_path} is not empty; pass overwrite=True.")
+    run_path.mkdir(parents=True, exist_ok=True)
+
+    problem_instance, task = load_problem_instance_task(problem_instance_path, task_uuid)
+    input_fcidump = run_path / "input.fcidump"
+    _materialize_fcidump(fcidump_path, input_fcidump)
+
+    problem_copy = run_path / "problem_instance.json"
+    task_copy = run_path / "task.json"
+    config_copy = run_path / "solver_config.json"
+    write_json(problem_copy, problem_instance)
+    write_json(task_copy, task)
+    write_json(config_copy, config_dict)
+
+    entrypoint = "run.sh"
+    write_executable(
+        run_path / entrypoint,
+        "#!/usr/bin/env bash\n"
+        "set -euo pipefail\n"
+        "cd \"$(dirname \"$0\")\"\n"
+        "python -m qb_gsee_benchmark.solvers.cli run --run-dir \"$PWD\"\n",
+    )
+
+    manifest = RunManifest(
+        adapter=ADAPTER_NAME,
+        adapter_version=ADAPTER_VERSION,
+        run_id=new_run_id(),
+        problem_instance_uuid=problem_instance["problem_instance_uuid"],
+        task_uuid=task_uuid,
+        solver_uuid=config_dict["solver_uuid"],
+        solver_short_name=config_dict["solver_short_name"],
+        resources=resources
+        or SolverResources(
+            cores=max(1, int(config_dict["num_threads"])),
+            memory_gb=4.0,
+            gpus=0,
+            walltime_seconds=1800,
+        ),
+        entrypoint=entrypoint,
+        config=config_dict,
+        files={
+            "problem_instance": problem_copy.name,
+            "task": task_copy.name,
+            "fcidump": input_fcidump.name,
+            "config": config_copy.name,
+            "raw_output": RAW_OUTPUT,
+            "solution": SOLUTION_OUTPUT,
+        },
+    )
+    write_manifest(run_path, manifest)
+    return manifest
+
+
+def run(run_dir: str | Path) -> dict[str, Any]:
+    """Execute the prepared PySCF run directory and write ``raw_output.json``."""
+
+    run_path = Path(run_dir)
+    manifest = load_manifest(run_path)
+    config = PySCFConfig.from_dict(manifest.config)
+    start = time.time()
+    start_iso = iso8601_timestamp()
+    status = "completed"
+    error_message = None
+    energy = None
+    details: dict[str, Any] = {}
+
+    try:
+        lib.num_threads(max(1, int(config.num_threads)))
+        energy, details = _compute_energy(
+            method=config.normalized_method(),
+            fcidump_path=run_path / manifest.files["fcidump"],
+        )
+    except Exception as exc:
+        status = "failed"
+        error_message = str(exc)
+        details = {"traceback": traceback.format_exc()}
+
+    stop = time.time()
+    raw_output = {
+        "adapter": manifest.adapter,
+        "adapter_version": manifest.adapter_version,
+        "run_id": manifest.run_id,
+        "status": status,
+        "method": config.normalized_method(),
+        "energy": energy,
+        "energy_units": config.energy_units,
+        "error_message": error_message,
+        "details": details,
+        "timing": {
+            "wall_clock_start_time": start_iso,
+            "wall_clock_stop_time": iso8601_timestamp(),
+            "seconds": stop - start,
+        },
+        "software": {
+            "pyscf_version": pyscf.__version__,
+            "python_version": platform.python_version(),
+        },
+    }
+    write_json(run_path / RAW_OUTPUT, raw_output)
+    write_manifest(run_path, manifest.with_status(status))
+    if status != "completed":
+        raise RuntimeError(error_message)
+    return raw_output
+
+
+def harvest(
+    run_dir: str | Path,
+    output_path: str | Path | None = None,
+    schema_dir: str | Path | None = None,
+    not_attempted_reason: str | None = None,
+) -> dict[str, Any]:
+    """Convert raw output to a schema-valid benchmark solution JSON."""
+
+    run_path = Path(run_dir)
+    manifest = load_manifest(run_path)
+    problem_instance = read_json(run_path / manifest.files["problem_instance"])
+    raw_path = run_path / manifest.files["raw_output"]
+    if raw_path.exists():
+        raw_output = read_json(raw_path)
+    else:
+        raw_output = _not_attempted_raw_output(manifest, not_attempted_reason)
+        write_json(raw_path, raw_output)
+        write_manifest(run_path, manifest.with_status("not_attempted"))
+    output_path = Path(output_path) if output_path is not None else run_path / SOLUTION_OUTPUT
+    timing = raw_output.get("timing", {})
+    status = raw_output.get("status", "failed")
+    attempted = status == "completed"
+    energy = raw_output.get("energy") if attempted else None
+    config = PySCFConfig.from_dict(manifest.config)
+
+    solution = {
+        "$schema": (
+            "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/"
+            "main/schemas/solution.schema.0.0.1.json"
+        ),
+        "solution_uuid": str(uuid.uuid4()),
+        "problem_instance_uuid": manifest.problem_instance_uuid,
+        "creation_timestamp": iso8601_timestamp(),
+        "contact_info": [
+            {
+                "name": "QB-GSEE Benchmark Harness",
+                "email": "bobqat@l3harris.com",
+                "institution": "L3Harris Technologies, Inc.",
+            }
+        ],
+        "is_resource_estimate": False,
+        "solution_data": [
+            {
+                "task_uuid": manifest.task_uuid,
+                "energy": energy,
+                "energy_units": config.energy_units,
+                "run_time": {
+                    "overall_time": {
+                        "wall_clock_start_time": timing.get("wall_clock_start_time"),
+                        "wall_clock_stop_time": timing.get("wall_clock_stop_time"),
+                        "seconds": float(timing.get("seconds", 0.0)),
+                    },
+                    "preprocessing_time": {"seconds": 0.0},
+                    "algorithm_run_time": {
+                        "wall_clock_start_time": timing.get("wall_clock_start_time"),
+                        "wall_clock_stop_time": timing.get("wall_clock_stop_time"),
+                        "seconds": float(timing.get("seconds", 0.0)),
+                    },
+                    "postprocessing_time": {"seconds": 0.0},
+                },
+                "solution_details": {
+                    "harness_status": status,
+                    "attempted": attempted,
+                    "not_attempted_reason": None
+                    if attempted
+                    else raw_output.get("error_message", "run did not complete"),
+                    "run_directory_id": manifest.run_id,
+                    "raw_output_file": manifest.files["raw_output"],
+                    "pyscf_details": raw_output.get("details", {}),
+                },
+            }
+        ],
+        "solver_details": {
+            "solver_uuid": manifest.solver_uuid,
+            "solver_short_name": manifest.solver_short_name,
+            "compute_hardware_type": "classical_computer",
+            "classical_hardware_details": {
+                "total_num_cores": manifest.resources.cores,
+                "ram_available_gb": manifest.resources.memory_gb,
+                "computing_environment_name": "harness run directory",
+            },
+            "algorithm_details": {
+                "name": f"PySCF {config.normalized_method()}",
+                "solver_config": manifest.config,
+                "harness_adapter": manifest.adapter,
+                "harness_adapter_version": manifest.adapter_version,
+            },
+            "software_details": {
+                "pyscf": raw_output.get("software", {}).get("pyscf_version"),
+                "python": raw_output.get("software", {}).get("python_version"),
+            },
+        },
+        "digital_signature": None,
+    }
+    write_validated_solution(
+        output_path,
+        solution,
+        schema_dir=schema_dir or default_schema_dir(),
+    )
+    write_manifest(run_path, manifest.with_status("harvested"))
+
+    # Keep a small proof target in the run directory for status tools.
+    write_json(
+        run_path / "harvest_summary.json",
+        {
+            "solution_file": str(output_path),
+            "task_count": len(problem_instance.get("tasks", [])),
+            "status": status,
+        },
+    )
+    return solution
+
+
+def smoke_test(run_dir: str | Path | None = None) -> dict[str, Any]:
+    """Run H2/cc-pVDZ direct FCI and assert the validation reference energy."""
+
+    cleanup = None
+    if run_dir is None:
+        cleanup = tempfile.TemporaryDirectory()
+        run_dir = cleanup.name
+
+    root = repo_root()
+    problem_instance_path = (
+        root
+        / "problem_instances"
+        / "validation_instances"
+        / "problem_instance.validation.H2.cc-PVDZ.9162371c-b23f-45a6-bacd-44cb7aaea917.json"
+    )
+    fcidump_path = (
+        root
+        / "scripts"
+        / "development"
+        / "validation.H2.cc-PVDZ.bbcd09f2-8a89-4f35-9577-7851a76ea17c.fcidump.gz"
+    )
+    problem_instance, task = load_problem_instance_task(
+        problem_instance_path,
+        "f847059f-a89f-4008-9ae1-39847c899e75",
+    )
+    prepare(
+        problem_instance_path=problem_instance_path,
+        task_uuid=task["task_uuid"],
+        fcidump_path=fcidump_path,
+        run_dir=run_dir,
+        config=PySCFConfig(method="FCI", num_threads=1),
+        overwrite=True,
+    )
+    run(run_dir)
+    solution = harvest(run_dir)
+    energy = solution["solution_data"][0]["energy"]
+    reference = task["requirements"]["reference_energy"]
+    tolerance = min(task["requirements"]["absolute_accuracy_threshold"], 1.0e-10)
+    if abs(energy - reference) > tolerance:
+        raise AssertionError(
+            f"PySCF FCI smoke energy {energy} did not match {reference}."
+        )
+    if cleanup is not None:
+        cleanup.cleanup()
+    return solution
+
+
+def _materialize_fcidump(source: str | Path, destination: str | Path) -> None:
+    source_path = Path(source)
+    destination_path = Path(destination)
+    if source_path.suffix == ".gz":
+        with gzip.open(source_path, "rb") as src, destination_path.open("wb") as dst:
+            shutil.copyfileobj(src, dst)
+    else:
+        shutil.copy2(source_path, destination_path)
+
+
+def _not_attempted_raw_output(
+    manifest: RunManifest,
+    reason: str | None,
+) -> dict[str, Any]:
+    message = reason or "run did not produce raw_output.json"
+    timestamp = iso8601_timestamp()
+    return {
+        "adapter": manifest.adapter,
+        "adapter_version": manifest.adapter_version,
+        "run_id": manifest.run_id,
+        "status": "not_attempted",
+        "method": manifest.config.get("method"),
+        "energy": None,
+        "energy_units": manifest.config.get("energy_units", "Hartree"),
+        "error_message": message,
+        "details": {"not_attempted_reason": message},
+        "timing": {
+            "wall_clock_start_time": timestamp,
+            "wall_clock_stop_time": timestamp,
+            "seconds": 0.0,
+        },
+        "software": {
+            "pyscf_version": pyscf.__version__,
+            "python_version": platform.python_version(),
+        },
+    }
+
+
+def _compute_energy(method: str, fcidump_path: str | Path) -> tuple[float, dict[str, Any]]:
+    if method == "FCI":
+        data = fcidump.read(str(fcidump_path))
+        energy, _ci = fci.direct_spin1.kernel(
+            data["H1"],
+            data["H2"],
+            data["NORB"],
+            data["NELEC"],
+            ecore=data.get("ECORE", 0.0),
+        )
+        return float(energy), {
+            "norb": int(data["NORB"]),
+            "nelec": data["NELEC"],
+            "method_note": "direct_spin1 FCI from FCIDUMP integrals",
+        }
+
+    if method == "HF":
+        mf, details = _run_hf(fcidump_path)
+        details["method_note"] = "SCF object reconstructed with pyscf.tools.fcidump.to_scf"
+        return float(mf.e_tot), details
+
+    if method == "MP2":
+        mf, details = _run_hf(fcidump_path)
+        solver = mp.MP2(mf)
+        solver.verbose = 0
+        correlation_energy, _t2 = solver.kernel()
+        details.update(
+            {
+                "method_note": "PySCF MP2 on the FCIDUMP-reconstructed SCF object",
+                "correlation_energy": float(correlation_energy),
+                "converged": _optional_bool(getattr(solver, "converged", None)),
+            }
+        )
+        return float(solver.e_tot), details
+
+    if method == "CISD":
+        mf, details = _run_hf(fcidump_path)
+        solver = ci.CISD(mf)
+        solver.verbose = 0
+        correlation_energy, _civec = solver.kernel()
+        details.update(
+            {
+                "method_note": "PySCF CISD on the FCIDUMP-reconstructed SCF object",
+                "correlation_energy": float(correlation_energy),
+                "converged": _optional_bool(getattr(solver, "converged", None)),
+            }
+        )
+        return float(solver.e_tot), details
+
+    if method in {"CCSD", "CCSD(T)"}:
+        mf, details = _run_hf(fcidump_path)
+        solver = cc.CCSD(mf)
+        solver.verbose = 0
+        correlation_energy, _t1, _t2 = solver.kernel()
+        triples_correction = 0.0
+        if method == "CCSD(T)":
+            triples_correction = float(solver.ccsd_t())
+        details.update(
+            {
+                "method_note": f"PySCF {method} on the FCIDUMP-reconstructed SCF object",
+                "correlation_energy": float(correlation_energy),
+                "triples_correction": triples_correction,
+                "converged": _optional_bool(getattr(solver, "converged", None)),
+            }
+        )
+        return float(mf.e_tot + solver.e_corr + triples_correction), details
+
+    raise ValueError(f"Unsupported PySCF harness method: {method}")
+
+
+def _run_hf(fcidump_path: str | Path) -> tuple[Any, dict[str, Any]]:
+    mf = fcidump.to_scf(str(fcidump_path))
+    mf.verbose = 0
+    mf.kernel()
+    return mf, {
+        "hf_energy": float(mf.e_tot),
+        "hf_converged": bool(mf.converged),
+    }
+
+
+def _optional_bool(value: Any) -> bool | None:
+    if value is None:
+        return None
+    return bool(value)
+
