@@ -1,9 +1,11 @@
 import json
+import sys
 from pathlib import Path
 
 import pytest
 
 from qb_gsee_benchmark.solvers import pyscf_adapter
+from qb_gsee_benchmark.solvers import shci_adapter
 from qb_gsee_benchmark.solvers.base import RUN_MANIFEST
 from qb_gsee_benchmark.solvers.base import RunManifest
 from qb_gsee_benchmark.solvers.base import SolverResources
@@ -32,6 +34,12 @@ H2_PYSCF_GOLDEN = [
     ("CCSD", "0a29e54f-bef9-4d19-bafa-d94b1c4b37aa", -1.1634029671742296),
     ("CCSD(T)", "c09217e6-d0f7-4b0f-81c4-79210b7ac878", -1.1634029671742296),
 ]
+H2_SHCI_GOLDEN = (
+    REPO_ROOT
+    / "solution_files"
+    / "SHCI"
+    / "solution.SHCI.validation.H2.cc-PVDZ.9162371c-b23f-45a6-bacd-44cb7aaea917_3fc1d523-c4dc-46d1-beed-1b5aea9be12f.json"
+)
 
 
 def test_run_manifest_round_trip(tmp_path):
@@ -132,6 +140,76 @@ def test_pyscf_harvest_missing_raw_output_marks_not_attempted(tmp_path):
     assert data["solution_details"]["attempted"] is False
     assert data["solution_details"]["not_attempted_reason"] == reason
     assert solution["solver_details"]["solver_short_name"] == "HF"
+
+
+def test_shci_adapter_smoke_matches_existing_h2_solution(tmp_path):
+    run_dir = tmp_path / "shci-smoke"
+
+    solution = shci_adapter.smoke_test(run_dir=run_dir)
+    golden = json.loads(H2_SHCI_GOLDEN.read_text())
+
+    assert (run_dir / "solution.json").exists()
+    assert (run_dir / "raw_output.json").exists()
+    assert solution["solution_data"][0]["energy"] == (
+        golden["solution_data"][0]["energy"]
+    )
+    assert solution["solver_details"]["solver_uuid"] == (
+        golden["solver_details"]["solver_uuid"]
+    )
+    assert solution["solver_details"]["solver_short_name"] == "SHCI_opt"
+
+
+def test_shci_adapter_runs_configured_external_command(tmp_path):
+    run_dir = tmp_path / "shci-command"
+    command = f"{sys.executable} -c 'print(\"Total Energy = -1.2345\")'"
+
+    shci_adapter.prepare(
+        problem_instance_path=H2_PROBLEM_INSTANCE,
+        task_uuid=H2_TASK_UUID,
+        fcidump_path=H2_FCIDUMP,
+        run_dir=run_dir,
+        config=shci_adapter.SHCIConfig(
+            variant="SHCI_var_2e-5",
+            num_threads=2,
+            command_template=command,
+        ),
+        overwrite=True,
+    )
+    raw_output = shci_adapter.run(run_dir)
+    solution = shci_adapter.harvest(run_dir)
+
+    assert raw_output["status"] == "completed"
+    assert raw_output["energy"] == -1.2345
+    assert (run_dir / "shci.stdout").exists()
+    assert solution["solver_details"]["solver_uuid"] == (
+        "86bfe50c-9342-4d54-bb68-abc8abd95688"
+    )
+    assert solution["solver_details"]["solver_short_name"] == "SHCI_var_2e-5"
+    assert solution["solution_data"][0]["energy"] == -1.2345
+
+
+def test_shci_harvest_missing_raw_output_marks_not_attempted(tmp_path):
+    run_dir = tmp_path / "shci-missing-raw"
+    reason = "scheduler exhausted retry budget before SHCI produced raw output"
+
+    shci_adapter.prepare(
+        problem_instance_path=H2_PROBLEM_INSTANCE,
+        task_uuid=H2_TASK_UUID,
+        fcidump_path=H2_FCIDUMP,
+        run_dir=run_dir,
+        config=shci_adapter.SHCIConfig(variant="SHCI_pt_2e-5"),
+        overwrite=True,
+    )
+    solution = shci_adapter.harvest(run_dir, not_attempted_reason=reason)
+
+    raw_output = json.loads((run_dir / "raw_output.json").read_text())
+    data = solution["solution_data"][0]
+    assert raw_output["status"] == "not_attempted"
+    assert raw_output["error_message"] == reason
+    assert data["energy"] is None
+    assert data["solution_details"]["attempted"] is False
+    assert data["solution_details"]["not_attempted_reason"] == reason
+    assert solution["solver_details"]["solver_short_name"] == "SHCI_pt_2e-5"
 
 
 def test_repo_layer_does_not_reference_hpc_site_layer():

@@ -21,6 +21,7 @@ import json
 from pathlib import Path
 
 from qb_gsee_benchmark.solvers import pyscf_adapter
+from qb_gsee_benchmark.solvers import shci_adapter
 from qb_gsee_benchmark.solvers.base import load_manifest
 
 
@@ -37,6 +38,23 @@ def main(argv: list[str] | None = None) -> int:
     prepare_pyscf.add_argument("--num-threads", type=int, default=1)
     prepare_pyscf.add_argument("--overwrite", action="store_true")
 
+    prepare_shci = subparsers.add_parser("prepare-shci")
+    prepare_shci.add_argument("--problem-instance", required=True)
+    prepare_shci.add_argument("--task-uuid", required=True)
+    prepare_shci.add_argument("--fcidump", required=True)
+    prepare_shci.add_argument("--run-dir", required=True)
+    prepare_shci.add_argument("--variant", default="SHCI_opt")
+    prepare_shci.add_argument("--num-threads", type=int, default=1)
+    prepare_shci.add_argument("--command-template")
+    prepare_shci.add_argument("--result-json", default="shci_result.json")
+    prepare_shci.add_argument("--eps-var", type=float)
+    prepare_shci.add_argument("--eps-var-label")
+    prepare_shci.add_argument("--pt-correction", action="store_true")
+    prepare_shci.add_argument("--no-pt-correction", action="store_true")
+    prepare_shci.add_argument("--optimized-orbitals", action="store_true")
+    prepare_shci.add_argument("--no-optimized-orbitals", action="store_true")
+    prepare_shci.add_argument("--overwrite", action="store_true")
+
     run_cmd = subparsers.add_parser("run")
     run_cmd.add_argument("--run-dir", required=True)
 
@@ -48,6 +66,9 @@ def main(argv: list[str] | None = None) -> int:
 
     smoke_pyscf = subparsers.add_parser("smoke-pyscf")
     smoke_pyscf.add_argument("--run-dir")
+
+    smoke_shci = subparsers.add_parser("smoke-shci")
+    smoke_shci.add_argument("--run-dir")
 
     args = parser.parse_args(argv)
 
@@ -66,10 +87,39 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(manifest.to_dict(), indent=2, sort_keys=True))
         return 0
 
+    if args.command == "prepare-shci":
+        pt_correction = _tri_state(args.pt_correction, args.no_pt_correction)
+        optimized_orbitals = _tri_state(
+            args.optimized_orbitals,
+            args.no_optimized_orbitals,
+        )
+        manifest = shci_adapter.prepare(
+            problem_instance_path=args.problem_instance,
+            task_uuid=args.task_uuid,
+            fcidump_path=args.fcidump,
+            run_dir=args.run_dir,
+            config=shci_adapter.SHCIConfig(
+                variant=args.variant,
+                num_threads=args.num_threads,
+                command_template=args.command_template,
+                result_json=args.result_json,
+                eps_var=args.eps_var,
+                eps_var_label=args.eps_var_label,
+                pt_correction=pt_correction,
+                optimized_orbitals=optimized_orbitals,
+            ),
+            overwrite=args.overwrite,
+        )
+        print(json.dumps(manifest.to_dict(), indent=2, sort_keys=True))
+        return 0
+
     if args.command == "run":
         manifest = load_manifest(args.run_dir)
         if manifest.adapter == pyscf_adapter.ADAPTER_NAME:
             pyscf_adapter.run(args.run_dir)
+            return 0
+        if manifest.adapter == shci_adapter.ADAPTER_NAME:
+            shci_adapter.run(args.run_dir)
             return 0
         raise ValueError(f"Unsupported adapter {manifest.adapter}")
 
@@ -85,13 +135,36 @@ def main(argv: list[str] | None = None) -> int:
             )
             print(json.dumps(solution, indent=2, sort_keys=True))
             return 0
+        if manifest.adapter == shci_adapter.ADAPTER_NAME:
+            solution = shci_adapter.harvest(
+                args.run_dir,
+                output_path=output,
+                schema_dir=args.schema_dir,
+                not_attempted_reason=args.not_attempted_reason,
+            )
+            print(json.dumps(solution, indent=2, sort_keys=True))
+            return 0
         raise ValueError(f"Unsupported adapter {manifest.adapter}")
 
     if args.command == "smoke-pyscf":
         pyscf_adapter.smoke_test(run_dir=args.run_dir)
         return 0
 
+    if args.command == "smoke-shci":
+        shci_adapter.smoke_test(run_dir=args.run_dir)
+        return 0
+
     raise ValueError(f"Unsupported command {args.command}")
+
+
+def _tri_state(enabled: bool, disabled: bool) -> bool | None:
+    if enabled and disabled:
+        raise ValueError("Conflicting boolean flags were provided.")
+    if enabled:
+        return True
+    if disabled:
+        return False
+    return None
 
 
 if __name__ == "__main__":
