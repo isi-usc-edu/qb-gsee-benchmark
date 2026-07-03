@@ -22,6 +22,7 @@ from pathlib import Path
 
 from qb_gsee_benchmark.solvers import pyscf_adapter
 from qb_gsee_benchmark.solvers import shci_adapter
+from qb_gsee_benchmark.solvers.dmrg_block2 import adapter as dmrg_adapter
 from qb_gsee_benchmark.solvers.ipie_afqmc import adapter as ipie_adapter
 from qb_gsee_benchmark.solvers.base import load_manifest
 
@@ -80,6 +81,22 @@ def main(argv: list[str] | None = None) -> int:
     prepare_ipie.add_argument("--no-phaseless", action="store_true")
     prepare_ipie.add_argument("--overwrite", action="store_true")
 
+    prepare_dmrg = subparsers.add_parser("prepare-dmrg")
+    prepare_dmrg.add_argument("--problem-instance", required=True)
+    prepare_dmrg.add_argument("--task-uuid", required=True)
+    prepare_dmrg.add_argument("--fcidump", required=True)
+    prepare_dmrg.add_argument("--run-dir", required=True)
+    prepare_dmrg.add_argument("--variant", default="DMRG_fixed_budget")
+    prepare_dmrg.add_argument("--num-threads", type=int, default=40)
+    prepare_dmrg.add_argument("--max-bond-dimension", type=int)
+    prepare_dmrg.add_argument("--bond-dimensions")
+    prepare_dmrg.add_argument("--truncation-cutoff", type=float)
+    prepare_dmrg.add_argument("--orbital-reordering")
+    prepare_dmrg.add_argument("--extrapolation-model")
+    prepare_dmrg.add_argument("--command-template")
+    prepare_dmrg.add_argument("--result-json", default="dmrg_result.json")
+    prepare_dmrg.add_argument("--overwrite", action="store_true")
+
     run_cmd = subparsers.add_parser("run")
     run_cmd.add_argument("--run-dir", required=True)
 
@@ -97,6 +114,9 @@ def main(argv: list[str] | None = None) -> int:
 
     smoke_ipie = subparsers.add_parser("smoke-ipie")
     smoke_ipie.add_argument("--run-dir")
+
+    smoke_dmrg = subparsers.add_parser("smoke-dmrg")
+    smoke_dmrg.add_argument("--run-dir")
 
     args = parser.parse_args(argv)
 
@@ -167,6 +187,28 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(manifest.to_dict(), indent=2, sort_keys=True))
         return 0
 
+    if args.command == "prepare-dmrg":
+        manifest = dmrg_adapter.prepare(
+            problem_instance_path=args.problem_instance,
+            task_uuid=args.task_uuid,
+            fcidump_path=args.fcidump,
+            run_dir=args.run_dir,
+            config=dmrg_adapter.DMRGConfig(
+                variant=args.variant,
+                num_threads=args.num_threads,
+                max_bond_dimension=args.max_bond_dimension,
+                bond_dimensions=_int_tuple(args.bond_dimensions),
+                truncation_cutoff=args.truncation_cutoff,
+                orbital_reordering=args.orbital_reordering,
+                extrapolation_model=args.extrapolation_model,
+                command_template=args.command_template,
+                result_json=args.result_json,
+            ),
+            overwrite=args.overwrite,
+        )
+        print(json.dumps(manifest.to_dict(), indent=2, sort_keys=True))
+        return 0
+
     if args.command == "run":
         manifest = load_manifest(args.run_dir)
         if manifest.adapter == pyscf_adapter.ADAPTER_NAME:
@@ -177,6 +219,9 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if manifest.adapter == ipie_adapter.ADAPTER_NAME:
             ipie_adapter.run(args.run_dir)
+            return 0
+        if manifest.adapter == dmrg_adapter.ADAPTER_NAME:
+            dmrg_adapter.run(args.run_dir)
             return 0
         raise ValueError(f"Unsupported adapter {manifest.adapter}")
 
@@ -210,6 +255,15 @@ def main(argv: list[str] | None = None) -> int:
             )
             print(json.dumps(solution, indent=2, sort_keys=True))
             return 0
+        if manifest.adapter == dmrg_adapter.ADAPTER_NAME:
+            solution = dmrg_adapter.harvest(
+                args.run_dir,
+                output_path=output,
+                schema_dir=args.schema_dir,
+                not_attempted_reason=args.not_attempted_reason,
+            )
+            print(json.dumps(solution, indent=2, sort_keys=True))
+            return 0
         raise ValueError(f"Unsupported adapter {manifest.adapter}")
 
     if args.command == "smoke-pyscf":
@@ -224,7 +278,17 @@ def main(argv: list[str] | None = None) -> int:
         ipie_adapter.smoke_test(run_dir=args.run_dir)
         return 0
 
+    if args.command == "smoke-dmrg":
+        dmrg_adapter.smoke_test(run_dir=args.run_dir)
+        return 0
+
     raise ValueError(f"Unsupported command {args.command}")
+
+
+def _int_tuple(value: str | None) -> tuple[int, ...]:
+    if not value:
+        return ()
+    return tuple(int(part.strip()) for part in value.split(",") if part.strip())
 
 
 def _tri_state(enabled: bool, disabled: bool) -> bool | None:

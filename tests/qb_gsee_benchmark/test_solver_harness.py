@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 
 from qb_gsee_benchmark.solvers import pyscf_adapter
+from qb_gsee_benchmark.solvers.dmrg_block2 import adapter as dmrg_adapter
 from qb_gsee_benchmark.solvers import shci_adapter
 from qb_gsee_benchmark.solvers.ipie_afqmc import adapter as ipie_adapter
 from qb_gsee_benchmark.solvers.base import RUN_MANIFEST
@@ -318,6 +319,134 @@ def test_ipie_adapter_smoke_exercises_h2_and_lih(tmp_path):
         assert data["error_bound"] == pytest.approx(1.0e-6)
         assert data["confidence_level"] == pytest.approx(
             ipie_adapter.DEFAULT_CONFIDENCE_LEVEL
+        )
+
+
+
+def test_dmrg_adapter_runs_configured_external_command(tmp_path):
+    run_dir = tmp_path / "dmrg-command"
+    code = (
+        "import json; "
+        "json.dump(dict(energy=-1.2345, bond_dimension=64, "
+        "discarded_weight=1.0e-8), open('dmrg_result.json', 'w'))"
+    )
+    command = f"{sys.executable} -c {shlex.quote(code)}"
+
+    manifest = dmrg_adapter.prepare(
+        problem_instance_path=H2_PROBLEM_INSTANCE,
+        task_uuid=H2_TASK_UUID,
+        fcidump_path=H2_FCIDUMP,
+        run_dir=run_dir,
+        config=dmrg_adapter.DMRGConfig(
+            variant="DMRG_fixed_budget",
+            num_threads=2,
+            max_bond_dimension=64,
+            command_template=command,
+        ),
+        overwrite=True,
+    )
+    raw_output = dmrg_adapter.run(run_dir)
+    solution = dmrg_adapter.harvest(run_dir)
+
+    data = solution["solution_data"][0]
+    assert manifest.resources.cores == 2
+    assert manifest.resources.gpus == 0
+    assert raw_output["status"] == "completed"
+    assert raw_output["energy"] == -1.2345
+    assert (run_dir / "dmrg.stdout").exists()
+    assert solution["solver_details"]["solver_uuid"] == (
+        dmrg_adapter.EXISTING_NIAGARA_DMRG_UUID
+    )
+    assert solution["solver_details"]["solver_short_name"] == (
+        dmrg_adapter.EXISTING_NIAGARA_DMRG_SHORT_NAME
+    )
+    assert data["energy"] == -1.2345
+    assert data["solution_details"]["bond_dimension"] == 64
+    assert data["solution_details"]["discarded_weight"] == 1.0e-8
+
+
+def test_dmrg_extrapolated_adapter_records_extrapolation_metadata(tmp_path):
+    run_dir = tmp_path / "dmrg-extrapolated"
+    code = (
+        "import json; "
+        "json.dump(dict(variational_energy=-1.2, extrapolated_energy=-1.25, "
+        "bond_dimension=256, discarded_weight=2.0e-6, "
+        "extrapolation_distance=0.003, extrapolation_model='linear'), "
+        "open('dmrg_result.json', 'w'))"
+    )
+    command = f"{sys.executable} -c {shlex.quote(code)}"
+
+    dmrg_adapter.prepare(
+        problem_instance_path=H2_PROBLEM_INSTANCE,
+        task_uuid=H2_TASK_UUID,
+        fcidump_path=H2_FCIDUMP,
+        run_dir=run_dir,
+        config=dmrg_adapter.DMRGConfig(
+            variant="DMRG_extrapolated",
+            num_threads=4,
+            bond_dimensions=(64, 128, 256),
+            orbital_reordering="Fiedler",
+            extrapolation_model="linear_discarded_weight",
+            command_template=command,
+        ),
+        overwrite=True,
+    )
+    raw_output = dmrg_adapter.run(run_dir)
+    solution = dmrg_adapter.harvest(run_dir)
+
+    data = solution["solution_data"][0]
+    assert raw_output["energy"] == -1.25
+    assert solution["solver_details"]["solver_short_name"] == "DMRG_extrapolated"
+    assert data["energy"] == -1.25
+    assert data["solution_details"]["variant"] == "DMRG_extrapolated"
+    assert data["solution_details"]["orbital_reordering"] == "Fiedler"
+    assert data["solution_details"]["extrapolation_distance"] == 0.003
+    assert data["solution_details"]["extrapolation_model"] == (
+        "linear_discarded_weight"
+    )
+
+
+def test_dmrg_harvest_missing_raw_output_marks_not_attempted(tmp_path):
+    run_dir = tmp_path / "dmrg-missing-raw"
+    reason = "scheduler exhausted Niagara allocation before DMRG produced raw output"
+
+    dmrg_adapter.prepare(
+        problem_instance_path=H2_PROBLEM_INSTANCE,
+        task_uuid=H2_TASK_UUID,
+        fcidump_path=H2_FCIDUMP,
+        run_dir=run_dir,
+        config=dmrg_adapter.DMRGConfig(variant="DMRG_fixed_budget"),
+        overwrite=True,
+    )
+    solution = dmrg_adapter.harvest(run_dir, not_attempted_reason=reason)
+
+    raw_output = json.loads((run_dir / "raw_output.json").read_text())
+    data = solution["solution_data"][0]
+    assert raw_output["status"] == "not_attempted"
+    assert raw_output["error_message"] == reason
+    assert data["energy"] is None
+    assert data["solution_details"]["attempted"] is False
+    assert data["solution_details"]["not_attempted_reason"] == reason
+    assert solution["solver_details"]["solver_short_name"] == (
+        dmrg_adapter.EXISTING_NIAGARA_DMRG_SHORT_NAME
+    )
+
+
+def test_dmrg_adapter_smoke_exercises_h2_and_lih(tmp_path):
+    run_dir = tmp_path / "dmrg-smoke"
+
+    summary = dmrg_adapter.smoke_test(run_dir=run_dir)
+
+    assert set(summary["solutions"]) == {"H2", "LiH"}
+    assert (run_dir / "H2" / "solution.json").exists()
+    assert (run_dir / "LiH" / "solution.json").exists()
+    h2_data = summary["solutions"]["H2"]["solution_data"][0]
+    lih_data = summary["solutions"]["LiH"]["solution_data"][0]
+    assert h2_data["task_uuid"] == H2_TASK_UUID
+    assert lih_data["task_uuid"] == LIH_TASK_UUID
+    for solution in summary["solutions"].values():
+        assert solution["solver_details"]["solver_short_name"] == (
+            dmrg_adapter.EXISTING_NIAGARA_DMRG_SHORT_NAME
         )
 
 
