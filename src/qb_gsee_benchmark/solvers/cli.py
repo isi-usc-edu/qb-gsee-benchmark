@@ -20,6 +20,7 @@ import argparse
 import json
 from pathlib import Path
 
+from qb_gsee_benchmark.solvers import batch
 from qb_gsee_benchmark.solvers import pyscf_adapter
 from qb_gsee_benchmark.solvers import shci_adapter
 from qb_gsee_benchmark.solvers.dmrg_block2 import adapter as dmrg_adapter
@@ -96,6 +97,12 @@ def main(argv: list[str] | None = None) -> int:
     prepare_dmrg.add_argument("--command-template")
     prepare_dmrg.add_argument("--result-json", default="dmrg_result.json")
     prepare_dmrg.add_argument("--overwrite", action="store_true")
+
+    prepare_batch = subparsers.add_parser("prepare-batch")
+    prepare_batch.add_argument("--plan", required=True)
+    prepare_batch.add_argument("--output-root", required=True)
+    prepare_batch.add_argument("--run-dir-file")
+    prepare_batch.add_argument("--overwrite", action="store_true")
 
     run_cmd = subparsers.add_parser("run")
     run_cmd.add_argument("--run-dir", required=True)
@@ -207,6 +214,16 @@ def main(argv: list[str] | None = None) -> int:
             overwrite=args.overwrite,
         )
         print(json.dumps(manifest.to_dict(), indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "prepare-batch":
+        summary = batch.prepare_batch(
+            plan_path=args.plan,
+            output_root=args.output_root,
+            run_dir_file=args.run_dir_file,
+            overwrite=args.overwrite,
+        )
+        print(json.dumps(summary, indent=2, sort_keys=True))
         return 0
 
     if args.command == "run":

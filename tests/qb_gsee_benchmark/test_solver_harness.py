@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+from qb_gsee_benchmark.solvers import batch
 from qb_gsee_benchmark.solvers import pyscf_adapter
 from qb_gsee_benchmark.solvers.dmrg_block2 import adapter as dmrg_adapter
 from qb_gsee_benchmark.solvers import shci_adapter
@@ -448,6 +449,71 @@ def test_dmrg_adapter_smoke_exercises_h2_and_lih(tmp_path):
         assert solution["solver_details"]["solver_short_name"] == (
             dmrg_adapter.EXISTING_NIAGARA_DMRG_SHORT_NAME
         )
+
+
+def test_prepare_batch_creates_run_dirs_and_pbs_run_dir_file(tmp_path):
+    plan = tmp_path / "batch_plan.csv"
+    output_root = tmp_path / "batch_runs"
+    plan.write_text(
+        "adapter,run_name,problem_instance,task_uuid,fcidump,method,variant,num_threads,command_template,cores,memory_gb,gpus,walltime_seconds,hardware_tags\n"
+        f"pyscf,h2_hf,{H2_PROBLEM_INSTANCE},{H2_TASK_UUID},{H2_FCIDUMP},HF,,1,,2,8,0,600,cpu\n"
+        f"shci,h2_shci,{H2_PROBLEM_INSTANCE},{H2_TASK_UUID},{H2_FCIDUMP},,SHCI_var_2e-5,2,echo Energy = -1.0,4,16,0,1200,cpu\n"
+    )
+
+    summary = batch.prepare_batch(plan, output_root, overwrite=True)
+
+    run_dirs = [Path(item["run_dir"]) for item in summary["runs"]]
+    assert summary["prepared_count"] == 2
+    assert Path(summary["run_dir_file"]).read_text().splitlines() == [
+        str(run_dirs[0]),
+        str(run_dirs[1]),
+    ]
+    assert (output_root / "batch_manifest.json").exists()
+    assert {load_manifest(run_dir).adapter for run_dir in run_dirs} == {
+        pyscf_adapter.ADAPTER_NAME,
+        shci_adapter.ADAPTER_NAME,
+    }
+    pyscf_manifest = load_manifest(output_root / "h2_hf")
+    assert pyscf_manifest.solver_short_name == "HF"
+    assert pyscf_manifest.resources.cores == 2
+    assert pyscf_manifest.resources.memory_gb == 8.0
+    assert pyscf_manifest.resources.walltime_seconds == 600
+    assert pyscf_manifest.resources.hardware_tags == ("cpu",)
+    shci_manifest = load_manifest(output_root / "h2_shci")
+    assert shci_manifest.solver_short_name == "SHCI_var_2e-5"
+    assert shci_manifest.config["command_template"] == "echo Energy = -1.0"
+    assert shci_manifest.resources.cores == 4
+    assert shci_manifest.resources.memory_gb == 16.0
+    assert shci_manifest.resources.walltime_seconds == 1200
+
+
+def test_prepare_batch_accepts_cwd_relative_paths_when_plan_lives_elsewhere(tmp_path):
+    plan = tmp_path / "batch_plan.csv"
+    output_root = tmp_path / "batch_runs"
+    problem_instance = H2_PROBLEM_INSTANCE.relative_to(REPO_ROOT)
+    fcidump = H2_FCIDUMP.relative_to(REPO_ROOT)
+    plan.write_text(
+        "adapter,run_name,problem_instance,task_uuid,fcidump,method\n"
+        f"pyscf,h2_hf,{problem_instance},{H2_TASK_UUID},{fcidump},HF\n"
+    )
+
+    summary = batch.prepare_batch(plan, output_root, overwrite=True)
+
+    assert summary["prepared_count"] == 1
+    manifest = load_manifest(output_root / "h2_hf")
+    assert manifest.adapter == pyscf_adapter.ADAPTER_NAME
+    assert manifest.solver_short_name == "HF"
+
+
+def test_prepare_batch_rejects_unknown_adapter(tmp_path):
+    plan = tmp_path / "bad_plan.csv"
+    plan.write_text(
+        "adapter,problem_instance,task_uuid,fcidump\n"
+        f"unknown,{H2_PROBLEM_INSTANCE},{H2_TASK_UUID},{H2_FCIDUMP}\n"
+    )
+
+    with pytest.raises(ValueError, match="Unsupported batch adapter"):
+        batch.prepare_batch(plan, tmp_path / "runs", overwrite=True)
 
 
 def test_repo_layer_does_not_reference_hpc_site_layer():
