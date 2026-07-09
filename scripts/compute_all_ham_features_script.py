@@ -40,6 +40,7 @@ sys.path.append("../Hamiltonian_features/experimental/fast_double_factorization_
 
 import pandas as pd
 from Hamiltonian_features.experimental.fast_double_factorization_features.fcidump_to_ham_features_csv import compute_ham_features_csv
+from qb_gsee_benchmark.features.df_features import add_df_feature_columns_to_record
 # from Hamiltonian_features.experimental.fast_double_factorization_features.compute_ham_features import compute_hypergraph_ham_features
 
 
@@ -355,8 +356,9 @@ def main(args):
                     ham_features["instance_data_object_file_name"] =  os.path.basename(fcidump_file_path)
                     ham_features["instance_data_object_url"] = fcidump_url
                     ham_features["date_of_calculation"] = str(ham_features_stop_time)
-                    ham_features["version_of_features_calculation_script"] = 1
+                    ham_features["version_of_features_calculation_script"] = 2
                     ham_features["ham_features_calc_time"] = ham_features_calc_time
+                    add_df_feature_columns_to_record(ham_features)
 
 
                     # Back up df_eigs to a file. 
