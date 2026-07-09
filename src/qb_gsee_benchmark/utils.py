@@ -149,6 +149,34 @@ def clear_or_create_output_directory(output_directory: str) -> None:
 
 
 
+def symmetrize_fcidump_h1(fci: dict) -> dict:
+    """Return an FCIDUMP dict with a symmetric one-body matrix.
+
+    Some FCIDUMP producers emit each off-diagonal H1 pair once, but not
+    consistently in the same triangle. PySCF preserves that arbitrary order on
+    read. Fill missing mirror entries; if both triangles are populated, keep
+    their average.
+    """
+    if "H1" not in fci:
+        return fci
+    h1 = np.array(fci["H1"], dtype=float, copy=True)
+    if h1.ndim != 2 or h1.shape[0] != h1.shape[1]:
+        return fci
+    diag = np.diag(np.diag(h1))
+    upper = np.triu(h1, 1)
+    lower_t = np.tril(h1, -1).T
+    both = (upper != 0.0) & (lower_t != 0.0)
+    sym_upper = np.where(both, 0.5 * (upper + lower_t), upper + lower_t)
+    fci["H1"] = diag + sym_upper + sym_upper.T
+    return fci
+
+
+def read_fcidump(filename: str, **kwargs) -> dict:
+    """Read an FCIDUMP through PySCF and normalize H1 symmetry."""
+    kwargs.setdefault("verbose", False)
+    return symmetrize_fcidump_h1(fcidump.read(filename=str(filename), **kwargs))
+
+
 
 def retrieve_fcidump_from_sftp(
         url: str,
@@ -176,7 +204,7 @@ def retrieve_fcidump_from_sftp(
     with gzip.open(filename, "rb") as f_in:
         with open(fcidump_filename, "wb") as f_out:
             shutil.copyfileobj(f_in, f_out)
-    fci = fcidump.read(filename=fcidump_filename)
+    fci = read_fcidump(filename=fcidump_filename)
     os.remove(filename)
     os.remove(fcidump_filename)
     return fci

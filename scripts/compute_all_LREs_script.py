@@ -31,10 +31,10 @@ import time
 import pandas as pd
 from pyLIQTR.utils.resource_analysis import estimate_resources
 
-from pyscf.tools import fcidump
 
 from qb_gsee_benchmark.qre import get_df_qpe_circuit
 from qb_gsee_benchmark.utils import retrieve_fcidump_from_sftp
+from qb_gsee_benchmark.utils import read_fcidump
 from qb_gsee_benchmark.utils import fetch_file_from_sftp
 from qb_gsee_benchmark.utils import download_file_via_https
 from qb_gsee_benchmark.utils import compare_file_sha1sum
@@ -159,7 +159,7 @@ def get_lqre(
 
 
             # read the file as an FCIDUMP file
-            fci = fcidump.read(filename=file_path)
+            fci = read_fcidump(filename=file_path)
 
             # remove the file (cleanup)
             os.remove(file_path)

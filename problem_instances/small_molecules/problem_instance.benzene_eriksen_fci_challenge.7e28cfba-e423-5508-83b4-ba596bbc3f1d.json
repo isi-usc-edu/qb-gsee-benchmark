@@ -1,0 +1,104 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "application_domain": "QC",
+  "basis_convention": {
+    "active_electrons": 30,
+    "active_spatial_orbitals": 108,
+    "basis": "cc-pVDZ",
+    "frozen_core_spatial_orbitals": 6,
+    "molecule": "benzene",
+    "orbital_basis": "source_optimized_shci_orbitals",
+    "reference_rule": "E_ref = SI RHF total energy plus the mean of DMRG, MBE-FCI, CAD-FCIQMC, and AS-FCIQMC correlation energies; selected-CI rows excluded from the reference mean.",
+    "source_fcidump": "FCIDUMP_optSHCIorbs",
+    "h1_reader_hazard_note": "H1 reader hazard: this source FCIDUMP stores off-diagonal one-body terms once per pair in arbitrary triangle order. After pyscf.tools.fcidump.read, readers must symmetrize H1 by filling missing mirror entries (averaging only pairs populated in both triangles) before HF, harness, or feature calculations."
+  },
+  "benchmark_role": "hard_tier_quantum_chemistry",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison",
+      "name": "Matthew Otten"
+    }
+  ],
+  "creation_timestamp": "2026-07-08T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-09T03:01:29+00:00",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "problem_instance_uuid": "7e28cfba-e423-5508-83b4-ba596bbc3f1d",
+  "problem_type": "GSEE",
+  "references": [
+    "Eriksen et al., J. Phys. Chem. Lett. 11, 8922 (2020), DOI 10.1021/acs.jpclett.0c02621 / arXiv:2008.02678.",
+    "SI-benzene-paper-DMRG source FCIDUMP_optSHCIorbs from commit 1d40f216317563d64971785cd274e08ef3710fe1.",
+    "C13 W8 convention approval in MATT_DECISION_QUEUE.md O12: stage the source optimized-SHCI-orbital FCIDUMP; reference is SI RHF plus non-SCI consensus correlation energy."
+  ],
+  "short_name": "benzene_eriksen_fci_challenge",
+  "status": "in_development",
+  "superseded_by": null,
+  "tasks": [
+    {
+      "benchmark_role": "hard_tier_quantum_chemistry",
+      "features": {
+        "application_domain": "quantum_chemistry",
+        "basis": "cc-pVDZ",
+        "basis_convention_note": "Uses Eriksen SI DMRG source FCIDUMP_optSHCIorbs, identified in the SI as optimized SHCI orbitals. The reference mean excludes selected-CI rows, including SHCI.",
+        "benchmark_role": "hard_tier_quantum_chemistry",
+        "ecore_hartree": -91.16678433171,
+        "frozen_core_spatial_orbitals": 6,
+        "h2_packed_length": 17325441,
+        "hamiltonian_family": "eriksen_benzene_fci_challenge",
+        "model": "benzene frozen-core electronic structure",
+        "molecule": "benzene",
+        "ms2": 0,
+        "num_electrons": 30,
+        "num_orbitals": 108,
+        "orbital_basis": "source_optimized_shci_orbitals",
+        "reference_correlation_energy_mhartree": -863.225,
+        "reference_non_sci_spread_mhartree": 0.9,
+        "source_fcidump_artifact": "FCIDUMP_optSHCIorbs",
+        "source_lfs_sha256": "8ac25808d1cac9ab15edb79c4e69c6cd0aef585d412094541c7cf136d0886b3e",
+        "h1_reader_hazard_note": "H1 reader hazard: this source FCIDUMP stores off-diagonal one-body terms once per pair in arbitrary triangle order. After pyscf.tools.fcidump.read, readers must symmetrize H1 by filling missing mirror entries (averaging only pairs populated in both triangles) before HF, harness, or feature calculations.",
+        "reference_non_sci_span_note": "0.9 mEh is the max-min span across the non-SCI consensus methods; sample sigma is about 0.40 mEh."
+      },
+      "independent_parameters": {
+        "basis": "cc-pVDZ",
+        "frozen_core_spatial_orbitals": 6,
+        "num_electrons": 30,
+        "num_spatial_orbitals": 108,
+        "orbital_convention": "source_optimized_shci_orbitals"
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -231.585044131,
+        "reference_energy_cross_validation_methods": [
+          "DMRG",
+          "MBE-FCI",
+          "CAD-FCIQMC",
+          "AS-FCIQMC"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "non-SCI consensus mean of DMRG, MBE-FCI, CAD-FCIQMC, and AS-FCIQMC correlation energies added to SI RHF total energy",
+        "reference_energy_note": "Selected-CI rows ASCI, iCI, and SHCI are excluded from the reference mean; the 0.9 mEh quantity is the non-SCI cross-method span (max-min), not a statistical standard error. The schema standard-error field carries this span by convention for this release.",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_source": "Eriksen et al. SI Table S2 and main-text non-SCI span; total uses SI RHF energy plus non-SCI consensus correlation energy. O12 approves this source-FCIDUMP convention.",
+        "reference_energy_standard_error": 0.0009,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400,
+        "reference_energy_uncertainty_note": "reference_energy_standard_error stores the 0.0009 Ha cross-method span by convention; it is not a standard error."
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "53fda02c5d49a1f7a47e0d0041eec64ff28ed97c",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/benzene_eriksen_fci_challenge/benzene_fc_ccpvdz_30e108o_optshci_orbs.fcidump.gz",
+          "instance_data_object_uuid": "72975d91-dc69-5746-bb07-2c443dd87e4e",
+          "is_fcidump_file": true
+        }
+      ],
+      "task_uuid": "3309b193-b0e3-52fe-bad6-5414ec07129c"
+    }
+  ]
+}

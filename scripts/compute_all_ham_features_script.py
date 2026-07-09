@@ -21,6 +21,7 @@ from qb_gsee_benchmark.utils import download_file_via_https
 from qb_gsee_benchmark.utils import compare_file_sha1sum
 from qb_gsee_benchmark.utils import decompress_file
 from qb_gsee_benchmark.utils import determine_url_protocol
+from qb_gsee_benchmark.utils import read_fcidump
 
 import os
 import argparse
@@ -37,7 +38,6 @@ import sys
 sys.path.append("../")
 sys.path.append("../Hamiltonian_features/experimental/fast_double_factorization_features")
 
-from pyscf.tools import fcidump
 import pandas as pd
 from Hamiltonian_features.experimental.fast_double_factorization_features.fcidump_to_ham_features_csv import compute_ham_features_csv
 # from Hamiltonian_features.experimental.fast_double_factorization_features.compute_ham_features import compute_hypergraph_ham_features
@@ -276,7 +276,7 @@ def main(args):
                     fcidump_file_path = decompress_file(fcidump_file_path)
 
                     # read the FCIDUMP file
-                    data = fcidump.read(filename=fcidump_file_path)
+                    data = read_fcidump(filename=fcidump_file_path)
                     
                     if num_orbitals is not None:
                         assert num_orbitals == data['NORB'], "Error: the number or orbitals listed in the FCIDUMP file doesn't match the number listed in the problem instance JSON file!";

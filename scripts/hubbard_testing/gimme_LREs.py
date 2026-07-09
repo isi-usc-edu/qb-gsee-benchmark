@@ -47,13 +47,13 @@ import time
 from pprint import pprint
 
 
-from pyscf.tools import fcidump
 
 import pandas as pd
 from pyLIQTR.utils.resource_analysis import estimate_resources
 
 from qb_gsee_benchmark.qre import get_df_qpe_circuit
 from qb_gsee_benchmark.utils import retrieve_fcidump_from_sftp
+from qb_gsee_benchmark.utils import read_fcidump
 from qb_gsee_benchmark.utils import iso8601_timestamp
 from qb_gsee_benchmark.utils import load_json_files
 
@@ -97,7 +97,7 @@ results: dict[str, Any] = {}
 
 for fcidump_file in os.listdir("./FCIDUMP_hubbard_hartree_fock_orbitals"):
     fcidump_file_path = os.path.join("./FCIDUMP_hubbard_hartree_fock_orbitals", fcidump_file)
-    fci = fcidump.read(fcidump_file_path)
+    fci = read_fcidump(filename=fcidump_file_path)
     num_orbitals = fci["H1"].shape[0]
     
     error_tolerance = 0.00159

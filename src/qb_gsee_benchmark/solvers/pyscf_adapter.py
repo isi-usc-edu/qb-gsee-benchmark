@@ -31,6 +31,8 @@ import time
 import traceback
 import uuid
 from dataclasses import dataclass
+
+import numpy as np
 from pathlib import Path
 from typing import Any
 
@@ -38,9 +40,10 @@ import pyscf
 from pyscf import cc
 from pyscf import ci
 from pyscf import fci
+from pyscf import gto
 from pyscf import lib
 from pyscf import mp
-from pyscf.tools import fcidump
+from pyscf import scf
 
 from qb_gsee_benchmark.solvers.base import RAW_OUTPUT
 from qb_gsee_benchmark.solvers.base import RUN_MANIFEST
@@ -58,6 +61,7 @@ from qb_gsee_benchmark.solvers.base import write_json
 from qb_gsee_benchmark.solvers.base import write_manifest
 from qb_gsee_benchmark.solvers.base import write_validated_solution
 from qb_gsee_benchmark.utils import iso8601_timestamp
+from qb_gsee_benchmark.utils import read_fcidump
 
 ADAPTER_NAME = "pyscf_reference"
 ADAPTER_VERSION = "0.1.0"
@@ -430,7 +434,7 @@ def _not_attempted_raw_output(
 
 def _compute_energy(method: str, fcidump_path: str | Path) -> tuple[float, dict[str, Any]]:
     if method == "FCI":
-        data = fcidump.read(str(fcidump_path))
+        data = read_fcidump(str(fcidump_path))
         energy, _ci = fci.direct_spin1.kernel(
             data["H1"],
             data["H2"],
@@ -446,7 +450,7 @@ def _compute_energy(method: str, fcidump_path: str | Path) -> tuple[float, dict[
 
     if method == "HF":
         mf, details = _run_hf(fcidump_path)
-        details["method_note"] = "SCF object reconstructed with pyscf.tools.fcidump.to_scf"
+        details["method_note"] = "SCF object reconstructed from symmetrized FCIDUMP integrals"
         return float(mf.e_tot), details
 
     if method == "MP2":
@@ -499,12 +503,26 @@ def _compute_energy(method: str, fcidump_path: str | Path) -> tuple[float, dict[
 
 
 def _run_hf(fcidump_path: str | Path) -> tuple[Any, dict[str, Any]]:
-    mf = fcidump.to_scf(str(fcidump_path))
+    data = read_fcidump(str(fcidump_path))
+    norb = int(data["NORB"])
+    mol = gto.M()
+    mol.nelectron = int(data["NELEC"])
+    mol.spin = int(data.get("MS2", 0))
+    mol.nao = norb
+    mol.incore_anyway = True
+    ecore = float(data.get("ECORE", 0.0))
+    mol.energy_nuc = lambda *args: ecore
+
+    mf = scf.RHF(mol)
     mf.verbose = 0
+    mf.get_hcore = lambda *args: data["H1"]
+    mf.get_ovlp = lambda *args: np.eye(norb)
+    mf._eri = data["H2"]
     mf.kernel()
     return mf, {
         "hf_energy": float(mf.e_tot),
         "hf_converged": bool(mf.converged),
+        "h1_symmetrized_on_read": True,
     }
 
 
