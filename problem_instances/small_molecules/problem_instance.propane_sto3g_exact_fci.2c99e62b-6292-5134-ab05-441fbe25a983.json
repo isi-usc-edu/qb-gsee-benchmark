@@ -1,0 +1,84 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "application_domain": "QC",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison",
+      "name": "Matthew Otten"
+    }
+  ],
+  "creation_timestamp": "2026-07-03T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-03T00:00:00+00:00",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "problem_instance_uuid": "2c99e62b-6292-5134-ab05-441fbe25a983",
+  "problem_type": "GSEE",
+  "references": [
+    "https://doi.org/10.1021/acs.jctc.3c01214",
+    "https://arxiv.org/abs/2402.13111"
+  ],
+  "short_name": "propane_sto3g_exact_fci",
+  "status": "in_development",
+  "superseded_by": null,
+  "tasks": [
+    {
+      "features": {
+        "basis_set": "STO-3G",
+        "charge": 0,
+        "geometry": "C 0.000000000000000 0.000000000000000 1.090847499416857\nC 0.000000000000000 2.408456450590927 -0.508239082372113\nC 0.000000000000000 -2.408456450590927 -0.508239082372113\nH 1.647274608065995 0.000000000000000 2.326917616585571\nH -1.647274608065995 0.000000000000000 2.326917616585571\nH 0.000000000000000 4.092202780505809 0.672839993045172\nH 0.000000000000000 -4.092202780505809 0.672839993045172\nH 1.660691666362736 2.493683116673039 -1.721254535988681\nH 1.660691666362736 -2.493683116673039 -1.721254535988681\nH -1.660691666362736 2.493683116673039 -1.721254535988681\nH -1.660691666362736 -2.493683116673039 -1.721254535988681",
+        "geometry_source": "work/fcidumps/propane_sto3g/source/C3H8_CCSD_STO3G.out",
+        "geometry_units": "bohr",
+        "hamiltonian_reconstruction_status": "near_match_pending_signoff",
+        "hf_digit_match_abs_delta_hartree": 4.627115401945048e-08,
+        "molecule_name": "propane_STO-3G",
+        "multiplicity": 1,
+        "nuclear_repulsion_abs_delta_hartree": 1.1425527191022411e-11,
+        "num_electrons": 26,
+        "num_orbitals": 23,
+        "pyscf_nuclear_repulsion_hartree": 82.59082513741143,
+        "pyscf_rhf_energy_hartree": -116.88610269639085,
+        "rounded_xyz_source": "work/fcidumps/propane_sto3g/source/C3H8.xyz",
+        "source_nuclear_repulsion_hartree": 82.5908251374,
+        "source_scf_energy_hartree": -116.8861026501197
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "energy_target": 0.99,
+        "probability_of_success": 0.99,
+        "reference_energy": -117.100122681461,
+        "reference_energy_cross_validation_methods": [
+          "FCI"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "FCI",
+        "reference_energy_note": "Candidate in_development instance. HF is variationally above the exact FCI reference; PySCF RHF differs from the ACES2 ancillary SCF value by less than 0.05 microhartree and needs acceptance before promotion if strict printed-digit matching is required.",
+        "reference_energy_provenance": "exact",
+        "reference_energy_source": "Gao et al., J. Chem. Theory Comput. 2024, exact propane/STO-3G FCI energy; Loos et al. arXiv:2402.13111 ancillary files provide reconstruction geometry and method comparisons.",
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 43200
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "430f4e755cff03ad8754c851ae3ea92da745f09c",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/propane_sto3g/propane_sto3g.fcidump.gz",
+          "instance_data_object_uuid": "12c72f4b-da81-5fbf-86c4-cdee6f44a299",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_checksum": "e528fdfca376568ecad597e8fc5fabecbf1641a0",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/propane_sto3g/propane_sto3g_aces2_bohr.xyz",
+          "instance_data_object_uuid": "a049c5fb-33ca-58b1-b4c3-52c13d0469d3",
+          "is_fcidump_file": false
+        }
+      ],
+      "task_uuid": "825327d9-5ab6-5dcb-b28c-294070439c75"
+    }
+  ]
+}
