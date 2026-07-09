@@ -808,7 +808,7 @@ class BenchmarkData:
                             
                             d["reported_energy"] = results["energy"]
                             try:
-                                d["solved_within_accuracy_requirement"] = bool(np.abs(d["reported_energy"] - d["reference_energy"]) < d["accuracy_tol"])
+                                d["solved_within_accuracy_requirement"] = bool(np.abs(d["reported_energy"] - d["reference_energy"]) <= d["accuracy_tol"])
                             except Exception as e:
                                 logging.error(f'{e}', exc_info=True)
                                 logging.warning(f"No energy target specified in task {task_uuid}.  reference_energy={d['reference_energy']}")
