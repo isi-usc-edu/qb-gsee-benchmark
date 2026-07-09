@@ -1,0 +1,479 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "application_domain": "CM",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison",
+      "name": "Matthew Otten"
+    }
+  ],
+  "creation_timestamp": "2026-07-07T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-07T17:59:47+00:00",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "problem_instance_uuid": "4dba0548-b9ac-5357-ac4b-3333eea8f55e",
+  "problem_type": "GSEE",
+  "references": [
+    "https://doi.org/10.1103/PhysRevLett.20.1445",
+    "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968); finite periodic-chain Bethe equations solved numerically and validated against exact diagonalization in analysis/hubbard_lieb_wu_subset."
+  ],
+  "short_name": "hubbard_lieb_wu_1d_site_basis",
+  "status": "in_development",
+  "superseded_by": null,
+  "basis_convention": {
+    "orbital_basis": "site_basis",
+    "boundary_condition": "periodic_ring",
+    "hopping_t_hartree": 1.0,
+    "onsite_term": "FCIDUMP two-electron integral (i i i i) = U",
+    "one_body_term": "h_{i,i+1}=h_{i+1,i}=-t with periodic edge, all other h_{ij}=0",
+    "core_energy_hartree": 0.0,
+    "particle_hole_shift": false,
+    "selected_sizes": "L=4n+2 half-filled singlet rings to avoid the finite-ring Bethe quantum-number ambiguity observed for L=4n in the current validator."
+  },
+  "tasks": [
+    {
+      "task_uuid": "43288e9c-5128-5841-bed2-4dda5922cb9d",
+      "independent_parameters": {
+        "num_sites": 6,
+        "u_over_t": 1.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 6,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "num_orbitals": 6,
+        "num_electrons": 6,
+        "ms2": 0,
+        "n_alpha": 3,
+        "n_beta": 3,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 1.0,
+        "u_over_t": 1.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "basis_convention_note": "Defensible lattice-model convention: FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift.",
+        "bethe_ansatz_residual_norm": 5.409839634847742e-13,
+        "ed_validation_energy_hartree": -6.601158293375121,
+        "bethe_ed_abs_delta_hartree": 3.552713678800501e-14
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -6.601158293375157,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "finite-chain Lieb-Wu Bethe ansatz",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "exact diagonalization"
+        ],
+        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
+        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "b20e6f9d-99d9-54bc-9eae-d158115badc0",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d/hubbard_lieb_wu_1d_L6_U1_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "e78f2f620297a0d60e2b0ca1e814cf5e6a335bf1",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "2a644fc2-ca5e-5000-b688-33c1ed15b2bf",
+      "independent_parameters": {
+        "num_sites": 6,
+        "u_over_t": 2.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 6,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "num_orbitals": 6,
+        "num_electrons": 6,
+        "ms2": 0,
+        "n_alpha": 3,
+        "n_beta": 3,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 2.0,
+        "u_over_t": 2.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "basis_convention_note": "Defensible lattice-model convention: FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift.",
+        "bethe_ansatz_residual_norm": 1.143132984337021e-13,
+        "ed_validation_energy_hartree": -5.409456845100596,
+        "bethe_ed_abs_delta_hartree": 8.881784197001252e-16
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.409456845100597,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "finite-chain Lieb-Wu Bethe ansatz",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "exact diagonalization"
+        ],
+        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
+        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "d76766c7-bf61-5af4-b112-d0799bb7c0db",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d/hubbard_lieb_wu_1d_L6_U2_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "87d0e23c29e959ffa81af1a215dbc8c17f484803",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "a614387a-cd98-5c4c-b738-b2b51ee8cda4",
+      "independent_parameters": {
+        "num_sites": 6,
+        "u_over_t": 4.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 6,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "num_orbitals": 6,
+        "num_electrons": 6,
+        "ms2": 0,
+        "n_alpha": 3,
+        "n_beta": 3,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 4.0,
+        "u_over_t": 4.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "basis_convention_note": "Defensible lattice-model convention: FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift.",
+        "bethe_ansatz_residual_norm": 3.4967619351230766e-15,
+        "ed_validation_energy_hartree": -3.6687061788729585,
+        "bethe_ed_abs_delta_hartree": 4.440892098500626e-16
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -3.668706178872958,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "finite-chain Lieb-Wu Bethe ansatz",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "exact diagonalization"
+        ],
+        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
+        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "26d8853c-6661-55b1-8642-3875ece8bdc2",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d/hubbard_lieb_wu_1d_L6_U4_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "eb5f1e4e05004acedef1621a8ae6ddfd2176d60f",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "110f9d7e-6490-51ca-9316-148800685feb",
+      "independent_parameters": {
+        "num_sites": 6,
+        "u_over_t": 8.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 6,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "num_orbitals": 6,
+        "num_electrons": 6,
+        "ms2": 0,
+        "n_alpha": 3,
+        "n_beta": 3,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 8.0,
+        "u_over_t": 8.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "basis_convention_note": "Defensible lattice-model convention: FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift.",
+        "bethe_ansatz_residual_norm": 6.823131199067169e-15,
+        "ed_validation_energy_hartree": -2.0481308860914518,
+        "bethe_ed_abs_delta_hartree": 2.220446049250313e-15
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -2.048130886091454,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "finite-chain Lieb-Wu Bethe ansatz",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "exact diagonalization"
+        ],
+        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
+        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "5629bb38-0f32-5674-a282-75f5db5a10d8",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d/hubbard_lieb_wu_1d_L6_U8_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "0b2f053991af14c8eaaee7f5c699937175fb9f75",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "59883e1b-62d9-5848-8720-a96be824a68c",
+      "independent_parameters": {
+        "num_sites": 10,
+        "u_over_t": 1.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "ms2": 0,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 1.0,
+        "u_over_t": 1.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "basis_convention_note": "Defensible lattice-model convention: FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift.",
+        "bethe_ansatz_residual_norm": 8.773334985967081e-13,
+        "ed_validation_energy_hartree": -10.614407160578935,
+        "bethe_ed_abs_delta_hartree": 1.9539925233402755e-14
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -10.614407160578915,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "finite-chain Lieb-Wu Bethe ansatz",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "exact diagonalization"
+        ],
+        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
+        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "1bb70bfe-c9f8-5b46-851a-887dbdc8ecd7",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d/hubbard_lieb_wu_1d_L10_U1_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "483a5b2992b98c65b4ce361fd1cad2b8c18112f8",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "b25111d5-8bed-5aed-9ab4-b6e1157784a5",
+      "independent_parameters": {
+        "num_sites": 10,
+        "u_over_t": 2.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "ms2": 0,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 2.0,
+        "u_over_t": 2.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "basis_convention_note": "Defensible lattice-model convention: FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift.",
+        "bethe_ansatz_residual_norm": 4.279243718288139e-14,
+        "ed_validation_energy_hartree": -8.638415739962324,
+        "bethe_ed_abs_delta_hartree": 5.329070518200751e-15
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -8.63841573996232,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "finite-chain Lieb-Wu Bethe ansatz",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "exact diagonalization"
+        ],
+        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
+        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "d3fa2e94-a102-5b92-b925-9aa4fedca328",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d/hubbard_lieb_wu_1d_L10_U2_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "e09ff546af526e064e2417c4bcaabf74110aa008",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "23bb39de-0492-5ac4-950c-16e1acc71990",
+      "independent_parameters": {
+        "num_sites": 10,
+        "u_over_t": 4.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "ms2": 0,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 4.0,
+        "u_over_t": 4.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "basis_convention_note": "Defensible lattice-model convention: FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift.",
+        "bethe_ansatz_residual_norm": 1.377612759042766e-13,
+        "ed_validation_energy_hartree": -5.834322635772543,
+        "bethe_ed_abs_delta_hartree": 6.217248937900877e-15
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.8343226357725495,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "finite-chain Lieb-Wu Bethe ansatz",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "exact diagonalization"
+        ],
+        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
+        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "c9d104c2-747d-5a60-8082-5d2332b39b67",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d/hubbard_lieb_wu_1d_L10_U4_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "ce5f9d44a3c1044fc6c19bb6c3516eed6f242c69",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "487199a7-ce3c-5174-b9f6-77d25dd5c59b",
+      "independent_parameters": {
+        "num_sites": 10,
+        "u_over_t": 8.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "ms2": 0,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 8.0,
+        "u_over_t": 8.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "basis_convention_note": "Defensible lattice-model convention: FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift.",
+        "bethe_ansatz_residual_norm": 4.3360729582309905e-13,
+        "ed_validation_energy_hartree": -3.314996729087812,
+        "bethe_ed_abs_delta_hartree": 1.9095836023552692e-14
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -3.314996729087793,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "finite-chain Lieb-Wu Bethe ansatz",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "exact diagonalization"
+        ],
+        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
+        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "7fca1cfa-8e41-5eb1-a4c1-b691faef196a",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d/hubbard_lieb_wu_1d_L10_U8_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "b07fbebc2249466ba36a20edc6f6c3ad2edd1d07",
+          "is_fcidump_file": true
+        }
+      ]
+    }
+  ]
+}
