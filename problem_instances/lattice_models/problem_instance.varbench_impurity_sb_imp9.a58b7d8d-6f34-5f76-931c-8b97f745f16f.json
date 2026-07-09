@@ -1,0 +1,87 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "application_domain": "CM",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "name": "Matthew Otten",
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison"
+    }
+  ],
+  "creation_timestamp": "2026-07-07T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-07T20:01:09+00:00",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "problem_instance_uuid": "a58b7d8d-6f34-5f76-931c-8b97f745f16f",
+  "problem_type": "GSEE",
+  "references": [
+    "https://github.com/varbench/varbench",
+    "https://arxiv.org/abs/2302.04919",
+    "https://github.com/varbench/methods/blob/main/scripts/Impurity/SB-IMP_9.py",
+    "https://journals.aps.org/prx/abstract/10.1103/PhysRevX.7.031013"
+  ],
+  "short_name": "varbench_impurity_sb_imp9",
+  "status": "in_development",
+  "superseded_by": null,
+  "basis_convention": {
+    "orbital_basis": "impurity_plus_bath_site_basis",
+    "orbital_order": "orbital 1 is the interacting impurity; orbitals 2-10 are bath orbitals in HDF5 bath-index order",
+    "core_energy_hartree": 0.0,
+    "one_body_source": "VarBench Impurity/HamParams/SB-IMP_9.h5 e0 and bath eps/V values",
+    "two_body_source": "VarBench HDF5 U stored as impurity onsite integral (1 1 1 1)"
+  },
+  "tasks": [
+    {
+      "task_uuid": "810e368c-6e98-56ed-8c61-132093091940",
+      "independent_parameters": {
+        "model": "single_band_anderson_impurity",
+        "num_bath_orbitals": 9,
+        "onsite_u_hartree": 2.0
+      },
+      "features": {
+        "model": "single-band Anderson impurity",
+        "hamiltonian_family": "impurity_model",
+        "application_domain": "condensed_matter",
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "ms2": 0,
+        "num_impurity_orbitals": 1,
+        "num_bath_orbitals": 9,
+        "onsite_u_hartree": 2.0,
+        "impurity_onsite_hartree": -1.0,
+        "orbital_basis": "impurity_plus_bath_site_basis",
+        "basis_convention_note": "one impurity spatial orbital followed by nine bath spatial orbitals; spin-independent one-body terms from HDF5 eps/V values; onsite impurity (1111)=U; ECORE=0",
+        "ed_validation_energy_hartree": -10.48712848470262,
+        "ed_reference_abs_delta_hartree": 1.5987211554602254e-14
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -10.487128484702636,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "Exact diagonalization",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "VarBench exact diagonalization",
+          "local exact diagonalization of generated FCIDUMP"
+        ],
+        "reference_energy_source": "VarBench row work/fcidumps/varbench_impurity/source/SB-IMP_9.md and method script work/fcidumps/varbench_impurity/source/methods_SB-IMP_9.py",
+        "reference_energy_note": "Candidate condensed-matter impurity subset. Local ED of the generated finite Hamiltonian matches the VarBench exact-ED row to numerical precision."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "beba92c7-5c0a-549f-be89-49785d40217c",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/varbench_impurity/varbench_impurity_sb_imp9.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "a0b292f4d2300c0d5056dc36c22a0c402f4d0e19",
+          "is_fcidump_file": true
+        }
+      ]
+    }
+  ]
+}
