@@ -1,0 +1,3321 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "application_domain": "CM",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison",
+      "name": "Matthew Otten"
+    }
+  ],
+  "creation_timestamp": "2026-07-08T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-09T18:00:51+00:00",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "problem_instance_uuid": "7c6743d7-497d-53b5-a303-effd916c27dc",
+  "problem_type": "GSEE",
+  "references": [
+    "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), DOI 10.1103/PhysRevB.94.085103.",
+    "arXiv:1605.09421v2 official PDF and source tarball, checksummed in analysis/qsz_hubbard_2d_halffilled/qsz_source_manifest.csv.",
+    "C13 implementer spec W1, analysis/coverage_expansion/C13_implementer_spec.md.",
+    "O7 policy in MATT_DECISION_QUEUE.md: local 4x4 FCI anchors are Exact references; QSZ AFQMC rows remain controlled with caveats."
+  ],
+  "short_name": "qsz_hubbard_2d_halffilled",
+  "status": "in_development",
+  "superseded_by": null,
+  "basis_convention": {
+    "orbital_basis": "site_basis",
+    "hopping_t_hartree": 1.0,
+    "core_energy_hartree": 0.0,
+    "particle_hole_shift": false,
+    "onsite_integral": "(ii|ii)=U encodes U n_{i,up} n_{i,down}",
+    "pbc_apbc": "Periodic along x and antiperiodic along y; the y wrap has one-body h_ij=+1 for t=1.",
+    "energy_units": "Hartree, with t=1 Hartree as the benchmark energy unit."
+  },
+  "promotion_gate": "O7 reference policy applied; pending public S3 URL verification and repo promotion.",
+  "tasks": [
+    {
+      "task_uuid": "beabcf8f-a6c0-5e32-9385-110ff65cbbf0",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_4x4",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 4,
+        "u_over_t": 2.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_4x4",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 16,
+        "num_electrons": 16,
+        "ms2": 0,
+        "n_alpha": 8,
+        "n_beta": 8,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 16,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 2.0,
+        "u_over_t": 2.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": 1.6072555007944942e-16,
+        "fermi_degeneracy_spin_orbitals": 12,
+        "occupied_fermi_spin_orbitals": 6,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+        "qsz_afqmc_reference_energy_hartree": -18.024,
+        "qsz_afqmc_standard_error_hartree": 0.006,
+        "exact_anchor_energy_hartree": -18.01756687069585,
+        "exact_anchor_source": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -18.01756687069585,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "generic-reader exact FCI anchor on emitted FCIDUMP",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks",
+          "QSZ Table IV AFQMC controlled cross-check",
+          "independent literature audit for the U/t=4 PBC caption-defect caveat"
+        ],
+        "reference_energy_source": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+        "reference_energy_note": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "facf72a8-d772-513e-9822-f593e2495fc8",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L4x4_pbc_u2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "83e5a80923213b299c76a36d7ec50f89aedcbc52",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "203dd012-1d00-5037-9eb9-9b645c8bfaed",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_4x4",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 4,
+        "u_over_t": 2.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_4x4",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 16,
+        "num_electrons": 16,
+        "ms2": 0,
+        "n_alpha": 8,
+        "n_beta": 8,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 16,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 2.0,
+        "u_over_t": 2.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.5857864376269051,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+        "qsz_afqmc_reference_energy_hartree": -20.114,
+        "qsz_afqmc_standard_error_hartree": 0.002,
+        "exact_anchor_energy_hartree": -20.112711434260994,
+        "exact_anchor_source": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -20.112711434260994,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "generic-reader exact FCI anchor on emitted FCIDUMP",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks",
+          "QSZ Table IV AFQMC controlled cross-check",
+          "independent literature audit for the U/t=4 PBC caption-defect caveat"
+        ],
+        "reference_energy_source": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+        "reference_energy_note": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "f3cd811e-8ccc-5d18-b1df-9941b46cd6f6",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L4x4_pbc_apbc_u2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "642bbd773b9642fff874b5df3a56cb1cd10479b1",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "3bf5ac12-b549-5577-ba33-4487cc1fe245",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_4x4",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 4,
+        "u_over_t": 4.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_4x4",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 16,
+        "num_electrons": 16,
+        "ms2": 0,
+        "n_alpha": 8,
+        "n_beta": 8,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 16,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 4.0,
+        "u_over_t": 4.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": 1.6072555007944942e-16,
+        "fermi_degeneracy_spin_orbitals": 12,
+        "occupied_fermi_spin_orbitals": 6,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+        "qsz_afqmc_reference_energy_hartree": -13.616,
+        "qsz_afqmc_standard_error_hartree": 0.006,
+        "exact_anchor_energy_hartree": -13.621854821105831,
+        "exact_anchor_source": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -13.621854821105831,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "generic-reader exact FCI anchor on emitted FCIDUMP",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks",
+          "QSZ Table IV AFQMC controlled cross-check",
+          "independent literature audit for the U/t=4 PBC caption-defect caveat"
+        ],
+        "reference_energy_source": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+        "reference_energy_note": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "c2222e5c-05e1-507f-b99f-015195b622ce",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L4x4_pbc_u4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "fd55e231d84df82b3a32a3fbde83b79c2cef172a",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "ff3fa734-deca-5c94-8024-75f34c076b59",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_4x4",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 4,
+        "u_over_t": 4.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_4x4",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 16,
+        "num_electrons": 16,
+        "ms2": 0,
+        "n_alpha": 8,
+        "n_beta": 8,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 16,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 4.0,
+        "u_over_t": 4.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.5857864376269051,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+        "qsz_afqmc_reference_energy_hartree": -14.594,
+        "qsz_afqmc_standard_error_hartree": 0.003,
+        "exact_anchor_energy_hartree": -14.59349892094018,
+        "exact_anchor_source": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -14.59349892094018,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "generic-reader exact FCI anchor on emitted FCIDUMP",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks",
+          "QSZ Table IV AFQMC controlled cross-check",
+          "independent literature audit for the U/t=4 PBC caption-defect caveat"
+        ],
+        "reference_energy_source": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+        "reference_energy_note": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "2b08126a-93eb-5bc9-a059-94cea06efe87",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L4x4_pbc_apbc_u4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "24045db21b5cdb4b89d6f2237a5f66820c1246f4",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "d969b014-a589-5edf-8407-12634908a31e",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_4x4",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 4,
+        "u_over_t": 6.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_4x4",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 16,
+        "num_electrons": 16,
+        "ms2": 0,
+        "n_alpha": 8,
+        "n_beta": 8,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 16,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 6.0,
+        "u_over_t": 6.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": 1.6072555007944942e-16,
+        "fermi_degeneracy_spin_orbitals": 12,
+        "occupied_fermi_spin_orbitals": 6,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+        "qsz_afqmc_reference_energy_hartree": -10.541,
+        "qsz_afqmc_standard_error_hartree": 0.004,
+        "exact_anchor_energy_hartree": -10.552217991520266,
+        "exact_anchor_source": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -10.552217991520266,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "generic-reader exact FCI anchor on emitted FCIDUMP",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks",
+          "QSZ Table IV AFQMC controlled cross-check",
+          "independent literature audit for the U/t=4 PBC caption-defect caveat"
+        ],
+        "reference_energy_source": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+        "reference_energy_note": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "b73846db-e444-56b6-86b2-f8458aca27b2",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L4x4_pbc_u6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "3f04879e3c9bb27662926683b11b03e80a87815e",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "6b2c9e72-ba53-5b2a-8f88-f05f0563c8db",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_4x4",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 4,
+        "u_over_t": 6.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_4x4",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 16,
+        "num_electrons": 16,
+        "ms2": 0,
+        "n_alpha": 8,
+        "n_beta": 8,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 16,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 6.0,
+        "u_over_t": 6.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.5857864376269051,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+        "qsz_afqmc_reference_energy_hartree": -10.902,
+        "qsz_afqmc_standard_error_hartree": 0.007,
+        "exact_anchor_energy_hartree": -10.91236808100485,
+        "exact_anchor_source": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -10.91236808100485,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "generic-reader exact FCI anchor on emitted FCIDUMP",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks",
+          "QSZ Table IV AFQMC controlled cross-check",
+          "independent literature audit for the U/t=4 PBC caption-defect caveat"
+        ],
+        "reference_energy_source": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+        "reference_energy_note": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "6f034b5c-a131-5daf-a15a-4ea1ada174cd",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L4x4_pbc_apbc_u6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "a258c9c6748f44068aa7a05ed17d70576dce0a7c",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "03505c3d-bfe3-51c9-8d2d-1e0feb7a073a",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_4x4",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 4,
+        "u_over_t": 8.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_4x4",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 16,
+        "num_electrons": 16,
+        "ms2": 0,
+        "n_alpha": 8,
+        "n_beta": 8,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 16,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 8.0,
+        "u_over_t": 8.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": 1.6072555007944942e-16,
+        "fermi_degeneracy_spin_orbitals": 12,
+        "occupied_fermi_spin_orbitals": 6,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+        "qsz_afqmc_reference_energy_hartree": -8.476,
+        "qsz_afqmc_standard_error_hartree": 0.009000000000000001,
+        "exact_anchor_energy_hartree": -8.46887501415959,
+        "exact_anchor_source": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -8.46887501415959,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "generic-reader exact FCI anchor on emitted FCIDUMP",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks",
+          "QSZ Table IV AFQMC controlled cross-check",
+          "independent literature audit for the U/t=4 PBC caption-defect caveat"
+        ],
+        "reference_energy_source": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+        "reference_energy_note": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "9aaeb109-ed6a-547f-b300-ec54994eef08",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L4x4_pbc_u8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "8546a312251b802a031eadc274c31dbc44ac6fe1",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "c02a6d71-4a7c-58e1-b6a3-6832dd4dbf5f",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_4x4",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 4,
+        "u_over_t": 8.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_4x4",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 16,
+        "num_electrons": 16,
+        "ms2": 0,
+        "n_alpha": 8,
+        "n_beta": 8,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 16,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 8.0,
+        "u_over_t": 8.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.5857864376269051,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+        "qsz_afqmc_reference_energy_hartree": -8.646,
+        "qsz_afqmc_standard_error_hartree": 0.008,
+        "exact_anchor_energy_hartree": -8.638711054344935,
+        "exact_anchor_source": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -8.638711054344935,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "generic-reader exact FCI anchor on emitted FCIDUMP",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks",
+          "QSZ Table IV AFQMC controlled cross-check",
+          "independent literature audit for the U/t=4 PBC caption-defect caveat"
+        ],
+        "reference_energy_source": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+        "reference_energy_note": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "897a55d3-c24d-54d3-9adc-3e0e3a6c1d4a",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L4x4_pbc_apbc_u8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "c375b4e6e80fa6ed91927c2b557f9404ea0f8b92",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "7f3b7817-7084-5db6-a22a-ed91728b74e6",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_6x6",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 6,
+        "u_over_t": 2.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_6x6",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 36,
+        "num_electrons": 36,
+        "ms2": 0,
+        "n_alpha": 18,
+        "n_beta": 18,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 36,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 2.0,
+        "u_over_t": 2.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": -5.181477379624477e-16,
+        "fermi_degeneracy_spin_orbitals": 20,
+        "occupied_fermi_spin_orbitals": 10,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -41.457,
+        "qsz_afqmc_standard_error_hartree": 0.005,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.01,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -41.457,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.005,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "b4e89d1c-3568-56ef-938b-d688cad894f7",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L6x6_pbc_u2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "ddc502990ccb9760a60e26b3407946568014aa19",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "84332a1c-fd0d-59ac-b21d-372bdf9b4865",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_6x6",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 6,
+        "u_over_t": 2.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_6x6",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 36,
+        "num_electrons": 36,
+        "ms2": 0,
+        "n_alpha": 18,
+        "n_beta": 18,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 36,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 2.0,
+        "u_over_t": 2.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.26794919243112236,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -43.499,
+        "qsz_afqmc_standard_error_hartree": 0.002,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.004,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -43.499,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.002,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "a68d9375-a11c-5fa9-833c-88adbc3cf8b5",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L6x6_pbc_apbc_u2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "cd4648f7af5f9aaa2a010f86fda76a600686169b",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "c1b48f12-6797-502a-a9e6-091172986a0a",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_6x6",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 6,
+        "u_over_t": 4.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_6x6",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 36,
+        "num_electrons": 36,
+        "ms2": 0,
+        "n_alpha": 18,
+        "n_beta": 18,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 36,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 4.0,
+        "u_over_t": 4.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": -5.181477379624477e-16,
+        "fermi_degeneracy_spin_orbitals": 20,
+        "occupied_fermi_spin_orbitals": 10,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -30.865,
+        "qsz_afqmc_standard_error_hartree": 0.009000000000000001,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.018000000000000002,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -30.865,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.009000000000000001,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "bdae6343-7ecb-5ec2-a5e6-4c156e7fd376",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L6x6_pbc_u4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "7d4d4e58d1d588718c49449b32a601493f2cb819",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "cc64bf3c-3ad3-561a-b416-4f530e770e96",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_6x6",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 6,
+        "u_over_t": 4.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_6x6",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 36,
+        "num_electrons": 36,
+        "ms2": 0,
+        "n_alpha": 18,
+        "n_beta": 18,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 36,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 4.0,
+        "u_over_t": 4.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.26794919243112236,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -31.43,
+        "qsz_afqmc_standard_error_hartree": 0.02,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.04,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -31.43,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.02,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "869f2489-9624-587d-9822-44aac2a5e85c",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L6x6_pbc_apbc_u4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "24e117916e0acfbc243fcdcaf9589d82b72b964f",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "34ee114f-ec28-59d4-a3aa-e57f61eed8e6",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_6x6",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 6,
+        "u_over_t": 6.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_6x6",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 36,
+        "num_electrons": 36,
+        "ms2": 0,
+        "n_alpha": 18,
+        "n_beta": 18,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 36,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 6.0,
+        "u_over_t": 6.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": -5.181477379624477e-16,
+        "fermi_degeneracy_spin_orbitals": 20,
+        "occupied_fermi_spin_orbitals": 10,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -23.74,
+        "qsz_afqmc_standard_error_hartree": 0.01,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.02,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -23.74,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.01,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "f2c3da56-62b2-53b6-88f5-182442c5c3b9",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L6x6_pbc_u6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "35014799e37ee7d83b5fb6254e68fe4d5ef70afd",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "4f4f70de-2edf-5034-973c-566d3e220c21",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_6x6",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 6,
+        "u_over_t": 6.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_6x6",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 36,
+        "num_electrons": 36,
+        "ms2": 0,
+        "n_alpha": 18,
+        "n_beta": 18,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 36,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 6.0,
+        "u_over_t": 6.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.26794919243112236,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -23.84,
+        "qsz_afqmc_standard_error_hartree": 0.01,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.02,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -23.84,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.01,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "fff10dc9-b190-5ca3-938e-0102cc99f2ae",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L6x6_pbc_apbc_u6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "ef39141b74ebf49fca08ad929a87fe7824328a06",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "57ba5f51-8b64-59c5-add7-bdc02619f060",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_6x6",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 6,
+        "u_over_t": 8.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_6x6",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 36,
+        "num_electrons": 36,
+        "ms2": 0,
+        "n_alpha": 18,
+        "n_beta": 18,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 36,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 8.0,
+        "u_over_t": 8.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": -5.181477379624477e-16,
+        "fermi_degeneracy_spin_orbitals": 20,
+        "occupied_fermi_spin_orbitals": 10,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -19.0,
+        "qsz_afqmc_standard_error_hartree": 0.02,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.04,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -19.0,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.02,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "3fb0479b-adcd-5559-967c-1d8699efffbf",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L6x6_pbc_u8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "fb09bfc7acfe06319a84225027e907453aef5f00",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "f00ad2cf-0c64-5cfe-b807-aa5a9a785b90",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_6x6",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 6,
+        "u_over_t": 8.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_6x6",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 36,
+        "num_electrons": 36,
+        "ms2": 0,
+        "n_alpha": 18,
+        "n_beta": 18,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 36,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 8.0,
+        "u_over_t": 8.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.26794919243112236,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -19.01,
+        "qsz_afqmc_standard_error_hartree": 0.01,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.02,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -19.01,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.01,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "b962885b-1334-5e56-93ee-115d5e9c769d",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L6x6_pbc_apbc_u8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "00e4997176326b12cf68158d8e8b866423f0a2bc",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "5f5688c2-51b1-5f69-bede-65a94386e392",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_8x8",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 8,
+        "u_over_t": 2.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_8x8",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 64,
+        "num_electrons": 64,
+        "ms2": 0,
+        "n_alpha": 32,
+        "n_beta": 32,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 64,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 2.0,
+        "u_over_t": 2.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": 5.78165035564649e-17,
+        "fermi_degeneracy_spin_orbitals": 28,
+        "occupied_fermi_spin_orbitals": 14,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -74.47,
+        "qsz_afqmc_standard_error_hartree": 0.005,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.01,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -74.47,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.005,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "da4ca49a-51f8-547f-a09c-0b254f5d780d",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L8x8_pbc_u2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "d13be138c47417160f5cfc55ad3135e415443172",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "c3331808-c745-55d6-b9f5-5b3c0a90ea94",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_8x8",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 8,
+        "u_over_t": 2.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_8x8",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 64,
+        "num_electrons": 64,
+        "ms2": 0,
+        "n_alpha": 32,
+        "n_beta": 32,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 64,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 2.0,
+        "u_over_t": 2.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.15224093497742602,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -76.308,
+        "qsz_afqmc_standard_error_hartree": 0.003,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.006,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -76.308,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.003,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "86039f7c-8b89-544f-b1d1-337a87252783",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L8x8_pbc_apbc_u2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "48cc9743f474d39008e2f2ab41b0a802461d99c1",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "1f5d15a5-2a68-5cdf-9a0a-7f42c6190a68",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_8x8",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 8,
+        "u_over_t": 4.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_8x8",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 64,
+        "num_electrons": 64,
+        "ms2": 0,
+        "n_alpha": 32,
+        "n_beta": 32,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 64,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 4.0,
+        "u_over_t": 4.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": 5.78165035564649e-17,
+        "fermi_degeneracy_spin_orbitals": 28,
+        "occupied_fermi_spin_orbitals": 14,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -55.05,
+        "qsz_afqmc_standard_error_hartree": 0.01,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.02,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -55.05,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.01,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "f8913cd6-073f-5a61-ad07-f9643684b563",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L8x8_pbc_u4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "51df6c489a191ceeb71bc75b63b864d683fc14d3",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "8d8894fe-ccf2-5908-a98c-0e870346f804",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_8x8",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 8,
+        "u_over_t": 4.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_8x8",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 64,
+        "num_electrons": 64,
+        "ms2": 0,
+        "n_alpha": 32,
+        "n_beta": 32,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 64,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 4.0,
+        "u_over_t": 4.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.15224093497742602,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -55.31,
+        "qsz_afqmc_standard_error_hartree": 0.01,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.02,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -55.31,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.01,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "b9199980-4780-5938-8a1a-c669c2b58b03",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L8x8_pbc_apbc_u4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "66e40dd5089972716debb1e691ba893eaf442899",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "4ece41c4-13f2-574a-838f-0c9ac1be488d",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_8x8",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 8,
+        "u_over_t": 6.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_8x8",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 64,
+        "num_electrons": 64,
+        "ms2": 0,
+        "n_alpha": 32,
+        "n_beta": 32,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 64,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 6.0,
+        "u_over_t": 6.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": 5.78165035564649e-17,
+        "fermi_degeneracy_spin_orbitals": 28,
+        "occupied_fermi_spin_orbitals": 14,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -42.16,
+        "qsz_afqmc_standard_error_hartree": 0.02,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.04,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -42.16,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.02,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "416803cc-62e9-512e-a39a-d48afb7b2686",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L8x8_pbc_u6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "ac01c3ecf82425efa85e825538c2e85e9fe17b7c",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "272835ce-dde4-59ab-8337-c479a7d517bc",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_8x8",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 8,
+        "u_over_t": 6.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_8x8",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 64,
+        "num_electrons": 64,
+        "ms2": 0,
+        "n_alpha": 32,
+        "n_beta": 32,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 64,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 6.0,
+        "u_over_t": 6.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.15224093497742602,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -42.17,
+        "qsz_afqmc_standard_error_hartree": 0.02,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.04,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -42.17,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.02,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "9c90c7d1-b622-5e26-94cb-347c9766a38d",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L8x8_pbc_apbc_u6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "d441bc022a9ecc4b4f276541e2cfaf7b49127a7a",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "9f3be85c-7214-51b5-badc-633715329c89",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_8x8",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 8,
+        "u_over_t": 8.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_8x8",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 64,
+        "num_electrons": 64,
+        "ms2": 0,
+        "n_alpha": 32,
+        "n_beta": 32,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 64,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 8.0,
+        "u_over_t": 8.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": 5.78165035564649e-17,
+        "fermi_degeneracy_spin_orbitals": 28,
+        "occupied_fermi_spin_orbitals": 14,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -33.68,
+        "qsz_afqmc_standard_error_hartree": 0.03,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.06,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -33.68,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.03,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "13a77fc7-65ff-5fb6-9a24-99bf248d02c2",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L8x8_pbc_u8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "2f9a9b4c31c7f6d4b019474cfedd081cf9ace2e5",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "c8483ed6-4145-54ab-ae8c-44dbf70aedb2",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_8x8",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 8,
+        "u_over_t": 8.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_8x8",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 64,
+        "num_electrons": 64,
+        "ms2": 0,
+        "n_alpha": 32,
+        "n_beta": 32,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 64,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 8.0,
+        "u_over_t": 8.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.15224093497742602,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -33.66,
+        "qsz_afqmc_standard_error_hartree": 0.02,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.04,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -33.66,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.02,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "3116142a-ff8f-520d-9ca6-0614b9ded3dd",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L8x8_pbc_apbc_u8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "a523424d2ca8aadd06ebe678098553383a529309",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "165a257c-248d-5e0a-b8cc-a3e8f7380931",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_10x10",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 10,
+        "u_over_t": 2.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_10x10",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 100,
+        "num_electrons": 100,
+        "ms2": 0,
+        "n_alpha": 50,
+        "n_beta": 50,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 100,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 2.0,
+        "u_over_t": 2.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": 3.5207723128894064e-16,
+        "fermi_degeneracy_spin_orbitals": 36,
+        "occupied_fermi_spin_orbitals": 18,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -116.908,
+        "qsz_afqmc_standard_error_hartree": 0.004,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.008,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -116.908,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.004,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "8168f4c3-f50a-5ac9-8512-d06a16ac90cf",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L10x10_pbc_u2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "f77edecfddd48f31c489106b676f388b325ea63a",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "8abe07a9-78ff-5e19-9cbc-79c6b1b18e75",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_10x10",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 10,
+        "u_over_t": 2.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_10x10",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 100,
+        "num_electrons": 100,
+        "ms2": 0,
+        "n_alpha": 50,
+        "n_beta": 50,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 100,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 2.0,
+        "u_over_t": 2.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.09788696740969265,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -118.505,
+        "qsz_afqmc_standard_error_hartree": 0.004,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.008,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -118.505,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.004,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "4fd59218-3036-5455-bd3c-6366067fdf45",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L10x10_pbc_apbc_u2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "5d91cb763e94501fba9aed2099fcef21ee3c9ad1",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "46eb70f6-9df3-515d-bdf3-d19681e495ce",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_10x10",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 10,
+        "u_over_t": 4.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_10x10",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 100,
+        "num_electrons": 100,
+        "ms2": 0,
+        "n_alpha": 50,
+        "n_beta": 50,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 100,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 4.0,
+        "u_over_t": 4.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": 3.5207723128894064e-16,
+        "fermi_degeneracy_spin_orbitals": 36,
+        "occupied_fermi_spin_orbitals": 18,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -86.12,
+        "qsz_afqmc_standard_error_hartree": 0.04,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.08,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -86.12,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.04,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "f0b4f743-1d39-5c28-a9f6-7f198ee68091",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L10x10_pbc_u4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "88be55b3d72961e1763b1c28580239e35be26ea4",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "fb31d8ae-e9bd-59a6-9360-b78cb2d50e2d",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_10x10",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 10,
+        "u_over_t": 4.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_10x10",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 100,
+        "num_electrons": 100,
+        "ms2": 0,
+        "n_alpha": 50,
+        "n_beta": 50,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 100,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 4.0,
+        "u_over_t": 4.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.09788696740969265,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -86.2,
+        "qsz_afqmc_standard_error_hartree": 0.02,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.04,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -86.2,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.02,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "3dd5d223-0bda-5f22-abf3-7e34fb185188",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L10x10_pbc_apbc_u4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "882e4914619fa779babebbfddbd8a23e66d64418",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "6e1d7d0f-5161-5aec-8812-35882f903e12",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_10x10",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 10,
+        "u_over_t": 6.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_10x10",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 100,
+        "num_electrons": 100,
+        "ms2": 0,
+        "n_alpha": 50,
+        "n_beta": 50,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 100,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 6.0,
+        "u_over_t": 6.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": 3.5207723128894064e-16,
+        "fermi_degeneracy_spin_orbitals": 36,
+        "occupied_fermi_spin_orbitals": 18,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -65.8,
+        "qsz_afqmc_standard_error_hartree": 0.02,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.04,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -65.8,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.02,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "a330c8a7-207c-53eb-83ed-e959a0a201ea",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L10x10_pbc_u6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "e8787b83e25544373ebcb9abc4e7f7613e26b8ad",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "afc9312d-7813-57cd-8e26-aaa9a5cd7981",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_10x10",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 10,
+        "u_over_t": 6.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_10x10",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 100,
+        "num_electrons": 100,
+        "ms2": 0,
+        "n_alpha": 50,
+        "n_beta": 50,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 100,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 6.0,
+        "u_over_t": 6.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.09788696740969265,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -65.76,
+        "qsz_afqmc_standard_error_hartree": 0.02,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.04,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -65.76,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.02,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "4ffacf10-36ff-5ab5-b4ea-5d9ab4eb8ea9",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L10x10_pbc_apbc_u6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "7f9d0be98b8da057f358a5c948f1c0edb5c8b8f4",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "b4efb68a-d15b-5e3c-b1d8-70d4effaa023",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_10x10",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 10,
+        "u_over_t": 8.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_10x10",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 100,
+        "num_electrons": 100,
+        "ms2": 0,
+        "n_alpha": 50,
+        "n_beta": 50,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 100,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 8.0,
+        "u_over_t": 8.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": 3.5207723128894064e-16,
+        "fermi_degeneracy_spin_orbitals": 36,
+        "occupied_fermi_spin_orbitals": 18,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -52.54,
+        "qsz_afqmc_standard_error_hartree": 0.03,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.06,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -52.54,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.03,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "e611536c-5f43-5670-8230-d29d2e71644c",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L10x10_pbc_u8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "73adbab3ef30fb84a742b5de56b3beb2e3970ff7",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "2343ed54-e181-5a20-b88d-5ffec353585c",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_10x10",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 10,
+        "u_over_t": 8.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_10x10",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 100,
+        "num_electrons": 100,
+        "ms2": 0,
+        "n_alpha": 50,
+        "n_beta": 50,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 100,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 8.0,
+        "u_over_t": 8.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.09788696740969265,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -52.49,
+        "qsz_afqmc_standard_error_hartree": 0.02,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.04,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -52.49,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.02,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "0c0f3e1c-2f2c-58ed-8964-947384350f6a",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L10x10_pbc_apbc_u8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "bac56f77850904dc928395bbd1a97280f7cd3983",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "51ff6d30-9530-51d4-8583-929ed1223885",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_12x12",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 12,
+        "u_over_t": 2.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_12x12",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 144,
+        "num_electrons": 144,
+        "ms2": 0,
+        "n_alpha": 72,
+        "n_beta": 72,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 144,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 2.0,
+        "u_over_t": 2.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": -8.775269625839272e-17,
+        "fermi_degeneracy_spin_orbitals": 44,
+        "occupied_fermi_spin_orbitals": 22,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -168.749,
+        "qsz_afqmc_standard_error_hartree": 0.007,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.014,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -168.749,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.007,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "097d2a6d-b08c-5339-9ca1-3b529eec8727",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L12x12_pbc_u2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "557b4bd5f86bc12e17c713c7fe1ec116441eac93",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "47001793-04d7-5baf-ba86-93a8156e402e",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_12x12",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 12,
+        "u_over_t": 2.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_12x12",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 144,
+        "num_electrons": 144,
+        "ms2": 0,
+        "n_alpha": 72,
+        "n_beta": 72,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 144,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 2.0,
+        "u_over_t": 2.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.06814834742186267,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -170.112,
+        "qsz_afqmc_standard_error_hartree": 0.003,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.006,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -170.112,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.003,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "fc4e9f62-fc2b-5092-b13a-7e9367d0da1d",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L12x12_pbc_apbc_u2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "e8c6463be3e367aa0ef8973d906344d864f5ff7a",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "afb5c6c5-eb40-5e3d-9ea9-b2566f8a12d1",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_12x12",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 12,
+        "u_over_t": 4.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_12x12",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 144,
+        "num_electrons": 144,
+        "ms2": 0,
+        "n_alpha": 72,
+        "n_beta": 72,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 144,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 4.0,
+        "u_over_t": 4.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": -8.775269625839272e-17,
+        "fermi_degeneracy_spin_orbitals": 44,
+        "occupied_fermi_spin_orbitals": 22,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -123.95,
+        "qsz_afqmc_standard_error_hartree": 0.02,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.04,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -123.95,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.02,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "7275da02-8656-55af-890a-2c2f59af60b2",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L12x12_pbc_u4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "14ed0f368c2d5943a0ca73f9107a69d97f90c7f7",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "4868f4f5-3898-592b-8d2c-2c40094918da",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_12x12",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 12,
+        "u_over_t": 4.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_12x12",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 144,
+        "num_electrons": 144,
+        "ms2": 0,
+        "n_alpha": 72,
+        "n_beta": 72,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 144,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 4.0,
+        "u_over_t": 4.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.06814834742186267,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -123.99,
+        "qsz_afqmc_standard_error_hartree": 0.03,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.06,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -123.99,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.03,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "f54011ad-33ae-589b-889f-d26df16437a3",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L12x12_pbc_apbc_u4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "ca33a07229181706a3dddd125027723873f4cdc3",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "12c53b97-a0c8-5b02-b2d7-20b150439cf2",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_12x12",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 12,
+        "u_over_t": 6.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_12x12",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 144,
+        "num_electrons": 144,
+        "ms2": 0,
+        "n_alpha": 72,
+        "n_beta": 72,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 144,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 6.0,
+        "u_over_t": 6.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": -8.775269625839272e-17,
+        "fermi_degeneracy_spin_orbitals": 44,
+        "occupied_fermi_spin_orbitals": 22,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -94.66,
+        "qsz_afqmc_standard_error_hartree": 0.02,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.04,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -94.66,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.02,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "5d0fe767-2744-527c-8cb0-b876eaa9e0ae",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L12x12_pbc_u6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "55c67f0549bef318791ab35b4c672ea18b19c831",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "dbc0edb4-f4c8-55a9-a633-98ca5689e193",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_12x12",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 12,
+        "u_over_t": 6.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_12x12",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 144,
+        "num_electrons": 144,
+        "ms2": 0,
+        "n_alpha": 72,
+        "n_beta": 72,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 144,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 6.0,
+        "u_over_t": 6.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.06814834742186267,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -94.67,
+        "qsz_afqmc_standard_error_hartree": 0.02,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.04,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -94.67,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.02,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "9aabce3d-80a9-52e0-8798-429b5921f8b1",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L12x12_pbc_apbc_u6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "a83b147ebdd33c699c4c75c5adbc6df211efb908",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "cd09f3a1-def5-5c63-8fe6-441ebbb55204",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_12x12",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 12,
+        "u_over_t": 8.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_12x12",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 144,
+        "num_electrons": 144,
+        "ms2": 0,
+        "n_alpha": 72,
+        "n_beta": 72,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 144,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 8.0,
+        "u_over_t": 8.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": -8.775269625839272e-17,
+        "fermi_degeneracy_spin_orbitals": 44,
+        "occupied_fermi_spin_orbitals": 22,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -75.54,
+        "qsz_afqmc_standard_error_hartree": 0.02,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.04,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -75.54,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.02,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "aadfa8de-a11d-56bb-ba0b-343d49f8dcce",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L12x12_pbc_u8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "c5153c9050e2f4e593b66132012bf567580367df",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "7e16e5ee-a5d9-5de3-b4a8-104d44e32966",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_12x12",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 12,
+        "u_over_t": 8.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_12x12",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 144,
+        "num_electrons": 144,
+        "ms2": 0,
+        "n_alpha": 72,
+        "n_beta": 72,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 144,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 8.0,
+        "u_over_t": 8.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.06814834742186267,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -75.58,
+        "qsz_afqmc_standard_error_hartree": 0.03,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.06,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -75.58,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.03,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "99dc3ea8-241c-5e44-af28-db728ba3f8af",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L12x12_pbc_apbc_u8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "3d8419f618c4f2e882479e078e6410a6e7eacfc9",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "7cb9d535-d12b-5de8-b861-4f2cddb95118",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_16x16",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 16,
+        "u_over_t": 2.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_16x16",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 256,
+        "num_electrons": 256,
+        "ms2": 0,
+        "n_alpha": 128,
+        "n_beta": 128,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 256,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 2.0,
+        "u_over_t": 2.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": 1.5648108954796652e-17,
+        "fermi_degeneracy_spin_orbitals": 60,
+        "occupied_fermi_spin_orbitals": 30,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -300.596,
+        "qsz_afqmc_standard_error_hartree": 0.006,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.012,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -300.596,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.006,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "88a3a229-7e5d-5a02-8ba3-1f3311c1a646",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L16x16_pbc_u2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "48b71bdb6c4c276e9400419705cc7e9fedab38de",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "4519521c-d1a7-5190-8d00-77f3af6d6eea",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_16x16",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 16,
+        "u_over_t": 2.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_16x16",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 256,
+        "num_electrons": 256,
+        "ms2": 0,
+        "n_alpha": 128,
+        "n_beta": 128,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 256,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 2.0,
+        "u_over_t": 2.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.03842943919353873,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -301.562,
+        "qsz_afqmc_standard_error_hartree": 0.005,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.01,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -301.562,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.005,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "6f40ea15-f4b5-56c5-a4f2-cf25cb02e87c",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L16x16_pbc_apbc_u2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "58dbb1e63b4efd3356364dde9c9ae8a5c8eb41ab",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "f8901861-5b5a-5b92-832b-f5bb20bd0527",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_16x16",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 16,
+        "u_over_t": 4.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_16x16",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 256,
+        "num_electrons": 256,
+        "ms2": 0,
+        "n_alpha": 128,
+        "n_beta": 128,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 256,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 4.0,
+        "u_over_t": 4.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": 1.5648108954796652e-17,
+        "fermi_degeneracy_spin_orbitals": 60,
+        "occupied_fermi_spin_orbitals": 30,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -220.29,
+        "qsz_afqmc_standard_error_hartree": 0.04,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.08,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -220.29,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.04,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "0901f889-23e2-5b38-a758-1717e49fedc2",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L16x16_pbc_u4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "d3c00cab61c2955f6570038734b8d495c8bf8a0e",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "5489c563-8e95-52bd-b47d-eeea140c9982",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_16x16",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 16,
+        "u_over_t": 4.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_16x16",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 256,
+        "num_electrons": 256,
+        "ms2": 0,
+        "n_alpha": 128,
+        "n_beta": 128,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 256,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 4.0,
+        "u_over_t": 4.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.03842943919353873,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -220.3,
+        "qsz_afqmc_standard_error_hartree": 0.04,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.08,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -220.3,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.04,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "ac08f1ef-2875-5b9f-9618-88f2dd3afecf",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L16x16_pbc_apbc_u4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "5231a1e2d6e93e7cbda07ab44bc13065864bfd34",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "7a699b31-5c4b-56a0-878d-c00b8c2372d7",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_16x16",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 16,
+        "u_over_t": 6.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_16x16",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 256,
+        "num_electrons": 256,
+        "ms2": 0,
+        "n_alpha": 128,
+        "n_beta": 128,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 256,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 6.0,
+        "u_over_t": 6.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": 1.5648108954796652e-17,
+        "fermi_degeneracy_spin_orbitals": 60,
+        "occupied_fermi_spin_orbitals": 30,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -168.19,
+        "qsz_afqmc_standard_error_hartree": 0.03,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.06,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -168.19,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.03,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "5fd476e9-86db-549a-ab5b-adf8468c677f",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L16x16_pbc_u6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "54299fe3e5d6786417e4eb3223380a66f63b78e2",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "fc432cd0-4856-54f2-a240-9813d9fda019",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_16x16",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 16,
+        "u_over_t": 6.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_16x16",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 256,
+        "num_electrons": 256,
+        "ms2": 0,
+        "n_alpha": 128,
+        "n_beta": 128,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 256,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 6.0,
+        "u_over_t": 6.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.03842943919353873,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -168.21,
+        "qsz_afqmc_standard_error_hartree": 0.05,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.1,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -168.21,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.05,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "0079ed8a-6761-521b-be57-80639048b8de",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L16x16_pbc_apbc_u6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "624c85987fc55a6f76292ced388f997a8d472dd4",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "e14e9bed-b93b-54be-9050-15c19757678b",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_16x16",
+        "boundary_condition": "pbc",
+        "lattice_size_l": 16,
+        "u_over_t": 8.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_16x16",
+        "boundary_condition": "pbc",
+        "boundary_condition_source_label": "PBC",
+        "num_orbitals": 256,
+        "num_electrons": 256,
+        "ms2": 0,
+        "n_alpha": 128,
+        "n_beta": 128,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 256,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 8.0,
+        "u_over_t": 8.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": true,
+        "fermi_value_hartree": 1.5648108954796652e-17,
+        "fermi_degeneracy_spin_orbitals": 60,
+        "occupied_fermi_spin_orbitals": 30,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -134.23,
+        "qsz_afqmc_standard_error_hartree": 0.03,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.06,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -134.23,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.03,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "2daea76a-f130-5cea-aaa1-93f4c93376f2",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L16x16_pbc_u8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "c211f1a81ccca9c55ae9635453493acd685bcf31",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "80b61006-12bc-5148-82a3-cd3fbfdda946",
+      "independent_parameters": {
+        "model": "Fermi-Hubbard",
+        "geometry": "square_16x16",
+        "boundary_condition": "pbc_apbc",
+        "lattice_size_l": 16,
+        "u_over_t": 8.0,
+        "hopping_t_hartree": 1.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_16x16",
+        "boundary_condition": "pbc_apbc",
+        "boundary_condition_source_label": "PBC-APBC",
+        "num_orbitals": 256,
+        "num_electrons": 256,
+        "ms2": 0,
+        "n_alpha": 128,
+        "n_beta": 128,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 256,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 8.0,
+        "u_over_t": 8.0,
+        "orbital_basis": "site_basis",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.03842943919353873,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
+        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "qsz_afqmc_reference_energy_hartree": -134.25,
+        "qsz_afqmc_standard_error_hartree": 0.03,
+        "exact_anchor_energy_hartree": null,
+        "exact_anchor_source": ""
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.06,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -134.25,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sign-problem-free AFQMC, Trotter-extrapolated to zero time step",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 0.03,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "U=0 tight-binding analytic checks",
+          "small-lattice dense ED code-path checks"
+        ],
+        "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "a9052b21-ea2e-5537-8aa9-72913feb92ae",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L16x16_pbc_apbc_u8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "fe8b4e65f9604be43e6e90e9b2e6ee210e3ceca8",
+          "is_fcidump_file": true
+        }
+      ]
+    }
+  ]
+}
