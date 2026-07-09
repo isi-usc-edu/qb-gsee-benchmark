@@ -1,0 +1,1014 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "application_domain": "CM",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "name": "Matthew Otten",
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison"
+    }
+  ],
+  "creation_timestamp": "2026-07-09T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-09T19:19:49+00:00",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "problem_instance_uuid": "0eed7ca9-c01b-57cc-8c4a-edd7718e7a3e",
+  "problem_type": "GSEE",
+  "references": [
+    "https://doi.org/10.1103/PhysRevLett.20.1445",
+    "O14 decision: sparse ED is the primary exact same-Hamiltonian reference for W3b doped/magnetized rows; Bethe real-root scans are non-blocking cross-checks only where validated."
+  ],
+  "short_name": "w3b_hubbard_lieb_wu_1d_doped_o14_ed",
+  "status": "in_development",
+  "superseded_by": null,
+  "basis_convention": {
+    "orbital_basis": "site_basis",
+    "boundary_condition": "periodic_ring",
+    "hopping_t_hartree": 1.0,
+    "onsite_term": "FCIDUMP two-electron integral (i i i i) = U",
+    "one_body_term": "h_{i,i+1}=h_{i+1,i}=-t with periodic edge, all other h_{ij}=0",
+    "core_energy_hartree": 0.0,
+    "particle_hole_shift": false,
+    "o14_filling_convention": "Rows are labeled by actual total filling n = N_e / L. L=12 sectors are Ne=10 and Ne=8, not nominal n=0.8 or n=0.6 claims."
+  },
+  "tasks": [
+    {
+      "task_uuid": "2b8eecf3-5000-5ca7-9d34-9a0e034805d7",
+      "independent_parameters": {
+        "target_class": "doped_singlet",
+        "num_sites": 10,
+        "num_electrons": 8,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "ms2": 0,
+        "actual_total_filling": 0.8,
+        "u_over_t": 2.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "hubbard_magnetized": false,
+        "hubbard_filling_electrons_per_site": 0.8,
+        "actual_total_filling": 0.8,
+        "num_orbitals": 10,
+        "num_electrons": 8,
+        "ms2": 0,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 2.0,
+        "u_over_t": 2.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "hilbert_dimension": 44100,
+        "lanczos_tol": 1e-12,
+        "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
+        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -9.224695045183102,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sparse exact diagonalization (Lanczos) of finite periodic Hubbard FCIDUMP Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "independent sparse ED verifier from FCIDUMP integrals"
+        ],
+        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 44100. Actual total filling n=N_e/L=0.8."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "a8c9cd1c-b8b2-594a-9f1e-b3683f8dd211",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d_doped/w3b_hubbard_1d_doped_singlet_L10_n8of10_ms20_U2_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "1b2cd390fc4860513279dee9805e0d4eca2deb8b",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "433a495b-874b-5c36-abbe-fb242beef004",
+      "independent_parameters": {
+        "target_class": "doped_singlet",
+        "num_sites": 10,
+        "num_electrons": 8,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "ms2": 0,
+        "actual_total_filling": 0.8,
+        "u_over_t": 4.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "hubbard_magnetized": false,
+        "hubbard_filling_electrons_per_site": 0.8,
+        "actual_total_filling": 0.8,
+        "num_orbitals": 10,
+        "num_electrons": 8,
+        "ms2": 0,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 4.0,
+        "u_over_t": 4.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "hilbert_dimension": 44100,
+        "lanczos_tol": 1e-12,
+        "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
+        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -7.647179208191264,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sparse exact diagonalization (Lanczos) of finite periodic Hubbard FCIDUMP Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "independent sparse ED verifier from FCIDUMP integrals"
+        ],
+        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 44100. Actual total filling n=N_e/L=0.8."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "ac23c5d6-d1af-57d7-9b88-06646780e624",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d_doped/w3b_hubbard_1d_doped_singlet_L10_n8of10_ms20_U4_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "0224e8d5513be881bd4ba0853174a92c2a9b6572",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "6d471452-fc44-5e62-a2f2-7898ede7b015",
+      "independent_parameters": {
+        "target_class": "doped_singlet",
+        "num_sites": 10,
+        "num_electrons": 8,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "ms2": 0,
+        "actual_total_filling": 0.8,
+        "u_over_t": 8.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "hubbard_magnetized": false,
+        "hubbard_filling_electrons_per_site": 0.8,
+        "actual_total_filling": 0.8,
+        "num_orbitals": 10,
+        "num_electrons": 8,
+        "ms2": 0,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 8.0,
+        "u_over_t": 8.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "hilbert_dimension": 44100,
+        "lanczos_tol": 1e-12,
+        "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
+        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -6.0763299197766445,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sparse exact diagonalization (Lanczos) of finite periodic Hubbard FCIDUMP Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "independent sparse ED verifier from FCIDUMP integrals"
+        ],
+        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 44100. Actual total filling n=N_e/L=0.8."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "643caf4f-d5a1-5703-aa40-5289295444a7",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d_doped/w3b_hubbard_1d_doped_singlet_L10_n8of10_ms20_U8_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "736a6d97695cca29798ad48e80ef5c73f5d7f60c",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "f741ad60-c607-5d84-a0f3-73471ba36915",
+      "independent_parameters": {
+        "target_class": "doped_singlet",
+        "num_sites": 10,
+        "num_electrons": 6,
+        "n_alpha": 3,
+        "n_beta": 3,
+        "ms2": 0,
+        "actual_total_filling": 0.6,
+        "u_over_t": 2.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "hubbard_magnetized": false,
+        "hubbard_filling_electrons_per_site": 0.6,
+        "actual_total_filling": 0.6,
+        "num_orbitals": 10,
+        "num_electrons": 6,
+        "ms2": 0,
+        "n_alpha": 3,
+        "n_beta": 3,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 2.0,
+        "u_over_t": 2.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "hilbert_dimension": 14400,
+        "lanczos_tol": 1e-12,
+        "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
+        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -9.078570008165727,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sparse exact diagonalization (Lanczos) of finite periodic Hubbard FCIDUMP Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "independent sparse ED verifier from FCIDUMP integrals"
+        ],
+        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 14400. Actual total filling n=N_e/L=0.6."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "e87a4261-0fd8-5b17-889d-a74be0c771ee",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d_doped/w3b_hubbard_1d_doped_singlet_L10_n6of10_ms20_U2_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "a83005fb0da51962b53888bb2cb64305b32c0612",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "478999cb-5f32-5e88-8610-a3671e9463d0",
+      "independent_parameters": {
+        "target_class": "doped_singlet",
+        "num_sites": 10,
+        "num_electrons": 6,
+        "n_alpha": 3,
+        "n_beta": 3,
+        "ms2": 0,
+        "actual_total_filling": 0.6,
+        "u_over_t": 4.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "hubbard_magnetized": false,
+        "hubbard_filling_electrons_per_site": 0.6,
+        "actual_total_filling": 0.6,
+        "num_orbitals": 10,
+        "num_electrons": 6,
+        "ms2": 0,
+        "n_alpha": 3,
+        "n_beta": 3,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 4.0,
+        "u_over_t": 4.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "hilbert_dimension": 14400,
+        "lanczos_tol": 1e-12,
+        "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
+        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -8.262531385370798,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sparse exact diagonalization (Lanczos) of finite periodic Hubbard FCIDUMP Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "independent sparse ED verifier from FCIDUMP integrals"
+        ],
+        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 14400. Actual total filling n=N_e/L=0.6."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "406c9bb9-f2d6-5385-bc57-7b8f82464023",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d_doped/w3b_hubbard_1d_doped_singlet_L10_n6of10_ms20_U4_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "9a7c2255a4f34049fb4ee9639887a86311ed3b92",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "f13bae7b-cb74-5d09-9089-5745668b2c53",
+      "independent_parameters": {
+        "target_class": "doped_singlet",
+        "num_sites": 10,
+        "num_electrons": 6,
+        "n_alpha": 3,
+        "n_beta": 3,
+        "ms2": 0,
+        "actual_total_filling": 0.6,
+        "u_over_t": 8.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "hubbard_magnetized": false,
+        "hubbard_filling_electrons_per_site": 0.6,
+        "actual_total_filling": 0.6,
+        "num_orbitals": 10,
+        "num_electrons": 6,
+        "ms2": 0,
+        "n_alpha": 3,
+        "n_beta": 3,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 8.0,
+        "u_over_t": 8.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "hilbert_dimension": 14400,
+        "lanczos_tol": 1e-12,
+        "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
+        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -7.448517346073178,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sparse exact diagonalization (Lanczos) of finite periodic Hubbard FCIDUMP Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "independent sparse ED verifier from FCIDUMP integrals"
+        ],
+        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 14400. Actual total filling n=N_e/L=0.6."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "3b4f5853-b8df-5dc8-baef-2c1fa21e1588",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d_doped/w3b_hubbard_1d_doped_singlet_L10_n6of10_ms20_U8_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "14f7111d4210175e095937e4cb598a07df35026f",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "bddd01e2-9505-53d9-a408-9c593a28b05f",
+      "independent_parameters": {
+        "target_class": "doped_singlet",
+        "num_sites": 12,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "actual_total_filling": 0.8333333333333334,
+        "u_over_t": 2.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 12,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "hubbard_magnetized": false,
+        "hubbard_filling_electrons_per_site": 0.8333333333333334,
+        "actual_total_filling": 0.8333333333333334,
+        "num_orbitals": 12,
+        "num_electrons": 10,
+        "ms2": 0,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 2.0,
+        "u_over_t": 2.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "hilbert_dimension": 627264,
+        "lanczos_tol": 1e-12,
+        "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
+        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -11.471904800079251,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sparse exact diagonalization (Lanczos) of finite periodic Hubbard FCIDUMP Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "independent sparse ED verifier from FCIDUMP integrals"
+        ],
+        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 627264. Actual total filling n=N_e/L=0.833333333333."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "753bff24-e819-5ceb-8ce0-268f0a9fb47f",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d_doped/w3b_hubbard_1d_doped_singlet_L12_n10of12_ms20_U2_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "b949dab1aae895d5b8dc22e3c7cd05e4dd71b7ad",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "7babf8ad-ed50-51d5-9ef6-c118d182525b",
+      "independent_parameters": {
+        "target_class": "doped_singlet",
+        "num_sites": 12,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "actual_total_filling": 0.8333333333333334,
+        "u_over_t": 4.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 12,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "hubbard_magnetized": false,
+        "hubbard_filling_electrons_per_site": 0.8333333333333334,
+        "actual_total_filling": 0.8333333333333334,
+        "num_orbitals": 12,
+        "num_electrons": 10,
+        "ms2": 0,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 4.0,
+        "u_over_t": 4.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "hilbert_dimension": 627264,
+        "lanczos_tol": 1e-12,
+        "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
+        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -9.25347886818764,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sparse exact diagonalization (Lanczos) of finite periodic Hubbard FCIDUMP Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "independent sparse ED verifier from FCIDUMP integrals"
+        ],
+        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 627264. Actual total filling n=N_e/L=0.833333333333."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "c709b14a-4ce9-553d-a9e6-1dc7e7482448",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d_doped/w3b_hubbard_1d_doped_singlet_L12_n10of12_ms20_U4_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "2a688064b6a6c3fd6d1fb77a9d2c68edbccad18e",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "7d524593-eb44-525d-aba8-b96e7f1ad464",
+      "independent_parameters": {
+        "target_class": "doped_singlet",
+        "num_sites": 12,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "actual_total_filling": 0.8333333333333334,
+        "u_over_t": 8.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 12,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "hubbard_magnetized": false,
+        "hubbard_filling_electrons_per_site": 0.8333333333333334,
+        "actual_total_filling": 0.8333333333333334,
+        "num_orbitals": 12,
+        "num_electrons": 10,
+        "ms2": 0,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 8.0,
+        "u_over_t": 8.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "hilbert_dimension": 627264,
+        "lanczos_tol": 1e-12,
+        "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
+        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -7.039284410676859,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sparse exact diagonalization (Lanczos) of finite periodic Hubbard FCIDUMP Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "independent sparse ED verifier from FCIDUMP integrals"
+        ],
+        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 627264. Actual total filling n=N_e/L=0.833333333333."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "d5c6554f-1564-523b-b3fe-a7fb1e328553",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d_doped/w3b_hubbard_1d_doped_singlet_L12_n10of12_ms20_U8_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "dc926baac8d1ebbe2e5ca09238a9bf2b80ea22ee",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "4339a791-272d-5eb9-8450-c9f7e57410f9",
+      "independent_parameters": {
+        "target_class": "doped_singlet",
+        "num_sites": 12,
+        "num_electrons": 8,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "ms2": 0,
+        "actual_total_filling": 0.6666666666666666,
+        "u_over_t": 2.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 12,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "hubbard_magnetized": false,
+        "hubbard_filling_electrons_per_site": 0.6666666666666666,
+        "actual_total_filling": 0.6666666666666666,
+        "num_orbitals": 12,
+        "num_electrons": 8,
+        "ms2": 0,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 2.0,
+        "u_over_t": 2.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "hilbert_dimension": 245025,
+        "lanczos_tol": 1e-12,
+        "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
+        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -10.934853286727849,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sparse exact diagonalization (Lanczos) of finite periodic Hubbard FCIDUMP Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "independent sparse ED verifier from FCIDUMP integrals"
+        ],
+        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 245025. Actual total filling n=N_e/L=0.666666666667."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "348e9d1e-51dd-56cb-bb3a-e3b5c54a8cff",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d_doped/w3b_hubbard_1d_doped_singlet_L12_n8of12_ms20_U2_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "a3c6db2543a274e5a661a3a4cee4d8ee898737d6",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "4eb3cba3-fbfd-5bf5-b139-354585fa4699",
+      "independent_parameters": {
+        "target_class": "doped_singlet",
+        "num_sites": 12,
+        "num_electrons": 8,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "ms2": 0,
+        "actual_total_filling": 0.6666666666666666,
+        "u_over_t": 4.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 12,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "hubbard_magnetized": false,
+        "hubbard_filling_electrons_per_site": 0.6666666666666666,
+        "actual_total_filling": 0.6666666666666666,
+        "num_orbitals": 12,
+        "num_electrons": 8,
+        "ms2": 0,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 4.0,
+        "u_over_t": 4.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "hilbert_dimension": 245025,
+        "lanczos_tol": 1e-12,
+        "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
+        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -9.730671493426469,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sparse exact diagonalization (Lanczos) of finite periodic Hubbard FCIDUMP Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "independent sparse ED verifier from FCIDUMP integrals"
+        ],
+        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 245025. Actual total filling n=N_e/L=0.666666666667."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "ff8c6431-4085-5747-bd70-7607dc7afed9",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d_doped/w3b_hubbard_1d_doped_singlet_L12_n8of12_ms20_U4_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "975e217b11edefc1245e50e2c7b747c2a61ccc1b",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "c3dc0087-f54d-5a4e-9513-f80c102f8442",
+      "independent_parameters": {
+        "target_class": "doped_singlet",
+        "num_sites": 12,
+        "num_electrons": 8,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "ms2": 0,
+        "actual_total_filling": 0.6666666666666666,
+        "u_over_t": 8.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 12,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "hubbard_magnetized": false,
+        "hubbard_filling_electrons_per_site": 0.6666666666666666,
+        "actual_total_filling": 0.6666666666666666,
+        "num_orbitals": 12,
+        "num_electrons": 8,
+        "ms2": 0,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 8.0,
+        "u_over_t": 8.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "hilbert_dimension": 245025,
+        "lanczos_tol": 1e-12,
+        "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
+        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -8.530897504496545,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sparse exact diagonalization (Lanczos) of finite periodic Hubbard FCIDUMP Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "independent sparse ED verifier from FCIDUMP integrals"
+        ],
+        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 245025. Actual total filling n=N_e/L=0.666666666667."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "e0111d16-7e5f-55b3-9e0a-bc41cc2fa534",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d_doped/w3b_hubbard_1d_doped_singlet_L12_n8of12_ms20_U8_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "030eb93626cbf01bcfb01143efbedb907c135265",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "6a5548f3-9cf5-57fd-bbbc-696ce1bec8d4",
+      "independent_parameters": {
+        "target_class": "magnetized",
+        "num_sites": 10,
+        "num_electrons": 10,
+        "n_alpha": 6,
+        "n_beta": 4,
+        "ms2": 2,
+        "actual_total_filling": 1.0,
+        "u_over_t": 2.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "hubbard_half_filled": true,
+        "hubbard_doped": false,
+        "hubbard_magnetized": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "actual_total_filling": 1.0,
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "ms2": 2,
+        "n_alpha": 6,
+        "n_beta": 4,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 2.0,
+        "u_over_t": 2.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "hilbert_dimension": 44100,
+        "lanczos_tol": 1e-12,
+        "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
+        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -7.869964558150688,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sparse exact diagonalization (Lanczos) of finite periodic Hubbard FCIDUMP Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "independent sparse ED verifier from FCIDUMP integrals"
+        ],
+        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 44100. Actual total filling n=N_e/L=1."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "293e4309-61f7-58e7-8b83-a29c84fa2020",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d_doped/w3b_hubbard_1d_magnetized_L10_n10of10_ms22_U2_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "7e2faee02c00535f41031cbde11a6e591c31c21f",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "6f8a0a46-3788-5bae-a0cf-1ac80246c966",
+      "independent_parameters": {
+        "target_class": "magnetized",
+        "num_sites": 10,
+        "num_electrons": 10,
+        "n_alpha": 6,
+        "n_beta": 4,
+        "ms2": 2,
+        "actual_total_filling": 1.0,
+        "u_over_t": 4.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "hubbard_half_filled": true,
+        "hubbard_doped": false,
+        "hubbard_magnetized": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "actual_total_filling": 1.0,
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "ms2": 2,
+        "n_alpha": 6,
+        "n_beta": 4,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 4.0,
+        "u_over_t": 4.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "hilbert_dimension": 44100,
+        "lanczos_tol": 1e-12,
+        "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
+        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.434854635651028,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sparse exact diagonalization (Lanczos) of finite periodic Hubbard FCIDUMP Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "independent sparse ED verifier from FCIDUMP integrals"
+        ],
+        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 44100. Actual total filling n=N_e/L=1."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "24ec81a5-fbb9-5aaa-8340-0d00a8eee410",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d_doped/w3b_hubbard_1d_magnetized_L10_n10of10_ms22_U4_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "b1cf3bd358f839c2cfb7a248801487ede6a5f619",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "2095ccd7-2007-55ba-8a0d-ced04e5ae859",
+      "independent_parameters": {
+        "target_class": "magnetized",
+        "num_sites": 10,
+        "num_electrons": 10,
+        "n_alpha": 6,
+        "n_beta": 4,
+        "ms2": 2,
+        "actual_total_filling": 1.0,
+        "u_over_t": 8.0,
+        "hopping_t_hartree": 1.0,
+        "boundary_condition": "periodic_ring"
+      },
+      "features": {
+        "model": "1D Fermi-Hubbard",
+        "geometry": "chain",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "hubbard_half_filled": true,
+        "hubbard_doped": false,
+        "hubbard_magnetized": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "actual_total_filling": 1.0,
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "ms2": 2,
+        "n_alpha": 6,
+        "n_beta": 4,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 8.0,
+        "u_over_t": 8.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "periodic_ring",
+        "hilbert_dimension": 44100,
+        "lanczos_tol": 1e-12,
+        "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
+        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -3.115437731871944,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sparse exact diagonalization (Lanczos) of finite periodic Hubbard FCIDUMP Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "independent sparse ED verifier from FCIDUMP integrals"
+        ],
+        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 44100. Actual total filling n=N_e/L=1."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "520f4c3a-7da8-5d70-be43-ac65e19fc8e2",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/hubbard_lieb_wu_1d_doped/w3b_hubbard_1d_magnetized_L10_n10of10_ms22_U8_site_basis.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "5f5da389c0a308723367f1f426e3f35d0c92ae75",
+          "is_fcidump_file": true
+        }
+      ]
+    }
+  ]
+}
