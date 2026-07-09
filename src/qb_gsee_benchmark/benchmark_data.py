@@ -14,6 +14,7 @@
 
 
 import os
+import re
 from urllib.parse import urlparse
 from datetime import datetime
 
@@ -41,6 +42,7 @@ from qb_gsee_benchmark.utils import iso8601_timestamp
 from qb_gsee_benchmark.utils import validate_json
 
 
+TM_FAMILY_ELEMENTS = {"Sc", "Ti", "V", "Cr", "Mn", "Fe", "Cu", "O"}
 TASK_TAXONOMY_FIELDS = [
     "reference_provenance_grade",
     "curation_tier",
@@ -49,6 +51,34 @@ TASK_TAXONOMY_FIELDS = [
     "source_defect_documented",
     "planting_mechanism",
 ]
+
+
+def canonical_problem_family(problem_instance_short_name: str) -> str:
+    """Return the canonical grouped-CV family for a problem instance."""
+    base_name = re.sub(r"_\d+$", "", str(problem_instance_short_name))
+    if base_name in TM_FAMILY_ELEMENTS:
+        return base_name
+    if base_name.endswith("O") and base_name[:-1] in TM_FAMILY_ELEMENTS:
+        return base_name[:-1]
+    return base_name
+
+
+def problem_instance_category_by_short_name(
+        problem_instances_directory: str
+    ) -> dict[str, str]:
+    """Map problem-instance short names to their containing category directory."""
+    mapping = {}
+    for json_file in Path(problem_instances_directory).rglob("*.json"):
+        try:
+            with json_file.open("r") as file:
+                problem_instance = json.load(file)
+        except Exception as e:
+            logging.error(f"Error reading {json_file}: {e}", exc_info=True)
+            continue
+        short_name = problem_instance.get("short_name")
+        if short_name is not None:
+            mapping[str(short_name)] = json_file.parent.name
+    return mapping
 
 
 def test_task_uuids(problem_instance_list: list[dict[str, Any]]) -> set[str]:
@@ -61,6 +91,19 @@ def test_task_uuids(problem_instance_list: list[dict[str, Any]]) -> set[str]:
     return task_uuids
 
 
+def solver_outcome(
+        attempted: bool,
+        solved_within_accuracy: bool,
+        solved_within_runtime: bool
+    ) -> str:
+    """Compress two-channel solver status to the paper-facing outcome enum."""
+    if not attempted:
+        return "not-attempted"
+    if solved_within_accuracy and solved_within_runtime:
+        return "solved"
+    if not solved_within_accuracy:
+        return "failed-accuracy"
+    return "failed-runtime"
 
 
 class BenchmarkData:
@@ -95,6 +138,9 @@ class BenchmarkData:
         self.hamiltonian_features = pd.read_csv(hamiltonian_features_csv_file_name)
         self.utility_estimation_data = pd.read_csv(utility_estimation_csv_file_name)
         self.problem_instance_list = load_json_files(search_dir=problem_instances_directory)
+        self.problem_instance_category_by_short_name = problem_instance_category_by_short_name(
+            problem_instances_directory
+        )
         self.solution_list = load_json_files(search_dir=solution_files_directory)
         self.performance_metrics_list = None # read in or calculated later.
         # TODO:  migrate performance metrics calculation to method below. self.performance_metrics_list = load_json_files(search_dir=performance_metrics_directory)
@@ -375,53 +421,101 @@ class BenchmarkData:
 
 
     def calculate_ml_scores(self) -> dict:
-        """Uses the `MiniML` class to calculate ML models for each solver. 
+        """Calculate legacy MiniML metrics and ML v2 out-of-fold summaries.
 
-        Note:
-            self.ml_models_dict is updated in place.
-            self.ml_score_dict is updated in place.
-
-        Returns:
-            dict: a dictionary with keys of solver_uuid and values of ML scores.
+        The legacy MiniML values are kept for backward compatibility.  New paper
+        and report logic should prefer ``ml_metrics["ml_v2"]``, which is based
+        on out-of-fold grouped/random cross validation and includes size-only
+        baseline comparisons.
         """
 
         from qb_gsee_benchmark.mini_ml import MiniML
+        from qb_gsee_benchmark.ml.data import (
+            assemble_solver_ml_table,
+            ml_v2_candidate_features,
+            ml_v2_feature_sets,
+        )
+        from qb_gsee_benchmark.ml.evaluation import evaluate_standard_comparators
+        from qb_gsee_benchmark.ml.evaluation import make_default_protocols
+        from qb_gsee_benchmark.ml.models import MODEL_LOGISTIC_L2
+        from qb_gsee_benchmark.ml.reporting import build_ml_v2_report_summary
 
         ml_scores_dict = {}
         ml_models_dict = {}
+        candidate_features = ml_v2_candidate_features(self.hamiltonian_features)
+
         for solver_uuid in self.solvers_dict:
             df = self.aggregated_solver_labels_df
-            df = df[df["solver_uuid"]==solver_uuid] # filter df to only solver_uuid
-            df = df[~df["reference_energy"].isna()] # filter to only entries with reference energy specified.
-            # df = df[df["attempted"]==True] # filter to attempted tasks/Hamiltonians
+            df = df[df["solver_uuid"] == solver_uuid]
+            df = df[~df["reference_energy"].isna()]
 
             try:
                 mini_ml_model = MiniML(
                     solver_labels_by_task_uuid=df,
-                    hamiltonian_features_by_task_uuid=self.hamiltonian_features    
+                    hamiltonian_features_by_task_uuid=self.hamiltonian_features
                 )
                 ml_scores_dict[solver_uuid] = {
-                    "solvability_ratio":mini_ml_model.ml_solvability_ratio["PCA"],
-                    "comments":", ".join(mini_ml_model.ml_model_notes),
-                    "f1_score":list(mini_ml_model.f1_score),
-                    "ml_metrics_calculator_version":1
+                    "legacy_solvability_ratio": mini_ml_model.ml_solvability_ratio["PCA"],
+                    "solvability_ratio": mini_ml_model.ml_solvability_ratio["PCA"],
+                    "comments": ", ".join(mini_ml_model.ml_model_notes),
+                    "f1_score": list(mini_ml_model.f1_score),
+                    "ml_metrics_calculator_version": 1,
                 }
             except Exception as e:
                 logging.error(f'{e}', exc_info=True)
                 mini_ml_model = "Model could not be calculated."
                 ml_scores_dict[solver_uuid] = {
-                    "solvability_ratio":None,
-                    "f1_score":None,
-                    "ml_metrics_calculator_version":1,
-                    "comment":"All labels were either all `True` or all `False` and we cannot create an ML model with only one class."
+                    "legacy_solvability_ratio": None,
+                    "solvability_ratio": None,
+                    "f1_score": None,
+                    "ml_metrics_calculator_version": 1,
+                    "comment": (
+                        "Legacy MiniML model could not be calculated; prefer "
+                        "ml_v2 when present."
+                    ),
                 }
 
-            ml_models_dict[solver_uuid] = mini_ml_model # TODO: currently storing the all MiniML models.
+            try:
+                ml_v2_table = assemble_solver_ml_table(
+                    solver_labels=df,
+                    hamiltonian_features=self.hamiltonian_features,
+                    feature_columns=candidate_features,
+                    solver_uuid=solver_uuid,
+                    attempted_only=True,
+                )
+                if len(ml_v2_table) < 2 or ml_v2_table["label"].nunique() < 2:
+                    raise ValueError("Need at least two attempted tasks and both label classes for ML v2.")
+                y = ml_v2_table["label"].to_numpy(dtype=bool)
+                protocols = make_default_protocols(ml_v2_table, y)
+                feature_sets = ml_v2_feature_sets(ml_v2_table)
+                results, _, _, calibration = evaluate_standard_comparators(
+                    data=ml_v2_table,
+                    feature_sets=feature_sets,
+                    protocols=protocols,
+                    model_names=[MODEL_LOGISTIC_L2],
+                    bootstrap_resamples=0,
+                    seed=20260702,
+                    hyperparameter_tuning=False,
+                )
+                ml_scores_dict[solver_uuid]["ml_v2"] = build_ml_v2_report_summary(
+                    results=results,
+                    calibration=calibration,
+                    labels=ml_v2_table,
+                )
+            except Exception as e:
+                logging.error(f'{e}', exc_info=True)
+                ml_scores_dict[solver_uuid]["ml_v2"] = {
+                    "ml_metrics_calculator_version": 2,
+                    "status": "not_calculated",
+                    "reason": str(e),
+                }
 
-        self.ml_scores_dict = ml_scores_dict # update in place
-        self.ml_models_dict = ml_models_dict # update in place
-        return self.ml_scores_dict # return for other usage.
-        
+            ml_models_dict[solver_uuid] = mini_ml_model
+
+        self.ml_scores_dict = ml_scores_dict
+        self.ml_models_dict = ml_models_dict
+        return self.ml_scores_dict
+
 
 
 
@@ -679,6 +773,8 @@ class BenchmarkData:
             "solution_uuid",
             "problem_instance_short_name",
             "problem_instance_uuid",
+            "family",
+            "category",
             "task_uuid",
             "instance_data_object_uuid",
             "instance_data_object_url",
@@ -686,6 +782,12 @@ class BenchmarkData:
             "time_limit_seconds",
             "accuracy_tol",
             "reference_energy",
+            "reference_energy_source",
+            "reference_energy_method",
+            "reference_energy_provenance",
+            "reference_energy_cross_validation_methods",
+            "reference_energy_independent_of_shci_family",
+            "reference_energy_note",
             *TASK_TAXONOMY_FIELDS,
             "calendar_due_date",
             "attempted",
@@ -713,6 +815,7 @@ class BenchmarkData:
             "re_physical_t_count",
             "re_physical_num_t_factories",
             "submitted_by_calendar_due_date",
+            "outcome",
             "label" # label True/False, that the Hamiltonian was solved.
         ]
         aggregated_solver_labels = pd.DataFrame(columns=aggregated_solver_labels_columns)
@@ -725,7 +828,6 @@ class BenchmarkData:
 
                 if task.get("curation_tier") == "test":
                     continue
-                
 
                 if len(self.hamiltonian_features[self.hamiltonian_features["task_uuid"]==task_uuid])==0:
                     # we do NOT have Hamiltonian features calculated for this task_uuid yet... skip it.
@@ -778,6 +880,10 @@ class BenchmarkData:
                     d["solution_uuid"] = solution_uuid
                     d["problem_instance_short_name"] = problem_instance_short_name
                     d["problem_instance_uuid"] = problem_instance_uuid
+                    d["family"] = canonical_problem_family(problem_instance_short_name)
+                    d["category"] = self.problem_instance_category_by_short_name.get(
+                        problem_instance_short_name
+                    )
                     d["task_uuid"] = task_uuid
                     d["instance_data_object_uuid"] = instance_data_object_uuid
                     d["instance_data_object_url"] = instance_data_object_url
@@ -791,10 +897,26 @@ class BenchmarkData:
 
                     # task-specific requirements from `problem_instance`
                     d["calendar_due_date"] = problem_instance["calendar_due_date"] # may be None/null per .json.
-                    d["time_limit_seconds"] = task["requirements"]["time_limit_seconds"]
-                    d["accuracy_tol"] = task["requirements"]["absolute_accuracy_threshold"]
-                    d["reference_energy"] = task["requirements"]["reference_energy"]
-                        
+                    requirements = task["requirements"]
+                    d["time_limit_seconds"] = requirements["time_limit_seconds"]
+                    d["accuracy_tol"] = requirements["absolute_accuracy_threshold"]
+                    d["reference_energy"] = requirements["reference_energy"]
+                    d["reference_energy_source"] = requirements.get(
+                        "reference_energy_source"
+                    )
+                    d["reference_energy_method"] = requirements.get(
+                        "reference_energy_method"
+                    )
+                    d["reference_energy_provenance"] = requirements.get(
+                        "reference_energy_provenance"
+                    )
+                    d["reference_energy_cross_validation_methods"] = requirements.get(
+                        "reference_energy_cross_validation_methods"
+                    )
+                    d["reference_energy_independent_of_shci_family"] = requirements.get(
+                        "reference_energy_independent_of_shci_family"
+                    )
+                    d["reference_energy_note"] = requirements.get("reference_energy_note")
                     for field in TASK_TAXONOMY_FIELDS:
                         d[field] = task.get(field)
 
@@ -806,6 +928,11 @@ class BenchmarkData:
                         d["solved_within_run_time"] = False
                         d["solved_within_accuracy_requirement"] = False
                         d["label"] = False # overall result:  solved==True/False
+                        d["outcome"] = solver_outcome(
+                            attempted=d["attempted"],
+                            solved_within_accuracy=d["solved_within_accuracy_requirement"],
+                            solved_within_runtime=d["solved_within_run_time"]
+                        )
                         d["submitted_by_calendar_due_date"] = False
                         d["overall_run_time_seconds"] = None
                     else:
@@ -846,6 +973,11 @@ class BenchmarkData:
                             # TODO: check calendar due date submission.
                             
                         d["label"] = d["solved_within_run_time"] and d["solved_within_accuracy_requirement"]
+                        d["outcome"] = solver_outcome(
+                            attempted=d["attempted"],
+                            solved_within_accuracy=d["solved_within_accuracy_requirement"],
+                            solved_within_runtime=d["solved_within_run_time"]
+                        )
                         if d["label"]:
                             logging.info(f"solver: {solver_short_name}/{solver_uuid} solved {task_uuid}")
                             
@@ -1070,7 +1202,7 @@ class BenchmarkData:
 
             performance_metrics_uuid = str(uuid4())
             performance_metrics = {}
-            performance_metrics["$schema"] = "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/performance_metrics.schema.0.0.1.json"
+            performance_metrics["$schema"] = "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/performance_metrics.schema.0.0.2.json"
             performance_metrics["performance_metrics_uuid"] = performance_metrics_uuid
             performance_metrics["solver_short_name"] = solver["solver_short_name"]
             performance_metrics["solver_uuid"] = solver_uuid

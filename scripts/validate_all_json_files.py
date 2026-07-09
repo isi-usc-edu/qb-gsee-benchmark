@@ -55,7 +55,7 @@ def main(args: argparse.Namespace) -> None:
             (
                 "performance metrics",
                 benchmark_data.performance_metrics_list,
-                "../schemas/performance_metrics.schema.0.0.1.json"
+                "../schemas/performance_metrics.schema.0.0.2.json"
             )
         ]
         for listy in lists:

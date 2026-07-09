@@ -23,6 +23,8 @@ import time
 import shutil
 
 import numpy as np
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from matplotlib.colors import cnames as color_names
@@ -99,6 +101,7 @@ class StandardReport:
         self.create_plot_quantum_vs_classical_num_orbitals_vs_run_time()
         self.create_plot_log_fci_dim_vs_run_time_for_all_solvers()
         self.create_plot_log_fci_dim_vs_run_time_for_each_solver()
+        self.create_plot_ml_v2_calibration_curves()
 
         # NOTE: some plots created during ML processing and already in the `ml_artifacts` directory.
 
@@ -586,6 +589,253 @@ class StandardReport:
 
 
 
+    @staticmethod
+    def _ml_v2_calibration_plot_filename(solver_uuid: str) -> str:
+        return f"ml_v2_calibration_solver_{solver_uuid}.png"
+
+
+    @staticmethod
+    def _calibration_rows_for_primary_features(ml_v2: dict) -> list[dict]:
+        rows = ml_v2.get("calibration") or []
+        if not rows:
+            return []
+        preferred = [row for row in rows if row.get("feature_set") == "full16_plus_b2"]
+        if preferred:
+            return preferred
+        fallback = [row for row in rows if row.get("feature_set") == "full16"]
+        return fallback if fallback else rows
+
+
+    def create_plot_ml_v2_calibration_curves(self) -> None:
+        """Create per-solver reliability curves from ML-v2 calibration bins."""
+        for performance_metrics in self.benchmark_data.performance_metrics_list:
+            solver_uuid = performance_metrics.get("solver_uuid")
+            if not solver_uuid:
+                continue
+            ml_metrics = performance_metrics.get("ml_metrics", {})
+            ml_v2 = ml_metrics.get("ml_v2", {}) if isinstance(ml_metrics, dict) else {}
+            rows = self._calibration_rows_for_primary_features(ml_v2)
+            plot_rows = []
+            for row in rows:
+                try:
+                    mean_probability = float(row.get("mean_probability"))
+                    observed_rate = float(row.get("observed_positive_rate"))
+                except (TypeError, ValueError):
+                    continue
+                if np.isnan(mean_probability) or np.isnan(observed_rate):
+                    continue
+                plot_rows.append(
+                    {
+                        "mean_probability": mean_probability,
+                        "observed_positive_rate": observed_rate,
+                        "n": row.get("n", 1) or 1,
+                        "feature_set": row.get("feature_set", ""),
+                    }
+                )
+            if not plot_rows:
+                continue
+            solver_short_name = performance_metrics.get("solver_short_name", solver_uuid[:8])
+            plt.figure(figsize=(4.8, 4.2))
+            plt.plot([0, 1], [0, 1], color="black", linewidth=1.0, linestyle="--", label="Perfect calibration")
+            x = [row["mean_probability"] for row in plot_rows]
+            y = [row["observed_positive_rate"] for row in plot_rows]
+            sizes = [max(20.0, 8.0 * float(row["n"])) for row in plot_rows]
+            feature_set = plot_rows[0].get("feature_set", "")
+            plt.scatter(x, y, s=sizes, color="tab:blue", alpha=0.75, edgecolor="black", label=feature_set)
+            plt.xlabel("Mean predicted probability")
+            plt.ylabel("Observed positive rate")
+            plt.xlim(0, 1)
+            plt.ylim(0, 1)
+            plt.title(f"ML v2 calibration: {solver_short_name}")
+            plt.legend(loc="best")
+            plt.tight_layout()
+            plt.savefig(os.path.join(
+                self.full_artifact_directory_path,
+                self._ml_v2_calibration_plot_filename(solver_uuid),
+            ))
+            plt.close()
+
+
+    @staticmethod
+    def _format_metric(value) -> str:
+        if value is None:
+            return "n/a"
+        try:
+            if np.isnan(value):
+                return "n/a"
+        except TypeError:
+            pass
+        if isinstance(value, float):
+            return f"{value:.3f}"
+        return str(value)
+
+
+    def _write_ml_summary_line(self, file, solver_short_name: str, solver_uuid: str, ml_metrics: dict) -> None:
+        ml_v2 = ml_metrics.get("ml_v2", {}) if isinstance(ml_metrics, dict) else {}
+        primary = ml_v2.get("primary_result") or {}
+        comparison = ml_v2.get("family_grouped_feature_comparison") or {}
+        leakage_rows = ml_v2.get("random_vs_grouped_leakage") or []
+        leakage = None
+        for row in leakage_rows:
+            if row.get("feature_set") in {"full16_plus_b2", "full16"}:
+                leakage = row.get("average_precision_random_minus_grouped")
+                break
+
+        if primary:
+            file.write(
+                f"Solver: {solver_short_name}/{solver_uuid}, "
+                f"ML v2 family-grouped AP: {self._format_metric(primary.get('average_precision'))}, "
+                f"Brier: {self._format_metric(primary.get('brier'))}, "
+                f"empirical coverage: {self._format_metric(primary.get('empirical_instance_coverage'))}"
+            )
+            delta = comparison.get("full16_plus_b2_minus_size_only_average_precision")
+            if delta is not None:
+                file.write(f", AP(full16+B2 - size-only): {self._format_metric(delta)}")
+            if leakage is not None:
+                file.write(f", random-minus-grouped AP: {self._format_metric(leakage)}")
+            file.write("\n\n")
+        else:
+            reason = ml_v2.get("reason", "ML v2 not calculated")
+            file.write(f"Solver: {solver_short_name}/{solver_uuid}, ML v2: {reason}\n\n")
+
+        legacy_ratio = ml_metrics.get("legacy_solvability_ratio", ml_metrics.get("solvability_ratio"))
+        legacy_f1 = ml_metrics.get("f1_score")
+        file.write(
+            "Legacy MiniML grid solvability ratio (not OOF): "
+            f"{self._format_metric(legacy_ratio)}; legacy in-sample F1: {legacy_f1}\n\n"
+        )
+
+
+    @staticmethod
+    def _beats_size_only_label(delta) -> str:
+        if delta is None:
+            return "n/a"
+        try:
+            if np.isnan(delta):
+                return "n/a"
+        except TypeError:
+            pass
+        return "Yes" if float(delta) > 0.0 else "No"
+
+
+    def _ml_v2_leaderboard_rows(self, performance_metrics_by_solver: dict) -> list[dict]:
+        rows = []
+        for solver_uuid in self.benchmark_data.solvers_dict:
+            solver = self.benchmark_data.solvers_dict[solver_uuid]
+            performance_metrics = performance_metrics_by_solver.get(solver_uuid, {})
+            top_level = performance_metrics.get("top_level_results", {})
+            ml_metrics = performance_metrics.get("ml_metrics", {}) if isinstance(performance_metrics, dict) else {}
+            ml_v2 = ml_metrics.get("ml_v2", {}) if isinstance(ml_metrics, dict) else {}
+            primary = ml_v2.get("primary_result") or {}
+            comparison = ml_v2.get("family_grouped_feature_comparison") or {}
+            delta = comparison.get("full16_plus_b2_minus_size_only_average_precision")
+            if delta is None:
+                delta = comparison.get("full16_minus_size_only_average_precision")
+            rows.append(
+                {
+                    "solver_short_name": solver.get("solver_short_name", ""),
+                    "solver_uuid": solver_uuid,
+                    "tasks_attempted": top_level.get("number_of_tasks_attempted"),
+                    "tasks_solved": top_level.get("number_of_tasks_solved"),
+                    "ml_v2_average_precision": primary.get("average_precision"),
+                    "ml_v2_brier": primary.get("brier"),
+                    "ml_v2_empirical_instance_coverage": primary.get("empirical_instance_coverage"),
+                    "ap_delta_vs_size_only": delta,
+                    "beats_size_only": self._beats_size_only_label(delta),
+                    "legacy_grid_solvability_ratio": ml_metrics.get(
+                        "legacy_solvability_ratio",
+                        ml_metrics.get("solvability_ratio"),
+                    ),
+                }
+            )
+
+        def sort_key(row: dict):
+            ap = row.get("ml_v2_average_precision")
+            try:
+                if ap is None or np.isnan(ap):
+                    return (1, 0.0, row["solver_short_name"])
+            except TypeError:
+                return (1, 0.0, row["solver_short_name"])
+            return (0, -float(ap), row["solver_short_name"])
+
+        return sorted(rows, key=sort_key)
+
+
+    def _write_ml_v2_leaderboard_table(self, file, performance_metrics_by_solver: dict) -> None:
+        rows = self._ml_v2_leaderboard_rows(performance_metrics_by_solver)
+        file.write("## ML v2 Out-of-Fold Leaderboard\n\n")
+        file.write(
+            "Primary ML-v2 metrics are family-grouped out-of-fold results for the "
+            "regularized logistic model. The `Beats size-only?` column compares the "
+            "primary feature set against the `{n_elec, n_orbs}` baseline by average "
+            "precision; legacy MiniML solvability/F1 values are listed separately "
+            "because they are not out-of-fold metrics.\n\n"
+        )
+        if not rows:
+            file.write("No solver performance metrics available.\n\n")
+            return
+        headers = [
+            "Solver",
+            "Attempted",
+            "Solved",
+            "OOF AP",
+            "Brier",
+            "Empirical coverage",
+            "AP delta vs size-only",
+            "Beats size-only?",
+            "Legacy grid solvability",
+        ]
+        file.write("| " + " | ".join(headers) + " |\n")
+        file.write("|" + "|".join("---" for _ in headers) + "|\n")
+        for row in rows:
+            solver_label = f"{row['solver_short_name']} ({row['solver_uuid'][:8]})"
+            values = [
+                solver_label,
+                self._format_metric(row.get("tasks_attempted")),
+                self._format_metric(row.get("tasks_solved")),
+                self._format_metric(row.get("ml_v2_average_precision")),
+                self._format_metric(row.get("ml_v2_brier")),
+                self._format_metric(row.get("ml_v2_empirical_instance_coverage")),
+                self._format_metric(row.get("ap_delta_vs_size_only")),
+                row.get("beats_size_only", "n/a"),
+                self._format_metric(row.get("legacy_grid_solvability_ratio")),
+            ]
+            file.write("| " + " | ".join(str(value) for value in values) + " |\n")
+        file.write("\n")
+
+
+    def _write_ml_metrics_block(self, file, ml_metrics: dict) -> None:
+        ml_v2 = ml_metrics.get("ml_v2", {}) if isinstance(ml_metrics, dict) else {}
+        primary = ml_v2.get("primary_result") or {}
+        comparison = ml_v2.get("family_grouped_feature_comparison") or {}
+        outcomes = ml_v2.get("two_channel_outcome_counts") or {}
+
+        file.write("ml_v2_primary_model: " + str(ml_v2.get("primary_model")) + "\n\n")
+        file.write("ml_v2_primary_protocol: " + str(primary.get("protocol")) + "\n\n")
+        file.write("ml_v2_primary_feature_set: " + str(primary.get("feature_set")) + "\n\n")
+        file.write("ml_v2_average_precision: " + self._format_metric(primary.get("average_precision")) + "\n\n")
+        file.write("ml_v2_brier: " + self._format_metric(primary.get("brier")) + "\n\n")
+        file.write("ml_v2_empirical_instance_coverage: " + self._format_metric(primary.get("empirical_instance_coverage")) + "\n\n")
+        file.write(
+            "ml_v2_full16_plus_b2_minus_size_only_average_precision: "
+            + self._format_metric(comparison.get("full16_plus_b2_minus_size_only_average_precision"))
+            + "\n\n"
+        )
+        file.write("two_channel_outcome_counts: " + str(outcomes) + "\n\n")
+        if outcomes:
+            file.write("| outcome | count |\n")
+            file.write("|---|---:|\n")
+            for outcome, count in sorted(outcomes.items()):
+                file.write(f"| {outcome} | {count} |\n")
+            file.write("\n")
+        file.write(
+            "legacy_solvability_ratio: "
+            + self._format_metric(ml_metrics.get("legacy_solvability_ratio", ml_metrics.get("solvability_ratio")))
+            + "\n\n"
+        )
+        file.write("legacy_in_sample_f1_score: " + str(ml_metrics.get("f1_score")) + "\n\n")
+
+
     def create_readme_content(self) -> None:
         readme_file = os.path.join(self.standard_report_output_directory, "README.md")
         with open(readme_file, "w") as file:
@@ -639,16 +889,17 @@ class StandardReport:
             file.write(f"# Solver Summary Statistics\n\n")
             file.write(f"number of unique participating solvers: {df['solver_uuid'].nunique()}\n\n")
 
-            for solver_uuid in self.benchmark_data.ml_models_dict:
+            performance_metrics_by_solver = {
+                pm["solver_uuid"]: pm
+                for pm in self.benchmark_data.performance_metrics_list
+            }
+            self._write_ml_v2_leaderboard_table(file, performance_metrics_by_solver)
+            file.write("## Per-Solver ML Details\n\n")
+            for solver_uuid in self.benchmark_data.solvers_dict:
                 solver_short_name = self.benchmark_data.solvers_dict[solver_uuid]["solver_short_name"]
-
-                ml_model = self.benchmark_data.ml_models_dict[solver_uuid]
-                if isinstance(ml_model, str):
-                    # probably an error that we couldn't calculate the model.
-                    verbiage = f"Solver: {solver_short_name}/{solver_uuid}, {ml_model}"
-                else:
-                    verbiage = f"Solver: {solver_short_name}/{solver_uuid}, ML Solvability Ratio: {ml_model.ml_solvability_ratio}, F1 Score: {ml_model.f1_score}"
-                file.write(f"{verbiage}\n\n")
+                performance_metrics = performance_metrics_by_solver.get(solver_uuid, {})
+                ml_metrics = performance_metrics.get("ml_metrics", {})
+                self._write_ml_summary_line(file, solver_short_name, solver_uuid, ml_metrics)
             
             file.write(f"![Solver scatter plot]({self.artifact_directory}/solver_num_orbs_vs_runtime_scatter_plot.png)\n\n")
             file.write(f"NOTE: only `attempted` tasks are plotted on the chart.  Triangle up/down indicates solved/unsolved.\n\n")
@@ -701,11 +952,17 @@ class StandardReport:
                 # writing out some (not all) performance metrics.
                 filtered_performance_metrics = {key: performance_metrics[key] for key in performance_metrics_fields if key in performance_metrics}
                 for k, v in filtered_performance_metrics.items():
-                    if not isinstance(v, dict):
+                    if k == "ml_metrics" and isinstance(v, dict):
+                        self._write_ml_metrics_block(file, v)
+                        ml_v2 = v.get("ml_v2", {}) if isinstance(v, dict) else {}
+                        if self._calibration_rows_for_primary_features(ml_v2):
+                            file.write(
+                                f"![ML v2 calibration curve]({self.artifact_directory}/{self._ml_v2_calibration_plot_filename(solver_uuid)})\n\n"
+                            )
+                    elif not isinstance(v, dict):
                         file.write(f"{k}: {v}\n\n")
                     else:
                         for kk, vv in v.items():
-                            # only breaking out one more level of a dictionary
                             file.write(f"{kk}: {vv}\n\n")
                 
                 # writing out plots:

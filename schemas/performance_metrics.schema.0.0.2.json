@@ -1,0 +1,371 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "performance_metrics.schema.0.0.2.json",
+    "title": "Quantum Benchmarking Performance Metrics File Schema",
+    "description": "Describes required fields for a valid performance metrics file.",
+    "required": [
+        "performance_metrics_uuid",
+        "solver_short_name",
+        "solver_uuid",
+        "creation_timestamp",
+        "ml_metrics",
+        "top_level_results",
+        "results_by_problem_instance",
+        "results_by_task",
+        "$schema"
+    ],
+    "properties": {
+        "$schema": {
+            "title": "Schema URL",
+            "desription": "A hyperlink to the schema that describes this JSON object.",
+            "type": "string"
+        },
+        "performance_metrics_uuid": {
+            "title": "Performance Metrics UUID",
+            "$ref": "uuid.schema.json"
+        },
+        "creation_timestamp": {
+            "title": "Creation Timestamp",
+            "$ref": "timestamp.schema.json"
+        },
+        "solver_short_name": {
+            "title": "Short name of the solver.",
+            "description": "A short string for human readability that is not necessarily unique.  E.g., `DMRG_32core_64GB`",
+            "type": "string"
+        },
+        "solver_uuid": {
+            "title": "The UUID of the solver.",
+            "$ref": "uuid.schema.json"
+        },
+        "ml_metrics": {
+            "title": "ML performance metrics",
+            "description": "The ML metrics calculated for the solver's performance.",
+            "type": "object",
+            "required": [
+                "solvability_ratio",
+                "f1_score"
+            ],
+            "properties": {
+                "ml_metrics_calculator_version": {
+                    "title": "ML performance metrics calculator version",
+                    "description": "The version of the ML metrics calculator software.",
+                    "type": "number"
+                },
+                "solvability_ratio": {
+                    "title": "ML Solvability Ratio",
+                    "description": "TODO:  A number between 0-1.  A higher number is better.",
+                    "type": [
+                        "null",
+                        "number"
+                    ]
+                },
+                "f1_score": {
+                    "title": "F1 score",
+                    "description": "TODO.  This is a measure of the goodness of the ML model, not the solver being evaluated.",
+                    "type": [
+                        "null",
+                        "array"
+                    ]
+                },
+                "legacy_solvability_ratio": {
+                    "title": "Legacy grid solvability ratio",
+                    "description": "Backward-compatible MiniML uniform-grid solvability ratio; kept for plots/legacy comparison and not an out-of-fold model metric.",
+                    "type": [
+                        "null",
+                        "number"
+                    ]
+                },
+                "comments": {
+                    "type": "string"
+                },
+                "comment": {
+                    "type": "string"
+                },
+                "ml_v2": {
+                    "title": "ML v2 out-of-fold metrics",
+                    "description": "Grouped/random out-of-fold ML metrics, baselines, calibration, and two-channel outcome summaries.",
+                    "type": "object",
+                    "properties": {
+                        "ml_metrics_calculator_version": {
+                            "type": "number"
+                        },
+                        "status": {
+                            "type": "string"
+                        },
+                        "reason": {
+                            "type": "string"
+                        },
+                        "evaluation_protocol": {
+                            "type": "string"
+                        },
+                        "primary_model": {
+                            "type": "string"
+                        },
+                        "primary_result": {
+                            "type": [
+                                "null",
+                                "object"
+                            ]
+                        },
+                        "results": {
+                            "type": "array",
+                            "items": {
+                                "type": "object"
+                            }
+                        },
+                        "family_grouped_feature_comparison": {
+                            "type": "object"
+                        },
+                        "random_vs_grouped_leakage": {
+                            "type": "array",
+                            "items": {
+                                "type": "object"
+                            }
+                        },
+                        "calibration": {
+                            "type": "array",
+                            "items": {
+                                "type": "object"
+                            }
+                        },
+                        "two_channel_outcome_counts": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            }
+        },
+        "top_level_results": {
+            "title": "Results",
+            "description": "Aggregated performance metrics and ML scores.",
+            "type": "object",
+            "required": [
+                "number_of_problem_instances",
+                "number_of_problem_instances_attempted",
+                "number_of_problem_instances_solved",
+                "number_of_tasks",
+                "number_of_tasks_attempted",
+                "number_of_tasks_solved",
+                "number_of_tasks_solved_within_run_time_limit",
+                "number_of_tasks_solved_within_accuracy_threshold",
+                "max_run_time_of_attempted_tasks",
+                "sum_of_run_time_of_attempted_tasks"
+            ],
+            "properties": {
+                "number_of_problem_instances": {
+                    "title": "Number of problem instances available.",
+                    "description": "A count of the number of `problem_instances` currently available (at creation time of this file) in the `problem_instances` directory.",
+                    "type": "integer"
+                },
+                "number_of_problem_instances_attempted": {
+                    "title": "Number of problem instances attempted",
+                    "description": "A count of the number of `problem_instances` where a solution was provided for at least one Hamiltonian (task) in the `problem_instance`",
+                    "type": "integer"
+                },
+                "number_of_problem_instances_solved": {
+                    "title": "Number of problem instances solved",
+                    "description": "A count of the number of `problem_instances` where the solutions for *all* Hamiltonians (tasks) were within the run time and accuracy requirements.",
+                    "type": "integer"
+                },
+                "number_of_tasks": {
+                    "title": "Number of Hamiltonians (tasks) available.",
+                    "description": "A count of the number of Hamiltonians (tasks) currently available (at creation time of this file) required in each `problem_instance` file.",
+                    "type": "integer"
+                },
+                "number_of_tasks_attempted": {
+                    "title": "Number of Hamiltonians (tasks) attempted.",
+                    "description": "A count of the number of Hamiltonians (tasks) where a solution was provided.",
+                    "type": "integer"
+                },
+                "number_of_tasks_solved_within_run_time_limit": {
+                    "title": "Number of Hamiltonians (tasks) solved within run time limit.",
+                    "description": "A count of the number of Hamiltonians (tasks) where a solution was provided that was within the run time limit.",
+                    "type": "integer"
+                },
+                "number_of_tasks_solved_within_accuracy_threshold": {
+                    "title": "Number of Hamiltonians (tasks) solved within accuracy threshold.",
+                    "description": "A count of the number of Hamiltonians (tasks) where a solution was provided that was within the accuracy threshold.",
+                    "type": "integer"
+                },
+                "number_of_tasks_solved": {
+                    "title": "Number of Hamiltonians (tasks) solved to requirements.",
+                    "description": "A count of the number of Hamiltonians (tasks) where a solution was provided met requirements.",
+                    "type": "integer"
+                },
+                "max_run_time_of_attempted_tasks": {
+                    "title": "Max run time of attempted Hamiltonians (tasks).",
+                    "description": "The maximum run time of the solutions provided for all attempted Hamiltonians (tasks).  In seconds.",
+                    "type": "number"
+                },
+                "sum_of_run_time_of_attempted_tasks": {
+                    "title": "The sum of the run time of attempted Hamiltonians (tasks).",
+                    "description": "The sum of the run time of the solutions provided for all attempted Hamiltonians (tasks).  In seconds.",
+                    "type": "number"
+                }
+            }
+        },
+        "results_by_problem_instance": {
+            "title": "Results aggregated by problem instance",
+            "description": "Performance metrics are aggregated to the `problem_instance` level.",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "problem_instance_uuid",
+                    "solution_uuid",
+                    "number_of_tasks",
+                    "number_of_tasks_attempted",
+                    "number_of_tasks_solved_within_runtime_limit",
+                    "number_of_tasks_solved_within_accuracy_requirement",
+                    "number_of_tasks_solved",
+                    "sum_of_run_time_of_attempted_tasks",
+                    "max_run_time_of_attempted_tasks",
+                    "solution_submitted_by_due_date"
+                ],
+                "properties": {
+                    "problem_instance_uuid": {
+                        "title": "Problem instance UUID",
+                        "$ref": "uuid.schema.json"
+                    },
+                    "solution_uuid": {
+                        "title": "Solution file UUID.  May be `null` if not attempted.",
+                        "type": [
+                            "null",
+                            "string"
+                        ],
+                        "anyOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "$ref": "uuid.schema.json"
+                            }
+                        ]
+                    },
+                    "number_of_tasks_attempted": {
+                        "type": "integer",
+                        "description": "The attempted number of `tasks` for a specific `problem_instance`."
+                    },
+                    "number_of_tasks_solved_within_runtime_limit": {
+                        "type": "integer",
+                        "description": "The number of `tasks` solved within the run time limit for a specific `problem_instance`."
+                    },
+                    "hamiltonians_solved_within_accuracy_requirement": {
+                        "type": "integer",
+                        "description": "The number of `tasks` solved within the accuracy threshold limit for a specific `problem_instance`."
+                    },
+                    "number_of_tasks_solved": {
+                        "type": "integer",
+                        "description": "The number of `tasks` solved within the run time limit and the accuracy threshold for a specific `problem_instance`."
+                    },
+                    "number_of_tasks": {
+                        "type": "integer",
+                        "description": "The total number of `tasks` for a specific `problem_instance`."
+                    },
+                    "sum_of_run_time_of_attempted_tasks": {
+                        "type": [
+                            "null",
+                            "number"
+                        ],
+                        "description": "Of the `tasks` that were attempted from a specific `problem_instance`, this is the sum of their run times (in seconds)."
+                    },
+                    "max_of_run_time_of_attempted_tasks": {
+                        "type": [
+                            "null",
+                            "number"
+                        ],
+                        "description": "Of the `tasks` that were attempted from a specific `problem_instance`, this is the sum of their run times (in seconds)."
+                    },
+                    "solution_submitted_by_due_date": {
+                        "title": "Solution Within Due Date?",
+                        "description": "Each `problem_instance` file has a specified calendar due date.  This boolean to identifies if the solution was submitted by the due date.  If there was no due date specified, then this is `true`.",
+                        "type": [
+                            "null",
+                            "boolean"
+                        ]
+                    }
+                }
+            }
+        },
+        "results_by_task": {
+            "title": "Results for each task",
+            "description": "A list of objects, one for each Hamiltonian (by `task_uuid`)",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "task_uuid",
+                    "problem_instance_uuid",
+                    "instance_data_object_uuid",
+                    "solution_uuid",
+                    "attempted",
+                    "solved_within_run_time",
+                    "solved_within_accuracy_requirement",
+                    "overall_run_time_seconds"
+                ],
+                "properties": {
+                    "task_uuid": {
+                        "title": "Task UUID",
+                        "$ref": "uuid.schema.json"
+                    },
+                    "problem_instance_uuid": {
+                        "title": "Problem instance UUID",
+                        "$ref": "uuid.schema.json"
+                    },
+                    "instance_data_object_uuid": {
+                        "title": "Instance Data Object (typically FCIDUMP file) UUID",
+                        "$ref": "uuid.schema.json"
+                    },
+                    "solution_uuid": {
+                        "title": "Solution file UUID.  May be `null` if not attempted.",
+                        "type": [
+                            "null",
+                            "string"
+                        ],
+                        "anyOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "$ref": "uuid.schema.json"
+                            }
+                        ]
+                    },
+                    "attempted": {
+                        "title": "Attempted flag",
+                        "description": "a boolean indicating if the solver attempted to calculate the GSE for the Hamiltonian.  At this time, if the data is missing from `solution.json` files, it is considered NOT attempted and other metrics indicate failure.",
+                        "type": "boolean"
+                    },
+                    "solved_within_run_time": {
+                        "title": "Solved within run time flag",
+                        "description": "a boolean indicating if the solver run time was within the run time requirement specified in the problem_instance.",
+                        "type": [
+                            "null",
+                            "boolean"
+                        ]
+                    },
+                    "solved_within_accuracy_requirement": {
+                        "title": "Solved with accuracy requirement flag",
+                        "description": "a boolean indicating if the solver run time was within the accuracy requirement specified in the problem_instance.",
+                        "type": [
+                            "null",
+                            "boolean"
+                        ]
+                    },
+                    "overall_run_time_seconds": {
+                        "title": "Overall run time in seconds",
+                        "description": "Overall run time in seconds",
+                        "type": [
+                            "null",
+                            "number"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}
