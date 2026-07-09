@@ -39,7 +39,6 @@ from qb_gsee_benchmark.utils import find_dict_with_matching_kv_pair
 from qb_gsee_benchmark.utils import data_frame_vlookup
 from qb_gsee_benchmark.utils import iso8601_timestamp
 from qb_gsee_benchmark.utils import validate_json
-from qb_gsee_benchmark.mini_ml import MiniML
 
 
 
@@ -365,6 +364,8 @@ class BenchmarkData:
         Returns:
             dict: a dictionary with keys of solver_uuid and values of ML scores.
         """
+
+        from qb_gsee_benchmark.mini_ml import MiniML
 
         ml_scores_dict = {}
         ml_models_dict = {}
