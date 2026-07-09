@@ -4,9 +4,6 @@
 
 import numpy as np
 from openfermion import InteractionOperator
-from pyLIQTR.BlockEncodings.DoubleFactorized import DoubleFactorized
-from pyLIQTR.ProblemInstances.ChemicalHamiltonian import ChemicalHamiltonian
-from pyLIQTR.qubitization.phase_estimation import QubitizedPhaseEstimation
 from pyscf import ao2mo
 
 
@@ -70,6 +67,19 @@ def get_failure_tolerance_per_shot(
     return 1 - (1 - failure_tolerance) ** (1 / num_shots)
 
 
+def _load_qpe_dependencies():
+    try:
+        from pyLIQTR.BlockEncodings.DoubleFactorized import DoubleFactorized
+        from pyLIQTR.ProblemInstances.ChemicalHamiltonian import ChemicalHamiltonian
+        from pyLIQTR.qubitization.phase_estimation import QubitizedPhaseEstimation
+    except ImportError as exc:
+        raise ImportError(
+            "QPE circuit construction requires pyLIQTR and its compatible "
+            "dependency stack."
+        ) from exc
+    return ChemicalHamiltonian, DoubleFactorized, QubitizedPhaseEstimation
+
+
 def get_df_qpe_circuit(
     fci: dict,
     square_overlap: float,
@@ -77,7 +87,7 @@ def get_df_qpe_circuit(
     failure_tolerance: float,
     sf_threshold: float,
     df_threshold: float,
-)-> tuple[QubitizedPhaseEstimation, int, float]:
+) -> tuple[object, int, float]:
     """Get the QPE circuit for a given PySCF FCI object.
 
     This uses an algorithm performance model based on that described in
@@ -140,6 +150,10 @@ def get_df_qpe_circuit(
     sigma = (
         np.sqrt(phase_estimation_failure_tolerance_per_shot)
         * spectral_leakage_error_tolerance
+    )
+
+    ChemicalHamiltonian, DoubleFactorized, QubitizedPhaseEstimation = (
+        _load_qpe_dependencies()
     )
 
     eri = ao2mo.restore("s1", fci["H2"], fci["NORB"])

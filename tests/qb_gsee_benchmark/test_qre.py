@@ -51,6 +51,8 @@ def test_get_failure_tolerance_per_shot(
 
 
 def test_get_df_qpe_circuit():
+    pytest.importorskip("pyLIQTR.BlockEncodings.DoubleFactorized", exc_type=ImportError)
+
     fci = fcidump.read(
         filename=os.path.join(os.path.dirname(__file__), "fcidump.h2_sto-3g")
     )
