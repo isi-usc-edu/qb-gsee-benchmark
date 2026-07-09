@@ -1,0 +1,710 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "application_domain": "CM",
+  "basis_convention": {
+    "hamiltonian_family": "uniform_electron_gas",
+    "madelung_constant_cubic": -2.837297479480619,
+    "madelung_convention": "cubic_madelung_included",
+    "orbital_basis": "real_plane_wave",
+    "reference_rule": "E_ref = analytic closed-shell plane-wave HF including N*v_M/2 plus Shepherd finite-basis correlation energy."
+  },
+  "benchmark_role": "hard_tier_condensed_matter",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison",
+      "name": "Matthew Otten"
+    }
+  ],
+  "creation_timestamp": "2026-07-08T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-09T02:40:23+00:00",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "problem_instance_uuid": "f6c114b8-2a95-5262-a14d-265b323f5b99",
+  "problem_type": "GSEE",
+  "references": [
+    "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691.",
+    "C13 W4 convention approval in MATT_DECISION_QUEUE.md O12: analytic plane-wave HF plus cubic Madelung, E_ref = E_HF + Shepherd E_corr.",
+    "Sparse FCIDUMP writer validated by analysis/ueg_n14_planewave/ueg_sparse_writer_anchor_verification.md."
+  ],
+  "short_name": "ueg_n14_planewave",
+  "status": "in_development",
+  "superseded_by": null,
+  "tasks": [
+    {
+      "benchmark_role": "hard_tier_condensed_matter",
+      "features": {
+        "analytic_hf_with_madelung_hartree": 48.36852150419694,
+        "application_domain": "condensed_matter",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "benchmark_role": "hard_tier_condensed_matter",
+        "box_length_bohr": 1.9425649689427535,
+        "hamiltonian_family": "plane_wave_ueg",
+        "kinetic_cutoff_hartree": 26.154633580934743,
+        "m_spin_orbitals_source": 114,
+        "madelung_convention": "cubic_madelung_included",
+        "madelung_potential_hartree": -1.4605933520075915,
+        "model": "uniform electron gas",
+        "ms2": 0,
+        "n_alpha": 7,
+        "n_beta": 7,
+        "num_electrons": 14,
+        "num_orbitals": 57,
+        "orbital_basis": "real_plane_wave",
+        "rs_bohr": 0.5,
+        "shepherd_correlation_energy_hartree": -0.5169
+      },
+      "independent_parameters": {
+        "m_spin_orbitals_source": 114,
+        "num_spatial_orbitals": 57,
+        "rs_bohr": 0.5
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": 47.85162150419694,
+        "reference_energy_cross_validation_methods": [
+          "Shepherd/Booth/Alavi initiator-FCIQMC finite-basis correlation energy",
+          "analytic closed-shell plane-wave Hartree-Fock"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
+        "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_standard_error": 0.0001,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "7ab9661007d841058d52ed0579414b57f42d7140",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ueg_n14_planewave/ueg_n14_rs0p5_m114.fcidump.gz",
+          "instance_data_object_uuid": "0df9ec9c-06bf-5fad-bcd8-8b563dfc51aa",
+          "is_fcidump_file": true
+        }
+      ],
+      "task_uuid": "0a114776-e93f-5a98-ab74-1a46992cf6e4"
+    },
+    {
+      "benchmark_role": "hard_tier_condensed_matter",
+      "features": {
+        "analytic_hf_with_madelung_hartree": 8.491480603537624,
+        "application_domain": "condensed_matter",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "benchmark_role": "hard_tier_condensed_matter",
+        "box_length_bohr": 3.885129937885507,
+        "hamiltonian_family": "plane_wave_ueg",
+        "kinetic_cutoff_hartree": 6.538658395233686,
+        "m_spin_orbitals_source": 114,
+        "madelung_convention": "cubic_madelung_included",
+        "madelung_potential_hartree": -0.7302966760037958,
+        "model": "uniform electron gas",
+        "ms2": 0,
+        "n_alpha": 7,
+        "n_beta": 7,
+        "num_electrons": 14,
+        "num_orbitals": 57,
+        "orbital_basis": "real_plane_wave",
+        "rs_bohr": 1.0,
+        "shepherd_correlation_energy_hartree": -0.46111
+      },
+      "independent_parameters": {
+        "m_spin_orbitals_source": 114,
+        "num_spatial_orbitals": 57,
+        "rs_bohr": 1.0
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": 8.030370603537625,
+        "reference_energy_cross_validation_methods": [
+          "Shepherd/Booth/Alavi initiator-FCIQMC finite-basis correlation energy",
+          "analytic closed-shell plane-wave Hartree-Fock"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
+        "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_standard_error": 9e-05,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "cfd4dee354ba1ba33e9a0840e83c709d6fb69cb7",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ueg_n14_planewave/ueg_n14_rs1p0_m114.fcidump.gz",
+          "instance_data_object_uuid": "c6bc106f-01b2-547f-b5ef-4af6d48b7336",
+          "is_fcidump_file": true
+        }
+      ],
+      "task_uuid": "56dcef7d-3518-5986-96b6-f09341023c02"
+    },
+    {
+      "benchmark_role": "hard_tier_condensed_matter",
+      "features": {
+        "analytic_hf_with_madelung_hartree": 0.3225452646286011,
+        "application_domain": "condensed_matter",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "benchmark_role": "hard_tier_condensed_matter",
+        "box_length_bohr": 7.770259875771014,
+        "hamiltonian_family": "plane_wave_ueg",
+        "kinetic_cutoff_hartree": 1.6346645988084214,
+        "m_spin_orbitals_source": 114,
+        "madelung_convention": "cubic_madelung_included",
+        "madelung_potential_hartree": -0.3651483380018979,
+        "model": "uniform electron gas",
+        "ms2": 0,
+        "n_alpha": 7,
+        "n_beta": 7,
+        "num_electrons": 14,
+        "num_orbitals": 57,
+        "orbital_basis": "real_plane_wave",
+        "rs_bohr": 2.0,
+        "shepherd_correlation_energy_hartree": -0.3842
+      },
+      "independent_parameters": {
+        "m_spin_orbitals_source": 114,
+        "num_spatial_orbitals": 57,
+        "rs_bohr": 2.0
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -0.06165473537139887,
+        "reference_energy_cross_validation_methods": [
+          "Shepherd/Booth/Alavi initiator-FCIQMC finite-basis correlation energy",
+          "analytic closed-shell plane-wave Hartree-Fock"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
+        "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_standard_error": 0.0002,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "f8a04106a732994b05f36abd7c4df48b5e503a6b",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ueg_n14_planewave/ueg_n14_rs2p0_m114.fcidump.gz",
+          "instance_data_object_uuid": "a2c9326a-e817-5ad0-8185-91069d1c770a",
+          "is_fcidump_file": true
+        }
+      ],
+      "task_uuid": "953a8e41-c68d-5ef7-929f-f614b8cdc2be"
+    },
+    {
+      "benchmark_role": "hard_tier_condensed_matter",
+      "features": {
+        "analytic_hf_with_madelung_hartree": -0.8125487030622105,
+        "application_domain": "condensed_matter",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "benchmark_role": "hard_tier_condensed_matter",
+        "box_length_bohr": 19.425649689427537,
+        "hamiltonian_family": "plane_wave_ueg",
+        "kinetic_cutoff_hartree": 0.2615463358093474,
+        "m_spin_orbitals_source": 114,
+        "madelung_convention": "cubic_madelung_included",
+        "madelung_potential_hartree": -0.14605933520075914,
+        "model": "uniform electron gas",
+        "ms2": 0,
+        "n_alpha": 7,
+        "n_beta": 7,
+        "num_electrons": 14,
+        "num_orbitals": 57,
+        "orbital_basis": "real_plane_wave",
+        "rs_bohr": 5.0,
+        "shepherd_correlation_energy_hartree": -0.2645
+      },
+      "independent_parameters": {
+        "m_spin_orbitals_source": 114,
+        "num_spatial_orbitals": 57,
+        "rs_bohr": 5.0
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -1.0770487030622105,
+        "reference_energy_cross_validation_methods": [
+          "Shepherd/Booth/Alavi initiator-FCIQMC finite-basis correlation energy",
+          "analytic closed-shell plane-wave Hartree-Fock"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
+        "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_standard_error": 0.00030000000000000003,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "2c4759ef848dcc47191427610cf424459890d408",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ueg_n14_planewave/ueg_n14_rs5p0_m114.fcidump.gz",
+          "instance_data_object_uuid": "a91622bc-3b65-580e-85ef-acc3184cde8c",
+          "is_fcidump_file": true
+        }
+      ],
+      "task_uuid": "c41ce537-9254-59d9-9e6e-5166a224bdf8"
+    },
+    {
+      "benchmark_role": "hard_tier_condensed_matter",
+      "features": {
+        "analytic_hf_with_madelung_hartree": 48.36852150419694,
+        "application_domain": "condensed_matter",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "benchmark_role": "hard_tier_condensed_matter",
+        "box_length_bohr": 1.9425649689427535,
+        "hamiltonian_family": "plane_wave_ueg",
+        "kinetic_cutoff_hartree": 41.847413729495585,
+        "m_spin_orbitals_source": 186,
+        "madelung_convention": "cubic_madelung_included",
+        "madelung_potential_hartree": -1.4605933520075915,
+        "model": "uniform electron gas",
+        "ms2": 0,
+        "n_alpha": 7,
+        "n_beta": 7,
+        "num_electrons": 14,
+        "num_orbitals": 93,
+        "orbital_basis": "real_plane_wave",
+        "rs_bohr": 0.5,
+        "shepherd_correlation_energy_hartree": -0.5589
+      },
+      "independent_parameters": {
+        "m_spin_orbitals_source": 186,
+        "num_spatial_orbitals": 93,
+        "rs_bohr": 0.5
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": 47.80962150419694,
+        "reference_energy_cross_validation_methods": [
+          "Shepherd/Booth/Alavi initiator-FCIQMC finite-basis correlation energy",
+          "analytic closed-shell plane-wave Hartree-Fock"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
+        "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_standard_error": 0.0001,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "e47b45565d805281c999a51d73528dd077becb35",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ueg_n14_planewave/ueg_n14_rs0p5_m186.fcidump.gz",
+          "instance_data_object_uuid": "c7b69b11-b45a-5c83-8bec-fa5096067998",
+          "is_fcidump_file": true
+        }
+      ],
+      "task_uuid": "8bf5674c-1fce-560c-a06b-50b13c1e6722"
+    },
+    {
+      "benchmark_role": "hard_tier_condensed_matter",
+      "features": {
+        "analytic_hf_with_madelung_hartree": 8.491480603537624,
+        "application_domain": "condensed_matter",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "benchmark_role": "hard_tier_condensed_matter",
+        "box_length_bohr": 3.885129937885507,
+        "hamiltonian_family": "plane_wave_ueg",
+        "kinetic_cutoff_hartree": 10.461853432373896,
+        "m_spin_orbitals_source": 186,
+        "madelung_convention": "cubic_madelung_included",
+        "madelung_potential_hartree": -0.7302966760037958,
+        "model": "uniform electron gas",
+        "ms2": 0,
+        "n_alpha": 7,
+        "n_beta": 7,
+        "num_electrons": 14,
+        "num_orbitals": 93,
+        "orbital_basis": "real_plane_wave",
+        "rs_bohr": 1.0,
+        "shepherd_correlation_energy_hartree": -0.50093
+      },
+      "independent_parameters": {
+        "m_spin_orbitals_source": 186,
+        "num_spatial_orbitals": 93,
+        "rs_bohr": 1.0
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": 7.990550603537624,
+        "reference_energy_cross_validation_methods": [
+          "Shepherd/Booth/Alavi initiator-FCIQMC finite-basis correlation energy",
+          "analytic closed-shell plane-wave Hartree-Fock"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
+        "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_standard_error": 9e-05,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "ff64784b36ba4d3577d275c70a1e36014b9d0200",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ueg_n14_planewave/ueg_n14_rs1p0_m186.fcidump.gz",
+          "instance_data_object_uuid": "f798db4e-602b-57e5-91fa-94ad908326f3",
+          "is_fcidump_file": true
+        }
+      ],
+      "task_uuid": "6f26f2db-8ffe-5356-983f-c8df105df274"
+    },
+    {
+      "benchmark_role": "hard_tier_condensed_matter",
+      "features": {
+        "analytic_hf_with_madelung_hartree": 0.3225452646286011,
+        "application_domain": "condensed_matter",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "benchmark_role": "hard_tier_condensed_matter",
+        "box_length_bohr": 7.770259875771014,
+        "hamiltonian_family": "plane_wave_ueg",
+        "kinetic_cutoff_hartree": 2.615463358093474,
+        "m_spin_orbitals_source": 186,
+        "madelung_convention": "cubic_madelung_included",
+        "madelung_potential_hartree": -0.3651483380018979,
+        "model": "uniform electron gas",
+        "ms2": 0,
+        "n_alpha": 7,
+        "n_beta": 7,
+        "num_electrons": 14,
+        "num_orbitals": 93,
+        "orbital_basis": "real_plane_wave",
+        "rs_bohr": 2.0,
+        "shepherd_correlation_energy_hartree": -0.4207
+      },
+      "independent_parameters": {
+        "m_spin_orbitals_source": 186,
+        "num_spatial_orbitals": 93,
+        "rs_bohr": 2.0
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -0.0981547353713989,
+        "reference_energy_cross_validation_methods": [
+          "Shepherd/Booth/Alavi initiator-FCIQMC finite-basis correlation energy",
+          "analytic closed-shell plane-wave Hartree-Fock"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
+        "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_standard_error": 0.00030000000000000003,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "11a677dd4946e08c3c48fc2229e1b14b9b1a72c9",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ueg_n14_planewave/ueg_n14_rs2p0_m186.fcidump.gz",
+          "instance_data_object_uuid": "fd7bbc85-43cd-581d-8c23-5730788b4bc9",
+          "is_fcidump_file": true
+        }
+      ],
+      "task_uuid": "99cb242a-c538-5541-9614-8dd27e01625d"
+    },
+    {
+      "benchmark_role": "hard_tier_condensed_matter",
+      "features": {
+        "analytic_hf_with_madelung_hartree": -0.8125487030622105,
+        "application_domain": "condensed_matter",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "benchmark_role": "hard_tier_condensed_matter",
+        "box_length_bohr": 19.425649689427537,
+        "hamiltonian_family": "plane_wave_ueg",
+        "kinetic_cutoff_hartree": 0.4184741372949558,
+        "m_spin_orbitals_source": 186,
+        "madelung_convention": "cubic_madelung_included",
+        "madelung_potential_hartree": -0.14605933520075914,
+        "model": "uniform electron gas",
+        "ms2": 0,
+        "n_alpha": 7,
+        "n_beta": 7,
+        "num_electrons": 14,
+        "num_orbitals": 93,
+        "orbital_basis": "real_plane_wave",
+        "rs_bohr": 5.0,
+        "shepherd_correlation_energy_hartree": -0.2928
+      },
+      "independent_parameters": {
+        "m_spin_orbitals_source": 186,
+        "num_spatial_orbitals": 93,
+        "rs_bohr": 5.0
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -1.1053487030622104,
+        "reference_energy_cross_validation_methods": [
+          "Shepherd/Booth/Alavi initiator-FCIQMC finite-basis correlation energy",
+          "analytic closed-shell plane-wave Hartree-Fock"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
+        "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_standard_error": 0.0004,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "b7b039fb8fee09a41e462babdea845ccd50ffec5",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ueg_n14_planewave/ueg_n14_rs5p0_m186.fcidump.gz",
+          "instance_data_object_uuid": "b97b548e-724c-53e1-8a72-4aaa40adf29e",
+          "is_fcidump_file": true
+        }
+      ],
+      "task_uuid": "d14b3959-1860-5338-b338-66d17d6ca09c"
+    },
+    {
+      "benchmark_role": "hard_tier_condensed_matter",
+      "features": {
+        "analytic_hf_with_madelung_hartree": 48.36852150419694,
+        "application_domain": "condensed_matter",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "benchmark_role": "hard_tier_condensed_matter",
+        "box_length_bohr": 1.9425649689427535,
+        "hamiltonian_family": "plane_wave_ueg",
+        "kinetic_cutoff_hartree": 62.77112059424338,
+        "m_spin_orbitals_source": 358,
+        "madelung_convention": "cubic_madelung_included",
+        "madelung_potential_hartree": -1.4605933520075915,
+        "model": "uniform electron gas",
+        "ms2": 0,
+        "n_alpha": 7,
+        "n_beta": 7,
+        "num_electrons": 14,
+        "num_orbitals": 179,
+        "orbital_basis": "real_plane_wave",
+        "rs_bohr": 0.5,
+        "shepherd_correlation_energy_hartree": -0.5797
+      },
+      "independent_parameters": {
+        "m_spin_orbitals_source": 358,
+        "num_spatial_orbitals": 179,
+        "rs_bohr": 0.5
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": 47.78882150419694,
+        "reference_energy_cross_validation_methods": [
+          "Shepherd/Booth/Alavi initiator-FCIQMC finite-basis correlation energy",
+          "analytic closed-shell plane-wave Hartree-Fock"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
+        "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_standard_error": 0.00030000000000000003,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "bed186be17575ad977a76a11e61ea8c5cc640b16",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ueg_n14_planewave/ueg_n14_rs0p5_m358.fcidump.gz",
+          "instance_data_object_uuid": "96b55b74-ea8b-51c6-8f06-788c3112caf7",
+          "is_fcidump_file": true
+        }
+      ],
+      "task_uuid": "5e53cc08-b541-5163-bbf2-66e195a6492f"
+    },
+    {
+      "benchmark_role": "hard_tier_condensed_matter",
+      "features": {
+        "analytic_hf_with_madelung_hartree": 8.491480603537624,
+        "application_domain": "condensed_matter",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "benchmark_role": "hard_tier_condensed_matter",
+        "box_length_bohr": 3.885129937885507,
+        "hamiltonian_family": "plane_wave_ueg",
+        "kinetic_cutoff_hartree": 15.692780148560844,
+        "m_spin_orbitals_source": 358,
+        "madelung_convention": "cubic_madelung_included",
+        "madelung_potential_hartree": -0.7302966760037958,
+        "model": "uniform electron gas",
+        "ms2": 0,
+        "n_alpha": 7,
+        "n_beta": 7,
+        "num_electrons": 14,
+        "num_orbitals": 179,
+        "orbital_basis": "real_plane_wave",
+        "rs_bohr": 1.0,
+        "shepherd_correlation_energy_hartree": -0.5189
+      },
+      "independent_parameters": {
+        "m_spin_orbitals_source": 358,
+        "num_spatial_orbitals": 179,
+        "rs_bohr": 1.0
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": 7.972580603537624,
+        "reference_energy_cross_validation_methods": [
+          "Shepherd/Booth/Alavi initiator-FCIQMC finite-basis correlation energy",
+          "analytic closed-shell plane-wave Hartree-Fock"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
+        "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_standard_error": 0.0001,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "a766c034f830fd4a4938d41f43e95892704964dc",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ueg_n14_planewave/ueg_n14_rs1p0_m358.fcidump.gz",
+          "instance_data_object_uuid": "fecf7b4b-ee4d-5e56-8b9c-9af7647e8587",
+          "is_fcidump_file": true
+        }
+      ],
+      "task_uuid": "e734c740-5fc4-5b50-9dc3-65a32bc801d4"
+    },
+    {
+      "benchmark_role": "hard_tier_condensed_matter",
+      "features": {
+        "analytic_hf_with_madelung_hartree": 0.3225452646286011,
+        "application_domain": "condensed_matter",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "benchmark_role": "hard_tier_condensed_matter",
+        "box_length_bohr": 7.770259875771014,
+        "hamiltonian_family": "plane_wave_ueg",
+        "kinetic_cutoff_hartree": 3.923195037140211,
+        "m_spin_orbitals_source": 358,
+        "madelung_convention": "cubic_madelung_included",
+        "madelung_potential_hartree": -0.3651483380018979,
+        "model": "uniform electron gas",
+        "ms2": 0,
+        "n_alpha": 7,
+        "n_beta": 7,
+        "num_electrons": 14,
+        "num_orbitals": 179,
+        "orbital_basis": "real_plane_wave",
+        "rs_bohr": 2.0,
+        "shepherd_correlation_energy_hartree": -0.4355
+      },
+      "independent_parameters": {
+        "m_spin_orbitals_source": 358,
+        "num_spatial_orbitals": 179,
+        "rs_bohr": 2.0
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -0.11295473537139888,
+        "reference_energy_cross_validation_methods": [
+          "Shepherd/Booth/Alavi initiator-FCIQMC finite-basis correlation energy",
+          "analytic closed-shell plane-wave Hartree-Fock"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
+        "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_standard_error": 0.0004,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "176c0e8fbd009f4a50c427482f665aeaec739f87",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ueg_n14_planewave/ueg_n14_rs2p0_m358.fcidump.gz",
+          "instance_data_object_uuid": "5a2c3110-f289-563d-ba3c-fb3cf5c2621a",
+          "is_fcidump_file": true
+        }
+      ],
+      "task_uuid": "922671d8-84d8-5a21-9d0a-1e1d774a1632"
+    },
+    {
+      "benchmark_role": "hard_tier_condensed_matter",
+      "features": {
+        "analytic_hf_with_madelung_hartree": -0.8125487030622105,
+        "application_domain": "condensed_matter",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "benchmark_role": "hard_tier_condensed_matter",
+        "box_length_bohr": 19.425649689427537,
+        "hamiltonian_family": "plane_wave_ueg",
+        "kinetic_cutoff_hartree": 0.6277112059424337,
+        "m_spin_orbitals_source": 358,
+        "madelung_convention": "cubic_madelung_included",
+        "madelung_potential_hartree": -0.14605933520075914,
+        "model": "uniform electron gas",
+        "ms2": 0,
+        "n_alpha": 7,
+        "n_beta": 7,
+        "num_electrons": 14,
+        "num_orbitals": 179,
+        "orbital_basis": "real_plane_wave",
+        "rs_bohr": 5.0,
+        "shepherd_correlation_energy_hartree": -0.3017
+      },
+      "independent_parameters": {
+        "m_spin_orbitals_source": 358,
+        "num_spatial_orbitals": 179,
+        "rs_bohr": 5.0
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -1.1142487030622106,
+        "reference_energy_cross_validation_methods": [
+          "Shepherd/Booth/Alavi initiator-FCIQMC finite-basis correlation energy",
+          "analytic closed-shell plane-wave Hartree-Fock"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
+        "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_standard_error": 0.0007,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "338c1682cf8fc66ede36424fd5fd76e486c529f6",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ueg_n14_planewave/ueg_n14_rs5p0_m358.fcidump.gz",
+          "instance_data_object_uuid": "33e45f17-1026-571e-9d49-9cbc6cfb651f",
+          "is_fcidump_file": true
+        }
+      ],
+      "task_uuid": "fd7cbf1b-3dbc-50a1-bac0-ed35682db5cb"
+    }
+  ]
+}
