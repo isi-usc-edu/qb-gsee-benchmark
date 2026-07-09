@@ -1,6 +1,6 @@
 {
   "problem_instance_uuid": "90d4e4fc-1216-4846-b45f-198c0530e29b",
-  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
   "problem_type": "GSEE",
   "application_domain": "QC",
   "creation_timestamp": "2024-03-20T20:48:21.795324+00:00",
@@ -31,7 +31,7 @@
     "url": "http://www.apache.org/licenses/LICENSE-2.0"
   },
   "references": [
-    "Nat. Comm. 2014, 5(1), 1â€“11"
+    "Nat. Comm. 2014, 5(1), 1\u00e2\u20ac\u201c11"
   ],
   "short_name": "mo2_n2",
   "tasks": [
@@ -239,7 +239,10 @@
         "reference_energy": null,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "None",
-        "reference_energy_method": "None"
+        "reference_energy_method": "None",
+        "reference_energy_provenance": "no_reference",
+        "reference_energy_independent_of_shci_family": false,
+        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row."
       },
       "supporting_files": [
         {
@@ -249,7 +252,12 @@
           "instance_data_checksum_type": "sha1sum",
           "is_fcidump_file": true
         }
-      ]
+      ],
+      "reference_provenance_grade": "no_reference",
+      "curation_tier": "utility",
+      "reference_independence_from_solvers": false,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     },
     {
       "task_uuid": "138733f0-08f5-4077-b848-813c8ec53c79",
@@ -455,7 +463,10 @@
         "reference_energy": null,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "None",
-        "reference_energy_method": "None"
+        "reference_energy_method": "None",
+        "reference_energy_provenance": "no_reference",
+        "reference_energy_independent_of_shci_family": false,
+        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row."
       },
       "supporting_files": [
         {
@@ -465,7 +476,12 @@
           "instance_data_checksum_type": "sha1sum",
           "is_fcidump_file": true
         }
-      ]
+      ],
+      "reference_provenance_grade": "no_reference",
+      "curation_tier": "utility",
+      "reference_independence_from_solvers": false,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     },
     {
       "task_uuid": "79b74ad4-afa8-458f-87a3-a5ec339056c6",
@@ -671,7 +687,10 @@
         "reference_energy": null,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "None",
-        "reference_energy_method": "None"
+        "reference_energy_method": "None",
+        "reference_energy_provenance": "no_reference",
+        "reference_energy_independent_of_shci_family": false,
+        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row."
       },
       "supporting_files": [
         {
@@ -681,7 +700,12 @@
           "instance_data_checksum_type": "sha1sum",
           "is_fcidump_file": true
         }
-      ]
+      ],
+      "reference_provenance_grade": "no_reference",
+      "curation_tier": "utility",
+      "reference_independence_from_solvers": false,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     }
   ]
 }

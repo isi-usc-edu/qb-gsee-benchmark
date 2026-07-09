@@ -1,0 +1,330 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "problem_instance.schema.0.0.2.json",
+    "title": "Quantum Benchmarking Problem Instance File Schema",
+    "description": "Describes required fields for a valid problem instance file. Version 0.0.2 adds O1 task-level reference taxonomy and curation fields.",
+    "required": [
+        "problem_instance_uuid",
+        "short_name",
+        "creation_timestamp",
+        "calendar_due_date",
+        "contact_info",
+        "problem_type",
+        "tasks",
+        "status",
+        "superseded_by",
+        "application_domain",
+        "license",
+        "$schema"
+    ],
+    "properties": {
+        "$schema": {
+            "title": "Schema URL",
+            "description": "A hyperlink to the schema that describes this JSON object.",
+            "type": "string"
+        },
+        "references": {
+            "title": "References",
+            "description": "A list of citations or references for the problem instance or data.",
+            "type": "array"
+        },
+        "problem_instance_uuid": {
+            "title": "Problem Instance UUID",
+            "$ref": "uuid.schema.json"
+        },
+        "creation_timestamp": {
+            "title": "Creation Timestamp",
+            "$ref": "timestamp.schema.json"
+        },
+        "calendar_due_date": {
+            "title": "Calendar Due Date",
+            "comment": "For competitions and ad hoc evaluations this may be set so that the benchmark performer must return a solution by the UTC due date.  The value is a string with a timestamp in ISO 8601 format.\n\n If there is no due date, it is set to `null`.",
+            "oneOf": [
+                {
+                    "$ref": "timestamp.schema.json"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "short_name": {
+            "title": "Short Name",
+            "description": "A short string.  Not necessarily unique.",
+            "type": "string"
+        },
+        "license": {
+            "title": "License",
+            "description": "object",
+            "required": [
+                "name",
+                "url"
+            ],
+            "properties": {
+                "name": {
+                    "title": "Name of License",
+                    "type": "string"
+                },
+                "url": {
+                    "title": "URL for License",
+                    "type": "string"
+                }
+            }
+        },
+        "contact_info": {
+            "title": "Point of Contact(s)",
+            "description": "A list of name/email/institution objects. Email is optional.",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "name",
+                    "institution"
+                ],
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "email": {
+                        "title": "Email",
+                        "type": "string"
+                    },
+                    "institution": {
+                        "title": "Institution/Organization",
+                        "type": "string"
+                    },
+                    "other_info": {
+                        "title": "Other Information",
+                        "description": "An optional object with no required structure for the test performer to put other contact information or comments in.",
+                        "type": "object"
+                    }
+                }
+            }
+        },
+        "status": {
+            "title": "Status of the Test Procedure",
+            "description": "may be `in_force`, `in_development`, `deprecated`.",
+            "type": "string",
+            "enum": [
+                "in_force",
+                "in_development",
+                "deprecated"
+            ]
+        },
+        "superseded_by": {
+            "title": "(if deprecated) Successor Problem Instance UUID",
+            "comment": "If this problem instance is status:deprecated, this field lists the UUID of the successor test_procedure object.\nIf this test_procedure is NOT deprecated, then the value is set to null.",
+            "oneOf": [
+                {
+                    "$ref": "uuid.schema.json"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "problem_type": {
+            "title": "Problem Type",
+            "description": "Limited to `GSEE`.",
+            "type": "string",
+            "enum": [
+                "GSEE"
+            ]
+        },
+        "application_domain": {
+            "title": "Application Domain",
+            "description": "Domain of the Problem Instance.  Choose from the following:\n\n`CM`: Condense Matter\n`QC`: Quantum Chemistry\n`QB`: Quantum Biochemistry\n`BIO`: Biology/Biomedical\n`ENG`: Engineering",
+            "type": "string",
+            "enum": [
+                "CM",
+                "QC",
+                "QB",
+                "BIO",
+                "ENG"
+            ]
+        },
+        "tasks": {
+            "title": "Tasks",
+            "description": "A list of tasks that must be performed.",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "task_uuid",
+                    "supporting_files",
+                    "reference_provenance_grade",
+                    "curation_tier",
+                    "reference_independence_from_solvers",
+                    "model_hamiltonian_downfolded",
+                    "source_defect_documented"
+                ],
+                "optional": [
+                    "independent_parameters",
+                    "features"
+                ],
+                "properties": {
+                    "task_uuid": {
+                        "title": "Task UUID",
+                        "$ref": "uuid.schema.json"
+                    },
+                    "supporting_files": {
+                        "title": "Supporting Files",
+                        "description": "A list of URLs and other metadata for supporting files.  E.g., FCIDUMP files, SCF solution files, checkpoint files, etc.  Note that this may be a list with only one item.",
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": [
+                                "instance_data_object_uuid",
+                                "instance_data_object_url",
+                                "instance_data_checksum_type",
+                                "instance_data_checksum",
+                                "is_fcidump_file"
+                            ],
+                            "properties": {
+                                "instance_data_object_uuid": {
+                                    "title": "Instance Data Object UUID",
+                                    "$ref": "uuid.schema.json"
+                                },
+                                "instance_data_object_url": {
+                                    "title": "Instance Data Object URL",
+                                    "type": "string",
+                                    "description": "A URL to the data file."
+                                },
+                                "instance_data_checksum_type": {
+                                    "title": "Instance Data Checksum Type",
+                                    "description": "Only `sha1sum` is supported at this time.",
+                                    "type": "string",
+                                    "enum": [
+                                        "sha1sum"
+                                    ]
+                                },
+                                "instance_data_checksum": {
+                                    "title": "Instance Data Checksum String",
+                                    "description": "a string containing the checksum of the data file.",
+                                    "type": "string"
+                                },
+                                "is_fcidump_file": {
+                                    "title": "Is FCIDUMP file indicator",
+                                    "description": "a boolean value to identify if the file is an FCIDUMP file or another supporting file type.",
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "requirements": {
+                        "title": "Performance Requirements",
+                        "description": "an object containing the accuracy, precision and runtime requirements for the benchmark.",
+                        "type": "object",
+                        "required": [
+                            "time_limit_seconds",
+                            "absolute_accuracy_threshold",
+                            "absolute_accuracy_threshold_energy_units",
+                            "reference_energy",
+                            "reference_energy_units"
+                        ],
+                        "properties": {
+                            "time_limit_seconds": {
+                                "title": "Time limit (in seconds)",
+                                "type": "number"
+                            },
+                            "absolute_accuracy_threshold": {
+                                "title": "Absolute accuracy threshold (in units of Hartree)",
+                                "description": "The absolute accuracy threshold in units of Hartree required for a reported solution to 'solve' the problem.  E.g., `reported_energy - reference_energy <= absolute_accuracy_threshold` implies that the reported solution has 'solved' the problem",
+                                "type": "number"
+                            },
+                            "absolute_accuracy_threshold_energy_units": {
+                                "title": "Absolute accuracy threshold units (Hartree)",
+                                "description": "The absolute accuracy threshold units: Hartree.  (The only choice is Hartree at this time.)",
+                                "type": "string",
+                                "enum": [
+                                    "Hartree"
+                                ]
+                            },
+                            "reference_energy": {
+                                "title": "Reference energy (in units of Hartree)",
+                                "description": "The reference energy of the Hamiltonian as determined classically, empirically or otherwise.  If a `reference_energy` is unknown, this may be `null`.",
+                                "oneOf": [
+                                    {
+                                        "type": "number"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ]
+                            },
+                            "reference_energy_units": {
+                                "title": "Reference energy units (Hartree)",
+                                "description": "The reference energy units: Hartree.  (The only choice is Hartree at this time.)",
+                                "type": "string",
+                                "enum": [
+                                    "Hartree"
+                                ]
+                            }
+                        }
+                    },
+                    "independent_parameters": {
+                        "title": "Independent Parameters",
+                        "description": "[OPTIONAL] A list of parameters that are being varied over the family of Hamiltonians.",
+                        "type": "object"
+                    },
+                    "features": {
+                        "title": "Features of the Instance",
+                        "description": "[OPTIONAL] Supplemental information about the problem features that drive the construction of the Hamiltonian.  Currently this is typically `PySCF` Hamiltonian generation arguments/parameters.  TODO: we may define this structure more.",
+                        "type": "object"
+                    },
+                    "reference_provenance_grade": {
+                        "title": "Reference Provenance Grade",
+                        "description": "O1 reference-provenance taxonomy grade for this task reference.",
+                        "type": "string",
+                        "enum": [
+                            "exact",
+                            "multiple_nearly_exact",
+                            "one_nearly_exact",
+                            "analytical",
+                            "uncontrolled_estimate",
+                            "variational_upper_bound",
+                            "no_reference"
+                        ]
+                    },
+                    "curation_tier": {
+                        "title": "Curation Tier",
+                        "description": "O1 curation/scoring tier for this task.",
+                        "type": "string",
+                        "enum": [
+                            "core",
+                            "expanded",
+                            "utility",
+                            "test"
+                        ]
+                    },
+                    "reference_independence_from_solvers": {
+                        "title": "Reference Independence From Solvers",
+                        "description": "True when the reference method is independent of solver families being scored for this task.",
+                        "type": "boolean"
+                    },
+                    "model_hamiltonian_downfolded": {
+                        "title": "Model Hamiltonian Downfolded",
+                        "description": "True for cRPA/downfolded effective model Hamiltonians; the grade applies to the finite model.",
+                        "type": "boolean"
+                    },
+                    "source_defect_documented": {
+                        "title": "Source Defect Documented",
+                        "description": "True where a source printed/reference value defect has been adjudicated and documented.",
+                        "type": "boolean"
+                    },
+                    "planting_mechanism": {
+                        "title": "Planting Mechanism",
+                        "description": "Optional planted-solution construction mechanism for planted families.",
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "instance_features": {
+            "title": "Instance Features",
+            "description": "An object describing the features of the instance. E.g., basis set used for Hamiltonian creation, number of orbitals, etc.  Exact structure is TBD.",
+            "type": "object"
+        }
+    }
+}

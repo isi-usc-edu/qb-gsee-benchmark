@@ -1,10 +1,10 @@
 {
   "problem_instance_uuid": "296bc86d-6de4-4737-b3b3-9dc1b6a4c6b8",
-  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
   "problem_type": "GSEE",
   "application_domain": "QC",
   "creation_timestamp": "2026-03-13T18:48:06.456295+00:00",
-  "latest_update_timestamp": "2026-03-31T19:34:42.795102+00:00",
+  "latest_update_timestamp": "2026-07-03T01:48:49+00:00",
   "calendar_due_date": "2126-03-13T18:48:06.456295+00:00",
   "status": "in_force",
   "superseded_by": null,
@@ -38,7 +38,8 @@
   },
   "references": [
     "Proc. Natl. Acad. Sci. U.S.A. 114 (29), 7555 (2017), https://doi.org/10.1073/pnas.1619152114, https://learn.microsoft.com/en-us/azure/quantum/tutorial-resource-estimator-chemistry, retrieved 31-March 2026",
-    "Chem. J. Phys. 150, 024302 (2019), https://doi.org/10.1063/1.5063376, https://github.com/zhendongli2008/Active-space-model-for-FeMoco, retrieved 16-March 2026"
+    "Chem. J. Phys. 150, 024302 (2019), https://doi.org/10.1063/1.5063376, https://github.com/zhendongli2008/Active-space-model-for-FeMoco, retrieved 16-March 2026",
+    "H. Zhai, C. Li, X. Zhang, Z. Li, S. Lee, G. K.-L. Chan, Classical computational simulation of the FeMo-cofactor model to chemical accuracy and its implications, arXiv:2601.04621v2 (2026), https://arxiv.org/abs/2601.04621"
   ],
   "short_name": "fe_mo_co",
   "tasks": [
@@ -114,7 +115,14 @@
         "reference_energy": -13482.181,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "https://doi.org/10.1063/1.5063376",
-        "reference_energy_method": "Average of extrapolated DMRG and SHCI"
+        "reference_energy_method": "Average of extrapolated DMRG and SHCI",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_cross_validation_methods": [
+          "DMRG",
+          "SHCI"
+        ],
+        "reference_energy_independent_of_shci_family": false,
+        "reference_energy_note": "Reference energy is the existing average of extrapolated DMRG and SHCI values; this is cross-validated literature metadata, but not an SHCI-independent hard-tier reference."
       },
       "supporting_files": [
         {
@@ -124,7 +132,12 @@
           "instance_data_checksum_type": "sha1sum",
           "is_fcidump_file": true
         }
-      ]
+      ],
+      "reference_provenance_grade": "one_nearly_exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": false,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     },
     {
       "task_uuid": "c6e29566-d374-4bbd-88cb-32190117a7eb",
@@ -381,10 +394,15 @@
         "absolute_accuracy_threshold": 0.00159362,
         "absolute_accuracy_threshold_energy_units": "Hartree",
         "energy_target": 0.99,
-        "reference_energy": -22140.4106,
+        "reference_energy": -22140.4101,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "https://arxiv.org/abs/2601.04621",
-        "reference_energy_method": "Average of unrestricted coupled cluster (UCC) and unrestricted DMRG (UDMRG)"
+        "reference_energy_method": "Cross-validated UDMRG (D=18000) and UCCSDTQ natural-orbital extrapolation",
+        "reference_energy_previous_value": -22140.4106,
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_update_delta_hartree": 0.0005,
+        "reference_energy_note": "Updated from -22140.4106 Hartree to the Zhai et al. 2026 cross-validated value; the 0.0005 Hartree (0.5 mHa) change is below the 0.00159362 Hartree accuracy threshold."
       },
       "supporting_files": [
         {
@@ -394,7 +412,12 @@
           "instance_data_checksum_type": "sha1sum",
           "is_fcidump_file": true
         }
-      ]
+      ],
+      "reference_provenance_grade": "one_nearly_exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     }
   ]
 }

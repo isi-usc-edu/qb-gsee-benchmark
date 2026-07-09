@@ -1,10 +1,10 @@
 {
   "problem_instance_uuid": "b78a10f2-ce8a-43c0-69ec-4cf666d8e85c",
-  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
   "problem_type": "GSEE",
   "application_domain": "QC",
   "creation_timestamp": "2024-03-20T20:48:21.795324+00:00",
-  "latest_update_timestamp": "2025-02-19T21:24:00.472071+00:00",
+  "latest_update_timestamp": "2026-07-03T01:56:22+00:00",
   "calendar_due_date": "2124-03-20T20:48:21.795324+00:00",
   "status": "in_force",
   "superseded_by": null,
@@ -31,7 +31,7 @@
     "url": "http://www.apache.org/licenses/LICENSE-2.0"
   },
   "references": [
-    "J. Am. Chem. Soc. 2017, 139 (3), 1245â€“1260"
+    "J. Am. Chem. Soc. 2017, 139 (3), 1245\u00e2\u20ac\u201c1260"
   ],
   "short_name": "ru_macho",
   "tasks": [
@@ -68,7 +68,14 @@
         "reference_energy": -187.72141980373365,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
-        "reference_energy_method": "SHCI and extrapolated DMRG"
+        "reference_energy_method": "SHCI and extrapolated DMRG",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_cross_validation_methods": [
+          "SHCI",
+          "DMRG"
+        ],
+        "reference_energy_independent_of_shci_family": false,
+        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference."
       },
       "supporting_files": [
         {
@@ -78,7 +85,12 @@
           "instance_data_checksum_type": "sha1sum",
           "is_fcidump_file": true
         }
-      ]
+      ],
+      "reference_provenance_grade": "one_nearly_exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": false,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     },
     {
       "task_uuid": "b164af91-a758-445c-8e78-610ffd2ad795",
@@ -127,7 +139,14 @@
         "reference_energy": -380.901861517385,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
-        "reference_energy_method": "SHCI and extrapolated DMRG"
+        "reference_energy_method": "SHCI and extrapolated DMRG",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_cross_validation_methods": [
+          "SHCI",
+          "DMRG"
+        ],
+        "reference_energy_independent_of_shci_family": false,
+        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference."
       },
       "supporting_files": [
         {
@@ -137,7 +156,12 @@
           "instance_data_checksum": "c27c6589d0b36b8069ea72e017420ceaf9168328",
           "is_fcidump_file": true
         }
-      ]
+      ],
+      "reference_provenance_grade": "one_nearly_exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": false,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     },
     {
       "task_uuid": "28bd4997-c04c-4914-9984-0101713041fe",
@@ -186,7 +210,14 @@
         "reference_energy": -380.88806185799865,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
-        "reference_energy_method": "SHCI and extrapolated DMRG"
+        "reference_energy_method": "SHCI and extrapolated DMRG",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_cross_validation_methods": [
+          "SHCI",
+          "DMRG"
+        ],
+        "reference_energy_independent_of_shci_family": false,
+        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference."
       },
       "supporting_files": [
         {
@@ -196,7 +227,12 @@
           "instance_data_checksum": "c24390bc6ebeb9121c5aafc8679590fa8af41a08",
           "is_fcidump_file": true
         }
-      ]
+      ],
+      "reference_provenance_grade": "one_nearly_exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": false,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     },
     {
       "task_uuid": "dcf2b441-b297-4a89-ae18-5778ec2d674d",
@@ -299,7 +335,14 @@
         "reference_energy": -2021.1755907881034,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
-        "reference_energy_method": "SHCI and extrapolated DMRG"
+        "reference_energy_method": "SHCI and extrapolated DMRG",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_cross_validation_methods": [
+          "SHCI",
+          "DMRG"
+        ],
+        "reference_energy_independent_of_shci_family": false,
+        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference."
       },
       "supporting_files": [
         {
@@ -309,7 +352,12 @@
           "instance_data_checksum": "042846e9019a1ddcf34193dd13681bd57d889608",
           "is_fcidump_file": true
         }
-      ]
+      ],
+      "reference_provenance_grade": "one_nearly_exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": false,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     },
     {
       "task_uuid": "6346b7fe-a4a5-4b10-a79b-706d4339923e",
@@ -420,7 +468,14 @@
         "reference_energy": -2021.3561470840154,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
-        "reference_energy_method": "SHCI and extrapolated DMRG"
+        "reference_energy_method": "SHCI and extrapolated DMRG",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_cross_validation_methods": [
+          "SHCI",
+          "DMRG"
+        ],
+        "reference_energy_independent_of_shci_family": false,
+        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference."
       },
       "supporting_files": [
         {
@@ -430,7 +485,12 @@
           "instance_data_checksum": "5d839c8c0fff7fe2a16b4c68fe9f4b9ce452959d",
           "is_fcidump_file": true
         }
-      ]
+      ],
+      "reference_provenance_grade": "one_nearly_exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": false,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     },
     {
       "task_uuid": "68db6781-dd54-43c4-b667-7b754c4d5cdb",
@@ -542,7 +602,14 @@
         "reference_energy": -2208.9903674400903,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
-        "reference_energy_method": "SHCI and extrapolated DMRG"
+        "reference_energy_method": "SHCI and extrapolated DMRG",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_cross_validation_methods": [
+          "SHCI",
+          "DMRG"
+        ],
+        "reference_energy_independent_of_shci_family": false,
+        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference."
       },
       "supporting_files": [
         {
@@ -552,7 +619,12 @@
           "instance_data_checksum": "4032d77f415dbc33c09503d404554f9bdba96967",
           "is_fcidump_file": true
         }
-      ]
+      ],
+      "reference_provenance_grade": "one_nearly_exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": false,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     },
     {
       "task_uuid": "d3ecd428-ee03-4d8b-aa14-af4d935781ed",
@@ -672,7 +744,10 @@
         "reference_energy": null,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "None",
-        "reference_energy_method": "None"
+        "reference_energy_method": "None",
+        "reference_energy_provenance": "no_reference",
+        "reference_energy_independent_of_shci_family": false,
+        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row."
       },
       "supporting_files": [
         {
@@ -682,7 +757,12 @@
           "instance_data_checksum": "df86a39c49585130c5dd900c90f984e0f185fd2a",
           "is_fcidump_file": true
         }
-      ]
+      ],
+      "reference_provenance_grade": "no_reference",
+      "curation_tier": "utility",
+      "reference_independence_from_solvers": false,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     },
     {
       "task_uuid": "89253c8f-0f01-4046-a138-1bada22f0a6a",
@@ -804,7 +884,14 @@
         "reference_energy": -2402.040424337404,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
-        "reference_energy_method": "SHCI and extrapolated DMRG"
+        "reference_energy_method": "SHCI and extrapolated DMRG",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_cross_validation_methods": [
+          "SHCI",
+          "DMRG"
+        ],
+        "reference_energy_independent_of_shci_family": false,
+        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference."
       },
       "supporting_files": [
         {
@@ -814,7 +901,12 @@
           "instance_data_checksum": "f5f3148b0939072f79edeea56090e35bbe8c38c0",
           "is_fcidump_file": true
         }
-      ]
+      ],
+      "reference_provenance_grade": "one_nearly_exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": false,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     },
     {
       "task_uuid": "842d2152-2f91-4dce-b088-7ed26afb2381",
@@ -944,7 +1036,10 @@
         "reference_energy": null,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "None",
-        "reference_energy_method": "None"
+        "reference_energy_method": "None",
+        "reference_energy_provenance": "no_reference",
+        "reference_energy_independent_of_shci_family": false,
+        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row."
       },
       "supporting_files": [
         {
@@ -954,7 +1049,12 @@
           "instance_data_checksum": "4556d50d340c3f27d143a42ef0a878f59c0b23a9",
           "is_fcidump_file": true
         }
-      ]
+      ],
+      "reference_provenance_grade": "no_reference",
+      "curation_tier": "utility",
+      "reference_independence_from_solvers": false,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     }
   ]
 }

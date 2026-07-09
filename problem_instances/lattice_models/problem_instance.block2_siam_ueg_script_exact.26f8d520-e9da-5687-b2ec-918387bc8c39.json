@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
   "application_domain": "CM",
   "calendar_due_date": null,
   "contact_info": [
@@ -74,7 +74,12 @@
           "instance_data_checksum": "81c89b83d14a4c132084e703cc70cc6e6dffbbaa",
           "is_fcidump_file": true
         }
-      ]
+      ],
+      "reference_provenance_grade": "one_nearly_exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     },
     {
       "task_uuid": "1ca99910-6d5a-5c82-ace4-70704a085bda",
@@ -121,7 +126,12 @@
           "instance_data_checksum": "cc71cbf114374d10368885003fd5ee3bfa47b653",
           "is_fcidump_file": true
         }
-      ]
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     }
   ]
 }

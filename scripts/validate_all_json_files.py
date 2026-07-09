@@ -45,7 +45,7 @@ def main(args: argparse.Namespace) -> None:
             (
                 "problem instances",
                 benchmark_data.problem_instance_list,
-                "../schemas/problem_instance.schema.0.0.1.json"
+                "../schemas/problem_instance.schema.0.0.2.json"
             ),
             (
                 "solutions",

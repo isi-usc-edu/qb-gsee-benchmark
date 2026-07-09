@@ -24,7 +24,10 @@
         "reference_energy": -8.014732559828659,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "Exact FCI solution in PySCF 2.8.0, with multithreading disabled.",
-        "reference_energy_method": "Exact FCI solution in PySCF 2.8.0, with multithreading disabled."
+        "reference_energy_method": "Exact FCI solution in PySCF 2.8.0, with multithreading disabled.",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_note": "Reference energy is an exact FCI solution from PySCF 2.8.0 with multithreading disabled; this is independent of the SHCI family."
       },
       "supporting_files": [
         {
@@ -34,13 +37,18 @@
           "instance_data_checksum_type": "sha1sum",
           "is_fcidump_file": true
         }
-      ]
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "test",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     }
   ],
-  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
   "references": [],
   "creation_timestamp": "2025-02-17T17:40:05.532275+00:00",
-  "latest_update_timestamp": "2025-02-17T17:40:05.532292+00:00",
+  "latest_update_timestamp": "2026-07-03T01:56:22+00:00",
   "calendar_due_date": null,
   "license": {
     "name": "Apache 2.0",

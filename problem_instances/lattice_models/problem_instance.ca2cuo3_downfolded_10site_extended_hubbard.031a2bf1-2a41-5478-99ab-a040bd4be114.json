@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
   "application_domain": "CM",
   "calendar_due_date": null,
   "contact_info": [
@@ -113,7 +113,12 @@
           "instance_data_checksum": "7f1b8b39a202d5cfc18d4b1bcd4d4ceac334fc8a",
           "is_fcidump_file": true
         }
-      ]
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": true,
+      "source_defect_documented": false
     }
   ]
 }

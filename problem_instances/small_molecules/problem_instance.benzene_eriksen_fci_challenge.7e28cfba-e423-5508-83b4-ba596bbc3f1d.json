@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
   "application_domain": "QC",
   "basis_convention": {
     "active_electrons": 30,
@@ -98,7 +98,12 @@
           "is_fcidump_file": true
         }
       ],
-      "task_uuid": "3309b193-b0e3-52fe-bad6-5414ec07129c"
+      "task_uuid": "3309b193-b0e3-52fe-bad6-5414ec07129c",
+      "reference_provenance_grade": "multiple_nearly_exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     }
   ]
 }

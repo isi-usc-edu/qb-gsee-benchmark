@@ -1,11 +1,11 @@
 {
-  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
   "references": [
     "https://doi.org/10.1063/5.0018577"
   ],
   "problem_instance_uuid": "3301a356-21a9-472b-8021-f02f4d2c9eec",
   "creation_timestamp": "2024-11-20T00:00:00.0+00:00",
-  "latest_update_timestamp": "2025-02-19T21:24:00.495577+00:00",
+  "latest_update_timestamp": "2026-07-03T01:56:22+00:00",
   "calendar_due_date": null,
   "short_name": "li2_0",
   "license": {
@@ -55,7 +55,14 @@
         "reference_energy": -14.869869469675248,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
-        "reference_energy_method": "SHCI and DMRG"
+        "reference_energy_method": "SHCI and DMRG",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_cross_validation_methods": [
+          "SHCI",
+          "DMRG"
+        ],
+        "reference_energy_independent_of_shci_family": false,
+        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference."
       },
       "supporting_files": [
         {
@@ -72,7 +79,12 @@
           "instance_data_checksum_type": "sha1sum",
           "is_fcidump_file": false
         }
-      ]
+      ],
+      "reference_provenance_grade": "multiple_nearly_exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": false,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     },
     {
       "task_uuid": "aaa24a30-ade6-44a6-b6aa-51bf54c31eef",
@@ -95,7 +107,10 @@
         "reference_energy": null,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "None; originally from https://doi.org/10.1063/5.0018577; see scripts/original_small_molecule_reference_energies.csv",
-        "reference_energy_method": "None"
+        "reference_energy_method": "None",
+        "reference_energy_provenance": "no_reference",
+        "reference_energy_independent_of_shci_family": false,
+        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row."
       },
       "supporting_files": [
         {
@@ -112,7 +127,12 @@
           "instance_data_checksum_type": "sha1sum",
           "is_fcidump_file": false
         }
-      ]
+      ],
+      "reference_provenance_grade": "no_reference",
+      "curation_tier": "utility",
+      "reference_independence_from_solvers": false,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     },
     {
       "task_uuid": "410cd417-988a-4f7f-99ad-93dda7eacdcb",
@@ -135,7 +155,10 @@
         "reference_energy": null,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "None; originally from https://doi.org/10.1063/5.0018577; see scripts/original_small_molecule_reference_energies.csv",
-        "reference_energy_method": "None"
+        "reference_energy_method": "None",
+        "reference_energy_provenance": "no_reference",
+        "reference_energy_independent_of_shci_family": false,
+        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row."
       },
       "supporting_files": [
         {
@@ -152,7 +175,12 @@
           "instance_data_checksum_type": "sha1sum",
           "is_fcidump_file": false
         }
-      ]
+      ],
+      "reference_provenance_grade": "no_reference",
+      "curation_tier": "utility",
+      "reference_independence_from_solvers": false,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     }
   ]
 }

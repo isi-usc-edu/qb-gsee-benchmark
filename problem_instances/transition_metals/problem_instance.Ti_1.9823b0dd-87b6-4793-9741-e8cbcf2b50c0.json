@@ -1,11 +1,11 @@
 {
-  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
   "references": [
     "https://doi.org/10.1103/PhysRevX.10.011041"
   ],
   "problem_instance_uuid": "9823b0dd-87b6-4793-9741-e8cbcf2b50c0",
   "creation_timestamp": "2024-11-20T00:00:00.0+00:00",
-  "latest_update_timestamp": "2025-02-19T21:24:00.465611+00:00",
+  "latest_update_timestamp": "2026-07-03T01:44:25+00:00",
   "calendar_due_date": null,
   "short_name": "Ti_1",
   "license": {
@@ -55,7 +55,15 @@
         "reference_energy": -57.63401999999999,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
-        "reference_energy_method": "SHCI"
+        "reference_energy_method": "SHCI",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_cross_validation_methods": [
+          "SHCI",
+          "DMRG",
+          "i-FCIQMC"
+        ],
+        "reference_energy_independent_of_shci_family": false,
+        "reference_energy_note": "Williams et al. 2020 report agreement among systematically converged SHCI, DMRG, and i-FCIQMC calculations for this transition-metal benchmark set. The stored reference method remains SHCI, so this is a validation-tier cross-validated label, not an SHCI-independent hard-tier reference."
       },
       "supporting_files": [
         {
@@ -72,7 +80,12 @@
           "instance_data_checksum_type": "sha1sum",
           "is_fcidump_file": false
         }
-      ]
+      ],
+      "reference_provenance_grade": "multiple_nearly_exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": false,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     },
     {
       "task_uuid": "c7049602-5460-4277-8148-d9c66012f8f0",
@@ -95,7 +108,15 @@
         "reference_energy": -57.70424000000001,
         "reference_energy_units": "Hartree",
         "reference_energy_source": "https://doi.org/10.1103/PhysRevX.10.011041",
-        "reference_energy_method": "SHCI"
+        "reference_energy_method": "SHCI",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_cross_validation_methods": [
+          "SHCI",
+          "DMRG",
+          "i-FCIQMC"
+        ],
+        "reference_energy_independent_of_shci_family": false,
+        "reference_energy_note": "Williams et al. 2020 report agreement among systematically converged SHCI, DMRG, and i-FCIQMC calculations for this transition-metal benchmark set. The stored reference method remains SHCI, so this is a validation-tier cross-validated label, not an SHCI-independent hard-tier reference."
       },
       "supporting_files": [
         {
@@ -112,7 +133,12 @@
           "instance_data_checksum_type": "sha1sum",
           "is_fcidump_file": false
         }
-      ]
+      ],
+      "reference_provenance_grade": "multiple_nearly_exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": false,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
     }
   ]
 }

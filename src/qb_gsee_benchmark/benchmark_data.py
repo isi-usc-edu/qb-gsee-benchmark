@@ -41,6 +41,26 @@ from qb_gsee_benchmark.utils import iso8601_timestamp
 from qb_gsee_benchmark.utils import validate_json
 
 
+TASK_TAXONOMY_FIELDS = [
+    "reference_provenance_grade",
+    "curation_tier",
+    "reference_independence_from_solvers",
+    "model_hamiltonian_downfolded",
+    "source_defect_documented",
+    "planting_mechanism",
+]
+
+
+def test_task_uuids(problem_instance_list: list[dict[str, Any]]) -> set[str]:
+    """Return task UUIDs marked as test-tier and excluded from scoring."""
+    task_uuids = set()
+    for problem_instance in problem_instance_list:
+        for task in problem_instance.get("tasks", []):
+            if task.get("curation_tier") == "test":
+                task_uuids.add(str(task["task_uuid"]))
+    return task_uuids
+
+
 
 
 class BenchmarkData:
@@ -666,6 +686,7 @@ class BenchmarkData:
             "time_limit_seconds",
             "accuracy_tol",
             "reference_energy",
+            *TASK_TAXONOMY_FIELDS,
             "calendar_due_date",
             "attempted",
             "solved_within_run_time",
@@ -701,6 +722,9 @@ class BenchmarkData:
             problem_instance_short_name = problem_instance["short_name"]
             for task in problem_instance["tasks"]:
                 task_uuid = task["task_uuid"]
+
+                if task.get("curation_tier") == "test":
+                    continue
                 
 
                 if len(self.hamiltonian_features[self.hamiltonian_features["task_uuid"]==task_uuid])==0:
@@ -771,6 +795,8 @@ class BenchmarkData:
                     d["accuracy_tol"] = task["requirements"]["absolute_accuracy_threshold"]
                     d["reference_energy"] = task["requirements"]["reference_energy"]
                         
+                    for field in TASK_TAXONOMY_FIELDS:
+                        d[field] = task.get(field)
 
                     if results is None:
                         # the solver did NOT submit a solution file for the problem_instance or Hamiltonian.
@@ -1239,7 +1265,10 @@ class BenchmarkData:
             output_directory (str): relative/path/for/outout.  Usually /ml_artifacts.
         """
 
-        self.data_for_bubble_ml_df = self.hamiltonian_features.copy() # copy/init as Hamiltonian features.
+        excluded_task_uuids = test_task_uuids(self.problem_instance_list)
+        self.data_for_bubble_ml_df = self.hamiltonian_features[
+            ~self.hamiltonian_features["task_uuid"].astype(str).isin(excluded_task_uuids)
+        ].copy() # copy/init as Hamiltonian features.
 
         for solver_uuid in self.solvers_dict:
             solver = self.solvers_dict[solver_uuid]

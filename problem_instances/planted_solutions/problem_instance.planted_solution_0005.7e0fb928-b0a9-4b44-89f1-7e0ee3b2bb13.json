@@ -1,11 +1,11 @@
 {
-  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
   "references": [
     "https://github.com/jtcantin/planted_solutions"
   ],
   "problem_instance_uuid": "7e0fb928-b0a9-4b44-89f1-7e0ee3b2bb13",
   "creation_timestamp": "2024-11-14T10:14:41.719923+00:00",
-  "latest_update_timestamp": "2025-02-19T17:01:14.164940+00:00",
+  "latest_update_timestamp": "2026-07-03T01:47:15+00:00",
   "calendar_due_date": null,
   "short_name": "planted_solution_0005",
   "license": {
@@ -41,7 +41,12 @@
         "absolute_accuracy_threshold_energy_units": "Hartree",
         "energy_target": 0.99,
         "reference_energy": -98.40362189128723,
-        "reference_energy_units": "Hartree"
+        "reference_energy_units": "Hartree",
+        "reference_energy_source": "https://github.com/jtcantin/planted_solutions",
+        "reference_energy_method": "Planted exact ground-state energy",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_note": "Reference energy is exact by construction from the planted-solution generator; this makes the reference independent of the SHCI family."
       },
       "features": {
         "multiplicity": 1,
@@ -49,7 +54,13 @@
         "num_orbitals": 14,
         "utility_scale": false
       },
-      "task_uuid": "a41a284c-7baa-438e-9323-532091c7a78f"
+      "task_uuid": "a41a284c-7baa-438e-9323-532091c7a78f",
+      "reference_provenance_grade": "exact",
+      "curation_tier": "utility",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false,
+      "planting_mechanism": "jtcantin_planted_solution_construction"
     }
   ]
 }
