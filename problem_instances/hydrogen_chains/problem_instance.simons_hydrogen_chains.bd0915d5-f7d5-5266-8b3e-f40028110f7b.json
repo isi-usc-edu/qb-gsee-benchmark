@@ -1,0 +1,2150 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "application_domain": "QC",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison",
+      "name": "Matthew Otten"
+    }
+  ],
+  "creation_timestamp": "2026-07-08T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-08T12:43:11+00:00",
+  "license": {
+    "name": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "problem_instance_uuid": "bd0915d5-f7d5-5266-8b3e-f40028110f7b",
+  "problem_type": "GSEE",
+  "references": [
+    "Motta et al., Phys. Rev. X 7, 031059 (2017), DOI 10.1103/PhysRevX.7.031059.",
+    "Simons Foundation hydrogen benchmark repository pinned at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea: https://github.com/simonsfoundation/hydrogen-benchmark-PRX"
+  ],
+  "short_name": "simons_hydrogen_chains",
+  "status": "in_development",
+  "superseded_by": null,
+  "source_data": {
+    "repository": "https://github.com/simonsfoundation/hydrogen-benchmark-PRX",
+    "commit": "b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea",
+    "retrieval_date": "2026-07-08",
+    "local_path": "external/hydrogen-benchmark-PRX"
+  },
+  "basis_convention": {
+    "geometry": "linear open-boundary H_N chain",
+    "bond_length_unit": "Bohr",
+    "pyscf_unit": "Bohr",
+    "frozen_core": false,
+    "orbital_basis": "canonical RHF molecular orbitals written by pyscf.tools.fcidump.from_scf"
+  },
+  "tasks": [
+    {
+      "task_uuid": "3cf5b34c-9808-530c-ada7-52dca6fcb8c1",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 1.0,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.0,
+        "basis_set": "STO-6G",
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -3.751740398123694,
+        "repo_rhf_energy_hartree": -3.7517377679,
+        "rhf_repo_delta_hartree": -2.6302236939557133e-06,
+        "dmrg_afqmc_delta_hartree": 0.000412000000000301
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -3.82438855,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "FCI_basis-STO",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "DMRG_basis-STO",
+          "MRCI+Q_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_1.0/FCI_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/STO-6G uses the Simons repo FCI file as the exact finite-basis reference."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "2eda4d21-8e0e-5abd-ac3c-c00bf064febc",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_sto6g_r1p0.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "800a9dc7e7ad78ac7b99654483ddd5ea5fe04a3f",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "99f44547-b9f5-5bdb-ad4d-f9155178eac6",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 1.2,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.2,
+        "basis_set": "STO-6G",
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -4.678055305847483,
+        "repo_rhf_energy_hartree": -4.6780538309,
+        "rhf_repo_delta_hartree": -1.4749474832598253e-06,
+        "dmrg_afqmc_delta_hartree": 0.00022200000000083264
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -4.76637768,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "FCI_basis-STO",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "DMRG_basis-STO",
+          "MRCI+Q_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_1.2/FCI_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/STO-6G uses the Simons repo FCI file as the exact finite-basis reference."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "43700eef-c554-5d60-b5d0-3dea5838a456",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_sto6g_r1p2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "664e9b4560f993b7de54731af5b52060e20c0dbb",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "491fa0b2-081e-5cd3-bc11-ee88beff81bb",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 1.4,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.4,
+        "basis_set": "STO-6G",
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -5.0986195108987715,
+        "repo_rhf_energy_hartree": -5.0986187791,
+        "rhf_repo_delta_hartree": -7.317987718025165e-07,
+        "dmrg_afqmc_delta_hartree": 5.999999999950489e-06
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.20509413,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "FCI_basis-STO",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "DMRG_basis-STO",
+          "MRCI+Q_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_1.4/FCI_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/STO-6G uses the Simons repo FCI file as the exact finite-basis reference."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "ddaeb0b0-4273-5e7b-9449-93053c0d3c71",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_sto6g_r1p4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "0d2ee09481ee44ede2330542ba86322f1c5ca8fc",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "33a43f11-7da1-5ca0-92cd-6b7cf81269a6",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 1.6,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.6,
+        "basis_set": "STO-6G",
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -5.256281587582038,
+        "repo_rhf_energy_hartree": -5.2562813583,
+        "rhf_repo_delta_hartree": -2.2928203780026024e-07,
+        "dmrg_afqmc_delta_hartree": -0.0024610000000002685
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.38436107,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "FCI_basis-STO",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "DMRG_basis-STO",
+          "MRCI+Q_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_1.6/FCI_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/STO-6G uses the Simons repo FCI file as the exact finite-basis reference."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "3ccb39c1-1e8d-588e-9685-806f8c2986ce",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_sto6g_r1p6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "66c739912f65068cc7c78c7f0c3899a54ad7daf1",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "5c7c5ee6-ff84-5fb3-9de8-b94b896937cc",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 1.8,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.8,
+        "basis_set": "STO-6G",
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -5.27014284162234,
+        "repo_rhf_energy_hartree": -5.2701429637,
+        "rhf_repo_delta_hartree": 1.2207765998084597e-07,
+        "dmrg_afqmc_delta_hartree": -0.0025849999999998374
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.42438538,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "FCI_basis-STO",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "DMRG_basis-STO",
+          "MRCI+Q_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_1.8/FCI_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/STO-6G uses the Simons repo FCI file as the exact finite-basis reference."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "d8db544b-34f3-5445-90ce-957727e7ba76",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_sto6g_r1p8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "39b2fabb4aff4a7e94fb6b6985c0ef71b2ed21dd",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "193c0b70-a4ed-587e-bd41-57e3d524ded8",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 2.0,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 2.0,
+        "basis_set": "STO-6G",
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -5.203470118620974,
+        "repo_rhf_energy_hartree": -5.2034704915,
+        "rhf_repo_delta_hartree": 3.7287902632243686e-07,
+        "dmrg_afqmc_delta_hartree": -0.002225999999999395
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.38962588,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "FCI_basis-STO",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "DMRG_basis-STO",
+          "MRCI+Q_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_2.0/FCI_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/STO-6G uses the Simons repo FCI file as the exact finite-basis reference."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "02f38f1a-59f8-55a0-8eba-77831846f657",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_sto6g_r2p0.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "a6286cf3b3f16a031739da6e598b7352f676de42",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "ad0ec143-c7bd-5c4e-854b-b89fa72398c3",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 2.4,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 2.4,
+        "basis_set": "STO-6G",
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -4.956056404503622,
+        "repo_rhf_energy_hartree": -4.9560570889,
+        "rhf_repo_delta_hartree": 6.843963777924955e-07,
+        "dmrg_afqmc_delta_hartree": -0.0008359999999996148
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.22793649,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "FCI_basis-STO",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "DMRG_basis-STO",
+          "MRCI+Q_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_2.4/FCI_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/STO-6G uses the Simons repo FCI file as the exact finite-basis reference."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "cfd142ef-bda4-5d7c-be54-851c27c22c97",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_sto6g_r2p4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "c877356ef1793426ff4ba893066a0a05c46baa89",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "719e803f-6efb-5c03-a4ea-d5a39d4b34a0",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 2.8,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 2.8,
+        "basis_set": "STO-6G",
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -4.658427915327248,
+        "repo_rhf_energy_hartree": -4.6584287534,
+        "rhf_repo_delta_hartree": 8.380727516410502e-07,
+        "dmrg_afqmc_delta_hartree": 0.0004559999999997899
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.05024496,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "FCI_basis-STO",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "DMRG_basis-STO",
+          "MRCI+Q_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_2.8/FCI_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/STO-6G uses the Simons repo FCI file as the exact finite-basis reference."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "e3bc2f39-b255-5406-b384-f043dccdba26",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_sto6g_r2p8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "f6dc15a064708a675f43e88489581c8fe80b544c",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "17b0ae27-5de4-57ba-8b37-ad3df66c6d94",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 3.2,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 3.2,
+        "basis_set": "STO-6G",
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -4.366793530183154,
+        "repo_rhf_energy_hartree": -4.3667944202,
+        "rhf_repo_delta_hartree": 8.900168460002078e-07,
+        "dmrg_afqmc_delta_hartree": 0.0010190000000003252
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -4.91038288,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "FCI_basis-STO",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "DMRG_basis-STO",
+          "MRCI+Q_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_3.2/FCI_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/STO-6G uses the Simons repo FCI file as the exact finite-basis reference."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "966b59ce-22fd-5dbb-97b1-f90e8c1eb79a",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_sto6g_r3p2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "fd7fe47ca3efa3c95f8946c57175d931ae0a886d",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "f0811117-21cb-581d-af4c-379576aa3f6a",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 3.6,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 3.6,
+        "basis_set": "STO-6G",
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -4.10493198051222,
+        "repo_rhf_energy_hartree": -4.1049328529,
+        "rhf_repo_delta_hartree": 8.72387779793371e-07,
+        "dmrg_afqmc_delta_hartree": 0.0013010000000006627
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -4.81870081,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "FCI_basis-STO",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "DMRG_basis-STO",
+          "MRCI+Q_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_3.6/FCI_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/STO-6G uses the Simons repo FCI file as the exact finite-basis reference."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "a4621463-188d-5513-9a95-f6d96b2a689b",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_sto6g_r3p6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "6916d95f5d2650d51f29b8537e6f3cee09447dc3",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "2865a5ab-0fb3-5f3d-a888-d37905986fec",
+      "independent_parameters": {
+        "n_hydrogen": 30,
+        "bond_length_bohr": 1.0,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H30",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.0,
+        "basis_set": "STO-6G",
+        "num_orbitals": 30,
+        "num_electrons": 30,
+        "n_alpha": 15,
+        "n_beta": 15,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -10.313655846520618,
+        "repo_rhf_energy_hartree": -10.3136558465141,
+        "rhf_repo_delta_hartree": -6.517453243759519e-12,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -10.55663,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_30_OBC/R_1.0/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H30/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "48ea34c3-de63-551c-8878-3ece9bbd8c90",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h30_sto6g_r1p0.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "6b80bfa7ead28edf42dda78ae535ecabbc083428",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "51d41482-511c-59aa-b289-a777376f6213",
+      "independent_parameters": {
+        "n_hydrogen": 30,
+        "bond_length_bohr": 1.2,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H30",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.2,
+        "basis_set": "STO-6G",
+        "num_orbitals": 30,
+        "num_electrons": 30,
+        "n_alpha": 15,
+        "n_beta": 15,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -13.56908169871923,
+        "repo_rhf_energy_hartree": -13.5690816987188,
+        "rhf_repo_delta_hartree": -4.298783551348606e-13,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -13.85415,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_30_OBC/R_1.2/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H30/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "50e66c4c-136d-59f2-ae66-6ac641a582ec",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h30_sto6g_r1p2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "a5f13e5212403a541dff99b8daf653bdfb4dd901",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "fd59b582-115a-564f-869f-f2062b5c037a",
+      "independent_parameters": {
+        "n_hydrogen": 30,
+        "bond_length_bohr": 1.4,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H30",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.4,
+        "basis_set": "STO-6G",
+        "num_orbitals": 30,
+        "num_electrons": 30,
+        "n_alpha": 15,
+        "n_beta": 15,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -15.062616795379867,
+        "repo_rhf_energy_hartree": -15.0626167953787,
+        "rhf_repo_delta_hartree": -1.1670664434859646e-12,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -15.39619,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_30_OBC/R_1.4/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H30/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "c5ffa212-ed43-5eb0-a6a0-f24fadbbca68",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h30_sto6g_r1p4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "62548345f6966d79e886e7bf74495a995da68727",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "72fd3cff-23cb-5408-b651-196a7ea1c49f",
+      "independent_parameters": {
+        "n_hydrogen": 30,
+        "bond_length_bohr": 1.6,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H30",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.6,
+        "basis_set": "STO-6G",
+        "num_orbitals": 30,
+        "num_electrons": 30,
+        "n_alpha": 15,
+        "n_beta": 15,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -15.65783548844292,
+        "repo_rhf_energy_hartree": -15.6578354884388,
+        "rhf_repo_delta_hartree": -4.121147867408581e-12,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -16.04934,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_30_OBC/R_1.6/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H30/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "799ab24c-7c71-5481-b115-4ae9b7b168ff",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h30_sto6g_r1p6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "e894a55ae0097daa6d9c24ac7fc49b0ffa482e49",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "1b0c33b4-c239-5e54-945b-c6c9041c926c",
+      "independent_parameters": {
+        "n_hydrogen": 30,
+        "bond_length_bohr": 1.8,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H30",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.8,
+        "basis_set": "STO-6G",
+        "num_orbitals": 30,
+        "num_electrons": 30,
+        "n_alpha": 15,
+        "n_beta": 15,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -15.766977274961569,
+        "repo_rhf_energy_hartree": -15.7669772749511,
+        "rhf_repo_delta_hartree": -1.0468070854585676e-11,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -16.22969,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_30_OBC/R_1.8/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H30/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "4f3fa3f3-c5ab-5017-8009-79c53977864e",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h30_sto6g_r1p8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "92402c54eb4cae649ddff7b9bf4d95d958ceb713",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "60a0c290-93c3-59cc-99bd-8e4e092e983a",
+      "independent_parameters": {
+        "n_hydrogen": 30,
+        "bond_length_bohr": 2.0,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H30",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 2.0,
+        "basis_set": "STO-6G",
+        "num_orbitals": 30,
+        "num_electrons": 30,
+        "n_alpha": 15,
+        "n_beta": 15,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -15.605070964131059,
+        "repo_rhf_energy_hartree": -15.6050709641061,
+        "rhf_repo_delta_hartree": -2.495958995041292e-11,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -16.15657,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_30_OBC/R_2.0/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H30/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "4b015b07-4e97-5c5d-84fe-5758b7f012c8",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h30_sto6g_r2p0.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "8031f33420a0cd9c560e7cf847097af37107f4ec",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "65243731-2f93-54c7-8df2-1d4e4fb6327a",
+      "independent_parameters": {
+        "n_hydrogen": 30,
+        "bond_length_bohr": 2.4,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H30",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 2.4,
+        "basis_set": "STO-6G",
+        "num_orbitals": 30,
+        "num_electrons": 30,
+        "n_alpha": 15,
+        "n_beta": 15,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -14.895572271048586,
+        "repo_rhf_energy_hartree": -14.8955722710483,
+        "rhf_repo_delta_hartree": -2.859934511434403e-13,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -15.69355,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_30_OBC/R_2.4/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H30/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "c9fc119d-706f-53e9-bd24-d660da5e0d23",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h30_sto6g_r2p4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "1dad686b94f89cb127d953804512baeaa354d333",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "ab96fd6e-9560-582a-8282-e6fc6d18b59a",
+      "independent_parameters": {
+        "n_hydrogen": 30,
+        "bond_length_bohr": 2.8,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H30",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 2.8,
+        "basis_set": "STO-6G",
+        "num_orbitals": 30,
+        "num_electrons": 30,
+        "n_alpha": 15,
+        "n_beta": 15,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -14.009491978957975,
+        "repo_rhf_energy_hartree": -14.0094919789563,
+        "rhf_repo_delta_hartree": -1.6751044995544362e-12,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -15.16211,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_30_OBC/R_2.8/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H30/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "c0bcbdcc-3b79-5403-ac5d-c79b858d6879",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h30_sto6g_r2p8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "8328195ea789e369f9ee7d919343944e9a6435c2",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "7f43dcbe-9dcb-55ea-84da-7955e43d5ec6",
+      "independent_parameters": {
+        "n_hydrogen": 30,
+        "bond_length_bohr": 3.2,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H30",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 3.2,
+        "basis_set": "STO-6G",
+        "num_orbitals": 30,
+        "num_electrons": 30,
+        "n_alpha": 15,
+        "n_beta": 15,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -13.13152054561031,
+        "repo_rhf_energy_hartree": -13.1315205456056,
+        "rhf_repo_delta_hartree": -4.710898338089464e-12,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -14.7391,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_30_OBC/R_3.2/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H30/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "6fba24fa-adaa-53e8-86e3-4991d587df17",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h30_sto6g_r3p2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "6313501ec4bac38950bc3e6440491080b8f8fe6b",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "085b2b97-cf95-5896-97e6-f6aedf1630dd",
+      "independent_parameters": {
+        "n_hydrogen": 30,
+        "bond_length_bohr": 3.6,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H30",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 3.6,
+        "basis_set": "STO-6G",
+        "num_orbitals": 30,
+        "num_electrons": 30,
+        "n_alpha": 15,
+        "n_beta": 15,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -12.339598781762472,
+        "repo_rhf_energy_hartree": -12.3395987816344,
+        "rhf_repo_delta_hartree": -1.2807177540707926e-10,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -14.46061,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_30_OBC/R_3.6/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H30/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "6d05ab01-13bf-551f-931b-690c4c55c90f",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h30_sto6g_r3p6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "0e9ff6e7d0e2a22345c909561e68b6fef791f1b5",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "feb7925e-0f1a-5c43-a501-69836804edde",
+      "independent_parameters": {
+        "n_hydrogen": 50,
+        "bond_length_bohr": 1.0,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H50",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.0,
+        "basis_set": "STO-6G",
+        "num_orbitals": 50,
+        "num_electrons": 50,
+        "n_alpha": 25,
+        "n_beta": 25,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -16.864875916385557,
+        "repo_rhf_energy_hartree": -16.864875,
+        "rhf_repo_delta_hartree": -9.163855558824707e-07,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -17.28406,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_50_OBC/R_1.0/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H50/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "d47a1953-602b-5ea8-961f-0de7032ae60a",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h50_sto6g_r1p0.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "d75388cbf91d75732156edeb1abb86855178564b",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "f8458833-5fda-5661-bf94-ccfb3301e392",
+      "independent_parameters": {
+        "n_hydrogen": 50,
+        "bond_length_bohr": 1.2,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H50",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.2,
+        "basis_set": "STO-6G",
+        "num_orbitals": 50,
+        "num_electrons": 50,
+        "n_alpha": 25,
+        "n_beta": 25,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -22.46126720980041,
+        "repo_rhf_energy_hartree": -22.461267,
+        "rhf_repo_delta_hartree": -2.0980041171014818e-07,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -22.94764,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_50_OBC/R_1.2/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H50/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "e2caa74a-d7bb-5643-b0ed-8f31be49c008",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h50_sto6g_r1p2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "4c037037e3a7f755b494d453abe2cde298d42ed0",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "71899c14-b0b7-55cd-adba-51c9f7fb9d67",
+      "independent_parameters": {
+        "n_hydrogen": 50,
+        "bond_length_bohr": 1.4,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H50",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.4,
+        "basis_set": "STO-6G",
+        "num_orbitals": 50,
+        "num_electrons": 50,
+        "n_alpha": 25,
+        "n_beta": 25,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -25.029762712918057,
+        "repo_rhf_energy_hartree": -25.029762,
+        "rhf_repo_delta_hartree": -7.129180552567504e-07,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -25.59377,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_50_OBC/R_1.4/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H50/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "117c0c49-1ad7-5fa0-b1f9-e14c47ae403b",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h50_sto6g_r1p4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "78b8f8cabc8df1854b92e17028afe694703ef257",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "fe153877-f0b3-5b76-b2ac-00bd849fa91b",
+      "independent_parameters": {
+        "n_hydrogen": 50,
+        "bond_length_bohr": 1.6,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H50",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.6,
+        "basis_set": "STO-6G",
+        "num_orbitals": 50,
+        "num_electrons": 50,
+        "n_alpha": 25,
+        "n_beta": 25,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -26.062253110280594,
+        "repo_rhf_energy_hartree": -26.062253,
+        "rhf_repo_delta_hartree": -1.1028059532236512e-07,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -26.71943,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_50_OBC/R_1.6/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H50/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "31f06a93-7a05-52d4-ba08-69148b988f50",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h50_sto6g_r1p6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "2f1936c277abeedbfeac705dd5ea5c0dfa97ed3e",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "39e3117a-66a0-55b5-b875-1dbe4c9cf61d",
+      "independent_parameters": {
+        "n_hydrogen": 50,
+        "bond_length_bohr": 1.8,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H50",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.8,
+        "basis_set": "STO-6G",
+        "num_orbitals": 50,
+        "num_electrons": 50,
+        "n_alpha": 25,
+        "n_beta": 25,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -26.265982821191784,
+        "repo_rhf_energy_hartree": -26.265982,
+        "rhf_repo_delta_hartree": -8.211917830180937e-07,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -27.03864,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_50_OBC/R_1.8/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H50/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "e9d95620-197f-55c6-988c-05098da95cd8",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h50_sto6g_r1p8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "abb0f9c064b4e785c96a5a65cc9c5f5d6f55157e",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "2f745687-96f2-5605-93e9-3e2ff86609ee",
+      "independent_parameters": {
+        "n_hydrogen": 50,
+        "bond_length_bohr": 2.0,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H50",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 2.0,
+        "basis_set": "STO-6G",
+        "num_orbitals": 50,
+        "num_electrons": 50,
+        "n_alpha": 25,
+        "n_beta": 25,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -26.008202040322075,
+        "repo_rhf_energy_hartree": -26.008202,
+        "rhf_repo_delta_hartree": -4.03220745681665e-08,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -26.92609,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_50_OBC/R_2.0/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H50/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "872ee7fa-ab59-5019-9253-e5806b64b8ca",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h50_sto6g_r2p0.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "24d5b9139d7077d6bfe5ecdbfe49ce48bb2329f1",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "8f4a92a8-df5e-538e-9fc1-16f82329f1b4",
+      "independent_parameters": {
+        "n_hydrogen": 50,
+        "bond_length_bohr": 2.4,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H50",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 2.4,
+        "basis_set": "STO-6G",
+        "num_orbitals": 50,
+        "num_electrons": 50,
+        "n_alpha": 25,
+        "n_beta": 25,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -24.83576092247742,
+        "repo_rhf_energy_hartree": -24.83576,
+        "rhf_repo_delta_hartree": -9.224774188965057e-07,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -26.16056,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_50_OBC/R_2.4/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H50/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "73b76ece-c20f-5c45-82be-f23640a846b5",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h50_sto6g_r2p4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "8df027c15c39e8292dc1c6c061b90ac48211882b",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "94934017-861e-5b86-a26e-c3af4185f44c",
+      "independent_parameters": {
+        "n_hydrogen": 50,
+        "bond_length_bohr": 2.8,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H50",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 2.8,
+        "basis_set": "STO-6G",
+        "num_orbitals": 50,
+        "num_electrons": 50,
+        "n_alpha": 25,
+        "n_beta": 25,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -23.360813429610744,
+        "repo_rhf_energy_hartree": -23.360813,
+        "rhf_repo_delta_hartree": -4.296107434242913e-07,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -25.27479,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_50_OBC/R_2.8/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H50/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "f739cc02-46ec-5a87-8f64-7bf6fe94b68a",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h50_sto6g_r2p8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "e2370a74145139377bfbe3baa9efc5c531daddae",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "4eeaa56f-30e7-59e4-8320-677583e3b128",
+      "independent_parameters": {
+        "n_hydrogen": 50,
+        "bond_length_bohr": 3.2,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H50",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 3.2,
+        "basis_set": "STO-6G",
+        "num_orbitals": 50,
+        "num_electrons": 50,
+        "n_alpha": 25,
+        "n_beta": 25,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -21.89633117382214,
+        "repo_rhf_energy_hartree": -21.896331,
+        "rhf_repo_delta_hartree": -1.7382214068106805e-07,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -24.56828,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_50_OBC/R_3.2/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H50/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "142a5b86-433c-57c9-b3a3-e8876c1b545b",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h50_sto6g_r3p2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "70d0bf0cee4c1221ca33d4d8c8d3de0f0fc48a7b",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "be009e7e-38b0-5316-a52a-e3a6f345ce2e",
+      "independent_parameters": {
+        "n_hydrogen": 50,
+        "bond_length_bohr": 3.6,
+        "boundary_condition": "open",
+        "basis_set": "STO-6G"
+      },
+      "features": {
+        "molecule": "H50",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 3.6,
+        "basis_set": "STO-6G",
+        "num_orbitals": 50,
+        "num_electrons": 50,
+        "n_alpha": 25,
+        "n_beta": 25,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -20.57428759557296,
+        "repo_rhf_energy_hartree": -20.574287,
+        "rhf_repo_delta_hartree": -5.955729598383641e-07,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -24.10276,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "DMRG_basis-STO",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-STO",
+          "RHF_basis-STO"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_50_OBC/R_3.6/DMRG_basis-STO at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H50/STO-6G uses the Simons repo DMRG value with AFQMC recorded as an independent cross-validation partner."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "26c6f3aa-1127-599f-93e2-034a1107b8c4",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h50_sto6g_r3p6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "c8a2f4d8e852b2c6ba4fbbf722c44735dbccdc6e",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "81f65b14-2085-5443-b91b-3d791a55ab00",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 1.0,
+        "boundary_condition": "open",
+        "basis_set": "cc-pVDZ"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.0,
+        "basis_set": "cc-pVDZ",
+        "num_orbitals": 50,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -4.010094696776491,
+        "repo_rhf_energy_hartree": -4.010066006349,
+        "rhf_repo_delta_hartree": -2.869042749154005e-05,
+        "dmrg_afqmc_delta_hartree": 0.0012999999999996348
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -4.21954063,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "MRCI+Q_basis-DZ",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-DZ",
+          "DMRG_basis-DZ",
+          "RHF_basis-DZ"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_1.0/MRCI+Q_basis-DZ at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/cc-pVDZ uses the Simons repo MRCI+Q value with DMRG and AFQMC recorded as cross-validation partners."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "82341253-74da-5314-af49-04ea26d8fec8",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_ccpvdz_r1p0.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "09f734142e0dc5d5625c3590566aa26895f40620",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "2cb87d49-8fc6-54d4-ad36-680cc7234ffc",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 1.2,
+        "boundary_condition": "open",
+        "basis_set": "cc-pVDZ"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.2,
+        "basis_set": "cc-pVDZ",
+        "num_orbitals": 50,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -4.8136184760249385,
+        "repo_rhf_energy_hartree": -4.813618548155,
+        "rhf_repo_delta_hartree": 7.213006103512498e-08,
+        "dmrg_afqmc_delta_hartree": 0.0015999999999998238
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.02811881,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "MRCI+Q_basis-DZ",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-DZ",
+          "DMRG_basis-DZ",
+          "RHF_basis-DZ"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_1.2/MRCI+Q_basis-DZ at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/cc-pVDZ uses the Simons repo MRCI+Q value with DMRG and AFQMC recorded as cross-validation partners."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "6af627ca-6c4f-5162-aa25-9e2cf8a3ac96",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_ccpvdz_r1p2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "2fb9dc8f091427d05663c52dec6c8246fd952b57",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "38105998-616e-50a7-8927-c8c990a9f9fb",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 1.4,
+        "boundary_condition": "open",
+        "basis_set": "cc-pVDZ"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.4,
+        "basis_set": "cc-pVDZ",
+        "num_orbitals": 50,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -5.18910747266445,
+        "repo_rhf_energy_hartree": -5.189107474144,
+        "rhf_repo_delta_hartree": 1.4795507041753808e-09,
+        "dmrg_afqmc_delta_hartree": 0.000300000000000189
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.40965841,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "MRCI+Q_basis-DZ",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-DZ",
+          "DMRG_basis-DZ",
+          "RHF_basis-DZ"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_1.4/MRCI+Q_basis-DZ at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/cc-pVDZ uses the Simons repo MRCI+Q value with DMRG and AFQMC recorded as cross-validation partners."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "a1642538-52be-512c-be69-28128c4426fb",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_ccpvdz_r1p4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "2427a9a391edb07f909521d6ef0159d7b93ee7df",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "039c7006-2efd-5373-85e3-a6ecdf1188df",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 1.6,
+        "boundary_condition": "open",
+        "basis_set": "cc-pVDZ"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.6,
+        "basis_set": "cc-pVDZ",
+        "num_orbitals": 50,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -5.344745308584233,
+        "repo_rhf_energy_hartree": -5.344745309165,
+        "rhf_repo_delta_hartree": 5.807665459656164e-10,
+        "dmrg_afqmc_delta_hartree": 0.0011999999999998678
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.57109876,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "MRCI+Q_basis-DZ",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-DZ",
+          "DMRG_basis-DZ",
+          "RHF_basis-DZ"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_1.6/MRCI+Q_basis-DZ at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/cc-pVDZ uses the Simons repo MRCI+Q value with DMRG and AFQMC recorded as cross-validation partners."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "9ba22ef2-bab4-5b94-b8b1-e64899b931f7",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_ccpvdz_r1p6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "95fea2a1a44317c6c5754839ebee6a8e3236d119",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "c5cf09df-1ac6-5bbb-a54b-69019a911faf",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 1.8,
+        "boundary_condition": "open",
+        "basis_set": "cc-pVDZ"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 1.8,
+        "basis_set": "cc-pVDZ",
+        "num_orbitals": 50,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -5.382305086902742,
+        "repo_rhf_energy_hartree": -5.382305086903,
+        "rhf_repo_delta_hartree": 2.5845992013273644e-13,
+        "dmrg_afqmc_delta_hartree": 0.00039999999999995595
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.61485896,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "MRCI+Q_basis-DZ",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-DZ",
+          "DMRG_basis-DZ",
+          "RHF_basis-DZ"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_1.8/MRCI+Q_basis-DZ at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/cc-pVDZ uses the Simons repo MRCI+Q value with DMRG and AFQMC recorded as cross-validation partners."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "ca72e2a7-c84a-52c1-990a-7b00e5b3ebe7",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_ccpvdz_r1p8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "03a67a09d8a5cf49ac0513a1efd4b1e18f5049c0",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "56e9fe7b-73a0-585a-8af0-b26ece83da6e",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 2.0,
+        "boundary_condition": "open",
+        "basis_set": "cc-pVDZ"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 2.0,
+        "basis_set": "cc-pVDZ",
+        "num_orbitals": 50,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -5.355374240929102,
+        "repo_rhf_energy_hartree": -5.355374241008,
+        "rhf_repo_delta_hartree": 7.889777720038182e-11,
+        "dmrg_afqmc_delta_hartree": -0.000700000000000145
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.59551879,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "MRCI+Q_basis-DZ",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-DZ",
+          "DMRG_basis-DZ",
+          "RHF_basis-DZ"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_2.0/MRCI+Q_basis-DZ at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/cc-pVDZ uses the Simons repo MRCI+Q value with DMRG and AFQMC recorded as cross-validation partners."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "aafcb584-8b17-5021-bc83-dbc98180d80a",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_ccpvdz_r2p0.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "db7515fa1b1d576c4a60f0ed5ecc5b83c8bb89d9",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "777984ab-27f9-5e17-bd3b-a51cf5d787fa",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 2.4,
+        "boundary_condition": "open",
+        "basis_set": "cc-pVDZ"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 2.4,
+        "basis_set": "cc-pVDZ",
+        "num_orbitals": 50,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -5.213909185286978,
+        "repo_rhf_energy_hartree": -5.213909185207,
+        "rhf_repo_delta_hartree": -7.997780215873718e-11,
+        "dmrg_afqmc_delta_hartree": -0.00019999999999953388
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.47661171,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "MRCI+Q_basis-DZ",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-DZ",
+          "DMRG_basis-DZ",
+          "RHF_basis-DZ"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_2.4/MRCI+Q_basis-DZ at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/cc-pVDZ uses the Simons repo MRCI+Q value with DMRG and AFQMC recorded as cross-validation partners."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "09d24a88-a76e-5d07-bd2d-3691ad9079ab",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_ccpvdz_r2p4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "f49c1b8f11151c40d99f77077c240532cd8cd27b",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "5c391a1d-7a28-526c-8b33-b0559b69ecfc",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 2.8,
+        "boundary_condition": "open",
+        "basis_set": "cc-pVDZ"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 2.8,
+        "basis_set": "cc-pVDZ",
+        "num_orbitals": 50,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -5.0349427046203825,
+        "repo_rhf_energy_hartree": -5.034942705315,
+        "rhf_repo_delta_hartree": 6.946176966948769e-10,
+        "dmrg_afqmc_delta_hartree": 0.001600000000000712
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.33469619,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "MRCI+Q_basis-DZ",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "AFQMC_basis-DZ",
+          "DMRG_basis-DZ",
+          "RHF_basis-DZ"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_2.8/MRCI+Q_basis-DZ at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/cc-pVDZ uses the Simons repo MRCI+Q value with DMRG and AFQMC recorded as cross-validation partners."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "a80663e3-9990-56aa-9b20-ca2929c416fc",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_ccpvdz_r2p8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "d8354fa47f593ab1265936d26db66bdb4de0deba",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "75c6898e-ac12-5058-85bd-db7408e2bff2",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 3.2,
+        "boundary_condition": "open",
+        "basis_set": "cc-pVDZ"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 3.2,
+        "basis_set": "cc-pVDZ",
+        "num_orbitals": 50,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -4.857738624962902,
+        "repo_rhf_energy_hartree": -4.857738624462,
+        "rhf_repo_delta_hartree": -5.009024306446008e-10,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.2126981,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "MRCI+Q_basis-DZ",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "DMRG_basis-DZ",
+          "RHF_basis-DZ"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_3.2/MRCI+Q_basis-DZ at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/cc-pVDZ uses the Simons repo MRCI+Q value with DMRG and AFQMC recorded as cross-validation partners."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "9d65b378-ad2d-501b-886d-079a26c94e1c",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_ccpvdz_r3p2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "a0b11d6cf4fb3ad4ad8f61693cba54865ff8dbf0",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "8063c91e-2c2c-534f-91b6-7210b7bed639",
+      "independent_parameters": {
+        "n_hydrogen": 10,
+        "bond_length_bohr": 3.6,
+        "boundary_condition": "open",
+        "basis_set": "cc-pVDZ"
+      },
+      "features": {
+        "molecule": "H10",
+        "geometry": "linear_chain",
+        "chain_boundary_condition": "open",
+        "bond_length_bohr": 3.6,
+        "basis_set": "cc-pVDZ",
+        "num_orbitals": 50,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "frozen_core": false,
+        "rhf_energy_hartree": -4.695941929205868,
+        "repo_rhf_energy_hartree": -4.695941929738,
+        "rhf_repo_delta_hartree": 5.321316720596769e-10,
+        "dmrg_afqmc_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.12396578,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "MRCI+Q_basis-DZ",
+        "reference_energy_provenance": "cross-validated",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "DMRG_basis-DZ",
+          "RHF_basis-DZ"
+        ],
+        "reference_energy_source": "Simons hydrogen benchmark repo file external/hydrogen-benchmark-PRX/N_10_OBC/R_3.6/MRCI+Q_basis-DZ at commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea.",
+        "reference_energy_note": "H10/cc-pVDZ uses the Simons repo MRCI+Q value with DMRG and AFQMC recorded as cross-validation partners."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "7fc1a5be-2175-5e1f-a822-d9d1657bd4bf",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/simons_hydrogen_chains/simons_h10_ccpvdz_r3p6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "ffedff4c502211f11b23b2357bffe47d68429471",
+          "is_fcidump_file": true
+        }
+      ]
+    }
+  ]
+}
