@@ -1,0 +1,407 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "application_domain": "CM",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "name": "Matthew Otten",
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison"
+    }
+  ],
+  "creation_timestamp": "2026-07-07T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-07T20:01:07+00:00",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "problem_instance_uuid": "2ce667f9-547b-5570-986a-3a689fedc0a0",
+  "problem_type": "GSEE",
+  "references": [
+    "https://github.com/varbench/varbench",
+    "https://arxiv.org/abs/2302.04919",
+    "https://github.com/varbench/methods"
+  ],
+  "short_name": "varbench_lattice_site_basis",
+  "status": "in_development",
+  "superseded_by": null,
+  "basis_convention": {
+    "orbital_basis": "site_basis",
+    "hopping_t_hartree": 1.0,
+    "core_energy_hartree": 0.0,
+    "spinless_encoding": "spinless t-V tasks use all-alpha FCIDUMP sectors with MS2=NELEC",
+    "source_note": "FCIDUMPs are local direct encodings of VarBench lattice Hamiltonians; reference energies are parsed from VarBench exact-diagonalization rows and linked method scripts."
+  },
+  "tasks": [
+    {
+      "task_uuid": "c61e052f-2de8-566c-8149-e82d9bca4a28",
+      "independent_parameters": {
+        "model": "hubbard",
+        "geometry": "square_4x4",
+        "boundary_condition": "periodic",
+        "coupling_name": "U",
+        "coupling_value": 2.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_4x4",
+        "boundary_condition": "periodic",
+        "num_orbitals": 16,
+        "num_electrons": 8,
+        "ms2": 0,
+        "hopping_t_hartree": 1.0,
+        "coupling_name": "U",
+        "coupling_value_hartree": 2.0,
+        "orbital_basis": "site_basis",
+        "basis_convention_note": "spinful 4x4 periodic Hubbard site basis; h_ij=-1 for nearest-neighbor directed hops; (ii|ii)=U; ECORE=0"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -18.495436619460737,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "Exact diagonalization",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "VarBench exact diagonalization"
+        ],
+        "reference_energy_source": "VarBench row work/fcidumps/varbench_lattice/source/Hubbard_square_16_P_4_2.md and method script work/fcidumps/varbench_lattice/source/methods_Hubbard_square_16_P_4_2/ed_lattice_symmetries.sh",
+        "reference_energy_note": "Candidate condensed-matter lattice subset. Promotion requires signoff that the VarBench site-basis convention and spinless all-alpha FCIDUMP convention are accepted."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "b8f13821-6d1a-5812-bced-9d3c217f3e43",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/varbench_lattice/varbench_hubbard_square16_pbc_nup4_u2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "0a022d3843a853b65d50f85cfca4f9c867daf632",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "ddbffee8-5083-54d0-a2a0-e8258bf58bcc",
+      "independent_parameters": {
+        "model": "hubbard",
+        "geometry": "square_4x4",
+        "boundary_condition": "periodic",
+        "coupling_name": "U",
+        "coupling_value": 4.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_4x4",
+        "boundary_condition": "periodic",
+        "num_orbitals": 16,
+        "num_electrons": 8,
+        "ms2": 0,
+        "hopping_t_hartree": 1.0,
+        "coupling_name": "U",
+        "coupling_value_hartree": 4.0,
+        "orbital_basis": "site_basis",
+        "basis_convention_note": "spinful 4x4 periodic Hubbard site basis; h_ij=-1 for nearest-neighbor directed hops; (ii|ii)=U; ECORE=0"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -17.534897796641197,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "Exact diagonalization",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "VarBench exact diagonalization"
+        ],
+        "reference_energy_source": "VarBench row work/fcidumps/varbench_lattice/source/Hubbard_square_16_P_4_4.md and method script work/fcidumps/varbench_lattice/source/methods_Hubbard_square_16_P_4_4/ed_lattice_symmetries.sh",
+        "reference_energy_note": "Candidate condensed-matter lattice subset. Promotion requires signoff that the VarBench site-basis convention and spinless all-alpha FCIDUMP convention are accepted."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "c3f8f5bb-8342-58e8-a8e9-808cf57c3540",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/varbench_lattice/varbench_hubbard_square16_pbc_nup4_u4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "bda3f4b1f7bb0f8271889f6a4938ee570c1bf76d",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "d3ff6a43-0606-5c8f-b060-6a468723955f",
+      "independent_parameters": {
+        "model": "hubbard",
+        "geometry": "square_4x4",
+        "boundary_condition": "periodic",
+        "coupling_name": "U",
+        "coupling_value": 6.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_4x4",
+        "boundary_condition": "periodic",
+        "num_orbitals": 16,
+        "num_electrons": 8,
+        "ms2": 0,
+        "hopping_t_hartree": 1.0,
+        "coupling_name": "U",
+        "coupling_value_hartree": 6.0,
+        "orbital_basis": "site_basis",
+        "basis_convention_note": "spinful 4x4 periodic Hubbard site basis; h_ij=-1 for nearest-neighbor directed hops; (ii|ii)=U; ECORE=0"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -16.899926630974996,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "Exact diagonalization",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "VarBench exact diagonalization"
+        ],
+        "reference_energy_source": "VarBench row work/fcidumps/varbench_lattice/source/Hubbard_square_16_P_4_6.md and method script work/fcidumps/varbench_lattice/source/methods_Hubbard_square_16_P_4_6/ed_lattice_symmetries.sh",
+        "reference_energy_note": "Candidate condensed-matter lattice subset. Promotion requires signoff that the VarBench site-basis convention and spinless all-alpha FCIDUMP convention are accepted."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "89b0df21-de7f-5a7c-85f8-da849cda9f3f",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/varbench_lattice/varbench_hubbard_square16_pbc_nup4_u6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "5a4eaa86d347e010f33d1a679125807a0bdde06b",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "1bae5428-9b0d-570e-b16c-e623b049125c",
+      "independent_parameters": {
+        "model": "hubbard",
+        "geometry": "square_4x4",
+        "boundary_condition": "periodic",
+        "coupling_name": "U",
+        "coupling_value": 8.0
+      },
+      "features": {
+        "model": "Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "square_4x4",
+        "boundary_condition": "periodic",
+        "num_orbitals": 16,
+        "num_electrons": 8,
+        "ms2": 0,
+        "hopping_t_hartree": 1.0,
+        "coupling_name": "U",
+        "coupling_value_hartree": 8.0,
+        "orbital_basis": "site_basis",
+        "basis_convention_note": "spinful 4x4 periodic Hubbard site basis; h_ij=-1 for nearest-neighbor directed hops; (ii|ii)=U; ECORE=0"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -16.46062675368178,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "Exact diagonalization",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "VarBench exact diagonalization"
+        ],
+        "reference_energy_source": "VarBench row work/fcidumps/varbench_lattice/source/Hubbard_square_16_P_4_8.md and method script work/fcidumps/varbench_lattice/source/methods_Hubbard_square_16_P_4_8/ed_lattice_symmetries.sh",
+        "reference_energy_note": "Candidate condensed-matter lattice subset. Promotion requires signoff that the VarBench site-basis convention and spinless all-alpha FCIDUMP convention are accepted."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "2fc99289-9a8a-5670-bf44-7d03b04d3e89",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/varbench_lattice/varbench_hubbard_square16_pbc_nup4_u8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "162301833842572663a140c96e09adfde8429d3c",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "3f07a4ce-a8a6-5b47-8f89-7461b76a580d",
+      "independent_parameters": {
+        "model": "spinless_t_v",
+        "geometry": "chain_32",
+        "boundary_condition": "periodic",
+        "coupling_name": "V",
+        "coupling_value": 1.0
+      },
+      "features": {
+        "model": "spinless t-V",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "chain_32",
+        "boundary_condition": "periodic",
+        "num_orbitals": 32,
+        "num_electrons": 16,
+        "ms2": 16,
+        "hopping_t_hartree": 1.0,
+        "coupling_name": "V",
+        "coupling_value_hartree": 1.0,
+        "orbital_basis": "site_basis",
+        "basis_convention_note": "spinless t-V chain encoded as a fully spin-polarized FCIDUMP: NELEC=Nf, MS2=Nf, h_ij=-1 for nearest-neighbor directed hops, and offsite density terms represented by direct integrals (ii|jj)=V for nearest-neighbor i<j; ECORE=0",
+        "xxz_delta": 0.5,
+        "jordan_wigner_spin_chain_boundary_condition": "Periodic spinless-fermion ring at even Nf; Jordan-Wigner maps this to the pi-flux/twisted XXZ spin-chain sector. Use the asymmetric integer spinless Bethe quantum numbers, not the symmetric naive periodic-XXZ set."
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -15.946847944277561,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "Finite-chain Bethe ansatz for spinless t-V / Jordan-Wigner twisted XXZ sector",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "VarBench exact diagonalization",
+          "independent sparse ED validation ladder at L=8,12,16"
+        ],
+        "reference_energy_source": "Finite-chain Bethe ansatz validation in analysis/varbench_lattice/validate_tv_bethe_ansatz.py for V/t=1 (Delta=0.5); VarBench ED cross-check row retained from work/fcidumps/varbench_lattice/source/tV_chain_32_P_16_1.md",
+        "reference_energy_note": "W3a provenance upgrade: the numeric reference energy is unchanged from the existing VarBench ED row, but the primary provenance is now the finite-chain spinless t-V Bethe ansatz. For this even-Nf periodic FCIDUMP sector, the Jordan-Wigner spin-chain representation carries a pi-flux/twisted boundary convention; the validation report rejects the symmetric naive periodic-XXZ quantum-number set.",
+        "bethe_ansatz_validation": {
+          "validation_report": "analysis/varbench_lattice/varbench_tv_bethe_validation.md",
+          "small_chain_ed_ladder": "L=8,12,16 for V/t=1,2,4",
+          "l32_cross_check": "Bethe ansatz vs VarBench exact diagonalization <= 1e-9 Hartree",
+          "naive_periodic_xxz_negative_control": "symmetric V/t=2 quantum numbers rejected against small-chain ED"
+        }
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "08b1b687-34f6-58f8-8264-5274533ab80c",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/varbench_lattice/varbench_tv_chain32_pbc_nf16_v1.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "488026d9ceec4381d8ed7e8467556d3658512f45",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "fcc8fbc8-87b5-5a77-b3e2-38539824873e",
+      "independent_parameters": {
+        "model": "spinless_t_v",
+        "geometry": "chain_32",
+        "boundary_condition": "periodic",
+        "coupling_name": "V",
+        "coupling_value": 2.0
+      },
+      "features": {
+        "model": "spinless t-V",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "chain_32",
+        "boundary_condition": "periodic",
+        "num_orbitals": 32,
+        "num_electrons": 16,
+        "ms2": 16,
+        "hopping_t_hartree": 1.0,
+        "coupling_name": "V",
+        "coupling_value_hartree": 2.0,
+        "orbital_basis": "site_basis",
+        "basis_convention_note": "spinless t-V chain encoded as a fully spin-polarized FCIDUMP: NELEC=Nf, MS2=Nf, h_ij=-1 for nearest-neighbor directed hops, and offsite density terms represented by direct integrals (ii|jj)=V for nearest-neighbor i<j; ECORE=0",
+        "xxz_delta": 1.0,
+        "jordan_wigner_spin_chain_boundary_condition": "Periodic spinless-fermion ring at even Nf; Jordan-Wigner maps this to the pi-flux/twisted XXZ spin-chain sector. Use the asymmetric integer spinless Bethe quantum numbers, not the symmetric naive periodic-XXZ set."
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -12.32869972364372,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "Finite-chain Bethe ansatz for spinless t-V / Jordan-Wigner twisted XXZ sector",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "VarBench exact diagonalization",
+          "independent sparse ED validation ladder at L=8,12,16"
+        ],
+        "reference_energy_source": "Finite-chain Bethe ansatz validation in analysis/varbench_lattice/validate_tv_bethe_ansatz.py for V/t=2 (Delta=1); VarBench ED cross-check row retained from work/fcidumps/varbench_lattice/source/tV_chain_32_P_16_2.md",
+        "reference_energy_note": "W3a provenance upgrade: the numeric reference energy is unchanged from the existing VarBench ED row, but the primary provenance is now the finite-chain spinless t-V Bethe ansatz. For this even-Nf periodic FCIDUMP sector, the Jordan-Wigner spin-chain representation carries a pi-flux/twisted boundary convention; the validation report rejects the symmetric naive periodic-XXZ quantum-number set.",
+        "bethe_ansatz_validation": {
+          "validation_report": "analysis/varbench_lattice/varbench_tv_bethe_validation.md",
+          "small_chain_ed_ladder": "L=8,12,16 for V/t=1,2,4",
+          "l32_cross_check": "Bethe ansatz vs VarBench exact diagonalization <= 1e-9 Hartree",
+          "naive_periodic_xxz_negative_control": "symmetric V/t=2 quantum numbers rejected against small-chain ED"
+        }
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "1584452d-d2fb-579e-ada6-5cfed89071d6",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/varbench_lattice/varbench_tv_chain32_pbc_nf16_v2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "c8876acc31d6e62fb8aedee0011be378a9a90851",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "cf9437b3-291e-555e-8fcf-37d3c67203a4",
+      "independent_parameters": {
+        "model": "spinless_t_v",
+        "geometry": "chain_32",
+        "boundary_condition": "periodic",
+        "coupling_name": "V",
+        "coupling_value": 4.0
+      },
+      "features": {
+        "model": "spinless t-V",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "geometry": "chain_32",
+        "boundary_condition": "periodic",
+        "num_orbitals": 32,
+        "num_electrons": 16,
+        "ms2": 16,
+        "hopping_t_hartree": 1.0,
+        "coupling_name": "V",
+        "coupling_value_hartree": 4.0,
+        "orbital_basis": "site_basis",
+        "basis_convention_note": "spinless t-V chain encoded as a fully spin-polarized FCIDUMP: NELEC=Nf, MS2=Nf, h_ij=-1 for nearest-neighbor directed hops, and offsite density terms represented by direct integrals (ii|jj)=V for nearest-neighbor i<j; ECORE=0",
+        "xxz_delta": 2.0,
+        "jordan_wigner_spin_chain_boundary_condition": "Periodic spinless-fermion ring at even Nf; Jordan-Wigner maps this to the pi-flux/twisted XXZ spin-chain sector. Use the asymmetric integer spinless Bethe quantum numbers, not the symmetric naive periodic-XXZ set."
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -7.5021616707610725,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "Finite-chain Bethe ansatz for spinless t-V / Jordan-Wigner twisted XXZ sector",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "VarBench exact diagonalization",
+          "independent sparse ED validation ladder at L=8,12,16"
+        ],
+        "reference_energy_source": "Finite-chain Bethe ansatz validation in analysis/varbench_lattice/validate_tv_bethe_ansatz.py for V/t=4 (Delta=2); VarBench ED cross-check row retained from work/fcidumps/varbench_lattice/source/tV_chain_32_P_16_4.md",
+        "reference_energy_note": "W3a provenance upgrade: the numeric reference energy is unchanged from the existing VarBench ED row, but the primary provenance is now the finite-chain spinless t-V Bethe ansatz. For this even-Nf periodic FCIDUMP sector, the Jordan-Wigner spin-chain representation carries a pi-flux/twisted boundary convention; the validation report rejects the symmetric naive periodic-XXZ quantum-number set.",
+        "bethe_ansatz_validation": {
+          "validation_report": "analysis/varbench_lattice/varbench_tv_bethe_validation.md",
+          "small_chain_ed_ladder": "L=8,12,16 for V/t=1,2,4",
+          "l32_cross_check": "Bethe ansatz vs VarBench exact diagonalization <= 1e-9 Hartree",
+          "naive_periodic_xxz_negative_control": "symmetric V/t=2 quantum numbers rejected against small-chain ED"
+        }
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "60a2c463-ffff-50f6-b7e7-fa0f18d85b2e",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/varbench_lattice/varbench_tv_chain32_pbc_nf16_v4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "90fcca57f8315952f14520ec9929996f5a033c92",
+          "is_fcidump_file": true
+        }
+      ]
+    }
+  ]
+}
