@@ -1,0 +1,119 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "application_domain": "CM",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "name": "Matthew Otten",
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison"
+    }
+  ],
+  "creation_timestamp": "2026-07-09T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-09T20:00:00+00:00",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "problem_instance_uuid": "031a2bf1-2a41-5478-99ab-a040bd4be114",
+  "problem_type": "GSEE",
+  "references": [
+    "https://arxiv.org/abs/2409.12237",
+    "https://doi.org/10.1103/PhysRevApplied.23.044028",
+    "analysis/ca2cuo3_spec/ca2cuo3_spec_summary.md"
+  ],
+  "short_name": "ca2cuo3_downfolded_10site_extended_hubbard",
+  "status": "in_development",
+  "superseded_by": null,
+  "basis_convention": {
+    "orbital_basis": "site_basis",
+    "boundary_condition": "open_chain",
+    "energy_units": "Hartree in FCIDUMP and benchmark reference; source model parameters are reported in eV.",
+    "eV_per_hartree": 27.211386245988,
+    "one_body_term": "h_{i,i+1}=h_{i+1,i}=t for 9 open-chain nearest-neighbor bonds; no periodic edge.",
+    "onsite_term": "FCIDUMP two-electron integral (i i i i)=U encodes U n_{i,alpha} n_{i,beta}.",
+    "nearest_neighbor_density_term": "FCIDUMP direct integral (i i j j)=V for each open-chain nearest-neighbor bond encodes V n_i n_j.",
+    "core_energy_hartree": 0.0,
+    "particle_hole_shift": false,
+    "model_hamiltonian_downfolded": true,
+    "downfolding_caveat": "This is an effective one-band Ca2CuO3 Hamiltonian obtained by Wannierization/downfolding with cRPA-screened parameters, not a full ab initio electronic-structure Hamiltonian. The exact label applies only to the finite 10-site model encoded in the FCIDUMP."
+  },
+  "tasks": [
+    {
+      "task_uuid": "fd237a35-ba7c-5969-82e4-ecb3e1a85f48",
+      "independent_parameters": {
+        "model": "extended_hubbard",
+        "system": "Ca2CuO3",
+        "num_sites": 10,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "ms2": 0,
+        "boundary_condition": "open_chain",
+        "t_eV": -0.491,
+        "u_eV": 3.578,
+        "nearest_neighbor_v_eV": 0.903,
+        "model_hamiltonian_downfolded": true
+      },
+      "features": {
+        "model": "one-band extended Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "application_domain": "condensed_matter",
+        "material": "Ca2CuO3",
+        "geometry": "chain_10",
+        "boundary_condition": "open_chain",
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "ms2": 0,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_eV": -0.491,
+        "onsite_u_eV": 3.578,
+        "nearest_neighbor_v_eV": 0.903,
+        "hopping_t_hartree": -0.018043917188246602,
+        "onsite_u_hartree": 0.13148907474449356,
+        "nearest_neighbor_v_hartree": 0.033184637924616456,
+        "orbital_basis": "site_basis",
+        "model_hamiltonian_downfolded": true,
+        "downfolding_method": "Wannierized one-band model with cRPA-screened parameters",
+        "downfolding_caveat": "This is an effective one-band Ca2CuO3 Hamiltonian obtained by Wannierization/downfolding with cRPA-screened parameters, not a full ab initio electronic-structure Hamiltonian. The exact label applies only to the finite 10-site model encoded in the FCIDUMP.",
+        "basis_convention_note": "Spatial orbitals are Ca2CuO3 downfolded Hubbard sites; ECORE=0; no particle-hole shift; open-chain nearest-neighbor V uses direct FCIDUMP integrals (ii|jj)=V.",
+        "paper_dmrg_energy_eV": 6.005,
+        "exact_ed_anchor_eV": 6.005054926021,
+        "hilbert_dimension": 63504,
+        "lanczos_tol": 1e-12
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": 0.22068169815884978,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "sparse exact diagonalization of the finite downfolded 10-site open-chain extended-Hubbard FCIDUMP Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "published DMRG value 6.005 eV, printed to 0.001 eV",
+          "independent ED convention scan confirming open-chain full-V model",
+          "verifier ED recomputation from emitted FCIDUMP integrals"
+        ],
+        "reference_energy_source": "Local exact diagonalization of the same finite downfolded model encoded in the FCIDUMP, anchored to analysis/ca2cuo3_spec/ca2cuo3_ed_convention_scan.csv; the arXiv v3 / Phys. Rev. Applied paper reports DMRG 6.005 eV for the same 10x1 half-filled model and parameters.",
+        "reference_energy_note": "ED anchor 6.005054926021 eV = 0.220681698158850 Ha using 27.211386245988 eV/Ha. This is an effective one-band Ca2CuO3 Hamiltonian obtained by Wannierization/downfolding with cRPA-screened parameters, not a full ab initio electronic-structure Hamiltonian. The exact label applies only to the finite 10-site model encoded in the FCIDUMP."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "ae206f09-11eb-59e7-84ee-53fe9de238c0",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ca2cuo3_spec/ca2cuo3_10site_open_extended_hubbard.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "7f1b8b39a202d5cfc18d4b1bcd4d4ceac334fc8a",
+          "is_fcidump_file": true
+        }
+      ]
+    }
+  ]
+}
