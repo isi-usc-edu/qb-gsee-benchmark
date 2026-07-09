@@ -1,0 +1,174 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "application_domain": "QC",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison",
+      "name": "Matthew Otten"
+    },
+    {
+      "institution": "California Institute of Technology",
+      "name": "Huanchen Zhai",
+      "other_info": {
+        "GitHub repository": "https://github.com/hczhai/block2-example-data"
+      }
+    }
+  ],
+  "creation_timestamp": "2026-07-04T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-04T00:00:00+00:00",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "problem_instance_uuid": "7fd69f5a-b7a2-58c1-a070-c56d46b5eae8",
+  "problem_type": "GSEE",
+  "references": [
+    "https://doi.org/10.1063/5.0180424",
+    "https://github.com/hczhai/block2-example-data"
+  ],
+  "short_name": "block2_c2_ccpvdz_scan",
+  "status": "in_development",
+  "superseded_by": null,
+  "tasks": [
+    {
+      "features": {
+        "basis_set": "cc-pVDZ",
+        "block2_pdmrg_energy_hartree": -75.45491915010574,
+        "block2_scan_index": 0,
+        "bond_distance_bohr": 1.8,
+        "charge": 0,
+        "geometry": "C 0 0 0\nC 0 0 1.800000000000",
+        "geometry_units": "bohr",
+        "hf_sanity_minus_reference_hartree": 0.3265034232994708,
+        "molecule_name": "c2_ccpvdz_d1p80bohr",
+        "multiplicity": 1,
+        "num_electrons": 12,
+        "num_orbitals": 28,
+        "pyscf_rhf_energy_hartree": -75.12845219319105,
+        "spin_ms2": 0,
+        "upstream_commit": "ee9868b32ce1527a5067707f21f178128ad4d9b0"
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "energy_target": 0.99,
+        "probability_of_success": 0.99,
+        "reference_energy": -75.45495561649052,
+        "reference_energy_cross_validation_methods": [
+          "DMRG"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "block2 DMRG(M=3000) fixed-bond-dimension example energy",
+        "reference_energy_note": "Candidate staging only. Upstream provides scripts/results rather than FCIDUMPs; FCIDUMP reconstructed locally with PySCF from the upstream script. Reference scope needs Matt signoff before repo promotion.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Zhai et al. JCP 159, 234801 (2023), block2-example-data 08-C2/dmrg.npy at upstream commit ee9868b32ce1527a5067707f21f178128ad4d9b0",
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "0be0e802d8926fa336463f1b8bf7dc9a52a03bd2",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/block2_c2/block2_c2_ccpvdz_d1p80bohr.fcidump.gz",
+          "instance_data_object_uuid": "bd6779f1-60cb-5bc1-8b95-02c009ff8867",
+          "is_fcidump_file": true
+        }
+      ],
+      "task_uuid": "20e93441-9241-512c-93a9-5ae0da3534a7"
+    },
+    {
+      "features": {
+        "basis_set": "cc-pVDZ",
+        "block2_pdmrg_energy_hartree": -75.73313947286357,
+        "block2_scan_index": 12,
+        "bond_distance_bohr": 2.4000000000000004,
+        "charge": 0,
+        "geometry": "C 0 0 0\nC 0 0 2.400000000000",
+        "geometry_units": "bohr",
+        "hf_sanity_minus_reference_hartree": 0.3465782198284302,
+        "molecule_name": "c2_ccpvdz_d2p40bohr",
+        "multiplicity": 1,
+        "num_electrons": 12,
+        "num_orbitals": 28,
+        "pyscf_rhf_energy_hartree": -75.3866008156238,
+        "spin_ms2": 0,
+        "upstream_commit": "ee9868b32ce1527a5067707f21f178128ad4d9b0"
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "energy_target": 0.99,
+        "probability_of_success": 0.99,
+        "reference_energy": -75.73317903545222,
+        "reference_energy_cross_validation_methods": [
+          "DMRG"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "block2 DMRG(M=3000) fixed-bond-dimension example energy",
+        "reference_energy_note": "Candidate staging only. Upstream provides scripts/results rather than FCIDUMPs; FCIDUMP reconstructed locally with PySCF from the upstream script. Reference scope needs Matt signoff before repo promotion.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Zhai et al. JCP 159, 234801 (2023), block2-example-data 08-C2/dmrg.npy at upstream commit ee9868b32ce1527a5067707f21f178128ad4d9b0",
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "5725ab7ed26e57357a9cab475193b7c785de5713",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/block2_c2/block2_c2_ccpvdz_d2p40bohr.fcidump.gz",
+          "instance_data_object_uuid": "e5912791-7528-57cb-b80b-b25aae52c1f6",
+          "is_fcidump_file": true
+        }
+      ],
+      "task_uuid": "3848a0cd-fc41-5ca8-8bd7-6fc7d78e0e39"
+    },
+    {
+      "features": {
+        "basis_set": "cc-pVDZ",
+        "block2_pdmrg_energy_hartree": -75.56288974433714,
+        "block2_scan_index": 47,
+        "bond_distance_bohr": 4.150000000000002,
+        "charge": 0,
+        "geometry": "C 0 0 0\nC 0 0 4.150000000000",
+        "geometry_units": "bohr",
+        "hf_sanity_minus_reference_hartree": 0.3446088946814143,
+        "molecule_name": "c2_ccpvdz_d4p15bohr",
+        "multiplicity": 1,
+        "num_electrons": 12,
+        "num_orbitals": 28,
+        "pyscf_rhf_energy_hartree": -75.21965330166539,
+        "spin_ms2": 0,
+        "upstream_commit": "ee9868b32ce1527a5067707f21f178128ad4d9b0"
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "energy_target": 0.99,
+        "probability_of_success": 0.99,
+        "reference_energy": -75.5642621963468,
+        "reference_energy_cross_validation_methods": [
+          "DMRG"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "block2 DMRG(M=3000) fixed-bond-dimension example energy",
+        "reference_energy_note": "Candidate staging only. Upstream provides scripts/results rather than FCIDUMPs; FCIDUMP reconstructed locally with PySCF from the upstream script. Reference scope needs Matt signoff before repo promotion.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Zhai et al. JCP 159, 234801 (2023), block2-example-data 08-C2/dmrg.npy at upstream commit ee9868b32ce1527a5067707f21f178128ad4d9b0",
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "a188c3b3af90573fd9213341831d766634fb8f22",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/block2_c2/block2_c2_ccpvdz_d4p15bohr.fcidump.gz",
+          "instance_data_object_uuid": "307d760e-1070-5da8-ab22-f820ba969a30",
+          "is_fcidump_file": true
+        }
+      ],
+      "task_uuid": "c2a00ace-484b-5a52-9365-057c5e31c62f"
+    }
+  ]
+}
