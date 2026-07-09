@@ -1,0 +1,926 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "application_domain": "QC",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison",
+      "name": "Matthew Otten"
+    },
+    {
+      "institution": "University of Cambridge",
+      "name": "Ali Alavi",
+      "other_info": {
+        "source_role": "corresponding author of reference article"
+      }
+    }
+  ],
+  "creation_timestamp": "2026-07-07T00:00:00+00:00",
+  "instance_features": {
+    "basis_convention": "PySCF canonical restricted Hartree-Fock orbitals; Be2 all-electron, C/N/O/F frozen-core active-space FCIDUMP.",
+    "family": "first-row diatomics",
+    "source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012)",
+    "source_pdf": "refs/taming-the-first-row-diatomics-a-full-configuration-interaction-quantum-monte-carlo-study.pdf"
+  },
+  "latest_update_timestamp": "2026-07-08T23:40:24+00:00",
+  "license": {
+    "name": "CC-BY local reconstruction metadata; FCIDUMP generated from PySCF inputs",
+    "url": "https://doi.org/10.1021/ct300504f"
+  },
+  "problem_instance_uuid": "8851796a-bbff-52f9-8029-392e975da5d2",
+  "problem_type": "GSEE",
+  "references": [
+    "https://doi.org/10.1021/ct300504f"
+  ],
+  "short_name": "ifciqmc_first_row_diatomics",
+  "status": "in_development",
+  "superseded_by": null,
+  "tasks": [
+    {
+      "features": {
+        "basis_label": "VDZ",
+        "basis_set": "cc-pcvdz",
+        "bond_length_angstrom": 2.254,
+        "charge": 0,
+        "ecore_hartree": 3.756359971038154,
+        "frozen_core_electrons": 0,
+        "frozen_core_mos": 0,
+        "geometry": "Be 0.000000000000 0.000000000000 -1.127000000000\nBe 0.000000000000 0.000000000000 1.127000000000",
+        "geometry_units": "Angstrom",
+        "hf_sanity_minus_reference_hartree": 0.17887760650222972,
+        "molecule_name": "ifciqmc_be2_vdz_all_electron",
+        "multiplicity": 1,
+        "num_electrons": 8,
+        "num_orbitals": 36,
+        "orbital_basis_convention": "PySCF canonical restricted Hartree-Fock molecular orbitals with all electrons active.",
+        "pyscf_hf_energy_hartree": -29.12561239349777,
+        "reference_stochastic_error_hartree_1sigma": 8e-05,
+        "source_table1_energy_literal": "-29.30449(8)",
+        "spin_ms2": 0,
+        "system": "Be2",
+        "total_electrons_before_frozen_core": 8
+      },
+      "independent_parameters": {
+        "basis_label": "VDZ",
+        "bond_length_angstrom": 2.254,
+        "system": "Be2"
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "energy_target": 0.99,
+        "probability_of_success": 0.99,
+        "reference_energy": -29.30449,
+        "reference_energy_cross_validation_methods": [
+          "i-FCIQMC"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "initiator FCIQMC with initiator-bias control and stochastic error estimate",
+        "reference_energy_note": "Reference is the Table 1 all-electron i-FCIQMC total energy with one-standard-deviation stochastic error in parentheses. FCIDUMP is a local PySCF reconstruction of the same geometry, core-valence basis, all-electron, and restricted-HF-orbital convention.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, Be2 VDZ",
+        "reference_energy_standard_error_hartree": 8e-05,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "1ee39f2fa640dc22103be52993f507e73942b49e",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ifciqmc_first_row_diatomics/ifciqmc_be2_vdz_all_electron.fcidump.gz",
+          "instance_data_object_uuid": "a962d540-4bdb-56ee-b9ec-bd94eb8d57a0",
+          "is_fcidump_file": true,
+          "local_fcidump_path": "work/fcidumps/ifciqmc_first_row_diatomics/ifciqmc_be2_vdz_all_electron.fcidump.gz"
+        }
+      ],
+      "task_uuid": "c29c1795-b4b5-5c80-9d4a-0730edef8991"
+    },
+    {
+      "features": {
+        "basis_label": "VTZ",
+        "basis_set": "cc-pcvtz",
+        "bond_length_angstrom": 2.254,
+        "charge": 0,
+        "ecore_hartree": 3.756359971038154,
+        "frozen_core_electrons": 0,
+        "frozen_core_mos": 0,
+        "geometry": "Be 0.000000000000 0.000000000000 -1.127000000000\nBe 0.000000000000 0.000000000000 1.127000000000",
+        "geometry_units": "Angstrom",
+        "hf_sanity_minus_reference_hartree": 0.20044140645820008,
+        "molecule_name": "ifciqmc_be2_vtz_all_electron",
+        "multiplicity": 1,
+        "num_electrons": 8,
+        "num_orbitals": 86,
+        "orbital_basis_convention": "PySCF canonical restricted Hartree-Fock molecular orbitals with all electrons active.",
+        "pyscf_hf_energy_hartree": -29.1272785935418,
+        "reference_stochastic_error_hartree_1sigma": 7.000000000000001e-05,
+        "source_table1_energy_literal": "-29.32772(7)",
+        "spin_ms2": 0,
+        "system": "Be2",
+        "total_electrons_before_frozen_core": 8
+      },
+      "independent_parameters": {
+        "basis_label": "VTZ",
+        "bond_length_angstrom": 2.254,
+        "system": "Be2"
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "energy_target": 0.99,
+        "probability_of_success": 0.99,
+        "reference_energy": -29.32772,
+        "reference_energy_cross_validation_methods": [
+          "i-FCIQMC"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "initiator FCIQMC with initiator-bias control and stochastic error estimate",
+        "reference_energy_note": "Reference is the Table 1 all-electron i-FCIQMC total energy with one-standard-deviation stochastic error in parentheses. FCIDUMP is a local PySCF reconstruction of the same geometry, core-valence basis, all-electron, and restricted-HF-orbital convention.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, Be2 VTZ",
+        "reference_energy_standard_error_hartree": 7.000000000000001e-05,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "1700a7f0eb3ef01e118e8ea717348be276ca80b2",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ifciqmc_first_row_diatomics/ifciqmc_be2_vtz_all_electron.fcidump.gz",
+          "instance_data_object_uuid": "334cb8a3-2603-56fe-8116-4737bb8c038d",
+          "is_fcidump_file": true,
+          "local_fcidump_path": "work/fcidumps/ifciqmc_first_row_diatomics/ifciqmc_be2_vtz_all_electron.fcidump.gz"
+        }
+      ],
+      "task_uuid": "e7f661a6-725c-5144-988b-8c9b4f25250d"
+    },
+    {
+      "features": {
+        "basis_label": "VQZ",
+        "basis_set": "cc-pcvqz",
+        "bond_length_angstrom": 2.254,
+        "charge": 0,
+        "ecore_hartree": 3.756359971038154,
+        "frozen_core_electrons": 0,
+        "frozen_core_mos": 0,
+        "geometry": "Be 0.000000000000 0.000000000000 -1.127000000000\nBe 0.000000000000 0.000000000000 1.127000000000",
+        "geometry_units": "Angstrom",
+        "hf_sanity_minus_reference_hartree": 0.20744239065993142,
+        "molecule_name": "ifciqmc_be2_vqz_all_electron",
+        "multiplicity": 1,
+        "num_electrons": 8,
+        "num_orbitals": 168,
+        "orbital_basis_convention": "PySCF canonical restricted Hartree-Fock molecular orbitals with all electrons active.",
+        "pyscf_hf_energy_hartree": -29.12755760934007,
+        "reference_stochastic_error_hartree_1sigma": 0.0001,
+        "source_table1_energy_literal": "-29.3350(1)",
+        "spin_ms2": 0,
+        "system": "Be2",
+        "total_electrons_before_frozen_core": 8
+      },
+      "independent_parameters": {
+        "basis_label": "VQZ",
+        "bond_length_angstrom": 2.254,
+        "system": "Be2"
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "energy_target": 0.99,
+        "probability_of_success": 0.99,
+        "reference_energy": -29.335,
+        "reference_energy_cross_validation_methods": [
+          "i-FCIQMC"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "initiator FCIQMC with initiator-bias control and stochastic error estimate",
+        "reference_energy_note": "Reference is the Table 1 all-electron i-FCIQMC total energy with one-standard-deviation stochastic error in parentheses. FCIDUMP is a local PySCF reconstruction of the same geometry, core-valence basis, all-electron, and restricted-HF-orbital convention.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, Be2 VQZ",
+        "reference_energy_standard_error_hartree": 0.0001,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "7be4df46fbc9ba7833e74085296670d0531cdb8f",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ifciqmc_first_row_diatomics/ifciqmc_be2_vqz_all_electron.fcidump.gz",
+          "instance_data_object_uuid": "eb48cf28-ab2d-522e-b40d-1372cb3d04eb",
+          "is_fcidump_file": true,
+          "local_fcidump_path": "work/fcidumps/ifciqmc_first_row_diatomics/ifciqmc_be2_vqz_all_electron.fcidump.gz"
+        }
+      ],
+      "task_uuid": "2a25f264-f981-5112-8e53-b93460392cb9"
+    },
+    {
+      "features": {
+        "basis_label": "VDZ",
+        "basis_set": "cc-pvdz",
+        "bond_length_angstrom": 1.2425,
+        "charge": 0,
+        "ecore_hartree": -57.90407014360056,
+        "frozen_core_electrons": 4,
+        "frozen_core_mos": 2,
+        "geometry": "C 0.000000000000 0.000000000000 -0.621250000000\nC 0.000000000000 0.000000000000 0.621250000000",
+        "geometry_units": "Angstrom",
+        "hf_sanity_minus_reference_hartree": 0.3415976222940884,
+        "molecule_name": "ifciqmc_c2_vdz_frozen_core",
+        "multiplicity": 1,
+        "num_electrons": 8,
+        "num_orbitals": 26,
+        "orbital_basis_convention": "PySCF canonical restricted Hartree-Fock molecular orbitals with frozen first-row 1s core orbitals removed from the active Hamiltonian.",
+        "pyscf_hf_energy_hartree": -75.38690237770591,
+        "reference_stochastic_error_hartree_1sigma": 0.0001,
+        "source_table1_energy_literal": "-75.7285(1)",
+        "spin_ms2": 0,
+        "system": "C2",
+        "total_electrons_before_frozen_core": 12
+      },
+      "independent_parameters": {
+        "basis_label": "VDZ",
+        "bond_length_angstrom": 1.2425,
+        "system": "C2"
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "energy_target": 0.99,
+        "probability_of_success": 0.99,
+        "reference_energy": -75.7285,
+        "reference_energy_cross_validation_methods": [
+          "i-FCIQMC"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "initiator FCIQMC with initiator-bias control and stochastic error estimate",
+        "reference_energy_note": "Reference is the Table 1 frozen-core i-FCIQMC total energy with one-standard-deviation stochastic error in parentheses. FCIDUMP is a local PySCF reconstruction of the same geometry, basis, frozen-core, and restricted-HF-orbital convention.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, C2 VDZ",
+        "reference_energy_standard_error_hartree": 0.0001,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "934744e8a08d8c3411008bbd326233ec67094269",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ifciqmc_first_row_diatomics/ifciqmc_c2_vdz_frozen_core.fcidump.gz",
+          "instance_data_object_uuid": "9ae44eed-9907-58fe-970b-bd9478ab8250",
+          "is_fcidump_file": true,
+          "local_fcidump_path": "work/fcidumps/ifciqmc_first_row_diatomics/ifciqmc_c2_vdz_frozen_core.fcidump.gz"
+        }
+      ],
+      "task_uuid": "97dd102c-8a71-5257-be32-9fa05c0c55d5"
+    },
+    {
+      "features": {
+        "basis_label": "VTZ",
+        "basis_set": "cc-pvtz",
+        "bond_length_angstrom": 1.2425,
+        "charge": 0,
+        "ecore_hartree": -57.90414244949309,
+        "frozen_core_electrons": 4,
+        "frozen_core_mos": 2,
+        "geometry": "C 0.000000000000 0.000000000000 -0.621250000000\nC 0.000000000000 0.000000000000 0.621250000000",
+        "geometry_units": "Angstrom",
+        "hf_sanity_minus_reference_hartree": 0.38355342067340814,
+        "molecule_name": "ifciqmc_c2_vtz_frozen_core",
+        "multiplicity": 1,
+        "num_electrons": 8,
+        "num_orbitals": 58,
+        "orbital_basis_convention": "PySCF canonical restricted Hartree-Fock molecular orbitals with frozen first-row 1s core orbitals removed from the active Hamiltonian.",
+        "pyscf_hf_energy_hartree": -75.40144657932659,
+        "reference_stochastic_error_hartree_1sigma": 0.0001,
+        "source_table1_energy_literal": "-75.7850(1)",
+        "spin_ms2": 0,
+        "system": "C2",
+        "total_electrons_before_frozen_core": 12
+      },
+      "independent_parameters": {
+        "basis_label": "VTZ",
+        "bond_length_angstrom": 1.2425,
+        "system": "C2"
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "energy_target": 0.99,
+        "probability_of_success": 0.99,
+        "reference_energy": -75.785,
+        "reference_energy_cross_validation_methods": [
+          "i-FCIQMC"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "initiator FCIQMC with initiator-bias control and stochastic error estimate",
+        "reference_energy_note": "Reference is the Table 1 frozen-core i-FCIQMC total energy with one-standard-deviation stochastic error in parentheses. FCIDUMP is a local PySCF reconstruction of the same geometry, basis, frozen-core, and restricted-HF-orbital convention.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, C2 VTZ",
+        "reference_energy_standard_error_hartree": 0.0001,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "0e3ed099ee6b94aa116afa2d2c1f71f14042712d",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ifciqmc_first_row_diatomics/ifciqmc_c2_vtz_frozen_core.fcidump.gz",
+          "instance_data_object_uuid": "3d7217b7-d570-522c-b0d5-220dc88ce466",
+          "is_fcidump_file": true,
+          "local_fcidump_path": "work/fcidumps/ifciqmc_first_row_diatomics/ifciqmc_c2_vtz_frozen_core.fcidump.gz"
+        }
+      ],
+      "task_uuid": "91386d39-02d1-523a-b00d-4b5ad1684ff8"
+    },
+    {
+      "features": {
+        "basis_label": "VQZ",
+        "basis_set": "cc-pvqz",
+        "bond_length_angstrom": 1.2425,
+        "charge": 0,
+        "ecore_hartree": -57.90537431957918,
+        "frozen_core_electrons": 4,
+        "frozen_core_mos": 2,
+        "geometry": "C 0.000000000000 0.000000000000 -0.621250000000\nC 0.000000000000 0.000000000000 0.621250000000",
+        "geometry_units": "Angstrom",
+        "hf_sanity_minus_reference_hartree": 0.39653463797758093,
+        "molecule_name": "ifciqmc_c2_vqz_frozen_core",
+        "multiplicity": 1,
+        "num_electrons": 8,
+        "num_orbitals": 108,
+        "orbital_basis_convention": "PySCF canonical restricted Hartree-Fock molecular orbitals with frozen first-row 1s core orbitals removed from the active Hamiltonian.",
+        "pyscf_hf_energy_hartree": -75.40576536202242,
+        "reference_stochastic_error_hartree_1sigma": 0.00030000000000000003,
+        "source_table1_energy_literal": "-75.8023(3)",
+        "spin_ms2": 0,
+        "system": "C2",
+        "total_electrons_before_frozen_core": 12
+      },
+      "independent_parameters": {
+        "basis_label": "VQZ",
+        "bond_length_angstrom": 1.2425,
+        "system": "C2"
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "energy_target": 0.99,
+        "probability_of_success": 0.99,
+        "reference_energy": -75.8023,
+        "reference_energy_cross_validation_methods": [
+          "i-FCIQMC"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "initiator FCIQMC with initiator-bias control and stochastic error estimate",
+        "reference_energy_note": "Reference is the Table 1 frozen-core i-FCIQMC total energy with one-standard-deviation stochastic error in parentheses. FCIDUMP is a local PySCF reconstruction of the same geometry, basis, frozen-core, and restricted-HF-orbital convention.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, C2 VQZ",
+        "reference_energy_standard_error_hartree": 0.00030000000000000003,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "fae7c6628db474aa67e56f92af8e4f8ba1d7a6f6",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ifciqmc_first_row_diatomics/ifciqmc_c2_vqz_frozen_core.fcidump.gz",
+          "instance_data_object_uuid": "dbfaa923-5191-5fee-bba0-3ccb31cf06d2",
+          "is_fcidump_file": true,
+          "local_fcidump_path": "work/fcidumps/ifciqmc_first_row_diatomics/ifciqmc_c2_vqz_frozen_core.fcidump.gz"
+        }
+      ],
+      "task_uuid": "2fbb0259-7d1f-52e1-a670-c33224c86ca6"
+    },
+    {
+      "features": {
+        "basis_label": "VDZ",
+        "basis_set": "cc-pvdz",
+        "bond_length_angstrom": 1.0977,
+        "charge": 0,
+        "ecore_hartree": -77.41413011525403,
+        "frozen_core_electrons": 4,
+        "frozen_core_mos": 2,
+        "geometry": "N 0.000000000000 0.000000000000 -0.548850000000\nN 0.000000000000 0.000000000000 0.548850000000",
+        "geometry_units": "Angstrom",
+        "hf_sanity_minus_reference_hartree": 0.32257198625457306,
+        "molecule_name": "ifciqmc_n2_vdz_frozen_core",
+        "multiplicity": 1,
+        "num_electrons": 10,
+        "num_orbitals": 26,
+        "orbital_basis_convention": "PySCF canonical restricted Hartree-Fock molecular orbitals with frozen first-row 1s core orbitals removed from the active Hamiltonian.",
+        "pyscf_hf_energy_hartree": -108.95412801374543,
+        "reference_stochastic_error_hartree_1sigma": 0.0001,
+        "source_table1_energy_literal": "-109.2767(1)",
+        "spin_ms2": 0,
+        "system": "N2",
+        "total_electrons_before_frozen_core": 14
+      },
+      "independent_parameters": {
+        "basis_label": "VDZ",
+        "bond_length_angstrom": 1.0977,
+        "system": "N2"
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "energy_target": 0.99,
+        "probability_of_success": 0.99,
+        "reference_energy": -109.2767,
+        "reference_energy_cross_validation_methods": [
+          "i-FCIQMC"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "initiator FCIQMC with initiator-bias control and stochastic error estimate",
+        "reference_energy_note": "Reference is the Table 1 frozen-core i-FCIQMC total energy with one-standard-deviation stochastic error in parentheses. FCIDUMP is a local PySCF reconstruction of the same geometry, basis, frozen-core, and restricted-HF-orbital convention.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, N2 VDZ",
+        "reference_energy_standard_error_hartree": 0.0001,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "23c1499576aab5b125963adb693250c34e22ede3",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ifciqmc_first_row_diatomics/ifciqmc_n2_vdz_frozen_core.fcidump.gz",
+          "instance_data_object_uuid": "9e200352-cd5d-56e1-92b0-fc5c6c75490f",
+          "is_fcidump_file": true,
+          "local_fcidump_path": "work/fcidumps/ifciqmc_first_row_diatomics/ifciqmc_n2_vdz_frozen_core.fcidump.gz"
+        }
+      ],
+      "task_uuid": "1378aa59-8d32-5fa5-8b45-fcac3ee58ad7"
+    },
+    {
+      "features": {
+        "basis_label": "VTZ",
+        "basis_set": "cc-pvtz",
+        "bond_length_angstrom": 1.0977,
+        "charge": 0,
+        "ecore_hartree": -77.41494481054806,
+        "frozen_core_electrons": 4,
+        "frozen_core_mos": 2,
+        "geometry": "N 0.000000000000 0.000000000000 -0.548850000000\nN 0.000000000000 0.000000000000 0.548850000000",
+        "geometry_units": "Angstrom",
+        "hf_sanity_minus_reference_hartree": 0.3919296942142978,
+        "molecule_name": "ifciqmc_n2_vtz_frozen_core",
+        "multiplicity": 1,
+        "num_electrons": 10,
+        "num_orbitals": 58,
+        "orbital_basis_convention": "PySCF canonical restricted Hartree-Fock molecular orbitals with frozen first-row 1s core orbitals removed from the active Hamiltonian.",
+        "pyscf_hf_energy_hartree": -108.9834703057857,
+        "reference_stochastic_error_hartree_1sigma": 0.0001,
+        "source_table1_energy_literal": "-109.3754(1)",
+        "spin_ms2": 0,
+        "system": "N2",
+        "total_electrons_before_frozen_core": 14
+      },
+      "independent_parameters": {
+        "basis_label": "VTZ",
+        "bond_length_angstrom": 1.0977,
+        "system": "N2"
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "energy_target": 0.99,
+        "probability_of_success": 0.99,
+        "reference_energy": -109.3754,
+        "reference_energy_cross_validation_methods": [
+          "i-FCIQMC"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "initiator FCIQMC with initiator-bias control and stochastic error estimate",
+        "reference_energy_note": "Reference is the Table 1 frozen-core i-FCIQMC total energy with one-standard-deviation stochastic error in parentheses. FCIDUMP is a local PySCF reconstruction of the same geometry, basis, frozen-core, and restricted-HF-orbital convention.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, N2 VTZ",
+        "reference_energy_standard_error_hartree": 0.0001,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "3bbc54b548d052f5370463f9df46d468e0af372d",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ifciqmc_first_row_diatomics/ifciqmc_n2_vtz_frozen_core.fcidump.gz",
+          "instance_data_object_uuid": "261b6a94-cd6d-507c-89a5-83bdb6aa26f2",
+          "is_fcidump_file": true,
+          "local_fcidump_path": "work/fcidumps/ifciqmc_first_row_diatomics/ifciqmc_n2_vtz_frozen_core.fcidump.gz"
+        }
+      ],
+      "task_uuid": "5e186221-83b8-5623-a0ca-582b09b379bf"
+    },
+    {
+      "features": {
+        "basis_label": "VQZ",
+        "basis_set": "cc-pvqz",
+        "bond_length_angstrom": 1.0977,
+        "charge": 0,
+        "ecore_hartree": -77.41698361415703,
+        "frozen_core_electrons": 4,
+        "frozen_core_mos": 2,
+        "geometry": "N 0.000000000000 0.000000000000 -0.548850000000\nN 0.000000000000 0.000000000000 0.548850000000",
+        "geometry_units": "Angstrom",
+        "hf_sanity_minus_reference_hartree": 0.4147164500757441,
+        "molecule_name": "ifciqmc_n2_vqz_frozen_core",
+        "multiplicity": 1,
+        "num_electrons": 10,
+        "num_orbitals": 108,
+        "orbital_basis_convention": "PySCF canonical restricted Hartree-Fock molecular orbitals with frozen first-row 1s core orbitals removed from the active Hamiltonian.",
+        "pyscf_hf_energy_hartree": -108.99108354992426,
+        "reference_stochastic_error_hartree_1sigma": 0.0001,
+        "source_table1_energy_literal": "-109.4058(1)",
+        "spin_ms2": 0,
+        "system": "N2",
+        "total_electrons_before_frozen_core": 14
+      },
+      "independent_parameters": {
+        "basis_label": "VQZ",
+        "bond_length_angstrom": 1.0977,
+        "system": "N2"
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "energy_target": 0.99,
+        "probability_of_success": 0.99,
+        "reference_energy": -109.4058,
+        "reference_energy_cross_validation_methods": [
+          "i-FCIQMC"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "initiator FCIQMC with initiator-bias control and stochastic error estimate",
+        "reference_energy_note": "Reference is the Table 1 frozen-core i-FCIQMC total energy with one-standard-deviation stochastic error in parentheses. FCIDUMP is a local PySCF reconstruction of the same geometry, basis, frozen-core, and restricted-HF-orbital convention.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, N2 VQZ",
+        "reference_energy_standard_error_hartree": 0.0001,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "68a017120667f1763b5a534b26087e9a267cc426",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ifciqmc_first_row_diatomics/ifciqmc_n2_vqz_frozen_core.fcidump.gz",
+          "instance_data_object_uuid": "2398d3d5-96e4-50e8-a3c5-d280df635020",
+          "is_fcidump_file": true,
+          "local_fcidump_path": "work/fcidumps/ifciqmc_first_row_diatomics/ifciqmc_n2_vqz_frozen_core.fcidump.gz"
+        }
+      ],
+      "task_uuid": "f904f554-0540-5618-96a1-d8daf46a1158"
+    },
+    {
+      "features": {
+        "basis_label": "VDZ",
+        "basis_set": "cc-pvdz",
+        "bond_length_angstrom": 1.1283,
+        "charge": 0,
+        "ecore_hartree": -80.20976223611778,
+        "frozen_core_electrons": 4,
+        "frozen_core_mos": 2,
+        "geometry": "C 0.000000000000 0.000000000000 -0.564150000000\nO 0.000000000000 0.000000000000 0.564150000000",
+        "geometry_units": "Angstrom",
+        "hf_sanity_minus_reference_hartree": 0.3063565312179861,
+        "molecule_name": "ifciqmc_co_vdz_frozen_core",
+        "multiplicity": 1,
+        "num_electrons": 10,
+        "num_orbitals": 26,
+        "orbital_basis_convention": "PySCF canonical restricted Hartree-Fock molecular orbitals with frozen first-row 1s core orbitals removed from the active Hamiltonian.",
+        "pyscf_hf_energy_hartree": -112.74928346878201,
+        "reference_stochastic_error_hartree_1sigma": 9e-05,
+        "source_table1_energy_literal": "-113.05564(9)",
+        "spin_ms2": 0,
+        "system": "CO",
+        "total_electrons_before_frozen_core": 14
+      },
+      "independent_parameters": {
+        "basis_label": "VDZ",
+        "bond_length_angstrom": 1.1283,
+        "system": "CO"
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "energy_target": 0.99,
+        "probability_of_success": 0.99,
+        "reference_energy": -113.05564,
+        "reference_energy_cross_validation_methods": [
+          "i-FCIQMC"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "initiator FCIQMC with initiator-bias control and stochastic error estimate",
+        "reference_energy_note": "Reference is the Table 1 frozen-core i-FCIQMC total energy with one-standard-deviation stochastic error in parentheses. FCIDUMP is a local PySCF reconstruction of the same geometry, basis, frozen-core, and restricted-HF-orbital convention.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, CO VDZ",
+        "reference_energy_standard_error_hartree": 9e-05,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "60269b89089b0526dd0c12fea1783e2bd3b379e4",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ifciqmc_first_row_diatomics/ifciqmc_co_vdz_frozen_core.fcidump.gz",
+          "instance_data_object_uuid": "53a9593f-5ec8-543c-a7da-ddf0b2f7e189",
+          "is_fcidump_file": true,
+          "local_fcidump_path": "work/fcidumps/ifciqmc_first_row_diatomics/ifciqmc_co_vdz_frozen_core.fcidump.gz"
+        }
+      ],
+      "task_uuid": "939c7592-ef32-53fc-ae3f-736bc3c8bf01"
+    },
+    {
+      "features": {
+        "basis_label": "VTZ",
+        "basis_set": "cc-pvtz",
+        "bond_length_angstrom": 1.1283,
+        "charge": 0,
+        "ecore_hartree": -80.21059566613913,
+        "frozen_core_electrons": 4,
+        "frozen_core_mos": 2,
+        "geometry": "C 0.000000000000 0.000000000000 -0.564150000000\nO 0.000000000000 0.000000000000 0.564150000000",
+        "geometry_units": "Angstrom",
+        "hf_sanity_minus_reference_hartree": 0.376046035668665,
+        "molecule_name": "ifciqmc_co_vtz_frozen_core",
+        "multiplicity": 1,
+        "num_electrons": 10,
+        "num_orbitals": 58,
+        "orbital_basis_convention": "PySCF canonical restricted Hartree-Fock molecular orbitals with frozen first-row 1s core orbitals removed from the active Hamiltonian.",
+        "pyscf_hf_energy_hartree": -112.78034396433134,
+        "reference_stochastic_error_hartree_1sigma": 7.000000000000001e-05,
+        "source_table1_energy_literal": "-113.15639(7)",
+        "spin_ms2": 0,
+        "system": "CO",
+        "total_electrons_before_frozen_core": 14
+      },
+      "independent_parameters": {
+        "basis_label": "VTZ",
+        "bond_length_angstrom": 1.1283,
+        "system": "CO"
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "energy_target": 0.99,
+        "probability_of_success": 0.99,
+        "reference_energy": -113.15639,
+        "reference_energy_cross_validation_methods": [
+          "i-FCIQMC"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "initiator FCIQMC with initiator-bias control and stochastic error estimate",
+        "reference_energy_note": "Reference is the Table 1 frozen-core i-FCIQMC total energy with one-standard-deviation stochastic error in parentheses. FCIDUMP is a local PySCF reconstruction of the same geometry, basis, frozen-core, and restricted-HF-orbital convention.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, CO VTZ",
+        "reference_energy_standard_error_hartree": 7.000000000000001e-05,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "4724c5e5071a77c50ffec4d7b67ffdafe97ed5f3",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ifciqmc_first_row_diatomics/ifciqmc_co_vtz_frozen_core.fcidump.gz",
+          "instance_data_object_uuid": "c97a55aa-5608-590f-99fd-c1f85dfd59ae",
+          "is_fcidump_file": true,
+          "local_fcidump_path": "work/fcidumps/ifciqmc_first_row_diatomics/ifciqmc_co_vtz_frozen_core.fcidump.gz"
+        }
+      ],
+      "task_uuid": "fc29fdb3-dc15-5ea2-bcab-033842c9effa"
+    },
+    {
+      "features": {
+        "basis_label": "VQZ",
+        "basis_set": "cc-pvqz",
+        "bond_length_angstrom": 1.1283,
+        "charge": 0,
+        "ecore_hartree": -80.21268307376502,
+        "frozen_core_electrons": 4,
+        "frozen_core_mos": 2,
+        "geometry": "C 0.000000000000 0.000000000000 -0.564150000000\nO 0.000000000000 0.000000000000 0.564150000000",
+        "geometry_units": "Angstrom",
+        "hf_sanity_minus_reference_hartree": 0.3998551020405472,
+        "molecule_name": "ifciqmc_co_vqz_frozen_core",
+        "multiplicity": 1,
+        "num_electrons": 10,
+        "num_orbitals": 108,
+        "orbital_basis_convention": "PySCF canonical restricted Hartree-Fock molecular orbitals with frozen first-row 1s core orbitals removed from the active Hamiltonian.",
+        "pyscf_hf_energy_hartree": -112.78884489795945,
+        "reference_stochastic_error_hartree_1sigma": 0.0001,
+        "source_table1_energy_literal": "-113.1887(1)",
+        "spin_ms2": 0,
+        "system": "CO",
+        "total_electrons_before_frozen_core": 14
+      },
+      "independent_parameters": {
+        "basis_label": "VQZ",
+        "bond_length_angstrom": 1.1283,
+        "system": "CO"
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "energy_target": 0.99,
+        "probability_of_success": 0.99,
+        "reference_energy": -113.1887,
+        "reference_energy_cross_validation_methods": [
+          "i-FCIQMC"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "initiator FCIQMC with initiator-bias control and stochastic error estimate",
+        "reference_energy_note": "Reference is the Table 1 frozen-core i-FCIQMC total energy with one-standard-deviation stochastic error in parentheses. FCIDUMP is a local PySCF reconstruction of the same geometry, basis, frozen-core, and restricted-HF-orbital convention.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, CO VQZ",
+        "reference_energy_standard_error_hartree": 0.0001,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "8f9c27206dc4295fc34a937127cfd31453abe8a0",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ifciqmc_first_row_diatomics/ifciqmc_co_vqz_frozen_core.fcidump.gz",
+          "instance_data_object_uuid": "8c1a7372-eadc-5d01-b11f-3487e312733e",
+          "is_fcidump_file": true,
+          "local_fcidump_path": "work/fcidumps/ifciqmc_first_row_diatomics/ifciqmc_co_vqz_frozen_core.fcidump.gz"
+        }
+      ],
+      "task_uuid": "715773cd-da74-5dbf-bd72-86107691871a"
+    },
+    {
+      "features": {
+        "basis_label": "VDZ",
+        "basis_set": "cc-pvdz",
+        "bond_length_angstrom": 1.4119,
+        "charge": 0,
+        "ecore_hartree": -132.5904277212396,
+        "frozen_core_electrons": 4,
+        "frozen_core_mos": 2,
+        "geometry": "F 0.000000000000 0.000000000000 -0.705950000000\nF 0.000000000000 0.000000000000 0.705950000000",
+        "geometry_units": "Angstrom",
+        "hf_sanity_minus_reference_hartree": 0.41373676872507303,
+        "molecule_name": "ifciqmc_f2_vdz_frozen_core",
+        "multiplicity": 1,
+        "num_electrons": 14,
+        "num_orbitals": 26,
+        "orbital_basis_convention": "PySCF canonical restricted Hartree-Fock molecular orbitals with frozen first-row 1s core orbitals removed from the active Hamiltonian.",
+        "pyscf_hf_energy_hartree": -198.68567323127493,
+        "reference_stochastic_error_hartree_1sigma": 9e-05,
+        "source_table1_energy_literal": "-199.09941(9)",
+        "spin_ms2": 0,
+        "system": "F2",
+        "total_electrons_before_frozen_core": 18
+      },
+      "independent_parameters": {
+        "basis_label": "VDZ",
+        "bond_length_angstrom": 1.4119,
+        "system": "F2"
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "energy_target": 0.99,
+        "probability_of_success": 0.99,
+        "reference_energy": -199.09941,
+        "reference_energy_cross_validation_methods": [
+          "i-FCIQMC"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "initiator FCIQMC with initiator-bias control and stochastic error estimate",
+        "reference_energy_note": "Reference is the Table 1 frozen-core i-FCIQMC total energy with one-standard-deviation stochastic error in parentheses. FCIDUMP is a local PySCF reconstruction of the same geometry, basis, frozen-core, and restricted-HF-orbital convention.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, F2 VDZ",
+        "reference_energy_standard_error_hartree": 9e-05,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "81052c35066604bfafbeb877af02156e4958e97b",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ifciqmc_first_row_diatomics/ifciqmc_f2_vdz_frozen_core.fcidump.gz",
+          "instance_data_object_uuid": "5b514dd3-ea49-546d-9752-d3c5bbc75c32",
+          "is_fcidump_file": true,
+          "local_fcidump_path": "work/fcidumps/ifciqmc_first_row_diatomics/ifciqmc_f2_vdz_frozen_core.fcidump.gz"
+        }
+      ],
+      "task_uuid": "962ec7b9-d700-51d7-b606-974c77fc2f0a"
+    },
+    {
+      "features": {
+        "basis_label": "VTZ",
+        "basis_set": "cc-pvtz",
+        "bond_length_angstrom": 1.4119,
+        "charge": 0,
+        "ecore_hartree": -132.5917286357183,
+        "frozen_core_electrons": 4,
+        "frozen_core_mos": 2,
+        "geometry": "F 0.000000000000 0.000000000000 -0.705950000000\nF 0.000000000000 0.000000000000 0.705950000000",
+        "geometry_units": "Angstrom",
+        "hf_sanity_minus_reference_hartree": 0.5456525234981484,
+        "molecule_name": "ifciqmc_f2_vtz_frozen_core",
+        "multiplicity": 1,
+        "num_electrons": 14,
+        "num_orbitals": 58,
+        "orbital_basis_convention": "PySCF canonical restricted Hartree-Fock molecular orbitals with frozen first-row 1s core orbitals removed from the active Hamiltonian.",
+        "pyscf_hf_energy_hartree": -198.75204747650184,
+        "reference_stochastic_error_hartree_1sigma": 0.0001,
+        "source_table1_energy_literal": "-199.2977(1)",
+        "spin_ms2": 0,
+        "system": "F2",
+        "total_electrons_before_frozen_core": 18
+      },
+      "independent_parameters": {
+        "basis_label": "VTZ",
+        "bond_length_angstrom": 1.4119,
+        "system": "F2"
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "energy_target": 0.99,
+        "probability_of_success": 0.99,
+        "reference_energy": -199.2977,
+        "reference_energy_cross_validation_methods": [
+          "i-FCIQMC"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "initiator FCIQMC with initiator-bias control and stochastic error estimate",
+        "reference_energy_note": "Reference is the Table 1 frozen-core i-FCIQMC total energy with one-standard-deviation stochastic error in parentheses. FCIDUMP is a local PySCF reconstruction of the same geometry, basis, frozen-core, and restricted-HF-orbital convention.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, F2 VTZ",
+        "reference_energy_standard_error_hartree": 0.0001,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "8dc2ce213a73108de2dc20d0a32632745c9a6f03",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ifciqmc_first_row_diatomics/ifciqmc_f2_vtz_frozen_core.fcidump.gz",
+          "instance_data_object_uuid": "bd3249e0-686a-58ee-a1e3-d47a89ee7933",
+          "is_fcidump_file": true,
+          "local_fcidump_path": "work/fcidumps/ifciqmc_first_row_diatomics/ifciqmc_f2_vtz_frozen_core.fcidump.gz"
+        }
+      ],
+      "task_uuid": "0f93e93f-a870-5609-8534-f17a04c94965"
+    },
+    {
+      "features": {
+        "basis_label": "VQZ",
+        "basis_set": "cc-pvqz",
+        "bond_length_angstrom": 1.4119,
+        "charge": 0,
+        "ecore_hartree": -132.5948516893638,
+        "frozen_core_electrons": 4,
+        "frozen_core_mos": 2,
+        "geometry": "F 0.000000000000 0.000000000000 -0.705950000000\nF 0.000000000000 0.000000000000 0.705950000000",
+        "geometry_units": "Angstrom",
+        "hf_sanity_minus_reference_hartree": 0.5915231984062075,
+        "molecule_name": "ifciqmc_f2_vqz_frozen_core",
+        "multiplicity": 1,
+        "num_electrons": 14,
+        "num_orbitals": 108,
+        "orbital_basis_convention": "PySCF canonical restricted Hartree-Fock molecular orbitals with frozen first-row 1s core orbitals removed from the active Hamiltonian.",
+        "pyscf_hf_energy_hartree": -198.7682768015938,
+        "reference_stochastic_error_hartree_1sigma": 0.0002,
+        "source_table1_energy_literal": "-199.3598(2)",
+        "spin_ms2": 0,
+        "system": "F2",
+        "total_electrons_before_frozen_core": 18
+      },
+      "independent_parameters": {
+        "basis_label": "VQZ",
+        "bond_length_angstrom": 1.4119,
+        "system": "F2"
+      },
+      "requirements": {
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "energy_target": 0.99,
+        "probability_of_success": 0.99,
+        "reference_energy": -199.3598,
+        "reference_energy_cross_validation_methods": [
+          "i-FCIQMC"
+        ],
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_method": "initiator FCIQMC with initiator-bias control and stochastic error estimate",
+        "reference_energy_note": "Reference is the Table 1 frozen-core i-FCIQMC total energy with one-standard-deviation stochastic error in parentheses. FCIDUMP is a local PySCF reconstruction of the same geometry, basis, frozen-core, and restricted-HF-orbital convention.",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, F2 VQZ",
+        "reference_energy_standard_error_hartree": 0.0002,
+        "reference_energy_units": "Hartree",
+        "time_limit_seconds": 86400
+      },
+      "supporting_files": [
+        {
+          "instance_data_checksum": "4f898c318f194951ceff8318e24bc8ac51a82957",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/ifciqmc_first_row_diatomics/ifciqmc_f2_vqz_frozen_core.fcidump.gz",
+          "instance_data_object_uuid": "4553d07e-ad54-5a7a-8d6d-7615b44b6549",
+          "is_fcidump_file": true,
+          "local_fcidump_path": "work/fcidumps/ifciqmc_first_row_diatomics/ifciqmc_f2_vqz_frozen_core.fcidump.gz"
+        }
+      ],
+      "task_uuid": "b1d94f42-fcba-5341-807a-08ff1ad91ca5"
+    }
+  ]
+}
