@@ -1,0 +1,358 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.1.json",
+  "application_domain": "CM",
+  "benchmark_role": "control_sanity",
+  "benchmark_scoring": {
+    "excluded_from_scoring": true,
+    "excluded_from_ml_feature_maps": true,
+    "reason": "C13 W3c tight-binding controls are diagnostic Hamiltonians for FCIDUMP convention checks, not benchmark-scored science instances."
+  },
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison",
+      "name": "Matthew Otten"
+    }
+  ],
+  "creation_timestamp": "2026-07-08T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-08T12:23:46+00:00",
+  "license": {
+    "name": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "problem_instance_uuid": "9d9da2bd-7357-5a3e-a937-cbec1e978639",
+  "problem_type": "GSEE",
+  "references": [
+    "Analytic nearest-neighbor tight-binding controls generated from the finite one-body hopping matrix; no external numerical reference data are used.",
+    "C13 implementer spec W3c, analysis/coverage_expansion/C13_implementer_spec.md."
+  ],
+  "short_name": "tight_binding_controls",
+  "status": "in_development",
+  "superseded_by": null,
+  "basis_convention": {
+    "orbital_basis": "site_basis",
+    "hopping_t_hartree": 1.0,
+    "onsite_u_hartree": 0.0,
+    "core_energy_hartree": 0.0,
+    "particle_hole_shift": false,
+    "reference_rule": "Sort the spin-orbital one-body spectrum and sum the lowest NELEC eigenvalues."
+  },
+  "tasks": [
+    {
+      "task_uuid": "e2bce4f6-5442-564f-888d-ae7b35c04fb4",
+      "benchmark_role": "control_sanity",
+      "independent_parameters": {
+        "geometry": "chain",
+        "shape": "12",
+        "boundary_condition": "open",
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 0.0
+      },
+      "features": {
+        "model": "tight-binding",
+        "benchmark_role": "control_sanity",
+        "excluded_from_scoring": true,
+        "excluded_from_ml_feature_maps": true,
+        "geometry": "chain",
+        "shape": "12",
+        "num_orbitals": 12,
+        "num_electrons": 12,
+        "ms2": 0,
+        "n_alpha": 6,
+        "n_beta": 6,
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 12,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 0.0,
+        "u_over_t": 0.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "open",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.24107336051064615,
+        "fermi_degeneracy_spin_orbitals": 2,
+        "occupied_fermi_spin_orbitals": 2,
+        "basis_convention_note": "U=0 site-basis control; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 3600,
+        "absolute_accuracy_threshold": 1e-10,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -14.592459621117507,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "analytic tight-binding one-body diagonalization",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "PySCF FCIDUMP reader one-body spectrum verifier"
+        ],
+        "reference_energy_source": "C13 W3c analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
+        "reference_energy_note": "Control-sanity task only. Exclude from benchmark scoring and ML feature maps; use for convention checks."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "ec93e219-c512-5eec-a4f9-832c5cdcf635",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/tight_binding_controls/tight_binding_controls_chain_L12_open.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "bccf4c8038e45c166d1aa6f3c024a38292d84751",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "fe55f18e-d86d-50d9-83ae-49ae37799e0a",
+      "benchmark_role": "control_sanity",
+      "independent_parameters": {
+        "geometry": "chain",
+        "shape": "12",
+        "boundary_condition": "pbc",
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 0.0
+      },
+      "features": {
+        "model": "tight-binding",
+        "benchmark_role": "control_sanity",
+        "excluded_from_scoring": true,
+        "excluded_from_ml_feature_maps": true,
+        "geometry": "chain",
+        "shape": "12",
+        "num_orbitals": 12,
+        "num_electrons": 12,
+        "ms2": 0,
+        "n_alpha": 6,
+        "n_beta": 6,
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 12,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 0.0,
+        "u_over_t": 0.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "pbc",
+        "open_shell_filling": true,
+        "fermi_value_hartree": 3.125859338978687e-16,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 2,
+        "basis_convention_note": "U=0 site-basis control; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 3600,
+        "absolute_accuracy_threshold": 1e-10,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -14.928203230275507,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "analytic tight-binding one-body diagonalization",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "PySCF FCIDUMP reader one-body spectrum verifier"
+        ],
+        "reference_energy_source": "C13 W3c analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
+        "reference_energy_note": "Control-sanity task only. Exclude from benchmark scoring and ML feature maps; use for convention checks."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "c6213765-b269-5ade-b223-5e5291668830",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/tight_binding_controls/tight_binding_controls_chain_L12_pbc.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "60f39607e65984a7cbcfccba3babfb2051892350",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "f323dcf7-70b5-5636-a085-86c78fd989e2",
+      "benchmark_role": "control_sanity",
+      "independent_parameters": {
+        "geometry": "chain",
+        "shape": "12",
+        "boundary_condition": "apbc",
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 0.0
+      },
+      "features": {
+        "model": "tight-binding",
+        "benchmark_role": "control_sanity",
+        "excluded_from_scoring": true,
+        "excluded_from_ml_feature_maps": true,
+        "geometry": "chain",
+        "shape": "12",
+        "num_orbitals": 12,
+        "num_electrons": 12,
+        "ms2": 0,
+        "n_alpha": 6,
+        "n_beta": 6,
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 12,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 0.0,
+        "u_over_t": 0.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "apbc",
+        "open_shell_filling": false,
+        "fermi_value_hartree": -0.5176380902050417,
+        "fermi_degeneracy_spin_orbitals": 4,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "U=0 site-basis control; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 3600,
+        "absolute_accuracy_threshold": 1e-10,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -15.454813220625098,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "analytic tight-binding one-body diagonalization",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "PySCF FCIDUMP reader one-body spectrum verifier"
+        ],
+        "reference_energy_source": "C13 W3c analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
+        "reference_energy_note": "Control-sanity task only. Exclude from benchmark scoring and ML feature maps; use for convention checks."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "68a7c666-b483-51cc-bee9-28125558f830",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/tight_binding_controls/tight_binding_controls_chain_L12_apbc.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "5bee530569ce53c5b0e5fd691ea21e526d65f0cf",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "c5697f2e-013f-55c4-98a5-f1ddf6ffbd65",
+      "benchmark_role": "control_sanity",
+      "independent_parameters": {
+        "geometry": "square",
+        "shape": "4x4",
+        "boundary_condition": "open",
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 0.0
+      },
+      "features": {
+        "model": "tight-binding",
+        "benchmark_role": "control_sanity",
+        "excluded_from_scoring": true,
+        "excluded_from_ml_feature_maps": true,
+        "geometry": "square",
+        "shape": "4x4",
+        "num_orbitals": 16,
+        "num_electrons": 16,
+        "ms2": 0,
+        "n_alpha": 8,
+        "n_beta": 8,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 16,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 0.0,
+        "u_over_t": 0.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "open",
+        "open_shell_filling": true,
+        "fermi_value_hartree": -3.9700597059122413e-16,
+        "fermi_degeneracy_spin_orbitals": 8,
+        "occupied_fermi_spin_orbitals": 4,
+        "basis_convention_note": "U=0 site-basis control; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 3600,
+        "absolute_accuracy_threshold": 1e-10,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -21.88854381999831,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "analytic tight-binding one-body diagonalization",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "PySCF FCIDUMP reader one-body spectrum verifier"
+        ],
+        "reference_energy_source": "C13 W3c analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
+        "reference_energy_note": "Control-sanity task only. Exclude from benchmark scoring and ML feature maps; use for convention checks."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "b4e0408c-d8d1-5fa4-99cf-c45e148b9b0e",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/tight_binding_controls/tight_binding_controls_square_4x4_open.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "601ee0dc22ee4295fba8a9de4a746833af708697",
+          "is_fcidump_file": true
+        }
+      ]
+    },
+    {
+      "task_uuid": "da5fe92d-18e9-5990-9346-81bc874e25b5",
+      "benchmark_role": "control_sanity",
+      "independent_parameters": {
+        "geometry": "square",
+        "shape": "4x4",
+        "boundary_condition": "pbc",
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 0.0
+      },
+      "features": {
+        "model": "tight-binding",
+        "benchmark_role": "control_sanity",
+        "excluded_from_scoring": true,
+        "excluded_from_ml_feature_maps": true,
+        "geometry": "square",
+        "shape": "4x4",
+        "num_orbitals": 16,
+        "num_electrons": 16,
+        "ms2": 0,
+        "n_alpha": 8,
+        "n_beta": 8,
+        "hubbard_dimensionality": 2,
+        "hubbard_num_sites": 16,
+        "hubbard_half_filled": true,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hopping_t_hartree": 1.0,
+        "onsite_u_hartree": 0.0,
+        "u_over_t": 0.0,
+        "orbital_basis": "site_basis",
+        "boundary_condition": "pbc",
+        "open_shell_filling": true,
+        "fermi_value_hartree": 1.6072555007944942e-16,
+        "fermi_degeneracy_spin_orbitals": 12,
+        "occupied_fermi_spin_orbitals": 6,
+        "basis_convention_note": "U=0 site-basis control; ECORE=0 and no particle-hole shift."
+      },
+      "requirements": {
+        "time_limit_seconds": 3600,
+        "absolute_accuracy_threshold": 1e-10,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -23.999999999999996,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "analytic tight-binding one-body diagonalization",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "PySCF FCIDUMP reader one-body spectrum verifier"
+        ],
+        "reference_energy_source": "C13 W3c analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
+        "reference_energy_note": "Control-sanity task only. Exclude from benchmark scoring and ML feature maps; use for convention checks."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "285eda30-6502-558a-9f3a-19b2fba4c950",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/tight_binding_controls/tight_binding_controls_square_4x4_pbc.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "709be4e384c68090c46ef7bbbaaaa55f4ba1e099",
+          "is_fcidump_file": true
+        }
+      ]
+    }
+  ]
+}
