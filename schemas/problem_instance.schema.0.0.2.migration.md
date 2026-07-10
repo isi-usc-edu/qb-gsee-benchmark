@@ -7,6 +7,18 @@ Planted-solution tasks also carry `planting_mechanism`.
 
 Backfill policy follows `work/O1_taxonomy_spec_draft.md`: Core is left empty pending a later curated selection pass; referenced scientific rows are Expanded, planted/no-reference rows are Utility, and smoke/control rows are Test.
 
+## Legacy-policy addendum
+
+The legacy rule mapping CCSD(T)-derived references to
+`uncontrolled_estimate` matched zero tasks. The audited legacy small-molecule
+references were SHCI+DMRG values and therefore mapped to
+`multiple_nearly_exact`; the CCSD(T) rule is documented but vacuous for this
+backfill.
+
+Legacy `requirements.reference_energy_provenance` labels coexist by design
+with the task-level O1 `reference_provenance_grade`; the former preserves the
+historical source vocabulary while the latter is the normalized scoring axis.
+
 ## Backfill Counts
 
 | reference_provenance_grade | curation_tier | tasks |
