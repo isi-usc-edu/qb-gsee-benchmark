@@ -38,6 +38,15 @@ def read_json(path: Path) -> dict[str, Any]:
         return json.load(handle)
 
 
+def solution_outcome(result: dict[str, Any]) -> str:
+    details = result.get("solution_details", {})
+    if "attempted" in details:
+        return "attempted" if details["attempted"] else "not_attempted"
+    if result.get("energy") is not None:
+        return "attempted"
+    return "legacy_present"
+
+
 def public_tasks(repo_root: Path) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     seen: set[str] = set()
@@ -83,11 +92,13 @@ def public_tasks(repo_root: Path) -> list[dict[str, Any]]:
     )
 
 
-def solution_index(repo_root: Path) -> tuple[dict[tuple[str, str], list[str]], list[str]]:
+def solution_index(
+    repo_root: Path,
+) -> tuple[dict[tuple[str, str], list[dict[str, str]]], list[str]]:
     solver_uuid_to_key = {
         details["solver_uuid"]: key for key, details in DEFAULT_SOLVERS.items()
     }
-    matches: dict[tuple[str, str], list[str]] = defaultdict(list)
+    matches: dict[tuple[str, str], list[dict[str, str]]] = defaultdict(list)
     parse_errors: list[str] = []
     for path in sorted((repo_root / "solution_files").glob("**/*.json")):
         try:
@@ -103,7 +114,10 @@ def solution_index(repo_root: Path) -> tuple[dict[tuple[str, str], list[str]], l
             task_uuid = result.get("task_uuid")
             if task_uuid:
                 matches[(solver_key, str(task_uuid))].append(
-                    str(path.relative_to(repo_root))
+                    {
+                        "path": str(path.relative_to(repo_root)),
+                        "outcome": solution_outcome(result),
+                    }
                 )
     return matches, parse_errors
 
@@ -115,13 +129,31 @@ def build_inventory(repo_root: Path) -> dict[str, Any]:
     for task in tasks:
         row = dict(task)
         for solver_key in DEFAULT_SOLVERS:
-            paths = sorted(matches.get((solver_key, task["task_uuid"]), []))
+            records = matches.get((solver_key, task["task_uuid"]), [])
+            paths = sorted(record["path"] for record in records)
+            outcomes = {record["outcome"] for record in records}
+            if not records:
+                outcome = "missing"
+            elif "attempted" in outcomes:
+                outcome = "attempted"
+            elif "not_attempted" in outcomes:
+                outcome = "not_attempted"
+            else:
+                outcome = "legacy_present"
             row[f"{solver_key}_status"] = "present" if paths else "missing"
+            row[f"{solver_key}_outcome"] = outcome
             row[f"{solver_key}_solution_paths"] = paths
         rows.append(row)
     summary = {
         key: {
             "present": sum(row[f"{key}_status"] == "present" for row in rows),
+            "attempted": sum(row[f"{key}_outcome"] == "attempted" for row in rows),
+            "not_attempted": sum(
+                row[f"{key}_outcome"] == "not_attempted" for row in rows
+            ),
+            "legacy_present": sum(
+                row[f"{key}_outcome"] == "legacy_present" for row in rows
+            ),
             "missing": sum(row[f"{key}_status"] == "missing" for row in rows),
         }
         for key in DEFAULT_SOLVERS
@@ -150,7 +182,9 @@ def write_csv(path: Path, inventory: dict[str, Any]) -> None:
     ]
     fields = list(base_fields)
     for key in DEFAULT_SOLVERS:
-        fields.extend((f"{key}_status", f"{key}_solution_paths"))
+        fields.extend(
+            (f"{key}_status", f"{key}_outcome", f"{key}_solution_paths")
+        )
     with path.open("w", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields)
         writer.writeheader()
@@ -170,7 +204,8 @@ def write_markdown(path: Path, inventory: dict[str, Any]) -> None:
         "Generated only from committed `problem_instances/` and "
         "`solution_files/` JSON. Validation instances are excluded. A cell is "
         "present only when a solution's stable solver UUID matches the exact "
-        "default adapter identity below and its `solution_data` names the task.",
+        "default adapter identity below and its `solution_data` names the task. "
+        "Artifact presence is separate from whether the solver was attempted.",
         "",
         "Regenerate with:",
         "",
@@ -195,31 +230,39 @@ def write_markdown(path: Path, inventory: dict[str, Any]) -> None:
             "",
             f"Public tasks: **{inventory['public_task_count']}**.",
             "",
-            "| solver | present | missing | coverage |",
-            "|---|---:|---:|---:|",
+            "| solver | present | attempted | not attempted | legacy present | "
+            "missing | artifact coverage |",
+            "|---|---:|---:|---:|---:|---:|---:|",
         ]
     )
     for key, counts in inventory["summary"].items():
         fraction = counts["present"] / inventory["public_task_count"]
         lines.append(
-            f"| `{key}` | {counts['present']} | {counts['missing']} | "
-            f"{fraction:.1%} |"
+            f"| `{key}` | {counts['present']} | {counts['attempted']} | "
+            f"{counts['not_attempted']} | {counts['legacy_present']} | "
+            f"{counts['missing']} | {fraction:.1%} |"
         )
     lines.extend(
         [
             "",
             "## Coverage matrix",
             "",
-            "`P` = present, `M` = missing. Exact matching solution paths are in "
-            "the adjacent CSV and JSON artifacts.",
+            "`A` = attempted, `N` = explicitly not attempted, `L` = legacy "
+            "present without attempt metadata, and `M` = missing. Exact paths "
+            "are in the adjacent CSV and JSON artifacts.",
             "",
-            "| orbitals | electrons | instance | task UUID | PySCF FCI | SHCI opt | DMRG | ipie UHF |",
+            "| orbitals | electrons | instance | task UUID | PySCF FCI | "
+            "SHCI opt | DMRG | ipie UHF |",
             "|---:|---:|---|---|:---:|:---:|:---:|:---:|",
         ]
     )
     for row in inventory["rows"]:
         status = [
-            "P" if row[f"{key}_status"] == "present" else "M"
+            {
+                "attempted": "A",
+                "not_attempted": "N",
+                "legacy_present": "L",
+            }.get(row[f"{key}_outcome"], "M")
             for key in DEFAULT_SOLVERS
         ]
         lines.append(

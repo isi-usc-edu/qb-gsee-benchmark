@@ -47,13 +47,55 @@ def test_inventory_excludes_validation_and_matches_default_solver_uuid(tmp_path:
                     "solver_uuid"
                 ]
             },
-            "solution_data": [{"task_uuid": task_uuid}],
+            "solution_data": [
+                {
+                    "task_uuid": task_uuid,
+                    "energy": -1.0,
+                    "solution_details": {"attempted": True},
+                }
+            ],
+        },
+    )
+    write_json(
+        tmp_path / "solution_files" / "ipie" / "solution.json",
+        {
+            "solver_details": {
+                "solver_uuid": inventory_module.DEFAULT_SOLVERS["ipie_uhf_trial"][
+                    "solver_uuid"
+                ]
+            },
+            "solution_data": [
+                {
+                    "task_uuid": task_uuid,
+                    "energy": None,
+                    "solution_details": {"attempted": False},
+                }
+            ],
         },
     )
 
     inventory = inventory_module.build_inventory(tmp_path)
 
     assert inventory["public_task_count"] == 1
-    assert inventory["summary"]["pyscf_fci"] == {"present": 1, "missing": 0}
-    assert inventory["summary"]["shci_opt"] == {"present": 0, "missing": 1}
+    assert inventory["summary"]["pyscf_fci"] == {
+        "present": 1,
+        "attempted": 1,
+        "not_attempted": 0,
+        "legacy_present": 0,
+        "missing": 0,
+    }
+    assert inventory["summary"]["ipie_uhf_trial"] == {
+        "present": 1,
+        "attempted": 0,
+        "not_attempted": 1,
+        "legacy_present": 0,
+        "missing": 0,
+    }
+    assert inventory["summary"]["shci_opt"] == {
+        "present": 0,
+        "attempted": 0,
+        "not_attempted": 0,
+        "legacy_present": 0,
+        "missing": 1,
+    }
     assert inventory["solution_json_parse_errors"] == []
