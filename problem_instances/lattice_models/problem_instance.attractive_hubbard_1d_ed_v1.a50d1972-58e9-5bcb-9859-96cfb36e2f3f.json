@@ -1,0 +1,1279 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
+  "application_domain": "CM",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "name": "Matthew Otten",
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison"
+    }
+  ],
+  "creation_timestamp": "2026-07-10T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-10T00:00:00+00:00",
+  "license": {
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "problem_instance_uuid": "a50d1972-58e9-5bcb-9859-96cfb36e2f3f",
+  "problem_type": "GSEE",
+  "references": [
+    "https://doi.org/10.1103/PhysRevLett.20.1445",
+    "https://doi.org/10.1007/3-540-44838-8_10"
+  ],
+  "short_name": "attractive_hubbard_1d_ed_v1",
+  "status": "in_development",
+  "superseded_by": null,
+  "basis_convention": {
+    "orbital_basis": "site_basis",
+    "boundary_condition": "periodic_ring",
+    "hopping": "nearest-neighbor h_ij=-1",
+    "onsite": "(ii|ii)=U<0",
+    "ecore_hartree": 0.0,
+    "particle_hole_shift": false
+  },
+  "tasks": [
+    {
+      "task_uuid": "aa9cf2d8-ef23-5185-96bd-d179c00928dc",
+      "independent_parameters": {
+        "num_sites": 6,
+        "num_electrons": 6,
+        "n_alpha": 3,
+        "n_beta": 3,
+        "onsite_u_hartree": -1.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 6,
+        "num_orbitals": 6,
+        "num_electrons": 6,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hubbard_half_filled": true,
+        "hubbard_doped": false,
+        "onsite_u_hartree": -1.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": 2.4868995751603507e-14
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -9.601158293375132,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "partial particle-hole map to an existing repulsive exact row"
+        ],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 400."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "6d4d72ee-2507-5152-bc52-50d84c999d31",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L6_n6_ms20_Uminus1.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "4594addd5ce336505c70eb3277aae61c573813d6",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "362af02a-adc2-5519-a77a-cda24c736973",
+      "independent_parameters": {
+        "num_sites": 6,
+        "num_electrons": 6,
+        "n_alpha": 3,
+        "n_beta": 3,
+        "onsite_u_hartree": -2.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 6,
+        "num_orbitals": 6,
+        "num_electrons": 6,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hubbard_half_filled": true,
+        "hubbard_doped": false,
+        "onsite_u_hartree": -2.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": 1.4210854715202004e-14
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -11.40945684510061,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "partial particle-hole map to an existing repulsive exact row"
+        ],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 400."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "5f7cdaae-d753-59b9-baa9-d46f9e31ce15",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L6_n6_ms20_Uminus2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "3c875834a35c9d8f7891220c09088aaf8ed0f2c6",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "7b1ea320-6c12-5012-922f-fa51d99eeaef",
+      "independent_parameters": {
+        "num_sites": 6,
+        "num_electrons": 6,
+        "n_alpha": 3,
+        "n_beta": 3,
+        "onsite_u_hartree": -4.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 6,
+        "num_orbitals": 6,
+        "num_electrons": 6,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hubbard_half_filled": true,
+        "hubbard_doped": false,
+        "onsite_u_hartree": -4.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": 1.0658141036401503e-14
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -15.668706178872947,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "partial particle-hole map to an existing repulsive exact row"
+        ],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 400."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "68ccb5af-8a43-5f0f-90e2-fdcf7ad7d58b",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L6_n6_ms20_Uminus4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "ce7df34f55c17205ecbebe56bd02a2e2ac28efc8",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "f7b1aa32-6223-5044-a91c-d0f095ca713c",
+      "independent_parameters": {
+        "num_sites": 6,
+        "num_electrons": 6,
+        "n_alpha": 3,
+        "n_beta": 3,
+        "onsite_u_hartree": -8.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 6,
+        "num_orbitals": 6,
+        "num_electrons": 6,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hubbard_half_filled": true,
+        "hubbard_doped": false,
+        "onsite_u_hartree": -8.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": 1.7763568394002505e-14
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -26.04813088609147,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "partial particle-hole map to an existing repulsive exact row"
+        ],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 400."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "bd80be9f-c3d4-5fb2-8830-2ea03a95dfff",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L6_n6_ms20_Uminus8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "30b711ffd1954f4d29337d3832e31afa877418d9",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "e239e95a-e89e-51ce-aa35-4c95ac6df9f2",
+      "independent_parameters": {
+        "num_sites": 10,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "onsite_u_hartree": -1.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hubbard_half_filled": true,
+        "hubbard_doped": false,
+        "onsite_u_hartree": -1.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": 1.2434497875801753e-14
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -15.614407160578928,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "partial particle-hole map to an existing repulsive exact row"
+        ],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 63504."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "7ccbdd63-1d54-5767-96f6-607b326f3921",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L10_n10_ms20_Uminus1.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "eda3bef07b2d28b9518228fafa1c1e74170db83e",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "7964bbe9-1ec7-55ef-b7b4-08b1d08445d8",
+      "independent_parameters": {
+        "num_sites": 10,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "onsite_u_hartree": -2.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hubbard_half_filled": true,
+        "hubbard_doped": false,
+        "onsite_u_hartree": -2.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": 7.105427357601002e-15
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -18.638415739962326,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "partial particle-hole map to an existing repulsive exact row"
+        ],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 63504."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "972e600e-7f1d-590d-b96b-77f0a0e530ca",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L10_n10_ms20_Uminus2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "b958541fa6390069c03fc358eee7fa5ca7061e44",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "deb04f20-3157-5b14-88b7-7a7a4ddc5c32",
+      "independent_parameters": {
+        "num_sites": 10,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "onsite_u_hartree": -4.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hubbard_half_filled": true,
+        "hubbard_doped": false,
+        "onsite_u_hartree": -4.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": 1.4210854715202004e-14
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -25.834322635772565,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "partial particle-hole map to an existing repulsive exact row"
+        ],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 63504."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "20f97708-fa30-51e1-8c30-5eaeffd76d79",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L10_n10_ms20_Uminus4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "77c390bbdb18c1fd77c3cb65149e6fbdda3e57b7",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "9e72fd5d-a3a2-585b-b1bd-9e421c95359f",
+      "independent_parameters": {
+        "num_sites": 10,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "onsite_u_hartree": -8.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 1.0,
+        "hubbard_half_filled": true,
+        "hubbard_doped": false,
+        "onsite_u_hartree": -8.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": 1.4210854715202004e-14
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -43.31499672908781,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "partial particle-hole map to an existing repulsive exact row"
+        ],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 63504."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "5d0eb2e2-e0ef-5874-8d5a-1b1b911141d4",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L10_n10_ms20_Uminus8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "f2552d0ce891c95b26a5ca5cb5dead17006957c6",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "99c5ab5b-0c59-503d-bba0-298b3e197b75",
+      "independent_parameters": {
+        "num_sites": 10,
+        "num_electrons": 8,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "onsite_u_hartree": -2.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "num_orbitals": 10,
+        "num_electrons": 8,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 0.8,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "onsite_u_hartree": -2.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": 0.0
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -15.869964558150688,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "partial particle-hole map to an existing repulsive exact row"
+        ],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 44100."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "e5f6dee7-8184-5746-a2f6-966d0b100b99",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L10_n8_ms20_Uminus2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "6162a9ebbe7f8a3cd62220f42d8f356c47dd03d5",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "12d0d43c-22d5-5699-b713-4fae60701a4e",
+      "independent_parameters": {
+        "num_sites": 10,
+        "num_electrons": 8,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "onsite_u_hartree": -4.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "num_orbitals": 10,
+        "num_electrons": 8,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 0.8,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "onsite_u_hartree": -4.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": 1.0658141036401503e-14
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -21.434854635651018,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "partial particle-hole map to an existing repulsive exact row"
+        ],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 44100."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "b8689c9c-ff9b-5535-9900-8c19524982cd",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L10_n8_ms20_Uminus4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "69160d589bc72f5a75e29af5806feaf3ba70683f",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "8198fdf2-0bb6-5684-acd4-af62e64a6ed9",
+      "independent_parameters": {
+        "num_sites": 10,
+        "num_electrons": 8,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "onsite_u_hartree": -8.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "num_orbitals": 10,
+        "num_electrons": 8,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 0.8,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "onsite_u_hartree": -8.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": 2.842170943040401e-14
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -35.115437731871914,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "partial particle-hole map to an existing repulsive exact row"
+        ],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 44100."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "16a7d4f6-47a1-5431-9eda-f8656da25a63",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L10_n8_ms20_Uminus8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "e49bda9e9ae447a009fcfaac23ec28c7106f8374",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "f7232c0e-1042-51e7-b2bb-397102d46eb0",
+      "independent_parameters": {
+        "num_sites": 10,
+        "num_electrons": 6,
+        "n_alpha": 3,
+        "n_beta": 3,
+        "onsite_u_hartree": -2.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "num_orbitals": 10,
+        "num_electrons": 6,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 0.6,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "onsite_u_hartree": -2.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -12.834757210229105,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 14400."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "1be648be-4117-5e34-a968-b062085481e7",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L10_n6_ms20_Uminus2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "177d00528a64e1607a23d509b1f53d2feaf44624",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "64e736ab-07ef-5db9-a555-17da30b4a865",
+      "independent_parameters": {
+        "num_sites": 10,
+        "num_electrons": 6,
+        "n_alpha": 3,
+        "n_beta": 3,
+        "onsite_u_hartree": -4.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "num_orbitals": 10,
+        "num_electrons": 6,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 0.6,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "onsite_u_hartree": -4.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -16.563396846066073,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 14400."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "ad6053c2-abab-58fe-82fd-6873352fdba1",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L10_n6_ms20_Uminus4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "ece1acdb4b32a0a68d5c7717e9710484bb5900a3",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "b4fc5215-8c0a-528b-a3a3-a5616c68713b",
+      "independent_parameters": {
+        "num_sites": 10,
+        "num_electrons": 6,
+        "n_alpha": 3,
+        "n_beta": 3,
+        "onsite_u_hartree": -8.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 10,
+        "num_orbitals": 10,
+        "num_electrons": 6,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 0.6,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "onsite_u_hartree": -8.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -26.58923834636996,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 14400."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "a97eb281-0dd4-5994-a18d-6db24982cdb8",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L10_n6_ms20_Uminus8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "82f4bcc99cf11b3f558fb366fccff34d7aad666b",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "ddc9113f-3bff-5771-98cd-cd6fc0590ca7",
+      "independent_parameters": {
+        "num_sites": 12,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "onsite_u_hartree": -2.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 12,
+        "num_orbitals": 12,
+        "num_electrons": 10,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 0.8333333333333334,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "onsite_u_hartree": -2.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -19.8957150295993,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 627264."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "54298b71-2462-595b-95a8-316c60259fd7",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L12_n10_ms20_Uminus2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "ce4aed547f312392ea8a9ff6708c30eeab3c8b4a",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "64818698-190e-5f48-9fe9-a374b30aac8e",
+      "independent_parameters": {
+        "num_sites": 12,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "onsite_u_hartree": -4.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 12,
+        "num_orbitals": 12,
+        "num_electrons": 10,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 0.8333333333333334,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "onsite_u_hartree": -4.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -26.670141145792588,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 627264."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "736dfabb-b18b-5838-94fa-e7d823476d8d",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L12_n10_ms20_Uminus4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "c0e0bc489412f8065240dc58a779f0bd7764ebb0",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "9317b786-c94e-59a1-9386-d7d91669bf10",
+      "independent_parameters": {
+        "num_sites": 12,
+        "num_electrons": 10,
+        "n_alpha": 5,
+        "n_beta": 5,
+        "onsite_u_hartree": -8.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 12,
+        "num_orbitals": 12,
+        "num_electrons": 10,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 0.8333333333333334,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "onsite_u_hartree": -8.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -43.796216816336226,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 627264."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "7ea2171e-6e04-58c7-abbb-f04e69312fb4",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L12_n10_ms20_Uminus8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "555dd2a37ef64eac2c1a6ce6bbb3e480fd69efcd",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "a83d93d8-78ff-5f5a-b27f-c9d3584b0416",
+      "independent_parameters": {
+        "num_sites": 12,
+        "num_electrons": 8,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "onsite_u_hartree": -2.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 12,
+        "num_orbitals": 12,
+        "num_electrons": 8,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 0.6666666666666666,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "onsite_u_hartree": -2.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -16.58502159734043,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 245025."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "c4c86a0c-c22a-55e0-a0cb-8a500065f67a",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L12_n8_ms20_Uminus2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "6129a0991925982bd859d40f9262b14878c609db",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "d836ebd5-ce4f-575a-a72d-889cb4ae4204",
+      "independent_parameters": {
+        "num_sites": 12,
+        "num_electrons": 8,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "onsite_u_hartree": -4.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 12,
+        "num_orbitals": 12,
+        "num_electrons": 8,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 0.6666666666666666,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "onsite_u_hartree": -4.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -21.860147106661355,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 245025."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "9271af75-f643-5d87-8aae-d20622f1ae7a",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L12_n8_ms20_Uminus4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "ceacb046095b98deb9aceafaa1274bc22959b030",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "82b10203-9445-52fd-8418-e67979a33bd3",
+      "independent_parameters": {
+        "num_sites": 12,
+        "num_electrons": 8,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "onsite_u_hartree": -8.0
+      },
+      "features": {
+        "model": "1D attractive Fermi-Hubbard",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "periodic_ring",
+        "boundary_condition": "periodic_ring",
+        "orbital_basis": "site_basis",
+        "hubbard_dimensionality": 1,
+        "hubbard_num_sites": 12,
+        "num_orbitals": 12,
+        "num_electrons": 8,
+        "ms2": 0,
+        "hubbard_filling_electrons_per_site": 0.6666666666666666,
+        "hubbard_half_filled": false,
+        "hubbard_doped": true,
+        "onsite_u_hartree": -8.0,
+        "hopping_t_hartree": 1.0,
+        "lattice_bipartite": true,
+        "interaction_sign": "negative",
+        "sign_free_condition_flag": true,
+        "sign_free_condition": "attractive_hubbard_spin_balanced_any_filling",
+        "sign_free_detector_version": "g23_sign_free_detector_v1",
+        "particle_hole_cross_check_delta_hartree": null
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -35.34300440195082,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization of the finite periodic site-basis Hamiltonian",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [],
+        "reference_energy_source": "In-house sparse ED with a bitstring hopping construction independent of the FCIDUMP writer; particle-hole cross-check attached where an existing exact repulsive partner exists.",
+        "reference_energy_note": "Lanczos tol 1e-12; Hilbert dimension 245025."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "e3d435fc-0d89-55e1-aaaf-06ef92112eb4",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/attractive_hubbard_1d/attractive_hubbard_1d_L12_n8_ms20_Uminus8.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "dc07880f760dd7d366caf0cc7e7a8e94968de977",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    }
+  ]
+}

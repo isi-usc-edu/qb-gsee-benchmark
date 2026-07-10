@@ -1,0 +1,269 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
+  "application_domain": "CM",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "name": "Matthew Otten",
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison"
+    }
+  ],
+  "creation_timestamp": "2026-07-10T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-10T00:00:00+00:00",
+  "license": {
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "problem_instance_uuid": "b6de69c8-c4a0-5d1a-8e42-dd88816c203a",
+  "problem_type": "GSEE",
+  "references": [
+    "https://github.com/varbench/varbench/tree/390a21eab7eb6898d663bc594bc139d1ec616711/tV",
+    "https://arxiv.org/abs/2302.04919"
+  ],
+  "short_name": "varbench_tv_square16_ed_v1",
+  "status": "in_development",
+  "superseded_by": null,
+  "basis_convention": {
+    "orbital_basis": "4x4 square-lattice sites",
+    "boundary_condition": "periodic_both_axes",
+    "spinless_encoding": "fully polarized all-alpha sector with MS2=NELEC",
+    "hopping": "nearest-neighbor h_ij=-1",
+    "interaction": "same-spin nearest-neighbor density term (ii|jj)=V",
+    "ecore_hartree": 0.0
+  },
+  "tasks": [
+    {
+      "task_uuid": "ac3a023f-8d31-5d79-803e-c54e947c8d75",
+      "independent_parameters": {
+        "model": "spinless_t_v",
+        "geometry": "square_4x4",
+        "num_sites": 16,
+        "num_fermions": 5,
+        "interaction_v_hartree": 0.01
+      },
+      "features": {
+        "model": "2D spinless t-V",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "square_4x4",
+        "boundary_condition": "periodic",
+        "orbital_basis": "site_basis_all_alpha",
+        "num_orbitals": 16,
+        "num_electrons": 5,
+        "ms2": 5,
+        "hopping_t_hartree": 1.0,
+        "nearest_neighbor_v_hartree": 0.01,
+        "lattice_bipartite": true,
+        "lattice_filling_electrons_per_site": 0.3125,
+        "interaction_sign": "positive",
+        "sign_free_condition_flag": false,
+        "sign_free_condition": "no_general_sign_free_condition_for_2d_spinless_t_v",
+        "sign_free_detector_version": "g23_sign_free_detector_v1"
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -11.980026283471318,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization in the Nf=5 spinless occupation basis",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "VarBench exact diagonalization"
+        ],
+        "reference_energy_source": "Our sparse ED is primary; VarBench pinned exact row: https://github.com/varbench/varbench/blob/390a21eab7eb6898d663bc594bc139d1ec616711/tV/square_16_P_5_0.01.md",
+        "reference_energy_note": "All-alpha FCIDUMP encoding, C(16,5)=4368 states; our ED/VarBench delta 2.309e-14 Ha."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "b8a5d73c-09ce-5715-85c0-b20ce448255e",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/varbench_tv_square16/varbench_tv_square16_pbc_nf5_v0p01.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "fec00fefd294777a854748768edfa08ca4a6c6ab",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "25c59f20-261b-59ad-b10f-fe2b61ae317e",
+      "independent_parameters": {
+        "model": "spinless_t_v",
+        "geometry": "square_4x4",
+        "num_sites": 16,
+        "num_fermions": 5,
+        "interaction_v_hartree": 0.1
+      },
+      "features": {
+        "model": "2D spinless t-V",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "square_4x4",
+        "boundary_condition": "periodic",
+        "orbital_basis": "site_basis_all_alpha",
+        "num_orbitals": 16,
+        "num_electrons": 5,
+        "ms2": 5,
+        "hopping_t_hartree": 1.0,
+        "nearest_neighbor_v_hartree": 0.1,
+        "lattice_bipartite": true,
+        "lattice_filling_electrons_per_site": 0.3125,
+        "interaction_sign": "positive",
+        "sign_free_condition_flag": false,
+        "sign_free_condition": "no_general_sign_free_condition_for_2d_spinless_t_v",
+        "sign_free_detector_version": "g23_sign_free_detector_v1"
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -11.8026110981111,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization in the Nf=5 spinless occupation basis",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "VarBench exact diagonalization"
+        ],
+        "reference_energy_source": "Our sparse ED is primary; VarBench pinned exact row: https://github.com/varbench/varbench/blob/390a21eab7eb6898d663bc594bc139d1ec616711/tV/square_16_P_5_0.1.md",
+        "reference_energy_note": "All-alpha FCIDUMP encoding, C(16,5)=4368 states; our ED/VarBench delta 1.421e-14 Ha."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "a1f5c178-99cc-5f6c-9ce6-efb25c15d539",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/varbench_tv_square16/varbench_tv_square16_pbc_nf5_v0p1.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "c5f3dc3e3183da3bd82ae847f18281358fb48359",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "9a097145-0078-510f-9ec8-55a1f65a5e22",
+      "independent_parameters": {
+        "model": "spinless_t_v",
+        "geometry": "square_4x4",
+        "num_sites": 16,
+        "num_fermions": 5,
+        "interaction_v_hartree": 1.0
+      },
+      "features": {
+        "model": "2D spinless t-V",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "square_4x4",
+        "boundary_condition": "periodic",
+        "orbital_basis": "site_basis_all_alpha",
+        "num_orbitals": 16,
+        "num_electrons": 5,
+        "ms2": 5,
+        "hopping_t_hartree": 1.0,
+        "nearest_neighbor_v_hartree": 1.0,
+        "lattice_bipartite": true,
+        "lattice_filling_electrons_per_site": 0.3125,
+        "interaction_sign": "positive",
+        "sign_free_condition_flag": false,
+        "sign_free_condition": "no_general_sign_free_condition_for_2d_spinless_t_v",
+        "sign_free_detector_version": "g23_sign_free_detector_v1"
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -10.240650492312074,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization in the Nf=5 spinless occupation basis",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "VarBench exact diagonalization"
+        ],
+        "reference_energy_source": "Our sparse ED is primary; VarBench pinned exact row: https://github.com/varbench/varbench/blob/390a21eab7eb6898d663bc594bc139d1ec616711/tV/square_16_P_5_1.md",
+        "reference_energy_note": "All-alpha FCIDUMP encoding, C(16,5)=4368 states; our ED/VarBench delta 3.553e-15 Ha."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "2eeb835b-f5ad-5111-9589-718eb4ba8d6f",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/varbench_tv_square16/varbench_tv_square16_pbc_nf5_v1.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "3381909365a1a5d203f8b8714e1bec5cca123bf7",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "ca8b59ee-11c4-59eb-94ff-505eb613f22a",
+      "independent_parameters": {
+        "model": "spinless_t_v",
+        "geometry": "square_4x4",
+        "num_sites": 16,
+        "num_fermions": 5,
+        "interaction_v_hartree": 10.0
+      },
+      "features": {
+        "model": "2D spinless t-V",
+        "hamiltonian_family": "lattice_model",
+        "geometry": "square_4x4",
+        "boundary_condition": "periodic",
+        "orbital_basis": "site_basis_all_alpha",
+        "num_orbitals": 16,
+        "num_electrons": 5,
+        "ms2": 5,
+        "hopping_t_hartree": 1.0,
+        "nearest_neighbor_v_hartree": 10.0,
+        "lattice_bipartite": true,
+        "lattice_filling_electrons_per_site": 0.3125,
+        "interaction_sign": "positive",
+        "sign_free_condition_flag": false,
+        "sign_free_condition": "no_general_sign_free_condition_for_2d_spinless_t_v",
+        "sign_free_detector_version": "g23_sign_free_detector_v1"
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -4.052055274410362,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "independent sparse exact diagonalization in the Nf=5 spinless occupation basis",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "VarBench exact diagonalization"
+        ],
+        "reference_energy_source": "Our sparse ED is primary; VarBench pinned exact row: https://github.com/varbench/varbench/blob/390a21eab7eb6898d663bc594bc139d1ec616711/tV/square_16_P_5_10.md",
+        "reference_energy_note": "All-alpha FCIDUMP encoding, C(16,5)=4368 states; our ED/VarBench delta 0.000e+00 Ha."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "a33abcf9-ff01-581e-b351-6eb4c78eb446",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/varbench_tv_square16/varbench_tv_square16_pbc_nf5_v10.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "6b579a97726d4024dadd537af86fc4c049b2c273",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    }
+  ]
+}
