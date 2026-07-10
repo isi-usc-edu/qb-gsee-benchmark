@@ -1,0 +1,99 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
+  "application_domain": "QC",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "name": "Matthew Otten",
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison"
+    }
+  ],
+  "creation_timestamp": "2026-07-09T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-09T22:00:00+00:00",
+  "license": {
+    "name": "Creative Commons Attribution 4.0 International",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "problem_instance_uuid": "b80b54cc-d5aa-59cd-85b0-67cdf19e1ad0",
+  "problem_type": "GSEE",
+  "references": [
+    "https://doi.org/10.1103/PhysRevResearch.3.033055",
+    "https://arxiv.org/abs/2007.14460",
+    "https://zenodo.org/records/4769113"
+  ],
+  "short_name": "vonburg_ru_ix_cas16_fb_68e62o",
+  "status": "in_development",
+  "superseded_by": null,
+  "basis_convention": {
+    "system": "stable Ru catalyst intermediate IX",
+    "charge_spin": "monocation, lowest-energy singlet",
+    "active_space": "68 electrons in 62 spatial orbitals",
+    "orbital_basis": "CASSCF molecular orbitals from CAS(16,16)SCF expanded to the full ANO-RCC basis",
+    "ao_basis": "ANO-RCC-VTZP for light elements and ANO-RCC-VQZP for Ru",
+    "cholesky_decomposition_threshold": 0.0001,
+    "fcidump_source_member": "leitnerCatalyst/defCD/IX-cas16-fb-68e62o.txt"
+  },
+  "tasks": [
+    {
+      "task_uuid": "322b3212-6364-5bef-bb6b-d0b61ed77bc5",
+      "independent_parameters": {
+        "structure": "IX",
+        "active_electrons": 68,
+        "active_spatial_orbitals": 62,
+        "ms2": 0,
+        "casscf_active_space": [
+          16,
+          16
+        ],
+        "cholesky_decomposition_threshold": 0.0001
+      },
+      "features": {
+        "molecule_name": "von Burg Ru catalyst intermediate IX",
+        "hamiltonian_family": "ab_initio_active_space",
+        "application_domain": "quantum_chemistry",
+        "num_orbitals": 62,
+        "num_electrons": 68,
+        "ms2": 0,
+        "orbital_basis": "CAS(16,16)SCF-derived full-basis CASSCF molecular orbitals",
+        "ao_basis": "ANO-RCC-VTZP (light elements), ANO-RCC-VQZP (Ru)",
+        "integral_generation_software": "OpenMolcas",
+        "reference_solver": "QCMaquis DMRG-CI",
+        "reference_bond_dimension": 1000,
+        "reference_sweeps": 10,
+        "reference_orbital_ordering": "Fiedler",
+        "hf_on_dump_energy_hartree": -7317.966520078237,
+        "hf_on_dump_converged": true
+      },
+      "requirements": {
+        "time_limit_seconds": 43200,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -7318.303045,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "finite-m QCMaquis DMRG-CI with m=1000, n=10, and Fiedler ordering",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_uncertainty": 0.0017,
+        "reference_energy_uncertainty_type": "documented one-sided convergence drift, not a statistical standard error",
+        "reference_energy_uncertainty_units": "Hartree",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "von Burg et al., Phys. Rev. Research 3, 033055 (2021), Supporting Information Table postHFEnergies and accompanying DMRG settings",
+        "reference_energy_note": "The published value is a finite-m QCMaquis DMRG-CI variational upper bound (m=1000, n=10, Fiedler ordering), not an extrapolation. The SI reports 1-2 mHartree lowering from m=500 to 1000 and an additional -1.7 mHartree change for IX from m=1000 to 2048, so the value is never treated as nearly exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "71c46375-9e1d-5944-a3e7-cd8b68a9d66c",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/vonburg_ru_spec/IX-cas16-fb-68e62o.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "604c088412f3ba260e65ea4c9aad5836a6e7063c",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "variational_upper_bound",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": true
+    }
+  ]
+}
