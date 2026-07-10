@@ -222,18 +222,16 @@ def verify(config_path: Path, workspace_root: Path) -> dict[str, object]:
         detector_details.append({"task_uuid": task.get("task_uuid"), "missing": missing})
     checks.append(result("detector_feature_population", detector_ok, {"declared_class": detector.get("declared_class"), "tasks": detector_details}))
 
-    artifact_by_task = {item["task_uuid"]: item for item in config.get("artifacts", [])}
+    hosted_files = {item["url"]: item for item in config.get("hosted_files", [])}
     hosting_details = []
     hosting_ok = True
     for task in tasks:
         for support in task.get("supporting_files", []):
-            if not support.get("is_fcidump_file"):
-                continue
             url = support.get("instance_data_object_url", "")
             status, length, error = anonymous_head(url)
-            artifact = artifact_by_task.get(task.get("task_uuid"), {})
-            expected_size = (workspace_root / artifact["gzip_path"]).stat().st_size if artifact else None
-            item_ok = status == 200 and (length is None or length == expected_size)
+            hosted = hosted_files.get(url, {})
+            expected_size = (workspace_root / hosted["local_path"]).stat().st_size if hosted else None
+            item_ok = bool(hosted) and status == 200 and (length is None or length == expected_size)
             hosting_ok &= item_ok
             hosting_details.append({"url": url, "status": status, "content_length": length, "expected_size": expected_size, "error": error})
     checks.append(result("hosting_anonymous_head_200", bool(hosting_details) and hosting_ok, hosting_details))
@@ -245,10 +243,9 @@ def verify(config_path: Path, workspace_root: Path) -> dict[str, object]:
     candidate_keys = []
     for task in tasks:
         for support in task.get("supporting_files", []):
-            if support.get("is_fcidump_file"):
-                parsed = urlparse(support["instance_data_object_url"])
-                candidate_keys.append(parsed.path.split("/", 2)[-1])
-    target_ok &= sorted(candidate_keys) == sorted(targets)
+            parsed = urlparse(support["instance_data_object_url"])
+            candidate_keys.append(parsed.path.split("/", 2)[-1])
+    target_ok &= len(targets) == len(set(targets)) and sorted(set(candidate_keys)) == sorted(targets)
     checks.append(result("emission_safety_allowlist", target_ok, {"allowed_s3_prefixes": allowed, "planned_object_keys": targets, "candidate_object_keys": candidate_keys, "read_only": True}))
 
     failed = [check for check in checks if not check["passed"]]
