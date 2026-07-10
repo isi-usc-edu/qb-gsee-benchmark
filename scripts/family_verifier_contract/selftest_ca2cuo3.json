@@ -1,0 +1,48 @@
+{
+  "family_id": "ca2cuo3_spec_read_only_selftest",
+  "candidate_json": "qb-gsee-benchmark/problem_instances/lattice_models/problem_instance.ca2cuo3_downfolded_10site_extended_hubbard.031a2bf1-2a41-5478-99ab-a040bd4be114.json",
+  "schema": "qb-gsee-benchmark/schemas/problem_instance.schema.0.0.2.json",
+  "redistribution": {
+    "approved": true,
+    "license_name": "Apache 2.0",
+    "license_url": "http://www.apache.org/licenses/LICENSE-2.0",
+    "evidence": "Deterministically generated in-house from the cited published model parameters; generator and emitted data are project-owned."
+  },
+  "artifacts": [
+    {
+      "task_uuid": "fd237a35-ba7c-5969-82e4-ecb3e1a85f48",
+      "raw_path": "work/fcidumps/ca2cuo3_spec/ca2cuo3_10site_open_extended_hubbard.fcidump",
+      "gzip_path": "work/fcidumps/ca2cuo3_spec/ca2cuo3_10site_open_extended_hubbard.fcidump.gz",
+      "raw_sha1": "031bfe02f86a112daf9a23fb71c5ea1d7929b7eb",
+      "raw_sha256": "7bd6f7010949e97c3a87906db8c553114bd36a58e3b0c52e87d2069b8c02c6fb",
+      "gzip_sha1": "7f1b8b39a202d5cfc18d4b1bcd4d4ceac334fc8a",
+      "gzip_sha256": "a12bd2c44d07765250c635ed243fc14c6296b5a4d98556ea23b7debb45012b17"
+    }
+  ],
+  "references": [
+    {
+      "task_uuid": "fd237a35-ba7c-5969-82e4-ecb3e1a85f48",
+      "reference_energy_hartree": 0.22068169815884978,
+      "match_tolerance_hartree": 1e-12
+    }
+  ],
+  "detector": {
+    "declared_class": "lattice_model",
+    "required_task_fields": [
+      "features.hubbard_dimensionality",
+      "features.hubbard_filling_electrons_per_site",
+      "features.hubbard_half_filled",
+      "features.boundary_condition",
+      "features.onsite_u_hartree",
+      "features.hopping_t_hartree"
+    ]
+  },
+  "emission": {
+    "allowed_s3_prefixes": [
+      "fcidumps/v1/ca2cuo3_spec/"
+    ],
+    "planned_object_keys": [
+      "fcidumps/v1/ca2cuo3_spec/ca2cuo3_10site_open_extended_hubbard.fcidump.gz"
+    ]
+  }
+}
