@@ -25,7 +25,10 @@ Cardoen, and Chan. Their 2006 results are cross-checks only.
 The generator checks active-orbital orthonormality, occupied-subspace
 separation, and equality between full-molecule RHF and the RHF determinant of
 the emitted active-space Hamiltonian. For `k<=12`, it also computes exact FCI
-and an explicit CI-vector residual.
+and an explicit CI-vector residual. Archival integral generation is fixed to
+one numerical thread because multithreaded BLAS reductions can change the last
+printed digits; deterministic gzip metadata and the single-threaded convention
+make repeated builds byte-identical in the pinned software environment.
 
 ## Usage
 
