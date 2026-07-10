@@ -34,6 +34,7 @@ CC_SINGLE_ANGSTROM = 1.4244
 CH_ANGSTROM = 1.0820
 BOND_ANGLE_DEGREES = 120.0
 FCIDUMP_TOL = 1.0e-14
+GENERATION_THREADS = 1
 SOURCE_URL = "https://arxiv.org/abs/cond-mat/0606115"
 SOURCE_DOI = "https://doi.org/10.1063/1.2345196"
 
@@ -210,28 +211,47 @@ def exact_fci_certificate(
     ecore: float,
 ) -> dict[str, Any]:
     electron_pair = (nelec // 2, nelec // 2)
-    energy, coefficients = fci.direct_spin1.kernel(
+    determinant_dimension = math.comb(norb, electron_pair[0]) * math.comb(
+        norb, electron_pair[1]
+    )
+    solver = fci.direct_spin1.FCI()
+    solver.conv_tol = 1.0e-13
+    solver.conv_tol_residual = 1.0e-10
+    solver.lindep = 1.0e-20
+    solver.max_cycle = 1000
+    solver.max_space = 100
+    solver.davidson_only = determinant_dimension > 400
+    solver.pspace_size = 400
+    energy, coefficients = solver.kernel(
         h1,
         eri,
         norb,
         electron_pair,
         ecore=ecore,
-        tol=1.0e-12,
-        max_cycle=500,
-        max_space=40,
     )
+    if not solver.converged:
+        raise RuntimeError(f"FCI Davidson did not converge for ({nelec}e,{norb}o)")
     absorbed = fci.direct_spin1.absorb_h1e(h1, eri, norb, electron_pair, 0.5)
     applied = fci.direct_spin1.contract_2e(absorbed, coefficients, norb, electron_pair)
     residual = np.asarray(applied) - (float(energy) - ecore) * np.asarray(
         coefficients
     )
+    residual_norm = float(np.linalg.norm(residual))
+    if residual_norm >= 1.0e-8:
+        raise RuntimeError(
+            f"FCI root residual {residual_norm:.3e} exceeds 1e-8 Ha for "
+            f"({nelec}e,{norb}o)"
+        )
     return {
         "energy_hartree": float(energy),
         "ci_norm": float(np.linalg.norm(coefficients)),
-        "root_residual_l2_hartree": float(np.linalg.norm(residual)),
+        "root_residual_l2_hartree": residual_norm,
         "determinant_dimension": int(coefficients.size),
         "solver": "PySCF direct_spin1 FCI",
-        "solver_tolerance_hartree": 1.0e-12,
+        "solver_energy_tolerance_hartree": solver.conv_tol,
+        "solver_residual_tolerance_hartree": solver.conv_tol_residual,
+        "solver_linear_dependence_threshold": solver.lindep,
+        "solver_converged": bool(solver.converged),
     }
 
 
@@ -420,11 +440,17 @@ def main() -> int:
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--analysis-dir", type=Path, required=True)
     parser.add_argument("--members", type=parse_members, default=MEMBERS)
-    parser.add_argument("--threads", type=int, default=1)
+    parser.add_argument(
+        "--threads",
+        type=int,
+        choices=(GENERATION_THREADS,),
+        default=GENERATION_THREADS,
+        help="archival generation is fixed to one thread for byte reproducibility",
+    )
     parser.add_argument("--skip-fci", action="store_true")
     args = parser.parse_args()
 
-    lib.num_threads(max(1, args.threads))
+    lib.num_threads(GENERATION_THREADS)
     args.output_dir.mkdir(parents=True, exist_ok=True)
     args.analysis_dir.mkdir(parents=True, exist_ok=True)
     rows = [
@@ -451,12 +477,13 @@ def main() -> int:
             "orbital_order": "carbon-chain topological order",
             "frozen_space": "remaining doubly occupied RHF orbitals",
             "absolute_energy": "FCIDUMP eigenvalue equals RHF total plus active correlation",
+            "reproducibility": "single-threaded integral generation; deterministic gzip",
         },
         "software": {
             "python": platform.python_version(),
             "numpy": np.__version__,
             "pyscf": pyscf.__version__,
-            "threads": max(1, args.threads),
+            "threads": GENERATION_THREADS,
         },
         "members": rows,
     }

@@ -53,6 +53,7 @@ def test_c4_generation_reproduces_rhf_fci_and_historical_crosscheck(tmp_path: Pa
     assert abs(row["rhf_consistency_delta_hartree"]) < 1.0e-9
     assert row["active_orthonormality_max_abs"] < 1.0e-10
     assert certificate["determinant_dimension"] == 36
+    assert certificate["solver_converged"] is True
     assert certificate["root_residual_l2_hartree"] < 1.0e-10
     assert certificate["energy_hartree"] == pytest.approx(
         -153.0978661842132, abs=1.0e-10
