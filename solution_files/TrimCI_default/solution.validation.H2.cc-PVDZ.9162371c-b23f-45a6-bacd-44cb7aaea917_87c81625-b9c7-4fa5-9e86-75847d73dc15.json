@@ -1,0 +1,239 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+  "contact_info": [
+    {
+      "email": "bobqat@l3harris.com",
+      "institution": "L3Harris Technologies, Inc.",
+      "name": "QB-GSEE Benchmark Harness"
+    }
+  ],
+  "creation_timestamp": "2026-07-10T13:51:47.631220+00:00",
+  "digital_signature": null,
+  "is_resource_estimate": false,
+  "problem_instance_uuid": "9162371c-b23f-45a6-bacd-44cb7aaea917",
+  "solution_data": [
+    {
+      "energy": -1.1634029610645866,
+      "energy_uncertainty": 0.0,
+      "energy_units": "Hartree",
+      "run_time": {
+        "algorithm_run_time": {
+          "seconds": 34.56472849845886,
+          "wall_clock_start_time": "2026-07-10T13:51:11.247336+00:00",
+          "wall_clock_stop_time": "2026-07-10T13:51:45.812075+00:00"
+        },
+        "overall_time": {
+          "seconds": 34.56472849845886,
+          "wall_clock_start_time": "2026-07-10T13:51:11.247336+00:00",
+          "wall_clock_stop_time": "2026-07-10T13:51:45.812075+00:00"
+        },
+        "postprocessing_time": {
+          "seconds": 0.0
+        },
+        "preprocessing_time": {
+          "seconds": 0.0
+        }
+      },
+      "solution_details": {
+        "attempted": true,
+        "harness_status": "completed",
+        "not_attempted_reason": null,
+        "raw_output_file": "raw_output.json",
+        "run_directory_id": "a2c7eafc-b886-4862-b0cb-28fcaf50bba9",
+        "trimci_details": {
+          "energy_policy": "pt2_if_available",
+          "result": {
+            "energy": -1.1634029610645866,
+            "energy_history": [
+              -1.1634029610645877,
+              -1.1634029610645864,
+              -1.1634029610645866,
+              -1.1634029610645866,
+              -1.1634029610645866,
+              -1.1634029610645866,
+              -1.1634029610645866
+            ],
+            "expansion_rounds": 6,
+            "n_dets_final": 26,
+            "n_dets_phase0": 26,
+            "n_fci": 100,
+            "orbopt_phases": {
+              "phase0_ran": true,
+              "phase0_requested": true,
+              "phase1_ran": true,
+              "phase1_requested": true
+            },
+            "pt2_correction": null,
+            "pt2_energy": null,
+            "pt2_history": [
+              0.0,
+              0.0,
+              0.0,
+              -0.0,
+              -0.0,
+              -0.0
+            ],
+            "resolved_trimci_config": {
+              "active": null,
+              "backend_phase0": "auto",
+              "backend_phase1": "cpu",
+              "backend_phase2": "cpu",
+              "davidson_energy_tol_phase1": 0.0001,
+              "davidson_energy_tol_phase2": 1e-05,
+              "enable_phase1": true,
+              "enable_phase2": true,
+              "growth_factor_phase1": 1.1,
+              "growth_factor_phase2": 2.0,
+              "loaded_dets_randomness": 0.0,
+              "max_dets_phase0": 100,
+              "max_dets_phase1": 1000000,
+              "max_dets_phase2": 100000000,
+              "n_cpu_workers": 1,
+              "n_gpu_workers": 0,
+              "n_parallel": 1,
+              "num_runs": 64,
+              "optimizer": "auto_bfgs",
+              "orbopt": true,
+              "orbopt_cycles": 10,
+              "orbopt_grad_tol": 0.001,
+              "orbopt_max_iter": 50,
+              "orbopt_phase1": true,
+              "phase0_overrides": {},
+              "phase1_overrides": {},
+              "phase2_overrides": {},
+              "pt2_correction": true,
+              "pt2_only_last": false,
+              "seed": 20260710,
+              "threshold": 0.01,
+              "tracking_dets": false,
+              "use_connection_cache_phase1": true,
+              "verbosity": 1,
+              "work_dir": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g28_trimci_h2_demo/trimci_work"
+            },
+            "variational_energy": -1.1634029610645866,
+            "wall_expansion": 0.6303446292877197,
+            "wall_phase0": 33.780123710632324,
+            "wavefunction_normalized": true
+          },
+          "settings_provenance": {
+            "defaults_policy": "trimci.Config defaults; only seed and run-local work_dir changed",
+            "energy_policy": "pt2_if_available",
+            "num_threads": 32,
+            "seed": 20260710,
+            "solver_short_name": "TrimCI_default",
+            "solver_uuid": "54feec4d-06b8-5ac2-a936-7e645130fb48",
+            "trimci_config": {
+              "active": null,
+              "backend_phase0": "auto",
+              "backend_phase1": "cpu",
+              "backend_phase2": "cpu",
+              "davidson_energy_tol_phase1": 0.0001,
+              "davidson_energy_tol_phase2": 1e-05,
+              "enable_phase1": true,
+              "enable_phase2": true,
+              "growth_factor_phase1": 1.1,
+              "growth_factor_phase2": 2.0,
+              "loaded_dets_randomness": 0.0,
+              "max_dets_phase0": 100,
+              "max_dets_phase1": 1000000,
+              "max_dets_phase2": 100000000,
+              "n_cpu_workers": 1,
+              "n_gpu_workers": 0,
+              "n_parallel": 1,
+              "num_runs": 64,
+              "optimizer": "auto_bfgs",
+              "orbopt": true,
+              "orbopt_cycles": 10,
+              "orbopt_grad_tol": 0.001,
+              "orbopt_max_iter": 50,
+              "orbopt_phase1": true,
+              "phase0_overrides": {},
+              "phase1_overrides": {},
+              "phase2_overrides": {},
+              "pt2_correction": true,
+              "pt2_only_last": false,
+              "seed": 20260710,
+              "threshold": 0.01,
+              "tracking_dets": false,
+              "use_connection_cache_phase1": true,
+              "verbosity": 1,
+              "work_dir": "trimci_work"
+            }
+          },
+          "single_panel_invocation": true,
+          "stderr_file": "trimci.stderr",
+          "stdout_file": "trimci.stdout"
+        }
+      },
+      "task_uuid": "f847059f-a89f-4008-9ae1-39847c899e75"
+    }
+  ],
+  "solution_uuid": "87c81625-b9c7-4fa5-9e86-75847d73dc15",
+  "solver_details": {
+    "algorithm_details": {
+      "harness_adapter": "trimci",
+      "harness_adapter_version": "0.1.0",
+      "name": "TrimCI default three-phase selected-CI workflow",
+      "solver_config": {
+        "defaults_policy": "trimci.Config defaults; only seed and run-local work_dir changed",
+        "energy_policy": "pt2_if_available",
+        "num_threads": 32,
+        "seed": 20260710,
+        "solver_short_name": "TrimCI_default",
+        "solver_uuid": "54feec4d-06b8-5ac2-a936-7e645130fb48",
+        "trimci_config": {
+          "active": null,
+          "backend_phase0": "auto",
+          "backend_phase1": "cpu",
+          "backend_phase2": "cpu",
+          "davidson_energy_tol_phase1": 0.0001,
+          "davidson_energy_tol_phase2": 1e-05,
+          "enable_phase1": true,
+          "enable_phase2": true,
+          "growth_factor_phase1": 1.1,
+          "growth_factor_phase2": 2.0,
+          "loaded_dets_randomness": 0.0,
+          "max_dets_phase0": 100,
+          "max_dets_phase1": 1000000,
+          "max_dets_phase2": 100000000,
+          "n_cpu_workers": 1,
+          "n_gpu_workers": 0,
+          "n_parallel": 1,
+          "num_runs": 64,
+          "optimizer": "auto_bfgs",
+          "orbopt": true,
+          "orbopt_cycles": 10,
+          "orbopt_grad_tol": 0.001,
+          "orbopt_max_iter": 50,
+          "orbopt_phase1": true,
+          "phase0_overrides": {},
+          "phase1_overrides": {},
+          "phase2_overrides": {},
+          "pt2_correction": true,
+          "pt2_only_last": false,
+          "seed": 20260710,
+          "threshold": 0.01,
+          "tracking_dets": false,
+          "use_connection_cache_phase1": true,
+          "verbosity": 1,
+          "work_dir": "trimci_work"
+        }
+      }
+    },
+    "classical_hardware_details": {
+      "computing_environment_name": "harness run directory",
+      "ram_available_gb": 32.0,
+      "total_num_cores": 32
+    },
+    "compute_hardware_type": "classical_computer",
+    "software_details": {
+      "python_version": "3.12.0",
+      "trimci": "0.2.0",
+      "trimci_git_revision": "d6f032385f65efd6c3fe91a79e88ba86af2c4387",
+      "trimci_license": "MIT",
+      "trimci_repository": "https://github.com/Zhang-Group-ANL/TrimCI"
+    },
+    "solver_short_name": "TrimCI_default",
+    "solver_uuid": "54feec4d-06b8-5ac2-a936-7e645130fb48"
+  }
+}

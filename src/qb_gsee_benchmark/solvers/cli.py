@@ -25,6 +25,7 @@ from qb_gsee_benchmark.solvers import pyscf_adapter
 from qb_gsee_benchmark.solvers import shci_adapter
 from qb_gsee_benchmark.solvers.dmrg_block2 import adapter as dmrg_adapter
 from qb_gsee_benchmark.solvers.ipie_afqmc import adapter as ipie_adapter
+from qb_gsee_benchmark.solvers.trimci import adapter as trimci_adapter
 from qb_gsee_benchmark.solvers.base import load_manifest
 
 
@@ -98,6 +99,17 @@ def main(argv: list[str] | None = None) -> int:
     prepare_dmrg.add_argument("--result-json", default="dmrg_result.json")
     prepare_dmrg.add_argument("--overwrite", action="store_true")
 
+    prepare_trimci = subparsers.add_parser("prepare-trimci")
+    prepare_trimci.add_argument("--problem-instance", required=True)
+    prepare_trimci.add_argument("--task-uuid", required=True)
+    prepare_trimci.add_argument("--fcidump", required=True)
+    prepare_trimci.add_argument("--run-dir", required=True)
+    prepare_trimci.add_argument(
+        "--seed", type=int, default=trimci_adapter.DEFAULT_SEED
+    )
+    prepare_trimci.add_argument("--num-threads", type=int, default=1)
+    prepare_trimci.add_argument("--overwrite", action="store_true")
+
     prepare_batch = subparsers.add_parser("prepare-batch")
     prepare_batch.add_argument("--plan", required=True)
     prepare_batch.add_argument("--output-root", required=True)
@@ -124,6 +136,9 @@ def main(argv: list[str] | None = None) -> int:
 
     smoke_dmrg = subparsers.add_parser("smoke-dmrg")
     smoke_dmrg.add_argument("--run-dir")
+
+    smoke_trimci = subparsers.add_parser("smoke-trimci")
+    smoke_trimci.add_argument("--run-dir", required=True)
 
     args = parser.parse_args(argv)
 
@@ -216,6 +231,21 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(manifest.to_dict(), indent=2, sort_keys=True))
         return 0
 
+    if args.command == "prepare-trimci":
+        manifest = trimci_adapter.prepare(
+            problem_instance_path=args.problem_instance,
+            task_uuid=args.task_uuid,
+            fcidump_path=args.fcidump,
+            run_dir=args.run_dir,
+            config=trimci_adapter.TrimCIConfig(
+                seed=args.seed,
+                num_threads=args.num_threads,
+            ),
+            overwrite=args.overwrite,
+        )
+        print(json.dumps(manifest.to_dict(), indent=2, sort_keys=True))
+        return 0
+
     if args.command == "prepare-batch":
         summary = batch.prepare_batch(
             plan_path=args.plan,
@@ -239,6 +269,9 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if manifest.adapter == dmrg_adapter.ADAPTER_NAME:
             dmrg_adapter.run(args.run_dir)
+            return 0
+        if manifest.adapter == trimci_adapter.ADAPTER_NAME:
+            trimci_adapter.run(args.run_dir)
             return 0
         raise ValueError(f"Unsupported adapter {manifest.adapter}")
 
@@ -281,6 +314,15 @@ def main(argv: list[str] | None = None) -> int:
             )
             print(json.dumps(solution, indent=2, sort_keys=True))
             return 0
+        if manifest.adapter == trimci_adapter.ADAPTER_NAME:
+            solution = trimci_adapter.harvest(
+                args.run_dir,
+                output_path=output,
+                schema_dir=args.schema_dir,
+                not_attempted_reason=args.not_attempted_reason,
+            )
+            print(json.dumps(solution, indent=2, sort_keys=True))
+            return 0
         raise ValueError(f"Unsupported adapter {manifest.adapter}")
 
     if args.command == "smoke-pyscf":
@@ -297,6 +339,10 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "smoke-dmrg":
         dmrg_adapter.smoke_test(run_dir=args.run_dir)
+        return 0
+
+    if args.command == "smoke-trimci":
+        trimci_adapter.smoke_test(run_dir=args.run_dir)
         return 0
 
     raise ValueError(f"Unsupported command {args.command}")

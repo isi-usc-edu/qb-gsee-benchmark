@@ -26,6 +26,7 @@ from qb_gsee_benchmark.solvers import pyscf_adapter
 from qb_gsee_benchmark.solvers import shci_adapter
 from qb_gsee_benchmark.solvers.dmrg_block2 import adapter as dmrg_adapter
 from qb_gsee_benchmark.solvers.ipie_afqmc import adapter as ipie_adapter
+from qb_gsee_benchmark.solvers.trimci import adapter as trimci_adapter
 from qb_gsee_benchmark.solvers.base import RunManifest
 from qb_gsee_benchmark.solvers.base import SolverResources
 
@@ -140,6 +141,19 @@ def _prepare_one(
                 eps_var_label=_none(row.get("eps_var_label")),
                 pt_correction=_bool_or_none(row.get("pt_correction")),
                 optimized_orbitals=_bool_or_none(row.get("optimized_orbitals")),
+            ),
+            resources=resources,
+            overwrite=overwrite,
+        )
+    if adapter_name in {"trimci", "trimci_default"}:
+        return trimci_adapter.prepare(
+            problem_instance_path=problem_instance,
+            task_uuid=task_uuid,
+            fcidump_path=fcidump,
+            run_dir=run_dir,
+            config=trimci_adapter.TrimCIConfig(
+                seed=_int(row.get("seed"), trimci_adapter.DEFAULT_SEED),
+                num_threads=_int(row.get("num_threads"), 1),
             ),
             resources=resources,
             overwrite=overwrite,
