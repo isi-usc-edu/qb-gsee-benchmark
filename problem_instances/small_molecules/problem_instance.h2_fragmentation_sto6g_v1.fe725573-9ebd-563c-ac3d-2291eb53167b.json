@@ -1,0 +1,1586 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
+  "application_domain": "QC",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "name": "Matthew Otten",
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison"
+    }
+  ],
+  "creation_timestamp": "2026-07-10T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-10T00:00:00+00:00",
+  "license": {
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "problem_instance_uuid": "fe725573-9ebd-563c-ac3d-2291eb53167b",
+  "problem_type": "GSEE",
+  "references": [
+    "https://doi.org/10.1103/RevModPhys.32.296",
+    "https://doi.org/10.1063/5.0006074"
+  ],
+  "short_name": "h2_fragmentation_sto6g_v1",
+  "status": "in_development",
+  "superseded_by": null,
+  "basis_convention": {
+    "basis": "STO-6G",
+    "geometry": "collinear; d is adjacent H2 center-to-center separation",
+    "orbitals": "projected-z localization separately within occupied and virtual RHF blocks (one-dimensional Boys localization)",
+    "lambda_plant_choice": "K=4, r=2.00 Angstrom, d=6 Angstrom (middle physical-grid separation; d was not specified in the intake row)",
+    "lambda_decomposition": "H_intra is a direct sum of four independently generated H2/STO-6G Hamiltonians; H_inter is the exact residual to the physical K=4, d=6 Angstrom Hamiltonian, including the nuclear-repulsion residual"
+  },
+  "tasks": [
+    {
+      "task_uuid": "7cf226f5-ce3d-5761-8473-5153fb290151",
+      "independent_parameters": {
+        "fragment_count": 2,
+        "h2_bond_length_angstrom": 0.741,
+        "fragment_center_separation_angstrom": 4.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 2,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 0.004486611550270637,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.1979913266927909,
+        "fragment_inferred_one_body_inter_intra_ratio": 0.004486611550270637,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.1979913266927909,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -2.2918371038653507,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "43ec01d3-8755-54ce-81f1-dd5d78f691bf",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k2_r0p741_d4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "73769b012867d2f067f1cf34887efde858655333",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "959cd310-259a-5936-a3c5-3899a7dad4a8",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k2_r0p741_d4.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "7101f48f6e7a9b6a358305409896c87f9002ff6a",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "a3c0d3bb-eeca-50de-913f-afdc37863574",
+      "independent_parameters": {
+        "fragment_count": 2,
+        "h2_bond_length_angstrom": 0.741,
+        "fragment_center_separation_angstrom": 6.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 2,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 9.389650340346609e-05,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.12854058328913703,
+        "fragment_inferred_one_body_inter_intra_ratio": 9.389650340346609e-05,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.12854058328913703,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -2.2918535537183407,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "b4bf29b9-8aa6-5c33-9bd4-86ecbcd6fd98",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k2_r0p741_d6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "d7c027170266c19b2e22b688823275bb36fc85d2",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "c4e16f9e-d4eb-58ce-bb55-f0a62ee37010",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k2_r0p741_d6.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "d5f5f85b015f9eb83205a4bad235516028a32380",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "f2f2b5aa-f39e-547f-a7e5-6840ac958d49",
+      "independent_parameters": {
+        "fragment_count": 2,
+        "h2_bond_length_angstrom": 0.741,
+        "fragment_center_separation_angstrom": 10.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 2,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 3.820583201237047e-09,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.07616330001505535,
+        "fragment_inferred_one_body_inter_intra_ratio": 3.820583201237047e-09,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.07616330001505535,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -2.291854330826169,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "794e2a55-4a80-5ec8-872f-a924515ca667",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k2_r0p741_d10.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "b40e945f058ad7c0c6110df5d50ef0ba7343ce70",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "48f182d3-5f33-5d67-9ff7-e087552cb9c5",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k2_r0p741_d10.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "c56b4be0696a785472a53145af9a01210377db47",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "def110fd-6099-5589-813c-e238dd5259c9",
+      "independent_parameters": {
+        "fragment_count": 2,
+        "h2_bond_length_angstrom": 1.2,
+        "fragment_center_separation_angstrom": 4.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 2,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 0.006352853044801494,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.22776567814779433,
+        "fragment_inferred_one_body_inter_intra_ratio": 0.006352853044801494,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.22776567814779433,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -2.1284870529697235,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "df9f282b-0ef9-59f1-827b-ccd3642704e9",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k2_r1p2_d4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "757ab243c2cfe09635980b85155bc01a30f59191",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "be1353fa-7e66-572d-85c3-162559b4ae5e",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k2_r1p2_d4.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "b3393f4120cbf7298f26e588022da5ccb72e667d",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "6adb63da-6eda-551e-96b8-d6163fe40187",
+      "independent_parameters": {
+        "fragment_count": 2,
+        "h2_bond_length_angstrom": 1.2,
+        "fragment_center_separation_angstrom": 6.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 2,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 0.00013984301349766518,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.14355036030766977,
+        "fragment_inferred_one_body_inter_intra_ratio": 0.00013984301349766518,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.14355036030766977,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -2.128588251741636,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "0b823722-a6f7-50a5-93dc-94784256b651",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k2_r1p2_d6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "d8abd20027b30dcb56338e9fcc732352c8c910f2",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "179f35a3-34dd-53cb-bda7-bbfbc4e05585",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k2_r1p2_d6.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "fc206019493febae2a98315585fd151496e0e12d",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "4d92193b-a2aa-5726-978f-eef601ff9a21",
+      "independent_parameters": {
+        "fragment_count": 2,
+        "h2_bond_length_angstrom": 1.2,
+        "fragment_center_separation_angstrom": 10.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 2,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 9.300469904453042e-09,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.08413764067349289,
+        "fragment_inferred_one_body_inter_intra_ratio": 9.300469904453042e-09,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.08413764067349289,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -2.1285911077787447,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "e727a212-7f71-515a-a4cc-e6ed1d0d2a68",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k2_r1p2_d10.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "8e9e8d233223e43491cf0d15b73f7fdfff5bcc7c",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "211db357-3d57-54df-9666-c7c81b9d0607",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k2_r1p2_d10.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "db8a8d96a8c12cf540991c71af99c8066d36136a",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "0a31c810-9581-5b29-b574-b4e3ab1e0561",
+      "independent_parameters": {
+        "fragment_count": 2,
+        "h2_bond_length_angstrom": 2.0,
+        "fragment_center_separation_angstrom": 4.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 2,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 0.03271239666570826,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.39450056032479286,
+        "fragment_inferred_one_body_inter_intra_ratio": 0.03271239666570826,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.39450056032479286,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -1.9157273762766378,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "18a78b63-7317-56c8-b50b-e3b357dc96f2",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k2_r2_d4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "ade1e71485b2f7a1e4ec6b6f918748fc6bfac536",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "39aa76e1-3a65-5c5d-b7f5-72b870158aeb",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k2_r2_d4.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "851931d4c98b8fa0c9b2d3ad5d541c67d8246050",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "ebe6a343-f7fd-5576-8c9d-b2e096e624a4",
+      "independent_parameters": {
+        "fragment_count": 2,
+        "h2_bond_length_angstrom": 2.0,
+        "fragment_center_separation_angstrom": 6.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 2,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 0.0006902241286138211,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.16654250175455648,
+        "fragment_inferred_one_body_inter_intra_ratio": 0.0006902241286138211,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.16654250175455648,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -1.9153144799331447,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "27c13059-aa89-564c-9ad1-7917442f9c81",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k2_r2_d6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "f97f146319214a8894fbbdcd93730037dc0cdcdf",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "28b77b93-b913-559e-b141-943437192807",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k2_r2_d6.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "f98f8074a4d26aa35694e6ef79b11160d655e161",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "062cbf0a-262c-5c75-a525-17a682f7d25f",
+      "independent_parameters": {
+        "fragment_count": 2,
+        "h2_bond_length_angstrom": 2.0,
+        "fragment_center_separation_angstrom": 10.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 2,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 8.228055613506753e-08,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.09383225178852905,
+        "fragment_inferred_one_body_inter_intra_ratio": 8.228055613506753e-08,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.09383225178852905,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -1.9153166405140036,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "6f57e4b8-2873-5962-a84c-2f7ddae3d7e4",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k2_r2_d10.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "d17751b3d04ab329b87baf8bd9f1d94adf0e9d3b",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "83c8e111-9cf2-5dc2-a615-1e64b385355e",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k2_r2_d10.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "0943a31a23f5d39f805c31665154919c29f58017",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "acbef708-c970-5ca2-b296-ff7d5e875833",
+      "independent_parameters": {
+        "fragment_count": 4,
+        "h2_bond_length_angstrom": 0.741,
+        "fragment_center_separation_angstrom": 4.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 4,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 0.004406451856636286,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.2644560770452726,
+        "fragment_inferred_one_body_inter_intra_ratio": 0.004406451856636286,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.2644560770452726,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -4.583656001084095,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "5714eccb-3a7f-5bf3-a3d6-1ce8492cbf93",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r0p741_d4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "2b2da82033883f22ba837000f6b2a71a2782a600",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "7f303da8-ddf9-541c-a340-2d49dd8479b5",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r0p741_d4.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "bff7de0b52e897c74ae2a0ed0b2b9c5641726acd",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "659c2dd8-2b6c-518c-96d2-175564ba0e87",
+      "independent_parameters": {
+        "fragment_count": 4,
+        "h2_bond_length_angstrom": 0.741,
+        "fragment_center_separation_angstrom": 6.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 4,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 9.736818136109924e-05,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.17228460895602146,
+        "fragment_inferred_one_body_inter_intra_ratio": 9.736818136109924e-05,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.17228460895602146,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -4.5837060724541105,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "1480b036-f2bc-5c34-b74c-eb547553d8c9",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r0p741_d6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "eaad5cffb6ff1d46fe4159bc4e7934dd692edf69",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "37cd3c00-5074-5864-96de-4a7b7d2876e7",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r0p741_d6.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "025d0200fb46584bce2e61504f1a18602e59e4ae",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "2d7aac5c-0c01-5ce6-be68-4d0ca198a9f6",
+      "independent_parameters": {
+        "fragment_count": 4,
+        "h2_bond_length_angstrom": 0.741,
+        "fragment_center_separation_angstrom": 10.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 4,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 4.189539904950583e-09,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.10224888345474592,
+        "fragment_inferred_one_body_inter_intra_ratio": 4.189539904950583e-09,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.10224888345474592,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -4.583708524731224,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "ec311e35-ce77-5e9f-9af0-3dc87c0f484d",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r0p741_d10.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "880822d0264e2c716496a9d96e95f95e238950e7",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "af56c2cd-e5f5-5b86-9d4d-640d681ad814",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r0p741_d10.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "697830a37d7ad8bd9ff8f11dce38ad2674c60ea4",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "b892fa22-87be-569e-a60f-14dc67c9cc25",
+      "independent_parameters": {
+        "fragment_count": 4,
+        "h2_bond_length_angstrom": 1.2,
+        "fragment_center_separation_angstrom": 4.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 4,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 0.0064078681438460095,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.30246231846817145,
+        "fragment_inferred_one_body_inter_intra_ratio": 0.0064078681438460095,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.30246231846817145,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -4.256867352229987,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "ea9da1b4-3702-5f7a-a43f-ad075a64be5e",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r1p2_d4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "dd8de600aff85389a11b007a4f5ccc2b7a949d24",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "1825efd6-f812-5824-9f90-d684d916c85c",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r1p2_d4.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "d7a124c3a0b3670abde79b40ae530e82cd3bd3f2",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "5317a912-eb4a-588d-92ab-3cab5e083e51",
+      "independent_parameters": {
+        "fragment_count": 4,
+        "h2_bond_length_angstrom": 1.2,
+        "fragment_center_separation_angstrom": 6.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 4,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 0.00014590299909125827,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.191993176349011,
+        "fragment_inferred_one_body_inter_intra_ratio": 0.00014590299909125827,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.191993176349011,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -4.257172874450495,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "286af897-34cb-5c0f-976e-cbb119314818",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r1p2_d6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "10bc5c10e93d72dee624e5ed25ca1f8b28777a94",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "83240ec1-0af5-596a-98b3-398d93d3954d",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r1p2_d6.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "493d314b12dcba4eba872d8abf3139f811f88ca2",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "c8826dd1-803c-5250-b7e6-7139a3543abf",
+      "independent_parameters": {
+        "fragment_count": 4,
+        "h2_bond_length_angstrom": 1.2,
+        "fragment_center_separation_angstrom": 10.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 4,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 1.0099534412190472e-08,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.11287020089941456,
+        "fragment_inferred_one_body_inter_intra_ratio": 1.0099534412190472e-08,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.11287020089941456,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -4.257181815292073,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "3a3cbbd1-7bd1-57d8-aef2-544b126702af",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r1p2_d10.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "8509f59951db35ffa91b80b8e7c337b0bd00e5ff",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "be704d79-ac77-547b-9ec5-7ee63c64d06b",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r1p2_d10.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "221c50bb2990699177f1fdc3ab0befc04ed7a6e1",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "cbb3f650-090f-5fa9-9f9e-365fb814c6d6",
+      "independent_parameters": {
+        "fragment_count": 4,
+        "h2_bond_length_angstrom": 2.0,
+        "fragment_center_separation_angstrom": 4.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 4,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 0.035561394416550346,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.5291558176679639,
+        "fragment_inferred_one_body_inter_intra_ratio": 0.035561394416550346,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.5291558176679639,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -3.8325098210497863,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "516ca6e0-60a0-569e-89f4-6ae96a567550",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r2_d4.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "c38b6368a14edf2c97d020be1a5f3ac7626cda81",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "a4238ba8-35a6-54a9-8e39-7bdce82cee11",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r2_d4.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "5ad9bdfdc06fc81fc3f34458a1b3f3d98910a186",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "314a3c71-80a5-5e39-9448-053747494f1c",
+      "independent_parameters": {
+        "fragment_count": 4,
+        "h2_bond_length_angstrom": 2.0,
+        "fragment_center_separation_angstrom": 6.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 4,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 0.0007654450632139204,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.2211340127811082,
+        "fragment_inferred_one_body_inter_intra_ratio": 0.0007654450632139204,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.2211340127811082,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -3.8306266438830603,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "c56f77c5-3b95-51d0-9bd4-7291332af509",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r2_d6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "a5eb9c0125812e5d1ea7f9b6a28d8ff317a07fd0",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "485d8158-f1d7-5c4e-b305-62a7fadfd1b8",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r2_d6.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "adc77eac183c2c3a44af947ed5088e9742eb8c9f",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "1624db95-1097-54d2-a68c-375f9b786492",
+      "independent_parameters": {
+        "fragment_count": 4,
+        "h2_bond_length_angstrom": 2.0,
+        "fragment_center_separation_angstrom": 10.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 4,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 9.007974682504056e-08,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.12556921361472465,
+        "fragment_inferred_one_body_inter_intra_ratio": 9.007974682504056e-08,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.12556921361472465,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -3.8306331975057626,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "df59630a-e448-5187-abc3-76539bb4f462",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r2_d10.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "21efa445d63648b5cb050cadc6bb4c816390c77a",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "5e2b6696-9471-584b-b12e-533436f1e08f",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r2_d10.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "0a79ae6a603e33b309a75c331000bd0e082ad693",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "b4fb73b8-4452-5072-99b6-eb9f61523499",
+      "independent_parameters": {
+        "fragment_count": 8,
+        "h2_bond_length_angstrom": 0.741,
+        "fragment_center_separation_angstrom": 6.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 8,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 8.991682647240454e-05,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.19729050486406405,
+        "fragment_inferred_one_body_inter_intra_ratio": 8.991682647240454e-05,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.19729050486406405,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -9.167411078981731,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "block2 SU(2) DMRG through M=1000 with converged final sweeps",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 1e-10,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "a561280b-9375-5347-9b8c-ccc5cb0c8851",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k8_r0p741_d6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "0ee38b2efd7f5d4346f765a96f7af3b377055700",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "047bb846-bab1-5b66-9621-b673b9c135ac",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k8_r0p741_d6.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "738c3e04ea63399c163156fe5e812f92d8f37fe8",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "one_nearly_exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "d42dc028-303e-5b43-a6d0-146bdb908fc8",
+      "independent_parameters": {
+        "fragment_count": 8,
+        "h2_bond_length_angstrom": 2.0,
+        "fragment_center_separation_angstrom": 6.0,
+        "lambda_interfragment": 1.0,
+        "construction": "ab_initio_physical_grid"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 8,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 0.0006685549120656534,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.2517234927650548,
+        "fragment_inferred_one_body_inter_intra_ratio": 0.0006685549120656534,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.2517234927650548,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "physical_fragmentation_grid"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -7.661250953833483,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "block2 SU(2) DMRG through M=1000 in a certified unitary-equivalent PySCF Boys stationary representation",
+        "reference_energy_provenance": "controlled",
+        "reference_energy_standard_error": 1e-10,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "6b5fd606-dae3-52d3-836b-df4f8468b70d",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k8_r2_d6.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "67b8b8f66310c28b582c8003a9b2572d91b701e2",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "0b76bd95-1021-5719-9464-72407fee85f5",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k8_r2_d6.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "8f7d173b87410994dd486c1a3954d259115e25b1",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "one_nearly_exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "280b4b86-4352-51a7-a165-355ee9ef3b2a",
+      "independent_parameters": {
+        "fragment_count": 4,
+        "h2_bond_length_angstrom": 2.0,
+        "fragment_center_separation_angstrom": 6.0,
+        "lambda_interfragment": 0.0,
+        "construction": "planted_interfragment_coupling_scale"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 4,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 0.0,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.0,
+        "fragment_inferred_one_body_inter_intra_ratio": 0.0,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.0,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "planted_interfragment_coupling"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -3.8306334352212597,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "b9c2ffa3-479c-5724-a50d-b8244b614f61",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r2_d6_lambda0.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "e825ca406a58fbead8a1edb949ce1e21367696d6",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "dcf84501-377b-5310-b342-aad8414ad9e6",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r2_d6_lambda0.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "7789822587d0d9264522c2e1f4f204b36b2d7af7",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "utility",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "47e28da2-70f2-5512-9d41-49ad17434d34",
+      "independent_parameters": {
+        "fragment_count": 4,
+        "h2_bond_length_angstrom": 2.0,
+        "fragment_center_separation_angstrom": 6.0,
+        "lambda_interfragment": 0.05,
+        "construction": "planted_interfragment_coupling_scale"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 4,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 0.027812429017106885,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.011056461924251861,
+        "fragment_inferred_one_body_inter_intra_ratio": 0.027812429017106885,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.011056461924251861,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "planted_interfragment_coupling"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -3.83063114433759,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "c5d2ae01-837e-5e3e-8b59-df3b48da3cf6",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r2_d6_lambda0p05.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "2523b718c5b822f05d21e5580e966ee3f813d86a",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "07f80002-6c1b-5b58-875f-7743848ee7da",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r2_d6_lambda0p05.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "2fd9d944c9fb91d3db6a11520488cc816f6b7b62",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "utility",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "b182fafe-58d4-58fc-9386-aa1cd4f7c2c9",
+      "independent_parameters": {
+        "fragment_count": 4,
+        "h2_bond_length_angstrom": 2.0,
+        "fragment_center_separation_angstrom": 6.0,
+        "lambda_interfragment": 0.2,
+        "construction": "planted_interfragment_coupling_scale"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 4,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 0.11124971606842754,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.044225847697007444,
+        "fragment_inferred_one_body_inter_intra_ratio": 0.11124971606842754,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.044225847697007444,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "planted_interfragment_coupling"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -3.8306254047462946,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "236c79fc-0c53-5182-aea6-cc2376c1cf96",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r2_d6_lambda0p2.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "6337f1053ed028dff72e82e91fe7aecc077fee59",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "a71d5306-fe02-53cc-b0bf-4dd2367317c1",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r2_d6_lambda0p2.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "a1f5a9774166a3a61e62e0aab7e2639f1d2dd769",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "utility",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "1b924e3e-0133-543b-86b3-2753cde933d5",
+      "independent_parameters": {
+        "fragment_count": 4,
+        "h2_bond_length_angstrom": 2.0,
+        "fragment_center_separation_angstrom": 6.0,
+        "lambda_interfragment": 0.5,
+        "construction": "planted_interfragment_coupling_scale"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 4,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 0.2781242901710688,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.1105646192425186,
+        "fragment_inferred_one_body_inter_intra_ratio": 0.2781242901710688,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.1105646192425186,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "planted_interfragment_coupling"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -3.830619286920684,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "723cb3fa-7bc3-5988-9284-5e2168bde65c",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r2_d6_lambda0p5.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "8f00978bf7d833768554239bdcc0f83045ec8d7b",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "97980702-f87b-5a1d-be95-d7c0f871dc23",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r2_d6_lambda0p5.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "c055064e7ef28422ab1ccea288934eb4632ab442",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "utility",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "ae429d44-6cf1-5deb-bc6e-ae485f3ed705",
+      "independent_parameters": {
+        "fragment_count": 4,
+        "h2_bond_length_angstrom": 2.0,
+        "fragment_center_separation_angstrom": 6.0,
+        "lambda_interfragment": 1.0,
+        "construction": "planted_interfragment_coupling_scale"
+      },
+      "features": {
+        "hamiltonian_family": "molecular_fragmentation",
+        "structured_easiness_class": "fragmentation",
+        "fragment_count": 4,
+        "fragment_partition_tracks": [
+          "oracle_geometry",
+          "inferred_orbital_centers"
+        ],
+        "fragment_ml_default_track": "inferred_orbital_centers",
+        "fragment_oracle_permission": "calibration_and_audit_only",
+        "fragment_partition_assignments_agree": true,
+        "fragment_oracle_one_body_inter_intra_ratio": 0.5562485803421376,
+        "fragment_oracle_two_body_inter_intra_ratio": 0.2211292384850372,
+        "fragment_inferred_one_body_inter_intra_ratio": 0.5562485803421376,
+        "fragment_inferred_two_body_inter_intra_ratio": 0.2211292384850372,
+        "fragment_detector_version": "g22_fragment_coupling_detector_v1",
+        "calibration_role": "planted_interfragment_coupling"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -3.8306266438830603,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "PySCF direct_spin1 full configuration interaction, tol=1e-12",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "fce047c3-1195-511b-ab5b-47d838279a2b",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r2_d6_lambda1.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "a5eb9c0125812e5d1ea7f9b6a28d8ff317a07fd0",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "5e71225d-90dd-520d-8115-a1fcd487f1c4",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/h2_fragmentation/h2_k4_r2_d6_lambda1.fragments.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "a973bcc7086ee7b0da58c3f90f17c3a416363901",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "utility",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    }
+  ]
+}
