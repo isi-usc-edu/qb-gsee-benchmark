@@ -629,11 +629,11 @@ This is a conservative scheduling upper bound, not a runtime forecast: every cur
 
 | solver | remaining gaps | tasks/node | wall cap (h) | full-cap jobs | full-cap node-hours | availability |
 |---|---:|---:|---:|---:|---:|---|
-| `pyscf_fci` | 586 | 32 | 4 | 19 | 76 | `available` |
-| `shci_opt` | 410 | 12 | 11 | 35 | 385 | `available` |
-| `dmrg_fixed_budget` | 408 | 1 | 12 | 408 | 4896 | `available` |
+| `pyscf_fci` | 586 | 32 | 4.0 | 19 | 76.0 | `available` |
+| `shci_opt` | 410 | 12 | 2.166667 | 35 | 75.833333 | `available` |
+| `dmrg_fixed_budget` | 408 | 1 | 12.0 | 408 | 4896.0 | `available` |
 | `ipie_uhf_trial` | 532 | n/a | n/a | n/a | n/a | `unavailable_no_gpu_nodes` |
 
-Available-solver full-cap total: **5357 node-hours** versus the G-31 **300 node-hour** fence. Therefore tranche 2 must remain a separately authorized, budgeted subset rather than an all-gap campaign.
+Available-solver full-cap total: **5047.833333 node-hours** versus the G-31 **300 node-hour** fence. Therefore tranche 2 must remain a separately authorized, budgeted subset rather than an all-gap campaign.
 
 `ipie_uhf_trial` is excluded from the numeric total: its default requires one GPU and Improv advertises no GPU nodes. A CPU override would violate the defaults-only protocol.

@@ -36,22 +36,22 @@ DEFAULT_SOLVERS = {
 TRANCHE2_TOPOLOGY = {
     "pyscf_fci": {
         "tasks_per_node": 32,
-        "wall_cap_hours": 4,
+        "wall_request_seconds": 14400,
         "availability": "available",
     },
     "shci_opt": {
         "tasks_per_node": 12,
-        "wall_cap_hours": 11,
+        "wall_request_seconds": 7800,
         "availability": "available",
     },
     "dmrg_fixed_budget": {
         "tasks_per_node": 1,
-        "wall_cap_hours": 12,
+        "wall_request_seconds": 43200,
         "availability": "available",
     },
     "ipie_uhf_trial": {
         "tasks_per_node": None,
-        "wall_cap_hours": None,
+        "wall_request_seconds": None,
         "availability": "unavailable_no_gpu_nodes",
     },
 }
@@ -149,21 +149,24 @@ def solution_index(
 def build_tranche2_estimate(summary: dict[str, dict[str, int]]) -> dict[str, Any]:
     """Conservatively price every current gap at the frozen site wall caps."""
     rows = {}
-    total = 0
+    total_seconds = 0
     for solver_key, topology in TRANCHE2_TOPOLOGY.items():
         missing = summary[solver_key]["missing"]
         tasks_per_node = topology["tasks_per_node"]
-        wall_cap_hours = topology["wall_cap_hours"]
-        if tasks_per_node is None or wall_cap_hours is None:
+        wall_request_seconds = topology["wall_request_seconds"]
+        if tasks_per_node is None or wall_request_seconds is None:
             jobs = None
+            wall_cap_hours = None
             node_hours = None
         else:
             jobs = math.ceil(missing / tasks_per_node)
-            node_hours = jobs * wall_cap_hours
-            total += node_hours
+            wall_cap_hours = round(wall_request_seconds / 3600, 6)
+            node_hours = round(jobs * wall_request_seconds / 3600, 6)
+            total_seconds += jobs * wall_request_seconds
         rows[solver_key] = {
             "remaining_gap_count": missing,
             "tasks_per_node": tasks_per_node,
+            "wall_request_seconds": wall_request_seconds,
             "wall_cap_hours": wall_cap_hours,
             "full_cap_jobs": jobs,
             "full_cap_node_hours": node_hours,
@@ -174,9 +177,9 @@ def build_tranche2_estimate(summary: dict[str, dict[str, int]]) -> dict[str, Any
             "conservative scheduling upper bound: every currently missing "
             "solver-task pair consumes its frozen site wall cap"
         ),
-        "available_solver_full_cap_node_hours": total,
+        "available_solver_full_cap_node_hours": round(total_seconds / 3600, 6),
         "campaign_budget_node_hours": 300,
-        "exceeds_campaign_budget": total > 300,
+        "exceeds_campaign_budget": total_seconds > 300 * 3600,
         "solvers": rows,
     }
 

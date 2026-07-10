@@ -104,13 +104,14 @@ def test_inventory_excludes_validation_and_matches_default_solver_uuid(tmp_path:
             "conservative scheduling upper bound: every currently missing "
             "solver-task pair consumes its frozen site wall cap"
         ),
-        "available_solver_full_cap_node_hours": 23,
+        "available_solver_full_cap_node_hours": 14.166667,
         "campaign_budget_node_hours": 300,
         "exceeds_campaign_budget": False,
         "solvers": {
             "pyscf_fci": {
                 "remaining_gap_count": 0,
                 "tasks_per_node": 32,
+                "wall_request_seconds": 14400,
                 "wall_cap_hours": 4,
                 "full_cap_jobs": 0,
                 "full_cap_node_hours": 0,
@@ -119,14 +120,16 @@ def test_inventory_excludes_validation_and_matches_default_solver_uuid(tmp_path:
             "shci_opt": {
                 "remaining_gap_count": 1,
                 "tasks_per_node": 12,
-                "wall_cap_hours": 11,
+                "wall_request_seconds": 7800,
+                "wall_cap_hours": 2.166667,
                 "full_cap_jobs": 1,
-                "full_cap_node_hours": 11,
+                "full_cap_node_hours": 2.166667,
                 "availability": "available",
             },
             "dmrg_fixed_budget": {
                 "remaining_gap_count": 1,
                 "tasks_per_node": 1,
+                "wall_request_seconds": 43200,
                 "wall_cap_hours": 12,
                 "full_cap_jobs": 1,
                 "full_cap_node_hours": 12,
@@ -135,6 +138,7 @@ def test_inventory_excludes_validation_and_matches_default_solver_uuid(tmp_path:
             "ipie_uhf_trial": {
                 "remaining_gap_count": 0,
                 "tasks_per_node": None,
+                "wall_request_seconds": None,
                 "wall_cap_hours": None,
                 "full_cap_jobs": None,
                 "full_cap_node_hours": None,
@@ -145,9 +149,12 @@ def test_inventory_excludes_validation_and_matches_default_solver_uuid(tmp_path:
     report = tmp_path / "coverage.md"
     inventory_module.write_markdown(report, inventory)
     rendered = report.read_text()
-    assert "| `shci_opt` | 1 | 12 | 11 | 1 | 11 | `available` |" in rendered
+    assert (
+        "| `shci_opt` | 1 | 12 | 2.166667 | 1 | 2.166667 | "
+        "`available` |"
+    ) in rendered
     assert (
         "| `ipie_uhf_trial` | 0 | n/a | n/a | n/a | n/a | "
         "`unavailable_no_gpu_nodes` |"
     ) in rendered
-    assert "Available-solver full-cap total: **23 node-hours**" in rendered
+    assert "Available-solver full-cap total: **14.166667 node-hours**" in rendered
