@@ -13,21 +13,24 @@
   "instance_features": {
     "basis_convention": "FCIDUMPs are direct conversions of Goings et al. HDF5 active-space tensors; ECORE is the source HDF5 ecore and active orbitals are localized high-spin ROHF orbitals.",
     "family": "P450 Goings Cpd I oxo high-spin active spaces",
-    "flagged_active_labels": [
-      "A",
-      "B"
-    ],
+    "flagged_active_labels": [],
     "reference_mapping": "analysis/p450_goings_active_spaces/p450_g9_reference_mapping.csv",
     "released_active_labels": [
+      "A",
+      "B",
       "C",
       "D",
       "E",
       "F",
       "G"
     ],
-    "source_archive": "https://doi.org/10.5281/zenodo.5941130"
+    "source_archive": "https://doi.org/10.5281/zenodo.5941130",
+    "test_active_labels": [
+      "A",
+      "B"
+    ]
   },
-  "latest_update_timestamp": "2026-07-09T19:41:33+00:00",
+  "latest_update_timestamp": "2026-07-10T00:20:23+00:00",
   "license": {
     "name": "Apache 2.0",
     "url": "http://www.apache.org/licenses/LICENSE-2.0"
@@ -38,12 +41,139 @@
     "https://doi.org/10.1073/pnas.2203533119",
     "https://doi.org/10.5281/zenodo.5941130",
     "https://arxiv.org/abs/2202.01244",
-    "P450 Spin-5/2 DMRG fitted-energy table supplied by the paper authors to Matt Otten, private communication, 2026-07-09."
+    "P450 Spin-5/2 DMRG fitted-energy table supplied by the paper authors to Matt Otten, private communication, 2026-07-09.",
+    "P450 A/B exact-FCI Test-tier controls generated in house from the released FCIDUMPs, 2026-07-09."
   ],
   "short_name": "p450_cpd1_spin5_goings_dmrg_ladder",
   "status": "in_development",
   "superseded_by": null,
   "tasks": [
+    {
+      "task_uuid": "250107ee-1182-5b80-bbf7-6dbc4363c964",
+      "independent_parameters": {
+        "molecule": "cytochrome P450 Compound I oxo model",
+        "source_label": "Cpd I oxo high-spin",
+        "active_label": "A",
+        "spin_state": "S=5/2",
+        "ms2": 5,
+        "n_spatial_orbitals": 5,
+        "n_electrons": 5,
+        "n_alpha": 5,
+        "n_beta": 0,
+        "exact_fci_determinant_dimension": 1
+      },
+      "features": {
+        "software_used": "Goings et al. Zenodo HDF5 active-space tensors converted to FCIDUMP with PySCF",
+        "molecule_name": "p450_cpd1_oxo_spin5_active_A",
+        "basis_set": "cc-pVDZ active-space Hamiltonian from Goings et al. source archive",
+        "orbital_basis": "localized high-spin ROHF active-space orbitals from the Goings et al. P450 source package",
+        "num_orbitals": 5,
+        "num_electrons": 5,
+        "n_alpha": 5,
+        "n_beta": 0,
+        "ms2": 5,
+        "source_hdf5_sha256": "d34b3f040503a941fdbdb584ed774b737f2a2a6d05af1de0846ba2cde703092d",
+        "raw_fcidump_sha1": "93508a2def4b4bfb658d46076887f045faaffad8",
+        "gzip_fcidump_sha256": "ea3724ac5e316f9d3b1e1128e4b07c205f4e2725e547e196d5c36723f7886f85",
+        "reference_grade": "exact",
+        "exact_fci_determinant_dimension": 1,
+        "hf_checkpoint_energy_hartree": -2756.492611458261,
+        "hf_bound_pass": true
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -2756.4926114581917,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "in-house PySCF exact FCI in the complete fixed-Ms determinant space (dimension 1)",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "exact FCI on source HDF5 tensors",
+          "exact FCI through the generic emitted-FCIDUMP reader"
+        ],
+        "reference_energy_source": "In-house exact FCI of released FCIDUMP gzip SHA1 2e7011abea6ba46d6c0874128ee479f05a404b05; source-HDF5 and FCIDUMP energies agree to serialized precision.",
+        "reference_energy_note": "PI-approved Test-tier control. Active space A has fixed-Ms determinant dimension 1; this exact reference is unscored and validates source-HDF5 to FCIDUMP conversion."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "2181b5c7-1ddf-5577-b087-72a8308c3e8e",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/p450_goings_active_spaces/p450_cpd1_a_spin5_goings.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "2e7011abea6ba46d6c0874128ee479f05a404b05",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "test",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "992b9494-5f30-5893-ae1d-1b92f5d9ec18",
+      "independent_parameters": {
+        "molecule": "cytochrome P450 Compound I oxo model",
+        "source_label": "Cpd I oxo high-spin",
+        "active_label": "B",
+        "spin_state": "S=5/2",
+        "ms2": 5,
+        "n_spatial_orbitals": 8,
+        "n_electrons": 11,
+        "n_alpha": 8,
+        "n_beta": 3,
+        "exact_fci_determinant_dimension": 56
+      },
+      "features": {
+        "software_used": "Goings et al. Zenodo HDF5 active-space tensors converted to FCIDUMP with PySCF",
+        "molecule_name": "p450_cpd1_oxo_spin5_active_B",
+        "basis_set": "cc-pVDZ active-space Hamiltonian from Goings et al. source archive",
+        "orbital_basis": "localized high-spin ROHF active-space orbitals from the Goings et al. P450 source package",
+        "num_orbitals": 8,
+        "num_electrons": 11,
+        "n_alpha": 8,
+        "n_beta": 3,
+        "ms2": 5,
+        "source_hdf5_sha256": "855726eb4d0c4a7e13870555603ede17167f332dfdce58c9e71ae5cb0527cce0",
+        "raw_fcidump_sha1": "d9c77d73749b50bb91ea5d7559ee3470997e773c",
+        "gzip_fcidump_sha256": "f5621b7a6b5174e3edcf983820c4b3ac4c530df1651f580378fc5a1fb5f0ae55",
+        "reference_grade": "exact",
+        "exact_fci_determinant_dimension": 56,
+        "hf_checkpoint_energy_hartree": -2756.492611458261,
+        "hf_bound_pass": true
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -2756.492612296278,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "in-house PySCF exact FCI in the complete fixed-Ms determinant space (dimension 56)",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "exact FCI on source HDF5 tensors",
+          "exact FCI through the generic emitted-FCIDUMP reader"
+        ],
+        "reference_energy_source": "In-house exact FCI of released FCIDUMP gzip SHA1 0770055fab43b3aadebf62d93438d6e8582c63ce; source-HDF5 and FCIDUMP energies agree to serialized precision.",
+        "reference_energy_note": "PI-approved Test-tier control. Active space B has fixed-Ms determinant dimension 56; this exact reference is unscored and validates source-HDF5 to FCIDUMP conversion."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "02007200-e1b9-5dba-b73f-4319b307a1ee",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/p450_goings_active_spaces/p450_cpd1_b_spin5_goings.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "0770055fab43b3aadebf62d93438d6e8582c63ce",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "test",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
     {
       "features": {
         "basis_set": "cc-pVDZ active-space Hamiltonian from Goings et al. source archive",
@@ -93,9 +223,9 @@
           "recomputed quadratic polyfit intercept in 1/M"
         ],
         "reference_energy_independent_of_shci_family": true,
-        "reference_energy_method": "DMRG finite-M bond-dimension ladder with second-order polynomial extrapolation in 1/M",
+        "reference_energy_method": "DMRG finite-M bond-dimension ladder with second-order polynomial extrapolation in 1/M; author-supplied private communication",
         "reference_energy_note": "Spin-5/2 active-space C uses M ladder 512.0;1024.0;2048.0;3072.0;4096.0 with energies -2756.511360000000;-2756.511360000000;-2756.511360000000;-2756.511360000000;-2756.511360000000 Ha. Extrapolated reference is -2756.511360000000 Ha; largest-M(4096.0) energy is -2756.511360000000 Ha; fit-minus-largest-M is -4.547e-13 Ha and max fit residual is 2.274e-12 Ha. The author-supplied file states the fitted energies use only a second-order polynomial and not the truncation error.",
-        "reference_energy_provenance": "author_supplied_private_communication",
+        "reference_energy_provenance": "controlled",
         "reference_energy_source": "author-supplied fitted DMRG M-ladder values from paper authors to Matt Otten, private communication; mapped to emitted FCIDUMP checksum from analysis/p450_goings_active_spaces/p450_g9_reference_mapping.csv.",
         "reference_energy_units": "Hartree",
         "time_limit_seconds": 86400
@@ -165,9 +295,9 @@
           "recomputed quadratic polyfit intercept in 1/M"
         ],
         "reference_energy_independent_of_shci_family": true,
-        "reference_energy_method": "DMRG finite-M bond-dimension ladder with second-order polynomial extrapolation in 1/M",
+        "reference_energy_method": "DMRG finite-M bond-dimension ladder with second-order polynomial extrapolation in 1/M; author-supplied private communication",
         "reference_energy_note": "Spin-5/2 active-space D uses M ladder 512.0;1024.0;2048.0;3072.0;4096.0 with energies -2756.507080000000;-2756.507190000000;-2756.507210000000;-2756.507220000000;-2756.507220000000 Ha. Extrapolated reference is -2756.507220000000 Ha; largest-M(4096.0) energy is -2756.507220000000 Ha; fit-minus-largest-M is -1.833e-07 Ha and max fit residual is 3.860e-06 Ha. The author-supplied file states the fitted energies use only a second-order polynomial and not the truncation error.",
-        "reference_energy_provenance": "author_supplied_private_communication",
+        "reference_energy_provenance": "controlled",
         "reference_energy_source": "author-supplied fitted DMRG M-ladder values from paper authors to Matt Otten, private communication; mapped to emitted FCIDUMP checksum from analysis/p450_goings_active_spaces/p450_g9_reference_mapping.csv.",
         "reference_energy_units": "Hartree",
         "time_limit_seconds": 86400
@@ -237,9 +367,9 @@
           "recomputed quadratic polyfit intercept in 1/M"
         ],
         "reference_energy_independent_of_shci_family": true,
-        "reference_energy_method": "DMRG finite-M bond-dimension ladder with second-order polynomial extrapolation in 1/M",
+        "reference_energy_method": "DMRG finite-M bond-dimension ladder with second-order polynomial extrapolation in 1/M; author-supplied private communication",
         "reference_energy_note": "Spin-5/2 active-space E uses M ladder 512.0;1024.0;2048.0;3072.0;4096.0 with energies -2756.542190000000;-2756.542440000000;-2756.542480000000;-2756.542540000000;-2756.542550000000 Ha. Extrapolated reference is -2756.542577000000 Ha; largest-M(4096.0) energy is -2756.542550000000 Ha; fit-minus-largest-M is -1.704e-05 Ha and max fit residual is 2.903e-05 Ha. The author-supplied file states the fitted energies use only a second-order polynomial and not the truncation error.",
-        "reference_energy_provenance": "author_supplied_private_communication",
+        "reference_energy_provenance": "controlled",
         "reference_energy_source": "author-supplied fitted DMRG M-ladder values from paper authors to Matt Otten, private communication; mapped to emitted FCIDUMP checksum from analysis/p450_goings_active_spaces/p450_g9_reference_mapping.csv.",
         "reference_energy_units": "Hartree",
         "time_limit_seconds": 86400
@@ -309,9 +439,9 @@
           "recomputed quadratic polyfit intercept in 1/M"
         ],
         "reference_energy_independent_of_shci_family": true,
-        "reference_energy_method": "DMRG finite-M bond-dimension ladder with second-order polynomial extrapolation in 1/M",
+        "reference_energy_method": "DMRG finite-M bond-dimension ladder with second-order polynomial extrapolation in 1/M; author-supplied private communication",
         "reference_energy_note": "Spin-5/2 active-space F uses M ladder 512.0;1024.0;2048.0;3072.0;4096.0 with energies -2756.706020000000;-2756.708040000000;-2756.709020000000;-2756.709320000000;-2756.709460000000 Ha. Extrapolated reference is -2756.709929000000 Ha; largest-M(4096.0) energy is -2756.709460000000 Ha; fit-minus-largest-M is -4.664e-04 Ha and max fit residual is 1.420e-05 Ha. The author-supplied file states the fitted energies use only a second-order polynomial and not the truncation error.",
-        "reference_energy_provenance": "author_supplied_private_communication",
+        "reference_energy_provenance": "controlled",
         "reference_energy_source": "author-supplied fitted DMRG M-ladder values from paper authors to Matt Otten, private communication; mapped to emitted FCIDUMP checksum from analysis/p450_goings_active_spaces/p450_g9_reference_mapping.csv.",
         "reference_energy_units": "Hartree",
         "time_limit_seconds": 86400
@@ -381,9 +511,9 @@
           "recomputed quadratic polyfit intercept in 1/M"
         ],
         "reference_energy_independent_of_shci_family": true,
-        "reference_energy_method": "DMRG finite-M bond-dimension ladder with second-order polynomial extrapolation in 1/M",
+        "reference_energy_method": "DMRG finite-M bond-dimension ladder with second-order polynomial extrapolation in 1/M; author-supplied private communication",
         "reference_energy_note": "Spin-5/2 active-space G uses M ladder 512.0;1024.0;2048.0;3072.0;4096.0 with energies -2756.718150000000;-2756.721970000000;-2756.723970000000;-2756.724640000000;-2756.724970000000 Ha. Extrapolated reference is -2756.726003000000 Ha; largest-M(4096.0) energy is -2756.724970000000 Ha; fit-minus-largest-M is -1.033e-03 Ha and max fit residual is 7.097e-06 Ha. The author-supplied file states the fitted energies use only a second-order polynomial and not the truncation error.",
-        "reference_energy_provenance": "author_supplied_private_communication",
+        "reference_energy_provenance": "controlled",
         "reference_energy_source": "author-supplied fitted DMRG M-ladder values from paper authors to Matt Otten, private communication; mapped to emitted FCIDUMP checksum from analysis/p450_goings_active_spaces/p450_g9_reference_mapping.csv.",
         "reference_energy_units": "Hartree",
         "time_limit_seconds": 86400
