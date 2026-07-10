@@ -1,0 +1,94 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+  "contact_info": [
+    {
+      "email": "bobqat@l3harris.com",
+      "institution": "L3Harris Technologies, Inc.",
+      "name": "QB-GSEE Benchmark Harness"
+    }
+  ],
+  "creation_timestamp": "2026-07-10T21:31:06.897691+00:00",
+  "digital_signature": null,
+  "is_resource_estimate": false,
+  "problem_instance_uuid": "fe725573-9ebd-563c-ac3d-2291eb53167b",
+  "solution_data": [
+    {
+      "energy": null,
+      "energy_units": "Hartree",
+      "run_time": {
+        "algorithm_run_time": {
+          "seconds": 0.0,
+          "wall_clock_start_time": "2026-07-10T21:31:06.893928+00:00",
+          "wall_clock_stop_time": "2026-07-10T21:31:06.893928+00:00"
+        },
+        "overall_time": {
+          "seconds": 0.0,
+          "wall_clock_start_time": "2026-07-10T21:31:06.893928+00:00",
+          "wall_clock_stop_time": "2026-07-10T21:31:06.893928+00:00"
+        },
+        "postprocessing_time": {
+          "seconds": 0.0
+        },
+        "preprocessing_time": {
+          "seconds": 0.0
+        }
+      },
+      "solution_details": {
+        "attempted": false,
+        "determinant_count": 1,
+        "harness_status": "not_attempted",
+        "ipie_afqmc_details": {
+          "not_attempted_reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults"
+        },
+        "not_attempted_reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+        "num_blocks": 1000,
+        "num_steps_per_block": 25,
+        "num_walkers": 512,
+        "raw_output_file": "raw_output.json",
+        "run_directory_id": "7ffd9e4c-19ec-44e8-816a-862b1ee76f34",
+        "timestep": 0.005,
+        "trial_wavefunction": "UHF"
+      },
+      "task_uuid": "6adb63da-6eda-551e-96b8-d6163fe40187"
+    }
+  ],
+  "solution_uuid": "326eb5f7-b30b-4377-9dc6-4d76aeac0e1b",
+  "solver_details": {
+    "algorithm_details": {
+      "harness_adapter": "ipie_afqmc",
+      "harness_adapter_version": "0.1.0",
+      "name": "ipie ph-AFQMC with UHF trial",
+      "solver_config": {
+        "algorithm_label": "ipie ph-AFQMC with UHF trial",
+        "command_template": "g31-run-ipie --fcidump {fcidump_abs} --config {config_abs} --result ipie_result.json",
+        "confidence_level": 0.682689492137,
+        "determinant_count": 1,
+        "energy_units": "Hartree",
+        "num_blocks": 1000,
+        "num_steps_per_block": 25,
+        "num_threads": 1,
+        "num_walkers": 512,
+        "phaseless": true,
+        "random_seed": 731031,
+        "result_json": "ipie_result.json",
+        "solver_short_name": "ipie_uhf_trial",
+        "solver_uuid": "54cf1eae-79a4-5ee5-9553-80f4f380882b",
+        "timestep": 0.005,
+        "trial_wavefunction": "UHF",
+        "variant": "ipie_uhf_trial"
+      }
+    },
+    "classical_hardware_details": {
+      "computing_environment_name": "harness run directory",
+      "ram_available_gb": 32.0,
+      "total_num_cores": 1
+    },
+    "compute_hardware_type": "classical_computer",
+    "software_details": {
+      "ipie": "ipie ph-AFQMC (https://github.com/linusjoonho/ipie).",
+      "python_version": "3.12.0"
+    },
+    "solver_short_name": "ipie_uhf_trial",
+    "solver_uuid": "54cf1eae-79a4-5ee5-9553-80f4f380882b"
+  }
+}
