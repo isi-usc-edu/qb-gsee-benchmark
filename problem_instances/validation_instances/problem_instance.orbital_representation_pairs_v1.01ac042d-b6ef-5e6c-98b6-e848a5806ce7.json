@@ -1,0 +1,366 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
+  "application_domain": "QC",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "name": "Matthew Otten",
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison"
+    }
+  ],
+  "creation_timestamp": "2026-07-09T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-10T04:46:00+00:00",
+  "license": {
+    "name": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "problem_instance_uuid": "01ac042d-b6ef-5e6c-98b6-e848a5806ce7",
+  "problem_type": "GSEE",
+  "references": [
+    "https://doi.org/10.1103/PhysRevX.7.031059",
+    "https://github.com/simonsfoundation/hydrogen-benchmark-PRX/tree/b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea",
+    "https://doi.org/10.1073/pnas.2203533119",
+    "https://zenodo.org/records/5941130"
+  ],
+  "short_name": "orbital_representation_pairs_v1",
+  "status": "in_development",
+  "superseded_by": null,
+  "basis_convention": {
+    "rotation_convention": "real orthogonal spatial-orbital rotations; identical rotation for alpha and beta spin orbitals",
+    "reference_invariance": "unitary orbital representations share the exact many-body spectrum",
+    "pair_1": {
+      "method": "separate Boys localization of occupied and virtual canonical RHF blocks",
+      "occupied_orbitals": 5,
+      "virtual_orbitals": 5,
+      "occupied_virtual_mixing_max_abs": 6.000620675710992e-16,
+      "conv_tol": 1e-12,
+      "max_cycle": 200,
+      "geometry": "linear open H10, adjacent separation 1.8 bohr",
+      "basis": "STO-6G",
+      "source_reference": "Simons Foundation hydrogen-benchmark-PRX commit b99a183a5a2dd2a471bbde3f3c4952cc3d2432ea"
+    },
+    "pair_2": {
+      "method": "PySCF Edmiston-Ruedenberg optimizer with J/K contractions evaluated exclusively from the source FCIDUMP ERI",
+      "pyscf_class": "pyscf.lo.ER",
+      "conv_tol": 1e-11,
+      "ah_conv_tol": 1e-11,
+      "max_cycle": 200,
+      "initial_self_repulsion_sum": 4.33445164332913,
+      "final_self_repulsion_sum": 4.391938155687201,
+      "source_fcidump": "work/fcidumps/p450_goings_active_spaces/p450_cpd1_b_spin5_goings.fcidump",
+      "source_raw_sha1": "d9c77d73749b50bb91ea5d7559ee3470997e773c",
+      "source_hdf5_sha256": "855726eb4d0c4a7e13870555603ede17167f332dfdce58c9e71ae5cb0527cce0"
+    }
+  },
+  "tasks": [
+    {
+      "task_uuid": "dd80e2eb-9220-53ee-bac4-a087306dc309",
+      "independent_parameters": {
+        "source_family": "simons_hydrogen_chains",
+        "pair_slug": "h10_sto6g_r1p8",
+        "orbital_representation": "canonical_rhf",
+        "equivalence_group_id": "8c70f261-4386-52ab-a75c-2a2a292034bd"
+      },
+      "features": {
+        "hamiltonian_family": "orbital_representation_pair",
+        "structured_easiness_class": "orbital_representation",
+        "source_family": "simons_hydrogen_chains",
+        "orbital_representation": "canonical_rhf",
+        "equivalence_group_id": "8c70f261-4386-52ab-a75c-2a2a292034bd",
+        "ml_split_group_id": "representation_pair::8c70f261-4386-52ab-a75c-2a2a292034bd",
+        "representation_feature_tags": {
+          "invariant": [
+            "num_orbitals",
+            "num_electrons",
+            "ms2",
+            "ecore_hartree",
+            "trace_h1",
+            "pair_space_eri_trace",
+            "fci_energy_hartree"
+          ],
+          "basis_covariant": [
+            "h1_offdiag_frobenius",
+            "eri_self_repulsion_sum",
+            "nonzero_integrals_1e_10"
+          ]
+        },
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "ms2": 0,
+        "ecore_hartree": 10.716490299823638,
+        "trace_h1": -22.945370759543106,
+        "pair_space_eri_trace": 9.28302257031123,
+        "fci_energy_hartree": -5.4243853763325145,
+        "h1_offdiag_frobenius": 0.8868771569348588,
+        "eri_self_repulsion_sum": 3.19346561019703,
+        "nonzero_integrals_1e_10": 5050
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.4243853763325145,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "exact FCI in the fixed particle-number and Ms sector, carried across a certified unitary orbital rotation",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house exact FCI on both unitary-equivalent FCIDUMPs; source Hamiltonians trace to Simons hydrogen-benchmark-PRX or Goings et al. Zenodo 5941130.",
+        "reference_energy_note": "The shared exact reference is representation invariant. Both dumps are independently diagonalized and must agree within 1e-9 Ha."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "6d76036a-7ae0-52d5-8a18-25cd4214e3eb",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/orbital_representation_pairs/h10_sto6g_r1p8_canonical_rhf.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "2f1f7259782cf00f8fd60e391105fb6c2b839f89",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "0b1473e9-fa40-5a8b-a096-cbb224823969",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/orbital_representation_pairs/h10_sto6g_r1p8.rotation.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "0b3d175beee19cbf117e3ce043b249709ebae948",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "cb5392c3-fd91-50f3-be40-149559ae7b96",
+      "independent_parameters": {
+        "source_family": "simons_hydrogen_chains",
+        "pair_slug": "h10_sto6g_r1p8",
+        "orbital_representation": "boys_split_localized",
+        "equivalence_group_id": "8c70f261-4386-52ab-a75c-2a2a292034bd"
+      },
+      "features": {
+        "hamiltonian_family": "orbital_representation_pair",
+        "structured_easiness_class": "orbital_representation",
+        "source_family": "simons_hydrogen_chains",
+        "orbital_representation": "boys_split_localized",
+        "equivalence_group_id": "8c70f261-4386-52ab-a75c-2a2a292034bd",
+        "ml_split_group_id": "representation_pair::8c70f261-4386-52ab-a75c-2a2a292034bd",
+        "representation_feature_tags": {
+          "invariant": [
+            "num_orbitals",
+            "num_electrons",
+            "ms2",
+            "ecore_hartree",
+            "trace_h1",
+            "pair_space_eri_trace",
+            "fci_energy_hartree"
+          ],
+          "basis_covariant": [
+            "h1_offdiag_frobenius",
+            "eri_self_repulsion_sum",
+            "nonzero_integrals_1e_10"
+          ]
+        },
+        "num_orbitals": 10,
+        "num_electrons": 10,
+        "ms2": 0,
+        "ecore_hartree": 10.716490299823638,
+        "trace_h1": -22.945370759543103,
+        "pair_space_eri_trace": 9.283022570311232,
+        "fci_energy_hartree": -5.4243853763325,
+        "h1_offdiag_frobenius": 0.885478204786561,
+        "eri_self_repulsion_sum": 6.396004650248918,
+        "nonzero_integrals_1e_10": 10080
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -5.4243853763325,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "exact FCI in the fixed particle-number and Ms sector, carried across a certified unitary orbital rotation",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house exact FCI on both unitary-equivalent FCIDUMPs; source Hamiltonians trace to Simons hydrogen-benchmark-PRX or Goings et al. Zenodo 5941130.",
+        "reference_energy_note": "The shared exact reference is representation invariant. Both dumps are independently diagonalized and must agree within 1e-9 Ha."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "33dd513b-be72-5ad5-9020-65d1892d890b",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/orbital_representation_pairs/h10_sto6g_r1p8_boys_split_localized.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "6b51ba04a50f6be8e9d9f689ca2d02c3253dfabe",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "0b1473e9-fa40-5a8b-a096-cbb224823969",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/orbital_representation_pairs/h10_sto6g_r1p8.rotation.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "0b3d175beee19cbf117e3ce043b249709ebae948",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "3d343ddb-a898-5c0e-afc9-42b62d588c5e",
+      "independent_parameters": {
+        "source_family": "p450_goings_active_spaces",
+        "pair_slug": "p450_cpd1_b_spin5",
+        "orbital_representation": "source_localized_rohf",
+        "equivalence_group_id": "b696450f-72ab-5509-b932-61fb30eda535"
+      },
+      "features": {
+        "hamiltonian_family": "orbital_representation_pair",
+        "structured_easiness_class": "orbital_representation",
+        "source_family": "p450_goings_active_spaces",
+        "orbital_representation": "source_localized_rohf",
+        "equivalence_group_id": "b696450f-72ab-5509-b932-61fb30eda535",
+        "ml_split_group_id": "representation_pair::b696450f-72ab-5509-b932-61fb30eda535",
+        "representation_feature_tags": {
+          "invariant": [
+            "num_orbitals",
+            "num_electrons",
+            "ms2",
+            "ecore_hartree",
+            "trace_h1",
+            "pair_space_eri_trace",
+            "fci_energy_hartree"
+          ],
+          "basis_covariant": [
+            "h1_offdiag_frobenius",
+            "eri_self_repulsion_sum",
+            "nonzero_integrals_1e_10"
+          ]
+        },
+        "num_orbitals": 8,
+        "num_electrons": 11,
+        "ms2": 5,
+        "ecore_hartree": -2734.902657458171,
+        "trace_h1": -25.460370477313173,
+        "pair_space_eri_trace": 5.248899334114533,
+        "fci_energy_hartree": -2756.492612296278,
+        "h1_offdiag_frobenius": 2.242010952981404,
+        "eri_self_repulsion_sum": 4.33445164332913,
+        "nonzero_integrals_1e_10": 4160
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -2756.492612296278,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "exact FCI in the fixed particle-number and Ms sector, carried across a certified unitary orbital rotation",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house exact FCI on both unitary-equivalent FCIDUMPs; source Hamiltonians trace to Simons hydrogen-benchmark-PRX or Goings et al. Zenodo 5941130.",
+        "reference_energy_note": "The shared exact reference is representation invariant. Both dumps are independently diagonalized and must agree within 1e-9 Ha."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "5e3b271d-7157-5c95-beb7-f34f6390e46e",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/orbital_representation_pairs/p450_cpd1_b_spin5_source_localized_rohf.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "ca1f0ec7d8277883bbcf373dcae9ba9f29a90eed",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "50aa4ada-bbf5-500c-b1d9-5e489204552e",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/orbital_representation_pairs/p450_cpd1_b_spin5.rotation.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "25060f89480bc3a759ff9b990da1af8c7a094cb4",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    },
+    {
+      "task_uuid": "6cd8382a-9a9a-5c43-83b1-616c9f301ab1",
+      "independent_parameters": {
+        "source_family": "p450_goings_active_spaces",
+        "pair_slug": "p450_cpd1_b_spin5",
+        "orbital_representation": "in_dump_er_localized",
+        "equivalence_group_id": "b696450f-72ab-5509-b932-61fb30eda535"
+      },
+      "features": {
+        "hamiltonian_family": "orbital_representation_pair",
+        "structured_easiness_class": "orbital_representation",
+        "source_family": "p450_goings_active_spaces",
+        "orbital_representation": "in_dump_er_localized",
+        "equivalence_group_id": "b696450f-72ab-5509-b932-61fb30eda535",
+        "ml_split_group_id": "representation_pair::b696450f-72ab-5509-b932-61fb30eda535",
+        "representation_feature_tags": {
+          "invariant": [
+            "num_orbitals",
+            "num_electrons",
+            "ms2",
+            "ecore_hartree",
+            "trace_h1",
+            "pair_space_eri_trace",
+            "fci_energy_hartree"
+          ],
+          "basis_covariant": [
+            "h1_offdiag_frobenius",
+            "eri_self_repulsion_sum",
+            "nonzero_integrals_1e_10"
+          ]
+        },
+        "num_orbitals": 8,
+        "num_electrons": 11,
+        "ms2": 5,
+        "ecore_hartree": -2734.902657458171,
+        "trace_h1": -25.46037047731317,
+        "pair_space_eri_trace": 5.248899334114538,
+        "fci_energy_hartree": -2756.492612296278,
+        "h1_offdiag_frobenius": 2.151836986688173,
+        "eri_self_repulsion_sum": 4.391938155687201,
+        "nonzero_integrals_1e_10": 4160
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -2756.492612296278,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "exact FCI in the fixed particle-number and Ms sector, carried across a certified unitary orbital rotation",
+        "reference_energy_provenance": "exact",
+        "reference_energy_standard_error": 0.0,
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house exact FCI on both unitary-equivalent FCIDUMPs; source Hamiltonians trace to Simons hydrogen-benchmark-PRX or Goings et al. Zenodo 5941130.",
+        "reference_energy_note": "The shared exact reference is representation invariant. Both dumps are independently diagonalized and must agree within 1e-9 Ha."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "797c7caf-a065-5cb6-b706-2ae3f1715a56",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/orbital_representation_pairs/p450_cpd1_b_spin5_in_dump_er_localized.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "9b3b6567fc5efac95f14ffc9f23e0d65af94244a",
+          "is_fcidump_file": true
+        },
+        {
+          "instance_data_object_uuid": "50aa4ada-bbf5-500c-b1d9-5e489204552e",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/orbital_representation_pairs/p450_cpd1_b_spin5.rotation.json",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "25060f89480bc3a759ff9b990da1af8c7a094cb4",
+          "is_fcidump_file": false
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    }
+  ]
+}
