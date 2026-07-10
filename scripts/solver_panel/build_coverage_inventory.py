@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import csv
 import json
+import math
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
@@ -29,6 +30,29 @@ DEFAULT_SOLVERS = {
         "adapter": "ipie_afqmc",
         "variant": "ipie_uhf_trial",
         "solver_uuid": "54cf1eae-79a4-5ee5-9553-80f4f380882b",
+    },
+}
+
+TRANCHE2_TOPOLOGY = {
+    "pyscf_fci": {
+        "tasks_per_node": 32,
+        "wall_cap_hours": 4,
+        "availability": "available",
+    },
+    "shci_opt": {
+        "tasks_per_node": 12,
+        "wall_cap_hours": 11,
+        "availability": "available",
+    },
+    "dmrg_fixed_budget": {
+        "tasks_per_node": 1,
+        "wall_cap_hours": 12,
+        "availability": "available",
+    },
+    "ipie_uhf_trial": {
+        "tasks_per_node": None,
+        "wall_cap_hours": None,
+        "availability": "unavailable_no_gpu_nodes",
     },
 }
 
@@ -122,6 +146,41 @@ def solution_index(
     return matches, parse_errors
 
 
+def build_tranche2_estimate(summary: dict[str, dict[str, int]]) -> dict[str, Any]:
+    """Conservatively price every current gap at the frozen site wall caps."""
+    rows = {}
+    total = 0
+    for solver_key, topology in TRANCHE2_TOPOLOGY.items():
+        missing = summary[solver_key]["missing"]
+        tasks_per_node = topology["tasks_per_node"]
+        wall_cap_hours = topology["wall_cap_hours"]
+        if tasks_per_node is None or wall_cap_hours is None:
+            jobs = None
+            node_hours = None
+        else:
+            jobs = math.ceil(missing / tasks_per_node)
+            node_hours = jobs * wall_cap_hours
+            total += node_hours
+        rows[solver_key] = {
+            "remaining_gap_count": missing,
+            "tasks_per_node": tasks_per_node,
+            "wall_cap_hours": wall_cap_hours,
+            "full_cap_jobs": jobs,
+            "full_cap_node_hours": node_hours,
+            "availability": topology["availability"],
+        }
+    return {
+        "basis": (
+            "conservative scheduling upper bound: every currently missing "
+            "solver-task pair consumes its frozen site wall cap"
+        ),
+        "available_solver_full_cap_node_hours": total,
+        "campaign_budget_node_hours": 300,
+        "exceeds_campaign_budget": total > 300,
+        "solvers": rows,
+    }
+
+
 def build_inventory(repo_root: Path) -> dict[str, Any]:
     tasks = public_tasks(repo_root)
     matches, parse_errors = solution_index(repo_root)
@@ -163,6 +222,7 @@ def build_inventory(repo_root: Path) -> dict[str, Any]:
         "default_solvers": DEFAULT_SOLVERS,
         "public_task_count": len(rows),
         "summary": summary,
+        "tranche2_estimate": build_tranche2_estimate(summary),
         "solution_json_parse_errors": parse_errors,
         "rows": rows,
     }
@@ -282,9 +342,42 @@ def write_markdown(path: Path, inventory: dict[str, Any]) -> None:
             "",
             "## Tranche-2 estimate",
             "",
-            "Pending tranche-1 terminal outcomes. G-31 requires this estimate "
-            "before campaign wrap-up; it is intentionally not guessed from "
-            "unattempted rows.",
+            "This is a conservative scheduling upper bound, not a runtime "
+            "forecast: every currently missing solver-task pair is charged at "
+            "the frozen site wall cap. Regeneration after tranche 1 replaces "
+            "the gap counts automatically with committed terminal outcomes.",
+            "",
+            "| solver | remaining gaps | tasks/node | wall cap (h) | "
+            "full-cap jobs | full-cap node-hours | availability |",
+            "|---|---:|---:|---:|---:|---:|---|",
+        ]
+    )
+    estimate = inventory["tranche2_estimate"]
+    for key, row in estimate["solvers"].items():
+        values = [
+            row["remaining_gap_count"],
+            row["tasks_per_node"],
+            row["wall_cap_hours"],
+            row["full_cap_jobs"],
+            row["full_cap_node_hours"],
+        ]
+        shown = ["n/a" if value is None else str(value) for value in values]
+        lines.append(
+            f"| `{key}` | {" | ".join(shown)} | "
+            f"`{row["availability"]}` |"
+        )
+    lines.extend(
+        [
+            "",
+            "Available-solver full-cap total: "
+            f"**{estimate["available_solver_full_cap_node_hours"]} node-hours** "
+            f"versus the G-31 **{estimate["campaign_budget_node_hours"]} "
+            "node-hour** fence. Therefore tranche 2 must remain a separately "
+            "authorized, budgeted subset rather than an all-gap campaign.",
+            "",
+            "`ipie_uhf_trial` is excluded from the numeric total: its default "
+            "requires one GPU and Improv advertises no GPU nodes. A CPU "
+            "override would violate the defaults-only protocol.",
             "",
         ]
     )

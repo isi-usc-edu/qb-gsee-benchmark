@@ -14349,5 +14349,45 @@
       "not_attempted": 0,
       "present": 176
     }
+  },
+  "tranche2_estimate": {
+    "available_solver_full_cap_node_hours": 5357,
+    "basis": "conservative scheduling upper bound: every currently missing solver-task pair consumes its frozen site wall cap",
+    "campaign_budget_node_hours": 300,
+    "exceeds_campaign_budget": true,
+    "solvers": {
+      "dmrg_fixed_budget": {
+        "availability": "available",
+        "full_cap_jobs": 408,
+        "full_cap_node_hours": 4896,
+        "remaining_gap_count": 408,
+        "tasks_per_node": 1,
+        "wall_cap_hours": 12
+      },
+      "ipie_uhf_trial": {
+        "availability": "unavailable_no_gpu_nodes",
+        "full_cap_jobs": null,
+        "full_cap_node_hours": null,
+        "remaining_gap_count": 532,
+        "tasks_per_node": null,
+        "wall_cap_hours": null
+      },
+      "pyscf_fci": {
+        "availability": "available",
+        "full_cap_jobs": 19,
+        "full_cap_node_hours": 76,
+        "remaining_gap_count": 586,
+        "tasks_per_node": 32,
+        "wall_cap_hours": 4
+      },
+      "shci_opt": {
+        "availability": "available",
+        "full_cap_jobs": 35,
+        "full_cap_node_hours": 385,
+        "remaining_gap_count": 410,
+        "tasks_per_node": 12,
+        "wall_cap_hours": 11
+      }
+    }
   }
 }

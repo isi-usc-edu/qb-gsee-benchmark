@@ -99,3 +99,55 @@ def test_inventory_excludes_validation_and_matches_default_solver_uuid(tmp_path:
         "missing": 1,
     }
     assert inventory["solution_json_parse_errors"] == []
+    assert inventory["tranche2_estimate"] == {
+        "basis": (
+            "conservative scheduling upper bound: every currently missing "
+            "solver-task pair consumes its frozen site wall cap"
+        ),
+        "available_solver_full_cap_node_hours": 23,
+        "campaign_budget_node_hours": 300,
+        "exceeds_campaign_budget": False,
+        "solvers": {
+            "pyscf_fci": {
+                "remaining_gap_count": 0,
+                "tasks_per_node": 32,
+                "wall_cap_hours": 4,
+                "full_cap_jobs": 0,
+                "full_cap_node_hours": 0,
+                "availability": "available",
+            },
+            "shci_opt": {
+                "remaining_gap_count": 1,
+                "tasks_per_node": 12,
+                "wall_cap_hours": 11,
+                "full_cap_jobs": 1,
+                "full_cap_node_hours": 11,
+                "availability": "available",
+            },
+            "dmrg_fixed_budget": {
+                "remaining_gap_count": 1,
+                "tasks_per_node": 1,
+                "wall_cap_hours": 12,
+                "full_cap_jobs": 1,
+                "full_cap_node_hours": 12,
+                "availability": "available",
+            },
+            "ipie_uhf_trial": {
+                "remaining_gap_count": 0,
+                "tasks_per_node": None,
+                "wall_cap_hours": None,
+                "full_cap_jobs": None,
+                "full_cap_node_hours": None,
+                "availability": "unavailable_no_gpu_nodes",
+            },
+        },
+    }
+    report = tmp_path / "coverage.md"
+    inventory_module.write_markdown(report, inventory)
+    rendered = report.read_text()
+    assert "| `shci_opt` | 1 | 12 | 11 | 1 | 11 | `available` |" in rendered
+    assert (
+        "| `ipie_uhf_trial` | 0 | n/a | n/a | n/a | n/a | "
+        "`unavailable_no_gpu_nodes` |"
+    ) in rendered
+    assert "Available-solver full-cap total: **23 node-hours**" in rendered
