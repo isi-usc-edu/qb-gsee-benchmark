@@ -28,6 +28,7 @@ def task(
 ):
     requirements = {
         "absolute_accuracy_threshold": threshold,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
         "reference_energy": reference,
         "reference_energy_units": "Hartree",
     }
@@ -180,7 +181,7 @@ def _load_export_module(repository_root):
     return module
 
 
-def test_export_is_byte_deterministic_and_validates_against_schema(tmp_path):
+def test_current_export_is_byte_deterministic_and_validates_against_schema(tmp_path):
     checkout = Path(__file__).resolve().parents[2]
     module = _load_export_module(checkout)
     repository = tmp_path / "repo"
@@ -195,7 +196,7 @@ def test_export_is_byte_deterministic_and_validates_against_schema(tmp_path):
     solution = {
         "is_resource_estimate": False,
         "solver_details": {"solver_short_name": "A"},
-        "solution_data": [{"task_uuid": "task", "energy": 0.0}],
+        "solution_data": [{"task_uuid": "task", "energy": 0.0, "energy_units": "Hartree"}],
     }
     (instance_dir / "instance.json").write_text(json.dumps(instance), encoding="utf-8")
     (solution_dir / "solution.json").write_text(json.dumps(solution), encoding="utf-8")
@@ -206,7 +207,7 @@ def test_export_is_byte_deterministic_and_validates_against_schema(tmp_path):
     assert first == second
 
     schema = json.loads(
-        (checkout / "scripts" / "dashboard_data" / "metrics_v1_2.schema.json").read_text()
+        (checkout / "scripts" / "dashboard_data" / "metrics_v1_4.schema.json").read_text()
     )
     jsonschema.Draft202012Validator(schema).validate(json.loads(first))
     assert json.loads(first)["attributions"] == {}
