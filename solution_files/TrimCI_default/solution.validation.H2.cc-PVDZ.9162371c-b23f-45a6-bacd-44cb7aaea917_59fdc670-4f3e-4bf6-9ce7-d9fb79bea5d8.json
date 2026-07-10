@@ -7,25 +7,25 @@
       "name": "QB-GSEE Benchmark Harness"
     }
   ],
-  "creation_timestamp": "2026-07-10T13:51:47.631220+00:00",
+  "creation_timestamp": "2026-07-10T19:33:28.902749+00:00",
   "digital_signature": null,
   "is_resource_estimate": false,
   "problem_instance_uuid": "9162371c-b23f-45a6-bacd-44cb7aaea917",
   "solution_data": [
     {
-      "energy": -1.1634029610645866,
+      "energy": -1.1634029610645857,
       "energy_uncertainty": 0.0,
       "energy_units": "Hartree",
       "run_time": {
         "algorithm_run_time": {
-          "seconds": 34.56472849845886,
-          "wall_clock_start_time": "2026-07-10T13:51:11.247336+00:00",
-          "wall_clock_stop_time": "2026-07-10T13:51:45.812075+00:00"
+          "seconds": 63.9983856678009,
+          "wall_clock_start_time": "2026-07-10T19:32:22.292256+00:00",
+          "wall_clock_stop_time": "2026-07-10T19:33:26.290654+00:00"
         },
         "overall_time": {
-          "seconds": 34.56472849845886,
-          "wall_clock_start_time": "2026-07-10T13:51:11.247336+00:00",
-          "wall_clock_stop_time": "2026-07-10T13:51:45.812075+00:00"
+          "seconds": 63.9983856678009,
+          "wall_clock_start_time": "2026-07-10T19:32:22.292256+00:00",
+          "wall_clock_stop_time": "2026-07-10T19:33:26.290654+00:00"
         },
         "postprocessing_time": {
           "seconds": 0.0
@@ -39,19 +39,19 @@
         "harness_status": "completed",
         "not_attempted_reason": null,
         "raw_output_file": "raw_output.json",
-        "run_directory_id": "a2c7eafc-b886-4862-b0cb-28fcaf50bba9",
+        "run_directory_id": "333ebb3f-a9ab-442a-b934-413a03bf57eb",
         "trimci_details": {
           "energy_policy": "pt2_if_available",
           "result": {
-            "energy": -1.1634029610645866,
+            "energy": -1.1634029610645857,
             "energy_history": [
               -1.1634029610645877,
-              -1.1634029610645864,
-              -1.1634029610645866,
-              -1.1634029610645866,
-              -1.1634029610645866,
-              -1.1634029610645866,
-              -1.1634029610645866
+              -1.1634029610645853,
+              -1.1634029610645857,
+              -1.1634029610645857,
+              -1.1634029610645857,
+              -1.1634029610645853,
+              -1.1634029610645857
             ],
             "expansion_rounds": 6,
             "n_dets_final": 26,
@@ -108,17 +108,17 @@
               "tracking_dets": false,
               "use_connection_cache_phase1": true,
               "verbosity": 1,
-              "work_dir": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g28_trimci_h2_demo/trimci_work"
+              "work_dir": "trimci_work"
             },
-            "variational_energy": -1.1634029610645866,
-            "wall_expansion": 0.6303446292877197,
-            "wall_phase0": 33.780123710632324,
+            "variational_energy": -1.1634029610645857,
+            "wall_expansion": 2.5738229751586914,
+            "wall_phase0": 60.755125522613525,
             "wavefunction_normalized": true
           },
           "settings_provenance": {
             "defaults_policy": "trimci.Config defaults; only seed and run-local work_dir changed",
             "energy_policy": "pt2_if_available",
-            "num_threads": 32,
+            "num_threads": 128,
             "seed": 20260710,
             "solver_short_name": "TrimCI_default",
             "solver_uuid": "54feec4d-06b8-5ac2-a936-7e645130fb48",
@@ -168,16 +168,16 @@
       "task_uuid": "f847059f-a89f-4008-9ae1-39847c899e75"
     }
   ],
-  "solution_uuid": "87c81625-b9c7-4fa5-9e86-75847d73dc15",
+  "solution_uuid": "59fdc670-4f3e-4bf6-9ce7-d9fb79bea5d8",
   "solver_details": {
     "algorithm_details": {
       "harness_adapter": "trimci",
-      "harness_adapter_version": "0.1.0",
+      "harness_adapter_version": "0.1.1",
       "name": "TrimCI default three-phase selected-CI workflow",
       "solver_config": {
         "defaults_policy": "trimci.Config defaults; only seed and run-local work_dir changed",
         "energy_policy": "pt2_if_available",
-        "num_threads": 32,
+        "num_threads": 128,
         "seed": 20260710,
         "solver_short_name": "TrimCI_default",
         "solver_uuid": "54feec4d-06b8-5ac2-a936-7e645130fb48",
@@ -223,15 +223,15 @@
     "classical_hardware_details": {
       "computing_environment_name": "harness run directory",
       "ram_available_gb": 32.0,
-      "total_num_cores": 32
+      "total_num_cores": 128
     },
     "compute_hardware_type": "classical_computer",
     "software_details": {
       "python_version": "3.12.0",
       "trimci": "0.2.0",
-      "trimci_git_revision": "d6f032385f65efd6c3fe91a79e88ba86af2c4387",
+      "trimci_git_revision": "8944a2be6b2c1e2a4f6c6c8cbbf6355baa068393",
       "trimci_license": "MIT",
-      "trimci_repository": "https://github.com/Zhang-Group-ANL/TrimCI"
+      "trimci_repository": "https://github.com/hao-zhang-quantum/TrimCI"
     },
     "solver_short_name": "TrimCI_default",
     "solver_uuid": "54feec4d-06b8-5ac2-a936-7e645130fb48"

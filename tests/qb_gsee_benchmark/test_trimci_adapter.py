@@ -87,6 +87,17 @@ def fake_trimci_module():
     )
 
 
+def absolute_paths(value):
+    """Return absolute filesystem strings from a nested JSON-like value."""
+    if isinstance(value, dict):
+        return [path for item in value.values() for path in absolute_paths(item)]
+    if isinstance(value, list):
+        return [path for item in value for path in absolute_paths(item)]
+    if isinstance(value, str) and Path(value).is_absolute():
+        return [value]
+    return []
+
+
 def test_trimci_adapter_validation_h2_and_full_provenance(tmp_path, monkeypatch):
     monkeypatch.setattr(adapter, "_import_trimci", fake_trimci_module)
     monkeypatch.setattr(adapter, "_trimci_git_revision", lambda _module: "abc123")
@@ -116,6 +127,13 @@ def test_trimci_adapter_validation_h2_and_full_provenance(tmp_path, monkeypatch)
     assert raw["software"]["trimci"] == "0.2.0-test"
     assert raw["software"]["trimci_git_revision"] == "abc123"
     assert raw["software"]["trimci_license"] == "MIT"
+    assert raw["software"]["trimci_repository"] == (
+        "https://github.com/hao-zhang-quantum/TrimCI"
+    )
+    assert raw["details"]["result"]["resolved_trimci_config"]["work_dir"] == (
+        "trimci_work"
+    )
+    assert absolute_paths(raw) == []
     assert (run_dir / "realtime_progress.out").is_file()
     assert not (tmp_path / "realtime_progress.out").exists()
     assert solution["solution_data"][0]["energy"] == pytest.approx(
@@ -123,6 +141,7 @@ def test_trimci_adapter_validation_h2_and_full_provenance(tmp_path, monkeypatch)
     )
     assert solution["solver_details"]["solver_uuid"] == adapter.SOLVER_UUID
     assert solution["solver_details"]["algorithm_details"]["solver_config"]
+    assert absolute_paths(solution) == []
 
 
 def test_trimci_optional_dependency_error_is_actionable(monkeypatch):

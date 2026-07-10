@@ -9,7 +9,7 @@
 """TrimCI adapter for the scheduler-agnostic solver harness.
 
 TrimCI is imported as an optional MIT-licensed dependency from
-https://github.com/Zhang-Group-ANL/TrimCI. No TrimCI source is vendored here.
+https://github.com/hao-zhang-quantum/TrimCI. No TrimCI source is vendored here.
 The panel posture is deliberately defaults-only: one call to
 ``trimci.ground_state`` per task, using every field from ``trimci.Config`` at
 its package default except for a recorded seed and run-local work directory.
@@ -51,12 +51,12 @@ from qb_gsee_benchmark.solvers.base import write_validated_solution
 from qb_gsee_benchmark.utils import iso8601_timestamp
 
 ADAPTER_NAME = "trimci"
-ADAPTER_VERSION = "0.1.0"
+ADAPTER_VERSION = "0.1.1"
 SOLVER_SHORT_NAME = "TrimCI_default"
 SOLVER_UUID = str(
     uuid.uuid5(uuid.NAMESPACE_URL, "qb-gsee-benchmark:solver:trimci-default:v1")
 )
-TRIMCI_REPOSITORY = "https://github.com/Zhang-Group-ANL/TrimCI"
+TRIMCI_REPOSITORY = "https://github.com/hao-zhang-quantum/TrimCI"
 TRIMCI_LICENSE = "MIT"
 DEFAULT_SEED = 20260710
 
@@ -184,9 +184,9 @@ def run(run_dir: str | Path) -> dict[str, Any]:
         software["trimci"] = getattr(trimci, "__version__", "unknown")
         software["trimci_git_revision"] = _trimci_git_revision(trimci)
         settings = dict(manifest.config["trimci_config"])
-        settings["work_dir"] = str((run_path / "trimci_work").resolve())
+        settings["work_dir"] = "trimci_work"
         trimci_config = trimci.Config(**settings)
-        input_fcidump = (run_path / manifest.files["fcidump"]).resolve()
+        input_fcidump = Path(manifest.files["fcidump"])
         with (run_path / manifest.files["stdout"]).open("w") as stdout:
             with (run_path / manifest.files["stderr"]).open("w") as stderr:
                 with contextlib.chdir(run_path):
