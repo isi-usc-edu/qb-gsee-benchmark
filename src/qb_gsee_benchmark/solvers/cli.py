@@ -43,6 +43,17 @@ def main(argv: list[str] | None = None) -> int:
     prepare_pyscf.add_argument("--campaign")
     prepare_pyscf.add_argument("--overwrite", action="store_true")
 
+    prepare_pyscf_method = subparsers.add_parser("prepare-pyscf-method")
+    prepare_pyscf_method.add_argument("--problem-instance", required=True)
+    prepare_pyscf_method.add_argument("--task-uuid", required=True)
+    prepare_pyscf_method.add_argument("--fcidump", required=True)
+    prepare_pyscf_method.add_argument("--run-dir", required=True)
+    prepare_pyscf_method.add_argument(
+        "--method", required=True, choices=tuple(pyscf_adapter.METHOD_ADAPTER_NAMES)
+    )
+    prepare_pyscf_method.add_argument("--num-threads", type=int, default=1)
+    prepare_pyscf_method.add_argument("--overwrite", action="store_true")
+
     prepare_shci = subparsers.add_parser("prepare-shci")
     prepare_shci.add_argument("--problem-instance", required=True)
     prepare_shci.add_argument("--task-uuid", required=True)
@@ -173,6 +184,19 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(manifest.to_dict(), indent=2, sort_keys=True))
         return 0
 
+    if args.command == "prepare-pyscf-method":
+        manifest = pyscf_adapter.prepare_method(
+            method=args.method,
+            problem_instance_path=args.problem_instance,
+            task_uuid=args.task_uuid,
+            fcidump_path=args.fcidump,
+            run_dir=args.run_dir,
+            num_threads=args.num_threads,
+            overwrite=args.overwrite,
+        )
+        print(json.dumps(manifest.to_dict(), indent=2, sort_keys=True))
+        return 0
+
     if args.command == "prepare-shci":
         pt_correction = _tri_state(args.pt_correction, args.no_pt_correction)
         optimized_orbitals = _tri_state(
@@ -279,7 +303,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "run":
         manifest = load_manifest(args.run_dir)
-        if manifest.adapter == pyscf_adapter.ADAPTER_NAME:
+        if manifest.adapter in pyscf_adapter.ADAPTER_NAMES:
             pyscf_adapter.run(args.run_dir)
             return 0
         if manifest.adapter == shci_adapter.ADAPTER_NAME:
@@ -299,7 +323,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "harvest":
         manifest = load_manifest(args.run_dir)
         output = Path(args.output) if args.output is not None else None
-        if manifest.adapter == pyscf_adapter.ADAPTER_NAME:
+        if manifest.adapter in pyscf_adapter.ADAPTER_NAMES:
             solution = pyscf_adapter.harvest(
                 args.run_dir,
                 output_path=output,

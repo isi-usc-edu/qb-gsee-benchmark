@@ -127,6 +127,17 @@ def _prepare_one(
             resources=resources,
             overwrite=overwrite,
         )
+    if adapter_name in pyscf_adapter.METHOD_ADAPTERS:
+        return pyscf_adapter.prepare_method(
+            method=pyscf_adapter.METHOD_ADAPTERS[adapter_name],
+            problem_instance_path=problem_instance,
+            task_uuid=task_uuid,
+            fcidump_path=fcidump,
+            run_dir=run_dir,
+            num_threads=_int(row.get("num_threads"), 1),
+            resources=resources,
+            overwrite=overwrite,
+        )
     if adapter_name in {"shci", "shci_arrow"}:
         return shci_adapter.prepare(
             problem_instance_path=problem_instance,

@@ -65,7 +65,8 @@ from qb_gsee_benchmark.utils import iso8601_timestamp
 from qb_gsee_benchmark.utils import read_fcidump
 
 ADAPTER_NAME = "pyscf_reference"
-ADAPTER_VERSION = "0.2.0"
+ADAPTER_VERSION = "0.3.0"
+METHOD_CAMPAIGN = "pyscf_methods_2026-07"
 
 SOLVER_UUIDS = {
     "HF": "5f5e617a-19c2-4d82-bebc-b2d6b3dcb012",
@@ -75,6 +76,16 @@ SOLVER_UUIDS = {
     "CCSD(T)": "c09217e6-d0f7-4b0f-81c4-79210b7ac878",
     "FCI": str(uuid.uuid5(uuid.NAMESPACE_URL, "qb-gsee-benchmark:pyscf:fci:v1")),
 }
+
+METHOD_ADAPTERS = {
+    "pyscf_hf": "HF",
+    "pyscf_mp2": "MP2",
+    "pyscf_cisd": "CISD",
+    "pyscf_ccsd": "CCSD",
+    "pyscf_ccsd_t": "CCSD(T)",
+}
+METHOD_ADAPTER_NAMES = {method: adapter for adapter, method in METHOD_ADAPTERS.items()}
+ADAPTER_NAMES = frozenset({ADAPTER_NAME, *METHOD_ADAPTERS})
 
 
 @dataclass(frozen=True)
@@ -125,7 +136,66 @@ def prepare(
 ) -> RunManifest:
     """Create a self-contained PySCF run directory."""
 
-    config = config or PySCFConfig()
+    return _prepare(
+        problem_instance_path=problem_instance_path,
+        task_uuid=task_uuid,
+        fcidump_path=fcidump_path,
+        run_dir=run_dir,
+        config=config or PySCFConfig(),
+        resources=resources,
+        overwrite=overwrite,
+        adapter_name=ADAPTER_NAME,
+    )
+
+
+def prepare_method(
+    method: str,
+    problem_instance_path: str | Path,
+    task_uuid: str,
+    fcidump_path: str | Path,
+    run_dir: str | Path,
+    num_threads: int = 1,
+    resources: SolverResources | None = None,
+    overwrite: bool = False,
+) -> RunManifest:
+    """Prepare one fixed-identity legacy PySCF method adapter."""
+
+    normalized_method = method.strip().upper()
+    try:
+        adapter_name = METHOD_ADAPTER_NAMES[normalized_method]
+    except KeyError as exc:
+        allowed = ", ".join(METHOD_ADAPTER_NAMES)
+        raise ValueError(
+            f"Unsupported PySCF method adapter {normalized_method!r}; choose {allowed}."
+        ) from exc
+    return _prepare(
+        problem_instance_path=problem_instance_path,
+        task_uuid=task_uuid,
+        fcidump_path=fcidump_path,
+        run_dir=run_dir,
+        config=PySCFConfig(
+            method=normalized_method,
+            num_threads=num_threads,
+            campaign=METHOD_CAMPAIGN,
+        ),
+        resources=resources,
+        overwrite=overwrite,
+        adapter_name=adapter_name,
+    )
+
+
+def _prepare(
+    problem_instance_path: str | Path,
+    task_uuid: str,
+    fcidump_path: str | Path,
+    run_dir: str | Path,
+    config: PySCFConfig,
+    resources: SolverResources | None,
+    overwrite: bool,
+    adapter_name: str,
+) -> RunManifest:
+    """Shared run-directory preparation for reference and method adapters."""
+
     config_dict = config.to_dict()
     method = config.normalized_method()
     if method not in SOLVER_UUIDS:
@@ -157,7 +227,7 @@ def prepare(
     )
 
     manifest = RunManifest(
-        adapter=ADAPTER_NAME,
+        adapter=adapter_name,
         adapter_version=ADAPTER_VERSION,
         run_id=new_run_id(),
         problem_instance_uuid=problem_instance["problem_instance_uuid"],
@@ -192,6 +262,7 @@ def run(run_dir: str | Path) -> dict[str, Any]:
     run_path = Path(run_dir)
     manifest = load_manifest(run_path)
     config = PySCFConfig.from_dict(manifest.config)
+    _validate_adapter_identity(manifest, config)
     start = time.time()
     start_iso = iso8601_timestamp()
     status = "completed"
@@ -204,6 +275,7 @@ def run(run_dir: str | Path) -> dict[str, Any]:
         energy, details = _compute_energy(
             method=config.normalized_method(),
             fcidump_path=run_path / manifest.files["fcidump"],
+            legacy_open_shell_uhf=manifest.adapter in METHOD_ADAPTERS,
         )
     except Exception as exc:
         status = "failed"
@@ -250,6 +322,8 @@ def harvest(
 
     run_path = Path(run_dir)
     manifest = load_manifest(run_path)
+    config = PySCFConfig.from_dict(manifest.config)
+    _validate_adapter_identity(manifest, config)
     problem_instance = read_json(run_path / manifest.files["problem_instance"])
     raw_path = run_path / manifest.files["raw_output"]
     if raw_path.exists():
@@ -269,7 +343,6 @@ def harvest(
     attempted = harness_attempted(status)
     completed = status == "completed"
     energy = raw_output.get("energy") if completed else None
-    config = PySCFConfig.from_dict(manifest.config)
 
     solution = {
         "$schema": (
@@ -448,7 +521,11 @@ def _not_attempted_raw_output(
     }
 
 
-def _compute_energy(method: str, fcidump_path: str | Path) -> tuple[float, dict[str, Any]]:
+def _compute_energy(
+    method: str,
+    fcidump_path: str | Path,
+    legacy_open_shell_uhf: bool = False,
+) -> tuple[float, dict[str, Any]]:
     if method == "FCI":
         data = read_fcidump(str(fcidump_path))
         energy, _ci = fci.direct_spin1.kernel(
@@ -465,12 +542,12 @@ def _compute_energy(method: str, fcidump_path: str | Path) -> tuple[float, dict[
         }
 
     if method == "HF":
-        mf, details = _run_hf(fcidump_path)
+        mf, details = _run_hf(fcidump_path, legacy_open_shell_uhf=legacy_open_shell_uhf)
         details["method_note"] = "SCF object reconstructed from symmetrized FCIDUMP integrals"
         return float(mf.e_tot), details
 
     if method == "MP2":
-        mf, details = _run_hf(fcidump_path)
+        mf, details = _run_hf(fcidump_path, legacy_open_shell_uhf=legacy_open_shell_uhf)
         solver = mp.MP2(mf)
         solver.verbose = 0
         correlation_energy, _t2 = solver.kernel()
@@ -484,7 +561,7 @@ def _compute_energy(method: str, fcidump_path: str | Path) -> tuple[float, dict[
         return float(solver.e_tot), details
 
     if method == "CISD":
-        mf, details = _run_hf(fcidump_path)
+        mf, details = _run_hf(fcidump_path, legacy_open_shell_uhf=legacy_open_shell_uhf)
         solver = ci.CISD(mf)
         solver.verbose = 0
         correlation_energy, _civec = solver.kernel()
@@ -498,7 +575,7 @@ def _compute_energy(method: str, fcidump_path: str | Path) -> tuple[float, dict[
         return float(solver.e_tot), details
 
     if method in {"CCSD", "CCSD(T)"}:
-        mf, details = _run_hf(fcidump_path)
+        mf, details = _run_hf(fcidump_path, legacy_open_shell_uhf=legacy_open_shell_uhf)
         solver = cc.CCSD(mf)
         solver.verbose = 0
         correlation_energy, _t1, _t2 = solver.kernel()
@@ -518,7 +595,10 @@ def _compute_energy(method: str, fcidump_path: str | Path) -> tuple[float, dict[
     raise ValueError(f"Unsupported PySCF harness method: {method}")
 
 
-def _run_hf(fcidump_path: str | Path) -> tuple[Any, dict[str, Any]]:
+def _run_hf(
+    fcidump_path: str | Path,
+    legacy_open_shell_uhf: bool = False,
+) -> tuple[Any, dict[str, Any]]:
     data = read_fcidump(str(fcidump_path))
     norb = int(data["NORB"])
     mol = gto.M()
@@ -529,15 +609,21 @@ def _run_hf(fcidump_path: str | Path) -> tuple[Any, dict[str, Any]]:
     ecore = float(data.get("ECORE", 0.0))
     mol.energy_nuc = lambda *args: ecore
 
-    mf = scf.RHF(mol)
+    if legacy_open_shell_uhf and mol.spin > 0:
+        mf = scf.UHF(mol)
+        hcore = np.asarray((data["H1"], data["H1"]))
+    else:
+        mf = scf.RHF(mol)
+        hcore = data["H1"]
     mf.verbose = 0
-    mf.get_hcore = lambda *args: data["H1"]
+    mf.get_hcore = lambda *args: hcore
     mf.get_ovlp = lambda *args: np.eye(norb)
     mf._eri = data["H2"]
     mf.kernel()
     return mf, {
         "hf_energy": float(mf.e_tot),
         "hf_converged": bool(mf.converged),
+        "hf_reference": "UHF" if isinstance(mf, scf.uhf.UHF) else "RHF",
         "h1_symmetrized_on_read": True,
     }
 
@@ -546,4 +632,29 @@ def _optional_bool(value: Any) -> bool | None:
     if value is None:
         return None
     return bool(value)
+
+
+def _validate_adapter_identity(manifest: RunManifest, config: PySCFConfig) -> None:
+    if manifest.adapter not in ADAPTER_NAMES:
+        raise ValueError(f"Unsupported PySCF adapter identity {manifest.adapter!r}.")
+    fixed_method = METHOD_ADAPTERS.get(manifest.adapter)
+    if fixed_method is None:
+        return
+    expected = {
+        "method": fixed_method,
+        "solver_uuid": SOLVER_UUIDS[fixed_method],
+        "solver_short_name": fixed_method,
+        "campaign": METHOD_CAMPAIGN,
+    }
+    actual = {
+        "method": config.normalized_method(),
+        "solver_uuid": manifest.solver_uuid,
+        "solver_short_name": manifest.solver_short_name,
+        "campaign": config.campaign,
+    }
+    if actual != expected:
+        raise ValueError(
+            f"Adapter {manifest.adapter!r} identity mismatch: "
+            f"expected {expected!r}, got {actual!r}."
+        )
 
