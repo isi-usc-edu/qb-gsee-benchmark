@@ -22,7 +22,7 @@ DEFAULT_DUPLICATE_ATOL = 1.0e-8
 
 
 @contextmanager
-def _open_text(
+def open_fcidump_text(
     path: Path,
 ) -> Iterator[tuple[TextIO, str, str | None]]:
     suffix = path.suffix.lower()
@@ -195,7 +195,7 @@ def read_sparse_fcidump(
 ) -> SparseFcidump:
     """Read a real spatial FCIDUMP without allocating an N**4 tensor."""
     path = Path(path)
-    with _open_text(path) as opened:
+    with open_fcidump_text(path) as opened:
         handle, container_format, container_member = opened
         header, ms2_source = _parse_header(
             handle, ms2_override=ms2_override

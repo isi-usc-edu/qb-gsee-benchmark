@@ -15,6 +15,7 @@ from qb_gsee_benchmark.features.corpus_runner import (
     run_linear_task,
     write_corpus_manifest_jsonl,
 )
+from qb_gsee_benchmark.features.fcidump_conflicts import scan_duplicate_conflicts
 from qb_gsee_benchmark.features.fcidump_sparse import read_sparse_fcidump
 from qb_gsee_benchmark.features.integral_features import effective_one_body
 from qb_gsee_benchmark.features.universal_t0_features import (
@@ -66,6 +67,36 @@ def test_sparse_reader_handles_compressed_and_duplicate_orientations(
     assert len(data.eri_records) == 4
     assert np.allclose(data.h1, [[1.0, 0.5], [0.5, 3.0]])
     assert data.eri_value(1, 0, 0, 1) == pytest.approx(0.25)
+
+
+def test_duplicate_conflict_census_counts_keys_not_only_records(
+    tmp_path: Path,
+) -> None:
+    path = _write_fcidump(tmp_path / "FCIDUMP")
+
+    census = scan_duplicate_conflicts(path)
+
+    assert census.two_body_input_record_count == 5
+    assert census.two_body_unique_key_count == 4
+    assert census.duplicate_key_count == 1
+    assert census.duplicate_record_count == 1
+    assert census.conflicting_key_count == 0
+
+
+def test_duplicate_conflict_census_records_maximum_disagreement(
+    tmp_path: Path,
+) -> None:
+    conflicting = FCIDUMP_TEXT.replace(
+        " 0.25 2 1 2 1", " 0.30 2 1 2 1"
+    )
+    path = _write_fcidump(tmp_path / "FCIDUMP", conflicting)
+
+    census = scan_duplicate_conflicts(path)
+
+    assert census.conflicting_key_count == 1
+    assert census.maximum_absolute_disagreement == pytest.approx(0.05)
+    assert census.maximum_relative_disagreement == pytest.approx(1.0 / 6.0)
+    assert census.maximum_disagreement_key_one_based == (1, 2, 1, 2)
 
 
 def test_sparse_reader_supports_single_member_zip(tmp_path: Path) -> None:
