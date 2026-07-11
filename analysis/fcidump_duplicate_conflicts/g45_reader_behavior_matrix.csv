@@ -1,0 +1,7 @@
+adapter_path,behavior,evidence_mode,forward_value,reverse_value,reader_version,source_evidence,note
+pyscf_fci_and_method_adapters,last_wins,empirical,3.0,1.0,2.8.0,qb_gsee_benchmark.utils.read_fcidump -> pyscf.tools.fcidump.read,All PySCF panel methods share this reader.
+in_house_hf_on_dump,last_wins,empirical_shared_path,3.0,1.0,2.8.0,qb_gsee_benchmark.solvers.pyscf_adapter._run_hf -> utils.read_fcidump,The verifier and method adapters share the same read result.
+ipie,last_wins,empirical,3.0,1.0,0.7.1,ipie.utils.hamiltonian_converter.read_fcidump(symmetry=8),"The deployed UHF trial additionally uses PySCF, also last-wins."
+trimci,last_wins,empirical,3.0,1.0,0.2.0,trimci.TrimCI_runner.io_utils.read_fcidump,PSYM=8 assignment expands each input record.
+dmrg_block2,last_wins,empirical,3.0,1.0,block2 0.5.3,"block2.FCIDUMP.read; FCIDUMP.v(0,0,1,1)",Probe used the deployed block2 virtual environment.
+shci_arrow,maximum_absolute_value,desk_source_analysis,3.0,3.0,git 51ceb8968d94d09a2087dd23e5305989c359d540,/home/ac.otten/soft/shci_new/src/chem/integrals.cc:108-111 sha256=f8423331e65b0a4f07ccbb736074151000930f6bdd6addfb8863a6708a6aba19,Empirical binary load blocked by missing libhcoll.so.1 and libocoms.so.0 on login host.

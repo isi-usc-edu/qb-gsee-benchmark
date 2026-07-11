@@ -1,0 +1,100 @@
+{
+  "rows": [
+    {
+      "adapter_path": "pyscf_fci_and_method_adapters",
+      "behavior": "last_wins",
+      "evidence_mode": "empirical",
+      "forward_value": 3.0,
+      "note": "All PySCF panel methods share this reader.",
+      "reader_version": "2.8.0",
+      "reverse_value": 1.0,
+      "source_evidence": "qb_gsee_benchmark.utils.read_fcidump -> pyscf.tools.fcidump.read"
+    },
+    {
+      "adapter_path": "in_house_hf_on_dump",
+      "behavior": "last_wins",
+      "evidence_mode": "empirical_shared_path",
+      "forward_value": 3.0,
+      "note": "The verifier and method adapters share the same read result.",
+      "reader_version": "2.8.0",
+      "reverse_value": 1.0,
+      "source_evidence": "qb_gsee_benchmark.solvers.pyscf_adapter._run_hf -> utils.read_fcidump"
+    },
+    {
+      "adapter_path": "ipie",
+      "behavior": "last_wins",
+      "evidence_mode": "empirical",
+      "forward_value": 3.0,
+      "note": "The deployed UHF trial additionally uses PySCF, also last-wins.",
+      "reader_version": "0.7.1",
+      "reverse_value": 1.0,
+      "source_evidence": "ipie.utils.hamiltonian_converter.read_fcidump(symmetry=8)"
+    },
+    {
+      "adapter_path": "trimci",
+      "behavior": "last_wins",
+      "evidence_mode": "empirical",
+      "forward_value": 3.0,
+      "note": "PSYM=8 assignment expands each input record.",
+      "reader_version": "0.2.0",
+      "reverse_value": 1.0,
+      "source_evidence": "trimci.TrimCI_runner.io_utils.read_fcidump"
+    },
+    {
+      "adapter_path": "dmrg_block2",
+      "behavior": "last_wins",
+      "evidence_mode": "empirical",
+      "forward_value": 3.0,
+      "note": "Probe used the deployed block2 virtual environment.",
+      "reader_version": "block2 0.5.3",
+      "reverse_value": 1.0,
+      "source_evidence": "block2.FCIDUMP.read; FCIDUMP.v(0,0,1,1)"
+    },
+    {
+      "adapter_path": "shci_arrow",
+      "behavior": "maximum_absolute_value",
+      "evidence_mode": "desk_source_analysis",
+      "forward_value": 3.0,
+      "note": "Empirical binary load blocked by missing libhcoll.so.1 and libocoms.so.0 on login host.",
+      "reader_version": "git 51ceb8968d94d09a2087dd23e5305989c359d540",
+      "reverse_value": 3.0,
+      "source_evidence": "/home/ac.otten/soft/shci_new/src/chem/integrals.cc:108-111 sha256=f8423331e65b0a4f07ccbb736074151000930f6bdd6addfb8863a6708a6aba19"
+    }
+  ],
+  "schema_version": "g45_reader_matrix_v1",
+  "synthetic_probe": {
+    "data_lines_per_probe": 3,
+    "expected_by_policy": {
+      "average": [
+        2.0,
+        2.0
+      ],
+      "first_wins": [
+        1.0,
+        3.0
+      ],
+      "last_wins": [
+        3.0,
+        1.0
+      ],
+      "maximum_absolute_value": [
+        3.0,
+        3.0
+      ],
+      "sum": [
+        4.0,
+        4.0
+      ]
+    },
+    "forward_duplicate_values": [
+      1.0,
+      3.0
+    ],
+    "probe_forward_sha256": "b100c3a88f9967e3348a1b172e5ea8b99f04bdede1ef64d16e9d470f040faeb0",
+    "probe_reverse_sha256": "f9455f41ca3be2f48df3d76e0b45afe99ae89ffd6505011f8a6a89f3da109524",
+    "reverse_duplicate_values": [
+      3.0,
+      1.0
+    ]
+  }
+}
