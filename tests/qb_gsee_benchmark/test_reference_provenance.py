@@ -144,7 +144,13 @@ def test_planted_solutions_are_labeled_exact():
 
 def test_all_numeric_reference_energies_have_provenance_labels():
     repo_root = Path(__file__).resolve().parents[2]
-    allowed = {"exact", "cross-validated", "controlled", "estimated"}
+    allowed = {
+        "exact",
+        "cross-validated",
+        "controlled",
+        "estimated",
+        "variational_upper_bound",
+    }
     missing = []
 
     for instance_path in sorted((repo_root / "problem_instances").rglob("*.json")):
