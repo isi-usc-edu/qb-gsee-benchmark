@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
 from qb_gsee_benchmark.features.corpus_runner import (
@@ -70,7 +70,7 @@ def main() -> int:
         selected = selected[: args.max_tasks]
 
     outcomes = []
-    with ThreadPoolExecutor(max_workers=args.workers) as executor:
+    with ProcessPoolExecutor(max_workers=args.workers) as executor:
         futures = {
             executor.submit(
                 run_linear_task,

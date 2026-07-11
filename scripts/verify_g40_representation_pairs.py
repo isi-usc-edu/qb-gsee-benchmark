@@ -68,6 +68,17 @@ def main() -> int:
             )
             continue
         group_states = [states[task_uuid] for task_uuid in sorted(task_uuids)]
+        extractor_versions = sorted(
+            {state.get("extractor_version") for state in group_states}
+        )
+        if len(extractor_versions) != 1:
+            failures.append(
+                {
+                    "group": group,
+                    "reason": "mixed_extractor_versions",
+                    "versions": extractor_versions,
+                }
+            )
         non_success = [
             state["task_uuid"]
             for state in group_states
@@ -123,9 +134,11 @@ def main() -> int:
             {
                 "equivalence_group_id": group,
                 "task_uuids": [state["task_uuid"] for state in group_states],
+                "extractor_versions": extractor_versions,
                 "status": (
                     "passed"
-                    if all(item["passed"] for item in invariant_checks.values())
+                    if len(extractor_versions) == 1
+                    and all(item["passed"] for item in invariant_checks.values())
                     and changed_basis_features
                     else "failed"
                 ),

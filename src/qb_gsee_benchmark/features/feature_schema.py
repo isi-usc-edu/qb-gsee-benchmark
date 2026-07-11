@@ -89,6 +89,8 @@ PROCEDURAL = {
     "sign_free_condition", "g24_coverage_group",
     "mp2_spin_decomposition_status", "pair_structure_basis",
     "U_eff_over_W_reason", "universal_t0_linear_features_version",
+    "fcidump_symmetry_status", "fcidump_symmetry_atol",
+    "fcidump_symmetry_rtol",
 }
 DUPLICATE_SIZE = {"num_orbitals", "num_electrons", "ms2"}
 LEGACY_JW_ARCHIVE = {
@@ -149,9 +151,29 @@ PAIR_T2_MODEL = {
     "mp2_pair_double_amplitude_l2_fraction",
 }
 PAIR_AUDIT = {
+    "one_body_duplicate_orientation_records_skipped",
+    "one_body_duplicate_max_abs_difference",
+    "one_body_duplicate_max_rel_difference",
+    "one_body_symmetry_conflict_records",
     "two_body_input_record_count", "two_body_unique_record_count",
     "two_body_duplicate_orientation_records_skipped",
+    "two_body_duplicate_max_abs_difference",
+    "two_body_duplicate_max_rel_difference",
+    "two_body_symmetry_conflict_records",
     "hf_stationarity_tolerance",
+}
+UNIVERSAL_T0_AUDIT_OUTPUTS = {
+    "one_body_duplicate_orientation_records_skipped",
+    "one_body_duplicate_max_abs_difference",
+    "one_body_duplicate_max_rel_difference",
+    "one_body_symmetry_conflict_records",
+    "two_body_input_record_count", "two_body_unique_record_count",
+    "two_body_duplicate_orientation_records_skipped",
+    "two_body_duplicate_max_abs_difference",
+    "two_body_duplicate_max_rel_difference",
+    "two_body_symmetry_conflict_records", "U_eff_over_W_reason",
+    "fcidump_symmetry_status", "fcidump_symmetry_atol",
+    "fcidump_symmetry_rtol", "universal_t0_linear_features_version",
 }
 UNIVERSAL_T0_INV_MODEL = {
     "effective_h1_frobenius_norm", "bare_one_body_bandwidth",
@@ -238,7 +260,11 @@ def metadata_for_column(column: str) -> FeatureColumnMetadata:
 
 PLANNED_COLUMNS = {
     column: metadata_for_column(column)
-    for column in sorted(UNIVERSAL_T0_INV_MODEL | UNIVERSAL_T0_BAS_MODEL)
+    for column in sorted(
+        UNIVERSAL_T0_INV_MODEL
+        | UNIVERSAL_T0_BAS_MODEL
+        | UNIVERSAL_T0_AUDIT_OUTPUTS
+    )
 }
 PLANNED_COLUMNS["fermionic_coefficient_l1_norm"] = _feature(
     "fermionic_coefficient_l1_norm", "T0", "BAS", scaling="extensive",

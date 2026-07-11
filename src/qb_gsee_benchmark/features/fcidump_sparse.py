@@ -15,6 +15,8 @@ import numpy as np
 
 
 _HEADER_KEYS = ("NORB", "NELEC", "MS2")
+DEFAULT_DUPLICATE_RTOL = 1.0e-8
+DEFAULT_DUPLICATE_ATOL = 1.0e-8
 
 
 def _open_text(path: Path) -> TextIO:
@@ -53,8 +55,15 @@ class SparseFcidump:
     h1: np.ndarray
     eri_records: dict[tuple[int, int, int, int], float]
     ecore: float
+    one_body_duplicate_orientations: int
+    one_body_duplicate_max_abs_difference: float
+    one_body_duplicate_max_rel_difference: float
+    one_body_symmetry_conflict_records: int
     two_body_input_records: int
     two_body_duplicate_orientations: int
+    two_body_duplicate_max_abs_difference: float
+    two_body_duplicate_max_rel_difference: float
+    two_body_symmetry_conflict_records: int
 
     @property
     def nalpha(self) -> int:
@@ -107,26 +116,44 @@ def _parse_header(handle: TextIO) -> dict[str, int]:
 
 def _store_checked(
     values: dict[tuple[int, ...], float],
+    counts: dict[tuple[int, ...], int],
     key: tuple[int, ...],
     value: float,
     *,
     label: str,
+    rtol: float,
     atol: float,
-) -> bool:
+    strict: bool,
+) -> tuple[bool, float, float, bool]:
     previous = values.get(key)
     if previous is None:
         values[key] = value
-        return False
-    if not np.isclose(previous, value, rtol=1.0e-10, atol=atol):
+        counts[key] = 1
+        return False, 0.0, 0.0, False
+    absolute_difference = abs(previous - value)
+    relative_difference = absolute_difference / max(
+        abs(previous), abs(value), float(np.finfo(float).tiny)
+    )
+    conflict = not np.isclose(previous, value, rtol=rtol, atol=atol)
+    if conflict and strict:
         raise ValueError(
             f"Conflicting {label} records for {key}: "
-            f"{previous:.17g} vs {value:.17g}"
+            f"{previous:.17g} vs {value:.17g}; "
+            f"abs_diff={absolute_difference:.3g}, "
+            f"rel_diff={relative_difference:.3g}"
         )
-    return True
+    count = counts[key]
+    values[key] = (count * previous + value) / (count + 1)
+    counts[key] = count + 1
+    return True, absolute_difference, relative_difference, conflict
 
 
 def read_sparse_fcidump(
-    path: str | Path, *, duplicate_atol: float = 1.0e-12
+    path: str | Path,
+    *,
+    duplicate_rtol: float = DEFAULT_DUPLICATE_RTOL,
+    duplicate_atol: float = DEFAULT_DUPLICATE_ATOL,
+    strict_duplicates: bool = False,
 ) -> SparseFcidump:
     """Read a real spatial FCIDUMP without allocating an N**4 tensor."""
     path = Path(path)
@@ -143,10 +170,19 @@ def read_sparse_fcidump(
             raise ValueError("FCIDUMP electron sector does not fit NORB")
 
         one_body: dict[tuple[int, int], float] = {}
+        one_body_counts: dict[tuple[int, int], int] = {}
         two_body: dict[tuple[int, int, int, int], float] = {}
+        two_body_counts: dict[tuple[int, int, int, int], int] = {}
         ecore = 0.0
+        one_body_duplicate_orientations = 0
+        one_body_duplicate_max_abs_difference = 0.0
+        one_body_duplicate_max_rel_difference = 0.0
+        one_body_symmetry_conflict_records = 0
         input_records = 0
         duplicate_orientations = 0
+        two_body_duplicate_max_abs_difference = 0.0
+        two_body_duplicate_max_rel_difference = 0.0
+        two_body_symmetry_conflict_records = 0
         for line_number, line in enumerate(handle, start=1):
             stripped = line.strip()
             if not stripped or stripped.startswith(("!", "#")):
@@ -168,27 +204,47 @@ def read_sparse_fcidump(
                         f"One-body index exceeds NORB at line {line_number}"
                     )
                 key = (min(i, j), max(i, j))
-                _store_checked(
+                duplicate, abs_difference, rel_difference, conflict = _store_checked(
                     one_body,
+                    one_body_counts,
                     key,
                     value,
                     label="one-body",
+                    rtol=duplicate_rtol,
                     atol=duplicate_atol,
+                    strict=strict_duplicates,
                 )
+                one_body_duplicate_orientations += int(duplicate)
+                one_body_duplicate_max_abs_difference = max(
+                    one_body_duplicate_max_abs_difference, abs_difference
+                )
+                one_body_duplicate_max_rel_difference = max(
+                    one_body_duplicate_max_rel_difference, rel_difference
+                )
+                one_body_symmetry_conflict_records += int(conflict)
                 continue
             if min(i, j, k, l) < 0 or max(i, j, k, l) >= norb:
                 raise ValueError(f"Invalid two-body indices at line {line_number}")
             input_records += 1
             key = canonical_eri_key(i, j, k, l)
-            duplicate_orientations += int(
-                _store_checked(
-                    two_body,
-                    key,
-                    value,
-                    label="two-body",
-                    atol=duplicate_atol,
-                )
+            duplicate, abs_difference, rel_difference, conflict = _store_checked(
+                two_body,
+                two_body_counts,
+                key,
+                value,
+                label="two-body",
+                rtol=duplicate_rtol,
+                atol=duplicate_atol,
+                strict=strict_duplicates,
             )
+            duplicate_orientations += int(duplicate)
+            two_body_duplicate_max_abs_difference = max(
+                two_body_duplicate_max_abs_difference, abs_difference
+            )
+            two_body_duplicate_max_rel_difference = max(
+                two_body_duplicate_max_rel_difference, rel_difference
+            )
+            two_body_symmetry_conflict_records += int(conflict)
 
     h1 = np.zeros((norb, norb), dtype=float)
     for (i, j), value in one_body.items():
@@ -201,6 +257,21 @@ def read_sparse_fcidump(
         h1=h1,
         eri_records=two_body,
         ecore=ecore,
+        one_body_duplicate_orientations=one_body_duplicate_orientations,
+        one_body_duplicate_max_abs_difference=(
+            one_body_duplicate_max_abs_difference
+        ),
+        one_body_duplicate_max_rel_difference=(
+            one_body_duplicate_max_rel_difference
+        ),
+        one_body_symmetry_conflict_records=one_body_symmetry_conflict_records,
         two_body_input_records=input_records,
         two_body_duplicate_orientations=duplicate_orientations,
+        two_body_duplicate_max_abs_difference=(
+            two_body_duplicate_max_abs_difference
+        ),
+        two_body_duplicate_max_rel_difference=(
+            two_body_duplicate_max_rel_difference
+        ),
+        two_body_symmetry_conflict_records=two_body_symmetry_conflict_records,
     )

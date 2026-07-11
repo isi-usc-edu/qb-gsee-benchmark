@@ -125,6 +125,7 @@
   ],
   "planned_columns_excluded_until_populated": [
     "U_eff_over_W",
+    "U_eff_over_W_reason",
     "bare_one_body_bandwidth",
     "bare_one_body_gap_alpha",
     "bare_one_body_gap_beta",
@@ -145,8 +146,19 @@
     "eri_fraction_above_rel_1e_6",
     "eri_fraction_above_rel_1e_8",
     "eri_l1_over_frobenius",
+    "fcidump_symmetry_atol",
+    "fcidump_symmetry_rtol",
+    "fcidump_symmetry_status",
     "fermionic_coefficient_l1_norm",
-    "rho_offdiag"
+    "one_body_duplicate_max_abs_difference",
+    "one_body_duplicate_max_rel_difference",
+    "one_body_duplicate_orientation_records_skipped",
+    "one_body_symmetry_conflict_records",
+    "rho_offdiag",
+    "two_body_duplicate_max_abs_difference",
+    "two_body_duplicate_max_rel_difference",
+    "two_body_symmetry_conflict_records",
+    "universal_t0_linear_features_version"
   ],
   "schema_version": "g40-p0-v1",
   "source_feature_table": "scripts/Hamiltonian_features.csv",

@@ -61,6 +61,7 @@ def test_sparse_reader_handles_compressed_and_duplicate_orientations(
     assert data.ecore == pytest.approx(7.0)
     assert data.two_body_input_records == 5
     assert data.two_body_duplicate_orientations == 1
+    assert data.two_body_symmetry_conflict_records == 0
     assert len(data.eri_records) == 4
     assert np.allclose(data.h1, [[1.0, 0.5], [0.5, 3.0]])
     assert data.eri_value(1, 0, 0, 1) == pytest.approx(0.25)
@@ -96,9 +97,36 @@ def test_universal_linear_features_have_declared_full_tensor_denominators(
     assert features["U_eff_over_W"] == pytest.approx(3.0 / math.sqrt(5))
     assert features["effective_h1_fraction_above_rel_1e_12"] == 1.0
     assert features["eri_fraction_above_rel_1e_12"] == 0.5
+    assert features["fcidump_symmetry_status"] == "ok"
 
 
-def test_sparse_reader_rejects_conflicting_symmetry_duplicates(
+def test_sparse_reader_averages_roundoff_level_symmetry_noise(
+    tmp_path: Path,
+) -> None:
+    noisy = FCIDUMP_TEXT.replace(
+        " 0.25 2 1 2 1", " 0.25000000005 2 1 2 1"
+    )
+    data = read_sparse_fcidump(_write_fcidump(tmp_path / "FCIDUMP", noisy))
+
+    assert data.eri_value(0, 1, 0, 1) == pytest.approx(0.250000000025)
+
+
+def test_sparse_reader_flags_and_averages_symmetry_conflicts(
+    tmp_path: Path,
+) -> None:
+    conflicting = FCIDUMP_TEXT.replace(
+        " 0.25 2 1 2 1", " 0.30 2 1 2 1"
+    )
+    path = _write_fcidump(tmp_path / "FCIDUMP", conflicting)
+
+    data = read_sparse_fcidump(path)
+
+    assert data.two_body_symmetry_conflict_records == 1
+    assert data.two_body_duplicate_max_abs_difference == pytest.approx(0.05)
+    assert data.eri_value(0, 1, 0, 1) == pytest.approx(0.275)
+
+
+def test_sparse_reader_strict_mode_rejects_symmetry_conflicts(
     tmp_path: Path,
 ) -> None:
     conflicting = FCIDUMP_TEXT.replace(
@@ -107,7 +135,7 @@ def test_sparse_reader_rejects_conflicting_symmetry_duplicates(
     path = _write_fcidump(tmp_path / "FCIDUMP", conflicting)
 
     with pytest.raises(ValueError, match="Conflicting two-body"):
-        read_sparse_fcidump(path)
+        read_sparse_fcidump(path, strict_duplicates=True)
 
 
 def test_sparse_reader_rejects_iuhf(tmp_path: Path) -> None:

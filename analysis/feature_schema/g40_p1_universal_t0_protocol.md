@@ -8,8 +8,12 @@ The reader accepts real spatial-orbital FCIDUMPs with eightfold chemist-integral
 symmetry. It reads `NORB`, `NELEC`, and `MS2` from the header, never
 infers a singlet, and rejects `IUHF=1` files because their block convention is
 not the declared shared spatial representation. Repeated symmetry orientations
-must agree numerically. Mathematical zeros remain part of all tensor
-denominators.
+are averaged to enforce an exact Hermitian/eightfold tensor. Differences beyond
+a frozen `1e-8` absolute / `1e-8` relative audit gate increment explicit
+conflict counts and retain maximum absolute/relative discrepancies. Strict mode
+fails on those conflicts; the universal corpus pass records and symmetrizes them
+rather than silently dropping the task. Mathematical zeros remain part of all
+tensor denominators.
 
 ## P1-A definitions
 

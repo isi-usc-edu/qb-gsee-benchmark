@@ -12,6 +12,8 @@ from typing import Any
 import numpy as np
 
 from qb_gsee_benchmark.features.fcidump_sparse import (
+    DEFAULT_DUPLICATE_ATOL,
+    DEFAULT_DUPLICATE_RTOL,
     SparseFcidump,
     eri_symmetry_permutations,
     read_sparse_fcidump,
@@ -19,7 +21,7 @@ from qb_gsee_benchmark.features.fcidump_sparse import (
 from qb_gsee_benchmark.features.integral_features import log10_fci_dimension
 
 
-UNIVERSAL_T0_LINEAR_VERSION = "g40_p1_linear_v1"
+UNIVERSAL_T0_LINEAR_VERSION = "g40_p1_linear_v3"
 RELATIVE_THRESHOLD_GRID = (
     1.0e-12,
     1.0e-10,
@@ -142,11 +144,40 @@ def compute_universal_t0_linear_features(
         "U_eff_over_W_reason": (
             "zero_one_body_bandwidth" if u_over_w is None else "ok"
         ),
+        "one_body_duplicate_orientation_records_skipped": (
+            data.one_body_duplicate_orientations
+        ),
+        "one_body_duplicate_max_abs_difference": (
+            data.one_body_duplicate_max_abs_difference
+        ),
+        "one_body_duplicate_max_rel_difference": (
+            data.one_body_duplicate_max_rel_difference
+        ),
+        "one_body_symmetry_conflict_records": (
+            data.one_body_symmetry_conflict_records
+        ),
         "two_body_input_record_count": data.two_body_input_records,
         "two_body_unique_record_count": len(data.eri_records),
         "two_body_duplicate_orientation_records_skipped": (
             data.two_body_duplicate_orientations
         ),
+        "two_body_duplicate_max_abs_difference": (
+            data.two_body_duplicate_max_abs_difference
+        ),
+        "two_body_duplicate_max_rel_difference": (
+            data.two_body_duplicate_max_rel_difference
+        ),
+        "two_body_symmetry_conflict_records": (
+            data.two_body_symmetry_conflict_records
+        ),
+        "fcidump_symmetry_status": (
+            "conflict_above_tolerance"
+            if data.one_body_symmetry_conflict_records
+            or data.two_body_symmetry_conflict_records
+            else "ok"
+        ),
+        "fcidump_symmetry_atol": DEFAULT_DUPLICATE_ATOL,
+        "fcidump_symmetry_rtol": DEFAULT_DUPLICATE_RTOL,
         "universal_t0_linear_features_version": (
             UNIVERSAL_T0_LINEAR_VERSION
         ),
