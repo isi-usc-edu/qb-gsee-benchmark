@@ -1,0 +1,78 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+  "contact_info": [
+    {
+      "email": "bobqat@l3harris.com",
+      "institution": "L3Harris Technologies, Inc.",
+      "name": "QB-GSEE Benchmark Harness"
+    }
+  ],
+  "creation_timestamp": "2026-07-10T23:34:45.444238+00:00",
+  "digital_signature": null,
+  "is_resource_estimate": false,
+  "problem_instance_uuid": "b6de69c8-c4a0-5d1a-8e42-dd88816c203a",
+  "solution_data": [
+    {
+      "energy": -13.789855387565723,
+      "energy_units": "Hartree",
+      "run_time": {
+        "algorithm_run_time": {
+          "seconds": 8.613885164260864,
+          "wall_clock_start_time": "2026-07-10T23:34:36.704248+00:00",
+          "wall_clock_stop_time": "2026-07-10T23:34:45.318141+00:00"
+        },
+        "overall_time": {
+          "seconds": 8.613885164260864,
+          "wall_clock_start_time": "2026-07-10T23:34:36.704248+00:00",
+          "wall_clock_stop_time": "2026-07-10T23:34:45.318141+00:00"
+        },
+        "postprocessing_time": {
+          "seconds": 0.0
+        },
+        "preprocessing_time": {
+          "seconds": 0.0
+        }
+      },
+      "solution_details": {
+        "attempted": true,
+        "harness_status": "completed",
+        "not_attempted_reason": null,
+        "pyscf_details": {
+          "method_note": "direct_spin1 FCI from FCIDUMP integrals",
+          "nelec": 5,
+          "norb": 16
+        },
+        "raw_output_file": "raw_output.json",
+        "run_directory_id": "3a770b6b-2df3-4376-9cfa-afca10b4c8fc"
+      },
+      "task_uuid": "25c59f20-261b-59ad-b10f-fe2b61ae317e"
+    }
+  ],
+  "solution_uuid": "31664dab-7630-41cd-90e3-682d625ab781",
+  "solver_details": {
+    "algorithm_details": {
+      "harness_adapter": "pyscf_reference",
+      "harness_adapter_version": "0.1.0",
+      "name": "PySCF FCI",
+      "solver_config": {
+        "energy_units": "Hartree",
+        "method": "FCI",
+        "num_threads": 1,
+        "solver_short_name": "FCI",
+        "solver_uuid": "99f002d5-3e19-5ea4-986e-5282d43a3c91"
+      }
+    },
+    "classical_hardware_details": {
+      "computing_environment_name": "harness run directory",
+      "ram_available_gb": 4.0,
+      "total_num_cores": 1
+    },
+    "compute_hardware_type": "classical_computer",
+    "software_details": {
+      "pyscf": "2.8.0",
+      "python": "3.12.0"
+    },
+    "solver_short_name": "FCI",
+    "solver_uuid": "99f002d5-3e19-5ea4-986e-5282d43a3c91"
+  }
+}
