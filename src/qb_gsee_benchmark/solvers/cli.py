@@ -108,6 +108,10 @@ def main(argv: list[str] | None = None) -> int:
         "--seed", type=int, default=trimci_adapter.DEFAULT_SEED
     )
     prepare_trimci.add_argument("--num-threads", type=int, default=1)
+    prepare_trimci.add_argument(
+        "--checkpoint-ndet-grid",
+        help="comma-separated Phase-2 determinant-budget caps",
+    )
     prepare_trimci.add_argument("--overwrite", action="store_true")
 
     prepare_batch = subparsers.add_parser("prepare-batch")
@@ -240,6 +244,7 @@ def main(argv: list[str] | None = None) -> int:
             config=trimci_adapter.TrimCIConfig(
                 seed=args.seed,
                 num_threads=args.num_threads,
+                checkpoint_ndet_grid=_int_tuple(args.checkpoint_ndet_grid),
             ),
             overwrite=args.overwrite,
         )

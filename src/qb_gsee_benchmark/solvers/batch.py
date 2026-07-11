@@ -154,6 +154,7 @@ def _prepare_one(
             config=trimci_adapter.TrimCIConfig(
                 seed=_int(row.get("seed"), trimci_adapter.DEFAULT_SEED),
                 num_threads=_int(row.get("num_threads"), 1),
+                checkpoint_ndet_grid=_int_tuple(row.get("checkpoint_ndet_grid")),
             ),
             resources=resources,
             overwrite=overwrite,
