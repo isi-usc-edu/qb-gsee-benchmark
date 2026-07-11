@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qb-gsee-benchmark.example/schemas/metrics_v1_4.schema.json",
+  "title": "QB-GSEE metrics bundle v1.4",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "metrics_spec_version",
+    "definitions",
+    "headline_counts",
+    "primitives",
+    "panel_descriptive_stats",
+    "stratified_aggregation",
+    "agreement",
+    "similarity",
+    "diagnostics",
+    "attributions"
+  ],
+  "properties": {
+    "metrics_spec_version": {"const": "1.4"},
+    "definitions": {
+      "type": "object",
+      "minProperties": 12,
+      "additionalProperties": {"$ref": "#/$defs/definition"}
+    },
+    "headline_counts": {
+      "type": "object",
+      "required": ["solvers_found", "n_solvers_found", "n_scored_solvers", "n_attempts_all_committed", "n_public_attempts", "n_scored_attempts", "n_tasks_covered_all_committed", "n_public_tasks_covered", "n_scored_tasks", "task_class_counts", "strata_populated"],
+      "properties": {
+        "solvers_found": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "n_solvers_found": {"type": "integer", "minimum": 0},
+        "n_scored_solvers": {"type": "integer", "minimum": 0},
+        "n_attempts_all_committed": {"type": "integer", "minimum": 0},
+        "n_public_attempts": {"type": "integer", "minimum": 0},
+        "n_scored_attempts": {"type": "integer", "minimum": 0},
+        "n_tasks_covered_all_committed": {"type": "integer", "minimum": 0},
+        "n_public_tasks_covered": {"type": "integer", "minimum": 0},
+        "n_scored_tasks": {"type": "integer", "minimum": 0},
+        "task_class_counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+        "strata_populated": {"type": "object", "additionalProperties": {"type": "array", "items": {"type": "string"}}}
+      },
+      "additionalProperties": false
+    },
+    "primitives": {"type": "array", "items": {"$ref": "#/$defs/primitive"}},
+    "panel_descriptive_stats": {"type": "array", "items": {"$ref": "#/$defs/panelStat"}},
+    "stratified_aggregation": {"type": "array", "items": {"$ref": "#/$defs/stratified"}},
+    "agreement": {
+      "type": "object",
+      "required": ["per_task_spread", "aggregate"],
+      "properties": {
+        "per_task_spread": {"type": "array", "items": {"type": "object"}},
+        "aggregate": {"type": "array", "items": {"$ref": "#/$defs/agreement"}}
+      },
+      "additionalProperties": false
+    },
+    "interval": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "array", "prefixItems": [{"type": "number"}, {"type": "number"}], "items": false, "minItems": 2, "maxItems": 2}
+      ]
+    },
+    "governing": {
+      "type": "object",
+      "required": ["status", "reason", "n_families", "interval"],
+      "properties": {
+        "status": {"enum": ["ok", "insufficient_data"]},
+        "reason": {"type": ["string", "null"]},
+        "n_families": {"type": "integer", "minimum": 1},
+        "interval": {"$ref": "#/$defs/interval"}
+      },
+      "additionalProperties": false
+    },
+    "similarity": {"type": "array", "items": {"$ref": "#/$defs/similarity"}},
+    "diagnostics": {
+      "type": "object",
+      "required": ["public_definition", "task_coverage", "attempt_disposition", "unjoinable_attempts", "size_band", "reference_uncertainty", "taxonomy_grade"],
+      "properties": {
+        "public_definition": {"$ref": "#/$defs/definition"},
+        "task_coverage": {"type": "object"},
+        "attempt_disposition": {"type": "object"},
+        "unjoinable_attempts": {"type": "object"},
+        "size_band": {"type": "object"},
+        "reference_uncertainty": {"type": "object"},
+        "taxonomy_grade": {"type": "object"}
+      },
+      "additionalProperties": false
+    },
+    "attributions": {
+      "type": "object",
+      "maxProperties": 0,
+      "description": "Reserved empty block; the later ML pipeline defined by METRICS_SPEC_v1.md section 9 will populate it."
+    }
+  },
+  "$defs": {
+    "definition": {
+      "type": "object",
+      "required": ["definition", "spec_section"],
+      "properties": {"definition": {"type": "string"}, "spec_section": {"type": "string"}},
+      "additionalProperties": false
+    },
+    "labels": {
+      "type": "object",
+      "required": ["family", "tier", "size_band", "reference_threshold_stratum"],
+      "properties": {
+        "family": {"type": "string"}, "tier": {"type": "string"}, "size_band": {"enum": ["norb_le8", "norb_9_16", "norb_17_32", "norb_33_64", "norb_65_128", "norb_ge129", "unspecified"]}, "reference_threshold_stratum": {"type": "string"}
+      }
+    },
+    "outcomeCounts": {
+      "type": "object",
+      "required": ["success", "miss", "indeterminate"],
+      "properties": {"success": {"type": "integer", "minimum": 0}, "miss": {"type": "integer", "minimum": 0}, "indeterminate": {"type": "integer", "minimum": 0}},
+      "additionalProperties": false
+    },
+    "primitive": {
+      "allOf": [{"$ref": "#/$defs/labels"}],
+      "type": "object",
+      "required": ["solver", "task_uuid", "outcome", "metric_status", "energy", "absolute_error", "graded_residual", "reference_grade", "reference_energy", "threshold", "reference_uncertainty", "threshold_dominated_by_reference"],
+      "properties": {
+        "solver": {"type": "string"}, "task_uuid": {"type": "string"}, "outcome": {"enum": ["success", "miss", "indeterminate"]}, "metric_status": {"const": "ok"},
+        "energy": {"type": ["number", "null"]}, "absolute_error": {"type": ["number", "null"], "minimum": 0}, "graded_residual": {"type": ["number", "null"], "minimum": 0}, "reference_grade": {"type": "string"}, "reference_energy": {"type": "number"}, "threshold": {"type": "number", "exclusiveMinimum": 0}, "reference_uncertainty": {"type": ["number", "null"], "minimum": 0}, "threshold_dominated_by_reference": {"type": "boolean"},
+        "family": {"type": "string"}, "tier": {"type": "string"}, "size_band": {"enum": ["norb_le8", "norb_9_16", "norb_17_32", "norb_33_64", "norb_65_128", "norb_ge129", "unspecified"]}, "reference_threshold_stratum": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "panelStat": {
+      "allOf": [{"$ref": "#/$defs/labels"}], "type": "object",
+      "required": ["task_uuid", "n_attempts", "outcome_counts", "panel_success_rate", "task_class", "panel_composition_dependent"],
+      "properties": {"task_uuid": {"type": "string"}, "n_attempts": {"type": "integer", "minimum": 1}, "outcome_counts": {"$ref": "#/$defs/outcomeCounts"}, "panel_success_rate": {"type": "number", "minimum": 0, "maximum": 1}, "task_class": {"enum": ["solved_by_all", "solved_by_none", "contested"]}, "panel_composition_dependent": {"const": true}, "family": {"type": "string"}, "tier": {"type": "string"}, "size_band": {"enum": ["norb_le8", "norb_9_16", "norb_17_32", "norb_33_64", "norb_65_128", "norb_ge129", "unspecified"]}, "reference_threshold_stratum": {"type": "string"}},
+      "additionalProperties": false
+    },
+    "stratified": {
+      "type": "object", "required": ["solver", "stratum", "n_attempts", "n_families", "outcome_counts", "outcome_rates", "success_rate_bootstrap_95", "absolute_errors", "graded_residuals"],
+      "properties": {"solver": {"type": "string"}, "stratum": {"$ref": "#/$defs/labels"}, "n_attempts": {"type": "integer", "minimum": 1}, "n_families": {"type": "integer", "minimum": 1}, "outcome_counts": {"$ref": "#/$defs/outcomeCounts"}, "outcome_rates": {"type": "object"}, "success_rate_bootstrap_95": {
+        "type": "object",
+        "required": ["instance_level", "family_level_governing", "iterations"],
+        "properties": {
+          "instance_level": {"": "#//interval"},
+          "family_level_governing": {"": "#//governing"},
+          "iterations": {"type": "integer", "minimum": 1}
+        },
+        "additionalProperties": false
+      }, "absolute_errors": {"type": "array", "items": {"type": "number", "minimum": 0}}, "graded_residuals": {"type": "array", "items": {"type": "number", "minimum": 0}}},
+      "additionalProperties": false
+    },
+    "agreement": {
+      "type": "object", "required": ["solver_i", "solver_j", "stratum", "n_jointly_completed", "n_agree", "agreement_fraction", "interpretation"],
+      "properties": {"solver_i": {"type": "string"}, "solver_j": {"type": "string"}, "stratum": {"$ref": "#/$defs/labels"}, "n_jointly_completed": {"type": "integer", "minimum": 1}, "n_agree": {"type": "integer", "minimum": 0}, "agreement_fraction": {"type": "number", "minimum": 0, "maximum": 1}, "interpretation": {"const": "consistency_not_correctness"}}, "additionalProperties": false
+    },
+    "interval": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "array", "prefixItems": [{"type": "number"}, {"type": "number"}], "items": false, "minItems": 2, "maxItems": 2}
+      ]
+    },
+    "governing": {
+      "type": "object",
+      "required": ["status", "reason", "n_families", "interval"],
+      "properties": {
+        "status": {"enum": ["ok", "insufficient_data"]},
+        "reason": {"type": ["string", "null"]},
+        "n_families": {"type": "integer", "minimum": 1},
+        "interval": {"$ref": "#/$defs/interval"}
+      },
+      "additionalProperties": false
+    },
+    "similarity": {
+      "type": "object", "required": ["solver_i", "solver_j", "n_jointly_attempted", "n_jointly_completed", "display_floor", "status", "failure_set_jaccard_status", "failure_set_jaccard", "absolute_error_spearman"],
+      "properties": {"solver_i": {"type": "string"}, "solver_j": {"type": "string"}, "n_jointly_attempted": {"type": "integer", "minimum": 0}, "n_jointly_completed": {"type": "integer", "minimum": 0}, "display_floor": {"const": 10}, "status": {"enum": ["ok", "insufficient_data"]}, "failure_set_jaccard_status": {"enum": ["ok", "insufficient_data", "no_joint_failures"]}, "failure_set_jaccard": {"type": ["number", "null"], "minimum": 0, "maximum": 1}, "absolute_error_spearman": {"type": ["number", "null"], "minimum": -1, "maximum": 1}}, "additionalProperties": false
+    }
+  }
+}
