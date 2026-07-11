@@ -1,0 +1,110 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+  "contact_info": [
+    {
+      "email": "bobqat@l3harris.com",
+      "institution": "L3Harris Technologies, Inc.",
+      "name": "QB-GSEE Benchmark Harness"
+    }
+  ],
+  "creation_timestamp": "2026-07-11T03:46:44.076200+00:00",
+  "digital_signature": null,
+  "is_resource_estimate": false,
+  "problem_instance_uuid": "d6ae9f64-235d-5876-bb8e-2a503a5d6072",
+  "solution_data": [
+    {
+      "energy": null,
+      "energy_units": "Hartree",
+      "run_time": {
+        "algorithm_run_time": {
+          "seconds": 7855.689813375473,
+          "wall_clock_start_time": "2026-07-11T01:35:47.335757+00:00",
+          "wall_clock_stop_time": "2026-07-11T03:46:43.025590+00:00"
+        },
+        "overall_time": {
+          "seconds": 7855.689813375473,
+          "wall_clock_start_time": "2026-07-11T01:35:47.335757+00:00",
+          "wall_clock_stop_time": "2026-07-11T03:46:43.025590+00:00"
+        },
+        "postprocessing_time": {
+          "seconds": 0.0
+        },
+        "preprocessing_time": {
+          "seconds": 0.0
+        }
+      },
+      "solution_details": {
+        "attempted": true,
+        "bond_dimension": null,
+        "campaign": "g31_tranche1_2026-07",
+        "discarded_weight": null,
+        "dmrg_details": {
+          "bond_dimension": null,
+          "command": [
+            "g31-run-dmrg",
+            "--fcidump",
+            "work/solver_runs/g31_diamond_addon/dmrg_diamond_2x2x2_64e051dd/input.fcidump",
+            "--result",
+            "dmrg_result.json"
+          ],
+          "discarded_weight": null,
+          "extrapolation_distance": null,
+          "extrapolation_model": null,
+          "orbital_reordering": null,
+          "result_data": {},
+          "result_json": "dmrg_result.json",
+          "returncode": 1,
+          "stderr_file": "dmrg.stderr",
+          "stdout_file": "dmrg.stdout",
+          "sweep_energies": null
+        },
+        "extrapolation_distance": null,
+        "extrapolation_model": null,
+        "harness_status": "failed",
+        "not_attempted_reason": "DMRG command exited with code 1.",
+        "orbital_reordering": null,
+        "raw_output_file": "raw_output.json",
+        "run_directory_id": "4f1c8003-b14b-49c5-be13-4ef1fdbcb593",
+        "variant": "DMRG_fixed_budget"
+      },
+      "task_uuid": "64e051dd-532e-51b3-94e1-9409438d3764"
+    }
+  ],
+  "solution_uuid": "b55619bc-5ac4-4585-99bb-9628930e62e6",
+  "solver_details": {
+    "algorithm_details": {
+      "harness_adapter": "dmrg_block2",
+      "harness_adapter_version": "0.1.0",
+      "name": "DMRG with the lowest variational energy obtained so far.",
+      "solver_config": {
+        "algorithm_label": "DMRG with the lowest variational energy obtained so far.",
+        "bond_dimensions": [],
+        "campaign": "g31_tranche1_2026-07",
+        "command_template": "g31-run-dmrg --fcidump {fcidump_abs} --result dmrg_result.json",
+        "energy_units": "Hartree",
+        "extrapolated": false,
+        "extrapolation_model": null,
+        "max_bond_dimension": null,
+        "num_threads": 40,
+        "orbital_reordering": null,
+        "result_json": "dmrg_result.json",
+        "solver_short_name": "DMRG_Niagara_cluster_lowest_energy",
+        "solver_uuid": "16537433-9f4c-4eae-a65d-787dc3b35b59",
+        "truncation_cutoff": null,
+        "variant": "DMRG_fixed_budget"
+      }
+    },
+    "classical_hardware_details": {
+      "computing_environment_name": "harness run directory",
+      "ram_available_gb": 202.0,
+      "total_num_cores": 40
+    },
+    "compute_hardware_type": "classical_computer",
+    "software_details": {
+      "block2": "block2 DMRG; production runs use the externally configured block2/dmrghandler environment.",
+      "python_version": "3.12.0"
+    },
+    "solver_short_name": "DMRG_Niagara_cluster_lowest_energy",
+    "solver_uuid": "16537433-9f4c-4eae-a65d-787dc3b35b59"
+  }
+}
