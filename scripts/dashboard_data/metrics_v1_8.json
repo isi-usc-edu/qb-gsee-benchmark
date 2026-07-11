@@ -18466,6 +18466,38 @@
         }
       },
       {
+        "agreement_fraction": 0.23076923076923078,
+        "campaign_i": "g31_tranche1_2026-07",
+        "campaign_j": "ipie_swing_2026-07",
+        "interpretation": "consistency_not_correctness",
+        "n_agree": 3,
+        "n_jointly_completed": 13,
+        "solver_i": "FCI",
+        "solver_j": "ipie_uhf_trial",
+        "stratum": {
+          "family": "small_molecules",
+          "reference_threshold_stratum": "reference_supported_threshold",
+          "size_band": "norb_le8",
+          "tier": "expanded"
+        }
+      },
+      {
+        "agreement_fraction": 0.0,
+        "campaign_i": "g31_tranche1_2026-07",
+        "campaign_j": "ipie_swing_2026-07",
+        "interpretation": "consistency_not_correctness",
+        "n_agree": 0,
+        "n_jointly_completed": 5,
+        "solver_i": "FCI",
+        "solver_j": "ipie_uhf_trial",
+        "stratum": {
+          "family": "small_molecules",
+          "reference_threshold_stratum": "reference_supported_threshold",
+          "size_band": "norb_le8",
+          "tier": "utility"
+        }
+      },
+      {
         "agreement_fraction": 0.0,
         "campaign_i": "legacy:pyscf_solutions",
         "campaign_j": "legacy:pyscf_solutions",
@@ -25455,6 +25487,54 @@
           "reference_threshold_stratum": "reference_supported_threshold",
           "size_band": "norb_ge129",
           "tier": "expanded"
+        }
+      },
+      {
+        "agreement_fraction": 1.0,
+        "campaign_i": "g31_tranche1_2026-07",
+        "campaign_j": "ipie_swing_2026-07",
+        "interpretation": "consistency_not_correctness",
+        "n_agree": 1,
+        "n_jointly_completed": 1,
+        "solver_i": "SHCI_opt",
+        "solver_j": "ipie_uhf_trial",
+        "stratum": {
+          "family": "small_molecules",
+          "reference_threshold_stratum": "reference_supported_threshold",
+          "size_band": "norb_9_16",
+          "tier": "expanded"
+        }
+      },
+      {
+        "agreement_fraction": 0.4,
+        "campaign_i": "g31_tranche1_2026-07",
+        "campaign_j": "ipie_swing_2026-07",
+        "interpretation": "consistency_not_correctness",
+        "n_agree": 2,
+        "n_jointly_completed": 5,
+        "solver_i": "SHCI_opt",
+        "solver_j": "ipie_uhf_trial",
+        "stratum": {
+          "family": "small_molecules",
+          "reference_threshold_stratum": "reference_supported_threshold",
+          "size_band": "norb_le8",
+          "tier": "expanded"
+        }
+      },
+      {
+        "agreement_fraction": 0.0,
+        "campaign_i": "g31_tranche1_2026-07",
+        "campaign_j": "ipie_swing_2026-07",
+        "interpretation": "consistency_not_correctness",
+        "n_agree": 0,
+        "n_jointly_completed": 2,
+        "solver_i": "SHCI_opt",
+        "solver_j": "ipie_uhf_trial",
+        "stratum": {
+          "family": "small_molecules",
+          "reference_threshold_stratum": "reference_supported_threshold",
+          "size_band": "norb_le8",
+          "tier": "utility"
         }
       },
       {
@@ -38793,12 +38873,12 @@
       },
       {
         "family": "small_molecules",
-        "n_completed": 1,
+        "n_completed": 2,
         "reference_grade": "exact",
         "reference_threshold_stratum": "reference_supported_threshold",
         "reference_uncertainty": 0.0,
         "size_band": "norb_le8",
-        "solver_spread": 0.0,
+        "solver_spread": 0.12924419331132442,
         "task_uuid": "062cbf0a-262c-5c75-a525-17a682f7d25f",
         "threshold": 0.00159362,
         "tier": "expanded"
@@ -38841,12 +38921,12 @@
       },
       {
         "family": "small_molecules",
-        "n_completed": 1,
+        "n_completed": 2,
         "reference_grade": "exact",
         "reference_threshold_stratum": "reference_supported_threshold",
         "reference_uncertainty": 0.0,
         "size_band": "norb_le8",
-        "solver_spread": 0.0,
+        "solver_spread": 0.12440633331687168,
         "task_uuid": "0a31c810-9581-5b29-b574-b4e3ab1e0561",
         "threshold": 0.00159362,
         "tier": "expanded"
@@ -39021,12 +39101,12 @@
       },
       {
         "family": "small_molecules",
-        "n_completed": 2,
+        "n_completed": 3,
         "reference_grade": "exact",
         "reference_threshold_stratum": "reference_supported_threshold",
         "reference_uncertainty": 0.0,
         "size_band": "norb_le8",
-        "solver_spread": 0.09736121418009702,
+        "solver_spread": 0.2557487715095732,
         "task_uuid": "1624db95-1097-54d2-a68c-375f9b786492",
         "threshold": 0.00159362,
         "tier": "expanded"
@@ -39057,12 +39137,12 @@
       },
       {
         "family": "small_molecules",
-        "n_completed": 1,
+        "n_completed": 2,
         "reference_grade": "exact",
         "reference_threshold_stratum": "reference_supported_threshold",
         "reference_uncertainty": 0.0,
         "size_band": "norb_le8",
-        "solver_spread": 0.0,
+        "solver_spread": 0.26581553562519744,
         "task_uuid": "1b924e3e-0133-543b-86b3-2753cde933d5",
         "threshold": 0.00159362,
         "tier": "utility"
@@ -39165,12 +39245,12 @@
       },
       {
         "family": "small_molecules",
-        "n_completed": 1,
+        "n_completed": 2,
         "reference_grade": "exact",
         "reference_threshold_stratum": "reference_supported_threshold",
         "reference_uncertainty": 0.0,
         "size_band": "norb_le8",
-        "solver_spread": 0.0,
+        "solver_spread": 0.15547081792349093,
         "task_uuid": "280b4b86-4352-51a7-a165-355ee9ef3b2a",
         "threshold": 0.00159362,
         "tier": "utility"
@@ -39237,12 +39317,12 @@
       },
       {
         "family": "small_molecules",
-        "n_completed": 1,
+        "n_completed": 2,
         "reference_grade": "exact",
         "reference_threshold_stratum": "reference_supported_threshold",
         "reference_uncertainty": 0.0,
         "size_band": "norb_le8",
-        "solver_spread": 0.0,
+        "solver_spread": 0.0008187162707482543,
         "task_uuid": "2d7aac5c-0c01-5ce6-be68-4d0ca198a9f6",
         "threshold": 0.00159362,
         "tier": "expanded"
@@ -39261,12 +39341,12 @@
       },
       {
         "family": "small_molecules",
-        "n_completed": 1,
+        "n_completed": 2,
         "reference_grade": "exact",
         "reference_threshold_stratum": "reference_supported_threshold",
         "reference_uncertainty": 0.0,
         "size_band": "norb_le8",
-        "solver_spread": 0.0,
+        "solver_spread": 0.2592207884121689,
         "task_uuid": "314a3c71-80a5-5e39-9448-053747494f1c",
         "threshold": 0.00159362,
         "tier": "expanded"
@@ -39597,12 +39677,12 @@
       },
       {
         "family": "small_molecules",
-        "n_completed": 2,
+        "n_completed": 3,
         "reference_grade": "exact",
         "reference_threshold_stratum": "reference_supported_threshold",
         "reference_uncertainty": 0.0,
         "size_band": "norb_le8",
-        "solver_spread": 0.09736172165568924,
+        "solver_spread": 0.2621510848872939,
         "task_uuid": "47e28da2-70f2-5512-9d41-49ad17434d34",
         "threshold": 0.00159362,
         "tier": "utility"
@@ -39705,12 +39785,12 @@
       },
       {
         "family": "small_molecules",
-        "n_completed": 1,
+        "n_completed": 2,
         "reference_grade": "exact",
         "reference_threshold_stratum": "reference_supported_threshold",
         "reference_uncertainty": 0.0,
         "size_band": "norb_le8",
-        "solver_spread": 0.0,
+        "solver_spread": 0.009997615370485047,
         "task_uuid": "4d92193b-a2aa-5726-978f-eef601ff9a21",
         "threshold": 0.00159362,
         "tier": "expanded"
@@ -39753,12 +39833,12 @@
       },
       {
         "family": "small_molecules",
-        "n_completed": 2,
+        "n_completed": 3,
         "reference_grade": "exact",
         "reference_threshold_stratum": "reference_supported_threshold",
         "reference_uncertainty": 0.0,
         "size_band": "norb_le8",
-        "solver_spread": 1.3975461055082405e-07,
+        "solver_spread": 0.022202172548817067,
         "task_uuid": "5317a912-eb4a-588d-92ab-3cab5e083e51",
         "threshold": 0.00159362,
         "tier": "expanded"
@@ -39981,12 +40061,12 @@
       },
       {
         "family": "small_molecules",
-        "n_completed": 2,
+        "n_completed": 3,
         "reference_grade": "exact",
         "reference_threshold_stratum": "reference_supported_threshold",
         "reference_uncertainty": 0.0,
         "size_band": "norb_le8",
-        "solver_spread": 3.872436593610473e-09,
+        "solver_spread": 2.343993442632808e-05,
         "task_uuid": "659c2dd8-2b6c-518c-96d2-175564ba0e87",
         "threshold": 0.00159362,
         "tier": "expanded"
@@ -40929,12 +41009,12 @@
       },
       {
         "family": "small_molecules",
-        "n_completed": 2,
+        "n_completed": 3,
         "reference_grade": "exact",
         "reference_threshold_stratum": "reference_supported_threshold",
         "reference_uncertainty": 0.0,
         "size_band": "norb_le8",
-        "solver_spread": 7.151764069845967e-08,
+        "solver_spread": 0.001012640928795605,
         "task_uuid": "acbef708-c970-5ca2-b296-ff7d5e875833",
         "threshold": 0.00159362,
         "tier": "expanded"
@@ -40977,12 +41057,12 @@
       },
       {
         "family": "small_molecules",
-        "n_completed": 1,
+        "n_completed": 2,
         "reference_grade": "exact",
         "reference_threshold_stratum": "reference_supported_threshold",
         "reference_uncertainty": 0.0,
         "size_band": "norb_le8",
-        "solver_spread": 0.0,
+        "solver_spread": 0.2584859103282575,
         "task_uuid": "ae429d44-6cf1-5deb-bc6e-ae485f3ed705",
         "threshold": 0.00159362,
         "tier": "utility"
@@ -41037,12 +41117,12 @@
       },
       {
         "family": "small_molecules",
-        "n_completed": 2,
+        "n_completed": 3,
         "reference_grade": "exact",
         "reference_threshold_stratum": "reference_supported_threshold",
         "reference_uncertainty": 0.0,
         "size_band": "norb_le8",
-        "solver_spread": 1.2794334036669852e-08,
+        "solver_spread": 0.2579980252060543,
         "task_uuid": "b182fafe-58d4-58fc-9386-aa1cd4f7c2c9",
         "threshold": 0.00159362,
         "tier": "utility"
@@ -41073,12 +41153,12 @@
       },
       {
         "family": "small_molecules",
-        "n_completed": 1,
+        "n_completed": 2,
         "reference_grade": "one_nearly_exact",
         "reference_threshold_stratum": "reference_supported_threshold",
         "reference_uncertainty": 1e-10,
         "size_band": "norb_9_16",
-        "solver_spread": 0.0,
+        "solver_spread": 0.0010064337878432639,
         "task_uuid": "b4fb73b8-4452-5072-99b6-eb9f61523499",
         "threshold": 0.00159362,
         "tier": "expanded"
@@ -41145,12 +41225,12 @@
       },
       {
         "family": "small_molecules",
-        "n_completed": 1,
+        "n_completed": 2,
         "reference_grade": "exact",
         "reference_threshold_stratum": "reference_supported_threshold",
         "reference_uncertainty": 0.0,
         "size_band": "norb_le8",
-        "solver_spread": 0.0,
+        "solver_spread": 0.022655941227069043,
         "task_uuid": "b892fa22-87be-569e-a60f-14dc67c9cc25",
         "threshold": 0.00159362,
         "tier": "expanded"
@@ -41325,12 +41405,12 @@
       },
       {
         "family": "small_molecules",
-        "n_completed": 2,
+        "n_completed": 3,
         "reference_grade": "exact",
         "reference_threshold_stratum": "reference_supported_threshold",
         "reference_uncertainty": 0.0,
         "size_band": "norb_le8",
-        "solver_spread": 3.535434167645235e-09,
+        "solver_spread": 0.023704161747671648,
         "task_uuid": "c8826dd1-803c-5250-b7e6-7139a3543abf",
         "threshold": 0.00159362,
         "tier": "expanded"
@@ -41397,12 +41477,12 @@
       },
       {
         "family": "small_molecules",
-        "n_completed": 1,
+        "n_completed": 2,
         "reference_grade": "exact",
         "reference_threshold_stratum": "reference_supported_threshold",
         "reference_uncertainty": 0.0,
         "size_band": "norb_le8",
-        "solver_spread": 0.0,
+        "solver_spread": 0.25294548553716334,
         "task_uuid": "cbb3f650-090f-5fa9-9f9e-365fb814c6d6",
         "threshold": 0.00159362,
         "tier": "expanded"
@@ -41502,6 +41582,18 @@
         "task_uuid": "d3ecd428-ee03-4d8b-aa14-af4d935781ed",
         "threshold": 0.00159362,
         "tier": "utility"
+      },
+      {
+        "family": "small_molecules",
+        "n_completed": 1,
+        "reference_grade": "one_nearly_exact",
+        "reference_threshold_stratum": "reference_supported_threshold",
+        "reference_uncertainty": 1e-10,
+        "size_band": "norb_9_16",
+        "solver_spread": 0.0,
+        "task_uuid": "d42dc028-303e-5b43-a6d0-146bdb908fc8",
+        "threshold": 0.00159362,
+        "tier": "expanded"
       },
       {
         "family": "lattice_models",
@@ -41793,12 +41885,12 @@
       },
       {
         "family": "small_molecules",
-        "n_completed": 1,
+        "n_completed": 2,
         "reference_grade": "exact",
         "reference_threshold_stratum": "reference_supported_threshold",
         "reference_uncertainty": 0.0,
         "size_band": "norb_le8",
-        "solver_spread": 0.0,
+        "solver_spread": 0.13396273246018864,
         "task_uuid": "ebe6a343-f7fd-5576-8c9d-b2e096e624a4",
         "threshold": 0.00159362,
         "tier": "expanded"
@@ -42040,7 +42132,8 @@
       "SHCI_var_2e-4": 228,
       "SHCI_var_2e-5": 228,
       "SHCI_var_5e-5": 228,
-      "TrimCI_default": 1
+      "TrimCI_default": 1,
+      "ipie_uhf_trial": 36
     },
     "attempted_by_solver_campaign": {
       "CCSD(T)@legacy:pyscf_solutions": 217,
@@ -42061,16 +42154,17 @@
       "SHCI_var_2e-4@legacy:SHCI_sweep": 228,
       "SHCI_var_2e-5@legacy:SHCI_sweep": 228,
       "SHCI_var_5e-5@legacy:SHCI_sweep": 228,
-      "TrimCI_default@legacy:TrimCI_default": 1
+      "TrimCI_default@legacy:TrimCI_default": 1,
+      "ipie_uhf_trial@ipie_swing_2026-07": 36
     },
     "definition": {
       "definition": "A record is coverage-only only when harness_status=not_attempted, attempted=false, and no runtime, exit, launch, traceback, or execution-bearing reason is present. Contradictory records are data errors and hard-fail ingest.",
       "spec_section": "METRICS_SPEC_v1.md section 4 (v1.8 rule 1)"
     },
     "identity": "all_committed_records = attempted_records + not_attempted_records",
-    "n_attempted_records": 3500,
+    "n_attempted_records": 3536,
     "n_not_attempted_records": 55,
-    "n_records_all_committed": 3555,
+    "n_records_all_committed": 3591,
     "not_attempted": [
       {
         "campaign": "g31_tranche1_2026-07",
@@ -42769,16 +42863,17 @@
         "excluded_invalid_reference_grade": 1111,
         "excluded_test_tier": 61,
         "not_attempted": 55,
-        "scored": 2328
+        "scored": 2364
       },
       "identity": "all committed records = scored + not_attempted + excluded categories",
-      "n_attempted_records": 3500,
+      "n_attempted_records": 3536,
       "n_not_attempted_records": 55,
-      "n_records_all_committed": 3555
+      "n_records_all_committed": 3591
     },
     "campaign_identity": {
       "campaign_record_counts": {
         "g31_tranche1_2026-07": 166,
+        "ipie_swing_2026-07": 36,
         "legacy:DMRG_Niagara_cluster_lowest_energy": 228,
         "legacy:SHCI": 226,
         "legacy:SHCI_sweep": 1824,
@@ -42786,7 +42881,7 @@
         "legacy:pyscf_solutions": 1110
       },
       "campaign_source_counts": {
-        "explicit": 166,
+        "explicit": 202,
         "legacy_inferred": 3389
       },
       "campaigns_by_solver": {
@@ -42844,14 +42939,15 @@
           "legacy:TrimCI_default"
         ],
         "ipie_uhf_trial": [
-          "g31_tranche1_2026-07"
+          "g31_tranche1_2026-07",
+          "ipie_swing_2026-07"
         ]
       },
       "definition": {
         "definition": "Every normalized solver record carries a campaign. Explicit G-39 campaign metadata is retained; pre-campaign records receive the deterministic label legacy:<solution-file-family>. Solver statistics, agreement, similarity, and ladders never pool across campaigns.",
         "spec_section": "METRICS_SPEC_v1.md v1.8 rule 2"
       },
-      "n_solver_campaigns": 20
+      "n_solver_campaigns": 21
     },
     "legacy_mapping": {
       "identity": "pre_mapping_unjoinable = joined_via_legacy_mapping + still_unjoinable",
@@ -42994,16 +43090,16 @@
     }
   },
   "headline_counts": {
-    "n_attempts_all_committed": 3500,
+    "n_attempts_all_committed": 3536,
     "n_not_attempted_records": 55,
-    "n_public_attempts": 3439,
+    "n_public_attempts": 3475,
     "n_public_tasks_covered": 279,
-    "n_records_all_committed": 3555,
-    "n_scored_attempts": 2328,
-    "n_scored_solver_campaigns": 17,
-    "n_scored_solvers": 16,
+    "n_records_all_committed": 3591,
+    "n_scored_attempts": 2364,
+    "n_scored_solver_campaigns": 18,
+    "n_scored_solvers": 17,
     "n_scored_tasks": 202,
-    "n_solver_campaigns_found": 20,
+    "n_solver_campaigns_found": 21,
     "n_solvers_found": 18,
     "n_tasks_covered_all_committed": 283,
     "solver_campaigns_found": [
@@ -43086,6 +43182,10 @@
       {
         "campaign": "g31_tranche1_2026-07",
         "solver": "ipie_uhf_trial"
+      },
+      {
+        "campaign": "ipie_swing_2026-07",
+        "solver": "ipie_uhf_trial"
       }
     ],
     "solvers_found": [
@@ -43134,8 +43234,8 @@
       ]
     },
     "task_class_counts": {
-      "contested": 167,
-      "solved_by_all": 25,
+      "contested": 175,
+      "solved_by_all": 17,
       "solved_by_none": 10
     }
   },
@@ -44393,14 +44493,14 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 1,
-        "miss": 0,
+        "miss": 1,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -44441,14 +44541,14 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 1,
-        "miss": 0,
+        "miss": 1,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -44617,14 +44717,14 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 0,
-        "miss": 1,
+        "miss": 2,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -44665,14 +44765,14 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 1,
-        "miss": 0,
+        "miss": 1,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -44761,10 +44861,10 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 1,
-        "miss": 1,
+        "miss": 2,
         "success": 0
       },
       "panel_composition_dependent": true,
@@ -44857,14 +44957,14 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 1,
         "miss": 0,
-        "success": 1
+        "success": 2
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.6666666666666666,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -44889,14 +44989,14 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 1,
-        "miss": 0,
+        "miss": 1,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -44969,14 +45069,14 @@
     },
     {
       "family": "lattice_models",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
-        "indeterminate": 1,
+        "indeterminate": 2,
         "miss": 0,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -45017,9 +45117,9 @@
     },
     {
       "family": "orbital_representation_pairs",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
-        "indeterminate": 1,
+        "indeterminate": 2,
         "miss": 1,
         "success": 0
       },
@@ -45193,14 +45293,14 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 0,
-        "miss": 1,
+        "miss": 2,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -45321,14 +45421,14 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 1,
-        "miss": 0,
+        "miss": 1,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -45353,17 +45453,17 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 0,
-        "miss": 0,
+        "miss": 1,
         "success": 2
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 1.0,
+      "panel_success_rate": 0.6666666666666666,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
-      "task_class": "solved_by_all",
+      "task_class": "contested",
       "task_uuid": "5317a912-eb4a-588d-92ab-3cab5e083e51",
       "tier": "expanded"
     },
@@ -45577,11 +45677,11 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 0,
         "miss": 0,
-        "success": 2
+        "success": 3
       },
       "panel_composition_dependent": true,
       "panel_success_rate": 1.0,
@@ -45625,14 +45725,14 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
-        "indeterminate": 1,
+        "indeterminate": 2,
         "miss": 0,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -45657,9 +45757,9 @@
     },
     {
       "family": "orbital_representation_pairs",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
-        "indeterminate": 1,
+        "indeterminate": 2,
         "miss": 1,
         "success": 0
       },
@@ -45817,30 +45917,30 @@
     },
     {
       "family": "lattice_models",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
-        "indeterminate": 0,
+        "indeterminate": 1,
         "miss": 0,
         "success": 2
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 1.0,
+      "panel_success_rate": 0.6666666666666666,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_9_16",
-      "task_class": "solved_by_all",
+      "task_class": "contested",
       "task_uuid": "7964bbe9-1ec7-55ef-b7b4-08b1d08445d8",
       "tier": "expanded"
     },
     {
       "family": "lattice_models",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
-        "indeterminate": 1,
+        "indeterminate": 2,
         "miss": 0,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -45881,14 +45981,14 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
-        "indeterminate": 1,
+        "indeterminate": 2,
         "miss": 0,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -46281,14 +46381,14 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
-        "indeterminate": 1,
+        "indeterminate": 2,
         "miss": 0,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -46393,14 +46493,14 @@
     },
     {
       "family": "lattice_models",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
-        "indeterminate": 1,
+        "indeterminate": 2,
         "miss": 0,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -46441,11 +46541,11 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 0,
         "miss": 0,
-        "success": 2
+        "success": 3
       },
       "panel_composition_dependent": true,
       "panel_success_rate": 1.0,
@@ -46473,14 +46573,14 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 1,
-        "miss": 0,
+        "miss": 1,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -46553,17 +46653,17 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 0,
-        "miss": 0,
+        "miss": 1,
         "success": 2
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 1.0,
+      "panel_success_rate": 0.6666666666666666,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
-      "task_class": "solved_by_all",
+      "task_class": "contested",
       "task_uuid": "b182fafe-58d4-58fc-9386-aa1cd4f7c2c9",
       "tier": "utility"
     },
@@ -46601,14 +46701,14 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 1,
         "miss": 0,
-        "success": 1
+        "success": 2
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.6666666666666666,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_9_16",
       "task_class": "contested",
@@ -46681,14 +46781,14 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 1,
-        "miss": 0,
+        "miss": 1,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -46857,17 +46957,17 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 0,
-        "miss": 0,
+        "miss": 1,
         "success": 2
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 1.0,
+      "panel_success_rate": 0.6666666666666666,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
-      "task_class": "solved_by_all",
+      "task_class": "contested",
       "task_uuid": "c8826dd1-803c-5250-b7e6-7139a3543abf",
       "tier": "expanded"
     },
@@ -46937,30 +47037,30 @@
     },
     {
       "family": "orbital_representation_pairs",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
-        "indeterminate": 0,
+        "indeterminate": 1,
         "miss": 0,
         "success": 2
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 1.0,
+      "panel_success_rate": 0.6666666666666666,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_9_16",
-      "task_class": "solved_by_all",
+      "task_class": "contested",
       "task_uuid": "cb5392c3-fd91-50f3-be40-149559ae7b96",
       "tier": "expanded"
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 1,
-        "miss": 0,
+        "miss": 1,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -47033,10 +47133,10 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 2,
-        "miss": 0,
+        "miss": 1,
         "success": 0
       },
       "panel_composition_dependent": true,
@@ -47193,17 +47293,17 @@
     },
     {
       "family": "orbital_representation_pairs",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
-        "indeterminate": 0,
+        "indeterminate": 1,
         "miss": 0,
         "success": 2
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 1.0,
+      "panel_success_rate": 0.6666666666666666,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_9_16",
-      "task_class": "solved_by_all",
+      "task_class": "contested",
       "task_uuid": "dd80e2eb-9220-53ee-bac4-a087306dc309",
       "tier": "expanded"
     },
@@ -47241,30 +47341,30 @@
     },
     {
       "family": "lattice_models",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
-        "indeterminate": 0,
+        "indeterminate": 1,
         "miss": 0,
         "success": 2
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 1.0,
+      "panel_success_rate": 0.6666666666666666,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_9_16",
-      "task_class": "solved_by_all",
+      "task_class": "contested",
       "task_uuid": "deb04f20-3157-5b14-88b7-7a7a4ddc5c32",
       "tier": "expanded"
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
-        "indeterminate": 1,
+        "indeterminate": 2,
         "miss": 0,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -47289,17 +47389,17 @@
     },
     {
       "family": "lattice_models",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
-        "indeterminate": 0,
+        "indeterminate": 1,
         "miss": 0,
         "success": 2
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 1.0,
+      "panel_success_rate": 0.6666666666666666,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_9_16",
-      "task_class": "solved_by_all",
+      "task_class": "contested",
       "task_uuid": "e239e95a-e89e-51ce-aa35-4c95ac6df9f2",
       "tier": "expanded"
     },
@@ -47353,14 +47453,14 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
         "indeterminate": 1,
-        "miss": 0,
+        "miss": 1,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -47401,14 +47501,14 @@
     },
     {
       "family": "small_molecules",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
-        "indeterminate": 1,
+        "indeterminate": 2,
         "miss": 0,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -47481,14 +47581,14 @@
     },
     {
       "family": "lattice_models",
-      "n_attempts": 2,
+      "n_attempts": 3,
       "outcome_counts": {
-        "indeterminate": 1,
+        "indeterminate": 2,
         "miss": 0,
         "success": 1
       },
       "panel_composition_dependent": true,
-      "panel_success_rate": 0.5,
+      "panel_success_rate": 0.3333333333333333,
       "reference_threshold_stratum": "reference_supported_threshold",
       "size_band": "norb_le8",
       "task_class": "contested",
@@ -91792,6 +91892,690 @@
       "threshold": 0.00159362,
       "threshold_dominated_by_reference": false,
       "tier": "expanded"
+    },
+    {
+      "absolute_error": 0.12924419331132442,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -1.7860724472026792,
+      "family": "small_molecules",
+      "graded_residual": 81.10101110134437,
+      "metric_status": "ok",
+      "outcome": "miss",
+      "reference_energy": -1.9153166405140036,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "062cbf0a-262c-5c75-a525-17a682f7d25f",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": 0.12440633331687123,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -1.7913210429597666,
+      "family": "small_molecules",
+      "graded_residual": 78.0652434814267,
+      "metric_status": "ok",
+      "outcome": "miss",
+      "reference_energy": -1.9157273762766378,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "0a31c810-9581-5b29-b574-b4e3ab1e0561",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": 0.2557487746436582,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -3.5748844228621044,
+      "family": "small_molecules",
+      "graded_residual": 160.48290975493416,
+      "metric_status": "ok",
+      "outcome": "miss",
+      "reference_energy": -3.8306331975057626,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "1624db95-1097-54d2-a68c-375f9b786492",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": 0.26581553567170424,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -3.56480375124898,
+      "family": "small_molecules",
+      "graded_residual": 166.79982409338754,
+      "metric_status": "ok",
+      "outcome": "miss",
+      "reference_energy": -3.830619286920684,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "1b924e3e-0133-543b-86b3-2753cde933d5",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "utility"
+    },
+    {
+      "absolute_error": 0.2528322167617931,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -3.5778012184594665,
+      "family": "small_molecules",
+      "graded_residual": 158.6527633700588,
+      "metric_status": "ok",
+      "outcome": "miss",
+      "reference_energy": -3.8306334352212597,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "280b4b86-4352-51a7-a165-355ee9ef3b2a",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "utility"
+    },
+    {
+      "absolute_error": 0.000818716270751807,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -4.582889808460473,
+      "family": "small_molecules",
+      "graded_residual": 0.5137462323212604,
+      "metric_status": "ok",
+      "outcome": "success",
+      "reference_energy": -4.583708524731224,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "2d7aac5c-0c01-5ce6-be68-4d0ca198a9f6",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": 0.2592207885022053,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -3.571405855380855,
+      "family": "small_molecules",
+      "graded_residual": 162.66160596767443,
+      "metric_status": "ok",
+      "outcome": "miss",
+      "reference_energy": -3.8306266438830603,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "314a3c71-80a5-5e39-9448-053747494f1c",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "campaign": "ipie_swing_2026-07",
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -11.40945684510061,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "362af02a-adc2-5519-a77a-cda24c736973",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "campaign": "ipie_swing_2026-07",
+      "energy": null,
+      "family": "orbital_representation_pairs",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -2756.492612296278,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "3d343ddb-a898-5c0e-afc9-42b62d588c5e",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": 0.26215111455127627,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -3.568480029786314,
+      "family": "small_molecules",
+      "graded_residual": 164.50039190727793,
+      "metric_status": "ok",
+      "outcome": "miss",
+      "reference_energy": -3.83063114433759,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "47e28da2-70f2-5512-9d41-49ad17434d34",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "utility"
+    },
+    {
+      "absolute_error": 0.009997615370485047,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -2.1185934924082597,
+      "family": "small_molecules",
+      "graded_residual": 6.273525288641612,
+      "metric_status": "ok",
+      "outcome": "miss",
+      "reference_energy": -2.1285911077787447,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "4d92193b-a2aa-5726-978f-eef601ff9a21",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": 0.02220203279452093,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -4.234970841655974,
+      "family": "small_molecules",
+      "graded_residual": 13.931823643353454,
+      "metric_status": "ok",
+      "outcome": "miss",
+      "reference_energy": -4.257172874450495,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "5317a912-eb4a-588d-92ab-3cab5e083e51",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": 2.34360619844054e-05,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -4.583682636392126,
+      "family": "small_molecules",
+      "graded_residual": 0.014706179631534116,
+      "metric_status": "ok",
+      "outcome": "success",
+      "reference_energy": -4.5837060724541105,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "659c2dd8-2b6c-518c-96d2-175564ba0e87",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "campaign": "ipie_swing_2026-07",
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -2.128588251741636,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "6adb63da-6eda-551e-96b8-d6163fe40187",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "campaign": "ipie_swing_2026-07",
+      "energy": null,
+      "family": "orbital_representation_pairs",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -2756.492612296278,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "6cd8382a-9a9a-5c43-83b1-616c9f301ab1",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "campaign": "ipie_swing_2026-07",
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -18.638415739962326,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "7964bbe9-1ec7-55ef-b7b4-08b1d08445d8",
+      "threshold": 0.01,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "campaign": "ipie_swing_2026-07",
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -15.668706178872947,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "7b1ea320-6c12-5012-922f-fa51d99eeaef",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "campaign": "ipie_swing_2026-07",
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -2.2918371038653507,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "7cf226f5-ce3d-5761-8473-5153fb290151",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "campaign": "ipie_swing_2026-07",
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -2.2918535537183407,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "a3c0d3bb-eeca-50de-913f-afdc37863574",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "campaign": "ipie_swing_2026-07",
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -9.601158293375132,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "aa9cf2d8-ef23-5185-96bd-d179c00928dc",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": 0.0010126409289110683,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -4.582643360155184,
+      "family": "small_molecules",
+      "graded_residual": 0.6354343751402896,
+      "metric_status": "ok",
+      "outcome": "success",
+      "reference_energy": -4.583656001084095,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "acbef708-c970-5ca2-b296-ff7d5e875833",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": 0.25848591041829394,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -3.5721407334647663,
+      "family": "small_molecules",
+      "graded_residual": 162.20046837909535,
+      "metric_status": "ok",
+      "outcome": "miss",
+      "reference_energy": -3.8306266438830603,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "ae429d44-6cf1-5deb-bc6e-ae485f3ed705",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "utility"
+    },
+    {
+      "absolute_error": 0.2579980124699448,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -3.57262739227635,
+      "family": "small_molecules",
+      "graded_residual": 161.89431136026457,
+      "metric_status": "ok",
+      "outcome": "miss",
+      "reference_energy": -3.8306254047462946,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "b182fafe-58d4-58fc-9386-aa1cd4f7c2c9",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "utility"
+    },
+    {
+      "absolute_error": 0.0010064381304193404,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -9.166404640851312,
+      "family": "small_molecules",
+      "graded_residual": 0.6315421056584006,
+      "metric_status": "ok",
+      "outcome": "success",
+      "reference_energy": -9.167411078981731,
+      "reference_grade": "one_nearly_exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 1e-10,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "b4fb73b8-4452-5072-99b6-eb9f61523499",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": 0.02265594123179948,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -4.234211410998188,
+      "family": "small_molecules",
+      "graded_residual": 14.216652170404162,
+      "metric_status": "ok",
+      "outcome": "miss",
+      "reference_energy": -4.256867352229987,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "b892fa22-87be-569e-a60f-14dc67c9cc25",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": 0.023704158212365378,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -4.233477657079708,
+      "family": "small_molecules",
+      "graded_residual": 14.874410594975828,
+      "metric_status": "ok",
+      "outcome": "miss",
+      "reference_energy": -4.257181815292073,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "c8826dd1-803c-5250-b7e6-7139a3543abf",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "campaign": "ipie_swing_2026-07",
+      "energy": null,
+      "family": "orbital_representation_pairs",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -5.4243853763325,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "cb5392c3-fd91-50f3-be40-149559ae7b96",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": 0.25309731587119044,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -3.579412505178596,
+      "family": "small_molecules",
+      "graded_residual": 158.81911363511404,
+      "metric_status": "ok",
+      "outcome": "miss",
+      "reference_energy": -3.8325098210497863,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "cbb3f650-090f-5fa9-9f9e-365fb814c6d6",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": 0.5232131635673376,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -7.138037790266146,
+      "family": "small_molecules",
+      "graded_residual": 328.31739283350964,
+      "metric_status": "ok",
+      "outcome": "miss",
+      "reference_energy": -7.661250953833483,
+      "reference_grade": "one_nearly_exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 1e-10,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "d42dc028-303e-5b43-a6d0-146bdb908fc8",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "campaign": "ipie_swing_2026-07",
+      "energy": null,
+      "family": "orbital_representation_pairs",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -5.4243853763325145,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "dd80e2eb-9220-53ee-bac4-a087306dc309",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "campaign": "ipie_swing_2026-07",
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -25.834322635772565,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "deb04f20-3157-5b14-88b7-7a7a4ddc5c32",
+      "threshold": 0.01,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "campaign": "ipie_swing_2026-07",
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -2.1284870529697235,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "def110fd-6099-5589-813c-e238dd5259c9",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "campaign": "ipie_swing_2026-07",
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -15.614407160578928,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "e239e95a-e89e-51ce-aa35-4c95ac6df9f2",
+      "threshold": 0.01,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": 0.13396273246018864,
+      "campaign": "ipie_swing_2026-07",
+      "energy": -1.781351747472956,
+      "family": "small_molecules",
+      "graded_residual": 84.06190463233935,
+      "metric_status": "ok",
+      "outcome": "miss",
+      "reference_energy": -1.9153144799331447,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "ebe6a343-f7fd-5576-8c9d-b2e096e624a4",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "campaign": "ipie_swing_2026-07",
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -2.291854330826169,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "f2f2b5aa-f39e-547f-a7e5-6840ac958d49",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "campaign": "ipie_swing_2026-07",
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -26.04813088609147,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "f7b1aa32-6223-5044-a91c-d0f095ca713c",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
     }
   ],
   "similarity": [
@@ -92004,6 +92788,19 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "campaign_i": "legacy:pyscf_solutions",
+      "campaign_j": "ipie_swing_2026-07",
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "CCSD",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.9169304046606833,
       "campaign_i": "legacy:pyscf_solutions",
       "campaign_j": "legacy:pyscf_solutions",
@@ -92199,6 +92996,19 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "campaign_i": "legacy:pyscf_solutions",
+      "campaign_j": "ipie_swing_2026-07",
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "CCSD(T)",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": -0.07819336114638128,
       "campaign_i": "legacy:pyscf_solutions",
       "campaign_j": "legacy:DMRG_Niagara_cluster_lowest_energy",
@@ -92382,6 +93192,19 @@
     },
     {
       "absolute_error_spearman": null,
+      "campaign_i": "legacy:pyscf_solutions",
+      "campaign_j": "ipie_swing_2026-07",
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "CISD",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
+      "absolute_error_spearman": null,
       "campaign_i": "legacy:DMRG_Niagara_cluster_lowest_energy",
       "campaign_j": "g31_tranche1_2026-07",
       "display_floor": 10,
@@ -92551,6 +93374,19 @@
     },
     {
       "absolute_error_spearman": null,
+      "campaign_i": "legacy:DMRG_Niagara_cluster_lowest_energy",
+      "campaign_j": "ipie_swing_2026-07",
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "DMRG_Niagara_cluster_lowest_energy",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
+      "absolute_error_spearman": null,
       "campaign_i": "g31_tranche1_2026-07",
       "campaign_j": "legacy:pyscf_solutions",
       "display_floor": 10,
@@ -92706,6 +93542,19 @@
       "status": "insufficient_data"
     },
     {
+      "absolute_error_spearman": 0.6559773626339456,
+      "campaign_i": "g31_tranche1_2026-07",
+      "campaign_j": "ipie_swing_2026-07",
+      "display_floor": 10,
+      "failure_set_jaccard": 0.18181818181818182,
+      "failure_set_jaccard_status": "ok",
+      "n_jointly_attempted": 36,
+      "n_jointly_completed": 18,
+      "solver_i": "FCI",
+      "solver_j": "ipie_uhf_trial",
+      "status": "ok"
+    },
+    {
       "absolute_error_spearman": 0.7845545776175373,
       "campaign_i": "legacy:pyscf_solutions",
       "campaign_j": "legacy:pyscf_solutions",
@@ -92851,6 +93700,19 @@
     {
       "absolute_error_spearman": null,
       "campaign_i": "legacy:pyscf_solutions",
+      "campaign_j": "ipie_swing_2026-07",
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "HF",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
+      "absolute_error_spearman": null,
+      "campaign_i": "legacy:pyscf_solutions",
       "campaign_j": "g31_tranche1_2026-07",
       "display_floor": 10,
       "failure_set_jaccard": null,
@@ -92980,6 +93842,19 @@
     },
     {
       "absolute_error_spearman": null,
+      "campaign_i": "legacy:pyscf_solutions",
+      "campaign_j": "ipie_swing_2026-07",
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "MP2",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
+      "absolute_error_spearman": null,
       "campaign_i": "g31_tranche1_2026-07",
       "campaign_j": "legacy:SHCI",
       "display_floor": 10,
@@ -93096,6 +93971,19 @@
       "status": "insufficient_data"
     },
     {
+      "absolute_error_spearman": 0.023809523809523808,
+      "campaign_i": "g31_tranche1_2026-07",
+      "campaign_j": "ipie_swing_2026-07",
+      "display_floor": 10,
+      "failure_set_jaccard": 0.6666666666666666,
+      "failure_set_jaccard_status": "ok",
+      "n_jointly_attempted": 36,
+      "n_jointly_completed": 8,
+      "solver_i": "SHCI_opt",
+      "solver_j": "ipie_uhf_trial",
+      "status": "ok"
+    },
+    {
       "absolute_error_spearman": 0.5255712597261893,
       "campaign_i": "legacy:SHCI",
       "campaign_j": "legacy:SHCI_sweep",
@@ -93200,6 +94088,19 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "campaign_i": "legacy:SHCI",
+      "campaign_j": "ipie_swing_2026-07",
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "SHCI_opt",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.6987384681046653,
       "campaign_i": "legacy:SHCI_sweep",
       "campaign_j": "legacy:SHCI_sweep",
@@ -93291,6 +94192,19 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "campaign_i": "legacy:SHCI_sweep",
+      "campaign_j": "ipie_swing_2026-07",
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "SHCI_pt_1e-4",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.3280133112317709,
       "campaign_i": "legacy:SHCI_sweep",
       "campaign_j": "legacy:SHCI_sweep",
@@ -93369,6 +94283,19 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "campaign_i": "legacy:SHCI_sweep",
+      "campaign_j": "ipie_swing_2026-07",
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "SHCI_pt_2e-4",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.8892477016540546,
       "campaign_i": "legacy:SHCI_sweep",
       "campaign_j": "legacy:SHCI_sweep",
@@ -93434,6 +94361,19 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "campaign_i": "legacy:SHCI_sweep",
+      "campaign_j": "ipie_swing_2026-07",
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "SHCI_pt_2e-5",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.5649890016087199,
       "campaign_i": "legacy:SHCI_sweep",
       "campaign_j": "legacy:SHCI_sweep",
@@ -93486,6 +94426,19 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "campaign_i": "legacy:SHCI_sweep",
+      "campaign_j": "ipie_swing_2026-07",
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "SHCI_pt_5e-5",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.9767281959062781,
       "campaign_i": "legacy:SHCI_sweep",
       "campaign_j": "legacy:SHCI_sweep",
@@ -93525,6 +94478,19 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "campaign_i": "legacy:SHCI_sweep",
+      "campaign_j": "ipie_swing_2026-07",
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "SHCI_var_1e-4",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.7746638003335486,
       "campaign_i": "legacy:SHCI_sweep",
       "campaign_j": "legacy:SHCI_sweep",
@@ -93551,6 +94517,19 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "campaign_i": "legacy:SHCI_sweep",
+      "campaign_j": "ipie_swing_2026-07",
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "SHCI_var_2e-4",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.9158300637212845,
       "campaign_i": "legacy:SHCI_sweep",
       "campaign_j": "legacy:SHCI_sweep",
@@ -93562,6 +94541,32 @@
       "solver_i": "SHCI_var_2e-5",
       "solver_j": "SHCI_var_5e-5",
       "status": "ok"
+    },
+    {
+      "absolute_error_spearman": null,
+      "campaign_i": "legacy:SHCI_sweep",
+      "campaign_j": "ipie_swing_2026-07",
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "SHCI_var_2e-5",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
+      "absolute_error_spearman": null,
+      "campaign_i": "legacy:SHCI_sweep",
+      "campaign_j": "ipie_swing_2026-07",
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "SHCI_var_5e-5",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
     }
   ],
   "stratified_aggregation": [
@@ -128360,6 +129365,662 @@
         "instance_level": [
           0.5454545454545454,
           1.0
+        ],
+        "iterations": 1000
+      }
+    },
+    {
+      "absolute_errors": [],
+      "campaign": "ipie_swing_2026-07",
+      "graded_residuals": [],
+      "n_attempts": 3,
+      "n_families": 1,
+      "outcome_counts": {
+        "indeterminate": 3,
+        "miss": 0,
+        "success": 0
+      },
+      "outcome_rates": {
+        "indeterminate": 1.0,
+        "miss": 0.0,
+        "success": 0.0
+      },
+      "solver": "ipie_uhf_trial",
+      "stratum": {
+        "family": "lattice_models",
+        "reference_threshold_stratum": "reference_supported_threshold",
+        "size_band": "norb_9_16",
+        "tier": "expanded"
+      },
+      "stratum_scope": "full_cross",
+      "success_rate_bootstrap_95": {
+        "family_level_governing": {
+          "annotation": null,
+          "interval": null,
+          "n_families": 1,
+          "reason": "fewer_than_two_families",
+          "status": "insufficient_data"
+        },
+        "instance_level": [
+          0.0,
+          0.0
+        ],
+        "iterations": 1000
+      }
+    },
+    {
+      "absolute_errors": [],
+      "campaign": "ipie_swing_2026-07",
+      "graded_residuals": [],
+      "n_attempts": 4,
+      "n_families": 1,
+      "outcome_counts": {
+        "indeterminate": 4,
+        "miss": 0,
+        "success": 0
+      },
+      "outcome_rates": {
+        "indeterminate": 1.0,
+        "miss": 0.0,
+        "success": 0.0
+      },
+      "solver": "ipie_uhf_trial",
+      "stratum": {
+        "family": "lattice_models",
+        "reference_threshold_stratum": "reference_supported_threshold",
+        "size_band": "norb_le8",
+        "tier": "expanded"
+      },
+      "stratum_scope": "full_cross",
+      "success_rate_bootstrap_95": {
+        "family_level_governing": {
+          "annotation": null,
+          "interval": null,
+          "n_families": 1,
+          "reason": "fewer_than_two_families",
+          "status": "insufficient_data"
+        },
+        "instance_level": [
+          0.0,
+          0.0
+        ],
+        "iterations": 1000
+      }
+    },
+    {
+      "absolute_errors": [],
+      "campaign": "ipie_swing_2026-07",
+      "graded_residuals": [],
+      "n_attempts": 2,
+      "n_families": 1,
+      "outcome_counts": {
+        "indeterminate": 2,
+        "miss": 0,
+        "success": 0
+      },
+      "outcome_rates": {
+        "indeterminate": 1.0,
+        "miss": 0.0,
+        "success": 0.0
+      },
+      "solver": "ipie_uhf_trial",
+      "stratum": {
+        "family": "orbital_representation_pairs",
+        "reference_threshold_stratum": "reference_supported_threshold",
+        "size_band": "norb_9_16",
+        "tier": "expanded"
+      },
+      "stratum_scope": "full_cross",
+      "success_rate_bootstrap_95": {
+        "family_level_governing": {
+          "annotation": null,
+          "interval": null,
+          "n_families": 1,
+          "reason": "fewer_than_two_families",
+          "status": "insufficient_data"
+        },
+        "instance_level": [
+          0.0,
+          0.0
+        ],
+        "iterations": 1000
+      }
+    },
+    {
+      "absolute_errors": [],
+      "campaign": "ipie_swing_2026-07",
+      "graded_residuals": [],
+      "n_attempts": 2,
+      "n_families": 1,
+      "outcome_counts": {
+        "indeterminate": 2,
+        "miss": 0,
+        "success": 0
+      },
+      "outcome_rates": {
+        "indeterminate": 1.0,
+        "miss": 0.0,
+        "success": 0.0
+      },
+      "solver": "ipie_uhf_trial",
+      "stratum": {
+        "family": "orbital_representation_pairs",
+        "reference_threshold_stratum": "reference_supported_threshold",
+        "size_band": "norb_le8",
+        "tier": "expanded"
+      },
+      "stratum_scope": "full_cross",
+      "success_rate_bootstrap_95": {
+        "family_level_governing": {
+          "annotation": null,
+          "interval": null,
+          "n_families": 1,
+          "reason": "fewer_than_two_families",
+          "status": "insufficient_data"
+        },
+        "instance_level": [
+          0.0,
+          0.0
+        ],
+        "iterations": 1000
+      }
+    },
+    {
+      "absolute_errors": [
+        0.0010064381304193404,
+        0.5232131635673376
+      ],
+      "campaign": "ipie_swing_2026-07",
+      "graded_residuals": [
+        0.6315421056584006,
+        328.31739283350964
+      ],
+      "n_attempts": 2,
+      "n_families": 1,
+      "outcome_counts": {
+        "indeterminate": 0,
+        "miss": 1,
+        "success": 1
+      },
+      "outcome_rates": {
+        "indeterminate": 0.0,
+        "miss": 0.5,
+        "success": 0.5
+      },
+      "solver": "ipie_uhf_trial",
+      "stratum": {
+        "family": "small_molecules",
+        "reference_threshold_stratum": "reference_supported_threshold",
+        "size_band": "norb_9_16",
+        "tier": "expanded"
+      },
+      "stratum_scope": "full_cross",
+      "success_rate_bootstrap_95": {
+        "family_level_governing": {
+          "annotation": null,
+          "interval": null,
+          "n_families": 1,
+          "reason": "fewer_than_two_families",
+          "status": "insufficient_data"
+        },
+        "instance_level": [
+          0.0,
+          1.0
+        ],
+        "iterations": 1000
+      }
+    },
+    {
+      "absolute_errors": [
+        2.34360619844054e-05,
+        0.000818716270751807,
+        0.0010126409289110683,
+        0.009997615370485047,
+        0.02220203279452093,
+        0.02265594123179948,
+        0.023704158212365378,
+        0.12440633331687123,
+        0.12924419331132442,
+        0.13396273246018864,
+        0.25309731587119044,
+        0.2557487746436582,
+        0.2592207885022053
+      ],
+      "campaign": "ipie_swing_2026-07",
+      "graded_residuals": [
+        0.014706179631534116,
+        0.5137462323212604,
+        0.6354343751402896,
+        6.273525288641612,
+        13.931823643353454,
+        14.216652170404162,
+        14.874410594975828,
+        78.0652434814267,
+        81.10101110134437,
+        84.06190463233935,
+        158.81911363511404,
+        160.48290975493416,
+        162.66160596767443
+      ],
+      "n_attempts": 18,
+      "n_families": 1,
+      "outcome_counts": {
+        "indeterminate": 5,
+        "miss": 10,
+        "success": 3
+      },
+      "outcome_rates": {
+        "indeterminate": 0.2777777777777778,
+        "miss": 0.5555555555555556,
+        "success": 0.16666666666666666
+      },
+      "solver": "ipie_uhf_trial",
+      "stratum": {
+        "family": "small_molecules",
+        "reference_threshold_stratum": "reference_supported_threshold",
+        "size_band": "norb_le8",
+        "tier": "expanded"
+      },
+      "stratum_scope": "full_cross",
+      "success_rate_bootstrap_95": {
+        "family_level_governing": {
+          "annotation": null,
+          "interval": null,
+          "n_families": 1,
+          "reason": "fewer_than_two_families",
+          "status": "insufficient_data"
+        },
+        "instance_level": [
+          0.0,
+          0.3333333333333333
+        ],
+        "iterations": 1000
+      }
+    },
+    {
+      "absolute_errors": [
+        0.2528322167617931,
+        0.2579980124699448,
+        0.25848591041829394,
+        0.26215111455127627,
+        0.26581553567170424
+      ],
+      "campaign": "ipie_swing_2026-07",
+      "graded_residuals": [
+        158.6527633700588,
+        161.89431136026457,
+        162.20046837909535,
+        164.50039190727793,
+        166.79982409338754
+      ],
+      "n_attempts": 5,
+      "n_families": 1,
+      "outcome_counts": {
+        "indeterminate": 0,
+        "miss": 5,
+        "success": 0
+      },
+      "outcome_rates": {
+        "indeterminate": 0.0,
+        "miss": 1.0,
+        "success": 0.0
+      },
+      "solver": "ipie_uhf_trial",
+      "stratum": {
+        "family": "small_molecules",
+        "reference_threshold_stratum": "reference_supported_threshold",
+        "size_band": "norb_le8",
+        "tier": "utility"
+      },
+      "stratum_scope": "full_cross",
+      "success_rate_bootstrap_95": {
+        "family_level_governing": {
+          "annotation": null,
+          "interval": null,
+          "n_families": 1,
+          "reason": "fewer_than_two_families",
+          "status": "insufficient_data"
+        },
+        "instance_level": [
+          0.0,
+          0.0
+        ],
+        "iterations": 1000
+      }
+    },
+    {
+      "absolute_errors": [
+        2.34360619844054e-05,
+        0.000818716270751807,
+        0.0010064381304193404,
+        0.0010126409289110683,
+        0.009997615370485047,
+        0.02220203279452093,
+        0.02265594123179948,
+        0.023704158212365378,
+        0.12440633331687123,
+        0.12924419331132442,
+        0.13396273246018864,
+        0.2528322167617931,
+        0.25309731587119044,
+        0.2557487746436582,
+        0.2579980124699448,
+        0.25848591041829394,
+        0.2592207885022053,
+        0.26215111455127627,
+        0.26581553567170424,
+        0.5232131635673376
+      ],
+      "campaign": "ipie_swing_2026-07",
+      "graded_residuals": [
+        0.014706179631534116,
+        0.5137462323212604,
+        0.6315421056584006,
+        0.6354343751402896,
+        6.273525288641612,
+        13.931823643353454,
+        14.216652170404162,
+        14.874410594975828,
+        78.0652434814267,
+        81.10101110134437,
+        84.06190463233935,
+        158.6527633700588,
+        158.81911363511404,
+        160.48290975493416,
+        161.89431136026457,
+        162.20046837909535,
+        162.66160596767443,
+        164.50039190727793,
+        166.79982409338754,
+        328.31739283350964
+      ],
+      "n_attempts": 36,
+      "n_families": 3,
+      "outcome_counts": {
+        "indeterminate": 16,
+        "miss": 16,
+        "success": 4
+      },
+      "outcome_rates": {
+        "indeterminate": 0.4444444444444444,
+        "miss": 0.4444444444444444,
+        "success": 0.1111111111111111
+      },
+      "solver": "ipie_uhf_trial",
+      "stratum": {
+        "family": "all",
+        "reference_threshold_stratum": "all",
+        "size_band": "all",
+        "tier": "all"
+      },
+      "stratum_scope": "global_marginal",
+      "success_rate_bootstrap_95": {
+        "family_level_governing": {
+          "annotation": null,
+          "interval": [
+            0.0,
+            0.16
+          ],
+          "n_families": 3,
+          "reason": null,
+          "status": "ok"
+        },
+        "instance_level": [
+          0.027777777777777776,
+          0.2222222222222222
+        ],
+        "iterations": 1000
+      }
+    },
+    {
+      "absolute_errors": [
+        0.0010064381304193404,
+        0.5232131635673376
+      ],
+      "campaign": "ipie_swing_2026-07",
+      "graded_residuals": [
+        0.6315421056584006,
+        328.31739283350964
+      ],
+      "n_attempts": 7,
+      "n_families": 3,
+      "outcome_counts": {
+        "indeterminate": 5,
+        "miss": 1,
+        "success": 1
+      },
+      "outcome_rates": {
+        "indeterminate": 0.7142857142857143,
+        "miss": 0.14285714285714285,
+        "success": 0.14285714285714285
+      },
+      "solver": "ipie_uhf_trial",
+      "stratum": {
+        "family": "all",
+        "reference_threshold_stratum": "all",
+        "size_band": "norb_9_16",
+        "tier": "all"
+      },
+      "stratum_scope": "size_band_marginal",
+      "success_rate_bootstrap_95": {
+        "family_level_governing": {
+          "annotation": null,
+          "interval": [
+            0.0,
+            0.5
+          ],
+          "n_families": 3,
+          "reason": null,
+          "status": "ok"
+        },
+        "instance_level": [
+          0.0,
+          0.42857142857142855
+        ],
+        "iterations": 1000
+      }
+    },
+    {
+      "absolute_errors": [
+        2.34360619844054e-05,
+        0.000818716270751807,
+        0.0010126409289110683,
+        0.009997615370485047,
+        0.02220203279452093,
+        0.02265594123179948,
+        0.023704158212365378,
+        0.12440633331687123,
+        0.12924419331132442,
+        0.13396273246018864,
+        0.2528322167617931,
+        0.25309731587119044,
+        0.2557487746436582,
+        0.2579980124699448,
+        0.25848591041829394,
+        0.2592207885022053,
+        0.26215111455127627,
+        0.26581553567170424
+      ],
+      "campaign": "ipie_swing_2026-07",
+      "graded_residuals": [
+        0.014706179631534116,
+        0.5137462323212604,
+        0.6354343751402896,
+        6.273525288641612,
+        13.931823643353454,
+        14.216652170404162,
+        14.874410594975828,
+        78.0652434814267,
+        81.10101110134437,
+        84.06190463233935,
+        158.6527633700588,
+        158.81911363511404,
+        160.48290975493416,
+        161.89431136026457,
+        162.20046837909535,
+        162.66160596767443,
+        164.50039190727793,
+        166.79982409338754
+      ],
+      "n_attempts": 29,
+      "n_families": 3,
+      "outcome_counts": {
+        "indeterminate": 11,
+        "miss": 15,
+        "success": 3
+      },
+      "outcome_rates": {
+        "indeterminate": 0.3793103448275862,
+        "miss": 0.5172413793103449,
+        "success": 0.10344827586206896
+      },
+      "solver": "ipie_uhf_trial",
+      "stratum": {
+        "family": "all",
+        "reference_threshold_stratum": "all",
+        "size_band": "norb_le8",
+        "tier": "all"
+      },
+      "stratum_scope": "size_band_marginal",
+      "success_rate_bootstrap_95": {
+        "family_level_governing": {
+          "annotation": null,
+          "interval": [
+            0.0,
+            0.13043478260869565
+          ],
+          "n_families": 3,
+          "reason": null,
+          "status": "ok"
+        },
+        "instance_level": [
+          0.0,
+          0.2077586206896544
+        ],
+        "iterations": 1000
+      }
+    },
+    {
+      "absolute_errors": [
+        2.34360619844054e-05,
+        0.000818716270751807,
+        0.0010064381304193404,
+        0.0010126409289110683,
+        0.009997615370485047,
+        0.02220203279452093,
+        0.02265594123179948,
+        0.023704158212365378,
+        0.12440633331687123,
+        0.12924419331132442,
+        0.13396273246018864,
+        0.25309731587119044,
+        0.2557487746436582,
+        0.2592207885022053,
+        0.5232131635673376
+      ],
+      "campaign": "ipie_swing_2026-07",
+      "graded_residuals": [
+        0.014706179631534116,
+        0.5137462323212604,
+        0.6315421056584006,
+        0.6354343751402896,
+        6.273525288641612,
+        13.931823643353454,
+        14.216652170404162,
+        14.874410594975828,
+        78.0652434814267,
+        81.10101110134437,
+        84.06190463233935,
+        158.81911363511404,
+        160.48290975493416,
+        162.66160596767443,
+        328.31739283350964
+      ],
+      "n_attempts": 31,
+      "n_families": 3,
+      "outcome_counts": {
+        "indeterminate": 16,
+        "miss": 11,
+        "success": 4
+      },
+      "outcome_rates": {
+        "indeterminate": 0.5161290322580645,
+        "miss": 0.3548387096774194,
+        "success": 0.12903225806451613
+      },
+      "solver": "ipie_uhf_trial",
+      "stratum": {
+        "family": "all",
+        "reference_threshold_stratum": "all",
+        "size_band": "all",
+        "tier": "expanded"
+      },
+      "stratum_scope": "tier_marginal",
+      "success_rate_bootstrap_95": {
+        "family_level_governing": {
+          "annotation": null,
+          "interval": [
+            0.0,
+            0.2
+          ],
+          "n_families": 3,
+          "reason": null,
+          "status": "ok"
+        },
+        "instance_level": [
+          0.03225806451612903,
+          0.25806451612903225
+        ],
+        "iterations": 1000
+      }
+    },
+    {
+      "absolute_errors": [
+        0.2528322167617931,
+        0.2579980124699448,
+        0.25848591041829394,
+        0.26215111455127627,
+        0.26581553567170424
+      ],
+      "campaign": "ipie_swing_2026-07",
+      "graded_residuals": [
+        158.6527633700588,
+        161.89431136026457,
+        162.20046837909535,
+        164.50039190727793,
+        166.79982409338754
+      ],
+      "n_attempts": 5,
+      "n_families": 1,
+      "outcome_counts": {
+        "indeterminate": 0,
+        "miss": 5,
+        "success": 0
+      },
+      "outcome_rates": {
+        "indeterminate": 0.0,
+        "miss": 1.0,
+        "success": 0.0
+      },
+      "solver": "ipie_uhf_trial",
+      "stratum": {
+        "family": "all",
+        "reference_threshold_stratum": "all",
+        "size_band": "all",
+        "tier": "utility"
+      },
+      "stratum_scope": "tier_marginal",
+      "success_rate_bootstrap_95": {
+        "family_level_governing": {
+          "annotation": null,
+          "interval": null,
+          "n_families": 1,
+          "reason": "fewer_than_two_families",
+          "status": "insufficient_data"
+        },
+        "instance_level": [
+          0.0,
+          0.0
         ],
         "iterations": 1000
       }

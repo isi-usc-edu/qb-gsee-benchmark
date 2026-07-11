@@ -631,23 +631,23 @@ def test_v18_real_ingest_reconciliation_campaigns_and_ladders_close():
         (checkout / "scripts" / "dashboard_data" / "metrics_v1_8.json").read_text()
     )
     headline = bundle["headline_counts"]
-    assert headline["n_records_all_committed"] == 3555
-    assert headline["n_attempts_all_committed"] == 3500
+    assert headline["n_records_all_committed"] == 3591
+    assert headline["n_attempts_all_committed"] == 3536
     assert headline["n_not_attempted_records"] == 55
-    assert headline["n_scored_attempts"] == 2328
-    assert headline["n_solver_campaigns_found"] == 20
+    assert headline["n_scored_attempts"] == 2364
+    assert headline["n_solver_campaigns_found"] == 21
     coverage = bundle["coverage"]
     assert coverage["not_attempted_by_solver"] == {"ipie_uhf_trial": 55}
     assert coverage["not_attempted_by_solver_campaign"] == {
         "ipie_uhf_trial@g31_tranche1_2026-07": 55
     }
     disposition = bundle["diagnostics"]["attempt_disposition"]
-    assert sum(disposition["counts"].values()) == 3555
+    assert sum(disposition["counts"].values()) == 3591
     assert disposition["counts"] == {
         "excluded_invalid_reference_grade": 1111,
         "excluded_test_tier": 61,
         "not_attempted": 55,
-        "scored": 2328,
+        "scored": 2364,
     }
     correction = bundle["diagnostics"]["record_correction"]
     assert correction["n_original_corrections_declared"] == 27
