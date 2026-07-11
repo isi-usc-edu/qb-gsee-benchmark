@@ -123,6 +123,10 @@ Preliminary P1-P2 envelope: **130-420 full-node hours**. This is an estimate, no
 ## Resource policy
 
 Use one whole 128-core Improv node, omit explicit memory, `compute` until allocation is exhausted, then `backfill`. Batch lightweight tasks; isolate memory-dominant cases. Every batch is restartable by task/block state and records FCIDUMP checksum, extractor version, walltime, and peak RSS.
+
+## P1-A calibration addendum
+
+The 25-task cross-band P1-A v3 pilot (`7651288.imgt1`) passed 25/25 in 5:11 wall with 5,322,012 kB measured memory over 703,540,925 compressed input bytes. Reserve at most **4 node-hours** for the full manifest-driven linear block, including download and a conservative large-file tail margin. P1-B/P1-C retain the preliminary 40-140-node-hour envelope until their own pilots.
 """
 
 

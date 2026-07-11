@@ -1,0 +1,193 @@
+{
+  "calibration_history": [
+    {
+      "job_id": "7651272.imgt1",
+      "reason": "login-node-local scratch worktree was not visible on compute node",
+      "scientific_tasks_started": 0,
+      "status": "environment_failure"
+    },
+    {
+      "extractor_version": "g40_p1_linear_v1",
+      "failed": 4,
+      "finding": "strict eightfold duplicate equality rejected PySCF fourfold records",
+      "job_id": "7651273.imgt1",
+      "success": 21,
+      "walltime_seconds": 436
+    },
+    {
+      "extractor_version": "g40_p1_linear_v3",
+      "failed": 0,
+      "finding": "process-parallel extraction with explicit symmetrization diagnostics",
+      "job_id": "7651288.imgt1",
+      "success": 25,
+      "walltime_seconds": 311
+    }
+  ],
+  "committed_extractor_revision": "cf91d89",
+  "compressed_input_bytes": 703540925,
+  "corpus_tasks_at_submission": 591,
+  "extractor_versions": [
+    "g40_p1_linear_v3"
+  ],
+  "maximum_task_peak_rss_kb": 1992136,
+  "maximum_task_walltime_seconds": 298.39605880202726,
+  "median_task_walltime_seconds": 0.2332682218402624,
+  "pbs": {
+    "cpu_time_seconds": 808,
+    "exit_status": 0,
+    "explicit_memory_request": false,
+    "job_id": "7651288.imgt1",
+    "memory_kb": 5322012,
+    "ncpus": 128,
+    "queue": "compute",
+    "virtual_memory_kb": 13771424,
+    "walltime_seconds": 311
+  },
+  "production_reservation": {
+    "basis": "25-task cross-band pilot includes NORB 5-256, three unknown-metadata tasks, both G21 pairs, and 704 MB compressed input; reserve includes full-corpus download and large-file tail margin",
+    "p1a_node_hours_upper_bound": 4,
+    "remaining_p1b_p1c_estimate_unchanged": "40-140 node-hours pending block pilots"
+  },
+  "report_version": "g40_p1a_pilot_v1",
+  "selected_tasks": 25,
+  "selection": [
+    {
+      "family": "blue_dimer",
+      "norb_metadata": null,
+      "task_uuid": "001a0d11-165a-49c5-a334-643023029f40"
+    },
+    {
+      "family": "na_cl_0",
+      "norb_metadata": 68,
+      "task_uuid": "01ec60f7-d38a-4c33-a498-659a388e10ee"
+    },
+    {
+      "family": "Sc_1",
+      "norb_metadata": 135,
+      "task_uuid": "10119019-eea2-45c9-a748-e206780c4235"
+    },
+    {
+      "family": "qsz_hubbard_2d_halffilled",
+      "norb_metadata": 100,
+      "task_uuid": "165a257c-248d-5e0a-b8cc-a3e8f7380931"
+    },
+    {
+      "family": "block2_c2_ccpvdz_scan",
+      "norb_metadata": 28,
+      "task_uuid": "20e93441-9241-512c-93a9-5ae0da3534a7"
+    },
+    {
+      "family": "p450_cpd1_spin5_goings_dmrg_ladder",
+      "norb_metadata": 5,
+      "task_uuid": "250107ee-1182-5b80-bbf7-6dbc4363c964"
+    },
+    {
+      "family": "validation.LiH.cc-PVDZ",
+      "norb_metadata": 19,
+      "task_uuid": "2b2eefc4-9c8c-4a02-b621-059774f620c4"
+    },
+    {
+      "family": "orbital_representation_pairs_v1",
+      "norb_metadata": 8,
+      "task_uuid": "3d343ddb-a898-5c0e-afc9-42b62d588c5e"
+    },
+    {
+      "family": "h2_s_0",
+      "norb_metadata": 119,
+      "task_uuid": "3d5186f9-82b3-4de0-9bc1-242d7bdb678a"
+    },
+    {
+      "family": "c_h4_0",
+      "norb_metadata": 34,
+      "task_uuid": "443371ce-c80d-450d-b281-ac1c4d5ecc4d"
+    },
+    {
+      "family": "ueg_n14_planewave",
+      "norb_metadata": 179,
+      "task_uuid": "5e53cc08-b541-5163-bbf2-66e195a6492f"
+    },
+    {
+      "family": "orbital_representation_pairs_v1",
+      "norb_metadata": 8,
+      "task_uuid": "6cd8382a-9a9a-5c43-83b1-616c9f301ab1"
+    },
+    {
+      "family": "simons_hydrogen_chains",
+      "norb_metadata": 50,
+      "task_uuid": "81f65b14-2085-5443-b91b-3d791a55ab00"
+    },
+    {
+      "family": "blue_dimer",
+      "norb_metadata": null,
+      "task_uuid": "858b9683-fc6c-4ebe-8c33-27f0d848f24f"
+    },
+    {
+      "family": "richardson_gaudin_pairing_extended_v1",
+      "norb_metadata": 80,
+      "task_uuid": "c9b3e84d-4e5b-5c34-8dd3-d1f72268769b"
+    },
+    {
+      "family": "orbital_representation_pairs_v1",
+      "norb_metadata": 10,
+      "task_uuid": "cb5392c3-fd91-50f3-be40-149559ae7b96"
+    },
+    {
+      "family": "ueg_n14_planewave",
+      "norb_metadata": 93,
+      "task_uuid": "d14b3959-1860-5338-b338-66d17d6ca09c"
+    },
+    {
+      "family": "attractive_hubbard_1d_ed_v1",
+      "norb_metadata": 12,
+      "task_uuid": "d836ebd5-ce4f-575a-a72d-889cb4ae4204"
+    },
+    {
+      "family": "orbital_representation_pairs_v1",
+      "norb_metadata": 10,
+      "task_uuid": "dd80e2eb-9220-53ee-bac4-a087306dc309"
+    },
+    {
+      "family": "richardson_gaudin_pairing_extended_v1",
+      "norb_metadata": 64,
+      "task_uuid": "e5a3592f-8ebe-584d-8b49-ec39e4d09743"
+    },
+    {
+      "family": "ifciqmc_first_row_diatomics",
+      "norb_metadata": 108,
+      "task_uuid": "f904f554-0540-5618-96a1-d8daf46a1158"
+    },
+    {
+      "family": "qsz_hubbard_2d_halffilled",
+      "norb_metadata": 256,
+      "task_uuid": "fc432cd0-4856-54f2-a240-9813d9fda019"
+    },
+    {
+      "family": "varbench_lattice_site_basis",
+      "norb_metadata": 32,
+      "task_uuid": "fcc8fbc8-87b5-5a77-b3e2-38539824873e"
+    },
+    {
+      "family": "mn_mono",
+      "norb_metadata": null,
+      "task_uuid": "ff0da1e2-2c76-4589-aefa-c13bb1a1ef8f"
+    },
+    {
+      "family": "qsz_hubbard_2d_halffilled",
+      "norb_metadata": 16,
+      "task_uuid": "ff3fa734-deca-5c94-8024-75f34c076b59"
+    }
+  ],
+  "sum_task_walltime_seconds": 811.7062815031968,
+  "symmetry_conflict_tasks": [
+    {
+      "family": "simons_hydrogen_chains",
+      "one_body_conflict_records": 0,
+      "task_uuid": "81f65b14-2085-5443-b91b-3d791a55ab00",
+      "two_body_conflict_records": 49733,
+      "two_body_max_abs_difference": 0.016786249941870307,
+      "two_body_max_rel_difference": 1.9999928374364713
+    }
+  ],
+  "terminal_failed": 0,
+  "terminal_success": 25
+}
