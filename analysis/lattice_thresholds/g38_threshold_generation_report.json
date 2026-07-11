@@ -1,0 +1,88 @@
+{
+  "ca2cuo3_threshold_hartree": 0.00018043917188246604,
+  "families": [
+    {
+      "family": "attractive_hubbard_1d_ed_v1",
+      "tasks": 20,
+      "thresholds_changed_from_legacy": 16
+    },
+    {
+      "family": "block2_siam_ueg_script_exact",
+      "tasks": 2,
+      "thresholds_changed_from_legacy": 1
+    },
+    {
+      "family": "ca2cuo3_downfolded_10site_extended_hubbard",
+      "tasks": 1,
+      "thresholds_changed_from_legacy": 1
+    },
+    {
+      "family": "hubbard_chain",
+      "tasks": 16,
+      "thresholds_changed_from_legacy": 16
+    },
+    {
+      "family": "hubbard_lieb_wu_1d_site_basis",
+      "tasks": 8,
+      "thresholds_changed_from_legacy": 4
+    },
+    {
+      "family": "hubbard_square",
+      "tasks": 30,
+      "thresholds_changed_from_legacy": 30
+    },
+    {
+      "family": "qsz_hubbard_2d_halffilled",
+      "tasks": 48,
+      "thresholds_changed_from_legacy": 46
+    },
+    {
+      "family": "richardson_gaudin_pairing_extended_v1",
+      "tasks": 140,
+      "thresholds_changed_from_legacy": 126
+    },
+    {
+      "family": "tight_binding_controls",
+      "tasks": 5,
+      "thresholds_changed_from_legacy": 0
+    },
+    {
+      "family": "ueg_n14_planewave",
+      "tasks": 12,
+      "thresholds_changed_from_legacy": 0
+    },
+    {
+      "family": "varbench_impurity_sb_imp9",
+      "tasks": 1,
+      "thresholds_changed_from_legacy": 0
+    },
+    {
+      "family": "varbench_lattice_site_basis",
+      "tasks": 7,
+      "thresholds_changed_from_legacy": 7
+    },
+    {
+      "family": "varbench_tv_square16_ed_v1",
+      "tasks": 4,
+      "thresholds_changed_from_legacy": 4
+    },
+    {
+      "family": "w3b_hubbard_lieb_wu_1d_doped_o14_ed",
+      "tasks": 15,
+      "thresholds_changed_from_legacy": 15
+    }
+  ],
+  "flip_totals": {
+    "miss_to_success": 67,
+    "success_to_miss": 0
+  },
+  "input_sha256": {
+    "legacy_uuid_mapping": "1195d016007f5abfcf888446e371dad135bf7cb915e0cd0be44b51e1390cb52e"
+  },
+  "lattice_tasks_audited": 309,
+  "policy": "O19 per-site lattice thresholds plus RG amendment",
+  "rg_core_tasks_audited": 84,
+  "rg_core_thresholds_changed_from_legacy": 70,
+  "status": "generated",
+  "thresholds_changed_from_legacy": 266
+}

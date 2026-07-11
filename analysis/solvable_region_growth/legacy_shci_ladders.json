@@ -1,0 +1,64 @@
+{
+  "excluded": [
+    {
+      "label": "SHCI_opt",
+      "reason": "orbital optimization changes the method and no common eps_var is declared"
+    }
+  ],
+  "ladders": [
+    {
+      "ladder_id": "legacy_shci_variational_eps_var",
+      "members": [
+        {
+          "eps_var": 0.0002,
+          "label": "SHCI_var_2e-4",
+          "member_index": 0
+        },
+        {
+          "eps_var": 0.0001,
+          "label": "SHCI_var_1e-4",
+          "member_index": 1
+        },
+        {
+          "eps_var": 5e-05,
+          "label": "SHCI_var_5e-5",
+          "member_index": 2
+        },
+        {
+          "eps_var": 2e-05,
+          "label": "SHCI_var_2e-5",
+          "member_index": 3
+        }
+      ],
+      "method_axis": "SHCI variational energy at fixed orbital representation"
+    },
+    {
+      "ladder_id": "legacy_shci_pt_eps_var",
+      "members": [
+        {
+          "eps_var": 0.0002,
+          "label": "SHCI_pt_2e-4",
+          "member_index": 0
+        },
+        {
+          "eps_var": 0.0001,
+          "label": "SHCI_pt_1e-4",
+          "member_index": 1
+        },
+        {
+          "eps_var": 5e-05,
+          "label": "SHCI_pt_5e-5",
+          "member_index": 2
+        },
+        {
+          "eps_var": 2e-05,
+          "label": "SHCI_pt_2e-5",
+          "member_index": 3
+        }
+      ],
+      "method_axis": "SHCI variational plus PT energy at fixed orbital representation"
+    }
+  ],
+  "metrics_module_version": "1.4",
+  "status": "exploratory"
+}

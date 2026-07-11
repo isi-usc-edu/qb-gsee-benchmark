@@ -71,7 +71,8 @@
           "local exact diagonalization of generated FCIDUMP"
         ],
         "reference_energy_source": "VarBench row work/fcidumps/varbench_impurity/source/SB-IMP_9.md and method script work/fcidumps/varbench_impurity/source/methods_SB-IMP_9.py",
-        "reference_energy_note": "Candidate condensed-matter impurity subset. Local ED of the generated finite Hamiltonian matches the VarBench exact-ED row to numerical precision."
+        "reference_energy_note": "Candidate condensed-matter impurity subset. Local ED of the generated finite Hamiltonian matches the VarBench exact-ED row to numerical precision.",
+        "absolute_accuracy_threshold_note": "O19 keeps the absolute threshold: an impurity plus finite bath is not translationally extensive, so a per-site rule is not physically meaningful."
       },
       "supporting_files": [
         {

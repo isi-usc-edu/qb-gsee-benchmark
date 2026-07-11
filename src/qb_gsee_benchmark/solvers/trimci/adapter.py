@@ -13,16 +13,21 @@ https://github.com/hao-zhang-quantum/TrimCI. No TrimCI source is vendored here.
 The panel posture is deliberately defaults-only: one call to
 ``trimci.ground_state`` per task, using every field from ``trimci.Config`` at
 its package default except for a recorded seed and run-local work directory.
-TrimCI's default internal multi-start behavior is retained verbatim.
+TrimCI's default internal multi-start behavior is retained verbatim. An optional
+harness-only determinant-budget grid emits correlated Phase-2 checkpoint
+solutions without changing the underlying TrimCI configuration or adding solver
+invocations.
 """
 
 from __future__ import annotations
 
 import contextlib
+import copy
 import gzip
 import importlib
 import importlib.metadata
 import json
+import math
 import os
 import platform
 import shutil
@@ -39,6 +44,7 @@ from qb_gsee_benchmark.solvers.base import SOLUTION_OUTPUT
 from qb_gsee_benchmark.solvers.base import RunManifest
 from qb_gsee_benchmark.solvers.base import SolverResources
 from qb_gsee_benchmark.solvers.base import default_schema_dir
+from qb_gsee_benchmark.solvers.base import harness_attempted
 from qb_gsee_benchmark.solvers.base import load_manifest
 from qb_gsee_benchmark.solvers.base import load_problem_instance_task
 from qb_gsee_benchmark.solvers.base import new_run_id
@@ -51,7 +57,7 @@ from qb_gsee_benchmark.solvers.base import write_validated_solution
 from qb_gsee_benchmark.utils import iso8601_timestamp
 
 ADAPTER_NAME = "trimci"
-ADAPTER_VERSION = "0.1.1"
+ADAPTER_VERSION = "0.3.0"
 SOLVER_SHORT_NAME = "TrimCI_default"
 SOLVER_UUID = str(
     uuid.uuid5(uuid.NAMESPACE_URL, "qb-gsee-benchmark:solver:trimci-default:v1")
@@ -72,10 +78,13 @@ class TrimCIConfig:
     seed: int = DEFAULT_SEED
     num_threads: int = 1
     energy_policy: str = "pt2_if_available"
+    checkpoint_ndet_grid: tuple[int, ...] = ()
+    campaign: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         if self.energy_policy != "pt2_if_available":
             raise ValueError("TrimCI panel energy_policy is fixed to pt2_if_available")
+        checkpoint_grid = _validate_checkpoint_grid(self.checkpoint_ndet_grid)
         trimci = _import_trimci()
         defaults = asdict(
             trimci.Config(seed=int(self.seed), work_dir="trimci_work")
@@ -84,6 +93,8 @@ class TrimCIConfig:
             "seed": int(self.seed),
             "num_threads": max(1, int(self.num_threads)),
             "energy_policy": self.energy_policy,
+            "checkpoint_ndet_grid": list(checkpoint_grid),
+            "campaign": self.campaign,
             "defaults_policy": (
                 "trimci.Config defaults; only seed and run-local work_dir changed"
             ),
@@ -98,6 +109,8 @@ class TrimCIConfig:
             seed=int(data.get("seed", DEFAULT_SEED)),
             num_threads=int(data.get("num_threads", 1)),
             energy_policy=str(data.get("energy_policy", "pt2_if_available")),
+            checkpoint_ndet_grid=tuple(data.get("checkpoint_ndet_grid", ())),
+            campaign=data.get("campaign"),
         )
 
 
@@ -200,6 +213,7 @@ def run(run_dir: str | Path) -> dict[str, Any]:
         result_dict = result.to_dict()
         diagnostics = result_dict["diagnostics"]
         energies = result_dict["energies"]
+        phase2_checkpoints = _phase2_checkpoint_history(run_path)
         variational = float(energies["var"])
         pt2_correction = energies.get("pt2_correction")
         selected_energy = (
@@ -216,6 +230,7 @@ def run(run_dir: str | Path) -> dict[str, Any]:
             ),
             "energy_history": energies.get("history", []),
             "pt2_history": energies.get("pt2_history", []),
+            "phase2_checkpoints": phase2_checkpoints,
             "n_dets_phase0": diagnostics["n_dets_phase0"],
             "n_dets_final": diagnostics["n_dets_final"],
             "n_fci": diagnostics.get("n_fci"),
@@ -276,6 +291,8 @@ def harvest(
     output_path: str | Path | None = None,
     schema_dir: str | Path | None = None,
     not_attempted_reason: str | None = None,
+    missing_output_status: str = "not_attempted",
+    missing_output_elapsed_seconds: float | None = None,
 ) -> dict[str, Any]:
     """Convert TrimCI raw output to a schema-valid benchmark solution."""
     run_path = Path(run_dir)
@@ -284,15 +301,21 @@ def harvest(
     if raw_path.exists():
         raw_output = read_json(raw_path)
     else:
-        raw_output = _not_attempted_raw_output(manifest, not_attempted_reason)
+        raw_output = _not_attempted_raw_output(
+            manifest,
+            not_attempted_reason,
+            missing_output_status,
+            missing_output_elapsed_seconds,
+        )
         write_json(raw_path, raw_output)
-        write_manifest(run_path, manifest.with_status("not_attempted"))
+        write_manifest(run_path, manifest.with_status(missing_output_status))
     output_path = (
         Path(output_path) if output_path is not None else run_path / SOLUTION_OUTPUT
     )
     timing = raw_output.get("timing", {})
     status = raw_output.get("status", "failed")
-    attempted = status == "completed"
+    attempted = harness_attempted(status)
+    completed = status == "completed"
     solution = {
         "$schema": (
             "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/"
@@ -312,7 +335,7 @@ def harvest(
         "solution_data": [
             {
                 "task_uuid": manifest.task_uuid,
-                "energy": raw_output.get("energy") if attempted else None,
+                "energy": raw_output.get("energy") if completed else None,
                 "energy_units": "Hartree",
                 "energy_uncertainty": raw_output.get("energy_uncertainty", 0.0),
                 "run_time": {
@@ -335,9 +358,10 @@ def harvest(
                 },
                 "solution_details": {
                     "harness_status": status,
+                    "campaign": manifest.config.get("campaign"),
                     "attempted": attempted,
                     "not_attempted_reason": None
-                    if attempted
+                    if completed
                     else raw_output.get("error_message", "run did not complete"),
                     "run_directory_id": manifest.run_id,
                     "raw_output_file": manifest.files["raw_output"],
@@ -367,10 +391,21 @@ def harvest(
     write_validated_solution(
         output_path, solution, schema_dir=schema_dir or default_schema_dir()
     )
+    checkpoint_solutions = _write_checkpoint_solutions(
+        run_path,
+        manifest,
+        raw_output,
+        solution,
+        schema_dir=schema_dir or default_schema_dir(),
+    )
     write_manifest(run_path, manifest.with_status("harvested"))
     write_json(
         run_path / "harvest_summary.json",
-        {"solution_file": str(output_path), "status": status},
+        {
+            "solution_file": str(output_path),
+            "checkpoint_solution_files": checkpoint_solutions,
+            "status": status,
+        },
     )
     return solution
 
@@ -445,6 +480,169 @@ def _trimci_git_revision(trimci: Any) -> str | None:
     return None
 
 
+def _validate_checkpoint_grid(values: Any) -> tuple[int, ...]:
+    grid = tuple(int(value) for value in values)
+    if any(value <= 0 for value in grid):
+        raise ValueError("TrimCI checkpoint determinant budgets must be positive")
+    if any(left >= right for left, right in zip(grid, grid[1:])):
+        raise ValueError(
+            "TrimCI checkpoint determinant budgets must be strictly increasing"
+        )
+    return grid
+
+
+def _phase2_checkpoint_history(run_path: Path) -> list[dict[str, Any]]:
+    """Return aligned Phase-2 checkpoint energies from TrimCI run artifacts."""
+
+    work_dir = run_path / "trimci_work"
+    results_path = work_dir / "result_results.json"
+    if not results_path.is_file():
+        return []
+    results = read_json(results_path)
+    checkpoint_module = importlib.import_module("trimci.checkpoint")
+    phase1 = sorted(
+        checkpoint_module.list_checkpoints(work_dir / "checkpoints" / "phase1"),
+        key=lambda item: int(item["round"]),
+    )
+    phase2 = sorted(
+        checkpoint_module.list_checkpoints(work_dir / "checkpoints" / "phase2"),
+        key=lambda item: int(item["round"]),
+    )
+    ndets_history = list(results.get("ndets_history", []))
+    energy_history = list(results.get("energy_history", []))
+    pt2_history = list(results.get("pt2_history", []))
+    total_rounds = len(phase1) + len(phase2)
+    if not (
+        len(ndets_history) == len(energy_history) == len(pt2_history) == total_rounds
+    ):
+        raise RuntimeError(
+            "TrimCI expansion histories do not align with Phase-1/2 checkpoints"
+        )
+    e_nuc = float(results.get("e_nuc", 0.0))
+    records = []
+    offset = len(phase1)
+    for checkpoint_index, metadata in enumerate(phase2):
+        history_index = offset + checkpoint_index
+        n_dets = int(metadata["n_dets"])
+        electronic_energy = float(metadata["energy"])
+        if n_dets != int(ndets_history[history_index]) or not math.isclose(
+            electronic_energy,
+            float(energy_history[history_index]),
+            rel_tol=0.0,
+            abs_tol=1e-10,
+        ):
+            raise RuntimeError(
+                "TrimCI Phase-2 checkpoint metadata disagrees with result history"
+            )
+        pt2 = float(pt2_history[history_index])
+        variational = electronic_energy + e_nuc
+        correction = pt2 if abs(pt2) > 0.0 else None
+        records.append(
+            {
+                "phase": "phase2",
+                "checkpoint_index": checkpoint_index,
+                "checkpoint_round": int(metadata["round"]),
+                "history_index": history_index,
+                "n_dets": n_dets,
+                "variational_energy": variational,
+                "pt2_correction": correction,
+                "selected_energy": variational + (correction or 0.0),
+                "checkpoint_file": os.path.relpath(metadata["path"], run_path),
+            }
+        )
+    return records
+
+
+def _select_phase2_checkpoints(
+    records: list[dict[str, Any]],
+    grid: tuple[int, ...],
+    n_fci: int | None,
+) -> list[dict[str, Any]]:
+    """Select the last completed Phase-2 state at or below each resource cap."""
+
+    selected = []
+    for target in _validate_checkpoint_grid(grid):
+        if n_fci is not None and target > n_fci:
+            continue
+        candidates = [record for record in records if int(record["n_dets"]) <= target]
+        if not candidates:
+            continue
+        record = max(
+            candidates,
+            key=lambda item: (int(item["n_dets"]), int(item["checkpoint_index"])),
+        )
+        selected.append({**record, "target_n_dets": target})
+    return selected
+
+
+def _checkpoint_solver_uuid(target_n_dets: int) -> str:
+    return str(
+        uuid.uuid5(
+            uuid.NAMESPACE_URL,
+            f"qb-gsee-benchmark:solver:trimci-ndet-{target_n_dets}:v1",
+        )
+    )
+
+
+def _write_checkpoint_solutions(
+    run_path: Path,
+    manifest: RunManifest,
+    raw_output: dict[str, Any],
+    base_solution: dict[str, Any],
+    schema_dir: str | Path,
+) -> list[str]:
+    grid = _validate_checkpoint_grid(manifest.config.get("checkpoint_ndet_grid", ()))
+    if not grid or raw_output.get("status") != "completed":
+        return []
+    result = raw_output.get("details", {}).get("result", {})
+    records = list(result.get("phase2_checkpoints", []))
+    if not records:
+        raise RuntimeError(
+            "TrimCI checkpoint grid was requested but no Phase-2 checkpoints "
+            "were recorded"
+        )
+    n_fci_value = result.get("n_fci")
+    n_fci = int(n_fci_value) if n_fci_value is not None else None
+    selected = _select_phase2_checkpoints(records, grid, n_fci)
+    output_dir = run_path / "checkpoint_solutions"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    outputs = []
+    for checkpoint in selected:
+        target = int(checkpoint["target_n_dets"])
+        solver_short_name = f"TrimCI_ndet_{target}"
+        solution = copy.deepcopy(base_solution)
+        solution["solution_uuid"] = str(uuid.uuid4())
+        solution["creation_timestamp"] = iso8601_timestamp()
+        row = solution["solution_data"][0]
+        row["energy"] = float(checkpoint["selected_energy"])
+        row["solution_details"]["trimci_checkpoint"] = {
+            **checkpoint,
+            "selection_rule": "last completed Phase-2 state with n_dets <= target",
+            "shared_parent_run_id": manifest.run_id,
+            "runtime_not_separately_measured": True,
+        }
+        solver = solution["solver_details"]
+        solver["solver_uuid"] = _checkpoint_solver_uuid(target)
+        solver["solver_short_name"] = solver_short_name
+        algorithm = solver["algorithm_details"]
+        algorithm["name"] = "TrimCI Phase-2 determinant-budget checkpoint"
+        algorithm["solver_config"] = {
+            **manifest.config,
+            "checkpoint_target_n_dets": target,
+            "checkpoint_actual_n_dets": int(checkpoint["n_dets"]),
+            "checkpoint_index": int(checkpoint["checkpoint_index"]),
+            "checkpoint_selection_rule": (
+                "last completed Phase-2 state with n_dets <= target"
+            ),
+            "shared_parent_solver_uuid": manifest.solver_uuid,
+            "shared_parent_run_id": manifest.run_id,
+        }
+        path = output_dir / f"solution.{solver_short_name}.{manifest.task_uuid}.json"
+        write_validated_solution(path, solution, schema_dir=schema_dir)
+        outputs.append(os.path.relpath(path, run_path))
+    return outputs
+
+
 def _materialize_fcidump(source: str | Path, destination: str | Path) -> None:
     source_path = Path(source)
     destination_path = Path(destination)
@@ -456,15 +654,19 @@ def _materialize_fcidump(source: str | Path, destination: str | Path) -> None:
 
 
 def _not_attempted_raw_output(
-    manifest: RunManifest, reason: str | None
+    manifest: RunManifest,
+    reason: str | None,
+    status: str = "not_attempted",
+    elapsed_seconds: float | None = None,
 ) -> dict[str, Any]:
+    harness_attempted(status)
     message = reason or "run did not produce raw_output.json"
     timestamp = iso8601_timestamp()
     return {
         "adapter": manifest.adapter,
         "adapter_version": manifest.adapter_version,
         "run_id": manifest.run_id,
-        "status": "not_attempted",
+        "status": status,
         "energy": None,
         "energy_units": "Hartree",
         "energy_uncertainty": 0.0,
@@ -473,7 +675,7 @@ def _not_attempted_raw_output(
         "timing": {
             "wall_clock_start_time": timestamp,
             "wall_clock_stop_time": timestamp,
-            "seconds": 0.0,
+            "seconds": float(elapsed_seconds or 0.0),
         },
         "software": {
             "trimci": None,

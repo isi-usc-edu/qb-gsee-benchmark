@@ -17,12 +17,12 @@
       "energy_units": "Hartree",
       "run_time": {
         "algorithm_run_time": {
-          "seconds": 0.0,
+          "seconds": 1800.1612884998322,
           "wall_clock_start_time": "2026-07-11T00:04:35.213198+00:00",
           "wall_clock_stop_time": "2026-07-11T00:04:35.213198+00:00"
         },
         "overall_time": {
-          "seconds": 0.0,
+          "seconds": 1800.1612884998322,
           "wall_clock_start_time": "2026-07-11T00:04:35.213198+00:00",
           "wall_clock_stop_time": "2026-07-11T00:04:35.213198+00:00"
         },
@@ -34,8 +34,9 @@
         }
       },
       "solution_details": {
-        "attempted": false,
-        "harness_status": "not_attempted",
+        "attempted": true,
+        "campaign": "g31_tranche1_2026-07",
+        "harness_status": "timeout",
         "not_attempted_reason": "attempt timed out at adapter-default wall cap 1800 seconds",
         "pyscf_details": {
           "not_attempted_reason": "attempt timed out at adapter-default wall cap 1800 seconds"
@@ -53,6 +54,7 @@
       "harness_adapter_version": "0.1.0",
       "name": "PySCF FCI",
       "solver_config": {
+        "campaign": "g31_tranche1_2026-07",
         "energy_units": "Hartree",
         "method": "FCI",
         "num_threads": 1,

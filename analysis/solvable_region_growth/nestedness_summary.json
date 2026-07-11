@@ -1,0 +1,125 @@
+{
+  "definition": "fraction of (task, i<j) pairs with success_i and not success_j over jointly-attempted reference-valid tasks",
+  "ladders": [
+    {
+      "joint_task_member_pairs": 894,
+      "ladder_id": "legacy_shci_variational_eps_var",
+      "ordered_members": [
+        "SHCI_var_2e-4",
+        "SHCI_var_1e-4",
+        "SHCI_var_5e-5",
+        "SHCI_var_2e-5"
+      ],
+      "pair_diagnostics": [
+        {
+          "earlier_member": "SHCI_var_2e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_var_1e-4",
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        {
+          "earlier_member": "SHCI_var_2e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_var_5e-5",
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        {
+          "earlier_member": "SHCI_var_2e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_var_2e-5",
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        {
+          "earlier_member": "SHCI_var_1e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_var_5e-5",
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        {
+          "earlier_member": "SHCI_var_1e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_var_2e-5",
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        {
+          "earlier_member": "SHCI_var_5e-5",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_var_2e-5",
+          "violation_rate": 0.0,
+          "violations": 0
+        }
+      ],
+      "violation_rate": 0.0,
+      "violations": 0
+    },
+    {
+      "joint_task_member_pairs": 894,
+      "ladder_id": "legacy_shci_pt_eps_var",
+      "ordered_members": [
+        "SHCI_pt_2e-4",
+        "SHCI_pt_1e-4",
+        "SHCI_pt_5e-5",
+        "SHCI_pt_2e-5"
+      ],
+      "pair_diagnostics": [
+        {
+          "earlier_member": "SHCI_pt_2e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_pt_1e-4",
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        {
+          "earlier_member": "SHCI_pt_2e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_pt_5e-5",
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        {
+          "earlier_member": "SHCI_pt_2e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_pt_2e-5",
+          "violation_rate": 0.006711409395973154,
+          "violations": 1
+        },
+        {
+          "earlier_member": "SHCI_pt_1e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_pt_5e-5",
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        {
+          "earlier_member": "SHCI_pt_1e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_pt_2e-5",
+          "violation_rate": 0.006711409395973154,
+          "violations": 1
+        },
+        {
+          "earlier_member": "SHCI_pt_5e-5",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_pt_2e-5",
+          "violation_rate": 0.006711409395973154,
+          "violations": 1
+        }
+      ],
+      "violation_rate": 0.003355704697986577,
+      "violations": 3
+    }
+  ],
+  "violation_clusters": [
+    {
+      "family": "transition_metals",
+      "ladder_id": "legacy_shci_pt_eps_var",
+      "size_band": "norb_65_128",
+      "violations": 3
+    }
+  ]
+}

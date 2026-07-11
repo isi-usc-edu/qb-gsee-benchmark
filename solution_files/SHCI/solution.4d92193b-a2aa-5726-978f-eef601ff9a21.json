@@ -35,7 +35,8 @@
         }
       },
       "solution_details": {
-        "attempted": false,
+        "attempted": true,
+        "campaign": "g31_tranche1_2026-07",
         "harness_status": "failed",
         "not_attempted_reason": "SHCI command exited with code 1.",
         "raw_output_file": "raw_output.json",
@@ -66,10 +67,11 @@
       "name": "SHCI with optimized orbitals followed by SHCI+PT",
       "solver_config": {
         "algorithm_label": "SHCI with optimized orbitals followed by SHCI+PT",
+        "campaign": "g31_tranche1_2026-07",
         "command_template": "g31-run-shci --fcidump {fcidump_abs} --result shci_result.json",
         "energy_units": "Hartree",
-        "eps_var": null,
-        "eps_var_label": null,
+        "eps_var": 5e-05,
+        "eps_var_label": "5e-5",
         "num_threads": 1,
         "optimized_orbitals": true,
         "pt_correction": true,

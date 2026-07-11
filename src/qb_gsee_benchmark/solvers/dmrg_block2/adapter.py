@@ -44,6 +44,7 @@ from qb_gsee_benchmark.solvers.base import SOLUTION_OUTPUT
 from qb_gsee_benchmark.solvers.base import RunManifest
 from qb_gsee_benchmark.solvers.base import SolverResources
 from qb_gsee_benchmark.solvers.base import default_schema_dir
+from qb_gsee_benchmark.solvers.base import harness_attempted
 from qb_gsee_benchmark.solvers.base import load_manifest
 from qb_gsee_benchmark.solvers.base import load_problem_instance_task
 from qb_gsee_benchmark.solvers.base import new_run_id
@@ -56,7 +57,7 @@ from qb_gsee_benchmark.solvers.base import write_validated_solution
 from qb_gsee_benchmark.utils import iso8601_timestamp
 
 ADAPTER_NAME = "dmrg_block2"
-ADAPTER_VERSION = "0.1.0"
+ADAPTER_VERSION = "0.2.0"
 
 BLOCK2_SOFTWARE_DETAILS = (
     "block2 DMRG; production runs use the externally configured block2/"
@@ -114,6 +115,7 @@ class DMRGConfig:
     command_template: str | None = None
     result_json: str = "dmrg_result.json"
     energy_units: str = "Hartree"
+    campaign: str | None = None
     solver_uuid: str | None = None
     solver_short_name: str | None = None
 
@@ -141,6 +143,7 @@ class DMRGConfig:
             "command_template": self.command_template,
             "result_json": self.result_json,
             "energy_units": self.energy_units,
+            "campaign": self.campaign,
             "solver_uuid": self.solver_uuid or known["solver_uuid"],
             "solver_short_name": (
                 self.solver_short_name or known["solver_short_name"]
@@ -161,6 +164,7 @@ class DMRGConfig:
             command_template=data.get("command_template"),
             result_json=str(data.get("result_json", "dmrg_result.json")),
             energy_units=str(data.get("energy_units", "Hartree")),
+            campaign=data.get("campaign"),
             solver_uuid=data.get("solver_uuid"),
             solver_short_name=data.get("solver_short_name"),
         )
@@ -356,6 +360,8 @@ def harvest(
     output_path: str | Path | None = None,
     schema_dir: str | Path | None = None,
     not_attempted_reason: str | None = None,
+    missing_output_status: str = "not_attempted",
+    missing_output_elapsed_seconds: float | None = None,
 ) -> dict[str, Any]:
     """Convert DMRG raw output to a schema-valid benchmark solution JSON."""
 
@@ -366,17 +372,23 @@ def harvest(
     if raw_path.exists():
         raw_output = read_json(raw_path)
     else:
-        raw_output = _not_attempted_raw_output(manifest, not_attempted_reason)
+        raw_output = _not_attempted_raw_output(
+            manifest,
+            not_attempted_reason,
+            missing_output_status,
+            missing_output_elapsed_seconds,
+        )
         write_json(raw_path, raw_output)
-        write_manifest(run_path, manifest.with_status("not_attempted"))
+        write_manifest(run_path, manifest.with_status(missing_output_status))
     output_path = (
         Path(output_path) if output_path is not None else run_path / SOLUTION_OUTPUT
     )
     config = DMRGConfig.from_dict(manifest.config)
     timing = raw_output.get("timing", {})
     status = raw_output.get("status", "failed")
-    attempted = status == "completed"
-    energy = raw_output.get("energy") if attempted else None
+    attempted = harness_attempted(status)
+    completed = status == "completed"
+    energy = raw_output.get("energy") if completed else None
     details = raw_output.get("details", {})
 
     solution = {
@@ -420,9 +432,10 @@ def harvest(
                 },
                 "solution_details": {
                     "harness_status": status,
+                    "campaign": manifest.config.get("campaign"),
                     "attempted": attempted,
                     "not_attempted_reason": None
-                    if attempted
+                    if completed
                     else raw_output.get("error_message", "run did not complete"),
                     "run_directory_id": manifest.run_id,
                     "raw_output_file": manifest.files["raw_output"],
@@ -615,14 +628,17 @@ def _materialize_fcidump(source: str | Path, destination: str | Path) -> None:
 def _not_attempted_raw_output(
     manifest: RunManifest,
     reason: str | None,
+    status: str = "not_attempted",
+    elapsed_seconds: float | None = None,
 ) -> dict[str, Any]:
+    harness_attempted(status)
     message = reason or "run did not produce raw_output.json"
     timestamp = iso8601_timestamp()
     return {
         "adapter": manifest.adapter,
         "adapter_version": manifest.adapter_version,
         "run_id": manifest.run_id,
-        "status": "not_attempted",
+        "status": status,
         "variant": manifest.config.get("variant"),
         "energy": None,
         "energy_units": manifest.config.get("energy_units", "Hartree"),
@@ -631,7 +647,7 @@ def _not_attempted_raw_output(
         "timing": {
             "wall_clock_start_time": timestamp,
             "wall_clock_stop_time": timestamp,
-            "seconds": 0.0,
+            "seconds": float(elapsed_seconds or 0.0),
         },
         "software": {
             "block2": BLOCK2_SOFTWARE_DETAILS,

@@ -159,6 +159,35 @@ def test_pyscf_harvest_missing_raw_output_marks_not_attempted(tmp_path):
     assert solution["solver_details"]["solver_short_name"] == "HF"
 
 
+def test_pyscf_harvest_scheduler_timeout_is_attempted(tmp_path):
+    run_dir = tmp_path / "timeout"
+    reason = "attempt timed out at adapter-default wall cap 1800 seconds"
+    pyscf_adapter.prepare(
+        problem_instance_path=H2_PROBLEM_INSTANCE,
+        task_uuid=H2_TASK_UUID,
+        fcidump_path=H2_FCIDUMP,
+        run_dir=run_dir,
+        config=pyscf_adapter.PySCFConfig(
+            method="HF", campaign="g31_tranche1_2026-07"
+        ),
+        overwrite=True,
+    )
+    solution = pyscf_adapter.harvest(
+        run_dir,
+        not_attempted_reason=reason,
+        missing_output_status="timeout",
+        missing_output_elapsed_seconds=1800.125,
+    )
+    data = solution["solution_data"][0]
+    assert data["energy"] is None
+    assert data["solution_details"]["harness_status"] == "timeout"
+    assert data["solution_details"]["campaign"] == "g31_tranche1_2026-07"
+    assert data["solution_details"]["attempted"] is True
+    assert data["solution_details"]["not_attempted_reason"] == reason
+    assert data["run_time"]["overall_time"]["seconds"] == 1800.125
+    assert data["run_time"]["algorithm_run_time"]["seconds"] == 1800.125
+
+
 def test_shci_adapter_smoke_matches_existing_h2_solution(tmp_path):
     run_dir = tmp_path / "shci-smoke"
 
@@ -203,6 +232,31 @@ def test_shci_adapter_runs_configured_external_command(tmp_path):
     )
     assert solution["solver_details"]["solver_short_name"] == "SHCI_var_2e-5"
     assert solution["solution_data"][0]["energy"] == -1.2345
+
+
+def test_shci_command_failure_is_attempted_and_preserves_reason(tmp_path):
+    run_dir = tmp_path / "shci-failure"
+    command = f"{sys.executable} -c 'raise RuntimeError(\"boom\")'"
+    shci_adapter.prepare(
+        problem_instance_path=H2_PROBLEM_INSTANCE,
+        task_uuid=H2_TASK_UUID,
+        fcidump_path=H2_FCIDUMP,
+        run_dir=run_dir,
+        config=shci_adapter.SHCIConfig(
+            variant="SHCI_var_2e-5", command_template=command
+        ),
+        overwrite=True,
+    )
+    with pytest.raises(RuntimeError, match="SHCI command exited with code 1"):
+        shci_adapter.run(run_dir)
+    solution = shci_adapter.harvest(run_dir)
+    data = solution["solution_data"][0]
+    assert data["energy"] is None
+    assert data["solution_details"]["harness_status"] == "failed"
+    assert data["solution_details"]["attempted"] is True
+    assert data["solution_details"]["not_attempted_reason"] == (
+        "SHCI command exited with code 1."
+    )
 
 
 def test_shci_harvest_missing_raw_output_marks_not_attempted(tmp_path):
