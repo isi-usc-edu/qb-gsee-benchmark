@@ -1,0 +1,237 @@
+# Copyright 2026.
+# Licensed under the Apache License, Version 2.0.
+
+"""Four-axis feature metadata and model eligibility for G-40."""
+
+from __future__ import annotations
+
+from dataclasses import asdict, dataclass
+from typing import Iterable
+
+PROVENANCE_TIERS = {"T0", "T1", "T2", "T-probe", "T3", "N/A"}
+REPRESENTATION_TAGS = {"INV", "BAS", "BAS+ORD", "GAUGE", "N/A"}
+PROTOCOL_TAGS = {"NONE", "MF-PROTO", "AFQMC-PROTO", "N/A"}
+ROLE_TAGS = {"accuracy", "runtime", "representation-sensitivity", "audit-only"}
+
+@dataclass(frozen=True)
+class FeatureColumnMetadata:
+    column: str
+    column_kind: str
+    provenance_tier: str
+    representation: str
+    protocol: str
+    role: str
+    model_eligible: bool
+    exclusion_reason: str
+    scaling: str
+    cost_class: str
+    definition: str
+    implementation_status: str = "current"
+
+    def __post_init__(self) -> None:
+        if self.provenance_tier not in PROVENANCE_TIERS:
+            raise ValueError(f"invalid provenance tier for {self.column}")
+        if self.representation not in REPRESENTATION_TAGS:
+            raise ValueError(f"invalid representation tag for {self.column}")
+        if self.protocol not in PROTOCOL_TAGS:
+            raise ValueError(f"invalid protocol tag for {self.column}")
+        if self.role not in ROLE_TAGS:
+            raise ValueError(f"invalid role tag for {self.column}")
+        if self.model_eligible and self.exclusion_reason:
+            raise ValueError(f"eligible column {self.column} has an exclusion reason")
+        if not self.model_eligible and not self.exclusion_reason:
+            raise ValueError(f"excluded column {self.column} lacks a reason")
+
+    def to_dict(self) -> dict[str, object]:
+        return asdict(self)
+
+def _feature(
+    column: str, tier: str, representation: str, *, protocol: str = "NONE",
+    role: str = "accuracy", eligible: bool = True, reason: str = "",
+    scaling: str = "intensive", cost: str = "integral_postprocess",
+    definition: str | None = None, status: str = "current",
+) -> FeatureColumnMetadata:
+    return FeatureColumnMetadata(
+        column=column, column_kind="feature", provenance_tier=tier,
+        representation=representation, protocol=protocol, role=role,
+        model_eligible=eligible, exclusion_reason=reason, scaling=scaling,
+        cost_class=cost, definition=definition or column.replace("_", " "),
+        implementation_status=status,
+    )
+
+def _audit(column: str, kind: str, reason: str) -> FeatureColumnMetadata:
+    return FeatureColumnMetadata(
+        column=column, column_kind=kind, provenance_tier="N/A",
+        representation="N/A", protocol="N/A", role="audit-only",
+        model_eligible=False, exclusion_reason=reason, scaling="N/A",
+        cost_class="metadata", definition=column.replace("_", " "),
+    )
+
+IDENTIFIERS = {
+    "problem_instance_uuid", "problem_instance_short_name", "task_uuid",
+    "instance_data_object_uuid", "instance_data_object_file_name",
+    "instance_data_object_url", "equivalence_group_id", "ml_split_group_id",
+    "orbital_representation", "lattice_model_family",
+}
+PROCEDURAL = {
+    "date_of_calculation", "version_of_features_calculation_script",
+    "ham_features_calc_time", "features_version", "pyscf_diagnostics_version",
+    "structure_proxy_features_version", "representation_features_version",
+    "fragment_detector_version", "sign_free_detector_version",
+    "pair_structure_features_version", "representation_invariant_feature_names",
+    "representation_covariant_feature_names", "df_eig_decay_fit_reason",
+    "pyscf_homo_lumo_gap_reason", "pyscf_uhf_s2_reason",
+    "mp2_corr_energy_reason", "mp2_corr_energy_per_electron_reason",
+    "ccsd_t1_diagnostic_reason", "ccsd_d1_diagnostic_reason",
+    "ccsd_max_t2_reason", "fragment_partition_tracks",
+    "fragment_ml_default_track", "fragment_oracle_permission",
+    "fragment_partition_assignments_agree", "fragment_calibration_role",
+    "sign_free_condition", "g24_coverage_group",
+    "mp2_spin_decomposition_status", "pair_structure_basis",
+}
+DUPLICATE_SIZE = {"num_orbitals", "num_electrons", "ms2"}
+LEGACY_JW_ARCHIVE = {
+    "one_norm", "min_weight", "max_edge_order", "one_norm_per_orbital",
+    "one_norm_per_pauli_term", "min_edge_order",
+}
+LEGACY_JW_MODEL = {
+    "max_vertex_degree", "min_vertex_degree", "mean_vertex_degree",
+    "std_dev_vertex_degree", "max_weight", "mean_weight", "std_dev_weight",
+    "mean_edge_order", "std_dev_edge_order", "number_of_terms",
+    "pauli_terms_per_orbital_quartic", "mean_vertex_degree_per_orbital",
+    "max_vertex_degree_per_orbital", "vertex_degree_coefficient_of_variation",
+    "edge_order_coefficient_of_variation",
+}
+DF_MODEL = {
+    "df_rank", "df_gap", "df_eig_decay_exponent", "df_rank_per_orbital",
+}
+DF_AUDIT = {"df_eigs", "df_eig_decay_r2", "df_eig_decay_npoints"}
+SOLVER_DERIVED = {
+    "pyscf_homo_lumo_gap", "pyscf_uhf_s2", "mp2_corr_energy",
+    "mp2_corr_energy_per_electron", "ccsd_t1_diagnostic",
+    "ccsd_d1_diagnostic", "ccsd_max_t2",
+}
+REPRESENTATION_MODEL = {
+    "h1_offdiag_frobenius", "eri_self_repulsion_sum",
+    "nonzero_integrals_1e_10",
+}
+REPRESENTATION_AUDIT = {
+    "ecore_hartree", "trace_h1", "pair_space_eri_trace", "fci_energy_hartree",
+}
+FRAGMENT_MODEL = {
+    "fragment_inferred_one_body_inter_intra_ratio",
+    "fragment_inferred_two_body_inter_intra_ratio",
+}
+FRAGMENT_AUDIT = {
+    "fragment_count", "h2_bond_length_angstrom",
+    "fragment_center_separation_angstrom", "lambda_interfragment",
+    "fragment_oracle_one_body_inter_intra_ratio",
+    "fragment_oracle_two_body_inter_intra_ratio",
+}
+SIGN_METADATA = {
+    "lattice_bipartite", "lattice_filling_electrons_per_site",
+    "interaction_sign", "sign_free_condition_flag",
+}
+PAIR_T0_MODEL = {
+    "eri_full_l1_norm", "eri_full_l2_norm",
+    "pair_scattering_eri_l1_fraction", "pair_scattering_eri_l2_fraction",
+    "seniority_preserving_eri_l1_fraction",
+    "seniority_preserving_eri_l2_fraction",
+    "pair_to_density_eri_l2_ratio",
+    "pair_to_seniority_breaking_eri_l2_ratio",
+}
+PAIR_T1_MODEL = {"hf_fock_ov_l2_norm", "hf_fock_ov_max_abs"}
+PAIR_T2_MODEL = {
+    "mp2_os_corr_energy_hartree", "mp2_ss_corr_energy_hartree",
+    "mp2_corr_energy_hartree", "mp2_os_energy_abs_fraction",
+    "mp2_ss_energy_abs_fraction", "mp2_pair_double_amplitude_l1_fraction",
+    "mp2_pair_double_amplitude_l2_fraction",
+}
+PAIR_AUDIT = {
+    "two_body_input_record_count", "two_body_unique_record_count",
+    "two_body_duplicate_orientation_records_skipped",
+    "hf_stationarity_tolerance",
+}
+
+def metadata_for_column(column: str) -> FeatureColumnMetadata:
+    """Return explicit P0 metadata; unknown columns fail closed."""
+    if column in IDENTIFIERS:
+        return _audit(column, "identifier", "identifier or split-group metadata")
+    if column in PROCEDURAL:
+        return _audit(column, "procedural", "procedural, status, reason, or version metadata")
+    if column in DUPLICATE_SIZE:
+        return _feature(column, "T0", "INV", eligible=False,
+            reason="duplicate structured-detector copy; canonical size columns are n_orbs/n_elec and header MS2",
+            definition=f"audit duplicate {column}")
+    if column in {"n_elec", "n_orbs", "log_fci_dim"}:
+        definition = {
+            "n_elec": "FCIDUMP NELEC", "n_orbs": "FCIDUMP NORB",
+            "log_fci_dim": "log10[C(N,n_alpha) C(N,n_beta)] with n_alpha=(NELEC+MS2)/2",
+        }[column]
+        return _feature(column, "T0", "INV", cost="header", definition=definition)
+    if column in LEGACY_JW_ARCHIVE:
+        return _feature(column, "T0", "BAS+ORD", eligible=False,
+            reason="legacy Jordan-Wigner/archive quantity superseded or identified as a mapping artifact",
+            role="audit-only", scaling="archive", cost="legacy_jw")
+    if column in LEGACY_JW_MODEL:
+        return _feature(column, "T0", "BAS+ORD", role="representation-sensitivity",
+            cost="legacy_jw", definition=f"legacy Jordan-Wigner hypergraph statistic: {column}")
+    if column in DF_MODEL:
+        return _feature(column, "T0", "INV", cost="df_spectrum",
+            definition=("gap between the two largest pair-space ERI eigenvalues; not an energy gap" if column == "df_gap" else column.replace("_", " ")))
+    if column in DF_AUDIT:
+        return _feature(column, "T0", "INV", eligible=False,
+            reason="raw spectrum or fit-quality diagnostic, retained for audit", role="audit-only",
+            scaling="diagnostic", cost="df_spectrum")
+    if column in SOLVER_DERIVED:
+        tier = "T3" if column.startswith("ccsd_") else ("T2" if column.startswith("mp2_") else "T1")
+        return _feature(column, tier, "BAS", protocol="MF-PROTO", eligible=False,
+            reason="legacy value was parsed from panel solver output; P1/P2 recompute independently from the Hamiltonian",
+            role="audit-only", cost="solver_output_postprocess")
+    if column in REPRESENTATION_MODEL:
+        return _feature(column, "T0", "BAS", role="representation-sensitivity")
+    if column in REPRESENTATION_AUDIT:
+        tier = "T3" if column == "fci_energy_hartree" else "T0"
+        return _feature(column, tier, "INV", eligible=False,
+            reason="representation-pair certificate field or correlated reference, retained for audit",
+            role="audit-only")
+    if column in FRAGMENT_MODEL:
+        return _feature(column, "T0", "BAS", role="accuracy")
+    if column in FRAGMENT_AUDIT:
+        return _feature(column, "T0", "N/A", eligible=False,
+            reason="oracle or planted fragmentation parameter", role="audit-only")
+    if column in SIGN_METADATA:
+        return _feature(column, "T0", "GAUGE", eligible=False,
+            reason="metadata-inherited sign flag; model eligibility requires P1 recomputation from FCIDUMP",
+            role="audit-only")
+    if column in PAIR_T0_MODEL:
+        representation = "INV" if column == "eri_full_l2_norm" else "BAS"
+        return _feature(column, "T0", representation)
+    if column in PAIR_T1_MODEL:
+        return _feature(column, "T1", "BAS", protocol="MF-PROTO")
+    if column in PAIR_T2_MODEL:
+        return _feature(column, "T2", "BAS", protocol="MF-PROTO")
+    if column in PAIR_AUDIT:
+        return _feature(column, "T0", "BAS", eligible=False,
+            reason="parser or mean-field procedural diagnostic", role="audit-only")
+    raise KeyError(f"G-40 P0 has no metadata classification for column {column!r}")
+
+PLANNED_P0_COLUMNS = {
+    "fermionic_coefficient_l1_norm": _feature(
+        "fermionic_coefficient_l1_norm", "T0", "BAS", scaling="extensive",
+        cost="integral_linear", status="defined_not_populated",
+        definition="sum_pq |h_tilde_pq| + 1/2 sum_pqrs |(pq|rs)|; h_tilde_pq=h_pq-1/2 sum_r (pr|rq)",
+    )
+}
+
+def metadata_catalog(columns: Iterable[str], include_planned: bool = True) -> list[FeatureColumnMetadata]:
+    result = [metadata_for_column(column) for column in columns]
+    if include_planned:
+        result.extend(PLANNED_P0_COLUMNS.values())
+    names = [row.column for row in result]
+    if len(names) != len(set(names)):
+        raise ValueError("duplicate columns in feature metadata catalog")
+    return result
+
+def model_eligible_columns(columns: Iterable[str]) -> list[str]:
+    return [row.column for row in metadata_catalog(columns, include_planned=False) if row.model_eligible]

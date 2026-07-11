@@ -1,0 +1,39 @@
+{
+  "afqmc_protocol_block_in_headline_space": false,
+  "axes": {
+    "protocol": [
+      "NONE",
+      "MF-PROTO",
+      "AFQMC-PROTO",
+      "N/A"
+    ],
+    "provenance": [
+      "T0",
+      "T1",
+      "T2",
+      "T-probe",
+      "T3",
+      "N/A"
+    ],
+    "representation": [
+      "INV",
+      "BAS",
+      "BAS+ORD",
+      "GAUGE",
+      "N/A"
+    ],
+    "role": [
+      "accuracy",
+      "runtime",
+      "representation-sensitivity",
+      "audit-only"
+    ]
+  },
+  "corrected_norm_column": "fermionic_coefficient_l1_norm",
+  "feature_table_value_changes_in_p0": 0,
+  "legacy_one_norm_preserved": true,
+  "log_fci_dim_ms2_source": "FCIDUMP header; no singlet inference",
+  "nonfeature_axis_policy": "Identifiers/procedural columns use N/A for scientific axes and audit-only role; they are never model eligible.",
+  "one_shared_feature_space": true,
+  "schema_version": "g40-p0-v1"
+}

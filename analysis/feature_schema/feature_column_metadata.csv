@@ -1,0 +1,122 @@
+column,column_kind,provenance_tier,representation,protocol,role,model_eligible,exclusion_reason,scaling,cost_class,definition,implementation_status
+max_vertex_degree,feature,T0,BAS+ORD,NONE,representation-sensitivity,True,,intensive,legacy_jw,legacy Jordan-Wigner hypergraph statistic: max_vertex_degree,current
+min_vertex_degree,feature,T0,BAS+ORD,NONE,representation-sensitivity,True,,intensive,legacy_jw,legacy Jordan-Wigner hypergraph statistic: min_vertex_degree,current
+mean_vertex_degree,feature,T0,BAS+ORD,NONE,representation-sensitivity,True,,intensive,legacy_jw,legacy Jordan-Wigner hypergraph statistic: mean_vertex_degree,current
+std_dev_vertex_degree,feature,T0,BAS+ORD,NONE,representation-sensitivity,True,,intensive,legacy_jw,legacy Jordan-Wigner hypergraph statistic: std_dev_vertex_degree,current
+one_norm,feature,T0,BAS+ORD,NONE,audit-only,False,legacy Jordan-Wigner/archive quantity superseded or identified as a mapping artifact,archive,legacy_jw,one norm,current
+max_weight,feature,T0,BAS+ORD,NONE,representation-sensitivity,True,,intensive,legacy_jw,legacy Jordan-Wigner hypergraph statistic: max_weight,current
+min_weight,feature,T0,BAS+ORD,NONE,audit-only,False,legacy Jordan-Wigner/archive quantity superseded or identified as a mapping artifact,archive,legacy_jw,min weight,current
+mean_weight,feature,T0,BAS+ORD,NONE,representation-sensitivity,True,,intensive,legacy_jw,legacy Jordan-Wigner hypergraph statistic: mean_weight,current
+std_dev_weight,feature,T0,BAS+ORD,NONE,representation-sensitivity,True,,intensive,legacy_jw,legacy Jordan-Wigner hypergraph statistic: std_dev_weight,current
+max_edge_order,feature,T0,BAS+ORD,NONE,audit-only,False,legacy Jordan-Wigner/archive quantity superseded or identified as a mapping artifact,archive,legacy_jw,max edge order,current
+min_edge_order,feature,T0,BAS+ORD,NONE,audit-only,False,legacy Jordan-Wigner/archive quantity superseded or identified as a mapping artifact,archive,legacy_jw,min edge order,current
+mean_edge_order,feature,T0,BAS+ORD,NONE,representation-sensitivity,True,,intensive,legacy_jw,legacy Jordan-Wigner hypergraph statistic: mean_edge_order,current
+std_dev_edge_order,feature,T0,BAS+ORD,NONE,representation-sensitivity,True,,intensive,legacy_jw,legacy Jordan-Wigner hypergraph statistic: std_dev_edge_order,current
+number_of_terms,feature,T0,BAS+ORD,NONE,representation-sensitivity,True,,intensive,legacy_jw,legacy Jordan-Wigner hypergraph statistic: number_of_terms,current
+log_fci_dim,feature,T0,INV,NONE,accuracy,True,,intensive,header,"log10[C(N,n_alpha) C(N,n_beta)] with n_alpha=(NELEC+MS2)/2",current
+n_elec,feature,T0,INV,NONE,accuracy,True,,intensive,header,FCIDUMP NELEC,current
+n_orbs,feature,T0,INV,NONE,accuracy,True,,intensive,header,FCIDUMP NORB,current
+df_rank,feature,T0,INV,NONE,accuracy,True,,intensive,df_spectrum,df rank,current
+df_gap,feature,T0,INV,NONE,accuracy,True,,intensive,df_spectrum,gap between the two largest pair-space ERI eigenvalues; not an energy gap,current
+df_eigs,feature,T0,INV,NONE,audit-only,False,"raw spectrum or fit-quality diagnostic, retained for audit",diagnostic,df_spectrum,df eigs,current
+problem_instance_uuid,identifier,N/A,N/A,N/A,audit-only,False,identifier or split-group metadata,N/A,metadata,problem instance uuid,current
+problem_instance_short_name,identifier,N/A,N/A,N/A,audit-only,False,identifier or split-group metadata,N/A,metadata,problem instance short name,current
+task_uuid,identifier,N/A,N/A,N/A,audit-only,False,identifier or split-group metadata,N/A,metadata,task uuid,current
+instance_data_object_uuid,identifier,N/A,N/A,N/A,audit-only,False,identifier or split-group metadata,N/A,metadata,instance data object uuid,current
+instance_data_object_file_name,identifier,N/A,N/A,N/A,audit-only,False,identifier or split-group metadata,N/A,metadata,instance data object file name,current
+instance_data_object_url,identifier,N/A,N/A,N/A,audit-only,False,identifier or split-group metadata,N/A,metadata,instance data object url,current
+date_of_calculation,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,date of calculation,current
+version_of_features_calculation_script,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,version of features calculation script,current
+ham_features_calc_time,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,ham features calc time,current
+df_eig_decay_exponent,feature,T0,INV,NONE,accuracy,True,,intensive,df_spectrum,df eig decay exponent,current
+df_eig_decay_r2,feature,T0,INV,NONE,audit-only,False,"raw spectrum or fit-quality diagnostic, retained for audit",diagnostic,df_spectrum,df eig decay r2,current
+df_eig_decay_npoints,feature,T0,INV,NONE,audit-only,False,"raw spectrum or fit-quality diagnostic, retained for audit",diagnostic,df_spectrum,df eig decay npoints,current
+df_eig_decay_fit_reason,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,df eig decay fit reason,current
+one_norm_per_orbital,feature,T0,BAS+ORD,NONE,audit-only,False,legacy Jordan-Wigner/archive quantity superseded or identified as a mapping artifact,archive,legacy_jw,one norm per orbital,current
+df_rank_per_orbital,feature,T0,INV,NONE,accuracy,True,,intensive,df_spectrum,df rank per orbital,current
+features_version,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,features version,current
+pyscf_homo_lumo_gap,feature,T1,BAS,MF-PROTO,audit-only,False,legacy value was parsed from panel solver output; P1/P2 recompute independently from the Hamiltonian,intensive,solver_output_postprocess,pyscf homo lumo gap,current
+pyscf_uhf_s2,feature,T1,BAS,MF-PROTO,audit-only,False,legacy value was parsed from panel solver output; P1/P2 recompute independently from the Hamiltonian,intensive,solver_output_postprocess,pyscf uhf s2,current
+mp2_corr_energy,feature,T2,BAS,MF-PROTO,audit-only,False,legacy value was parsed from panel solver output; P1/P2 recompute independently from the Hamiltonian,intensive,solver_output_postprocess,mp2 corr energy,current
+mp2_corr_energy_per_electron,feature,T2,BAS,MF-PROTO,audit-only,False,legacy value was parsed from panel solver output; P1/P2 recompute independently from the Hamiltonian,intensive,solver_output_postprocess,mp2 corr energy per electron,current
+ccsd_t1_diagnostic,feature,T3,BAS,MF-PROTO,audit-only,False,legacy value was parsed from panel solver output; P1/P2 recompute independently from the Hamiltonian,intensive,solver_output_postprocess,ccsd t1 diagnostic,current
+ccsd_d1_diagnostic,feature,T3,BAS,MF-PROTO,audit-only,False,legacy value was parsed from panel solver output; P1/P2 recompute independently from the Hamiltonian,intensive,solver_output_postprocess,ccsd d1 diagnostic,current
+ccsd_max_t2,feature,T3,BAS,MF-PROTO,audit-only,False,legacy value was parsed from panel solver output; P1/P2 recompute independently from the Hamiltonian,intensive,solver_output_postprocess,ccsd max t2,current
+pyscf_homo_lumo_gap_reason,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,pyscf homo lumo gap reason,current
+pyscf_uhf_s2_reason,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,pyscf uhf s2 reason,current
+mp2_corr_energy_reason,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,mp2 corr energy reason,current
+mp2_corr_energy_per_electron_reason,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,mp2 corr energy per electron reason,current
+ccsd_t1_diagnostic_reason,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,ccsd t1 diagnostic reason,current
+ccsd_d1_diagnostic_reason,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,ccsd d1 diagnostic reason,current
+ccsd_max_t2_reason,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,ccsd max t2 reason,current
+pyscf_diagnostics_version,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,pyscf diagnostics version,current
+pauli_terms_per_orbital_quartic,feature,T0,BAS+ORD,NONE,representation-sensitivity,True,,intensive,legacy_jw,legacy Jordan-Wigner hypergraph statistic: pauli_terms_per_orbital_quartic,current
+one_norm_per_pauli_term,feature,T0,BAS+ORD,NONE,audit-only,False,legacy Jordan-Wigner/archive quantity superseded or identified as a mapping artifact,archive,legacy_jw,one norm per pauli term,current
+mean_vertex_degree_per_orbital,feature,T0,BAS+ORD,NONE,representation-sensitivity,True,,intensive,legacy_jw,legacy Jordan-Wigner hypergraph statistic: mean_vertex_degree_per_orbital,current
+max_vertex_degree_per_orbital,feature,T0,BAS+ORD,NONE,representation-sensitivity,True,,intensive,legacy_jw,legacy Jordan-Wigner hypergraph statistic: max_vertex_degree_per_orbital,current
+vertex_degree_coefficient_of_variation,feature,T0,BAS+ORD,NONE,representation-sensitivity,True,,intensive,legacy_jw,legacy Jordan-Wigner hypergraph statistic: vertex_degree_coefficient_of_variation,current
+edge_order_coefficient_of_variation,feature,T0,BAS+ORD,NONE,representation-sensitivity,True,,intensive,legacy_jw,legacy Jordan-Wigner hypergraph statistic: edge_order_coefficient_of_variation,current
+structure_proxy_features_version,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,structure proxy features version,current
+equivalence_group_id,identifier,N/A,N/A,N/A,audit-only,False,identifier or split-group metadata,N/A,metadata,equivalence group id,current
+ml_split_group_id,identifier,N/A,N/A,N/A,audit-only,False,identifier or split-group metadata,N/A,metadata,ml split group id,current
+orbital_representation,identifier,N/A,N/A,N/A,audit-only,False,identifier or split-group metadata,N/A,metadata,orbital representation,current
+representation_invariant_feature_names,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,representation invariant feature names,current
+representation_covariant_feature_names,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,representation covariant feature names,current
+num_orbitals,feature,T0,INV,NONE,accuracy,False,duplicate structured-detector copy; canonical size columns are n_orbs/n_elec and header MS2,intensive,integral_postprocess,audit duplicate num_orbitals,current
+num_electrons,feature,T0,INV,NONE,accuracy,False,duplicate structured-detector copy; canonical size columns are n_orbs/n_elec and header MS2,intensive,integral_postprocess,audit duplicate num_electrons,current
+ms2,feature,T0,INV,NONE,accuracy,False,duplicate structured-detector copy; canonical size columns are n_orbs/n_elec and header MS2,intensive,integral_postprocess,audit duplicate ms2,current
+ecore_hartree,feature,T0,INV,NONE,audit-only,False,"representation-pair certificate field or correlated reference, retained for audit",intensive,integral_postprocess,ecore hartree,current
+trace_h1,feature,T0,INV,NONE,audit-only,False,"representation-pair certificate field or correlated reference, retained for audit",intensive,integral_postprocess,trace h1,current
+pair_space_eri_trace,feature,T0,INV,NONE,audit-only,False,"representation-pair certificate field or correlated reference, retained for audit",intensive,integral_postprocess,pair space eri trace,current
+fci_energy_hartree,feature,T3,INV,NONE,audit-only,False,"representation-pair certificate field or correlated reference, retained for audit",intensive,integral_postprocess,fci energy hartree,current
+h1_offdiag_frobenius,feature,T0,BAS,NONE,representation-sensitivity,True,,intensive,integral_postprocess,h1 offdiag frobenius,current
+eri_self_repulsion_sum,feature,T0,BAS,NONE,representation-sensitivity,True,,intensive,integral_postprocess,eri self repulsion sum,current
+nonzero_integrals_1e_10,feature,T0,BAS,NONE,representation-sensitivity,True,,intensive,integral_postprocess,nonzero integrals 1e 10,current
+representation_features_version,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,representation features version,current
+fragment_count,feature,T0,N/A,NONE,audit-only,False,oracle or planted fragmentation parameter,intensive,integral_postprocess,fragment count,current
+h2_bond_length_angstrom,feature,T0,N/A,NONE,audit-only,False,oracle or planted fragmentation parameter,intensive,integral_postprocess,h2 bond length angstrom,current
+fragment_center_separation_angstrom,feature,T0,N/A,NONE,audit-only,False,oracle or planted fragmentation parameter,intensive,integral_postprocess,fragment center separation angstrom,current
+lambda_interfragment,feature,T0,N/A,NONE,audit-only,False,oracle or planted fragmentation parameter,intensive,integral_postprocess,lambda interfragment,current
+fragment_partition_tracks,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,fragment partition tracks,current
+fragment_ml_default_track,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,fragment ml default track,current
+fragment_oracle_permission,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,fragment oracle permission,current
+fragment_partition_assignments_agree,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,fragment partition assignments agree,current
+fragment_oracle_one_body_inter_intra_ratio,feature,T0,N/A,NONE,audit-only,False,oracle or planted fragmentation parameter,intensive,integral_postprocess,fragment oracle one body inter intra ratio,current
+fragment_oracle_two_body_inter_intra_ratio,feature,T0,N/A,NONE,audit-only,False,oracle or planted fragmentation parameter,intensive,integral_postprocess,fragment oracle two body inter intra ratio,current
+fragment_inferred_one_body_inter_intra_ratio,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_postprocess,fragment inferred one body inter intra ratio,current
+fragment_inferred_two_body_inter_intra_ratio,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_postprocess,fragment inferred two body inter intra ratio,current
+fragment_detector_version,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,fragment detector version,current
+fragment_calibration_role,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,fragment calibration role,current
+lattice_model_family,identifier,N/A,N/A,N/A,audit-only,False,identifier or split-group metadata,N/A,metadata,lattice model family,current
+lattice_bipartite,feature,T0,GAUGE,NONE,audit-only,False,metadata-inherited sign flag; model eligibility requires P1 recomputation from FCIDUMP,intensive,integral_postprocess,lattice bipartite,current
+lattice_filling_electrons_per_site,feature,T0,GAUGE,NONE,audit-only,False,metadata-inherited sign flag; model eligibility requires P1 recomputation from FCIDUMP,intensive,integral_postprocess,lattice filling electrons per site,current
+interaction_sign,feature,T0,GAUGE,NONE,audit-only,False,metadata-inherited sign flag; model eligibility requires P1 recomputation from FCIDUMP,intensive,integral_postprocess,interaction sign,current
+sign_free_condition_flag,feature,T0,GAUGE,NONE,audit-only,False,metadata-inherited sign flag; model eligibility requires P1 recomputation from FCIDUMP,intensive,integral_postprocess,sign free condition flag,current
+sign_free_condition,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,sign free condition,current
+sign_free_detector_version,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,sign free detector version,current
+g24_coverage_group,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,g24 coverage group,current
+two_body_input_record_count,feature,T0,BAS,NONE,audit-only,False,parser or mean-field procedural diagnostic,intensive,integral_postprocess,two body input record count,current
+two_body_unique_record_count,feature,T0,BAS,NONE,audit-only,False,parser or mean-field procedural diagnostic,intensive,integral_postprocess,two body unique record count,current
+two_body_duplicate_orientation_records_skipped,feature,T0,BAS,NONE,audit-only,False,parser or mean-field procedural diagnostic,intensive,integral_postprocess,two body duplicate orientation records skipped,current
+eri_full_l1_norm,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_postprocess,eri full l1 norm,current
+eri_full_l2_norm,feature,T0,INV,NONE,accuracy,True,,intensive,integral_postprocess,eri full l2 norm,current
+pair_scattering_eri_l1_fraction,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_postprocess,pair scattering eri l1 fraction,current
+pair_scattering_eri_l2_fraction,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_postprocess,pair scattering eri l2 fraction,current
+seniority_preserving_eri_l1_fraction,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_postprocess,seniority preserving eri l1 fraction,current
+seniority_preserving_eri_l2_fraction,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_postprocess,seniority preserving eri l2 fraction,current
+pair_to_density_eri_l2_ratio,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_postprocess,pair to density eri l2 ratio,current
+pair_to_seniority_breaking_eri_l2_ratio,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_postprocess,pair to seniority breaking eri l2 ratio,current
+hf_fock_ov_l2_norm,feature,T1,BAS,MF-PROTO,accuracy,True,,intensive,integral_postprocess,hf fock ov l2 norm,current
+hf_fock_ov_max_abs,feature,T1,BAS,MF-PROTO,accuracy,True,,intensive,integral_postprocess,hf fock ov max abs,current
+hf_stationarity_tolerance,feature,T0,BAS,NONE,audit-only,False,parser or mean-field procedural diagnostic,intensive,integral_postprocess,hf stationarity tolerance,current
+mp2_os_corr_energy_hartree,feature,T2,BAS,MF-PROTO,accuracy,True,,intensive,integral_postprocess,mp2 os corr energy hartree,current
+mp2_ss_corr_energy_hartree,feature,T2,BAS,MF-PROTO,accuracy,True,,intensive,integral_postprocess,mp2 ss corr energy hartree,current
+mp2_corr_energy_hartree,feature,T2,BAS,MF-PROTO,accuracy,True,,intensive,integral_postprocess,mp2 corr energy hartree,current
+mp2_os_energy_abs_fraction,feature,T2,BAS,MF-PROTO,accuracy,True,,intensive,integral_postprocess,mp2 os energy abs fraction,current
+mp2_ss_energy_abs_fraction,feature,T2,BAS,MF-PROTO,accuracy,True,,intensive,integral_postprocess,mp2 ss energy abs fraction,current
+mp2_pair_double_amplitude_l1_fraction,feature,T2,BAS,MF-PROTO,accuracy,True,,intensive,integral_postprocess,mp2 pair double amplitude l1 fraction,current
+mp2_pair_double_amplitude_l2_fraction,feature,T2,BAS,MF-PROTO,accuracy,True,,intensive,integral_postprocess,mp2 pair double amplitude l2 fraction,current
+mp2_spin_decomposition_status,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,mp2 spin decomposition status,current
+pair_structure_basis,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,pair structure basis,current
+pair_structure_features_version,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,pair structure features version,current
+fermionic_coefficient_l1_norm,feature,T0,BAS,NONE,accuracy,True,,extensive,integral_linear,sum_pq |h_tilde_pq| + 1/2 sum_pqrs |(pq|rs)|; h_tilde_pq=h_pq-1/2 sum_r (pr|rq),defined_not_populated
