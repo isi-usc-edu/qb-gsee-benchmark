@@ -35,8 +35,9 @@
         }
       },
       "solution_details": {
-        "attempted": false,
-        "harness_status": "not_attempted",
+        "attempted": true,
+        "campaign": "g31_tranche1_2026-07",
+        "harness_status": "timeout",
         "not_attempted_reason": "attempt timed out at adapter-default wall cap 7200 seconds",
         "raw_output_file": "raw_output.json",
         "run_directory_id": "ceeba8ea-1796-4389-80f5-2e07b80ef7d8",
@@ -55,10 +56,11 @@
       "name": "SHCI with optimized orbitals followed by SHCI+PT",
       "solver_config": {
         "algorithm_label": "SHCI with optimized orbitals followed by SHCI+PT",
+        "campaign": "g31_tranche1_2026-07",
         "command_template": "g31-run-shci --fcidump {fcidump_abs} --result shci_result.json",
         "energy_units": "Hartree",
-        "eps_var": null,
-        "eps_var_label": null,
+        "eps_var": 5e-05,
+        "eps_var_label": "5e-5",
         "num_threads": 1,
         "optimized_orbitals": true,
         "pt_correction": true,

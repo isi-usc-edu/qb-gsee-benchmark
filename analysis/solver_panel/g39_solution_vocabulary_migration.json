@@ -1,0 +1,2992 @@
+{
+  "campaign": "g31_tranche1_2026-07",
+  "diamond_corrections": [
+    "solution_files/SHCI/solution.64e051dd-532e-51b3-94e1-9409438d3764.json",
+    "solution_files/pyscf_solutions/solution.64e051dd-532e-51b3-94e1-9409438d3764.json"
+  ],
+  "original_corrections": [
+    "solution_files/SHCI/solution.062cbf0a-262c-5c75-a525-17a682f7d25f.json",
+    "solution_files/SHCI/solution.0a31c810-9581-5b29-b574-b4e3ab1e0561.json",
+    "solution_files/SHCI/solution.1b924e3e-0133-543b-86b3-2753cde933d5.json",
+    "solution_files/SHCI/solution.280b4b86-4352-51a7-a165-355ee9ef3b2a.json",
+    "solution_files/SHCI/solution.2d7aac5c-0c01-5ce6-be68-4d0ca198a9f6.json",
+    "solution_files/SHCI/solution.314a3c71-80a5-5e39-9448-053747494f1c.json",
+    "solution_files/SHCI/solution.322b3212-6364-5bef-bb6b-d0b61ed77bc5.json",
+    "solution_files/SHCI/solution.362af02a-adc2-5519-a77a-cda24c736973.json",
+    "solution_files/SHCI/solution.3d343ddb-a898-5c0e-afc9-42b62d588c5e.json",
+    "solution_files/SHCI/solution.4d92193b-a2aa-5726-978f-eef601ff9a21.json",
+    "solution_files/SHCI/solution.6adb63da-6eda-551e-96b8-d6163fe40187.json",
+    "solution_files/SHCI/solution.6cd8382a-9a9a-5c43-83b1-616c9f301ab1.json",
+    "solution_files/SHCI/solution.7b1ea320-6c12-5012-922f-fa51d99eeaef.json",
+    "solution_files/SHCI/solution.7cf226f5-ce3d-5761-8473-5153fb290151.json",
+    "solution_files/SHCI/solution.a3c0d3bb-eeca-50de-913f-afdc37863574.json",
+    "solution_files/SHCI/solution.aa9cf2d8-ef23-5185-96bd-d179c00928dc.json",
+    "solution_files/SHCI/solution.ae429d44-6cf1-5deb-bc6e-ae485f3ed705.json",
+    "solution_files/SHCI/solution.b892fa22-87be-569e-a60f-14dc67c9cc25.json",
+    "solution_files/SHCI/solution.cbb3f650-090f-5fa9-9f9e-365fb814c6d6.json",
+    "solution_files/SHCI/solution.d42dc028-303e-5b43-a6d0-146bdb908fc8.json",
+    "solution_files/SHCI/solution.def110fd-6099-5589-813c-e238dd5259c9.json",
+    "solution_files/SHCI/solution.ebe6a343-f7fd-5576-8c9d-b2e096e624a4.json",
+    "solution_files/SHCI/solution.f2f2b5aa-f39e-547f-a7e5-6840ac958d49.json",
+    "solution_files/SHCI/solution.f7b1aa32-6223-5044-a91c-d0f095ca713c.json",
+    "solution_files/pyscf_solutions/solution.322b3212-6364-5bef-bb6b-d0b61ed77bc5.json",
+    "solution_files/pyscf_solutions/solution.b4fb73b8-4452-5072-99b6-eb9f61523499.json",
+    "solution_files/pyscf_solutions/solution.d42dc028-303e-5b43-a6d0-146bdb908fc8.json"
+  ],
+  "records": 165,
+  "records_detail": [
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.062cbf0a-262c-5c75-a525-17a682f7d25f.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "ce045369a56b5557c2f1ecbfdc345b26339177d62507841c3fcc75445c71c12b",
+      "sha256_before": "380e3891ba87a1bf07f420c8efe5a9791a06dec3f5373e43e34d60acc86276ba",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "062cbf0a-262c-5c75-a525-17a682f7d25f"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.0a31c810-9581-5b29-b574-b4e3ab1e0561.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "2524efdc4f9b138a5ffb18afdd3453b28cd756b86087d9ba3db3813cae4d698a",
+      "sha256_before": "6454d1dbe9c13b2f10cb2ade7c0325c1c474942344e994249673f030964146c8",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "0a31c810-9581-5b29-b574-b4e3ab1e0561"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.12d0d43c-22d5-5699-b713-4fae60701a4e.json",
+      "reason": null,
+      "sha256_after": "6b908c5690aa34c69f4d4685446e709bb49d1ca611198265ef194c85d8dec232",
+      "sha256_before": "4658b62dd25722195f0f1e4399e2a833f7234489a7f4af3deef5b1d48c027db3",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "12d0d43c-22d5-5699-b713-4fae60701a4e"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.1624db95-1097-54d2-a68c-375f9b786492.json",
+      "reason": null,
+      "sha256_after": "260ccb22fbc676b5aa62af3d9550830464d6784fc6315a80d695ac228bf4c357",
+      "sha256_before": "7f5018972facddf2576caf40d84e534e6b60a262999874cf50079976ae4586ed",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "1624db95-1097-54d2-a68c-375f9b786492"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.1b924e3e-0133-543b-86b3-2753cde933d5.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "1d8374b3780530df7ee0ea660d15a776fc2ad82f8aa08df6ca25b49bc57c1c21",
+      "sha256_before": "dd3185923a15e325df01bb851b67b19bf73e0a281e9656d9ed2478839e18345d",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "1b924e3e-0133-543b-86b3-2753cde933d5"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.25c59f20-261b-59ad-b10f-fe2b61ae317e.json",
+      "reason": null,
+      "sha256_after": "ce0fff87c05fcd1366350026ba3be257a585d3994d529359c5d15222ecfb62e9",
+      "sha256_before": "ba06a9166f266dc6ac8e2986e243aabc30b67857671af17005c86e515a9b3471",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "25c59f20-261b-59ad-b10f-fe2b61ae317e"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.280b4b86-4352-51a7-a165-355ee9ef3b2a.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "520e2c9def77a413db0472b609e5bd584388bdc8e1812242f7ee3e8f0b0a9af5",
+      "sha256_before": "aff542c7227a54e5842a2eda4774c7c165cc28b37814126dab38703d56f697ff",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "280b4b86-4352-51a7-a165-355ee9ef3b2a"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.2d7aac5c-0c01-5ce6-be68-4d0ca198a9f6.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "db73446ce1bc919aadcc1f747586c04393e5d20cd2acfcc8063400a9ee44b982",
+      "sha256_before": "85d2d4164b15f5b7353ee221235dc5bc0cf336e67e1a933f0338424ce53461d8",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "2d7aac5c-0c01-5ce6-be68-4d0ca198a9f6"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.314a3c71-80a5-5e39-9448-053747494f1c.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "551367a45643a81df248bb7fa7813e46fa25e6c093e08aa50c1b2f827cf9eca3",
+      "sha256_before": "8a258467d28e0b3a510e6c3e8431a23ba7ad5426014f5dbcb52a1ea4c8ea05b6",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "314a3c71-80a5-5e39-9448-053747494f1c"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solution_data[0].solution_details.harness_status",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.322b3212-6364-5bef-bb6b-d0b61ed77bc5.json",
+      "reason": "attempt timed out at adapter-default wall cap 7200 seconds",
+      "sha256_after": "90f1bb424d3d2941c589c3f159ff5108355d450238e00ae50535d3e953802d5e",
+      "sha256_before": "c202c4034d9e05bfb0dea39dd82e65c8ba3a999ad28d25624803784fff9cf0b3",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "timeout",
+      "status_before": "not_attempted",
+      "task_uuid": "322b3212-6364-5bef-bb6b-d0b61ed77bc5"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.362af02a-adc2-5519-a77a-cda24c736973.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "1be66d58f02f41acce37b917258f940abff547edf7b23d26ce6490c37fe302c0",
+      "sha256_before": "002b8570df34aed11091b9b7b05f3ae9403a4596f9eba7037fdb66d40997dcea",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "362af02a-adc2-5519-a77a-cda24c736973"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.3d343ddb-a898-5c0e-afc9-42b62d588c5e.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "c1aeb034ca1be7ef66ff76dc0440792810b70e714591d6c421ca60f4820527f7",
+      "sha256_before": "e0ed256885c2433ae795a6822d98ffdaff1b7e0792f92b83fd06b9fd8fc576a4",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "3d343ddb-a898-5c0e-afc9-42b62d588c5e"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.47e28da2-70f2-5512-9d41-49ad17434d34.json",
+      "reason": null,
+      "sha256_after": "384aa2ea581e65b46d25d3ab3b4a1807e3d4b372d54183cc64a7fb02f45b27a2",
+      "sha256_before": "8a545d974fbfadc41a4b2b02486817b5e62e6e117ce366755bd27e2274054c12",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "47e28da2-70f2-5512-9d41-49ad17434d34"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.4d92193b-a2aa-5726-978f-eef601ff9a21.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "2d2e8ae7678eb2e3e729a3b3906149b30d005e8b9eaf989b47a542f499888e0e",
+      "sha256_before": "c76893a1ff4c7f15734c23860c096200f3141d6ab48209c3b189019156f769a3",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "4d92193b-a2aa-5726-978f-eef601ff9a21"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.5317a912-eb4a-588d-92ab-3cab5e083e51.json",
+      "reason": null,
+      "sha256_after": "852d7ea54f3f7e44d2fdfe0002f15e0b25b7d8820b962f4a8140b3b00815ae35",
+      "sha256_before": "2856d426bb651ccc57967a721fe64262edb01f990654e9180b167b1b1f8cc618",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "5317a912-eb4a-588d-92ab-3cab5e083e51"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.64818698-190e-5f48-9fe9-a374b30aac8e.json",
+      "reason": null,
+      "sha256_after": "457b2634caf2f226e958dde62163e4f78061cb60fd5fdf4f15955aa086edfeb9",
+      "sha256_before": "919fe5a0235888c1fd6c9d6f3220abce98c8a4f0a30657746403f9d40942cc6e",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "64818698-190e-5f48-9fe9-a374b30aac8e"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.64e051dd-532e-51b3-94e1-9409438d3764.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "45da31262aa7251f29c1d867c017a4f15d13a528598edb81180f739bbe0cb9ae",
+      "sha256_before": "1f22f3a9a763f11ef69dc880bf1138aaca94f43e9fbd11ec00647562d52529e4",
+      "source": "diamond_shci",
+      "source_commit": "a545345",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "64e051dd-532e-51b3-94e1-9409438d3764"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.64e736ab-07ef-5db9-a555-17da30b4a865.json",
+      "reason": null,
+      "sha256_after": "38274522e558b7bef94ebfb006e20c58b3f1ab070a945828de82adf7abfd9df7",
+      "sha256_before": "264ea3545201cd0515b7c37a837328d557195b4d56b7ff63cba9359c66b5a2dc",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "64e736ab-07ef-5db9-a555-17da30b4a865"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.659c2dd8-2b6c-518c-96d2-175564ba0e87.json",
+      "reason": null,
+      "sha256_after": "24fb5b312fab9919e509453e52127bfed83ff5686834ed101ee5a394ed76dd3a",
+      "sha256_before": "e9629430060ec24d6d55d66472cd45c25a43a0e24a37535f1e1c9d43c8f030db",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "659c2dd8-2b6c-518c-96d2-175564ba0e87"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.6adb63da-6eda-551e-96b8-d6163fe40187.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "c241f4183f06d4539d664081b04267f35f2ee35228f1559ee9a61a9061accd75",
+      "sha256_before": "fe2a96b38162e6ff74f44edee477163c3bff60deb566127d6abe6555f1c83882",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "6adb63da-6eda-551e-96b8-d6163fe40187"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.6cd8382a-9a9a-5c43-83b1-616c9f301ab1.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "08e58f5bab07c417d25c5783988bcd39f94c2aeb8adec7bca5589b2c0256105d",
+      "sha256_before": "d31ba70db7dda15df84f06c47ad0a49f8f19496a7403dc2a360cdf57082a10a3",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "6cd8382a-9a9a-5c43-83b1-616c9f301ab1"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.7964bbe9-1ec7-55ef-b7b4-08b1d08445d8.json",
+      "reason": null,
+      "sha256_after": "e00ddcdd7cf6206f71d1912d8504c59bdf45b34bc5506746ea76b26f13b2faf8",
+      "sha256_before": "0d1d74555748ccaafbc78c6390176366d066648b5bc36a0b0970154637718f3b",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "7964bbe9-1ec7-55ef-b7b4-08b1d08445d8"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.7b1ea320-6c12-5012-922f-fa51d99eeaef.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "ebe18949da1be79bdc0228162820713ffdd7afc1376f9a264973ddf143061b1e",
+      "sha256_before": "febbd837b7dedc5397143df0d85a5c9c196bb592f464cf85cd03252bc0dd211e",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "7b1ea320-6c12-5012-922f-fa51d99eeaef"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.7cf226f5-ce3d-5761-8473-5153fb290151.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "66f9fcd5ea07b2eec88ab70db10c912dfac07949035339496945c215255d70df",
+      "sha256_before": "f0a773c0a93ee3876b32427076a82524216bc35c031524a3eb6533960140f7ca",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "7cf226f5-ce3d-5761-8473-5153fb290151"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.8198fdf2-0bb6-5684-acd4-af62e64a6ed9.json",
+      "reason": null,
+      "sha256_after": "d47b33c43b6209eb58b259615c5c83a78c0b631b515ead5ffa4945afbebf89c8",
+      "sha256_before": "097508d4050d638f909a468d103ecde62bca5addce77467cfba1a1c574ae8c64",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "8198fdf2-0bb6-5684-acd4-af62e64a6ed9"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.82b10203-9445-52fd-8418-e67979a33bd3.json",
+      "reason": null,
+      "sha256_after": "d6213f525988904681a0294e86f3422db6aa35f13bb6f2e2a586008f67364336",
+      "sha256_before": "d21392fb5b47a6741bda39ce4bdb92ae44410db9c62d351383c2572418853ab3",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "82b10203-9445-52fd-8418-e67979a33bd3"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.9317b786-c94e-59a1-9386-d7d91669bf10.json",
+      "reason": null,
+      "sha256_after": "f5075b14703ac10c4aa7041016ecf17cccb374b15dbccfedd05de336f4a617d0",
+      "sha256_before": "ae51dbe806dced51ea5e7bc3212d3d9ef2dd93560deb343e25a888e046889d3e",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "9317b786-c94e-59a1-9386-d7d91669bf10"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.99c5ab5b-0c59-503d-bba0-298b3e197b75.json",
+      "reason": null,
+      "sha256_after": "142ff76f02480d51955935daca6e8635641d814bcaba0749ce5d2cf12b24882b",
+      "sha256_before": "5c3f0c47e5f9cf26b3798e005a5fcb30503304893dc20c6c8ffdd81c8bb99bde",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "99c5ab5b-0c59-503d-bba0-298b3e197b75"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.9a097145-0078-510f-9ec8-55a1f65a5e22.json",
+      "reason": null,
+      "sha256_after": "6c1a10920a3f563c0720204608f4ca81e2dd32c52c9988eb18b82fa528abc71d",
+      "sha256_before": "86cdb23fac86ceb65155b1ac6e76391b28d5c9c5e5a023314d0c46f5cbb00223",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "9a097145-0078-510f-9ec8-55a1f65a5e22"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.9e72fd5d-a3a2-585b-b1bd-9e421c95359f.json",
+      "reason": null,
+      "sha256_after": "c370cb1a72f9f483ff9db8bf64fa835bd82c8ff47c7b5195f2f171867788125e",
+      "sha256_before": "b7932f66180ef667b6b09108bf1e5b6bba7bb0592a446b64241b8c62684728db",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "9e72fd5d-a3a2-585b-b1bd-9e421c95359f"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.a3c0d3bb-eeca-50de-913f-afdc37863574.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "e8d0b0645a72d564287ae701eb0c0e813384087f68d160889912bef962c51e5e",
+      "sha256_before": "bf986088850206d4df9a73b35dc9169e545608e7757d80e6ced8028f9eb858dc",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "a3c0d3bb-eeca-50de-913f-afdc37863574"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.a83d93d8-78ff-5f5a-b27f-c9d3584b0416.json",
+      "reason": null,
+      "sha256_after": "e6dcb27798c5a273fbf52e2b6e96c163435c7f34f5f106e5310426e55296b5b2",
+      "sha256_before": "0d3d0954da55e97e30c364c6960fd471bd0299c350c113c8aeee111fd4b5cbf6",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "a83d93d8-78ff-5f5a-b27f-c9d3584b0416"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.aa9cf2d8-ef23-5185-96bd-d179c00928dc.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "d32f7f7affadd896c75e394dad7949c79775d925011f3cd44ee0a0a55f6b4ff8",
+      "sha256_before": "8c21e4e7e48a272c383d5ccb3f4d487b0649eddf0ae6fece859a1dca41a04ba8",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "aa9cf2d8-ef23-5185-96bd-d179c00928dc"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.ac3a023f-8d31-5d79-803e-c54e947c8d75.json",
+      "reason": null,
+      "sha256_after": "58941bd14190f90fab7c03c973c5fbf366f1c88db9e06a1ccaed645115829b9c",
+      "sha256_before": "2506c31047a4a2615944283b2493ce5c1cff42bb6aae0712d26e6f80ebba6b68",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "ac3a023f-8d31-5d79-803e-c54e947c8d75"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.acbef708-c970-5ca2-b296-ff7d5e875833.json",
+      "reason": null,
+      "sha256_after": "9cad37ac3062840eac86462ac557a3ddbdf25384c3f77dcdc554e86f3320687f",
+      "sha256_before": "cca96719de4a3536186c4cc391d8ed8eea6563ced9eba71d6dba308af74100e4",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "acbef708-c970-5ca2-b296-ff7d5e875833"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.ae429d44-6cf1-5deb-bc6e-ae485f3ed705.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "fe7db61af363ba1842c8708102f0d632de87c68b3b251b8e410815dc9d20f1c0",
+      "sha256_before": "45952544dbe5461d869daf99097d94b60c5e537406a40c0486cc91867e388ff5",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "ae429d44-6cf1-5deb-bc6e-ae485f3ed705"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.b182fafe-58d4-58fc-9386-aa1cd4f7c2c9.json",
+      "reason": null,
+      "sha256_after": "7f7be6918b173eddbb2eb59d18152d6a0b9ef56bbc8b6e5085fc45d6847ef2eb",
+      "sha256_before": "ee29eb7b87af0e895c7b3a494d36ae4afea160b4ba2cc1e14936d871081ec2f8",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "b182fafe-58d4-58fc-9386-aa1cd4f7c2c9"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.b4fb73b8-4452-5072-99b6-eb9f61523499.json",
+      "reason": null,
+      "sha256_after": "9b9164ee9a5a964916bda543a12c5b7ac1e67429b63cd9f08ddf955d295d15b7",
+      "sha256_before": "1474c698813c923825eea4812c1ca4c507ce4de06c3485228b0a066ecbd8c0a2",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "b4fb73b8-4452-5072-99b6-eb9f61523499"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.b4fc5215-8c0a-528b-a3a3-a5616c68713b.json",
+      "reason": null,
+      "sha256_after": "095aaa930669a5291a003075550ff5edab183eba9d321b3a844d4e8a51bbd5ff",
+      "sha256_before": "3677b7be3d6b169f85d736bad7e5a72cf6752a58c8a3aa3075e011c632ef12c5",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "b4fc5215-8c0a-528b-a3a3-a5616c68713b"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.b892fa22-87be-569e-a60f-14dc67c9cc25.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "1bd7bcf017ba9a1a1389dc1e54f43285338dddb9a032830cd5ce6312bef987c1",
+      "sha256_before": "df3b5c4a54b415bc955bf12f18e5ffcd6eb056b69de8e1ddead6080ef91f66e1",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "b892fa22-87be-569e-a60f-14dc67c9cc25"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.c8826dd1-803c-5250-b7e6-7139a3543abf.json",
+      "reason": null,
+      "sha256_after": "65914fc9fe6a620d98beadbfcd2d67c22fa3ac31da286ae7a5a9dde281c42fd1",
+      "sha256_before": "15fae3f8914753a4eeb5d16cb3e5da3b04e0ed0d3ae688ffe4cce46febb344ed",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "c8826dd1-803c-5250-b7e6-7139a3543abf"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.ca8b59ee-11c4-59eb-94ff-505eb613f22a.json",
+      "reason": null,
+      "sha256_after": "c684be56143ff1b5880aa4abbb381f18ac85892b3e09ffae84f9a4a6a2c990df",
+      "sha256_before": "e504b41fcbe1e87d6ae2e007a5b4780d931a81d5e9102a3e7f2255a6bfb8675d",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "ca8b59ee-11c4-59eb-94ff-505eb613f22a"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.cb5392c3-fd91-50f3-be40-149559ae7b96.json",
+      "reason": null,
+      "sha256_after": "ea5df870e67db9374f44ee5b74f236dfb440ff5d339a025b118e129a0f59a07d",
+      "sha256_before": "afff737218a029df454d71179552f23dd1e3f11e8eb26accb574e057f31f34d2",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "cb5392c3-fd91-50f3-be40-149559ae7b96"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.cbb3f650-090f-5fa9-9f9e-365fb814c6d6.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "a633dfce936ad7bdef0f40c7f6189b3f3f8cecf997091b65c317951921fddad7",
+      "sha256_before": "e6d5f53216bc6bad07d983143fd47a7d06cdb26b3a70c40a8671d2768df2d3fa",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "cbb3f650-090f-5fa9-9f9e-365fb814c6d6"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solution_data[0].solution_details.harness_status",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.d42dc028-303e-5b43-a6d0-146bdb908fc8.json",
+      "reason": "attempt timed out at adapter-default wall cap 7200 seconds",
+      "sha256_after": "be073bbff823dc5d9617540d3da47cb4b692622b95716028c2650eefb2ab272d",
+      "sha256_before": "cee288f31547f10ac291f2d2b7148204e42d6699c161244752e5c865429ad3d5",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "timeout",
+      "status_before": "not_attempted",
+      "task_uuid": "d42dc028-303e-5b43-a6d0-146bdb908fc8"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.d836ebd5-ce4f-575a-a72d-889cb4ae4204.json",
+      "reason": null,
+      "sha256_after": "816bea118253db3f34bf4cf7508649122e0b5d250cdfc2a49992a49189d2396b",
+      "sha256_before": "6c303debe38849427f4d27d72f21743a148f7379eab0e39a564bad184c64ee11",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "d836ebd5-ce4f-575a-a72d-889cb4ae4204"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.dd80e2eb-9220-53ee-bac4-a087306dc309.json",
+      "reason": null,
+      "sha256_after": "fc96488c7e66f3b40b251d36eb11117ee100ae8cc8e98ff87b9afa1a4a4e2f2d",
+      "sha256_before": "9bea35c7581c1b626f1e7fcddabfa1a13fde87e9819b3c78c6a9e4140e485309",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "dd80e2eb-9220-53ee-bac4-a087306dc309"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.ddc9113f-3bff-5771-98cd-cd6fc0590ca7.json",
+      "reason": null,
+      "sha256_after": "05dace6d135a60f5321d9da264309c0a779b071abf863e35bcf2a0e98bd7e023",
+      "sha256_before": "ec33d14fba66673fd73f86e01c3fc45d8e8375c1a2732d5d08e93cbb21d0d0f0",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "ddc9113f-3bff-5771-98cd-cd6fc0590ca7"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.deb04f20-3157-5b14-88b7-7a7a4ddc5c32.json",
+      "reason": null,
+      "sha256_after": "e98d457aa9e8233c4125d33146eeec248738c2ec968f727bd47057607060614c",
+      "sha256_before": "ab3ccae85e01cb2904fc218b1a4a41679b349b384779a8f97d23b2b8ca1ebafd",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "deb04f20-3157-5b14-88b7-7a7a4ddc5c32"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.def110fd-6099-5589-813c-e238dd5259c9.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "9bf3ad708b39a940bce8a50604dde364e020de0d80f82096914a7820692be8e0",
+      "sha256_before": "8518a888f1174b9ea260c0ae32b788c04b23d71da50efd5a9a125181e4b5f210",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "def110fd-6099-5589-813c-e238dd5259c9"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.e239e95a-e89e-51ce-aa35-4c95ac6df9f2.json",
+      "reason": null,
+      "sha256_after": "dbabfdef3b8039de758352b4129ec7d17fe871d4d01c0ed44be832cbb7a61c50",
+      "sha256_before": "8c4b394b7afabd8daf2f13e8b1e42e0bac95920a8c1d3c8b0fbf4ad0464b822f",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "e239e95a-e89e-51ce-aa35-4c95ac6df9f2"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.ebe6a343-f7fd-5576-8c9d-b2e096e624a4.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "535005bb4e217ba358d602f9b84571c924db6ff5ad10b0ed595d2a8d50de63f0",
+      "sha256_before": "aa1494c2cc07cdcdb1c9875ca08214eea43554ca823020277bd414dd15f760d5",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "ebe6a343-f7fd-5576-8c9d-b2e096e624a4"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.f2f2b5aa-f39e-547f-a7e5-6840ac958d49.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "52229753ea057843e07b91dc697334d8b3c27e84786ebd07f15a53f0a50e07f6",
+      "sha256_before": "1c859a0320432618ffe3ec002ba22b38aa6adf215087e0aedcd02c51cfc6bdb5",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "f2f2b5aa-f39e-547f-a7e5-6840ac958d49"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.f7232c0e-1042-51e7-b2bb-397102d46eb0.json",
+      "reason": null,
+      "sha256_after": "98391a844b644001929dccc513175b9e263b64e21e9b7f9fcd7c27767852095a",
+      "sha256_before": "3f037e68a7d25dd77110087dfe4a950984319b13e5932b9e4ee1580014de5814",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "f7232c0e-1042-51e7-b2bb-397102d46eb0"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign",
+        "solver_details.algorithm_details.solver_config.eps_var",
+        "solver_details.algorithm_details.solver_config.eps_var_label"
+      ],
+      "path": "solution_files/SHCI/solution.f7b1aa32-6223-5044-a91c-d0f095ca713c.json",
+      "reason": "SHCI command exited with code 1.",
+      "sha256_after": "95381761ca126741ce60b834a415ca8cec3977724ad23cbafdbe95b67cc09318",
+      "sha256_before": "d5db2ecdaa2f4a50cc960108973511731b612af3d1dee977d0d005fa1d439812",
+      "source": "original_shci",
+      "source_commit": "56792ca",
+      "status_after": "failed",
+      "status_before": "failed",
+      "task_uuid": "f7b1aa32-6223-5044-a91c-d0f095ca713c"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.062cbf0a-262c-5c75-a525-17a682f7d25f.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "5537bd14a3e2ea41b8cde4bdf3636d1316d305cab9008d5ee624ce460654ef9b",
+      "sha256_before": "ace3999c5ac45237e088fcdf35b26b16d5dbf86d86c5aca5326d2cf2d707e4fc",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "062cbf0a-262c-5c75-a525-17a682f7d25f"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.0a31c810-9581-5b29-b574-b4e3ab1e0561.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "dc0204d5df13f3a7427f1b2a9d6faf753f73d2f0fb26db3155f882f2c2d31ec0",
+      "sha256_before": "6eb67bc699a2cc7c380bfc531f4c2c12719011b6167a24f58fcbe728b6fbc15f",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "0a31c810-9581-5b29-b574-b4e3ab1e0561"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.12d0d43c-22d5-5699-b713-4fae60701a4e.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "bc19cc07484b8ccf0f6b3d4c49021035f4c1976f8b5316f1ff81ffac9a0beba8",
+      "sha256_before": "b29e8d3a31f658b1d73cf75a79559e992aa13c1a50e820f49c54f84dfe039055",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "12d0d43c-22d5-5699-b713-4fae60701a4e"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.1624db95-1097-54d2-a68c-375f9b786492.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "9e713246d05df76a3166a9c18e513cc40e22a7995547b2f6a8abe25ff8d667ff",
+      "sha256_before": "cd6b7d680d374e64a1747324846d279cd4a9fd67c3c4559c84296b590b4d0a62",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "1624db95-1097-54d2-a68c-375f9b786492"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.1b924e3e-0133-543b-86b3-2753cde933d5.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "349b6eadb160426ccfeb026eee0884bed9046ade18133f407a010964a187f259",
+      "sha256_before": "2e63609a3136565f41dc141467dc52dd088edb0084e1536af31aff9032982bd9",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "1b924e3e-0133-543b-86b3-2753cde933d5"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.25c59f20-261b-59ad-b10f-fe2b61ae317e.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "f9097c88a40f12ee3b161e3b105660df1a9d0c592eede0a2dbb391ea5717c7dc",
+      "sha256_before": "5dc2777ae11141984f2e302bd41162098e88191add021090ef938abf4a1a2099",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "25c59f20-261b-59ad-b10f-fe2b61ae317e"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.280b4b86-4352-51a7-a165-355ee9ef3b2a.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "8adb71e5d7084b47d3a9530a5cd4fcf730874121083459a568fa00c4628202f3",
+      "sha256_before": "61a609662db95cae8e374cc002557f214370a1ab017cb4df7e11a0f589beb512",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "280b4b86-4352-51a7-a165-355ee9ef3b2a"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.2d7aac5c-0c01-5ce6-be68-4d0ca198a9f6.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "63343f1fd685a6407e2e29ff130a4fc2ae0916efb738bdc3a8350b523aa7d90f",
+      "sha256_before": "b7d5f3ba74d77089d6cb0605c4c7be53614f528c1662d4f0566c0f26cfc610b2",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "2d7aac5c-0c01-5ce6-be68-4d0ca198a9f6"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.314a3c71-80a5-5e39-9448-053747494f1c.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "a5ded7c4884a5f2edca509f92c139671b9e45107f78dd0e61dd99fccb5c083c4",
+      "sha256_before": "efd84c0570dff598a3d154168a3130e93cae8d641f6ac5019e83d272869688f9",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "314a3c71-80a5-5e39-9448-053747494f1c"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.322b3212-6364-5bef-bb6b-d0b61ed77bc5.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "6e34c87b20ac7a1f51e297e7152de45f0b4a749ea6170aaf6458b2483ffe3611",
+      "sha256_before": "4d691842d3ee746d7a548514d301a8f28789811dd6b77dd0e70269be9a369190",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "322b3212-6364-5bef-bb6b-d0b61ed77bc5"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.362af02a-adc2-5519-a77a-cda24c736973.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "3eda3a8ca670bf23977ca10077ed2ccc3dc8cd629a818e7988573fddb168fa4e",
+      "sha256_before": "fbab5d2cef08d0502cd6c216e3778f425aa1a4907946721c688dcd5c6eea623f",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "362af02a-adc2-5519-a77a-cda24c736973"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.3d343ddb-a898-5c0e-afc9-42b62d588c5e.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "11757a2d14cf0b75e7deaddc5bacf89449444ee2cbfe374a2d9204e91bb28a6f",
+      "sha256_before": "d2e55119910e98c04e5311e89b24aa1350459371c663c2ee105e7b465edb126a",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "3d343ddb-a898-5c0e-afc9-42b62d588c5e"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.47e28da2-70f2-5512-9d41-49ad17434d34.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "bf8085a61fce4a0d7cbdffd694b85b78d7251f0feef7017b8a28b0b2d4956047",
+      "sha256_before": "f974cc4ceb01a9ca7cc70d4d086d69a3c952ac5733d51d7df5418b5c1f09e89c",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "47e28da2-70f2-5512-9d41-49ad17434d34"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.4d92193b-a2aa-5726-978f-eef601ff9a21.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "ddd08be4201df00406eeb74b4c13930f1822d9b8a9adfbd15b6cfc4bcd83e81a",
+      "sha256_before": "5e9ea974854031d060c3af004307a7dea9993d518c06da0408ddf5912c15d3b3",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "4d92193b-a2aa-5726-978f-eef601ff9a21"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.5317a912-eb4a-588d-92ab-3cab5e083e51.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "421b08ba85cd160e2431c0e5eff146f9b965722978cfdf8096ae7837245977f1",
+      "sha256_before": "ac3e04154d60933985f77ca9ac920d90193be92bce0fc5fd9a391b84deb4b6a9",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "5317a912-eb4a-588d-92ab-3cab5e083e51"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.64818698-190e-5f48-9fe9-a374b30aac8e.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "eb7c7dac35dea40d44815aed0fb2d36c08a215669822c05e3087629d08e613c0",
+      "sha256_before": "c2451e2e683863a52b665794d45403498b054a71e6af5bef9bc50bc35a755d3f",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "64818698-190e-5f48-9fe9-a374b30aac8e"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.64e051dd-532e-51b3-94e1-9409438d3764.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "636b1ae2c923aa627804f161c0de73ecc44eee1120d73b2226810c92c6510eda",
+      "sha256_before": "e238a6bb47a35249fdd4c88c0f93f842fb334344495a754f1eee5d3819b13ef1",
+      "source": "diamond_ipie",
+      "source_commit": "839f67a",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "64e051dd-532e-51b3-94e1-9409438d3764"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.64e736ab-07ef-5db9-a555-17da30b4a865.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "9e513f972d91f2afe4561c0277370b88db90d9f2a7034f078d482f78d88bf3e4",
+      "sha256_before": "ea724ca5ff134c5924ac8ff8ce21a8c857acdaa1bd63a887588f6c4c4a870ec3",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "64e736ab-07ef-5db9-a555-17da30b4a865"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.659c2dd8-2b6c-518c-96d2-175564ba0e87.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "bad50169370f5d932693decd99e14e1b3900a62b3dae3ad9962985f63d8fe958",
+      "sha256_before": "4dab1bd58c168c81ba898530c208e87e06215083e978128425e383fe80297be8",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "659c2dd8-2b6c-518c-96d2-175564ba0e87"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.6adb63da-6eda-551e-96b8-d6163fe40187.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "0b21c0b1b1de818bb035d4b85b65247e209128a0d5b027ba36990855f5f103fe",
+      "sha256_before": "75feb51ffbaaf27f8915a746a2af91204f20a5282a7ea4cb4499207296d0b6bb",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "6adb63da-6eda-551e-96b8-d6163fe40187"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.6cd8382a-9a9a-5c43-83b1-616c9f301ab1.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "d9740154f2d6a8ce39e3a60cf7c7c45580f73dbfc65a5c9beb270d0ac659f9b7",
+      "sha256_before": "6b9fbc3e822583882b416827e1121b11353eea743e00881fce1747580a8c3082",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "6cd8382a-9a9a-5c43-83b1-616c9f301ab1"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.7964bbe9-1ec7-55ef-b7b4-08b1d08445d8.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "0d3f8b7c8aa5b273d346b06c3a7930c7f0f463333c47ad314a3cb0d1bd60acc3",
+      "sha256_before": "6fb1b2b96289fd45ab18f938c70d7c1e385798630ea742c92e8332f920b90ab8",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "7964bbe9-1ec7-55ef-b7b4-08b1d08445d8"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.7b1ea320-6c12-5012-922f-fa51d99eeaef.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "9572944a9f51df644d4dda646b2355e978e5f47d5381b9d5a7f5cc354d6a2c37",
+      "sha256_before": "eb6bc9376e5449e58004a98d356ec401bce1fda243a85b569eca2dc6cafb3822",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "7b1ea320-6c12-5012-922f-fa51d99eeaef"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.7cf226f5-ce3d-5761-8473-5153fb290151.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "931e5c6425a13b93cdc7fcffb6798a6fe2539d056a304833a515089b45492612",
+      "sha256_before": "ee4a50b52832f94361d8cf0f31ef44fad5a5a69b5e9efdd4b19cee744ff82f95",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "7cf226f5-ce3d-5761-8473-5153fb290151"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.8198fdf2-0bb6-5684-acd4-af62e64a6ed9.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "299d7f7045553fc27b60833ebbfcd43449e407313440e1bb78fe39c224d03444",
+      "sha256_before": "d78110f8318a754524e5866f4a22649c8dd87fe79b1bf8888effeef66d73f96e",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "8198fdf2-0bb6-5684-acd4-af62e64a6ed9"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.82b10203-9445-52fd-8418-e67979a33bd3.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "9f39172255be3ab01d474a37c3751061630ef9b84af4eff2eaa98511df11f22c",
+      "sha256_before": "a19fb2cbc519733f9e511c60e92df3a9addfec1c95d3aef1f0ee493022d0b4ce",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "82b10203-9445-52fd-8418-e67979a33bd3"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.9317b786-c94e-59a1-9386-d7d91669bf10.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "9dc2206e7acc16a5eb263bf0f4e0919fef8631db97f18abb6f710728869e2281",
+      "sha256_before": "3836edf7112388ac39c5d86f86de48a095da1330b1603030e93164cb516f04ee",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "9317b786-c94e-59a1-9386-d7d91669bf10"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.99c5ab5b-0c59-503d-bba0-298b3e197b75.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "9be442e47770c867990de2b70c5f74567763b76f1cf461407fdbf65c74a3a9f0",
+      "sha256_before": "79fc70ee82010c0a8bd0cc70967b5faebaf269a7a4b53fadde6697d566d62564",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "99c5ab5b-0c59-503d-bba0-298b3e197b75"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.9a097145-0078-510f-9ec8-55a1f65a5e22.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "9817f2524755d942971fc9c602ee12fcb412a2b01945ec17bd7b6bac27b99c57",
+      "sha256_before": "cc1f7e5d7fd6843fc55752cb31b588122c18b41d7692c8c8b9b28b1770cafd4a",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "9a097145-0078-510f-9ec8-55a1f65a5e22"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.9e72fd5d-a3a2-585b-b1bd-9e421c95359f.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "27cdda615debcd856672939a89774dbc3c9c73248f82590fc6158a65cf65de04",
+      "sha256_before": "840c0e8ef627e80fb4b6670d7f1fd24a89e6c3530a2a9a3d0dc26c14a8042de5",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "9e72fd5d-a3a2-585b-b1bd-9e421c95359f"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.a3c0d3bb-eeca-50de-913f-afdc37863574.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "f11fc407a2a4ada81d0bcc09c6d55dd37e4b35ce5f2d3978a57983d0ddd05ab6",
+      "sha256_before": "8458a582e2596c992857eb9e119048f9ab8c7b2c7ff276d5fadbd859183cc6f9",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "a3c0d3bb-eeca-50de-913f-afdc37863574"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.a83d93d8-78ff-5f5a-b27f-c9d3584b0416.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "3d051ca30f0bc35545653180bb1c71de6ab0e5d7ee5cfbcc2c854a337b3ba57e",
+      "sha256_before": "c02b6738f530d5720225855486af9edd6a29f24604811baf0a308e8000213762",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "a83d93d8-78ff-5f5a-b27f-c9d3584b0416"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.aa9cf2d8-ef23-5185-96bd-d179c00928dc.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "5e810bdab47613175d753d30ce1628179551e680cb8e00b428e4964d4f3436ad",
+      "sha256_before": "1944e747d0cacfaae428a353b3194ce274887fa07ed3e0ffac82eea6fbf17c67",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "aa9cf2d8-ef23-5185-96bd-d179c00928dc"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.ac3a023f-8d31-5d79-803e-c54e947c8d75.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "f8cab42b602e7b78b40abd7655af0096087607259b57015bed345ad8f7fd0f46",
+      "sha256_before": "cb96a281d9b36f7929107f09939c77a04d332cbb3b87ea6da738fdb7eb1b46e1",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "ac3a023f-8d31-5d79-803e-c54e947c8d75"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.acbef708-c970-5ca2-b296-ff7d5e875833.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "f856bd4a89a401d00c57f798e748d9cbb74109d12697c87b4e50c261c11d2f31",
+      "sha256_before": "d972541bc6c67b682201854e642597bdd8e2663bdac4fca13c16c48fe55a6ea2",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "acbef708-c970-5ca2-b296-ff7d5e875833"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.ae429d44-6cf1-5deb-bc6e-ae485f3ed705.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "e6e9fbb9b194a67cdc218306e4830431fcde212922ef05a0d16e1ab3c1c2332f",
+      "sha256_before": "1f5cee9088291e0c45bc6e799787b9a86c383932b983ee7e5ca0fe95dd9fdbfd",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "ae429d44-6cf1-5deb-bc6e-ae485f3ed705"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.b182fafe-58d4-58fc-9386-aa1cd4f7c2c9.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "889d808a0505006e11ff532bc0698db794fc6063b7da338e05628a901480d150",
+      "sha256_before": "38bc7dad0d86498276b4b246bfdc038719f1074127efdb3593be5de541f5fbfa",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "b182fafe-58d4-58fc-9386-aa1cd4f7c2c9"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.b4fb73b8-4452-5072-99b6-eb9f61523499.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "7b3f904b854cc1032036286d114cbb6775eff46e5c54a49a9b9fe3847daf19ec",
+      "sha256_before": "bd6569035b7b8c5278b8706772629f2c0b3423919d96fdc1cbc97444cc8d5420",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "b4fb73b8-4452-5072-99b6-eb9f61523499"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.b4fc5215-8c0a-528b-a3a3-a5616c68713b.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "2a77c04e3e5935af21769f4417aecaba99438b9b53061871936598a1c2ae7ee9",
+      "sha256_before": "8572dda289b9be9bdbc893b8b0449122fbfcc388e1379394994ecac74cc74ab1",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "b4fc5215-8c0a-528b-a3a3-a5616c68713b"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.b892fa22-87be-569e-a60f-14dc67c9cc25.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "e9a7c8787baede40e17b9a99b3e6aa696c79009556a6e4e6f1fba66dcc55bd67",
+      "sha256_before": "8074e56b4d3c5837fdb141589cf27fb6af1529bdd13c2be88328cd91dd353274",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "b892fa22-87be-569e-a60f-14dc67c9cc25"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.c8826dd1-803c-5250-b7e6-7139a3543abf.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "3bb2331d4b0daf9e4b875b01fb5532b32fe2dbdd0163efa7d9708554923c06b8",
+      "sha256_before": "aaf6dbf130b6a1602454a05d68300378ffedd685363990e75d7c71f7c1f66cbc",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "c8826dd1-803c-5250-b7e6-7139a3543abf"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.ca8b59ee-11c4-59eb-94ff-505eb613f22a.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "dafa83d541647c101ff1b90c224ff56e6403716bcf652df31a9e3f926bfb3863",
+      "sha256_before": "440fc0fe22523dfbbfe11b7249556516a5faa51d7b9ff1579ecc3f8b177c0dde",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "ca8b59ee-11c4-59eb-94ff-505eb613f22a"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.cb5392c3-fd91-50f3-be40-149559ae7b96.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "16fe9718f20f9babc21e5a06bcad7b8d53b996809918705b0b1bc93a5e3f051a",
+      "sha256_before": "c674f5075169a31164e90b9772cd6ff46c25773d8860b209452f6b33462e8236",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "cb5392c3-fd91-50f3-be40-149559ae7b96"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.cbb3f650-090f-5fa9-9f9e-365fb814c6d6.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "d5068e9c7cdfd8f06a837b0f4a50bb21c4b25d69d4badece5fd0eeb175fde2d8",
+      "sha256_before": "8bf3b295a0ed8b32fcbb9d1b221ca3c8b9e6b5944fa590b39d9ffb4b5df54658",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "cbb3f650-090f-5fa9-9f9e-365fb814c6d6"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.d42dc028-303e-5b43-a6d0-146bdb908fc8.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "5853a9faa4220002d46d563aa1732873825c8f4d6e22f877b22c682170a2ccae",
+      "sha256_before": "970dd88f6cb8f90bfa87ad650045508739f7fecaf76d594a4868e25569ca204d",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "d42dc028-303e-5b43-a6d0-146bdb908fc8"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.d836ebd5-ce4f-575a-a72d-889cb4ae4204.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "15d8520315efc6bfb43ac41277744a844ef407a6bca44270483de8ad7dd50940",
+      "sha256_before": "ef6e3deddc0ea9e2152a76bcabeddc2cd792cd66a396859ac0aa889ac5f1dad0",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "d836ebd5-ce4f-575a-a72d-889cb4ae4204"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.dd80e2eb-9220-53ee-bac4-a087306dc309.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "1067143630e89d4c970dde4ffbd330425d4073ed1f79c30de90b2619f101acc1",
+      "sha256_before": "7eb314816d927c4aa5ec7b3a2c991cd247658bdbc426942609726bdda64e97db",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "dd80e2eb-9220-53ee-bac4-a087306dc309"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.ddc9113f-3bff-5771-98cd-cd6fc0590ca7.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "52745cfe595f1b2777f2ca0556d40e14577df97bf3dd8c6b3de2278da488951d",
+      "sha256_before": "a0dd92109f1ed05cbfd8641458613a6f300c44f0d24bfe42581fdfa2827f6cb3",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "ddc9113f-3bff-5771-98cd-cd6fc0590ca7"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.deb04f20-3157-5b14-88b7-7a7a4ddc5c32.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "09b02a712a5a98495956efa1c7e1ee46d6e3006d9e5f2208d86bb9bceb179bdb",
+      "sha256_before": "61882379ed1550a31f9ea30dcf5d208c04855103cb04cc39323375f8f5175308",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "deb04f20-3157-5b14-88b7-7a7a4ddc5c32"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.def110fd-6099-5589-813c-e238dd5259c9.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "2bf23247768eb4abe31275a5bd065ea258b2216b0433b0af53de9edb5a5fea48",
+      "sha256_before": "6b7e0979b0e7a98df65af8386903f3e2ab6b2cb8efe840b56c854231e6ebbb23",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "def110fd-6099-5589-813c-e238dd5259c9"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.e239e95a-e89e-51ce-aa35-4c95ac6df9f2.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "211c0efdde9fb55d76fed110e2ed26fbb9991dc0f7b84bf75d7f4bbfcb2736fe",
+      "sha256_before": "5cd38a14fc59f3c9075aba4b25961ba319ae7eeba7258ce4f9a54c019953c6e4",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "e239e95a-e89e-51ce-aa35-4c95ac6df9f2"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.ebe6a343-f7fd-5576-8c9d-b2e096e624a4.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "b04b7e1347eb02e9bfd33bb8a8f05dafc9279b6b1bcc8de3598329d795905bfa",
+      "sha256_before": "1db1f362804d95ca466065d7bbb045f3cfb374e36ae3550280fa5d1c76d5bece",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "ebe6a343-f7fd-5576-8c9d-b2e096e624a4"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.f2f2b5aa-f39e-547f-a7e5-6840ac958d49.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "632cd02a87034540d5473d6affb5d41de2fb425e5cad43e98c437e58c4f6ae1a",
+      "sha256_before": "6905132dc8cb6a7cf668ed3d1a46d765d739e703c5df0a1ba5195811dd82802f",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "f2f2b5aa-f39e-547f-a7e5-6840ac958d49"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.f7232c0e-1042-51e7-b2bb-397102d46eb0.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "b1bf57319c424d07de018a805789155ea8dbb171a7ac424482f77e6cb7931bc4",
+      "sha256_before": "9d958b1a80315241cc9ac767f65850d3a1e2efc1da0faf2e3eea470eb0ae3f41",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "f7232c0e-1042-51e7-b2bb-397102d46eb0"
+    },
+    {
+      "attempted_after": false,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/ipie_uhf_trial/solution.f7b1aa32-6223-5044-a91c-d0f095ca713c.json",
+      "reason": "not attempted: the tested ipie adapter default requests one GPU, but all Improv backfill nodes report ngpus=0; CPU override forbidden by G-31 defaults",
+      "sha256_after": "02b5fd335a6dbfc693e8f89c6d9c2038409d9734e2870a9e7e9b917c3720e240",
+      "sha256_before": "058ae1ae71639eb286964659adc2b907def239d0fe9ab54128ae893f5d32035d",
+      "source": "original_ipie",
+      "source_commit": "2629353",
+      "status_after": "not_attempted",
+      "status_before": "not_attempted",
+      "task_uuid": "f7b1aa32-6223-5044-a91c-d0f095ca713c"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.062cbf0a-262c-5c75-a525-17a682f7d25f.json",
+      "reason": null,
+      "sha256_after": "9a13b43e62bd4a77f1af4954e5380296972c5e8565a9aed9363647b56b80ee22",
+      "sha256_before": "3480e6a3afb86a2b198e8776d7f351c0b89b906ed415e821403be651108971d5",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "062cbf0a-262c-5c75-a525-17a682f7d25f"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.0a31c810-9581-5b29-b574-b4e3ab1e0561.json",
+      "reason": null,
+      "sha256_after": "e0093a71c13398cfcb274c988fb3bbd15f9d77181a4f5fdd3107f1500340f3e5",
+      "sha256_before": "621fafd579155f2a280ee4e65b72289d17046e7bdad4551ad7202711781e3581",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "0a31c810-9581-5b29-b574-b4e3ab1e0561"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.12d0d43c-22d5-5699-b713-4fae60701a4e.json",
+      "reason": null,
+      "sha256_after": "6ac92870a1e9047051100050e396fcc60266a94103ca385a9e8481780ad3b87b",
+      "sha256_before": "fee8576be9c6816e606a06fadd65dd6e84d5e90cc04fc80d425334546ae08840",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "12d0d43c-22d5-5699-b713-4fae60701a4e"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.1624db95-1097-54d2-a68c-375f9b786492.json",
+      "reason": null,
+      "sha256_after": "d7f169f9d2306d8a70dab239d5f89b216b4b3ab40a2a4a4eb022ae9fbc0c1f22",
+      "sha256_before": "acd15da25cbc21e70a6d17400922d6c76bb4404e7201f5a1d88850868a271f7e",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "1624db95-1097-54d2-a68c-375f9b786492"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.1b924e3e-0133-543b-86b3-2753cde933d5.json",
+      "reason": null,
+      "sha256_after": "3ed535d30547a810e7c455445bc139329d0156afcce0ac5e8f6766cc61600059",
+      "sha256_before": "7d30a69a99d154bd86f5294dbedf84b4cc7c5390dbbd3522467808ce4c84304d",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "1b924e3e-0133-543b-86b3-2753cde933d5"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.25c59f20-261b-59ad-b10f-fe2b61ae317e.json",
+      "reason": null,
+      "sha256_after": "4dfad688b64870271d9445a7f1b9a639ba1a7821783318d0ade9e0f460a9c13c",
+      "sha256_before": "a5a84635e44e3402cf33e13406f2ec147decd643b826919d994d718b55b4b19a",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "25c59f20-261b-59ad-b10f-fe2b61ae317e"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.280b4b86-4352-51a7-a165-355ee9ef3b2a.json",
+      "reason": null,
+      "sha256_after": "dc7310b6e2348c6a99bfe249b6188fe970d43b5e32500a0bfcf7f81af40625a9",
+      "sha256_before": "00878a74c4cf584739131fd69db55cd65bda2600bce6c7828dbe92fc0c45b955",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "280b4b86-4352-51a7-a165-355ee9ef3b2a"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.2d7aac5c-0c01-5ce6-be68-4d0ca198a9f6.json",
+      "reason": null,
+      "sha256_after": "8bf56b57467ec30f466fea5e0b4d125cbd8e3eeb615ed176448425205437ce6a",
+      "sha256_before": "a434b2ab99c364f31680a4dd4d37408ce04981c74c55e6a9ac5241b65402e4be",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "2d7aac5c-0c01-5ce6-be68-4d0ca198a9f6"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.314a3c71-80a5-5e39-9448-053747494f1c.json",
+      "reason": null,
+      "sha256_after": "64829972b9586d628bc466e594a11114af1143d5102b35f5bb5eb16e0d66e245",
+      "sha256_before": "f3f12bccc4b8e03b3c336559afe50320c399d43c46b07c8910bef6d72cfe3cfe",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "314a3c71-80a5-5e39-9448-053747494f1c"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solution_data[0].solution_details.harness_status",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.322b3212-6364-5bef-bb6b-d0b61ed77bc5.json",
+      "reason": "attempt timed out at adapter-default wall cap 1800 seconds",
+      "sha256_after": "0bb0894e4a645f6d9a357480e911e687a2a4bfa3d1f5284dbab8ec57a2cec73c",
+      "sha256_before": "ff5f63c8e97e050ee65a6b0af51c9f273351607b046c847f40cf74fe00871ad0",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "timeout",
+      "status_before": "not_attempted",
+      "task_uuid": "322b3212-6364-5bef-bb6b-d0b61ed77bc5"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.362af02a-adc2-5519-a77a-cda24c736973.json",
+      "reason": null,
+      "sha256_after": "fcc687af83a5b2f8d2cfc98eddb60259edc40fff05b244dfb3ce823987121d1d",
+      "sha256_before": "43d6d1ab5386792775554bf8aca66d4de69dfff7e428bf247acc018102c7bcb2",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "362af02a-adc2-5519-a77a-cda24c736973"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.3d343ddb-a898-5c0e-afc9-42b62d588c5e.json",
+      "reason": null,
+      "sha256_after": "dbaff3826a795820a4a5e1803dc5d98b6bdddbfcdd73e2213cca2af2448e4002",
+      "sha256_before": "d6376e6ac0885397f52aab11868643cf34c65cd1f2495c817b4b431dd938a1f9",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "3d343ddb-a898-5c0e-afc9-42b62d588c5e"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.47e28da2-70f2-5512-9d41-49ad17434d34.json",
+      "reason": null,
+      "sha256_after": "9247d5aeeaacf5c50eedff420c37b6c0ab56d9777343c34512b9a7bfea6df9df",
+      "sha256_before": "4053159dc9a8ac765ca5264398289b519c367cc74f4ab78fe1192c47d3864345",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "47e28da2-70f2-5512-9d41-49ad17434d34"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.4d92193b-a2aa-5726-978f-eef601ff9a21.json",
+      "reason": null,
+      "sha256_after": "1f75272a402b35317a4595ff49fa87edfecfe44446907667aa43f21cc8d6b2f2",
+      "sha256_before": "f6b5e903e7f5a19413843ac6753b8d4739533bb602394e9e6e27e91af908b027",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "4d92193b-a2aa-5726-978f-eef601ff9a21"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.5317a912-eb4a-588d-92ab-3cab5e083e51.json",
+      "reason": null,
+      "sha256_after": "6819eaf86ab52266a2ea4d9315bc3ff7e81f90a4f1ab0c58cda350421edf36da",
+      "sha256_before": "eead33f643a97edde8eecf1e8d40cfc24315c05557a7d68c1b5aa742a03d4cab",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "5317a912-eb4a-588d-92ab-3cab5e083e51"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.64818698-190e-5f48-9fe9-a374b30aac8e.json",
+      "reason": null,
+      "sha256_after": "d242f9316576017642af273bcab6c941cca6b4433292021db4eca453220f7caf",
+      "sha256_before": "678bb395ee921f102a305e6f7ceed33ed62168ed092c5cac9528470ba156bb8a",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "64818698-190e-5f48-9fe9-a374b30aac8e"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solution_data[0].solution_details.harness_status",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.64e051dd-532e-51b3-94e1-9409438d3764.json",
+      "reason": "attempt timed out at adapter-default wall cap 1800 seconds",
+      "sha256_after": "694eb6084e15eabe2a9e8f9db7bc7f327b25f3e86288de4503da8d19c6a78b14",
+      "sha256_before": "b59e9a49e8fab7963c7bee1e08018b62e7615419a820f9dea4fda1edea2bd9ad",
+      "source": "diamond_pyscf",
+      "source_commit": "454ab19",
+      "status_after": "timeout",
+      "status_before": "not_attempted",
+      "task_uuid": "64e051dd-532e-51b3-94e1-9409438d3764"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.64e736ab-07ef-5db9-a555-17da30b4a865.json",
+      "reason": null,
+      "sha256_after": "cf9b830e37003bff5893e64e23d2c379075dbf87ed75011678016f04dae96b44",
+      "sha256_before": "7cc24e1f3b997282b9314b69bcf9d91ea803ecfdf9c2a121c6774799caa5edb1",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "64e736ab-07ef-5db9-a555-17da30b4a865"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.659c2dd8-2b6c-518c-96d2-175564ba0e87.json",
+      "reason": null,
+      "sha256_after": "0dda37cc34960d42500c224567696b9bcaf7be0a2d1010a1252f2cfab8f783ca",
+      "sha256_before": "ea06fa2b04f438419e9db0b5642df4a2dfa540182c8abb311e1289df177d7303",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "659c2dd8-2b6c-518c-96d2-175564ba0e87"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.6adb63da-6eda-551e-96b8-d6163fe40187.json",
+      "reason": null,
+      "sha256_after": "8e498fc090e3a1e1e80997a31db0e2a7dc41b8588ae0600e8f7ad81d04933a3e",
+      "sha256_before": "10c86f6e8fc382c6dfefc184dc9a4c6d88ff29ad29e66e3055fd79b4e9278a76",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "6adb63da-6eda-551e-96b8-d6163fe40187"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.6cd8382a-9a9a-5c43-83b1-616c9f301ab1.json",
+      "reason": null,
+      "sha256_after": "ac6ba3ab1658450b32260c168a60d27036f3bd9444b1ec7f990a7adf042b331a",
+      "sha256_before": "619643ed934ea96d383455fc2cfa8a757685d42bfe2b8c4f61d345757b46b23c",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "6cd8382a-9a9a-5c43-83b1-616c9f301ab1"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.7964bbe9-1ec7-55ef-b7b4-08b1d08445d8.json",
+      "reason": null,
+      "sha256_after": "7ebfe0423732e5829b67f77362a9f75acbb8b7b744b89055263bc46e4bd31644",
+      "sha256_before": "053a60792788d0e8a2ced2c2531e11b9592990f7e40ec0478f26134e020ce80a",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "7964bbe9-1ec7-55ef-b7b4-08b1d08445d8"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.7b1ea320-6c12-5012-922f-fa51d99eeaef.json",
+      "reason": null,
+      "sha256_after": "00652c82b412e9586fe7c01f3176d75185aec8a6f342df4eb86cbd9e8e89cace",
+      "sha256_before": "0abfbb954a6da80e67cb93ffd6f028ccc54431b47aed1d83eb7997456ee3337f",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "7b1ea320-6c12-5012-922f-fa51d99eeaef"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.7cf226f5-ce3d-5761-8473-5153fb290151.json",
+      "reason": null,
+      "sha256_after": "1184de891c5cb613268cffa7c56bfa2918b7e451ca39bb06f2d892dfadaa2837",
+      "sha256_before": "59eff77d4f7faca2e11c0d88ac411b20fb6b2c892ab2670c12c745074275a34e",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "7cf226f5-ce3d-5761-8473-5153fb290151"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.8198fdf2-0bb6-5684-acd4-af62e64a6ed9.json",
+      "reason": null,
+      "sha256_after": "9dffbacf44266f1d7cf41fbe8989ab684161927c543d0c7f100aa797aefe0b6d",
+      "sha256_before": "5d3aad9fbd5e3fa34e611eb5005d2bd133efeb6de43410b743ace654a90cdfd5",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "8198fdf2-0bb6-5684-acd4-af62e64a6ed9"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.82b10203-9445-52fd-8418-e67979a33bd3.json",
+      "reason": null,
+      "sha256_after": "859444e3a559bc14ff6524cc441e78b622f93dde22f1eed2f529767feeae653c",
+      "sha256_before": "dccbc833a28ee8ab5fcb659f5bc3ff5356e1e332845a3b18f2d52ec37bcc5bee",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "82b10203-9445-52fd-8418-e67979a33bd3"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.9317b786-c94e-59a1-9386-d7d91669bf10.json",
+      "reason": null,
+      "sha256_after": "d5f9e1b797755887b365c79df6288f343baff8a89308f575d5fb026467f360e6",
+      "sha256_before": "dbdec5916430c2ee965aea37421e247f661cba69326585f58b15e2fe5f2ded80",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "9317b786-c94e-59a1-9386-d7d91669bf10"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.99c5ab5b-0c59-503d-bba0-298b3e197b75.json",
+      "reason": null,
+      "sha256_after": "cd7d47e303cd2c788a4013bf944305e04c90805ecaa45a1ae35049eec4e69e44",
+      "sha256_before": "59c5bc46614f268573993bcf981f1449895dd09e36513943d17498a1594dfd01",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "99c5ab5b-0c59-503d-bba0-298b3e197b75"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.9a097145-0078-510f-9ec8-55a1f65a5e22.json",
+      "reason": null,
+      "sha256_after": "1c234542704df106002fb6ebcf329471e9edb167a31dbee809d958a2e62b51f1",
+      "sha256_before": "1d82fde3232850f6465e8ffcce8565666cdfd4626adfbc4a7dda05a24629e9ae",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "9a097145-0078-510f-9ec8-55a1f65a5e22"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.9e72fd5d-a3a2-585b-b1bd-9e421c95359f.json",
+      "reason": null,
+      "sha256_after": "96ddf98bd56395fa098773531079ed99326683be9004953b07f68d87c7e493c0",
+      "sha256_before": "d8aa6b0951376b1d6eae4b4aaca0aee2c78b18b8dce24df4a11f09efb20dc83a",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "9e72fd5d-a3a2-585b-b1bd-9e421c95359f"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.a3c0d3bb-eeca-50de-913f-afdc37863574.json",
+      "reason": null,
+      "sha256_after": "df343c8be015273a45aa05a89966b59317155f67e6b4c1f4f80fa48376ade562",
+      "sha256_before": "395d60e7cc2b9efa8c94ad4a4c892ea5fdff4b75c45ff0719e194aa5bc5563a5",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "a3c0d3bb-eeca-50de-913f-afdc37863574"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.a83d93d8-78ff-5f5a-b27f-c9d3584b0416.json",
+      "reason": null,
+      "sha256_after": "5bab3a46a9f26d55eb905137a74a719dd5e5ef1287767c2617692edc7fb12046",
+      "sha256_before": "f826717bdf56718db8caece2de286297769188cbe0561d02770b12162dbd1330",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "a83d93d8-78ff-5f5a-b27f-c9d3584b0416"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.aa9cf2d8-ef23-5185-96bd-d179c00928dc.json",
+      "reason": null,
+      "sha256_after": "99649fdc95fc1fb2297576b89a66cca51cb34a248bce0099fd14bb96103390b5",
+      "sha256_before": "22921c24a1230c9dbf42527cf517306533091cb2231f03a93b19ae025f6fa647",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "aa9cf2d8-ef23-5185-96bd-d179c00928dc"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.ac3a023f-8d31-5d79-803e-c54e947c8d75.json",
+      "reason": null,
+      "sha256_after": "774fd9a8a28b00e024ba66360cb7618b5d43ccb2f971bc3951ce9b9dfebeee1d",
+      "sha256_before": "9e7185b34de6b9d0e85db603a85f317a4e7d2648ff1c08ce1217d4a5dca2e266",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "ac3a023f-8d31-5d79-803e-c54e947c8d75"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.acbef708-c970-5ca2-b296-ff7d5e875833.json",
+      "reason": null,
+      "sha256_after": "abb6fee5ea6c77a8c82525d0614f94c48017e74fb03fcbd79a32ee234ad7cbae",
+      "sha256_before": "9895a5fb646979833507c142a64c36de2cc69d488adbffcff5f5c45d8a1fe01d",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "acbef708-c970-5ca2-b296-ff7d5e875833"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.ae429d44-6cf1-5deb-bc6e-ae485f3ed705.json",
+      "reason": null,
+      "sha256_after": "1f938b58b3dcad94dee9ef9346fb5c7bc8dab52d241a59be81608afdd18c8ce1",
+      "sha256_before": "558fd891c461034913550e293496f6a5ab4fad043186116307879123b43118cc",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "ae429d44-6cf1-5deb-bc6e-ae485f3ed705"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.b182fafe-58d4-58fc-9386-aa1cd4f7c2c9.json",
+      "reason": null,
+      "sha256_after": "1430405eabd9f901b99eae68ad137c3e9a514e7d99ac1b08f8cbe033bafbc008",
+      "sha256_before": "89e6b6a6782419cb3ed79a73503e272ee60eb022b5a874e4e574db6ee9fbd1f9",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "b182fafe-58d4-58fc-9386-aa1cd4f7c2c9"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solution_data[0].solution_details.harness_status",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.b4fb73b8-4452-5072-99b6-eb9f61523499.json",
+      "reason": "attempt timed out at adapter-default wall cap 1800 seconds",
+      "sha256_after": "cb6092b058ef8cf450d9ea2dd97cd55edc4c9f905e7e317fcc3cd358bc41c2af",
+      "sha256_before": "2b0b319a714ad835540a11e7a0903ef43eb0fa90f817c2529ade5a20599ae67c",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "timeout",
+      "status_before": "not_attempted",
+      "task_uuid": "b4fb73b8-4452-5072-99b6-eb9f61523499"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.b4fc5215-8c0a-528b-a3a3-a5616c68713b.json",
+      "reason": null,
+      "sha256_after": "717aa85d9ee753e50332d3f8f8e3edbbeaa46507ee40da461d044565326e0eaf",
+      "sha256_before": "5ce166a9edb7e622e2e860bcbb105253a0339f0c3ec066db59b78bf9c44a7a83",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "b4fc5215-8c0a-528b-a3a3-a5616c68713b"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.b892fa22-87be-569e-a60f-14dc67c9cc25.json",
+      "reason": null,
+      "sha256_after": "4a8687f7adf4ed6c0f529d409bfcad585f6df5ae894fb575a42de7dd3e42ff5c",
+      "sha256_before": "3cde1d163719a5723181f52dbd59325287a2ff650fea7b993e3c81e9fcae4238",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "b892fa22-87be-569e-a60f-14dc67c9cc25"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.c8826dd1-803c-5250-b7e6-7139a3543abf.json",
+      "reason": null,
+      "sha256_after": "e3fe9d368e9b8d7ebaccf1801eb0eef2174a7d05240178cf292b6a95b7bdca33",
+      "sha256_before": "f0d650fe88f335e7732797f968646fd7e674cd695ffcbdaca2ed1bf6a0dfb3f7",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "c8826dd1-803c-5250-b7e6-7139a3543abf"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.ca8b59ee-11c4-59eb-94ff-505eb613f22a.json",
+      "reason": null,
+      "sha256_after": "55eb710814cbf6b56d6a620042c1f0a6c749c1cbfeb5fc60591041e1bb7a4b1e",
+      "sha256_before": "c544a27968b022e68208587e0ece4525b6671582b6ac1b9053c95a28cabaf9cc",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "ca8b59ee-11c4-59eb-94ff-505eb613f22a"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.cb5392c3-fd91-50f3-be40-149559ae7b96.json",
+      "reason": null,
+      "sha256_after": "3cfa78b97deb34d469f8e86da2a1d4957fbf83caedcaa1545a1c541e702be91e",
+      "sha256_before": "4ac81cd2c61ebad14452beb04cfb09ca88a9ef78b0456f12a8ae77bc1f353276",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "cb5392c3-fd91-50f3-be40-149559ae7b96"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.cbb3f650-090f-5fa9-9f9e-365fb814c6d6.json",
+      "reason": null,
+      "sha256_after": "cf6765deecea88b8b0378feea865e422b5712b169c95ace6731f872a1bcb3324",
+      "sha256_before": "d24b09cf016df767a8247aaa5933a1750e79d83b9aae2eab2582ac834a56ab1e",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "cbb3f650-090f-5fa9-9f9e-365fb814c6d6"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": false,
+      "changed_paths": [
+        "solution_data[0].solution_details.attempted",
+        "solution_data[0].solution_details.campaign",
+        "solution_data[0].solution_details.harness_status",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.d42dc028-303e-5b43-a6d0-146bdb908fc8.json",
+      "reason": "attempt timed out at adapter-default wall cap 1800 seconds",
+      "sha256_after": "8a71e95d322e830f8de707826205e559e9883a63283f0b473cf62b4519f669d7",
+      "sha256_before": "4ba68b1ca1d21912f53d60a22dcbf9ce4f27b9d22bbc7ad4e732ecdffeba9ee9",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "timeout",
+      "status_before": "not_attempted",
+      "task_uuid": "d42dc028-303e-5b43-a6d0-146bdb908fc8"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.d836ebd5-ce4f-575a-a72d-889cb4ae4204.json",
+      "reason": null,
+      "sha256_after": "c1794fb828c90038cbbba8f23ec783c3900a0908a1e6f42dbb1ed7fdced4e01b",
+      "sha256_before": "6efcecf58e0abc257e65dff8518d538f263994e528e0f4faa5ea3dfbf1abef67",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "d836ebd5-ce4f-575a-a72d-889cb4ae4204"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.dd80e2eb-9220-53ee-bac4-a087306dc309.json",
+      "reason": null,
+      "sha256_after": "96bf2f782b62acaf509cb0bc354080dfb52ef744a77e513270353fddf7ca848d",
+      "sha256_before": "3a1cb39964a35e89d22f27bf5a38882bc5b5590f05945cc54507452c5defbfc6",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "dd80e2eb-9220-53ee-bac4-a087306dc309"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.ddc9113f-3bff-5771-98cd-cd6fc0590ca7.json",
+      "reason": null,
+      "sha256_after": "9e634815be22c6b6a14deb99f89f62676aab93044d8ec297271587dd0de38b59",
+      "sha256_before": "cf9073cb65b47f9e4b8be46cfb7682a720365c0df8695543dc8fee38219384aa",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "ddc9113f-3bff-5771-98cd-cd6fc0590ca7"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.deb04f20-3157-5b14-88b7-7a7a4ddc5c32.json",
+      "reason": null,
+      "sha256_after": "7a4eb7ba2de519b940ca882c8f14f008ee9997380353923cce680f518e966d67",
+      "sha256_before": "df7c4bc38ff335b9df6f7bc2ff1260a19838c1716862efd7ad72d57ec9aa37d5",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "deb04f20-3157-5b14-88b7-7a7a4ddc5c32"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.def110fd-6099-5589-813c-e238dd5259c9.json",
+      "reason": null,
+      "sha256_after": "fac5a93d7c14ca348ae79d9f74d927de819920b226f90ea9a736ac30560ba6cf",
+      "sha256_before": "111d4a533aa2630e4a4d003d10a3b9dfddcbd531bd5dc86c07c12a55478cecc3",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "def110fd-6099-5589-813c-e238dd5259c9"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.e239e95a-e89e-51ce-aa35-4c95ac6df9f2.json",
+      "reason": null,
+      "sha256_after": "010a1eee6f1ce0d62d9c6b433f395dfa773afd16e1206ce899eeeaa134004aba",
+      "sha256_before": "85a8e0ac2748ea70b7cf52e608c5e80f866e2fd5bc482f4a7cfb2bf3e3bb9b43",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "e239e95a-e89e-51ce-aa35-4c95ac6df9f2"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.ebe6a343-f7fd-5576-8c9d-b2e096e624a4.json",
+      "reason": null,
+      "sha256_after": "f36c1c5eb34e848b24a97b158902e03cfb7dd0760429bf08f1e88834a4d2af0e",
+      "sha256_before": "5b209c1867365a9a12827cb2d7ac425afe6f843b4d24e86e4eb386be20bce6d3",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "ebe6a343-f7fd-5576-8c9d-b2e096e624a4"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.f2f2b5aa-f39e-547f-a7e5-6840ac958d49.json",
+      "reason": null,
+      "sha256_after": "053eb5e07aa7e57904c9ee03f18be708c14b9810c26bc56470252db4bbc8677f",
+      "sha256_before": "1c10df2787468909b69cf634dfb7759e33e3cc178402e642a969b56fcc3f1474",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "f2f2b5aa-f39e-547f-a7e5-6840ac958d49"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.f7232c0e-1042-51e7-b2bb-397102d46eb0.json",
+      "reason": null,
+      "sha256_after": "6be21c6ee870d56cffc67a7a5bdd59e190ae76edb0a3c4698215e9232b872c4b",
+      "sha256_before": "de8268a015a090c81eaebea17144826f54cb3734af58a9fd4843a3080e364c74",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "f7232c0e-1042-51e7-b2bb-397102d46eb0"
+    },
+    {
+      "attempted_after": true,
+      "attempted_before": true,
+      "changed_paths": [
+        "solution_data[0].solution_details.campaign",
+        "solver_details.algorithm_details.solver_config.campaign"
+      ],
+      "path": "solution_files/pyscf_solutions/solution.f7b1aa32-6223-5044-a91c-d0f095ca713c.json",
+      "reason": null,
+      "sha256_after": "ab12391f8b88c5253913cedfb06b8357f2c67d7cc6d08f527e1b0d97df94803f",
+      "sha256_before": "8f96aac49bec91cf2890dc288f3f57ea87bad69b27c42e9eb203360c9a858337",
+      "source": "original_pyscf",
+      "source_commit": "90e7e0b",
+      "status_after": "completed",
+      "status_before": "completed",
+      "task_uuid": "f7b1aa32-6223-5044-a91c-d0f095ca713c"
+    }
+  ],
+  "shci_eps_var": 5e-05,
+  "shci_eps_var_label": "5e-5",
+  "status": "applied"
+}
