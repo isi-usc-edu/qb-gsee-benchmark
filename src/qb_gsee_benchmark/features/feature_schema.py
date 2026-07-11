@@ -88,6 +88,7 @@ PROCEDURAL = {
     "fragment_partition_assignments_agree", "fragment_calibration_role",
     "sign_free_condition", "g24_coverage_group",
     "mp2_spin_decomposition_status", "pair_structure_basis",
+    "U_eff_over_W_reason", "universal_t0_linear_features_version",
 }
 DUPLICATE_SIZE = {"num_orbitals", "num_electrons", "ms2"}
 LEGACY_JW_ARCHIVE = {
@@ -152,6 +153,21 @@ PAIR_AUDIT = {
     "two_body_duplicate_orientation_records_skipped",
     "hf_stationarity_tolerance",
 }
+UNIVERSAL_T0_INV_MODEL = {
+    "effective_h1_frobenius_norm", "bare_one_body_bandwidth",
+    "bare_one_body_gap_alpha", "bare_one_body_gap_beta",
+    "bare_one_body_gap_min",
+}
+UNIVERSAL_T0_BAS_MODEL = {
+    "fermionic_coefficient_l1_norm", "effective_h1_entrywise_l1_norm",
+    "effective_h1_l1_over_frobenius", "eri_l1_over_frobenius",
+    "rho_offdiag", "U_eff_over_W",
+    *{
+        f"{prefix}_fraction_above_rel_1e_{exponent}"
+        for prefix in ("effective_h1", "eri")
+        for exponent in (12, 10, 8, 6, 4, 2)
+    },
+}
 
 def metadata_for_column(column: str) -> FeatureColumnMetadata:
     """Return explicit P0 metadata; unknown columns fail closed."""
@@ -214,20 +230,40 @@ def metadata_for_column(column: str) -> FeatureColumnMetadata:
     if column in PAIR_AUDIT:
         return _feature(column, "T0", "BAS", eligible=False,
             reason="parser or mean-field procedural diagnostic", role="audit-only")
+    if column in UNIVERSAL_T0_INV_MODEL:
+        return _feature(column, "T0", "INV", cost="integral_linear")
+    if column in UNIVERSAL_T0_BAS_MODEL:
+        return _feature(column, "T0", "BAS", cost="integral_linear")
     raise KeyError(f"G-40 P0 has no metadata classification for column {column!r}")
 
-PLANNED_P0_COLUMNS = {
-    "fermionic_coefficient_l1_norm": _feature(
-        "fermionic_coefficient_l1_norm", "T0", "BAS", scaling="extensive",
-        cost="integral_linear", status="defined_not_populated",
-        definition="sum_pq |h_tilde_pq| + 1/2 sum_pqrs |(pq|rs)|; h_tilde_pq=h_pq-1/2 sum_r (pr|rq)",
+PLANNED_COLUMNS = {
+    column: metadata_for_column(column)
+    for column in sorted(UNIVERSAL_T0_INV_MODEL | UNIVERSAL_T0_BAS_MODEL)
+}
+PLANNED_COLUMNS["fermionic_coefficient_l1_norm"] = _feature(
+    "fermionic_coefficient_l1_norm", "T0", "BAS", scaling="extensive",
+    cost="integral_linear", status="defined_not_populated",
+    definition="sum_pq |h_tilde_pq| + 1/2 sum_pqrs |(pq|rs)|",
+)
+PLANNED_COLUMNS = {
+    name: FeatureColumnMetadata(
+        **{
+            **metadata.to_dict(),
+            "implementation_status": "defined_not_populated",
+        }
     )
+    for name, metadata in PLANNED_COLUMNS.items()
 }
 
 def metadata_catalog(columns: Iterable[str], include_planned: bool = True) -> list[FeatureColumnMetadata]:
-    result = [metadata_for_column(column) for column in columns]
+    column_list = list(columns)
+    result = [metadata_for_column(column) for column in column_list]
     if include_planned:
-        result.extend(PLANNED_P0_COLUMNS.values())
+        current_names = set(column_list)
+        result.extend(
+            metadata for name, metadata in PLANNED_COLUMNS.items()
+            if name not in current_names
+        )
     names = [row.column for row in result]
     if len(names) != len(set(names)):
         raise ValueError("duplicate columns in feature metadata catalog")

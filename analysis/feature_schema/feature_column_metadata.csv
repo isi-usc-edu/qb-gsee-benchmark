@@ -119,4 +119,26 @@ mp2_pair_double_amplitude_l2_fraction,feature,T2,BAS,MF-PROTO,accuracy,True,,int
 mp2_spin_decomposition_status,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,mp2 spin decomposition status,current
 pair_structure_basis,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,pair structure basis,current
 pair_structure_features_version,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,pair structure features version,current
-fermionic_coefficient_l1_norm,feature,T0,BAS,NONE,accuracy,True,,extensive,integral_linear,sum_pq |h_tilde_pq| + 1/2 sum_pqrs |(pq|rs)|; h_tilde_pq=h_pq-1/2 sum_r (pr|rq),defined_not_populated
+U_eff_over_W,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,U eff over W,defined_not_populated
+bare_one_body_bandwidth,feature,T0,INV,NONE,accuracy,True,,intensive,integral_linear,bare one body bandwidth,defined_not_populated
+bare_one_body_gap_alpha,feature,T0,INV,NONE,accuracy,True,,intensive,integral_linear,bare one body gap alpha,defined_not_populated
+bare_one_body_gap_beta,feature,T0,INV,NONE,accuracy,True,,intensive,integral_linear,bare one body gap beta,defined_not_populated
+bare_one_body_gap_min,feature,T0,INV,NONE,accuracy,True,,intensive,integral_linear,bare one body gap min,defined_not_populated
+effective_h1_entrywise_l1_norm,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,effective h1 entrywise l1 norm,defined_not_populated
+effective_h1_fraction_above_rel_1e_10,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,effective h1 fraction above rel 1e 10,defined_not_populated
+effective_h1_fraction_above_rel_1e_12,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,effective h1 fraction above rel 1e 12,defined_not_populated
+effective_h1_fraction_above_rel_1e_2,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,effective h1 fraction above rel 1e 2,defined_not_populated
+effective_h1_fraction_above_rel_1e_4,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,effective h1 fraction above rel 1e 4,defined_not_populated
+effective_h1_fraction_above_rel_1e_6,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,effective h1 fraction above rel 1e 6,defined_not_populated
+effective_h1_fraction_above_rel_1e_8,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,effective h1 fraction above rel 1e 8,defined_not_populated
+effective_h1_frobenius_norm,feature,T0,INV,NONE,accuracy,True,,intensive,integral_linear,effective h1 frobenius norm,defined_not_populated
+effective_h1_l1_over_frobenius,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,effective h1 l1 over frobenius,defined_not_populated
+eri_fraction_above_rel_1e_10,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,eri fraction above rel 1e 10,defined_not_populated
+eri_fraction_above_rel_1e_12,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,eri fraction above rel 1e 12,defined_not_populated
+eri_fraction_above_rel_1e_2,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,eri fraction above rel 1e 2,defined_not_populated
+eri_fraction_above_rel_1e_4,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,eri fraction above rel 1e 4,defined_not_populated
+eri_fraction_above_rel_1e_6,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,eri fraction above rel 1e 6,defined_not_populated
+eri_fraction_above_rel_1e_8,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,eri fraction above rel 1e 8,defined_not_populated
+eri_l1_over_frobenius,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,eri l1 over frobenius,defined_not_populated
+fermionic_coefficient_l1_norm,feature,T0,BAS,NONE,accuracy,True,,extensive,integral_linear,sum_pq |h_tilde_pq| + 1/2 sum_pqrs |(pq|rs)|,defined_not_populated
+rho_offdiag,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,rho offdiag,defined_not_populated

@@ -10,6 +10,7 @@ import pandas as pd
 import pytest
 
 from qb_gsee_benchmark.features.feature_schema import (
+    PLANNED_COLUMNS,
     metadata_catalog,
     metadata_for_column,
     model_eligible_columns,
@@ -63,7 +64,9 @@ def test_schema_classifies_every_current_column_once() -> None:
     columns = list(pd.read_csv(FEATURES, nrows=0).columns)
     catalog = metadata_catalog(columns)
 
-    assert len(catalog) == len(columns) + 1
+    assert len(catalog) == len(columns) + len(
+        set(PLANNED_COLUMNS) - set(columns)
+    )
     assert len({row.column for row in catalog}) == len(catalog)
 
 
@@ -104,5 +107,6 @@ def test_generated_p0_artifacts_are_deterministic_and_value_preserving() -> None
 
     with (OUT / "feature_column_metadata.csv").open(newline="") as handle:
         rows = list(csv.DictReader(handle))
-    assert len(rows) == len(pd.read_csv(FEATURES, nrows=0).columns) + 1
+    columns = list(pd.read_csv(FEATURES, nrows=0).columns)
+    assert len(rows) == len(columns) + len(set(PLANNED_COLUMNS) - set(columns))
     assert (OUT / "g40_p0_appendix_divergences.md").is_file()
