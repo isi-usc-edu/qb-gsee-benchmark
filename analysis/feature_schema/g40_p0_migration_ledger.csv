@@ -1,5 +1,5 @@
 change_id,columns,change_type,old_semantics,new_semantics,status,value_cells_changed_in_p0,note
-P0-001,log_fci_dim,definition_and_values,nalpha derived after MS2/2,nalpha=(NELEC+MS2)/2; nbeta=(NELEC-MS2)/2,pending_header_backed_P1_rebuild,0,No value guessed from task metadata; P1 reads every FCIDUMP header and enumerates changed cells.
+P0-001,log_fci_dim,definition_and_values,nalpha derived after MS2/2,nalpha=(NELEC+MS2)/2; nbeta=(NELEC-MS2)/2,complete_in_p1a,0,P1-A read every FCIDUMP header; changed cells are enumerated in g40_p1a_migration_ledger.csv.
 P0-002,one_norm,preserve_and_demote,legacy Jordan-Wigner one norm treated as physical lambda,byte-preserved archive column; BAS+ORD; model-ineligible,complete,0,Never silently redefine the historical column.
 P0-003,fermionic_coefficient_l1_norm,new_definition,absent,sum|h_tilde| + 1/2 sum|V|; BAS,defined_pending_P1_population,0,New column; does not overwrite one_norm.
 P0-004,df_rank;df_gap;df_eig_decay_exponent;df_rank_per_orbital,representation_retag,legacy/addendum BAS claim,INV under U tensor U conjugation,complete,0,G-21 empirical checks remain a P1 release gate.

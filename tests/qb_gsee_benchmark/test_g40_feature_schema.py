@@ -73,7 +73,7 @@ def test_schema_classifies_every_current_column_once() -> None:
 def test_p0_eligibility_and_retags_are_explicit() -> None:
     log_dimension = metadata_for_column("log_fci_dim")
     assert log_dimension.model_eligible
-    assert log_dimension.implementation_status == "pending_value_rebuild"
+    assert log_dimension.implementation_status == "current"
     assert metadata_for_column("df_gap").representation == "INV"
     assert metadata_for_column("one_norm").representation == "BAS+ORD"
     assert not metadata_for_column("one_norm").model_eligible
@@ -82,10 +82,10 @@ def test_p0_eligibility_and_retags_are_explicit() -> None:
 
     columns = list(pd.read_csv(FEATURES, nrows=0).columns)
     eligible = model_eligible_columns(columns)
-    assert "log_fci_dim" not in eligible
+    assert "log_fci_dim" in eligible
     assert "one_norm" not in eligible
     assert "ccsd_t1_diagnostic" not in eligible
-    assert "fermionic_coefficient_l1_norm" not in eligible
+    assert "fermionic_coefficient_l1_norm" in eligible
 
 
 def test_generated_p0_artifacts_are_deterministic_and_value_preserving() -> None:
@@ -103,13 +103,12 @@ def test_generated_p0_artifacts_are_deterministic_and_value_preserving() -> None
     assert manifest["source_feature_table_sha256"]
     assert "one_norm" in manifest["excluded_columns"]
     assert "ccsd_t1_diagnostic" in manifest["excluded_columns"]
-    assert manifest["pending_value_rebuild_columns"] == ["log_fci_dim"]
+    assert manifest["pending_value_rebuild_columns"] == []
     planned = manifest["planned_columns_excluded_until_populated"]
-    assert "fermionic_coefficient_l1_norm" in planned["pending_model_eligible"]
-    assert "fcidump_symmetry_status" in planned["permanently_audit_only"]
-    assert not set(planned["pending_model_eligible"]) & set(
-        planned["permanently_audit_only"]
-    )
+    assert planned == {
+        "pending_model_eligible": [],
+        "permanently_audit_only": [],
+    }
 
     with (OUT / "feature_column_metadata.csv").open(newline="") as handle:
         rows = list(csv.DictReader(handle))

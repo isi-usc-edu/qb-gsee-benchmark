@@ -215,11 +215,6 @@ def metadata_for_column(column: str) -> FeatureColumnMetadata:
             "INV",
             cost="header",
             definition=definition,
-            status=(
-                "pending_value_rebuild"
-                if column == "log_fci_dim"
-                else "current"
-            ),
         )
     if column in LEGACY_JW_ARCHIVE:
         return _feature(column, "T0", "BAS+ORD", eligible=False,
