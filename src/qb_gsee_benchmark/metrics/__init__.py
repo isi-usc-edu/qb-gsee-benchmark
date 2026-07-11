@@ -1,4 +1,4 @@
-"""Versioned benchmark metrics defined by METRICS_SPEC v1.5."""
+"""Versioned benchmark metrics defined by METRICS_SPEC v1.7."""
 
 from .v1_2 import (
     METRICS_SPEC_VERSION as METRICS_SPEC_VERSION_V1_2,
@@ -24,8 +24,8 @@ from .v1_4 import (
     stratified_aggregation_v1_4,
 )
 from .v1_5 import (
-    METRICS_SPEC_VERSION,
-    VALID_REFERENCE_GRADES,
+    METRICS_SPEC_VERSION as METRICS_SPEC_VERSION_V1_5,
+    VALID_REFERENCE_GRADES as VALID_REFERENCE_GRADES_V1_5,
     agreement_v1_5,
     build_bundle_v1_5,
     classify_outcome_v1_5,
@@ -35,9 +35,31 @@ from .v1_5 import (
     stratified_aggregation_v1_5,
 )
 
+from .v1_7 import (
+    METRICS_SPEC_VERSION,
+    VALID_REFERENCE_GRADES,
+    agreement_v1_7,
+    build_bundle_v1_7,
+    classify_outcome_v1_7,
+    coverage_v1_7,
+    panel_descriptive_stats_v1_7,
+    per_solver_task_primitives_v1_7,
+    solver_similarity_v1_7,
+    stratified_aggregation_v1_7,
+)
 
 __all__ = [
     "METRICS_SPEC_VERSION",
+    "METRICS_SPEC_VERSION_V1_5",
+    "VALID_REFERENCE_GRADES_V1_5",
+    "agreement_v1_7",
+    "build_bundle_v1_7",
+    "classify_outcome_v1_7",
+    "coverage_v1_7",
+    "panel_descriptive_stats_v1_7",
+    "per_solver_task_primitives_v1_7",
+    "solver_similarity_v1_7",
+    "stratified_aggregation_v1_7",
     "METRICS_SPEC_VERSION_V1_4",
     "VALID_REFERENCE_GRADES_V1_4",
     "agreement_v1_5",

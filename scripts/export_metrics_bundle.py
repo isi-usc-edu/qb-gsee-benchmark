@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export the deterministic METRICS_SPEC v1.5 dashboard/paper data bundle."""
+"""Export the deterministic METRICS_SPEC v1.7 dashboard/paper data bundle."""
 
 from __future__ import annotations
 
@@ -13,9 +13,9 @@ from typing import Any
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPOSITORY_ROOT / "src"))
 
-from qb_gsee_benchmark.metrics import build_bundle_v1_5  # noqa: E402
+from qb_gsee_benchmark.metrics import build_bundle_v1_7  # noqa: E402
 
-DEFAULT_OUTPUT = REPOSITORY_ROOT / "scripts" / "dashboard_data" / "metrics_v1_5.json"
+DEFAULT_OUTPUT = REPOSITORY_ROOT / "scripts" / "dashboard_data" / "metrics_v1_7.json"
 
 
 def _require_hartree(value: Any, context: str) -> None:
@@ -54,11 +54,25 @@ LEGACY_MAPPING_RELATIVE_PATH = Path(
     "analysis/solver_panel/g31_legacy_lattice_task_mapping.csv"
 )
 CERTIFIED_MAPPING_STATUS = "certified_identity_lineage_and_recovered_payload"
+LEGACY_LATTICE_PROBLEM_UUIDS = (
+    "c2009f9f-4738-4919-9295-5f9231ca5199",
+    "614c4444-a31a-4348-b24d-01040208651c",
+)
 
 
 def _load_legacy_task_mapping(repository_root: Path) -> dict[str, str]:
     path = repository_root / LEGACY_MAPPING_RELATIVE_PATH
     if not path.exists():
+        legacy_files = [
+            candidate.relative_to(repository_root).as_posix()
+            for candidate in sorted((repository_root / "solution_files").rglob("*.json"))
+            if any(token in candidate.as_posix() for token in LEGACY_LATTICE_PROBLEM_UUIDS)
+        ]
+        if legacy_files:
+            raise FileNotFoundError(
+                f"required certified legacy task mapping is absent: {path}; "
+                f"legacy lattice solution files exist, including {legacy_files[0]}"
+            )
         return {}
     mapping: dict[str, str] = {}
     current_ids: set[str] = set()
@@ -116,6 +130,8 @@ def load_committed_artifacts(repository_root: Path) -> tuple[dict[str, dict[str,
         family = path.parent.name
         instance_uuid = str(document.get("problem_instance_uuid", ""))
         for raw_task in document.get("tasks", []):
+            # The metric layer converts reference_energy_uncertainty in mHa to
+            # Hartree before taking the maximum across supported uncertainty fields.
             task = dict(raw_task)
             task_uuid = str(task.get("task_uuid", ""))
             if not task_uuid:
@@ -177,6 +193,9 @@ def load_committed_artifacts(repository_root: Path) -> tuple[dict[str, dict[str,
         for result in solution_data:
             if not isinstance(result, dict):
                 continue
+            solution_details = result.get("solution_details")
+            if not isinstance(solution_details, dict):
+                solution_details = {}
             if result.get("energy") is not None or "energy_units" in result:
                 _require_hartree(
                     result.get("energy_units"),
@@ -203,6 +222,9 @@ def load_committed_artifacts(repository_root: Path) -> tuple[dict[str, dict[str,
                         else None
                     ),
                     "energy": result.get("energy"),
+                    "attempted": solution_details.get("attempted"),
+                    "harness_status": solution_details.get("harness_status"),
+                    "not_attempted_reason": solution_details.get("not_attempted_reason"),
                     "source": path.relative_to(repository_root).as_posix(),
                     "solution_file_family": solution_file_family,
                 }
@@ -212,7 +234,7 @@ def load_committed_artifacts(repository_root: Path) -> tuple[dict[str, dict[str,
 
 def export_bundle(repository_root: Path, output: Path, bootstrap_iterations: int = 1000) -> bytes:
     tasks, attempts = load_committed_artifacts(repository_root)
-    bundle = build_bundle_v1_5(
+    bundle = build_bundle_v1_7(
         tasks, attempts, bootstrap_iterations=bootstrap_iterations
     )
     encoded = (json.dumps(bundle, indent=2, sort_keys=True, allow_nan=False) + "\n").encode("utf-8")
