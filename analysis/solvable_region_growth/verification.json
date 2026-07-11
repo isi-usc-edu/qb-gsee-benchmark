@@ -1,0 +1,381 @@
+{
+  "checks": [
+    {
+      "check": "certified_uuid_mapping",
+      "evidence": {
+        "rows": 46
+      },
+      "status": "pass"
+    },
+    {
+      "check": "raw_ladder_coverage",
+      "evidence": {
+        "attempts": 1824,
+        "per_member": {
+          "SHCI_pt_1e-4": 228,
+          "SHCI_pt_2e-4": 228,
+          "SHCI_pt_2e-5": 228,
+          "SHCI_pt_5e-5": 228,
+          "SHCI_var_1e-4": 228,
+          "SHCI_var_2e-4": 228,
+          "SHCI_var_2e-5": 228,
+          "SHCI_var_5e-5": 228
+        },
+        "remapped": 368
+      },
+      "status": "pass"
+    },
+    {
+      "check": "shared_primitive_coverage",
+      "evidence": {
+        "per_member": {
+          "SHCI_pt_1e-4": 149,
+          "SHCI_pt_2e-4": 149,
+          "SHCI_pt_2e-5": 149,
+          "SHCI_pt_5e-5": 149,
+          "SHCI_var_1e-4": 149,
+          "SHCI_var_2e-4": 149,
+          "SHCI_var_2e-5": 149,
+          "SHCI_var_5e-5": 149
+        },
+        "primitives": 1192
+      },
+      "status": "pass"
+    },
+    {
+      "check": "member_summary_SHCI_pt_1e-4",
+      "evidence": {
+        "independent": {
+          "indeterminate": 6,
+          "miss": 10,
+          "success": 133
+        },
+        "output": {
+          "eps_var": "1.0e-04",
+          "indeterminate": "6",
+          "ladder_id": "legacy_shci_pt_eps_var",
+          "member_index": "1",
+          "member_label": "SHCI_pt_1e-4",
+          "misses": "10",
+          "reference_valid_attempts": "149",
+          "success_rate": "0.8926174496644296",
+          "successes": "133"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "check": "member_summary_SHCI_pt_2e-4",
+      "evidence": {
+        "independent": {
+          "indeterminate": 6,
+          "miss": 10,
+          "success": 133
+        },
+        "output": {
+          "eps_var": "2.0e-04",
+          "indeterminate": "6",
+          "ladder_id": "legacy_shci_pt_eps_var",
+          "member_index": "0",
+          "member_label": "SHCI_pt_2e-4",
+          "misses": "10",
+          "reference_valid_attempts": "149",
+          "success_rate": "0.8926174496644296",
+          "successes": "133"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "check": "member_summary_SHCI_pt_2e-5",
+      "evidence": {
+        "independent": {
+          "indeterminate": 7,
+          "miss": 4,
+          "success": 138
+        },
+        "output": {
+          "eps_var": "2.0e-05",
+          "indeterminate": "7",
+          "ladder_id": "legacy_shci_pt_eps_var",
+          "member_index": "3",
+          "member_label": "SHCI_pt_2e-5",
+          "misses": "4",
+          "reference_valid_attempts": "149",
+          "success_rate": "0.9261744966442953",
+          "successes": "138"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "check": "member_summary_SHCI_pt_5e-5",
+      "evidence": {
+        "independent": {
+          "indeterminate": 6,
+          "miss": 7,
+          "success": 136
+        },
+        "output": {
+          "eps_var": "5.0e-05",
+          "indeterminate": "6",
+          "ladder_id": "legacy_shci_pt_eps_var",
+          "member_index": "2",
+          "member_label": "SHCI_pt_5e-5",
+          "misses": "7",
+          "reference_valid_attempts": "149",
+          "success_rate": "0.912751677852349",
+          "successes": "136"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "check": "member_summary_SHCI_var_1e-4",
+      "evidence": {
+        "independent": {
+          "indeterminate": 2,
+          "miss": 47,
+          "success": 100
+        },
+        "output": {
+          "eps_var": "1.0e-04",
+          "indeterminate": "2",
+          "ladder_id": "legacy_shci_variational_eps_var",
+          "member_index": "1",
+          "member_label": "SHCI_var_1e-4",
+          "misses": "47",
+          "reference_valid_attempts": "149",
+          "success_rate": "0.6711409395973155",
+          "successes": "100"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "check": "member_summary_SHCI_var_2e-4",
+      "evidence": {
+        "independent": {
+          "indeterminate": 2,
+          "miss": 54,
+          "success": 93
+        },
+        "output": {
+          "eps_var": "2.0e-04",
+          "indeterminate": "2",
+          "ladder_id": "legacy_shci_variational_eps_var",
+          "member_index": "0",
+          "member_label": "SHCI_var_2e-4",
+          "misses": "54",
+          "reference_valid_attempts": "149",
+          "success_rate": "0.6241610738255033",
+          "successes": "93"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "check": "member_summary_SHCI_var_2e-5",
+      "evidence": {
+        "independent": {
+          "indeterminate": 3,
+          "miss": 20,
+          "success": 126
+        },
+        "output": {
+          "eps_var": "2.0e-05",
+          "indeterminate": "3",
+          "ladder_id": "legacy_shci_variational_eps_var",
+          "member_index": "3",
+          "member_label": "SHCI_var_2e-5",
+          "misses": "20",
+          "reference_valid_attempts": "149",
+          "success_rate": "0.8456375838926175",
+          "successes": "126"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "check": "member_summary_SHCI_var_5e-5",
+      "evidence": {
+        "independent": {
+          "indeterminate": 2,
+          "miss": 34,
+          "success": 113
+        },
+        "output": {
+          "eps_var": "5.0e-05",
+          "indeterminate": "2",
+          "ladder_id": "legacy_shci_variational_eps_var",
+          "member_index": "2",
+          "member_label": "SHCI_var_5e-5",
+          "misses": "34",
+          "reference_valid_attempts": "149",
+          "success_rate": "0.7583892617449665",
+          "successes": "113"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "check": "nestedness_recomputed",
+      "evidence": {
+        "independent": {
+          "legacy_shci_pt_eps_var": [
+            894,
+            3
+          ],
+          "legacy_shci_variational_eps_var": [
+            894,
+            0
+          ]
+        },
+        "output": {
+          "legacy_shci_pt_eps_var": [
+            894,
+            3
+          ],
+          "legacy_shci_variational_eps_var": [
+            894,
+            0
+          ]
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "check": "violations_localize_to_null_cu_rung",
+      "evidence": [
+        {
+          "earlier_member": "SHCI_pt_1e-4",
+          "earlier_outcome": "success",
+          "family": "transition_metals",
+          "ladder_id": "legacy_shci_pt_eps_var",
+          "later_member": "SHCI_pt_2e-5",
+          "later_outcome": "indeterminate",
+          "problem_instance_short_name": "Cu_1",
+          "size_band": "norb_65_128",
+          "task_uuid": "1c7f5399-8982-4daf-81a5-7cef4e4588cc"
+        },
+        {
+          "earlier_member": "SHCI_pt_2e-4",
+          "earlier_outcome": "success",
+          "family": "transition_metals",
+          "ladder_id": "legacy_shci_pt_eps_var",
+          "later_member": "SHCI_pt_2e-5",
+          "later_outcome": "indeterminate",
+          "problem_instance_short_name": "Cu_1",
+          "size_band": "norb_65_128",
+          "task_uuid": "1c7f5399-8982-4daf-81a5-7cef4e4588cc"
+        },
+        {
+          "earlier_member": "SHCI_pt_5e-5",
+          "earlier_outcome": "success",
+          "family": "transition_metals",
+          "ladder_id": "legacy_shci_pt_eps_var",
+          "later_member": "SHCI_pt_2e-5",
+          "later_outcome": "indeterminate",
+          "problem_instance_short_name": "Cu_1",
+          "size_band": "norb_65_128",
+          "task_uuid": "1c7f5399-8982-4daf-81a5-7cef4e4588cc"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "check": "family_size_regions_close",
+      "evidence": {
+        "SHCI_pt_1e-4": 149,
+        "SHCI_pt_2e-4": 149,
+        "SHCI_pt_2e-5": 149,
+        "SHCI_pt_5e-5": 149,
+        "SHCI_var_1e-4": 149,
+        "SHCI_var_2e-4": 149,
+        "SHCI_var_2e-5": 149,
+        "SHCI_var_5e-5": 149
+      },
+      "status": "pass"
+    },
+    {
+      "check": "feature_space_coordinates",
+      "evidence": {
+        "per_member": {
+          "SHCI_pt_1e-4": 149,
+          "SHCI_pt_2e-4": 149,
+          "SHCI_pt_2e-5": 149,
+          "SHCI_pt_5e-5": 149,
+          "SHCI_var_1e-4": 149,
+          "SHCI_var_2e-4": 149,
+          "SHCI_var_2e-5": 149,
+          "SHCI_var_5e-5": 149
+        },
+        "rows": 1192
+      },
+      "status": "pass"
+    },
+    {
+      "check": "shared_ml_maps_api_recorded",
+      "evidence": {
+        "explained_variance_ratio": [
+          0.5817738949854548,
+          0.15314840908863914
+        ],
+        "feature_columns": [
+          "max_vertex_degree",
+          "min_vertex_degree",
+          "mean_vertex_degree",
+          "std_dev_vertex_degree",
+          "max_weight",
+          "min_weight",
+          "mean_weight",
+          "std_dev_weight",
+          "max_edge_order",
+          "mean_edge_order",
+          "std_dev_edge_order",
+          "one_norm",
+          "log_fci_dim",
+          "n_elec",
+          "n_orbs",
+          "df_gap"
+        ],
+        "method": "pca",
+        "n_components": 2,
+        "n_rows": 149
+      },
+      "status": "pass"
+    },
+    {
+      "check": "frontier_pngs",
+      "evidence": {
+        "legacy_shci_pt_eps_var_frontier.png": {
+          "bytes": 127237,
+          "dimensions": [
+            2520,
+            648
+          ]
+        },
+        "legacy_shci_variational_eps_var_frontier.png": {
+          "bytes": 133904,
+          "dimensions": [
+            2520,
+            648
+          ]
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "check": "exploratory_scope_and_axis_exclusion",
+      "evidence": [
+        {
+          "label": "SHCI_opt",
+          "reason": "orbital optimization changes the method and no common eps_var is declared"
+        }
+      ],
+      "status": "pass"
+    }
+  ],
+  "checks_passed": 18,
+  "status": "pass"
+}

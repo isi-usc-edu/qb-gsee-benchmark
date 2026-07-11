@@ -1,0 +1,140 @@
+{
+  "coverage": {
+    "certified_uuid_alias_applications": 368,
+    "committed_ladder_attempts": 1824,
+    "legacy_uuid_aliases_per_member": 46,
+    "mapping_rows": 46,
+    "raw_attempts_per_member": 228,
+    "reference_valid_per_member": 149,
+    "reference_valid_primitives": 1192
+  },
+  "input_sha256": {
+    "hamiltonian_features": "5ff6a01715d525cc74a952e742634b973e3911113e39b2819caeb0089eb58892",
+    "metrics_module": "00d22130b6373e350670d3cdc974271f3387a895eb9b65b51ba45347fdfecd7f",
+    "ml_maps_module": "8725a1d9c479a88c528a3f9d9fbea531573f64e73017654cdc6a44211ebee42d",
+    "uuid_mapping": "1195d016007f5abfcf888446e371dad135bf7cb915e0cd0be44b51e1390cb52e"
+  },
+  "invariants": {
+    "feature_embedding_uses_ml_maps_api": true,
+    "no_solver_runs": true,
+    "shared_outcome_primitive_only": true,
+    "two_independent_four_member_ladders": true,
+    "uuid_mapping_certified_bijective_46": true
+  },
+  "nestedness": [
+    {
+      "joint_task_member_pairs": 894,
+      "ladder_id": "legacy_shci_variational_eps_var",
+      "ordered_members": [
+        "SHCI_var_2e-4",
+        "SHCI_var_1e-4",
+        "SHCI_var_5e-5",
+        "SHCI_var_2e-5"
+      ],
+      "pair_diagnostics": [
+        {
+          "earlier_member": "SHCI_var_2e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_var_1e-4",
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        {
+          "earlier_member": "SHCI_var_2e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_var_5e-5",
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        {
+          "earlier_member": "SHCI_var_2e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_var_2e-5",
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        {
+          "earlier_member": "SHCI_var_1e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_var_5e-5",
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        {
+          "earlier_member": "SHCI_var_1e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_var_2e-5",
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        {
+          "earlier_member": "SHCI_var_5e-5",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_var_2e-5",
+          "violation_rate": 0.0,
+          "violations": 0
+        }
+      ],
+      "violation_rate": 0.0,
+      "violations": 0
+    },
+    {
+      "joint_task_member_pairs": 894,
+      "ladder_id": "legacy_shci_pt_eps_var",
+      "ordered_members": [
+        "SHCI_pt_2e-4",
+        "SHCI_pt_1e-4",
+        "SHCI_pt_5e-5",
+        "SHCI_pt_2e-5"
+      ],
+      "pair_diagnostics": [
+        {
+          "earlier_member": "SHCI_pt_2e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_pt_1e-4",
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        {
+          "earlier_member": "SHCI_pt_2e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_pt_5e-5",
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        {
+          "earlier_member": "SHCI_pt_2e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_pt_2e-5",
+          "violation_rate": 0.006711409395973154,
+          "violations": 1
+        },
+        {
+          "earlier_member": "SHCI_pt_1e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_pt_5e-5",
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        {
+          "earlier_member": "SHCI_pt_1e-4",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_pt_2e-5",
+          "violation_rate": 0.006711409395973154,
+          "violations": 1
+        },
+        {
+          "earlier_member": "SHCI_pt_5e-5",
+          "jointly_attempted_reference_valid_tasks": 149,
+          "later_member": "SHCI_pt_2e-5",
+          "violation_rate": 0.006711409395973154,
+          "violations": 1
+        }
+      ],
+      "violation_rate": 0.003355704697986577,
+      "violations": 3
+    }
+  ],
+  "scope": "G37(a) exploratory legacy SHCI resource-ladder analysis",
+  "status": "pass"
+}

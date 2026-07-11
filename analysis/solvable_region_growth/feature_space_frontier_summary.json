@@ -1,0 +1,157 @@
+{
+  "embedding_api": "qb_gsee_benchmark.ml.maps.fit_feature_embedding",
+  "embedding_metadata": {
+    "explained_variance_ratio": [
+      0.5817738949854548,
+      0.15314840908863914
+    ],
+    "feature_columns": [
+      "max_vertex_degree",
+      "min_vertex_degree",
+      "mean_vertex_degree",
+      "std_dev_vertex_degree",
+      "max_weight",
+      "min_weight",
+      "mean_weight",
+      "std_dev_weight",
+      "max_edge_order",
+      "mean_edge_order",
+      "std_dev_edge_order",
+      "one_norm",
+      "log_fci_dim",
+      "n_elec",
+      "n_orbs",
+      "df_gap"
+    ],
+    "method": "pca",
+    "n_components": 2,
+    "n_rows": 149
+  },
+  "frontiers": [
+    {
+      "eps_var": "2.0e-04",
+      "ladder_id": "legacy_shci_variational_eps_var",
+      "member_index": 0,
+      "member_label": "SHCI_var_2e-4",
+      "new_success_centroid": {
+        "pca_component_1": -1.3157325541822134,
+        "pca_component_2": 0.16128697742082487
+      },
+      "new_successes_vs_previous_member": 93,
+      "success_centroid": {
+        "pca_component_1": -1.3157325541822134,
+        "pca_component_2": 0.16128697742082487
+      },
+      "successes_with_features": 93
+    },
+    {
+      "eps_var": "1.0e-04",
+      "ladder_id": "legacy_shci_variational_eps_var",
+      "member_index": 1,
+      "member_label": "SHCI_var_1e-4",
+      "new_success_centroid": {
+        "pca_component_1": -0.7196365274244829,
+        "pca_component_2": -0.7387096561355931
+      },
+      "new_successes_vs_previous_member": 7,
+      "success_centroid": {
+        "pca_component_1": -1.2740058323091723,
+        "pca_component_2": 0.09828721307187563
+      },
+      "successes_with_features": 100
+    },
+    {
+      "eps_var": "5.0e-05",
+      "ladder_id": "legacy_shci_variational_eps_var",
+      "member_index": 2,
+      "member_label": "SHCI_var_5e-5",
+      "new_success_centroid": {
+        "pca_component_1": 0.3205496916031677,
+        "pca_component_2": -0.5222819730809322
+      },
+      "new_successes_vs_previous_member": 13,
+      "success_centroid": {
+        "pca_component_1": -1.090561391505098,
+        "pca_component_2": 0.0268942978507562
+      },
+      "successes_with_features": 113
+    },
+    {
+      "eps_var": "2.0e-05",
+      "ladder_id": "legacy_shci_variational_eps_var",
+      "member_index": 3,
+      "member_label": "SHCI_var_2e-5",
+      "new_success_centroid": {
+        "pca_component_1": 1.9884045622868252,
+        "pca_component_2": -0.4574242149559306
+      },
+      "new_successes_vs_previous_member": 13,
+      "success_centroid": {
+        "pca_component_1": -0.7728903010345026,
+        "pca_component_2": -0.023075072518187693
+      },
+      "successes_with_features": 126
+    },
+    {
+      "eps_var": "2.0e-04",
+      "ladder_id": "legacy_shci_pt_eps_var",
+      "member_index": 0,
+      "member_label": "SHCI_pt_2e-4",
+      "new_success_centroid": {
+        "pca_component_1": -0.13380189890942149,
+        "pca_component_2": -0.22865614552027325
+      },
+      "new_successes_vs_previous_member": 133,
+      "success_centroid": {
+        "pca_component_1": -0.13380189890942149,
+        "pca_component_2": -0.22865614552027325
+      },
+      "successes_with_features": 133
+    },
+    {
+      "eps_var": "1.0e-04",
+      "ladder_id": "legacy_shci_pt_eps_var",
+      "member_index": 1,
+      "member_label": "SHCI_pt_1e-4",
+      "new_success_centroid": null,
+      "new_successes_vs_previous_member": 0,
+      "success_centroid": {
+        "pca_component_1": -0.13380189890942149,
+        "pca_component_2": -0.22865614552027325
+      },
+      "successes_with_features": 133
+    },
+    {
+      "eps_var": "5.0e-05",
+      "ladder_id": "legacy_shci_pt_eps_var",
+      "member_index": 2,
+      "member_label": "SHCI_pt_5e-5",
+      "new_success_centroid": {
+        "pca_component_1": 1.802767072659145,
+        "pca_component_2": -0.6533211823176682
+      },
+      "new_successes_vs_previous_member": 3,
+      "success_centroid": {
+        "pca_component_1": -0.09108346571305603,
+        "pca_component_2": -0.23802375662609812
+      },
+      "successes_with_features": 136
+    },
+    {
+      "eps_var": "2.0e-05",
+      "ladder_id": "legacy_shci_pt_eps_var",
+      "member_index": 3,
+      "member_label": "SHCI_pt_2e-5",
+      "new_success_centroid": {
+        "pca_component_1": 2.877596266665906,
+        "pca_component_2": -0.5757650533132644
+      },
+      "new_successes_vs_previous_member": 3,
+      "success_centroid": {
+        "pca_component_1": -0.0766900502509309,
+        "pca_component_2": -0.2509324532818655
+      },
+      "successes_with_features": 138
+    }
+  ]
+}
