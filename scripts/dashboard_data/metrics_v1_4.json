@@ -33065,13 +33065,13 @@
   "diagnostics": {
     "attempt_disposition": {
       "counts": {
-        "excluded_invalid_reference_grade": 1050,
+        "excluded_invalid_reference_grade": 1051,
         "excluded_test_tier": 61,
-        "scored": 1594,
+        "scored": 1647,
         "unjoinable": 684
       },
       "identity": "every committed non-resource attempt has exactly one disposition",
-      "n_attempts": 3389
+      "n_attempts": 3443
     },
     "public_definition": {
       "definition": "A public task has curation_tier != test and joins to a committed problem-instance task_uuid; unjoinable attempts are never public.",
@@ -33091,20 +33091,21 @@
       ]
     },
     "size_band": {
-      "n_public_tasks": 178,
+      "n_public_tasks": 232,
       "n_unspecified_public_attempts": 0,
       "n_unspecified_public_tasks": 0,
       "norb_source_counts": {
-        "feature_csv": 67,
-        "task_metadata+feature_csv": 111
+        "feature_csv": 92,
+        "task_metadata": 1,
+        "task_metadata+feature_csv": 139
       },
       "unspecified_public_task_uuids": []
     },
     "task_coverage": {
       "identity": "attempted = public + test_tier + orphan",
-      "n_distinct_attempted_task_uuids": 228,
+      "n_distinct_attempted_task_uuids": 282,
       "n_orphan_task_uuids": 46,
-      "n_public_task_uuids": 178,
+      "n_public_task_uuids": 232,
       "n_test_tier_task_uuids": 4,
       "test_tier_task_uuids": [
         "2b2eefc4-9c8c-4a02-b621-059774f620c4",
@@ -33195,14 +33196,14 @@
     }
   },
   "headline_counts": {
-    "n_attempts_all_committed": 3389,
-    "n_public_attempts": 2644,
-    "n_public_tasks_covered": 178,
-    "n_scored_attempts": 1594,
-    "n_scored_solvers": 15,
-    "n_scored_tasks": 107,
-    "n_solvers_found": 16,
-    "n_tasks_covered_all_committed": 228,
+    "n_attempts_all_committed": 3443,
+    "n_public_attempts": 2698,
+    "n_public_tasks_covered": 232,
+    "n_scored_attempts": 1647,
+    "n_scored_solvers": 16,
+    "n_scored_tasks": 160,
+    "n_solvers_found": 17,
+    "n_tasks_covered_all_committed": 282,
     "solvers_found": [
       "CCSD",
       "CCSD(T)",
@@ -33219,11 +33220,14 @@
       "SHCI_var_2e-4",
       "SHCI_var_2e-5",
       "SHCI_var_5e-5",
-      "TrimCI_default"
+      "TrimCI_default",
+      "ipie_uhf_trial"
     ],
     "strata_populated": {
       "family": [
         "homogeneous_catalysts",
+        "lattice_models",
+        "orbital_representation_pairs",
         "planted_solutions",
         "small_molecules",
         "transition_metals"
@@ -33247,7 +33251,7 @@
     "task_class_counts": {
       "contested": 102,
       "solved_by_all": 2,
-      "solved_by_none": 3
+      "solved_by_none": 56
     }
   },
   "metrics_spec_version": "1.4",
@@ -33317,6 +33321,22 @@
       "tier": "expanded"
     },
     {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "062cbf0a-262c-5c75-a525-17a682f7d25f",
+      "tier": "expanded"
+    },
+    {
       "family": "homogeneous_catalysts",
       "n_attempts": 15,
       "outcome_counts": {
@@ -33330,6 +33350,22 @@
       "size_band": "norb_17_32",
       "task_class": "contested",
       "task_uuid": "09b81c3d-aee1-4bc3-98ce-a72da477b108",
+      "tier": "expanded"
+    },
+    {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "0a31c810-9581-5b29-b574-b4e3ab1e0561",
       "tier": "expanded"
     },
     {
@@ -33429,6 +33465,22 @@
       "tier": "expanded"
     },
     {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "12d0d43c-22d5-5699-b713-4fae60701a4e",
+      "tier": "expanded"
+    },
+    {
       "family": "homogeneous_catalysts",
       "n_attempts": 15,
       "outcome_counts": {
@@ -33458,6 +33510,22 @@
       "size_band": "norb_65_128",
       "task_class": "contested",
       "task_uuid": "13b4bdcc-1cef-419a-92b1-156febff71d4",
+      "tier": "expanded"
+    },
+    {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "1624db95-1097-54d2-a68c-375f9b786492",
       "tier": "expanded"
     },
     {
@@ -33493,6 +33561,22 @@
       "tier": "expanded"
     },
     {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "1b924e3e-0133-543b-86b3-2753cde933d5",
+      "tier": "utility"
+    },
+    {
       "family": "transition_metals",
       "n_attempts": 15,
       "outcome_counts": {
@@ -33523,6 +33607,38 @@
       "task_class": "contested",
       "task_uuid": "24f12fad-130e-44fc-8b07-bc26c5a3d878",
       "tier": "expanded"
+    },
+    {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "25c59f20-261b-59ad-b10f-fe2b61ae317e",
+      "tier": "expanded"
+    },
+    {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "280b4b86-4352-51a7-a165-355ee9ef3b2a",
+      "tier": "utility"
     },
     {
       "family": "transition_metals",
@@ -33589,6 +33705,38 @@
       "tier": "expanded"
     },
     {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "2d7aac5c-0c01-5ce6-be68-4d0ca198a9f6",
+      "tier": "expanded"
+    },
+    {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "314a3c71-80a5-5e39-9448-053747494f1c",
+      "tier": "expanded"
+    },
+    {
       "family": "transition_metals",
       "n_attempts": 15,
       "outcome_counts": {
@@ -33637,6 +33785,22 @@
       "tier": "expanded"
     },
     {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "362af02a-adc2-5519-a77a-cda24c736973",
+      "tier": "expanded"
+    },
+    {
       "family": "transition_metals",
       "n_attempts": 15,
       "outcome_counts": {
@@ -33650,6 +33814,22 @@
       "size_band": "norb_65_128",
       "task_class": "contested",
       "task_uuid": "37e1f17b-384d-423d-860b-c75b9dcff951",
+      "tier": "expanded"
+    },
+    {
+      "family": "orbital_representation_pairs",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "3d343ddb-a898-5c0e-afc9-42b62d588c5e",
       "tier": "expanded"
     },
     {
@@ -33749,6 +33929,22 @@
       "tier": "utility"
     },
     {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "47e28da2-70f2-5512-9d41-49ad17434d34",
+      "tier": "utility"
+    },
+    {
       "family": "homogeneous_catalysts",
       "n_attempts": 15,
       "outcome_counts": {
@@ -33762,6 +33958,38 @@
       "size_band": "norb_17_32",
       "task_class": "contested",
       "task_uuid": "4c240146-6b8b-4fa5-88e4-41cbd39c8ac3",
+      "tier": "expanded"
+    },
+    {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "4d92193b-a2aa-5726-978f-eef601ff9a21",
+      "tier": "expanded"
+    },
+    {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "5317a912-eb4a-588d-92ab-3cab5e083e51",
       "tier": "expanded"
     },
     {
@@ -33925,6 +34153,54 @@
       "tier": "expanded"
     },
     {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "64818698-190e-5f48-9fe9-a374b30aac8e",
+      "tier": "expanded"
+    },
+    {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "64e736ab-07ef-5db9-a555-17da30b4a865",
+      "tier": "expanded"
+    },
+    {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "659c2dd8-2b6c-518c-96d2-175564ba0e87",
+      "tier": "expanded"
+    },
+    {
       "family": "homogeneous_catalysts",
       "n_attempts": 15,
       "outcome_counts": {
@@ -33957,6 +34233,22 @@
       "tier": "expanded"
     },
     {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "6adb63da-6eda-551e-96b8-d6163fe40187",
+      "tier": "expanded"
+    },
+    {
       "family": "homogeneous_catalysts",
       "n_attempts": 15,
       "outcome_counts": {
@@ -33970,6 +34262,22 @@
       "size_band": "norb_17_32",
       "task_class": "contested",
       "task_uuid": "6c39d3a7-c71a-4049-a8c7-3a3a4b61d8da",
+      "tier": "expanded"
+    },
+    {
+      "family": "orbital_representation_pairs",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "6cd8382a-9a9a-5c43-83b1-616c9f301ab1",
       "tier": "expanded"
     },
     {
@@ -34053,6 +34361,38 @@
       "tier": "expanded"
     },
     {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "7964bbe9-1ec7-55ef-b7b4-08b1d08445d8",
+      "tier": "expanded"
+    },
+    {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "7b1ea320-6c12-5012-922f-fa51d99eeaef",
+      "tier": "expanded"
+    },
+    {
       "family": "planted_solutions",
       "n_attempts": 15,
       "outcome_counts": {
@@ -34067,6 +34407,22 @@
       "task_class": "contested",
       "task_uuid": "7cc1ed5c-0dcb-4315-9e51-2ae94b5cdd02",
       "tier": "utility"
+    },
+    {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "7cf226f5-ce3d-5761-8473-5153fb290151",
+      "tier": "expanded"
     },
     {
       "family": "transition_metals",
@@ -34114,6 +34470,38 @@
       "size_band": "norb_17_32",
       "task_class": "contested",
       "task_uuid": "80d75334-b878-41ec-99a8-b21277f3df60",
+      "tier": "expanded"
+    },
+    {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "8198fdf2-0bb6-5684-acd4-af62e64a6ed9",
+      "tier": "expanded"
+    },
+    {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "82b10203-9445-52fd-8418-e67979a33bd3",
       "tier": "expanded"
     },
     {
@@ -34229,6 +34617,22 @@
       "tier": "expanded"
     },
     {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "9317b786-c94e-59a1-9386-d7d91669bf10",
+      "tier": "expanded"
+    },
+    {
       "family": "transition_metals",
       "n_attempts": 15,
       "outcome_counts": {
@@ -34245,6 +34649,38 @@
       "tier": "expanded"
     },
     {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "99c5ab5b-0c59-503d-bba0-298b3e197b75",
+      "tier": "expanded"
+    },
+    {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "9a097145-0078-510f-9ec8-55a1f65a5e22",
+      "tier": "expanded"
+    },
+    {
       "family": "transition_metals",
       "n_attempts": 15,
       "outcome_counts": {
@@ -34258,6 +34694,22 @@
       "size_band": "norb_33_64",
       "task_class": "contested",
       "task_uuid": "9d82f7d4-165d-4499-8add-361a770d1d44",
+      "tier": "expanded"
+    },
+    {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "9e72fd5d-a3a2-585b-b1bd-9e421c95359f",
       "tier": "expanded"
     },
     {
@@ -34290,6 +34742,22 @@
       "size_band": "norb_17_32",
       "task_class": "contested",
       "task_uuid": "a16168e2-98cd-430d-a180-84f64b4d5e75",
+      "tier": "expanded"
+    },
+    {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "a3c0d3bb-eeca-50de-913f-afdc37863574",
       "tier": "expanded"
     },
     {
@@ -34341,6 +34809,22 @@
       "tier": "expanded"
     },
     {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "a83d93d8-78ff-5f5a-b27f-c9d3584b0416",
+      "tier": "expanded"
+    },
+    {
       "family": "homogeneous_catalysts",
       "n_attempts": 15,
       "outcome_counts": {
@@ -34354,6 +34838,22 @@
       "size_band": "norb_9_16",
       "task_class": "contested",
       "task_uuid": "a9c90f98-6557-44d2-9ca0-0c9122f4080c",
+      "tier": "expanded"
+    },
+    {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "aa9cf2d8-ef23-5185-96bd-d179c00928dc",
       "tier": "expanded"
     },
     {
@@ -34373,6 +34873,38 @@
       "tier": "expanded"
     },
     {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "ac3a023f-8d31-5d79-803e-c54e947c8d75",
+      "tier": "expanded"
+    },
+    {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "acbef708-c970-5ca2-b296-ff7d5e875833",
+      "tier": "expanded"
+    },
+    {
       "family": "homogeneous_catalysts",
       "n_attempts": 15,
       "outcome_counts": {
@@ -34387,6 +34919,22 @@
       "task_class": "contested",
       "task_uuid": "ace55695-1ca9-4153-8fd4-55ed6658cf8c",
       "tier": "expanded"
+    },
+    {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "ae429d44-6cf1-5deb-bc6e-ae485f3ed705",
+      "tier": "utility"
     },
     {
       "family": "planted_solutions",
@@ -34437,6 +34985,22 @@
       "tier": "expanded"
     },
     {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "b182fafe-58d4-58fc-9386-aa1cd4f7c2c9",
+      "tier": "utility"
+    },
+    {
       "family": "transition_metals",
       "n_attempts": 15,
       "outcome_counts": {
@@ -34466,6 +35030,38 @@
       "size_band": "norb_65_128",
       "task_class": "contested",
       "task_uuid": "b4e88a1e-f05f-4ff7-bd91-b24a5073c6ca",
+      "tier": "expanded"
+    },
+    {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "b4fb73b8-4452-5072-99b6-eb9f61523499",
+      "tier": "expanded"
+    },
+    {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "b4fc5215-8c0a-528b-a3a3-a5616c68713b",
       "tier": "expanded"
     },
     {
@@ -34514,6 +35110,22 @@
       "size_band": "norb_65_128",
       "task_class": "contested",
       "task_uuid": "b8344eb5-f574-4198-b917-8312240ba288",
+      "tier": "expanded"
+    },
+    {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "b892fa22-87be-569e-a60f-14dc67c9cc25",
       "tier": "expanded"
     },
     {
@@ -34613,6 +35225,22 @@
       "tier": "expanded"
     },
     {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "c8826dd1-803c-5250-b7e6-7139a3543abf",
+      "tier": "expanded"
+    },
+    {
       "family": "planted_solutions",
       "n_attempts": 15,
       "outcome_counts": {
@@ -34642,6 +35270,54 @@
       "size_band": "norb_33_64",
       "task_class": "contested",
       "task_uuid": "ca6f7678-0952-4fe4-83fe-c4455a682132",
+      "tier": "expanded"
+    },
+    {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "ca8b59ee-11c4-59eb-94ff-505eb613f22a",
+      "tier": "expanded"
+    },
+    {
+      "family": "orbital_representation_pairs",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "cb5392c3-fd91-50f3-be40-149559ae7b96",
+      "tier": "expanded"
+    },
+    {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "cbb3f650-090f-5fa9-9f9e-365fb814c6d6",
       "tier": "expanded"
     },
     {
@@ -34691,6 +35367,38 @@
       "task_class": "contested",
       "task_uuid": "d3c058ec-9b13-4a9a-aba0-d3f19091c47b",
       "tier": "utility"
+    },
+    {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "d42dc028-303e-5b43-a6d0-146bdb908fc8",
+      "tier": "expanded"
+    },
+    {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "d836ebd5-ce4f-575a-a72d-889cb4ae4204",
+      "tier": "expanded"
     },
     {
       "family": "homogeneous_catalysts",
@@ -34789,6 +35497,38 @@
       "tier": "expanded"
     },
     {
+      "family": "orbital_representation_pairs",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "dd80e2eb-9220-53ee-bac4-a087306dc309",
+      "tier": "expanded"
+    },
+    {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "ddc9113f-3bff-5771-98cd-cd6fc0590ca7",
+      "tier": "expanded"
+    },
+    {
       "family": "homogeneous_catalysts",
       "n_attempts": 15,
       "outcome_counts": {
@@ -34805,6 +35545,38 @@
       "tier": "expanded"
     },
     {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "deb04f20-3157-5b14-88b7-7a7a4ddc5c32",
+      "tier": "expanded"
+    },
+    {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "def110fd-6099-5589-813c-e238dd5259c9",
+      "tier": "expanded"
+    },
+    {
       "family": "transition_metals",
       "n_attempts": 15,
       "outcome_counts": {
@@ -34818,6 +35590,22 @@
       "size_band": "norb_65_128",
       "task_class": "contested",
       "task_uuid": "e0101b06-dfd6-4caa-8580-a9815b225204",
+      "tier": "expanded"
+    },
+    {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "e239e95a-e89e-51ce-aa35-4c95ac6df9f2",
       "tier": "expanded"
     },
     {
@@ -34853,6 +35641,22 @@
       "tier": "expanded"
     },
     {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "ebe6a343-f7fd-5576-8c9d-b2e096e624a4",
+      "tier": "expanded"
+    },
+    {
       "family": "transition_metals",
       "n_attempts": 15,
       "outcome_counts": {
@@ -34885,6 +35689,22 @@
       "tier": "expanded"
     },
     {
+      "family": "small_molecules",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "f2f2b5aa-f39e-547f-a7e5-6840ac958d49",
+      "tier": "expanded"
+    },
+    {
       "family": "transition_metals",
       "n_attempts": 15,
       "outcome_counts": {
@@ -34898,6 +35718,38 @@
       "size_band": "norb_65_128",
       "task_class": "contested",
       "task_uuid": "f4b120e9-acd0-4c7c-89e2-cc082f52f5cf",
+      "tier": "expanded"
+    },
+    {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_9_16",
+      "task_class": "solved_by_none",
+      "task_uuid": "f7232c0e-1042-51e7-b2bb-397102d46eb0",
+      "tier": "expanded"
+    },
+    {
+      "family": "lattice_models",
+      "n_attempts": 1,
+      "outcome_counts": {
+        "indeterminate": 1,
+        "miss": 0,
+        "success": 0
+      },
+      "panel_composition_dependent": true,
+      "panel_success_rate": 0.0,
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "size_band": "norb_le8",
+      "task_class": "solved_by_none",
+      "task_uuid": "f7b1aa32-6223-5044-a91c-d0f095ca713c",
       "tier": "expanded"
     },
     {
@@ -63657,6 +64509,960 @@
       "threshold": 0.00159362,
       "threshold_dominated_by_reference": false,
       "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -1.9153166405140036,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "062cbf0a-262c-5c75-a525-17a682f7d25f",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -1.9157273762766378,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "0a31c810-9581-5b29-b574-b4e3ab1e0561",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -21.434854635651018,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "12d0d43c-22d5-5699-b713-4fae60701a4e",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -3.8306331975057626,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "1624db95-1097-54d2-a68c-375f9b786492",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -3.830619286920684,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "1b924e3e-0133-543b-86b3-2753cde933d5",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "utility"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -11.8026110981111,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "25c59f20-261b-59ad-b10f-fe2b61ae317e",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -3.8306334352212597,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "280b4b86-4352-51a7-a165-355ee9ef3b2a",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "utility"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -4.583708524731224,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "2d7aac5c-0c01-5ce6-be68-4d0ca198a9f6",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -3.8306266438830603,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "314a3c71-80a5-5e39-9448-053747494f1c",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -11.40945684510061,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "362af02a-adc2-5519-a77a-cda24c736973",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "orbital_representation_pairs",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -2756.492612296278,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "3d343ddb-a898-5c0e-afc9-42b62d588c5e",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -3.83063114433759,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "47e28da2-70f2-5512-9d41-49ad17434d34",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "utility"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -2.1285911077787447,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "4d92193b-a2aa-5726-978f-eef601ff9a21",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -4.257172874450495,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "5317a912-eb4a-588d-92ab-3cab5e083e51",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -26.670141145792588,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "64818698-190e-5f48-9fe9-a374b30aac8e",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -16.563396846066073,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "64e736ab-07ef-5db9-a555-17da30b4a865",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -4.5837060724541105,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "659c2dd8-2b6c-518c-96d2-175564ba0e87",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -2.128588251741636,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "6adb63da-6eda-551e-96b8-d6163fe40187",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "orbital_representation_pairs",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -2756.492612296278,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "6cd8382a-9a9a-5c43-83b1-616c9f301ab1",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -18.638415739962326,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "7964bbe9-1ec7-55ef-b7b4-08b1d08445d8",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -15.668706178872947,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "7b1ea320-6c12-5012-922f-fa51d99eeaef",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -2.2918371038653507,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "7cf226f5-ce3d-5761-8473-5153fb290151",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -35.115437731871914,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "8198fdf2-0bb6-5684-acd4-af62e64a6ed9",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -35.34300440195082,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "82b10203-9445-52fd-8418-e67979a33bd3",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -43.796216816336226,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "9317b786-c94e-59a1-9386-d7d91669bf10",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -15.869964558150688,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "99c5ab5b-0c59-503d-bba0-298b3e197b75",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -10.240650492312074,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "9a097145-0078-510f-9ec8-55a1f65a5e22",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -43.31499672908781,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "9e72fd5d-a3a2-585b-b1bd-9e421c95359f",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -2.2918535537183407,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "a3c0d3bb-eeca-50de-913f-afdc37863574",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -16.58502159734043,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "a83d93d8-78ff-5f5a-b27f-c9d3584b0416",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -9.601158293375132,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "aa9cf2d8-ef23-5185-96bd-d179c00928dc",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -11.980026283471318,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "ac3a023f-8d31-5d79-803e-c54e947c8d75",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -4.583656001084095,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "acbef708-c970-5ca2-b296-ff7d5e875833",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -3.8306266438830603,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "ae429d44-6cf1-5deb-bc6e-ae485f3ed705",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "utility"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -3.8306254047462946,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "b182fafe-58d4-58fc-9386-aa1cd4f7c2c9",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "utility"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -9.167411078981731,
+      "reference_grade": "one_nearly_exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 1e-10,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "b4fb73b8-4452-5072-99b6-eb9f61523499",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -26.58923834636996,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "b4fc5215-8c0a-528b-a3a3-a5616c68713b",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -4.256867352229987,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "b892fa22-87be-569e-a60f-14dc67c9cc25",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -4.257181815292073,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "c8826dd1-803c-5250-b7e6-7139a3543abf",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -4.052055274410362,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "ca8b59ee-11c4-59eb-94ff-505eb613f22a",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "orbital_representation_pairs",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -5.4243853763325,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "cb5392c3-fd91-50f3-be40-149559ae7b96",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -3.8325098210497863,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "cbb3f650-090f-5fa9-9f9e-365fb814c6d6",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -7.661250953833483,
+      "reference_grade": "one_nearly_exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 1e-10,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "d42dc028-303e-5b43-a6d0-146bdb908fc8",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -21.860147106661355,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "d836ebd5-ce4f-575a-a72d-889cb4ae4204",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "orbital_representation_pairs",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -5.4243853763325145,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "dd80e2eb-9220-53ee-bac4-a087306dc309",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -19.8957150295993,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "ddc9113f-3bff-5771-98cd-cd6fc0590ca7",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -25.834322635772565,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "deb04f20-3157-5b14-88b7-7a7a4ddc5c32",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -2.1284870529697235,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "def110fd-6099-5589-813c-e238dd5259c9",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -15.614407160578928,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "e239e95a-e89e-51ce-aa35-4c95ac6df9f2",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -1.9153144799331447,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "ebe6a343-f7fd-5576-8c9d-b2e096e624a4",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "small_molecules",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -2.291854330826169,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "f2f2b5aa-f39e-547f-a7e5-6840ac958d49",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -12.834757210229105,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_9_16",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "f7232c0e-1042-51e7-b2bb-397102d46eb0",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
+    },
+    {
+      "absolute_error": null,
+      "energy": null,
+      "family": "lattice_models",
+      "graded_residual": null,
+      "metric_status": "ok",
+      "outcome": "indeterminate",
+      "reference_energy": -26.04813088609147,
+      "reference_grade": "exact",
+      "reference_threshold_stratum": "reference_supported_threshold",
+      "reference_uncertainty": 0.0,
+      "size_band": "norb_le8",
+      "solver": "ipie_uhf_trial",
+      "task_uuid": "f7b1aa32-6223-5044-a91c-d0f095ca713c",
+      "threshold": 0.00159362,
+      "threshold_dominated_by_reference": false,
+      "tier": "expanded"
     }
   ],
   "similarity": [
@@ -63815,6 +65621,17 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "CCSD",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.8973114264376401,
       "display_floor": 10,
       "failure_set_jaccard": 0.5057471264367817,
@@ -63958,6 +65775,17 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "CCSD(T)",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.32722036090048784,
       "display_floor": 10,
       "failure_set_jaccard": 0.44086021505376344,
@@ -64090,6 +65918,17 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "CISD",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.6425478555614335,
       "display_floor": 10,
       "failure_set_jaccard": 0.4174757281553398,
@@ -64211,6 +66050,17 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "DMRG_Niagara_cluster_lowest_energy",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.577925957537608,
       "display_floor": 10,
       "failure_set_jaccard": 1.0,
@@ -64321,6 +66171,17 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "HF",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.3825536751276498,
       "display_floor": 10,
       "failure_set_jaccard": 0.010309278350515464,
@@ -64420,6 +66281,17 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "MP2",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.5530110658124636,
       "display_floor": 10,
       "failure_set_jaccard": 0.07142857142857142,
@@ -64508,6 +66380,17 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "SHCI_opt",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.8851252184041933,
       "display_floor": 10,
       "failure_set_jaccard": 1.0,
@@ -64585,6 +66468,17 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "SHCI_pt_1e-4",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.6064326432643264,
       "display_floor": 10,
       "failure_set_jaccard": 0.5882352941176471,
@@ -64651,6 +66545,17 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "SHCI_pt_2e-4",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.9020942094209421,
       "display_floor": 10,
       "failure_set_jaccard": 0.7142857142857143,
@@ -64706,6 +66611,17 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "SHCI_pt_2e-5",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.5626907396622015,
       "display_floor": 10,
       "failure_set_jaccard": 0.16981132075471697,
@@ -64750,6 +66666,17 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "SHCI_pt_5e-5",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.995200082935932,
       "display_floor": 10,
       "failure_set_jaccard": 0.875,
@@ -64783,6 +66710,17 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "SHCI_var_1e-4",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.9352288488210818,
       "display_floor": 10,
       "failure_set_jaccard": 0.4107142857142857,
@@ -64805,6 +66743,17 @@
       "status": "ok"
     },
     {
+      "absolute_error_spearman": null,
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "SHCI_var_2e-4",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
       "absolute_error_spearman": 0.9644937586685159,
       "display_floor": 10,
       "failure_set_jaccard": 0.6388888888888888,
@@ -64814,6 +66763,28 @@
       "solver_i": "SHCI_var_2e-5",
       "solver_j": "SHCI_var_5e-5",
       "status": "ok"
+    },
+    {
+      "absolute_error_spearman": null,
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "SHCI_var_2e-5",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
+    },
+    {
+      "absolute_error_spearman": null,
+      "display_floor": 10,
+      "failure_set_jaccard": null,
+      "failure_set_jaccard_status": "insufficient_data",
+      "n_jointly_attempted": 0,
+      "n_jointly_completed": 0,
+      "solver_i": "SHCI_var_5e-5",
+      "solver_j": "ipie_uhf_trial",
+      "status": "insufficient_data"
     }
   ],
   "stratified_aggregation": [
@@ -76483,6 +78454,258 @@
         "instance_level": [
           0.0,
           1.0
+        ],
+        "iterations": 1000
+      }
+    },
+    {
+      "absolute_errors": [],
+      "graded_residuals": [],
+      "n_attempts": 20,
+      "n_families": 1,
+      "outcome_counts": {
+        "indeterminate": 20,
+        "miss": 0,
+        "success": 0
+      },
+      "outcome_rates": {
+        "indeterminate": 1.0,
+        "miss": 0.0,
+        "success": 0.0
+      },
+      "solver": "ipie_uhf_trial",
+      "stratum": {
+        "family": "lattice_models",
+        "reference_threshold_stratum": "reference_supported_threshold",
+        "size_band": "norb_9_16",
+        "tier": "expanded"
+      },
+      "success_rate_bootstrap_95": {
+        "family_level_governing": {
+          "interval": null,
+          "n_families": 1,
+          "reason": "fewer_than_two_families",
+          "status": "insufficient_data"
+        },
+        "instance_level": [
+          0.0,
+          0.0
+        ],
+        "iterations": 1000
+      }
+    },
+    {
+      "absolute_errors": [],
+      "graded_residuals": [],
+      "n_attempts": 4,
+      "n_families": 1,
+      "outcome_counts": {
+        "indeterminate": 4,
+        "miss": 0,
+        "success": 0
+      },
+      "outcome_rates": {
+        "indeterminate": 1.0,
+        "miss": 0.0,
+        "success": 0.0
+      },
+      "solver": "ipie_uhf_trial",
+      "stratum": {
+        "family": "lattice_models",
+        "reference_threshold_stratum": "reference_supported_threshold",
+        "size_band": "norb_le8",
+        "tier": "expanded"
+      },
+      "success_rate_bootstrap_95": {
+        "family_level_governing": {
+          "interval": null,
+          "n_families": 1,
+          "reason": "fewer_than_two_families",
+          "status": "insufficient_data"
+        },
+        "instance_level": [
+          0.0,
+          0.0
+        ],
+        "iterations": 1000
+      }
+    },
+    {
+      "absolute_errors": [],
+      "graded_residuals": [],
+      "n_attempts": 2,
+      "n_families": 1,
+      "outcome_counts": {
+        "indeterminate": 2,
+        "miss": 0,
+        "success": 0
+      },
+      "outcome_rates": {
+        "indeterminate": 1.0,
+        "miss": 0.0,
+        "success": 0.0
+      },
+      "solver": "ipie_uhf_trial",
+      "stratum": {
+        "family": "orbital_representation_pairs",
+        "reference_threshold_stratum": "reference_supported_threshold",
+        "size_band": "norb_9_16",
+        "tier": "expanded"
+      },
+      "success_rate_bootstrap_95": {
+        "family_level_governing": {
+          "interval": null,
+          "n_families": 1,
+          "reason": "fewer_than_two_families",
+          "status": "insufficient_data"
+        },
+        "instance_level": [
+          0.0,
+          0.0
+        ],
+        "iterations": 1000
+      }
+    },
+    {
+      "absolute_errors": [],
+      "graded_residuals": [],
+      "n_attempts": 2,
+      "n_families": 1,
+      "outcome_counts": {
+        "indeterminate": 2,
+        "miss": 0,
+        "success": 0
+      },
+      "outcome_rates": {
+        "indeterminate": 1.0,
+        "miss": 0.0,
+        "success": 0.0
+      },
+      "solver": "ipie_uhf_trial",
+      "stratum": {
+        "family": "orbital_representation_pairs",
+        "reference_threshold_stratum": "reference_supported_threshold",
+        "size_band": "norb_le8",
+        "tier": "expanded"
+      },
+      "success_rate_bootstrap_95": {
+        "family_level_governing": {
+          "interval": null,
+          "n_families": 1,
+          "reason": "fewer_than_two_families",
+          "status": "insufficient_data"
+        },
+        "instance_level": [
+          0.0,
+          0.0
+        ],
+        "iterations": 1000
+      }
+    },
+    {
+      "absolute_errors": [],
+      "graded_residuals": [],
+      "n_attempts": 2,
+      "n_families": 1,
+      "outcome_counts": {
+        "indeterminate": 2,
+        "miss": 0,
+        "success": 0
+      },
+      "outcome_rates": {
+        "indeterminate": 1.0,
+        "miss": 0.0,
+        "success": 0.0
+      },
+      "solver": "ipie_uhf_trial",
+      "stratum": {
+        "family": "small_molecules",
+        "reference_threshold_stratum": "reference_supported_threshold",
+        "size_band": "norb_9_16",
+        "tier": "expanded"
+      },
+      "success_rate_bootstrap_95": {
+        "family_level_governing": {
+          "interval": null,
+          "n_families": 1,
+          "reason": "fewer_than_two_families",
+          "status": "insufficient_data"
+        },
+        "instance_level": [
+          0.0,
+          0.0
+        ],
+        "iterations": 1000
+      }
+    },
+    {
+      "absolute_errors": [],
+      "graded_residuals": [],
+      "n_attempts": 18,
+      "n_families": 1,
+      "outcome_counts": {
+        "indeterminate": 18,
+        "miss": 0,
+        "success": 0
+      },
+      "outcome_rates": {
+        "indeterminate": 1.0,
+        "miss": 0.0,
+        "success": 0.0
+      },
+      "solver": "ipie_uhf_trial",
+      "stratum": {
+        "family": "small_molecules",
+        "reference_threshold_stratum": "reference_supported_threshold",
+        "size_band": "norb_le8",
+        "tier": "expanded"
+      },
+      "success_rate_bootstrap_95": {
+        "family_level_governing": {
+          "interval": null,
+          "n_families": 1,
+          "reason": "fewer_than_two_families",
+          "status": "insufficient_data"
+        },
+        "instance_level": [
+          0.0,
+          0.0
+        ],
+        "iterations": 1000
+      }
+    },
+    {
+      "absolute_errors": [],
+      "graded_residuals": [],
+      "n_attempts": 5,
+      "n_families": 1,
+      "outcome_counts": {
+        "indeterminate": 5,
+        "miss": 0,
+        "success": 0
+      },
+      "outcome_rates": {
+        "indeterminate": 1.0,
+        "miss": 0.0,
+        "success": 0.0
+      },
+      "solver": "ipie_uhf_trial",
+      "stratum": {
+        "family": "small_molecules",
+        "reference_threshold_stratum": "reference_supported_threshold",
+        "size_band": "norb_le8",
+        "tier": "utility"
+      },
+      "success_rate_bootstrap_95": {
+        "family_level_governing": {
+          "interval": null,
+          "n_families": 1,
+          "reason": "fewer_than_two_families",
+          "status": "insufficient_data"
+        },
+        "instance_level": [
+          0.0,
+          0.0
         ],
         "iterations": 1000
       }

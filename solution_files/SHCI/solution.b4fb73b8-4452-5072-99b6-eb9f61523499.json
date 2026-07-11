@@ -1,0 +1,185 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+  "contact_info": [
+    {
+      "email": "bobqat@l3harris.com",
+      "institution": "L3Harris Technologies, Inc.",
+      "name": "QB-GSEE Benchmark Harness"
+    }
+  ],
+  "creation_timestamp": "2026-07-10T23:34:38.358465+00:00",
+  "digital_signature": null,
+  "is_resource_estimate": false,
+  "problem_instance_uuid": "fe725573-9ebd-563c-ac3d-2291eb53167b",
+  "solution_data": [
+    {
+      "energy": -9.167411074639155,
+      "energy_uncertainty": 1.1694385194848919e-08,
+      "energy_units": "Hartree",
+      "run_time": {
+        "algorithm_run_time": {
+          "seconds": 1.531933307647705,
+          "wall_clock_start_time": "2026-07-10T23:34:36.706518+00:00",
+          "wall_clock_stop_time": "2026-07-10T23:34:38.238473+00:00"
+        },
+        "overall_time": {
+          "seconds": 1.531933307647705,
+          "wall_clock_start_time": "2026-07-10T23:34:36.706518+00:00",
+          "wall_clock_stop_time": "2026-07-10T23:34:38.238473+00:00"
+        },
+        "postprocessing_time": {
+          "seconds": 0.0
+        },
+        "preprocessing_time": {
+          "seconds": 0.0
+        }
+      },
+      "solution_details": {
+        "attempted": true,
+        "harness_status": "completed",
+        "not_attempted_reason": null,
+        "raw_output_file": "raw_output.json",
+        "run_directory_id": "20c5cbc9-7826-4a3d-8077-b8e6e4cf2bf8",
+        "shci_details": {
+          "command": [
+            "g31-run-shci",
+            "--fcidump",
+            "work/solver_runs/g31_tranche1/shci_h2_fragmentation_sto6g_v1_018_b4fb73b8/input.fcidump",
+            "--result",
+            "shci_result.json"
+          ],
+          "result_data": {
+            "arrow_result": {
+              "config": {
+                "chem": {
+                  "point_group": "c1"
+                },
+                "eps_vars": [
+                  5e-05
+                ],
+                "eps_vars_schedule": [
+                  0.005,
+                  0.002,
+                  0.001,
+                  0.0005,
+                  0.0002,
+                  0.0001
+                ],
+                "n_dn": 8,
+                "n_up": 8,
+                "optorb": false,
+                "system": "chem",
+                "var_only": false
+              },
+              "energy_hf": -9.002502438874163,
+              "energy_total": {
+                "5.00e-05": {
+                  "5.00e-08": {
+                    "uncert": 1.1694385194848919e-08,
+                    "value": -9.167411074639155
+                  }
+                }
+              },
+              "energy_var": {
+                "5.00e-05": -9.167410808772795
+              },
+              "n_elecs": 16
+            },
+            "bridge_required_fields": {
+              "orbital_optimization": {
+                "chem": {
+                  "point_group": "c1"
+                },
+                "eps_vars": [
+                  5e-05
+                ],
+                "eps_vars_schedule": [
+                  0.005,
+                  0.002,
+                  0.001,
+                  0.0005,
+                  0.0002,
+                  0.0001
+                ],
+                "n_dn": 8,
+                "n_up": 8,
+                "optorb": true,
+                "system": "chem",
+                "var_only": false
+              },
+              "post_optimization": {
+                "chem": {
+                  "point_group": "c1"
+                },
+                "eps_vars": [
+                  5e-05
+                ],
+                "eps_vars_schedule": [
+                  0.005,
+                  0.002,
+                  0.001,
+                  0.0005,
+                  0.0002,
+                  0.0001
+                ],
+                "n_dn": 8,
+                "n_up": 8,
+                "optorb": false,
+                "system": "chem",
+                "var_only": false
+              }
+            },
+            "energy": -9.167411074639155,
+            "energy_uncertainty": 1.1694385194848919e-08,
+            "native_defaults": {
+              "optimization_method": "app_newton",
+              "optimization_natorb_iter": 1,
+              "optimization_optorb_iter": 20,
+              "random_seed": 347634253,
+              "target_error": 5e-05
+            }
+          },
+          "result_json": "shci_result.json",
+          "returncode": 0,
+          "stderr_file": "shci.stderr",
+          "stdout_file": "shci.stdout"
+        }
+      },
+      "task_uuid": "b4fb73b8-4452-5072-99b6-eb9f61523499"
+    }
+  ],
+  "solution_uuid": "d9f841c9-f61e-42a9-bfcb-e6a76b7b491f",
+  "solver_details": {
+    "algorithm_details": {
+      "harness_adapter": "shci_arrow",
+      "harness_adapter_version": "0.1.0",
+      "name": "SHCI with optimized orbitals followed by SHCI+PT",
+      "solver_config": {
+        "algorithm_label": "SHCI with optimized orbitals followed by SHCI+PT",
+        "command_template": "g31-run-shci --fcidump {fcidump_abs} --result shci_result.json",
+        "energy_units": "Hartree",
+        "eps_var": null,
+        "eps_var_label": null,
+        "num_threads": 1,
+        "optimized_orbitals": true,
+        "pt_correction": true,
+        "result_json": "shci_result.json",
+        "solver_short_name": "SHCI_opt",
+        "solver_uuid": "2dde727e-a881-44fa-aabf-bba6248e4baf",
+        "variant": "SHCI_opt"
+      }
+    },
+    "classical_hardware_details": {
+      "computing_environment_name": "harness run directory",
+      "ram_available_gb": 16.0,
+      "total_num_cores": 1
+    },
+    "compute_hardware_type": "classical_computer",
+    "software_details": {
+      "python_version": "3.12.0",
+      "shci_arrow": "SHCI Arrow Code (https://github.com/QMC-Cornell/shci)."
+    },
+    "solver_short_name": "SHCI_opt",
+    "solver_uuid": "2dde727e-a881-44fa-aabf-bba6248e4baf"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
+  "application_domain": "QC",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "name": "Matthew Otten",
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison"
+    }
+  ],
+  "creation_timestamp": "2026-07-10T00:00:00Z",
+  "latest_update_timestamp": "2026-07-10T00:00:00Z",
+  "license": {
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "problem_instance_uuid": "d6ae9f64-235d-5876-bb8e-2a503a5d6072",
+  "problem_type": "GSEE",
+  "references": [
+    "https://qmcpack.readthedocs.io/en/develop/lab_afqmc.html#x2x2-diamond-supercell",
+    "https://pyscf.org/user/pbc.html",
+    "https://github.com/hao-zhang-quantum/TrimCI/tree/8944a2be6b2c1e2a4f6c6c8cbbf6355baa068393"
+  ],
+  "short_name": "diamond_2x2x2_gamma_gth_szv_v1",
+  "status": "in_development",
+  "superseded_by": null,
+  "source_data": {
+    "generation_manifest": "analysis/diamond_2x2x2/diamond_phase1_generation.json",
+    "hamiltonian_verification": "analysis/diamond_2x2x2/diamond_phase1_verification.json",
+    "reference_analysis": "analysis/diamond_2x2x2/trimci_production_analysis.json"
+  },
+  "basis_convention": {
+    "geometry": "direct 2x2x2 Gamma-point diamond supercell",
+    "primitive_lattice_constant_angstrom": 3.6,
+    "basis": "gth-szv",
+    "pseudopotential": "gth-pade",
+    "orbital_basis": "real canonical restricted-Hartree-Fock spatial MOs",
+    "exchange_divergence": "exxdiv=None",
+    "ecore_definition": "periodic Ewald ion-ion energy returned by Cell.energy_nuc()",
+    "fcidump_zero_threshold_hartree": 1e-12
+  },
+  "tasks": [
+    {
+      "task_uuid": "64e051dd-532e-51b3-94e1-9409438d3764",
+      "independent_parameters": {
+        "material": "diamond",
+        "primitive_lattice_constant_angstrom": 3.6,
+        "supercell_repeats": [
+          2,
+          2,
+          2
+        ],
+        "k_point": "Gamma",
+        "exchange_divergence": "exxdiv=None"
+      },
+      "features": {
+        "material": "diamond",
+        "hamiltonian_family": "ab_initio_periodic_solid",
+        "application_domain": "condensed_matter",
+        "periodic_boundary_conditions": true,
+        "spatial_dimension": 3,
+        "atom_count": 16,
+        "num_orbitals": 64,
+        "num_electrons": 64,
+        "n_alpha": 32,
+        "n_beta": 32,
+        "ms2": 0,
+        "basis_set": "gth-szv",
+        "pseudopotential": "gth-pade",
+        "orbital_basis": "real canonical restricted-Hartree-Fock spatial MOs",
+        "integral_generation_software": "PySCF 2.8.0 PBC FFTDF",
+        "reference_solver": "TrimCI",
+        "reference_determinants": 10000000,
+        "reference_seed": 20260712,
+        "reference_engine_revision": "8944a2be6b2c1e2a4f6c6c8cbbf6355baa068393",
+        "reference_pt2_magnitude_hartree_context_only": 0.06387459293438362,
+        "reference_seed_spread_hartree_diagnostic_only": 0.017823129403524263,
+        "reference_wavefunction_sha256": "829d76f266e1f6a0cae3225454c3b0444d330ca5726670297638cadeaacdecc9",
+        "reference_orbital_rotation_sha256": "15cba5dc26ff4d5aa190c4cd42a51990768bace2ab681f374959b4e1f69042e7",
+        "reference_cost_class": "node_selected_ci_high"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -77.56718950649218,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "lowest TrimCI T3 variational state among three recorded outer seeds; 10,000,000 determinants",
+        "reference_energy_provenance": "variational_upper_bound",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_source": "In-house same-Hamiltonian TrimCI T1-T3 campaign with full seed, engine-content, wavefunction, and orbital-rotation provenance in analysis/diamond_2x2x2/trimci_production_analysis.json.",
+        "reference_energy_note": "This value is a rigorous variational upper bound, not a nearly exact point reference. The selected T3 PT2 magnitude is 0.06387459293438362 Ha and is recorded only as one-sided distance-to-ground context, not as an uncertainty. Outer-seed spread is a protocol diagnostic only; the preregistered ladder produced no extrapolated reference."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "f4594f76-af3a-57f7-b074-79b1ff7f33fa",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/periodic_solids/diamond_2x2x2_gamma_gth_szv.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "2d1b17351997c692cf4379b8867442a80206dc22",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "variational_upper_bound",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": false,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    }
+  ]
+}
