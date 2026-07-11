@@ -386,6 +386,7 @@ def harvest(
     schema_dir: str | Path | None = None,
     not_attempted_reason: str | None = None,
     missing_output_status: str = "not_attempted",
+    missing_output_elapsed_seconds: float | None = None,
 ) -> dict[str, Any]:
     """Convert SHCI raw output to a schema-valid benchmark solution JSON."""
 
@@ -397,7 +398,10 @@ def harvest(
         raw_output = read_json(raw_path)
     else:
         raw_output = _not_attempted_raw_output(
-            manifest, not_attempted_reason, missing_output_status
+            manifest,
+            not_attempted_reason,
+            missing_output_status,
+            missing_output_elapsed_seconds,
         )
         write_json(raw_path, raw_output)
         write_manifest(run_path, manifest.with_status(missing_output_status))
@@ -635,6 +639,7 @@ def _not_attempted_raw_output(
     manifest: RunManifest,
     reason: str | None,
     status: str = "not_attempted",
+    elapsed_seconds: float | None = None,
 ) -> dict[str, Any]:
     harness_attempted(status)
     message = reason or "run did not produce raw_output.json"
@@ -653,7 +658,7 @@ def _not_attempted_raw_output(
         "timing": {
             "wall_clock_start_time": timestamp,
             "wall_clock_stop_time": timestamp,
-            "seconds": 0.0,
+            "seconds": float(elapsed_seconds or 0.0),
         },
         "software": {
             "shci_arrow": SHCI_SOFTWARE_DETAILS,

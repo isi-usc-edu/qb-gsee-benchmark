@@ -53,6 +53,14 @@ def audit_solution_payload(
         expected = harness_attempted(status)
         if attempted is not expected:
             violations.append({**common, "reason": "attempted_status_mismatch"})
+        if status == "timeout":
+            seconds = (
+                row.get("run_time", {}).get("overall_time", {}).get("seconds")
+            )
+            if not isinstance(seconds, (int, float)) or seconds <= 0:
+                violations.append(
+                    {**common, "reason": "timeout_missing_elapsed_time"}
+                )
         if status == "not_attempted" and has_execution_evidence(details):
             violations.append(
                 {**common, "reason": "not_attempted_has_execution_evidence"}

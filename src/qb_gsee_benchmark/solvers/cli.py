@@ -138,6 +138,7 @@ def main(argv: list[str] | None = None) -> int:
         choices=("not_attempted", "timeout"),
         default="not_attempted",
     )
+    harvest_cmd.add_argument("--missing-output-elapsed-seconds", type=float)
 
     smoke_pyscf = subparsers.add_parser("smoke-pyscf")
     smoke_pyscf.add_argument("--run-dir")
@@ -305,6 +306,9 @@ def main(argv: list[str] | None = None) -> int:
                 schema_dir=args.schema_dir,
                 not_attempted_reason=args.not_attempted_reason,
                 missing_output_status=args.missing_output_status,
+                missing_output_elapsed_seconds=(
+                    args.missing_output_elapsed_seconds
+                ),
             )
             print(json.dumps(solution, indent=2, sort_keys=True))
             return 0
@@ -315,6 +319,9 @@ def main(argv: list[str] | None = None) -> int:
                 schema_dir=args.schema_dir,
                 not_attempted_reason=args.not_attempted_reason,
                 missing_output_status=args.missing_output_status,
+                missing_output_elapsed_seconds=(
+                    args.missing_output_elapsed_seconds
+                ),
             )
             print(json.dumps(solution, indent=2, sort_keys=True))
             return 0
@@ -325,6 +332,9 @@ def main(argv: list[str] | None = None) -> int:
                 schema_dir=args.schema_dir,
                 not_attempted_reason=args.not_attempted_reason,
                 missing_output_status=args.missing_output_status,
+                missing_output_elapsed_seconds=(
+                    args.missing_output_elapsed_seconds
+                ),
             )
             print(json.dumps(solution, indent=2, sort_keys=True))
             return 0
@@ -335,6 +345,9 @@ def main(argv: list[str] | None = None) -> int:
                 schema_dir=args.schema_dir,
                 not_attempted_reason=args.not_attempted_reason,
                 missing_output_status=args.missing_output_status,
+                missing_output_elapsed_seconds=(
+                    args.missing_output_elapsed_seconds
+                ),
             )
             print(json.dumps(solution, indent=2, sort_keys=True))
             return 0
@@ -345,6 +358,9 @@ def main(argv: list[str] | None = None) -> int:
                 schema_dir=args.schema_dir,
                 not_attempted_reason=args.not_attempted_reason,
                 missing_output_status=args.missing_output_status,
+                missing_output_elapsed_seconds=(
+                    args.missing_output_elapsed_seconds
+                ),
             )
             print(json.dumps(solution, indent=2, sort_keys=True))
             return 0

@@ -29,6 +29,32 @@ EXPECTED_ORIGINAL_CORRECTIONS = 27
 EXPECTED_DIAMOND_CORRECTIONS = 2
 SHCI_EPS_VAR = 5.0e-5
 SHCI_EPS_VAR_LABEL = "5e-5"
+TIMEOUT_ELAPSED_SECONDS = {
+    (
+        "solution_files/pyscf_solutions/"
+        "solution.b4fb73b8-4452-5072-99b6-eb9f61523499.json"
+    ): 1800.1470546722412,
+    (
+        "solution_files/pyscf_solutions/"
+        "solution.d42dc028-303e-5b43-a6d0-146bdb908fc8.json"
+    ): 1800.1083147525787,
+    (
+        "solution_files/pyscf_solutions/"
+        "solution.322b3212-6364-5bef-bb6b-d0b61ed77bc5.json"
+    ): 1800.1612884998322,
+    (
+        "solution_files/pyscf_solutions/"
+        "solution.64e051dd-532e-51b3-94e1-9409438d3764.json"
+    ): 1800.1102952957153,
+    (
+        "solution_files/SHCI/"
+        "solution.d42dc028-303e-5b43-a6d0-146bdb908fc8.json"
+    ): 7200.1054763793945,
+    (
+        "solution_files/SHCI/"
+        "solution.322b3212-6364-5bef-bb6b-d0b61ed77bc5.json"
+    ): 7200.10426735878,
+}
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -79,7 +105,10 @@ def changed_paths(before: Any, after: Any, prefix: str = "") -> set[str]:
     return set() if before == after else {prefix}
 
 
-def migrate_payload(payload: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
+def migrate_payload(
+    payload: dict[str, Any],
+    timeout_elapsed_seconds: float | None = None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
     migrated = deepcopy(payload)
     rows = migrated.get("solution_data", [])
     if len(rows) != 1:
@@ -100,6 +129,10 @@ def migrate_payload(payload: dict[str, Any]) -> tuple[dict[str, Any], dict[str, 
     details["harness_status"] = status_after
     details["attempted"] = attempted_after
     details["campaign"] = CAMPAIGN
+    if status_after == "timeout" and timeout_elapsed_seconds is not None:
+        run_time = rows[0].setdefault("run_time", {})
+        for timing_name in ("overall_time", "algorithm_run_time"):
+            run_time.setdefault(timing_name, {})["seconds"] = timeout_elapsed_seconds
 
     algorithm = migrated["solver_details"]["algorithm_details"]
     config = algorithm.setdefault("solver_config", {})
@@ -115,6 +148,13 @@ def migrate_payload(payload: dict[str, Any]) -> tuple[dict[str, Any], dict[str, 
         "solution_data[0].solution_details.campaign",
         "solver_details.algorithm_details.solver_config.campaign",
     }
+    if status_after == "timeout" and timeout_elapsed_seconds is not None:
+        allowed.update(
+            {
+                "solution_data[0].run_time.overall_time.seconds",
+                "solution_data[0].run_time.algorithm_run_time.seconds",
+            }
+        )
     if is_shci:
         allowed.update(
             {
@@ -133,6 +173,7 @@ def migrate_payload(payload: dict[str, Any]) -> tuple[dict[str, Any], dict[str, 
         "attempted_before": attempted_before,
         "attempted_after": attempted_after,
         "reason": reason,
+        "timeout_elapsed_seconds": timeout_elapsed_seconds,
         "changed_paths": sorted(changes),
     }
 
@@ -165,10 +206,15 @@ def main() -> int:
         ).stdout
         current = path.read_bytes()
         payload = json.loads(baseline)
-        migrated, change = migrate_payload(payload)
+        previous, _ = migrate_payload(payload)
+        elapsed = TIMEOUT_ELAPSED_SECONDS.get(str(relative_path))
+        migrated, change = migrate_payload(payload, elapsed)
         validate_solution_payload(migrated, schema_dir=ROOT / "schemas")
         after_bytes = (json.dumps(migrated, indent=2, sort_keys=True) + "\n").encode()
-        if current not in {baseline, after_bytes}:
+        previous_bytes = (
+            json.dumps(previous, indent=2, sort_keys=True) + "\n"
+        ).encode()
+        if current not in {baseline, previous_bytes, after_bytes}:
             raise RuntimeError(
                 f"{relative_path} is neither the source nor migrated payload"
             )
@@ -186,6 +232,7 @@ def main() -> int:
             "attempted_before": change["attempted_before"],
             "attempted_after": change["attempted_after"],
             "reason": change["reason"],
+            "timeout_elapsed_seconds": change["timeout_elapsed_seconds"],
             "changed_paths": change["changed_paths"],
             "sha256_before": sha256_bytes(baseline),
             "sha256_after": sha256_bytes(after_bytes),

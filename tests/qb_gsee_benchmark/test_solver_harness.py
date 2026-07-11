@@ -176,6 +176,7 @@ def test_pyscf_harvest_scheduler_timeout_is_attempted(tmp_path):
         run_dir,
         not_attempted_reason=reason,
         missing_output_status="timeout",
+        missing_output_elapsed_seconds=1800.125,
     )
     data = solution["solution_data"][0]
     assert data["energy"] is None
@@ -183,6 +184,8 @@ def test_pyscf_harvest_scheduler_timeout_is_attempted(tmp_path):
     assert data["solution_details"]["campaign"] == "g31_tranche1_2026-07"
     assert data["solution_details"]["attempted"] is True
     assert data["solution_details"]["not_attempted_reason"] == reason
+    assert data["run_time"]["overall_time"]["seconds"] == 1800.125
+    assert data["run_time"]["algorithm_run_time"]["seconds"] == 1800.125
 
 
 def test_shci_adapter_smoke_matches_existing_h2_solution(tmp_path):

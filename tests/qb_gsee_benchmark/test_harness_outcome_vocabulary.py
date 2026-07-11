@@ -39,3 +39,22 @@ def test_not_attempted_with_launch_evidence_is_rejected():
         row["reason"] for row in audit_solution_payload(payload, "solution.json")
     }
     assert reasons == {"not_attempted_has_execution_evidence"}
+
+
+def test_timeout_requires_positive_elapsed_time():
+    payload = {
+        "solution_data": [
+            {
+                "task_uuid": "task",
+                "run_time": {"overall_time": {"seconds": 0.0}},
+                "solution_details": {
+                    "harness_status": "timeout",
+                    "attempted": True,
+                },
+            }
+        ]
+    }
+    reasons = {
+        row["reason"] for row in audit_solution_payload(payload, "solution.json")
+    }
+    assert reasons == {"timeout_missing_elapsed_time"}
