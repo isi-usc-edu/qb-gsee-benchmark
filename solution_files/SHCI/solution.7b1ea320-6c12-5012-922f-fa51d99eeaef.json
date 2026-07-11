@@ -1,0 +1,95 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+  "contact_info": [
+    {
+      "email": "bobqat@l3harris.com",
+      "institution": "L3Harris Technologies, Inc.",
+      "name": "QB-GSEE Benchmark Harness"
+    }
+  ],
+  "creation_timestamp": "2026-07-10T23:34:38.510332+00:00",
+  "digital_signature": null,
+  "is_resource_estimate": false,
+  "problem_instance_uuid": "a50d1972-58e9-5bcb-9859-96cfb36e2f3f",
+  "solution_data": [
+    {
+      "energy": null,
+      "energy_uncertainty": 0.0,
+      "energy_units": "Hartree",
+      "run_time": {
+        "algorithm_run_time": {
+          "seconds": 1.447810173034668,
+          "wall_clock_start_time": "2026-07-10T23:34:36.772093+00:00",
+          "wall_clock_stop_time": "2026-07-10T23:34:38.219935+00:00"
+        },
+        "overall_time": {
+          "seconds": 1.447810173034668,
+          "wall_clock_start_time": "2026-07-10T23:34:36.772093+00:00",
+          "wall_clock_stop_time": "2026-07-10T23:34:38.219935+00:00"
+        },
+        "postprocessing_time": {
+          "seconds": 0.0
+        },
+        "preprocessing_time": {
+          "seconds": 0.0
+        }
+      },
+      "solution_details": {
+        "attempted": false,
+        "harness_status": "failed",
+        "not_attempted_reason": "SHCI command exited with code 1.",
+        "raw_output_file": "raw_output.json",
+        "run_directory_id": "95a645d2-eac1-4564-b0d1-aa5384a590da",
+        "shci_details": {
+          "command": [
+            "g31-run-shci",
+            "--fcidump",
+            "work/solver_runs/g31_tranche1/shci_attractive_hubbard_1d_ed_v1_002_7b1ea320/input.fcidump",
+            "--result",
+            "shci_result.json"
+          ],
+          "result_data": {},
+          "result_json": "shci_result.json",
+          "returncode": 1,
+          "stderr_file": "shci.stderr",
+          "stdout_file": "shci.stdout"
+        }
+      },
+      "task_uuid": "7b1ea320-6c12-5012-922f-fa51d99eeaef"
+    }
+  ],
+  "solution_uuid": "11b1634a-2afd-4fe8-a488-8ef2f116d3d4",
+  "solver_details": {
+    "algorithm_details": {
+      "harness_adapter": "shci_arrow",
+      "harness_adapter_version": "0.1.0",
+      "name": "SHCI with optimized orbitals followed by SHCI+PT",
+      "solver_config": {
+        "algorithm_label": "SHCI with optimized orbitals followed by SHCI+PT",
+        "command_template": "g31-run-shci --fcidump {fcidump_abs} --result shci_result.json",
+        "energy_units": "Hartree",
+        "eps_var": null,
+        "eps_var_label": null,
+        "num_threads": 1,
+        "optimized_orbitals": true,
+        "pt_correction": true,
+        "result_json": "shci_result.json",
+        "solver_short_name": "SHCI_opt",
+        "solver_uuid": "2dde727e-a881-44fa-aabf-bba6248e4baf",
+        "variant": "SHCI_opt"
+      }
+    },
+    "classical_hardware_details": {
+      "computing_environment_name": "harness run directory",
+      "ram_available_gb": 16.0,
+      "total_num_cores": 1
+    },
+    "compute_hardware_type": "classical_computer",
+    "software_details": {
+      "python_version": "3.12.0",
+      "shci_arrow": "SHCI Arrow Code (https://github.com/QMC-Cornell/shci)."
+    },
+    "solver_short_name": "SHCI_opt",
+    "solver_uuid": "2dde727e-a881-44fa-aabf-bba6248e4baf"
+  }
+}

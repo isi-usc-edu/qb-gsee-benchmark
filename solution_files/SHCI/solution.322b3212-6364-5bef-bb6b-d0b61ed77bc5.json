@@ -1,0 +1,84 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+  "contact_info": [
+    {
+      "email": "bobqat@l3harris.com",
+      "institution": "L3Harris Technologies, Inc.",
+      "name": "QB-GSEE Benchmark Harness"
+    }
+  ],
+  "creation_timestamp": "2026-07-11T01:34:35.157568+00:00",
+  "digital_signature": null,
+  "is_resource_estimate": false,
+  "problem_instance_uuid": "b80b54cc-d5aa-59cd-85b0-67cdf19e1ad0",
+  "solution_data": [
+    {
+      "energy": null,
+      "energy_uncertainty": 0.0,
+      "energy_units": "Hartree",
+      "run_time": {
+        "algorithm_run_time": {
+          "seconds": 0.0,
+          "wall_clock_start_time": "2026-07-11T01:34:35.155491+00:00",
+          "wall_clock_stop_time": "2026-07-11T01:34:35.155491+00:00"
+        },
+        "overall_time": {
+          "seconds": 0.0,
+          "wall_clock_start_time": "2026-07-11T01:34:35.155491+00:00",
+          "wall_clock_stop_time": "2026-07-11T01:34:35.155491+00:00"
+        },
+        "postprocessing_time": {
+          "seconds": 0.0
+        },
+        "preprocessing_time": {
+          "seconds": 0.0
+        }
+      },
+      "solution_details": {
+        "attempted": false,
+        "harness_status": "not_attempted",
+        "not_attempted_reason": "attempt timed out at adapter-default wall cap 7200 seconds",
+        "raw_output_file": "raw_output.json",
+        "run_directory_id": "5cef88d1-8e1b-4bc4-b1b5-a31cf70050b5",
+        "shci_details": {
+          "not_attempted_reason": "attempt timed out at adapter-default wall cap 7200 seconds"
+        }
+      },
+      "task_uuid": "322b3212-6364-5bef-bb6b-d0b61ed77bc5"
+    }
+  ],
+  "solution_uuid": "2881b164-7194-42ad-a522-7a850a2a7a72",
+  "solver_details": {
+    "algorithm_details": {
+      "harness_adapter": "shci_arrow",
+      "harness_adapter_version": "0.1.0",
+      "name": "SHCI with optimized orbitals followed by SHCI+PT",
+      "solver_config": {
+        "algorithm_label": "SHCI with optimized orbitals followed by SHCI+PT",
+        "command_template": "g31-run-shci --fcidump {fcidump_abs} --result shci_result.json",
+        "energy_units": "Hartree",
+        "eps_var": null,
+        "eps_var_label": null,
+        "num_threads": 1,
+        "optimized_orbitals": true,
+        "pt_correction": true,
+        "result_json": "shci_result.json",
+        "solver_short_name": "SHCI_opt",
+        "solver_uuid": "2dde727e-a881-44fa-aabf-bba6248e4baf",
+        "variant": "SHCI_opt"
+      }
+    },
+    "classical_hardware_details": {
+      "computing_environment_name": "harness run directory",
+      "ram_available_gb": 16.0,
+      "total_num_cores": 1
+    },
+    "compute_hardware_type": "classical_computer",
+    "software_details": {
+      "python_version": "3.12.0",
+      "shci_arrow": "SHCI Arrow Code (https://github.com/QMC-Cornell/shci)."
+    },
+    "solver_short_name": "SHCI_opt",
+    "solver_uuid": "2dde727e-a881-44fa-aabf-bba6248e4baf"
+  }
+}
