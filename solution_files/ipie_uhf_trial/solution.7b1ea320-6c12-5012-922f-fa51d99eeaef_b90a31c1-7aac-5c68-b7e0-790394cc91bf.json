@@ -1,0 +1,160 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/solution.schema.0.0.1.json",
+  "contact_info": [
+    {
+      "email": "bobqat@l3harris.com",
+      "institution": "L3Harris Technologies, Inc.",
+      "name": "QB-GSEE Benchmark Harness"
+    }
+  ],
+  "creation_timestamp": "2026-07-11T10:59:16.000848+00:00",
+  "digital_signature": null,
+  "is_resource_estimate": false,
+  "problem_instance_uuid": "a50d1972-58e9-5bcb-9859-96cfb36e2f3f",
+  "solution_data": [
+    {
+      "energy": null,
+      "energy_units": "Hartree",
+      "run_time": {
+        "algorithm_run_time": {
+          "seconds": 496.2375388145447,
+          "wall_clock_start_time": "2026-07-11T10:50:59.763287+00:00",
+          "wall_clock_stop_time": "2026-07-11T10:59:16.000848+00:00"
+        },
+        "overall_time": {
+          "seconds": 496.2375388145447,
+          "wall_clock_start_time": "2026-07-11T10:50:59.763287+00:00",
+          "wall_clock_stop_time": "2026-07-11T10:59:16.000848+00:00"
+        },
+        "postprocessing_time": {
+          "seconds": 0.0
+        },
+        "preprocessing_time": {
+          "seconds": 0.0
+        }
+      },
+      "solution_details": {
+        "attempted": true,
+        "campaign": "ipie_swing_2026-07",
+        "determinant_count": 1,
+        "execution_provenance": {
+          "campaign": "ipie_swing_2026-07",
+          "failure_summary": "RuntimeError: insufficient finite post-equilibration ipie estimates",
+          "gpu": {
+            "cluster": "ALCF Swing",
+            "cuda_compute_capability": "8.0",
+            "gpu_count": 1,
+            "gpu_memory_gb": 39.494,
+            "gpu_name": "NVIDIA A100-SXM4-40GB",
+            "host": "gpu4",
+            "node_memory_gb": 1007.6524
+          },
+          "ipie_version": "0.7.1",
+          "random_seed": 731031,
+          "source_artifact_sha256": {
+            "ipie.stderr": "8590d4a31bfcad44924e596db0b049a790084c3a216880f072e5aba2aa8cb078",
+            "ipie.stdout": "9456e96abc931ea670fa79b94d96b2d04f798606c22235624b7d25a4b110d7c0",
+            "raw_output.json": "d7a6aa43ec91254f272846297bcd19c45877470583a2a4a667e4d2e3c26024ec",
+            "run_manifest.json": "5c0b57e46fbbfc945126843cab51c438fd4a3c71627aa41cd06bbbb2dcb3c712"
+          },
+          "source_harvest_mode": "read_only_additive_snapshot",
+          "source_prepared_run_id": "6e2e27e2-e45c-4b82-94d0-c52304dd376a",
+          "trial_wavefunction": "UHF"
+        },
+        "harness_status": "failed",
+        "ipie_afqmc_details": {
+          "command": [
+            "g31-run-ipie",
+            "--fcidump",
+            "input.fcidump",
+            "--config",
+            "solver_config.json",
+            "--result",
+            "ipie_result.json"
+          ],
+          "determinant_count": 1,
+          "num_blocks": 1000,
+          "num_steps_per_block": 25,
+          "num_walkers": 512,
+          "result_data": {},
+          "result_json": "ipie_result.json",
+          "returncode": 1,
+          "stderr_file": "ipie.stderr",
+          "stdout_file": "ipie.stdout",
+          "timestep": 0.005,
+          "timing_note": "Measured wall clock includes trial preparation and AFQMC propagation performed by the configured external command.",
+          "trial_wavefunction": "UHF"
+        },
+        "not_attempted_reason": "ipie command exited with code 1.",
+        "num_blocks": 1000,
+        "num_steps_per_block": 25,
+        "num_walkers": 512,
+        "raw_output_file": "raw_output.json",
+        "run_directory_id": "8043616f-8608-5349-90b3-979db289fc0d",
+        "timestep": 0.005,
+        "trial_wavefunction": "UHF"
+      },
+      "task_uuid": "7b1ea320-6c12-5012-922f-fa51d99eeaef"
+    }
+  ],
+  "solution_uuid": "b90a31c1-7aac-5c68-b7e0-790394cc91bf",
+  "solver_details": {
+    "algorithm_details": {
+      "execution_hardware": {
+        "cluster": "ALCF Swing",
+        "cuda_compute_capability": "8.0",
+        "gpu_count": 1,
+        "gpu_memory_gb": 39.494,
+        "gpu_name": "NVIDIA A100-SXM4-40GB",
+        "host": "gpu4",
+        "node_memory_gb": 1007.6524
+      },
+      "harness_adapter": "ipie_afqmc",
+      "harness_adapter_version": "0.1.0",
+      "name": "ipie ph-AFQMC with UHF trial",
+      "solver_config": {
+        "algorithm_label": "ipie ph-AFQMC with UHF trial",
+        "campaign": "ipie_swing_2026-07",
+        "command_template": "g31-run-ipie --fcidump {fcidump_abs} --config {config_abs} --result ipie_result.json",
+        "confidence_level": 0.682689492137,
+        "determinant_count": 1,
+        "energy_units": "Hartree",
+        "execution_site": "ALCF Swing",
+        "gpu_name": "NVIDIA A100-SXM4-40GB",
+        "num_blocks": 1000,
+        "num_steps_per_block": 25,
+        "num_threads": 1,
+        "num_walkers": 512,
+        "phaseless": true,
+        "random_seed": 731031,
+        "result_json": "ipie_result.json",
+        "solver_short_name": "ipie_uhf_trial",
+        "solver_uuid": "54cf1eae-79a4-5ee5-9553-80f4f380882b",
+        "timestep": 0.005,
+        "trial_wavefunction": "UHF",
+        "variant": "ipie_uhf_trial"
+      }
+    },
+    "classical_hardware_details": {
+      "computing_environment_name": "ALCF Swing",
+      "gpu_description": "NVIDIA A100-SXM4-40GB",
+      "gpu_memory_gb": 39.494,
+      "ram_available_gb": 1007.6524,
+      "total_num_cores": 1,
+      "total_num_gpus": 1
+    },
+    "compute_hardware_type": "classical_computer",
+    "software_details": {
+      "cuda_version": "12.09.0",
+      "cupy_version": "13.6.0",
+      "h5py_version": "3.16.0",
+      "ipie": "ipie ph-AFQMC (https://github.com/linusjoonho/ipie).",
+      "ipie_version": "0.7.1",
+      "numpy_version": "2.4.6",
+      "python_version": "3.12.0",
+      "scipy_version": "1.18.0"
+    },
+    "solver_short_name": "ipie_uhf_trial",
+    "solver_uuid": "54cf1eae-79a4-5ee5-9553-80f4f380882b"
+  }
+}
