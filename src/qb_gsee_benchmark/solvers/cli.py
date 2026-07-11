@@ -40,6 +40,7 @@ def main(argv: list[str] | None = None) -> int:
     prepare_pyscf.add_argument("--run-dir", required=True)
     prepare_pyscf.add_argument("--method", default="FCI")
     prepare_pyscf.add_argument("--num-threads", type=int, default=1)
+    prepare_pyscf.add_argument("--campaign")
     prepare_pyscf.add_argument("--overwrite", action="store_true")
 
     prepare_shci = subparsers.add_parser("prepare-shci")
@@ -51,6 +52,7 @@ def main(argv: list[str] | None = None) -> int:
     prepare_shci.add_argument("--num-threads", type=int, default=1)
     prepare_shci.add_argument("--command-template")
     prepare_shci.add_argument("--result-json", default="shci_result.json")
+    prepare_shci.add_argument("--campaign")
     prepare_shci.add_argument("--eps-var", type=float)
     prepare_shci.add_argument("--eps-var-label")
     prepare_shci.add_argument("--pt-correction", action="store_true")
@@ -80,6 +82,7 @@ def main(argv: list[str] | None = None) -> int:
         default=ipie_adapter.DEFAULT_CONFIDENCE_LEVEL,
     )
     prepare_ipie.add_argument("--random-seed", type=int)
+    prepare_ipie.add_argument("--campaign")
     prepare_ipie.add_argument("--no-phaseless", action="store_true")
     prepare_ipie.add_argument("--overwrite", action="store_true")
 
@@ -97,6 +100,7 @@ def main(argv: list[str] | None = None) -> int:
     prepare_dmrg.add_argument("--extrapolation-model")
     prepare_dmrg.add_argument("--command-template")
     prepare_dmrg.add_argument("--result-json", default="dmrg_result.json")
+    prepare_dmrg.add_argument("--campaign")
     prepare_dmrg.add_argument("--overwrite", action="store_true")
 
     prepare_trimci = subparsers.add_parser("prepare-trimci")
@@ -108,6 +112,7 @@ def main(argv: list[str] | None = None) -> int:
         "--seed", type=int, default=trimci_adapter.DEFAULT_SEED
     )
     prepare_trimci.add_argument("--num-threads", type=int, default=1)
+    prepare_trimci.add_argument("--campaign")
     prepare_trimci.add_argument(
         "--checkpoint-ndet-grid",
         help="comma-separated Phase-2 determinant-budget caps",
@@ -128,6 +133,11 @@ def main(argv: list[str] | None = None) -> int:
     harvest_cmd.add_argument("--output")
     harvest_cmd.add_argument("--schema-dir")
     harvest_cmd.add_argument("--not-attempted-reason")
+    harvest_cmd.add_argument(
+        "--missing-output-status",
+        choices=("not_attempted", "timeout"),
+        default="not_attempted",
+    )
 
     smoke_pyscf = subparsers.add_parser("smoke-pyscf")
     smoke_pyscf.add_argument("--run-dir")
@@ -155,6 +165,7 @@ def main(argv: list[str] | None = None) -> int:
             config=pyscf_adapter.PySCFConfig(
                 method=args.method,
                 num_threads=args.num_threads,
+                campaign=args.campaign,
             ),
             overwrite=args.overwrite,
         )
@@ -181,6 +192,7 @@ def main(argv: list[str] | None = None) -> int:
                 eps_var_label=args.eps_var_label,
                 pt_correction=pt_correction,
                 optimized_orbitals=optimized_orbitals,
+                campaign=args.campaign,
             ),
             overwrite=args.overwrite,
         )
@@ -207,6 +219,7 @@ def main(argv: list[str] | None = None) -> int:
                 confidence_level=args.confidence_level,
                 phaseless=not args.no_phaseless,
                 random_seed=args.random_seed,
+                campaign=args.campaign,
             ),
             overwrite=args.overwrite,
         )
@@ -229,6 +242,7 @@ def main(argv: list[str] | None = None) -> int:
                 extrapolation_model=args.extrapolation_model,
                 command_template=args.command_template,
                 result_json=args.result_json,
+                campaign=args.campaign,
             ),
             overwrite=args.overwrite,
         )
@@ -245,6 +259,7 @@ def main(argv: list[str] | None = None) -> int:
                 seed=args.seed,
                 num_threads=args.num_threads,
                 checkpoint_ndet_grid=_int_tuple(args.checkpoint_ndet_grid),
+                campaign=args.campaign,
             ),
             overwrite=args.overwrite,
         )
@@ -289,6 +304,7 @@ def main(argv: list[str] | None = None) -> int:
                 output_path=output,
                 schema_dir=args.schema_dir,
                 not_attempted_reason=args.not_attempted_reason,
+                missing_output_status=args.missing_output_status,
             )
             print(json.dumps(solution, indent=2, sort_keys=True))
             return 0
@@ -298,6 +314,7 @@ def main(argv: list[str] | None = None) -> int:
                 output_path=output,
                 schema_dir=args.schema_dir,
                 not_attempted_reason=args.not_attempted_reason,
+                missing_output_status=args.missing_output_status,
             )
             print(json.dumps(solution, indent=2, sort_keys=True))
             return 0
@@ -307,6 +324,7 @@ def main(argv: list[str] | None = None) -> int:
                 output_path=output,
                 schema_dir=args.schema_dir,
                 not_attempted_reason=args.not_attempted_reason,
+                missing_output_status=args.missing_output_status,
             )
             print(json.dumps(solution, indent=2, sort_keys=True))
             return 0
@@ -316,6 +334,7 @@ def main(argv: list[str] | None = None) -> int:
                 output_path=output,
                 schema_dir=args.schema_dir,
                 not_attempted_reason=args.not_attempted_reason,
+                missing_output_status=args.missing_output_status,
             )
             print(json.dumps(solution, indent=2, sort_keys=True))
             return 0
@@ -325,6 +344,7 @@ def main(argv: list[str] | None = None) -> int:
                 output_path=output,
                 schema_dir=args.schema_dir,
                 not_attempted_reason=args.not_attempted_reason,
+                missing_output_status=args.missing_output_status,
             )
             print(json.dumps(solution, indent=2, sort_keys=True))
             return 0

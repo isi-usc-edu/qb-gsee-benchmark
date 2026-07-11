@@ -51,6 +51,7 @@ from qb_gsee_benchmark.solvers.base import SOLUTION_OUTPUT
 from qb_gsee_benchmark.solvers.base import RunManifest
 from qb_gsee_benchmark.solvers.base import SolverResources
 from qb_gsee_benchmark.solvers.base import default_schema_dir
+from qb_gsee_benchmark.solvers.base import harness_attempted
 from qb_gsee_benchmark.solvers.base import load_manifest
 from qb_gsee_benchmark.solvers.base import load_problem_instance_task
 from qb_gsee_benchmark.solvers.base import new_run_id
@@ -64,7 +65,7 @@ from qb_gsee_benchmark.utils import iso8601_timestamp
 from qb_gsee_benchmark.utils import read_fcidump
 
 ADAPTER_NAME = "pyscf_reference"
-ADAPTER_VERSION = "0.1.0"
+ADAPTER_VERSION = "0.2.0"
 
 SOLVER_UUIDS = {
     "HF": "5f5e617a-19c2-4d82-bebc-b2d6b3dcb012",
@@ -81,6 +82,7 @@ class PySCFConfig:
     method: str = "FCI"
     num_threads: int = 1
     energy_units: str = "Hartree"
+    campaign: str | None = None
     solver_uuid: str | None = None
     solver_short_name: str | None = None
 
@@ -95,6 +97,7 @@ class PySCFConfig:
             "method": method,
             "num_threads": self.num_threads,
             "energy_units": self.energy_units,
+            "campaign": self.campaign,
             "solver_uuid": self.solver_uuid or SOLVER_UUIDS[method],
             "solver_short_name": self.solver_short_name or method,
         }
@@ -105,6 +108,7 @@ class PySCFConfig:
             method=str(data.get("method", "FCI")),
             num_threads=int(data.get("num_threads", 1)),
             energy_units=str(data.get("energy_units", "Hartree")),
+            campaign=data.get("campaign"),
             solver_uuid=data.get("solver_uuid"),
             solver_short_name=data.get("solver_short_name"),
         )
@@ -239,6 +243,7 @@ def harvest(
     output_path: str | Path | None = None,
     schema_dir: str | Path | None = None,
     not_attempted_reason: str | None = None,
+    missing_output_status: str = "not_attempted",
 ) -> dict[str, Any]:
     """Convert raw output to a schema-valid benchmark solution JSON."""
 
@@ -249,14 +254,17 @@ def harvest(
     if raw_path.exists():
         raw_output = read_json(raw_path)
     else:
-        raw_output = _not_attempted_raw_output(manifest, not_attempted_reason)
+        raw_output = _not_attempted_raw_output(
+            manifest, not_attempted_reason, missing_output_status
+        )
         write_json(raw_path, raw_output)
-        write_manifest(run_path, manifest.with_status("not_attempted"))
+        write_manifest(run_path, manifest.with_status(missing_output_status))
     output_path = Path(output_path) if output_path is not None else run_path / SOLUTION_OUTPUT
     timing = raw_output.get("timing", {})
     status = raw_output.get("status", "failed")
-    attempted = status == "completed"
-    energy = raw_output.get("energy") if attempted else None
+    attempted = harness_attempted(status)
+    completed = status == "completed"
+    energy = raw_output.get("energy") if completed else None
     config = PySCFConfig.from_dict(manifest.config)
 
     solution = {
@@ -296,9 +304,10 @@ def harvest(
                 },
                 "solution_details": {
                     "harness_status": status,
+                    "campaign": manifest.config.get("campaign"),
                     "attempted": attempted,
                     "not_attempted_reason": None
-                    if attempted
+                    if completed
                     else raw_output.get("error_message", "run did not complete"),
                     "run_directory_id": manifest.run_id,
                     "raw_output_file": manifest.files["raw_output"],
@@ -407,14 +416,16 @@ def _materialize_fcidump(source: str | Path, destination: str | Path) -> None:
 def _not_attempted_raw_output(
     manifest: RunManifest,
     reason: str | None,
+    status: str = "not_attempted",
 ) -> dict[str, Any]:
+    harness_attempted(status)
     message = reason or "run did not produce raw_output.json"
     timestamp = iso8601_timestamp()
     return {
         "adapter": manifest.adapter,
         "adapter_version": manifest.adapter_version,
         "run_id": manifest.run_id,
-        "status": "not_attempted",
+        "status": status,
         "method": manifest.config.get("method"),
         "energy": None,
         "energy_units": manifest.config.get("energy_units", "Hartree"),

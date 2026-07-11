@@ -37,6 +37,7 @@ from qb_gsee_benchmark.utils import validate_json
 RUN_MANIFEST = "run_manifest.json"
 RAW_OUTPUT = "raw_output.json"
 SOLUTION_OUTPUT = "solution.json"
+HARNESS_STATUSES = frozenset({"completed", "failed", "timeout", "not_attempted"})
 
 
 @dataclass(frozen=True)
@@ -217,4 +218,13 @@ def write_validated_solution(
 
 def relative_to_run_dir(run_dir: str | Path, path: str | Path) -> str:
     return os.path.relpath(Path(path), start=Path(run_dir))
+
+
+def harness_attempted(status: str) -> bool:
+    """Return whether solver execution started for a harness outcome."""
+
+    if status not in HARNESS_STATUSES:
+        allowed = ", ".join(sorted(HARNESS_STATUSES))
+        raise ValueError(f"Unsupported harness status {status!r}; choose {allowed}.")
+    return status != "not_attempted"
 

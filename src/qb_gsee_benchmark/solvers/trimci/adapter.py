@@ -44,6 +44,7 @@ from qb_gsee_benchmark.solvers.base import SOLUTION_OUTPUT
 from qb_gsee_benchmark.solvers.base import RunManifest
 from qb_gsee_benchmark.solvers.base import SolverResources
 from qb_gsee_benchmark.solvers.base import default_schema_dir
+from qb_gsee_benchmark.solvers.base import harness_attempted
 from qb_gsee_benchmark.solvers.base import load_manifest
 from qb_gsee_benchmark.solvers.base import load_problem_instance_task
 from qb_gsee_benchmark.solvers.base import new_run_id
@@ -56,7 +57,7 @@ from qb_gsee_benchmark.solvers.base import write_validated_solution
 from qb_gsee_benchmark.utils import iso8601_timestamp
 
 ADAPTER_NAME = "trimci"
-ADAPTER_VERSION = "0.2.0"
+ADAPTER_VERSION = "0.3.0"
 SOLVER_SHORT_NAME = "TrimCI_default"
 SOLVER_UUID = str(
     uuid.uuid5(uuid.NAMESPACE_URL, "qb-gsee-benchmark:solver:trimci-default:v1")
@@ -78,6 +79,7 @@ class TrimCIConfig:
     num_threads: int = 1
     energy_policy: str = "pt2_if_available"
     checkpoint_ndet_grid: tuple[int, ...] = ()
+    campaign: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         if self.energy_policy != "pt2_if_available":
@@ -92,6 +94,7 @@ class TrimCIConfig:
             "num_threads": max(1, int(self.num_threads)),
             "energy_policy": self.energy_policy,
             "checkpoint_ndet_grid": list(checkpoint_grid),
+            "campaign": self.campaign,
             "defaults_policy": (
                 "trimci.Config defaults; only seed and run-local work_dir changed"
             ),
@@ -107,6 +110,7 @@ class TrimCIConfig:
             num_threads=int(data.get("num_threads", 1)),
             energy_policy=str(data.get("energy_policy", "pt2_if_available")),
             checkpoint_ndet_grid=tuple(data.get("checkpoint_ndet_grid", ())),
+            campaign=data.get("campaign"),
         )
 
 
@@ -287,6 +291,7 @@ def harvest(
     output_path: str | Path | None = None,
     schema_dir: str | Path | None = None,
     not_attempted_reason: str | None = None,
+    missing_output_status: str = "not_attempted",
 ) -> dict[str, Any]:
     """Convert TrimCI raw output to a schema-valid benchmark solution."""
     run_path = Path(run_dir)
@@ -295,15 +300,18 @@ def harvest(
     if raw_path.exists():
         raw_output = read_json(raw_path)
     else:
-        raw_output = _not_attempted_raw_output(manifest, not_attempted_reason)
+        raw_output = _not_attempted_raw_output(
+            manifest, not_attempted_reason, missing_output_status
+        )
         write_json(raw_path, raw_output)
-        write_manifest(run_path, manifest.with_status("not_attempted"))
+        write_manifest(run_path, manifest.with_status(missing_output_status))
     output_path = (
         Path(output_path) if output_path is not None else run_path / SOLUTION_OUTPUT
     )
     timing = raw_output.get("timing", {})
     status = raw_output.get("status", "failed")
-    attempted = status == "completed"
+    attempted = harness_attempted(status)
+    completed = status == "completed"
     solution = {
         "$schema": (
             "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/"
@@ -323,7 +331,7 @@ def harvest(
         "solution_data": [
             {
                 "task_uuid": manifest.task_uuid,
-                "energy": raw_output.get("energy") if attempted else None,
+                "energy": raw_output.get("energy") if completed else None,
                 "energy_units": "Hartree",
                 "energy_uncertainty": raw_output.get("energy_uncertainty", 0.0),
                 "run_time": {
@@ -346,9 +354,10 @@ def harvest(
                 },
                 "solution_details": {
                     "harness_status": status,
+                    "campaign": manifest.config.get("campaign"),
                     "attempted": attempted,
                     "not_attempted_reason": None
-                    if attempted
+                    if completed
                     else raw_output.get("error_message", "run did not complete"),
                     "run_directory_id": manifest.run_id,
                     "raw_output_file": manifest.files["raw_output"],
@@ -643,13 +652,14 @@ def _materialize_fcidump(source: str | Path, destination: str | Path) -> None:
 def _not_attempted_raw_output(
     manifest: RunManifest, reason: str | None
 ) -> dict[str, Any]:
+    harness_attempted(status)
     message = reason or "run did not produce raw_output.json"
     timestamp = iso8601_timestamp()
     return {
         "adapter": manifest.adapter,
         "adapter_version": manifest.adapter_version,
         "run_id": manifest.run_id,
-        "status": "not_attempted",
+        "status": status,
         "energy": None,
         "energy_units": "Hartree",
         "energy_uncertainty": 0.0,
