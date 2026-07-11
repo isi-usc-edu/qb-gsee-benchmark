@@ -209,7 +209,7 @@ def test_export_is_byte_deterministic_and_validates_against_schema(tmp_path):
     assert first == second
 
     schema = json.loads(
-        (checkout / "scripts" / "dashboard_data" / "metrics_v1_4.schema.json").read_text()
+        (checkout / "scripts" / "dashboard_data" / "metrics_v1_5.schema.json").read_text()
     )
     jsonschema.Draft202012Validator(schema).validate(json.loads(first))
     assert json.loads(first)["attributions"] == {}

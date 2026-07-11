@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export the deterministic METRICS_SPEC v1.4 dashboard/paper data bundle."""
+"""Export the deterministic METRICS_SPEC v1.5 dashboard/paper data bundle."""
 
 from __future__ import annotations
 
@@ -13,9 +13,9 @@ from typing import Any
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPOSITORY_ROOT / "src"))
 
-from qb_gsee_benchmark.metrics import build_bundle_v1_4  # noqa: E402
+from qb_gsee_benchmark.metrics import build_bundle_v1_5  # noqa: E402
 
-DEFAULT_OUTPUT = REPOSITORY_ROOT / "scripts" / "dashboard_data" / "metrics_v1_4.json"
+DEFAULT_OUTPUT = REPOSITORY_ROOT / "scripts" / "dashboard_data" / "metrics_v1_5.json"
 
 
 def _require_hartree(value: Any, context: str) -> None:
@@ -50,11 +50,67 @@ def _load_feature_norb(repository_root: Path) -> dict[str, int]:
     return values
 
 
+LEGACY_MAPPING_RELATIVE_PATH = Path(
+    "analysis/solver_panel/g31_legacy_lattice_task_mapping.csv"
+)
+CERTIFIED_MAPPING_STATUS = "certified_identity_lineage_and_recovered_payload"
+
+
+def _load_legacy_task_mapping(repository_root: Path) -> dict[str, str]:
+    path = repository_root / LEGACY_MAPPING_RELATIVE_PATH
+    if not path.exists():
+        return {}
+    mapping: dict[str, str] = {}
+    current_ids: set[str] = set()
+    with path.open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            legacy = str(row.get("legacy_task_uuid") or "")
+            current = str(row.get("current_task_uuid") or "")
+            status = str(row.get("mapping_status") or "")
+            if not legacy or not current or status != CERTIFIED_MAPPING_STATUS:
+                raise ValueError(f"uncertified or incomplete legacy mapping row: {row}")
+            if legacy in mapping or current in current_ids:
+                raise ValueError("legacy lattice mapping must be one-to-one")
+            mapping[legacy] = current
+            current_ids.add(current)
+    return mapping
+
+
+def _metadata_norb(task_uuid: str, task: dict[str, Any]) -> tuple[int | None, list[str]]:
+    features = task.get("features", {})
+    independent = task.get("independent_parameters", {})
+    if not isinstance(features, dict):
+        features = {}
+    if not isinstance(independent, dict):
+        independent = {}
+    raw_candidates = (
+        ("features.num_orbitals", features.get("num_orbitals")),
+        ("features.hubbard_num_sites", features.get("hubbard_num_sites")),
+        ("independent_parameters.num_sites", independent.get("num_sites")),
+        (
+            "independent_parameters.num_spatial_orbitals",
+            independent.get("num_spatial_orbitals"),
+        ),
+    )
+    candidates: list[tuple[str, int]] = []
+    for field, raw in raw_candidates:
+        if raw is None:
+            continue
+        number = float(raw)
+        if not number.is_integer() or number < 0:
+            raise ValueError(f"invalid {field} for task {task_uuid}: {raw!r}")
+        candidates.append((field, int(number)))
+    if len({value for _, value in candidates}) > 1:
+        raise ValueError(f"metadata NORB disagreement for task {task_uuid}: {candidates}")
+    return (candidates[0][1] if candidates else None, [field for field, _ in candidates])
+
+
 def load_committed_artifacts(repository_root: Path) -> tuple[dict[str, dict[str, Any]], list[dict[str, Any]]]:
     """Normalize instance and non-resource solution JSONs for pure metrics."""
 
     tasks: dict[str, dict[str, Any]] = {}
     feature_norb = _load_feature_norb(repository_root)
+    legacy_mapping = _load_legacy_task_mapping(repository_root)
     for path in sorted((repository_root / "problem_instances").rglob("*.json")):
         document = json.loads(path.read_text(encoding="utf-8"))
         family = path.parent.name
@@ -81,17 +137,12 @@ def load_committed_artifacts(repository_root: Path) -> tuple[dict[str, dict[str,
                     requirements.get("reference_energy_units"),
                     f"task {task_uuid} reference energy",
                 )
-            features = task.get("features", {})
-            metadata_norb = features.get("num_orbitals") if isinstance(features, dict) else None
-            if metadata_norb is not None:
-                metadata_number = float(metadata_norb)
-                if not metadata_number.is_integer() or metadata_number < 0:
-                    raise ValueError(f"invalid metadata NORB for task {task_uuid}")
-                metadata_norb = int(metadata_number)
+            metadata_norb, metadata_fields = _metadata_norb(task_uuid, task)
             csv_norb = feature_norb.get(task_uuid)
             if metadata_norb is not None and csv_norb is not None and metadata_norb != csv_norb:
                 raise ValueError(f"metadata/feature CSV NORB disagreement for task {task_uuid}")
             task["metrics_norb"] = metadata_norb if metadata_norb is not None else csv_norb
+            task["metrics_norb_metadata_fields"] = metadata_fields
             task["metrics_norb_source"] = (
                 "task_metadata+feature_csv"
                 if metadata_norb is not None and csv_norb is not None
@@ -102,6 +153,10 @@ def load_committed_artifacts(repository_root: Path) -> tuple[dict[str, dict[str,
                 else "unspecified"
             )
             tasks[task_uuid] = task
+
+    missing_mapping_targets = sorted(set(legacy_mapping.values()) - set(tasks))
+    if missing_mapping_targets:
+        raise ValueError(f"legacy mapping targets absent from committed instances: {missing_mapping_targets}")
 
     attempts: list[dict[str, Any]] = []
     seen_pairs: set[tuple[str, str]] = set()
@@ -127,9 +182,11 @@ def load_committed_artifacts(repository_root: Path) -> tuple[dict[str, dict[str,
                     result.get("energy_units"),
                     f"solution {path} task {result.get("task_uuid", "unknown")} energy",
                 )
-            task_uuid = str(result.get("task_uuid", ""))
-            if not task_uuid:
+            original_task_uuid = str(result.get("task_uuid", ""))
+            if not original_task_uuid:
                 continue
+            task_uuid = legacy_mapping.get(original_task_uuid, original_task_uuid)
+            joined_via_mapping = original_task_uuid in legacy_mapping
             pair = (solver, task_uuid)
             if pair in seen_pairs:
                 raise ValueError(f"multiple committed attempts for solver/task pair {pair}")
@@ -138,6 +195,13 @@ def load_committed_artifacts(repository_root: Path) -> tuple[dict[str, dict[str,
                 {
                     "solver": solver,
                     "task_uuid": task_uuid,
+                    "original_task_uuid": original_task_uuid,
+                    "joined_via_legacy_mapping": joined_via_mapping,
+                    "legacy_mapping_source": (
+                        LEGACY_MAPPING_RELATIVE_PATH.as_posix()
+                        if joined_via_mapping
+                        else None
+                    ),
                     "energy": result.get("energy"),
                     "source": path.relative_to(repository_root).as_posix(),
                     "solution_file_family": solution_file_family,
@@ -148,7 +212,7 @@ def load_committed_artifacts(repository_root: Path) -> tuple[dict[str, dict[str,
 
 def export_bundle(repository_root: Path, output: Path, bootstrap_iterations: int = 1000) -> bytes:
     tasks, attempts = load_committed_artifacts(repository_root)
-    bundle = build_bundle_v1_4(
+    bundle = build_bundle_v1_5(
         tasks, attempts, bootstrap_iterations=bootstrap_iterations
     )
     encoded = (json.dumps(bundle, indent=2, sort_keys=True, allow_nan=False) + "\n").encode("utf-8")
