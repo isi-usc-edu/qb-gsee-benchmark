@@ -6,7 +6,10 @@
 from __future__ import annotations
 
 import gzip
+import io
 import re
+import zipfile
+from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterator, TextIO
@@ -14,15 +17,35 @@ from typing import Iterator, TextIO
 import numpy as np
 
 
-_HEADER_KEYS = ("NORB", "NELEC", "MS2")
 DEFAULT_DUPLICATE_RTOL = 1.0e-8
 DEFAULT_DUPLICATE_ATOL = 1.0e-8
 
 
-def _open_text(path: Path) -> TextIO:
-    if path.suffix.lower() == ".gz":
-        return gzip.open(path, "rt", encoding="ascii")
-    return path.open("rt", encoding="ascii")
+@contextmanager
+def _open_text(
+    path: Path,
+) -> Iterator[tuple[TextIO, str, str | None]]:
+    suffix = path.suffix.lower()
+    if suffix == ".zip":
+        with zipfile.ZipFile(path) as archive:
+            members = sorted(
+                info.filename for info in archive.infolist() if not info.is_dir()
+            )
+            if len(members) != 1:
+                raise ValueError(
+                    f"FCIDUMP ZIP must contain exactly one file, found {members}"
+                )
+            member = members[0]
+            with archive.open(member) as raw:
+                with io.TextIOWrapper(raw, encoding="ascii") as handle:
+                    yield handle, "zip", member
+        return
+    if suffix == ".gz":
+        with gzip.open(path, "rt", encoding="ascii") as handle:
+            yield handle, "gzip", None
+        return
+    with path.open("rt", encoding="ascii") as handle:
+        yield handle, "plain", None
 
 
 def eri_symmetry_permutations(
@@ -64,6 +87,9 @@ class SparseFcidump:
     two_body_duplicate_max_abs_difference: float
     two_body_duplicate_max_rel_difference: float
     two_body_symmetry_conflict_records: int
+    container_format: str
+    container_member: str | None
+    ms2_source: str
 
     @property
     def nalpha(self) -> int:
@@ -91,7 +117,9 @@ class SparseFcidump:
         return eri
 
 
-def _parse_header(handle: TextIO) -> dict[str, int]:
+def _parse_header(
+    handle: TextIO, *, ms2_override: int | None = None
+) -> tuple[dict[str, int], str]:
     chunks: list[str] = []
     for line in handle:
         chunks.append(line)
@@ -103,15 +131,24 @@ def _parse_header(handle: TextIO) -> dict[str, int]:
 
     text = " ".join(chunks)
     result: dict[str, int] = {}
-    for key in _HEADER_KEYS:
+    for key in ("NORB", "NELEC"):
         match = re.search(rf"\b{key}\s*=\s*(-?\d+)", text, re.IGNORECASE)
         if match is None:
             raise ValueError(f"Missing {key} in FCIDUMP header")
         result[key.lower()] = int(match.group(1))
+    ms2_match = re.search(r"\bMS2\s*=\s*(-?\d+)", text, re.IGNORECASE)
+    if ms2_match is None:
+        if ms2_override is None:
+            raise ValueError("Missing MS2 in FCIDUMP header and manifest")
+        result["ms2"] = int(ms2_override)
+        ms2_source = "problem_instance_features"
+    else:
+        result["ms2"] = int(ms2_match.group(1))
+        ms2_source = "fcidump_header"
     iuhf = re.search(r"\bIUHF\s*=\s*(-?\d+)", text, re.IGNORECASE)
     if iuhf is not None and int(iuhf.group(1)) != 0:
         raise ValueError("IUHF FCIDUMPs are not supported by the spatial parser")
-    return result
+    return result, ms2_source
 
 
 def _store_checked(
@@ -154,11 +191,15 @@ def read_sparse_fcidump(
     duplicate_rtol: float = DEFAULT_DUPLICATE_RTOL,
     duplicate_atol: float = DEFAULT_DUPLICATE_ATOL,
     strict_duplicates: bool = False,
+    ms2_override: int | None = None,
 ) -> SparseFcidump:
     """Read a real spatial FCIDUMP without allocating an N**4 tensor."""
     path = Path(path)
-    with _open_text(path) as handle:
-        header = _parse_header(handle)
+    with _open_text(path) as opened:
+        handle, container_format, container_member = opened
+        header, ms2_source = _parse_header(
+            handle, ms2_override=ms2_override
+        )
         norb = header["norb"]
         nelec = header["nelec"]
         ms2 = header["ms2"]
@@ -274,4 +315,7 @@ def read_sparse_fcidump(
             two_body_duplicate_max_rel_difference
         ),
         two_body_symmetry_conflict_records=two_body_symmetry_conflict_records,
+        container_format=container_format,
+        container_member=container_member,
+        ms2_source=ms2_source,
     )

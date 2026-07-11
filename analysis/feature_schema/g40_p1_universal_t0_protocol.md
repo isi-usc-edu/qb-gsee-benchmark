@@ -5,12 +5,17 @@ Status: P1-A implemented; corpus population and P1-B/P1-C heavy blocks pending.
 ## Input convention
 
 The reader accepts real spatial-orbital FCIDUMPs with eightfold chemist-integral
-symmetry. It reads `NORB`, `NELEC`, and `MS2` from the header, never
-infers a singlet, and rejects `IUHF=1` files because their block convention is
-not the declared shared spatial representation. Repeated symmetry orientations
-are averaged to enforce an exact Hermitian/eightfold tensor. Differences beyond
-a frozen `1e-8` absolute / `1e-8` relative audit gate increment explicit
-conflict counts and retain maximum absolute/relative discrepancies. Strict mode
+symmetry. It reads `NORB`, `NELEC`, and `MS2` from the header and never
+infers a singlet. When `MS2` is absent, an explicit problem-instance `ms2` or
+`spin` value may be used and is provenance-tagged; absence from both locations
+fails. A ZIP input must contain exactly one file, whose member name is recorded.
+`IUHF=1` is rejected because its block convention is outside the declared
+shared spatial representation. Repeated symmetry orientations are averaged to
+enforce an exact Hermitian/eightfold tensor. The audit gate is NumPy
+`isclose(a, b, rtol=1e-8, atol=1e-8)`, a combined tolerance equivalent to
+`abs(a-b) <= atol + rtol*abs(b)`, not two independent gates. Differences beyond
+it increment explicit conflict counts and retain maximum absolute/relative
+discrepancies. Strict mode
 fails on those conflicts; the universal corpus pass records and symmetrizes them
 rather than silently dropping the task. Mathematical zeros remain part of all
 tensor denominators.

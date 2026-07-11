@@ -21,7 +21,7 @@ from qb_gsee_benchmark.features.fcidump_sparse import (
 from qb_gsee_benchmark.features.integral_features import log10_fci_dimension
 
 
-UNIVERSAL_T0_LINEAR_VERSION = "g40_p1_linear_v3"
+UNIVERSAL_T0_LINEAR_VERSION = "g40_p1_linear_v4"
 RELATIVE_THRESHOLD_GRID = (
     1.0e-12,
     1.0e-10,
@@ -67,6 +67,8 @@ def _bare_gap(eigenvalues: np.ndarray, occupation: int) -> float | None:
 
 def compute_universal_t0_linear_features(
     source: str | Path | SparseFcidump,
+    *,
+    ms2_override: int | None = None,
 ) -> dict[str, Any]:
     """Compute G40 P1 header, coefficient, sparsity, and bare-gap features.
 
@@ -77,7 +79,7 @@ def compute_universal_t0_linear_features(
     data = (
         source
         if isinstance(source, SparseFcidump)
-        else read_sparse_fcidump(source)
+        else read_sparse_fcidump(source, ms2_override=ms2_override)
     )
     effective_h1 = effective_one_body_from_sparse(data)
     effective_abs = np.abs(effective_h1)
@@ -178,6 +180,9 @@ def compute_universal_t0_linear_features(
         ),
         "fcidump_symmetry_atol": DEFAULT_DUPLICATE_ATOL,
         "fcidump_symmetry_rtol": DEFAULT_DUPLICATE_RTOL,
+        "fcidump_container_format": data.container_format,
+        "fcidump_container_member": data.container_member,
+        "fcidump_ms2_source": data.ms2_source,
         "universal_t0_linear_features_version": (
             UNIVERSAL_T0_LINEAR_VERSION
         ),

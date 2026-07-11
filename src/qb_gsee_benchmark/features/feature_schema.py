@@ -90,7 +90,8 @@ PROCEDURAL = {
     "mp2_spin_decomposition_status", "pair_structure_basis",
     "U_eff_over_W_reason", "universal_t0_linear_features_version",
     "fcidump_symmetry_status", "fcidump_symmetry_atol",
-    "fcidump_symmetry_rtol",
+    "fcidump_symmetry_rtol", "fcidump_container_format",
+    "fcidump_container_member", "fcidump_ms2_source",
 }
 DUPLICATE_SIZE = {"num_orbitals", "num_electrons", "ms2"}
 LEGACY_JW_ARCHIVE = {
@@ -174,6 +175,8 @@ UNIVERSAL_T0_AUDIT_OUTPUTS = {
     "two_body_symmetry_conflict_records", "U_eff_over_W_reason",
     "fcidump_symmetry_status", "fcidump_symmetry_atol",
     "fcidump_symmetry_rtol", "universal_t0_linear_features_version",
+    "fcidump_container_format", "fcidump_container_member",
+    "fcidump_ms2_source",
 }
 UNIVERSAL_T0_INV_MODEL = {
     "effective_h1_frobenius_norm", "bare_one_body_bandwidth",
@@ -206,7 +209,18 @@ def metadata_for_column(column: str) -> FeatureColumnMetadata:
             "n_elec": "FCIDUMP NELEC", "n_orbs": "FCIDUMP NORB",
             "log_fci_dim": "log10[C(N,n_alpha) C(N,n_beta)] with n_alpha=(NELEC+MS2)/2",
         }[column]
-        return _feature(column, "T0", "INV", cost="header", definition=definition)
+        return _feature(
+            column,
+            "T0",
+            "INV",
+            cost="header",
+            definition=definition,
+            status=(
+                "pending_value_rebuild"
+                if column == "log_fci_dim"
+                else "current"
+            ),
+        )
     if column in LEGACY_JW_ARCHIVE:
         return _feature(column, "T0", "BAS+ORD", eligible=False,
             reason="legacy Jordan-Wigner/archive quantity superseded or identified as a mapping artifact",
@@ -296,4 +310,8 @@ def metadata_catalog(columns: Iterable[str], include_planned: bool = True) -> li
     return result
 
 def model_eligible_columns(columns: Iterable[str]) -> list[str]:
-    return [row.column for row in metadata_catalog(columns, include_planned=False) if row.model_eligible]
+    return [
+        row.column
+        for row in metadata_catalog(columns, include_planned=False)
+        if row.model_eligible and row.implementation_status == "current"
+    ]

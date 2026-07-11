@@ -83,7 +83,7 @@ def migration_rows() -> list[dict[str, object]]:
         ("P0-002", "one_norm", "preserve_and_demote", "legacy Jordan-Wigner one norm treated as physical lambda", "byte-preserved archive column; BAS+ORD; model-ineligible", "complete", "0", "Never silently redefine the historical column."),
         ("P0-003", "fermionic_coefficient_l1_norm", "new_definition", "absent", "sum|h_tilde| + 1/2 sum|V|; BAS", "defined_pending_P1_population", "0", "New column; does not overwrite one_norm."),
         ("P0-004", "df_rank;df_gap;df_eig_decay_exponent;df_rank_per_orbital", "representation_retag", "legacy/addendum BAS claim", "INV under U tensor U conjugation", "complete", "0", "G-21 empirical checks remain a P1 release gate."),
-        ("P0-005", "min_weight;max_edge_order", "eligibility_demotion", "legacy candidate features", "archive-only pipeline artifacts", "complete", "0", "Pruning threshold and JW locality artifact."),
+        ("P0-005", "min_weight;min_edge_order;max_edge_order", "eligibility_demotion", "legacy candidate features", "archive-only pipeline artifacts", "complete", "0", "Pruning threshold and JW locality artifact."),
         ("P0-006", "pyscf_homo_lumo_gap;pyscf_uhf_s2;mp2_corr_energy;mp2_corr_energy_per_electron", "eligibility_demotion", "solver-file postprocessing", "archive until independently recomputed under MF-PROTO", "complete", "0", "P2 creates Hamiltonian-conditioned protocol features."),
         ("P0-007", "ccsd_t1_diagnostic;ccsd_d1_diagnostic;ccsd_max_t2", "eligibility_demotion", "dead solver-derived columns", "T3 archive-only", "complete", "0", "Panel-class solver output is circular as an input."),
         ("P0-008", "sign_free_condition_flag", "eligibility_demotion", "metadata-inherited flag", "model-eligible only after P1 integral recomputation", "complete", "0", "Current metadata value remains archived."),
@@ -158,14 +158,43 @@ def main() -> int:
     write_csv(MIGRATION, migration_rows())
     census = corpus_census()
     write_json(CENSUS, census)
-    current = [row for row in catalog if row.implementation_status == "current"]
+    source_rows = [
+        row
+        for row in catalog
+        if row.implementation_status in {"current", "pending_value_rebuild"}
+    ]
+    planned_rows = [
+        row
+        for row in catalog
+        if row.implementation_status not in {"current", "pending_value_rebuild"}
+    ]
     write_json(MANIFEST, {
-        "schema_version": "g40-p0-v1",
+        "schema_version": "g40-p0-v2",
         "source_feature_table": str(FEATURES.relative_to(ROOT)),
         "source_feature_table_sha256": before,
-        "model_eligible_columns": [row.column for row in current if row.model_eligible],
-        "excluded_columns": {row.column: row.exclusion_reason for row in current if not row.model_eligible},
-        "planned_columns_excluded_until_populated": [row.column for row in catalog if row.implementation_status != "current"],
+        "model_eligible_columns": [
+            row.column
+            for row in source_rows
+            if row.model_eligible and row.implementation_status == "current"
+        ],
+        "pending_value_rebuild_columns": [
+            row.column
+            for row in source_rows
+            if row.implementation_status == "pending_value_rebuild"
+        ],
+        "excluded_columns": {
+            row.column: row.exclusion_reason
+            for row in source_rows
+            if not row.model_eligible
+        },
+        "planned_columns_excluded_until_populated": {
+            "pending_model_eligible": [
+                row.column for row in planned_rows if row.model_eligible
+            ],
+            "permanently_audit_only": [
+                row.column for row in planned_rows if not row.model_eligible
+            ],
+        },
     })
     write_json(DEFINITIONS, {
         "schema_version": "g40-p0-v1",
@@ -190,7 +219,10 @@ def main() -> int:
         raise RuntimeError("P0 mutated Hamiltonian_features.csv")
     print(json.dumps({
         "current_columns": len(columns), "catalog_rows": len(catalog),
-        "model_eligible_current": sum(row.model_eligible for row in current),
+        "model_eligible_current": sum(
+            row.model_eligible and row.implementation_status == "current"
+            for row in source_rows
+        ),
         "corpus_tasks": census["task_count"], "feature_table_sha256": after,
     }, sort_keys=True))
     return 0

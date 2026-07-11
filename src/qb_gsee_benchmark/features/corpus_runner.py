@@ -33,6 +33,7 @@ class CorpusFcidump:
     checksum_type: str
     file_name: str
     norb_metadata: int | None
+    ms2_metadata: int | None
 
     def signature(self) -> str:
         payload = json.dumps(asdict(self), sort_keys=True, separators=(",", ":"))
@@ -63,6 +64,7 @@ def load_corpus_fcidumps(
                 "num_orbitals",
                 features.get("n_orbitals", features.get("n_levels")),
             )
+            ms2 = features.get("ms2", features.get("spin"))
             url_name = Path(urlparse(item["instance_data_object_url"]).path).name
             records.append(
                 CorpusFcidump(
@@ -74,6 +76,7 @@ def load_corpus_fcidumps(
                     checksum_type=item.get("instance_data_checksum_type", ""),
                     file_name=item.get("instance_data_object_file_name", url_name),
                     norb_metadata=None if norb is None else int(norb),
+                    ms2_metadata=None if ms2 is None else int(ms2),
                 )
             )
     records.sort(key=lambda record: record.task_uuid)
@@ -200,7 +203,9 @@ def run_linear_task(
     started = time.monotonic()
     try:
         source = materialize_fcidump(record, cache_dir, offline=offline)
-        features = compute_universal_t0_linear_features(source)
+        features = compute_universal_t0_linear_features(
+            source, ms2_override=record.ms2_metadata
+        )
         source_sha256 = file_checksum(source, "sha256")
         status = "success"
         error_type = None
@@ -221,6 +226,7 @@ def run_linear_task(
         "declared_checksum_type": record.checksum_type,
         "source_sha256": source_sha256,
         "manifest_signature": signature,
+        "manifest_ms2_metadata": record.ms2_metadata,
         "extractor_version": UNIVERSAL_T0_LINEAR_VERSION,
         "walltime_seconds": time.monotonic() - started,
         "process_peak_rss_kb": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,

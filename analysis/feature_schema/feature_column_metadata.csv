@@ -13,7 +13,7 @@ min_edge_order,feature,T0,BAS+ORD,NONE,audit-only,False,legacy Jordan-Wigner/arc
 mean_edge_order,feature,T0,BAS+ORD,NONE,representation-sensitivity,True,,intensive,legacy_jw,legacy Jordan-Wigner hypergraph statistic: mean_edge_order,current
 std_dev_edge_order,feature,T0,BAS+ORD,NONE,representation-sensitivity,True,,intensive,legacy_jw,legacy Jordan-Wigner hypergraph statistic: std_dev_edge_order,current
 number_of_terms,feature,T0,BAS+ORD,NONE,representation-sensitivity,True,,intensive,legacy_jw,legacy Jordan-Wigner hypergraph statistic: number_of_terms,current
-log_fci_dim,feature,T0,INV,NONE,accuracy,True,,intensive,header,"log10[C(N,n_alpha) C(N,n_beta)] with n_alpha=(NELEC+MS2)/2",current
+log_fci_dim,feature,T0,INV,NONE,accuracy,True,,intensive,header,"log10[C(N,n_alpha) C(N,n_beta)] with n_alpha=(NELEC+MS2)/2",pending_value_rebuild
 n_elec,feature,T0,INV,NONE,accuracy,True,,intensive,header,FCIDUMP NELEC,current
 n_orbs,feature,T0,INV,NONE,accuracy,True,,intensive,header,FCIDUMP NORB,current
 df_rank,feature,T0,INV,NONE,accuracy,True,,intensive,df_spectrum,df rank,current
@@ -141,6 +141,9 @@ eri_fraction_above_rel_1e_4,feature,T0,BAS,NONE,accuracy,True,,intensive,integra
 eri_fraction_above_rel_1e_6,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,eri fraction above rel 1e 6,defined_not_populated
 eri_fraction_above_rel_1e_8,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,eri fraction above rel 1e 8,defined_not_populated
 eri_l1_over_frobenius,feature,T0,BAS,NONE,accuracy,True,,intensive,integral_linear,eri l1 over frobenius,defined_not_populated
+fcidump_container_format,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,fcidump container format,defined_not_populated
+fcidump_container_member,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,fcidump container member,defined_not_populated
+fcidump_ms2_source,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,fcidump ms2 source,defined_not_populated
 fcidump_symmetry_atol,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,fcidump symmetry atol,defined_not_populated
 fcidump_symmetry_rtol,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,fcidump symmetry rtol,defined_not_populated
 fcidump_symmetry_status,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,fcidump symmetry status,defined_not_populated

@@ -1,6 +1,7 @@
 import gzip
 import hashlib
 import json
+import zipfile
 import math
 from pathlib import Path
 
@@ -65,6 +66,40 @@ def test_sparse_reader_handles_compressed_and_duplicate_orientations(
     assert len(data.eri_records) == 4
     assert np.allclose(data.h1, [[1.0, 0.5], [0.5, 3.0]])
     assert data.eri_value(1, 0, 0, 1) == pytest.approx(0.25)
+
+
+def test_sparse_reader_supports_single_member_zip(tmp_path: Path) -> None:
+    path = tmp_path / "FCIDUMP.zip"
+    with zipfile.ZipFile(path, "w") as archive:
+        archive.writestr("FCIDUMP", FCIDUMP_TEXT)
+
+    features = compute_universal_t0_linear_features(path)
+
+    assert features["n_orbs"] == 2
+    assert features["fcidump_container_format"] == "zip"
+    assert features["fcidump_container_member"] == "FCIDUMP"
+
+
+def test_sparse_reader_rejects_ambiguous_zip(tmp_path: Path) -> None:
+    path = tmp_path / "FCIDUMP.zip"
+    with zipfile.ZipFile(path, "w") as archive:
+        archive.writestr("FCIDUMP.a", FCIDUMP_TEXT)
+        archive.writestr("FCIDUMP.b", FCIDUMP_TEXT)
+
+    with pytest.raises(ValueError, match="exactly one file"):
+        read_sparse_fcidump(path)
+
+
+def test_missing_ms2_requires_explicit_manifest_value(tmp_path: Path) -> None:
+    text = FCIDUMP_TEXT.replace("MS2=0,", "")
+    path = _write_fcidump(tmp_path / "FCIDUMP", text)
+
+    with pytest.raises(ValueError, match="header and manifest"):
+        read_sparse_fcidump(path)
+
+    features = compute_universal_t0_linear_features(path, ms2_override=0)
+    assert features["ms2"] == 0
+    assert features["fcidump_ms2_source"] == "problem_instance_features"
 
 
 def test_sparse_effective_one_body_matches_dense_definition(
@@ -177,6 +212,7 @@ def test_linear_task_is_checksum_bound_and_resumable(tmp_path: Path) -> None:
         checksum_type="sha1sum",
         file_name="fixture.fcidump",
         norb_metadata=2,
+        ms2_metadata=0,
     )
     cache = tmp_path / "cache"
     state = tmp_path / "state"
@@ -192,6 +228,7 @@ def test_linear_task_is_checksum_bound_and_resumable(tmp_path: Path) -> None:
     assert second == first
     assert next(state.glob("*.json")).read_bytes() == state_bytes
     assert first["features"]["n_orbs"] == 2
+    assert first["manifest_ms2_metadata"] == 0
     assert json.loads(state_bytes)["source_sha256"] == hashlib.sha256(
         payload
     ).hexdigest()

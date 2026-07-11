@@ -3,7 +3,7 @@ P0-001,log_fci_dim,definition_and_values,nalpha derived after MS2/2,nalpha=(NELE
 P0-002,one_norm,preserve_and_demote,legacy Jordan-Wigner one norm treated as physical lambda,byte-preserved archive column; BAS+ORD; model-ineligible,complete,0,Never silently redefine the historical column.
 P0-003,fermionic_coefficient_l1_norm,new_definition,absent,sum|h_tilde| + 1/2 sum|V|; BAS,defined_pending_P1_population,0,New column; does not overwrite one_norm.
 P0-004,df_rank;df_gap;df_eig_decay_exponent;df_rank_per_orbital,representation_retag,legacy/addendum BAS claim,INV under U tensor U conjugation,complete,0,G-21 empirical checks remain a P1 release gate.
-P0-005,min_weight;max_edge_order,eligibility_demotion,legacy candidate features,archive-only pipeline artifacts,complete,0,Pruning threshold and JW locality artifact.
+P0-005,min_weight;min_edge_order;max_edge_order,eligibility_demotion,legacy candidate features,archive-only pipeline artifacts,complete,0,Pruning threshold and JW locality artifact.
 P0-006,pyscf_homo_lumo_gap;pyscf_uhf_s2;mp2_corr_energy;mp2_corr_energy_per_electron,eligibility_demotion,solver-file postprocessing,archive until independently recomputed under MF-PROTO,complete,0,P2 creates Hamiltonian-conditioned protocol features.
 P0-007,ccsd_t1_diagnostic;ccsd_d1_diagnostic;ccsd_max_t2,eligibility_demotion,dead solver-derived columns,T3 archive-only,complete,0,Panel-class solver output is circular as an input.
 P0-008,sign_free_condition_flag,eligibility_demotion,metadata-inherited flag,model-eligible only after P1 integral recomputation,complete,0,Current metadata value remains archived.
