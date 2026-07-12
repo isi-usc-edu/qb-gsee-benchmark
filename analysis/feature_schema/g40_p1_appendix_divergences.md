@@ -28,3 +28,20 @@ conflicted source FCIDUMPs should be regenerated/canonicalized and whether the
 solver harness must use the same averaging convention. Until then,
 `fcidump_symmetry_status=conflict_above_tolerance` is an applicability flag,
 not a benign diagnostic.
+
+## FLAG: canonical modified-Cholesky block has no completed P1 slot
+
+The amended appendix requires canonical modified-Cholesky rank, effective rank,
+and participation/decay diagnostics across the universal corpus. P1-A populated
+the 591-row linear block but did not run a modified-Cholesky extractor. The
+current feature table has `df_rank`, `df_gap`, `df_eig_decay_exponent`,
+`df_rank_per_orbital`, and `df_eigs` on only **184 of 591** rows. No universal
+post-P1-A extractor exists in `src/qb_gsee_benchmark/features`.
+
+The subsequent tracker labels assign P1-B to determinant coupling and P1-C to
+orderability/MPO, then direct execution to P2. Therefore legacy partial DF
+coverage must not be treated as satisfying the amended P1 contract. PI
+reconciliation is required: insert a separately pilot-gated invariant DF block
+before P2, or explicitly amend the appendix and G40 completion contract. P1-C
+coefficient-matricization ranks are basis/ordering-sensitive and do not replace
+this missing invariant interaction-spectrum block.

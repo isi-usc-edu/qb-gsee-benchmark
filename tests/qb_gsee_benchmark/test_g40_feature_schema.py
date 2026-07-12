@@ -12,6 +12,9 @@ import pytest
 from qb_gsee_benchmark.features.feature_schema import (
     P1B_AUDIT,
     P1B_MODEL,
+    P1C_AUDIT,
+    P1C_BAS_MODEL,
+    P1C_BAS_ORD_MODEL,
     PLANNED_COLUMNS,
     metadata_catalog,
     metadata_for_column,
@@ -108,8 +111,8 @@ def test_generated_p0_artifacts_are_deterministic_and_value_preserving() -> None
     assert manifest["pending_value_rebuild_columns"] == []
     planned = manifest["planned_columns_excluded_until_populated"]
     assert planned == {
-        "pending_model_eligible": sorted(P1B_MODEL),
-        "permanently_audit_only": sorted(P1B_AUDIT),
+        "pending_model_eligible": sorted(P1B_MODEL | P1C_BAS_MODEL | P1C_BAS_ORD_MODEL),
+        "permanently_audit_only": sorted(P1B_AUDIT | P1C_AUDIT),
     }
 
     with (OUT / "feature_column_metadata.csv").open(newline="") as handle:

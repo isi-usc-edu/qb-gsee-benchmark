@@ -209,6 +209,23 @@ P1B_AUDIT = {
     *{f"random_det_expected_degree_mc_se_rel_1e_{exponent}" for exponent in (12, 10, 8, 6, 4, 2)},
 }
 
+P1C_BAS_MODEL = {
+    "interaction_graph_edge_count", "interaction_graph_total_weight",
+    "min_fill_width_upper_bound",
+    *{f"cut_weight_{name}_{metric}" for name in ("fiedler", "rcm", "minimum_degree", "linear_relaxation", "best") for metric in ("max", "p95", "sum")},
+    *{f"cut_weight_heuristic_spread_{metric}" for metric in ("max", "p95", "sum")},
+}
+P1C_BAS_ORD_MODEL = {
+    *{f"cut_weight_{name}_{metric}" for name in ("file", "random") for metric in ("max", "p95", "sum")},
+    *{f"cut_weight_improvement_vs_{name}_{metric}" for name in ("file", "random") for metric in ("max", "p95", "sum")},
+    "mpo_pair_rank_max", "mpo_pair_rank_p95", "mpo_pair_rank_mean",
+}
+P1C_AUDIT = {
+    "orderability_random_seed", "orderability_features_version",
+    "mpo_ordering_heuristic",
+    *{f"cut_weight_best_{metric}_heuristic" for metric in ("max", "p95", "sum")},
+}
+
 def metadata_for_column(column: str) -> FeatureColumnMetadata:
     """Return explicit P0 metadata; unknown columns fail closed."""
     if column in IDENTIFIERS:
@@ -284,6 +301,14 @@ def metadata_for_column(column: str) -> FeatureColumnMetadata:
         return _feature(column, "T0", "BAS", eligible=False,
             reason="deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",
             role="audit-only", cost="determinant_coupling")
+    if column in P1C_BAS_MODEL:
+        return _feature(column, "T0", "BAS", cost="orderability")
+    if column in P1C_BAS_ORD_MODEL:
+        return _feature(column, "T0", "BAS+ORD", cost="orderability")
+    if column in P1C_AUDIT:
+        return _feature(column, "T0", "BAS+ORD", eligible=False,
+            reason="ordering choice, random seed, or extractor version",
+            role="audit-only", cost="orderability")
     if column in UNIVERSAL_T0_BAS_MODEL:
         return _feature(column, "T0", "BAS", cost="integral_linear")
     raise KeyError(f"G-40 P0 has no metadata classification for column {column!r}")
@@ -296,6 +321,9 @@ PLANNED_COLUMNS = {
         | UNIVERSAL_T0_AUDIT_OUTPUTS
         | P1B_MODEL
         | P1B_AUDIT
+        | P1C_BAS_MODEL
+        | P1C_BAS_ORD_MODEL
+        | P1C_AUDIT
     )
 }
 PLANNED_COLUMNS["fermionic_coefficient_l1_norm"] = _feature(

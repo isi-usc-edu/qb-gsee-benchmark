@@ -1,6 +1,6 @@
 # G-40 P1 universal T0 protocol
 
-Status: P1-A implemented; corpus population and P1-B/P1-C heavy blocks pending.
+Status: P1-A populated on 591 tasks; P1-B and P1-C extractors are pilot-gated.
 
 ## Input convention
 
@@ -52,8 +52,9 @@ audit-only.
 
 ## Remaining release gates
 
-P1-A values are not model-eligible until the manifest-driven corpus pass,
-migration ledger, no-op check on existing populated cells, and G-21
-representation-pair checks are green. P1-B covers modified-Cholesky spectra,
-participation rank, and interaction graphs. P1-C covers determinant coupling,
-branching, cut profiles, min-fill, and MPO compressibility.
+P1-A passed its manifest-driven corpus, migration, no-op, and G21 gates.
+P1-B covers determinant coupling and random-determinant branching. P1-C covers
+interaction-graph cut profiles, min-fill, and coefficient-MPO compressibility.
+The canonical modified-Cholesky/participation-rank block remains unresolved as
+recorded in `g40_p1_appendix_divergences.md`; legacy 184-row DF coverage is not
+universal completion.
