@@ -29,3 +29,10 @@ def test_p1d_pilot_selection_is_unique_cross_band_and_contains_g21() -> None:
     } <= set(selected)
     assert "fc432cd0-4856-54f2-a240-9813d9fda019" in selected
     assert "5e53cc08-b541-5163-bbf2-66e195a6492f" in selected
+
+
+def test_p1d_legacy_comparison_selection_is_frozen_at_184_rows() -> None:
+    selected = (
+        OUT / "g40_p1d_legacy_comparison_selection.txt"
+    ).read_text().splitlines()
+    assert len(selected) == len(set(selected)) == 184
