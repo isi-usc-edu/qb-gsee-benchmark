@@ -148,8 +148,9 @@ def main() -> int:
         raise ValueError("feature table does not exactly match the corpus manifest")
     rows_before = previous.get("rows_before", len(rows))
     columns_before = previous.get("columns_before", len(fields))
-    new_columns = sorted(set(feature_columns) - set(fields))
-    fields.extend(new_columns)
+    current_new_columns = sorted(set(feature_columns) - set(fields))
+    fields.extend(current_new_columns)
+    new_columns = previous.get("new_columns", current_new_columns)
 
     audited = 0
     newly_populated = 0
