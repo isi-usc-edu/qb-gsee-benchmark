@@ -638,12 +638,15 @@ def _ordered_diagonal_boundary_tie(
     )
 
 
-def run_mean_field(data: SparseFcidump) -> MeanFieldResult:
+def run_mean_field(
+    data: SparseFcidump, eri: np.ndarray | None = None
+) -> MeanFieldResult:
     """Run the complete MFPROTO-v1 RHF/UHF x G1--G4 branch panel."""
     sector = particle_sector(data.norb, data.nelec, data.ms2)
     core = canonical_eigh(data.h1)
     guesses = initial_spin_density_guesses(data.h1, data.nelec, data.ms2)
-    eri = data.dense_eri()
+    if eri is None:
+        eri = data.dense_eri()
     methods = ("RHF", "UHF") if data.ms2 == 0 else ("UHF",)
     branches = [
         _run_mean_field_branch(data, eri, method, guess, guesses[guess], sector)
@@ -798,3 +801,42 @@ def mean_field_feature_values(result: MeanFieldResult) -> dict[str, Any]:
         None if not applicable_fock_gaps else float(min(applicable_fock_gaps))
     )
     return features
+
+
+def pyscf_solver_for_branch(
+    data: SparseFcidump, eri: np.ndarray, branch: MeanFieldBranch
+) -> Any:
+    """Reconstruct a PySCF object at a canonical converged branch."""
+    if not branch.converged:
+        raise ValueError("cannot reconstruct an unconverged branch")
+    solver = _build_pyscf_mean_field(data, eri, branch.method)
+    if branch.method == "RHF":
+        occupations = np.zeros(data.norb)
+        occupations[: data.nalpha] = 2.0
+        solver.mo_coeff = branch.orbitals_alpha
+        solver.mo_energy = branch.energies_alpha
+        solver.mo_occ = occupations
+    else:
+        occupation_alpha = np.zeros(data.norb)
+        occupation_beta = np.zeros(data.norb)
+        occupation_alpha[: data.nalpha] = 1.0
+        occupation_beta[: data.nbeta] = 1.0
+        solver.mo_coeff = np.asarray((branch.orbitals_alpha, branch.orbitals_beta))
+        solver.mo_energy = np.asarray((branch.energies_alpha, branch.energies_beta))
+        solver.mo_occ = np.asarray((occupation_alpha, occupation_beta))
+    solver.e_tot = branch.energy
+    solver.converged = True
+    return solver
+
+
+def run_mean_field_from_density(
+    data: SparseFcidump,
+    eri: np.ndarray,
+    method: str,
+    spin_density: tuple[np.ndarray, np.ndarray],
+    *,
+    guess: str,
+) -> MeanFieldBranch:
+    """Apply the frozen primary-plus-fallback protocol to a followed density."""
+    sector = particle_sector(data.norb, data.nelec, data.ms2)
+    return _run_mean_field_branch(data, eri, method, guess, spin_density, sector)
