@@ -1,3 +1,4 @@
+import csv
 from pathlib import Path
 
 
@@ -13,9 +14,30 @@ def test_p1d_protocol_and_cost_gate_are_frozen_before_pilot() -> None:
     assert "driver=\"evd\"" in protocol
     assert "partial eigensolver" in protocol
     assert "184 rows" in protocol
+    assert "exact zero at float64 precision" in protocol
+    assert "Spearman" in protocol
+    assert "permanent `interaction_spectrum_*` names" in protocol
     assert "upper bound of 12" in cost
     assert "node-hours" in cost
     assert "16,109" in cost
+
+
+def test_p1d_legacy_mapping_rejects_semantic_renames() -> None:
+    with (OUT / "g40_p1d_legacy_mapping.csv").open(newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    assert len(rows) == 7
+    assert {row["legacy_column"] for row in rows} == {
+        "df_rank",
+        "df_gap",
+        "df_eig_decay_exponent",
+        "df_rank_per_orbital",
+        "df_eigs",
+        "df_eig_decay_r2",
+        "df_eig_decay_npoints",
+    }
+    assert all(
+        row["replacement_status"] != "semantically_equivalent" for row in rows
+    )
 
 
 def test_p1d_pilot_selection_is_unique_cross_band_and_contains_g21() -> None:

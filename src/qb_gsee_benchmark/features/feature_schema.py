@@ -107,7 +107,7 @@ LEGACY_JW_MODEL = {
     "max_vertex_degree_per_orbital", "vertex_degree_coefficient_of_variation",
     "edge_order_coefficient_of_variation",
 }
-DF_MODEL = {
+DF_ARCHIVE = {
     "df_rank", "df_gap", "df_eig_decay_exponent", "df_rank_per_orbital",
 }
 DF_AUDIT = {"df_eigs", "df_eig_decay_r2", "df_eig_decay_npoints"}
@@ -287,13 +287,15 @@ def metadata_for_column(column: str) -> FeatureColumnMetadata:
     if column in LEGACY_JW_MODEL:
         return _feature(column, "T0", "BAS+ORD", role="representation-sensitivity",
             cost="legacy_jw", definition=f"legacy Jordan-Wigner hypergraph statistic: {column}")
-    if column in DF_MODEL:
-        return _feature(column, "T0", "INV", cost="df_spectrum",
+    if column in DF_ARCHIVE:
+        return _feature(column, "T0", "INV", eligible=False,
+            reason="superseded by exact invariant interaction-spectrum block - different threshold conventions",
+            role="audit-only", scaling="archive", cost="df_spectrum",
             definition=("gap between the two largest pair-space ERI eigenvalues; not an energy gap" if column == "df_gap" else column.replace("_", " ")))
     if column in DF_AUDIT:
         return _feature(column, "T0", "INV", eligible=False,
-            reason="raw spectrum or fit-quality diagnostic, retained for audit", role="audit-only",
-            scaling="diagnostic", cost="df_spectrum")
+            reason="superseded by exact invariant interaction-spectrum block - different threshold conventions",
+            role="audit-only", scaling="archive", cost="df_spectrum")
     if column in SOLVER_DERIVED:
         tier = "T3" if column.startswith("ccsd_") else ("T2" if column.startswith("mp2_") else "T1")
         return _feature(column, tier, "BAS", protocol="MF-PROTO", eligible=False,

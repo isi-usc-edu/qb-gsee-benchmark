@@ -1,0 +1,8 @@
+legacy_column,related_interaction_spectrum_column,replacement_status,semantic_difference
+df_rank,interaction_spectrum_rank_rel_1e_4,not_semantically_equivalent,"legacy counts positive eigenvalues above an absolute 1e-8 Ha floor; replacement counts magnitude eigenvalues above a relative threshold"
+df_gap,interaction_spectrum_relative_gap,not_semantically_equivalent,"legacy is an absolute positive-eigenvalue gap with last-record-wins input; replacement is a dimensionless magnitude-spectrum gap with duplicate-averaged input"
+df_eig_decay_exponent,interaction_spectrum_decay_exponent,not_semantically_equivalent,"legacy fits the positive-spectrum tail to an absolute floor; replacement fits the magnitude-spectrum head through rank_rel_1e_4"
+df_rank_per_orbital,interaction_spectrum_rank_rel_1e_4,related_derived_only,"legacy df_rank divided by n_orbs; no direct replacement column is emitted"
+df_eigs,,archive_only,"legacy raw positive spectrum is retained for audit and has no direct replacement"
+df_eig_decay_r2,,archive_only,"legacy fit-quality diagnostic is retained for audit and has no direct replacement"
+df_eig_decay_npoints,,archive_only,"legacy fit-size diagnostic is retained for audit and has no direct replacement"

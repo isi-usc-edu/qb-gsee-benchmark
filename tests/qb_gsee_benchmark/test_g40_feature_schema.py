@@ -94,6 +94,20 @@ def test_p0_eligibility_and_retags_are_explicit() -> None:
     assert metadata_for_column("interaction_spectrum_effective_rank").representation == "INV"
     assert metadata_for_column("interaction_spectrum_effective_rank").model_eligible
     assert not metadata_for_column("interaction_spectrum_negative_mass_fraction").model_eligible
+    for column in (
+        "df_rank",
+        "df_gap",
+        "df_eig_decay_exponent",
+        "df_rank_per_orbital",
+        "df_eigs",
+        "df_eig_decay_r2",
+        "df_eig_decay_npoints",
+    ):
+        assert not metadata_for_column(column).model_eligible
+        assert metadata_for_column(column).exclusion_reason == (
+            "superseded by exact invariant interaction-spectrum block - "
+            "different threshold conventions"
+        )
     assert not metadata_for_column("one_norm").model_eligible
     assert not metadata_for_column("ccsd_t1_diagnostic").model_eligible
     assert not metadata_for_column("sign_free_condition_flag").model_eligible
@@ -102,6 +116,8 @@ def test_p0_eligibility_and_retags_are_explicit() -> None:
     eligible = model_eligible_columns(columns)
     assert "log_fci_dim" in eligible
     assert "one_norm" not in eligible
+    assert "df_rank" not in eligible
+    assert "df_gap" not in eligible
     assert "ccsd_t1_diagnostic" not in eligible
     assert "fermionic_coefficient_l1_norm" in eligible
 

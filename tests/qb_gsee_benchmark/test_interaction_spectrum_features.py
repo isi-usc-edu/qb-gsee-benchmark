@@ -77,6 +77,29 @@ def test_interaction_spectrum_statistics_include_negative_mass() -> None:
     assert features["interaction_spectrum_active_pair_dimension"] == 2
 
 
+def test_real_tight_binding_control_has_exact_zero_interaction_spectrum() -> None:
+    source = (
+        ROOT
+        / "tests/qb_gsee_benchmark/fixtures/tight_binding_controls_chain_L12_open.FCIDUMP"
+    )
+    assert hashlib.sha256(source.read_bytes()).hexdigest() == (
+        "51211e4923e613a77b229c2a83cc69dfe6f3a4aaf822e5b2b8e8d26e43346c25"
+    )
+
+    features = compute_interaction_spectrum_features(source)
+    assert features["interaction_spectrum_rank_rel_1e_2"] == 0
+    assert features["interaction_spectrum_rank_rel_1e_4"] == 0
+    assert features["interaction_spectrum_rank_rel_1e_6"] == 0
+    assert features["interaction_spectrum_effective_rank"] == 0.0
+    assert features["interaction_spectrum_participation_rank"] == 0.0
+    assert features["interaction_spectrum_decay_exponent"] is None
+    assert features["interaction_spectrum_relative_gap"] == 0.0
+    assert features["interaction_spectrum_negative_mass_fraction"] == 0.0
+    assert features["interaction_spectrum_max_abs_eigenvalue"] == 0.0
+    assert features["interaction_spectrum_pair_dimension"] == 78
+    assert features["interaction_spectrum_active_pair_dimension"] == 0
+
+
 def test_support_reduction_preserves_full_nonzero_spectrum() -> None:
     data = _data(
         3,

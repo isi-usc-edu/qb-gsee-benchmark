@@ -16,9 +16,9 @@ number_of_terms,feature,T0,BAS+ORD,NONE,representation-sensitivity,True,,intensi
 log_fci_dim,feature,T0,INV,NONE,accuracy,True,,intensive,header,"log10[C(N,n_alpha) C(N,n_beta)] with n_alpha=(NELEC+MS2)/2",current
 n_elec,feature,T0,INV,NONE,accuracy,True,,intensive,header,FCIDUMP NELEC,current
 n_orbs,feature,T0,INV,NONE,accuracy,True,,intensive,header,FCIDUMP NORB,current
-df_rank,feature,T0,INV,NONE,accuracy,True,,intensive,df_spectrum,df rank,current
-df_gap,feature,T0,INV,NONE,accuracy,True,,intensive,df_spectrum,gap between the two largest pair-space ERI eigenvalues; not an energy gap,current
-df_eigs,feature,T0,INV,NONE,audit-only,False,"raw spectrum or fit-quality diagnostic, retained for audit",diagnostic,df_spectrum,df eigs,current
+df_rank,feature,T0,INV,NONE,audit-only,False,superseded by exact invariant interaction-spectrum block - different threshold conventions,archive,df_spectrum,df rank,current
+df_gap,feature,T0,INV,NONE,audit-only,False,superseded by exact invariant interaction-spectrum block - different threshold conventions,archive,df_spectrum,gap between the two largest pair-space ERI eigenvalues; not an energy gap,current
+df_eigs,feature,T0,INV,NONE,audit-only,False,superseded by exact invariant interaction-spectrum block - different threshold conventions,archive,df_spectrum,df eigs,current
 problem_instance_uuid,identifier,N/A,N/A,N/A,audit-only,False,identifier or split-group metadata,N/A,metadata,problem instance uuid,current
 problem_instance_short_name,identifier,N/A,N/A,N/A,audit-only,False,identifier or split-group metadata,N/A,metadata,problem instance short name,current
 task_uuid,identifier,N/A,N/A,N/A,audit-only,False,identifier or split-group metadata,N/A,metadata,task uuid,current
@@ -28,12 +28,12 @@ instance_data_object_url,identifier,N/A,N/A,N/A,audit-only,False,identifier or s
 date_of_calculation,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,date of calculation,current
 version_of_features_calculation_script,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,version of features calculation script,current
 ham_features_calc_time,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,ham features calc time,current
-df_eig_decay_exponent,feature,T0,INV,NONE,accuracy,True,,intensive,df_spectrum,df eig decay exponent,current
-df_eig_decay_r2,feature,T0,INV,NONE,audit-only,False,"raw spectrum or fit-quality diagnostic, retained for audit",diagnostic,df_spectrum,df eig decay r2,current
-df_eig_decay_npoints,feature,T0,INV,NONE,audit-only,False,"raw spectrum or fit-quality diagnostic, retained for audit",diagnostic,df_spectrum,df eig decay npoints,current
+df_eig_decay_exponent,feature,T0,INV,NONE,audit-only,False,superseded by exact invariant interaction-spectrum block - different threshold conventions,archive,df_spectrum,df eig decay exponent,current
+df_eig_decay_r2,feature,T0,INV,NONE,audit-only,False,superseded by exact invariant interaction-spectrum block - different threshold conventions,archive,df_spectrum,df eig decay r2,current
+df_eig_decay_npoints,feature,T0,INV,NONE,audit-only,False,superseded by exact invariant interaction-spectrum block - different threshold conventions,archive,df_spectrum,df eig decay npoints,current
 df_eig_decay_fit_reason,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,df eig decay fit reason,current
 one_norm_per_orbital,feature,T0,BAS+ORD,NONE,audit-only,False,legacy Jordan-Wigner/archive quantity superseded or identified as a mapping artifact,archive,legacy_jw,one norm per orbital,current
-df_rank_per_orbital,feature,T0,INV,NONE,accuracy,True,,intensive,df_spectrum,df rank per orbital,current
+df_rank_per_orbital,feature,T0,INV,NONE,audit-only,False,superseded by exact invariant interaction-spectrum block - different threshold conventions,archive,df_spectrum,df rank per orbital,current
 features_version,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,features version,current
 pyscf_homo_lumo_gap,feature,T1,BAS,MF-PROTO,audit-only,False,legacy value was parsed from panel solver output; P1/P2 recompute independently from the Hamiltonian,intensive,solver_output_postprocess,pyscf homo lumo gap,current
 pyscf_uhf_s2,feature,T1,BAS,MF-PROTO,audit-only,False,legacy value was parsed from panel solver output; P1/P2 recompute independently from the Hamiltonian,intensive,solver_output_postprocess,pyscf uhf s2,current

@@ -37,6 +37,19 @@ Let `a_k` be all `abs(lambda_k)` sorted descending, `A = sum_k a_k`, and
 - Negative-mass fraction is `sum_{lambda<0}|lambda| / A` and is audit-only.
 - Every ratio/rank is zero for an all-zero tensor.
 
+Values with magnitude below `1e-12` in the relative-gap or decay columns are
+interpreted as exact zero at float64 precision. This documents accepted
+machine noise in flat or degenerate spectra; committed values are not rounded
+or rewritten. The all-zero path is pinned by a checksum-bound FCIDUMP from the
+released `tight_binding_controls` family, whose two-body tensor has no nonzero
+records.
+
+The decay exponent is not an independent effective-dimension diagnostic. Over
+the legacy-comparison corpus it is strongly constrained by
+`rank_rel_1e_4`: approximately `alpha = 4/log10(rank_rel_1e_4)`, with Spearman
+correlation 0.81 under the comparison convention. It remains available, but
+models and interpretation must account for this collinearity.
+
 All seven model columns are `T0/INV/NONE`. Scale, dimensions, tolerances,
 negative mass, and extractor version are audit-only. The named representation
 gate requires agreement on both G21 orbital-rotation pairs and the certified
@@ -49,10 +62,13 @@ it densely, retained only positive eigenvalues `lambda >= 1e-8 Ha`, sorted them
 ascending, set `df_rank` to their count, and defined `df_gap` as the absolute
 difference between the two largest retained positive eigenvalues. It did not
 use relative thresholds, absolute-value ranks, symmetric-pair normalization,
-or a non-PSD diagnostic. P1-D therefore uses new names during the pilot. The
-pilot-review comparison will report overlap and residuals on all 184 rows with
-legacy `df_*` coverage before the PI chooses same-name backfill versus permanent
-new names.
+or a non-PSD diagnostic.
+P1-D therefore uses permanent `interaction_spectrum_*` names. Every legacy
+`df_*` value is byte-preserved but model-ineligible in the archive ring, with
+the reason `superseded by exact invariant interaction-spectrum block -
+different threshold conventions`. The related-field mapping records why none
+of these columns is a semantically equivalent rename.
+The pilot-review comparison covers all 184 rows with legacy `df_*` values.
 
 ## Pilot gate
 
