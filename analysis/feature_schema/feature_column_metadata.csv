@@ -157,6 +157,38 @@ two_body_duplicate_max_abs_difference,feature,T0,BAS,NONE,audit-only,False,parse
 two_body_duplicate_max_rel_difference,feature,T0,BAS,NONE,audit-only,False,parser or mean-field procedural diagnostic,intensive,integral_postprocess,two body duplicate max rel difference,current
 two_body_symmetry_conflict_records,feature,T0,BAS,NONE,audit-only,False,parser or mean-field procedural diagnostic,intensive,integral_postprocess,two body symmetry conflict records,current
 universal_t0_linear_features_version,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,universal t0 linear features version,current
+det_coupling_count_above_rel_1e_10,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling count above rel 1e 10,current
+det_coupling_count_above_rel_1e_12,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling count above rel 1e 12,current
+det_coupling_count_above_rel_1e_2,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling count above rel 1e 2,current
+det_coupling_count_above_rel_1e_4,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling count above rel 1e 4,current
+det_coupling_count_above_rel_1e_6,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling count above rel 1e 6,current
+det_coupling_count_above_rel_1e_8,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling count above rel 1e 8,current
+det_coupling_nonzero_degree,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling nonzero degree,current
+det_coupling_participation_ratio,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling participation ratio,current
+det_coupling_reference,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,det coupling reference,current
+det_coupling_scale,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling scale,current
+det_coupling_tail_loglog_slope,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling tail loglog slope,current
+det_coupling_top_100_l2_mass_fraction,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling top 100 l2 mass fraction,current
+det_coupling_top_10_l2_mass_fraction,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling top 10 l2 mass fraction,current
+det_coupling_top_1_l2_mass_fraction,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling top 1 l2 mass fraction,current
+determinant_coupling_features_version,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,determinant coupling features version,current
+random_det_branching_determinants,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det branching determinants,current
+random_det_branching_double_method,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det branching double method,current
+random_det_branching_exact_double_max_eri_records,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det branching exact double max eri records,current
+random_det_branching_excitation_samples_per_class,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det branching excitation samples per class,current
+random_det_branching_seed,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det branching seed,current
+random_det_expected_degree_mc_se_rel_1e_10,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det expected degree mc se rel 1e 10,current
+random_det_expected_degree_mc_se_rel_1e_12,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det expected degree mc se rel 1e 12,current
+random_det_expected_degree_mc_se_rel_1e_2,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det expected degree mc se rel 1e 2,current
+random_det_expected_degree_mc_se_rel_1e_4,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det expected degree mc se rel 1e 4,current
+random_det_expected_degree_mc_se_rel_1e_6,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det expected degree mc se rel 1e 6,current
+random_det_expected_degree_mc_se_rel_1e_8,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det expected degree mc se rel 1e 8,current
+random_det_expected_degree_rel_1e_10,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,random det expected degree rel 1e 10,current
+random_det_expected_degree_rel_1e_12,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,random det expected degree rel 1e 12,current
+random_det_expected_degree_rel_1e_2,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,random det expected degree rel 1e 2,current
+random_det_expected_degree_rel_1e_4,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,random det expected degree rel 1e 4,current
+random_det_expected_degree_rel_1e_6,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,random det expected degree rel 1e 6,current
+random_det_expected_degree_rel_1e_8,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,random det expected degree rel 1e 8,current
 cut_weight_best_max,feature,T0,BAS,NONE,accuracy,True,,intensive,orderability,cut weight best max,defined_not_populated
 cut_weight_best_max_heuristic,feature,T0,BAS+ORD,NONE,audit-only,False,"ordering choice, random seed, or extractor version",intensive,orderability,cut weight best max heuristic,defined_not_populated
 cut_weight_best_p95,feature,T0,BAS,NONE,accuracy,True,,intensive,orderability,cut weight best p95,defined_not_populated
@@ -190,21 +222,6 @@ cut_weight_random_sum,feature,T0,BAS+ORD,NONE,accuracy,True,,intensive,orderabil
 cut_weight_rcm_max,feature,T0,BAS,NONE,accuracy,True,,intensive,orderability,cut weight rcm max,defined_not_populated
 cut_weight_rcm_p95,feature,T0,BAS,NONE,accuracy,True,,intensive,orderability,cut weight rcm p95,defined_not_populated
 cut_weight_rcm_sum,feature,T0,BAS,NONE,accuracy,True,,intensive,orderability,cut weight rcm sum,defined_not_populated
-det_coupling_count_above_rel_1e_10,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling count above rel 1e 10,defined_not_populated
-det_coupling_count_above_rel_1e_12,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling count above rel 1e 12,defined_not_populated
-det_coupling_count_above_rel_1e_2,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling count above rel 1e 2,defined_not_populated
-det_coupling_count_above_rel_1e_4,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling count above rel 1e 4,defined_not_populated
-det_coupling_count_above_rel_1e_6,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling count above rel 1e 6,defined_not_populated
-det_coupling_count_above_rel_1e_8,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling count above rel 1e 8,defined_not_populated
-det_coupling_nonzero_degree,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling nonzero degree,defined_not_populated
-det_coupling_participation_ratio,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling participation ratio,defined_not_populated
-det_coupling_reference,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,det coupling reference,defined_not_populated
-det_coupling_scale,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling scale,defined_not_populated
-det_coupling_tail_loglog_slope,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling tail loglog slope,defined_not_populated
-det_coupling_top_100_l2_mass_fraction,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling top 100 l2 mass fraction,defined_not_populated
-det_coupling_top_10_l2_mass_fraction,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling top 10 l2 mass fraction,defined_not_populated
-det_coupling_top_1_l2_mass_fraction,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,det coupling top 1 l2 mass fraction,defined_not_populated
-determinant_coupling_features_version,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,determinant coupling features version,defined_not_populated
 interaction_graph_edge_count,feature,T0,BAS,NONE,accuracy,True,,intensive,orderability,interaction graph edge count,defined_not_populated
 interaction_graph_total_weight,feature,T0,BAS,NONE,accuracy,True,,intensive,orderability,interaction graph total weight,defined_not_populated
 min_fill_width_upper_bound,feature,T0,BAS,NONE,accuracy,True,,intensive,orderability,min fill width upper bound,defined_not_populated
@@ -214,20 +231,3 @@ mpo_pair_rank_mean,feature,T0,BAS+ORD,NONE,accuracy,True,,intensive,orderability
 mpo_pair_rank_p95,feature,T0,BAS+ORD,NONE,accuracy,True,,intensive,orderability,mpo pair rank p95,defined_not_populated
 orderability_features_version,feature,T0,BAS+ORD,NONE,audit-only,False,"ordering choice, random seed, or extractor version",intensive,orderability,orderability features version,defined_not_populated
 orderability_random_seed,feature,T0,BAS+ORD,NONE,audit-only,False,"ordering choice, random seed, or extractor version",intensive,orderability,orderability random seed,defined_not_populated
-random_det_branching_determinants,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det branching determinants,defined_not_populated
-random_det_branching_double_method,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det branching double method,defined_not_populated
-random_det_branching_exact_double_max_eri_records,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det branching exact double max eri records,defined_not_populated
-random_det_branching_excitation_samples_per_class,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det branching excitation samples per class,defined_not_populated
-random_det_branching_seed,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det branching seed,defined_not_populated
-random_det_expected_degree_mc_se_rel_1e_10,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det expected degree mc se rel 1e 10,defined_not_populated
-random_det_expected_degree_mc_se_rel_1e_12,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det expected degree mc se rel 1e 12,defined_not_populated
-random_det_expected_degree_mc_se_rel_1e_2,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det expected degree mc se rel 1e 2,defined_not_populated
-random_det_expected_degree_mc_se_rel_1e_4,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det expected degree mc se rel 1e 4,defined_not_populated
-random_det_expected_degree_mc_se_rel_1e_6,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det expected degree mc se rel 1e 6,defined_not_populated
-random_det_expected_degree_mc_se_rel_1e_8,feature,T0,BAS,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,random det expected degree mc se rel 1e 8,defined_not_populated
-random_det_expected_degree_rel_1e_10,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,random det expected degree rel 1e 10,defined_not_populated
-random_det_expected_degree_rel_1e_12,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,random det expected degree rel 1e 12,defined_not_populated
-random_det_expected_degree_rel_1e_2,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,random det expected degree rel 1e 2,defined_not_populated
-random_det_expected_degree_rel_1e_4,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,random det expected degree rel 1e 4,defined_not_populated
-random_det_expected_degree_rel_1e_6,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,random det expected degree rel 1e 6,defined_not_populated
-random_det_expected_degree_rel_1e_8,feature,T0,BAS,NONE,accuracy,True,,intensive,determinant_coupling,random det expected degree rel 1e 8,defined_not_populated

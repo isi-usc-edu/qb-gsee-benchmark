@@ -23,7 +23,8 @@ def _sha256(path: Path) -> str:
 
 def test_p1a_table_has_manifest_wide_universal_coverage() -> None:
     frame = pd.read_csv(TABLE)
-    assert frame.shape == (591, 158)
+    assert frame.shape[0] == 591
+    assert frame.shape[1] >= 158
     assert frame["task_uuid"].is_unique
     always_applicable = [
         "n_orbs",
@@ -72,7 +73,12 @@ def test_p1a_report_binds_table_jobs_and_representation_gate() -> None:
     assert report["columns_before"] == 120
     assert report["columns_after"] == 158
     assert report["migration_cells"] == 601
-    assert report["output_feature_table_sha256"] == _sha256(TABLE)
+    assert report["output_feature_table_sha256"] == (
+        "7d15c9fefe2951be9fc1bf9fdbfeedc0f0a4ea300a3c1a47fcb7ca9e35441410"
+    )
+    p1b = json.loads((OUT / "g40_p1b_production_report.json").read_text())
+    assert p1b["input_feature_table_sha256"] == report["output_feature_table_sha256"]
+    assert p1b["output_feature_table_sha256"] == _sha256(TABLE)
     assert report["initial_job_id"] == "7651290.imgt1"
     assert report["corrected_job_id"] == "7651318.imgt1"
     assert report["corrected_code_revision"].startswith("8f8348a")
