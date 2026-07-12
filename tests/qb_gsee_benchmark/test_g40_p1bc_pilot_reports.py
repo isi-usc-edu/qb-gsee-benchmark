@@ -30,7 +30,8 @@ def test_p1b_pilot_report_binds_precision_representation_and_pbs() -> None:
 def test_p1b_production_table_and_report_are_complete() -> None:
     table = ROOT / "scripts" / "Hamiltonian_features.csv"
     frame = pd.read_csv(table)
-    assert frame.shape == (591, 190)
+    assert frame.shape[0] == 591
+    assert frame.shape[1] >= 232
     assert frame["task_uuid"].is_unique
     assert set(frame["determinant_coupling_features_version"]) == {
         "g40_p1b_determinant_coupling_v4"
@@ -58,9 +59,8 @@ def test_p1b_production_table_and_report_are_complete() -> None:
     assert report["pbs"]["job_id"] == "7651364.imgt1"
     assert report["pbs"]["exit_status"] == 0
     assert report["representation_pair_check"]["status"] == "passed"
-    assert (
-        report["output_feature_table_sha256"]
-        == hashlib.sha256(table.read_bytes()).hexdigest()
+    assert report["output_feature_table_sha256"] == (
+        "966b7f87f212e928af36f303c3bccda5f51270638c4bc96c7f9c5a6b78ed735c"
     )
 
 
@@ -81,3 +81,46 @@ def test_p1c_pilot_report_binds_representation_and_pbs() -> None:
         "status": "passed",
     }
     assert len(report["state_ledger"]) == 25
+
+
+def test_p1c_production_table_and_report_are_complete() -> None:
+    table = ROOT / "scripts" / "Hamiltonian_features.csv"
+    frame = pd.read_csv(table)
+    assert frame.shape == (591, 232)
+    assert frame["task_uuid"].is_unique
+    assert set(frame["orderability_features_version"]) == {
+        "g40_p1c_orderability_v1"
+    }
+    required = [
+        "cut_weight_best_max",
+        "cut_weight_heuristic_spread_p95",
+        "cut_weight_improvement_vs_file_sum",
+        "min_fill_width_upper_bound",
+        "mpo_pair_rank_max",
+    ]
+    assert not frame[required].isna().any().any()
+
+    report = json.loads((OUT / "g40_p1c_production_report.json").read_text())
+    p1b = json.loads((OUT / "g40_p1b_production_report.json").read_text())
+    assert report["successful_states"] == report["corpus_tasks"] == 591
+    assert report["rows_before"] == report["rows_after"] == 591
+    assert report["columns_before"] == 190
+    assert report["columns_after"] == 232
+    assert len(report["new_columns"]) == 42
+    assert report["newly_populated_cells"] == 24822
+    assert report["changed_populated_cells"] == 0
+    assert report["code_revision"] == "a1179fa"
+    assert report["builder_revision"] == "0da1087"
+    assert report["input_feature_table_sha256"] == p1b[
+        "output_feature_table_sha256"
+    ]
+    assert report["output_feature_table_sha256"] == hashlib.sha256(
+        table.read_bytes()
+    ).hexdigest()
+    assert report["pbs"]["job_id"] == "7651367.imgt1"
+    assert report["pbs"]["exit_status"] == 0
+    assert report["representation_pair_check"] == {
+        "equivalence_groups": 4,
+        "groups_passed": 4,
+        "status": "passed",
+    }
