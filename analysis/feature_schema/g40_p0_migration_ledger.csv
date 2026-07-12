@@ -15,3 +15,4 @@ R1-001,det_coupling_*;random_det_expected_degree_*,representation_retag,T0 BAS,T
 R1-002,cut_weight_rcm_*;cut_weight_minimum_degree_*;cut_weight_heuristic_spread_*,representation_retag,T0 BAS,T0 BAS+ORD,complete,0,Unweighted graph tie-breaking depends on shipped orbital order; feature values unchanged.
 R1-003,det_coupling_reference_boundary_tie,new_audit_flag,absent,T0 BAS+ORD audit-only,pending_value_backfill,0,Exact h1 diagonal tie at either spin occupation boundary.
 R4-001,mpo_pair_rank_applicable,new_applicability_flag,absent,T0 BAS audit-only,pending_value_backfill,0,False when every nonzero ERI is strictly on-site; prevents degenerate zero pair-rank use.
+R6-001,cut_weight_fiedler_*;cut_weight_linear_relaxation_*;cut_weight_best_*;min_fill_width_upper_bound,representation_retag,T0 BAS,T0 BAS+ORD,complete,0,Exact Laplacian/Fiedler degeneracies and graph-elimination ties make the shipped orbital labels observable; all feature-table values remain byte-preserved.

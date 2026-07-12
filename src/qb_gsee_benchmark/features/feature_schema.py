@@ -217,6 +217,8 @@ P1B_LEGACY_AUDIT = {"random_det_branching_excitation_samples_per_det"}
 P1C_RETAG_BAS_ORD_MODEL = {
     *{f"cut_weight_{name}_{metric}" for name in ("rcm", "minimum_degree") for metric in ("max", "p95", "sum")},
     *{f"cut_weight_heuristic_spread_{metric}" for metric in ("max", "p95", "sum")},
+    *{f"cut_weight_{name}_{metric}" for name in ("fiedler", "linear_relaxation", "best") for metric in ("max", "p95", "sum")},
+    "min_fill_width_upper_bound",
 }
 P1C_BAS_MODEL = {
     "interaction_graph_edge_count", "interaction_graph_total_weight",
