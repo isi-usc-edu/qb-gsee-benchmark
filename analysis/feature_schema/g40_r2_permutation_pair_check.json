@@ -1,0 +1,725 @@
+{
+  "atol": 1e-10,
+  "check": "g40_r2_permutation_certificates",
+  "equivalence_groups": 2,
+  "failures": [],
+  "groups_passed": 2,
+  "permutation_blocks": [
+    "linear",
+    "coupling",
+    "orderability"
+  ],
+  "permutation_certificate_version": "g40_orbital_permutation_pairs_v1",
+  "reports": [
+    {
+      "blocks": [
+        {
+          "block": "linear",
+          "checked_inv_or_bas_columns": 28,
+          "checks": {
+            "U_eff_over_W": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                1.5765976588363573,
+                1.5765976588363573
+              ]
+            },
+            "bare_one_body_bandwidth": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                0.3855710966530723,
+                0.3855710966530723
+              ]
+            },
+            "bare_one_body_gap_alpha": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                0.3855710966530723,
+                0.3855710966530723
+              ]
+            },
+            "bare_one_body_gap_beta": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                0.3855710966530723,
+                0.3855710966530723
+              ]
+            },
+            "bare_one_body_gap_min": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                0.3855710966530723,
+                0.3855710966530723
+              ]
+            },
+            "effective_h1_entrywise_l1_norm": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                2.47128100734822,
+                2.47128100734822
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_10": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.5,
+                0.5
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_12": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.5,
+                0.5
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_2": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.5,
+                0.5
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_4": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.5,
+                0.5
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_6": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.5,
+                0.5
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_8": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.5,
+                0.5
+              ]
+            },
+            "effective_h1_frobenius_norm": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                1.7670165603266594,
+                1.7670165603266594
+              ]
+            },
+            "effective_h1_l1_over_frobenius": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                1.3985613167605893,
+                1.3985613167605893
+              ]
+            },
+            "eri_fraction_above_rel_1e_10": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.5,
+                0.5
+              ]
+            },
+            "eri_fraction_above_rel_1e_12": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.5,
+                0.5
+              ]
+            },
+            "eri_fraction_above_rel_1e_2": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.5,
+                0.5
+              ]
+            },
+            "eri_fraction_above_rel_1e_4": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.5,
+                0.5
+              ]
+            },
+            "eri_fraction_above_rel_1e_6": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.5,
+                0.5
+              ]
+            },
+            "eri_fraction_above_rel_1e_8": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.5,
+                0.5
+              ]
+            },
+            "eri_full_l1_norm": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                3.2428791779645985,
+                3.2428791779645985
+              ]
+            },
+            "eri_full_l2_norm": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                1.2732406278754866,
+                1.2732406278754864
+              ]
+            },
+            "eri_l1_over_frobenius": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                2.546949183812667,
+                2.5469491838126674
+              ]
+            },
+            "fermionic_coefficient_l1_norm": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                4.092720596330519,
+                4.092720596330519
+              ]
+            },
+            "log_fci_dim": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                0.6020599913279621,
+                0.6020599913279621
+              ]
+            },
+            "n_elec": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                2,
+                2
+              ]
+            },
+            "n_orbs": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                2,
+                2
+              ]
+            },
+            "rho_offdiag": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.0,
+                0.0
+              ]
+            }
+          },
+          "status": "passed"
+        },
+        {
+          "block": "coupling",
+          "checked_inv_or_bas_columns": 0,
+          "checks": {},
+          "status": "passed"
+        },
+        {
+          "block": "orderability",
+          "checked_inv_or_bas_columns": 12,
+          "checks": {
+            "cut_weight_best_max": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.6299271891397082,
+                0.6299271891397082
+              ]
+            },
+            "cut_weight_best_p95": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.6299271891397082,
+                0.6299271891397082
+              ]
+            },
+            "cut_weight_best_sum": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.6299271891397082,
+                0.6299271891397082
+              ]
+            },
+            "cut_weight_fiedler_max": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.6299271891397082,
+                0.6299271891397082
+              ]
+            },
+            "cut_weight_fiedler_p95": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.6299271891397082,
+                0.6299271891397082
+              ]
+            },
+            "cut_weight_fiedler_sum": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.6299271891397082,
+                0.6299271891397082
+              ]
+            },
+            "cut_weight_linear_relaxation_max": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.6299271891397082,
+                0.6299271891397082
+              ]
+            },
+            "cut_weight_linear_relaxation_p95": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.6299271891397082,
+                0.6299271891397082
+              ]
+            },
+            "cut_weight_linear_relaxation_sum": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.6299271891397082,
+                0.6299271891397082
+              ]
+            },
+            "interaction_graph_edge_count": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                1,
+                1
+              ]
+            },
+            "interaction_graph_total_weight": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.6299271891397082,
+                0.6299271891397082
+              ]
+            },
+            "min_fill_width_upper_bound": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                1,
+                1
+              ]
+            }
+          },
+          "status": "passed"
+        }
+      ],
+      "equivalence_group_id": "g40-permutation-molecular_h2-v1",
+      "kind": "molecular_tie_free",
+      "permutation_new_to_old": [
+        1,
+        0
+      ],
+      "seed": 40045,
+      "status": "passed",
+      "tensor_certificate_passed": true
+    },
+    {
+      "blocks": [
+        {
+          "block": "linear",
+          "checked_inv_or_bas_columns": 28,
+          "checks": {
+            "U_eff_over_W": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                1.2360679774997896,
+                1.2360679774997894
+              ]
+            },
+            "bare_one_body_bandwidth": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                3.23606797749979,
+                3.2360679774997907
+              ]
+            },
+            "bare_one_body_gap_alpha": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                1.2360679774997898,
+                1.236067977499789
+              ]
+            },
+            "bare_one_body_gap_beta": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                1.2360679774997898,
+                1.236067977499789
+              ]
+            },
+            "bare_one_body_gap_min": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                1.2360679774997898,
+                1.236067977499789
+              ]
+            },
+            "effective_h1_entrywise_l1_norm": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                14.0,
+                14.0
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_10": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.625,
+                0.625
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_12": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.625,
+                0.625
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_2": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.625,
+                0.625
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_4": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.625,
+                0.625
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_6": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.625,
+                0.625
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_8": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.625,
+                0.625
+              ]
+            },
+            "effective_h1_frobenius_norm": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                4.69041575982343,
+                4.69041575982343
+              ]
+            },
+            "effective_h1_l1_over_frobenius": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                2.9848100289785457,
+                2.9848100289785457
+              ]
+            },
+            "eri_fraction_above_rel_1e_10": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.015625,
+                0.015625
+              ]
+            },
+            "eri_fraction_above_rel_1e_12": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.015625,
+                0.015625
+              ]
+            },
+            "eri_fraction_above_rel_1e_2": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.015625,
+                0.015625
+              ]
+            },
+            "eri_fraction_above_rel_1e_4": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.015625,
+                0.015625
+              ]
+            },
+            "eri_fraction_above_rel_1e_6": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.015625,
+                0.015625
+              ]
+            },
+            "eri_fraction_above_rel_1e_8": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.015625,
+                0.015625
+              ]
+            },
+            "eri_full_l1_norm": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                16.0,
+                16.0
+              ]
+            },
+            "eri_full_l2_norm": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                8.0,
+                8.0
+              ]
+            },
+            "eri_l1_over_frobenius": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                2.0,
+                2.0
+              ]
+            },
+            "fermionic_coefficient_l1_norm": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                22.0,
+                22.0
+              ]
+            },
+            "log_fci_dim": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                1.556302500767287,
+                1.556302500767287
+              ]
+            },
+            "n_elec": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                4,
+                4
+              ]
+            },
+            "n_orbs": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                4,
+                4
+              ]
+            },
+            "rho_offdiag": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.42857142857142855,
+                0.42857142857142855
+              ]
+            }
+          },
+          "status": "passed"
+        },
+        {
+          "block": "coupling",
+          "checked_inv_or_bas_columns": 0,
+          "checks": {},
+          "status": "passed"
+        },
+        {
+          "block": "orderability",
+          "checked_inv_or_bas_columns": 12,
+          "checks": {
+            "cut_weight_best_max": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                1.0,
+                1.0
+              ]
+            },
+            "cut_weight_best_p95": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                1.0,
+                1.0
+              ]
+            },
+            "cut_weight_best_sum": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                3.0,
+                3.0
+              ]
+            },
+            "cut_weight_fiedler_max": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                1.0,
+                1.0
+              ]
+            },
+            "cut_weight_fiedler_p95": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                1.0,
+                1.0
+              ]
+            },
+            "cut_weight_fiedler_sum": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                3.0,
+                3.0
+              ]
+            },
+            "cut_weight_linear_relaxation_max": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                1.0,
+                1.0
+              ]
+            },
+            "cut_weight_linear_relaxation_p95": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                1.0,
+                1.0
+              ]
+            },
+            "cut_weight_linear_relaxation_sum": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                3.0,
+                3.0
+              ]
+            },
+            "interaction_graph_edge_count": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                3,
+                3
+              ]
+            },
+            "interaction_graph_total_weight": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                3.0,
+                3.0
+              ]
+            },
+            "min_fill_width_upper_bound": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                1,
+                1
+              ]
+            }
+          },
+          "status": "passed"
+        }
+      ],
+      "equivalence_group_id": "g40-permutation-lattice_hubbard-v1",
+      "kind": "lattice",
+      "permutation_new_to_old": [
+        2,
+        3,
+        1,
+        0
+      ],
+      "seed": 40045,
+      "status": "passed",
+      "tensor_certificate_passed": true
+    }
+  ],
+  "rtol": 1e-09,
+  "status": "passed"
+}

@@ -1,0 +1,46 @@
+{
+  "certificate_version": "g40_orbital_permutation_pairs_v1",
+  "pairs": [
+    {
+      "equivalence_group_id": "g40-permutation-molecular_h2-v1",
+      "files": {
+        "original": {
+          "path": "tests/qb_gsee_benchmark/fixtures/g40_permutation_pairs/molecular_h2_original.FCIDUMP",
+          "sha256": "1f9f72302d0983d31c702dc5d8d19c97496fb60383a89273033a3c57cbdcdbcc"
+        },
+        "permuted": {
+          "path": "tests/qb_gsee_benchmark/fixtures/g40_permutation_pairs/molecular_h2_permuted.FCIDUMP",
+          "sha256": "def0e4f907bc74104410ddb6676fa1dbc535f2577bf1bd6ea3e6e36b0809203f"
+        }
+      },
+      "kind": "molecular_tie_free",
+      "permutation_new_to_old": [
+        1,
+        0
+      ],
+      "seed": 40045
+    },
+    {
+      "equivalence_group_id": "g40-permutation-lattice_hubbard-v1",
+      "files": {
+        "original": {
+          "path": "tests/qb_gsee_benchmark/fixtures/g40_permutation_pairs/lattice_hubbard_original.FCIDUMP",
+          "sha256": "ba300efbcb788701528958e6c633edf6defb050273defa77f03c74d49d0d3401"
+        },
+        "permuted": {
+          "path": "tests/qb_gsee_benchmark/fixtures/g40_permutation_pairs/lattice_hubbard_permuted.FCIDUMP",
+          "sha256": "69990b4c6da815c9a5d0483189bb1fa49b48c4373ef88a48cb232c87b8a1c808"
+        }
+      },
+      "kind": "lattice",
+      "permutation_new_to_old": [
+        2,
+        3,
+        1,
+        0
+      ],
+      "seed": 40045
+    }
+  ],
+  "rng": "numpy.PCG64"
+}

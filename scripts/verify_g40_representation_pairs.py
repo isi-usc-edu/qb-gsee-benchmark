@@ -4,13 +4,25 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+import numpy as np
+
+from qb_gsee_benchmark.features.determinant_coupling_features import (
+    compute_determinant_coupling_features,
+    diagonal_reference_boundary_tie,
+)
 from qb_gsee_benchmark.features.feature_schema import metadata_for_column
+from qb_gsee_benchmark.features.fcidump_sparse import read_sparse_fcidump
+from qb_gsee_benchmark.features.orderability_features import compute_orderability_features
+from qb_gsee_benchmark.features.universal_t0_features import (
+    compute_universal_t0_linear_features,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,7 +35,7 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         default=ROOT / "problem_instances" / "orbital_representation_pairs",
     )
-    parser.add_argument("--state-dir", type=Path, required=True)
+    parser.add_argument("--state-dir", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--rtol", type=float, default=1.0e-9)
     parser.add_argument("--atol", type=float, default=1.0e-10)
@@ -31,6 +43,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--check-name", default="g40_p1a_g21_representation_pairs"
     )
+    parser.add_argument(
+        "--permutation-certificates",
+        type=Path,
+        default=ROOT / "tests" / "qb_gsee_benchmark" / "fixtures" / "g40_permutation_pairs" / "certificates.json",
+    )
+    parser.add_argument(
+        "--permutation-block",
+        action="append",
+        choices=("linear", "coupling", "orderability"),
+        default=[],
+    )
+    parser.add_argument("--permutation-only", action="store_true")
     return parser.parse_args()
 
 
@@ -40,21 +64,153 @@ def _close(left: Any, right: Any, rtol: float, atol: float) -> bool:
     return math.isclose(float(left), float(right), rel_tol=rtol, abs_tol=atol)
 
 
+def _sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _permutation_features(block: str, path: Path) -> dict[str, Any]:
+    functions = {
+        "linear": compute_universal_t0_linear_features,
+        "coupling": compute_determinant_coupling_features,
+        "orderability": compute_orderability_features,
+    }
+    return functions[block](path)
+
+
+def _infer_permutation_blocks(pattern: str) -> list[str]:
+    for suffix, block in (
+        (".linear.json", "linear"),
+        (".coupling.json", "coupling"),
+        (".orderability.json", "orderability"),
+    ):
+        if suffix in pattern:
+            return [block]
+    raise ValueError("pass --permutation-block when state pattern does not identify a block")
+
+
+def _verify_permutation_certificates(
+    certificate_path: Path,
+    blocks: list[str],
+    rtol: float,
+    atol: float,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    payload = json.loads(certificate_path.read_text())
+    if payload.get("certificate_version") != "g40_orbital_permutation_pairs_v1":
+        raise ValueError("unexpected permutation certificate version")
+    reports = []
+    failures = []
+    for pair in payload["pairs"]:
+        permutation = np.asarray(pair["permutation_new_to_old"], dtype=int)
+        paths = {
+            name: ROOT / item["path"]
+            for name, item in pair["files"].items()
+        }
+        for name, item in pair["files"].items():
+            actual = _sha256(paths[name])
+            if actual != item["sha256"]:
+                failures.append(
+                    {
+                        "group": pair["equivalence_group_id"],
+                        "reason": "certificate_checksum_mismatch",
+                        "member": name,
+                    }
+                )
+        original = read_sparse_fcidump(paths["original"])
+        permuted = read_sparse_fcidump(paths["permuted"])
+        tensor_passed = (
+            np.array_equal(permutation, np.random.default_rng(pair["seed"]).permutation(original.norb))
+            and np.allclose(
+                permuted.h1,
+                original.h1[np.ix_(permutation, permutation)],
+                rtol=0.0,
+                atol=1.0e-14,
+            )
+            and np.allclose(
+                permuted.dense_eri(),
+                original.dense_eri()[np.ix_(permutation, permutation, permutation, permutation)],
+                rtol=0.0,
+                atol=1.0e-14,
+            )
+        )
+        if pair["kind"] == "molecular_tie_free":
+            tensor_passed = tensor_passed and not diagonal_reference_boundary_tie(original)
+        if not tensor_passed:
+            failures.append(
+                {
+                    "group": pair["equivalence_group_id"],
+                    "reason": "permutation_certificate_tensor_mismatch",
+                }
+            )
+        block_reports = []
+        for block in blocks:
+            features = {
+                name: _permutation_features(block, path)
+                for name, path in paths.items()
+            }
+            checks = {}
+            for column in sorted(set(features["original"]) & set(features["permuted"])):
+                metadata = metadata_for_column(column)
+                if not metadata.model_eligible or metadata.representation not in {"INV", "BAS"}:
+                    continue
+                passed = _close(
+                    features["original"][column],
+                    features["permuted"][column],
+                    rtol,
+                    atol,
+                )
+                checks[column] = {
+                    "representation": metadata.representation,
+                    "values": [features["original"][column], features["permuted"][column]],
+                    "passed": passed,
+                }
+                if not passed:
+                    failures.append(
+                        {
+                            "group": pair["equivalence_group_id"],
+                            "block": block,
+                            "reason": "permutation_invariant_axis_changed",
+                            "column": column,
+                        }
+                    )
+            block_reports.append(
+                {
+                    "block": block,
+                    "checked_inv_or_bas_columns": len(checks),
+                    "checks": checks,
+                    "status": "passed" if all(item["passed"] for item in checks.values()) else "failed",
+                }
+            )
+        reports.append(
+            {
+                "equivalence_group_id": pair["equivalence_group_id"],
+                "kind": pair["kind"],
+                "seed": pair["seed"],
+                "permutation_new_to_old": pair["permutation_new_to_old"],
+                "tensor_certificate_passed": tensor_passed,
+                "blocks": block_reports,
+                "status": "passed" if tensor_passed and all(item["status"] == "passed" for item in block_reports) else "failed",
+            }
+        )
+    return reports, failures
+
+
 def main() -> int:
     args = parse_args()
     groups: dict[str, list[str]] = defaultdict(list)
-    for path in sorted(args.pair_instance_dir.glob("*.json")):
-        document = json.loads(path.read_text())
-        for task in document["tasks"]:
-            group = task.get("features", {}).get("equivalence_group_id")
-            if not group:
-                raise ValueError(f"{task['task_uuid']} lacks equivalence_group_id")
-            groups[group].append(task["task_uuid"])
-
     states = {}
-    for path in sorted(args.state_dir.glob(args.state_pattern)):
-        state = json.loads(path.read_text())
-        states[state["task_uuid"]] = state
+    if not args.permutation_only:
+        if args.state_dir is None:
+            raise ValueError("--state-dir is required unless --permutation-only")
+        for path in sorted(args.pair_instance_dir.glob("*.json")):
+            document = json.loads(path.read_text())
+            for task in document["tasks"]:
+                group = task.get("features", {}).get("equivalence_group_id")
+                if not group:
+                    raise ValueError(f"{task['task_uuid']} lacks equivalence_group_id")
+                groups[group].append(task["task_uuid"])
+        for path in sorted(args.state_dir.glob(args.state_pattern)):
+            state = json.loads(path.read_text())
+            states[state["task_uuid"]] = state
 
     reports = []
     failures = []
@@ -152,11 +308,23 @@ def main() -> int:
             }
         )
 
+    permutation_blocks = args.permutation_block or _infer_permutation_blocks(args.state_pattern)
+    permutation_reports, permutation_failures = _verify_permutation_certificates(
+        args.permutation_certificates,
+        permutation_blocks,
+        args.rtol,
+        args.atol,
+    )
+    failures.extend(permutation_failures)
+    reports.extend(permutation_reports)
+
     payload = {
         "check": args.check_name,
+        "permutation_certificate_version": "g40_orbital_permutation_pairs_v1",
+        "permutation_blocks": permutation_blocks,
         "rtol": args.rtol,
         "atol": args.atol,
-        "equivalence_groups": len(groups),
+        "equivalence_groups": len(reports),
         "groups_passed": sum(report["status"] == "passed" for report in reports),
         "status": "passed" if not failures else "failed",
         "reports": reports,
