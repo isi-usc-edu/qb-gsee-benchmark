@@ -209,14 +209,26 @@ def _pair_graph_features(weights: np.ndarray) -> dict[str, object]:
         "mp2_pair_graph_random_seed": RANDOM_ORDER_SEED,
     }
     heuristics = ("fiedler", "linear_relaxation", "rcm", "minimum_degree")
+    total_weight = result["mp2_pair_graph_total_weight"]
+    sum_scale = total_weight * max(1, len(weights) - 1)
     for name in PAIR_GRAPH_ORDERINGS:
         for metric in PROFILE_METRICS:
-            result[f"mp2_pair_cut_{name}_{metric}"] = summaries[name][metric]
+            value = summaries[name][metric]
+            result[f"mp2_pair_cut_{name}_{metric}"] = value
+            scale = sum_scale if metric == "sum" else total_weight
+            result[f"mp2_pair_cut_{name}_{metric}_normalized"] = (
+                0.0 if scale == 0.0 else value / scale
+            )
     for metric in PROFILE_METRICS:
         best_name = min(heuristics, key=lambda name: (summaries[name][metric], name))
         values = [summaries[name][metric] for name in heuristics]
         maximum = max(values)
-        result[f"mp2_pair_cut_best_{metric}"] = summaries[best_name][metric]
+        best_value = summaries[best_name][metric]
+        result[f"mp2_pair_cut_best_{metric}"] = best_value
+        scale = sum_scale if metric == "sum" else total_weight
+        result[f"mp2_pair_cut_best_{metric}_normalized"] = (
+            0.0 if scale == 0.0 else best_value / scale
+        )
         result[f"mp2_pair_cut_best_{metric}_heuristic"] = best_name
         result[f"mp2_pair_cut_heuristic_spread_{metric}"] = (
             0.0 if maximum == 0.0 else (maximum - min(values)) / maximum
@@ -351,12 +363,30 @@ def run_mp2(
         "mp2_opposite_spin_correlation_energy_hartree": opposite_energy,
     }
     features.update(_denominator_features(denominators, masks))
+    for key in (
+        "mp2_correlation_energy_hartree",
+        "mp2_same_spin_correlation_energy_hartree",
+        "mp2_opposite_spin_correlation_energy_hartree",
+    ):
+        intensive_key = key.replace("_energy_hartree", "_energy_per_electron_hartree")
+        features[intensive_key] = features[key] / sector.nelec
     features.update(_amplitude_summary(amplitudes, "mp2_amplitude"))
     features.update(_amplitude_summary(same_amplitudes, "mp2_same_spin_amplitude"))
     features.update(
         _amplitude_summary(opposite_amplitudes, "mp2_opposite_spin_amplitude")
     )
     features.update(_kappa_features(energy_terms, denominators))
+    for key, value in list(features.items()):
+        if key.startswith("mp2_kappa_") and key.endswith("_energy_hartree"):
+            intensive_key = key.replace(
+                "_energy_hartree", "_energy_per_electron_hartree"
+            )
+            features[intensive_key] = value / sector.nelec
+        if key.startswith("mp2_kappa_") and key.endswith("_difference_hartree"):
+            intensive_key = key.replace(
+                "_difference_hartree", "_difference_per_electron_hartree"
+            )
+            features[intensive_key] = value / sector.nelec
     solver = pyscf_solver_for_branch(data, eri, branch)
     mp_solver = mp.MP2(solver)
     mp_solver.verbose = 0

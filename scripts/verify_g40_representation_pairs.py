@@ -24,6 +24,7 @@ from qb_gsee_benchmark.features.interaction_spectrum_features import (
     exact_symmetric_pair_eigenvalues,
 )
 from qb_gsee_benchmark.features.orderability_features import compute_orderability_features
+from qb_gsee_benchmark.features.mfproto_extractor import compute_mfproto_features
 from qb_gsee_benchmark.features.universal_t0_features import (
     compute_universal_t0_linear_features,
 )
@@ -55,7 +56,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--permutation-block",
         action="append",
-        choices=("linear", "coupling", "orderability", "interaction-spectrum"),
+        choices=("linear", "coupling", "orderability", "interaction-spectrum", "mfproto"),
         default=[],
     )
     parser.add_argument("--permutation-only", action="store_true")
@@ -78,6 +79,7 @@ def _permutation_features(block: str, path: Path) -> dict[str, Any]:
         "coupling": compute_determinant_coupling_features,
         "orderability": compute_orderability_features,
         "interaction-spectrum": compute_interaction_spectrum_features,
+        "mfproto": lambda path: compute_mfproto_features(path).features,
     }
     return functions[block](path)
 
@@ -88,6 +90,7 @@ def _infer_permutation_blocks(pattern: str) -> list[str]:
         (".coupling.json", "coupling"),
         (".orderability.json", "orderability"),
         (".interaction-spectrum.json", "interaction-spectrum"),
+        (".mfproto.json", "mfproto"),
     ):
         if suffix in pattern:
             return [block]

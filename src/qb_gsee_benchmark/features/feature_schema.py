@@ -258,6 +258,102 @@ P1D_AUDIT = {
     "interaction_spectrum_features_version",
 }
 
+def _p2_metadata(column: str) -> FeatureColumnMetadata | None:
+    if not column.startswith(("mf_", "mfproto_", "mp2_")):
+        return None
+    if column.startswith("mfproto_"):
+        return _audit(
+            column,
+            "procedural",
+            "MFPROTO version, measured cost, or execution diagnostic",
+        )
+    tier = "T2" if column.startswith("mp2_") else "T1"
+    cost = "mp2" if tier == "T2" else "mean_field"
+    if "stability" in column:
+        cost = "stability"
+    elif "hf_variance" in column:
+        cost = "hf_variance"
+    elif "pair_" in column:
+        cost = "mp2_pair_graph"
+
+    procedural = (
+        column.endswith(("_applicable", "_reason", "_partial_mask"))
+        or "_tie_" in column
+        or column.endswith(("_marginal", "_edge_degenerate", "_zero"))
+        or column.endswith("_heuristic")
+        or column in {"mf_selected_method", "mf_selected_guess", "mp2_reference"}
+    )
+    audit_numeric = (
+        column.endswith(("_count", "_raw", "_seconds", "_ceiling"))
+        or "_orbital_count_" in column
+        or column
+        in {
+            "mf_branch_count",
+            "mf_converged_branch_count",
+            "mf_selected_energy_hartree",
+            "mf_lowest_rhf_energy_hartree",
+            "mf_lowest_uhf_energy_hartree",
+            "mf_solution_energy_spread_hartree",
+            "mf_symmetry_breaking_energy_hartree",
+            "mf_hf_variance_hartree_squared",
+            "mf_hf_variance_singles_alpha",
+            "mf_hf_variance_singles_beta",
+            "mf_hf_variance_doubles_same_spin_alpha",
+            "mf_hf_variance_doubles_same_spin_beta",
+            "mf_hf_variance_doubles_opposite_spin",
+            "mf_stability_external_dimension",
+            "mf_stability_external_action_seconds",
+            "mp2_denominator_masked_count",
+            "mp2_denominator_term_count",
+            "mp2_natural_occupation_clipped_count",
+            "mp2_natural_occupation_minimum_raw",
+            "mp2_natural_occupation_maximum_raw",
+            "mp2_natural_entropy",
+            "mp2_pair_graph_edge_count",
+            "mp2_pair_graph_total_weight",
+            "mp2_pair_graph_random_seed",
+        }
+        or (
+            column.startswith("mp2_")
+            and column.endswith(("_energy_hartree", "_difference_hartree"))
+        )
+        or ("_amplitude_" in column and column.endswith(("_l1_norm", "_l2_norm")))
+        or (
+            column.startswith("mp2_pair_cut_")
+            and not column.endswith("_normalized")
+            and "heuristic_spread" not in column
+        )
+        or column.endswith("_center_hartree")
+    )
+    if procedural:
+        return _audit(
+            column,
+            "procedural",
+            "MFPROTO applicability, mask, tie, method, or ordering diagnostic",
+        )
+    if audit_numeric:
+        return _feature(
+            column,
+            tier,
+            "BAS+ORD",
+            protocol="MF-PROTO",
+            role="audit-only",
+            eligible=False,
+            reason="raw extensive quantity, count, ceiling, or numerical audit",
+            scaling="audit",
+            cost=cost,
+        )
+    return _feature(
+        column,
+        tier,
+        "BAS+ORD",
+        protocol="MF-PROTO",
+        role="accuracy",
+        scaling="intensive",
+        cost=cost,
+    )
+
+
 def metadata_for_column(column: str) -> FeatureColumnMetadata:
     """Return explicit P0 metadata; unknown columns fail closed."""
     if column in IDENTIFIERS:
@@ -361,6 +457,9 @@ def metadata_for_column(column: str) -> FeatureColumnMetadata:
         )
     if column in UNIVERSAL_T0_BAS_MODEL:
         return _feature(column, "T0", "BAS", cost="integral_linear")
+    p2_metadata = _p2_metadata(column)
+    if p2_metadata is not None:
+        return p2_metadata
     raise KeyError(f"G-40 P0 has no metadata classification for column {column!r}")
 
 PLANNED_COLUMNS = {

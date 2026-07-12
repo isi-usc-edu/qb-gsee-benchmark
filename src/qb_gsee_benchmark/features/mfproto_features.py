@@ -736,6 +736,11 @@ def mean_field_feature_values(result: MeanFieldResult) -> dict[str, Any]:
         "mf_selected_energy_hartree": None if selected is None else selected.energy,
         "mf_selected_s2": None if selected is None else selected.s2,
     }
+    features["mf_solution_energy_spread_per_electron_hartree"] = (
+        None
+        if features["mf_solution_energy_spread_hartree"] is None
+        else features["mf_solution_energy_spread_hartree"] / result.sector.nelec
+    )
     features.update({f"mf_tie_{key}": value for key, value in result.tie_audit.items()})
 
     method_energies = {
@@ -793,7 +798,11 @@ def mean_field_feature_values(result: MeanFieldResult) -> dict[str, Any]:
         )
         selected_panels[spin] = panel
         for key, value in panel.items():
-            features[f"mf_selected_fock_{spin}_{key}"] = value
+            output_key = {
+                "gap": "gap_hartree",
+                "center": "center_hartree",
+            }.get(key, key)
+            features[f"mf_selected_fock_{spin}_{output_key}"] = value
     applicable_fock_gaps = [
         panel["gap"] for panel in selected_panels.values() if panel["applicable"]
     ]
