@@ -12,10 +12,20 @@ from typing import Any
 
 from scripts.build_g40_p1a_production import _corpus_metadata
 from scripts.build_g40_p1bc_pilot_report import _pbs_accounting, _sha256
+from qb_gsee_benchmark.features.feature_schema import P1D_AUDIT, P1D_MODEL
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_TABLE = ROOT / "scripts" / "Hamiltonian_features.csv"
 DEFAULT_OUTPUT = ROOT / "analysis" / "feature_schema"
+LEGACY_DF_COLUMNS = [
+    "df_rank",
+    "df_gap",
+    "df_eig_decay_exponent",
+    "df_rank_per_orbital",
+    "df_eigs",
+    "df_eig_decay_r2",
+    "df_eig_decay_npoints",
+]
 
 
 def _value_text(value: Any) -> str:
@@ -44,6 +54,17 @@ def _write_table(path: Path, fields: list[str], rows: list[dict[str, str]]) -> N
 def _state_ledger(paths: list[Path]) -> str:
     text = "".join(f"{_sha256(path)}  {path.name}\n" for path in paths)
     return hashlib.sha256(text.encode("ascii")).hexdigest()
+
+
+def _column_value_digest(
+    rows: list[dict[str, str]], columns: list[str]
+) -> str:
+    payload = [
+        [row["task_uuid"], *(row.get(column, "") for column in columns)]
+        for row in rows
+    ]
+    encoded = json.dumps(payload, separators=(",", ":"), ensure_ascii=True)
+    return hashlib.sha256(encoded.encode("ascii")).hexdigest()
 
 
 def _markdown(report: dict[str, Any]) -> str:
@@ -89,7 +110,9 @@ def _markdown(report: dict[str, Any]) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--block", choices=("g40_p1b", "g40_p1c"), required=True)
+    parser.add_argument(
+        "--block", choices=("g40_p1b", "g40_p1c", "g40_p1d"), required=True
+    )
     parser.add_argument("--state-dir", type=Path, required=True)
     parser.add_argument("--state-pattern", required=True)
     parser.add_argument("--extractor-version", required=True)
@@ -126,6 +149,8 @@ def main() -> int:
     if len(feature_sets) != 1:
         raise ValueError("production states have inconsistent feature columns")
     feature_columns = list(next(iter(feature_sets)))
+    if args.block == "g40_p1d" and set(feature_columns) != P1D_MODEL | P1D_AUDIT:
+        raise ValueError("P1-D production states do not match the frozen schema")
 
     pilot = json.loads(args.pilot_report.read_text())
     if (
@@ -143,6 +168,7 @@ def main() -> int:
         "input_feature_table_sha256", _sha256(args.feature_table)
     )
     fields, rows = _read_table(args.feature_table)
+    legacy_df_before = _column_value_digest(rows, LEGACY_DF_COLUMNS)
     rows_by_uuid = {row["task_uuid"]: row for row in rows}
     if set(rows_by_uuid) != set(corpus) or len(rows_by_uuid) != len(rows):
         raise ValueError("feature table does not exactly match the corpus manifest")
@@ -171,8 +197,15 @@ def main() -> int:
             row[column] = new_value
 
     _write_table(args.feature_table, fields, rows)
+    legacy_df_after = _column_value_digest(rows, LEGACY_DF_COLUMNS)
+    if legacy_df_after != legacy_df_before:
+        raise ValueError("P1-D merge changed legacy df_* values")
     report = {
-        "report_version": "g40_p1bc_production_v1",
+        "report_version": (
+            "g40_p1d_production_v1"
+            if args.block == "g40_p1d"
+            else "g40_p1bc_production_v1"
+        ),
         "block": args.block,
         "code_revision": args.code_revision,
         "builder_revision": args.builder_revision,
@@ -203,6 +236,11 @@ def main() -> int:
         "job_script_sha256": _sha256(args.job_script),
         "accounting_sha256": _sha256(args.accounting),
     }
+    if args.block == "g40_p1d":
+        report["legacy_df_columns"] = LEGACY_DF_COLUMNS
+        report["legacy_df_value_sha256_before"] = legacy_df_before
+        report["legacy_df_value_sha256_after"] = legacy_df_after
+        report["legacy_df_values_preserved"] = True
     args.output_prefix.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
     args.output_prefix.with_suffix(".md").write_text(_markdown(report))
