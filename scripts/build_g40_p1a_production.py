@@ -125,31 +125,64 @@ def _migration_row(
 def _report_markdown(report: dict[str, Any]) -> str:
     changes = report["migration_cells_by_column"]
     change_text = ", ".join(f"`{key}`={value}" for key, value in changes.items())
-    return f"""# G40 P1-A production report
-
-## Result
-
-- Corpus manifest tasks: **{report['corpus_tasks']}**.
-- Successful v4 states merged: **{report['successful_states']}**.
-- Feature table: **{report['rows_before']} x {report['columns_before']}** to **{report['rows_after']} x {report['columns_after']}**.  # noqa: E501
-- Existing populated cells audited: **{report['existing_populated_cells_audited']}**.
-- Approved migrated cells: **{report['migration_cells']}** ({change_text}).
-- Unapproved populated-cell changes: **0**.
-- G21 representation-pair check: **{report['representation_pair_status']}** ({report['representation_pair_groups_passed']}/{report['representation_pair_groups']} groups).  # noqa: E501
-
-## Production evidence
-
-- Initial run: PBS `{report['initial_job_id']}`, code `{report['initial_code_revision']}`, stdout `{report['initial_stdout_log']}`, stderr `{report['initial_stderr_log']}`. Result: 589 success, 2 failed.  # noqa: E501
-- Failure `c6e29566-d374-4bbd-88cb-32190117a7eb`: source is a one-member ZIP; v3 attempted to decode the ZIP container as ASCII.  # noqa: E501
-- Failure `34e0f543-0f23-405b-b06f-4be3cd556f9b`: source header omits MS2; v3 rejected it before consulting explicit task `spin=0` metadata.  # noqa: E501
-- Corrected run: PBS `{report['corrected_job_id']}`, code `{report['corrected_code_revision']}`, stdout `{report['corrected_stdout_log']}`, stderr `{report['corrected_stderr_log']}`. Result: 591 success, 0 failed; exit 0; walltime 00:17:06.  # noqa: E501
-
-The corrected reader records ZIP member/container provenance and permits a
-missing header MS2 only when explicit task `ms2`/`spin` metadata exists. It
-does not infer a singlet. All state inputs remain checksum-bound. The merge
-preserves every populated legacy cell outside the five migration columns
-listed in `g40_p1a_migration_ledger.csv`.
-"""
+    lines = [
+        "# G40 P1-A production report",
+        "",
+        "## Result",
+        "",
+        f"- Corpus manifest tasks: **{report['corpus_tasks']}**.",
+        f"- Successful v4 states merged: **{report['successful_states']}**.",
+        (
+            f"- Feature table: **{report['rows_before']} x "
+            f"{report['columns_before']}** to **{report['rows_after']} x "
+            f"{report['columns_after']}**."
+        ),
+        (
+            "- Existing populated cells audited: "
+            f"**{report['existing_populated_cells_audited']}**."
+        ),
+        f"- Approved migrated cells: **{report['migration_cells']}** ({change_text}).",
+        "- Unapproved populated-cell changes: **0**.",
+        (
+            "- G21 representation-pair check: "
+            f"**{report['representation_pair_status']}** "
+            f"({report['representation_pair_groups_passed']}/"
+            f"{report['representation_pair_groups']} groups)."
+        ),
+        "",
+        "## Production evidence",
+        "",
+        (
+            f"- Initial run: PBS `{report['initial_job_id']}`, code "
+            f"`{report['initial_code_revision']}`, stdout "
+            f"`{report['initial_stdout_log']}`, stderr "
+            f"`{report['initial_stderr_log']}`. Result: 589 success, 2 failed."
+        ),
+        (
+            "- Failure `c6e29566-d374-4bbd-88cb-32190117a7eb`: source is a "
+            "one-member ZIP; v3 attempted to decode the ZIP container as ASCII."
+        ),
+        (
+            "- Failure `34e0f543-0f23-405b-b06f-4be3cd556f9b`: source header "
+            "omits MS2; v3 rejected it before consulting explicit task `spin=0` "
+            "metadata."
+        ),
+        (
+            f"- Corrected run: PBS `{report['corrected_job_id']}`, code "
+            f"`{report['corrected_code_revision']}`, stdout "
+            f"`{report['corrected_stdout_log']}`, stderr "
+            f"`{report['corrected_stderr_log']}`. Result: 591 success, 0 failed; "
+            "exit 0; walltime 00:17:06."
+        ),
+        "",
+        "The corrected reader records ZIP member/container provenance and permits a",
+        "missing header MS2 only when explicit task `ms2`/`spin` metadata exists. It",
+        "does not infer a singlet. All state inputs remain checksum-bound. The merge",
+        "preserves every populated legacy cell outside the five migration columns",
+        "listed in `g40_p1a_migration_ledger.csv`.",
+        "",
+    ]
+    return "\n".join(lines)
 
 
 def main() -> int:
