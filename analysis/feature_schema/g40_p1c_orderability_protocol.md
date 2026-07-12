@@ -63,3 +63,25 @@ Seed, chosen heuristic names, and extractor version are audit-only. Runtime
 and peak memory across the NORB 5-256 cross-band pilot determine whether the
 exact all-cut implementation is viable for production; approximation or cut
 subsampling requires an explicit PI reconciliation and version change.
+
+## R6 degeneracy addendum
+
+The Fiedler, normalized linear-relaxation, best-of-heuristics, and min-fill
+columns are `BAS+ORD`. Exact spectral/eigenvector and elimination-order ties
+make shipped orbital labels observable even when typical nondegenerate cases
+appear permutation-stable. Values computed before this retag are preserved.
+
+For the unnormalized interaction-graph Laplacian with ascending eigenvalues,
+R6 records `(lambda3-lambda2)/lambda3`. If fewer than three orbitals exist the
+value is absent and its applicability flag is false. If `lambda3` is zero to
+`1e-14 * max(1,max(abs(lambda)))`, the relative split is defined as zero. R6
+also records the minimum adjacent gap after sorting the coordinates of the
+unit-norm second eigenvector returned by `numpy.linalg.eigh`; this is a
+diagnostic of the implemented eigensolver convention, not a gauge-invariant
+observable. Both values and their extractor version are audit-only.
+
+The named permutation gate includes a checksum-bound qsz L4x4 U=2 corpus
+member and a seed-2 relabeling. Every block reports
+`vacuous_for_this_block=true` with reason
+`zero_inv_or_bas_model_eligible_columns` when no `INV` or `BAS`
+model-eligible column is actually checked.

@@ -75,7 +75,7 @@ def test_representation_gate_accepts_an_all_inv_block(tmp_path: Path) -> None:
     )
     payload = json.loads(output.read_text())
     assert payload["status"] == "passed"
-    assert payload["equivalence_groups"] == payload["groups_passed"] == 3
+    assert payload["equivalence_groups"] == payload["groups_passed"] == 4
     all_inv = next(
         report
         for report in payload["reports"]

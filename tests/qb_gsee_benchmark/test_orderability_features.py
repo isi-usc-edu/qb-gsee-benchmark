@@ -7,6 +7,7 @@ from qb_gsee_benchmark.features.orderability_features import (
     cut_profile,
     interaction_graph,
     mpo_pair_rank_applicable,
+    orderability_degeneracy_features,
     pair_space_cut_effective_rank,
 )
 
@@ -74,3 +75,11 @@ def test_orderability_panel_is_deterministic() -> None:
     assert first["cut_weight_best_max"] == pytest.approx(1.0)
     assert first["min_fill_width_upper_bound"] == 1
     assert first["mpo_pair_rank_max"] == 0.0
+
+
+def test_orderability_degeneracy_diagnostics_detect_exact_fiedler_tie() -> None:
+    weights = np.ones((4, 4)) - np.eye(4)
+    features = orderability_degeneracy_features(weights)
+    assert features["orderability_laplacian_lambda23_split_applicable"] is True
+    assert features["orderability_laplacian_lambda23_relative_split"] == pytest.approx(0.0)
+    assert features["orderability_fiedler_min_coordinate_gap"] >= 0.0

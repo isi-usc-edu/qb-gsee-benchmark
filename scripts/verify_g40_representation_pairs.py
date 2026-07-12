@@ -100,7 +100,7 @@ def _verify_permutation_certificates(
     atol: float,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     payload = json.loads(certificate_path.read_text())
-    if payload.get("certificate_version") != "g40_orbital_permutation_pairs_v1":
+    if payload.get("certificate_version") != "g40_orbital_permutation_pairs_v2":
         raise ValueError("unexpected permutation certificate version")
     reports = []
     failures = []
@@ -118,6 +118,15 @@ def _verify_permutation_certificates(
                         "group": pair["equivalence_group_id"],
                         "reason": "certificate_checksum_mismatch",
                         "member": name,
+                    }
+                )
+        if pair["kind"] == "corpus_lattice_degenerate":
+            source = pair.get("source", {})
+            if source.get("uncompressed_sha256") != _sha256(paths["original"]):
+                failures.append(
+                    {
+                        "group": pair["equivalence_group_id"],
+                        "reason": "corpus_source_provenance_mismatch",
                     }
                 )
         original = read_sparse_fcidump(paths["original"])
@@ -177,11 +186,22 @@ def _verify_permutation_certificates(
                             "column": column,
                         }
                     )
+            observed_bas_ord_drift = {}
+            if pair["kind"] == "corpus_lattice_degenerate" and block == "orderability":
+                for column in ("cut_weight_best_max", "cut_weight_best_sum"):
+                    observed_bas_ord_drift[column] = [
+                        features["original"][column], features["permuted"][column]
+                    ]
             block_reports.append(
                 {
                     "block": block,
                     "checked_inv_or_bas_columns": len(checks),
+                    "vacuous_for_this_block": not checks,
+                    "vacuity_reason": (
+                        "zero_inv_or_bas_model_eligible_columns" if not checks else None
+                    ),
                     "checks": checks,
+                    "observed_bas_ord_drift": observed_bas_ord_drift,
                     "status": "passed" if all(item["passed"] for item in checks.values()) else "failed",
                 }
             )
@@ -189,6 +209,7 @@ def _verify_permutation_certificates(
             {
                 "equivalence_group_id": pair["equivalence_group_id"],
                 "kind": pair["kind"],
+                "source": pair.get("source"),
                 "seed": pair["seed"],
                 "permutation_new_to_old": pair["permutation_new_to_old"],
                 "tensor_certificate_passed": tensor_passed,
@@ -258,6 +279,12 @@ def main() -> int:
         common = set.intersection(
             *(set(state["features"]) for state in group_states)
         )
+        inv_or_bas_columns = [
+            column
+            for column in common
+            if metadata_for_column(column).model_eligible
+            and metadata_for_column(column).representation in {"INV", "BAS"}
+        ]
         invariant_checks = {}
         basis_values = {}
         changed_basis_features = []
@@ -308,6 +335,12 @@ def main() -> int:
                     else "failed"
                 ),
                 "invariant_checks": invariant_checks,
+                "vacuous_for_this_block": not inv_or_bas_columns,
+                "vacuity_reason": (
+                    "zero_inv_or_bas_model_eligible_columns"
+                    if not inv_or_bas_columns
+                    else None
+                ),
                 "basis_feature_values": basis_values,
                 "changed_basis_features": changed_basis_features,
             }
@@ -325,7 +358,7 @@ def main() -> int:
 
     payload = {
         "check": args.check_name,
-        "permutation_certificate_version": "g40_orbital_permutation_pairs_v1",
+        "permutation_certificate_version": "g40_orbital_permutation_pairs_v2",
         "permutation_blocks": permutation_blocks,
         "rtol": args.rtol,
         "atol": args.atol,

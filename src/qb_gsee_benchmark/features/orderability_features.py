@@ -14,7 +14,8 @@ from scipy.sparse.csgraph import reverse_cuthill_mckee
 
 from qb_gsee_benchmark.features.fcidump_sparse import SparseFcidump, read_sparse_fcidump
 
-ORDERABILITY_VERSION = "g40_p1c_orderability_v2"
+ORDERABILITY_VERSION = "g40_p1c_orderability_v3"
+ORDERABILITY_DEGENERACY_VERSION = "g40_orderability_degeneracy_v1"
 RANDOM_ORDER_SEED = 40041
 HEURISTIC_NAMES = ("fiedler", "rcm", "minimum_degree", "linear_relaxation")
 PROFILE_METRICS = ("max", "p95", "sum")
@@ -47,6 +48,35 @@ def fiedler_order(weights: np.ndarray) -> np.ndarray:
     degree = np.sum(weights, axis=1)
     laplacian = np.diag(degree) - weights
     return _ordered_eigenvector(laplacian)
+
+
+def orderability_degeneracy_features(weights: np.ndarray) -> dict[str, Any]:
+    """Diagnose permutation-sensitive spectral and coordinate degeneracies."""
+    degree = np.sum(weights, axis=1)
+    laplacian = np.diag(degree) - weights
+    eigenvalues, eigenvectors = np.linalg.eigh(laplacian)
+    applicable = len(eigenvalues) >= 3
+    relative_split = None
+    if applicable:
+        lambda2 = float(eigenvalues[1])
+        lambda3 = float(eigenvalues[2])
+        scale = max(1.0, float(np.max(np.abs(eigenvalues), initial=0.0)))
+        relative_split = (
+            0.0
+            if abs(lambda3) <= 1.0e-14 * scale
+            else (lambda3 - lambda2) / lambda3
+        )
+    if len(eigenvalues) < 2:
+        coordinate_gap = None
+    else:
+        fiedler = np.sort(eigenvectors[:, 1])
+        coordinate_gap = float(np.min(np.diff(fiedler), initial=np.inf))
+    return {
+        "orderability_laplacian_lambda23_relative_split": relative_split,
+        "orderability_laplacian_lambda23_split_applicable": applicable,
+        "orderability_fiedler_min_coordinate_gap": coordinate_gap,
+        "orderability_degeneracy_features_version": ORDERABILITY_DEGENERACY_VERSION,
+    }
 
 
 def linear_relaxation_order(weights: np.ndarray) -> np.ndarray:
@@ -202,6 +232,7 @@ def compute_orderability_features(
         "min_fill_width_upper_bound": min_fill_width_upper_bound(weights),
         "mpo_pair_rank_applicable": mpo_pair_rank_applicable(data),
         "orderability_features_version": ORDERABILITY_VERSION,
+        **orderability_degeneracy_features(weights),
     }
     for name in (*HEURISTIC_NAMES, "file", "random"):
         for metric in PROFILE_METRICS:

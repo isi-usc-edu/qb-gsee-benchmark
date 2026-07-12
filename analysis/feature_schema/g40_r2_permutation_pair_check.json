@@ -1,16 +1,16 @@
 {
   "atol": 1e-10,
   "check": "g40_r2_permutation_certificates",
-  "equivalence_groups": 2,
+  "equivalence_groups": 3,
   "failures": [],
-  "groups_passed": 2,
+  "groups_passed": 3,
   "permutation_blocks": [
     "linear",
     "coupling",
     "orderability",
     "interaction-spectrum"
   ],
-  "permutation_certificate_version": "g40_orbital_permutation_pairs_v1",
+  "permutation_certificate_version": "g40_orbital_permutation_pairs_v2",
   "reports": [
     {
       "blocks": [
@@ -243,90 +243,24 @@
               ]
             }
           },
-          "status": "passed"
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": null,
+          "vacuous_for_this_block": false
         },
         {
           "block": "coupling",
           "checked_inv_or_bas_columns": 0,
           "checks": {},
-          "status": "passed"
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": "zero_inv_or_bas_model_eligible_columns",
+          "vacuous_for_this_block": true
         },
         {
           "block": "orderability",
-          "checked_inv_or_bas_columns": 12,
+          "checked_inv_or_bas_columns": 2,
           "checks": {
-            "cut_weight_best_max": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                0.6299271891397082,
-                0.6299271891397082
-              ]
-            },
-            "cut_weight_best_p95": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                0.6299271891397082,
-                0.6299271891397082
-              ]
-            },
-            "cut_weight_best_sum": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                0.6299271891397082,
-                0.6299271891397082
-              ]
-            },
-            "cut_weight_fiedler_max": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                0.6299271891397082,
-                0.6299271891397082
-              ]
-            },
-            "cut_weight_fiedler_p95": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                0.6299271891397082,
-                0.6299271891397082
-              ]
-            },
-            "cut_weight_fiedler_sum": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                0.6299271891397082,
-                0.6299271891397082
-              ]
-            },
-            "cut_weight_linear_relaxation_max": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                0.6299271891397082,
-                0.6299271891397082
-              ]
-            },
-            "cut_weight_linear_relaxation_p95": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                0.6299271891397082,
-                0.6299271891397082
-              ]
-            },
-            "cut_weight_linear_relaxation_sum": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                0.6299271891397082,
-                0.6299271891397082
-              ]
-            },
             "interaction_graph_edge_count": {
               "passed": true,
               "representation": "BAS",
@@ -342,17 +276,12 @@
                 0.6299271891397082,
                 0.6299271891397082
               ]
-            },
-            "min_fill_width_upper_bound": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                1,
-                1
-              ]
             }
           },
-          "status": "passed"
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": null,
+          "vacuous_for_this_block": false
         },
         {
           "block": "interaction-spectrum",
@@ -415,7 +344,10 @@
               ]
             }
           },
-          "status": "passed"
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": null,
+          "vacuous_for_this_block": false
         }
       ],
       "equivalence_group_id": "g40-permutation-molecular_h2-v1",
@@ -425,6 +357,7 @@
         0
       ],
       "seed": 40045,
+      "source": null,
       "status": "passed",
       "tensor_certificate_passed": true
     },
@@ -659,90 +592,24 @@
               ]
             }
           },
-          "status": "passed"
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": null,
+          "vacuous_for_this_block": false
         },
         {
           "block": "coupling",
           "checked_inv_or_bas_columns": 0,
           "checks": {},
-          "status": "passed"
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": "zero_inv_or_bas_model_eligible_columns",
+          "vacuous_for_this_block": true
         },
         {
           "block": "orderability",
-          "checked_inv_or_bas_columns": 12,
+          "checked_inv_or_bas_columns": 2,
           "checks": {
-            "cut_weight_best_max": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                1.0,
-                1.0
-              ]
-            },
-            "cut_weight_best_p95": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                1.0,
-                1.0
-              ]
-            },
-            "cut_weight_best_sum": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                3.0,
-                3.0
-              ]
-            },
-            "cut_weight_fiedler_max": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                1.0,
-                1.0
-              ]
-            },
-            "cut_weight_fiedler_p95": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                1.0,
-                1.0
-              ]
-            },
-            "cut_weight_fiedler_sum": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                3.0,
-                3.0
-              ]
-            },
-            "cut_weight_linear_relaxation_max": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                1.0,
-                1.0
-              ]
-            },
-            "cut_weight_linear_relaxation_p95": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                1.0,
-                1.0
-              ]
-            },
-            "cut_weight_linear_relaxation_sum": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                3.0,
-                3.0
-              ]
-            },
             "interaction_graph_edge_count": {
               "passed": true,
               "representation": "BAS",
@@ -758,17 +625,12 @@
                 3.0,
                 3.0
               ]
-            },
-            "min_fill_width_upper_bound": {
-              "passed": true,
-              "representation": "BAS",
-              "values": [
-                1,
-                1
-              ]
             }
           },
-          "status": "passed"
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": null,
+          "vacuous_for_this_block": false
         },
         {
           "block": "interaction-spectrum",
@@ -831,7 +693,10 @@
               ]
             }
           },
-          "status": "passed"
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": null,
+          "vacuous_for_this_block": false
         }
       ],
       "equivalence_group_id": "g40-permutation-lattice_hubbard-v1",
@@ -843,6 +708,386 @@
         0
       ],
       "seed": 40045,
+      "source": null,
+      "status": "passed",
+      "tensor_certificate_passed": true
+    },
+    {
+      "blocks": [
+        {
+          "block": "linear",
+          "checked_inv_or_bas_columns": 28,
+          "checks": {
+            "U_eff_over_W": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.24999999999999994,
+                0.25
+              ]
+            },
+            "bare_one_body_bandwidth": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                8.000000000000002,
+                8.0
+              ]
+            },
+            "bare_one_body_gap_alpha": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                1.5671484849863468e-16,
+                1.2861254503953033e-16
+              ]
+            },
+            "bare_one_body_gap_beta": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                1.5671484849863468e-16,
+                1.2861254503953033e-16
+              ]
+            },
+            "bare_one_body_gap_min": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                1.5671484849863468e-16,
+                1.2861254503953033e-16
+              ]
+            },
+            "effective_h1_entrywise_l1_norm": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                80.0,
+                80.0
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_10": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.3125,
+                0.3125
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_12": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.3125,
+                0.3125
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_2": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.3125,
+                0.3125
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_4": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.3125,
+                0.3125
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_6": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.3125,
+                0.3125
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_8": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.3125,
+                0.3125
+              ]
+            },
+            "effective_h1_frobenius_norm": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                8.94427190999916,
+                8.94427190999916
+              ]
+            },
+            "effective_h1_l1_over_frobenius": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                8.94427190999916,
+                8.94427190999916
+              ]
+            },
+            "eri_fraction_above_rel_1e_10": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.000244140625,
+                0.000244140625
+              ]
+            },
+            "eri_fraction_above_rel_1e_12": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.000244140625,
+                0.000244140625
+              ]
+            },
+            "eri_fraction_above_rel_1e_2": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.000244140625,
+                0.000244140625
+              ]
+            },
+            "eri_fraction_above_rel_1e_4": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.000244140625,
+                0.000244140625
+              ]
+            },
+            "eri_fraction_above_rel_1e_6": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.000244140625,
+                0.000244140625
+              ]
+            },
+            "eri_fraction_above_rel_1e_8": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.000244140625,
+                0.000244140625
+              ]
+            },
+            "eri_full_l1_norm": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                32.0,
+                32.0
+              ]
+            },
+            "eri_full_l2_norm": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                8.0,
+                8.0
+              ]
+            },
+            "eri_l1_over_frobenius": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                4.0,
+                4.0
+              ]
+            },
+            "fermionic_coefficient_l1_norm": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                96.0,
+                96.0
+              ]
+            },
+            "log_fci_dim": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                8.219157093808773,
+                8.219157093808773
+              ]
+            },
+            "n_elec": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                16,
+                16
+              ]
+            },
+            "n_orbs": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                16,
+                16
+              ]
+            },
+            "rho_offdiag": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.8,
+                0.8
+              ]
+            }
+          },
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": null,
+          "vacuous_for_this_block": false
+        },
+        {
+          "block": "coupling",
+          "checked_inv_or_bas_columns": 0,
+          "checks": {},
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": "zero_inv_or_bas_model_eligible_columns",
+          "vacuous_for_this_block": true
+        },
+        {
+          "block": "orderability",
+          "checked_inv_or_bas_columns": 2,
+          "checks": {
+            "interaction_graph_edge_count": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                32,
+                32
+              ]
+            },
+            "interaction_graph_total_weight": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                32.0,
+                32.0
+              ]
+            }
+          },
+          "observed_bas_ord_drift": {
+            "cut_weight_best_max": [
+              10.0,
+              12.0
+            ],
+            "cut_weight_best_sum": [
+              120.0,
+              132.0
+            ]
+          },
+          "status": "passed",
+          "vacuity_reason": null,
+          "vacuous_for_this_block": false
+        },
+        {
+          "block": "interaction-spectrum",
+          "checked_inv_or_bas_columns": 7,
+          "checks": {
+            "interaction_spectrum_decay_exponent": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                8.517211900746414e-17,
+                8.517211900746414e-17
+              ]
+            },
+            "interaction_spectrum_effective_rank": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                15.999999999999998,
+                15.999999999999998
+              ]
+            },
+            "interaction_spectrum_participation_rank": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                16.0,
+                16.0
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_2": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                16,
+                16
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_4": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                16,
+                16
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_6": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                16,
+                16
+              ]
+            },
+            "interaction_spectrum_relative_gap": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                0.0,
+                0.0
+              ]
+            }
+          },
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": null,
+          "vacuous_for_this_block": false
+        }
+      ],
+      "equivalence_group_id": "g40-permutation-qsz-l4x4-u2-degenerate-v1",
+      "kind": "corpus_lattice_degenerate",
+      "permutation_new_to_old": [
+        10,
+        7,
+        6,
+        14,
+        2,
+        0,
+        13,
+        15,
+        12,
+        9,
+        11,
+        5,
+        3,
+        4,
+        8,
+        1
+      ],
+      "seed": 2,
+      "source": {
+        "declared_checksum": "83e5a80923213b299c76a36d7ec50f89aedcbc52",
+        "declared_checksum_type": "sha1sum",
+        "instance_data_object_uuid": "facf72a8-d772-513e-9822-f593e2495fc8",
+        "task_uuid": "beabcf8f-a6c0-5e32-9385-110ff65cbbf0",
+        "uncompressed_sha256": "4aeebb2fabcfbfe1baaf939e166c28390e8de0c98053fadf6680fce8c00b055c",
+        "url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L4x4_pbc_u2.fcidump.gz"
+      },
       "status": "passed",
       "tensor_certificate_passed": true
     }

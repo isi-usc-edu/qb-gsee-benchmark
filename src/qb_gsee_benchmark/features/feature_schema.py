@@ -234,6 +234,10 @@ P1C_BAS_ORD_MODEL = {
 }
 P1C_AUDIT = {
     "orderability_random_seed", "orderability_features_version",
+    "orderability_laplacian_lambda23_relative_split",
+    "orderability_laplacian_lambda23_split_applicable",
+    "orderability_fiedler_min_coordinate_gap",
+    "orderability_degeneracy_features_version",
     "mpo_ordering_heuristic", "mpo_pair_rank_applicable",
     *{f"cut_weight_best_{metric}_heuristic" for metric in ("max", "p95", "sum")},
 }

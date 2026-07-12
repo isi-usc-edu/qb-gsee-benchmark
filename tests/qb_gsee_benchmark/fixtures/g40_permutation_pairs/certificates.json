@@ -1,5 +1,5 @@
 {
-  "certificate_version": "g40_orbital_permutation_pairs_v1",
+  "certificate_version": "g40_orbital_permutation_pairs_v2",
   "pairs": [
     {
       "equivalence_group_id": "g40-permutation-molecular_h2-v1",
@@ -40,6 +40,47 @@
         0
       ],
       "seed": 40045
+    },
+    {
+      "equivalence_group_id": "g40-permutation-qsz-l4x4-u2-degenerate-v1",
+      "files": {
+        "original": {
+          "path": "tests/qb_gsee_benchmark/fixtures/g40_permutation_pairs/qsz_l4x4_u2_original.FCIDUMP",
+          "sha256": "4aeebb2fabcfbfe1baaf939e166c28390e8de0c98053fadf6680fce8c00b055c"
+        },
+        "permuted": {
+          "path": "tests/qb_gsee_benchmark/fixtures/g40_permutation_pairs/qsz_l4x4_u2_permuted.FCIDUMP",
+          "sha256": "64260df340ef7e61d8b70c579aad058a8ce5a39be34ac81055b31832e1638df1"
+        }
+      },
+      "kind": "corpus_lattice_degenerate",
+      "permutation_new_to_old": [
+        10,
+        7,
+        6,
+        14,
+        2,
+        0,
+        13,
+        15,
+        12,
+        9,
+        11,
+        5,
+        3,
+        4,
+        8,
+        1
+      ],
+      "seed": 2,
+      "source": {
+        "declared_checksum": "83e5a80923213b299c76a36d7ec50f89aedcbc52",
+        "declared_checksum_type": "sha1sum",
+        "instance_data_object_uuid": "facf72a8-d772-513e-9822-f593e2495fc8",
+        "task_uuid": "beabcf8f-a6c0-5e32-9385-110ff65cbbf0",
+        "uncompressed_sha256": "4aeebb2fabcfbfe1baaf939e166c28390e8de0c98053fadf6680fce8c00b055c",
+        "url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L4x4_pbc_u2.fcidump.gz"
+      }
     }
   ],
   "rng": "numpy.PCG64"
