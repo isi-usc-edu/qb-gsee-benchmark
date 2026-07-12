@@ -279,21 +279,31 @@ def spectral_panel(
     eigenvalues: np.ndarray,
     eigenvectors: np.ndarray,
     particles: int,
-) -> dict[str, float | bool | None]:
+) -> dict[str, float | bool | None | str]:
     """Compute one-spin gap, thermal, DOS, and projector-IPR primitives."""
     values = np.asarray(eigenvalues, dtype=float)
     vectors = np.asarray(eigenvectors, dtype=float)
     if vectors.shape != (values.size, values.size):
         raise ValueError("eigenvector dimensions do not match eigenvalues")
     if particles <= 0 or particles >= values.size:
-        return {
+        result: dict[str, float | bool | None | str] = {
             "applicable": False,
             "reason": "empty_or_full_spin_sector",
             "gap": None,
             "center": None,
             "edge_degenerate": None,
         }
-
+        for kt in THERMAL_KT_GRID:
+            result[f"thermal_active_fraction_kt_{kt:g}"] = None
+        for eta in DOS_ETA_GRID:
+            result[f"dos_total_eta_{eta:g}"] = None
+            result[f"dos_per_orbital_eta_{eta:g}"] = None
+        for width in IPR_WINDOW_GRID:
+            result[f"ipr_window_orbital_count_{width:g}"] = 0
+            result[f"ipr_window_{width:g}_applicable"] = False
+            result[f"ipr_window_{width:g}_reason"] = "empty_or_full_spin_sector"
+            result[f"ipr_window_{width:g}"] = None
+        return result
     homo = float(values[particles - 1])
     lumo = float(values[particles])
     gap = lumo - homo
@@ -322,6 +332,10 @@ def spectral_panel(
         selected = np.abs(values - center) <= width
         rank = int(np.count_nonzero(selected))
         result[f"ipr_window_orbital_count_{width:g}"] = rank
+        result[f"ipr_window_{width:g}_applicable"] = rank > 0
+        result[f"ipr_window_{width:g}_reason"] = (
+            None if rank > 0 else "empty_spectral_projector"
+        )
         result[f"ipr_window_{width:g}"] = (
             None
             if rank == 0
@@ -752,6 +766,8 @@ def mean_field_feature_values(result: MeanFieldResult) -> dict[str, Any]:
             None if not energies else float(min(energies))
         )
     if method_energies["RHF"] and method_energies["UHF"]:
+        features["mf_symmetry_breaking_applicable"] = True
+        features["mf_symmetry_breaking_reason"] = None
         delta = min(method_energies["RHF"]) - min(method_energies["UHF"])
         features["mf_symmetry_breaking_energy_hartree"] = float(delta)
         features["mf_symmetry_breaking_energy_per_electron"] = float(
@@ -759,6 +775,10 @@ def mean_field_feature_values(result: MeanFieldResult) -> dict[str, Any]:
         )
     else:
         features["mf_symmetry_breaking_energy_hartree"] = None
+        features["mf_symmetry_breaking_applicable"] = False
+        features["mf_symmetry_breaking_reason"] = (
+            "ms2_nonzero" if result.sector.ms2 != 0 else "missing_converged_rhf_or_uhf"
+        )
         features["mf_symmetry_breaking_energy_per_electron"] = None
 
     core_panels = {
@@ -782,6 +802,10 @@ def mean_field_feature_values(result: MeanFieldResult) -> dict[str, Any]:
     ]
     features["mf_core_gap_min_hartree"] = (
         None if not applicable_core_gaps else float(min(applicable_core_gaps))
+    )
+    features["mf_core_gap_min_applicable"] = bool(applicable_core_gaps)
+    features["mf_core_gap_min_reason"] = (
+        None if applicable_core_gaps else "no_applicable_spin_gap"
     )
     if selected is None:
         return features
@@ -809,6 +833,29 @@ def mean_field_feature_values(result: MeanFieldResult) -> dict[str, Any]:
     features["mf_selected_fock_gap_min_hartree"] = (
         None if not applicable_fock_gaps else float(min(applicable_fock_gaps))
     )
+    features["mf_selected_fock_gap_min_applicable"] = bool(applicable_fock_gaps)
+    features["mf_selected_fock_gap_min_reason"] = (
+        None if applicable_fock_gaps else "no_applicable_spin_gap"
+    )
+    for label in ("alpha", "beta", "min"):
+        core_gap = (
+            features["mf_core_gap_min_hartree"]
+            if label == "min"
+            else core_panels[label]["gap"]
+        )
+        selected_gap = (
+            features["mf_selected_fock_gap_min_hartree"]
+            if label == "min"
+            else selected_panels[label]["gap"]
+        )
+        applicable = core_gap is not None and selected_gap is not None
+        features[f"mf_gap_mismatch_{label}_applicable"] = applicable
+        features[f"mf_gap_mismatch_{label}_reason"] = (
+            None if applicable else "core_or_selected_fock_gap_not_applicable"
+        )
+        features[f"mf_gap_mismatch_{label}_hartree"] = (
+            abs(float(selected_gap) - float(core_gap)) if applicable else None
+        )
     return features
 
 

@@ -111,23 +111,35 @@ def lowest_davidson_root(
         denominator[np.abs(denominator) < 1.0e-8] = 1.0e-8
         return residual / denominator
 
-    eigenvalue, vector = lib.davidson(
-        measured_hop,
+    converged, eigenvalues, vectors = lib.davidson1(
+        lambda vectors: [measured_hop(vector) for vector in vectors],
         starts,
         precondition,
         tol=STABILITY_RESIDUAL_TOL,
+        tol_residual=STABILITY_RESIDUAL_TOL,
         max_cycle=STABILITY_MAX_CYCLE,
         max_space=STABILITY_MAX_SPACE,
         lindep=STABILITY_LINDEP,
         nroots=1,
         verbose=0,
     )
-    vector = np.asarray(vector, dtype=float)
+    eigenvalue = float(eigenvalues[0])
+    vector = np.asarray(vectors[0], dtype=float)
     vector /= np.linalg.norm(vector)
+    residual_norm = float(np.linalg.norm(measured_hop(vector) - eigenvalue * vector))
+    if not bool(converged[0]) or residual_norm > STABILITY_RESIDUAL_TOL:
+        return StabilityRoot(
+            False,
+            "davidson_not_converged",
+            None,
+            None,
+            dimension,
+            action_seconds,
+        )
     return StabilityRoot(
         True,
         None,
-        float(eigenvalue),
+        eigenvalue,
         vector,
         dimension,
         action_seconds,

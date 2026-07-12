@@ -138,7 +138,11 @@ def compute_mfproto_features(
         features["mp2_reason"] = None
     except Exception as exc:
         audit["panel_errors"]["mp2"] = _panel_failure(features, "mp2", exc)
-    features["mfproto_mp2_seconds"] = time.monotonic() - mp2_started
+    mp2_and_pair_graph_seconds = time.monotonic() - mp2_started
+    pair_graph_seconds = float(features.get("mfproto_pair_graph_seconds", 0.0))
+    features["mfproto_mp2_seconds"] = max(
+        0.0, mp2_and_pair_graph_seconds - pair_graph_seconds
+    )
     features["mfproto_total_seconds"] = time.monotonic() - started
     return MFPROTOExtraction(features, audit)
 

@@ -5,6 +5,7 @@
 
 from __future__ import annotations
 
+import time
 from dataclasses import dataclass
 
 import numpy as np
@@ -74,6 +75,20 @@ def _masked_amplitude(
     return amplitude, mask
 
 
+def _regularized_amplitude(
+    integrals: np.ndarray, denominator: np.ndarray, kappa: float
+) -> np.ndarray:
+    damping = 1.0 - np.exp(-kappa * np.abs(denominator))
+    regularized_inverse = np.full_like(denominator, -kappa)
+    np.divide(
+        damping,
+        denominator,
+        out=regularized_inverse,
+        where=denominator != 0.0,
+    )
+    return integrals * regularized_inverse
+
+
 def _amplitude_summary(values: np.ndarray, prefix: str) -> dict[str, float]:
     absolute = np.abs(np.asarray(values).ravel())
     l1 = float(np.sum(absolute))
@@ -94,6 +109,27 @@ def _amplitude_summary(values: np.ndarray, prefix: str) -> dict[str, float]:
             if l2_square == 0.0
             else float(np.sum(ordered_square[:top_k]) / l2_square)
         )
+    return result
+
+
+def _masked_amplitude_summary(
+    values: np.ndarray, mask: np.ndarray, prefix: str
+) -> dict[str, object]:
+    flattened = np.asarray(values).ravel()
+    flattened_mask = np.asarray(mask, dtype=bool).ravel()
+    if flattened.shape != flattened_mask.shape:
+        raise ValueError("amplitude values and masks must have matching shapes")
+    unmasked = flattened[~flattened_mask]
+    applicable = bool(unmasked.size)
+    result: dict[str, object] = {
+        f"{prefix}_applicable": applicable,
+        f"{prefix}_reason": None if applicable else "all_amplitudes_masked",
+        f"{prefix}_partial_mask": bool(np.any(flattened_mask)),
+    }
+    summary = _amplitude_summary(unmasked, prefix)
+    if not applicable:
+        summary = {key: None for key in summary}
+    result.update(summary)
     return result
 
 
@@ -237,33 +273,77 @@ def _pair_graph_features(weights: np.ndarray) -> dict[str, object]:
 
 
 def _kappa_features(
-    energy_terms: list[np.ndarray], denominators: list[np.ndarray]
+    energy_terms: list[np.ndarray],
+    energy_numerators: list[np.ndarray],
+    denominators: list[np.ndarray],
+    *,
+    unregularized_applicable: bool,
+    unregularized_partial_mask: bool,
 ) -> dict[str, object]:
-    energies = {"inf": float(sum(np.sum(terms) for terms in energy_terms))}
+    energies: dict[str, float | None] = {
+        "inf": (
+            float(sum(np.sum(terms) for terms in energy_terms))
+            if unregularized_applicable
+            else None
+        )
+    }
     for kappa in KAPPA_GRID:
         energy = 0.0
-        for terms, denominator in zip(energy_terms, denominators):
+        for numerator, denominator in zip(energy_numerators, denominators):
             damping = 1.0 - np.exp(-kappa * np.abs(denominator))
-            energy += float(np.sum(terms * damping**2))
+            regularized_inverse = np.zeros_like(denominator)
+            np.divide(
+                damping**2,
+                denominator,
+                out=regularized_inverse,
+                where=denominator != 0.0,
+            )
+            energy += float(np.sum(numerator * regularized_inverse))
         label = str(kappa).replace(".", "p")
         energies[label] = energy
     result: dict[str, object] = {
         f"mp2_kappa_{label}_correlation_energy_hartree": value
         for label, value in energies.items()
     }
+    result.update(
+        {
+            "mp2_kappa_inf_applicable": unregularized_applicable,
+            "mp2_kappa_inf_reason": (
+                None if unregularized_applicable else "all_denominators_below_threshold"
+            ),
+            "mp2_kappa_inf_partial_mask": unregularized_partial_mask,
+        }
+    )
     comparisons = (("1p45", "inf"), ("1p1", "inf"), ("1p1", "1p45"))
     for numerator, denominator in comparisons:
         prefix = f"mp2_kappa_{numerator}_vs_{denominator}"
+        difference_applicable = (
+            energies[numerator] is not None and energies[denominator] is not None
+        )
+        result[f"{prefix}_difference_applicable"] = difference_applicable
+        result[f"{prefix}_difference_reason"] = (
+            None if difference_applicable else "correlation_energy_panel_not_applicable"
+        )
         result[f"{prefix}_difference_hartree"] = (
             energies[numerator] - energies[denominator]
+            if difference_applicable
+            else None
         )
-        applicable = abs(energies[denominator]) >= 1.0e-14
-        result[f"{prefix}_ratio_applicable"] = applicable
+        ratio_applicable = bool(
+            difference_applicable and abs(energies[denominator]) >= 1.0e-14
+        )
+        result[f"{prefix}_ratio_applicable"] = ratio_applicable
         result[f"{prefix}_ratio_reason"] = (
-            None if applicable else "correlation_energy_denominator_below_1e_14"
+            None
+            if ratio_applicable
+            else (
+                "correlation_energy_denominator_below_1e_14"
+                if difference_applicable
+                else "correlation_energy_panel_not_applicable"
+            )
         )
         result[f"{prefix}_ratio"] = (
-            energies[numerator] / energies[denominator] if applicable else None
+            energies[numerator] / energies[denominator] if ratio_applicable else None
         )
     return result
 
@@ -298,12 +378,40 @@ def run_mp2(
         same_terms = t2 * integrals - t2 * exchange
         opposite_energy = float(np.sum(opposite_terms))
         same_energy = float(np.sum(same_terms))
-        amplitudes = t2.ravel()
+        same_spin_t2 = t2 - t2.swapaxes(2, 3)
+        amplitudes = np.concatenate(
+            (same_spin_t2.ravel(), t2.ravel(), same_spin_t2.ravel())
+        )
         opposite_amplitudes = t2.ravel()
-        same_amplitudes = np.concatenate((t2.ravel(), t2.ravel()))
+        same_amplitudes = np.concatenate((same_spin_t2.ravel(), same_spin_t2.ravel()))
         denominators = [denominator]
         masks = [mask]
+        amplitude_masks = {
+            "all": np.concatenate((mask.ravel(), mask.ravel(), mask.ravel())),
+            "same_spin": np.concatenate((mask.ravel(), mask.ravel())),
+            "opposite_spin": mask.ravel(),
+        }
         energy_terms = [opposite_terms + same_terms]
+        energy_numerators = [integrals * (2.0 * integrals - exchange)]
+        regularized_amplitudes = {}
+        for kappa in KAPPA_GRID:
+            regularized_opposite = _regularized_amplitude(integrals, denominator, kappa)
+            regularized_same = regularized_opposite - regularized_opposite.swapaxes(
+                2, 3
+            )
+            regularized_amplitudes[kappa] = {
+                "all": np.concatenate(
+                    (
+                        regularized_same.ravel(),
+                        regularized_opposite.ravel(),
+                        regularized_same.ravel(),
+                    )
+                ),
+                "same_spin": np.concatenate(
+                    (regularized_same.ravel(), regularized_same.ravel())
+                ),
+                "opposite_spin": regularized_opposite.ravel(),
+            }
         pair_energy[: sector.nalpha, : sector.nalpha] += np.sum(
             opposite_terms + same_terms, axis=(2, 3)
         )
@@ -348,19 +456,71 @@ def run_mp2(
         opposite_amplitudes = t2ab.ravel()
         denominators = [denominator_aa, denominator_ab, denominator_bb]
         masks = [mask_aa, mask_ab, mask_bb]
+        amplitude_masks = {
+            "all": np.concatenate((mask_aa.ravel(), mask_ab.ravel(), mask_bb.ravel())),
+            "same_spin": np.concatenate((mask_aa.ravel(), mask_bb.ravel())),
+            "opposite_spin": mask_ab.ravel(),
+        }
         energy_terms = [terms_aa, terms_ab, terms_bb]
+        energy_numerators = [
+            0.25 * (integral_aa - integral_aa.swapaxes(2, 3)) ** 2,
+            integral_ab**2,
+            0.25 * (integral_bb - integral_bb.swapaxes(2, 3)) ** 2,
+        ]
+        regularized_amplitudes = {}
+        for kappa in KAPPA_GRID:
+            regularized_aa_direct = _regularized_amplitude(
+                integral_aa, denominator_aa, kappa
+            )
+            regularized_bb_direct = _regularized_amplitude(
+                integral_bb, denominator_bb, kappa
+            )
+            regularized_aa = regularized_aa_direct - regularized_aa_direct.swapaxes(
+                2, 3
+            )
+            regularized_bb = regularized_bb_direct - regularized_bb_direct.swapaxes(
+                2, 3
+            )
+            regularized_ab = _regularized_amplitude(integral_ab, denominator_ab, kappa)
+            regularized_amplitudes[kappa] = {
+                "all": np.concatenate(
+                    (
+                        regularized_aa.ravel(),
+                        regularized_ab.ravel(),
+                        regularized_bb.ravel(),
+                    )
+                ),
+                "same_spin": np.concatenate(
+                    (regularized_aa.ravel(), regularized_bb.ravel())
+                ),
+                "opposite_spin": regularized_ab.ravel(),
+            }
         pair_energy[: sector.nalpha, : sector.nalpha] += np.sum(terms_aa, axis=(2, 3))
         pair_energy[: sector.nbeta, : sector.nbeta] += np.sum(terms_bb, axis=(2, 3))
         pair_energy[: sector.nalpha, : sector.nbeta] += np.sum(terms_ab, axis=(2, 3))
         t2_for_density = (t2aa, t2ab, t2bb)
 
+    flattened_mask = np.concatenate([mask.ravel() for mask in masks])
+    unregularized_applicable = bool(np.any(~flattened_mask))
+    unregularized_partial_mask = bool(np.any(flattened_mask))
     pair_graph = 0.5 * (np.abs(pair_energy) + np.abs(pair_energy.T))
     np.fill_diagonal(pair_graph, 0.0)
     features: dict[str, object] = {
         "mp2_reference": "RMP2" if branch.method == "RHF" else "UMP2",
-        "mp2_correlation_energy_hartree": same_energy + opposite_energy,
-        "mp2_same_spin_correlation_energy_hartree": same_energy,
-        "mp2_opposite_spin_correlation_energy_hartree": opposite_energy,
+        "mp2_unregularized_applicable": unregularized_applicable,
+        "mp2_unregularized_reason": (
+            None if unregularized_applicable else "all_denominators_below_threshold"
+        ),
+        "mp2_unregularized_partial_mask": unregularized_partial_mask,
+        "mp2_correlation_energy_hartree": (
+            same_energy + opposite_energy if unregularized_applicable else None
+        ),
+        "mp2_same_spin_correlation_energy_hartree": (
+            same_energy if unregularized_applicable else None
+        ),
+        "mp2_opposite_spin_correlation_energy_hartree": (
+            opposite_energy if unregularized_applicable else None
+        ),
     }
     features.update(_denominator_features(denominators, masks))
     for key in (
@@ -369,27 +529,67 @@ def run_mp2(
         "mp2_opposite_spin_correlation_energy_hartree",
     ):
         intensive_key = key.replace("_energy_hartree", "_energy_per_electron_hartree")
-        features[intensive_key] = features[key] / sector.nelec
-    features.update(_amplitude_summary(amplitudes, "mp2_amplitude"))
-    features.update(_amplitude_summary(same_amplitudes, "mp2_same_spin_amplitude"))
+        features[intensive_key] = (
+            None if features[key] is None else features[key] / sector.nelec
+        )
     features.update(
-        _amplitude_summary(opposite_amplitudes, "mp2_opposite_spin_amplitude")
+        _masked_amplitude_summary(amplitudes, amplitude_masks["all"], "mp2_amplitude")
     )
-    features.update(_kappa_features(energy_terms, denominators))
+    features.update(
+        _masked_amplitude_summary(
+            same_amplitudes,
+            amplitude_masks["same_spin"],
+            "mp2_same_spin_amplitude",
+        )
+    )
+    features.update(
+        _masked_amplitude_summary(
+            opposite_amplitudes,
+            amplitude_masks["opposite_spin"],
+            "mp2_opposite_spin_amplitude",
+        )
+    )
+    for kappa, channels in regularized_amplitudes.items():
+        label = str(kappa).replace(".", "p")
+        features.update(
+            _amplitude_summary(channels["all"], f"mp2_kappa_{label}_amplitude")
+        )
+        features.update(
+            _amplitude_summary(
+                channels["same_spin"], f"mp2_kappa_{label}_same_spin_amplitude"
+            )
+        )
+        features.update(
+            _amplitude_summary(
+                channels["opposite_spin"],
+                f"mp2_kappa_{label}_opposite_spin_amplitude",
+            )
+        )
+    features.update(
+        _kappa_features(
+            energy_terms,
+            energy_numerators,
+            denominators,
+            unregularized_applicable=unregularized_applicable,
+            unregularized_partial_mask=unregularized_partial_mask,
+        )
+    )
     for key, value in list(features.items()):
         if key.startswith("mp2_kappa_") and key.endswith("_energy_hartree"):
             intensive_key = key.replace(
                 "_energy_hartree", "_energy_per_electron_hartree"
             )
-            features[intensive_key] = value / sector.nelec
+            features[intensive_key] = None if value is None else value / sector.nelec
         if key.startswith("mp2_kappa_") and key.endswith("_difference_hartree"):
             intensive_key = key.replace(
                 "_difference_hartree", "_difference_per_electron_hartree"
             )
-            features[intensive_key] = value / sector.nelec
+            features[intensive_key] = None if value is None else value / sector.nelec
     solver = pyscf_solver_for_branch(data, eri, branch)
     mp_solver = mp.MP2(solver)
     mp_solver.verbose = 0
     features.update(_natural_occupation_features(mp_solver, t2_for_density, data.nelec))
+    pair_graph_started = time.monotonic()
     features.update(_pair_graph_features(pair_graph))
+    features["mfproto_pair_graph_seconds"] = time.monotonic() - pair_graph_started
     return MP2Result(features, pair_graph, t2_for_density)

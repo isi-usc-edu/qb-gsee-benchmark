@@ -24,6 +24,7 @@ def test_p2_pilot_report_binds_states_contract_representation_and_cost(
                 "mfproto_stability_seconds": 2.0,
                 "mfproto_hf_variance_seconds": 3.0,
                 "mfproto_mp2_seconds": 4.0,
+                "mfproto_pair_graph_seconds": 0.5,
                 "mf_tie_core_degenerate_subspace_count": 0,
                 "mf_tie_selected_fock_alpha_degenerate_subspace_count": 0,
                 "mf_tie_selected_fock_beta_degenerate_subspace_count": 0,

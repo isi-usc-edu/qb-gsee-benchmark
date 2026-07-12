@@ -165,7 +165,8 @@ def main() -> int:
         "scf": "mfproto_scf_seconds",
         "stability": "mfproto_stability_seconds",
         "hf_variance": "mfproto_hf_variance_seconds",
-        "mp2_and_pair_graph": "mfproto_mp2_seconds",
+        "mp2": "mfproto_mp2_seconds",
+        "pair_graph": "mfproto_pair_graph_seconds",
     }
     timings = {}
     for block, key in timing_keys.items():

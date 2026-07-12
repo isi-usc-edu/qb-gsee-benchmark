@@ -9,7 +9,14 @@ from qb_gsee_benchmark.features.mfproto_features import (
     pyscf_solver_for_branch,
     run_mean_field,
 )
-from qb_gsee_benchmark.features.mfproto_mp2 import _masked_amplitude, run_mp2
+from qb_gsee_benchmark.features.mfproto_mp2 import (
+    KAPPA_GRID,
+    _kappa_features,
+    _masked_amplitude,
+    _masked_amplitude_summary,
+    _regularized_amplitude,
+    run_mp2,
+)
 from qb_gsee_benchmark.features.mfproto_variance import exact_hf_variance
 
 
@@ -156,3 +163,110 @@ def test_mp2_small_denominators_are_masked_from_amplitudes() -> None:
     amplitudes, mask = _masked_amplitude(integrals, denominators)
     np.testing.assert_array_equal(mask, [True, False])
     np.testing.assert_allclose(amplitudes, [0.0, -1.0])
+
+
+def test_kappa_regularization_retains_small_denominator_terms() -> None:
+    denominator = np.array([1.0e-7, 0.0, -2.0])
+    numerator = np.array([4.0, 9.0, 16.0])
+    masked_energy = np.array([0.0, 0.0, -8.0])
+    features = _kappa_features(
+        [masked_energy],
+        [numerator],
+        [denominator],
+        unregularized_applicable=True,
+        unregularized_partial_mask=True,
+    )
+
+    assert features["mp2_kappa_inf_correlation_energy_hartree"] == -8.0
+    for kappa in KAPPA_GRID:
+        label = str(kappa).replace(".", "p")
+        damping = 1.0 - np.exp(-kappa * np.abs(denominator))
+        expected = np.sum(
+            numerator
+            * np.divide(
+                damping**2,
+                denominator,
+                out=np.zeros_like(denominator),
+                where=denominator != 0.0,
+            )
+        )
+        assert features[
+            f"mp2_kappa_{label}_correlation_energy_hartree"
+        ] == pytest.approx(expected, abs=1e-15)
+        masked_only = -8.0 * damping[-1] ** 2
+        assert abs(expected - masked_only) > 1.0e-8
+        regularized = _regularized_amplitude(numerator, denominator, kappa)
+        assert regularized[0] != 0.0
+        assert regularized[1] == pytest.approx(-kappa * numerator[1], abs=1e-15)
+
+
+def test_fully_masked_unregularized_panels_are_not_encoded_as_zero() -> None:
+    values = np.array([0.0, 0.0])
+    mask = np.array([True, True])
+    amplitudes = _masked_amplitude_summary(values, mask, "test_amplitude")
+    assert amplitudes["test_amplitude_applicable"] is False
+    assert amplitudes["test_amplitude_reason"] == "all_amplitudes_masked"
+    assert amplitudes["test_amplitude_partial_mask"] is True
+    assert amplitudes["test_amplitude_max_abs"] is None
+
+    denominator = np.array([-1.0e-8])
+    kappa = _kappa_features(
+        [np.array([0.0])],
+        [np.array([4.0])],
+        [denominator],
+        unregularized_applicable=False,
+        unregularized_partial_mask=True,
+    )
+    assert kappa["mp2_kappa_inf_applicable"] is False
+    assert kappa["mp2_kappa_inf_correlation_energy_hartree"] is None
+    assert kappa["mp2_kappa_1p45_correlation_energy_hartree"] != 0.0
+    assert kappa["mp2_kappa_1p45_vs_inf_difference_hartree"] is None
+    assert kappa["mp2_kappa_1p45_vs_inf_difference_applicable"] is False
+
+
+def test_rmp2_amplitude_spin_blocks_match_equivalent_ump2() -> None:
+    data = _random_symmetric_data()
+    mean_field = run_mean_field(data)
+    selected = mean_field.selected
+    restricted = run_mp2(data, data.dense_eri(), selected, mean_field.sector)
+    unrestricted = run_mp2(
+        data,
+        data.dense_eri(),
+        replace(selected, method="UHF"),
+        mean_field.sector,
+    )
+    for label in ("inf", "1p45", "1p1"):
+        key = f"mp2_kappa_{label}_correlation_energy_hartree"
+        assert restricted.features[key] == pytest.approx(
+            unrestricted.features[key], abs=1e-14
+        )
+    for prefix in (
+        "mp2_amplitude",
+        "mp2_same_spin_amplitude",
+        "mp2_opposite_spin_amplitude",
+    ):
+        for suffix in (
+            "max_abs",
+            "l1_norm",
+            "l2_norm",
+            "participation_ratio",
+            "top_16_l2_mass_fraction",
+            "top_128_l2_mass_fraction",
+        ):
+            assert restricted.features[f"{prefix}_{suffix}"] == pytest.approx(
+                unrestricted.features[f"{prefix}_{suffix}"], abs=1e-14
+            )
+    for label in ("1p45", "1p1"):
+        for spin in ("", "same_spin_", "opposite_spin_"):
+            prefix = f"mp2_kappa_{label}_{spin}amplitude"
+            for suffix in (
+                "max_abs",
+                "l1_norm",
+                "l2_norm",
+                "participation_ratio",
+                "top_16_l2_mass_fraction",
+                "top_128_l2_mass_fraction",
+            ):
+                assert restricted.features[f"{prefix}_{suffix}"] == pytest.approx(
+                    unrestricted.features[f"{prefix}_{suffix}"], abs=1e-14
+                )

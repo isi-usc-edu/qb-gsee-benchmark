@@ -30,6 +30,7 @@ def test_complete_extractor_populates_independent_panels() -> None:
     assert features["mfproto_stability_seconds"] >= 0.0
     assert features["mfproto_hf_variance_seconds"] >= 0.0
     assert features["mfproto_mp2_seconds"] >= 0.0
+    assert features["mfproto_pair_graph_seconds"] >= 0.0
     assert extraction.audit["panel_errors"] == {}
     assert len(extraction.audit["branch_outcomes"]) == 8
 

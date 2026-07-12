@@ -143,6 +143,9 @@ Davidson controls, but never select or follow a GHF solution in v1. Mask an
 external root when its particle-hole dimension or measured Hessian-action cost
 exceeds the pilot ceiling; report that ceiling rather than silently omitting
 the value.
+The pilot ceilings are particle-hole dimension `250000` and `120.0 s` for the
+measured first Hessian action. These numerical ceilings are pilot implementation
+resolutions to be checked at review.
 
 ### Gap, thermal, DOS, IPR, and variance panels
 
@@ -150,6 +153,8 @@ the value.
   zero-electron or full-spin sectors are not applicable.
 - Selected-Fock gaps use canonical final orbitals, alpha/beta separately and
   their minimum. A gap with absolute value `<=1e-10 Ha` is edge-degenerate.
+- Gap mismatch is the absolute selected-Fock minus core-Hamiltonian gap,
+  reported for alpha, beta, and the respective minimum-over-spin gaps.
 - Thermal fractions use Fermi occupations at `kT = {0.025,0.1,0.25} Ha` and
   report the fraction of spin orbitals with occupations in `[0.02,0.98]`.
 - DOS uses normalized Gaussians at `eta = {0.05,0.2} Ha`. The center is the
@@ -186,6 +191,12 @@ opposite-spin and same-spin energy and amplitude summaries. For
 square `(1-exp(-kappa*d))^2`; `kappa=infinity` is the masked unregularized
 panel. Record cross-grid differences and ratios; a ratio with denominator
 below `1e-14 Ha` is masked.
+
+Finite-kappa energy and total/same-spin/opposite-spin amplitude summaries use
+all denominators, including those below the unregularized `1e-6 Ha` mask. At
+an exactly zero denominator, the amplitude uses the occupied-virtual
+negative-side limit `-kappa*g`, while the regularized energy contribution is
+zero. This limit is a pilot implementation resolution to be checked at review.
 
 Build the spin-orbital MP2 one-particle density matrix. If `n_q` are its
 natural occupations in `[0,1]`, report

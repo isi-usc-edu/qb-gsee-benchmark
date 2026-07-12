@@ -70,6 +70,8 @@ def test_boundary_tie_and_spectral_panel_follow_inclusive_rules() -> None:
     assert panel["gap"] == pytest.approx(0.1)
     assert panel["center"] == pytest.approx(0.05)
     assert panel["ipr_window_orbital_count_0.1"] == 3
+    assert panel["ipr_window_0.1_applicable"] is True
+    assert panel["ipr_window_0.1_reason"] is None
     assert panel["ipr_window_0.1"] == pytest.approx(1.0 / 3.0)
     assert 0.0 <= panel["thermal_active_fraction_kt_0.1"] <= 1.0
     assert panel["dos_total_eta_0.05"] > 0.0
@@ -82,13 +84,22 @@ def test_spectral_panel_masks_empty_and_full_spin_sectors() -> None:
     values = np.array([-1.0, 1.0])
     for particles in (0, 2):
         panel = spectral_panel(values, np.eye(2), particles)
-        assert panel == {
-            "applicable": False,
-            "reason": "empty_or_full_spin_sector",
-            "gap": None,
-            "center": None,
-            "edge_degenerate": None,
-        }
+        assert panel["applicable"] is False
+        assert panel["reason"] == "empty_or_full_spin_sector"
+        assert panel["gap"] is None
+        assert panel["thermal_active_fraction_kt_0.1"] is None
+        assert panel["dos_total_eta_0.05"] is None
+        assert panel["ipr_window_0.1_applicable"] is False
+        assert panel["ipr_window_0.1_reason"] == "empty_or_full_spin_sector"
+        assert panel["ipr_window_0.1"] is None
+
+
+def test_spectral_panel_masks_empty_projector_windows_independently() -> None:
+    panel = spectral_panel(np.array([-1.0, 1.0]), np.eye(2), particles=1)
+    for width in ("0.1", "0.5"):
+        assert panel[f"ipr_window_{width}_applicable"] is False
+        assert panel[f"ipr_window_{width}_reason"] == "empty_spectral_projector"
+        assert panel[f"ipr_window_{width}"] is None
 
 
 def _sparse_data(norb: int, nelec: int, ms2: int, h1: np.ndarray) -> SparseFcidump:
@@ -132,7 +143,11 @@ def test_mean_field_panel_runs_all_closed_shell_branches_and_deduplicates() -> N
     assert features["mf_selected_guess"] == "G1"
     assert features["mf_selected_energy_hartree"] == pytest.approx(-2.0)
     assert features["mf_symmetry_breaking_energy_hartree"] == pytest.approx(0.0)
+    assert features["mf_symmetry_breaking_applicable"] is True
+    assert features["mf_symmetry_breaking_reason"] is None
     assert features["mf_selected_fock_gap_min_hartree"] == pytest.approx(2.0)
+    assert features["mf_gap_mismatch_min_applicable"] is True
+    assert features["mf_gap_mismatch_min_hartree"] == pytest.approx(0.0)
 
 
 def test_mean_field_open_shell_runs_only_uhf_and_masks_empty_beta_gap() -> None:
@@ -143,8 +158,12 @@ def test_mean_field_open_shell_runs_only_uhf_and_masks_empty_beta_gap() -> None:
     assert all(branch.converged for branch in result.branches)
     features = mean_field_feature_values(result)
     assert features["mf_lowest_rhf_energy_hartree"] is None
+    assert features["mf_symmetry_breaking_applicable"] is False
+    assert features["mf_symmetry_breaking_reason"] == "ms2_nonzero"
     assert features["mf_selected_fock_beta_applicable"] is False
     assert features["mf_selected_fock_beta_reason"] == "empty_or_full_spin_sector"
+    assert features["mf_selected_fock_beta_thermal_active_fraction_kt_0.1"] is None
+    assert features["mf_selected_fock_beta_ipr_window_0.1_applicable"] is False
     assert features["mf_selected_s2"] == pytest.approx(0.75)
 
 

@@ -40,6 +40,7 @@ def test_davidson_root_uses_lowest_eigenpair_and_normalizes_vector() -> None:
     assert root.applicable
     assert root.eigenvalue == pytest.approx(expected, abs=1e-12)
     assert np.linalg.norm(root.vector) == pytest.approx(1.0, abs=1e-14)
+    assert np.linalg.norm(matrix @ root.vector - root.eigenvalue * root.vector) <= 1e-7
     assert root.dimension == 3
 
 
