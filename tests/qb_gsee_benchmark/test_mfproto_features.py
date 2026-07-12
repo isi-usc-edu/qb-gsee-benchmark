@@ -1,12 +1,16 @@
 import numpy as np
 import pytest
 
+from qb_gsee_benchmark.features.fcidump_sparse import SparseFcidump
 from qb_gsee_benchmark.features.mfproto_features import (
     canonical_eigh,
+    configure_newton_fallback,
     fermi_occupations,
     initial_spin_density_guesses,
+    mean_field_feature_values,
     occupation_boundary_tie,
     particle_sector,
+    run_mean_field,
     spectral_panel,
 )
 
@@ -85,3 +89,89 @@ def test_spectral_panel_masks_empty_and_full_spin_sectors() -> None:
             "center": None,
             "edge_degenerate": None,
         }
+
+
+def _sparse_data(norb: int, nelec: int, ms2: int, h1: np.ndarray) -> SparseFcidump:
+    return SparseFcidump(
+        norb=norb,
+        nelec=nelec,
+        ms2=ms2,
+        h1=h1,
+        eri_records={},
+        ecore=0.0,
+        one_body_duplicate_orientations=0,
+        one_body_duplicate_max_abs_difference=0.0,
+        one_body_duplicate_max_rel_difference=0.0,
+        one_body_symmetry_conflict_records=0,
+        two_body_input_records=0,
+        two_body_duplicate_orientations=0,
+        two_body_duplicate_max_abs_difference=0.0,
+        two_body_duplicate_max_rel_difference=0.0,
+        two_body_symmetry_conflict_records=0,
+        container_format="plain",
+        container_member=None,
+        ms2_source="test",
+    )
+
+
+def test_mean_field_panel_runs_all_closed_shell_branches_and_deduplicates() -> None:
+    data = _sparse_data(2, 2, 0, np.diag([-1.0, 1.0]))
+    result = run_mean_field(data)
+    assert [(branch.method, branch.guess) for branch in result.branches] == [
+        (method, guess)
+        for method in ("RHF", "UHF")
+        for guess in ("G1", "G2", "G3", "G4")
+    ]
+    assert all(branch.converged for branch in result.branches)
+    assert not any(branch.fallback_used for branch in result.branches)
+    assert result.components == [list(range(8))]
+    assert result.selected_branch_index == 0
+    features = mean_field_feature_values(result)
+    assert features["mf_distinct_solution_count"] == 1
+    assert features["mf_selected_method"] == "RHF"
+    assert features["mf_selected_guess"] == "G1"
+    assert features["mf_selected_energy_hartree"] == pytest.approx(-2.0)
+    assert features["mf_symmetry_breaking_energy_hartree"] == pytest.approx(0.0)
+    assert features["mf_selected_fock_gap_min_hartree"] == pytest.approx(2.0)
+
+
+def test_mean_field_open_shell_runs_only_uhf_and_masks_empty_beta_gap() -> None:
+    data = _sparse_data(3, 1, 1, np.diag([-2.0, 0.0, 2.0]))
+    result = run_mean_field(data)
+    assert len(result.branches) == 4
+    assert all(branch.method == "UHF" for branch in result.branches)
+    assert all(branch.converged for branch in result.branches)
+    features = mean_field_feature_values(result)
+    assert features["mf_lowest_rhf_energy_hartree"] is None
+    assert features["mf_selected_fock_beta_applicable"] is False
+    assert features["mf_selected_fock_beta_reason"] == "empty_or_full_spin_sector"
+    assert features["mf_selected_s2"] == pytest.approx(0.75)
+
+
+def test_newton_fallback_controls_are_all_overridden() -> None:
+    class Solver:
+        max_cycle = None
+        max_cycle_inner = None
+        max_stepsize = None
+        ah_start_cycle = None
+        ah_start_tol = None
+        ah_conv_tol = None
+        ah_lindep = None
+        ah_max_cycle = None
+        ah_level_shift = None
+        ah_grad_trust_region = None
+        kf_interval = None
+        kf_trust_region = None
+        conv_tol = None
+        conv_tol_grad = None
+
+    solver = configure_newton_fallback(Solver())
+    assert solver.max_cycle == 50
+    assert solver.max_cycle_inner == 12
+    assert solver.max_stepsize == 0.05
+    assert solver.ah_start_tol == 1.0e9
+    assert solver.ah_conv_tol == 1.0e-12
+    assert solver.ah_lindep == 1.0e-14
+    assert solver.ah_grad_trust_region == 2.5
+    assert solver.kf_interval == 4
+    assert solver.kf_trust_region == 5

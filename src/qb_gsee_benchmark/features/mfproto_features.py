@@ -6,7 +6,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Any
 
+
+from qb_gsee_benchmark.features.fcidump_sparse import SparseFcidump
 import numpy as np
 
 MFPROTO_VERSION = "g40_p2_mfproto_v1"
@@ -15,6 +18,12 @@ FERMI_RESIDUAL_TOL = 1.0e-13
 FERMI_BRACKET_TOL = 1.0e-13
 THERMAL_KT_GRID = (0.025, 0.1, 0.25)
 DOS_ETA_GRID = (0.05, 0.2)
+SCF_ENERGY_TOL = 1.0e-9
+SCF_GRADIENT_TOL = 1.0e-6
+SCF_MAX_CYCLE = 150
+SOLUTION_ENERGY_TOL = 1.0e-7
+SOLUTION_DENSITY_TOL = 1.0e-4
+GUESS_ORDER = ("G1", "G2", "G3", "G4")
 IPR_WINDOW_GRID = (0.1, 0.5)
 
 
@@ -33,6 +42,46 @@ class ParticleSector:
     ms2: int
     nalpha: int
     nbeta: int
+
+
+@dataclass
+class MeanFieldBranch:
+    method: str
+    guess: str
+    converged: bool
+    fallback_used: bool
+    engine_converged: bool
+    energy: float | None
+    final_delta_energy: float | None
+    maximum_ov_gradient: float | None
+    density_alpha: np.ndarray | None
+    density_beta: np.ndarray | None
+    fock_alpha: np.ndarray | None
+    fock_beta: np.ndarray | None
+    orbitals_alpha: np.ndarray | None
+    orbitals_beta: np.ndarray | None
+    energies_alpha: np.ndarray | None
+    energies_beta: np.ndarray | None
+    s2: float | None
+    cycles: int
+    error_type: str | None = None
+    error_message: str | None = None
+
+
+@dataclass
+class MeanFieldResult:
+    sector: ParticleSector
+    branches: list[MeanFieldBranch]
+    components: list[list[int]]
+    selected_branch_index: int | None
+    core_spectrum: CanonicalSpectrum
+    tie_audit: dict[str, float | int | bool | None]
+
+    @property
+    def selected(self) -> MeanFieldBranch | None:
+        if self.selected_branch_index is None:
+            return None
+        return self.branches[self.selected_branch_index]
 
 
 def particle_sector(norb: int, nelec: int, ms2: int) -> ParticleSector:
@@ -279,3 +328,473 @@ def spectral_panel(
             else float(np.sum(np.sum(vectors[:, selected] ** 2, axis=1) ** 2) / rank**2)
         )
     return result
+
+
+def _build_pyscf_mean_field(data: SparseFcidump, eri: np.ndarray, method: str) -> Any:
+    from pyscf import gto, scf
+
+    mol = gto.M()
+    mol.nelectron = data.nelec
+    mol.spin = data.ms2
+    mol.nao = data.norb
+    mol.incore_anyway = True
+    mol.verbose = 0
+    mol.enuc = data.ecore
+    mf = scf.RHF(mol) if method == "RHF" else scf.UHF(mol)
+    mf.verbose = 0
+    mf.max_cycle = SCF_MAX_CYCLE
+    mf.conv_tol = SCF_ENERGY_TOL
+    mf.conv_tol_grad = SCF_GRADIENT_TOL
+    hcore = data.h1 if method == "RHF" else np.asarray((data.h1, data.h1))
+    mf.get_hcore = lambda *args: hcore
+    mf.get_ovlp = lambda *args: np.eye(data.norb)
+    mf._eri = eri
+    return mf
+
+
+def configure_newton_fallback(solver: Any) -> Any:
+    """Apply every frozen MFPROTO-v1 augmented-Hessian control."""
+    controls = {
+        "max_cycle": 50,
+        "max_cycle_inner": 12,
+        "max_stepsize": 0.05,
+        "ah_start_cycle": 1,
+        "ah_start_tol": 1.0e9,
+        "ah_conv_tol": 1.0e-12,
+        "ah_lindep": 1.0e-14,
+        "ah_max_cycle": 40,
+        "ah_level_shift": 0.0,
+        "ah_grad_trust_region": 2.5,
+        "kf_interval": 4,
+        "kf_trust_region": 5,
+    }
+    for name, value in controls.items():
+        if not hasattr(solver, name):
+            raise AttributeError(f"PySCF Newton solver lacks frozen control {name}")
+        setattr(solver, name, value)
+    solver.conv_tol = SCF_ENERGY_TOL
+    solver.conv_tol_grad = SCF_GRADIENT_TOL
+    return solver
+
+
+def _kernel_with_history(
+    solver: Any,
+    *,
+    dm0: np.ndarray | tuple[np.ndarray, np.ndarray] | None = None,
+    mo_coeff: Any = None,
+    mo_occ: Any = None,
+) -> list[float]:
+    energy_changes: list[float] = []
+
+    def callback(environment: dict[str, Any]) -> None:
+        energy = environment.get("e_tot")
+        previous = environment.get("last_hf_e")
+        if (
+            energy is not None
+            and previous is not None
+            and np.isfinite(energy)
+            and np.isfinite(previous)
+        ):
+            energy_changes.append(abs(float(energy) - float(previous)))
+
+    solver.callback = callback
+    if mo_coeff is not None:
+        solver.kernel(mo_coeff=mo_coeff, mo_occ=mo_occ)
+    else:
+        solver.kernel(dm0=dm0)
+    return energy_changes
+
+
+def _canonical_state(
+    solver: Any, method: str, sector: ParticleSector
+) -> dict[str, Any]:
+    original_dm = solver.make_rdm1(solver.mo_coeff, solver.mo_occ)
+    original_fock = solver.get_fock(dm=original_dm)
+    if method == "RHF":
+        spectra = (canonical_eigh(original_fock),) * 2
+        orbitals = spectra[0].eigenvectors
+        occupations = np.zeros(sector.norb)
+        occupations[: sector.nalpha] = 2.0
+        density = occupation_density(orbitals, occupations)
+        fock = solver.get_fock(dm=density)
+        spectrum = canonical_eigh(fock)
+        orbitals = spectrum.eigenvectors
+        density = occupation_density(orbitals, occupations)
+        fock = solver.get_fock(dm=density)
+        gradient = solver.get_grad(orbitals, occupations, fock)
+        veff = solver.get_veff(dm=density)
+        energy = float(solver.energy_tot(dm=density, h1e=data_hcore(solver), vhf=veff))
+        density_alpha = density_beta = 0.5 * density
+        s2 = 0.0
+        return {
+            "energy": energy,
+            "gradient": float(np.max(np.abs(gradient), initial=0.0)),
+            "density_alpha": density_alpha,
+            "density_beta": density_beta,
+            "fock_alpha": fock,
+            "fock_beta": fock,
+            "orbitals_alpha": orbitals,
+            "orbitals_beta": orbitals,
+            "energies_alpha": spectrum.eigenvalues,
+            "energies_beta": spectrum.eigenvalues,
+            "s2": s2,
+        }
+
+    fock_alpha, fock_beta = original_fock
+    spectrum_alpha = canonical_eigh(fock_alpha)
+    spectrum_beta = canonical_eigh(fock_beta)
+    occupation_alpha = np.zeros(sector.norb)
+    occupation_beta = np.zeros(sector.norb)
+    occupation_alpha[: sector.nalpha] = 1.0
+    occupation_beta[: sector.nbeta] = 1.0
+    density_alpha = occupation_density(spectrum_alpha.eigenvectors, occupation_alpha)
+    density_beta = occupation_density(spectrum_beta.eigenvectors, occupation_beta)
+    density = np.asarray((density_alpha, density_beta))
+    fock_alpha, fock_beta = solver.get_fock(dm=density)
+    spectrum_alpha = canonical_eigh(fock_alpha)
+    spectrum_beta = canonical_eigh(fock_beta)
+    density_alpha = occupation_density(spectrum_alpha.eigenvectors, occupation_alpha)
+    density_beta = occupation_density(spectrum_beta.eigenvectors, occupation_beta)
+    density = np.asarray((density_alpha, density_beta))
+    fock = solver.get_fock(dm=density)
+    gradient = solver.get_grad(
+        (spectrum_alpha.eigenvectors, spectrum_beta.eigenvectors),
+        (occupation_alpha, occupation_beta),
+        fock,
+    )
+    veff = solver.get_veff(dm=density)
+    energy = float(solver.energy_tot(dm=density, h1e=data_hcore(solver), vhf=veff))
+    occupied = (
+        spectrum_alpha.eigenvectors[:, : sector.nalpha],
+        spectrum_beta.eigenvectors[:, : sector.nbeta],
+    )
+    s2 = float(solver.spin_square(occupied, np.eye(sector.norb))[0])
+    return {
+        "energy": energy,
+        "gradient": float(np.max(np.abs(gradient), initial=0.0)),
+        "density_alpha": density_alpha,
+        "density_beta": density_beta,
+        "fock_alpha": fock[0],
+        "fock_beta": fock[1],
+        "orbitals_alpha": spectrum_alpha.eigenvectors,
+        "orbitals_beta": spectrum_beta.eigenvectors,
+        "energies_alpha": spectrum_alpha.eigenvalues,
+        "energies_beta": spectrum_beta.eigenvalues,
+        "s2": s2,
+    }
+
+
+def data_hcore(solver: Any) -> Any:
+    """Return hcore with the shape expected by RHF or UHF energy_tot."""
+    return solver.get_hcore(solver.mol)
+
+
+def _evaluate_branch(
+    solver: Any,
+    method: str,
+    guess: str,
+    sector: ParticleSector,
+    history: list[float],
+    *,
+    fallback_used: bool,
+) -> MeanFieldBranch:
+    state = _canonical_state(solver, method, sector)
+    iterative_delta = history[-1] if history else float("inf")
+    canonical_delta = abs(state["energy"] - float(solver.e_tot))
+    final_delta = max(iterative_delta, canonical_delta)
+    gradient = state["gradient"]
+    converged = bool(final_delta < SCF_ENERGY_TOL and gradient < SCF_GRADIENT_TOL)
+    return MeanFieldBranch(
+        method=method,
+        guess=guess,
+        converged=converged,
+        fallback_used=fallback_used,
+        engine_converged=bool(solver.converged),
+        energy=state["energy"],
+        final_delta_energy=float(final_delta),
+        maximum_ov_gradient=gradient,
+        density_alpha=state["density_alpha"],
+        density_beta=state["density_beta"],
+        fock_alpha=state["fock_alpha"],
+        fock_beta=state["fock_beta"],
+        orbitals_alpha=state["orbitals_alpha"],
+        orbitals_beta=state["orbitals_beta"],
+        energies_alpha=state["energies_alpha"],
+        energies_beta=state["energies_beta"],
+        s2=state["s2"],
+        cycles=int(getattr(solver, "cycles", len(history))),
+    )
+
+
+def _failed_branch(method: str, guess: str, exc: Exception) -> MeanFieldBranch:
+    return MeanFieldBranch(
+        method=method,
+        guess=guess,
+        converged=False,
+        fallback_used=False,
+        engine_converged=False,
+        energy=None,
+        final_delta_energy=None,
+        maximum_ov_gradient=None,
+        density_alpha=None,
+        density_beta=None,
+        fock_alpha=None,
+        fock_beta=None,
+        orbitals_alpha=None,
+        orbitals_beta=None,
+        energies_alpha=None,
+        energies_beta=None,
+        s2=None,
+        cycles=0,
+        error_type=type(exc).__name__,
+        error_message=str(exc),
+    )
+
+
+def _run_mean_field_branch(
+    data: SparseFcidump,
+    eri: np.ndarray,
+    method: str,
+    guess: str,
+    spin_density: tuple[np.ndarray, np.ndarray],
+    sector: ParticleSector,
+) -> MeanFieldBranch:
+    try:
+        solver = _build_pyscf_mean_field(data, eri, method)
+        dm0 = spin_density[0] + spin_density[1] if method == "RHF" else spin_density
+        history = _kernel_with_history(solver, dm0=dm0)
+        result = _evaluate_branch(
+            solver, method, guess, sector, history, fallback_used=False
+        )
+        if result.converged:
+            return result
+        second_order = configure_newton_fallback(solver.newton())
+        history = _kernel_with_history(
+            second_order, mo_coeff=solver.mo_coeff, mo_occ=solver.mo_occ
+        )
+        return _evaluate_branch(
+            second_order, method, guess, sector, history, fallback_used=True
+        )
+    except Exception as exc:
+        return _failed_branch(method, guess, exc)
+
+
+def spin_density_distance(left: MeanFieldBranch, right: MeanFieldBranch) -> float:
+    if left.density_alpha is None or right.density_alpha is None:
+        return float("inf")
+    alpha = np.linalg.norm(left.density_alpha - right.density_alpha)
+    beta = np.linalg.norm(left.density_beta - right.density_beta)
+    return float(np.hypot(alpha, beta))
+
+
+def _stationary_components(branches: list[MeanFieldBranch]) -> list[list[int]]:
+    eligible = [index for index, branch in enumerate(branches) if branch.converged]
+    parents = {index: index for index in eligible}
+
+    def find(index: int) -> int:
+        while parents[index] != index:
+            parents[index] = parents[parents[index]]
+            index = parents[index]
+        return index
+
+    def union(left: int, right: int) -> None:
+        left_root, right_root = find(left), find(right)
+        if left_root != right_root:
+            parents[right_root] = left_root
+
+    for position, left in enumerate(eligible):
+        for right in eligible[position + 1 :]:
+            if (
+                abs(branches[left].energy - branches[right].energy)
+                <= SOLUTION_ENERGY_TOL
+                and spin_density_distance(branches[left], branches[right])
+                <= SOLUTION_DENSITY_TOL
+            ):
+                union(left, right)
+    groups: dict[int, list[int]] = {}
+    for index in eligible:
+        groups.setdefault(find(index), []).append(index)
+    return sorted(
+        (sorted(group) for group in groups.values()), key=lambda group: group[0]
+    )
+
+
+def _branch_rank(branch: MeanFieldBranch) -> tuple[float, int, int]:
+    return (
+        float(branch.energy),
+        GUESS_ORDER.index(branch.guess),
+        0 if branch.method == "RHF" else 1,
+    )
+
+
+def _ordered_diagonal_boundary_tie(
+    diagonal: np.ndarray, order: np.ndarray, particles: int
+) -> bool:
+    if particles <= 0 or particles >= order.size:
+        return False
+    return bool(
+        abs(diagonal[order[particles]] - diagonal[order[particles - 1]])
+        <= DEGENERACY_ATOL
+    )
+
+
+def run_mean_field(data: SparseFcidump) -> MeanFieldResult:
+    """Run the complete MFPROTO-v1 RHF/UHF x G1--G4 branch panel."""
+    sector = particle_sector(data.norb, data.nelec, data.ms2)
+    core = canonical_eigh(data.h1)
+    guesses = initial_spin_density_guesses(data.h1, data.nelec, data.ms2)
+    eri = data.dense_eri()
+    methods = ("RHF", "UHF") if data.ms2 == 0 else ("UHF",)
+    branches = [
+        _run_mean_field_branch(data, eri, method, guess, guesses[guess], sector)
+        for method in methods
+        for guess in GUESS_ORDER
+    ]
+    components = _stationary_components(branches)
+    representatives = [
+        min(group, key=lambda index: _branch_rank(branches[index]))
+        for group in components
+    ]
+    selected_index = (
+        None
+        if not representatives
+        else min(representatives, key=lambda index: _branch_rank(branches[index]))
+    )
+
+    diagonal = np.diag(data.h1)
+    shipped = np.arange(data.norb)
+    alpha_alternating = np.array(sorted(range(data.norb), key=lambda i: (i % 2, i)))
+    beta_alternating = np.array(
+        sorted(range(data.norb), key=lambda i: ((i + 1) % 2, i))
+    )
+    tie_audit: dict[str, float | int | bool | None] = {
+        "core_minimum_adjacent_split": core.minimum_adjacent_split,
+        "core_degenerate_subspace_count": core.degenerate_subspace_count,
+        "g1_alpha_boundary_tie": occupation_boundary_tie(
+            core.eigenvalues, sector.nalpha
+        ),
+        "g1_beta_boundary_tie": occupation_boundary_tie(core.eigenvalues, sector.nbeta),
+        "g2_alpha_boundary_tie": _ordered_diagonal_boundary_tie(
+            diagonal, shipped, sector.nalpha
+        ),
+        "g2_beta_boundary_tie": _ordered_diagonal_boundary_tie(
+            diagonal, shipped, sector.nbeta
+        ),
+        "g3_alpha_boundary_tie": _ordered_diagonal_boundary_tie(
+            diagonal, alpha_alternating, sector.nalpha
+        ),
+        "g3_beta_boundary_tie": _ordered_diagonal_boundary_tie(
+            diagonal, beta_alternating, sector.nbeta
+        ),
+    }
+    selected = None if selected_index is None else branches[selected_index]
+    for spin in ("alpha", "beta"):
+        fock = None if selected is None else getattr(selected, f"fock_{spin}")
+        spectrum = None if fock is None else canonical_eigh(fock)
+        tie_audit[f"selected_fock_{spin}_minimum_adjacent_split"] = (
+            None if spectrum is None else spectrum.minimum_adjacent_split
+        )
+        tie_audit[f"selected_fock_{spin}_degenerate_subspace_count"] = (
+            None if spectrum is None else spectrum.degenerate_subspace_count
+        )
+    return MeanFieldResult(
+        sector=sector,
+        branches=branches,
+        components=components,
+        selected_branch_index=selected_index,
+        core_spectrum=core,
+        tie_audit=tie_audit,
+    )
+
+
+def mean_field_feature_values(result: MeanFieldResult) -> dict[str, Any]:
+    """Flatten the stationary-state and one-body panels for corpus states."""
+    selected = result.selected
+    converged = [branch for branch in result.branches if branch.converged]
+    features: dict[str, Any] = {
+        "mfproto_features_version": MFPROTO_VERSION,
+        "mf_branch_count": len(result.branches),
+        "mf_converged_branch_count": len(converged),
+        "mf_distinct_solution_count": len(result.components),
+        "mf_solution_energy_spread_hartree": (
+            None
+            if not converged
+            else float(
+                max(branch.energy for branch in converged)
+                - min(branch.energy for branch in converged)
+            )
+        ),
+        "mf_selected_applicable": selected is not None,
+        "mf_selected_reason": (
+            None if selected is not None else "no_converged_scf_branch"
+        ),
+        "mf_selected_method": None if selected is None else selected.method,
+        "mf_selected_guess": None if selected is None else selected.guess,
+        "mf_selected_energy_hartree": None if selected is None else selected.energy,
+        "mf_selected_s2": None if selected is None else selected.s2,
+    }
+    features.update({f"mf_tie_{key}": value for key, value in result.tie_audit.items()})
+
+    method_energies = {
+        method: [branch.energy for branch in converged if branch.method == method]
+        for method in ("RHF", "UHF")
+    }
+    for method, energies in method_energies.items():
+        features[f"mf_lowest_{method.lower()}_energy_hartree"] = (
+            None if not energies else float(min(energies))
+        )
+    if method_energies["RHF"] and method_energies["UHF"]:
+        delta = min(method_energies["RHF"]) - min(method_energies["UHF"])
+        features["mf_symmetry_breaking_energy_hartree"] = float(delta)
+        features["mf_symmetry_breaking_energy_per_electron"] = float(
+            delta / result.sector.nelec
+        )
+    else:
+        features["mf_symmetry_breaking_energy_hartree"] = None
+        features["mf_symmetry_breaking_energy_per_electron"] = None
+
+    core_panels = {
+        "alpha": spectral_panel(
+            result.core_spectrum.eigenvalues,
+            result.core_spectrum.eigenvectors,
+            result.sector.nalpha,
+        ),
+        "beta": spectral_panel(
+            result.core_spectrum.eigenvalues,
+            result.core_spectrum.eigenvectors,
+            result.sector.nbeta,
+        ),
+    }
+    for spin, panel in core_panels.items():
+        features[f"mf_core_gap_{spin}_applicable"] = panel["applicable"]
+        features[f"mf_core_gap_{spin}_reason"] = panel["reason"]
+        features[f"mf_core_gap_{spin}_hartree"] = panel["gap"]
+    applicable_core_gaps = [
+        panel["gap"] for panel in core_panels.values() if panel["applicable"]
+    ]
+    features["mf_core_gap_min_hartree"] = (
+        None if not applicable_core_gaps else float(min(applicable_core_gaps))
+    )
+    if selected is None:
+        return features
+
+    selected_panels = {}
+    for spin, particles in (
+        ("alpha", result.sector.nalpha),
+        ("beta", result.sector.nbeta),
+    ):
+        panel = spectral_panel(
+            getattr(selected, f"energies_{spin}"),
+            getattr(selected, f"orbitals_{spin}"),
+            particles,
+        )
+        selected_panels[spin] = panel
+        for key, value in panel.items():
+            features[f"mf_selected_fock_{spin}_{key}"] = value
+    applicable_fock_gaps = [
+        panel["gap"] for panel in selected_panels.values() if panel["applicable"]
+    ]
+    features["mf_selected_fock_gap_min_hartree"] = (
+        None if not applicable_fock_gaps else float(min(applicable_fock_gaps))
+    )
+    return features
