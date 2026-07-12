@@ -21,9 +21,9 @@ from qb_gsee_benchmark.features.universal_t0_features import (
     _threshold_suffix,
 )
 
-DETERMINANT_COUPLING_VERSION = "g40_p1b_determinant_coupling_v3"
+DETERMINANT_COUPLING_VERSION = "g40_p1b_determinant_coupling_v4"
 DEFAULT_RANDOM_SEED = 40040
-DEFAULT_RANDOM_DETERMINANTS = 32
+DEFAULT_RANDOM_DETERMINANTS = 64
 DEFAULT_EXCITATION_SAMPLES_PER_CLASS = 512
 TOP_K_GRID = (1, 10, 100)
 EXACT_DOUBLE_MAX_ERI_RECORDS = 100_000
