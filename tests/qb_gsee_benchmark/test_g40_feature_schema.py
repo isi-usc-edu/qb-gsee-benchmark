@@ -25,7 +25,6 @@ from qb_gsee_benchmark.features.integral_features import (
     log10_fci_dimension,
 )
 
-
 ROOT = Path(__file__).resolve().parents[2]
 FEATURES = ROOT / "scripts" / "Hamiltonian_features.csv"
 OUT = ROOT / "analysis" / "feature_schema"
@@ -69,9 +68,7 @@ def test_schema_classifies_every_current_column_once() -> None:
     columns = list(pd.read_csv(FEATURES, nrows=0).columns)
     catalog = metadata_catalog(columns)
 
-    assert len(catalog) == len(columns) + len(
-        set(PLANNED_COLUMNS) - set(columns)
-    )
+    assert len(catalog) == len(columns) + len(set(PLANNED_COLUMNS) - set(columns))
     assert len({row.column for row in catalog}) == len(catalog)
 
 
@@ -110,9 +107,12 @@ def test_generated_p0_artifacts_are_deterministic_and_value_preserving() -> None
     assert "ccsd_t1_diagnostic" in manifest["excluded_columns"]
     assert manifest["pending_value_rebuild_columns"] == []
     planned = manifest["planned_columns_excluded_until_populated"]
+    current_columns = set(pd.read_csv(FEATURES, nrows=0).columns)
     assert planned == {
-        "pending_model_eligible": sorted(P1B_MODEL | P1C_BAS_MODEL | P1C_BAS_ORD_MODEL),
-        "permanently_audit_only": sorted(P1B_AUDIT | P1C_AUDIT),
+        "pending_model_eligible": sorted(
+            (P1B_MODEL | P1C_BAS_MODEL | P1C_BAS_ORD_MODEL) - current_columns
+        ),
+        "permanently_audit_only": sorted((P1B_AUDIT | P1C_AUDIT) - current_columns),
     }
 
     with (OUT / "feature_column_metadata.csv").open(newline="") as handle:
