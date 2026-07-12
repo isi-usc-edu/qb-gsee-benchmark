@@ -79,10 +79,12 @@ def test_p1a_report_binds_table_jobs_and_representation_gate() -> None:
     p1b = json.loads((OUT / "g40_p1b_production_report.json").read_text())
     p1c = json.loads((OUT / "g40_p1c_production_report.json").read_text())
     retag = json.loads((OUT / "g40_retag_audit_production_report.json").read_text())
+    r6 = json.loads((OUT / "g40_r6_production_report.json").read_text())
     assert p1b["input_feature_table_sha256"] == report["output_feature_table_sha256"]
     assert p1c["input_feature_table_sha256"] == p1b["output_feature_table_sha256"]
     assert retag["input_feature_table_sha256"] == p1c["output_feature_table_sha256"]
-    assert retag["output_feature_table_sha256"] == _sha256(TABLE)
+    assert r6["input_feature_table_sha256"] == retag["output_feature_table_sha256"]
+    assert r6["output_feature_table_sha256"] == _sha256(TABLE)
     assert report["initial_job_id"] == "7651290.imgt1"
     assert report["corrected_job_id"] == "7651318.imgt1"
     assert report["corrected_code_revision"].startswith("8f8348a")

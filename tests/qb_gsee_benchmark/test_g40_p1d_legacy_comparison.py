@@ -14,6 +14,7 @@ def test_p1d_legacy_comparison_is_complete_and_provenanced() -> None:
     selected = selection.read_text().splitlines()
     comparison = pd.read_csv(OUT / "g40_p1d_legacy_comparison.csv")
     report = json.loads((OUT / "g40_p1d_legacy_comparison.json").read_text())
+    r6 = json.loads((OUT / "g40_r6_production_report.json").read_text())
 
     assert len(selected) == len(set(selected)) == 184
     assert comparison["task_uuid"].is_unique
@@ -25,9 +26,7 @@ def test_p1d_legacy_comparison_is_complete_and_provenanced() -> None:
     assert report["selection_sha256"] == hashlib.sha256(
         selection.read_bytes()
     ).hexdigest()
-    assert report["feature_table_sha256"] == hashlib.sha256(
-        (ROOT / "scripts" / "Hamiltonian_features.csv").read_bytes()
-    ).hexdigest()
+    assert report["feature_table_sha256"] == r6["input_feature_table_sha256"]
     assert report["pbs"]["job_id"] == "7651569.imgt1"
     assert report["pbs"]["queue"] == "compute"
     assert report["pbs"]["exit_status"] == 0
