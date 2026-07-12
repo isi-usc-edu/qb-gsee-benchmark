@@ -130,7 +130,7 @@ def test_p1c_production_table_and_report_are_complete() -> None:
 def test_retag_audit_flags_and_report_are_complete() -> None:
     table = ROOT / "scripts" / "Hamiltonian_features.csv"
     frame = pd.read_csv(table)
-    assert frame.shape == (591, 239)
+    assert frame.shape == (591, 253)
     assert not frame[[
         "det_coupling_reference_boundary_tie",
         "mpo_pair_rank_applicable",
@@ -149,6 +149,7 @@ def test_retag_audit_flags_and_report_are_complete() -> None:
     report = json.loads((OUT / "g40_retag_audit_production_report.json").read_text())
     p1c = json.loads((OUT / "g40_p1c_production_report.json").read_text())
     r6 = json.loads((OUT / "g40_r6_production_report.json").read_text())
+    p1d = json.loads((OUT / "g40_p1d_production_report.json").read_text())
     assert report["successful_states"] == report["corpus_tasks"] == 591
     assert report["columns_before"] == 232
     assert report["columns_after"] == 235
@@ -156,7 +157,10 @@ def test_retag_audit_flags_and_report_are_complete() -> None:
     assert report["changed_populated_cells"] == 0
     assert report["input_feature_table_sha256"] == p1c["output_feature_table_sha256"]
     assert report["output_feature_table_sha256"] == r6["input_feature_table_sha256"]
-    assert r6["output_feature_table_sha256"] == hashlib.sha256(
+    assert r6["output_feature_table_sha256"] == p1d[
+        "input_feature_table_sha256"
+    ]
+    assert p1d["output_feature_table_sha256"] == hashlib.sha256(
         table.read_bytes()
     ).hexdigest()
     assert [job["job_id"] for job in report["pbs_jobs"]] == [

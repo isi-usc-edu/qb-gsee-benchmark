@@ -1,0 +1,410 @@
+{
+  "atol": 1e-10,
+  "check": "g40_p1d_production_representation_pairs",
+  "equivalence_groups": 5,
+  "failures": [],
+  "groups_passed": 5,
+  "permutation_blocks": [
+    "interaction-spectrum"
+  ],
+  "permutation_certificate_version": "g40_orbital_permutation_pairs_v2",
+  "reports": [
+    {
+      "basis_feature_values": {},
+      "changed_basis_features": [],
+      "equivalence_group_id": "8c70f261-4386-52ab-a75c-2a2a292034bd",
+      "extractor_versions": [
+        "g40_p1d_interaction_spectrum_v1"
+      ],
+      "invariant_checks": {
+        "interaction_spectrum_decay_exponent": {
+          "passed": true,
+          "values": [
+            -2.081758196598786,
+            -2.0817581965987864
+          ]
+        },
+        "interaction_spectrum_effective_rank": {
+          "passed": true,
+          "values": [
+            8.12665357007086,
+            8.126653570070896
+          ]
+        },
+        "interaction_spectrum_participation_rank": {
+          "passed": true,
+          "values": [
+            5.838651387652364,
+            5.8386513876523685
+          ]
+        },
+        "interaction_spectrum_rank_rel_1e_2": {
+          "passed": true,
+          "values": [
+            12,
+            12
+          ]
+        },
+        "interaction_spectrum_rank_rel_1e_4": {
+          "passed": true,
+          "values": [
+            19,
+            19
+          ]
+        },
+        "interaction_spectrum_rank_rel_1e_6": {
+          "passed": true,
+          "values": [
+            27,
+            27
+          ]
+        },
+        "interaction_spectrum_relative_gap": {
+          "passed": true,
+          "values": [
+            0.44360666887315553,
+            0.4436066688731562
+          ]
+        }
+      },
+      "status": "passed",
+      "task_uuids": [
+        "cb5392c3-fd91-50f3-be40-149559ae7b96",
+        "dd80e2eb-9220-53ee-bac4-a087306dc309"
+      ],
+      "vacuity_reason": null,
+      "vacuous_for_this_block": false
+    },
+    {
+      "basis_feature_values": {},
+      "changed_basis_features": [],
+      "equivalence_group_id": "b696450f-72ab-5509-b932-61fb30eda535",
+      "extractor_versions": [
+        "g40_p1d_interaction_spectrum_v1"
+      ],
+      "invariant_checks": {
+        "interaction_spectrum_decay_exponent": {
+          "passed": true,
+          "values": [
+            -2.8988178868362717,
+            -2.8988178868362677
+          ]
+        },
+        "interaction_spectrum_effective_rank": {
+          "passed": true,
+          "values": [
+            4.70630969254678,
+            4.706309692546781
+          ]
+        },
+        "interaction_spectrum_participation_rank": {
+          "passed": true,
+          "values": [
+            2.836589679297818,
+            2.8365896792978194
+          ]
+        },
+        "interaction_spectrum_rank_rel_1e_2": {
+          "passed": true,
+          "values": [
+            12,
+            12
+          ]
+        },
+        "interaction_spectrum_rank_rel_1e_4": {
+          "passed": true,
+          "values": [
+            18,
+            18
+          ]
+        },
+        "interaction_spectrum_rank_rel_1e_6": {
+          "passed": true,
+          "values": [
+            36,
+            36
+          ]
+        },
+        "interaction_spectrum_relative_gap": {
+          "passed": true,
+          "values": [
+            0.7530102033769538,
+            0.753010203376953
+          ]
+        }
+      },
+      "status": "passed",
+      "task_uuids": [
+        "3d343ddb-a898-5c0e-afc9-42b62d588c5e",
+        "6cd8382a-9a9a-5c43-83b1-616c9f301ab1"
+      ],
+      "vacuity_reason": null,
+      "vacuous_for_this_block": false
+    },
+    {
+      "blocks": [
+        {
+          "block": "interaction-spectrum",
+          "checked_inv_or_bas_columns": 7,
+          "checks": {
+            "interaction_spectrum_decay_exponent": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                -3.7953505564269476,
+                -3.7953505564269463
+              ]
+            },
+            "interaction_spectrum_effective_rank": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                1.8504972374801987,
+                1.8504972374801991
+              ]
+            },
+            "interaction_spectrum_participation_rank": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                1.649710902207519,
+                1.6497109022075194
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_2": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                3,
+                3
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_4": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                3,
+                3
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_6": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                3,
+                3
+              ]
+            },
+            "interaction_spectrum_relative_gap": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                0.6509413044768209,
+                0.6509413044768209
+              ]
+            }
+          },
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": null,
+          "vacuous_for_this_block": false
+        }
+      ],
+      "equivalence_group_id": "g40-permutation-molecular_h2-v1",
+      "kind": "molecular_tie_free",
+      "permutation_new_to_old": [
+        1,
+        0
+      ],
+      "seed": 40045,
+      "source": null,
+      "status": "passed",
+      "tensor_certificate_passed": true
+    },
+    {
+      "blocks": [
+        {
+          "block": "interaction-spectrum",
+          "checked_inv_or_bas_columns": 7,
+          "checks": {
+            "interaction_spectrum_decay_exponent": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                2.945922645270618e-17,
+                2.945922645270618e-17
+              ]
+            },
+            "interaction_spectrum_effective_rank": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                4.0,
+                4.0
+              ]
+            },
+            "interaction_spectrum_participation_rank": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                4.0,
+                4.0
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_2": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                4,
+                4
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_4": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                4,
+                4
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_6": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                4,
+                4
+              ]
+            },
+            "interaction_spectrum_relative_gap": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                0.0,
+                0.0
+              ]
+            }
+          },
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": null,
+          "vacuous_for_this_block": false
+        }
+      ],
+      "equivalence_group_id": "g40-permutation-lattice_hubbard-v1",
+      "kind": "lattice",
+      "permutation_new_to_old": [
+        2,
+        3,
+        1,
+        0
+      ],
+      "seed": 40045,
+      "source": null,
+      "status": "passed",
+      "tensor_certificate_passed": true
+    },
+    {
+      "blocks": [
+        {
+          "block": "interaction-spectrum",
+          "checked_inv_or_bas_columns": 7,
+          "checks": {
+            "interaction_spectrum_decay_exponent": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                8.517211900746414e-17,
+                8.517211900746414e-17
+              ]
+            },
+            "interaction_spectrum_effective_rank": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                15.999999999999998,
+                15.999999999999998
+              ]
+            },
+            "interaction_spectrum_participation_rank": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                16.0,
+                16.0
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_2": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                16,
+                16
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_4": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                16,
+                16
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_6": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                16,
+                16
+              ]
+            },
+            "interaction_spectrum_relative_gap": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                0.0,
+                0.0
+              ]
+            }
+          },
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": null,
+          "vacuous_for_this_block": false
+        }
+      ],
+      "equivalence_group_id": "g40-permutation-qsz-l4x4-u2-degenerate-v1",
+      "kind": "corpus_lattice_degenerate",
+      "permutation_new_to_old": [
+        10,
+        7,
+        6,
+        14,
+        2,
+        0,
+        13,
+        15,
+        12,
+        9,
+        11,
+        5,
+        3,
+        4,
+        8,
+        1
+      ],
+      "seed": 2,
+      "source": {
+        "declared_checksum": "83e5a80923213b299c76a36d7ec50f89aedcbc52",
+        "declared_checksum_type": "sha1sum",
+        "instance_data_object_uuid": "facf72a8-d772-513e-9822-f593e2495fc8",
+        "task_uuid": "beabcf8f-a6c0-5e32-9385-110ff65cbbf0",
+        "uncompressed_sha256": "4aeebb2fabcfbfe1baaf939e166c28390e8de0c98053fadf6680fce8c00b055c",
+        "url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L4x4_pbc_u2.fcidump.gz"
+      },
+      "status": "passed",
+      "tensor_certificate_passed": true
+    }
+  ],
+  "rtol": 1e-09,
+  "status": "passed"
+}
