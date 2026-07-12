@@ -202,7 +202,8 @@ P1B_MODEL = {
     *{f"random_det_expected_degree_rel_1e_{exponent}" for exponent in (12, 10, 8, 6, 4, 2)},
 }
 P1B_AUDIT = {
-    "det_coupling_reference", "random_det_branching_seed",
+    "det_coupling_reference", "det_coupling_reference_boundary_tie",
+    "random_det_branching_seed",
     "random_det_branching_determinants",
     "random_det_branching_excitation_samples_per_class",
     "random_det_branching_double_method",
@@ -212,20 +213,25 @@ P1B_AUDIT = {
 }
 P1B_LEGACY_AUDIT = {"random_det_branching_excitation_samples_per_det"}
 
+P1C_RETAG_BAS_ORD_MODEL = {
+    *{f"cut_weight_{name}_{metric}" for name in ("rcm", "minimum_degree") for metric in ("max", "p95", "sum")},
+    *{f"cut_weight_heuristic_spread_{metric}" for metric in ("max", "p95", "sum")},
+}
 P1C_BAS_MODEL = {
     "interaction_graph_edge_count", "interaction_graph_total_weight",
     "min_fill_width_upper_bound",
     *{f"cut_weight_{name}_{metric}" for name in ("fiedler", "rcm", "minimum_degree", "linear_relaxation", "best") for metric in ("max", "p95", "sum")},
     *{f"cut_weight_heuristic_spread_{metric}" for metric in ("max", "p95", "sum")},
-}
+} - P1C_RETAG_BAS_ORD_MODEL
 P1C_BAS_ORD_MODEL = {
     *{f"cut_weight_{name}_{metric}" for name in ("file", "random") for metric in ("max", "p95", "sum")},
     *{f"cut_weight_improvement_vs_{name}_{metric}" for name in ("file", "random") for metric in ("max", "p95", "sum")},
     "mpo_pair_rank_max", "mpo_pair_rank_p95", "mpo_pair_rank_mean",
+    *P1C_RETAG_BAS_ORD_MODEL,
 }
 P1C_AUDIT = {
     "orderability_random_seed", "orderability_features_version",
-    "mpo_ordering_heuristic",
+    "mpo_ordering_heuristic", "mpo_pair_rank_applicable",
     *{f"cut_weight_best_{metric}_heuristic" for metric in ("max", "p95", "sum")},
 }
 
@@ -299,9 +305,12 @@ def metadata_for_column(column: str) -> FeatureColumnMetadata:
     if column in UNIVERSAL_T0_INV_MODEL:
         return _feature(column, "T0", "INV", cost="integral_linear")
     if column in P1B_MODEL:
-        return _feature(column, "T0", "BAS", cost="determinant_coupling")
+        return _feature(column, "T0", "BAS+ORD", cost="determinant_coupling")
     if column in P1B_AUDIT | P1B_LEGACY_AUDIT:
-        return _feature(column, "T0", "BAS", eligible=False,
+        representation = (
+            "BAS+ORD" if column == "det_coupling_reference_boundary_tie" else "BAS"
+        )
+        return _feature(column, "T0", representation, eligible=False,
             reason="deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",
             role="audit-only", cost="determinant_coupling")
     if column in P1C_BAS_MODEL:
@@ -309,7 +318,8 @@ def metadata_for_column(column: str) -> FeatureColumnMetadata:
     if column in P1C_BAS_ORD_MODEL:
         return _feature(column, "T0", "BAS+ORD", cost="orderability")
     if column in P1C_AUDIT:
-        return _feature(column, "T0", "BAS+ORD", eligible=False,
+        representation = "BAS" if column == "mpo_pair_rank_applicable" else "BAS+ORD"
+        return _feature(column, "T0", representation, eligible=False,
             reason="ordering choice, random seed, or extractor version",
             role="audit-only", cost="orderability")
     if column in UNIVERSAL_T0_BAS_MODEL:

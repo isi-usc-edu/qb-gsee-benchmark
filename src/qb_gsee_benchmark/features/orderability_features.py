@@ -14,7 +14,7 @@ from scipy.sparse.csgraph import reverse_cuthill_mckee
 
 from qb_gsee_benchmark.features.fcidump_sparse import SparseFcidump, read_sparse_fcidump
 
-ORDERABILITY_VERSION = "g40_p1c_orderability_v1"
+ORDERABILITY_VERSION = "g40_p1c_orderability_v2"
 RANDOM_ORDER_SEED = 40041
 HEURISTIC_NAMES = ("fiedler", "rcm", "minimum_degree", "linear_relaxation")
 PROFILE_METRICS = ("max", "p95", "sum")
@@ -162,6 +162,11 @@ def pair_space_cut_effective_rank(
     return 0.0 if fourth_sum == 0.0 else frobenius_square**2 / fourth_sum
 
 
+def mpo_pair_rank_applicable(data: SparseFcidump) -> bool:
+    """Return false when every nonzero interaction is strictly on-site."""
+    return any(len({p, q, r, s}) > 1 for p, q, r, s in data.eri_records)
+
+
 def compute_orderability_features(
     source: str | Path | SparseFcidump,
     *,
@@ -195,6 +200,7 @@ def compute_orderability_features(
         "interaction_graph_edge_count": int(np.count_nonzero(np.triu(weights, 1))),
         "interaction_graph_total_weight": float(np.sum(np.triu(weights, 1))),
         "min_fill_width_upper_bound": min_fill_width_upper_bound(weights),
+        "mpo_pair_rank_applicable": mpo_pair_rank_applicable(data),
         "orderability_features_version": ORDERABILITY_VERSION,
     }
     for name in (*HEURISTIC_NAMES, "file", "random"):

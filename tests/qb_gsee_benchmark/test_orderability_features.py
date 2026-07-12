@@ -6,6 +6,7 @@ from qb_gsee_benchmark.features.orderability_features import (
     compute_orderability_features,
     cut_profile,
     interaction_graph,
+    mpo_pair_rank_applicable,
     pair_space_cut_effective_rank,
 )
 
@@ -53,6 +54,13 @@ def test_interaction_graph_uses_exchange_block_frobenius_norm() -> None:
 def test_pair_space_effective_rank_detects_rank_one_cut() -> None:
     data = _data(2, np.zeros((2, 2)), {(0, 0, 1, 1): 0.5})
     assert pair_space_cut_effective_rank(data, np.arange(2), 1) == pytest.approx(1.0)
+
+
+def test_mpo_pair_rank_applicability_masks_on_site_only_interactions() -> None:
+    onsite = _data(2, np.zeros((2, 2)), {(0, 0, 0, 0): 1.0})
+    cross_site = _data(2, np.zeros((2, 2)), {(0, 0, 1, 1): 1.0})
+    assert mpo_pair_rank_applicable(onsite) is False
+    assert mpo_pair_rank_applicable(cross_site) is True
 
 
 def test_orderability_panel_is_deterministic() -> None:

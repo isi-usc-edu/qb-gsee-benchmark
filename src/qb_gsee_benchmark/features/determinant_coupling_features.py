@@ -21,7 +21,7 @@ from qb_gsee_benchmark.features.universal_t0_features import (
     _threshold_suffix,
 )
 
-DETERMINANT_COUPLING_VERSION = "g40_p1b_determinant_coupling_v4"
+DETERMINANT_COUPLING_VERSION = "g40_p1b_determinant_coupling_v5"
 DEFAULT_RANDOM_SEED = 40040
 DEFAULT_RANDOM_DETERMINANTS = 64
 DEFAULT_EXCITATION_SAMPLES_PER_CLASS = 512
@@ -46,6 +46,16 @@ def diagonal_one_body_reference(data: SparseFcidump) -> Occupation:
     return Occupation(
         alpha=tuple(sorted(order[: data.nalpha])),
         beta=tuple(sorted(order[: data.nbeta])),
+    )
+
+
+def diagonal_reference_boundary_tie(data: SparseFcidump) -> bool:
+    """Return whether either spin occupation boundary has an exact h1 tie."""
+    diagonal = np.sort(np.diag(data.h1))
+    return any(
+        0 < occupied < data.norb
+        and diagonal[occupied - 1] == diagonal[occupied]
+        for occupied in (data.nalpha, data.nbeta)
     )
 
 
@@ -362,6 +372,7 @@ def compute_determinant_coupling_features(
     sorted_squares = np.sort(squares)[::-1]
     result: dict[str, Any] = {
         "det_coupling_reference": "lowest_diagonal_h1_file_orbitals",
+        "det_coupling_reference_boundary_tie": diagonal_reference_boundary_tie(data),
         "det_coupling_scale": scale,
         "det_coupling_nonzero_degree": int(magnitudes.size),
         "det_coupling_participation_ratio": (

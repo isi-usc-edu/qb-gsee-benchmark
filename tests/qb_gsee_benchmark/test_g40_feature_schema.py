@@ -78,6 +78,14 @@ def test_p0_eligibility_and_retags_are_explicit() -> None:
     assert log_dimension.implementation_status == "current"
     assert metadata_for_column("df_gap").representation == "INV"
     assert metadata_for_column("one_norm").representation == "BAS+ORD"
+    assert metadata_for_column("det_coupling_nonzero_degree").representation == "BAS+ORD"
+    assert metadata_for_column("random_det_expected_degree_rel_1e_8").representation == "BAS+ORD"
+    assert metadata_for_column("cut_weight_rcm_max").representation == "BAS+ORD"
+    assert metadata_for_column("cut_weight_minimum_degree_sum").representation == "BAS+ORD"
+    assert metadata_for_column("cut_weight_heuristic_spread_p95").representation == "BAS+ORD"
+    assert metadata_for_column("cut_weight_fiedler_max").representation == "BAS"
+    assert metadata_for_column("det_coupling_reference_boundary_tie").representation == "BAS+ORD"
+    assert metadata_for_column("mpo_pair_rank_applicable").representation == "BAS"
     assert not metadata_for_column("one_norm").model_eligible
     assert not metadata_for_column("ccsd_t1_diagnostic").model_eligible
     assert not metadata_for_column("sign_free_condition_flag").model_eligible

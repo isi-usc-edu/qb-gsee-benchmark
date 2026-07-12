@@ -91,6 +91,10 @@ def migration_rows() -> list[dict[str, object]]:
         ("P0-010", "f_sigma_over_B", "planned_tag", "absent", "T0 GAUGE lattice sufficient-condition detector", "planned_P1", "0", "Never a universal molecular sign predictor."),
         ("P0-011", "fermi_window_projector_ipr", "definition_replacement", "single-orbital IPR proposal", "energy-window spectral-projector IPR", "planned_P1", "0", "Avoid eigenvector gauge dependence in degenerate windows."),
         ("P0-012", "krylov_ritz_separation", "rename", "Lanczos gap", "fixed-budget Krylov-Ritz separation", "planned_P1", "0", "Probe separation is not an exact energy gap."),
+        ("R1-001", "det_coupling_*;random_det_expected_degree_*", "representation_retag", "T0 BAS", "T0 BAS+ORD", "complete", "0", "Reference tie-breaking and sampled determinant sequence depend on shipped orbital order; feature values unchanged."),
+        ("R1-002", "cut_weight_rcm_*;cut_weight_minimum_degree_*;cut_weight_heuristic_spread_*", "representation_retag", "T0 BAS", "T0 BAS+ORD", "complete", "0", "Unweighted graph tie-breaking depends on shipped orbital order; feature values unchanged."),
+        ("R1-003", "det_coupling_reference_boundary_tie", "new_audit_flag", "absent", "T0 BAS+ORD audit-only", "pending_value_backfill", "0", "Exact h1 diagonal tie at either spin occupation boundary."),
+        ("R4-001", "mpo_pair_rank_applicable", "new_applicability_flag", "absent", "T0 BAS audit-only", "pending_value_backfill", "0", "False when every nonzero ERI is strictly on-site; prevents degenerate zero pair-rank use."),
     ]
     fields = ["change_id", "columns", "change_type", "old_semantics", "new_semantics", "status", "value_cells_changed_in_p0", "note"]
     return [dict(zip(fields, row)) for row in rows]

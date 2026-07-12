@@ -11,6 +11,7 @@ from qb_gsee_benchmark.features.determinant_coupling_features import (
     Occupation,
     compute_determinant_coupling_features,
     diagonal_one_body_reference,
+    diagonal_reference_boundary_tie,
     reference_coupling_magnitudes,
     random_determinant_branching_profile,
 )
@@ -56,6 +57,13 @@ def _data(
 def test_reference_uses_lowest_diagonal_orbitals() -> None:
     data = _data(np.diag([2.0, -1.0, 0.5]), {})
     assert diagonal_one_body_reference(data) == Occupation(alpha=(1,), beta=(1,))
+
+
+def test_reference_boundary_tie_only_marks_occupation_boundary() -> None:
+    data = _data(np.diag([0.0, 0.0, 1.0, 1.0]), {})
+    assert diagonal_reference_boundary_tie(data) is True
+    data = _data(np.diag([0.0, 1.0, 1.0, 2.0]), {})
+    assert diagonal_reference_boundary_tie(data) is False
 
 
 def test_opposite_spin_double_and_singles_are_counted() -> None:
