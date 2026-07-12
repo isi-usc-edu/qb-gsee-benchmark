@@ -219,6 +219,13 @@ maximum, p95 with linear interpolation, and sum definitions unchanged. This
 block is `BAS+ORD`; all-zero graphs are applicable with zero cuts and an
 explicit zero-graph flag.
 
+Graph nodes are final-canonical orbital indices `0..NORB-1`; only occupied-pair
+contributions are nonzero, so virtual-only nodes are retained with zero incident
+weight. For UHF, alpha-alpha, beta-beta, and alpha-beta occupied-pair energies
+are accumulated by equal energy-ordered canonical index before absolute-value
+arithmetic symmetrization. This spin-fused index convention is a pilot
+implementation resolution to be checked at review.
+
 ### Explicit v1 exclusions
 
 Krylov-Ritz and RPA are absent from MFPROTO-v1. The retained gap ladder contains
