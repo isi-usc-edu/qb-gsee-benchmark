@@ -1,7 +1,7 @@
 # G40 P1-B determinant-coupling protocol
 
-Status: extractor implemented; representation-pair smoke gate passed; cross-band
-compute pilot required before production.
+Status: v1 pilot exposed sparse-class Monte Carlo variance; v2 stratified extractor
+implemented and requires a replacement cross-band pilot before production.
 
 ## Reference determinant
 
@@ -39,22 +39,23 @@ remain.
 ## Random-determinant branching
 
 The profile draws 32 determinants uniformly from the fixed `(N_alpha,N_beta)`
-sector with NumPy PCG64 seed 40040. For each determinant it draws 2048
-single/double substitutions uniformly with replacement from every legal
-one-hop substitution in that sector. The estimated degree at each frozen
+sector with NumPy PCG64 seed 40040. For each determinant it draws 512 substitutions with replacement from each
+nonempty legal excitation class: singles, alpha-alpha doubles, beta-beta
+doubles, and alpha-beta doubles. Stratifying the classes prevents the
+combinatorially dominant double space from starving sparse hopping events. The estimated degree at each frozen
 threshold is the observed hit fraction times the exact combinatorial number of
 legal substitutions. The reported value is the mean over determinants; the
 reported audit-only MC error is the sample standard deviation of the 32 degree
 estimates divided by `sqrt(32)`.
 
-The seed, determinant count, substitutions per determinant, reference rule,
+The seed, determinant count, substitutions per class, reference rule,
 MC errors, and extractor version are audit-only. They are retained beside the
 model-eligible expected-degree values and bind resume-state identity.
 
 ## Representation gate
 
 The G21 smoke check passed both certified equivalence groups with extractor
-`g40_p1b_determinant_coupling_v1`: the block declares no `INV` features and at least one `BAS` feature changed in each group. The exact check is regenerated
+`g40_p1b_determinant_coupling_v2`: the block declares no `INV` features and at least one `BAS` feature changed in each group. The exact check is regenerated
 from checksum-bound states for the committed pilot and production reports.
 
 No feature-table values are changed before the pilot is accepted.

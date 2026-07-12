@@ -21,10 +21,10 @@ from qb_gsee_benchmark.features.universal_t0_features import (
     _threshold_suffix,
 )
 
-DETERMINANT_COUPLING_VERSION = "g40_p1b_determinant_coupling_v1"
+DETERMINANT_COUPLING_VERSION = "g40_p1b_determinant_coupling_v2"
 DEFAULT_RANDOM_SEED = 40040
 DEFAULT_RANDOM_DETERMINANTS = 32
-DEFAULT_EXCITATION_SAMPLES = 2048
+DEFAULT_EXCITATION_SAMPLES_PER_CLASS = 512
 TOP_K_GRID = (1, 10, 100)
 
 
@@ -163,51 +163,68 @@ def _draw_occupation(data: SparseFcidump, rng: np.random.Generator) -> Occupatio
     )
 
 
-def _sample_excitation_magnitudes(
+def _sample_excitation_classes(
     data: SparseFcidump,
     occupied: Occupation,
-    samples: int,
+    samples_per_class: int,
     rng: np.random.Generator,
-) -> np.ndarray:
+) -> list[tuple[int, np.ndarray]]:
+    """Sample each excitation class separately and return class populations."""
     alpha_virt = _virtuals(data.norb, occupied.alpha)
     beta_virt = _virtuals(data.norb, occupied.beta)
     counts = _excitation_counts(data)
-    cumulative = np.cumsum(counts)
-    total = int(cumulative[-1])
-    if total == 0:
-        return np.zeros(samples, dtype=float)
-
-    values = np.empty(samples, dtype=float)
-    for sample in range(samples):
-        draw = int(rng.integers(total))
-        if draw < cumulative[0]:
-            alpha_count = data.nalpha * len(alpha_virt)
-            if draw < alpha_count:
-                hole = int(rng.choice(occupied.alpha))
-                particle = int(rng.choice(alpha_virt))
-                value = _single_coupling(data, occupied, "alpha", hole, particle)
+    samples: list[tuple[int, np.ndarray]] = []
+    for excitation_class, population in enumerate(counts):
+        if population == 0:
+            continue
+        values = np.empty(samples_per_class, dtype=float)
+        for sample in range(samples_per_class):
+            if excitation_class == 0:
+                alpha_count = data.nalpha * len(alpha_virt)
+                draw = int(rng.integers(population))
+                if draw < alpha_count:
+                    value = _single_coupling(
+                        data,
+                        occupied,
+                        "alpha",
+                        int(rng.choice(occupied.alpha)),
+                        int(rng.choice(alpha_virt)),
+                    )
+                else:
+                    value = _single_coupling(
+                        data,
+                        occupied,
+                        "beta",
+                        int(rng.choice(occupied.beta)),
+                        int(rng.choice(beta_virt)),
+                    )
+            elif excitation_class == 1:
+                holes = tuple(
+                    sorted(rng.choice(occupied.alpha, 2, replace=False).tolist())
+                )
+                particles = tuple(
+                    sorted(rng.choice(alpha_virt, 2, replace=False).tolist())
+                )
+                value = _same_spin_double_coupling(data, holes, particles)
+            elif excitation_class == 2:
+                holes = tuple(
+                    sorted(rng.choice(occupied.beta, 2, replace=False).tolist())
+                )
+                particles = tuple(
+                    sorted(rng.choice(beta_virt, 2, replace=False).tolist())
+                )
+                value = _same_spin_double_coupling(data, holes, particles)
             else:
-                hole = int(rng.choice(occupied.beta))
-                particle = int(rng.choice(beta_virt))
-                value = _single_coupling(data, occupied, "beta", hole, particle)
-        elif draw < cumulative[1]:
-            holes = tuple(sorted(rng.choice(occupied.alpha, 2, replace=False).tolist()))
-            particles = tuple(sorted(rng.choice(alpha_virt, 2, replace=False).tolist()))
-            value = _same_spin_double_coupling(data, holes, particles)
-        elif draw < cumulative[2]:
-            holes = tuple(sorted(rng.choice(occupied.beta, 2, replace=False).tolist()))
-            particles = tuple(sorted(rng.choice(beta_virt, 2, replace=False).tolist()))
-            value = _same_spin_double_coupling(data, holes, particles)
-        else:
-            value = _opposite_spin_double_coupling(
-                data,
-                int(rng.choice(occupied.alpha)),
-                int(rng.choice(alpha_virt)),
-                int(rng.choice(occupied.beta)),
-                int(rng.choice(beta_virt)),
-            )
-        values[sample] = abs(value)
-    return values
+                value = _opposite_spin_double_coupling(
+                    data,
+                    int(rng.choice(occupied.alpha)),
+                    int(rng.choice(alpha_virt)),
+                    int(rng.choice(occupied.beta)),
+                    int(rng.choice(beta_virt)),
+                )
+            values[sample] = abs(value)
+        samples.append((population, values))
+    return samples
 
 
 def random_determinant_branching_profile(
@@ -216,22 +233,24 @@ def random_determinant_branching_profile(
     *,
     seed: int = DEFAULT_RANDOM_SEED,
     determinants: int = DEFAULT_RANDOM_DETERMINANTS,
-    excitation_samples: int = DEFAULT_EXCITATION_SAMPLES,
+    excitation_samples_per_class: int = DEFAULT_EXCITATION_SAMPLES_PER_CLASS,
 ) -> dict[str, float]:
-    """Estimate sector-uniform expected threshold degree with fixed-seed MC."""
-    if determinants <= 1 or excitation_samples <= 0:
+    """Estimate sector-uniform expected degree with stratified fixed-seed MC."""
+    if determinants <= 1 or excitation_samples_per_class <= 0:
         raise ValueError("random branching requires >1 determinants and samples")
     rng = np.random.default_rng(seed)
-    total_degree = int(sum(_excitation_counts(data)))
     estimates = {threshold: [] for threshold in RELATIVE_THRESHOLD_GRID}
     for _ in range(determinants):
         occupied = _draw_occupation(data, rng)
-        magnitudes = _sample_excitation_magnitudes(
-            data, occupied, excitation_samples, rng
+        class_samples = _sample_excitation_classes(
+            data, occupied, excitation_samples_per_class, rng
         )
         for threshold in RELATIVE_THRESHOLD_GRID:
-            probability = float(np.mean(magnitudes > threshold * scale))
-            estimates[threshold].append(total_degree * probability)
+            degree = sum(
+                population * float(np.mean(values > threshold * scale))
+                for population, values in class_samples
+            )
+            estimates[threshold].append(degree)
 
     result: dict[str, float] = {}
     for threshold, values in estimates.items():
@@ -262,7 +281,7 @@ def compute_determinant_coupling_features(
     ms2_override: int | None = None,
     random_seed: int = DEFAULT_RANDOM_SEED,
     random_determinants: int = DEFAULT_RANDOM_DETERMINANTS,
-    excitation_samples: int = DEFAULT_EXCITATION_SAMPLES,
+    excitation_samples_per_class: int = DEFAULT_EXCITATION_SAMPLES_PER_CLASS,
 ) -> dict[str, Any]:
     """Compute the shared-space G40 P1-B determinant-coupling block."""
     data = (
@@ -287,7 +306,7 @@ def compute_determinant_coupling_features(
         "det_coupling_tail_loglog_slope": _tail_slope(magnitudes, scale),
         "random_det_branching_seed": random_seed,
         "random_det_branching_determinants": random_determinants,
-        "random_det_branching_excitation_samples_per_det": excitation_samples,
+        "random_det_branching_excitation_samples_per_class": excitation_samples_per_class,
         "determinant_coupling_features_version": DETERMINANT_COUPLING_VERSION,
     }
     for threshold in RELATIVE_THRESHOLD_GRID:
@@ -307,7 +326,7 @@ def compute_determinant_coupling_features(
             scale,
             seed=random_seed,
             determinants=random_determinants,
-            excitation_samples=excitation_samples,
+            excitation_samples_per_class=excitation_samples_per_class,
         )
     )
     return result

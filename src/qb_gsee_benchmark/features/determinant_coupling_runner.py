@@ -18,7 +18,7 @@ from qb_gsee_benchmark.features.corpus_runner import (
     materialize_fcidump,
 )
 from qb_gsee_benchmark.features.determinant_coupling_features import (
-    DEFAULT_EXCITATION_SAMPLES,
+    DEFAULT_EXCITATION_SAMPLES_PER_CLASS,
     DEFAULT_RANDOM_DETERMINANTS,
     DEFAULT_RANDOM_SEED,
     DETERMINANT_COUPLING_VERSION,
@@ -40,7 +40,7 @@ def run_determinant_coupling_task(
     offline: bool = False,
     random_seed: int = DEFAULT_RANDOM_SEED,
     random_determinants: int = DEFAULT_RANDOM_DETERMINANTS,
-    excitation_samples: int = DEFAULT_EXCITATION_SAMPLES,
+    excitation_samples_per_class: int = DEFAULT_EXCITATION_SAMPLES_PER_CLASS,
 ) -> dict[str, Any]:
     """Run or resume one checksum- and configuration-bound P1-B task."""
     state_path = Path(state_dir) / f"{record.task_uuid}.coupling.json"
@@ -49,7 +49,7 @@ def run_determinant_coupling_task(
     configuration = {
         "random_seed": random_seed,
         "random_determinants": random_determinants,
-        "excitation_samples": excitation_samples,
+        "excitation_samples_per_class": excitation_samples_per_class,
     }
     if state_path.exists():
         previous = json.loads(state_path.read_text())
@@ -69,7 +69,7 @@ def run_determinant_coupling_task(
             ms2_override=record.ms2_metadata,
             random_seed=random_seed,
             random_determinants=random_determinants,
-            excitation_samples=excitation_samples,
+            excitation_samples_per_class=excitation_samples_per_class,
         )
         source_sha256 = file_checksum(source, "sha256")
         status = "success"

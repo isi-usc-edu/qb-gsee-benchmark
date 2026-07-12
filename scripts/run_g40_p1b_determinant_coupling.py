@@ -13,7 +13,7 @@ from qb_gsee_benchmark.features.corpus_runner import (
     write_corpus_manifest_jsonl,
 )
 from qb_gsee_benchmark.features.determinant_coupling_features import (
-    DEFAULT_EXCITATION_SAMPLES,
+    DEFAULT_EXCITATION_SAMPLES_PER_CLASS,
     DEFAULT_RANDOM_DETERMINANTS,
     DEFAULT_RANDOM_SEED,
 )
@@ -43,7 +43,9 @@ def parse_args() -> argparse.Namespace:
         "--random-determinants", type=int, default=DEFAULT_RANDOM_DETERMINANTS
     )
     parser.add_argument(
-        "--excitation-samples", type=int, default=DEFAULT_EXCITATION_SAMPLES
+        "--excitation-samples-per-class",
+        type=int,
+        default=DEFAULT_EXCITATION_SAMPLES_PER_CLASS,
     )
     return parser.parse_args()
 
@@ -91,7 +93,7 @@ def main() -> int:
                 offline=args.offline,
                 random_seed=args.random_seed,
                 random_determinants=args.random_determinants,
-                excitation_samples=args.excitation_samples,
+                excitation_samples_per_class=args.excitation_samples_per_class,
             ): record
             for record in selected
         }

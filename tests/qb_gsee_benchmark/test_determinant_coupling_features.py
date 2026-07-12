@@ -11,6 +11,7 @@ from qb_gsee_benchmark.features.determinant_coupling_features import (
     compute_determinant_coupling_features,
     diagonal_one_body_reference,
     reference_coupling_magnitudes,
+    random_determinant_branching_profile,
 )
 from qb_gsee_benchmark.features.corpus_runner import CorpusFcidump, cache_path
 from qb_gsee_benchmark.features.determinant_coupling_runner import (
@@ -114,7 +115,7 @@ def test_runner_is_checksum_and_configuration_resumable(tmp_path: Path) -> None:
         state_dir,
         offline=True,
         random_determinants=4,
-        excitation_samples=64,
+        excitation_samples_per_class=64,
     )
     state_path = state_dir / "task.coupling.json"
     first_bytes = state_path.read_bytes()
@@ -124,20 +125,35 @@ def test_runner_is_checksum_and_configuration_resumable(tmp_path: Path) -> None:
         state_dir,
         offline=True,
         random_determinants=4,
-        excitation_samples=64,
+        excitation_samples_per_class=64,
     )
     assert first["status"] == "success"
     assert second == first
     assert state_path.read_bytes() == first_bytes
 
 
+def test_stratified_branching_resolves_sparse_hopping_degree() -> None:
+    norb = 20
+    h1 = np.zeros((norb, norb))
+    for orbital in range(norb - 1):
+        h1[orbital, orbital + 1] = h1[orbital + 1, orbital] = 1.0
+    data = _data(h1, {}, nelec=20, ms2=0)
+    result = random_determinant_branching_profile(
+        data, 1.0, determinants=32, excitation_samples_per_class=128
+    )
+    mean = result["random_det_expected_degree_rel_1e_8"]
+    standard_error = result["random_det_expected_degree_mc_se_rel_1e_8"]
+    assert mean == pytest.approx(20.0, abs=3.0)
+    assert standard_error / mean < 0.15
+
+
 def test_feature_block_is_deterministic_and_bounded() -> None:
     path = ROOT / "tests/qb_gsee_benchmark/fcidump.h2_sto-3g"
     first = compute_determinant_coupling_features(
-        path, random_determinants=4, excitation_samples=64
+        path, random_determinants=4, excitation_samples_per_class=64
     )
     second = compute_determinant_coupling_features(
-        path, random_determinants=4, excitation_samples=64
+        path, random_determinants=4, excitation_samples_per_class=64
     )
     assert first == second
     assert (

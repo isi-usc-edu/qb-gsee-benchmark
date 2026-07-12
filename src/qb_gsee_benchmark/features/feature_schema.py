@@ -204,7 +204,7 @@ P1B_MODEL = {
 P1B_AUDIT = {
     "det_coupling_reference", "random_det_branching_seed",
     "random_det_branching_determinants",
-    "random_det_branching_excitation_samples_per_det",
+    "random_det_branching_excitation_samples_per_class",
     "determinant_coupling_features_version",
     *{f"random_det_expected_degree_mc_se_rel_1e_{exponent}" for exponent in (12, 10, 8, 6, 4, 2)},
 }
