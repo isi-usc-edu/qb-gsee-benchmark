@@ -234,3 +234,17 @@ orderability_random_seed,feature,T0,BAS+ORD,NONE,audit-only,False,"ordering choi
 det_coupling_reference_boundary_tie,feature,T0,BAS+ORD,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,det coupling reference boundary tie,current
 mpo_pair_rank_applicable,feature,T0,BAS,NONE,audit-only,False,"ordering choice, random seed, or extractor version",intensive,orderability,mpo pair rank applicable,current
 retag_audit_features_version,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,retag audit features version,current
+interaction_spectrum_active_pair_dimension,feature,T0,INV,NONE,audit-only,False,"exact-spectrum scale, applicability, tolerance, non-PSD, or version diagnostic",intensive,exact_pair_spectrum,interaction spectrum active pair dimension,defined_not_populated
+interaction_spectrum_decay_exponent,feature,T0,INV,NONE,accuracy,True,,intensive,exact_pair_spectrum,interaction spectrum decay exponent,defined_not_populated
+interaction_spectrum_effective_rank,feature,T0,INV,NONE,accuracy,True,,intensive,exact_pair_spectrum,interaction spectrum effective rank,defined_not_populated
+interaction_spectrum_features_version,feature,T0,INV,NONE,audit-only,False,"exact-spectrum scale, applicability, tolerance, non-PSD, or version diagnostic",intensive,exact_pair_spectrum,interaction spectrum features version,defined_not_populated
+interaction_spectrum_max_abs_eigenvalue,feature,T0,INV,NONE,audit-only,False,"exact-spectrum scale, applicability, tolerance, non-PSD, or version diagnostic",intensive,exact_pair_spectrum,interaction spectrum max abs eigenvalue,defined_not_populated
+interaction_spectrum_negative_mass_fraction,feature,T0,INV,NONE,audit-only,False,"exact-spectrum scale, applicability, tolerance, non-PSD, or version diagnostic",intensive,exact_pair_spectrum,interaction spectrum negative mass fraction,defined_not_populated
+interaction_spectrum_pair_dimension,feature,T0,INV,NONE,audit-only,False,"exact-spectrum scale, applicability, tolerance, non-PSD, or version diagnostic",intensive,exact_pair_spectrum,interaction spectrum pair dimension,defined_not_populated
+interaction_spectrum_participation_rank,feature,T0,INV,NONE,accuracy,True,,intensive,exact_pair_spectrum,interaction spectrum participation rank,defined_not_populated
+interaction_spectrum_rank_rel_1e_2,feature,T0,INV,NONE,accuracy,True,,intensive,exact_pair_spectrum,interaction spectrum rank rel 1e 2,defined_not_populated
+interaction_spectrum_rank_rel_1e_4,feature,T0,INV,NONE,accuracy,True,,intensive,exact_pair_spectrum,interaction spectrum rank rel 1e 4,defined_not_populated
+interaction_spectrum_rank_rel_1e_6,feature,T0,INV,NONE,accuracy,True,,intensive,exact_pair_spectrum,interaction spectrum rank rel 1e 6,defined_not_populated
+interaction_spectrum_relative_gap,feature,T0,INV,NONE,accuracy,True,,intensive,exact_pair_spectrum,interaction spectrum relative gap,defined_not_populated
+interaction_spectrum_zero_atol,feature,T0,INV,NONE,audit-only,False,"exact-spectrum scale, applicability, tolerance, non-PSD, or version diagnostic",intensive,exact_pair_spectrum,interaction spectrum zero atol,defined_not_populated
+interaction_spectrum_zero_rtol,feature,T0,INV,NONE,audit-only,False,"exact-spectrum scale, applicability, tolerance, non-PSD, or version diagnostic",intensive,exact_pair_spectrum,interaction spectrum zero rtol,defined_not_populated

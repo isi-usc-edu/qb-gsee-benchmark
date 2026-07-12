@@ -7,7 +7,8 @@
   "permutation_blocks": [
     "linear",
     "coupling",
-    "orderability"
+    "orderability",
+    "interaction-spectrum"
   ],
   "permutation_certificate_version": "g40_orbital_permutation_pairs_v1",
   "reports": [
@@ -348,6 +349,69 @@
               "values": [
                 1,
                 1
+              ]
+            }
+          },
+          "status": "passed"
+        },
+        {
+          "block": "interaction-spectrum",
+          "checked_inv_or_bas_columns": 7,
+          "checks": {
+            "interaction_spectrum_decay_exponent": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                -3.7953505564269476,
+                -3.7953505564269463
+              ]
+            },
+            "interaction_spectrum_effective_rank": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                1.8504972374801987,
+                1.8504972374801991
+              ]
+            },
+            "interaction_spectrum_participation_rank": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                1.649710902207519,
+                1.6497109022075194
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_2": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                3,
+                3
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_4": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                3,
+                3
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_6": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                3,
+                3
+              ]
+            },
+            "interaction_spectrum_relative_gap": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                0.6509413044768209,
+                0.6509413044768209
               ]
             }
           },
@@ -701,6 +765,69 @@
               "values": [
                 1,
                 1
+              ]
+            }
+          },
+          "status": "passed"
+        },
+        {
+          "block": "interaction-spectrum",
+          "checked_inv_or_bas_columns": 7,
+          "checks": {
+            "interaction_spectrum_decay_exponent": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                2.945922645270618e-17,
+                2.945922645270618e-17
+              ]
+            },
+            "interaction_spectrum_effective_rank": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                4.0,
+                4.0
+              ]
+            },
+            "interaction_spectrum_participation_rank": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                4.0,
+                4.0
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_2": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                4,
+                4
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_4": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                4,
+                4
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_6": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                4,
+                4
+              ]
+            },
+            "interaction_spectrum_relative_gap": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                0.0,
+                0.0
               ]
             }
           },

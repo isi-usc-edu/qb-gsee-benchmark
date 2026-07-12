@@ -235,6 +235,22 @@ P1C_AUDIT = {
     "mpo_ordering_heuristic", "mpo_pair_rank_applicable",
     *{f"cut_weight_best_{metric}_heuristic" for metric in ("max", "p95", "sum")},
 }
+P1D_MODEL = {
+    "interaction_spectrum_effective_rank",
+    "interaction_spectrum_participation_rank",
+    "interaction_spectrum_decay_exponent",
+    "interaction_spectrum_relative_gap",
+    *{f"interaction_spectrum_rank_rel_1e_{exponent}" for exponent in (2, 4, 6)},
+}
+P1D_AUDIT = {
+    "interaction_spectrum_negative_mass_fraction",
+    "interaction_spectrum_max_abs_eigenvalue",
+    "interaction_spectrum_pair_dimension",
+    "interaction_spectrum_active_pair_dimension",
+    "interaction_spectrum_zero_rtol",
+    "interaction_spectrum_zero_atol",
+    "interaction_spectrum_features_version",
+}
 
 def metadata_for_column(column: str) -> FeatureColumnMetadata:
     """Return explicit P0 metadata; unknown columns fail closed."""
@@ -323,6 +339,18 @@ def metadata_for_column(column: str) -> FeatureColumnMetadata:
         return _feature(column, "T0", representation, eligible=False,
             reason="ordering choice, random seed, or extractor version",
             role="audit-only", cost="orderability")
+    if column in P1D_MODEL:
+        return _feature(column, "T0", "INV", cost="exact_pair_spectrum")
+    if column in P1D_AUDIT:
+        return _feature(
+            column,
+            "T0",
+            "INV",
+            eligible=False,
+            reason="exact-spectrum scale, applicability, tolerance, non-PSD, or version diagnostic",
+            role="audit-only",
+            cost="exact_pair_spectrum",
+        )
     if column in UNIVERSAL_T0_BAS_MODEL:
         return _feature(column, "T0", "BAS", cost="integral_linear")
     raise KeyError(f"G-40 P0 has no metadata classification for column {column!r}")
@@ -338,6 +366,8 @@ PLANNED_COLUMNS = {
         | P1C_BAS_MODEL
         | P1C_BAS_ORD_MODEL
         | P1C_AUDIT
+        | P1D_MODEL
+        | P1D_AUDIT
     )
 }
 PLANNED_COLUMNS["fermionic_coefficient_l1_norm"] = _feature(

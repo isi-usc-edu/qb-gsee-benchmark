@@ -20,6 +20,8 @@ def test_named_representation_gate_includes_certified_permutation_pairs(tmp_path
         "coupling",
         "--permutation-block",
         "orderability",
+        "--permutation-block",
+        "interaction-spectrum",
         "--check-name",
         "g40_r2_permutation_certificates",
         "--output",
@@ -40,5 +42,6 @@ def test_named_representation_gate_includes_certified_permutation_pairs(tmp_path
             "linear",
             "coupling",
             "orderability",
+            "interaction-spectrum",
         ]
         assert all(block["status"] == "passed" for block in report["blocks"])

@@ -189,7 +189,7 @@ def _markdown(report: dict[str, Any]) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--block", choices=("g40_p1b", "g40_p1c"), required=True)
+    parser.add_argument("--block", choices=("g40_p1b", "g40_p1c", "g40_p1d"), required=True)
     parser.add_argument("--state-dir", type=Path, required=True)
     parser.add_argument("--state-pattern", required=True)
     parser.add_argument("--code-revision", required=True)

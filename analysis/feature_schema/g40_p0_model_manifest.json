@@ -240,8 +240,24 @@
   ],
   "pending_value_rebuild_columns": [],
   "planned_columns_excluded_until_populated": {
-    "pending_model_eligible": [],
-    "permanently_audit_only": []
+    "pending_model_eligible": [
+      "interaction_spectrum_decay_exponent",
+      "interaction_spectrum_effective_rank",
+      "interaction_spectrum_participation_rank",
+      "interaction_spectrum_rank_rel_1e_2",
+      "interaction_spectrum_rank_rel_1e_4",
+      "interaction_spectrum_rank_rel_1e_6",
+      "interaction_spectrum_relative_gap"
+    ],
+    "permanently_audit_only": [
+      "interaction_spectrum_active_pair_dimension",
+      "interaction_spectrum_features_version",
+      "interaction_spectrum_max_abs_eigenvalue",
+      "interaction_spectrum_negative_mass_fraction",
+      "interaction_spectrum_pair_dimension",
+      "interaction_spectrum_zero_atol",
+      "interaction_spectrum_zero_rtol"
+    ]
   },
   "schema_version": "g40-p0-v2",
   "source_feature_table": "scripts/Hamiltonian_features.csv",

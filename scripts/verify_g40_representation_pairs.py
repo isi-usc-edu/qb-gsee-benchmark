@@ -19,6 +19,9 @@ from qb_gsee_benchmark.features.determinant_coupling_features import (
 )
 from qb_gsee_benchmark.features.feature_schema import metadata_for_column
 from qb_gsee_benchmark.features.fcidump_sparse import read_sparse_fcidump
+from qb_gsee_benchmark.features.interaction_spectrum_features import (
+    compute_interaction_spectrum_features,
+)
 from qb_gsee_benchmark.features.orderability_features import compute_orderability_features
 from qb_gsee_benchmark.features.universal_t0_features import (
     compute_universal_t0_linear_features,
@@ -51,7 +54,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--permutation-block",
         action="append",
-        choices=("linear", "coupling", "orderability"),
+        choices=("linear", "coupling", "orderability", "interaction-spectrum"),
         default=[],
     )
     parser.add_argument("--permutation-only", action="store_true")
@@ -73,6 +76,7 @@ def _permutation_features(block: str, path: Path) -> dict[str, Any]:
         "linear": compute_universal_t0_linear_features,
         "coupling": compute_determinant_coupling_features,
         "orderability": compute_orderability_features,
+        "interaction-spectrum": compute_interaction_spectrum_features,
     }
     return functions[block](path)
 
@@ -82,6 +86,7 @@ def _infer_permutation_blocks(pattern: str) -> list[str]:
         (".linear.json", "linear"),
         (".coupling.json", "coupling"),
         (".orderability.json", "orderability"),
+        (".interaction-spectrum.json", "interaction-spectrum"),
     ):
         if suffix in pattern:
             return [block]

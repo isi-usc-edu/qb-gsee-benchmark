@@ -15,6 +15,8 @@ from qb_gsee_benchmark.features.feature_schema import (
     P1C_AUDIT,
     P1C_BAS_MODEL,
     P1C_BAS_ORD_MODEL,
+    P1D_AUDIT,
+    P1D_MODEL,
     PLANNED_COLUMNS,
     metadata_catalog,
     metadata_for_column,
@@ -86,6 +88,9 @@ def test_p0_eligibility_and_retags_are_explicit() -> None:
     assert metadata_for_column("cut_weight_fiedler_max").representation == "BAS"
     assert metadata_for_column("det_coupling_reference_boundary_tie").representation == "BAS+ORD"
     assert metadata_for_column("mpo_pair_rank_applicable").representation == "BAS"
+    assert metadata_for_column("interaction_spectrum_effective_rank").representation == "INV"
+    assert metadata_for_column("interaction_spectrum_effective_rank").model_eligible
+    assert not metadata_for_column("interaction_spectrum_negative_mass_fraction").model_eligible
     assert not metadata_for_column("one_norm").model_eligible
     assert not metadata_for_column("ccsd_t1_diagnostic").model_eligible
     assert not metadata_for_column("sign_free_condition_flag").model_eligible
@@ -118,9 +123,9 @@ def test_generated_p0_artifacts_are_deterministic_and_value_preserving() -> None
     current_columns = set(pd.read_csv(FEATURES, nrows=0).columns)
     assert planned == {
         "pending_model_eligible": sorted(
-            (P1B_MODEL | P1C_BAS_MODEL | P1C_BAS_ORD_MODEL) - current_columns
+            (P1B_MODEL | P1C_BAS_MODEL | P1C_BAS_ORD_MODEL | P1D_MODEL) - current_columns
         ),
-        "permanently_audit_only": sorted((P1B_AUDIT | P1C_AUDIT) - current_columns),
+        "permanently_audit_only": sorted((P1B_AUDIT | P1C_AUDIT | P1D_AUDIT) - current_columns),
     }
 
     with (OUT / "feature_column_metadata.csv").open(newline="") as handle:
