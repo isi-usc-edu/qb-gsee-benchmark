@@ -92,6 +92,7 @@ PROCEDURAL = {
     "fcidump_symmetry_status", "fcidump_symmetry_atol",
     "fcidump_symmetry_rtol", "fcidump_container_format",
     "fcidump_container_member", "fcidump_ms2_source",
+    "retag_audit_features_version",
 }
 DUPLICATE_SIZE = {"num_orbitals", "num_electrons", "ms2"}
 LEGACY_JW_ARCHIVE = {
