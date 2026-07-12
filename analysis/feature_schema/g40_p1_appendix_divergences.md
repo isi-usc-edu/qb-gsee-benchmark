@@ -45,3 +45,24 @@ reconciliation is required: insert a separately pilot-gated invariant DF block
 before P2, or explicitly amend the appendix and G40 completion contract. P1-C
 coefficient-matricization ranks are basis/ordering-sensitive and do not replace
 this missing invariant interaction-spectrum block.
+
+## FLAG: P2 MF-PROTO numerical conventions are not yet declared
+
+The amended goal and feature appendix require a fully specified, versioned
+mean-field protocol, including a small deterministic initial-guess set and a
+predeclared MP2 regularizer grid. Neither source currently names the density
+matrices in that initial-guess set, the SCF convergence/stability tolerances,
+the stationary-solution deduplication tolerance and selection rule, the
+thermal broadening or energy-window widths, or the numerical regularizers and
+denominator thresholds. These choices change the resulting T1/T2 values and
+applicability masks; they therefore cannot be introduced as undocumented
+extractor defaults.
+
+The FCIDUMP-only setting also rules out PySCF's atom-based initial guess for the
+universal protocol because lattice/model dumps generally carry no atom or AO
+metadata. Before P2 production, the PI must either ratify an explicit
+FCIDUMP-native protocol (for example, density guesses constructed only from
+the one-body matrix and shipped orbital basis, with all numerical grids frozen)
+or provide a different reproducible convention. Extractor scaffolding and
+small-system validation can proceed after that ruling, but no P2 pilot or
+production artifact should claim appendix compliance before it.
