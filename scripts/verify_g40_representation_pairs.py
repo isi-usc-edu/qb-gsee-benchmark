@@ -21,6 +21,7 @@ from qb_gsee_benchmark.features.feature_schema import metadata_for_column
 from qb_gsee_benchmark.features.fcidump_sparse import read_sparse_fcidump
 from qb_gsee_benchmark.features.interaction_spectrum_features import (
     compute_interaction_spectrum_features,
+    exact_symmetric_pair_eigenvalues,
 )
 from qb_gsee_benchmark.features.orderability_features import compute_orderability_features
 from qb_gsee_benchmark.features.universal_t0_features import (
@@ -100,10 +101,23 @@ def _verify_permutation_certificates(
     atol: float,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     payload = json.loads(certificate_path.read_text())
-    if payload.get("certificate_version") != "g40_orbital_permutation_pairs_v2":
+    if payload.get("certificate_version") != "g40_orbital_permutation_pairs_v3":
         raise ValueError("unexpected permutation certificate version")
     reports = []
     failures = []
+    structured_pairs = [
+        pair
+        for pair in payload["pairs"]
+        if pair.get("spectrum_structure", {}).get(
+            "distinct_nonzero_magnitude_count", 0
+        ) >= 2
+    ]
+    if not structured_pairs:
+        failures.append(
+            {
+                "reason": "missing_structured_spectrum_permutation_certificate",
+            }
+        )
     for pair in payload["pairs"]:
         permutation = np.asarray(pair["permutation_new_to_old"], dtype=int)
         paths = {
@@ -120,7 +134,7 @@ def _verify_permutation_certificates(
                         "member": name,
                     }
                 )
-        if pair["kind"] == "corpus_lattice_degenerate":
+        if pair.get("source"):
             source = pair.get("source", {})
             if source.get("uncompressed_sha256") != _sha256(paths["original"]):
                 failures.append(
@@ -131,6 +145,45 @@ def _verify_permutation_certificates(
                 )
         original = read_sparse_fcidump(paths["original"])
         permuted = read_sparse_fcidump(paths["permuted"])
+        spectrum_expected = pair.get("spectrum_structure")
+        spectrum_observed = None
+        spectrum_structure_passed = None
+        if spectrum_expected is not None:
+            eigenvalues, _, active_dimension = exact_symmetric_pair_eigenvalues(
+                original
+            )
+            magnitudes = np.abs(eigenvalues[eigenvalues != 0.0])
+            distinct_magnitudes = np.unique(np.round(magnitudes, decimals=12))
+            spectrum_observed = {
+                "active_pair_dimension": active_dimension,
+                "nonzero_eigenvalue_count": len(magnitudes),
+                "distinct_nonzero_magnitude_count": len(distinct_magnitudes),
+                "distinct_nonzero_magnitudes": distinct_magnitudes.tolist(),
+            }
+            spectrum_structure_passed = (
+                spectrum_expected["distinct_nonzero_magnitude_count"] >= 2
+                and spectrum_observed["active_pair_dimension"]
+                == spectrum_expected["active_pair_dimension"]
+                and spectrum_observed["nonzero_eigenvalue_count"]
+                == spectrum_expected["nonzero_eigenvalue_count"]
+                and spectrum_observed["distinct_nonzero_magnitude_count"]
+                == spectrum_expected["distinct_nonzero_magnitude_count"]
+                and np.allclose(
+                    spectrum_observed["distinct_nonzero_magnitudes"],
+                    spectrum_expected["distinct_nonzero_magnitudes"],
+                    rtol=0.0,
+                    atol=1.0e-12,
+                )
+            )
+            if not spectrum_structure_passed:
+                failures.append(
+                    {
+                        "group": pair["equivalence_group_id"],
+                        "reason": "spectrum_structure_certificate_mismatch",
+                        "expected": spectrum_expected,
+                        "observed": spectrum_observed,
+                    }
+                )
         tensor_passed = (
             np.array_equal(permutation, np.random.default_rng(pair["seed"]).permutation(original.norb))
             and np.allclose(
@@ -187,11 +240,28 @@ def _verify_permutation_certificates(
                         }
                     )
             observed_bas_ord_drift = {}
-            if pair["kind"] == "corpus_lattice_degenerate" and block == "orderability":
-                for column in ("cut_weight_best_max", "cut_weight_best_sum"):
+            expected_bas_ord_drift = pair.get("expected_bas_ord_drift", {})
+            if expected_bas_ord_drift and block == "orderability":
+                for column, expected_values in expected_bas_ord_drift.items():
                     observed_bas_ord_drift[column] = [
                         features["original"][column], features["permuted"][column]
                     ]
+                    if not all(
+                        _close(observed, expected, rtol, atol)
+                        for observed, expected in zip(
+                            observed_bas_ord_drift[column], expected_values
+                        )
+                    ):
+                        failures.append(
+                            {
+                                "group": pair["equivalence_group_id"],
+                                "block": block,
+                                "reason": "expected_bas_ord_drift_mismatch",
+                                "column": column,
+                                "expected": expected_values,
+                                "observed": observed_bas_ord_drift[column],
+                            }
+                        )
             block_reports.append(
                 {
                     "block": block,
@@ -213,8 +283,17 @@ def _verify_permutation_certificates(
                 "seed": pair["seed"],
                 "permutation_new_to_old": pair["permutation_new_to_old"],
                 "tensor_certificate_passed": tensor_passed,
+                "spectrum_structure": spectrum_expected,
+                "observed_spectrum_structure": spectrum_observed,
+                "spectrum_structure_passed": spectrum_structure_passed,
                 "blocks": block_reports,
-                "status": "passed" if tensor_passed and all(item["status"] == "passed" for item in block_reports) else "failed",
+                "status": (
+                    "passed"
+                    if tensor_passed
+                    and spectrum_structure_passed is not False
+                    and all(item["status"] == "passed" for item in block_reports)
+                    else "failed"
+                ),
             }
         )
     return reports, failures
@@ -358,7 +437,7 @@ def main() -> int:
 
     payload = {
         "check": args.check_name,
-        "permutation_certificate_version": "g40_orbital_permutation_pairs_v2",
+        "permutation_certificate_version": "g40_orbital_permutation_pairs_v3",
         "permutation_blocks": permutation_blocks,
         "rtol": args.rtol,
         "atol": args.atol,

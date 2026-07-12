@@ -1,5 +1,5 @@
 {
-  "certificate_version": "g40_orbital_permutation_pairs_v2",
+  "certificate_version": "g40_orbital_permutation_pairs_v3",
   "pairs": [
     {
       "equivalence_group_id": "g40-permutation-molecular_h2-v1",
@@ -80,6 +80,66 @@
         "task_uuid": "beabcf8f-a6c0-5e32-9385-110ff65cbbf0",
         "uncompressed_sha256": "4aeebb2fabcfbfe1baaf939e166c28390e8de0c98053fadf6680fce8c00b055c",
         "url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L4x4_pbc_u2.fcidump.gz"
+      },
+      "expected_bas_ord_drift": {
+        "cut_weight_best_max": [
+          10.0,
+          12.0
+        ],
+        "cut_weight_best_sum": [
+          120.0,
+          132.0
+        ]
+      }
+    },
+    {
+      "equivalence_group_id": "g40-permutation-varbench-tv-square16-v0p01-structured-v1",
+      "files": {
+        "original": {
+          "path": "tests/qb_gsee_benchmark/fixtures/g40_permutation_pairs/varbench_tv_square16_v0p01_original.FCIDUMP",
+          "sha256": "a48cd414aa2e63b92129a5af639c91e785c63a5bf6abdc260663863564bb29f4"
+        },
+        "permuted": {
+          "path": "tests/qb_gsee_benchmark/fixtures/g40_permutation_pairs/varbench_tv_square16_v0p01_permuted.FCIDUMP",
+          "sha256": "983f6fbed9fdff5e2bfba075dce71fccd33e9518b30aa6b0226f76bd4f15c533"
+        }
+      },
+      "kind": "corpus_structured_spectrum",
+      "permutation_new_to_old": [
+        9,
+        1,
+        5,
+        12,
+        3,
+        8,
+        14,
+        0,
+        2,
+        15,
+        10,
+        6,
+        11,
+        13,
+        4,
+        7
+      ],
+      "seed": 20260712,
+      "source": {
+        "declared_checksum": "fec00fefd294777a854748768edfa08ca4a6c6ab",
+        "declared_checksum_type": "sha1sum",
+        "instance_data_object_uuid": "b8a5d73c-09ce-5715-85c0-b20ce448255e",
+        "task_uuid": "ac3a023f-8d31-5d79-803e-c54e947c8d75",
+        "uncompressed_sha256": "a48cd414aa2e63b92129a5af639c91e785c63a5bf6abdc260663863564bb29f4",
+        "url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/varbench_tv_square16/varbench_tv_square16_pbc_nf5_v0p01.fcidump.gz"
+      },
+      "spectrum_structure": {
+        "active_pair_dimension": 16,
+        "nonzero_eigenvalue_count": 10,
+        "distinct_nonzero_magnitude_count": 2,
+        "distinct_nonzero_magnitudes": [
+          0.02,
+          0.04
+        ]
       }
     }
   ],

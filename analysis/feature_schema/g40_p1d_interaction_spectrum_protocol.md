@@ -70,6 +70,15 @@ different threshold conventions`. The related-field mapping records why none
 of these columns is a semantically equivalent rename.
 The pilot-review comparison covers all 184 rows with legacy `df_*` values.
 
+## Representation-gate composition
+
+Forward clarification after production review: the historical production
+report's `5/5` label comprised **2 orbital-rotation groups and 3 certified
+orbital-permutation groups**; it was not five G21 rotation pairs. R7 adds one
+corpus-derived, structured-spectrum VarBench `t-V` permutation pair, so the
+current gate comprises **2 rotation + 4 permutation groups**. The historical
+production report remains unchanged.
+
 ## Pilot gate
 
 The committed 25-task selection spans NORB 5-256, includes all four G21 tasks,

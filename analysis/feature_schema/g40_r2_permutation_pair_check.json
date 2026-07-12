@@ -1,16 +1,16 @@
 {
   "atol": 1e-10,
   "check": "g40_r2_permutation_certificates",
-  "equivalence_groups": 3,
+  "equivalence_groups": 4,
   "failures": [],
-  "groups_passed": 3,
+  "groups_passed": 4,
   "permutation_blocks": [
     "linear",
     "coupling",
     "orderability",
     "interaction-spectrum"
   ],
-  "permutation_certificate_version": "g40_orbital_permutation_pairs_v2",
+  "permutation_certificate_version": "g40_orbital_permutation_pairs_v3",
   "reports": [
     {
       "blocks": [
@@ -352,12 +352,15 @@
       ],
       "equivalence_group_id": "g40-permutation-molecular_h2-v1",
       "kind": "molecular_tie_free",
+      "observed_spectrum_structure": null,
       "permutation_new_to_old": [
         1,
         0
       ],
       "seed": 40045,
       "source": null,
+      "spectrum_structure": null,
+      "spectrum_structure_passed": null,
       "status": "passed",
       "tensor_certificate_passed": true
     },
@@ -701,6 +704,7 @@
       ],
       "equivalence_group_id": "g40-permutation-lattice_hubbard-v1",
       "kind": "lattice",
+      "observed_spectrum_structure": null,
       "permutation_new_to_old": [
         2,
         3,
@@ -709,6 +713,8 @@
       ],
       "seed": 40045,
       "source": null,
+      "spectrum_structure": null,
+      "spectrum_structure_passed": null,
       "status": "passed",
       "tensor_certificate_passed": true
     },
@@ -1061,6 +1067,7 @@
       ],
       "equivalence_group_id": "g40-permutation-qsz-l4x4-u2-degenerate-v1",
       "kind": "corpus_lattice_degenerate",
+      "observed_spectrum_structure": null,
       "permutation_new_to_old": [
         10,
         7,
@@ -1088,6 +1095,397 @@
         "uncompressed_sha256": "4aeebb2fabcfbfe1baaf939e166c28390e8de0c98053fadf6680fce8c00b055c",
         "url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L4x4_pbc_u2.fcidump.gz"
       },
+      "spectrum_structure": null,
+      "spectrum_structure_passed": null,
+      "status": "passed",
+      "tensor_certificate_passed": true
+    },
+    {
+      "blocks": [
+        {
+          "block": "linear",
+          "checked_inv_or_bas_columns": 28,
+          "checks": {
+            "U_eff_over_W": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.0,
+                0.0
+              ]
+            },
+            "bare_one_body_bandwidth": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                8.000000000000002,
+                8.0
+              ]
+            },
+            "bare_one_body_gap_alpha": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                1.999999999999998,
+                1.9999999999999991
+              ]
+            },
+            "bare_one_body_gap_beta": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                null,
+                null
+              ]
+            },
+            "bare_one_body_gap_min": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                1.999999999999998,
+                1.9999999999999991
+              ]
+            },
+            "effective_h1_entrywise_l1_norm": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                64.0,
+                64.0
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_10": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.25,
+                0.25
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_12": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.25,
+                0.25
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_2": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.25,
+                0.25
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_4": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.25,
+                0.25
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_6": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.25,
+                0.25
+              ]
+            },
+            "effective_h1_fraction_above_rel_1e_8": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.25,
+                0.25
+              ]
+            },
+            "effective_h1_frobenius_norm": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                8.0,
+                8.0
+              ]
+            },
+            "effective_h1_l1_over_frobenius": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                8.0,
+                8.0
+              ]
+            },
+            "eri_fraction_above_rel_1e_10": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.0009765625,
+                0.0009765625
+              ]
+            },
+            "eri_fraction_above_rel_1e_12": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.0009765625,
+                0.0009765625
+              ]
+            },
+            "eri_fraction_above_rel_1e_2": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.0009765625,
+                0.0009765625
+              ]
+            },
+            "eri_fraction_above_rel_1e_4": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.0009765625,
+                0.0009765625
+              ]
+            },
+            "eri_fraction_above_rel_1e_6": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.0009765625,
+                0.0009765625
+              ]
+            },
+            "eri_fraction_above_rel_1e_8": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.0009765625,
+                0.0009765625
+              ]
+            },
+            "eri_full_l1_norm": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                0.6400000000000002,
+                0.6400000000000002
+              ]
+            },
+            "eri_full_l2_norm": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                0.07999999999999997,
+                0.07999999999999997
+              ]
+            },
+            "eri_l1_over_frobenius": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                8.000000000000005,
+                8.000000000000005
+              ]
+            },
+            "fermionic_coefficient_l1_norm": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                64.32,
+                64.32
+              ]
+            },
+            "log_fci_dim": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                3.64028262969668,
+                3.64028262969668
+              ]
+            },
+            "n_elec": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                5,
+                5
+              ]
+            },
+            "n_orbs": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                16,
+                16
+              ]
+            },
+            "rho_offdiag": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                1.0,
+                1.0
+              ]
+            }
+          },
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": null,
+          "vacuous_for_this_block": false
+        },
+        {
+          "block": "coupling",
+          "checked_inv_or_bas_columns": 0,
+          "checks": {},
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": "zero_inv_or_bas_model_eligible_columns",
+          "vacuous_for_this_block": true
+        },
+        {
+          "block": "orderability",
+          "checked_inv_or_bas_columns": 2,
+          "checks": {
+            "interaction_graph_edge_count": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                32,
+                32
+              ]
+            },
+            "interaction_graph_total_weight": {
+              "passed": true,
+              "representation": "BAS",
+              "values": [
+                32.32000000000001,
+                32.32
+              ]
+            }
+          },
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": null,
+          "vacuous_for_this_block": false
+        },
+        {
+          "block": "interaction-spectrum",
+          "checked_inv_or_bas_columns": 7,
+          "checks": {
+            "interaction_spectrum_decay_exponent": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                -0.33364169700215124,
+                -0.33364169700215174
+              ]
+            },
+            "interaction_spectrum_effective_rank": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                9.5244063118092,
+                9.5244063118092
+              ]
+            },
+            "interaction_spectrum_participation_rank": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                9.000000000000002,
+                9.0
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_2": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                10,
+                10
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_4": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                10,
+                10
+              ]
+            },
+            "interaction_spectrum_rank_rel_1e_6": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                10,
+                10
+              ]
+            },
+            "interaction_spectrum_relative_gap": {
+              "passed": true,
+              "representation": "INV",
+              "values": [
+                0.0,
+                6.938893903907227e-16
+              ]
+            }
+          },
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": null,
+          "vacuous_for_this_block": false
+        }
+      ],
+      "equivalence_group_id": "g40-permutation-varbench-tv-square16-v0p01-structured-v1",
+      "kind": "corpus_structured_spectrum",
+      "observed_spectrum_structure": {
+        "active_pair_dimension": 16,
+        "distinct_nonzero_magnitude_count": 2,
+        "distinct_nonzero_magnitudes": [
+          0.02,
+          0.04
+        ],
+        "nonzero_eigenvalue_count": 10
+      },
+      "permutation_new_to_old": [
+        9,
+        1,
+        5,
+        12,
+        3,
+        8,
+        14,
+        0,
+        2,
+        15,
+        10,
+        6,
+        11,
+        13,
+        4,
+        7
+      ],
+      "seed": 20260712,
+      "source": {
+        "declared_checksum": "fec00fefd294777a854748768edfa08ca4a6c6ab",
+        "declared_checksum_type": "sha1sum",
+        "instance_data_object_uuid": "b8a5d73c-09ce-5715-85c0-b20ce448255e",
+        "task_uuid": "ac3a023f-8d31-5d79-803e-c54e947c8d75",
+        "uncompressed_sha256": "a48cd414aa2e63b92129a5af639c91e785c63a5bf6abdc260663863564bb29f4",
+        "url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/varbench_tv_square16/varbench_tv_square16_pbc_nf5_v0p01.fcidump.gz"
+      },
+      "spectrum_structure": {
+        "active_pair_dimension": 16,
+        "distinct_nonzero_magnitude_count": 2,
+        "distinct_nonzero_magnitudes": [
+          0.02,
+          0.04
+        ],
+        "nonzero_eigenvalue_count": 10
+      },
+      "spectrum_structure_passed": true,
       "status": "passed",
       "tensor_certificate_passed": true
     }
