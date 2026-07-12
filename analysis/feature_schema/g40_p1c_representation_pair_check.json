@@ -1,0 +1,399 @@
+{
+  "atol": 1e-10,
+  "check": "g40_p1c_g21_representation_pairs",
+  "equivalence_groups": 2,
+  "failures": [],
+  "groups_passed": 2,
+  "reports": [
+    {
+      "basis_feature_values": {
+        "cut_weight_best_max": [
+          5.750558661683619,
+          9.560205982440062
+        ],
+        "cut_weight_best_p95": [
+          5.522609487132707,
+          9.47812896349752
+        ],
+        "cut_weight_best_sum": [
+          39.62931909277879,
+          65.06449533892201
+        ],
+        "cut_weight_fiedler_max": [
+          5.750558661683619,
+          9.560205982440062
+        ],
+        "cut_weight_fiedler_p95": [
+          5.522609487132707,
+          9.499839753213074
+        ],
+        "cut_weight_fiedler_sum": [
+          39.62931909277879,
+          65.06449533892201
+        ],
+        "cut_weight_file_max": [
+          9.383749074625177,
+          10.48690916884047
+        ],
+        "cut_weight_file_p95": [
+          9.263565527372853,
+          10.356334071293608
+        ],
+        "cut_weight_file_sum": [
+          60.9822106184397,
+          69.27256264791819
+        ],
+        "cut_weight_heuristic_spread_max": [
+          0.38717898188114985,
+          0.08836761828298303
+        ],
+        "cut_weight_heuristic_spread_p95": [
+          0.40383543778969533,
+          0.08479883921766841
+        ],
+        "cut_weight_heuristic_spread_sum": [
+          0.35014951588528115,
+          0.060746522838831925
+        ],
+        "cut_weight_improvement_vs_file_max": [
+          0.38717898188114985,
+          0.0883676182829829
+        ],
+        "cut_weight_improvement_vs_file_p95": [
+          0.40383543778969533,
+          0.0847988392176684
+        ],
+        "cut_weight_improvement_vs_file_sum": [
+          0.3501495158852811,
+          0.06074652283883197
+        ],
+        "cut_weight_improvement_vs_random_max": [
+          0.34165442974191373,
+          0.06785423399481016
+        ],
+        "cut_weight_improvement_vs_random_p95": [
+          0.364620098741687,
+          0.07130071952815353
+        ],
+        "cut_weight_improvement_vs_random_sum": [
+          0.31538642742325296,
+          0.06212885004317925
+        ],
+        "cut_weight_linear_relaxation_max": [
+          5.750558661683619,
+          9.560205982440062
+        ],
+        "cut_weight_linear_relaxation_p95": [
+          5.522609487132707,
+          9.47812896349752
+        ],
+        "cut_weight_linear_relaxation_sum": [
+          39.62931909277879,
+          66.47244358728597
+        ],
+        "cut_weight_minimum_degree_max": [
+          9.383749074625177,
+          10.48690916884047
+        ],
+        "cut_weight_minimum_degree_p95": [
+          9.263565527372853,
+          10.356334071293608
+        ],
+        "cut_weight_minimum_degree_sum": [
+          60.9822106184397,
+          69.27256264791819
+        ],
+        "cut_weight_random_max": [
+          8.734863453898946,
+          10.25612766918563
+        ],
+        "cut_weight_random_p95": [
+          8.691822760203262,
+          10.20581060284869
+        ],
+        "cut_weight_random_sum": [
+          57.88567548204171,
+          69.37466339797056
+        ],
+        "cut_weight_rcm_max": [
+          9.383749074625177,
+          10.486909168840471
+        ],
+        "cut_weight_rcm_p95": [
+          9.263565527372853,
+          10.356334071293608
+        ],
+        "cut_weight_rcm_sum": [
+          60.98221061843971,
+          69.27256264791819
+        ],
+        "interaction_graph_edge_count": [
+          45,
+          45
+        ],
+        "interaction_graph_total_weight": [
+          15.755982593182724,
+          19.313085285022105
+        ],
+        "min_fill_width_upper_bound": [
+          9,
+          9
+        ],
+        "mpo_pair_rank_max": [
+          1.0215330350110505,
+          1.4576207824260776
+        ],
+        "mpo_pair_rank_mean": [
+          1.0097570296344969,
+          1.2314361767236024
+        ],
+        "mpo_pair_rank_p95": [
+          1.0202703087459797,
+          1.4110337759966802
+        ]
+      },
+      "changed_basis_features": [
+        "cut_weight_best_max",
+        "cut_weight_best_p95",
+        "cut_weight_best_sum",
+        "cut_weight_fiedler_max",
+        "cut_weight_fiedler_p95",
+        "cut_weight_fiedler_sum",
+        "cut_weight_file_max",
+        "cut_weight_file_p95",
+        "cut_weight_file_sum",
+        "cut_weight_heuristic_spread_max",
+        "cut_weight_heuristic_spread_p95",
+        "cut_weight_heuristic_spread_sum",
+        "cut_weight_improvement_vs_file_max",
+        "cut_weight_improvement_vs_file_p95",
+        "cut_weight_improvement_vs_file_sum",
+        "cut_weight_improvement_vs_random_max",
+        "cut_weight_improvement_vs_random_p95",
+        "cut_weight_improvement_vs_random_sum",
+        "cut_weight_linear_relaxation_max",
+        "cut_weight_linear_relaxation_p95",
+        "cut_weight_linear_relaxation_sum",
+        "cut_weight_minimum_degree_max",
+        "cut_weight_minimum_degree_p95",
+        "cut_weight_minimum_degree_sum",
+        "cut_weight_random_max",
+        "cut_weight_random_p95",
+        "cut_weight_random_sum",
+        "cut_weight_rcm_max",
+        "cut_weight_rcm_p95",
+        "cut_weight_rcm_sum",
+        "interaction_graph_total_weight",
+        "mpo_pair_rank_max",
+        "mpo_pair_rank_mean",
+        "mpo_pair_rank_p95"
+      ],
+      "equivalence_group_id": "8c70f261-4386-52ab-a75c-2a2a292034bd",
+      "extractor_versions": [
+        "g40_p1c_orderability_v1"
+      ],
+      "invariant_checks": {},
+      "status": "passed",
+      "task_uuids": [
+        "cb5392c3-fd91-50f3-be40-149559ae7b96",
+        "dd80e2eb-9220-53ee-bac4-a087306dc309"
+      ]
+    },
+    {
+      "basis_feature_values": {
+        "cut_weight_best_max": [
+          4.767423779220109,
+          4.435749093829936
+        ],
+        "cut_weight_best_p95": [
+          4.7312629232064385,
+          4.30770779761846
+        ],
+        "cut_weight_best_sum": [
+          22.463031192472798,
+          20.537996157970802
+        ],
+        "cut_weight_fiedler_max": [
+          5.9325833616317,
+          4.784718657925624
+        ],
+        "cut_weight_fiedler_p95": [
+          5.618969692609637,
+          4.695069421931447
+        ],
+        "cut_weight_fiedler_sum": [
+          22.463031192472798,
+          20.537996157970802
+        ],
+        "cut_weight_file_max": [
+          6.096087436333132,
+          5.696015738820627
+        ],
+        "cut_weight_file_p95": [
+          5.80315044572925,
+          5.22431072693678
+        ],
+        "cut_weight_file_sum": [
+          26.322836068198956,
+          21.94716485154282
+        ],
+        "cut_weight_heuristic_spread_max": [
+          0.21795351050808254,
+          0.22125406648746934
+        ],
+        "cut_weight_heuristic_spread_p95": [
+          0.18470786386585117,
+          0.17544954295927967
+        ],
+        "cut_weight_heuristic_spread_sum": [
+          0.1466333211864376,
+          0.06420732259059678
+        ],
+        "cut_weight_improvement_vs_file_max": [
+          0.21795351050808254,
+          0.22125406648746937
+        ],
+        "cut_weight_improvement_vs_file_p95": [
+          0.18470786386585114,
+          0.17544954295927973
+        ],
+        "cut_weight_improvement_vs_file_sum": [
+          0.14663332118643746,
+          0.0642073225905968
+        ],
+        "cut_weight_improvement_vs_random_max": [
+          0.2858785123715062,
+          0.07640015721740923
+        ],
+        "cut_weight_improvement_vs_random_p95": [
+          0.28590033366356493,
+          0.09441762250717134
+        ],
+        "cut_weight_improvement_vs_random_sum": [
+          0.24728656671886706,
+          0.10916127406395282
+        ],
+        "cut_weight_linear_relaxation_max": [
+          4.767423779220109,
+          4.435749093829936
+        ],
+        "cut_weight_linear_relaxation_p95": [
+          4.7312629232064385,
+          4.30770779761846
+        ],
+        "cut_weight_linear_relaxation_sum": [
+          24.073319577551395,
+          20.96011533758723
+        ],
+        "cut_weight_minimum_degree_max": [
+          6.096087436333132,
+          5.696015738820627
+        ],
+        "cut_weight_minimum_degree_p95": [
+          5.80315044572925,
+          5.22431072693678
+        ],
+        "cut_weight_minimum_degree_sum": [
+          26.322836068198956,
+          21.94716485154282
+        ],
+        "cut_weight_random_max": [
+          6.675928202429693,
+          4.802674154280992
+        ],
+        "cut_weight_random_p95": [
+          6.625493815841373,
+          4.7568370417550145
+        ],
+        "cut_weight_random_sum": [
+          29.84273987851499,
+          23.054673713685425
+        ],
+        "cut_weight_rcm_max": [
+          6.096087436333131,
+          5.696015738820627
+        ],
+        "cut_weight_rcm_p95": [
+          5.80315044572925,
+          5.22431072693678
+        ],
+        "cut_weight_rcm_sum": [
+          26.32283606819896,
+          21.94716485154282
+        ],
+        "interaction_graph_edge_count": [
+          28,
+          28
+        ],
+        "interaction_graph_total_weight": [
+          10.147407663642994,
+          9.375753314487692
+        ],
+        "min_fill_width_upper_bound": [
+          7,
+          7
+        ],
+        "mpo_pair_rank_max": [
+          1.082782751611334,
+          1.1248776290746307
+        ],
+        "mpo_pair_rank_mean": [
+          1.0392081509087119,
+          1.0558612725581682
+        ],
+        "mpo_pair_rank_p95": [
+          1.0818999811108945,
+          1.114196412484067
+        ]
+      },
+      "changed_basis_features": [
+        "cut_weight_best_max",
+        "cut_weight_best_p95",
+        "cut_weight_best_sum",
+        "cut_weight_fiedler_max",
+        "cut_weight_fiedler_p95",
+        "cut_weight_fiedler_sum",
+        "cut_weight_file_max",
+        "cut_weight_file_p95",
+        "cut_weight_file_sum",
+        "cut_weight_heuristic_spread_max",
+        "cut_weight_heuristic_spread_p95",
+        "cut_weight_heuristic_spread_sum",
+        "cut_weight_improvement_vs_file_max",
+        "cut_weight_improvement_vs_file_p95",
+        "cut_weight_improvement_vs_file_sum",
+        "cut_weight_improvement_vs_random_max",
+        "cut_weight_improvement_vs_random_p95",
+        "cut_weight_improvement_vs_random_sum",
+        "cut_weight_linear_relaxation_max",
+        "cut_weight_linear_relaxation_p95",
+        "cut_weight_linear_relaxation_sum",
+        "cut_weight_minimum_degree_max",
+        "cut_weight_minimum_degree_p95",
+        "cut_weight_minimum_degree_sum",
+        "cut_weight_random_max",
+        "cut_weight_random_p95",
+        "cut_weight_random_sum",
+        "cut_weight_rcm_max",
+        "cut_weight_rcm_p95",
+        "cut_weight_rcm_sum",
+        "interaction_graph_total_weight",
+        "mpo_pair_rank_max",
+        "mpo_pair_rank_mean",
+        "mpo_pair_rank_p95"
+      ],
+      "equivalence_group_id": "b696450f-72ab-5509-b932-61fb30eda535",
+      "extractor_versions": [
+        "g40_p1c_orderability_v1"
+      ],
+      "invariant_checks": {},
+      "status": "passed",
+      "task_uuids": [
+        "3d343ddb-a898-5c0e-afc9-42b62d588c5e",
+        "6cd8382a-9a9a-5c43-83b1-616c9f301ab1"
+      ]
+    }
+  ],
+  "rtol": 1e-09,
+  "status": "passed"
+}

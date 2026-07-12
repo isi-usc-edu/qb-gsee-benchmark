@@ -62,3 +62,22 @@ def test_p1b_production_table_and_report_are_complete() -> None:
         report["output_feature_table_sha256"]
         == hashlib.sha256(table.read_bytes()).hexdigest()
     )
+
+
+def test_p1c_pilot_report_binds_representation_and_pbs() -> None:
+    report = json.loads((OUT / "g40_p1c_pilot_report.json").read_text())
+    assert report["status"] == "passed"
+    assert report["code_revision"] == "a1179fa"
+    assert report["extractor_version"] == "g40_p1c_orderability_v1"
+    assert report["successful_states"] == report["selected_tasks"] == 25
+    assert report["pbs"]["job_id"] == "7651352.imgt1"
+    assert report["pbs"]["exit_status"] == 0
+    assert report["pbs"]["queue"] == "compute"
+    assert report["maximum_task_walltime_seconds"] > 3000.0
+    assert report["maximum_task_peak_rss_kb"] < 3_000_000
+    assert report["representation_pair_check"] == {
+        "equivalence_groups": 2,
+        "groups_passed": 2,
+        "status": "passed",
+    }
+    assert len(report["state_ledger"]) == 25
