@@ -79,6 +79,10 @@ def _write_markdown(
             "The JSON and CSV contain all 591 per-dump rows, including zero-conflict",
             "rows, declared and observed checksums, source URLs, container metadata,",
             "maximum-disagreement keys, and writer provenance where known.",
+            (
+                "Max-disagreement fields range over all duplicated keys, not only "
+                "keys that fail the conflict gate."
+            ),
             "",
             "## Execution evidence",
             "",

@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 
@@ -67,3 +69,19 @@ def test_impact_report_excludes_unconverged_iterate_from_spread() -> None:
     assert len(simons) == 3
     assert all(row["hf_all_policies_converged"] for row in simons)
     assert max(row["hf_energy_spread_hartree"] for row in simons) < 1.0e-9
+
+
+def test_review_cleanup_is_encoded_in_generators() -> None:
+    census_markdown = (ANALYSIS / "g45_duplicate_conflict_census.md").read_text()
+    assert "range over all duplicated keys" in census_markdown
+
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "scripts/build_g45_reader_matrix.py")],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert result.returncode == 2
+    assert "--arrow-source" in result.stderr
+    assert "required" in result.stderr

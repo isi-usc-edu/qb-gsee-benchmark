@@ -140,11 +140,7 @@ def main() -> int:
         type=Path,
         default=ROOT.parent / "work/software/block2-0.5.3-venv/bin/python",
     )
-    parser.add_argument(
-        "--arrow-source",
-        type=Path,
-        default=Path("/home/ac.otten/soft/shci_new/src/chem/integrals.cc"),
-    )
+    parser.add_argument("--arrow-source", type=Path, required=True)
     parser.add_argument(
         "--output",
         type=Path,

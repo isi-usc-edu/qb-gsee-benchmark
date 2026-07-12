@@ -78,3 +78,28 @@ def test_p1a_report_binds_table_jobs_and_representation_gate() -> None:
     assert report["corrected_code_revision"].startswith("8f8348a")
     assert report["representation_pair_status"] == "passed"
     assert report["representation_pair_groups_passed"] == 2
+
+
+def test_p1a_report_builder_has_no_embedded_noqa() -> None:
+    builder = (ROOT / "scripts/build_g40_p1a_production.py").read_text()
+    report_markdown = (OUT / "g40_p1a_production_report.md").read_text()
+    assert "# noqa" not in builder
+    assert "# noqa" not in report_markdown
+
+
+def test_femoco76_spin_provenance_distinguishes_stages() -> None:
+    provenance = json.loads((OUT / "g40_femoco76_spin_provenance.json").read_text())
+    assert provenance["current_features_spin"] == 35
+    assert provenance["intake_features_spin"] == 35
+    assert provenance["upstream"]["orbital_generation_spin_2s"] == 35
+    assert provenance["fcidump"] == {
+        "container": "zip",
+        "member": "FCIDUMP",
+        "ms2": 3,
+        "nelec": 113,
+        "norb": 76,
+    }
+    assert provenance["instance_edit_performed"] is False
+    assert provenance["finding"] == (
+        "distinct_orbital_generation_and_active_space_spin_sectors"
+    )
