@@ -5,6 +5,7 @@ import pytest
 from qb_gsee_benchmark.ml.interim import (
     MODEL_LABELS,
     family_balanced_scores,
+    oof_probabilities,
     feature_contract,
     stratum_status,
 )
@@ -69,3 +70,25 @@ def test_stratum_floor_is_explicit():
     status, evidence = stratum_status(data)
     assert status == "insufficient_data"
     assert evidence["n_tasks"] == 6
+
+
+def test_grouped_inner_log_loss_accepts_single_class_validation_folds():
+    rows = []
+    for family_index in range(4):
+        outcome = "success" if family_index % 2 else "miss"
+        for task_index in range(3):
+            rows.append({
+                "task_uuid": f"{family_index}-{task_index}",
+                "family": f"family-{family_index}",
+                "outcome": outcome,
+                "signal": float(family_index + task_index),
+            })
+    data = pd.DataFrame(rows)
+    probabilities, folds = oof_probabilities(
+        data,
+        ["signal"],
+        "ridge_logistic",
+        "leave_one_family_out",
+        {"model__C": [0.1, 1.0]},
+    )
+    assert np.isfinite(probabilities).all()

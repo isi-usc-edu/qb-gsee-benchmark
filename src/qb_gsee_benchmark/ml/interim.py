@@ -21,7 +21,7 @@ from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.gaussian_process import GaussianProcessClassifier
 from sklearn.gaussian_process.kernels import ConstantKernel, RBF
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import average_precision_score
+from sklearn.metrics import average_precision_score, log_loss
 from sklearn.model_selection import GridSearchCV, GroupKFold, LeaveOneGroupOut, StratifiedKFold
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import SplineTransformer, StandardScaler
@@ -408,6 +408,43 @@ def _splits(data: pd.DataFrame, protocol: str) -> list[tuple[np.ndarray, np.ndar
     raise ValueError(f"Unknown protocol {protocol}")
 
 
+def _fixed_label_neg_log_loss(
+    estimator: Any, x_test: pd.DataFrame, y_test: Sequence[str]
+) -> float:
+    """Score an inner family fold whose held-out labels may be single-class."""
+    return -float(log_loss(
+        y_test,
+        estimator.predict_proba(x_test),
+        labels=list(estimator.classes_),
+    ))
+
+class _FeasibleGroupKFold:
+    """GroupKFold with training sides that retain at least two classes."""
+
+    def __init__(self, n_splits: int):
+        self.n_splits = n_splits
+
+    def split(
+        self, x_data: Any, y_data: Sequence[str], groups: Sequence[str]
+    ):
+        labels = np.asarray(y_data)
+        splitter = GroupKFold(n_splits=self.n_splits)
+        for train_index, test_index in splitter.split(x_data, labels, groups):
+            if len(np.unique(labels[train_index])) >= 2:
+                yield train_index, test_index
+
+    def get_n_splits(
+        self,
+        x_data: Any = None,
+        y_data: Sequence[str] | None = None,
+        groups: Sequence[str] | None = None,
+    ) -> int:
+        if x_data is None or y_data is None or groups is None:
+            return self.n_splits
+        return sum(1 for _ in self.split(x_data, y_data, groups))
+
+
+
 def oof_probabilities(
     data: pd.DataFrame,
     feature_columns: Sequence[str],
@@ -435,8 +472,8 @@ def oof_probabilities(
                 n_groups = train["family"].nunique()
                 if n_groups >= 2:
                     search = GridSearchCV(
-                        estimator, grid, scoring="neg_log_loss",
-                        cv=GroupKFold(n_splits=min(3, n_groups)),
+                        estimator, grid, scoring=_fixed_label_neg_log_loss,
+                        cv=_FeasibleGroupKFold(n_splits=min(3, n_groups)),
                         refit=True, error_score="raise", n_jobs=1,
                     )
                     search.fit(
