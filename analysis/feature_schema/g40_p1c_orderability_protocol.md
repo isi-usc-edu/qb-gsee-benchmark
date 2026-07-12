@@ -9,6 +9,9 @@ For distinct spatial orbitals `p,q`, the symmetric graph weight is
 
 `w[p,q] = |h[p,q]| + sqrt(sum_rs |V[p,r,q,s]|^2)`.
 
+Here `V[p,r,q,s]` is read in the chemists-notation FCIDUMP convention used by
+the canonical sparse parser.
+
 The diagonal is zero. This exchange-block Frobenius graph uses the complete
 two-electron tensor rather than only density-density terms. It is basis
 sensitive. Edge count uses strict positive weight and total weight counts each
@@ -18,8 +21,9 @@ undirected edge once.
 
 The four frozen heuristics are the weighted combinatorial-Laplacian Fiedler
 order, unweighted reverse Cuthill-McKee, minimum-degree elimination with fill,
-and the normalized-Laplacian linear-arrangement relaxation. Eigenvector signs
-and ties are resolved deterministically. A min-fill elimination independently
+and the normalized-Laplacian linear-arrangement relaxation. An eigenvector sign
+is fixed by making its largest-absolute component positive; equal coordinates
+are ordered by orbital index. A min-fill elimination independently
 reports its maximum active-neighbor count as a treewidth upper bound.
 
 For each ordering and cut, cut weight is the sum of graph weights crossing the
@@ -27,7 +31,9 @@ cut. Each heuristic reports maximum, 95th percentile, and sum over all cuts.
 Best-of-heuristics is the minimum separately for each statistic. Improvement
 over shipped and deterministic-random order is `1 - best / baseline`, or zero
 when the baseline is zero. Heuristic spread is `(max - min) / max`, or zero
-when all values are zero. The random baseline uses NumPy PCG64 seed 40041.
+when all values are zero. The 95th percentile uses NumPy's linear
+interpolation convention. The random baseline is one NumPy PCG64 permutation
+at seed 40041 and is therefore shared across all tasks with equal `NORB`.
 
 Heuristic and best-of-heuristic graph values are `T0/BAS/NONE`. Shipped/random
 baselines and relative improvements are conservatively `T0/BAS+ORD/NONE`.
@@ -44,6 +50,8 @@ for `p,r` left of the cut and `q,s` right of it. The per-cut effective rank is
 the exact Renyi-2 singular-value participation rank
 
 `r_eff = ||M||_F^4 / ||M^T M||_F^2`.
+
+An all-zero cut matricization has `r_eff := 0.0`.
 
 The implementation uses sparse matrices and forms the Gram matrix on the
 smaller side. The model columns are maximum, 95th percentile, and mean rank

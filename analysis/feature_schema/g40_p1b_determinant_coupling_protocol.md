@@ -8,9 +8,12 @@ to satisfy the predeclared precision gate and requires a replacement cross-band 
 
 The T0 reference occupies, separately for alpha and beta electrons, the orbitals
 with the lowest diagonal one-body values `h[p,p]`. Ties use the orbital index.
-This rule is equivariant under orbital permutation and requires no mean-field
-calculation. It is basis-sensitive and all physical outputs are tagged
-`T0/BAS/NONE`. It is not presented as an HF determinant.
+This rule requires no mean-field calculation. The particle counts are frozen as
+`n_alpha = (NELEC + MS2) / 2` and `n_beta = (NELEC - MS2) / 2`, with invalid
+parity rejected by the FCIDUMP parser. Orbital-index tie breaking makes the
+reference and its coupling features ordering-sensitive when diagonal values
+are degenerate; the physical outputs are therefore tagged `T0/BAS+ORD/NONE`.
+It is not presented as an HF determinant.
 
 All one-hop single and double couplings are evaluated by the spatial-orbital
 Slater-Condon rules. The implementation scans sparse nonzero ERIs to identify
@@ -32,10 +35,11 @@ largest magnitudes. The participation ratio is
 `(sum |H_DI|^2)^2 / sum |H_DI|^4`, with zero for an empty distribution.
 
 The tail slope sorts positive magnitudes in descending order, drops the first
-20 percent (at least the largest value), and fits
+`max(1, floor(0.2 n))` values, and fits
 `log10(|H_DI| / scale)` against `log10(rank)` over the remainder. It is null
 when fewer than eight positive couplings exist or fewer than four tail points
-remain.
+remain. Rank is the global one-based rank before the head is dropped. For an
+empty coupling distribution every top-k mass fraction is defined as `0.0`.
 
 ## Random-determinant branching
 
@@ -54,6 +58,20 @@ Carlo for every class. The method and cutoff are audit-only.
 The reported value is the mean over determinants; the
 reported audit-only MC error is the sample standard deviation of the 64 degree
 estimates divided by `sqrt(64)`.
+
+The estimand, seed, determinant count, and class-stratified sampling scheme are
+part of this protocol. Bitwise sample reproduction additionally uses the
+versioned code snapshot because it pins NumPy RNG call order.
+
+## Precision gate and declaration history
+
+Production requires, for every task and threshold,
+`MC standard error <= max(1.0, 0.1 * expected degree)`. This rule first entered
+the committed record in `59d9517`, after the v1-v4 pilot runs whose acceptance
+it was used to assess. It was therefore not predeclared before those runs. The
+pilot history and results remain valid as an empirical calibration, but the
+timing is recorded explicitly. Future gates described as predeclared must be
+committed before their gated runs are submitted.
 
 The seed, determinant count, substitutions per class, reference rule,
 MC errors, and extractor version are audit-only. They are retained beside the
