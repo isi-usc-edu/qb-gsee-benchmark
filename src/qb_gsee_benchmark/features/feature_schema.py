@@ -205,9 +205,12 @@ P1B_AUDIT = {
     "det_coupling_reference", "random_det_branching_seed",
     "random_det_branching_determinants",
     "random_det_branching_excitation_samples_per_class",
+    "random_det_branching_double_method",
+    "random_det_branching_exact_double_max_eri_records",
     "determinant_coupling_features_version",
     *{f"random_det_expected_degree_mc_se_rel_1e_{exponent}" for exponent in (12, 10, 8, 6, 4, 2)},
 }
+P1B_LEGACY_AUDIT = {"random_det_branching_excitation_samples_per_det"}
 
 P1C_BAS_MODEL = {
     "interaction_graph_edge_count", "interaction_graph_total_weight",
@@ -297,7 +300,7 @@ def metadata_for_column(column: str) -> FeatureColumnMetadata:
         return _feature(column, "T0", "INV", cost="integral_linear")
     if column in P1B_MODEL:
         return _feature(column, "T0", "BAS", cost="determinant_coupling")
-    if column in P1B_AUDIT:
+    if column in P1B_AUDIT | P1B_LEGACY_AUDIT:
         return _feature(column, "T0", "BAS", eligible=False,
             reason="deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",
             role="audit-only", cost="determinant_coupling")

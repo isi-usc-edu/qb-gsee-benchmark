@@ -1,4 +1,5 @@
 from pathlib import Path
+from itertools import combinations
 import hashlib
 
 import numpy as np
@@ -130,6 +131,23 @@ def test_runner_is_checksum_and_configuration_resumable(tmp_path: Path) -> None:
     assert first["status"] == "success"
     assert second == first
     assert state_path.read_bytes() == first_bytes
+
+
+def test_sparse_double_branching_matches_exhaustive_sector_average() -> None:
+    data = _data(np.zeros((4, 4)), {(0, 1, 2, 3): 0.5}, nelec=4, ms2=0)
+    degrees = []
+    for alpha in combinations(range(4), 2):
+        for beta in combinations(range(4), 2):
+            magnitudes = reference_coupling_magnitudes(data, Occupation(alpha, beta))
+            degrees.append(int(np.count_nonzero(magnitudes > 1.0e-8)))
+    result = random_determinant_branching_profile(
+        data, 1.0, determinants=4, excitation_samples_per_class=8
+    )
+    assert result["random_det_branching_double_method"] == "exact_combinatorial_sparse"
+    assert result["random_det_expected_degree_rel_1e_8"] == pytest.approx(
+        np.mean(degrees)
+    )
+    assert result["random_det_expected_degree_mc_se_rel_1e_8"] == 0.0
 
 
 def test_stratified_branching_resolves_sparse_hopping_degree() -> None:

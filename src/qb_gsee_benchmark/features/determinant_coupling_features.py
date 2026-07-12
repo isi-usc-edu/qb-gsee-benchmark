@@ -21,11 +21,12 @@ from qb_gsee_benchmark.features.universal_t0_features import (
     _threshold_suffix,
 )
 
-DETERMINANT_COUPLING_VERSION = "g40_p1b_determinant_coupling_v2"
+DETERMINANT_COUPLING_VERSION = "g40_p1b_determinant_coupling_v3"
 DEFAULT_RANDOM_SEED = 40040
 DEFAULT_RANDOM_DETERMINANTS = 32
 DEFAULT_EXCITATION_SAMPLES_PER_CLASS = 512
 TOP_K_GRID = (1, 10, 100)
+EXACT_DOUBLE_MAX_ERI_RECORDS = 100_000
 
 
 @dataclass(frozen=True)
@@ -168,12 +169,12 @@ def _sample_excitation_classes(
     occupied: Occupation,
     samples_per_class: int,
     rng: np.random.Generator,
-) -> list[tuple[int, np.ndarray]]:
+) -> list[tuple[int, int, np.ndarray]]:
     """Sample each excitation class separately and return class populations."""
     alpha_virt = _virtuals(data.norb, occupied.alpha)
     beta_virt = _virtuals(data.norb, occupied.beta)
     counts = _excitation_counts(data)
-    samples: list[tuple[int, np.ndarray]] = []
+    samples: list[tuple[int, int, np.ndarray]] = []
     for excitation_class, population in enumerate(counts):
         if population == 0:
             continue
@@ -223,8 +224,59 @@ def _sample_excitation_classes(
                     int(rng.choice(beta_virt)),
                 )
             values[sample] = abs(value)
-        samples.append((population, values))
+        samples.append((excitation_class, population, values))
     return samples
+
+
+def _occupation_probability(
+    norb: int, occupied: int, holes: int, particles: int
+) -> float:
+    if occupied < holes or norb - occupied < particles:
+        return 0.0
+    return math.comb(norb - holes - particles, occupied - holes) / math.comb(
+        norb, occupied
+    )
+
+
+def _exact_double_expected_degrees(
+    data: SparseFcidump, scale: float
+) -> dict[float, float]:
+    same_spin: set[tuple[tuple[int, int], tuple[int, int]]] = set()
+    opposite_spin: set[tuple[int, int, int, int]] = set()
+    for (a, i, b, j), _ in data.iter_eri_entries():
+        if a != b and i != j and not {a, b} & {i, j}:
+            same_spin.add((tuple(sorted((i, j))), tuple(sorted((a, b)))))
+        if a != i and b != j:
+            opposite_spin.add((i, a, j, b))
+    same_values = np.asarray(
+        [
+            abs(_same_spin_double_coupling(data, holes, particles))
+            for holes, particles in same_spin
+        ],
+        dtype=float,
+    )
+    opposite_values = np.asarray(
+        [
+            abs(_opposite_spin_double_coupling(data, i, a, j, b))
+            for i, a, j, b in opposite_spin
+        ],
+        dtype=float,
+    )
+    same_probability = sum(
+        _occupation_probability(data.norb, occupied, 2, 2)
+        for occupied in (data.nalpha, data.nbeta)
+    )
+    alpha_probability = _occupation_probability(data.norb, data.nalpha, 1, 1)
+    beta_probability = _occupation_probability(data.norb, data.nbeta, 1, 1)
+    return {
+        threshold: (
+            np.count_nonzero(same_values > threshold * scale) * same_probability
+            + np.count_nonzero(opposite_values > threshold * scale)
+            * alpha_probability
+            * beta_probability
+        )
+        for threshold in RELATIVE_THRESHOLD_GRID
+    }
 
 
 def random_determinant_branching_profile(
@@ -234,25 +286,37 @@ def random_determinant_branching_profile(
     seed: int = DEFAULT_RANDOM_SEED,
     determinants: int = DEFAULT_RANDOM_DETERMINANTS,
     excitation_samples_per_class: int = DEFAULT_EXCITATION_SAMPLES_PER_CLASS,
-) -> dict[str, float]:
+) -> dict[str, Any]:
     """Estimate sector-uniform expected degree with stratified fixed-seed MC."""
     if determinants <= 1 or excitation_samples_per_class <= 0:
         raise ValueError("random branching requires >1 determinants and samples")
     rng = np.random.default_rng(seed)
+    exact_doubles = len(data.eri_records) <= EXACT_DOUBLE_MAX_ERI_RECORDS
+    exact_degree = (
+        _exact_double_expected_degrees(data, scale)
+        if exact_doubles
+        else {threshold: 0.0 for threshold in RELATIVE_THRESHOLD_GRID}
+    )
     estimates = {threshold: [] for threshold in RELATIVE_THRESHOLD_GRID}
     for _ in range(determinants):
         occupied = _draw_occupation(data, rng)
         class_samples = _sample_excitation_classes(
             data, occupied, excitation_samples_per_class, rng
         )
+        if exact_doubles:
+            class_samples = [item for item in class_samples if item[0] == 0]
         for threshold in RELATIVE_THRESHOLD_GRID:
-            degree = sum(
+            degree = exact_degree[threshold] + sum(
                 population * float(np.mean(values > threshold * scale))
-                for population, values in class_samples
+                for _, population, values in class_samples
             )
             estimates[threshold].append(degree)
 
-    result: dict[str, float] = {}
+    result: dict[str, float] = {
+        "random_det_branching_double_method": (
+            "exact_combinatorial_sparse" if exact_doubles else "stratified_mc"
+        )
+    }
     for threshold, values in estimates.items():
         suffix = _threshold_suffix(threshold)
         array = np.asarray(values, dtype=float)
@@ -307,6 +371,9 @@ def compute_determinant_coupling_features(
         "random_det_branching_seed": random_seed,
         "random_det_branching_determinants": random_determinants,
         "random_det_branching_excitation_samples_per_class": excitation_samples_per_class,
+        "random_det_branching_exact_double_max_eri_records": (
+            EXACT_DOUBLE_MAX_ERI_RECORDS
+        ),
         "determinant_coupling_features_version": DETERMINANT_COUPLING_VERSION,
     }
     for threshold in RELATIVE_THRESHOLD_GRID:
