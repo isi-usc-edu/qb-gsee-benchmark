@@ -12,6 +12,7 @@
     "cut_weight_best_sum_heuristic": "ordering choice, random seed, or extractor version",
     "date_of_calculation": "procedural, status, reason, or version metadata",
     "det_coupling_reference": "deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",
+    "det_coupling_reference_boundary_tie": "deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",
     "determinant_coupling_features_version": "deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",
     "df_eig_decay_fit_reason": "procedural, status, reason, or version metadata",
     "df_eig_decay_npoints": "raw spectrum or fit-quality diagnostic, retained for audit",
@@ -59,6 +60,7 @@
     "mp2_corr_energy_reason": "procedural, status, reason, or version metadata",
     "mp2_spin_decomposition_status": "procedural, status, reason, or version metadata",
     "mpo_ordering_heuristic": "ordering choice, random seed, or extractor version",
+    "mpo_pair_rank_applicable": "ordering choice, random seed, or extractor version",
     "ms2": "duplicate structured-detector copy; canonical size columns are n_orbs/n_elec and header MS2",
     "num_electrons": "duplicate structured-detector copy; canonical size columns are n_orbs/n_elec and header MS2",
     "num_orbitals": "duplicate structured-detector copy; canonical size columns are n_orbs/n_elec and header MS2",
@@ -96,6 +98,7 @@
     "representation_covariant_feature_names": "procedural, status, reason, or version metadata",
     "representation_features_version": "procedural, status, reason, or version metadata",
     "representation_invariant_feature_names": "procedural, status, reason, or version metadata",
+    "retag_audit_features_version": "procedural, status, reason, or version metadata",
     "sign_free_condition": "procedural, status, reason, or version metadata",
     "sign_free_condition_flag": "metadata-inherited sign flag; model eligibility requires P1 recomputation from FCIDUMP",
     "sign_free_detector_version": "procedural, status, reason, or version metadata",
@@ -238,12 +241,9 @@
   "pending_value_rebuild_columns": [],
   "planned_columns_excluded_until_populated": {
     "pending_model_eligible": [],
-    "permanently_audit_only": [
-      "det_coupling_reference_boundary_tie",
-      "mpo_pair_rank_applicable"
-    ]
+    "permanently_audit_only": []
   },
   "schema_version": "g40-p0-v2",
   "source_feature_table": "scripts/Hamiltonian_features.csv",
-  "source_feature_table_sha256": "3ef297f012f7cb5a2eb839515d33140c10a203d558852cdbe9b873f8fe68f3b8"
+  "source_feature_table_sha256": "79050a997a8b334093fffaf7bf638dd81fe7cd5e24abfb9973b9e1d6aa590ee3"
 }

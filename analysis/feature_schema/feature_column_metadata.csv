@@ -231,5 +231,6 @@ mpo_pair_rank_mean,feature,T0,BAS+ORD,NONE,accuracy,True,,intensive,orderability
 mpo_pair_rank_p95,feature,T0,BAS+ORD,NONE,accuracy,True,,intensive,orderability,mpo pair rank p95,current
 orderability_features_version,feature,T0,BAS+ORD,NONE,audit-only,False,"ordering choice, random seed, or extractor version",intensive,orderability,orderability features version,current
 orderability_random_seed,feature,T0,BAS+ORD,NONE,audit-only,False,"ordering choice, random seed, or extractor version",intensive,orderability,orderability random seed,current
-det_coupling_reference_boundary_tie,feature,T0,BAS+ORD,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,det coupling reference boundary tie,defined_not_populated
-mpo_pair_rank_applicable,feature,T0,BAS,NONE,audit-only,False,"ordering choice, random seed, or extractor version",intensive,orderability,mpo pair rank applicable,defined_not_populated
+det_coupling_reference_boundary_tie,feature,T0,BAS+ORD,NONE,audit-only,False,"deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",intensive,determinant_coupling,det coupling reference boundary tie,current
+mpo_pair_rank_applicable,feature,T0,BAS,NONE,audit-only,False,"ordering choice, random seed, or extractor version",intensive,orderability,mpo pair rank applicable,current
+retag_audit_features_version,procedural,N/A,N/A,N/A,audit-only,False,"procedural, status, reason, or version metadata",N/A,metadata,retag audit features version,current

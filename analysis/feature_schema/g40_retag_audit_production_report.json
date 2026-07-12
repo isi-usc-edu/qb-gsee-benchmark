@@ -1,0 +1,56 @@
+{
+  "accounting_sha256": [
+    "62f269cf3b93238a54037248916cbbb049a9795bee4bdc745b1e383630c1d8c6",
+    "486bcdb79fa62f228ded2fbab9ed14efb87b76e15a1f0e98ea5a703f96d7aa1b"
+  ],
+  "changed_populated_cells": 0,
+  "code_revision": "9e1607c",
+  "columns_after": 235,
+  "columns_before": 232,
+  "corpus_tasks": 591,
+  "duplicate_submission_note": "PBS jobs 7651548.imgt1 and 7651553.imgt1 were submitted 52 seconds apart against the same resume-safe state directory and shared log paths; both exited zero and the final checksum-bound states are ledgered here.",
+  "existing_populated_cells_audited": 0,
+  "extractor_version": "g40_retag_audit_v1",
+  "input_feature_table_sha256": "3ef297f012f7cb5a2eb839515d33140c10a203d558852cdbe9b873f8fe68f3b8",
+  "job_script_sha256": "9b90d6afc051b87c49cc58bbb342dc10a2330e3c69e2c04ba1c0b26d83151eb9",
+  "new_columns": [
+    "det_coupling_reference_boundary_tie",
+    "mpo_pair_rank_applicable",
+    "retag_audit_features_version"
+  ],
+  "newly_populated_cells": 1773,
+  "output_feature_table_sha256": "79050a997a8b334093fffaf7bf638dd81fe7cd5e24abfb9973b9e1d6aa590ee3",
+  "pbs_jobs": [
+    {
+      "cpu_time_seconds": 9426,
+      "exit_status": 0,
+      "job_id": "7651548.imgt1",
+      "job_state": "F",
+      "memory": "43012296kb",
+      "ncpus": 128,
+      "queue": "compute",
+      "requested_walltime_seconds": 7200,
+      "virtual_memory": "68163784kb",
+      "walltime_seconds": 917
+    },
+    {
+      "cpu_time_seconds": 7995,
+      "exit_status": 0,
+      "job_id": "7651553.imgt1",
+      "job_state": "F",
+      "memory": "45783784kb",
+      "ncpus": 128,
+      "queue": "compute",
+      "requested_walltime_seconds": 7200,
+      "virtual_memory": "71169252kb",
+      "walltime_seconds": 930
+    }
+  ],
+  "report_version": "g40_retag_audit_production_v1",
+  "rows_after": 591,
+  "rows_before": 591,
+  "state_ledger_sha256": "8fa8b650911ec1bc86f405326448f9da9dd81cd85010f029ce543e51c4d0cb23",
+  "stderr_log_sha256": "83d05b4c5a4307de479b13f810a5153f3c959d7e6ece8f6c30e6b3c8cf032fa3",
+  "stdout_log_sha256": "73057f448798e0e2c8388960b971bba8b22974ea6605df7eff026b53ccdbd179",
+  "successful_states": 591
+}
