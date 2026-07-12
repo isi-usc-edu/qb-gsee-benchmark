@@ -1,0 +1,72 @@
+{
+  "accounting_sha256": "4e1ce4648adfaea9c86d9aba98ef27fb98007eb58e2f1491b4681e82c55e1db6",
+  "code_revision": "533a3fd",
+  "decay_comparison": {
+    "maximum_absolute_difference": 19.24203303090724,
+    "median_absolute_difference": 12.524670747850159,
+    "median_relative_difference": 0.881107562192871,
+    "pearson": -0.46787831817740255,
+    "rows": 184,
+    "spearman": -0.557425208529984
+  },
+  "extractor_version": "g40_p1d_interaction_spectrum_v1",
+  "feature_table_sha256": "79050a997a8b334093fffaf7bf638dd81fe7cd5e24abfb9973b9e1d6aa590ee3",
+  "gap_comparison": {
+    "maximum_absolute_difference": 0.13561888272416175,
+    "median_absolute_difference": 4.3866066334885545e-10,
+    "median_relative_difference": 6.601320432650445e-11,
+    "pearson": 0.9999996349474756,
+    "rows": 184,
+    "spearman": 0.9999918128691583
+  },
+  "job_script_sha256": "ff657e33bd6aa06aceedb1efc5841dc92233e293c078744c2c0b9a7f4bad5a62",
+  "legacy_convention": "full N^2 pair matrix; positive eigenvalues >=1e-8 Ha; df_rank is their count; df_gap is the absolute gap between the two largest retained positive eigenvalues; decay is a final-50-percent positive-tail fit",
+  "maximum_negative_mass_fraction": 3.0269027502634987e-05,
+  "name_decision": "PI review required: the old and new columns use different matrix, threshold, sign, gap, and decay-fit conventions; this report does not silently overwrite legacy df_* names.",
+  "non_psd_rows": 12,
+  "p1d_convention": "normalized symmetric-pair matrix; absolute-value relative ranks; top-magnitude relative gap; rank(1e-4) leading-spectrum decay fit",
+  "pbs": {
+    "cpu_time_seconds": 9373,
+    "exit_status": 0,
+    "job_id": "7651569.imgt1",
+    "job_state": "F",
+    "memory": "11040440kb",
+    "ncpus": 128,
+    "queue": "compute",
+    "requested_walltime_seconds": 43200,
+    "virtual_memory": "23779756kb",
+    "walltime_seconds": 1143
+  },
+  "rank_comparisons": {
+    "rel_1e_2": {
+      "maximum_absolute_difference": 1791.0,
+      "median_absolute_difference": 482.5,
+      "median_relative_difference": 0.9245647969052224,
+      "pearson": 0.29007910580588236,
+      "rows": 184,
+      "spearman": 0.9060300701476118
+    },
+    "rel_1e_4": {
+      "maximum_absolute_difference": 1477.0,
+      "median_absolute_difference": 338.5,
+      "median_relative_difference": 0.5516877637130801,
+      "pearson": 0.8450459568839954,
+      "rows": 184,
+      "spearman": 0.924472310436356
+    },
+    "rel_1e_6": {
+      "maximum_absolute_difference": 1068.0,
+      "median_absolute_difference": 226.5,
+      "median_relative_difference": 0.3500316023989224,
+      "pearson": 0.9475918550444087,
+      "rows": 184,
+      "spearman": 0.9714048879865859
+    }
+  },
+  "report_version": "g40_p1d_legacy_comparison_v1",
+  "rows": 184,
+  "selection_sha256": "fff593779be3cf28c146be51932e16825932abe10bfe89cf29c6499f00e2dea3",
+  "state_ledger_sha256": "e2ef8ba1f030b1143bdca86badecd9413f5300d5e1513ae93b48b3875935f69e",
+  "stderr_log_sha256": "3dc32f63b9ea9244452671fbb9add324a6300be4a7f864e1bbd7950f12b27447",
+  "stdout_log_sha256": "1c8c4759c433462c642ab56ffca13c05fd57c760fc971432048097e7520c14ad"
+}
