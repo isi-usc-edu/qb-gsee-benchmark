@@ -215,7 +215,7 @@ def main() -> int:
     if versions != {args.extractor_version}:
         raise ValueError(f"unexpected extractor versions: {versions}")
     configurations = {
-        json.dumps(state["configuration"], sort_keys=True) for state in states
+        json.dumps(state.get("configuration", {}), sort_keys=True) for state in states
     }
     if len(configurations) != 1:
         raise ValueError("mixed pilot configurations")
@@ -238,9 +238,15 @@ def main() -> int:
         "sum_task_walltime_seconds": sum(walltimes),
         "median_task_walltime_seconds": statistics.median(walltimes),
         "maximum_task_walltime_seconds": max(walltimes),
+        "maximum_task_walltime_task_uuid": max(
+            states, key=lambda state: state["walltime_seconds"]
+        )["task_uuid"],
         "maximum_task_peak_rss_kb": max(
             state["process_peak_rss_kb"] for state in states
         ),
+        "maximum_task_peak_rss_task_uuid": max(
+            states, key=lambda state: state["process_peak_rss_kb"]
+        )["task_uuid"],
         "pbs": _pbs_accounting(args.accounting),
         "representation_pair_check": {
             key: representation[key]

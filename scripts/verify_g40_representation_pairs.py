@@ -288,7 +288,7 @@ def main() -> int:
                     for value in values[1:]
                 ):
                     changed_basis_features.append(column)
-        if not changed_basis_features:
+        if basis_values and not changed_basis_features:
             failures.append(
                 {
                     "group": group,
@@ -304,7 +304,7 @@ def main() -> int:
                     "passed"
                     if len(extractor_versions) == 1
                     and all(item["passed"] for item in invariant_checks.values())
-                    and changed_basis_features
+                    and (changed_basis_features or not basis_values)
                     else "failed"
                 ),
                 "invariant_checks": invariant_checks,

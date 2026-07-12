@@ -1,0 +1,172 @@
+{
+  "accounting": {
+    "path": "accounting.txt",
+    "sha256": "4c778f2941428e08e5e75c02651799976f738f30c1dd70427d8bc7042cce547c"
+  },
+  "block": "g40_p1d",
+  "code_revision": "c626e5c",
+  "configuration": {},
+  "extractor_version": "g40_p1d_interaction_spectrum_v1",
+  "feature_columns": [
+    "interaction_spectrum_active_pair_dimension",
+    "interaction_spectrum_decay_exponent",
+    "interaction_spectrum_effective_rank",
+    "interaction_spectrum_features_version",
+    "interaction_spectrum_max_abs_eigenvalue",
+    "interaction_spectrum_negative_mass_fraction",
+    "interaction_spectrum_pair_dimension",
+    "interaction_spectrum_participation_rank",
+    "interaction_spectrum_rank_rel_1e_2",
+    "interaction_spectrum_rank_rel_1e_4",
+    "interaction_spectrum_rank_rel_1e_6",
+    "interaction_spectrum_relative_gap",
+    "interaction_spectrum_zero_atol",
+    "interaction_spectrum_zero_rtol"
+  ],
+  "job_script": {
+    "path": "g40_p1d_pilot.pbs",
+    "sha256": "becda67fabe1ce866fffbf3aff5059e9e42b1f8f73c9e4ed14da391e215f2463"
+  },
+  "maximum_task_peak_rss_kb": 4422888,
+  "maximum_task_peak_rss_task_uuid": "5e53cc08-b541-5163-bbf2-66e195a6492f",
+  "maximum_task_walltime_seconds": 306.0638158041984,
+  "maximum_task_walltime_task_uuid": "10119019-eea2-45c9-a748-e206780c4235",
+  "median_task_walltime_seconds": 0.3296512709930539,
+  "pbs": {
+    "cpu_time_seconds": 14252,
+    "exit_status": 0,
+    "job_id": "7651564.imgt1",
+    "job_state": "F",
+    "memory": "4488740kb",
+    "ncpus": 128,
+    "queue": "compute",
+    "requested_walltime_seconds": 43200,
+    "virtual_memory": "13757560kb",
+    "walltime_seconds": 961
+  },
+  "report_version": "g40_p1bc_pilot_v1",
+  "representation_pair_check": {
+    "equivalence_groups": 4,
+    "groups_passed": 4,
+    "status": "passed"
+  },
+  "selected_tasks": 25,
+  "selection": {
+    "path": "task_uuids.txt",
+    "sha256": "82c10b05d5da5865bc1d0e8580e48d7b367f06a028bb694c5d94c271f42c68a0"
+  },
+  "state_ledger": [
+    {
+      "path": "001a0d11-165a-49c5-a334-643023029f40.interaction-spectrum.json",
+      "sha256": "eb82c7a14ecdc0a21f33d8f97aac48afea3e94a90e861845f38bef983efa622a"
+    },
+    {
+      "path": "01ec60f7-d38a-4c33-a498-659a388e10ee.interaction-spectrum.json",
+      "sha256": "dc57219716653e885357ecb107a8c0a9c173759d6f900a893d75dc86bd09bc11"
+    },
+    {
+      "path": "10119019-eea2-45c9-a748-e206780c4235.interaction-spectrum.json",
+      "sha256": "c51fd9fe0cbef0a5afb9eaa480914ae7fee298d6100536507fc37d76868293dd"
+    },
+    {
+      "path": "165a257c-248d-5e0a-b8cc-a3e8f7380931.interaction-spectrum.json",
+      "sha256": "5b2c1a20ea9e2c82b2c65f04a6043f26e50096e9da6d4a7c60196e1e3722ee85"
+    },
+    {
+      "path": "20e93441-9241-512c-93a9-5ae0da3534a7.interaction-spectrum.json",
+      "sha256": "f03f6e8dc88c3b27d76100ba529f094c52fbedf75b3b9d4a8d0800aa5b715d0c"
+    },
+    {
+      "path": "250107ee-1182-5b80-bbf7-6dbc4363c964.interaction-spectrum.json",
+      "sha256": "f95f160f18f11e4c4328edeae3c229169d127da9593c7ed9e95f0286fd09adb8"
+    },
+    {
+      "path": "2b2eefc4-9c8c-4a02-b621-059774f620c4.interaction-spectrum.json",
+      "sha256": "2951feb0bcc2f30635d79145c004c35c59f6f97aa5c4b508512df76e53b2f987"
+    },
+    {
+      "path": "3d343ddb-a898-5c0e-afc9-42b62d588c5e.interaction-spectrum.json",
+      "sha256": "c1af65062f9abfba4bb6f47b4e3d90a58f292e02bb4ac47cab99e72f8293eb8b"
+    },
+    {
+      "path": "3d5186f9-82b3-4de0-9bc1-242d7bdb678a.interaction-spectrum.json",
+      "sha256": "d4f1a6d5db7bc0e4f90fb60c4abbaf359f457c91b8d7efa2e856ae0090289f98"
+    },
+    {
+      "path": "443371ce-c80d-450d-b281-ac1c4d5ecc4d.interaction-spectrum.json",
+      "sha256": "2e3c5841a26585734648e6cfb335cac61ab9db94c6ff78c187d841fa782df465"
+    },
+    {
+      "path": "5e53cc08-b541-5163-bbf2-66e195a6492f.interaction-spectrum.json",
+      "sha256": "a8ab0fef9429d42b92bd17e595b6ae02a3fc7035013c3dedd92b7dec48cd76c7"
+    },
+    {
+      "path": "6cd8382a-9a9a-5c43-83b1-616c9f301ab1.interaction-spectrum.json",
+      "sha256": "e02e89aff7c8c7e9752331424fc17093d3e2283c983c232cb59427ea0780b90e"
+    },
+    {
+      "path": "81f65b14-2085-5443-b91b-3d791a55ab00.interaction-spectrum.json",
+      "sha256": "4372b738a53fac19438e1103bfaf5ee14d62cace09135b48e352d7d9c02f7755"
+    },
+    {
+      "path": "858b9683-fc6c-4ebe-8c33-27f0d848f24f.interaction-spectrum.json",
+      "sha256": "81dcf064d5dc0f6e845069f13e44786d8b11c9a5b9b28c8b4443c4a05d472160"
+    },
+    {
+      "path": "c9b3e84d-4e5b-5c34-8dd3-d1f72268769b.interaction-spectrum.json",
+      "sha256": "80ee9637e6e686f8e49e5ae89d148f9fa88d64d2a0980f2babe5f84dc3be30a3"
+    },
+    {
+      "path": "cb5392c3-fd91-50f3-be40-149559ae7b96.interaction-spectrum.json",
+      "sha256": "fc374de9db8a91dc1912788688157d3099cb02b5b1228b9796d80f84a97eaa04"
+    },
+    {
+      "path": "d14b3959-1860-5338-b338-66d17d6ca09c.interaction-spectrum.json",
+      "sha256": "1fc0fd055b9b6e53c57c06b9f664f24fb2f1d0cf5db6ca8d76bb1adb9299d0f5"
+    },
+    {
+      "path": "d836ebd5-ce4f-575a-a72d-889cb4ae4204.interaction-spectrum.json",
+      "sha256": "6ea03135ef0fd14e81b84791d3508e9cb95d80705458ed31ec98b45f51bbbbde"
+    },
+    {
+      "path": "dd80e2eb-9220-53ee-bac4-a087306dc309.interaction-spectrum.json",
+      "sha256": "b237306a2ce47dbe561fbb74384a3e865562505683695d0efe64e613ff85e41f"
+    },
+    {
+      "path": "e5a3592f-8ebe-584d-8b49-ec39e4d09743.interaction-spectrum.json",
+      "sha256": "6d3a470a8b0ef95f8399d242d203ee16eac4865c69b79a736c78ef0b1fd488b9"
+    },
+    {
+      "path": "f904f554-0540-5618-96a1-d8daf46a1158.interaction-spectrum.json",
+      "sha256": "609dbb04945617eca08b1d5711aa2a27f98d67992c5cb53b0314c0b4084267b7"
+    },
+    {
+      "path": "fc432cd0-4856-54f2-a240-9813d9fda019.interaction-spectrum.json",
+      "sha256": "c6254fa88225e6c90431ef71961e643104caf1934cc26183301dba60330eb510"
+    },
+    {
+      "path": "fcc8fbc8-87b5-5a77-b3e2-38539824873e.interaction-spectrum.json",
+      "sha256": "bb13189f4fa7b37dc5d95944075a5f1a5a0a15de7520e287567c432bf404feab"
+    },
+    {
+      "path": "ff0da1e2-2c76-4589-aefa-c13bb1a1ef8f.interaction-spectrum.json",
+      "sha256": "e11dbf3279e9196926c5b1f19318919c8fdd14df056d901ada63473608902fca"
+    },
+    {
+      "path": "ff3fa734-deca-5c94-8024-75f34c076b59.interaction-spectrum.json",
+      "sha256": "d391ac91db9ce321d38fed2b34bcba1207b6265a174fa3872ddae4d3ff0b01de"
+    }
+  ],
+  "state_ledger_sha256": "7480d6d8561063ca5793c59dfb66be2cd35928b363c9b2c5e1d5ccf200dcfe94",
+  "status": "passed",
+  "stderr_log": {
+    "path": "pilot.err",
+    "sha256": "24c51d03c660481a7cb967024ba2a997c01b41efa81139f881d6f858a3b34f09"
+  },
+  "stdout_log": {
+    "path": "pilot.out",
+    "sha256": "b3d9c5440f740cc8f0f924332435381d32e0cc59d0534739672aad56f23cf9bf"
+  },
+  "successful_states": 25,
+  "sum_task_walltime_seconds": 976.6979771060869
+}
