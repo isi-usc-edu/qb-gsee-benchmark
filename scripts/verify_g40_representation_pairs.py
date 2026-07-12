@@ -27,6 +27,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--rtol", type=float, default=1.0e-9)
     parser.add_argument("--atol", type=float, default=1.0e-10)
+    parser.add_argument("--state-pattern", default="*.linear.json")
+    parser.add_argument(
+        "--check-name", default="g40_p1a_g21_representation_pairs"
+    )
     return parser.parse_args()
 
 
@@ -48,7 +52,7 @@ def main() -> int:
             groups[group].append(task["task_uuid"])
 
     states = {}
-    for path in sorted(args.state_dir.glob("*.linear.json")):
+    for path in sorted(args.state_dir.glob(args.state_pattern)):
         state = json.loads(path.read_text())
         states[state["task_uuid"]] = state
 
@@ -149,7 +153,7 @@ def main() -> int:
         )
 
     payload = {
-        "check": "g40_p1a_g21_representation_pairs",
+        "check": args.check_name,
         "rtol": args.rtol,
         "atol": args.atol,
         "equivalence_groups": len(groups),

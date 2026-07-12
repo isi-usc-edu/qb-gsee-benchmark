@@ -163,8 +163,40 @@
   ],
   "pending_value_rebuild_columns": [],
   "planned_columns_excluded_until_populated": {
-    "pending_model_eligible": [],
-    "permanently_audit_only": []
+    "pending_model_eligible": [
+      "det_coupling_count_above_rel_1e_10",
+      "det_coupling_count_above_rel_1e_12",
+      "det_coupling_count_above_rel_1e_2",
+      "det_coupling_count_above_rel_1e_4",
+      "det_coupling_count_above_rel_1e_6",
+      "det_coupling_count_above_rel_1e_8",
+      "det_coupling_nonzero_degree",
+      "det_coupling_participation_ratio",
+      "det_coupling_scale",
+      "det_coupling_tail_loglog_slope",
+      "det_coupling_top_100_l2_mass_fraction",
+      "det_coupling_top_10_l2_mass_fraction",
+      "det_coupling_top_1_l2_mass_fraction",
+      "random_det_expected_degree_rel_1e_10",
+      "random_det_expected_degree_rel_1e_12",
+      "random_det_expected_degree_rel_1e_2",
+      "random_det_expected_degree_rel_1e_4",
+      "random_det_expected_degree_rel_1e_6",
+      "random_det_expected_degree_rel_1e_8"
+    ],
+    "permanently_audit_only": [
+      "det_coupling_reference",
+      "determinant_coupling_features_version",
+      "random_det_branching_determinants",
+      "random_det_branching_excitation_samples_per_det",
+      "random_det_branching_seed",
+      "random_det_expected_degree_mc_se_rel_1e_10",
+      "random_det_expected_degree_mc_se_rel_1e_12",
+      "random_det_expected_degree_mc_se_rel_1e_2",
+      "random_det_expected_degree_mc_se_rel_1e_4",
+      "random_det_expected_degree_mc_se_rel_1e_6",
+      "random_det_expected_degree_mc_se_rel_1e_8"
+    ]
   },
   "schema_version": "g40-p0-v2",
   "source_feature_table": "scripts/Hamiltonian_features.csv",

@@ -194,6 +194,21 @@ UNIVERSAL_T0_BAS_MODEL = {
     },
 }
 
+P1B_MODEL = {
+    "det_coupling_scale", "det_coupling_nonzero_degree",
+    "det_coupling_participation_ratio", "det_coupling_tail_loglog_slope",
+    *{f"det_coupling_count_above_rel_1e_{exponent}" for exponent in (12, 10, 8, 6, 4, 2)},
+    *{f"det_coupling_top_{top_k}_l2_mass_fraction" for top_k in (1, 10, 100)},
+    *{f"random_det_expected_degree_rel_1e_{exponent}" for exponent in (12, 10, 8, 6, 4, 2)},
+}
+P1B_AUDIT = {
+    "det_coupling_reference", "random_det_branching_seed",
+    "random_det_branching_determinants",
+    "random_det_branching_excitation_samples_per_det",
+    "determinant_coupling_features_version",
+    *{f"random_det_expected_degree_mc_se_rel_1e_{exponent}" for exponent in (12, 10, 8, 6, 4, 2)},
+}
+
 def metadata_for_column(column: str) -> FeatureColumnMetadata:
     """Return explicit P0 metadata; unknown columns fail closed."""
     if column in IDENTIFIERS:
@@ -263,6 +278,12 @@ def metadata_for_column(column: str) -> FeatureColumnMetadata:
             reason="parser or mean-field procedural diagnostic", role="audit-only")
     if column in UNIVERSAL_T0_INV_MODEL:
         return _feature(column, "T0", "INV", cost="integral_linear")
+    if column in P1B_MODEL:
+        return _feature(column, "T0", "BAS", cost="determinant_coupling")
+    if column in P1B_AUDIT:
+        return _feature(column, "T0", "BAS", eligible=False,
+            reason="deterministic reference, Monte Carlo configuration, uncertainty, or extractor version",
+            role="audit-only", cost="determinant_coupling")
     if column in UNIVERSAL_T0_BAS_MODEL:
         return _feature(column, "T0", "BAS", cost="integral_linear")
     raise KeyError(f"G-40 P0 has no metadata classification for column {column!r}")
@@ -273,6 +294,8 @@ PLANNED_COLUMNS = {
         UNIVERSAL_T0_INV_MODEL
         | UNIVERSAL_T0_BAS_MODEL
         | UNIVERSAL_T0_AUDIT_OUTPUTS
+        | P1B_MODEL
+        | P1B_AUDIT
     )
 }
 PLANNED_COLUMNS["fermionic_coefficient_l1_norm"] = _feature(
