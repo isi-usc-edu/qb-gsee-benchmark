@@ -186,6 +186,16 @@ def main() -> int:
     state_paths = sorted(args.state_dir.glob(args.state_pattern))
     states = [json.loads(path.read_text()) for path in state_paths]
     state_ids = [state.get("task_uuid") for state in states]
+    mismatched_filenames = [
+        path.name
+        for path, state in zip(state_paths, states)
+        if path.name != f"{state.get('task_uuid')}.mfproto.json"
+    ]
+    if mismatched_filenames:
+        raise ValueError(
+            "production state filenames do not match task UUIDs: "
+            f"{mismatched_filenames}"
+        )
     if len(state_ids) != len(set(state_ids)):
         raise ValueError("duplicate production task state")
     if set(state_ids) != set(records_by_uuid):
@@ -214,8 +224,18 @@ def main() -> int:
         }
         if mismatches:
             raise ValueError(f"invalid production state {task_uuid}: {mismatches}")
-        if not state.get("source_sha256"):
-            raise ValueError(f"production state lacks source checksum: {task_uuid}")
+        source_sha256 = state.get("source_sha256")
+        if (
+            not isinstance(source_sha256, str)
+            or len(source_sha256) != 64
+            or any(
+                character not in "0123456789abcdef"
+                for character in source_sha256.lower()
+            )
+        ):
+            raise ValueError(
+                f"production state has invalid source SHA-256: {task_uuid}"
+            )
         if set(state.get("features") or {}) != contract_columns:
             raise ValueError(f"production state violates P2 contract: {task_uuid}")
 

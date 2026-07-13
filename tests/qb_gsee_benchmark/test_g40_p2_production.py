@@ -78,7 +78,7 @@ def _state(record, columns, *, walltime: float) -> dict:
         "source_url": record.url,
         "declared_checksum": record.checksum,
         "declared_checksum_type": record.checksum_type,
-        "source_sha256": "source-sha256",
+        "source_sha256": "0" * 64,
         "manifest_signature": record.signature(),
         "manifest_ms2_metadata": record.ms2_metadata,
         "extractor_version": "g40_p2_mfproto_v2",
@@ -96,7 +96,9 @@ def _state(record, columns, *, walltime: float) -> dict:
     }
 
 
-def _run_prepare_and_build(tmp_path: Path) -> tuple[Path, Path, Path, list[str]]:
+def _run_prepare_and_build(
+    tmp_path: Path,
+) -> tuple[Path, Path, Path, list[str], list[str]]:
     problem_instances, feature_table, records = _write_fixture_corpus(tmp_path)
     contract = json.loads(CONTRACT.read_text())
     columns = contract["output_columns"]
@@ -226,11 +228,11 @@ def _run_prepare_and_build(tmp_path: Path) -> tuple[Path, Path, Path, list[str]]
         "--output-prefix",
         str(output_prefix),
     ]
-    return feature_table, output_prefix, run_dir, build
+    return feature_table, output_prefix, run_dir, build, prepare
 
 
 def test_p2_production_plan_is_deterministic_and_seeds_passed_pilot(tmp_path) -> None:
-    _, _, run_dir, _ = _run_prepare_and_build(tmp_path)
+    _, _, run_dir, _, prepare = _run_prepare_and_build(tmp_path)
     plan = json.loads((run_dir / "production_plan.json").read_text())
     assert plan["plan_version"] == "g40_p2_production_plan_v1"
     assert plan["corpus_tasks"] == 3
@@ -244,9 +246,30 @@ def test_p2_production_plan_is_deterministic_and_seeds_passed_pilot(tmp_path) ->
     }
     assert shard_tasks == {item["task_uuid"] for item in plan["tasks"]}
 
+    state_path = sorted((run_dir / "state").glob("*.mfproto.json"))[0]
+    wrong_path = state_path.with_name("wrong.mfproto.json")
+    state_path.rename(wrong_path)
+    failed = subprocess.run(
+        prepare, cwd=ROOT, check=False, capture_output=True, text=True
+    )
+    assert failed.returncode != 0
+    assert "state filename does not match task UUID" in failed.stderr
+    wrong_path.rename(state_path)
+
+    original_state = state_path.read_bytes()
+    payload = json.loads(original_state)
+    payload["source_sha256"] = "not-a-digest"
+    state_path.write_text(json.dumps(payload) + "\n")
+    failed = subprocess.run(
+        prepare, cwd=ROOT, check=False, capture_output=True, text=True
+    )
+    assert failed.returncode != 0
+    assert "invalid source_sha256" in failed.stderr
+    state_path.write_bytes(original_state)
+
 
 def test_p2_production_merge_is_additive_idempotent_and_fail_closed(tmp_path) -> None:
-    feature_table, output_prefix, _, build = _run_prepare_and_build(tmp_path)
+    feature_table, output_prefix, run_dir, build, _ = _run_prepare_and_build(tmp_path)
     subprocess.run(build, cwd=ROOT, check=True, capture_output=True, text=True)
     first_table = feature_table.read_bytes()
     first_report = json.loads(output_prefix.with_suffix(".json").read_text())
@@ -263,6 +286,27 @@ def test_p2_production_merge_is_additive_idempotent_and_fail_closed(tmp_path) ->
         second_report["output_feature_table_sha256"]
         == first_report["output_feature_table_sha256"]
     )
+
+    state_path = sorted((run_dir / "state").glob("*.mfproto.json"))[0]
+    wrong_path = state_path.with_name("wrong.mfproto.json")
+    state_path.rename(wrong_path)
+    failed = subprocess.run(
+        build, cwd=ROOT, check=False, capture_output=True, text=True
+    )
+    assert failed.returncode != 0
+    assert "state filenames do not match task UUIDs" in failed.stderr
+    wrong_path.rename(state_path)
+
+    original_state = state_path.read_bytes()
+    payload = json.loads(original_state)
+    payload["source_sha256"] = "not-a-digest"
+    state_path.write_text(json.dumps(payload) + "\n")
+    failed = subprocess.run(
+        build, cwd=ROOT, check=False, capture_output=True, text=True
+    )
+    assert failed.returncode != 0
+    assert "invalid source SHA-256" in failed.stderr
+    state_path.write_bytes(original_state)
 
     rows = []
     with feature_table.open(newline="") as handle:

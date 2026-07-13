@@ -74,8 +74,15 @@ def _validate_state(
     }
     if mismatches:
         raise ValueError(f"invalid state metadata for {record.task_uuid}: {mismatches}")
-    if not state.get("source_sha256"):
-        raise ValueError(f"state {record.task_uuid} lacks source_sha256")
+    source_sha256 = state.get("source_sha256")
+    if (
+        not isinstance(source_sha256, str)
+        or len(source_sha256) != 64
+        or any(
+            character not in "0123456789abcdef" for character in source_sha256.lower()
+        )
+    ):
+        raise ValueError(f"state {record.task_uuid} has invalid source_sha256")
     if set(state.get("features") or {}) != contract_columns:
         raise ValueError(f"state {record.task_uuid} does not match P2 contract")
 
@@ -179,6 +186,8 @@ def main() -> int:
             raise ValueError(f"pilot state checksum mismatch: {path.name}")
         state = json.loads(path.read_text())
         task_uuid = state["task_uuid"]
+        if path.name != f"{task_uuid}.mfproto.json":
+            raise ValueError(f"pilot state filename does not match task UUID: {path}")
         if task_uuid not in records_by_uuid:
             raise ValueError(f"pilot state is outside the live corpus: {task_uuid}")
         _validate_state(
@@ -197,6 +206,10 @@ def main() -> int:
     for existing in sorted(state_dir.glob("*.mfproto.json")):
         state = json.loads(existing.read_text())
         task_uuid = state.get("task_uuid")
+        if existing.name != f"{task_uuid}.mfproto.json":
+            raise ValueError(
+                f"production state filename does not match task UUID: {existing}"
+            )
         if task_uuid not in records_by_uuid:
             raise ValueError(f"production state is outside live corpus: {existing}")
         _validate_state(
