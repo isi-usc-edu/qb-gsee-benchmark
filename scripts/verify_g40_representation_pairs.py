@@ -48,6 +48,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--check-name", default="g40_p1a_g21_representation_pairs"
     )
+    parser.add_argument("--code-revision")
     parser.add_argument(
         "--permutation-certificates",
         type=Path,
@@ -322,6 +323,8 @@ def main() -> int:
 
     reports = []
     failures = []
+    rotation_groups_with_basis_features = []
+    rotation_groups_with_observed_basis_drift = []
     for group, task_uuids in sorted(groups.items()):
         missing = sorted(set(task_uuids) - set(states))
         if missing:
@@ -397,13 +400,10 @@ def main() -> int:
                     for value in values[1:]
                 ):
                     changed_basis_features.append(column)
-        if basis_values and not changed_basis_features:
-            failures.append(
-                {
-                    "group": group,
-                    "reason": "no_representation_sensitive_feature_changed",
-                }
-            )
+        if basis_values:
+            rotation_groups_with_basis_features.append(group)
+        if changed_basis_features:
+            rotation_groups_with_observed_basis_drift.append(group)
         reports.append(
             {
                 "equivalence_group_id": group,
@@ -413,7 +413,6 @@ def main() -> int:
                     "passed"
                     if len(extractor_versions) == 1
                     and all(item["passed"] for item in invariant_checks.values())
-                    and (changed_basis_features or not basis_values)
                     else "failed"
                 ),
                 "invariant_checks": invariant_checks,
@@ -425,6 +424,18 @@ def main() -> int:
                 ),
                 "basis_feature_values": basis_values,
                 "changed_basis_features": changed_basis_features,
+                "basis_drift_observed": bool(changed_basis_features),
+            }
+        )
+
+    if (
+        rotation_groups_with_basis_features
+        and not rotation_groups_with_observed_basis_drift
+    ):
+        failures.append(
+            {
+                "reason": "no_representation_sensitive_feature_changed_in_rotation_pair_set",
+                "groups": rotation_groups_with_basis_features,
             }
         )
 
@@ -450,6 +461,22 @@ def main() -> int:
         "reports": reports,
         "failures": failures,
     }
+    if not args.permutation_only:
+        payload["rotation_pair_nonvacuity"] = {
+            "groups_with_basis_features": rotation_groups_with_basis_features,
+            "groups_with_observed_basis_drift": rotation_groups_with_observed_basis_drift,
+            "status": (
+                "not_applicable"
+                if not rotation_groups_with_basis_features
+                else (
+                    "passed"
+                    if rotation_groups_with_observed_basis_drift
+                    else "failed"
+                )
+            ),
+        }
+    if args.code_revision is not None:
+        payload["code_revision"] = args.code_revision
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
     print(

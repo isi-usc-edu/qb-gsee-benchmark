@@ -1,9 +1,8 @@
 # G40 P2 MFPROTO-v2 ratified protocol
 
-Status: **ratified protocol; pilot submission held pending the focused P2-FIX
-spot-check.** This revision incorporates the binding goals-review-12 amendments.
-The implementation and protocol must be committed and FIX.1--FIX.3 spot-checked
-before pilot authorization; production remains gated on pilot review. Layer 1
+Status: **ratified protocol; P2-FIX.1--.6 accepted and pilot submitted at
+`1b35f2d`; production remains held pending pilot review.** This revision
+incorporates the binding goals-review-12 and 12.5 amendments. Layer 1
 records the binding G40 rulings. Layer 2 is the frozen numerical contract for v2.
 
 ## Scope and tags
@@ -266,6 +265,14 @@ no coverage check may pass on a false expected outcome. This UUID mechanism is
 a consistency check between the declarations and frozen selection, not an
 independent verification that a mask fires; regimes omitted from both mappings
 remain unchecked and are left to the pilot report unexpected-mask backstop.
+For certified orbital-rotation pairs, every model-eligible `INV` column must
+agree within the gate tolerance. Representation-sensitive drift is required
+across the selected rotation-pair set, not separately in every pair: `BAS`,
+`BAS+ORD`, and `GAUGE` tags mean that a value may depend on representation, not
+that every unitary rotation must move it. A pair with no observed drift is
+therefore recorded explicitly but does not fail when another selected pair
+makes the detector nonvacuous; zero observed drift across the whole selected
+set fails closed.
 
 Use one 128-core `compute` node per memory-dominant task, omit an explicit
 memory request, and use `backfill` only after compute allocation is exhausted.
@@ -281,5 +288,7 @@ Goals-review 10 approved the base protocol. Goals-review 12 accepted the prior
 implementation wave, ratified the exact-zero finite-kappa limit and UHF
 spin-fused pair graph, and required this v2 recursive tie pin, classify-once
 hysteresis, deterministic external ceiling, selection tie band, gradient
-normalization, and honest mask preregistration. The pilot remains held until the
-P2-FIX commit receives the focused FIX.1--FIX.3 PI spot-check.
+normalization, and honest mask preregistration. Goals-review 12.5 accepted
+FIX.1--.5 and authorized submission after FIX.6; commit `1b35f2d` completed
+that amendment and launched the pilot. Production remains held pending review
+of the pilot evidence and any repair evidence.

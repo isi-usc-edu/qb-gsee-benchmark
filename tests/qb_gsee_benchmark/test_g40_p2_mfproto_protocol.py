@@ -11,7 +11,7 @@ def _text() -> str:
 def test_mfproto_ratification_freezes_required_numerics() -> None:
     text = _text()
     for required in (
-        "pilot submission held pending",
+        "production remains held pending pilot review",
         "g40_p2_mfproto_v2",
         "PySCF 2.8.0",
         "G1 core",
@@ -52,6 +52,8 @@ def test_mfproto_ratification_contains_all_required_doc_fixes() -> None:
         "future sign-odd column",
         "future cliff-sensitive column requires an explicit band mask",
         "consistency check between the declarations and frozen selection",
+        "across the selected rotation-pair set",
+        "zero observed drift across the whole selected set fails closed",
     ):
         assert required in text
 
@@ -62,7 +64,7 @@ def test_mfproto_marks_binding_resolutions_and_v2_exclusions() -> None:
     assert text.count("PI-ratified by goals-review 12") >= 2
     assert "Krylov-Ritz and RPA are absent from MFPROTO-v2" in text
     assert "iterative lowest-pole formulation is the admissible post-v2 route" in text
-    assert "focused FIX.1--FIX.3 PI spot-check" in text
+    assert "Goals-review 12.5 accepted" in text
     for obsolete in (
         "proposal for PI ratification",
         "Krylov-Ritz amendment request",
