@@ -1,3 +1,4 @@
+import hashlib
 import json
 import subprocess
 import sys
@@ -189,4 +190,82 @@ def test_p2_pilot_report_binds_states_contract_representation_and_cost(
     assert repaired_report["status"] == "passed"
     assert [item["job_id"] for item in repaired_report["superseded_pbs_jobs"]] == [
         "0.imgt1"
+    ]
+
+
+def test_committed_p2_pilot_report_closes_all_gates_and_preserves_repair() -> None:
+    report_path = OUT / "g40_p2_pilot_report.json"
+    current_check_path = OUT / "g40_p2_representation_pair_check.json"
+    superseded_check_path = (
+        OUT / "g40_p2_representation_pair_check_superseded_1b35f2d.json"
+    )
+    report = json.loads(report_path.read_text())
+    current_check = json.loads(current_check_path.read_text())
+    superseded_check = json.loads(superseded_check_path.read_text())
+
+    assert report["report_version"] == "g40_p2_pilot_report_v3"
+    assert report["status"] == "passed"
+    assert report["code_revision"] == "1b35f2d"
+    assert report["verifier_code_revision"] == "8f369a6"
+    assert report["report_code_revision"] == "8f369a6"
+    assert report["successful_states"] == report["selected_tasks"] == 25
+    assert report["output_contract"]["status"] == "passed"
+    assert report["output_contract"]["columns"] == 327
+    assert report["representation_gate"]["status"] == "passed"
+    assert report["representation_gate"]["groups_passed"] == 6
+    assert report["representation_gate"]["failures"] == []
+    assert report["representation_gate"]["rotation_pair_nonvacuity"]["status"] == (
+        "passed"
+    )
+    assert report["pbs_gate"] == {
+        "failed_job_ids": [],
+        "jobs": 11,
+        "status": "passed",
+        "successful_jobs": 11,
+        "unauthorized_queue_job_ids": [],
+    }
+    assert [item["job_id"] for item in report["pbs_jobs"]] == [
+        *(f"{job_id}.imgt1" for job_id in range(7651821, 7651831)),
+        "7652168.imgt1",
+    ]
+    assert [
+        (item["job_id"], item["exit_status"]) for item in report["superseded_pbs_jobs"]
+    ] == [("7651831.imgt1", 1)]
+    assert report["mask_regime_gate"]["status"] == "passed"
+    assert all(
+        item["status"] in {"passed", "unreachable in corpus, fixture-covered"}
+        for item in report["mask_regime_coverage"].values()
+    )
+    assert report["degenerate_fock_states"] == 15
+    assert len(report["tie_audit_ledger"]) == 15
+    assert {
+        "ac3a023f-8d31-5d79-803e-c54e947c8d75",
+        "beabcf8f-a6c0-5e32-9385-110ff65cbbf0",
+    } <= {item["task_uuid"] for item in report["tie_audit_ledger"]}
+    assert report["cost_gate"]["projected_production_node_hours"] < 23.0
+    assert report["cost_gate"]["maximum_memory_gb"] < 94.0
+    assert report["cost_gate"]["node_hour_status"] == "passed"
+    assert report["cost_gate"]["memory_status"] == "passed"
+
+    assert current_check["status"] == "passed"
+    assert current_check["code_revision"] == "8f369a6"
+    assert current_check["groups_passed"] == current_check["equivalence_groups"] == 6
+    assert current_check["rotation_pair_nonvacuity"]["status"] == "passed"
+    assert superseded_check["status"] == "failed"
+    assert superseded_check["failures"] == [
+        {
+            "group": "b696450f-72ab-5509-b932-61fb30eda535",
+            "reason": "no_representation_sensitive_feature_changed",
+        }
+    ]
+
+    assert report["representation_check"] == {
+        "path": current_check_path.name,
+        "sha256": hashlib.sha256(current_check_path.read_bytes()).hexdigest(),
+    }
+    assert report["superseded_representation_checks"] == [
+        {
+            "path": superseded_check_path.name,
+            "sha256": hashlib.sha256(superseded_check_path.read_bytes()).hexdigest(),
+        }
     ]
