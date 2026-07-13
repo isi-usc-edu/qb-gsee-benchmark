@@ -33,9 +33,9 @@ def test_p2_pilot_report_binds_states_contract_representation_and_cost(
         state = {
             "status": "success",
             "task_uuid": task_uuid,
-            "extractor_version": "g40_p2_mfproto_v1",
+            "extractor_version": "g40_p2_mfproto_v2",
             "code_revision": "revision",
-            "configuration": {"protocol_version": "g40_p2_mfproto_v1"},
+            "configuration": {"protocol_version": "g40_p2_mfproto_v2"},
             "walltime_seconds": 10.0,
             "features": features,
         }
@@ -105,3 +105,7 @@ def test_p2_pilot_report_binds_states_contract_representation_and_cost(
     assert report["cost_gate"]["node_hour_status"] == "passed"
     assert report["cost_gate"]["memory_status"] == "passed"
     assert len(report["state_ledger"]) == 25
+    assert (
+        report["mask_regime_coverage"]["natural_occupation_out_of_range"]["status"]
+        == "unreachable in corpus, fixture-covered"
+    )

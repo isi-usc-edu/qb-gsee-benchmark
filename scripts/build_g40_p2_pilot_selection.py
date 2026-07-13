@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build and verify the frozen G40 P2 MFPROTO-v1 pilot selection."""
+"""Build and verify the frozen G40 P2 MFPROTO-v2 pilot selection."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from typing import Any
 
 import pandas as pd
 
-PROTOCOL_VERSION = "g40_p2_mfproto_v1"
+PROTOCOL_VERSION = "g40_p2_mfproto_v2"
 
 # Labels here are preregistered expectations, not observed pilot outcomes.
 TASK_EXPECTATIONS: dict[str, dict[str, Any]] = {
@@ -25,16 +25,12 @@ TASK_EXPECTATIONS: dict[str, dict[str, Any]] = {
     "10119019-eea2-45c9-a748-e206780c4235": {
         "domain": "molecular",
         "correlation": "strong",
-        "expected_masks": [
-            "rhf_not_attempted_ms2_nonzero",
-            "external_stability_cost_ceiling",
-        ],
+        "expected_masks": ["rhf_not_attempted_ms2_nonzero"],
     },
     "165a257c-248d-5e0a-b8cc-a3e8f7380931": {
         "domain": "lattice",
         "correlation": "strong",
         "degenerate_fock_expected": True,
-        "expected_masks": ["mp2_denominator_below_threshold"],
     },
     "20e93441-9241-512c-93a9-5ae0da3534a7": {
         "domain": "molecular",
@@ -47,7 +43,11 @@ TASK_EXPECTATIONS: dict[str, dict[str, Any]] = {
     "3d343ddb-a898-5c0e-afc9-42b62d588c5e": {
         "domain": "molecular",
         "correlation": "strong",
-        "expected_masks": ["rhf_not_attempted_ms2_nonzero"],
+        "expected_masks": [
+            "rhf_not_attempted_ms2_nonzero",
+            "spin_gap_sector_empty",
+            "all_amplitudes_masked",
+        ],
         "representation_rotation_pair": True,
     },
     "3d5186f9-82b3-4de0-9bc1-242d7bdb678a": {
@@ -61,12 +61,15 @@ TASK_EXPECTATIONS: dict[str, dict[str, Any]] = {
     "5e53cc08-b541-5163-bbf2-66e195a6492f": {
         "domain": "lattice",
         "correlation": "weak",
-        "expected_masks": ["external_stability_cost_ceiling"],
     },
     "6cd8382a-9a9a-5c43-83b1-616c9f301ab1": {
         "domain": "molecular",
         "correlation": "strong",
-        "expected_masks": ["rhf_not_attempted_ms2_nonzero"],
+        "expected_masks": [
+            "rhf_not_attempted_ms2_nonzero",
+            "spin_gap_sector_empty",
+            "all_amplitudes_masked",
+        ],
         "representation_rotation_pair": True,
     },
     "81f65b14-2085-5443-b91b-3d791a55ab00": {
@@ -88,13 +91,11 @@ TASK_EXPECTATIONS: dict[str, dict[str, Any]] = {
         "domain": "lattice",
         "correlation": "strong",
         "degenerate_fock_expected": True,
-        "expected_masks": ["mp2_denominator_below_threshold"],
         "r7_permutation_source": True,
     },
     "c9b3e84d-4e5b-5c34-8dd3-d1f72268769b": {
         "domain": "analytic_model",
         "correlation": "strong",
-        "expected_masks": ["natural_occupation_out_of_range"],
     },
     "cb5392c3-fd91-50f3-be40-149559ae7b96": {
         "domain": "molecular",
@@ -118,7 +119,6 @@ TASK_EXPECTATIONS: dict[str, dict[str, Any]] = {
     "e5a3592f-8ebe-584d-8b49-ec39e4d09743": {
         "domain": "analytic_model",
         "correlation": "strong",
-        "expected_masks": ["natural_occupation_out_of_range"],
     },
     "f904f554-0540-5618-96a1-d8daf46a1158": {
         "domain": "molecular",
@@ -128,10 +128,7 @@ TASK_EXPECTATIONS: dict[str, dict[str, Any]] = {
         "domain": "lattice",
         "correlation": "strong",
         "degenerate_fock_expected": True,
-        "expected_masks": [
-            "mp2_denominator_below_threshold",
-            "external_stability_cost_ceiling",
-        ],
+        "expected_masks": ["external_stability_dimension_ceiling"],
     },
     "fcc8fbc8-87b5-5a77-b3e2-38539824873e": {
         "domain": "lattice",
@@ -143,6 +140,53 @@ TASK_EXPECTATIONS: dict[str, dict[str, Any]] = {
         "domain": "molecular",
         "correlation": "strong",
         "expected_masks": ["rhf_not_attempted_ms2_nonzero"],
+    },
+}
+
+
+MASK_REGIME_COVERAGE: dict[str, dict[str, Any]] = {
+    "rhf_not_attempted_ms2_nonzero": {
+        "status": "corpus-reachable",
+        "task_uuids": [
+            "10119019-eea2-45c9-a748-e206780c4235",
+            "3d343ddb-a898-5c0e-afc9-42b62d588c5e",
+            "6cd8382a-9a9a-5c43-83b1-616c9f301ab1",
+            "ac3a023f-8d31-5d79-803e-c54e947c8d75",
+            "fcc8fbc8-87b5-5a77-b3e2-38539824873e",
+            "ff0da1e2-2c76-4589-aefa-c13bb1a1ef8f",
+        ],
+    },
+    "spin_gap_sector_empty": {
+        "status": "corpus-reachable",
+        "task_uuids": [
+            "3d343ddb-a898-5c0e-afc9-42b62d588c5e",
+            "6cd8382a-9a9a-5c43-83b1-616c9f301ab1",
+            "ac3a023f-8d31-5d79-803e-c54e947c8d75",
+            "fcc8fbc8-87b5-5a77-b3e2-38539824873e",
+        ],
+    },
+    "all_amplitudes_masked": {
+        "status": "corpus-reachable",
+        "task_uuids": [
+            "3d343ddb-a898-5c0e-afc9-42b62d588c5e",
+            "6cd8382a-9a9a-5c43-83b1-616c9f301ab1",
+        ],
+    },
+    "external_stability_dimension_ceiling": {
+        "status": "corpus-reachable",
+        "task_uuids": ["fc432cd0-4856-54f2-a240-9813d9fda019"],
+    },
+    "mp2_denominator_below_threshold": {
+        "status": "unreachable in corpus, fixture-covered",
+        "fixture_tests": [
+            "tests/qb_gsee_benchmark/test_mfproto_masks.py::test_all_denominators_below_threshold_fail_closed"
+        ],
+    },
+    "natural_occupation_out_of_range": {
+        "status": "unreachable in corpus, fixture-covered",
+        "fixture_tests": [
+            "tests/qb_gsee_benchmark/test_mfproto_masks.py::test_natural_occupation_out_of_range_fail_closed"
+        ],
     },
 }
 
@@ -235,21 +279,25 @@ def build_manifest(feature_table: Path) -> dict[str, Any]:
             task["degenerate_fock_expected"] for task in tasks
         )
         >= 2,
-        "two_expected_no_mask_rows": mask_counts.get(
-            "natural_occupation_out_of_range", 0
-        )
-        >= 2,
-        "two_per_other_expected_mask_regime": all(
-            count >= 2
-            for reason, count in mask_counts.items()
-            if reason != "natural_occupation_out_of_range"
+        "reachable_mask_regimes_have_proven_rows": all(
+            coverage["task_uuids"]
+            and set(coverage["task_uuids"])
+            == {task["task_uuid"] for task in tasks if reason in task["expected_masks"]}
+            for reason, coverage in MASK_REGIME_COVERAGE.items()
+            if coverage["status"] == "corpus-reachable"
+        ),
+        "unreachable_mask_regimes_fixture_covered": all(
+            coverage["status"] == "unreachable in corpus, fixture-covered"
+            and bool(coverage["fixture_tests"])
+            for coverage in MASK_REGIME_COVERAGE.values()
+            if coverage["status"] != "corpus-reachable"
         ),
     }
     if not all(checks.values()):
         raise ValueError(f"P2 selection coverage failed: {checks}")
 
     return {
-        "manifest_version": "g40_p2_pilot_selection_v1",
+        "manifest_version": "g40_p2_pilot_selection_v2",
         "protocol_version": PROTOCOL_VERSION,
         "selection_policy": (
             "Frozen before pilot execution; objective fields are derived from the "
@@ -257,6 +305,7 @@ def build_manifest(feature_table: Path) -> dict[str, Any]:
         ),
         "selected_tasks": len(tasks),
         "coverage_checks": checks,
+        "mask_regime_coverage": MASK_REGIME_COVERAGE,
         "coverage_counts": {
             "size_band_v1_8": count("size_band_v1_8"),
             "shell": count("shell"),

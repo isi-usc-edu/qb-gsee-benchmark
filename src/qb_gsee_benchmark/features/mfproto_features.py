@@ -1,7 +1,7 @@
 # Copyright 2026.
 # Licensed under the Apache License, Version 2.0.
 
-"""Deterministic numerical primitives for G40 MFPROTO-v1."""
+"""Deterministic numerical primitives for G40 MFPROTO-v2."""
 
 from __future__ import annotations
 
@@ -12,8 +12,11 @@ from typing import Any
 from qb_gsee_benchmark.features.fcidump_sparse import SparseFcidump
 import numpy as np
 
-MFPROTO_VERSION = "g40_p2_mfproto_v1"
-DEGENERACY_ATOL = 1.0e-10
+MFPROTO_VERSION = "g40_p2_mfproto_v2"
+DEGENERACY_ENTER_ATOL = 1.0e-10
+DEGENERACY_ATOL = 1.0e-8
+PROJECTED_INDEX_DEGENERACY_ATOL = 1.0e-10
+COORDINATE_PIN_TOL = 1.0e-12
 FERMI_RESIDUAL_TOL = 1.0e-13
 FERMI_BRACKET_TOL = 1.0e-13
 THERMAL_KT_GRID = (0.025, 0.1, 0.25)
@@ -23,7 +26,9 @@ SCF_GRADIENT_TOL = 1.0e-6
 SCF_MAX_CYCLE = 150
 SOLUTION_ENERGY_TOL = 1.0e-7
 SOLUTION_DENSITY_TOL = 1.0e-4
+SELECTION_ENERGY_TIE_TOL = 1.0e-10
 GUESS_ORDER = ("G1", "G2", "G3", "G4")
+METHOD_ORDER = ("RHF", "UHF")
 IPR_WINDOW_GRID = (0.1, 0.5)
 
 
@@ -33,6 +38,8 @@ class CanonicalSpectrum:
     eigenvectors: np.ndarray
     minimum_adjacent_split: float | None
     degenerate_subspace_count: int
+    projected_index_tied_subspace_count: int
+    hysteresis_band_split_count: int
 
 
 @dataclass(frozen=True)
@@ -62,6 +69,8 @@ class MeanFieldBranch:
     orbitals_beta: np.ndarray | None
     energies_alpha: np.ndarray | None
     energies_beta: np.ndarray | None
+    fock_canonical_audit_alpha: dict[str, float | int | None] | None
+    fock_canonical_audit_beta: dict[str, float | int | None] | None
     s2: float | None
     cycles: int
     error_type: str | None = None
@@ -75,7 +84,7 @@ class MeanFieldResult:
     components: list[list[int]]
     selected_branch_index: int | None
     core_spectrum: CanonicalSpectrum
-    tie_audit: dict[str, float | int | bool | None]
+    tie_audit: dict[str, float | int | bool | str | None]
 
     @property
     def selected(self) -> MeanFieldBranch | None:
@@ -120,10 +129,49 @@ def _fix_column_signs(vectors: np.ndarray) -> np.ndarray:
     return result
 
 
+def _coordinate_pinned_basis(
+    subspace: np.ndarray, *, tolerance: float = COORDINATE_PIN_TOL
+) -> np.ndarray:
+    """Build a basis from coordinate projections, independent of input rotation."""
+    subspace = np.asarray(subspace, dtype=float)
+    dimension = subspace.shape[1]
+    projector = subspace @ subspace.T
+    basis: list[np.ndarray] = []
+    for index in range(projector.shape[0]):
+        vector = projector[:, index].copy()
+        for _ in range(2):
+            for prior in basis:
+                vector -= np.dot(prior, vector) * prior
+        norm = float(np.linalg.norm(vector))
+        if norm <= tolerance:
+            continue
+        vector /= norm
+        pivot = int(np.flatnonzero(np.abs(vector) == np.max(np.abs(vector)))[0])
+        if vector[pivot] < 0.0:
+            vector *= -1.0
+        basis.append(vector)
+        if len(basis) == dimension:
+            break
+    if len(basis) != dimension:
+        raise RuntimeError("coordinate pin did not span the degenerate subspace")
+    return np.column_stack(basis)
+
+
+def _spectrum_audit(spectrum: CanonicalSpectrum) -> dict[str, float | int | None]:
+    return {
+        "minimum_adjacent_split": spectrum.minimum_adjacent_split,
+        "degenerate_subspace_count": spectrum.degenerate_subspace_count,
+        "projected_index_tied_subspace_count": (
+            spectrum.projected_index_tied_subspace_count
+        ),
+        "hysteresis_band_split_count": spectrum.hysteresis_band_split_count,
+    }
+
+
 def canonical_eigh(
     matrix: np.ndarray, *, degeneracy_atol: float = DEGENERACY_ATOL
 ) -> CanonicalSpectrum:
-    """Diagonalize with the MFPROTO projected shipped-index tie rule."""
+    """Diagonalize with recursive projected-index and coordinate tie pins."""
     matrix = np.asarray(matrix, dtype=float)
     if matrix.ndim != 2 or matrix.shape[0] != matrix.shape[1]:
         raise ValueError("matrix must be square")
@@ -136,14 +184,32 @@ def canonical_eigh(
     groups = _degenerate_groups(values, degeneracy_atol)
     shipped_index = np.arange(matrix.shape[0], dtype=float)
     degenerate_count = 0
+    projected_tie_count = 0
+    hysteresis_band_count = 0
     for group in groups:
         if group.stop - group.start < 2:
             continue
         degenerate_count += 1
+        splits = np.abs(np.diff(values[group]))
+        hysteresis_band_count += int(
+            np.count_nonzero(
+                (splits > DEGENERACY_ENTER_ATOL) & (splits <= degeneracy_atol)
+            )
+        )
         subspace = vectors[:, group]
         projected = subspace.T @ (shipped_index[:, None] * subspace)
-        _, rotation = np.linalg.eigh(projected)
-        vectors[:, group] = subspace @ rotation
+        projected_values, rotation = np.linalg.eigh(projected)
+        resolved = subspace @ rotation
+        for projected_group in _degenerate_groups(
+            projected_values, PROJECTED_INDEX_DEGENERACY_ATOL
+        ):
+            if projected_group.stop - projected_group.start < 2:
+                continue
+            projected_tie_count += 1
+            resolved[:, projected_group] = _coordinate_pinned_basis(
+                resolved[:, projected_group]
+            )
+        vectors[:, group] = resolved
     vectors = _fix_column_signs(vectors)
     minimum_split = None if values.size < 2 else float(np.min(np.abs(np.diff(values))))
     return CanonicalSpectrum(
@@ -151,6 +217,8 @@ def canonical_eigh(
         eigenvectors=vectors,
         minimum_adjacent_split=minimum_split,
         degenerate_subspace_count=degenerate_count,
+        projected_index_tied_subspace_count=projected_tie_count,
+        hysteresis_band_split_count=hysteresis_band_count,
     )
 
 
@@ -205,12 +273,16 @@ def fermi_occupations(
 
 
 def initial_spin_density_guesses(
-    h1: np.ndarray, nelec: int, ms2: int
+    h1: np.ndarray,
+    nelec: int,
+    ms2: int,
+    *,
+    core_spectrum: CanonicalSpectrum | None = None,
 ) -> dict[str, tuple[np.ndarray, np.ndarray]]:
     """Return G1--G4 alpha/beta densities in shipped-orbital coordinates."""
     h1 = np.asarray(h1, dtype=float)
     sector = particle_sector(h1.shape[0], nelec, ms2)
-    core = canonical_eigh(h1)
+    core = canonical_eigh(h1) if core_spectrum is None else core_spectrum
     identity = np.eye(sector.norb)
 
     def integer_occupations(order: np.ndarray, count: int) -> np.ndarray:
@@ -367,7 +439,7 @@ def _build_pyscf_mean_field(data: SparseFcidump, eri: np.ndarray, method: str) -
 
 
 def configure_newton_fallback(solver: Any) -> Any:
-    """Apply every frozen MFPROTO-v1 augmented-Hessian control."""
+    """Apply every frozen MFPROTO-v2 augmented-Hessian control."""
     controls = {
         "max_cycle": 50,
         "max_cycle_inner": 12,
@@ -422,41 +494,39 @@ def _kernel_with_history(
 def _canonical_state(
     solver: Any, method: str, sector: ParticleSector
 ) -> dict[str, Any]:
+    """Canonicalize one frozen Fock classification and evaluate that state."""
     original_dm = solver.make_rdm1(solver.mo_coeff, solver.mo_occ)
     original_fock = solver.get_fock(dm=original_dm)
     if method == "RHF":
-        spectra = (canonical_eigh(original_fock),) * 2
-        orbitals = spectra[0].eigenvectors
+        spectrum = canonical_eigh(original_fock)
+        orbitals = spectrum.eigenvectors
         occupations = np.zeros(sector.norb)
         occupations[: sector.nalpha] = 2.0
         density = occupation_density(orbitals, occupations)
-        fock = solver.get_fock(dm=density)
-        spectrum = canonical_eigh(fock)
-        orbitals = spectrum.eigenvectors
-        density = occupation_density(orbitals, occupations)
-        fock = solver.get_fock(dm=density)
-        gradient = solver.get_grad(orbitals, occupations, fock)
+        evaluation_fock = solver.get_fock(dm=density)
+        # PySCF RHF get_grad returns 2 F_ai; normalize both methods to |F_ai|.
+        gradient = 0.5 * solver.get_grad(orbitals, occupations, evaluation_fock)
         veff = solver.get_veff(dm=density)
         energy = float(solver.energy_tot(dm=density, h1e=data_hcore(solver), vhf=veff))
-        density_alpha = density_beta = 0.5 * density
-        s2 = 0.0
         return {
             "energy": energy,
             "gradient": float(np.max(np.abs(gradient), initial=0.0)),
-            "density_alpha": density_alpha,
-            "density_beta": density_beta,
-            "fock_alpha": fock,
-            "fock_beta": fock,
+            "density_alpha": 0.5 * density,
+            "density_beta": 0.5 * density,
+            "fock_alpha": original_fock,
+            "fock_beta": original_fock,
             "orbitals_alpha": orbitals,
             "orbitals_beta": orbitals,
             "energies_alpha": spectrum.eigenvalues,
             "energies_beta": spectrum.eigenvalues,
-            "s2": s2,
+            "fock_canonical_audit_alpha": _spectrum_audit(spectrum),
+            "fock_canonical_audit_beta": _spectrum_audit(spectrum),
+            "s2": 0.0,
         }
 
-    fock_alpha, fock_beta = original_fock
-    spectrum_alpha = canonical_eigh(fock_alpha)
-    spectrum_beta = canonical_eigh(fock_beta)
+    original_fock_alpha, original_fock_beta = original_fock
+    spectrum_alpha = canonical_eigh(original_fock_alpha)
+    spectrum_beta = canonical_eigh(original_fock_beta)
     occupation_alpha = np.zeros(sector.norb)
     occupation_beta = np.zeros(sector.norb)
     occupation_alpha[: sector.nalpha] = 1.0
@@ -464,17 +534,11 @@ def _canonical_state(
     density_alpha = occupation_density(spectrum_alpha.eigenvectors, occupation_alpha)
     density_beta = occupation_density(spectrum_beta.eigenvectors, occupation_beta)
     density = np.asarray((density_alpha, density_beta))
-    fock_alpha, fock_beta = solver.get_fock(dm=density)
-    spectrum_alpha = canonical_eigh(fock_alpha)
-    spectrum_beta = canonical_eigh(fock_beta)
-    density_alpha = occupation_density(spectrum_alpha.eigenvectors, occupation_alpha)
-    density_beta = occupation_density(spectrum_beta.eigenvectors, occupation_beta)
-    density = np.asarray((density_alpha, density_beta))
-    fock = solver.get_fock(dm=density)
+    evaluation_fock = solver.get_fock(dm=density)
     gradient = solver.get_grad(
         (spectrum_alpha.eigenvectors, spectrum_beta.eigenvectors),
         (occupation_alpha, occupation_beta),
-        fock,
+        evaluation_fock,
     )
     veff = solver.get_veff(dm=density)
     energy = float(solver.energy_tot(dm=density, h1e=data_hcore(solver), vhf=veff))
@@ -488,12 +552,14 @@ def _canonical_state(
         "gradient": float(np.max(np.abs(gradient), initial=0.0)),
         "density_alpha": density_alpha,
         "density_beta": density_beta,
-        "fock_alpha": fock[0],
-        "fock_beta": fock[1],
+        "fock_alpha": original_fock_alpha,
+        "fock_beta": original_fock_beta,
         "orbitals_alpha": spectrum_alpha.eigenvectors,
         "orbitals_beta": spectrum_beta.eigenvectors,
         "energies_alpha": spectrum_alpha.eigenvalues,
         "energies_beta": spectrum_beta.eigenvalues,
+        "fock_canonical_audit_alpha": _spectrum_audit(spectrum_alpha),
+        "fock_canonical_audit_beta": _spectrum_audit(spectrum_beta),
         "s2": s2,
     }
 
@@ -535,6 +601,8 @@ def _evaluate_branch(
         orbitals_beta=state["orbitals_beta"],
         energies_alpha=state["energies_alpha"],
         energies_beta=state["energies_beta"],
+        fock_canonical_audit_alpha=state["fock_canonical_audit_alpha"],
+        fock_canonical_audit_beta=state["fock_canonical_audit_beta"],
         s2=state["s2"],
         cycles=int(getattr(solver, "cycles", len(history))),
     )
@@ -558,6 +626,8 @@ def _failed_branch(method: str, guess: str, exc: Exception) -> MeanFieldBranch:
         orbitals_beta=None,
         energies_alpha=None,
         energies_beta=None,
+        fock_canonical_audit_alpha=None,
+        fock_canonical_audit_beta=None,
         s2=None,
         cycles=0,
         error_type=type(exc).__name__,
@@ -633,11 +703,20 @@ def _stationary_components(branches: list[MeanFieldBranch]) -> list[list[int]]:
     )
 
 
-def _branch_rank(branch: MeanFieldBranch) -> tuple[float, int, int]:
-    return (
-        float(branch.energy),
-        GUESS_ORDER.index(branch.guess),
-        0 if branch.method == "RHF" else 1,
+def _select_branch(indices: list[int], branches: list[MeanFieldBranch]) -> int:
+    minimum_energy = min(float(branches[index].energy) for index in indices)
+    tied = [
+        index
+        for index in indices
+        if abs(float(branches[index].energy) - minimum_energy)
+        <= SELECTION_ENERGY_TIE_TOL
+    ]
+    return min(
+        tied,
+        key=lambda index: (
+            GUESS_ORDER.index(branches[index].guess),
+            METHOD_ORDER.index(branches[index].method),
+        ),
     )
 
 
@@ -655,27 +734,24 @@ def _ordered_diagonal_boundary_tie(
 def run_mean_field(
     data: SparseFcidump, eri: np.ndarray | None = None
 ) -> MeanFieldResult:
-    """Run the complete MFPROTO-v1 RHF/UHF x G1--G4 branch panel."""
+    """Run the complete MFPROTO-v2 RHF/UHF x G1--G4 branch panel."""
     sector = particle_sector(data.norb, data.nelec, data.ms2)
     core = canonical_eigh(data.h1)
-    guesses = initial_spin_density_guesses(data.h1, data.nelec, data.ms2)
+    guesses = initial_spin_density_guesses(
+        data.h1, data.nelec, data.ms2, core_spectrum=core
+    )
     if eri is None:
         eri = data.dense_eri()
-    methods = ("RHF", "UHF") if data.ms2 == 0 else ("UHF",)
+    methods = METHOD_ORDER if data.ms2 == 0 else ("UHF",)
     branches = [
         _run_mean_field_branch(data, eri, method, guess, guesses[guess], sector)
         for method in methods
         for guess in GUESS_ORDER
     ]
     components = _stationary_components(branches)
-    representatives = [
-        min(group, key=lambda index: _branch_rank(branches[index]))
-        for group in components
-    ]
+    representatives = [_select_branch(group, branches) for group in components]
     selected_index = (
-        None
-        if not representatives
-        else min(representatives, key=lambda index: _branch_rank(branches[index]))
+        None if not representatives else _select_branch(representatives, branches)
     )
 
     diagonal = np.diag(data.h1)
@@ -684,9 +760,13 @@ def run_mean_field(
     beta_alternating = np.array(
         sorted(range(data.norb), key=lambda i: ((i + 1) % 2, i))
     )
-    tie_audit: dict[str, float | int | bool | None] = {
+    tie_audit: dict[str, float | int | bool | str | None] = {
         "core_minimum_adjacent_split": core.minimum_adjacent_split,
         "core_degenerate_subspace_count": core.degenerate_subspace_count,
+        "core_projected_index_tied_subspace_count": (
+            core.projected_index_tied_subspace_count
+        ),
+        "core_hysteresis_band_split_count": core.hysteresis_band_split_count,
         "g1_alpha_boundary_tie": occupation_boundary_tie(
             core.eigenvalues, sector.nalpha
         ),
@@ -705,15 +785,31 @@ def run_mean_field(
         ),
     }
     selected = None if selected_index is None else branches[selected_index]
-    for spin in ("alpha", "beta"):
-        fock = None if selected is None else getattr(selected, f"fock_{spin}")
-        spectrum = None if fock is None else canonical_eigh(fock)
-        tie_audit[f"selected_fock_{spin}_minimum_adjacent_split"] = (
-            None if spectrum is None else spectrum.minimum_adjacent_split
+    for spin, particles in (
+        ("alpha", sector.nalpha),
+        ("beta", sector.nbeta),
+    ):
+        audit = (
+            None
+            if selected is None
+            else getattr(selected, f"fock_canonical_audit_{spin}")
         )
-        tie_audit[f"selected_fock_{spin}_degenerate_subspace_count"] = (
-            None if spectrum is None else spectrum.degenerate_subspace_count
+        for key in (
+            "minimum_adjacent_split",
+            "degenerate_subspace_count",
+            "projected_index_tied_subspace_count",
+            "hysteresis_band_split_count",
+        ):
+            tie_audit[f"selected_fock_{spin}_{key}"] = (
+                None if audit is None else audit[key]
+            )
+        energies = None if selected is None else getattr(selected, f"energies_{spin}")
+        tie_audit[f"selected_fock_{spin}_boundary_tie"] = (
+            None if energies is None else occupation_boundary_tie(energies, particles)
         )
+    tie_audit["selection_energy_tie_tolerance_hartree"] = SELECTION_ENERGY_TIE_TOL
+    tie_audit["selection_method_order"] = ">".join(METHOD_ORDER)
+
     return MeanFieldResult(
         sector=sector,
         branches=branches,

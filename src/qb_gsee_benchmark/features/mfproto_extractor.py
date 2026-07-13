@@ -1,7 +1,7 @@
 # Copyright 2026.
 # Licensed under the Apache License, Version 2.0.
 
-"""Panel-isolated orchestration for G40 MFPROTO-v1."""
+"""Panel-isolated orchestration for G40 MFPROTO-v2."""
 
 from __future__ import annotations
 
@@ -48,6 +48,8 @@ def _branch_audit(branch: MeanFieldBranch) -> dict[str, Any]:
         "maximum_ov_gradient_hartree": branch.maximum_ov_gradient,
         "s2": branch.s2,
         "cycles": branch.cycles,
+        "fock_canonical_audit_alpha": branch.fock_canonical_audit_alpha,
+        "fock_canonical_audit_beta": branch.fock_canonical_audit_beta,
         "error_type": branch.error_type,
         "error_message": branch.error_message,
     }

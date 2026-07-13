@@ -1,7 +1,7 @@
 # Copyright 2026.
 # Licensed under the Apache License, Version 2.0.
 
-"""Deterministic selected-state stability analysis for MFPROTO-v1."""
+"""Deterministic selected-state stability analysis for MFPROTO-v2."""
 
 from __future__ import annotations
 
@@ -29,8 +29,7 @@ STABILITY_LINDEP = 1.0e-14
 INSTABILITY_THRESHOLD = -1.0e-5
 MARGINAL_ABS_THRESHOLD = 1.0e-5
 MAX_FOLLOW_STEPS = 2
-EXTERNAL_DIMENSION_CEILING = 250_000
-EXTERNAL_ACTION_SECONDS_CEILING = 120.0
+EXTERNAL_DIMENSION_CEILING = 10_000
 
 
 @dataclass(frozen=True)
@@ -68,7 +67,6 @@ def lowest_davidson_root(
     hdiag: np.ndarray,
     *,
     dimension_ceiling: int | None = None,
-    action_seconds_ceiling: float | None = None,
 ) -> StabilityRoot:
     hdiag = np.asarray(hdiag, dtype=float)
     dimension = hdiag.size
@@ -87,15 +85,6 @@ def lowest_davidson_root(
     started = time.monotonic()
     first_action = np.asarray(hop(starts[0]), dtype=float)
     action_seconds = time.monotonic() - started
-    if action_seconds_ceiling is not None and action_seconds > action_seconds_ceiling:
-        return StabilityRoot(
-            False,
-            "external_hessian_action_ceiling",
-            None,
-            None,
-            dimension,
-            action_seconds,
-        )
     first_start = starts[0]
 
     def measured_hop(vector: np.ndarray) -> np.ndarray:
@@ -200,7 +189,6 @@ def _external_root(
         hop,
         hdiag,
         dimension_ceiling=EXTERNAL_DIMENSION_CEILING,
-        action_seconds_ceiling=EXTERNAL_ACTION_SECONDS_CEILING,
     )
 
 
@@ -280,5 +268,4 @@ def stability_feature_values(result: StabilityResult) -> dict[str, object]:
         "mf_stability_external_dimension": external.dimension,
         "mf_stability_external_dimension_ceiling": EXTERNAL_DIMENSION_CEILING,
         "mf_stability_external_action_seconds": external.hessian_action_seconds,
-        "mf_stability_external_action_seconds_ceiling": EXTERNAL_ACTION_SECONDS_CEILING,
     }

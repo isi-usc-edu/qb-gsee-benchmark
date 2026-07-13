@@ -33,6 +33,13 @@ def test_complete_extractor_populates_independent_panels() -> None:
     assert features["mfproto_pair_graph_seconds"] >= 0.0
     assert extraction.audit["panel_errors"] == {}
     assert len(extraction.audit["branch_outcomes"]) == 8
+    selected = extraction.audit["branch_outcomes"][
+        extraction.audit["selected_branch_index"]
+    ]
+    for spin in ("alpha", "beta"):
+        branch_audit = selected[f"fock_canonical_audit_{spin}"]
+        for key, value in branch_audit.items():
+            assert features[f"mf_tie_selected_fock_{spin}_{key}"] == value
 
 
 def test_runner_binds_checksum_protocol_code_and_resumes(tmp_path) -> None:
@@ -92,11 +99,13 @@ def test_every_p2_output_has_fail_closed_metadata() -> None:
     assert metadata["mf_symmetry_breaking_energy_per_electron"].model_eligible
     assert metadata["mf_hf_variance_per_electron_hartree_squared"].model_eligible
     assert metadata["mp2_correlation_energy_per_electron_hartree"].model_eligible
+    assert not metadata["mf_stability_external_eigenvalue_hartree"].model_eligible
     assert metadata["mp2_pair_cut_fiedler_max_normalized"].model_eligible
     for column in (
         "mf_selected_method",
         "mf_selected_energy_hartree",
         "mf_tie_g1_alpha_boundary_tie",
+        "mp2_amplitude_shape_boundary_ambiguous",
         "mfproto_scf_seconds",
         "mp2_denominator_masked_count",
         "mp2_natural_occupation_minimum_raw",

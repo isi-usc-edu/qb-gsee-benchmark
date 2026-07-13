@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the manifest-driven G40 P2 MFPROTO-v1 extractor."""
+"""Run the manifest-driven G40 P2 MFPROTO-v2 extractor."""
 
 from __future__ import annotations
 

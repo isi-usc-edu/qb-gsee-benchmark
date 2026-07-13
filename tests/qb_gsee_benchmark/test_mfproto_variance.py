@@ -270,3 +270,33 @@ def test_rmp2_amplitude_spin_blocks_match_equivalent_ump2() -> None:
                 assert restricted.features[f"{prefix}_{suffix}"] == pytest.approx(
                     unrestricted.features[f"{prefix}_{suffix}"], abs=1e-14
                 )
+
+
+def test_boundary_ambiguous_orbitals_mask_all_amplitude_shapes() -> None:
+    data = _random_symmetric_data()
+    mean_field = run_mean_field(data)
+    selected = mean_field.selected
+    energies = selected.energies_alpha.copy()
+    energies[mean_field.sector.nalpha] = energies[mean_field.sector.nalpha - 1]
+    ambiguous = replace(
+        selected,
+        energies_alpha=energies,
+        energies_beta=energies.copy(),
+    )
+    result = run_mp2(data, data.dense_eri(), ambiguous, mean_field.sector)
+
+    assert result.features["mp2_amplitude_shape_boundary_ambiguous"] is True
+    for prefix in (
+        "mp2_amplitude",
+        "mp2_same_spin_amplitude",
+        "mp2_opposite_spin_amplitude",
+        "mp2_kappa_1p45_amplitude",
+        "mp2_kappa_1p45_same_spin_amplitude",
+        "mp2_kappa_1p45_opposite_spin_amplitude",
+        "mp2_kappa_1p1_amplitude",
+        "mp2_kappa_1p1_same_spin_amplitude",
+        "mp2_kappa_1p1_opposite_spin_amplitude",
+    ):
+        assert result.features[f"{prefix}_applicable"] is False
+        assert result.features[f"{prefix}_reason"] == "all_amplitudes_masked"
+        assert result.features[f"{prefix}_max_abs"] is None

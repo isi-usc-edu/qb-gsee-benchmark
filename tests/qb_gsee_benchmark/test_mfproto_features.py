@@ -1,8 +1,15 @@
 import numpy as np
+from pathlib import Path
+from types import SimpleNamespace
 import pytest
 
-from qb_gsee_benchmark.features.fcidump_sparse import SparseFcidump
+from qb_gsee_benchmark.features.fcidump_sparse import (
+    SparseFcidump,
+    read_sparse_fcidump,
+)
 from qb_gsee_benchmark.features.mfproto_features import (
+    _coordinate_pinned_basis,
+    _select_branch,
     canonical_eigh,
     configure_newton_fallback,
     fermi_occupations,
@@ -194,3 +201,51 @@ def test_newton_fallback_controls_are_all_overridden() -> None:
     assert solver.ah_grad_trust_region == 2.5
     assert solver.kf_interval == 4
     assert solver.kf_trust_region == 5
+
+
+def test_recursive_coordinate_pin_is_independent_of_subspace_rotation() -> None:
+    subspace = np.array(
+        [
+            [1.0, 0.0],
+            [0.0, 1.0],
+            [0.0, 0.0],
+            [0.0, 0.0],
+        ]
+    )
+    angle = 0.731
+    rotation = np.array(
+        [
+            [np.cos(angle), -np.sin(angle)],
+            [np.sin(angle), np.cos(angle)],
+        ]
+    )
+    np.testing.assert_allclose(
+        _coordinate_pinned_basis(subspace),
+        _coordinate_pinned_basis(subspace @ rotation),
+        atol=1.0e-14,
+    )
+
+
+def test_real_lattice_fixtures_exercise_recursive_projected_index_pin() -> None:
+    fixture_root = Path(__file__).parent / "fixtures" / "g40_permutation_pairs"
+    for name in (
+        "qsz_l4x4_u2_original.FCIDUMP",
+        "varbench_tv_square16_v0p01_original.FCIDUMP",
+    ):
+        spectrum = canonical_eigh(read_sparse_fcidump(fixture_root / name).h1)
+        assert spectrum.projected_index_tied_subspace_count >= 1
+
+
+def test_degeneracy_hysteresis_absorbs_scf_noise_scale_split() -> None:
+    spectrum = canonical_eigh(np.diag([0.0, 1.304e-10, 2.0]))
+    assert spectrum.degenerate_subspace_count == 1
+    assert spectrum.hysteresis_band_split_count == 1
+
+
+def test_selection_tie_band_uses_guess_then_explicit_method_order() -> None:
+    branches = [
+        SimpleNamespace(energy=-1.0, guess="G2", method="UHF"),
+        SimpleNamespace(energy=-1.0 + 5.0e-11, guess="G1", method="UHF"),
+        SimpleNamespace(energy=-1.0 + 7.0e-11, guess="G1", method="RHF"),
+    ]
+    assert _select_branch([0, 1, 2], branches) == 2

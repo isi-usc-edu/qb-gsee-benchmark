@@ -22,12 +22,15 @@ def test_p2_pilot_selection_is_frozen_and_satisfies_ratified_coverage() -> None:
     assert len(selected) == len(set(selected)) == manifest["selected_tasks"] == 25
     assert selected == [task["task_uuid"] for task in manifest["tasks"]]
     assert all(manifest["coverage_checks"].values())
-    assert (
-        manifest["coverage_counts"]["expected_mask_regime"][
-            "natural_occupation_out_of_range"
-        ]
-        >= 2
+    coverage = manifest["mask_regime_coverage"]
+    assert coverage["mp2_denominator_below_threshold"]["status"] == (
+        "unreachable in corpus, fixture-covered"
     )
+    assert coverage["natural_occupation_out_of_range"]["fixture_tests"]
+    assert coverage["all_amplitudes_masked"]["task_uuids"] == [
+        "3d343ddb-a898-5c0e-afc9-42b62d588c5e",
+        "6cd8382a-9a9a-5c43-83b1-616c9f301ab1",
+    ]
     assert {
         "3d343ddb-a898-5c0e-afc9-42b62d588c5e",
         "6cd8382a-9a9a-5c43-83b1-616c9f301ab1",

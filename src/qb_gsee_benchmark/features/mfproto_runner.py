@@ -1,7 +1,7 @@
 # Copyright 2026.
 # Licensed under the Apache License, Version 2.0.
 
-"""Resume-safe corpus runner for G40 P2 MFPROTO-v1."""
+"""Resume-safe corpus runner for G40 P2 MFPROTO-v2."""
 
 from __future__ import annotations
 
@@ -23,7 +23,6 @@ from qb_gsee_benchmark.features.mfproto_extractor import (
 )
 from qb_gsee_benchmark.features.mfproto_features import MFPROTO_VERSION
 from qb_gsee_benchmark.features.mfproto_stability import (
-    EXTERNAL_ACTION_SECONDS_CEILING,
     EXTERNAL_DIMENSION_CEILING,
 )
 
@@ -32,7 +31,6 @@ MFPROTO_CONFIGURATION = {
     "pyscf_version": "2.8.0",
     "scf_threads_are_environment_controlled": True,
     "external_stability_dimension_ceiling": EXTERNAL_DIMENSION_CEILING,
-    "external_stability_action_seconds_ceiling": EXTERNAL_ACTION_SECONDS_CEILING,
 }
 
 

@@ -281,7 +281,12 @@ def _p2_metadata(column: str) -> FeatureColumnMetadata | None:
         or "_tie_" in column
         or column.endswith(("_marginal", "_edge_degenerate", "_zero"))
         or column.endswith("_heuristic")
-        or column in {"mf_selected_method", "mf_selected_guess", "mp2_reference"}
+        or column in {
+            "mf_selected_method",
+            "mf_selected_guess",
+            "mp2_reference",
+            "mp2_amplitude_shape_boundary_ambiguous",
+        }
     )
     audit_numeric = (
         column.endswith(("_count", "_raw", "_seconds", "_ceiling"))
@@ -303,6 +308,7 @@ def _p2_metadata(column: str) -> FeatureColumnMetadata | None:
             "mf_hf_variance_doubles_opposite_spin",
             "mf_stability_external_dimension",
             "mf_stability_external_action_seconds",
+            "mf_stability_external_eigenvalue_hartree",
             "mp2_denominator_masked_count",
             "mp2_denominator_term_count",
             "mp2_natural_occupation_clipped_count",

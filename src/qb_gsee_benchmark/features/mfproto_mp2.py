@@ -1,7 +1,7 @@
 # Copyright 2026.
 # Licensed under the Apache License, Version 2.0.
 
-"""Canonical MP2 panels for G40 MFPROTO-v1."""
+"""Canonical MP2 panels for G40 MFPROTO-v2."""
 
 from __future__ import annotations
 
@@ -15,6 +15,7 @@ from qb_gsee_benchmark.features.fcidump_sparse import SparseFcidump
 from qb_gsee_benchmark.features.mfproto_features import (
     MeanFieldBranch,
     ParticleSector,
+    occupation_boundary_tie,
     pyscf_solver_for_branch,
 )
 from qb_gsee_benchmark.features.mfproto_variance import _transform_ovov
@@ -362,6 +363,9 @@ def run_mp2(
     ca_occ, ca_vir = ca[:, : sector.nalpha], ca[:, sector.nalpha :]
     cb_occ, cb_vir = cb[:, : sector.nbeta], cb[:, sector.nbeta :]
     pair_energy = np.zeros((sector.norb, sector.norb))
+    boundary_ambiguous = occupation_boundary_tie(
+        ea, sector.nalpha
+    ) or occupation_boundary_tie(eb, sector.nbeta)
 
     if branch.method == "RHF":
         block = _transform_ovov(eri, ca_vir, ca_occ, ca_vir, ca_occ)
@@ -500,12 +504,23 @@ def run_mp2(
         pair_energy[: sector.nalpha, : sector.nbeta] += np.sum(terms_ab, axis=(2, 3))
         t2_for_density = (t2aa, t2ab, t2bb)
 
+    shape_masks = {
+        key: np.full(np.asarray(values).shape, boundary_ambiguous, dtype=bool)
+        for key, values in amplitude_masks.items()
+    }
+    if boundary_ambiguous:
+        amplitude_masks = {
+            key: np.logical_or(values, shape_masks[key])
+            for key, values in amplitude_masks.items()
+        }
+
     flattened_mask = np.concatenate([mask.ravel() for mask in masks])
     unregularized_applicable = bool(np.any(~flattened_mask))
     unregularized_partial_mask = bool(np.any(flattened_mask))
     pair_graph = 0.5 * (np.abs(pair_energy) + np.abs(pair_energy.T))
     np.fill_diagonal(pair_graph, 0.0)
     features: dict[str, object] = {
+        "mp2_amplitude_shape_boundary_ambiguous": boundary_ambiguous,
         "mp2_reference": "RMP2" if branch.method == "RHF" else "UMP2",
         "mp2_unregularized_applicable": unregularized_applicable,
         "mp2_unregularized_reason": (
@@ -551,20 +566,18 @@ def run_mp2(
     )
     for kappa, channels in regularized_amplitudes.items():
         label = str(kappa).replace(".", "p")
-        features.update(
-            _amplitude_summary(channels["all"], f"mp2_kappa_{label}_amplitude")
-        )
-        features.update(
-            _amplitude_summary(
-                channels["same_spin"], f"mp2_kappa_{label}_same_spin_amplitude"
+        for channel, suffix in (
+            ("all", ""),
+            ("same_spin", "_same_spin"),
+            ("opposite_spin", "_opposite_spin"),
+        ):
+            features.update(
+                _masked_amplitude_summary(
+                    channels[channel],
+                    shape_masks[channel],
+                    f"mp2_kappa_{label}{suffix}_amplitude",
+                )
             )
-        )
-        features.update(
-            _amplitude_summary(
-                channels["opposite_spin"],
-                f"mp2_kappa_{label}_opposite_spin_amplitude",
-            )
-        )
     features.update(
         _kappa_features(
             energy_terms,

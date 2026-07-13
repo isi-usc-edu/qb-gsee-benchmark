@@ -70,3 +70,5 @@ def test_noninteracting_selected_state_is_stable_without_following() -> None:
     assert features["mf_stability_internal_marginal"] is False
     assert features["mf_stability_external_applicable"] is True
     assert features["mf_stability_external_dimension"] == 1
+    assert features["mf_stability_external_dimension_ceiling"] == 10_000
+    assert "mf_stability_external_action_seconds_ceiling" not in features

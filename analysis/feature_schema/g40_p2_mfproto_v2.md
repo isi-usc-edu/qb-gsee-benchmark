@@ -1,17 +1,17 @@
-# G40 P2 MFPROTO-v1 ratified protocol
+# G40 P2 MFPROTO-v2 ratified protocol
 
-Status: **ratified for the P2 pilot.** This revision incorporates the binding
-goals-review-10 amendments. The P2 pilot is authorized once this revision is
-committed; production remains gated on pilot review. Layer 1 records the
-binding G40 ruling and explicitly marks implementer resolutions ratified by
-the PI. Layer 2 is the frozen numerical contract for v1.
+Status: **ratified protocol; pilot submission held pending the focused P2-FIX
+spot-check.** This revision incorporates the binding goals-review-12 amendments.
+The implementation and protocol must be committed and FIX.1--FIX.3 spot-checked
+before pilot authorization; production remains gated on pilot review. Layer 1
+records the binding G40 rulings. Layer 2 is the frozen numerical contract for v2.
 
 ## Scope and tags
 
 - Inputs are only the duplicate-averaged canonical FCIDUMP tensors, `NELEC`,
   `MS2`, and shipped orbital order. The overlap is the identity. Atom, AO,
   geometry, and generator metadata are forbidden.
-- Protocol version: `g40_p2_mfproto_v1`; reference implementation: PySCF
+- Protocol version: `g40_p2_mfproto_v2`; reference implementation: PySCF
   2.8.0 plus repository-owned wrappers for guesses, acceptance tests,
   stability eigenvalues, masks, and ledgers.
 - T1/T2 values are `MF-PROTO`, `BAS+ORD`, because the G2/G3 guess panel and
@@ -33,17 +33,20 @@ the PI. Layer 2 is the frozen numerical contract for v1.
 Particle counts are
 `nalpha = (NELEC + MS2) / 2`, `nbeta = NELEC - nalpha`; invalid parity or
 bounds fail before SCF. RHF is attempted only for `MS2 == 0`; UHF is attempted
-for every task. ROHF is outside v1.
+for every task. ROHF is outside v2.
 
 Four guesses are evaluated in this order:
 
 1. **G1 core:** diagonalize `h`; fill the lowest `nalpha` and `nbeta`
-   eigenvectors. Within every eigenvalue-degenerate subspace (absolute split
-   `<=1e-10 Ha`), diagonalize the projected shipped-index operator
-   `diag(0,1,...,N-1)` and order by its eigenvalues. Signs make each vector's
-   largest-magnitude component (lowest index on a tie) positive.
-   The projected shipped-index operator and sign rule are PI-ratified
-   resolutions of the ruling's degenerate-subspace ambiguity.
+   eigenvectors. Classify adjacent eigenvalues with split `<=1e-8 Ha` as one degenerate
+   group; splits in `(1e-10,1e-8] Ha` are the pinned hysteresis band and are
+   counted in audit output. Within each group diagonalize the projected
+   shipped-index operator `diag(0,1,...,N-1)`. If that projected operator is
+   tied within `1e-10`, recursively pin the tied subspace from its invariant
+   projector by scanning shipped coordinate projections in index order with
+   deterministic Gram-Schmidt. Signs make each vector's largest-magnitude
+   component (lowest index on a tie) positive. No LAPACK-chosen rotation
+   survives either tie layer.
 2. **G2 shipped:** diagonal alpha and beta densities occupy shipped orbitals
    `0..nalpha-1` and `0..nbeta-1`.
 3. **G3 alternating:** alpha fills shipped indices ordered by `(index % 2,
@@ -63,8 +66,9 @@ Four guesses are evaluated in this order:
 
 An SCF result is converged only if both `abs(delta_E) < 1e-9 Ha` and the
 maximum absolute occupied-virtual orbital-gradient element is below `1e-6 Ha`.
-The occupied-virtual reading, in fixed spin then occupied then virtual index
-order, is a PI-ratified resolution of the ruling's gradient ambiguity.
+The recorded gradient is `max |F_ai|`: PySCF RHF `get_grad` is divided by
+two, while UHF `get_grad` is used directly. Occupied-virtual entries use fixed
+spin, occupied, then virtual index order.
 Primary DIIS has at most 150 cycles. Failed primary branches receive exactly
 one deterministic fallback. Unconverged `(method, guess)` branches are masked,
 never accepted from an engine-level convergence flag alone.
@@ -73,8 +77,11 @@ Stationary points are duplicates iff `abs(delta_E) <= 1e-7 Ha` and the
 spin-resolved shipped-basis density Frobenius distance is `<= 1e-4`. Connected
 components under this relation define solutions; this connected-component
 closure is a PI-ratified resolution rather than pairwise-only deduplication.
-The representative is lowest energy, then G1, G2, G3, G4. The selected solution
-is lowest energy across components, with the same guess-order tie break. Record
+Branch energies within `1e-10 Ha` of the minimum are tied. Representatives
+and the selected solution resolve a tie by G1, G2, G3, G4, then by explicit
+method order RHF before UHF. Energies outside the band retain energy order. The
+selected-method, selected-guess, and MP2-reference labels are reproducible under
+this rule and remain audit-only; fallback use remains branch-level audit. Record
 solution count, energy spread, selected guess, selected `<S^2>`, and, for
 `MS2 == 0`, `delta_E_sb = E_RHF - E_UHF`.
 
@@ -103,15 +110,17 @@ inheriting environment defaults:
 | keyframe interval / trust region | 4 / 5 |
 | canonicalize final orbitals | true |
 
-Final canonical orbitals use the G1 degenerate-subspace convention separately
-within each spin block: Fock eigenvalues with absolute split `<=1e-10 Ha` are
-canonicalized by the projected shipped-index operator, then signed and ordered
-by the G1 rule. This applies after both primary and fallback SCF and before
-selected-Fock, MP2, natural-occupation, or pair-graph features. Audit-only
-columns record, per spin, the minimum adjacent Fock split and the number of
-degenerate subspaces.
+Each branch constructs one Fock matrix from the engine-returned density,
+classifies that Fock exactly once by the recursive G1 convention, and stores
+that same Fock, spectrum, orbitals, and tie audit. The canonical density is
+evaluated without reclassifying a recomputed Fock. This classify-once rule
+applies after both primary and fallback SCF and before selected-Fock, MP2,
+natural-occupation, or pair-graph features. Audit columns record per spin the
+minimum adjacent split, degenerate-subspace count, projected-index tied-subspace
+count, hysteresis-band split count, and occupation-boundary ambiguity.
 
 The binding energy and gradient acceptance tests are reapplied independently
+after the primary solve and after the fallback.
 
 ### Stability
 
@@ -132,20 +141,17 @@ point.
 Mean-field tie diagnostics are audit-only and never model inputs: record the
 minimum adjacent core-Hamiltonian eigenvalue split, G1 occupation-boundary tie
 per spin, shipped-diagonal occupation-boundary ties for G2/G3, and the selected
-final-Fock minimum split and degenerate-subspace count per spin. The same
-`1e-10 Ha` threshold and fixed index ordering used above apply. These flags are
+final-Fock minimum split and degenerate-subspace count per spin. The recursive `1e-8 Ha` grouping, `1e-10 Ha` projected-tie threshold, and
+fixed index ordering used above apply. These flags are
 the mean-field analogue of the R6.2 orderability-degeneracy diagnostics.
 
-The appendix also names external stability, while Layer 1 only binds internal
-following. Binding v1 treatment: compute the lowest RHF-to-UHF and
-UHF-to-GHF external Hessian roots as **audit-only** values with the same
-Davidson controls, but never select or follow a GHF solution in v1. Mask an
-external root when its particle-hole dimension or measured Hessian-action cost
-exceeds the pilot ceiling; report that ceiling rather than silently omitting
-the value.
-The pilot ceilings are particle-hole dimension `250000` and `120.0 s` for the
-measured first Hessian action. These numerical ceilings are pilot implementation
-resolutions to be checked at review.
+External stability is computed only for the selected method channel: RHF-to-UHF
+for selected RHF or UHF-to-GHF for selected UHF. The root is audit-only and is
+never selected or followed. PySCF engine external Hessian action reports one half of
+the real-orbital rotation curvature; the recorded eigenvalue retains that native
+`0.5 * curvature` convention. Mask before any Hessian action when the
+particle-hole dimension exceeds the deterministic ceiling `10000`. The measured
+first-action seconds remain audit-only output and never control applicability.
 
 ### Gap, thermal, DOS, IPR, and variance panels
 
@@ -183,6 +189,11 @@ amplitude statistic, and their count and fraction are recorded. Percentiles are
 linear-interpolated `{1,5,25,50}` percentiles over unmasked denominators.
 Inverse moments are arithmetic means of `d^-1` and `d^-2`.
 
+If either selected-Fock spin occupation boundary is ambiguous under the
+recursive convention, every unregularized and finite-kappa amplitude-shape
+summary is masked; the audit flag records the boundary ambiguity, while energy
+and denominator panels remain independently defined.
+
 Report maximum absolute amplitude, L1/L2 norms, participation ratio, and the
 fractions of amplitude L2 mass in the largest `k={16,128}` entries. Separate
 opposite-spin and same-spin energy and amplitude summaries. For
@@ -196,7 +207,7 @@ Finite-kappa energy and total/same-spin/opposite-spin amplitude summaries use
 all denominators, including those below the unregularized `1e-6 Ha` mask. At
 an exactly zero denominator, the amplitude uses the occupied-virtual
 negative-side limit `-kappa*g`, while the regularized energy contribution is
-zero. This limit is a pilot implementation resolution to be checked at review.
+zero. This exact-zero finite-kappa limit is PI-ratified by goals-review 12.
 
 Build the spin-orbital MP2 one-particle density matrix. If `n_q` are its
 natural occupations in `[0,1]`, report
@@ -223,28 +234,29 @@ Graph nodes are final-canonical orbital indices `0..NORB-1`; only occupied-pair
 contributions are nonzero, so virtual-only nodes are retained with zero incident
 weight. For UHF, alpha-alpha, beta-beta, and alpha-beta occupied-pair energies
 are accumulated by equal energy-ordered canonical index before absolute-value
-arithmetic symmetrization. This spin-fused index convention is a pilot
-implementation resolution to be checked at review.
+arithmetic symmetrization. This spin-fused index convention is PI-ratified by goals-review 12, with the
+spin-polarized fusion arbitrariness retained as an audit caveat.
 
-### Explicit v1 exclusions
+### Explicit v2 exclusions
 
-Krylov-Ritz and RPA are absent from MFPROTO-v1. The retained gap ladder contains
+Krylov-Ritz and RPA are absent from MFPROTO-v2. The retained gap ladder contains
 only `delta_1` and the selected-Fock gap plus their mismatch. A many-body
 Krylov probe requires a separately ratified `T-probe` protocol because any
 tractable compression introduces solver choices. Dense or cost-capped RPA is
 also excluded: the cap would create family- and size-biased coverage. An
-iterative lowest-pole formulation is the admissible v2 route, subject to a new
+iterative lowest-pole formulation is the admissible post-v2 route, subject to a new
 protocol ruling. Neither excluded block emits applicability masks or placeholder
-columns in v1.
+columns in v2.
 
 ## Pilot and cost gate
 
 Commit the extractor and a deterministic 25-task selection before submission.
 The selection must span all NORB bands, closed/open shell, molecular/lattice
 families, weak/strong correlation, every G21 rotation pair, and the current R7
-permutation gate. It must include degenerate-Fock lattice tasks and at least two
-tasks expected to trigger `natural_occupation_out_of_range`, as well as at
-least two tasks in every other expected applicability-mask regime.
+permutation gate. It must include degenerate-Fock lattice tasks. Every corpus-reachable mask
+regime names rows that provably fire. A corpus-unreachable regime is labeled
+`unreachable in corpus, fixture-covered` and names committed constructed tests;
+no coverage check may pass on a false expected outcome.
 
 Use one 128-core `compute` node per memory-dominant task, omit an explicit
 memory request, and use `backfill` only after compute allocation is exhausted.
@@ -256,11 +268,9 @@ single-task memory above 220 GB returns to PI review.
 
 ## Ratification record
 
-Goals-review 10 approved the second-order fallback; internal stability and
-audit-only non-followed external roots; gap, thermal, DOS, boundary-inclusive
-IPR, and exact HF variance; MP2 denominator, kappa, natural-occupation, and
-fixed pair-graph conventions; and the 280-node-hour / 220-GB return gates.
-Krylov-Ritz and RPA were dropped from v1. The G1/G3/G4,
-connected-component, and occupied-virtual interpretations marked above are
-binding PI-ratified resolutions. This revision satisfies required fixes
-(a)-(f) and authorizes the P2 pilot without another pre-pilot review.
+Goals-review 10 approved the base protocol. Goals-review 12 accepted the prior
+implementation wave, ratified the exact-zero finite-kappa limit and UHF
+spin-fused pair graph, and required this v2 recursive tie pin, classify-once
+hysteresis, deterministic external ceiling, selection tie band, gradient
+normalization, and honest mask preregistration. The pilot remains held until the
+P2-FIX commit receives the focused FIX.1--FIX.3 PI spot-check.

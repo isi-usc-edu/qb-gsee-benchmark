@@ -31,7 +31,7 @@ def main() -> int:
     features = compute_mfproto_features(args.fixture).features
     metadata = [metadata_for_column(column).to_dict() for column in sorted(features)]
     payload = {
-        "contract_version": "g40_p2_feature_contract_v1",
+        "contract_version": "g40_p2_feature_contract_v2",
         "protocol_version": MFPROTO_VERSION,
         "fixture_path": str(args.fixture.relative_to(ROOT)),
         "fixture_sha256": hashlib.sha256(args.fixture.read_bytes()).hexdigest(),
