@@ -30,6 +30,8 @@ def test_p2_pilot_selection_is_frozen_and_satisfies_ratified_coverage() -> None:
     assert coverage["all_amplitudes_masked"]["task_uuids"] == [
         "3d343ddb-a898-5c0e-afc9-42b62d588c5e",
         "6cd8382a-9a9a-5c43-83b1-616c9f301ab1",
+        "ac3a023f-8d31-5d79-803e-c54e947c8d75",
+        "fcc8fbc8-87b5-5a77-b3e2-38539824873e",
     ]
     assert {
         "3d343ddb-a898-5c0e-afc9-42b62d588c5e",

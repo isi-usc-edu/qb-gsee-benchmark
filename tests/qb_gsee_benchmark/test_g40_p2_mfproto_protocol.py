@@ -49,6 +49,9 @@ def test_mfproto_ratification_contains_all_required_doc_fixes() -> None:
         "0.5 * curvature",
         "amplitude-shape",
         "RHF before UHF",
+        "future sign-odd column",
+        "future cliff-sensitive column requires an explicit band mask",
+        "consistency check between the declarations and frozen selection",
     ):
         assert required in text
 

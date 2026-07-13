@@ -84,7 +84,11 @@ TASK_EXPECTATIONS: dict[str, dict[str, Any]] = {
         "domain": "lattice",
         "correlation": "weak",
         "degenerate_fock_expected": True,
-        "expected_masks": ["rhf_not_attempted_ms2_nonzero", "spin_gap_sector_empty"],
+        "expected_masks": [
+            "rhf_not_attempted_ms2_nonzero",
+            "spin_gap_sector_empty",
+            "all_amplitudes_masked",
+        ],
         "r7_permutation_source": True,
     },
     "beabcf8f-a6c0-5e32-9385-110ff65cbbf0": {
@@ -134,7 +138,11 @@ TASK_EXPECTATIONS: dict[str, dict[str, Any]] = {
         "domain": "lattice",
         "correlation": "strong",
         "degenerate_fock_expected": True,
-        "expected_masks": ["rhf_not_attempted_ms2_nonzero", "spin_gap_sector_empty"],
+        "expected_masks": [
+            "rhf_not_attempted_ms2_nonzero",
+            "spin_gap_sector_empty",
+            "all_amplitudes_masked",
+        ],
     },
     "ff0da1e2-2c76-4589-aefa-c13bb1a1ef8f": {
         "domain": "molecular",
@@ -170,6 +178,8 @@ MASK_REGIME_COVERAGE: dict[str, dict[str, Any]] = {
         "task_uuids": [
             "3d343ddb-a898-5c0e-afc9-42b62d588c5e",
             "6cd8382a-9a9a-5c43-83b1-616c9f301ab1",
+            "ac3a023f-8d31-5d79-803e-c54e947c8d75",
+            "fcc8fbc8-87b5-5a77-b3e2-38539824873e",
         ],
     },
     "external_stability_dimension_ceiling": {

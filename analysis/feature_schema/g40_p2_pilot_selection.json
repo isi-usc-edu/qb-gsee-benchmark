@@ -22,7 +22,7 @@
       "molecular": 15
     },
     "expected_mask_regime": {
-      "all_amplitudes_masked": 2,
+      "all_amplitudes_masked": 4,
       "external_stability_dimension_ceiling": 1,
       "rhf_not_attempted_ms2_nonzero": 6,
       "spin_gap_sector_empty": 4
@@ -46,7 +46,9 @@
       "status": "corpus-reachable",
       "task_uuids": [
         "3d343ddb-a898-5c0e-afc9-42b62d588c5e",
-        "6cd8382a-9a9a-5c43-83b1-616c9f301ab1"
+        "6cd8382a-9a9a-5c43-83b1-616c9f301ab1",
+        "ac3a023f-8d31-5d79-803e-c54e947c8d75",
+        "fcc8fbc8-87b5-5a77-b3e2-38539824873e"
       ]
     },
     "external_stability_dimension_ceiling": {
@@ -303,7 +305,8 @@
       "domain": "lattice",
       "expected_masks": [
         "rhf_not_attempted_ms2_nonzero",
-        "spin_gap_sector_empty"
+        "spin_gap_sector_empty",
+        "all_amplitudes_masked"
       ],
       "ms2": 5,
       "nelec": 5,
@@ -458,7 +461,8 @@
       "domain": "lattice",
       "expected_masks": [
         "rhf_not_attempted_ms2_nonzero",
-        "spin_gap_sector_empty"
+        "spin_gap_sector_empty",
+        "all_amplitudes_masked"
       ],
       "ms2": 16,
       "nelec": 16,

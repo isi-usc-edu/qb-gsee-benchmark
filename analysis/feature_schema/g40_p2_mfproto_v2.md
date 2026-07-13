@@ -46,7 +46,10 @@ Four guesses are evaluated in this order:
    projector by scanning shipped coordinate projections in index order with
    deterministic Gram-Schmidt. Signs make each vector's largest-magnitude
    component (lowest index on a tie) positive. No LAPACK-chosen rotation
-   survives either tie layer.
+   survives either tie layer. Exact equal-magnitude sign ties may still select
+   opposite column signs; the present protocol guarantees only sign-even
+   absolute-value and squared functionals. Any future sign-odd column requires
+   an additional deterministic sign pin.
 2. **G2 shipped:** diagonal alpha and beta densities occupy shipped orbitals
    `0..nalpha-1` and `0..nbeta-1`.
 3. **G3 alternating:** alpha fills shipped indices ordered by `(index % 2,
@@ -143,7 +146,10 @@ minimum adjacent core-Hamiltonian eigenvalue split, G1 occupation-boundary tie
 per spin, shipped-diagonal occupation-boundary ties for G2/G3, and the selected
 final-Fock minimum split and degenerate-subspace count per spin. The recursive `1e-8 Ha` grouping, `1e-10 Ha` projected-tie threshold, and
 fixed index ordering used above apply. These flags are
-the mean-field analogue of the R6.2 orderability-degeneracy diagnostics.
+the mean-field analogue of the R6.2 orderability-degeneracy diagnostics. The
+`1e-8`, `1e-10`, and `1e-12` thresholds retain hard cliffs: those cliffs are
+audited rather than masked because current columns are not cliff-sensitive. A
+future cliff-sensitive column requires an explicit band mask.
 
 External stability is computed only for the selected method channel: RHF-to-UHF
 for selected RHF or UHF-to-GHF for selected UHF. The root is audit-only and is
@@ -256,7 +262,10 @@ families, weak/strong correlation, every G21 rotation pair, and the current R7
 permutation gate. It must include degenerate-Fock lattice tasks. Every corpus-reachable mask
 regime names rows that provably fire. A corpus-unreachable regime is labeled
 `unreachable in corpus, fixture-covered` and names committed constructed tests;
-no coverage check may pass on a false expected outcome.
+no coverage check may pass on a false expected outcome. This UUID mechanism is
+a consistency check between the declarations and frozen selection, not an
+independent verification that a mask fires; regimes omitted from both mappings
+remain unchecked and are left to the pilot report unexpected-mask backstop.
 
 Use one 128-core `compute` node per memory-dominant task, omit an explicit
 memory request, and use `backfill` only after compute allocation is exhausted.
