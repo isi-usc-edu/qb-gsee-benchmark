@@ -1,0 +1,1732 @@
+[
+  {
+    "campaign": "legacy:pyscf_solutions",
+    "counts": {
+      "label_counts": {
+        "indeterminate": 0,
+        "miss": 115,
+        "success": 30
+      },
+      "n_families": 5,
+      "n_tasks": 145
+    },
+    "method": "grouped-CV forward selection using family-balanced average precision",
+    "model": "ridge_logistic",
+    "narrative_block_order": [
+      "a_size_dimension",
+      "d_determinant_coupling",
+      "c_two_electron_spectrum",
+      "e_orderability_mpo",
+      "b_coefficient_sparsity"
+    ],
+    "solver": "CCSD",
+    "status": "ok",
+    "steps": [
+      {
+        "added_block": "a_size_dimension",
+        "delta_average_precision": null,
+        "scores": {
+          "average_precision": 0.3754432454487213,
+          "brier": 0.6059479915713213,
+          "log_loss": 1.1797811809326157
+        },
+        "selected_blocks": [
+          "a_size_dimension"
+        ],
+        "step": 0
+      },
+      {
+        "added_block": "d_determinant_coupling",
+        "delta_average_precision": 0.11747366319117414,
+        "scores": {
+          "average_precision": 0.49291690863989546,
+          "brier": 0.6213986505194924,
+          "log_loss": 2.5615790195831187
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling"
+        ],
+        "step": 1
+      },
+      {
+        "added_block": "c_two_electron_spectrum",
+        "delta_average_precision": -0.006455232392404142,
+        "scores": {
+          "average_precision": 0.4864616762474913,
+          "brier": 0.6212288213900914,
+          "log_loss": 2.4083210121756564
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "c_two_electron_spectrum"
+        ],
+        "step": 2
+      },
+      {
+        "added_block": "e_orderability_mpo",
+        "delta_average_precision": -0.05270331533226924,
+        "scores": {
+          "average_precision": 0.4337583609152221,
+          "brier": 0.6539587041338932,
+          "log_loss": 2.707894247133025
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "c_two_electron_spectrum",
+          "e_orderability_mpo"
+        ],
+        "step": 3
+      },
+      {
+        "added_block": "b_coefficient_sparsity",
+        "delta_average_precision": -0.021106918067600455,
+        "scores": {
+          "average_precision": 0.4126514428476216,
+          "brier": 0.6211260307264042,
+          "log_loss": 5.474063379227745
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "c_two_electron_spectrum",
+          "e_orderability_mpo",
+          "b_coefficient_sparsity"
+        ],
+        "step": 4
+      }
+    ]
+  },
+  {
+    "campaign": "legacy:pyscf_solutions",
+    "counts": {
+      "label_counts": {
+        "indeterminate": 0,
+        "miss": 67,
+        "success": 78
+      },
+      "n_families": 5,
+      "n_tasks": 145
+    },
+    "method": "grouped-CV forward selection using family-balanced average precision",
+    "model": "ridge_logistic",
+    "narrative_block_order": [
+      "a_size_dimension",
+      "d_determinant_coupling",
+      "c_two_electron_spectrum",
+      "b_coefficient_sparsity",
+      "e_orderability_mpo"
+    ],
+    "solver": "CCSD(T)",
+    "status": "ok",
+    "steps": [
+      {
+        "added_block": "a_size_dimension",
+        "delta_average_precision": null,
+        "scores": {
+          "average_precision": 0.4166281479928561,
+          "brier": 0.5655523574165606,
+          "log_loss": 0.766280786749167
+        },
+        "selected_blocks": [
+          "a_size_dimension"
+        ],
+        "step": 0
+      },
+      {
+        "added_block": "d_determinant_coupling",
+        "delta_average_precision": 0.15213356284592205,
+        "scores": {
+          "average_precision": 0.5687617108387781,
+          "brier": 0.6700920483371555,
+          "log_loss": 1.1669251987269829
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling"
+        ],
+        "step": 1
+      },
+      {
+        "added_block": "c_two_electron_spectrum",
+        "delta_average_precision": 0.00903650501447295,
+        "scores": {
+          "average_precision": 0.5777982158532511,
+          "brier": 0.7146747380788314,
+          "log_loss": 1.2272088339635356
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "c_two_electron_spectrum"
+        ],
+        "step": 2
+      },
+      {
+        "added_block": "b_coefficient_sparsity",
+        "delta_average_precision": -0.03624378776783577,
+        "scores": {
+          "average_precision": 0.5415544280854153,
+          "brier": 0.9128968183237174,
+          "log_loss": 1.9279001135385179
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "c_two_electron_spectrum",
+          "b_coefficient_sparsity"
+        ],
+        "step": 3
+      },
+      {
+        "added_block": "e_orderability_mpo",
+        "delta_average_precision": -0.030338842587029347,
+        "scores": {
+          "average_precision": 0.511215585498386,
+          "brier": 0.920462858163925,
+          "log_loss": 2.0719910284370338
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "c_two_electron_spectrum",
+          "b_coefficient_sparsity",
+          "e_orderability_mpo"
+        ],
+        "step": 4
+      }
+    ]
+  },
+  {
+    "campaign": "legacy:pyscf_solutions",
+    "counts": {
+      "label_counts": {
+        "indeterminate": 0,
+        "miss": 130,
+        "success": 19
+      },
+      "n_families": 5,
+      "n_tasks": 149
+    },
+    "method": "grouped-CV forward selection using family-balanced average precision",
+    "model": "ridge_logistic",
+    "narrative_block_order": [
+      "a_size_dimension",
+      "d_determinant_coupling",
+      "c_two_electron_spectrum",
+      "e_orderability_mpo",
+      "b_coefficient_sparsity"
+    ],
+    "solver": "CISD",
+    "status": "ok",
+    "steps": [
+      {
+        "added_block": "a_size_dimension",
+        "delta_average_precision": null,
+        "scores": {
+          "average_precision": 0.38792701814411257,
+          "brier": 0.4637359146407416,
+          "log_loss": 0.927815733829034
+        },
+        "selected_blocks": [
+          "a_size_dimension"
+        ],
+        "step": 0
+      },
+      {
+        "added_block": "d_determinant_coupling",
+        "delta_average_precision": 0.12438495176299913,
+        "scores": {
+          "average_precision": 0.5123119699071117,
+          "brier": 0.46260559583713934,
+          "log_loss": 1.7285103322393933
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling"
+        ],
+        "step": 1
+      },
+      {
+        "added_block": "c_two_electron_spectrum",
+        "delta_average_precision": 0.01908886674246535,
+        "scores": {
+          "average_precision": 0.531400836649577,
+          "brier": 0.4505018452955241,
+          "log_loss": 1.5703529985961437
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "c_two_electron_spectrum"
+        ],
+        "step": 2
+      },
+      {
+        "added_block": "e_orderability_mpo",
+        "delta_average_precision": -0.06638655996178205,
+        "scores": {
+          "average_precision": 0.465014276687795,
+          "brier": 0.44556883852396867,
+          "log_loss": 2.1070109015465954
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "c_two_electron_spectrum",
+          "e_orderability_mpo"
+        ],
+        "step": 3
+      },
+      {
+        "added_block": "b_coefficient_sparsity",
+        "delta_average_precision": -0.035490171441733,
+        "scores": {
+          "average_precision": 0.429524105246062,
+          "brier": 0.4464319387217268,
+          "log_loss": 4.173560790808185
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "c_two_electron_spectrum",
+          "e_orderability_mpo",
+          "b_coefficient_sparsity"
+        ],
+        "step": 4
+      }
+    ]
+  },
+  {
+    "campaign": "legacy:DMRG_Niagara_cluster_lowest_energy",
+    "counts": {
+      "label_counts": {
+        "indeterminate": 0,
+        "miss": 44,
+        "success": 105
+      },
+      "n_families": 5,
+      "n_tasks": 149
+    },
+    "method": "grouped-CV forward selection using family-balanced average precision",
+    "model": "ridge_logistic",
+    "narrative_block_order": [
+      "a_size_dimension",
+      "e_orderability_mpo",
+      "c_two_electron_spectrum",
+      "b_coefficient_sparsity",
+      "d_determinant_coupling"
+    ],
+    "solver": "DMRG_Niagara_cluster_lowest_energy",
+    "status": "ok",
+    "steps": [
+      {
+        "added_block": "a_size_dimension",
+        "delta_average_precision": null,
+        "scores": {
+          "average_precision": 0.43559805268675894,
+          "brier": 0.5779070760513965,
+          "log_loss": 1.4517660193822248
+        },
+        "selected_blocks": [
+          "a_size_dimension"
+        ],
+        "step": 0
+      },
+      {
+        "added_block": "e_orderability_mpo",
+        "delta_average_precision": 0.25489588619079645,
+        "scores": {
+          "average_precision": 0.6904939388775554,
+          "brier": 0.29856843182929305,
+          "log_loss": 0.5707101339067377
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "e_orderability_mpo"
+        ],
+        "step": 1
+      },
+      {
+        "added_block": "c_two_electron_spectrum",
+        "delta_average_precision": -0.06674346097520412,
+        "scores": {
+          "average_precision": 0.6237504779023513,
+          "brier": 0.3358609444958785,
+          "log_loss": 1.4815046899152973
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "e_orderability_mpo",
+          "c_two_electron_spectrum"
+        ],
+        "step": 2
+      },
+      {
+        "added_block": "b_coefficient_sparsity",
+        "delta_average_precision": -0.03871216835125302,
+        "scores": {
+          "average_precision": 0.5850383095510983,
+          "brier": 0.39560545704746075,
+          "log_loss": 1.0381771295999835
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "e_orderability_mpo",
+          "c_two_electron_spectrum",
+          "b_coefficient_sparsity"
+        ],
+        "step": 3
+      },
+      {
+        "added_block": "d_determinant_coupling",
+        "delta_average_precision": -0.09802180640853819,
+        "scores": {
+          "average_precision": 0.48701650314256006,
+          "brier": 0.7112142814344227,
+          "log_loss": 2.3253604093455924
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "e_orderability_mpo",
+          "c_two_electron_spectrum",
+          "b_coefficient_sparsity",
+          "d_determinant_coupling"
+        ],
+        "step": 4
+      }
+    ]
+  },
+  {
+    "campaign": "g31_tranche1_2026-07",
+    "counts": {
+      "label_counts": {
+        "indeterminate": 2,
+        "miss": 9,
+        "success": 42
+      },
+      "n_families": 3,
+      "n_tasks": 53
+    },
+    "method": "grouped-CV forward selection using family-balanced average precision",
+    "model": "ridge_logistic",
+    "narrative_block_order": [
+      "a_size_dimension",
+      "b_coefficient_sparsity",
+      "d_determinant_coupling",
+      "c_two_electron_spectrum",
+      "e_orderability_mpo"
+    ],
+    "solver": "FCI",
+    "status": "ok",
+    "steps": [
+      {
+        "added_block": "a_size_dimension",
+        "delta_average_precision": null,
+        "scores": {
+          "average_precision": 0.29495801126831667,
+          "brier": 0.5022810163687813,
+          "log_loss": 1.6435285145383447
+        },
+        "selected_blocks": [
+          "a_size_dimension"
+        ],
+        "step": 0
+      },
+      {
+        "added_block": "b_coefficient_sparsity",
+        "delta_average_precision": 0.03779833341586897,
+        "scores": {
+          "average_precision": 0.33275634468418563,
+          "brier": 0.9547071759803881,
+          "log_loss": 3.4939607312213927
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity"
+        ],
+        "step": 1
+      },
+      {
+        "added_block": "d_determinant_coupling",
+        "delta_average_precision": 0.036048103992460556,
+        "scores": {
+          "average_precision": 0.3688044486766462,
+          "brier": 0.973367238293694,
+          "log_loss": 3.8181251448803084
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity",
+          "d_determinant_coupling"
+        ],
+        "step": 2
+      },
+      {
+        "added_block": "c_two_electron_spectrum",
+        "delta_average_precision": -0.0001297329501627753,
+        "scores": {
+          "average_precision": 0.3686747157264834,
+          "brier": 0.9287154913158621,
+          "log_loss": 3.3478983014005426
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity",
+          "d_determinant_coupling",
+          "c_two_electron_spectrum"
+        ],
+        "step": 3
+      },
+      {
+        "added_block": "e_orderability_mpo",
+        "delta_average_precision": -0.0488249997847765,
+        "scores": {
+          "average_precision": 0.3198497159417069,
+          "brier": 1.0472969824592708,
+          "log_loss": 7.416017962807125
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity",
+          "d_determinant_coupling",
+          "c_two_electron_spectrum",
+          "e_orderability_mpo"
+        ],
+        "step": 4
+      }
+    ]
+  },
+  {
+    "campaign": "legacy:pyscf_solutions",
+    "counts": {
+      "label_counts": {
+        "indeterminate": 0,
+        "miss": 144,
+        "success": 5
+      },
+      "n_families": 5,
+      "n_tasks": 149
+    },
+    "method": "grouped-CV forward selection using family-balanced average precision",
+    "model": "ridge_logistic",
+    "narrative_block_order": [
+      "a_size_dimension",
+      "e_orderability_mpo",
+      "b_coefficient_sparsity",
+      "c_two_electron_spectrum",
+      "d_determinant_coupling"
+    ],
+    "solver": "HF",
+    "status": "ok",
+    "steps": [
+      {
+        "added_block": "a_size_dimension",
+        "delta_average_precision": null,
+        "scores": {
+          "average_precision": 0.43915801567664015,
+          "brier": 0.24500110216661186,
+          "log_loss": 3.2500656879188217
+        },
+        "selected_blocks": [
+          "a_size_dimension"
+        ],
+        "step": 0
+      },
+      {
+        "added_block": "e_orderability_mpo",
+        "delta_average_precision": 0.0009080823851402853,
+        "scores": {
+          "average_precision": 0.44006609806178043,
+          "brier": 0.21258651815887583,
+          "log_loss": 3.2154116292668933
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "e_orderability_mpo"
+        ],
+        "step": 1
+      },
+      {
+        "added_block": "b_coefficient_sparsity",
+        "delta_average_precision": 0.0007814348258150527,
+        "scores": {
+          "average_precision": 0.4408475328875955,
+          "brier": 0.21660850457882846,
+          "log_loss": 3.206921894313281
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "e_orderability_mpo",
+          "b_coefficient_sparsity"
+        ],
+        "step": 2
+      },
+      {
+        "added_block": "c_two_electron_spectrum",
+        "delta_average_precision": 0.0005880614458416145,
+        "scores": {
+          "average_precision": 0.4414355943334371,
+          "brier": 0.21637842471199314,
+          "log_loss": 3.2072306960701558
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "e_orderability_mpo",
+          "b_coefficient_sparsity",
+          "c_two_electron_spectrum"
+        ],
+        "step": 3
+      },
+      {
+        "added_block": "d_determinant_coupling",
+        "delta_average_precision": -0.0031843204071959064,
+        "scores": {
+          "average_precision": 0.4382512739262412,
+          "brier": 0.18844645273434518,
+          "log_loss": 3.150384093429137
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "e_orderability_mpo",
+          "b_coefficient_sparsity",
+          "c_two_electron_spectrum",
+          "d_determinant_coupling"
+        ],
+        "step": 4
+      }
+    ]
+  },
+  {
+    "campaign": "legacy:pyscf_solutions",
+    "counts": {
+      "label_counts": {
+        "indeterminate": 0,
+        "miss": 140,
+        "success": 6
+      },
+      "n_families": 5,
+      "n_tasks": 146
+    },
+    "method": "grouped-CV forward selection using family-balanced average precision",
+    "model": "ridge_logistic",
+    "narrative_block_order": [
+      "a_size_dimension",
+      "c_two_electron_spectrum",
+      "d_determinant_coupling",
+      "e_orderability_mpo",
+      "b_coefficient_sparsity"
+    ],
+    "solver": "MP2",
+    "status": "ok",
+    "steps": [
+      {
+        "added_block": "a_size_dimension",
+        "delta_average_precision": null,
+        "scores": {
+          "average_precision": 0.42697698447093047,
+          "brier": 0.1983932954694268,
+          "log_loss": 0.9130698487774019
+        },
+        "selected_blocks": [
+          "a_size_dimension"
+        ],
+        "step": 0
+      },
+      {
+        "added_block": "c_two_electron_spectrum",
+        "delta_average_precision": 0.09263602002467297,
+        "scores": {
+          "average_precision": 0.5196130044956034,
+          "brier": 0.19194987086095766,
+          "log_loss": 0.5422284123726491
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "c_two_electron_spectrum"
+        ],
+        "step": 1
+      },
+      {
+        "added_block": "d_determinant_coupling",
+        "delta_average_precision": -0.08350285221010023,
+        "scores": {
+          "average_precision": 0.4361101522855032,
+          "brier": 0.1933256589298418,
+          "log_loss": 1.3900691122485112
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "c_two_electron_spectrum",
+          "d_determinant_coupling"
+        ],
+        "step": 2
+      },
+      {
+        "added_block": "e_orderability_mpo",
+        "delta_average_precision": 0.03583397361676638,
+        "scores": {
+          "average_precision": 0.4719441259022696,
+          "brier": 0.19246287151746316,
+          "log_loss": 1.4769936125467433
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "c_two_electron_spectrum",
+          "d_determinant_coupling",
+          "e_orderability_mpo"
+        ],
+        "step": 3
+      },
+      {
+        "added_block": "b_coefficient_sparsity",
+        "delta_average_precision": -0.054651916729020034,
+        "scores": {
+          "average_precision": 0.41729220917324955,
+          "brier": 0.19251284759655332,
+          "log_loss": 3.3059226442818606
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "c_two_electron_spectrum",
+          "d_determinant_coupling",
+          "e_orderability_mpo",
+          "b_coefficient_sparsity"
+        ],
+        "step": 4
+      }
+    ]
+  },
+  {
+    "campaign": "g31_tranche1_2026-07",
+    "counts": {
+      "label_counts": {
+        "indeterminate": 23,
+        "miss": 3,
+        "success": 27
+      },
+      "n_families": 3,
+      "n_tasks": 53
+    },
+    "method": "grouped-CV forward selection using family-balanced average precision",
+    "model": "ridge_logistic",
+    "narrative_block_order": [
+      "a_size_dimension",
+      "c_two_electron_spectrum",
+      "b_coefficient_sparsity",
+      "e_orderability_mpo",
+      "d_determinant_coupling"
+    ],
+    "solver": "SHCI_opt",
+    "status": "ok",
+    "steps": [
+      {
+        "added_block": "a_size_dimension",
+        "delta_average_precision": null,
+        "scores": {
+          "average_precision": 0.5628873222889869,
+          "brier": 0.41995432255893994,
+          "log_loss": 2.1149051039057896
+        },
+        "selected_blocks": [
+          "a_size_dimension"
+        ],
+        "step": 0
+      },
+      {
+        "added_block": "c_two_electron_spectrum",
+        "delta_average_precision": -0.020287617583380158,
+        "scores": {
+          "average_precision": 0.5425997047056067,
+          "brier": 0.5442824828461773,
+          "log_loss": 2.4083954055337737
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "c_two_electron_spectrum"
+        ],
+        "step": 1
+      },
+      {
+        "added_block": "b_coefficient_sparsity",
+        "delta_average_precision": -0.06517517354380792,
+        "scores": {
+          "average_precision": 0.4774245311617988,
+          "brier": 0.5678211389642459,
+          "log_loss": 2.336388309978038
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "c_two_electron_spectrum",
+          "b_coefficient_sparsity"
+        ],
+        "step": 2
+      },
+      {
+        "added_block": "e_orderability_mpo",
+        "delta_average_precision": -0.075403649657666,
+        "scores": {
+          "average_precision": 0.4020208815041328,
+          "brier": 0.780912008284931,
+          "log_loss": 4.029841763984489
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "c_two_electron_spectrum",
+          "b_coefficient_sparsity",
+          "e_orderability_mpo"
+        ],
+        "step": 3
+      },
+      {
+        "added_block": "d_determinant_coupling",
+        "delta_average_precision": -0.027220601952727908,
+        "scores": {
+          "average_precision": 0.3748002795514049,
+          "brier": 0.9179705171594538,
+          "log_loss": 5.920754595782967
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "c_two_electron_spectrum",
+          "b_coefficient_sparsity",
+          "e_orderability_mpo",
+          "d_determinant_coupling"
+        ],
+        "step": 4
+      }
+    ]
+  },
+  {
+    "campaign": "legacy:SHCI",
+    "counts": {
+      "label_counts": {
+        "indeterminate": 0,
+        "miss": 1,
+        "success": 146
+      },
+      "n_families": 5,
+      "n_tasks": 147
+    },
+    "solver": "SHCI_opt",
+    "status": "insufficient_data",
+    "steps": []
+  },
+  {
+    "campaign": "legacy:SHCI_sweep",
+    "counts": {
+      "label_counts": {
+        "indeterminate": 6,
+        "miss": 10,
+        "success": 133
+      },
+      "n_families": 5,
+      "n_tasks": 149
+    },
+    "method": "grouped-CV forward selection using family-balanced average precision",
+    "model": "ridge_logistic",
+    "narrative_block_order": [
+      "a_size_dimension",
+      "b_coefficient_sparsity",
+      "e_orderability_mpo",
+      "c_two_electron_spectrum",
+      "d_determinant_coupling"
+    ],
+    "solver": "SHCI_pt_1e-4",
+    "status": "ok",
+    "steps": [
+      {
+        "added_block": "a_size_dimension",
+        "delta_average_precision": null,
+        "scores": {
+          "average_precision": 0.2903571597817314,
+          "brier": 0.3774397959826445,
+          "log_loss": 0.9291635250895109
+        },
+        "selected_blocks": [
+          "a_size_dimension"
+        ],
+        "step": 0
+      },
+      {
+        "added_block": "b_coefficient_sparsity",
+        "delta_average_precision": 0.11510963148760583,
+        "scores": {
+          "average_precision": 0.4054667912693372,
+          "brier": 0.4792617378345587,
+          "log_loss": 1.5614612953232545
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity"
+        ],
+        "step": 1
+      },
+      {
+        "added_block": "e_orderability_mpo",
+        "delta_average_precision": -0.04270753471578692,
+        "scores": {
+          "average_precision": 0.3627592565535503,
+          "brier": 0.5441004539252166,
+          "log_loss": 1.9695322742294414
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity",
+          "e_orderability_mpo"
+        ],
+        "step": 2
+      },
+      {
+        "added_block": "c_two_electron_spectrum",
+        "delta_average_precision": -0.00019984849513643432,
+        "scores": {
+          "average_precision": 0.36255940805841386,
+          "brier": 0.54717901186182,
+          "log_loss": 1.9558231572460762
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity",
+          "e_orderability_mpo",
+          "c_two_electron_spectrum"
+        ],
+        "step": 3
+      },
+      {
+        "added_block": "d_determinant_coupling",
+        "delta_average_precision": -0.03334118603656483,
+        "scores": {
+          "average_precision": 0.329218222021849,
+          "brier": 0.8829533178540843,
+          "log_loss": 4.934935442164736
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity",
+          "e_orderability_mpo",
+          "c_two_electron_spectrum",
+          "d_determinant_coupling"
+        ],
+        "step": 4
+      }
+    ]
+  },
+  {
+    "campaign": "legacy:SHCI_sweep",
+    "counts": {
+      "label_counts": {
+        "indeterminate": 6,
+        "miss": 10,
+        "success": 133
+      },
+      "n_families": 5,
+      "n_tasks": 149
+    },
+    "method": "grouped-CV forward selection using family-balanced average precision",
+    "model": "ridge_logistic",
+    "narrative_block_order": [
+      "a_size_dimension",
+      "b_coefficient_sparsity",
+      "e_orderability_mpo",
+      "c_two_electron_spectrum",
+      "d_determinant_coupling"
+    ],
+    "solver": "SHCI_pt_2e-4",
+    "status": "ok",
+    "steps": [
+      {
+        "added_block": "a_size_dimension",
+        "delta_average_precision": null,
+        "scores": {
+          "average_precision": 0.2903571597817314,
+          "brier": 0.3774397959826445,
+          "log_loss": 0.9291635250895109
+        },
+        "selected_blocks": [
+          "a_size_dimension"
+        ],
+        "step": 0
+      },
+      {
+        "added_block": "b_coefficient_sparsity",
+        "delta_average_precision": 0.11510963148760583,
+        "scores": {
+          "average_precision": 0.4054667912693372,
+          "brier": 0.4792617378345587,
+          "log_loss": 1.5614612953232545
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity"
+        ],
+        "step": 1
+      },
+      {
+        "added_block": "e_orderability_mpo",
+        "delta_average_precision": -0.04270753471578692,
+        "scores": {
+          "average_precision": 0.3627592565535503,
+          "brier": 0.5441004539252166,
+          "log_loss": 1.9695322742294414
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity",
+          "e_orderability_mpo"
+        ],
+        "step": 2
+      },
+      {
+        "added_block": "c_two_electron_spectrum",
+        "delta_average_precision": -0.00019984849513643432,
+        "scores": {
+          "average_precision": 0.36255940805841386,
+          "brier": 0.54717901186182,
+          "log_loss": 1.9558231572460762
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity",
+          "e_orderability_mpo",
+          "c_two_electron_spectrum"
+        ],
+        "step": 3
+      },
+      {
+        "added_block": "d_determinant_coupling",
+        "delta_average_precision": -0.03334118603656483,
+        "scores": {
+          "average_precision": 0.329218222021849,
+          "brier": 0.8829533178540843,
+          "log_loss": 4.934935442164736
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity",
+          "e_orderability_mpo",
+          "c_two_electron_spectrum",
+          "d_determinant_coupling"
+        ],
+        "step": 4
+      }
+    ]
+  },
+  {
+    "campaign": "legacy:SHCI_sweep",
+    "counts": {
+      "label_counts": {
+        "indeterminate": 7,
+        "miss": 4,
+        "success": 138
+      },
+      "n_families": 5,
+      "n_tasks": 149
+    },
+    "method": "grouped-CV forward selection using family-balanced average precision",
+    "model": "ridge_logistic",
+    "narrative_block_order": [
+      "a_size_dimension",
+      "b_coefficient_sparsity",
+      "c_two_electron_spectrum",
+      "e_orderability_mpo",
+      "d_determinant_coupling"
+    ],
+    "solver": "SHCI_pt_2e-5",
+    "status": "ok",
+    "steps": [
+      {
+        "added_block": "a_size_dimension",
+        "delta_average_precision": null,
+        "scores": {
+          "average_precision": 0.2965048989183136,
+          "brier": 0.27791888236576995,
+          "log_loss": 0.7109998054938975
+        },
+        "selected_blocks": [
+          "a_size_dimension"
+        ],
+        "step": 0
+      },
+      {
+        "added_block": "b_coefficient_sparsity",
+        "delta_average_precision": 0.2693087798969737,
+        "scores": {
+          "average_precision": 0.5658136788152873,
+          "brier": 0.2672859680788106,
+          "log_loss": 2.3307625174807347
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity"
+        ],
+        "step": 1
+      },
+      {
+        "added_block": "c_two_electron_spectrum",
+        "delta_average_precision": -0.01529293480442262,
+        "scores": {
+          "average_precision": 0.5505207440108647,
+          "brier": 0.2496802788312925,
+          "log_loss": 2.318192613076418
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity",
+          "c_two_electron_spectrum"
+        ],
+        "step": 2
+      },
+      {
+        "added_block": "e_orderability_mpo",
+        "delta_average_precision": -0.04845435412977972,
+        "scores": {
+          "average_precision": 0.502066389881085,
+          "brier": 0.2598673373747264,
+          "log_loss": 2.0744592859463236
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity",
+          "c_two_electron_spectrum",
+          "e_orderability_mpo"
+        ],
+        "step": 3
+      },
+      {
+        "added_block": "d_determinant_coupling",
+        "delta_average_precision": -0.11748294354108518,
+        "scores": {
+          "average_precision": 0.3845834463399998,
+          "brier": 0.8759722158631793,
+          "log_loss": 3.641652061342164
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity",
+          "c_two_electron_spectrum",
+          "e_orderability_mpo",
+          "d_determinant_coupling"
+        ],
+        "step": 4
+      }
+    ]
+  },
+  {
+    "campaign": "legacy:SHCI_sweep",
+    "counts": {
+      "label_counts": {
+        "indeterminate": 6,
+        "miss": 7,
+        "success": 136
+      },
+      "n_families": 5,
+      "n_tasks": 149
+    },
+    "method": "grouped-CV forward selection using family-balanced average precision",
+    "model": "ridge_logistic",
+    "narrative_block_order": [
+      "a_size_dimension",
+      "b_coefficient_sparsity",
+      "c_two_electron_spectrum",
+      "d_determinant_coupling",
+      "e_orderability_mpo"
+    ],
+    "solver": "SHCI_pt_5e-5",
+    "status": "ok",
+    "steps": [
+      {
+        "added_block": "a_size_dimension",
+        "delta_average_precision": null,
+        "scores": {
+          "average_precision": 0.2902487203251448,
+          "brier": 0.32926477465606596,
+          "log_loss": 0.8334977431973286
+        },
+        "selected_blocks": [
+          "a_size_dimension"
+        ],
+        "step": 0
+      },
+      {
+        "added_block": "b_coefficient_sparsity",
+        "delta_average_precision": 0.17023518629836454,
+        "scores": {
+          "average_precision": 0.46048390662350935,
+          "brier": 0.430394543137413,
+          "log_loss": 1.8631860309284025
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity"
+        ],
+        "step": 1
+      },
+      {
+        "added_block": "c_two_electron_spectrum",
+        "delta_average_precision": 0.010480137724245664,
+        "scores": {
+          "average_precision": 0.470964044347755,
+          "brier": 0.4518799863503737,
+          "log_loss": 1.9572017275770128
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity",
+          "c_two_electron_spectrum"
+        ],
+        "step": 2
+      },
+      {
+        "added_block": "d_determinant_coupling",
+        "delta_average_precision": -0.08347035418959214,
+        "scores": {
+          "average_precision": 0.3874936901581629,
+          "brier": 0.8898803022362449,
+          "log_loss": 5.72904993874217
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity",
+          "c_two_electron_spectrum",
+          "d_determinant_coupling"
+        ],
+        "step": 3
+      },
+      {
+        "added_block": "e_orderability_mpo",
+        "delta_average_precision": -0.06511842148338165,
+        "scores": {
+          "average_precision": 0.3223752686747812,
+          "brier": 0.8833651579151784,
+          "log_loss": 5.5507035648068435
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "b_coefficient_sparsity",
+          "c_two_electron_spectrum",
+          "d_determinant_coupling",
+          "e_orderability_mpo"
+        ],
+        "step": 4
+      }
+    ]
+  },
+  {
+    "campaign": "legacy:SHCI_sweep",
+    "counts": {
+      "label_counts": {
+        "indeterminate": 2,
+        "miss": 47,
+        "success": 100
+      },
+      "n_families": 5,
+      "n_tasks": 149
+    },
+    "method": "grouped-CV forward selection using family-balanced average precision",
+    "model": "ridge_logistic",
+    "narrative_block_order": [
+      "a_size_dimension",
+      "d_determinant_coupling",
+      "b_coefficient_sparsity",
+      "c_two_electron_spectrum",
+      "e_orderability_mpo"
+    ],
+    "solver": "SHCI_var_1e-4",
+    "status": "ok",
+    "steps": [
+      {
+        "added_block": "a_size_dimension",
+        "delta_average_precision": null,
+        "scores": {
+          "average_precision": 0.4034266925415279,
+          "brier": 0.49662488051338527,
+          "log_loss": 0.9638795548535526
+        },
+        "selected_blocks": [
+          "a_size_dimension"
+        ],
+        "step": 0
+      },
+      {
+        "added_block": "d_determinant_coupling",
+        "delta_average_precision": 0.16629413742736981,
+        "scores": {
+          "average_precision": 0.5697208299688977,
+          "brier": 0.6546581655838746,
+          "log_loss": 3.1071076255183274
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling"
+        ],
+        "step": 1
+      },
+      {
+        "added_block": "b_coefficient_sparsity",
+        "delta_average_precision": 0.0636466738359488,
+        "scores": {
+          "average_precision": 0.6333675038048465,
+          "brier": 0.7720301071534252,
+          "log_loss": 3.8500360670531664
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "b_coefficient_sparsity"
+        ],
+        "step": 2
+      },
+      {
+        "added_block": "c_two_electron_spectrum",
+        "delta_average_precision": -0.010347544258160535,
+        "scores": {
+          "average_precision": 0.623019959546686,
+          "brier": 0.7862693575589725,
+          "log_loss": 4.065064784256746
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "b_coefficient_sparsity",
+          "c_two_electron_spectrum"
+        ],
+        "step": 3
+      },
+      {
+        "added_block": "e_orderability_mpo",
+        "delta_average_precision": -0.07857982169560196,
+        "scores": {
+          "average_precision": 0.544440137851084,
+          "brier": 0.6916943453377973,
+          "log_loss": 3.1510914265586845
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "b_coefficient_sparsity",
+          "c_two_electron_spectrum",
+          "e_orderability_mpo"
+        ],
+        "step": 4
+      }
+    ]
+  },
+  {
+    "campaign": "legacy:SHCI_sweep",
+    "counts": {
+      "label_counts": {
+        "indeterminate": 2,
+        "miss": 54,
+        "success": 93
+      },
+      "n_families": 5,
+      "n_tasks": 149
+    },
+    "method": "grouped-CV forward selection using family-balanced average precision",
+    "model": "ridge_logistic",
+    "narrative_block_order": [
+      "a_size_dimension",
+      "d_determinant_coupling",
+      "b_coefficient_sparsity",
+      "c_two_electron_spectrum",
+      "e_orderability_mpo"
+    ],
+    "solver": "SHCI_var_2e-4",
+    "status": "ok",
+    "steps": [
+      {
+        "added_block": "a_size_dimension",
+        "delta_average_precision": null,
+        "scores": {
+          "average_precision": 0.38947586940178464,
+          "brier": 0.5541792849968584,
+          "log_loss": 1.0813832752047672
+        },
+        "selected_blocks": [
+          "a_size_dimension"
+        ],
+        "step": 0
+      },
+      {
+        "added_block": "d_determinant_coupling",
+        "delta_average_precision": 0.17521683182748654,
+        "scores": {
+          "average_precision": 0.5646927012292712,
+          "brier": 0.6615393042344724,
+          "log_loss": 5.195586929763172
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling"
+        ],
+        "step": 1
+      },
+      {
+        "added_block": "b_coefficient_sparsity",
+        "delta_average_precision": 0.050459752995617446,
+        "scores": {
+          "average_precision": 0.6151524542248886,
+          "brier": 0.7415026977541432,
+          "log_loss": 4.716541008977765
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "b_coefficient_sparsity"
+        ],
+        "step": 2
+      },
+      {
+        "added_block": "c_two_electron_spectrum",
+        "delta_average_precision": -0.00821101240990818,
+        "scores": {
+          "average_precision": 0.6069414418149804,
+          "brier": 0.731439175760942,
+          "log_loss": 4.919724720971621
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "b_coefficient_sparsity",
+          "c_two_electron_spectrum"
+        ],
+        "step": 3
+      },
+      {
+        "added_block": "e_orderability_mpo",
+        "delta_average_precision": -0.04725310645257674,
+        "scores": {
+          "average_precision": 0.5596883353624037,
+          "brier": 0.7829811163842411,
+          "log_loss": 4.721085871999826
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "b_coefficient_sparsity",
+          "c_two_electron_spectrum",
+          "e_orderability_mpo"
+        ],
+        "step": 4
+      }
+    ]
+  },
+  {
+    "campaign": "legacy:SHCI_sweep",
+    "counts": {
+      "label_counts": {
+        "indeterminate": 3,
+        "miss": 20,
+        "success": 126
+      },
+      "n_families": 5,
+      "n_tasks": 149
+    },
+    "method": "grouped-CV forward selection using family-balanced average precision",
+    "model": "ridge_logistic",
+    "narrative_block_order": [
+      "a_size_dimension",
+      "d_determinant_coupling",
+      "b_coefficient_sparsity",
+      "c_two_electron_spectrum",
+      "e_orderability_mpo"
+    ],
+    "solver": "SHCI_var_2e-5",
+    "status": "ok",
+    "steps": [
+      {
+        "added_block": "a_size_dimension",
+        "delta_average_precision": null,
+        "scores": {
+          "average_precision": 0.44211236347316846,
+          "brier": 0.30453284271126185,
+          "log_loss": 0.5625107732790362
+        },
+        "selected_blocks": [
+          "a_size_dimension"
+        ],
+        "step": 0
+      },
+      {
+        "added_block": "d_determinant_coupling",
+        "delta_average_precision": 0.02448579381810162,
+        "scores": {
+          "average_precision": 0.4665981572912701,
+          "brier": 0.5983292534027957,
+          "log_loss": 2.268160168163574
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling"
+        ],
+        "step": 1
+      },
+      {
+        "added_block": "b_coefficient_sparsity",
+        "delta_average_precision": 0.027211252705599875,
+        "scores": {
+          "average_precision": 0.49380940999686995,
+          "brier": 0.7937618930206369,
+          "log_loss": 4.206222087885577
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "b_coefficient_sparsity"
+        ],
+        "step": 2
+      },
+      {
+        "added_block": "c_two_electron_spectrum",
+        "delta_average_precision": -0.0009976903973360485,
+        "scores": {
+          "average_precision": 0.4928117195995339,
+          "brier": 0.798627468727588,
+          "log_loss": 4.247033599375335
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "b_coefficient_sparsity",
+          "c_two_electron_spectrum"
+        ],
+        "step": 3
+      },
+      {
+        "added_block": "e_orderability_mpo",
+        "delta_average_precision": -0.03420595860153475,
+        "scores": {
+          "average_precision": 0.45860576099799916,
+          "brier": 0.7353239170459025,
+          "log_loss": 3.395257319791828
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "b_coefficient_sparsity",
+          "c_two_electron_spectrum",
+          "e_orderability_mpo"
+        ],
+        "step": 4
+      }
+    ]
+  },
+  {
+    "campaign": "legacy:SHCI_sweep",
+    "counts": {
+      "label_counts": {
+        "indeterminate": 2,
+        "miss": 34,
+        "success": 113
+      },
+      "n_families": 5,
+      "n_tasks": 149
+    },
+    "method": "grouped-CV forward selection using family-balanced average precision",
+    "model": "ridge_logistic",
+    "narrative_block_order": [
+      "a_size_dimension",
+      "d_determinant_coupling",
+      "e_orderability_mpo",
+      "b_coefficient_sparsity",
+      "c_two_electron_spectrum"
+    ],
+    "solver": "SHCI_var_5e-5",
+    "status": "ok",
+    "steps": [
+      {
+        "added_block": "a_size_dimension",
+        "delta_average_precision": null,
+        "scores": {
+          "average_precision": 0.3509767103204921,
+          "brier": 0.434327008178535,
+          "log_loss": 0.8539307932144694
+        },
+        "selected_blocks": [
+          "a_size_dimension"
+        ],
+        "step": 0
+      },
+      {
+        "added_block": "d_determinant_coupling",
+        "delta_average_precision": 0.22407114108309029,
+        "scores": {
+          "average_precision": 0.5750478514035824,
+          "brier": 0.597013071654011,
+          "log_loss": 4.485069687232922
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling"
+        ],
+        "step": 1
+      },
+      {
+        "added_block": "e_orderability_mpo",
+        "delta_average_precision": -0.07161800735179902,
+        "scores": {
+          "average_precision": 0.5034298440517834,
+          "brier": 0.5948285587008346,
+          "log_loss": 4.0828035255436825
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "e_orderability_mpo"
+        ],
+        "step": 2
+      },
+      {
+        "added_block": "b_coefficient_sparsity",
+        "delta_average_precision": 0.014615397964387045,
+        "scores": {
+          "average_precision": 0.5180452420161704,
+          "brier": 0.7128590696277594,
+          "log_loss": 4.511396180834061
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "e_orderability_mpo",
+          "b_coefficient_sparsity"
+        ],
+        "step": 3
+      },
+      {
+        "added_block": "c_two_electron_spectrum",
+        "delta_average_precision": -0.00487035155442983,
+        "scores": {
+          "average_precision": 0.5131748904617406,
+          "brier": 0.7057945678534969,
+          "log_loss": 4.439505033849747
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "d_determinant_coupling",
+          "e_orderability_mpo",
+          "b_coefficient_sparsity",
+          "c_two_electron_spectrum"
+        ],
+        "step": 4
+      }
+    ]
+  },
+  {
+    "campaign": "ipie_swing_2026-07",
+    "counts": {
+      "label_counts": {
+        "indeterminate": 29,
+        "miss": 16,
+        "success": 4
+      },
+      "n_families": 3,
+      "n_tasks": 49
+    },
+    "method": "grouped-CV forward selection using family-balanced average precision",
+    "model": "ridge_logistic",
+    "narrative_block_order": [
+      "a_size_dimension",
+      "e_orderability_mpo",
+      "c_two_electron_spectrum",
+      "d_determinant_coupling",
+      "b_coefficient_sparsity"
+    ],
+    "solver": "ipie_uhf_trial",
+    "status": "ok",
+    "steps": [
+      {
+        "added_block": "a_size_dimension",
+        "delta_average_precision": null,
+        "scores": {
+          "average_precision": 0.2798249053133848,
+          "brier": 1.0366088026929778,
+          "log_loss": 9.976181257480643
+        },
+        "selected_blocks": [
+          "a_size_dimension"
+        ],
+        "step": 0
+      },
+      {
+        "added_block": "e_orderability_mpo",
+        "delta_average_precision": -0.006204906204906158,
+        "scores": {
+          "average_precision": 0.2736199991084786,
+          "brier": 1.3829109876870396,
+          "log_loss": 17.919453724624468
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "e_orderability_mpo"
+        ],
+        "step": 1
+      },
+      {
+        "added_block": "c_two_electron_spectrum",
+        "delta_average_precision": 0.0,
+        "scores": {
+          "average_precision": 0.2736199991084786,
+          "brier": 1.349220493169835,
+          "log_loss": 17.94985892988529
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "e_orderability_mpo",
+          "c_two_electron_spectrum"
+        ],
+        "step": 2
+      },
+      {
+        "added_block": "d_determinant_coupling",
+        "delta_average_precision": -0.0023222978945138806,
+        "scores": {
+          "average_precision": 0.27129770121396474,
+          "brier": 1.006033803420271,
+          "log_loss": 11.61024345533696
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "e_orderability_mpo",
+          "c_two_electron_spectrum",
+          "d_determinant_coupling"
+        ],
+        "step": 3
+      },
+      {
+        "added_block": "b_coefficient_sparsity",
+        "delta_average_precision": -0.0007467481871409332,
+        "scores": {
+          "average_precision": 0.2705509530268238,
+          "brier": 1.3075552768111172,
+          "log_loss": 12.568275490648873
+        },
+        "selected_blocks": [
+          "a_size_dimension",
+          "e_orderability_mpo",
+          "c_two_electron_spectrum",
+          "d_determinant_coupling",
+          "b_coefficient_sparsity"
+        ],
+        "step": 4
+      }
+    ]
+  },
+  {
+    "campaign": "ipie_swing_envfix_2026-07",
+    "counts": {
+      "label_counts": {
+        "indeterminate": 0,
+        "miss": 3,
+        "success": 5
+      },
+      "n_families": 2,
+      "n_tasks": 8
+    },
+    "solver": "ipie_uhf_trial",
+    "status": "insufficient_data",
+    "steps": []
+  }
+]

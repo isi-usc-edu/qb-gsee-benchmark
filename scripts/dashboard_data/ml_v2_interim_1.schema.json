@@ -1,0 +1,63 @@
+{
+  "$id": "ml_v2_interim_1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "bundle_version": {
+      "const": "ml-v2-interim-1"
+    },
+    "definitions": {
+      "type": "object"
+    },
+    "evaluations": {
+      "items": {
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "interim": {
+      "const": true
+    },
+    "interim_label": {
+      "const": "INTERIM (pre-mean-field feature set)"
+    },
+    "manifest_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "model_label_vocabulary": {
+      "const": [
+        "success",
+        "miss",
+        "indeterminate"
+      ]
+    },
+    "per_task_predictions": {
+      "items": {
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "source_outcome_vocabulary": {
+      "const": [
+        "success",
+        "miss",
+        "indeterminate",
+        "not_attempted"
+      ]
+    }
+  },
+  "required": [
+    "bundle_version",
+    "interim",
+    "interim_label",
+    "definitions",
+    "source_outcome_vocabulary",
+    "model_label_vocabulary",
+    "manifest_sha256",
+    "evaluations",
+    "per_task_predictions"
+  ],
+  "title": "QB-GSEE ML v2 interim bundle",
+  "type": "object"
+}
