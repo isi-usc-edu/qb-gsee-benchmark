@@ -65,8 +65,9 @@ from qb_gsee_benchmark.utils import iso8601_timestamp
 from qb_gsee_benchmark.utils import read_fcidump
 
 ADAPTER_NAME = "pyscf_reference"
-ADAPTER_VERSION = "0.3.0"
-METHOD_CAMPAIGN = "pyscf_methods_2026-07"
+ADAPTER_VERSION = "0.4.0"
+LEGACY_METHOD_CAMPAIGN = "pyscf_methods_2026-07"
+G48_METHOD_CAMPAIGN = "g48_pyscf_clean_slate_2026-07_v1"
 
 SOLVER_UUIDS = {
     "HF": "5f5e617a-19c2-4d82-bebc-b2d6b3dcb012",
@@ -154,11 +155,12 @@ def prepare_method(
     task_uuid: str,
     fcidump_path: str | Path,
     run_dir: str | Path,
+    campaign: str,
     num_threads: int = 1,
     resources: SolverResources | None = None,
     overwrite: bool = False,
 ) -> RunManifest:
-    """Prepare one fixed-identity legacy PySCF method adapter."""
+    """Prepare one fixed-identity PySCF method adapter for the reviewed G-48 campaign."""
 
     normalized_method = method.strip().upper()
     try:
@@ -168,6 +170,7 @@ def prepare_method(
         raise ValueError(
             f"Unsupported PySCF method adapter {normalized_method!r}; choose {allowed}."
         ) from exc
+    _validate_method_campaign(campaign)
     return _prepare(
         problem_instance_path=problem_instance_path,
         task_uuid=task_uuid,
@@ -176,7 +179,7 @@ def prepare_method(
         config=PySCFConfig(
             method=normalized_method,
             num_threads=num_threads,
-            campaign=METHOD_CAMPAIGN,
+            campaign=campaign,
         ),
         resources=resources,
         overwrite=overwrite,
@@ -277,6 +280,15 @@ def run(run_dir: str | Path) -> dict[str, Any]:
             fcidump_path=run_path / manifest.files["fcidump"],
             legacy_open_shell_uhf=manifest.adapter in METHOD_ADAPTERS,
         )
+        nonconverged_stages = _nonconverged_stages(config.normalized_method(), details)
+        if nonconverged_stages:
+            details["diagnostic_energy_hartree"] = energy
+            details["nonconverged_stages"] = nonconverged_stages
+            error_message = "PySCF did not converge at default settings: " + ", ".join(
+                nonconverged_stages
+            )
+            status = "failed"
+            energy = None
     except Exception as exc:
         status = "failed"
         error_message = str(exc)
@@ -628,6 +640,23 @@ def _run_hf(
     }
 
 
+def _nonconverged_stages(method: str, details: dict[str, Any]) -> list[str]:
+    stages = []
+    if details.get("hf_converged") is False:
+        stages.append("HF")
+    if method != "HF" and details.get("converged") is False:
+        stages.append(method)
+    return stages
+
+
+def _validate_method_campaign(campaign: str | None) -> None:
+    if campaign != G48_METHOD_CAMPAIGN:
+        raise ValueError(
+            f"Unsupported PySCF method campaign {campaign!r}; "
+            f"expected reviewed G-48 campaign {G48_METHOD_CAMPAIGN!r}."
+        )
+
+
 def _optional_bool(value: Any) -> bool | None:
     if value is None:
         return None
@@ -640,21 +669,19 @@ def _validate_adapter_identity(manifest: RunManifest, config: PySCFConfig) -> No
     fixed_method = METHOD_ADAPTERS.get(manifest.adapter)
     if fixed_method is None:
         return
+    _validate_method_campaign(config.campaign)
     expected = {
         "method": fixed_method,
         "solver_uuid": SOLVER_UUIDS[fixed_method],
         "solver_short_name": fixed_method,
-        "campaign": METHOD_CAMPAIGN,
     }
     actual = {
         "method": config.normalized_method(),
         "solver_uuid": manifest.solver_uuid,
         "solver_short_name": manifest.solver_short_name,
-        "campaign": config.campaign,
     }
     if actual != expected:
         raise ValueError(
             f"Adapter {manifest.adapter!r} identity mismatch: "
             f"expected {expected!r}, got {actual!r}."
         )
-

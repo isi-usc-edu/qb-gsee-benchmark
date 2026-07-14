@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "campaign_id": "g48_pyscf_clean_slate_2026-07_v1",
+  "status": "prepilot_launch_blockers_fixed",
+  "artifact_sha256": {
+    "g48_adapter_cold.junit.xml": "783a41b2d41d04524f3c5d984d1e402fd2a9d692961c445d8ecd91794ffd0e14",
+    "g48_adapter_focused.junit.xml": "bc632655b41efa7b8fdbf35fd0d18613d7e126929ade75bcbb4bfed4941bc9f4",
+    "g48_environment_pin.json": "b49afb2c0960d63ae490c11901312016ad5e60241c67cff3bd08016fd91ed75b",
+    "requirements.lock": "bfbed8f9395dbc570e1210fe934d539ed10453610f97ef3f5abe5335ebe1c4a4",
+    "verify_g48_environment_pin.py": "c92b75273be36ce4bf6e85e851154ba02fd90dad82552895f3b96c6b56573746"
+  },
+  "tests": {
+    "focused": {
+      "tests": 17,
+      "passed": 17,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "cold": {
+      "tests": 376,
+      "passed": 375,
+      "skipped": 1,
+      "failures": 0,
+      "errors": 0
+    }
+  },
+  "execution": {
+    "solver_jobs_submitted": 0,
+    "pilot_launched": false,
+    "pbs_submission_performed": false
+  }
+}

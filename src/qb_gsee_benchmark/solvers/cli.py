@@ -52,6 +52,7 @@ def main(argv: list[str] | None = None) -> int:
         "--method", required=True, choices=tuple(pyscf_adapter.METHOD_ADAPTER_NAMES)
     )
     prepare_pyscf_method.add_argument("--num-threads", type=int, default=1)
+    prepare_pyscf_method.add_argument("--campaign", required=True)
     prepare_pyscf_method.add_argument("--overwrite", action="store_true")
 
     prepare_shci = subparsers.add_parser("prepare-shci")
@@ -192,6 +193,7 @@ def main(argv: list[str] | None = None) -> int:
             fcidump_path=args.fcidump,
             run_dir=args.run_dir,
             num_threads=args.num_threads,
+            campaign=args.campaign,
             overwrite=args.overwrite,
         )
         print(json.dumps(manifest.to_dict(), indent=2, sort_keys=True))

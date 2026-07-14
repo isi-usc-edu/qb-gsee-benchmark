@@ -1,0 +1,30 @@
+{
+  "campaign_id": "g48_pyscf_clean_slate_2026-07_v1",
+  "check_count": 20,
+  "checks": {
+    "adapter_version": true,
+    "bundle_sha256:g48_adapter_cold.junit.xml": true,
+    "bundle_sha256:g48_adapter_focused.junit.xml": true,
+    "bundle_sha256:g48_environment_pin.json": true,
+    "bundle_sha256:requirements.lock": true,
+    "bundle_sha256:verify_g48_environment_pin.py": true,
+    "campaign_id": true,
+    "legacy_campaign_rejected": true,
+    "package:h5py": true,
+    "package:numpy": true,
+    "package:pyscf": true,
+    "package:scipy": true,
+    "platform": true,
+    "python": true,
+    "python_compiler": true,
+    "python_implementation": true,
+    "requirements_lock": true,
+    "source_sha256:src/qb_gsee_benchmark/solvers/batch.py": true,
+    "source_sha256:src/qb_gsee_benchmark/solvers/cli.py": true,
+    "source_sha256:src/qb_gsee_benchmark/solvers/pyscf_adapter.py": true
+  },
+  "failed_checks": [],
+  "passed_count": 20,
+  "schema_version": 1,
+  "status": "passed"
+}

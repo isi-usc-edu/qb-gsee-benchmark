@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "campaign_id": "g48_pyscf_clean_slate_2026-07_v1",
+  "status": "prepilot_environment_pin",
+  "repository": {
+    "reviewed_phase1_revision": "bfd636f7a9c6110a9375f381b3839ca89c6c6ef9",
+    "source_sha256": {
+      "src/qb_gsee_benchmark/solvers/pyscf_adapter.py": "96e64023ea315f7c8fc5932fd4ae3954f719d543bcd41b24741fb4ec82d6cbba",
+      "src/qb_gsee_benchmark/solvers/cli.py": "a77c6753fbbd6fc5600a9458fed6e5d02687dc46a5a110585dec84b30c66ecef",
+      "src/qb_gsee_benchmark/solvers/batch.py": "91b451e841d2b3234855d20325ddee6de853a3907593ba84dcd6394ef8848842"
+    }
+  },
+  "adapter": {
+    "name": "pyscf_reference",
+    "version": "0.4.0",
+    "fixed_method_campaign": "g48_pyscf_clean_slate_2026-07_v1",
+    "rejected_legacy_campaign": "pyscf_methods_2026-07"
+  },
+  "runtime": {
+    "python": "3.12.0",
+    "python_implementation": "CPython",
+    "python_compiler": "GCC 11.2.0",
+    "platform": "Linux-4.18.0-553.69.1.el8_10.x86_64-x86_64-with-glibc2.28",
+    "packages": {
+      "h5py": "3.12.1",
+      "numpy": "2.4.6",
+      "pyscf": "2.8.0",
+      "scipy": "1.18.0"
+    }
+  },
+  "execution_contract": {
+    "node": "Improv full node",
+    "ncpus": 128,
+    "memory_request": null,
+    "queues_in_order": [
+      "compute",
+      "backfill"
+    ],
+    "forbidden_queue": "debug",
+    "retries": 0
+  },
+  "scientific_contract": {
+    "convergence_overrides": false,
+    "density_fitting": false,
+    "frozen_orbital_changes": false,
+    "lowest_of_n_selection": false,
+    "per_task_tuning": false,
+    "nonconverged_energy_usage": "raw_diagnostic_only",
+    "nonconverged_harness_status": "failed",
+    "nonconverged_attempted": true
+  }
+}

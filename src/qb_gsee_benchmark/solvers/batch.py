@@ -135,6 +135,7 @@ def _prepare_one(
             fcidump_path=fcidump,
             run_dir=run_dir,
             num_threads=_int(row.get("num_threads"), 1),
+            campaign=_none(row.get("campaign")),
             resources=resources,
             overwrite=overwrite,
         )

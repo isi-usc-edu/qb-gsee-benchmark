@@ -68,6 +68,7 @@ def test_method_adapters_match_legacy_h2_records(
         task_uuid=H2_TASK_UUID,
         fcidump_path=H2_FCIDUMP,
         run_dir=run_dir,
+        campaign=pyscf_adapter.G48_METHOD_CAMPAIGN,
         overwrite=True,
     )
 
@@ -76,17 +77,17 @@ def test_method_adapters_match_legacy_h2_records(
     data = solution["solution_data"][0]
 
     assert manifest.adapter == adapter_name
-    assert manifest.adapter_version == "0.3.0"
+    assert manifest.adapter_version == "0.4.0"
     assert manifest.solver_uuid == solver_uuid
     assert manifest.solver_short_name == method
     assert manifest.config["method"] == method
-    assert manifest.config["campaign"] == pyscf_adapter.METHOD_CAMPAIGN
+    assert manifest.config["campaign"] == pyscf_adapter.G48_METHOD_CAMPAIGN
     assert manifest.resources.walltime_seconds == 1800
     assert raw_output["status"] == "completed"
     assert data["energy"] == pytest.approx(expected_energy, abs=1.0e-10)
     assert data["solution_details"]["harness_status"] == "completed"
     assert data["solution_details"]["attempted"] is True
-    assert data["solution_details"]["campaign"] == pyscf_adapter.METHOD_CAMPAIGN
+    assert data["solution_details"]["campaign"] == pyscf_adapter.G48_METHOD_CAMPAIGN
 
 
 def test_method_adapter_uses_legacy_uhf_open_shell_convention(tmp_path):
@@ -97,6 +98,7 @@ def test_method_adapter_uses_legacy_uhf_open_shell_convention(tmp_path):
         task_uuid=H_TASK_UUID,
         fcidump_path=H_FCIDUMP,
         run_dir=run_dir,
+        campaign=pyscf_adapter.G48_METHOD_CAMPAIGN,
         overwrite=True,
     )
 
@@ -114,6 +116,7 @@ def test_method_adapter_rejects_mutated_identity(tmp_path):
         task_uuid=H2_TASK_UUID,
         fcidump_path=H2_FCIDUMP,
         run_dir=run_dir,
+        campaign=pyscf_adapter.G48_METHOD_CAMPAIGN,
         overwrite=True,
     )
     manifest_data = load_manifest(run_dir).to_dict()
@@ -132,6 +135,7 @@ def test_method_adapter_timeout_uses_four_state_vocabulary(tmp_path):
         task_uuid=H2_TASK_UUID,
         fcidump_path=H2_FCIDUMP,
         run_dir=run_dir,
+        campaign=pyscf_adapter.G48_METHOD_CAMPAIGN,
         overwrite=True,
     )
 
@@ -146,7 +150,7 @@ def test_method_adapter_timeout_uses_four_state_vocabulary(tmp_path):
     assert data["energy"] is None
     assert data["solution_details"]["harness_status"] == "timeout"
     assert data["solution_details"]["attempted"] is True
-    assert data["solution_details"]["campaign"] == pyscf_adapter.METHOD_CAMPAIGN
+    assert data["solution_details"]["campaign"] == pyscf_adapter.G48_METHOD_CAMPAIGN
     assert data["run_time"]["overall_time"]["seconds"] == 1800.25
 
 
@@ -156,12 +160,12 @@ def test_batch_method_aliases_freeze_method_and_campaign(tmp_path):
     rows = [
         (
             f"{adapter},{adapter},{H2_PROBLEM_INSTANCE},{H2_TASK_UUID},"
-            f"{H2_FCIDUMP},FCI,2"
+            f"{H2_FCIDUMP},FCI,2,{pyscf_adapter.G48_METHOD_CAMPAIGN}"
         )
         for adapter, _method, _uuid, _energy in METHOD_CASES
     ]
     plan.write_text(
-        "adapter,run_name,problem_instance,task_uuid,fcidump,method,num_threads\n"
+        "adapter,run_name,problem_instance,task_uuid,fcidump,method,num_threads,campaign\n"
         + "\n".join(rows)
         + "\n"
     )
@@ -173,7 +177,7 @@ def test_batch_method_aliases_freeze_method_and_campaign(tmp_path):
         manifest = load_manifest(output_root / adapter_name)
         assert manifest.adapter == adapter_name
         assert manifest.config["method"] == method
-        assert manifest.config["campaign"] == pyscf_adapter.METHOD_CAMPAIGN
+        assert manifest.config["campaign"] == pyscf_adapter.G48_METHOD_CAMPAIGN
         assert manifest.config["num_threads"] == 2
 
 
@@ -189,7 +193,19 @@ def test_pyscf_hf_demonstration_record_on_validation_instance(tmp_path, capsys):
         "--run-dir",
         str(run_dir),
     ]
-    assert cli.main(["prepare-pyscf-method", *common, "--method", "HF"]) == 0
+    assert (
+        cli.main(
+            [
+                "prepare-pyscf-method",
+                *common,
+                "--method",
+                "HF",
+                "--campaign",
+                pyscf_adapter.G48_METHOD_CAMPAIGN,
+            ]
+        )
+        == 0
+    )
     assert cli.main(["run", "--run-dir", str(run_dir)]) == 0
     assert cli.main(["harvest", "--run-dir", str(run_dir)]) == 0
     capsys.readouterr()
@@ -201,4 +217,144 @@ def test_pyscf_hf_demonstration_record_on_validation_instance(tmp_path, capsys):
     assert data["energy"] == pytest.approx(-1.1287110109153249, abs=1.0e-10)
     assert record["solver_details"]["solver_short_name"] == "HF"
     assert record["solver_details"]["algorithm_details"]["harness_adapter"] == "pyscf_hf"
-    assert data["solution_details"]["campaign"] == pyscf_adapter.METHOD_CAMPAIGN
+    assert data["solution_details"]["campaign"] == pyscf_adapter.G48_METHOD_CAMPAIGN
+
+
+def test_method_adapter_rejects_unknown_campaign_before_preparation(tmp_path):
+    run_dir = tmp_path / "unknown-campaign"
+
+    with pytest.raises(ValueError, match="Unsupported PySCF method campaign"):
+        pyscf_adapter.prepare_method(
+            method="HF",
+            problem_instance_path=H2_PROBLEM_INSTANCE,
+            task_uuid=H2_TASK_UUID,
+            fcidump_path=H2_FCIDUMP,
+            run_dir=run_dir,
+            campaign="g48-unreviewed-campaign",
+            overwrite=True,
+        )
+
+    assert not run_dir.exists()
+
+
+def test_method_adapter_rejects_legacy_campaign_before_preparation(tmp_path):
+    run_dir = tmp_path / "legacy-campaign"
+
+    with pytest.raises(
+        ValueError,
+        match="expected reviewed G-48 campaign",
+    ):
+        pyscf_adapter.prepare_method(
+            method="HF",
+            problem_instance_path=H2_PROBLEM_INSTANCE,
+            task_uuid=H2_TASK_UUID,
+            fcidump_path=H2_FCIDUMP,
+            run_dir=run_dir,
+            campaign=pyscf_adapter.LEGACY_METHOD_CAMPAIGN,
+            overwrite=True,
+        )
+
+    assert not run_dir.exists()
+
+
+def test_method_adapter_rejects_mutated_campaign_identity(tmp_path):
+    run_dir = tmp_path / "mutated-campaign"
+    pyscf_adapter.prepare_method(
+        method="HF",
+        problem_instance_path=H2_PROBLEM_INSTANCE,
+        task_uuid=H2_TASK_UUID,
+        fcidump_path=H2_FCIDUMP,
+        run_dir=run_dir,
+        campaign=pyscf_adapter.G48_METHOD_CAMPAIGN,
+        overwrite=True,
+    )
+    manifest_data = load_manifest(run_dir).to_dict()
+    manifest_data["config"]["campaign"] = "g48-unreviewed-campaign"
+    write_manifest(run_dir, RunManifest.from_dict(manifest_data))
+
+    with pytest.raises(ValueError, match="Unsupported PySCF method campaign"):
+        pyscf_adapter.run(run_dir)
+
+
+@pytest.mark.parametrize(
+    "method,details,expected_stages",
+    [
+        (
+            "HF",
+            {
+                "hf_energy": -1.0,
+                "hf_converged": False,
+                "hf_reference": "RHF",
+            },
+            ["HF"],
+        ),
+        (
+            "MP2",
+            {
+                "hf_energy": -1.0,
+                "hf_converged": True,
+                "hf_reference": "RHF",
+                "converged": False,
+            },
+            ["MP2"],
+        ),
+        (
+            "CCSD",
+            {
+                "hf_energy": -1.0,
+                "hf_converged": True,
+                "hf_reference": "RHF",
+                "converged": False,
+            },
+            ["CCSD"],
+        ),
+        (
+            "CCSD(T)",
+            {
+                "hf_energy": -1.0,
+                "hf_converged": False,
+                "hf_reference": "UHF",
+                "converged": False,
+            },
+            ["HF", "CCSD(T)"],
+        ),
+    ],
+)
+def test_nonconvergence_is_attempted_failure_with_diagnostic_only_energy(
+    tmp_path, monkeypatch, method, details, expected_stages
+):
+    run_dir = tmp_path / method.replace("(", "_").replace(")", "")
+    pyscf_adapter.prepare_method(
+        method=method,
+        problem_instance_path=H2_PROBLEM_INSTANCE,
+        task_uuid=H2_TASK_UUID,
+        fcidump_path=H2_FCIDUMP,
+        run_dir=run_dir,
+        campaign=pyscf_adapter.G48_METHOD_CAMPAIGN,
+        overwrite=True,
+    )
+    monkeypatch.setattr(
+        pyscf_adapter,
+        "_compute_energy",
+        lambda **_kwargs: (-1.2345, dict(details)),
+    )
+
+    with pytest.raises(RuntimeError, match="did not converge at default settings"):
+        pyscf_adapter.run(run_dir)
+
+    raw = json.loads((run_dir / "raw_output.json").read_text())
+    assert raw["status"] == "failed"
+    assert raw["energy"] is None
+    assert raw["details"]["diagnostic_energy_hartree"] == -1.2345
+    assert raw["details"]["nonconverged_stages"] == expected_stages
+
+    solution = pyscf_adapter.harvest(run_dir)
+    data = solution["solution_data"][0]
+    assert data["energy"] is None
+    assert data["solution_details"]["harness_status"] == "failed"
+    assert data["solution_details"]["attempted"] is True
+    assert data["solution_details"]["campaign"] == pyscf_adapter.G48_METHOD_CAMPAIGN
+    assert (
+        data["solution_details"]["pyscf_details"]["diagnostic_energy_hartree"]
+        == -1.2345
+    )
