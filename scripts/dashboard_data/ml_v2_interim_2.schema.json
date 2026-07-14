@@ -1,0 +1,64 @@
+{
+  "$id": "ml_v2_interim_2.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "adjudication": {
+      "type": "object"
+    },
+    "bundle_version": {
+      "const": "ml-v2-interim-2"
+    },
+    "evaluations": {
+      "items": {
+        "properties": {
+          "interim": {
+            "const": true
+          }
+        },
+        "required": [
+          "interim"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "identifier_screen": {
+      "type": "object"
+    },
+    "interim": {
+      "const": true
+    },
+    "paired_delta_results": {
+      "type": "object"
+    },
+    "per_task_predictions": {
+      "items": {
+        "properties": {
+          "interim": {
+            "const": true
+          }
+        },
+        "required": [
+          "interim"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "shuffle_nulls": {
+      "type": "array"
+    }
+  },
+  "required": [
+    "bundle_version",
+    "interim",
+    "adjudication",
+    "evaluations",
+    "per_task_predictions",
+    "paired_delta_results",
+    "identifier_screen",
+    "shuffle_nulls"
+  ],
+  "type": "object"
+}
