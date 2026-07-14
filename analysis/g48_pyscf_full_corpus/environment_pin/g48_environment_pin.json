@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
   "campaign_id": "g48_pyscf_clean_slate_2026-07_v1",
-  "status": "phase2_pilot_environment_repair",
+  "status": "phase2_pilot_failure_provenance_repair",
   "repository": {
     "reviewed_phase1_revision": "bfd636f7a9c6110a9375f381b3839ca89c6c6ef9",
     "source_sha256": {
-      "src/qb_gsee_benchmark/solvers/pyscf_adapter.py": "96e64023ea315f7c8fc5932fd4ae3954f719d543bcd41b24741fb4ec82d6cbba",
+      "src/qb_gsee_benchmark/solvers/pyscf_adapter.py": "87eb60312d48a724a14fc364bc775db40aa94552e244e54ed7546ea77584c7c5",
       "src/qb_gsee_benchmark/solvers/cli.py": "a77c6753fbbd6fc5600a9458fed6e5d02687dc46a5a110585dec84b30c66ecef",
       "src/qb_gsee_benchmark/solvers/batch.py": "91b451e841d2b3234855d20325ddee6de853a3907593ba84dcd6394ef8848842"
     }
   },
   "adapter": {
     "name": "pyscf_reference",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "fixed_method_campaign": "g48_pyscf_clean_slate_2026-07_v1",
     "rejected_legacy_campaign": "pyscf_methods_2026-07"
   },
@@ -61,7 +61,9 @@
   },
   "repair_provenance": {
     "trigger": "phase2_pilot_ccsd_t_q080_34ee114f",
-    "failure": "PySCF 2.8.0 DIIS exception handler incompatible with user-site NumPy 2.4.6",
-    "resolution": "disable user-site packages and use the internally consistent Mamba environment"
+    "environment_failure": "PySCF 2.8.0 DIIS exception handler incompatible with user-site NumPy 2.4.6",
+    "environment_resolution": "disable user-site packages and use the internally consistent Mamba environment",
+    "repilot_failure": "underlying CCSD Singular matrix exception lacked explicit convergence metadata",
+    "repilot_resolution": "adapter 0.4.1 preserves known flags and records unknown flags explicitly"
   }
 }

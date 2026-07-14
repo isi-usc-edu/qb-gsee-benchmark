@@ -65,7 +65,7 @@ from qb_gsee_benchmark.utils import iso8601_timestamp
 from qb_gsee_benchmark.utils import read_fcidump
 
 ADAPTER_NAME = "pyscf_reference"
-ADAPTER_VERSION = "0.4.0"
+ADAPTER_VERSION = "0.4.1"
 LEGACY_METHOD_CAMPAIGN = "pyscf_methods_2026-07"
 G48_METHOD_CAMPAIGN = "g48_pyscf_clean_slate_2026-07_v1"
 
@@ -87,6 +87,14 @@ METHOD_ADAPTERS = {
 }
 METHOD_ADAPTER_NAMES = {method: adapter for adapter, method in METHOD_ADAPTERS.items()}
 ADAPTER_NAMES = frozenset({ADAPTER_NAME, *METHOD_ADAPTERS})
+
+
+class _PySCFStageError(RuntimeError):
+    """Carry convergence provenance when a PySCF stage raises."""
+
+    def __init__(self, message: str, details: dict[str, Any]):
+        super().__init__(message)
+        self.details = details
 
 
 @dataclass(frozen=True)
@@ -209,7 +217,9 @@ def _prepare(
         raise FileExistsError(f"{run_path} is not empty; pass overwrite=True.")
     run_path.mkdir(parents=True, exist_ok=True)
 
-    problem_instance, task = load_problem_instance_task(problem_instance_path, task_uuid)
+    problem_instance, task = load_problem_instance_task(
+        problem_instance_path, task_uuid
+    )
     input_fcidump = run_path / "input.fcidump"
     _materialize_fcidump(fcidump_path, input_fcidump)
 
@@ -225,8 +235,8 @@ def _prepare(
         run_path / entrypoint,
         "#!/usr/bin/env bash\n"
         "set -euo pipefail\n"
-        "cd \"$(dirname \"$0\")\"\n"
-        "python -m qb_gsee_benchmark.solvers.cli run --run-dir \"$PWD\"\n",
+        'cd "$(dirname "$0")"\n'
+        'python -m qb_gsee_benchmark.solvers.cli run --run-dir "$PWD"\n',
     )
 
     manifest = RunManifest(
@@ -289,10 +299,23 @@ def run(run_dir: str | Path) -> dict[str, Any]:
             )
             status = "failed"
             energy = None
+    except _PySCFStageError as exc:
+        status = "failed"
+        error_message = str(exc)
+        details = dict(exc.details)
+        details["traceback"] = traceback.format_exc()
     except Exception as exc:
         status = "failed"
         error_message = str(exc)
-        details = {"traceback": traceback.format_exc()}
+        details = {
+            "failure_stage": "unresolved",
+            "convergence_metadata_status": "unavailable_before_stage_return",
+            "traceback": traceback.format_exc(),
+        }
+        if config.normalized_method() != "FCI":
+            details["hf_converged"] = None
+        if config.normalized_method() not in {"FCI", "HF"}:
+            details["converged"] = None
 
     stop = time.time()
     raw_output = {
@@ -349,7 +372,9 @@ def harvest(
         )
         write_json(raw_path, raw_output)
         write_manifest(run_path, manifest.with_status(missing_output_status))
-    output_path = Path(output_path) if output_path is not None else run_path / SOLUTION_OUTPUT
+    output_path = (
+        Path(output_path) if output_path is not None else run_path / SOLUTION_OUTPUT
+    )
     timing = raw_output.get("timing", {})
     status = raw_output.get("status", "failed")
     attempted = harness_attempted(status)
@@ -395,9 +420,11 @@ def harvest(
                     "harness_status": status,
                     "campaign": manifest.config.get("campaign"),
                     "attempted": attempted,
-                    "not_attempted_reason": None
-                    if completed
-                    else raw_output.get("error_message", "run did not complete"),
+                    "not_attempted_reason": (
+                        None
+                        if completed
+                        else raw_output.get("error_message", "run did not complete")
+                    ),
                     "run_directory_id": manifest.run_id,
                     "raw_output_file": manifest.files["raw_output"],
                     "pyscf_details": raw_output.get("details", {}),
@@ -533,6 +560,20 @@ def _not_attempted_raw_output(
     }
 
 
+def _raise_stage_error(
+    exc: Exception,
+    details: dict[str, Any],
+    stage: str,
+    solver: Any | None = None,
+) -> None:
+    payload = dict(details)
+    payload["failure_stage"] = stage
+    payload["convergence_metadata_status"] = "partial"
+    if solver is not None:
+        payload["converged"] = _optional_bool(getattr(solver, "converged", None))
+    raise _PySCFStageError(str(exc), payload) from exc
+
+
 def _compute_energy(
     method: str,
     fcidump_path: str | Path,
@@ -555,17 +596,22 @@ def _compute_energy(
 
     if method == "HF":
         mf, details = _run_hf(fcidump_path, legacy_open_shell_uhf=legacy_open_shell_uhf)
-        details["method_note"] = "SCF object reconstructed from symmetrized FCIDUMP integrals"
+        details["method_note"] = (
+            "SCF object reconstructed from symmetrized FCIDUMP integrals"
+        )
         return float(mf.e_tot), details
 
     if method == "MP2":
         mf, details = _run_hf(fcidump_path, legacy_open_shell_uhf=legacy_open_shell_uhf)
         solver = mp.MP2(mf)
         solver.verbose = 0
-        correlation_energy, _t2 = solver.kernel()
+        details["method_note"] = "PySCF MP2 on the FCIDUMP-reconstructed SCF object"
+        try:
+            correlation_energy, _t2 = solver.kernel()
+        except Exception as exc:
+            _raise_stage_error(exc, details, "MP2", solver)
         details.update(
             {
-                "method_note": "PySCF MP2 on the FCIDUMP-reconstructed SCF object",
                 "correlation_energy": float(correlation_energy),
                 "converged": _optional_bool(getattr(solver, "converged", None)),
             }
@@ -576,10 +622,13 @@ def _compute_energy(
         mf, details = _run_hf(fcidump_path, legacy_open_shell_uhf=legacy_open_shell_uhf)
         solver = ci.CISD(mf)
         solver.verbose = 0
-        correlation_energy, _civec = solver.kernel()
+        details["method_note"] = "PySCF CISD on the FCIDUMP-reconstructed SCF object"
+        try:
+            correlation_energy, _civec = solver.kernel()
+        except Exception as exc:
+            _raise_stage_error(exc, details, "CISD", solver)
         details.update(
             {
-                "method_note": "PySCF CISD on the FCIDUMP-reconstructed SCF object",
                 "correlation_energy": float(correlation_energy),
                 "converged": _optional_bool(getattr(solver, "converged", None)),
             }
@@ -590,18 +639,26 @@ def _compute_energy(
         mf, details = _run_hf(fcidump_path, legacy_open_shell_uhf=legacy_open_shell_uhf)
         solver = cc.CCSD(mf)
         solver.verbose = 0
-        correlation_energy, _t1, _t2 = solver.kernel()
-        triples_correction = 0.0
-        if method == "CCSD(T)":
-            triples_correction = float(solver.ccsd_t())
+        details["method_note"] = (
+            f"PySCF {method} on the FCIDUMP-reconstructed SCF object"
+        )
+        try:
+            correlation_energy, _t1, _t2 = solver.kernel()
+        except Exception as exc:
+            _raise_stage_error(exc, details, "CCSD", solver)
         details.update(
             {
-                "method_note": f"PySCF {method} on the FCIDUMP-reconstructed SCF object",
                 "correlation_energy": float(correlation_energy),
-                "triples_correction": triples_correction,
                 "converged": _optional_bool(getattr(solver, "converged", None)),
             }
         )
+        triples_correction = 0.0
+        if method == "CCSD(T)":
+            try:
+                triples_correction = float(solver.ccsd_t())
+            except Exception as exc:
+                _raise_stage_error(exc, details, "CCSD(T)", solver)
+        details["triples_correction"] = triples_correction
         return float(mf.e_tot + solver.e_corr + triples_correction), details
 
     raise ValueError(f"Unsupported PySCF harness method: {method}")

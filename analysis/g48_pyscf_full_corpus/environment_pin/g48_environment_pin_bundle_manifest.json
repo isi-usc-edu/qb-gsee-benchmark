@@ -1,27 +1,27 @@
 {
   "schema_version": 1,
   "campaign_id": "g48_pyscf_clean_slate_2026-07_v1",
-  "status": "phase2_pilot_environment_repair_validated",
+  "status": "phase2_pilot_failure_provenance_repair_validated",
   "artifact_sha256": {
-    "g48_adapter_cold.junit.xml": "6038d1eea2ab9876cb1e625f18cc7ac519aff54e0d860da6e80c9769ebd1a5ea",
-    "g48_adapter_focused.junit.xml": "70ff615fe5ed28612716dc90092c71490d9657041596bf8e15f55819ef01fcbe",
-    "g48_environment_pin.json": "e0672e1aae4f8fc978dfc3216e9c632ec0596d005cd0a6b21c7c60d69b653e17",
+    "g48_adapter_cold.junit.xml": "6a16c169d6230f3e9c0827f5925bec985e28edaeed57af3cbe6c3a4e4f7c59b7",
+    "g48_adapter_focused.junit.xml": "55b0083841023125519b1849356c4e5cfa52f7bc39b0479d6104fe6e6853db76",
+    "g48_environment_pin.json": "77cb1dbbdb06f4e4a760f256291a6b96b415824ad146f85616a3dce8ecaa7f02",
     "requirements.lock": "f15657f0fd7b3ad873db9c7b38c57dc0c40719c83a591c42928832ed0ff8ff00",
     "verify_g48_environment_pin.py": "57958af9cfb1f365f886ef5a344188e83fe03f6677974e3c210f85037cd063e2"
   },
   "tests": {
     "focused": {
       "runtime": "isolated_campaign_environment",
-      "tests": 17,
-      "passed": 17,
+      "tests": 19,
+      "passed": 19,
       "skipped": 0,
       "failures": 0,
       "errors": 0
     },
     "cold": {
       "runtime": "standard_repository_environment",
-      "tests": 376,
-      "passed": 375,
+      "tests": 378,
+      "passed": 377,
       "skipped": 1,
       "failures": 0,
       "errors": 0
@@ -34,6 +34,13 @@
       "terminal_verifier": "failed_238_of_240",
       "disposition": "immutable_failure_evidence"
     },
-    "repair_pilot_launched": false
+    "isolated_repilot": {
+      "pairs": 30,
+      "environment_preflight": "passed_27_of_27_all_rows",
+      "outcomes": "24_completed_6_failed",
+      "terminal_verifier": "failed_268_of_270",
+      "disposition": "immutable_failure_evidence"
+    },
+    "stage_provenance_repair_pilot_launched": false
   }
 }

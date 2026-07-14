@@ -10,7 +10,6 @@ from qb_gsee_benchmark.solvers.base import RunManifest
 from qb_gsee_benchmark.solvers.base import load_manifest
 from qb_gsee_benchmark.solvers.base import write_manifest
 
-
 REPO_ROOT = Path(__file__).parents[2]
 H2_PROBLEM_INSTANCE = (
     REPO_ROOT
@@ -53,7 +52,9 @@ METHOD_CASES = [
 ]
 
 
-@pytest.mark.parametrize("adapter_name,method,solver_uuid,expected_energy", METHOD_CASES)
+@pytest.mark.parametrize(
+    "adapter_name,method,solver_uuid,expected_energy", METHOD_CASES
+)
 def test_method_adapters_match_legacy_h2_records(
     tmp_path,
     adapter_name,
@@ -77,7 +78,7 @@ def test_method_adapters_match_legacy_h2_records(
     data = solution["solution_data"][0]
 
     assert manifest.adapter == adapter_name
-    assert manifest.adapter_version == "0.4.0"
+    assert manifest.adapter_version == "0.4.1"
     assert manifest.solver_uuid == solver_uuid
     assert manifest.solver_short_name == method
     assert manifest.config["method"] == method
@@ -216,7 +217,9 @@ def test_pyscf_hf_demonstration_record_on_validation_instance(tmp_path, capsys):
     assert data["task_uuid"] == H2_TASK_UUID
     assert data["energy"] == pytest.approx(-1.1287110109153249, abs=1.0e-10)
     assert record["solver_details"]["solver_short_name"] == "HF"
-    assert record["solver_details"]["algorithm_details"]["harness_adapter"] == "pyscf_hf"
+    assert (
+        record["solver_details"]["algorithm_details"]["harness_adapter"] == "pyscf_hf"
+    )
     assert data["solution_details"]["campaign"] == pyscf_adapter.G48_METHOD_CAMPAIGN
 
 
@@ -358,3 +361,72 @@ def test_nonconvergence_is_attempted_failure_with_diagnostic_only_energy(
         data["solution_details"]["pyscf_details"]["diagnostic_energy_hartree"]
         == -1.2345
     )
+
+
+def test_ccsd_kernel_exception_preserves_hf_provenance(monkeypatch):
+    class FailingCCSD:
+        converged = None
+
+        def kernel(self):
+            raise RuntimeError("Singular matrix")
+
+    details = {
+        "hf_energy": -1.0,
+        "hf_converged": True,
+        "hf_reference": "UHF",
+    }
+    monkeypatch.setattr(
+        pyscf_adapter,
+        "_run_hf",
+        lambda *_args, **_kwargs: (object(), dict(details)),
+    )
+    monkeypatch.setattr(pyscf_adapter.cc, "CCSD", lambda _mf: FailingCCSD())
+
+    with pytest.raises(pyscf_adapter._PySCFStageError) as captured:
+        pyscf_adapter._compute_energy(
+            method="CCSD(T)",
+            fcidump_path=H2_FCIDUMP,
+            legacy_open_shell_uhf=True,
+        )
+
+    failure = captured.value.details
+    assert str(captured.value) == "Singular matrix"
+    assert failure["failure_stage"] == "CCSD"
+    assert failure["convergence_metadata_status"] == "partial"
+    assert failure["hf_converged"] is True
+    assert failure["converged"] is None
+
+
+def test_unexpected_exception_records_explicit_unknown_convergence(
+    tmp_path, monkeypatch
+):
+    run_dir = tmp_path / "unexpected"
+    pyscf_adapter.prepare_method(
+        method="CCSD(T)",
+        problem_instance_path=H2_PROBLEM_INSTANCE,
+        task_uuid=H2_TASK_UUID,
+        fcidump_path=H2_FCIDUMP,
+        run_dir=run_dir,
+        campaign=pyscf_adapter.G48_METHOD_CAMPAIGN,
+        overwrite=True,
+    )
+
+    def fail(**_kwargs):
+        raise RuntimeError("unexpected solver failure")
+
+    monkeypatch.setattr(pyscf_adapter, "_compute_energy", fail)
+    with pytest.raises(RuntimeError, match="unexpected solver failure"):
+        pyscf_adapter.run(run_dir)
+
+    raw = json.loads((run_dir / "raw_output.json").read_text())
+    details = raw["details"]
+    assert raw["status"] == "failed"
+    assert raw["energy"] is None
+    assert details["failure_stage"] == "unresolved"
+    assert details["convergence_metadata_status"] == "unavailable_before_stage_return"
+    assert details["hf_converged"] is None
+    assert details["converged"] is None
+
+    solution = pyscf_adapter.harvest(run_dir)
+    data = solution["solution_data"][0]
+    assert data["solution_details"]["harness_status"] == "failed"
