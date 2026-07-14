@@ -1,0 +1,1280 @@
+{
+  "atol": 1e-10,
+  "check": "g40_p2_mfproto_v3_representation_pairs_d40ccf7",
+  "code_revision": "d40ccf7",
+  "equivalence_groups": 6,
+  "failures": [],
+  "groups_passed": 6,
+  "permutation_blocks": [
+    "mfproto"
+  ],
+  "permutation_certificate_version": "g40_orbital_permutation_pairs_v3",
+  "reports": [
+    {
+      "basis_drift_observed": true,
+      "basis_feature_values": {
+        "mf_core_gap_alpha_hartree": [
+          0.1901857709782533,
+          0.19018577097825373
+        ],
+        "mf_core_gap_beta_hartree": [
+          0.1901857709782533,
+          0.19018577097825373
+        ],
+        "mf_core_gap_min_hartree": [
+          0.1901857709782533,
+          0.19018577097825373
+        ],
+        "mf_gap_mismatch_alpha_hartree": [
+          0.3035296555418878,
+          0.24624435691051993
+        ],
+        "mf_gap_mismatch_beta_hartree": [
+          0.3035297472461994,
+          0.24624435691051993
+        ],
+        "mf_gap_mismatch_min_hartree": [
+          0.3035296555418878,
+          0.24624435691051993
+        ],
+        "mf_hf_variance_per_electron_hartree_squared": [
+          0.01676420680379102,
+          0.02070182526375323
+        ],
+        "mf_selected_fock_alpha_dos_per_orbital_eta_0.05": [
+          8.126418260307853e-06,
+          0.0001166646476477835
+        ],
+        "mf_selected_fock_alpha_dos_per_orbital_eta_0.2": [
+          0.2325229022324319,
+          0.27005162507998487
+        ],
+        "mf_selected_fock_alpha_dos_total_eta_0.05": [
+          8.126418260307853e-05,
+          0.001166646476477835
+        ],
+        "mf_selected_fock_alpha_dos_total_eta_0.2": [
+          2.325229022324319,
+          2.700516250799849
+        ],
+        "mf_selected_fock_alpha_gap_hartree": [
+          0.4937154265201411,
+          0.43643012788877367
+        ],
+        "mf_selected_fock_alpha_ipr_window_0.1": [
+          null,
+          null
+        ],
+        "mf_selected_fock_alpha_ipr_window_0.5": [
+          0.10273720157814553,
+          0.24999999999999967
+        ],
+        "mf_selected_fock_alpha_thermal_active_fraction_kt_0.025": [
+          0.0,
+          0.0
+        ],
+        "mf_selected_fock_alpha_thermal_active_fraction_kt_0.1": [
+          0.2,
+          0.2
+        ],
+        "mf_selected_fock_alpha_thermal_active_fraction_kt_0.25": [
+          0.8,
+          0.8
+        ],
+        "mf_selected_fock_beta_dos_per_orbital_eta_0.05": [
+          8.126381467352384e-06,
+          0.0001166646476477835
+        ],
+        "mf_selected_fock_beta_dos_per_orbital_eta_0.2": [
+          0.2325229186435139,
+          0.27005162507998487
+        ],
+        "mf_selected_fock_beta_dos_total_eta_0.05": [
+          8.126381467352384e-05,
+          0.001166646476477835
+        ],
+        "mf_selected_fock_beta_dos_total_eta_0.2": [
+          2.325229186435139,
+          2.700516250799849
+        ],
+        "mf_selected_fock_beta_gap_hartree": [
+          0.4937155182244527,
+          0.43643012788877367
+        ],
+        "mf_selected_fock_beta_ipr_window_0.1": [
+          null,
+          null
+        ],
+        "mf_selected_fock_beta_ipr_window_0.5": [
+          0.1027372074736637,
+          0.24999999999999967
+        ],
+        "mf_selected_fock_beta_thermal_active_fraction_kt_0.025": [
+          0.0,
+          0.0
+        ],
+        "mf_selected_fock_beta_thermal_active_fraction_kt_0.1": [
+          0.2,
+          0.2
+        ],
+        "mf_selected_fock_beta_thermal_active_fraction_kt_0.25": [
+          0.8,
+          0.8
+        ],
+        "mf_selected_fock_gap_min_hartree": [
+          0.4937154265201411,
+          0.43643012788877367
+        ],
+        "mf_selected_s2": [
+          0.5393489520371411,
+          0.0
+        ],
+        "mf_solution_energy_spread_per_electron_hartree": [
+          0.00073058603824947,
+          9.237055564881303e-15
+        ],
+        "mf_stability_internal_final_eigenvalue_hartree": [
+          0.16963332592936553,
+          1.4526729981241895
+        ],
+        "mf_stability_internal_initial_eigenvalue_hartree": [
+          0.16963332592936553,
+          1.4526729981241895
+        ],
+        "mf_symmetry_breaking_energy_per_electron": [
+          0.0007305860382480489,
+          0.0
+        ],
+        "mp2_amplitude_max_abs": [
+          0.05081106485456805,
+          0.08939049001746072
+        ],
+        "mp2_amplitude_participation_ratio": [
+          95.02670473950133,
+          49.52774573618316
+        ],
+        "mp2_amplitude_top_128_l2_mass_fraction": [
+          0.7597004691272998,
+          0.8207049836811547
+        ],
+        "mp2_amplitude_top_16_l2_mass_fraction": [
+          0.3184573646839338,
+          0.40651294826730877
+        ],
+        "mp2_correlation_energy_per_electron_hartree": [
+          -0.007592747580827036,
+          -0.010124984895452485
+        ],
+        "mp2_denominator_inverse_first_moment": [
+          0.41531519018270446,
+          0.4239910751543404
+        ],
+        "mp2_denominator_inverse_second_moment": [
+          0.18514478541934584,
+          0.19485745769171398
+        ],
+        "mp2_denominator_masked_fraction": [
+          0.0,
+          0.0
+        ],
+        "mp2_denominator_p1_hartree": [
+          1.268504351219376,
+          1.1886946177377835
+        ],
+        "mp2_denominator_p25_hartree": [
+          2.127803526975816,
+          2.085236995611256
+        ],
+        "mp2_denominator_p50_hartree": [
+          2.570926114059117,
+          2.5425304682208703
+        ],
+        "mp2_denominator_p5_hartree": [
+          1.5708770600889217,
+          1.5086038736872922
+        ],
+        "mp2_kappa_1p1_amplitude_max_abs": [
+          0.0336620607238612,
+          0.05516851371918257
+        ],
+        "mp2_kappa_1p1_amplitude_participation_ratio": [
+          132.45129412931738,
+          89.55598169322816
+        ],
+        "mp2_kappa_1p1_amplitude_top_128_l2_mass_fraction": [
+          0.7257122264738878,
+          0.780435751275043
+        ],
+        "mp2_kappa_1p1_amplitude_top_16_l2_mass_fraction": [
+          0.2582320626116898,
+          0.31825296367682393
+        ],
+        "mp2_kappa_1p1_correlation_energy_per_electron_hartree": [
+          -0.006030218344335488,
+          -0.007627694255969326
+        ],
+        "mp2_kappa_1p1_opposite_spin_amplitude_max_abs": [
+          0.0336620607238612,
+          0.05516851371918257
+        ],
+        "mp2_kappa_1p1_opposite_spin_amplitude_participation_ratio": [
+          67.0953426346264,
+          43.519167466941845
+        ],
+        "mp2_kappa_1p1_opposite_spin_amplitude_top_128_l2_mass_fraction": [
+          0.8590438766462768,
+          0.921697293020925
+        ],
+        "mp2_kappa_1p1_opposite_spin_amplitude_top_16_l2_mass_fraction": [
+          0.4013627245003438,
+          0.4828105367220917
+        ],
+        "mp2_kappa_1p1_same_spin_amplitude_max_abs": [
+          0.020176909926328934,
+          0.02594465591157765
+        ],
+        "mp2_kappa_1p1_same_spin_amplitude_participation_ratio": [
+          85.6054554334889,
+          68.58263398409237
+        ],
+        "mp2_kappa_1p1_same_spin_amplitude_top_128_l2_mass_fraction": [
+          0.8751383132276269,
+          0.9129683654446352
+        ],
+        "mp2_kappa_1p1_same_spin_amplitude_top_16_l2_mass_fraction": [
+          0.32696751956921166,
+          0.3862777226884677
+        ],
+        "mp2_kappa_1p1_vs_1p45_difference_per_electron_hartree": [
+          0.0006896035135046982,
+          0.0009936425151962456
+        ],
+        "mp2_kappa_1p1_vs_1p45_ratio": [
+          0.897377709098029,
+          0.8847461198222154
+        ],
+        "mp2_kappa_1p1_vs_inf_difference_per_electron_hartree": [
+          0.0015625292364915486,
+          0.0024972906394831575
+        ],
+        "mp2_kappa_1p1_vs_inf_ratio": [
+          0.7942076672695932,
+          0.7533536429664418
+        ],
+        "mp2_kappa_1p45_amplitude_max_abs": [
+          0.03867308614859117,
+          0.06417730859707982
+        ],
+        "mp2_kappa_1p45_amplitude_participation_ratio": [
+          120.32320897269537,
+          77.58244319234981
+        ],
+        "mp2_kappa_1p45_amplitude_top_128_l2_mass_fraction": [
+          0.7380259683183497,
+          0.7938794664042413
+        ],
+        "mp2_kappa_1p45_amplitude_top_16_l2_mass_fraction": [
+          0.2765670968708611,
+          0.34150209202653153
+        ],
+        "mp2_kappa_1p45_correlation_energy_per_electron_hartree": [
+          -0.006719821857840186,
+          -0.008621336771165573
+        ],
+        "mp2_kappa_1p45_opposite_spin_amplitude_max_abs": [
+          0.03867308614859117,
+          0.06417730859707982
+        ],
+        "mp2_kappa_1p45_opposite_spin_amplitude_participation_ratio": [
+          60.4095187817018,
+          37.27549061457645
+        ],
+        "mp2_kappa_1p45_opposite_spin_amplitude_top_128_l2_mass_fraction": [
+          0.8654500537498586,
+          0.9272607442519153
+        ],
+        "mp2_kappa_1p45_opposite_spin_amplitude_top_16_l2_mass_fraction": [
+          0.42463717948927154,
+          0.5119680422582563
+        ],
+        "mp2_kappa_1p45_same_spin_amplitude_max_abs": [
+          0.022350327968401446,
+          0.028919096295251162
+        ],
+        "mp2_kappa_1p45_same_spin_amplitude_participation_ratio": [
+          79.26743506213836,
+          62.846344020389154
+        ],
+        "mp2_kappa_1p45_same_spin_amplitude_top_128_l2_mass_fraction": [
+          0.8814012107695809,
+          0.9194936643398627
+        ],
+        "mp2_kappa_1p45_same_spin_amplitude_top_16_l2_mass_fraction": [
+          0.3461177706228833,
+          0.4068899894310263
+        ],
+        "mp2_kappa_1p45_vs_inf_difference_per_electron_hartree": [
+          0.0008729257229868504,
+          0.0015036481242869117
+        ],
+        "mp2_kappa_1p45_vs_inf_ratio": [
+          0.8850316418800575,
+          0.8514913217339951
+        ],
+        "mp2_kappa_inf_correlation_energy_per_electron_hartree": [
+          -0.007592747580827036,
+          -0.010124984895452483
+        ],
+        "mp2_natural_active_fraction": [
+          0.0,
+          0.2
+        ],
+        "mp2_natural_entropy_per_electron": [
+          0.08718387235271621,
+          0.11907213792069808
+        ],
+        "mp2_opposite_spin_amplitude_max_abs": [
+          0.05081106485456805,
+          0.08939049001746072
+        ],
+        "mp2_opposite_spin_amplitude_participation_ratio": [
+          46.752452729655424,
+          23.25344575793706
+        ],
+        "mp2_opposite_spin_amplitude_top_128_l2_mass_fraction": [
+          0.8774443327378413,
+          0.938427938443694
+        ],
+        "mp2_opposite_spin_amplitude_top_16_l2_mass_fraction": [
+          0.47190485545601607,
+          0.5785445094515723
+        ],
+        "mp2_opposite_spin_correlation_energy_per_electron_hartree": [
+          -0.006672125747335457,
+          -0.008881892397264854
+        ],
+        "mp2_pair_cut_best_max_normalized": [
+          0.5508112745369247,
+          0.5483174632988094
+        ],
+        "mp2_pair_cut_best_p95_normalized": [
+          0.5272839539349563,
+          0.5434272266687096
+        ],
+        "mp2_pair_cut_best_sum_normalized": [
+          0.19090209673031255,
+          0.19201700528187113
+        ],
+        "mp2_pair_cut_fiedler_max_normalized": [
+          0.5508112745369247,
+          0.5483174632988094
+        ],
+        "mp2_pair_cut_fiedler_p95_normalized": [
+          0.5272839539349563,
+          0.5434272266687096
+        ],
+        "mp2_pair_cut_fiedler_sum_normalized": [
+          0.19090209673031255,
+          0.19201700528187113
+        ],
+        "mp2_pair_cut_file_max_normalized": [
+          0.5508112745369247,
+          0.5483174632988094
+        ],
+        "mp2_pair_cut_file_p95_normalized": [
+          0.5272839539349563,
+          0.5434272266687096
+        ],
+        "mp2_pair_cut_file_sum_normalized": [
+          0.19090209673031255,
+          0.19201700528187113
+        ],
+        "mp2_pair_cut_heuristic_spread_max": [
+          0.0,
+          0.0
+        ],
+        "mp2_pair_cut_heuristic_spread_p95": [
+          0.042535648559005095,
+          0.0
+        ],
+        "mp2_pair_cut_heuristic_spread_sum": [
+          0.14754247838411197,
+          0.1427048721377594
+        ],
+        "mp2_pair_cut_linear_relaxation_max_normalized": [
+          0.5508112745369247,
+          0.5483174632988094
+        ],
+        "mp2_pair_cut_linear_relaxation_p95_normalized": [
+          0.5272839539349563,
+          0.5434272266687096
+        ],
+        "mp2_pair_cut_linear_relaxation_sum_normalized": [
+          0.19090209673031255,
+          0.19201700528187113
+        ],
+        "mp2_pair_cut_minimum_degree_max_normalized": [
+          0.5508112745369247,
+          0.5483174632988094
+        ],
+        "mp2_pair_cut_minimum_degree_p95_normalized": [
+          0.5272839539349563,
+          0.5434272266687096
+        ],
+        "mp2_pair_cut_minimum_degree_sum_normalized": [
+          0.19090209673031255,
+          0.19201700528187113
+        ],
+        "mp2_pair_cut_random_max_normalized": [
+          0.6524180788220871,
+          0.6652810222887732
+        ],
+        "mp2_pair_cut_random_p95_normalized": [
+          0.5882480365060537,
+          0.6136053620626879
+        ],
+        "mp2_pair_cut_random_sum_normalized": [
+          0.4388659151811767,
+          0.4308781710194058
+        ],
+        "mp2_pair_cut_rcm_max_normalized": [
+          0.5508112745369247,
+          0.5483174632988094
+        ],
+        "mp2_pair_cut_rcm_p95_normalized": [
+          0.5507087059078365,
+          0.5434272266687096
+        ],
+        "mp2_pair_cut_rcm_sum_normalized": [
+          0.22394323692334295,
+          0.22398004962501836
+        ],
+        "mp2_same_spin_amplitude_max_abs": [
+          0.025857898327224793,
+          0.03406333813898556
+        ],
+        "mp2_same_spin_amplitude_participation_ratio": [
+          68.0823854338774,
+          52.3402133081993
+        ],
+        "mp2_same_spin_amplitude_top_128_l2_mass_fraction": [
+          0.8908413569743887,
+          0.9299268415600641
+        ],
+        "mp2_same_spin_amplitude_top_16_l2_mass_fraction": [
+          0.3842796660956074,
+          0.44999232870885175
+        ],
+        "mp2_same_spin_correlation_energy_per_electron_hartree": [
+          -0.0009206218334915798,
+          -0.0012430924981876308
+        ]
+      },
+      "changed_basis_features": [
+        "mf_gap_mismatch_alpha_hartree",
+        "mf_gap_mismatch_beta_hartree",
+        "mf_gap_mismatch_min_hartree",
+        "mf_hf_variance_per_electron_hartree_squared",
+        "mf_selected_fock_alpha_dos_per_orbital_eta_0.05",
+        "mf_selected_fock_alpha_dos_per_orbital_eta_0.2",
+        "mf_selected_fock_alpha_dos_total_eta_0.05",
+        "mf_selected_fock_alpha_dos_total_eta_0.2",
+        "mf_selected_fock_alpha_gap_hartree",
+        "mf_selected_fock_alpha_ipr_window_0.5",
+        "mf_selected_fock_beta_dos_per_orbital_eta_0.05",
+        "mf_selected_fock_beta_dos_per_orbital_eta_0.2",
+        "mf_selected_fock_beta_dos_total_eta_0.05",
+        "mf_selected_fock_beta_dos_total_eta_0.2",
+        "mf_selected_fock_beta_gap_hartree",
+        "mf_selected_fock_beta_ipr_window_0.5",
+        "mf_selected_fock_gap_min_hartree",
+        "mf_selected_s2",
+        "mf_solution_energy_spread_per_electron_hartree",
+        "mf_stability_internal_final_eigenvalue_hartree",
+        "mf_stability_internal_initial_eigenvalue_hartree",
+        "mf_symmetry_breaking_energy_per_electron",
+        "mp2_amplitude_max_abs",
+        "mp2_amplitude_participation_ratio",
+        "mp2_amplitude_top_128_l2_mass_fraction",
+        "mp2_amplitude_top_16_l2_mass_fraction",
+        "mp2_correlation_energy_per_electron_hartree",
+        "mp2_denominator_inverse_first_moment",
+        "mp2_denominator_inverse_second_moment",
+        "mp2_denominator_p1_hartree",
+        "mp2_denominator_p25_hartree",
+        "mp2_denominator_p50_hartree",
+        "mp2_denominator_p5_hartree",
+        "mp2_kappa_1p1_amplitude_max_abs",
+        "mp2_kappa_1p1_amplitude_participation_ratio",
+        "mp2_kappa_1p1_amplitude_top_128_l2_mass_fraction",
+        "mp2_kappa_1p1_amplitude_top_16_l2_mass_fraction",
+        "mp2_kappa_1p1_correlation_energy_per_electron_hartree",
+        "mp2_kappa_1p1_opposite_spin_amplitude_max_abs",
+        "mp2_kappa_1p1_opposite_spin_amplitude_participation_ratio",
+        "mp2_kappa_1p1_opposite_spin_amplitude_top_128_l2_mass_fraction",
+        "mp2_kappa_1p1_opposite_spin_amplitude_top_16_l2_mass_fraction",
+        "mp2_kappa_1p1_same_spin_amplitude_max_abs",
+        "mp2_kappa_1p1_same_spin_amplitude_participation_ratio",
+        "mp2_kappa_1p1_same_spin_amplitude_top_128_l2_mass_fraction",
+        "mp2_kappa_1p1_same_spin_amplitude_top_16_l2_mass_fraction",
+        "mp2_kappa_1p1_vs_1p45_difference_per_electron_hartree",
+        "mp2_kappa_1p1_vs_1p45_ratio",
+        "mp2_kappa_1p1_vs_inf_difference_per_electron_hartree",
+        "mp2_kappa_1p1_vs_inf_ratio",
+        "mp2_kappa_1p45_amplitude_max_abs",
+        "mp2_kappa_1p45_amplitude_participation_ratio",
+        "mp2_kappa_1p45_amplitude_top_128_l2_mass_fraction",
+        "mp2_kappa_1p45_amplitude_top_16_l2_mass_fraction",
+        "mp2_kappa_1p45_correlation_energy_per_electron_hartree",
+        "mp2_kappa_1p45_opposite_spin_amplitude_max_abs",
+        "mp2_kappa_1p45_opposite_spin_amplitude_participation_ratio",
+        "mp2_kappa_1p45_opposite_spin_amplitude_top_128_l2_mass_fraction",
+        "mp2_kappa_1p45_opposite_spin_amplitude_top_16_l2_mass_fraction",
+        "mp2_kappa_1p45_same_spin_amplitude_max_abs",
+        "mp2_kappa_1p45_same_spin_amplitude_participation_ratio",
+        "mp2_kappa_1p45_same_spin_amplitude_top_128_l2_mass_fraction",
+        "mp2_kappa_1p45_same_spin_amplitude_top_16_l2_mass_fraction",
+        "mp2_kappa_1p45_vs_inf_difference_per_electron_hartree",
+        "mp2_kappa_1p45_vs_inf_ratio",
+        "mp2_kappa_inf_correlation_energy_per_electron_hartree",
+        "mp2_natural_active_fraction",
+        "mp2_natural_entropy_per_electron",
+        "mp2_opposite_spin_amplitude_max_abs",
+        "mp2_opposite_spin_amplitude_participation_ratio",
+        "mp2_opposite_spin_amplitude_top_128_l2_mass_fraction",
+        "mp2_opposite_spin_amplitude_top_16_l2_mass_fraction",
+        "mp2_opposite_spin_correlation_energy_per_electron_hartree",
+        "mp2_pair_cut_best_max_normalized",
+        "mp2_pair_cut_best_p95_normalized",
+        "mp2_pair_cut_best_sum_normalized",
+        "mp2_pair_cut_fiedler_max_normalized",
+        "mp2_pair_cut_fiedler_p95_normalized",
+        "mp2_pair_cut_fiedler_sum_normalized",
+        "mp2_pair_cut_file_max_normalized",
+        "mp2_pair_cut_file_p95_normalized",
+        "mp2_pair_cut_file_sum_normalized",
+        "mp2_pair_cut_heuristic_spread_p95",
+        "mp2_pair_cut_heuristic_spread_sum",
+        "mp2_pair_cut_linear_relaxation_max_normalized",
+        "mp2_pair_cut_linear_relaxation_p95_normalized",
+        "mp2_pair_cut_linear_relaxation_sum_normalized",
+        "mp2_pair_cut_minimum_degree_max_normalized",
+        "mp2_pair_cut_minimum_degree_p95_normalized",
+        "mp2_pair_cut_minimum_degree_sum_normalized",
+        "mp2_pair_cut_random_max_normalized",
+        "mp2_pair_cut_random_p95_normalized",
+        "mp2_pair_cut_random_sum_normalized",
+        "mp2_pair_cut_rcm_max_normalized",
+        "mp2_pair_cut_rcm_p95_normalized",
+        "mp2_pair_cut_rcm_sum_normalized",
+        "mp2_same_spin_amplitude_max_abs",
+        "mp2_same_spin_amplitude_participation_ratio",
+        "mp2_same_spin_amplitude_top_128_l2_mass_fraction",
+        "mp2_same_spin_amplitude_top_16_l2_mass_fraction",
+        "mp2_same_spin_correlation_energy_per_electron_hartree"
+      ],
+      "equivalence_group_id": "8c70f261-4386-52ab-a75c-2a2a292034bd",
+      "extractor_versions": [
+        "g40_p2_mfproto_v3"
+      ],
+      "invariant_checks": {},
+      "stationary_point_identity": null,
+      "status": "passed",
+      "task_uuids": [
+        "cb5392c3-fd91-50f3-be40-149559ae7b96",
+        "dd80e2eb-9220-53ee-bac4-a087306dc309"
+      ],
+      "vacuity_reason": "zero_inv_or_bas_model_eligible_columns",
+      "vacuous_for_this_block": true
+    },
+    {
+      "basis_drift_observed": false,
+      "basis_feature_values": {
+        "mf_core_gap_alpha_hartree": [
+          null,
+          null
+        ],
+        "mf_core_gap_beta_hartree": [
+          2.2830414963857004,
+          2.283041496385695
+        ],
+        "mf_core_gap_min_hartree": [
+          2.2830414963857004,
+          2.283041496385695
+        ],
+        "mf_gap_mismatch_alpha_hartree": [
+          null,
+          null
+        ],
+        "mf_gap_mismatch_beta_hartree": [
+          1.9240653472181293,
+          1.924065347218124
+        ],
+        "mf_gap_mismatch_min_hartree": [
+          1.9240653472181293,
+          1.924065347218124
+        ],
+        "mf_hf_variance_per_electron_hartree_squared": [
+          4.542158819061384e-08,
+          4.5421588190634257e-08
+        ],
+        "mf_selected_fock_alpha_dos_per_orbital_eta_0.05": [
+          null,
+          null
+        ],
+        "mf_selected_fock_alpha_dos_per_orbital_eta_0.2": [
+          null,
+          null
+        ],
+        "mf_selected_fock_alpha_dos_total_eta_0.05": [
+          null,
+          null
+        ],
+        "mf_selected_fock_alpha_dos_total_eta_0.2": [
+          null,
+          null
+        ],
+        "mf_selected_fock_alpha_gap_hartree": [
+          null,
+          null
+        ],
+        "mf_selected_fock_alpha_ipr_window_0.1": [
+          null,
+          null
+        ],
+        "mf_selected_fock_alpha_ipr_window_0.5": [
+          null,
+          null
+        ],
+        "mf_selected_fock_alpha_thermal_active_fraction_kt_0.025": [
+          null,
+          null
+        ],
+        "mf_selected_fock_alpha_thermal_active_fraction_kt_0.1": [
+          null,
+          null
+        ],
+        "mf_selected_fock_alpha_thermal_active_fraction_kt_0.25": [
+          null,
+          null
+        ],
+        "mf_selected_fock_beta_dos_per_orbital_eta_0.05": [
+          0.003178301051207194,
+          0.003178301051207188
+        ],
+        "mf_selected_fock_beta_dos_per_orbital_eta_0.2": [
+          0.650393159278922,
+          0.6503931592789229
+        ],
+        "mf_selected_fock_beta_dos_total_eta_0.05": [
+          0.025426408409657552,
+          0.025426408409657503
+        ],
+        "mf_selected_fock_beta_dos_total_eta_0.2": [
+          5.203145274231376,
+          5.2031452742313835
+        ],
+        "mf_selected_fock_beta_gap_hartree": [
+          0.3589761491675711,
+          0.3589761491675711
+        ],
+        "mf_selected_fock_beta_ipr_window_0.1": [
+          null,
+          null
+        ],
+        "mf_selected_fock_beta_ipr_window_0.5": [
+          0.12500000000000006,
+          0.125
+        ],
+        "mf_selected_fock_beta_thermal_active_fraction_kt_0.025": [
+          0.0,
+          0.0
+        ],
+        "mf_selected_fock_beta_thermal_active_fraction_kt_0.1": [
+          0.75,
+          0.75
+        ],
+        "mf_selected_fock_beta_thermal_active_fraction_kt_0.25": [
+          1.0,
+          1.0
+        ],
+        "mf_selected_fock_gap_min_hartree": [
+          0.3589761491675711,
+          0.3589761491675711
+        ],
+        "mf_selected_s2": [
+          8.750000000000002,
+          8.75
+        ],
+        "mf_solution_energy_spread_per_electron_hartree": [
+          0.005904235178894107,
+          0.005904235178894107
+        ],
+        "mf_stability_internal_final_eigenvalue_hartree": [
+          0.10541191506355907,
+          0.10541191506355607
+        ],
+        "mf_stability_internal_initial_eigenvalue_hartree": [
+          0.10541191506355907,
+          0.10541191506355607
+        ],
+        "mf_symmetry_breaking_energy_per_electron": [
+          null,
+          null
+        ],
+        "mp2_amplitude_max_abs": [
+          0.0003896275282149009,
+          0.00038962752821502383
+        ],
+        "mp2_amplitude_participation_ratio": [
+          9.197666867777663,
+          9.197666867775514
+        ],
+        "mp2_amplitude_top_128_l2_mass_fraction": [
+          0.9999999999999998,
+          1.0
+        ],
+        "mp2_amplitude_top_16_l2_mass_fraction": [
+          0.9365932761346498,
+          0.936593276134679
+        ],
+        "mp2_correlation_energy_per_electron_hartree": [
+          -3.214813750902587e-08,
+          -3.2148137509039887e-08
+        ],
+        "mp2_denominator_inverse_first_moment": [
+          0.7927906684863102,
+          0.7927906684863112
+        ],
+        "mp2_denominator_inverse_second_moment": [
+          0.6499479374539727,
+          0.6499479374539745
+        ],
+        "mp2_denominator_masked_fraction": [
+          0.0,
+          0.0
+        ],
+        "mp2_denominator_p1_hartree": [
+          0.793725272420452,
+          0.7937252724204523
+        ],
+        "mp2_denominator_p25_hartree": [
+          1.1277421405932126,
+          1.1277421405932118
+        ],
+        "mp2_denominator_p50_hartree": [
+          1.29700644894843,
+          1.2970064489484299
+        ],
+        "mp2_denominator_p5_hartree": [
+          0.9431253296448157,
+          0.9431253296448143
+        ],
+        "mp2_kappa_1p1_amplitude_max_abs": [
+          0.0003138544965516846,
+          0.0003138544965517836
+        ],
+        "mp2_kappa_1p1_amplitude_participation_ratio": [
+          8.62213497360165,
+          8.622134973599579
+        ],
+        "mp2_kappa_1p1_amplitude_top_128_l2_mass_fraction": [
+          1.0,
+          1.0
+        ],
+        "mp2_kappa_1p1_amplitude_top_16_l2_mass_fraction": [
+          0.9404142773131973,
+          0.9404142773132277
+        ],
+        "mp2_kappa_1p1_correlation_energy_per_electron_hartree": [
+          -1.9929653491856196e-08,
+          -1.9929653491865146e-08
+        ],
+        "mp2_kappa_1p1_opposite_spin_amplitude_max_abs": [
+          null,
+          null
+        ],
+        "mp2_kappa_1p1_opposite_spin_amplitude_participation_ratio": [
+          null,
+          null
+        ],
+        "mp2_kappa_1p1_opposite_spin_amplitude_top_128_l2_mass_fraction": [
+          null,
+          null
+        ],
+        "mp2_kappa_1p1_opposite_spin_amplitude_top_16_l2_mass_fraction": [
+          null,
+          null
+        ],
+        "mp2_kappa_1p1_same_spin_amplitude_max_abs": [
+          0.0003138544965516846,
+          0.0003138544965517836
+        ],
+        "mp2_kappa_1p1_same_spin_amplitude_participation_ratio": [
+          8.62213497360165,
+          8.622134973599579
+        ],
+        "mp2_kappa_1p1_same_spin_amplitude_top_128_l2_mass_fraction": [
+          1.0,
+          1.0
+        ],
+        "mp2_kappa_1p1_same_spin_amplitude_top_16_l2_mass_fraction": [
+          0.9404142773131973,
+          0.9404142773132277
+        ],
+        "mp2_kappa_1p1_vs_1p45_difference_per_electron_hartree": [
+          4.373259604719787e-09,
+          4.373259604721674e-09
+        ],
+        "mp2_kappa_1p1_vs_1p45_ratio": [
+          0.8200520411960025,
+          0.820052041196005
+        ],
+        "mp2_kappa_1p1_vs_inf_difference_per_electron_hartree": [
+          1.2218484017169673e-08,
+          1.221848401717474e-08
+        ],
+        "mp2_kappa_1p1_vs_inf_ratio": [
+          0.6199318229947465,
+          0.6199318229947546
+        ],
+        "mp2_kappa_1p45_amplitude_max_abs": [
+          0.00034462421939416394,
+          0.0003446242193942726
+        ],
+        "mp2_kappa_1p45_amplitude_participation_ratio": [
+          8.763462337199499,
+          8.763462337197407
+        ],
+        "mp2_kappa_1p45_amplitude_top_128_l2_mass_fraction": [
+          1.0,
+          1.0
+        ],
+        "mp2_kappa_1p45_amplitude_top_16_l2_mass_fraction": [
+          0.9395980632545747,
+          0.9395980632546048
+        ],
+        "mp2_kappa_1p45_correlation_energy_per_electron_hartree": [
+          -2.430291309657598e-08,
+          -2.430291309658682e-08
+        ],
+        "mp2_kappa_1p45_opposite_spin_amplitude_max_abs": [
+          null,
+          null
+        ],
+        "mp2_kappa_1p45_opposite_spin_amplitude_participation_ratio": [
+          null,
+          null
+        ],
+        "mp2_kappa_1p45_opposite_spin_amplitude_top_128_l2_mass_fraction": [
+          null,
+          null
+        ],
+        "mp2_kappa_1p45_opposite_spin_amplitude_top_16_l2_mass_fraction": [
+          null,
+          null
+        ],
+        "mp2_kappa_1p45_same_spin_amplitude_max_abs": [
+          0.00034462421939416394,
+          0.0003446242193942726
+        ],
+        "mp2_kappa_1p45_same_spin_amplitude_participation_ratio": [
+          8.763462337199499,
+          8.763462337197407
+        ],
+        "mp2_kappa_1p45_same_spin_amplitude_top_128_l2_mass_fraction": [
+          1.0,
+          1.0
+        ],
+        "mp2_kappa_1p45_same_spin_amplitude_top_16_l2_mass_fraction": [
+          0.9395980632545747,
+          0.9395980632546048
+        ],
+        "mp2_kappa_1p45_vs_inf_difference_per_electron_hartree": [
+          7.845224412449886e-09,
+          7.845224412453067e-09
+        ],
+        "mp2_kappa_1p45_vs_inf_ratio": [
+          0.7559664409719763,
+          0.7559664409719838
+        ],
+        "mp2_kappa_inf_correlation_energy_per_electron_hartree": [
+          -3.214813750902587e-08,
+          -3.2148137509039887e-08
+        ],
+        "mp2_natural_active_fraction": [
+          0.0,
+          0.0
+        ],
+        "mp2_natural_entropy_per_electron": [
+          1.4964266704357817e-06,
+          1.496426669242702e-06
+        ],
+        "mp2_opposite_spin_amplitude_max_abs": [
+          null,
+          null
+        ],
+        "mp2_opposite_spin_amplitude_participation_ratio": [
+          null,
+          null
+        ],
+        "mp2_opposite_spin_amplitude_top_128_l2_mass_fraction": [
+          null,
+          null
+        ],
+        "mp2_opposite_spin_amplitude_top_16_l2_mass_fraction": [
+          null,
+          null
+        ],
+        "mp2_opposite_spin_correlation_energy_per_electron_hartree": [
+          0.0,
+          0.0
+        ],
+        "mp2_pair_cut_best_max_normalized": [
+          0.9700470333449069,
+          0.97004703334493
+        ],
+        "mp2_pair_cut_best_p95_normalized": [
+          0.6912101865571836,
+          0.6912101865571915
+        ],
+        "mp2_pair_cut_best_sum_normalized": [
+          0.14437684439010542,
+          0.14437684439010484
+        ],
+        "mp2_pair_cut_fiedler_max_normalized": [
+          0.9700470333449069,
+          0.97004703334493
+        ],
+        "mp2_pair_cut_fiedler_p95_normalized": [
+          0.6912101865571836,
+          0.6912101865571915
+        ],
+        "mp2_pair_cut_fiedler_sum_normalized": [
+          0.14437684439010542,
+          0.14437684439010484
+        ],
+        "mp2_pair_cut_file_max_normalized": [
+          0.9700470333449069,
+          0.97004703334493
+        ],
+        "mp2_pair_cut_file_p95_normalized": [
+          0.6912101865571836,
+          0.6912101865571915
+        ],
+        "mp2_pair_cut_file_sum_normalized": [
+          0.14437684439010542,
+          0.14437684439010484
+        ],
+        "mp2_pair_cut_heuristic_spread_max": [
+          0.019522737058402097,
+          0.01952273705838276
+        ],
+        "mp2_pair_cut_heuristic_spread_p95": [
+          0.29724179010300095,
+          0.29724179010299984
+        ],
+        "mp2_pair_cut_heuristic_spread_sum": [
+          0.4842129195650659,
+          0.4842129195650752
+        ],
+        "mp2_pair_cut_linear_relaxation_max_normalized": [
+          0.9700470333449069,
+          0.97004703334493
+        ],
+        "mp2_pair_cut_linear_relaxation_p95_normalized": [
+          0.6912101865571836,
+          0.6912101865571915
+        ],
+        "mp2_pair_cut_linear_relaxation_sum_normalized": [
+          0.14437684439010542,
+          0.14437684439010484
+        ],
+        "mp2_pair_cut_minimum_degree_max_normalized": [
+          0.9700470333449069,
+          0.97004703334493
+        ],
+        "mp2_pair_cut_minimum_degree_p95_normalized": [
+          0.6912101865571836,
+          0.6912101865571915
+        ],
+        "mp2_pair_cut_minimum_degree_sum_normalized": [
+          0.14437684439010542,
+          0.14437684439010484
+        ],
+        "mp2_pair_cut_random_max_normalized": [
+          0.9700470333449069,
+          0.97004703334493
+        ],
+        "mp2_pair_cut_random_p95_normalized": [
+          0.9700470333449069,
+          0.97004703334493
+        ],
+        "mp2_pair_cut_random_sum_normalized": [
+          0.42153313963150735,
+          0.4215331396315134
+        ],
+        "mp2_pair_cut_rcm_max_normalized": [
+          0.9893620892692621,
+          0.9893620892692662
+        ],
+        "mp2_pair_cut_rcm_p95_normalized": [
+          0.9835675724919555,
+          0.9835675724919652
+        ],
+        "mp2_pair_cut_rcm_sum_normalized": [
+          0.2799155889448813,
+          0.27991558894488516
+        ],
+        "mp2_same_spin_amplitude_max_abs": [
+          0.0003896275282149009,
+          0.00038962752821502383
+        ],
+        "mp2_same_spin_amplitude_participation_ratio": [
+          9.197666867777663,
+          9.197666867775514
+        ],
+        "mp2_same_spin_amplitude_top_128_l2_mass_fraction": [
+          0.9999999999999998,
+          1.0
+        ],
+        "mp2_same_spin_amplitude_top_16_l2_mass_fraction": [
+          0.9365932761346498,
+          0.936593276134679
+        ],
+        "mp2_same_spin_correlation_energy_per_electron_hartree": [
+          -3.214813750902587e-08,
+          -3.2148137509039887e-08
+        ]
+      },
+      "changed_basis_features": [],
+      "equivalence_group_id": "b696450f-72ab-5509-b932-61fb30eda535",
+      "extractor_versions": [
+        "g40_p2_mfproto_v3"
+      ],
+      "invariant_checks": {},
+      "stationary_point_identity": {
+        "certificate_version": "g40_rotation_stationary_point_identity_v1",
+        "checks": {
+          "fock_spectrum": true,
+          "mapped_spin_density": true,
+          "selected_energy": true,
+          "selected_s2": true,
+          "solution_branch_structure": true
+        },
+        "energy_tolerance_hartree": 1e-09,
+        "fock_spectrum_max_abs_deltas_hartree": {
+          "alpha": 2.220446049250313e-15,
+          "beta": 2.9976021664879227e-15
+        },
+        "fock_spectrum_tolerance_hartree": 1e-09,
+        "localized_representation": "in_dump_er_localized",
+        "mapped_spin_density_frobenius_combined": 7.217943214331074e-15,
+        "mapped_spin_density_frobenius_deltas": {
+          "alpha": 2.812254707722786e-15,
+          "beta": 6.647550504072837e-15
+        },
+        "mapped_spin_density_frobenius_tolerance": 1e-08,
+        "reason": null,
+        "rotation_certificate": {
+          "declared_sha1": "25060f89480bc3a759ff9b990da1af8c7a094cb4",
+          "equivalence_group_id": "b696450f-72ab-5509-b932-61fb30eda535",
+          "observed_sha1": "25060f89480bc3a759ff9b990da1af8c7a094cb4",
+          "orthogonality_residual_max_abs": 8.881784197001252e-16,
+          "path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/feature_runs/code_g40_p2_d40ccf7/analysis/feature_schema/g40_rotation_pair_certificates/p450_cpd1_b_spin5.rotation.json",
+          "reason": null,
+          "status": "passed"
+        },
+        "s2_tolerance": 1e-09,
+        "selected_energy_delta_hartree": 0.0,
+        "selected_s2_delta": 1.7763568394002505e-15,
+        "solution_branch_structure_equal": true,
+        "source_representation": "source_localized_rohf",
+        "status": "passed"
+      },
+      "status": "passed",
+      "task_uuids": [
+        "3d343ddb-a898-5c0e-afc9-42b62d588c5e",
+        "6cd8382a-9a9a-5c43-83b1-616c9f301ab1"
+      ],
+      "vacuity_reason": "zero_inv_or_bas_model_eligible_columns",
+      "vacuous_for_this_block": true
+    },
+    {
+      "blocks": [
+        {
+          "block": "mfproto",
+          "checked_inv_or_bas_columns": 0,
+          "checks": {},
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": "zero_inv_or_bas_model_eligible_columns",
+          "vacuous_for_this_block": true
+        }
+      ],
+      "equivalence_group_id": "g40-permutation-molecular_h2-v1",
+      "kind": "molecular_tie_free",
+      "observed_spectrum_structure": null,
+      "permutation_new_to_old": [
+        1,
+        0
+      ],
+      "seed": 40045,
+      "source": null,
+      "spectrum_structure": null,
+      "spectrum_structure_passed": null,
+      "status": "passed",
+      "tensor_certificate_passed": true
+    },
+    {
+      "blocks": [
+        {
+          "block": "mfproto",
+          "checked_inv_or_bas_columns": 0,
+          "checks": {},
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": "zero_inv_or_bas_model_eligible_columns",
+          "vacuous_for_this_block": true
+        }
+      ],
+      "equivalence_group_id": "g40-permutation-lattice_hubbard-v1",
+      "kind": "lattice",
+      "observed_spectrum_structure": null,
+      "permutation_new_to_old": [
+        2,
+        3,
+        1,
+        0
+      ],
+      "seed": 40045,
+      "source": null,
+      "spectrum_structure": null,
+      "spectrum_structure_passed": null,
+      "status": "passed",
+      "tensor_certificate_passed": true
+    },
+    {
+      "blocks": [
+        {
+          "block": "mfproto",
+          "checked_inv_or_bas_columns": 0,
+          "checks": {},
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": "zero_inv_or_bas_model_eligible_columns",
+          "vacuous_for_this_block": true
+        }
+      ],
+      "equivalence_group_id": "g40-permutation-qsz-l4x4-u2-degenerate-v1",
+      "kind": "corpus_lattice_degenerate",
+      "observed_spectrum_structure": null,
+      "permutation_new_to_old": [
+        10,
+        7,
+        6,
+        14,
+        2,
+        0,
+        13,
+        15,
+        12,
+        9,
+        11,
+        5,
+        3,
+        4,
+        8,
+        1
+      ],
+      "seed": 2,
+      "source": {
+        "declared_checksum": "83e5a80923213b299c76a36d7ec50f89aedcbc52",
+        "declared_checksum_type": "sha1sum",
+        "instance_data_object_uuid": "facf72a8-d772-513e-9822-f593e2495fc8",
+        "task_uuid": "beabcf8f-a6c0-5e32-9385-110ff65cbbf0",
+        "uncompressed_sha256": "4aeebb2fabcfbfe1baaf939e166c28390e8de0c98053fadf6680fce8c00b055c",
+        "url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L4x4_pbc_u2.fcidump.gz"
+      },
+      "spectrum_structure": null,
+      "spectrum_structure_passed": null,
+      "status": "passed",
+      "tensor_certificate_passed": true
+    },
+    {
+      "blocks": [
+        {
+          "block": "mfproto",
+          "checked_inv_or_bas_columns": 0,
+          "checks": {},
+          "observed_bas_ord_drift": {},
+          "status": "passed",
+          "vacuity_reason": "zero_inv_or_bas_model_eligible_columns",
+          "vacuous_for_this_block": true
+        }
+      ],
+      "equivalence_group_id": "g40-permutation-varbench-tv-square16-v0p01-structured-v1",
+      "kind": "corpus_structured_spectrum",
+      "observed_spectrum_structure": {
+        "active_pair_dimension": 16,
+        "distinct_nonzero_magnitude_count": 2,
+        "distinct_nonzero_magnitudes": [
+          0.02,
+          0.04
+        ],
+        "nonzero_eigenvalue_count": 10
+      },
+      "permutation_new_to_old": [
+        9,
+        1,
+        5,
+        12,
+        3,
+        8,
+        14,
+        0,
+        2,
+        15,
+        10,
+        6,
+        11,
+        13,
+        4,
+        7
+      ],
+      "seed": 20260712,
+      "source": {
+        "declared_checksum": "fec00fefd294777a854748768edfa08ca4a6c6ab",
+        "declared_checksum_type": "sha1sum",
+        "instance_data_object_uuid": "b8a5d73c-09ce-5715-85c0-b20ce448255e",
+        "task_uuid": "ac3a023f-8d31-5d79-803e-c54e947c8d75",
+        "uncompressed_sha256": "a48cd414aa2e63b92129a5af639c91e785c63a5bf6abdc260663863564bb29f4",
+        "url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/varbench_tv_square16/varbench_tv_square16_pbc_nf5_v0p01.fcidump.gz"
+      },
+      "spectrum_structure": {
+        "active_pair_dimension": 16,
+        "distinct_nonzero_magnitude_count": 2,
+        "distinct_nonzero_magnitudes": [
+          0.02,
+          0.04
+        ],
+        "nonzero_eigenvalue_count": 10
+      },
+      "spectrum_structure_passed": true,
+      "status": "passed",
+      "tensor_certificate_passed": true
+    }
+  ],
+  "rotation_pair_nonvacuity": {
+    "groups_with_basis_features": [
+      "8c70f261-4386-52ab-a75c-2a2a292034bd",
+      "b696450f-72ab-5509-b932-61fb30eda535"
+    ],
+    "groups_with_observed_basis_drift": [
+      "8c70f261-4386-52ab-a75c-2a2a292034bd"
+    ],
+    "status": "passed"
+  },
+  "rtol": 1e-09,
+  "status": "passed"
+}
