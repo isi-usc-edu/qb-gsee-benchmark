@@ -1,0 +1,2158 @@
+{
+  "identifier_columns": [
+    "bare_one_body_bandwidth",
+    "det_coupling_count_above_rel_1e_4",
+    "det_coupling_participation_ratio",
+    "det_coupling_scale",
+    "effective_h1_entrywise_l1_norm",
+    "effective_h1_frobenius_norm",
+    "effective_h1_l1_over_frobenius",
+    "eri_full_l2_norm",
+    "interaction_spectrum_relative_gap",
+    "random_det_expected_degree_rel_1e_2",
+    "random_det_expected_degree_rel_1e_4"
+  ],
+  "n_identifier_columns": 11,
+  "populations": {
+    "full_feature_corpus": {
+      "identifier_columns": [
+        "bare_one_body_bandwidth",
+        "det_coupling_count_above_rel_1e_4",
+        "det_coupling_participation_ratio",
+        "det_coupling_scale",
+        "random_det_expected_degree_rel_1e_2",
+        "random_det_expected_degree_rel_1e_4"
+      ],
+      "ledger": [
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6936026936026936,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 2.0000000000000004
+          },
+          "column": "U_eff_over_W",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6936026936026936,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 1.0,
+            "family": "planted_solutions",
+            "side": "greater_than",
+            "threshold": 208.66924461295176
+          },
+          "column": "bare_one_body_bandwidth",
+          "is_family_identifier": true,
+          "max_one_vs_rest_f1": 1.0,
+          "threshold_matches": [
+            {
+              "f1": 1.0,
+              "family": "planted_solutions",
+              "side": "greater_than",
+              "threshold": 208.66924461295176
+            }
+          ]
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6986301369863014,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 1.4357444869099163
+          },
+          "column": "cut_weight_best_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6986301369863014,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6986301369863014,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 1.4357444869099163
+          },
+          "column": "cut_weight_best_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6986301369863014,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7015945330296127,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 7.084048172906281
+          },
+          "column": "cut_weight_best_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7015945330296127,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7014084507042253,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 160.99689437998487
+          },
+          "column": "cut_weight_fiedler_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7014084507042253,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.70042194092827,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 160.46582823532867
+          },
+          "column": "cut_weight_fiedler_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.70042194092827,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7015945330296127,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 7.084048172906281
+          },
+          "column": "cut_weight_fiedler_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7015945330296127,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7073863636363636,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 160.99689437998487
+          },
+          "column": "cut_weight_file_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7073863636363636,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7073863636363636,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 160.46582823532867
+          },
+          "column": "cut_weight_file_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7073863636363636,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.701530612244898,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 12208.931157148854
+          },
+          "column": "cut_weight_file_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.701530612244898,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7730769230769231,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.0153586731075575
+          },
+          "column": "cut_weight_heuristic_spread_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7730769230769231,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7716535433070866,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.0036700390334878
+          },
+          "column": "cut_weight_heuristic_spread_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7716535433070866,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7575150300601202,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.021686474597013
+          },
+          "column": "cut_weight_heuristic_spread_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7575150300601202,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8989547038327527,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.0082619103655049
+          },
+          "column": "cut_weight_improvement_vs_file_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8989547038327527,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.9017543859649123,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.0036700390334878
+          },
+          "column": "cut_weight_improvement_vs_file_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.9017543859649123,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8912655971479501,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.0216864745970131
+          },
+          "column": "cut_weight_improvement_vs_file_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8912655971479501,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6852057842046718,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.9090909090909092
+          },
+          "column": "cut_weight_improvement_vs_random_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6852057842046718,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6852057842046718,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.9090909090909092
+          },
+          "column": "cut_weight_improvement_vs_random_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6852057842046718,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6874304783092324,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": -2.220446049250313e-16
+          },
+          "column": "cut_weight_improvement_vs_random_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6874304783092324,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7007963594994312,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 1.4359218998665593
+          },
+          "column": "cut_weight_linear_relaxation_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7007963594994312,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7015945330296127,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 1.567777772326308
+          },
+          "column": "cut_weight_linear_relaxation_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7015945330296127,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7015945330296127,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 7.087765123711547
+          },
+          "column": "cut_weight_linear_relaxation_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7015945330296127,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.690744920993228,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 1.7325365480767894
+          },
+          "column": "cut_weight_minimum_degree_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.690744920993228,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.690744920993228,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 1.6702617116056673
+          },
+          "column": "cut_weight_minimum_degree_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.690744920993228,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6936936936936937,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 3.9209361500243016
+          },
+          "column": "cut_weight_minimum_degree_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6936936936936937,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7010050251256281,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 447.21359549995793
+          },
+          "column": "cut_weight_random_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7010050251256281,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7001254705144291,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 446.0955615112081
+          },
+          "column": "cut_weight_random_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7001254705144291,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6987104337631888,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 48835.72462859542
+          },
+          "column": "cut_weight_random_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6987104337631888,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7073863636363636,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 160.99689437998487
+          },
+          "column": "cut_weight_rcm_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7073863636363636,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7073863636363636,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 160.46582823532867
+          },
+          "column": "cut_weight_rcm_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7073863636363636,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.701530612244898,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 12208.931157148854
+          },
+          "column": "cut_weight_rcm_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.701530612244898,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.891566265060241,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 2239.0
+          },
+          "column": "det_coupling_count_above_rel_1e_10",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.891566265060241,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8929110105580694,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 2239.0
+          },
+          "column": "det_coupling_count_above_rel_1e_12",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8929110105580694,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7479674796747967,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 3.0
+          },
+          "column": "det_coupling_count_above_rel_1e_2",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7479674796747967,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 1.0,
+            "family": "periodic_solids",
+            "side": "greater_than",
+            "threshold": 137453.0
+          },
+          "column": "det_coupling_count_above_rel_1e_4",
+          "is_family_identifier": true,
+          "max_one_vs_rest_f1": 1.0,
+          "threshold_matches": [
+            {
+              "f1": 1.0,
+              "family": "periodic_solids",
+              "side": "greater_than",
+              "threshold": 137453.0
+            }
+          ]
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8862275449101796,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 1680.0
+          },
+          "column": "det_coupling_count_above_rel_1e_6",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8862275449101796,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.891566265060241,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 2006.0
+          },
+          "column": "det_coupling_count_above_rel_1e_8",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.891566265060241,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8925869894099848,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 2223.0
+          },
+          "column": "det_coupling_nonzero_degree",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8925869894099848,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 1.0,
+            "family": "periodic_solids",
+            "side": "greater_than",
+            "threshold": 20755.834564775065
+          },
+          "column": "det_coupling_participation_ratio",
+          "is_family_identifier": true,
+          "max_one_vs_rest_f1": 1.0,
+          "threshold_matches": [
+            {
+              "f1": 1.0,
+              "family": "periodic_solids",
+              "side": "greater_than",
+              "threshold": 20755.834564775065
+            }
+          ]
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 1.0,
+            "family": "planted_solutions",
+            "side": "greater_than",
+            "threshold": 199.7260454465817
+          },
+          "column": "det_coupling_scale",
+          "is_family_identifier": true,
+          "max_one_vs_rest_f1": 1.0,
+          "threshold_matches": [
+            {
+              "f1": 1.0,
+              "family": "planted_solutions",
+              "side": "greater_than",
+              "threshold": 199.7260454465817
+            }
+          ]
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6928251121076233,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 0.0577214436251471
+          },
+          "column": "det_coupling_top_100_l2_mass_fraction",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6928251121076233,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6889632107023411,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 0.0059731923242545
+          },
+          "column": "det_coupling_top_10_l2_mass_fraction",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6889632107023411,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6973532796317606,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.25
+          },
+          "column": "det_coupling_top_1_l2_mass_fraction",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6973532796317606,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7777777777777778,
+            "family": "planted_solutions",
+            "side": "greater_than",
+            "threshold": 6400.0
+          },
+          "column": "effective_h1_entrywise_l1_norm",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7777777777777778,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8065476190476191,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.3125
+          },
+          "column": "effective_h1_fraction_above_rel_1e_10",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8065476190476191,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.811377245508982,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.3125
+          },
+          "column": "effective_h1_fraction_above_rel_1e_12",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.811377245508982,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6959537572254335,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.3125
+          },
+          "column": "effective_h1_fraction_above_rel_1e_2",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6959537572254335,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8047337278106509,
+            "family": "homogeneous_catalysts",
+            "side": "greater_than",
+            "threshold": 0.7040816326530612
+          },
+          "column": "effective_h1_fraction_above_rel_1e_4",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8047337278106509,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8114285714285714,
+            "family": "homogeneous_catalysts",
+            "side": "greater_than",
+            "threshold": 0.9489795918367347
+          },
+          "column": "effective_h1_fraction_above_rel_1e_6",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8114285714285714,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8152173913043478,
+            "family": "homogeneous_catalysts",
+            "side": "greater_than",
+            "threshold": 0.9865702479338844
+          },
+          "column": "effective_h1_fraction_above_rel_1e_8",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8152173913043478,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.9166666666666666,
+            "family": "planted_solutions",
+            "side": "greater_than",
+            "threshold": 532.9014918350294
+          },
+          "column": "effective_h1_frobenius_norm",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.9166666666666666,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7092391304347826,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 8.67639985177852
+          },
+          "column": "effective_h1_l1_over_frobenius",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7092391304347826,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.9179755671902269,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.04296875
+          },
+          "column": "eri_fraction_above_rel_1e_10",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.9179755671902269,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.9179755671902269,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.04296875
+          },
+          "column": "eri_fraction_above_rel_1e_12",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.9179755671902269,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6874304783092324,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.4508538109121199
+          },
+          "column": "eri_fraction_above_rel_1e_2",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6874304783092324,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8960817717206133,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.04296875
+          },
+          "column": "eri_fraction_above_rel_1e_4",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8960817717206133,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.9163763066202091,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.04296875
+          },
+          "column": "eri_fraction_above_rel_1e_6",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.9163763066202091,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.9179755671902269,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.04296875
+          },
+          "column": "eri_fraction_above_rel_1e_8",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.9179755671902269,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7394270122783083,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 3970.0
+          },
+          "column": "eri_full_l1_norm",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7394270122783083,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.9166666666666666,
+            "family": "planted_solutions",
+            "side": "greater_than",
+            "threshold": 191.16485032557637
+          },
+          "column": "eri_full_l2_norm",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.9166666666666666,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7343532684283728,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 2560.0
+          },
+          "column": "fermionic_coefficient_l1_norm",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7343532684283728,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7319727891156462,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 1128.0
+          },
+          "column": "interaction_graph_edge_count",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7319727891156462,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6992481203007519,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 883.246851112417
+          },
+          "column": "interaction_graph_total_weight",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6992481203007519,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7161997563946407,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 9.320190729464487
+          },
+          "column": "interaction_spectrum_effective_rank",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7161997563946407,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8287112561174551,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 13.967569855472863
+          },
+          "column": "interaction_spectrum_participation_rank",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8287112561174551,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6909090909090909,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 63.0
+          },
+          "column": "interaction_spectrum_rank_rel_1e_2",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6909090909090909,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6793296089385474,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 0.0
+          },
+          "column": "interaction_spectrum_rank_rel_1e_4",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6793296089385474,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6793296089385474,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 0.0
+          },
+          "column": "interaction_spectrum_rank_rel_1e_6",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6793296089385474,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6974789915966386,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 2.3913215860625385e-15
+          },
+          "column": "interaction_spectrum_relative_gap",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6974789915966386,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6998867497168743,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 2.352182518111364
+          },
+          "column": "log_fci_dim",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6998867497168743,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7319727891156462,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 47.0
+          },
+          "column": "min_fill_width_upper_bound",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7319727891156462,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8756756756756757,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 1.0000000000000016
+          },
+          "column": "mpo_pair_rank_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8756756756756757,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8756756756756757,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 1.0000000000000002
+          },
+          "column": "mpo_pair_rank_mean",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8756756756756757,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8756756756756757,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 1.0000000000000009
+          },
+          "column": "mpo_pair_rank_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8756756756756757,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8571428571428571,
+            "family": "validation_instances",
+            "side": "less_than_or_equal",
+            "threshold": 2.0
+          },
+          "column": "n_elec",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8571428571428571,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6959459459459459,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 5.0
+          },
+          "column": "n_orbs",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6959459459459459,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8929110105580694,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 2236.261376953125
+          },
+          "column": "random_det_expected_degree_rel_1e_10",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8929110105580694,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8942598187311178,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 2239.0
+          },
+          "column": "random_det_expected_degree_rel_1e_12",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8942598187311178,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 1.0,
+            "family": "periodic_solids",
+            "side": "greater_than",
+            "threshold": 2056.506375612978
+          },
+          "column": "random_det_expected_degree_rel_1e_2",
+          "is_family_identifier": true,
+          "max_one_vs_rest_f1": 1.0,
+          "threshold_matches": [
+            {
+              "f1": 1.0,
+              "family": "periodic_solids",
+              "side": "greater_than",
+              "threshold": 2056.506375612978
+            }
+          ]
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 1.0,
+            "family": "periodic_solids",
+            "side": "greater_than",
+            "threshold": 152515.31600952148
+          },
+          "column": "random_det_expected_degree_rel_1e_4",
+          "is_family_identifier": true,
+          "max_one_vs_rest_f1": 1.0,
+          "threshold_matches": [
+            {
+              "f1": 1.0,
+              "family": "periodic_solids",
+              "side": "greater_than",
+              "threshold": 152515.31600952148
+            }
+          ]
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8888888888888888,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 1679.9755859375
+          },
+          "column": "random_det_expected_degree_rel_1e_6",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8888888888888888,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8929110105580694,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 1984.7916829427083
+          },
+          "column": "random_det_expected_degree_rel_1e_8",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8929110105580694,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.720754716981132,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.071012355907549
+          },
+          "column": "rho_offdiag",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.720754716981132,
+          "threshold_matches": []
+        }
+      ],
+      "n_columns_screened": 84,
+      "procedure": "For each universal-core column and family, exhaustively evaluate every observed single-threshold split in both directions against the one-vs-rest family label; flag the column if the maximum full-corpus F1 is at least the frozen threshold.",
+      "threshold": 0.95
+    },
+    "unique_scored_tasks": {
+      "identifier_columns": [
+        "bare_one_body_bandwidth",
+        "det_coupling_scale",
+        "effective_h1_entrywise_l1_norm",
+        "effective_h1_frobenius_norm",
+        "effective_h1_l1_over_frobenius",
+        "eri_full_l2_norm",
+        "interaction_spectrum_relative_gap"
+      ],
+      "ledger": [
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.65625,
+            "family": "transition_metals",
+            "side": "less_than_or_equal",
+            "threshold": 0.0550055044642756
+          },
+          "column": "U_eff_over_W",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.65625,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 1.0,
+            "family": "planted_solutions",
+            "side": "greater_than",
+            "threshold": 143.11144415900796
+          },
+          "column": "bare_one_body_bandwidth",
+          "is_family_identifier": true,
+          "max_one_vs_rest_f1": 1.0,
+          "threshold_matches": [
+            {
+              "f1": 1.0,
+              "family": "planted_solutions",
+              "side": "greater_than",
+              "threshold": 143.11144415900796
+            }
+          ]
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.875,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 213.00708387129487
+          },
+          "column": "cut_weight_best_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.875,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.875,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 203.0480836193088
+          },
+          "column": "cut_weight_best_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.875,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8936170212765957,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 6972.385881775227
+          },
+          "column": "cut_weight_best_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8936170212765957,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.865979381443299,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 213.39983545405727
+          },
+          "column": "cut_weight_fiedler_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.865979381443299,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.865979381443299,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 192.38142022433289
+          },
+          "column": "cut_weight_fiedler_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.865979381443299,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8936170212765957,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 6972.385881775227
+          },
+          "column": "cut_weight_fiedler_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8936170212765957,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.865979381443299,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 230.3758738197989
+          },
+          "column": "cut_weight_file_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.865979381443299,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.865979381443299,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 221.67494434167924
+          },
+          "column": "cut_weight_file_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.865979381443299,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8936170212765957,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 7879.537895397961
+          },
+          "column": "cut_weight_file_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8936170212765957,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6896551724137931,
+            "family": "small_molecules",
+            "side": "greater_than",
+            "threshold": 0.2220001948902093
+          },
+          "column": "cut_weight_heuristic_spread_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6896551724137931,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7012987012987013,
+            "family": "small_molecules",
+            "side": "greater_than",
+            "threshold": 0.2879865821006134
+          },
+          "column": "cut_weight_heuristic_spread_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7012987012987013,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6753246753246753,
+            "family": "small_molecules",
+            "side": "greater_than",
+            "threshold": 0.3044682363462477
+          },
+          "column": "cut_weight_heuristic_spread_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6753246753246753,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7317073170731707,
+            "family": "small_molecules",
+            "side": "greater_than",
+            "threshold": 0.2220001948902092
+          },
+          "column": "cut_weight_improvement_vs_file_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7317073170731707,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7397260273972602,
+            "family": "small_molecules",
+            "side": "greater_than",
+            "threshold": 0.2879865821006134
+          },
+          "column": "cut_weight_improvement_vs_file_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7397260273972602,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7123287671232876,
+            "family": "small_molecules",
+            "side": "greater_than",
+            "threshold": 0.3044682363462477
+          },
+          "column": "cut_weight_improvement_vs_file_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7123287671232876,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.5454545454545454,
+            "family": "transition_metals",
+            "side": "less_than_or_equal",
+            "threshold": 0.1398306694840488
+          },
+          "column": "cut_weight_improvement_vs_random_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.5454545454545454,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.5503355704697986,
+            "family": "transition_metals",
+            "side": "less_than_or_equal",
+            "threshold": 0.1630842598115225
+          },
+          "column": "cut_weight_improvement_vs_random_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.5503355704697986,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7272727272727273,
+            "family": "planted_solutions",
+            "side": "greater_than",
+            "threshold": 0.5792901351195487
+          },
+          "column": "cut_weight_improvement_vs_random_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7272727272727273,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.875,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 213.00708387129487
+          },
+          "column": "cut_weight_linear_relaxation_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.875,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.875,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 203.0480836193088
+          },
+          "column": "cut_weight_linear_relaxation_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.875,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8842105263157894,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 7123.606931189184
+          },
+          "column": "cut_weight_linear_relaxation_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8842105263157894,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8571428571428571,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 230.3758738197989
+          },
+          "column": "cut_weight_minimum_degree_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8571428571428571,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8571428571428571,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 221.67494434167924
+          },
+          "column": "cut_weight_minimum_degree_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8571428571428571,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8936170212765957,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 7879.537895397961
+          },
+          "column": "cut_weight_minimum_degree_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8936170212765957,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8316831683168316,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 220.0
+          },
+          "column": "cut_weight_random_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8316831683168316,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8316831683168316,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 208.67275724975156
+          },
+          "column": "cut_weight_random_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8316831683168316,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.865979381443299,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 5850.677683181547
+          },
+          "column": "cut_weight_random_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.865979381443299,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.865979381443299,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 230.37587381979887
+          },
+          "column": "cut_weight_rcm_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.865979381443299,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.865979381443299,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 221.6749443416793
+          },
+          "column": "cut_weight_rcm_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.865979381443299,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8936170212765957,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 7879.53789539796
+          },
+          "column": "cut_weight_rcm_sum",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8936170212765957,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7514450867052023,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 2239.0
+          },
+          "column": "det_coupling_count_above_rel_1e_10",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7514450867052023,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7558139534883721,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 2239.0
+          },
+          "column": "det_coupling_count_above_rel_1e_12",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7558139534883721,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7777777777777778,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 99.0
+          },
+          "column": "det_coupling_count_above_rel_1e_2",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7777777777777778,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.898876404494382,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 6809.0
+          },
+          "column": "det_coupling_count_above_rel_1e_4",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.898876404494382,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7344632768361582,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 1680.0
+          },
+          "column": "det_coupling_count_above_rel_1e_6",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7344632768361582,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7514450867052023,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 2006.0
+          },
+          "column": "det_coupling_count_above_rel_1e_8",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7514450867052023,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7764705882352941,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 62510.0
+          },
+          "column": "det_coupling_nonzero_degree",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7764705882352941,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 282.22534561270817
+          },
+          "column": "det_coupling_participation_ratio",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 1.0,
+            "family": "planted_solutions",
+            "side": "greater_than",
+            "threshold": 145.6820818645691
+          },
+          "column": "det_coupling_scale",
+          "is_family_identifier": true,
+          "max_one_vs_rest_f1": 1.0,
+          "threshold_matches": [
+            {
+              "f1": 1.0,
+              "family": "planted_solutions",
+              "side": "greater_than",
+              "threshold": 145.6820818645691
+            }
+          ]
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8095238095238095,
+            "family": "transition_metals",
+            "side": "less_than_or_equal",
+            "threshold": 0.432837427260264
+          },
+          "column": "det_coupling_top_100_l2_mass_fraction",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8095238095238095,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7368421052631579,
+            "family": "transition_metals",
+            "side": "less_than_or_equal",
+            "threshold": 0.0920943096400332
+          },
+          "column": "det_coupling_top_10_l2_mass_fraction",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7368421052631579,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7368421052631579,
+            "family": "transition_metals",
+            "side": "less_than_or_equal",
+            "threshold": 0.0147717170297604
+          },
+          "column": "det_coupling_top_1_l2_mass_fraction",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7368421052631579,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 1.0,
+            "family": "planted_solutions",
+            "side": "greater_than",
+            "threshold": 1462.1410219090872
+          },
+          "column": "effective_h1_entrywise_l1_norm",
+          "is_family_identifier": true,
+          "max_one_vs_rest_f1": 1.0,
+          "threshold_matches": [
+            {
+              "f1": 1.0,
+              "family": "planted_solutions",
+              "side": "greater_than",
+              "threshold": 1462.1410219090872
+            }
+          ]
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6349206349206349,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.5
+          },
+          "column": "effective_h1_fraction_above_rel_1e_10",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6349206349206349,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6557377049180327,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 0.5
+          },
+          "column": "effective_h1_fraction_above_rel_1e_12",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6557377049180327,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6363636363636364,
+            "family": "planted_solutions",
+            "side": "less_than_or_equal",
+            "threshold": 0.0333333333333333
+          },
+          "column": "effective_h1_fraction_above_rel_1e_2",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6363636363636364,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6666666666666666,
+            "family": "homogeneous_catalysts",
+            "side": "greater_than",
+            "threshold": 0.7040816326530612
+          },
+          "column": "effective_h1_fraction_above_rel_1e_4",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6666666666666666,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6732673267326733,
+            "family": "transition_metals",
+            "side": "less_than_or_equal",
+            "threshold": 0.2359396433470507
+          },
+          "column": "effective_h1_fraction_above_rel_1e_6",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6732673267326733,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6666666666666666,
+            "family": "homogeneous_catalysts",
+            "side": "greater_than",
+            "threshold": 0.9375
+          },
+          "column": "effective_h1_fraction_above_rel_1e_8",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6666666666666666,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 1.0,
+            "family": "planted_solutions",
+            "side": "greater_than",
+            "threshold": 189.24262341608863
+          },
+          "column": "effective_h1_frobenius_norm",
+          "is_family_identifier": true,
+          "max_one_vs_rest_f1": 1.0,
+          "threshold_matches": [
+            {
+              "f1": 1.0,
+              "family": "planted_solutions",
+              "side": "greater_than",
+              "threshold": 189.24262341608863
+            }
+          ]
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.9545454545454546,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 8.957849990222977
+          },
+          "column": "effective_h1_l1_over_frobenius",
+          "is_family_identifier": true,
+          "max_one_vs_rest_f1": 0.9545454545454546,
+          "threshold_matches": [
+            {
+              "f1": 0.9545454545454546,
+              "family": "transition_metals",
+              "side": "greater_than",
+              "threshold": 8.957849990222977
+            }
+          ]
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7469879518072289,
+            "family": "homogeneous_catalysts",
+            "side": "greater_than",
+            "threshold": 0.999878725010043
+          },
+          "column": "eri_fraction_above_rel_1e_10",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7469879518072289,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.6904761904761905,
+            "family": "homogeneous_catalysts",
+            "side": "greater_than",
+            "threshold": 0.999999733197869
+          },
+          "column": "eri_fraction_above_rel_1e_12",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.6904761904761905,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7777777777777778,
+            "family": "planted_solutions",
+            "side": "less_than_or_equal",
+            "threshold": 0.000174332798063
+          },
+          "column": "eri_fraction_above_rel_1e_2",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7777777777777778,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.696969696969697,
+            "family": "homogeneous_catalysts",
+            "side": "greater_than",
+            "threshold": 0.5
+          },
+          "column": "eri_fraction_above_rel_1e_4",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.696969696969697,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7878787878787878,
+            "family": "homogeneous_catalysts",
+            "side": "greater_than",
+            "threshold": 0.9623852883010532
+          },
+          "column": "eri_fraction_above_rel_1e_6",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7878787878787878,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7536231884057971,
+            "family": "homogeneous_catalysts",
+            "side": "greater_than",
+            "threshold": 0.9996876301541024
+          },
+          "column": "eri_fraction_above_rel_1e_8",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7536231884057971,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8118811881188119,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 3770.802937125258
+          },
+          "column": "eri_full_l1_norm",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8118811881188119,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 1.0,
+            "family": "planted_solutions",
+            "side": "greater_than",
+            "threshold": 80.0
+          },
+          "column": "eri_full_l2_norm",
+          "is_family_identifier": true,
+          "max_one_vs_rest_f1": 1.0,
+          "threshold_matches": [
+            {
+              "f1": 1.0,
+              "family": "planted_solutions",
+              "side": "greater_than",
+              "threshold": 80.0
+            }
+          ]
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7961165048543689,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 2167.4306252270108
+          },
+          "column": "fermionic_coefficient_l1_norm",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7961165048543689,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.9032258064516129,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 946.0
+          },
+          "column": "interaction_graph_edge_count",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.9032258064516129,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8316831683168316,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 413.5413858866333
+          },
+          "column": "interaction_graph_total_weight",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8316831683168316,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.9230769230769231,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 26.70294485167677
+          },
+          "column": "interaction_spectrum_effective_rank",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.9230769230769231,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8529411764705882,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 9.943075218351382
+          },
+          "column": "interaction_spectrum_participation_rank",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8529411764705882,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8695652173913043,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 38.0
+          },
+          "column": "interaction_spectrum_rank_rel_1e_2",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8695652173913043,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.9438202247191011,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 207.0
+          },
+          "column": "interaction_spectrum_rank_rel_1e_4",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.9438202247191011,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.9302325581395349,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 365.0
+          },
+          "column": "interaction_spectrum_rank_rel_1e_6",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.9302325581395349,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.9924812030075187,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 8.029885779752969e-16
+          },
+          "column": "interaction_spectrum_relative_gap",
+          "is_family_identifier": true,
+          "max_one_vs_rest_f1": 0.9924812030075187,
+          "threshold_matches": [
+            {
+              "f1": 0.9924812030075187,
+              "family": "lattice_models",
+              "side": "less_than_or_equal",
+              "threshold": 8.029885779752969e-16
+            }
+          ]
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7727272727272727,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 14.608984286898718
+          },
+          "column": "log_fci_dim",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7727272727272727,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.9032258064516129,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 43.0
+          },
+          "column": "min_fill_width_upper_bound",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.9032258064516129,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 2.950850294033078
+          },
+          "column": "mpo_pair_rank_max",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8214285714285714,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 3.0636539222330894
+          },
+          "column": "mpo_pair_rank_mean",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8214285714285714,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8,
+            "family": "lattice_models",
+            "side": "greater_than",
+            "threshold": 2.26952805429641
+          },
+          "column": "mpo_pair_rank_p95",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7374301675977654,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 10.0
+          },
+          "column": "n_elec",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7374301675977654,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.9032258064516129,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 44.0
+          },
+          "column": "n_orbs",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.9032258064516129,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7558139534883721,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 2236.261376953125
+          },
+          "column": "random_det_expected_degree_rel_1e_10",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7558139534883721,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7602339181286549,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 2239.0
+          },
+          "column": "random_det_expected_degree_rel_1e_12",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7602339181286549,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8421052631578947,
+            "family": "planted_solutions",
+            "side": "less_than_or_equal",
+            "threshold": 0.6683349609375
+          },
+          "column": "random_det_expected_degree_rel_1e_2",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8421052631578947,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.8282828282828283,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 3540.2470703125
+          },
+          "column": "random_det_expected_degree_rel_1e_4",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.8282828282828283,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7386363636363636,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 1677.918940418484
+          },
+          "column": "random_det_expected_degree_rel_1e_6",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7386363636363636,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7558139534883721,
+            "family": "lattice_models",
+            "side": "less_than_or_equal",
+            "threshold": 1984.7916829427083
+          },
+          "column": "random_det_expected_degree_rel_1e_8",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7558139534883721,
+          "threshold_matches": []
+        },
+        {
+          "best_one_vs_rest_split": {
+            "f1": 0.7719298245614035,
+            "family": "transition_metals",
+            "side": "greater_than",
+            "threshold": 0.3333333333333333
+          },
+          "column": "rho_offdiag",
+          "is_family_identifier": false,
+          "max_one_vs_rest_f1": 0.7719298245614035,
+          "threshold_matches": []
+        }
+      ],
+      "n_columns_screened": 84,
+      "procedure": "For each universal-core column and family, exhaustively evaluate every observed single-threshold split in both directions against the one-vs-rest family label; flag the column if the maximum full-corpus F1 is at least the frozen threshold.",
+      "threshold": 0.95
+    }
+  },
+  "procedure": "Apply the exhaustive single-threshold one-vs-rest family F1 screen to both the complete 591-row pinned feature corpus and the 202 unique tasks represented in scored metrics-v1.8 primitives, then take the union; outcome values are never read by the detector.",
+  "threshold": 0.95
+}
