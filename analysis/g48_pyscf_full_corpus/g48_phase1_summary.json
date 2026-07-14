@@ -1,0 +1,252 @@
+{
+  "calibration": {
+    "CCSD": {
+      "calibration_rows": 174,
+      "legacy_norb_max": 135,
+      "legacy_norb_min": 5,
+      "legacy_unique_tasks": 174,
+      "observed_wall_q50_seconds": 23.31227970123291,
+      "observed_wall_q90_seconds": 76.77778847217562,
+      "prediction_quantile": 0.9,
+      "seconds_per_unit_q50": 0.2463027382180359,
+      "seconds_per_unit_q90": 13.016526299862232
+    },
+    "CCSD(T)": {
+      "calibration_rows": 174,
+      "legacy_norb_max": 135,
+      "legacy_norb_min": 5,
+      "legacy_unique_tasks": 174,
+      "observed_wall_q50_seconds": 27.272950053215027,
+      "observed_wall_q90_seconds": 92.03854885101319,
+      "prediction_quantile": 0.9,
+      "seconds_per_unit_q50": 0.20820872295588427,
+      "seconds_per_unit_q90": 22.12562335197307
+    },
+    "CISD": {
+      "calibration_rows": 182,
+      "legacy_norb_max": 135,
+      "legacy_norb_min": 5,
+      "legacy_unique_tasks": 182,
+      "observed_wall_q50_seconds": 9.83839225769043,
+      "observed_wall_q90_seconds": 23.744242930412295,
+      "prediction_quantile": 0.9,
+      "seconds_per_unit_q50": 0.10568314009922278,
+      "seconds_per_unit_q90": 7.023535969225268
+    },
+    "HF": {
+      "calibration_rows": 182,
+      "legacy_norb_max": 135,
+      "legacy_norb_min": 5,
+      "legacy_unique_tasks": 182,
+      "observed_wall_q50_seconds": 2.189703106880188,
+      "observed_wall_q90_seconds": 9.492116355895996,
+      "prediction_quantile": 0.9,
+      "seconds_per_unit_q50": 0.07197548710451387,
+      "seconds_per_unit_q90": 3.0654279936190996
+    },
+    "MP2": {
+      "calibration_rows": 174,
+      "legacy_norb_max": 135,
+      "legacy_norb_min": 5,
+      "legacy_unique_tasks": 174,
+      "observed_wall_q50_seconds": 0.297332763671875,
+      "observed_wall_q90_seconds": 0.9297591686248783,
+      "prediction_quantile": 0.9,
+      "seconds_per_unit_q50": 0.005002237181748673,
+      "seconds_per_unit_q90": 0.34769553203852843
+    }
+  },
+  "campaign_date": "2026-07-14",
+  "campaign_id": "g48_pyscf_clean_slate_2026-07_v1",
+  "input_provenance": {
+    "feature_table": "scripts/Hamiltonian_features.csv",
+    "feature_table_sha256": "21d5d671ff2f471a762bd241622b89c42a79aaeb61adb0b5ab4d73729979e62c",
+    "legacy_solution_file_count": 395,
+    "legacy_solution_inventory_sha256": "cadb2e965f06e1606ec4c7b438678e678a49054ecfa2e60cc49fe2247a34980d",
+    "problem_instance_count": 218,
+    "problem_instance_inventory_sha256": "ff3c15f201132eeb11c1217611cba05529b69619dcd2defb45a028b864a4bd66"
+  },
+  "launch_blockers": [
+    "campaign_id_is_hard_coded_in_prepare_method",
+    "nonconverged_results_can_be_harvested_as_completed",
+    "phase2_requires_pi_review"
+  ],
+  "legacy": {
+    "campaign": "legacy:pyscf_solutions",
+    "energy_tolerance_hartree": {
+      "CCSD": 1e-07,
+      "CCSD(T)": 1e-07,
+      "CISD": 1e-07,
+      "HF": 1e-08,
+      "MP2": 1e-08
+    },
+    "outside_current_identity_pairs": 224,
+    "overlap_pairs": 886,
+    "overlap_tasks": 182,
+    "pool_with_new_campaign": false,
+    "source_five_method_pairs": 1110
+  },
+  "not_attempted_reason_taxonomy": [
+    "held_femoco54_pending_o27",
+    "projected_peak_memory_exceeds_192_gib",
+    "projected_walltime_exceeds_<solver_cap>_seconds",
+    "missing_or_invalid_size_metadata",
+    "unsupported_electron_spin_partition"
+  ],
+  "phase": "phase1_desk_only",
+  "repository_revision": "95c2b28e424623c83ca286538d9def0b474b0388",
+  "scopes": {
+    "baseline_591": {
+      "by_method": {
+        "CCSD": {
+          "not_attempted": 132,
+          "not_attempted_reasons": {
+            "held_femoco54_pending_o27": 1,
+            "projected_walltime_exceeds_7200_seconds": 131
+          },
+          "pairs": 591,
+          "planned_attempts": 459,
+          "predicted_node_hours_q90": 71.97570394162061,
+          "predicted_node_hours_with_25pct_contingency": 89.96962992702576,
+          "worst_case_cap_node_hours": 918.0
+        },
+        "CCSD(T)": {
+          "not_attempted": 153,
+          "not_attempted_reasons": {
+            "held_femoco54_pending_o27": 1,
+            "projected_walltime_exceeds_10800_seconds": 152
+          },
+          "pairs": 591,
+          "planned_attempts": 438,
+          "predicted_node_hours_q90": 136.1671855763566,
+          "predicted_node_hours_with_25pct_contingency": 170.20898197044576,
+          "worst_case_cap_node_hours": 1314.0
+        },
+        "CISD": {
+          "not_attempted": 133,
+          "not_attempted_reasons": {
+            "held_femoco54_pending_o27": 1,
+            "projected_walltime_exceeds_3600_seconds": 132
+          },
+          "pairs": 591,
+          "planned_attempts": 458,
+          "predicted_node_hours_q90": 37.792812525293236,
+          "predicted_node_hours_with_25pct_contingency": 47.24101565661654,
+          "worst_case_cap_node_hours": 458.0
+        },
+        "HF": {
+          "not_attempted": 50,
+          "not_attempted_reasons": {
+            "held_femoco54_pending_o27": 1,
+            "projected_walltime_exceeds_1800_seconds": 49
+          },
+          "pairs": 591,
+          "planned_attempts": 541,
+          "predicted_node_hours_q90": 21.13685789919952,
+          "predicted_node_hours_with_25pct_contingency": 26.421072373999397,
+          "worst_case_cap_node_hours": 270.5
+        },
+        "MP2": {
+          "not_attempted": 41,
+          "not_attempted_reasons": {
+            "held_femoco54_pending_o27": 1,
+            "projected_walltime_exceeds_1800_seconds": 40
+          },
+          "pairs": 591,
+          "planned_attempts": 550,
+          "predicted_node_hours_q90": 20.976184488494134,
+          "predicted_node_hours_with_25pct_contingency": 26.220230610617666,
+          "worst_case_cap_node_hours": 275.0
+        }
+      },
+      "families": 66,
+      "pairs": 2955,
+      "predicted_node_hours_with_25pct_contingency": 360.0609305387051,
+      "reference_scoring_eligible_tasks": 493,
+      "tasks": 591,
+      "test_tier_tasks": 11,
+      "worst_case_cap_node_hours": 3235.5
+    },
+    "gao_arrival_127": {
+      "by_method": {
+        "CCSD": {
+          "not_attempted": 0,
+          "not_attempted_reasons": {},
+          "pairs": 127,
+          "planned_attempts": 127,
+          "predicted_node_hours_q90": 0.750549525363522,
+          "predicted_node_hours_with_25pct_contingency": 0.9381869067044024,
+          "worst_case_cap_node_hours": 254.0
+        },
+        "CCSD(T)": {
+          "not_attempted": 0,
+          "not_attempted_reasons": {},
+          "pairs": 127,
+          "planned_attempts": 127,
+          "predicted_node_hours_q90": 0.9178101104208096,
+          "predicted_node_hours_with_25pct_contingency": 1.147262638026012,
+          "worst_case_cap_node_hours": 381.0
+        },
+        "CISD": {
+          "not_attempted": 0,
+          "not_attempted_reasons": {},
+          "pairs": 127,
+          "planned_attempts": 127,
+          "predicted_node_hours_q90": 0.41102027013405973,
+          "predicted_node_hours_with_25pct_contingency": 0.5137753376675747,
+          "worst_case_cap_node_hours": 127.0
+        },
+        "HF": {
+          "not_attempted": 0,
+          "not_attempted_reasons": {},
+          "pairs": 127,
+          "planned_attempts": 127,
+          "predicted_node_hours_q90": 0.46647355284693415,
+          "predicted_node_hours_with_25pct_contingency": 0.5830919410586677,
+          "worst_case_cap_node_hours": 63.5
+        },
+        "MP2": {
+          "not_attempted": 0,
+          "not_attempted_reasons": {},
+          "pairs": 127,
+          "planned_attempts": 127,
+          "predicted_node_hours_q90": 0.060990599501252615,
+          "predicted_node_hours_with_25pct_contingency": 0.07623824937656577,
+          "worst_case_cap_node_hours": 63.5
+        }
+      },
+      "families": 1,
+      "pairs": 635,
+      "predicted_node_hours_with_25pct_contingency": 3.2585550728332224,
+      "reference_scoring_eligible_tasks": 127,
+      "tasks": 127,
+      "test_tier_tasks": 0,
+      "worst_case_cap_node_hours": 889.0
+    }
+  },
+  "settings": {
+    "adapter_version_desk_pin": "0.3.0",
+    "contingency_factor": 1.25,
+    "debug_queue_allowed": false,
+    "memory_gate_gib": 192.0,
+    "node_cores": 128,
+    "node_memory_gib": 256.0,
+    "numpy_version_desk_pin": "2.4.6",
+    "pyscf_version_desk_pin": "2.8.0",
+    "python_version_desk_pin": "3.12.0",
+    "queue_order": [
+      "compute",
+      "backfill"
+    ],
+    "threads_per_task": 128,
+    "wall_cap_seconds": {
+      "CCSD": 7200,
+      "CCSD(T)": 10800,
+      "CISD": 3600,
+      "HF": 1800,
+      "MP2": 1800
+    }
+  },
+  "solver_execution_performed": false,
+  "submission_performed": false
+}
