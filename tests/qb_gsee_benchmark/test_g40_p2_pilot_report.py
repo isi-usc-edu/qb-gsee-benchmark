@@ -294,3 +294,47 @@ def test_committed_p2_pilot_report_closes_all_gates_and_preserves_repair() -> No
             "sha256": hashlib.sha256(superseded_check_path.read_bytes()).hexdigest(),
         }
     ]
+
+
+def test_committed_p2_v5_report_uses_amended_table_and_same_states() -> None:
+    report_path = OUT / "g40_p2_pilot_report_v5.json"
+    report = json.loads(report_path.read_text())
+    failed_v4 = json.loads(
+        (OUT / "g40_p2_repilot_report_v4_d40ccf7_failed.json").read_text()
+    )
+    amendment_path = OUT / "g40_p2_pilot_selection_v3_postpilot_amendment_gr16.json"
+
+    assert report["report_version"] == "g40_p2_pilot_report_v5"
+    assert report["status"] == "passed"
+    assert report["code_revision"] == "d40ccf7"
+    assert report["verifier_code_revision"] == "d40ccf7"
+    assert report["report_code_revision"] == "db6cfa1"
+    assert report["successful_states"] == report["selected_tasks"] == 25
+    assert report["state_ledger"] == failed_v4["state_ledger"]
+    assert report["mask_regime_gate"]["status"] == "passed"
+    assert report["mask_table_amendment"]["status"] == "adjudicated_post_pilot"
+    assert report["mask_table_amendment"]["review_id"] == "goals-review-16"
+    assert report["selection_manifest"] == {
+        "path": amendment_path.name,
+        "sha256": hashlib.sha256(amendment_path.read_bytes()).hexdigest(),
+    }
+    assert report["mask_regime_coverage"]["natural_occupation_out_of_range"] == {
+        "declaration_status": "corpus-reachable",
+        "status": "passed",
+        "expected_task_uuids": ["beabcf8f-a6c0-5e32-9385-110ff65cbbf0"],
+        "observed_task_uuids": ["beabcf8f-a6c0-5e32-9385-110ff65cbbf0"],
+        "missing_task_uuids": [],
+        "unexpected_task_uuids": [],
+    }
+    assert report["natural_occupation_mask_audit"] == [
+        {
+            "task_uuid": "beabcf8f-a6c0-5e32-9385-110ff65cbbf0",
+            "reason": "natural_occupation_out_of_range",
+            "minimum_raw": -0.3031729295813625,
+            "maximum_raw": 1.3031729295813625,
+        }
+    ]
+    assert report["pbs_gate"]["status"] == "passed"
+    assert report["representation_gate"]["status"] == "passed"
+    assert report["cost_gate"]["node_hour_status"] == "passed"
+    assert report["cost_gate"]["memory_status"] == "passed"
