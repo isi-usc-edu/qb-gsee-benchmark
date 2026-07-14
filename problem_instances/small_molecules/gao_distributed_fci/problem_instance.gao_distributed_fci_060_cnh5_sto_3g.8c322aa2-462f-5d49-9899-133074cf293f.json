@@ -1,0 +1,98 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
+  "application_domain": "QC",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "name": "Matthew Otten",
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison"
+    }
+  ],
+  "creation_timestamp": "2026-07-14T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-14T00:00:00+00:00",
+  "license": {
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "problem_instance_uuid": "8c322aa2-462f-5d49-9899-133074cf293f",
+  "problem_type": "GSEE",
+  "references": [
+    "https://doi.org/10.1021/acs.jctc.3c01190"
+  ],
+  "short_name": "gao_distributed_fci_060_cnh5_sto_3g",
+  "status": "in_force",
+  "superseded_by": null,
+  "family_metadata": {
+    "family_id": "gao_distributed_fci",
+    "ml_family_weighting_group": "gao_distributed_fci",
+    "related_instance_count": 127,
+    "weighting_note": "Treat all Gao rows as one family in grouped validation and family-balanced scoring."
+  },
+  "tasks": [
+    {
+      "task_uuid": "426025bd-460c-5e55-82af-1c3cb2f96353",
+      "independent_parameters": {
+        "molecule": "CNH5",
+        "basis": "sto-3g",
+        "source_row_id": "table1_067"
+      },
+      "features": {
+        "model": "ab initio molecular electronic Hamiltonian",
+        "hamiltonian_family": "gao_distributed_fci",
+        "ml_family_weighting_group": "gao_distributed_fci",
+        "application_domain": "quantum_chemistry",
+        "molecule_name": "CNH5",
+        "basis_set": "sto-3g",
+        "geometry": "C 0.0484 0.7007 0\nN 0.0484 -0.7524 0\nH -0.9445 1.1602 0\nH 0.5828 1.0591 0.8759\nH 0.5828 1.0591 -0.8759\nH -0.4252 -1.1081 -0.8051\nH -0.4252 -1.1081 0.8051",
+        "geometry_units": "angstrom",
+        "geometry_source": "Gao supporting information Table 3",
+        "charge": 0,
+        "ms2": 0,
+        "multiplicity_sector_note": "MS2=0 closed-shell sector used by Gao; this does not assert that the physical ground state is a singlet.",
+        "num_electrons": 18,
+        "num_orbitals": 15,
+        "determinant_count": 25050025,
+        "all_electron_full_orbital_space": true,
+        "spherical_basis_functions": true,
+        "integral_generation_software": "PySCF 2.8.0",
+        "orbital_basis": "PySCF RHF canonical molecular orbitals",
+        "gao_reference_evidence_tier": "R",
+        "gao_reference_evidence_tier_description": "Tier R: the SI PySCF FCI value was independently reproduced with PySCF 2.8.0 to at most 1e-9 Hartree.",
+        "hf_roundtrip_delta_hartree": -4.263256414560601e-14,
+        "reference_cost_class": "trivial_published_exact_value"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -94.1604400322521,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "published deterministic distributed FCI",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "independent PySCF 2.8.0 FCI reproduction",
+          "FCIDUMP HF roundtrip",
+          "closed-shell determinant count"
+        ],
+        "reference_energy_source": "https://doi.org/10.1021/acs.jctc.3c01190",
+        "reference_energy_note": "Tier R: the SI PySCF FCI value was independently reproduced with PySCF 2.8.0 to at most 1e-9 Hartree."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "8a01cd26-b20e-5d74-95be-ea7c81b61cab",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/gao_distributed_fci/gao_cnh5_sto_3g.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "2c7a572704fe9b65e58bd11dab2102fa9de47e4c",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
+  "application_domain": "QC",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "name": "Matthew Otten",
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison"
+    }
+  ],
+  "creation_timestamp": "2026-07-14T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-14T00:00:00+00:00",
+  "license": {
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "problem_instance_uuid": "0f579aa2-f7be-58f5-ba70-a1c7d86ae8a2",
+  "problem_type": "GSEE",
+  "references": [
+    "https://doi.org/10.1021/acs.jctc.3c01190"
+  ],
+  "short_name": "gao_distributed_fci_031_h2co_sto_3g",
+  "status": "in_force",
+  "superseded_by": null,
+  "family_metadata": {
+    "family_id": "gao_distributed_fci",
+    "ml_family_weighting_group": "gao_distributed_fci",
+    "related_instance_count": 127,
+    "weighting_note": "Treat all Gao rows as one family in grouped validation and family-balanced scoring."
+  },
+  "tasks": [
+    {
+      "task_uuid": "23b2e3ec-144b-589e-8fb5-835dbca2c270",
+      "independent_parameters": {
+        "molecule": "H2CO",
+        "basis": "sto-3g",
+        "source_row_id": "table1_035"
+      },
+      "features": {
+        "model": "ab initio molecular electronic Hamiltonian",
+        "hamiltonian_family": "gao_distributed_fci",
+        "ml_family_weighting_group": "gao_distributed_fci",
+        "application_domain": "quantum_chemistry",
+        "molecule_name": "H2CO",
+        "basis_set": "sto-3g",
+        "geometry": "C 0.0117 0.7354 0\nO 0.0117 -0.5628 0\nH -1.0633 0.9785 0\nH 0.8993 -0.888 0",
+        "geometry_units": "angstrom",
+        "geometry_source": "Gao supporting information Table 3",
+        "charge": 0,
+        "ms2": 0,
+        "multiplicity_sector_note": "MS2=0 closed-shell sector used by Gao; this does not assert that the physical ground state is a singlet.",
+        "num_electrons": 16,
+        "num_orbitals": 12,
+        "determinant_count": 245025,
+        "all_electron_full_orbital_space": true,
+        "spherical_basis_functions": true,
+        "integral_generation_software": "PySCF 2.8.0",
+        "orbital_basis": "PySCF RHF canonical molecular orbitals",
+        "gao_reference_evidence_tier": "R",
+        "gao_reference_evidence_tier_description": "Tier R: the SI PySCF FCI value was independently reproduced with PySCF 2.8.0 to at most 1e-9 Hartree.",
+        "hf_roundtrip_delta_hartree": 0.0,
+        "reference_cost_class": "trivial_published_exact_value"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -112.387736024035,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "published deterministic distributed FCI",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "independent PySCF 2.8.0 FCI reproduction",
+          "FCIDUMP HF roundtrip",
+          "closed-shell determinant count"
+        ],
+        "reference_energy_source": "https://doi.org/10.1021/acs.jctc.3c01190",
+        "reference_energy_note": "Tier R: the SI PySCF FCI value was independently reproduced with PySCF 2.8.0 to at most 1e-9 Hartree."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "d1429a31-8b16-5e64-8b70-ac1a7c84bae8",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/gao_distributed_fci/gao_h2co_sto_3g.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "6fff3a36badef3084697e3fd00c7205bd873d13b",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    }
+  ]
+}

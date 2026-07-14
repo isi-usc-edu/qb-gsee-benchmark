@@ -1,0 +1,97 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
+  "application_domain": "QC",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "name": "Matthew Otten",
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison"
+    }
+  ],
+  "creation_timestamp": "2026-07-14T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-14T00:00:00+00:00",
+  "license": {
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "problem_instance_uuid": "8909be05-bb1c-55cb-b181-c328eb501fe1",
+  "problem_type": "GSEE",
+  "references": [
+    "https://doi.org/10.1021/acs.jctc.3c01190"
+  ],
+  "short_name": "gao_distributed_fci_082_bh3_cc_pvdz",
+  "status": "in_force",
+  "superseded_by": null,
+  "family_metadata": {
+    "family_id": "gao_distributed_fci",
+    "ml_family_weighting_group": "gao_distributed_fci",
+    "related_instance_count": 127,
+    "weighting_note": "Treat all Gao rows as one family in grouped validation and family-balanced scoring."
+  },
+  "tasks": [
+    {
+      "task_uuid": "860eed87-6fbf-5673-80b4-82802447c5a0",
+      "independent_parameters": {
+        "molecule": "BH3",
+        "basis": "cc-pVDZ",
+        "source_row_id": "table1_089"
+      },
+      "features": {
+        "model": "ab initio molecular electronic Hamiltonian",
+        "hamiltonian_family": "gao_distributed_fci",
+        "ml_family_weighting_group": "gao_distributed_fci",
+        "application_domain": "quantum_chemistry",
+        "molecule_name": "BH3",
+        "basis_set": "cc-pVDZ",
+        "geometry": "B 0 0 0\nH 0 1.1937 0\nH 1.0338 -0.5969 0\nH -1.0338 -0.5969 0",
+        "geometry_units": "angstrom",
+        "geometry_source": "Gao supporting information Table 3",
+        "charge": 0,
+        "ms2": 0,
+        "multiplicity_sector_note": "MS2=0 closed-shell sector used by Gao; this does not assert that the physical ground state is a singlet.",
+        "num_electrons": 8,
+        "num_orbitals": 29,
+        "determinant_count": 564110001,
+        "all_electron_full_orbital_space": true,
+        "spherical_basis_functions": true,
+        "integral_generation_software": "PySCF 2.8.0",
+        "orbital_basis": "PySCF RHF canonical molecular orbitals",
+        "gao_reference_evidence_tier": "P",
+        "gao_reference_evidence_tier_description": "Tier P: the published distributed-FCI value is used as the exact reference; the reconstructed Hamiltonian is checked by SI geometry/basis/sector, determinant count, and FCIDUMP HF roundtrip. No independent reproduction of Gao's distributed calculation is claimed.",
+        "hf_roundtrip_delta_hartree": 2.1316282072803006e-14,
+        "reference_cost_class": "trivial_published_exact_value"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -26.5105657660894,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "published deterministic distributed FCI",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "FCIDUMP HF roundtrip",
+          "closed-shell determinant count"
+        ],
+        "reference_energy_source": "https://doi.org/10.1021/acs.jctc.3c01190",
+        "reference_energy_note": "Tier P: the published distributed-FCI value is used as the exact reference; the reconstructed Hamiltonian is checked by SI geometry/basis/sector, determinant count, and FCIDUMP HF roundtrip. No independent reproduction of Gao's distributed calculation is claimed."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "acb775b0-783a-52c9-94fd-1a6266ede826",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/gao_distributed_fci/gao_bh3_cc_pvdz.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "3d0dad88a17a92b87a8a491b7aee8d6cedc2e214",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    }
+  ]
+}

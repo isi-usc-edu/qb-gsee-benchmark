@@ -1,0 +1,98 @@
+{
+  "$schema": "https://raw.githubusercontent.com/isi-usc-edu/qb-gsee-benchmark/main/schemas/problem_instance.schema.0.0.2.json",
+  "application_domain": "QC",
+  "calendar_due_date": null,
+  "contact_info": [
+    {
+      "name": "Matthew Otten",
+      "email": "mjotten@wisc.edu",
+      "institution": "University of Wisconsin -- Madison"
+    }
+  ],
+  "creation_timestamp": "2026-07-14T00:00:00+00:00",
+  "latest_update_timestamp": "2026-07-14T00:00:00+00:00",
+  "license": {
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "problem_instance_uuid": "ac4aee4a-f00c-5a22-bc33-d7f9f9854dff",
+  "problem_type": "GSEE",
+  "references": [
+    "https://doi.org/10.1021/acs.jctc.3c01190"
+  ],
+  "short_name": "gao_distributed_fci_021_c2_sto_3g",
+  "status": "in_force",
+  "superseded_by": null,
+  "family_metadata": {
+    "family_id": "gao_distributed_fci",
+    "ml_family_weighting_group": "gao_distributed_fci",
+    "related_instance_count": 127,
+    "weighting_note": "Treat all Gao rows as one family in grouped validation and family-balanced scoring."
+  },
+  "tasks": [
+    {
+      "task_uuid": "d85db6f3-29cf-57f3-a299-61732537e12e",
+      "independent_parameters": {
+        "molecule": "C2",
+        "basis": "sto-3g",
+        "source_row_id": "table1_024"
+      },
+      "features": {
+        "model": "ab initio molecular electronic Hamiltonian",
+        "hamiltonian_family": "gao_distributed_fci",
+        "ml_family_weighting_group": "gao_distributed_fci",
+        "application_domain": "quantum_chemistry",
+        "molecule_name": "C2",
+        "basis_set": "sto-3g",
+        "geometry": "C 0 0 -0.6248\nC 0 0 0.6248",
+        "geometry_units": "angstrom",
+        "geometry_source": "Gao supporting information Table 3",
+        "charge": 0,
+        "ms2": 0,
+        "multiplicity_sector_note": "MS2=0 closed-shell sector used by Gao; this does not assert that the physical ground state is a singlet.",
+        "num_electrons": 12,
+        "num_orbitals": 10,
+        "determinant_count": 44100,
+        "all_electron_full_orbital_space": true,
+        "spherical_basis_functions": true,
+        "integral_generation_software": "PySCF 2.8.0",
+        "orbital_basis": "PySCF RHF canonical molecular orbitals",
+        "gao_reference_evidence_tier": "R",
+        "gao_reference_evidence_tier_description": "Tier R: the SI PySCF FCI value was independently reproduced with PySCF 2.8.0 to at most 1e-9 Hartree.",
+        "hf_roundtrip_delta_hartree": 0.0,
+        "reference_cost_class": "trivial_published_exact_value"
+      },
+      "requirements": {
+        "time_limit_seconds": 86400,
+        "absolute_accuracy_threshold": 0.00159362,
+        "absolute_accuracy_threshold_energy_units": "Hartree",
+        "reference_energy": -74.6905707130489,
+        "reference_energy_units": "Hartree",
+        "reference_energy_method": "published deterministic distributed FCI",
+        "reference_energy_provenance": "exact",
+        "reference_energy_independent_of_shci_family": true,
+        "reference_energy_cross_validation_methods": [
+          "independent PySCF 2.8.0 FCI reproduction",
+          "FCIDUMP HF roundtrip",
+          "closed-shell determinant count"
+        ],
+        "reference_energy_source": "https://doi.org/10.1021/acs.jctc.3c01190",
+        "reference_energy_note": "Tier R: the SI PySCF FCI value was independently reproduced with PySCF 2.8.0 to at most 1e-9 Hartree."
+      },
+      "supporting_files": [
+        {
+          "instance_data_object_uuid": "d1073d6b-b951-5c33-be27-0c04a77b86c4",
+          "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/gao_distributed_fci/gao_c2_sto_3g.fcidump.gz",
+          "instance_data_checksum_type": "sha1sum",
+          "instance_data_checksum": "8c7d52a70446639ddbb3eaf689b1cd695452f846",
+          "is_fcidump_file": true
+        }
+      ],
+      "reference_provenance_grade": "exact",
+      "curation_tier": "expanded",
+      "reference_independence_from_solvers": true,
+      "model_hamiltonian_downfolded": false,
+      "source_defect_documented": false
+    }
+  ]
+}
