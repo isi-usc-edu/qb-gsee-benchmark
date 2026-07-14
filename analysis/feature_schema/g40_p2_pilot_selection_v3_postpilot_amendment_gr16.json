@@ -1,0 +1,518 @@
+{
+  "amendment": {
+    "net_changes": {
+      "natural_occupation_out_of_range": {
+        "from": "unreachable in corpus, fixture-covered",
+        "task_uuids": [
+          "beabcf8f-a6c0-5e32-9385-110ff65cbbf0"
+        ],
+        "to": "corpus-reachable"
+      }
+    },
+    "non_retroactivity": "The frozen v2-semantics table and failed report v4 remain historical evidence; this amendment applies only to report v5 and later production.",
+    "provenance": "The unexpected-mask backstop in failed report v4 exposed that the frozen reachability table had been derived under v2 followed-state semantics. Goals-review 16 ratified the full independent re-derivation under v3 selected-state semantics.",
+    "review": "work/PI_REVIEW_2026-07-14_g40_p2_repilot.md",
+    "review_id": "goals-review-16",
+    "status": "adjudicated_post_pilot"
+  },
+  "coverage_checks": {
+    "all_four_g21_rotation_rows": true,
+    "all_v1_8_norb_bands": true,
+    "both_r7_corpus_sources": true,
+    "closed_and_open_shell": true,
+    "degenerate_fock_lattice_rows": true,
+    "exactly_25_unique_tasks": true,
+    "molecular_and_lattice": true,
+    "reachable_mask_regimes_have_proven_rows": true,
+    "unreachable_mask_regimes_fixture_covered": true,
+    "weak_and_strong": true
+  },
+  "coverage_counts": {
+    "correlation_expectation": {
+      "strong": 16,
+      "weak": 9
+    },
+    "domain": {
+      "analytic_model": 2,
+      "lattice": 8,
+      "molecular": 15
+    },
+    "expected_mask_regime": {
+      "all_amplitudes_masked": 4,
+      "external_stability_dimension_ceiling": 1,
+      "natural_occupation_out_of_range": 1,
+      "rhf_not_attempted_ms2_nonzero": 6,
+      "spin_gap_sector_empty": 4
+    },
+    "shell": {
+      "closed": 19,
+      "open": 6
+    },
+    "size_band_v1_8": {
+      "norb_17_32": 5,
+      "norb_33_64": 4,
+      "norb_65_128": 6,
+      "norb_9_16": 5,
+      "norb_ge129": 3,
+      "norb_le8": 2
+    }
+  },
+  "manifest_version": "g40_p2_pilot_selection_v3_postpilot_amendment_gr16",
+  "mask_regime_coverage": {
+    "all_amplitudes_masked": {
+      "status": "corpus-reachable",
+      "task_uuids": [
+        "3d343ddb-a898-5c0e-afc9-42b62d588c5e",
+        "6cd8382a-9a9a-5c43-83b1-616c9f301ab1",
+        "ac3a023f-8d31-5d79-803e-c54e947c8d75",
+        "fcc8fbc8-87b5-5a77-b3e2-38539824873e"
+      ]
+    },
+    "external_stability_dimension_ceiling": {
+      "status": "corpus-reachable",
+      "task_uuids": [
+        "fc432cd0-4856-54f2-a240-9813d9fda019"
+      ]
+    },
+    "mp2_denominator_below_threshold": {
+      "fixture_tests": [
+        "tests/qb_gsee_benchmark/test_mfproto_masks.py::test_all_denominators_below_threshold_fail_closed"
+      ],
+      "status": "unreachable in corpus, fixture-covered"
+    },
+    "natural_occupation_out_of_range": {
+      "evidence": {
+        "review": "goals-review-16",
+        "source": "same d40ccf7 pilot state used by failed report v4"
+      },
+      "status": "corpus-reachable",
+      "task_uuids": [
+        "beabcf8f-a6c0-5e32-9385-110ff65cbbf0"
+      ]
+    },
+    "rhf_not_attempted_ms2_nonzero": {
+      "status": "corpus-reachable",
+      "task_uuids": [
+        "10119019-eea2-45c9-a748-e206780c4235",
+        "3d343ddb-a898-5c0e-afc9-42b62d588c5e",
+        "6cd8382a-9a9a-5c43-83b1-616c9f301ab1",
+        "ac3a023f-8d31-5d79-803e-c54e947c8d75",
+        "fcc8fbc8-87b5-5a77-b3e2-38539824873e",
+        "ff0da1e2-2c76-4589-aefa-c13bb1a1ef8f"
+      ]
+    },
+    "spin_gap_sector_empty": {
+      "status": "corpus-reachable",
+      "task_uuids": [
+        "3d343ddb-a898-5c0e-afc9-42b62d588c5e",
+        "6cd8382a-9a9a-5c43-83b1-616c9f301ab1",
+        "ac3a023f-8d31-5d79-803e-c54e947c8d75",
+        "fcc8fbc8-87b5-5a77-b3e2-38539824873e"
+      ]
+    }
+  },
+  "protocol_version": "g40_p2_mfproto_v3",
+  "selected_tasks": 25,
+  "selection_policy": "The 25-task selection remains frozen. Expected-mask reachability is the full MFPROTO-v3 selected-state re-derivation adjudicated post-pilot in goals-review 16; it is not a retroactive preregistration.",
+  "tasks": [
+    {
+      "correlation_expectation": "weak",
+      "degenerate_fock_expected": false,
+      "domain": "molecular",
+      "expected_masks": [],
+      "ms2": 0,
+      "nelec": 38,
+      "norb": 28,
+      "problem_instance_short_name": "blue_dimer",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": false,
+      "shell": "closed",
+      "size_band_v1_8": "norb_17_32",
+      "task_uuid": "001a0d11-165a-49c5-a334-643023029f40"
+    },
+    {
+      "correlation_expectation": "weak",
+      "degenerate_fock_expected": false,
+      "domain": "molecular",
+      "expected_masks": [],
+      "ms2": 0,
+      "nelec": 28,
+      "norb": 68,
+      "problem_instance_short_name": "na_cl_0",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": false,
+      "shell": "closed",
+      "size_band_v1_8": "norb_65_128",
+      "task_uuid": "01ec60f7-d38a-4c33-a498-659a388e10ee"
+    },
+    {
+      "correlation_expectation": "strong",
+      "degenerate_fock_expected": false,
+      "domain": "molecular",
+      "expected_masks": [
+        "rhf_not_attempted_ms2_nonzero"
+      ],
+      "ms2": 2,
+      "nelec": 10,
+      "norb": 135,
+      "problem_instance_short_name": "Sc_1",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": false,
+      "shell": "open",
+      "size_band_v1_8": "norb_ge129",
+      "task_uuid": "10119019-eea2-45c9-a748-e206780c4235"
+    },
+    {
+      "correlation_expectation": "strong",
+      "degenerate_fock_expected": true,
+      "domain": "lattice",
+      "expected_masks": [],
+      "ms2": 0,
+      "nelec": 100,
+      "norb": 100,
+      "problem_instance_short_name": "qsz_hubbard_2d_halffilled",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": false,
+      "shell": "closed",
+      "size_band_v1_8": "norb_65_128",
+      "task_uuid": "165a257c-248d-5e0a-b8cc-a3e8f7380931"
+    },
+    {
+      "correlation_expectation": "strong",
+      "degenerate_fock_expected": false,
+      "domain": "molecular",
+      "expected_masks": [],
+      "ms2": 0,
+      "nelec": 12,
+      "norb": 28,
+      "problem_instance_short_name": "block2_c2_ccpvdz_scan",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": false,
+      "shell": "closed",
+      "size_band_v1_8": "norb_17_32",
+      "task_uuid": "20e93441-9241-512c-93a9-5ae0da3534a7"
+    },
+    {
+      "correlation_expectation": "weak",
+      "degenerate_fock_expected": false,
+      "domain": "molecular",
+      "expected_masks": [],
+      "ms2": 0,
+      "nelec": 4,
+      "norb": 19,
+      "problem_instance_short_name": "validation.LiH.cc-PVDZ",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": false,
+      "shell": "closed",
+      "size_band_v1_8": "norb_17_32",
+      "task_uuid": "2b2eefc4-9c8c-4a02-b621-059774f620c4"
+    },
+    {
+      "correlation_expectation": "strong",
+      "degenerate_fock_expected": false,
+      "domain": "molecular",
+      "expected_masks": [
+        "rhf_not_attempted_ms2_nonzero",
+        "spin_gap_sector_empty",
+        "all_amplitudes_masked"
+      ],
+      "ms2": 5,
+      "nelec": 11,
+      "norb": 8,
+      "problem_instance_short_name": "orbital_representation_pairs_v1",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": true,
+      "shell": "open",
+      "size_band_v1_8": "norb_le8",
+      "task_uuid": "3d343ddb-a898-5c0e-afc9-42b62d588c5e"
+    },
+    {
+      "correlation_expectation": "weak",
+      "degenerate_fock_expected": false,
+      "domain": "molecular",
+      "expected_masks": [],
+      "ms2": 0,
+      "nelec": 18,
+      "norb": 119,
+      "problem_instance_short_name": "h2_s_0",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": false,
+      "shell": "closed",
+      "size_band_v1_8": "norb_65_128",
+      "task_uuid": "3d5186f9-82b3-4de0-9bc1-242d7bdb678a"
+    },
+    {
+      "correlation_expectation": "strong",
+      "degenerate_fock_expected": false,
+      "domain": "molecular",
+      "expected_masks": [],
+      "ms2": 0,
+      "nelec": 10,
+      "norb": 34,
+      "problem_instance_short_name": "c_h4_0",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": false,
+      "shell": "closed",
+      "size_band_v1_8": "norb_33_64",
+      "task_uuid": "443371ce-c80d-450d-b281-ac1c4d5ecc4d"
+    },
+    {
+      "correlation_expectation": "weak",
+      "degenerate_fock_expected": false,
+      "domain": "lattice",
+      "expected_masks": [],
+      "ms2": 0,
+      "nelec": 14,
+      "norb": 179,
+      "problem_instance_short_name": "ueg_n14_planewave",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": false,
+      "shell": "closed",
+      "size_band_v1_8": "norb_ge129",
+      "task_uuid": "5e53cc08-b541-5163-bbf2-66e195a6492f"
+    },
+    {
+      "correlation_expectation": "strong",
+      "degenerate_fock_expected": false,
+      "domain": "molecular",
+      "expected_masks": [
+        "rhf_not_attempted_ms2_nonzero",
+        "spin_gap_sector_empty",
+        "all_amplitudes_masked"
+      ],
+      "ms2": 5,
+      "nelec": 11,
+      "norb": 8,
+      "problem_instance_short_name": "orbital_representation_pairs_v1",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": true,
+      "shell": "open",
+      "size_band_v1_8": "norb_le8",
+      "task_uuid": "6cd8382a-9a9a-5c43-83b1-616c9f301ab1"
+    },
+    {
+      "correlation_expectation": "strong",
+      "degenerate_fock_expected": false,
+      "domain": "molecular",
+      "expected_masks": [],
+      "ms2": 0,
+      "nelec": 10,
+      "norb": 50,
+      "problem_instance_short_name": "simons_hydrogen_chains",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": false,
+      "shell": "closed",
+      "size_band_v1_8": "norb_33_64",
+      "task_uuid": "81f65b14-2085-5443-b91b-3d791a55ab00"
+    },
+    {
+      "correlation_expectation": "weak",
+      "degenerate_fock_expected": false,
+      "domain": "molecular",
+      "expected_masks": [],
+      "ms2": 0,
+      "nelec": 50,
+      "norb": 36,
+      "problem_instance_short_name": "blue_dimer",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": false,
+      "shell": "closed",
+      "size_band_v1_8": "norb_33_64",
+      "task_uuid": "858b9683-fc6c-4ebe-8c33-27f0d848f24f"
+    },
+    {
+      "correlation_expectation": "weak",
+      "degenerate_fock_expected": true,
+      "domain": "lattice",
+      "expected_masks": [
+        "rhf_not_attempted_ms2_nonzero",
+        "spin_gap_sector_empty",
+        "all_amplitudes_masked"
+      ],
+      "ms2": 5,
+      "nelec": 5,
+      "norb": 16,
+      "problem_instance_short_name": "varbench_tv_square16_ed_v1",
+      "r7_permutation_source": true,
+      "representation_rotation_pair": false,
+      "shell": "open",
+      "size_band_v1_8": "norb_9_16",
+      "task_uuid": "ac3a023f-8d31-5d79-803e-c54e947c8d75"
+    },
+    {
+      "correlation_expectation": "strong",
+      "degenerate_fock_expected": true,
+      "domain": "lattice",
+      "expected_masks": [
+        "natural_occupation_out_of_range"
+      ],
+      "ms2": 0,
+      "nelec": 16,
+      "norb": 16,
+      "problem_instance_short_name": "qsz_hubbard_2d_halffilled",
+      "r7_permutation_source": true,
+      "representation_rotation_pair": false,
+      "shell": "closed",
+      "size_band_v1_8": "norb_9_16",
+      "task_uuid": "beabcf8f-a6c0-5e32-9385-110ff65cbbf0"
+    },
+    {
+      "correlation_expectation": "strong",
+      "degenerate_fock_expected": false,
+      "domain": "analytic_model",
+      "expected_masks": [],
+      "ms2": 0,
+      "nelec": 80,
+      "norb": 80,
+      "problem_instance_short_name": "richardson_gaudin_pairing_extended_v1",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": false,
+      "shell": "closed",
+      "size_band_v1_8": "norb_65_128",
+      "task_uuid": "c9b3e84d-4e5b-5c34-8dd3-d1f72268769b"
+    },
+    {
+      "correlation_expectation": "strong",
+      "degenerate_fock_expected": false,
+      "domain": "molecular",
+      "expected_masks": [],
+      "ms2": 0,
+      "nelec": 10,
+      "norb": 10,
+      "problem_instance_short_name": "orbital_representation_pairs_v1",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": true,
+      "shell": "closed",
+      "size_band_v1_8": "norb_9_16",
+      "task_uuid": "cb5392c3-fd91-50f3-be40-149559ae7b96"
+    },
+    {
+      "correlation_expectation": "weak",
+      "degenerate_fock_expected": false,
+      "domain": "lattice",
+      "expected_masks": [],
+      "ms2": 0,
+      "nelec": 14,
+      "norb": 93,
+      "problem_instance_short_name": "ueg_n14_planewave",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": false,
+      "shell": "closed",
+      "size_band_v1_8": "norb_65_128",
+      "task_uuid": "d14b3959-1860-5338-b338-66d17d6ca09c"
+    },
+    {
+      "correlation_expectation": "strong",
+      "degenerate_fock_expected": true,
+      "domain": "lattice",
+      "expected_masks": [],
+      "ms2": 0,
+      "nelec": 8,
+      "norb": 12,
+      "problem_instance_short_name": "attractive_hubbard_1d_ed_v1",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": false,
+      "shell": "closed",
+      "size_band_v1_8": "norb_9_16",
+      "task_uuid": "d836ebd5-ce4f-575a-a72d-889cb4ae4204"
+    },
+    {
+      "correlation_expectation": "strong",
+      "degenerate_fock_expected": false,
+      "domain": "molecular",
+      "expected_masks": [],
+      "ms2": 0,
+      "nelec": 10,
+      "norb": 10,
+      "problem_instance_short_name": "orbital_representation_pairs_v1",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": true,
+      "shell": "closed",
+      "size_band_v1_8": "norb_9_16",
+      "task_uuid": "dd80e2eb-9220-53ee-bac4-a087306dc309"
+    },
+    {
+      "correlation_expectation": "strong",
+      "degenerate_fock_expected": false,
+      "domain": "analytic_model",
+      "expected_masks": [],
+      "ms2": 0,
+      "nelec": 64,
+      "norb": 64,
+      "problem_instance_short_name": "richardson_gaudin_pairing_extended_v1",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": false,
+      "shell": "closed",
+      "size_band_v1_8": "norb_33_64",
+      "task_uuid": "e5a3592f-8ebe-584d-8b49-ec39e4d09743"
+    },
+    {
+      "correlation_expectation": "weak",
+      "degenerate_fock_expected": false,
+      "domain": "molecular",
+      "expected_masks": [],
+      "ms2": 0,
+      "nelec": 10,
+      "norb": 108,
+      "problem_instance_short_name": "ifciqmc_first_row_diatomics",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": false,
+      "shell": "closed",
+      "size_band_v1_8": "norb_65_128",
+      "task_uuid": "f904f554-0540-5618-96a1-d8daf46a1158"
+    },
+    {
+      "correlation_expectation": "strong",
+      "degenerate_fock_expected": true,
+      "domain": "lattice",
+      "expected_masks": [
+        "external_stability_dimension_ceiling"
+      ],
+      "ms2": 0,
+      "nelec": 256,
+      "norb": 256,
+      "problem_instance_short_name": "qsz_hubbard_2d_halffilled",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": false,
+      "shell": "closed",
+      "size_band_v1_8": "norb_ge129",
+      "task_uuid": "fc432cd0-4856-54f2-a240-9813d9fda019"
+    },
+    {
+      "correlation_expectation": "strong",
+      "degenerate_fock_expected": true,
+      "domain": "lattice",
+      "expected_masks": [
+        "rhf_not_attempted_ms2_nonzero",
+        "spin_gap_sector_empty",
+        "all_amplitudes_masked"
+      ],
+      "ms2": 16,
+      "nelec": 16,
+      "norb": 32,
+      "problem_instance_short_name": "varbench_lattice_site_basis",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": false,
+      "shell": "open",
+      "size_band_v1_8": "norb_17_32",
+      "task_uuid": "fcc8fbc8-87b5-5a77-b3e2-38539824873e"
+    },
+    {
+      "correlation_expectation": "strong",
+      "degenerate_fock_expected": false,
+      "domain": "molecular",
+      "expected_masks": [
+        "rhf_not_attempted_ms2_nonzero"
+      ],
+      "ms2": 2,
+      "nelec": 50,
+      "norb": 31,
+      "problem_instance_short_name": "mn_mono",
+      "r7_permutation_source": false,
+      "representation_rotation_pair": false,
+      "shell": "open",
+      "size_band_v1_8": "norb_17_32",
+      "task_uuid": "ff0da1e2-2c76-4589-aefa-c13bb1a1ef8f"
+    }
+  ]
+}

@@ -48,3 +48,42 @@ def test_p2_pilot_selection_rebuild_is_byte_exact() -> None:
     rebuilt = module.build_manifest(ROOT / "scripts" / "Hamiltonian_features.csv")
     committed = json.loads((OUT / "g40_p2_pilot_selection.json").read_text())
     assert rebuilt == committed
+
+
+def test_p2_postpilot_amendment_is_one_row_and_byte_rebuildable() -> None:
+    module = _builder_module()
+    frozen = json.loads((OUT / "g40_p2_pilot_selection.json").read_text())
+    amended_path = OUT / "g40_p2_pilot_selection_v3_postpilot_amendment_gr16.json"
+    amended = json.loads(amended_path.read_text())
+
+    assert (
+        module.build_postpilot_amendment(ROOT / "scripts" / "Hamiltonian_features.csv")
+        == amended
+    )
+    assert amended["manifest_version"] == (
+        "g40_p2_pilot_selection_v3_postpilot_amendment_gr16"
+    )
+    assert amended["amendment"]["status"] == "adjudicated_post_pilot"
+    assert amended["amendment"]["review_id"] == "goals-review-16"
+    assert "not a retroactive preregistration" in amended["selection_policy"]
+    assert "historical evidence" in amended["amendment"]["non_retroactivity"]
+
+    regime = "natural_occupation_out_of_range"
+    task_uuid = "beabcf8f-a6c0-5e32-9385-110ff65cbbf0"
+    assert amended["mask_regime_coverage"][regime]["status"] == "corpus-reachable"
+    assert amended["mask_regime_coverage"][regime]["task_uuids"] == [task_uuid]
+    assert amended["coverage_counts"]["expected_mask_regime"][regime] == 1
+    for name, declaration in frozen["mask_regime_coverage"].items():
+        if name != regime:
+            assert amended["mask_regime_coverage"][name] == declaration
+
+    frozen_tasks = {task["task_uuid"]: task for task in frozen["tasks"]}
+    amended_tasks = {task["task_uuid"]: task for task in amended["tasks"]}
+    assert frozen_tasks.keys() == amended_tasks.keys()
+    for current_uuid in frozen_tasks:
+        frozen_masks = frozen_tasks[current_uuid]["expected_masks"]
+        amended_masks = amended_tasks[current_uuid]["expected_masks"]
+        if current_uuid == task_uuid:
+            assert amended_masks == [*frozen_masks, regime]
+        else:
+            assert amended_masks == frozen_masks

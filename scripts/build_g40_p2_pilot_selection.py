@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import json
 from pathlib import Path
 from typing import Any
@@ -11,6 +12,7 @@ from typing import Any
 import pandas as pd
 
 PROTOCOL_VERSION = "g40_p2_mfproto_v3"
+NATURAL_OCCUPATION_TASK = "beabcf8f-a6c0-5e32-9385-110ff65cbbf0"
 
 # Labels here are preregistered expectations, not observed pilot outcomes.
 TASK_EXPECTATIONS: dict[str, dict[str, Any]] = {
@@ -327,14 +329,69 @@ def build_manifest(feature_table: Path) -> dict[str, Any]:
     }
 
 
+def build_postpilot_amendment(feature_table: Path) -> dict[str, Any]:
+    """Apply the goals-review-16 v3-semantics mask-table adjudication."""
+    manifest = copy.deepcopy(build_manifest(feature_table))
+    regime = "natural_occupation_out_of_range"
+    manifest["manifest_version"] = "g40_p2_pilot_selection_v3_postpilot_amendment_gr16"
+    manifest["selection_policy"] = (
+        "The 25-task selection remains frozen. Expected-mask reachability is the "
+        "full MFPROTO-v3 selected-state re-derivation adjudicated post-pilot in "
+        "goals-review 16; it is not a retroactive preregistration."
+    )
+    manifest["amendment"] = {
+        "status": "adjudicated_post_pilot",
+        "review": "work/PI_REVIEW_2026-07-14_g40_p2_repilot.md",
+        "review_id": "goals-review-16",
+        "provenance": (
+            "The unexpected-mask backstop in failed report v4 exposed that the "
+            "frozen reachability table had been derived under v2 followed-state "
+            "semantics. Goals-review 16 ratified the full independent re-derivation "
+            "under v3 selected-state semantics."
+        ),
+        "non_retroactivity": (
+            "The frozen v2-semantics table and failed report v4 remain historical "
+            "evidence; this amendment applies only to report v5 and later production."
+        ),
+        "net_changes": {
+            regime: {
+                "from": "unreachable in corpus, fixture-covered",
+                "to": "corpus-reachable",
+                "task_uuids": [NATURAL_OCCUPATION_TASK],
+            }
+        },
+    }
+    manifest["mask_regime_coverage"][regime] = {
+        "status": "corpus-reachable",
+        "task_uuids": [NATURAL_OCCUPATION_TASK],
+        "evidence": {
+            "source": "same d40ccf7 pilot state used by failed report v4",
+            "review": "goals-review-16",
+        },
+    }
+    for task in manifest["tasks"]:
+        if task["task_uuid"] == NATURAL_OCCUPATION_TASK:
+            task["expected_masks"] = [*task["expected_masks"], regime]
+            break
+    else:
+        raise ValueError(f"missing adjudicated task {NATURAL_OCCUPATION_TASK}")
+    manifest["coverage_counts"]["expected_mask_regime"][regime] = 1
+    return manifest
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--feature-table", type=Path, required=True)
     parser.add_argument("--selection-output", type=Path, required=True)
     parser.add_argument("--manifest-output", type=Path, required=True)
+    parser.add_argument("--postpilot-amendment-gr16", action="store_true")
     args = parser.parse_args()
 
-    manifest = build_manifest(args.feature_table)
+    manifest = (
+        build_postpilot_amendment(args.feature_table)
+        if args.postpilot_amendment_gr16
+        else build_manifest(args.feature_table)
+    )
     args.selection_output.parent.mkdir(parents=True, exist_ok=True)
     args.manifest_output.parent.mkdir(parents=True, exist_ok=True)
     args.selection_output.write_text(

@@ -12,7 +12,7 @@ def test_p2_pilot_report_binds_states_contract_representation_and_cost(
     tmp_path,
 ) -> None:
     selection = OUT / "g40_p2_pilot_selection.txt"
-    selection_manifest = OUT / "g40_p2_pilot_selection.json"
+    selection_manifest = OUT / "g40_p2_pilot_selection_v3_postpilot_amendment_gr16.json"
     selection_payload = json.loads(selection_manifest.read_text())
     expected_masks = {
         task["task_uuid"]: set(task["expected_masks"])
@@ -45,6 +45,12 @@ def test_p2_pilot_report_binds_states_contract_representation_and_cost(
             features["mp2_opposite_spin_amplitude_reason"] = "all_amplitudes_masked"
         if "external_stability_dimension_ceiling" in task_masks:
             features["mf_stability_external_reason"] = "external_dimension_ceiling"
+        if "natural_occupation_out_of_range" in task_masks:
+            features["mp2_natural_occupation_reason"] = (
+                "natural_occupation_out_of_range"
+            )
+            features["mp2_natural_occupation_minimum_raw"] = -0.3031729295813625
+            features["mp2_natural_occupation_maximum_raw"] = 1.3031729295813625
         state = {
             "status": "success",
             "task_uuid": task_uuid,
@@ -127,7 +133,7 @@ def test_p2_pilot_report_binds_states_contract_representation_and_cost(
     subprocess.run(command, cwd=ROOT, check=True, capture_output=True, text=True)
     report = json.loads(output.with_suffix(".json").read_text())
     assert report["status"] == "passed"
-    assert report["report_version"] == "g40_p2_pilot_report_v4"
+    assert report["report_version"] == "g40_p2_pilot_report_v5"
     assert report["code_revision"] == "revision"
     assert report["verifier_code_revision"] == "verifier-revision"
     assert report["report_code_revision"] == "report-revision"
@@ -152,9 +158,18 @@ def test_p2_pilot_report_binds_states_contract_representation_and_cost(
         ]
     )
     assert len(report["state_ledger"]) == 25
+    assert report["natural_occupation_mask_audit"] == [
+        {
+            "task_uuid": "beabcf8f-a6c0-5e32-9385-110ff65cbbf0",
+            "reason": "natural_occupation_out_of_range",
+            "minimum_raw": -0.3031729295813625,
+            "maximum_raw": 1.3031729295813625,
+        }
+    ]
+    assert report["mask_table_amendment"]["review_id"] == "goals-review-16"
     assert (
         report["mask_regime_coverage"]["natural_occupation_out_of_range"]["status"]
-        == "unreachable in corpus, fixture-covered"
+        == "passed"
     )
 
     failed_accounting = tmp_path / "accounting.failed.txt"

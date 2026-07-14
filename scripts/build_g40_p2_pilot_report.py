@@ -186,9 +186,31 @@ def _tie_audit_ledger(states: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return ledger
 
 
+def _natural_occupation_mask_audit(
+    states: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    rows = []
+    for state in states:
+        features = state["features"]
+        if (
+            features.get("mp2_natural_occupation_reason")
+            != "natural_occupation_out_of_range"
+        ):
+            continue
+        rows.append(
+            {
+                "task_uuid": state["task_uuid"],
+                "reason": features["mp2_natural_occupation_reason"],
+                "minimum_raw": features["mp2_natural_occupation_minimum_raw"],
+                "maximum_raw": features["mp2_natural_occupation_maximum_raw"],
+            }
+        )
+    return rows
+
+
 def _markdown(report: dict[str, Any]) -> str:
     lines = [
-        "# G40 P2 MFPROTO-v3 pilot report",
+        "# G40 P2 MFPROTO-v3 pilot report v5",
         "",
         "## Result",
         "",
@@ -218,6 +240,8 @@ def _markdown(report: dict[str, Any]) -> str:
             "",
             f"- Mask reasons: `{json.dumps(report['mask_reason_counts'], sort_keys=True)}`.",
             f"- Mask preregistration: {json.dumps(report['mask_regime_coverage'], sort_keys=True)}.",
+            f"- Post-pilot amendment: {json.dumps(report['mask_table_amendment'], sort_keys=True)}.",
+            f"- Natural-occupation mask audit: {json.dumps(report['natural_occupation_mask_audit'], sort_keys=True)}.",
             f"- `degenerate_fock_states` (any observed tie signal): **{report['degenerate_fock_states']}**.",
             f"- `degenerate_fock_expected` (selection stratum): **{report['degenerate_fock_expected']}**.",
             f"- Detailed tie-audit rows: **{len(report['tie_audit_ledger'])}**.",
@@ -350,6 +374,13 @@ def main() -> int:
             > 0
         )
     selection_manifest = json.loads(args.selection_manifest.read_text())
+    amendment = selection_manifest.get("amendment")
+    if (
+        not isinstance(amendment, dict)
+        or amendment.get("status") != "adjudicated_post_pilot"
+        or amendment.get("review_id") != "goals-review-16"
+    ):
+        raise ValueError("report v5 requires the goals-review-16 mask-table amendment")
     degenerate_expected = sum(
         bool(task.get("degenerate_fock_expected"))
         for task in selection_manifest["tasks"]
@@ -358,6 +389,7 @@ def main() -> int:
         states, selection_manifest
     )
     tie_audit_ledger = _tie_audit_ledger(states)
+    natural_occupation_mask_audit = _natural_occupation_mask_audit(states)
     gates = {
         "states": not failed,
         "contract": contract_status == "passed",
@@ -368,7 +400,7 @@ def main() -> int:
         "memory": maximum_memory_gb <= 220.0,
     }
     report = {
-        "report_version": "g40_p2_pilot_report_v4",
+        "report_version": "g40_p2_pilot_report_v5",
         "status": "passed" if all(gates.values()) else "failed",
         "code_revision": args.code_revision,
         "verifier_code_revision": args.verifier_code_revision,
@@ -403,6 +435,8 @@ def main() -> int:
         "mask_reason_counts": dict(sorted(reasons.items())),
         "mask_regime_gate": {"status": "passed" if mask_regime_passed else "failed"},
         "mask_regime_coverage": mask_regime_coverage,
+        "mask_table_amendment": amendment,
+        "natural_occupation_mask_audit": natural_occupation_mask_audit,
         "degenerate_fock_states": degenerate,
         "degenerate_fock_expected": degenerate_expected,
         "tie_audit_ledger": tie_audit_ledger,
