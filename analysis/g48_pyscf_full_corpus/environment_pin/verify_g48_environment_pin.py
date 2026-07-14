@@ -6,7 +6,9 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import platform
+import site
 import sys
 from pathlib import Path
 
@@ -53,14 +55,33 @@ def verify() -> dict[str, object]:
     )
     checks["python_compiler"] = platform.python_compiler() == runtime["python_compiler"]
     checks["platform"] = platform.platform() == runtime["platform"]
-    versions = {
-        "h5py": h5py.__version__,
-        "numpy": numpy.__version__,
-        "pyscf": pyscf.__version__,
-        "scipy": scipy.__version__,
+    isolation = runtime["isolation"]
+    checks["python_user_site_disabled"] = (
+        site.ENABLE_USER_SITE is isolation["python_user_site"]
+    )
+    checks["python_no_user_site_environment"] = (
+        os.environ.get("PYTHONNOUSERSITE")
+        == isolation["required_environment"]["PYTHONNOUSERSITE"]
+    )
+    modules = {
+        "h5py": h5py,
+        "numpy": numpy,
+        "pyscf": pyscf,
+        "scipy": scipy,
     }
-    for package, actual_version in versions.items():
-        checks[f"package:{package}"] = actual_version == runtime["packages"][package]
+    prefix = Path(sys.prefix).resolve()
+    for package, module in modules.items():
+        checks[f"package:{package}"] = (
+            module.__version__ == runtime["packages"][package]
+        )
+        checks[f"package_origin:{package}"] = (
+            Path(module.__file__).resolve().is_relative_to(prefix)
+        )
+    legacy_linalg = getattr(numpy.linalg, "linalg", None)
+    checks["numpy_pyscf_diis_compatibility"] = (
+        legacy_linalg is not None
+        and legacy_linalg.LinAlgError is numpy.linalg.LinAlgError
+    )
 
     expected_lock = "".join(
         f"{package}=={version}\n"

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "campaign_id": "g48_pyscf_clean_slate_2026-07_v1",
-  "status": "prepilot_environment_pin",
+  "status": "phase2_pilot_environment_repair",
   "repository": {
     "reviewed_phase1_revision": "bfd636f7a9c6110a9375f381b3839ca89c6c6ef9",
     "source_sha256": {
@@ -23,9 +23,17 @@
     "platform": "Linux-4.18.0-553.69.1.el8_10.x86_64-x86_64-with-glibc2.28",
     "packages": {
       "h5py": "3.12.1",
-      "numpy": "2.4.6",
+      "numpy": "1.26.4",
       "pyscf": "2.8.0",
-      "scipy": "1.18.0"
+      "scipy": "1.12.0"
+    },
+    "isolation": {
+      "python_user_site": false,
+      "required_environment": {
+        "PYTHONNOUSERSITE": "1"
+      },
+      "package_origin": "selected_python_prefix",
+      "compatibility_probe": "numpy.linalg.linalg.LinAlgError"
     }
   },
   "execution_contract": {
@@ -37,6 +45,8 @@
       "backfill"
     ],
     "forbidden_queue": "debug",
+    "environment_preflight_required": true,
+    "numexpr_max_threads": 128,
     "retries": 0
   },
   "scientific_contract": {
@@ -48,5 +58,10 @@
     "nonconverged_energy_usage": "raw_diagnostic_only",
     "nonconverged_harness_status": "failed",
     "nonconverged_attempted": true
+  },
+  "repair_provenance": {
+    "trigger": "phase2_pilot_ccsd_t_q080_34ee114f",
+    "failure": "PySCF 2.8.0 DIIS exception handler incompatible with user-site NumPy 2.4.6",
+    "resolution": "disable user-site packages and use the internally consistent Mamba environment"
   }
 }
