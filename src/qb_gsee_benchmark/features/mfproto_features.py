@@ -1,7 +1,7 @@
 # Copyright 2026.
 # Licensed under the Apache License, Version 2.0.
 
-"""Deterministic numerical primitives for G40 MFPROTO-v2."""
+"""Deterministic numerical primitives for G40 MFPROTO-v3."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ from typing import Any
 from qb_gsee_benchmark.features.fcidump_sparse import SparseFcidump
 import numpy as np
 
-MFPROTO_VERSION = "g40_p2_mfproto_v2"
+MFPROTO_VERSION = "g40_p2_mfproto_v3"
 DEGENERACY_ENTER_ATOL = 1.0e-10
 DEGENERACY_ATOL = 1.0e-8
 PROJECTED_INDEX_DEGENERACY_ATOL = 1.0e-10
@@ -439,7 +439,7 @@ def _build_pyscf_mean_field(data: SparseFcidump, eri: np.ndarray, method: str) -
 
 
 def configure_newton_fallback(solver: Any) -> Any:
-    """Apply every frozen MFPROTO-v2 augmented-Hessian control."""
+    """Apply every frozen MFPROTO-v3 augmented-Hessian control."""
     controls = {
         "max_cycle": 50,
         "max_cycle_inner": 12,
@@ -734,7 +734,7 @@ def _ordered_diagonal_boundary_tie(
 def run_mean_field(
     data: SparseFcidump, eri: np.ndarray | None = None
 ) -> MeanFieldResult:
-    """Run the complete MFPROTO-v2 RHF/UHF x G1--G4 branch panel."""
+    """Run the complete MFPROTO-v3 RHF/UHF x G1--G4 branch panel."""
     sector = particle_sector(data.norb, data.nelec, data.ms2)
     core = canonical_eigh(data.h1)
     guesses = initial_spin_density_guesses(

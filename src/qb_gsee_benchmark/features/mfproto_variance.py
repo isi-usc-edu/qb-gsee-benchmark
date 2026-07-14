@@ -1,7 +1,7 @@
 # Copyright 2026.
 # Licensed under the Apache License, Version 2.0.
 
-"""Exact selected-determinant variance for G40 MFPROTO-v2."""
+"""Exact selected-determinant variance for G40 MFPROTO-v3."""
 
 from __future__ import annotations
 

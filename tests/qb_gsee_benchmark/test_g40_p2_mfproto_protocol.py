@@ -1,7 +1,7 @@
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-PROTOCOL = ROOT / "analysis" / "feature_schema" / "g40_p2_mfproto_v2.md"
+PROTOCOL = ROOT / "analysis" / "feature_schema" / "g40_p2_mfproto_v3.md"
 
 
 def _text() -> str:
@@ -11,8 +11,8 @@ def _text() -> str:
 def test_mfproto_ratification_freezes_required_numerics() -> None:
     text = _text()
     for required in (
-        "production remains held pending pilot review",
-        "g40_p2_mfproto_v2",
+        "production remains held pending goals-review 16",
+        "g40_p2_mfproto_v3",
         "PySCF 2.8.0",
         "G1 core",
         "G2 shipped",
@@ -53,17 +53,23 @@ def test_mfproto_ratification_contains_all_required_doc_fixes() -> None:
         "future cliff-sensitive column requires an explicit band mask",
         "consistency check between the declarations and frozen selection",
         "across the selected rotation-pair set",
-        "zero observed drift across the whole selected set fails closed",
+        "Zero observed drift across the whole selected set also fails closed",
+        "stationary-point-identity certificate",
+        "mapped by the pair's checksum-bound unitary",
+        "goals-review 14",
+        "Stability-follow outputs are diagnostic-only",
+        "protocol-selected solution",
+        "## Changelog",
     ):
         assert required in text
 
 
-def test_mfproto_marks_binding_resolutions_and_v2_exclusions() -> None:
+def test_mfproto_marks_binding_resolutions_and_v3_exclusions() -> None:
     text = _text()
     assert text.count("PI-ratified resolution") >= 3
     assert text.count("PI-ratified by goals-review 12") >= 2
-    assert "Krylov-Ritz and RPA are absent from MFPROTO-v2" in text
-    assert "iterative lowest-pole formulation is the admissible post-v2 route" in text
+    assert "Krylov-Ritz and RPA are absent from MFPROTO-v3" in text
+    assert "iterative lowest-pole formulation is the admissible post-v3 route" in text
     assert "Goals-review 12.5 accepted" in text
     for obsolete in (
         "proposal for PI ratification",

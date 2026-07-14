@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build review evidence for the G40 P2 MFPROTO-v2 pilot."""
+"""Build review evidence for the G40 P2 MFPROTO-v3 pilot."""
 
 from __future__ import annotations
 
@@ -40,6 +40,7 @@ def _pbs_accounting(path: Path) -> dict[str, Any]:
         "Resource_List.ncpus",
         "Resource_List.walltime",
         "queue",
+        "Job_Name",
     )
     missing = [key for key in required if key not in fields]
     if missing:
@@ -49,6 +50,7 @@ def _pbs_accounting(path: Path) -> dict[str, Any]:
         "sha256": _sha256(path),
         "job_id": fields["Job_Id"],
         "job_state": fields["job_state"],
+        "job_name": fields["Job_Name"],
         "exit_status": int(fields["Exit_status"]),
         "queue": fields["queue"],
         "ncpus": int(fields["Resource_List.ncpus"]),
@@ -186,7 +188,7 @@ def _tie_audit_ledger(states: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 def _markdown(report: dict[str, Any]) -> str:
     lines = [
-        "# G40 P2 MFPROTO-v2 pilot report",
+        "# G40 P2 MFPROTO-v3 pilot report",
         "",
         "## Result",
         "",
@@ -197,7 +199,10 @@ def _markdown(report: dict[str, Any]) -> str:
         f"- PBS accounting gate: **{report['pbs_gate']['status']}** ({report['pbs_gate']['successful_jobs']}/{report['pbs_gate']['jobs']} active jobs successful).",
         f"- Mask preregistration gate: **{report['mask_regime_gate']['status']}**.",
         f"- Projected production: **{report['cost_gate']['projected_production_node_hours']:.3f} node-hours**; gate {report['cost_gate']['node_hour_status']}.",
-        f"- Maximum measured memory: **{report['cost_gate']['maximum_memory_gb']:.3f} GB**; gate {report['cost_gate']['memory_status']}.",
+        "- Projection caveat: uniform mean-scaling of a hard-biased pilot; the 12x gate margin is retained.",
+        f"- Maximum measured memory (headline): **{report['cost_gate']['maximum_memory_gb']:.3f} GB**; gate {report['cost_gate']['memory_status']}.",
+        f"- State-level process peak RSS: **{report['cost_gate']['state_peak_rss_gb']:.3f} GB**.",
+        f"- PBS-sampled peak memory: **{report['cost_gate']['pbs_sampled_peak_memory_gb']:.3f} GB**.",
         "",
         "## Block scaling",
         "",
@@ -213,7 +218,8 @@ def _markdown(report: dict[str, Any]) -> str:
             "",
             f"- Mask reasons: `{json.dumps(report['mask_reason_counts'], sort_keys=True)}`.",
             f"- Mask preregistration: {json.dumps(report['mask_regime_coverage'], sort_keys=True)}.",
-            f"- Core/Fock degeneracy-flagged states: **{report['degenerate_fock_states']}**.",
+            f"- `degenerate_fock_states` (any observed tie signal): **{report['degenerate_fock_states']}**.",
+            f"- `degenerate_fock_expected` (selection stratum): **{report['degenerate_fock_expected']}**.",
             f"- Detailed tie-audit rows: **{len(report['tie_audit_ledger'])}**.",
             "",
             "No feature table, instance, reference, solution, or S3 object was changed by this pilot.",
@@ -324,8 +330,11 @@ def main() -> int:
         }
     total_task_seconds = sum(float(state["walltime_seconds"]) for state in states)
     projected_node_hours = total_task_seconds * 591.0 / len(states) / 3600.0
-    memory_kb = max(_memory_kb(item["memory"]) for item in accounting)
-    memory_gb = memory_kb / 1024**2
+    pbs_memory_kb = max(_memory_kb(item["memory"]) for item in accounting)
+    pbs_memory_gb = pbs_memory_kb / 1024**2
+    state_peak_rss_kb = max(int(state["process_peak_rss_kb"]) for state in states)
+    state_peak_rss_gb = state_peak_rss_kb / 1024**2
+    maximum_memory_gb = max(state_peak_rss_gb, pbs_memory_gb)
     reasons = Counter()
     degenerate = 0
     for state in states:
@@ -341,6 +350,10 @@ def main() -> int:
             > 0
         )
     selection_manifest = json.loads(args.selection_manifest.read_text())
+    degenerate_expected = sum(
+        bool(task.get("degenerate_fock_expected"))
+        for task in selection_manifest["tasks"]
+    )
     mask_regime_coverage, mask_regime_passed = _mask_regime_report(
         states, selection_manifest
     )
@@ -352,10 +365,10 @@ def main() -> int:
         "pbs": pbs_passed,
         "masks": mask_regime_passed,
         "node_hours": projected_node_hours <= 280.0,
-        "memory": memory_gb <= 220.0,
+        "memory": maximum_memory_gb <= 220.0,
     }
     report = {
-        "report_version": "g40_p2_pilot_report_v3",
+        "report_version": "g40_p2_pilot_report_v4",
         "status": "passed" if all(gates.values()) else "failed",
         "code_revision": args.code_revision,
         "verifier_code_revision": args.verifier_code_revision,
@@ -391,6 +404,7 @@ def main() -> int:
         "mask_regime_gate": {"status": "passed" if mask_regime_passed else "failed"},
         "mask_regime_coverage": mask_regime_coverage,
         "degenerate_fock_states": degenerate,
+        "degenerate_fock_expected": degenerate_expected,
         "tie_audit_ledger": tie_audit_ledger,
         "pbs_gate": {
             "status": "passed" if pbs_passed else "failed",
@@ -412,9 +426,19 @@ def main() -> int:
         ],
         "cost_gate": {
             "projected_production_node_hours": projected_node_hours,
+            "projection_method": "uniform_mean_scaling_of_hard_biased_25_state_pilot",
+            "projection_margin_ratio": 280.0 / projected_node_hours,
             "node_hour_ceiling": 280.0,
             "node_hour_status": "passed" if gates["node_hours"] else "review_required",
-            "maximum_memory_gb": memory_gb,
+            "maximum_memory_gb": maximum_memory_gb,
+            "state_peak_rss_gb": state_peak_rss_gb,
+            "state_peak_rss_task_uuid": max(
+                states, key=lambda state: int(state["process_peak_rss_kb"])
+            )["task_uuid"],
+            "pbs_sampled_peak_memory_gb": pbs_memory_gb,
+            "pbs_sampled_peak_memory_job_name": max(
+                accounting, key=lambda item: _memory_kb(item["memory"])
+            )["job_name"],
             "memory_ceiling_gb": 220.0,
             "memory_status": "passed" if gates["memory"] else "review_required",
         },

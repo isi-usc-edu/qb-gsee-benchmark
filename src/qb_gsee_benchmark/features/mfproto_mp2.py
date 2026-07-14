@@ -1,7 +1,7 @@
 # Copyright 2026.
 # Licensed under the Apache License, Version 2.0.
 
-"""Canonical MP2 panels for G40 MFPROTO-v2."""
+"""Canonical MP2 panels for G40 MFPROTO-v3."""
 
 from __future__ import annotations
 

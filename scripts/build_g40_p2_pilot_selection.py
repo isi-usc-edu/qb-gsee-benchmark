@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build and verify the frozen G40 P2 MFPROTO-v2 pilot selection."""
+"""Build and verify the frozen G40 P2 MFPROTO-v3 pilot selection."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from typing import Any
 
 import pandas as pd
 
-PROTOCOL_VERSION = "g40_p2_mfproto_v2"
+PROTOCOL_VERSION = "g40_p2_mfproto_v3"
 
 # Labels here are preregistered expectations, not observed pilot outcomes.
 TASK_EXPECTATIONS: dict[str, dict[str, Any]] = {
@@ -307,7 +307,7 @@ def build_manifest(feature_table: Path) -> dict[str, Any]:
         raise ValueError(f"P2 selection coverage failed: {checks}")
 
     return {
-        "manifest_version": "g40_p2_pilot_selection_v2",
+        "manifest_version": "g40_p2_pilot_selection_v3",
         "protocol_version": PROTOCOL_VERSION,
         "selection_policy": (
             "Frozen before pilot execution; objective fields are derived from the "

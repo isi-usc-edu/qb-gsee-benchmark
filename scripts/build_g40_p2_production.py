@@ -72,7 +72,7 @@ def _mask_reason_counts(states: list[dict[str, Any]]) -> dict[str, int]:
 def _markdown(report: dict[str, Any]) -> str:
     return "\n".join(
         [
-            "# G40 P2 MFPROTO-v2 production report",
+            "# G40 P2 MFPROTO-v3 production report",
             "",
             "## Result",
             "",
@@ -113,6 +113,31 @@ def _markdown(report: dict[str, Any]) -> str:
     )
 
 
+def _validate_bundle_evidence(
+    plan: dict[str, Any], plan_path: Path
+) -> list[dict[str, str]]:
+    ledger = plan.get("artifacts", {}).get("bundle_evidence")
+    expected = {
+        "evidence/cold_tests.junit.xml",
+        "evidence/mock_submission.log",
+        "evidence/improv_preflight.log",
+    }
+    if (
+        not isinstance(ledger, list)
+        or any(not isinstance(item, dict) for item in ledger)
+        or {item.get("path") for item in ledger} != expected
+    ):
+        raise ValueError("production plan lacks the required bundle evidence ledger")
+    for item in ledger:
+        relative = Path(item["path"])
+        if relative.is_absolute() or ".." in relative.parts:
+            raise ValueError("bundle evidence path escapes the production bundle")
+        path = plan_path.parent / relative
+        if not path.is_file() or _sha256(path) != item.get("sha256"):
+            raise ValueError(f"bundle evidence checksum mismatch: {relative}")
+    return ledger
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--state-dir", type=Path, required=True)
@@ -139,7 +164,7 @@ def main() -> int:
     previous = json.loads(report_path.read_text()) if report_path.exists() else {}
 
     contract = json.loads(args.feature_contract.read_text())
-    if contract.get("contract_version") != "g40_p2_feature_contract_v2":
+    if contract.get("contract_version") != "g40_p2_feature_contract_v3":
         raise ValueError("unexpected P2 feature contract")
     feature_columns = list(contract["output_columns"])
     if len(feature_columns) != len(set(feature_columns)):
@@ -159,8 +184,9 @@ def main() -> int:
     records = load_corpus_fcidumps(args.problem_instances)
     records_by_uuid = {record.task_uuid: record for record in records}
     plan = json.loads(args.production_plan.read_text())
-    if plan.get("plan_version") != "g40_p2_production_plan_v1":
+    if plan.get("plan_version") != "g40_p2_production_plan_v2":
         raise ValueError("unexpected production plan version")
+    bundle_evidence = _validate_bundle_evidence(plan, args.production_plan)
     if (
         plan["extractor_version"] != args.extractor_version
         or plan["extractor_code_revision"] != args.extractor_code_revision
@@ -334,6 +360,7 @@ def main() -> int:
         "feature_contract_sha256": _sha256(args.feature_contract),
         "pilot_report_sha256": _sha256(args.pilot_report),
         "production_plan_sha256": _sha256(args.production_plan),
+        "bundle_evidence": bundle_evidence,
         "state_ledger_sha256": state_ledger_sha256,
         "state_ledger": state_ledger,
         "task_timing_seconds": {

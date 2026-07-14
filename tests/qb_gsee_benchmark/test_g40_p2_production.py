@@ -81,10 +81,10 @@ def _state(record, columns, *, walltime: float) -> dict:
         "source_sha256": "0" * 64,
         "manifest_signature": record.signature(),
         "manifest_ms2_metadata": record.ms2_metadata,
-        "extractor_version": "g40_p2_mfproto_v2",
+        "extractor_version": "g40_p2_mfproto_v3",
         "code_revision": "extractor-revision",
         "configuration": {
-            "protocol_version": "g40_p2_mfproto_v2",
+            "protocol_version": "g40_p2_mfproto_v3",
             "pyscf_version": "2.8.0",
         },
         "walltime_seconds": walltime,
@@ -112,10 +112,10 @@ def _run_prepare_and_build(
         json.dumps(
             {
                 "status": "passed",
-                "extractor_version": "g40_p2_mfproto_v2",
+                "extractor_version": "g40_p2_mfproto_v3",
                 "code_revision": "extractor-revision",
                 "configuration": {
-                    "protocol_version": "g40_p2_mfproto_v2",
+                    "protocol_version": "g40_p2_mfproto_v3",
                     "pyscf_version": "2.8.0",
                 },
                 "output_contract": {"sha256": _sha256(CONTRACT)},
@@ -128,6 +128,14 @@ def _run_prepare_and_build(
         + "\n"
     )
     run_dir = tmp_path / "production"
+    junit = tmp_path / "cold.junit.xml"
+    junit.write_text(
+        '<testsuite tests="1" failures="0" errors="0"><testcase name="cold"/></testsuite>\n'
+    )
+    mock_log = tmp_path / "mock-submission.log"
+    mock_log.write_text("mock qsub passed\n")
+    preflight_log = tmp_path / "preflight.log"
+    preflight_log.write_text("Improv preflight passed\n")
     prepare = [
         sys.executable,
         str(ROOT / "scripts" / "prepare_g40_p2_production.py"),
@@ -143,6 +151,12 @@ def _run_prepare_and_build(
         str(pilot_states),
         "--output-dir",
         str(run_dir),
+        "--junit-xml",
+        str(junit),
+        "--mock-submission-log",
+        str(mock_log),
+        "--preflight-log",
+        str(preflight_log),
         "--shards",
         "2",
     ]
@@ -173,6 +187,7 @@ def _run_prepare_and_build(
         "\n".join(
             [
                 "Job Id: 1.imgt1",
+                "    Job_Name = g40_p2_fixture",
                 "    job_state = F",
                 "    Exit_status = 0",
                 "    resources_used.walltime = 00:05:00",
@@ -198,7 +213,7 @@ def _run_prepare_and_build(
         "--state-dir",
         str(run_dir / "state"),
         "--extractor-version",
-        "g40_p2_mfproto_v2",
+        "g40_p2_mfproto_v3",
         "--extractor-code-revision",
         "extractor-revision",
         "--builder-revision",
@@ -232,12 +247,21 @@ def _run_prepare_and_build(
 
 
 def test_p2_production_plan_is_deterministic_and_seeds_passed_pilot(tmp_path) -> None:
-    _, _, run_dir, _, prepare = _run_prepare_and_build(tmp_path)
+    _, _, run_dir, build, prepare = _run_prepare_and_build(tmp_path)
     plan = json.loads((run_dir / "production_plan.json").read_text())
-    assert plan["plan_version"] == "g40_p2_production_plan_v1"
+    assert plan["plan_version"] == "g40_p2_production_plan_v2"
     assert plan["corpus_tasks"] == 3
     assert plan["preseeded_states"] == 2
     assert plan["shards"] == 2
+    assert {item["path"] for item in plan["artifacts"]["bundle_evidence"]} == {
+        "evidence/cold_tests.junit.xml",
+        "evidence/mock_submission.log",
+        "evidence/improv_preflight.log",
+    }
+    assert all(
+        (run_dir / item["path"]).is_file()
+        for item in plan["artifacts"]["bundle_evidence"]
+    )
     assert len(list((run_dir / "state").glob("*.mfproto.json"))) == 3
     shard_tasks = {
         task_uuid
@@ -245,6 +269,16 @@ def test_p2_production_plan_is_deterministic_and_seeds_passed_pilot(tmp_path) ->
         for task_uuid in path.read_text().splitlines()
     }
     assert shard_tasks == {item["task_uuid"] for item in plan["tasks"]}
+
+    evidence_path = run_dir / "evidence" / "mock_submission.log"
+    original_evidence = evidence_path.read_bytes()
+    evidence_path.write_text("tampered\n")
+    failed = subprocess.run(
+        build, cwd=ROOT, check=False, capture_output=True, text=True
+    )
+    assert failed.returncode != 0
+    assert "bundle evidence checksum mismatch" in failed.stderr
+    evidence_path.write_bytes(original_evidence)
 
     state_path = sorted((run_dir / "state").glob("*.mfproto.json"))[0]
     wrong_path = state_path.with_name("wrong.mfproto.json")

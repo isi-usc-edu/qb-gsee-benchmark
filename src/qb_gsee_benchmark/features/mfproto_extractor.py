@@ -1,7 +1,7 @@
 # Copyright 2026.
 # Licensed under the Apache License, Version 2.0.
 
-"""Panel-isolated orchestration for G40 MFPROTO-v2."""
+"""Panel-isolated orchestration for G40 MFPROTO-v3."""
 
 from __future__ import annotations
 
@@ -16,6 +16,7 @@ from qb_gsee_benchmark.features.fcidump_sparse import read_sparse_fcidump
 from qb_gsee_benchmark.features.mfproto_features import (
     MFPROTO_VERSION,
     MeanFieldBranch,
+    MeanFieldResult,
     mean_field_feature_values,
     run_mean_field,
 )
@@ -52,6 +53,39 @@ def _branch_audit(branch: MeanFieldBranch) -> dict[str, Any]:
         "fock_canonical_audit_beta": branch.fock_canonical_audit_beta,
         "error_type": branch.error_type,
         "error_message": branch.error_message,
+    }
+
+
+def _selected_state_certificate(
+    mean_field: MeanFieldResult, selected: MeanFieldBranch
+) -> dict[str, Any]:
+    def spectrum(matrix: np.ndarray | None) -> np.ndarray | None:
+        return None if matrix is None else np.linalg.eigvalsh(matrix)
+
+    branch_structure = [
+        {
+            "method": branch.method,
+            "guess": branch.guess,
+            "converged": branch.converged,
+            "fallback_used": branch.fallback_used,
+            "engine_converged": branch.engine_converged,
+            "error_type": branch.error_type,
+        }
+        for branch in mean_field.branches
+    ]
+    return {
+        "certificate_version": "g40_mfproto_selected_stationary_point_v1",
+        "selected_branch_index": mean_field.selected_branch_index,
+        "selected_method": selected.method,
+        "selected_guess": selected.guess,
+        "selected_energy_hartree": selected.energy,
+        "selected_s2": selected.s2,
+        "density_alpha": selected.density_alpha,
+        "density_beta": selected.density_beta,
+        "fock_spectrum_alpha_hartree": spectrum(selected.fock_alpha),
+        "fock_spectrum_beta_hartree": spectrum(selected.fock_beta),
+        "stationary_components": mean_field.components,
+        "branch_structure": branch_structure,
     }
 
 
@@ -104,16 +138,20 @@ def compute_mfproto_features(
         )
         return MFPROTOExtraction(features, audit)
 
-    final_branch = selected
+    audit["science_panel_branch_index"] = mean_field.selected_branch_index
+    audit["science_panel_state"] = "protocol_selected_solution"
+    audit["stability_follow_is_diagnostic_only"] = True
+    audit["selected_state_certificate"] = _selected_state_certificate(
+        mean_field, selected
+    )
     stability_started = time.monotonic()
     try:
         stability = run_stability(data, eri, selected)
-        final_branch = stability.final_branch
         features.update(stability_feature_values(stability))
         features["mf_stability_applicable"] = True
         features["mf_stability_reason"] = None
         audit["stability_follow_outcomes"] = stability.follow_outcomes
-        audit["stability_final_branch"] = _branch_audit(final_branch)
+        audit["stability_final_branch"] = _branch_audit(stability.final_branch)
     except Exception as exc:
         audit["panel_errors"]["mf_stability"] = _panel_failure(
             features, "mf_stability", exc
@@ -122,7 +160,7 @@ def compute_mfproto_features(
 
     variance_started = time.monotonic()
     try:
-        variance = exact_hf_variance(eri, final_branch, mean_field.sector)
+        variance = exact_hf_variance(eri, selected, mean_field.sector)
         features.update(hf_variance_feature_values(variance))
         features["mf_hf_variance_applicable"] = True
         features["mf_hf_variance_reason"] = None
@@ -134,7 +172,7 @@ def compute_mfproto_features(
 
     mp2_started = time.monotonic()
     try:
-        mp2_result = run_mp2(data, eri, final_branch, mean_field.sector)
+        mp2_result = run_mp2(data, eri, selected, mean_field.sector)
         features.update(mp2_result.features)
         features["mp2_applicable"] = True
         features["mp2_reason"] = None

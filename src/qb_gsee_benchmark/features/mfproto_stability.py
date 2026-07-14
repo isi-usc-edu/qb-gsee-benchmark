@@ -1,7 +1,7 @@
 # Copyright 2026.
 # Licensed under the Apache License, Version 2.0.
 
-"""Deterministic selected-state stability analysis for MFPROTO-v2."""
+"""Deterministic selected-state stability analysis for MFPROTO-v3."""
 
 from __future__ import annotations
 

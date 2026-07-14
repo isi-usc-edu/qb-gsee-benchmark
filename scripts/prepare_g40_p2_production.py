@@ -9,6 +9,7 @@ import hashlib
 import json
 import os
 import shutil
+import xml.etree.ElementTree as ET
 from bisect import bisect_left
 from pathlib import Path
 from typing import Any
@@ -136,6 +137,29 @@ def _write_text_exact(path: Path, text: str) -> None:
     path.write_text(text)
 
 
+def _copy_bundle_evidence(source: Path, destination: Path) -> dict[str, str]:
+    if not source.is_file() or source.stat().st_size == 0:
+        raise ValueError(f"missing or empty bundle evidence: {source}")
+    if destination.exists():
+        if _sha256(destination) != _sha256(source):
+            raise ValueError(f"refusing to replace nonmatching evidence {destination}")
+    else:
+        shutil.copyfile(source, destination)
+    return {"path": str(destination), "sha256": _sha256(destination)}
+
+
+def _validate_cold_junit(path: Path) -> None:
+    root = ET.parse(path).getroot()
+    suites = [root] if root.tag == "testsuite" else list(root.findall("testsuite"))
+    tests = sum(int(suite.get("tests", "0")) for suite in suites)
+    failures = sum(int(suite.get("failures", "0")) for suite in suites)
+    errors = sum(int(suite.get("errors", "0")) for suite in suites)
+    if tests < 1 or failures or errors:
+        raise ValueError(
+            f"cold JUnit is not passing: tests={tests}, failures={failures}, errors={errors}"
+        )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -154,6 +178,9 @@ def main() -> int:
     parser.add_argument("--pilot-report", type=Path, required=True)
     parser.add_argument("--pilot-state-dir", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--junit-xml", type=Path, required=True)
+    parser.add_argument("--mock-submission-log", type=Path, required=True)
+    parser.add_argument("--preflight-log", type=Path, required=True)
     parser.add_argument("--shards", type=int, default=15)
     args = parser.parse_args()
     if args.shards < 1:
@@ -163,7 +190,7 @@ def main() -> int:
     if pilot.get("status") != "passed":
         raise ValueError("production requires a passed P2 pilot")
     contract = json.loads(args.feature_contract.read_text())
-    if contract.get("contract_version") != "g40_p2_feature_contract_v2":
+    if contract.get("contract_version") != "g40_p2_feature_contract_v3":
         raise ValueError("unexpected P2 feature contract")
     if pilot["output_contract"]["sha256"] != _sha256(args.feature_contract):
         raise ValueError("pilot and production feature contracts differ")
@@ -201,6 +228,19 @@ def main() -> int:
         seed_states[task_uuid] = state
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
+    evidence_dir = args.output_dir / "evidence"
+    evidence_dir.mkdir(parents=True, exist_ok=True)
+    _validate_cold_junit(args.junit_xml)
+    bundle_evidence = []
+    for name, source in (
+        ("cold_tests.junit.xml", args.junit_xml),
+        ("mock_submission.log", args.mock_submission_log),
+        ("improv_preflight.log", args.preflight_log),
+    ):
+        destination = evidence_dir / name
+        item = _copy_bundle_evidence(source, destination)
+        item["path"] = str(destination.relative_to(args.output_dir))
+        bundle_evidence.append(item)
     state_dir = args.output_dir / "state"
     state_dir.mkdir(parents=True, exist_ok=True)
     for existing in sorted(state_dir.glob("*.mfproto.json")):
@@ -267,7 +307,7 @@ def main() -> int:
         text = "".join(f"{item['task_uuid']}\n" for item in items)
         _write_text_exact(args.output_dir / f"shard_{index:02d}.txt", text)
     plan = {
-        "plan_version": "g40_p2_production_plan_v1",
+        "plan_version": "g40_p2_production_plan_v2",
         "extractor_version": pilot["extractor_version"],
         "extractor_code_revision": pilot["code_revision"],
         "configuration": pilot["configuration"],
@@ -288,6 +328,7 @@ def main() -> int:
             "corpus_manifest_sha256": _sha256(
                 args.output_dir / "corpus_manifest.jsonl"
             ),
+            "bundle_evidence": bundle_evidence,
         },
         "seed_state_ledger": [
             {"path": path.name, "sha256": _sha256(path)} for path in seed_paths

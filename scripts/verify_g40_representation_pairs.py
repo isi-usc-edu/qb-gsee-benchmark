@@ -23,12 +23,13 @@ from qb_gsee_benchmark.features.interaction_spectrum_features import (
     compute_interaction_spectrum_features,
     exact_symmetric_pair_eigenvalues,
 )
-from qb_gsee_benchmark.features.orderability_features import compute_orderability_features
+from qb_gsee_benchmark.features.orderability_features import (
+    compute_orderability_features,
+)
 from qb_gsee_benchmark.features.mfproto_extractor import compute_mfproto_features
 from qb_gsee_benchmark.features.universal_t0_features import (
     compute_universal_t0_linear_features,
 )
-
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -40,28 +41,46 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         default=ROOT / "problem_instances" / "orbital_representation_pairs",
     )
+    parser.add_argument(
+        "--rotation-certificate-dir",
+        type=Path,
+        default=ROOT / "analysis" / "feature_schema" / "g40_rotation_pair_certificates",
+    )
     parser.add_argument("--state-dir", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--rtol", type=float, default=1.0e-9)
     parser.add_argument("--atol", type=float, default=1.0e-10)
     parser.add_argument("--state-pattern", default="*.linear.json")
-    parser.add_argument(
-        "--check-name", default="g40_p1a_g21_representation_pairs"
-    )
+    parser.add_argument("--check-name", default="g40_p1a_g21_representation_pairs")
     parser.add_argument("--code-revision")
     parser.add_argument(
         "--permutation-certificates",
         type=Path,
-        default=ROOT / "tests" / "qb_gsee_benchmark" / "fixtures" / "g40_permutation_pairs" / "certificates.json",
+        default=ROOT
+        / "tests"
+        / "qb_gsee_benchmark"
+        / "fixtures"
+        / "g40_permutation_pairs"
+        / "certificates.json",
     )
     parser.add_argument(
         "--permutation-block",
         action="append",
-        choices=("linear", "coupling", "orderability", "interaction-spectrum", "mfproto"),
+        choices=(
+            "linear",
+            "coupling",
+            "orderability",
+            "interaction-spectrum",
+            "mfproto",
+        ),
         default=[],
     )
     parser.add_argument("--permutation-only", action="store_true")
     return parser.parse_args()
+
+
+def _sha1(path: Path) -> str:
+    return hashlib.sha1(path.read_bytes()).hexdigest()
 
 
 def _close(left: Any, right: Any, rtol: float, atol: float) -> bool:
@@ -95,7 +114,9 @@ def _infer_permutation_blocks(pattern: str) -> list[str]:
     ):
         if suffix in pattern:
             return [block]
-    raise ValueError("pass --permutation-block when state pattern does not identify a block")
+    raise ValueError(
+        "pass --permutation-block when state pattern does not identify a block"
+    )
 
 
 def _verify_permutation_certificates(
@@ -112,9 +133,8 @@ def _verify_permutation_certificates(
     structured_pairs = [
         pair
         for pair in payload["pairs"]
-        if pair.get("spectrum_structure", {}).get(
-            "distinct_nonzero_magnitude_count", 0
-        ) >= 2
+        if pair.get("spectrum_structure", {}).get("distinct_nonzero_magnitude_count", 0)
+        >= 2
     ]
     if not structured_pairs:
         failures.append(
@@ -124,10 +144,7 @@ def _verify_permutation_certificates(
         )
     for pair in payload["pairs"]:
         permutation = np.asarray(pair["permutation_new_to_old"], dtype=int)
-        paths = {
-            name: ROOT / item["path"]
-            for name, item in pair["files"].items()
-        }
+        paths = {name: ROOT / item["path"] for name, item in pair["files"].items()}
         for name, item in pair["files"].items():
             actual = _sha256(paths[name])
             if actual != item["sha256"]:
@@ -189,7 +206,10 @@ def _verify_permutation_certificates(
                     }
                 )
         tensor_passed = (
-            np.array_equal(permutation, np.random.default_rng(pair["seed"]).permutation(original.norb))
+            np.array_equal(
+                permutation,
+                np.random.default_rng(pair["seed"]).permutation(original.norb),
+            )
             and np.allclose(
                 permuted.h1,
                 original.h1[np.ix_(permutation, permutation)],
@@ -198,13 +218,17 @@ def _verify_permutation_certificates(
             )
             and np.allclose(
                 permuted.dense_eri(),
-                original.dense_eri()[np.ix_(permutation, permutation, permutation, permutation)],
+                original.dense_eri()[
+                    np.ix_(permutation, permutation, permutation, permutation)
+                ],
                 rtol=0.0,
                 atol=1.0e-14,
             )
         )
         if pair["kind"] == "molecular_tie_free":
-            tensor_passed = tensor_passed and not diagonal_reference_boundary_tie(original)
+            tensor_passed = tensor_passed and not diagonal_reference_boundary_tie(
+                original
+            )
         if not tensor_passed:
             failures.append(
                 {
@@ -215,13 +239,15 @@ def _verify_permutation_certificates(
         block_reports = []
         for block in blocks:
             features = {
-                name: _permutation_features(block, path)
-                for name, path in paths.items()
+                name: _permutation_features(block, path) for name, path in paths.items()
             }
             checks = {}
             for column in sorted(set(features["original"]) & set(features["permuted"])):
                 metadata = metadata_for_column(column)
-                if not metadata.model_eligible or metadata.representation not in {"INV", "BAS"}:
+                if not metadata.model_eligible or metadata.representation not in {
+                    "INV",
+                    "BAS",
+                }:
                     continue
                 passed = _close(
                     features["original"][column],
@@ -231,7 +257,10 @@ def _verify_permutation_certificates(
                 )
                 checks[column] = {
                     "representation": metadata.representation,
-                    "values": [features["original"][column], features["permuted"][column]],
+                    "values": [
+                        features["original"][column],
+                        features["permuted"][column],
+                    ],
                     "passed": passed,
                 }
                 if not passed:
@@ -248,7 +277,8 @@ def _verify_permutation_certificates(
             if expected_bas_ord_drift and block == "orderability":
                 for column, expected_values in expected_bas_ord_drift.items():
                     observed_bas_ord_drift[column] = [
-                        features["original"][column], features["permuted"][column]
+                        features["original"][column],
+                        features["permuted"][column],
                     ]
                     if not all(
                         _close(observed, expected, rtol, atol)
@@ -276,7 +306,11 @@ def _verify_permutation_certificates(
                     ),
                     "checks": checks,
                     "observed_bas_ord_drift": observed_bas_ord_drift,
-                    "status": "passed" if all(item["passed"] for item in checks.values()) else "failed",
+                    "status": (
+                        "passed"
+                        if all(item["passed"] for item in checks.values())
+                        else "failed"
+                    ),
                 }
             )
         reports.append(
@@ -303,9 +337,165 @@ def _verify_permutation_certificates(
     return reports, failures
 
 
+def _load_rotation_certificate(
+    group: str,
+    declaration: dict[str, Any] | None,
+    certificate_dir: Path,
+) -> tuple[dict[str, Any] | None, dict[str, Any]]:
+    report: dict[str, Any] = {
+        "status": "failed",
+        "equivalence_group_id": group,
+    }
+    if declaration is None:
+        report["reason"] = "missing_rotation_certificate_declaration"
+        return None, report
+    if declaration.get("instance_data_checksum_type") != "sha1sum":
+        report["reason"] = "unsupported_rotation_certificate_checksum"
+        return None, report
+    filename = Path(declaration["instance_data_object_url"]).name
+    path = certificate_dir / filename
+    report["path"] = str(path)
+    if not path.is_file():
+        report["reason"] = "missing_rotation_certificate_file"
+        return None, report
+    observed_sha1 = _sha1(path)
+    report["declared_sha1"] = declaration["instance_data_checksum"]
+    report["observed_sha1"] = observed_sha1
+    if observed_sha1 != declaration["instance_data_checksum"]:
+        report["reason"] = "rotation_certificate_checksum_mismatch"
+        return None, report
+    payload = json.loads(path.read_text())
+    rotation = np.asarray(payload.get("rotation_matrix"), dtype=float)
+    orthogonality_residual = (
+        float(np.max(np.abs(rotation.T @ rotation - np.eye(rotation.shape[0]))))
+        if rotation.ndim == 2 and rotation.shape[0] == rotation.shape[1]
+        else math.inf
+    )
+    report["orthogonality_residual_max_abs"] = orthogonality_residual
+    if (
+        payload.get("equivalence_group_id") != group
+        or rotation.ndim != 2
+        or rotation.shape[0] != rotation.shape[1]
+        or orthogonality_residual > 1.0e-10
+    ):
+        report["reason"] = "invalid_rotation_certificate"
+        return None, report
+    report["status"] = "passed"
+    report["reason"] = None
+    return payload, report
+
+
+def _stationary_point_identity_certificate(
+    group_states: list[dict[str, Any]],
+    representations: dict[str, str | None],
+    rotation_payload: dict[str, Any] | None,
+    rotation_report: dict[str, Any],
+) -> dict[str, Any]:
+    report: dict[str, Any] = {
+        "certificate_version": "g40_rotation_stationary_point_identity_v1",
+        "rotation_certificate": rotation_report,
+        "energy_tolerance_hartree": 1.0e-9,
+        "s2_tolerance": 1.0e-9,
+        "fock_spectrum_tolerance_hartree": 1.0e-9,
+        "mapped_spin_density_frobenius_tolerance": 1.0e-8,
+        "status": "failed",
+    }
+    if rotation_payload is None:
+        report["reason"] = "rotation_certificate_unavailable"
+        return report
+    by_representation = {
+        representations[state["task_uuid"]]: state for state in group_states
+    }
+    source_name = rotation_payload.get("source_representation")
+    localized_name = rotation_payload.get("localized_representation")
+    if set(by_representation) != {source_name, localized_name}:
+        report["reason"] = "rotation_pair_representation_mismatch"
+        return report
+    certificates = {}
+    for name, state in by_representation.items():
+        certificate = (state.get("audit") or {}).get("selected_state_certificate")
+        if (
+            not isinstance(certificate, dict)
+            or certificate.get("certificate_version")
+            != "g40_mfproto_selected_stationary_point_v1"
+        ):
+            report["reason"] = "missing_selected_state_certificate"
+            report["missing_representation"] = name
+            return report
+        certificates[name] = certificate
+
+    source = certificates[source_name]
+    localized = certificates[localized_name]
+    rotation = np.asarray(rotation_payload["rotation_matrix"], dtype=float)
+    energy_delta = abs(
+        float(source["selected_energy_hartree"])
+        - float(localized["selected_energy_hartree"])
+    )
+    s2_delta = abs(float(source["selected_s2"]) - float(localized["selected_s2"]))
+    fock_deltas = {}
+    density_deltas = {}
+    for spin in ("alpha", "beta"):
+        source_fock = np.asarray(source[f"fock_spectrum_{spin}_hartree"], dtype=float)
+        localized_fock = np.asarray(
+            localized[f"fock_spectrum_{spin}_hartree"], dtype=float
+        )
+        fock_deltas[spin] = (
+            math.inf
+            if source_fock.shape != localized_fock.shape
+            else float(np.max(np.abs(source_fock - localized_fock), initial=0.0))
+        )
+        source_density = np.asarray(source[f"density_{spin}"], dtype=float)
+        localized_density = np.asarray(localized[f"density_{spin}"], dtype=float)
+        mapped_density = rotation.T @ source_density @ rotation
+        density_deltas[spin] = (
+            math.inf
+            if mapped_density.shape != localized_density.shape
+            else float(np.linalg.norm(mapped_density - localized_density))
+        )
+    combined_density_delta = float(
+        math.sqrt(sum(value * value for value in density_deltas.values()))
+    )
+    structure_keys = (
+        "selected_branch_index",
+        "selected_method",
+        "selected_guess",
+        "stationary_components",
+        "branch_structure",
+    )
+    structure_equal = all(source[key] == localized[key] for key in structure_keys)
+    checks = {
+        "selected_energy": energy_delta <= report["energy_tolerance_hartree"],
+        "selected_s2": s2_delta <= report["s2_tolerance"],
+        "fock_spectrum": max(fock_deltas.values())
+        <= report["fock_spectrum_tolerance_hartree"],
+        "mapped_spin_density": combined_density_delta
+        <= report["mapped_spin_density_frobenius_tolerance"],
+        "solution_branch_structure": structure_equal,
+    }
+    passed = all(checks.values())
+    report.update(
+        {
+            "source_representation": source_name,
+            "localized_representation": localized_name,
+            "selected_energy_delta_hartree": energy_delta,
+            "selected_s2_delta": s2_delta,
+            "fock_spectrum_max_abs_deltas_hartree": fock_deltas,
+            "mapped_spin_density_frobenius_deltas": density_deltas,
+            "mapped_spin_density_frobenius_combined": combined_density_delta,
+            "solution_branch_structure_equal": structure_equal,
+            "checks": checks,
+            "status": "passed" if passed else "failed",
+            "reason": None if passed else "stationary_point_identity_mismatch",
+        }
+    )
+    return report
+
+
 def main() -> int:
     args = parse_args()
     groups: dict[str, list[str]] = defaultdict(list)
+    representations: dict[str, dict[str, str | None]] = defaultdict(dict)
+    rotation_declarations: dict[str, dict[str, Any]] = {}
     states = {}
     if not args.permutation_only:
         if args.state_dir is None:
@@ -317,6 +507,23 @@ def main() -> int:
                 if not group:
                     raise ValueError(f"{task['task_uuid']} lacks equivalence_group_id")
                 groups[group].append(task["task_uuid"])
+                representations[group][task["task_uuid"]] = task.get(
+                    "features", {}
+                ).get("orbital_representation")
+                declarations = [
+                    item
+                    for item in task.get("supporting_files", [])
+                    if not item.get("is_fcidump_file")
+                    and item.get("instance_data_object_url", "").endswith(
+                        ".rotation.json"
+                    )
+                ]
+                if len(declarations) == 1:
+                    previous = rotation_declarations.setdefault(group, declarations[0])
+                    if previous != declarations[0]:
+                        raise ValueError(
+                            f"{group} has inconsistent rotation declarations"
+                        )
         for path in sorted(args.state_dir.glob(args.state_pattern)):
             state = json.loads(path.read_text())
             states[state["task_uuid"]] = state
@@ -328,7 +535,9 @@ def main() -> int:
     for group, task_uuids in sorted(groups.items()):
         missing = sorted(set(task_uuids) - set(states))
         if missing:
-            failures.append({"group": group, "reason": "missing_state", "tasks": missing})
+            failures.append(
+                {"group": group, "reason": "missing_state", "tasks": missing}
+            )
             reports.append(
                 {
                     "equivalence_group_id": group,
@@ -361,9 +570,7 @@ def main() -> int:
             )
             continue
 
-        common = set.intersection(
-            *(set(state["features"]) for state in group_states)
-        )
+        common = set.intersection(*(set(state["features"]) for state in group_states))
         inv_or_bas_columns = [
             column
             for column in common
@@ -404,6 +611,39 @@ def main() -> int:
             rotation_groups_with_basis_features.append(group)
         if changed_basis_features:
             rotation_groups_with_observed_basis_drift.append(group)
+        stationary_identity = None
+        if basis_values and not changed_basis_features:
+            rotation_payload, rotation_report = _load_rotation_certificate(
+                group,
+                rotation_declarations.get(group),
+                args.rotation_certificate_dir,
+            )
+            try:
+                stationary_identity = _stationary_point_identity_certificate(
+                    group_states,
+                    representations[group],
+                    rotation_payload,
+                    rotation_report,
+                )
+            except (KeyError, TypeError, ValueError) as exc:
+                stationary_identity = {
+                    "certificate_version": (
+                        "g40_rotation_stationary_point_identity_v1"
+                    ),
+                    "status": "failed",
+                    "reason": "malformed_selected_state_certificate",
+                    "error_type": type(exc).__name__,
+                    "error_message": str(exc),
+                    "rotation_certificate": rotation_report,
+                }
+            if stationary_identity["status"] != "passed":
+                failures.append(
+                    {
+                        "group": group,
+                        "reason": "stationary_point_identity_certificate_failed",
+                        "detail": stationary_identity.get("reason"),
+                    }
+                )
         reports.append(
             {
                 "equivalence_group_id": group,
@@ -413,6 +653,10 @@ def main() -> int:
                     "passed"
                     if len(extractor_versions) == 1
                     and all(item["passed"] for item in invariant_checks.values())
+                    and (
+                        stationary_identity is None
+                        or stationary_identity["status"] == "passed"
+                    )
                     else "failed"
                 ),
                 "invariant_checks": invariant_checks,
@@ -425,6 +669,7 @@ def main() -> int:
                 "basis_feature_values": basis_values,
                 "changed_basis_features": changed_basis_features,
                 "basis_drift_observed": bool(changed_basis_features),
+                "stationary_point_identity": stationary_identity,
             }
         )
 
@@ -439,7 +684,9 @@ def main() -> int:
             }
         )
 
-    permutation_blocks = args.permutation_block or _infer_permutation_blocks(args.state_pattern)
+    permutation_blocks = args.permutation_block or _infer_permutation_blocks(
+        args.state_pattern
+    )
     permutation_reports, permutation_failures = _verify_permutation_certificates(
         args.permutation_certificates,
         permutation_blocks,
@@ -469,9 +716,7 @@ def main() -> int:
                 "not_applicable"
                 if not rotation_groups_with_basis_features
                 else (
-                    "passed"
-                    if rotation_groups_with_observed_basis_drift
-                    else "failed"
+                    "passed" if rotation_groups_with_observed_basis_drift else "failed"
                 )
             ),
         }

@@ -48,10 +48,11 @@ def test_p2_pilot_report_binds_states_contract_representation_and_cost(
         state = {
             "status": "success",
             "task_uuid": task_uuid,
-            "extractor_version": "g40_p2_mfproto_v2",
+            "extractor_version": "g40_p2_mfproto_v3",
             "code_revision": "revision",
-            "configuration": {"protocol_version": "g40_p2_mfproto_v2"},
+            "configuration": {"protocol_version": "g40_p2_mfproto_v3"},
             "walltime_seconds": 10.0,
+            "process_peak_rss_kb": 2048,
             "features": features,
         }
         (state_dir / f"{task_uuid}.mfproto.json").write_text(
@@ -73,6 +74,7 @@ def test_p2_pilot_report_binds_states_contract_representation_and_cost(
         "\n".join(
             [
                 "Job Id: 1.imgt1",
+                "    Job_Name = g40_p2_fixture",
                 "    job_state = F",
                 "    Exit_status = 0",
                 "    resources_used.walltime = 00:05:00",
@@ -125,6 +127,7 @@ def test_p2_pilot_report_binds_states_contract_representation_and_cost(
     subprocess.run(command, cwd=ROOT, check=True, capture_output=True, text=True)
     report = json.loads(output.with_suffix(".json").read_text())
     assert report["status"] == "passed"
+    assert report["report_version"] == "g40_p2_pilot_report_v4"
     assert report["code_revision"] == "revision"
     assert report["verifier_code_revision"] == "verifier-revision"
     assert report["report_code_revision"] == "report-revision"
@@ -133,6 +136,13 @@ def test_p2_pilot_report_binds_states_contract_representation_and_cost(
     assert report["representation_gate"]["groups_passed"] == 6
     assert report["cost_gate"]["node_hour_status"] == "passed"
     assert report["cost_gate"]["memory_status"] == "passed"
+    assert report["cost_gate"]["state_peak_rss_gb"] == 2048 / 1024**2
+    assert report["cost_gate"]["pbs_sampled_peak_memory_gb"] == 1024 / 1024**2
+    assert report["cost_gate"]["maximum_memory_gb"] == 2048 / 1024**2
+    assert report["degenerate_fock_expected"] == 6
+    assert report["cost_gate"]["projection_method"] == (
+        "uniform_mean_scaling_of_hard_biased_25_state_pilot"
+    )
     assert report["pbs_gate"]["status"] == "passed"
     assert report["mask_regime_gate"]["status"] == "passed"
     assert (

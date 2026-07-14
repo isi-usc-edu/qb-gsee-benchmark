@@ -1,7 +1,7 @@
 # Copyright 2026.
 # Licensed under the Apache License, Version 2.0.
 
-"""Resume-safe corpus runner for G40 P2 MFPROTO-v2."""
+"""Resume-safe corpus runner for G40 P2 MFPROTO-v3."""
 
 from __future__ import annotations
 
