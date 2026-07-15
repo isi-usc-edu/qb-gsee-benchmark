@@ -15,6 +15,8 @@ from scripts.build_g40_p1a_production import ALLOWED_MIGRATIONS
 ROOT = Path(__file__).resolve().parents[2]
 TABLE = ROOT / "scripts" / "Hamiltonian_features.csv"
 OUT = ROOT / "analysis" / "feature_schema"
+G40_P2_TABLE_SHA256 = "8f0d89ec2cc7cf933a57c4ace7d32cd62d478c0fb8f8272aae4d36d387d45b2b"
+G52_TABLE_SHA256 = "ee94df21f927ff2e548ac10fda8d5a88c601f31330619ec6c575dc75cf436dc7"
 
 
 def _sha256(path: Path) -> str:
@@ -23,9 +25,11 @@ def _sha256(path: Path) -> str:
 
 def test_p1a_table_has_manifest_wide_universal_coverage() -> None:
     frame = pd.read_csv(TABLE)
-    assert frame.shape[0] == 591
+    assert frame.shape[0] == 718
     assert frame.shape[1] >= 158
     assert frame["task_uuid"].is_unique
+    g40 = frame[frame["universal_t0_linear_features_version"].notna()]
+    assert len(g40) == 591
     always_applicable = [
         "n_orbs",
         "n_elec",
@@ -41,9 +45,9 @@ def test_p1a_table_has_manifest_wide_universal_coverage() -> None:
         "fcidump_ms2_source",
         "universal_t0_linear_features_version",
     ]
-    assert not frame[always_applicable].isna().any().any()
-    assert set(frame["universal_t0_linear_features_version"]) == {"g40_p1_linear_v4"}
-    assert set(frame["fcidump_symmetry_status"]) == {
+    assert not g40[always_applicable].isna().any().any()
+    assert set(g40["universal_t0_linear_features_version"]) == {"g40_p1_linear_v4"}
+    assert set(g40["fcidump_symmetry_status"]) == {
         "ok",
         "conflict_above_tolerance",
     }
@@ -88,7 +92,8 @@ def test_p1a_report_binds_table_jobs_and_representation_gate() -> None:
     assert r6["input_feature_table_sha256"] == retag["output_feature_table_sha256"]
     assert p1d["input_feature_table_sha256"] == r6["output_feature_table_sha256"]
     assert p2["input_feature_table_sha256"] == p1d["output_feature_table_sha256"]
-    assert p2["output_feature_table_sha256"] == _sha256(TABLE)
+    assert p2["output_feature_table_sha256"] == G40_P2_TABLE_SHA256
+    assert _sha256(TABLE) == G52_TABLE_SHA256
     assert report["initial_job_id"] == "7651290.imgt1"
     assert report["corrected_job_id"] == "7651318.imgt1"
     assert report["corrected_code_revision"].startswith("8f8348a")

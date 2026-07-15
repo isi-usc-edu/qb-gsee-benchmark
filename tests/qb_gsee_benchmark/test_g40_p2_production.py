@@ -482,7 +482,12 @@ def test_committed_p2_report_binds_live_table_and_production_evidence() -> None:
     assert report["new_columns"] == contract["output_columns"]
     assert report["changed_populated_cells"] == 0
     assert report["input_feature_table_sha256"] == p1d["output_feature_table_sha256"]
-    assert report["output_feature_table_sha256"] == _sha256(table)
+    assert report["output_feature_table_sha256"] == (
+        "8f0d89ec2cc7cf933a57c4ace7d32cd62d478c0fb8f8272aae4d36d387d45b2b"
+    )
+    assert _sha256(table) == (
+        "ee94df21f927ff2e548ac10fda8d5a88c601f31330619ec6c575dc75cf436dc7"
+    )
     assert report["pbs_gate"]["status"] == "passed"
     assert report["pbs_gate"]["successful_jobs"] == report["pbs_gate"]["jobs"] == 16
     assert report["representation_pair_check"]["status"] == "passed"

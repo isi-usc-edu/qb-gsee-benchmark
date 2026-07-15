@@ -6,6 +6,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "analysis" / "feature_schema"
+G40_P2_TABLE_SHA256 = "8f0d89ec2cc7cf933a57c4ace7d32cd62d478c0fb8f8272aae4d36d387d45b2b"
+G52_TABLE_SHA256 = "ee94df21f927ff2e548ac10fda8d5a88c601f31330619ec6c575dc75cf436dc7"
 
 
 def test_p1b_pilot_report_binds_precision_representation_and_pbs() -> None:
@@ -30,10 +32,12 @@ def test_p1b_pilot_report_binds_precision_representation_and_pbs() -> None:
 def test_p1b_production_table_and_report_are_complete() -> None:
     table = ROOT / "scripts" / "Hamiltonian_features.csv"
     frame = pd.read_csv(table)
-    assert frame.shape[0] == 591
+    assert frame.shape[0] == 718
     assert frame.shape[1] >= 232
     assert frame["task_uuid"].is_unique
-    assert set(frame["determinant_coupling_features_version"]) == {
+    g40 = frame[frame["determinant_coupling_features_version"].notna()]
+    assert len(g40) == 591
+    assert set(g40["determinant_coupling_features_version"]) == {
         "g40_p1b_determinant_coupling_v4"
     }
     required = [
@@ -44,7 +48,7 @@ def test_p1b_production_table_and_report_are_complete() -> None:
         "random_det_expected_degree_mc_se_rel_1e_8",
         "random_det_branching_double_method",
     ]
-    assert not frame[required].isna().any().any()
+    assert not g40[required].isna().any().any()
 
     report = json.loads((OUT / "g40_p1b_production_report.json").read_text())
     assert report["successful_states"] == report["corpus_tasks"] == 591
@@ -86,10 +90,12 @@ def test_p1c_pilot_report_binds_representation_and_pbs() -> None:
 def test_p1c_production_table_and_report_are_complete() -> None:
     table = ROOT / "scripts" / "Hamiltonian_features.csv"
     frame = pd.read_csv(table)
-    assert frame.shape[0] == 591
+    assert frame.shape[0] == 718
     assert frame.shape[1] >= 232
     assert frame["task_uuid"].is_unique
-    assert set(frame["orderability_features_version"]) == {"g40_p1c_orderability_v1"}
+    g40 = frame[frame["orderability_features_version"].notna()]
+    assert len(g40) == 591
+    assert set(g40["orderability_features_version"]) == {"g40_p1c_orderability_v1"}
     required = [
         "cut_weight_best_max",
         "cut_weight_heuristic_spread_p95",
@@ -97,7 +103,7 @@ def test_p1c_production_table_and_report_are_complete() -> None:
         "min_fill_width_upper_bound",
         "mpo_pair_rank_max",
     ]
-    assert not frame[required].isna().any().any()
+    assert not g40[required].isna().any().any()
 
     report = json.loads((OUT / "g40_p1c_production_report.json").read_text())
     p1b = json.loads((OUT / "g40_p1b_production_report.json").read_text())
@@ -126,9 +132,11 @@ def test_p1c_production_table_and_report_are_complete() -> None:
 def test_retag_audit_flags_and_report_are_complete() -> None:
     table = ROOT / "scripts" / "Hamiltonian_features.csv"
     frame = pd.read_csv(table)
-    assert frame.shape == (591, 580)
+    assert frame.shape == (718, 580)
+    g40 = frame[frame["retag_audit_features_version"].notna()]
+    assert g40.shape == (591, 580)
     assert (
-        not frame[
+        not g40[
             [
                 "det_coupling_reference_boundary_tie",
                 "mpo_pair_rank_applicable",
@@ -139,9 +147,9 @@ def test_retag_audit_flags_and_report_are_complete() -> None:
         .any()
         .any()
     )
-    assert set(frame["retag_audit_features_version"]) == {"g40_retag_audit_v1"}
+    assert set(g40["retag_audit_features_version"]) == {"g40_retag_audit_v1"}
     assert (
-        not frame[
+        not g40[
             [
                 "orderability_degeneracy_features_version",
                 "orderability_fiedler_min_coordinate_gap",
@@ -153,7 +161,7 @@ def test_retag_audit_flags_and_report_are_complete() -> None:
         .any()
         .any()
     )
-    assert set(frame["orderability_degeneracy_features_version"]) == {
+    assert set(g40["orderability_degeneracy_features_version"]) == {
         "g40_orderability_degeneracy_v1"
     }
     report = json.loads((OUT / "g40_retag_audit_production_report.json").read_text())
@@ -170,10 +178,8 @@ def test_retag_audit_flags_and_report_are_complete() -> None:
     assert report["output_feature_table_sha256"] == r6["input_feature_table_sha256"]
     assert r6["output_feature_table_sha256"] == p1d["input_feature_table_sha256"]
     assert p2["input_feature_table_sha256"] == p1d["output_feature_table_sha256"]
-    assert (
-        p2["output_feature_table_sha256"]
-        == hashlib.sha256(table.read_bytes()).hexdigest()
-    )
+    assert p2["output_feature_table_sha256"] == G40_P2_TABLE_SHA256
+    assert hashlib.sha256(table.read_bytes()).hexdigest() == G52_TABLE_SHA256
     assert [job["job_id"] for job in report["pbs_jobs"]] == [
         "7651548.imgt1",
         "7651553.imgt1",

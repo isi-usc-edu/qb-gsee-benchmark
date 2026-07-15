@@ -280,10 +280,11 @@ def _verify_permutation_certificates(
                         features["original"][column],
                         features["permuted"][column],
                     ]
-                    if not all(
+                    observed_values = observed_bas_ord_drift[column]
+                    if len(observed_values) != len(expected_values) or not all(
                         _close(observed, expected, rtol, atol)
                         for observed, expected in zip(
-                            observed_bas_ord_drift[column], expected_values
+                            sorted(observed_values), sorted(expected_values)
                         )
                     ):
                         failures.append(

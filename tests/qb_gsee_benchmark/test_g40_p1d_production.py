@@ -9,6 +9,8 @@ from qb_gsee_benchmark.features.feature_schema import P1D_AUDIT, P1D_MODEL
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "analysis" / "feature_schema"
 TABLE = ROOT / "scripts" / "Hamiltonian_features.csv"
+G40_P2_TABLE_SHA256 = "8f0d89ec2cc7cf933a57c4ace7d32cd62d478c0fb8f8272aae4d36d387d45b2b"
+G52_TABLE_SHA256 = "ee94df21f927ff2e548ac10fda8d5a88c601f31330619ec6c575dc75cf436dc7"
 
 
 def test_p1d_production_report_binds_full_additive_merge() -> None:
@@ -29,10 +31,8 @@ def test_p1d_production_report_binds_full_additive_merge() -> None:
     assert report["changed_populated_cells"] == 0
     assert report["input_feature_table_sha256"] == r6["output_feature_table_sha256"]
     assert p2["input_feature_table_sha256"] == report["output_feature_table_sha256"]
-    assert (
-        p2["output_feature_table_sha256"]
-        == hashlib.sha256(TABLE.read_bytes()).hexdigest()
-    )
+    assert p2["output_feature_table_sha256"] == G40_P2_TABLE_SHA256
+    assert hashlib.sha256(TABLE.read_bytes()).hexdigest() == G52_TABLE_SHA256
     assert report["legacy_df_values_preserved"] is True
     assert (
         report["legacy_df_value_sha256_before"]
@@ -50,14 +50,16 @@ def test_p1d_production_report_binds_full_additive_merge() -> None:
 
 def test_p1d_production_table_has_frozen_schema_and_expected_nulls() -> None:
     frame = pd.read_csv(TABLE)
-    assert frame.shape == (591, 580)
+    assert frame.shape == (718, 580)
     assert set(P1D_MODEL | P1D_AUDIT) <= set(frame)
-    assert set(frame["interaction_spectrum_features_version"]) == {
+    g40 = frame[frame["interaction_spectrum_features_version"].notna()]
+    assert g40.shape == (591, 580)
+    assert set(g40["interaction_spectrum_features_version"]) == {
         "g40_p1d_interaction_spectrum_v1"
     }
     always_populated = (P1D_MODEL | P1D_AUDIT) - {"interaction_spectrum_decay_exponent"}
-    assert not frame[list(always_populated)].isna().any().any()
-    assert frame["interaction_spectrum_decay_exponent"].isna().sum() == 7
+    assert not g40[list(always_populated)].isna().any().any()
+    assert g40["interaction_spectrum_decay_exponent"].isna().sum() == 7
 
 
 def test_p1d_production_preserves_real_all_zero_controls() -> None:
