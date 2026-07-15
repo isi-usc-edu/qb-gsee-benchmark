@@ -12,6 +12,7 @@ from scripts.build_g40_p2_production import (
 )
 
 ROOT = Path(__file__).resolve().parents[2]
+OUT = ROOT / "analysis" / "feature_schema"
 CONTRACT = ROOT / "analysis" / "feature_schema" / "g40_p2_feature_contract.json"
 
 
@@ -461,3 +462,42 @@ def test_no_converged_scf_state_is_strictly_expanded_to_contract() -> None:
         assert "lacks no-converged-SCF evidence" in str(exc)
     else:
         raise AssertionError("partial state with a selected branch was accepted")
+
+
+def test_committed_p2_report_binds_live_table_and_production_evidence() -> None:
+    report = json.loads((OUT / "g40_p2_production_report.json").read_text())
+    p1d = json.loads((OUT / "g40_p1d_production_report.json").read_text())
+    contract = json.loads(CONTRACT.read_text())
+    table = ROOT / "scripts" / "Hamiltonian_features.csv"
+
+    assert report["status"] == "passed"
+    assert report["report_version"] == "g40_p2_production_v1"
+    assert report["extractor_version"] == "g40_p2_mfproto_v3"
+    assert report["extractor_code_revision"] == "d40ccf7"
+    assert report["builder_revision"] == "8630b8a206c42823b85d17f4968e4932f5d471b7"
+    assert report["successful_states"] == report["corpus_tasks"] == 591
+    assert report["rows_before"] == report["rows_after"] == 591
+    assert report["columns_before"] == 253
+    assert report["columns_after"] == 580
+    assert report["new_columns"] == contract["output_columns"]
+    assert report["changed_populated_cells"] == 0
+    assert report["input_feature_table_sha256"] == p1d["output_feature_table_sha256"]
+    assert report["output_feature_table_sha256"] == _sha256(table)
+    assert report["pbs_gate"]["status"] == "passed"
+    assert report["pbs_gate"]["successful_jobs"] == report["pbs_gate"]["jobs"] == 16
+    assert report["representation_pair_check"]["status"] == "passed"
+    assert report["representation_pair_check"]["groups_passed"] == 6
+    compatibility = report["contract_shape_compatibility"]
+    assert {item["task_uuid"] for item in compatibility} == {
+        "0deae366-42de-4081-914d-db85c6b47168",
+        "5f5688c2-51b1-5f69-bede-65a94386e392",
+        "7cb9d535-d12b-5de8-b861-4f2cddb95118",
+        "c9d79afa-cfb2-5256-9b79-744b12ff0f43",
+    }
+    assert all(
+        item["reason"] == "no_converged_scf_branch"
+        and item["observed_feature_columns"] == 58
+        and item["null_filled_contract_columns"] == 269
+        and item["raw_state_unchanged"] is True
+        for item in compatibility
+    )

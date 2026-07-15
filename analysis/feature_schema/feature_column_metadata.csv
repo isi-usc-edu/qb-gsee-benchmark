@@ -252,3 +252,330 @@ interaction_spectrum_rank_rel_1e_6,feature,T0,INV,NONE,accuracy,True,,intensive,
 interaction_spectrum_relative_gap,feature,T0,INV,NONE,accuracy,True,,intensive,exact_pair_spectrum,interaction spectrum relative gap,current
 interaction_spectrum_zero_atol,feature,T0,INV,NONE,audit-only,False,"exact-spectrum scale, applicability, tolerance, non-PSD, or version diagnostic",intensive,exact_pair_spectrum,interaction spectrum zero atol,current
 interaction_spectrum_zero_rtol,feature,T0,INV,NONE,audit-only,False,"exact-spectrum scale, applicability, tolerance, non-PSD, or version diagnostic",intensive,exact_pair_spectrum,interaction spectrum zero rtol,current
+mf_branch_count,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mean_field,mf branch count,current
+mf_converged_branch_count,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mean_field,mf converged branch count,current
+mf_core_gap_alpha_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf core gap alpha applicable,current
+mf_core_gap_alpha_hartree,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf core gap alpha hartree,current
+mf_core_gap_alpha_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf core gap alpha reason,current
+mf_core_gap_beta_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf core gap beta applicable,current
+mf_core_gap_beta_hartree,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf core gap beta hartree,current
+mf_core_gap_beta_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf core gap beta reason,current
+mf_core_gap_min_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf core gap min applicable,current
+mf_core_gap_min_hartree,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf core gap min hartree,current
+mf_core_gap_min_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf core gap min reason,current
+mf_distinct_solution_count,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mean_field,mf distinct solution count,current
+mf_gap_mismatch_alpha_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf gap mismatch alpha applicable,current
+mf_gap_mismatch_alpha_hartree,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf gap mismatch alpha hartree,current
+mf_gap_mismatch_alpha_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf gap mismatch alpha reason,current
+mf_gap_mismatch_beta_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf gap mismatch beta applicable,current
+mf_gap_mismatch_beta_hartree,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf gap mismatch beta hartree,current
+mf_gap_mismatch_beta_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf gap mismatch beta reason,current
+mf_gap_mismatch_min_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf gap mismatch min applicable,current
+mf_gap_mismatch_min_hartree,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf gap mismatch min hartree,current
+mf_gap_mismatch_min_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf gap mismatch min reason,current
+mf_hf_variance_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf hf variance applicable,current
+mf_hf_variance_doubles_opposite_spin,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,hf_variance,mf hf variance doubles opposite spin,current
+mf_hf_variance_doubles_same_spin_alpha,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,hf_variance,mf hf variance doubles same spin alpha,current
+mf_hf_variance_doubles_same_spin_beta,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,hf_variance,mf hf variance doubles same spin beta,current
+mf_hf_variance_hartree_squared,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,hf_variance,mf hf variance hartree squared,current
+mf_hf_variance_per_electron_hartree_squared,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,hf_variance,mf hf variance per electron hartree squared,current
+mf_hf_variance_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf hf variance reason,current
+mf_hf_variance_singles_alpha,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,hf_variance,mf hf variance singles alpha,current
+mf_hf_variance_singles_beta,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,hf_variance,mf hf variance singles beta,current
+mf_lowest_rhf_energy_hartree,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mean_field,mf lowest rhf energy hartree,current
+mf_lowest_uhf_energy_hartree,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mean_field,mf lowest uhf energy hartree,current
+mf_selected_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected applicable,current
+mf_selected_energy_hartree,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mean_field,mf selected energy hartree,current
+mf_selected_fock_alpha_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected fock alpha applicable,current
+mf_selected_fock_alpha_center_hartree,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mean_field,mf selected fock alpha center hartree,current
+mf_selected_fock_alpha_dos_per_orbital_eta_0.05,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock alpha dos per orbital eta 0.05,current
+mf_selected_fock_alpha_dos_per_orbital_eta_0.2,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock alpha dos per orbital eta 0.2,current
+mf_selected_fock_alpha_dos_total_eta_0.05,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock alpha dos total eta 0.05,current
+mf_selected_fock_alpha_dos_total_eta_0.2,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock alpha dos total eta 0.2,current
+mf_selected_fock_alpha_edge_degenerate,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected fock alpha edge degenerate,current
+mf_selected_fock_alpha_gap_hartree,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock alpha gap hartree,current
+mf_selected_fock_alpha_ipr_window_0.1,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock alpha ipr window 0.1,current
+mf_selected_fock_alpha_ipr_window_0.1_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected fock alpha ipr window 0.1 applicable,current
+mf_selected_fock_alpha_ipr_window_0.1_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected fock alpha ipr window 0.1 reason,current
+mf_selected_fock_alpha_ipr_window_0.5,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock alpha ipr window 0.5,current
+mf_selected_fock_alpha_ipr_window_0.5_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected fock alpha ipr window 0.5 applicable,current
+mf_selected_fock_alpha_ipr_window_0.5_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected fock alpha ipr window 0.5 reason,current
+mf_selected_fock_alpha_ipr_window_orbital_count_0.1,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mean_field,mf selected fock alpha ipr window orbital count 0.1,current
+mf_selected_fock_alpha_ipr_window_orbital_count_0.5,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mean_field,mf selected fock alpha ipr window orbital count 0.5,current
+mf_selected_fock_alpha_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected fock alpha reason,current
+mf_selected_fock_alpha_thermal_active_fraction_kt_0.025,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock alpha thermal active fraction kt 0.025,current
+mf_selected_fock_alpha_thermal_active_fraction_kt_0.1,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock alpha thermal active fraction kt 0.1,current
+mf_selected_fock_alpha_thermal_active_fraction_kt_0.25,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock alpha thermal active fraction kt 0.25,current
+mf_selected_fock_beta_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected fock beta applicable,current
+mf_selected_fock_beta_center_hartree,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mean_field,mf selected fock beta center hartree,current
+mf_selected_fock_beta_dos_per_orbital_eta_0.05,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock beta dos per orbital eta 0.05,current
+mf_selected_fock_beta_dos_per_orbital_eta_0.2,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock beta dos per orbital eta 0.2,current
+mf_selected_fock_beta_dos_total_eta_0.05,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock beta dos total eta 0.05,current
+mf_selected_fock_beta_dos_total_eta_0.2,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock beta dos total eta 0.2,current
+mf_selected_fock_beta_edge_degenerate,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected fock beta edge degenerate,current
+mf_selected_fock_beta_gap_hartree,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock beta gap hartree,current
+mf_selected_fock_beta_ipr_window_0.1,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock beta ipr window 0.1,current
+mf_selected_fock_beta_ipr_window_0.1_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected fock beta ipr window 0.1 applicable,current
+mf_selected_fock_beta_ipr_window_0.1_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected fock beta ipr window 0.1 reason,current
+mf_selected_fock_beta_ipr_window_0.5,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock beta ipr window 0.5,current
+mf_selected_fock_beta_ipr_window_0.5_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected fock beta ipr window 0.5 applicable,current
+mf_selected_fock_beta_ipr_window_0.5_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected fock beta ipr window 0.5 reason,current
+mf_selected_fock_beta_ipr_window_orbital_count_0.1,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mean_field,mf selected fock beta ipr window orbital count 0.1,current
+mf_selected_fock_beta_ipr_window_orbital_count_0.5,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mean_field,mf selected fock beta ipr window orbital count 0.5,current
+mf_selected_fock_beta_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected fock beta reason,current
+mf_selected_fock_beta_thermal_active_fraction_kt_0.025,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock beta thermal active fraction kt 0.025,current
+mf_selected_fock_beta_thermal_active_fraction_kt_0.1,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock beta thermal active fraction kt 0.1,current
+mf_selected_fock_beta_thermal_active_fraction_kt_0.25,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock beta thermal active fraction kt 0.25,current
+mf_selected_fock_gap_min_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected fock gap min applicable,current
+mf_selected_fock_gap_min_hartree,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected fock gap min hartree,current
+mf_selected_fock_gap_min_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected fock gap min reason,current
+mf_selected_guess,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected guess,current
+mf_selected_method,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected method,current
+mf_selected_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf selected reason,current
+mf_selected_s2,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf selected s2,current
+mf_solution_energy_spread_hartree,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mean_field,mf solution energy spread hartree,current
+mf_solution_energy_spread_per_electron_hartree,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf solution energy spread per electron hartree,current
+mf_stability_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf stability applicable,current
+mf_stability_external_action_seconds,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,stability,mf stability external action seconds,current
+mf_stability_external_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf stability external applicable,current
+mf_stability_external_dimension,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,stability,mf stability external dimension,current
+mf_stability_external_dimension_ceiling,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,stability,mf stability external dimension ceiling,current
+mf_stability_external_eigenvalue_hartree,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,stability,mf stability external eigenvalue hartree,current
+mf_stability_external_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf stability external reason,current
+mf_stability_follow_count,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,stability,mf stability follow count,current
+mf_stability_internal_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf stability internal applicable,current
+mf_stability_internal_final_eigenvalue_hartree,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,stability,mf stability internal final eigenvalue hartree,current
+mf_stability_internal_initial_eigenvalue_hartree,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,stability,mf stability internal initial eigenvalue hartree,current
+mf_stability_internal_marginal,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf stability internal marginal,current
+mf_stability_internal_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf stability internal reason,current
+mf_stability_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf stability reason,current
+mf_symmetry_breaking_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf symmetry breaking applicable,current
+mf_symmetry_breaking_energy_hartree,feature,T1,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mean_field,mf symmetry breaking energy hartree,current
+mf_symmetry_breaking_energy_per_electron,feature,T1,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mean_field,mf symmetry breaking energy per electron,current
+mf_symmetry_breaking_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf symmetry breaking reason,current
+mf_tie_core_degenerate_subspace_count,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie core degenerate subspace count,current
+mf_tie_core_hysteresis_band_split_count,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie core hysteresis band split count,current
+mf_tie_core_minimum_adjacent_split,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie core minimum adjacent split,current
+mf_tie_core_projected_index_tied_subspace_count,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie core projected index tied subspace count,current
+mf_tie_g1_alpha_boundary_tie,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie g1 alpha boundary tie,current
+mf_tie_g1_beta_boundary_tie,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie g1 beta boundary tie,current
+mf_tie_g2_alpha_boundary_tie,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie g2 alpha boundary tie,current
+mf_tie_g2_beta_boundary_tie,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie g2 beta boundary tie,current
+mf_tie_g3_alpha_boundary_tie,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie g3 alpha boundary tie,current
+mf_tie_g3_beta_boundary_tie,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie g3 beta boundary tie,current
+mf_tie_selected_fock_alpha_boundary_tie,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie selected fock alpha boundary tie,current
+mf_tie_selected_fock_alpha_degenerate_subspace_count,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie selected fock alpha degenerate subspace count,current
+mf_tie_selected_fock_alpha_hysteresis_band_split_count,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie selected fock alpha hysteresis band split count,current
+mf_tie_selected_fock_alpha_minimum_adjacent_split,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie selected fock alpha minimum adjacent split,current
+mf_tie_selected_fock_alpha_projected_index_tied_subspace_count,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie selected fock alpha projected index tied subspace count,current
+mf_tie_selected_fock_beta_boundary_tie,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie selected fock beta boundary tie,current
+mf_tie_selected_fock_beta_degenerate_subspace_count,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie selected fock beta degenerate subspace count,current
+mf_tie_selected_fock_beta_hysteresis_band_split_count,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie selected fock beta hysteresis band split count,current
+mf_tie_selected_fock_beta_minimum_adjacent_split,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie selected fock beta minimum adjacent split,current
+mf_tie_selected_fock_beta_projected_index_tied_subspace_count,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie selected fock beta projected index tied subspace count,current
+mf_tie_selection_energy_tie_tolerance_hartree,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie selection energy tie tolerance hartree,current
+mf_tie_selection_method_order,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mf tie selection method order,current
+mfproto_dense_eri_seconds,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO version, measured cost, or execution diagnostic",N/A,metadata,mfproto dense eri seconds,current
+mfproto_features_version,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO version, measured cost, or execution diagnostic",N/A,metadata,mfproto features version,current
+mfproto_hf_variance_seconds,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO version, measured cost, or execution diagnostic",N/A,metadata,mfproto hf variance seconds,current
+mfproto_mp2_seconds,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO version, measured cost, or execution diagnostic",N/A,metadata,mfproto mp2 seconds,current
+mfproto_pair_graph_seconds,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO version, measured cost, or execution diagnostic",N/A,metadata,mfproto pair graph seconds,current
+mfproto_scf_seconds,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO version, measured cost, or execution diagnostic",N/A,metadata,mfproto scf seconds,current
+mfproto_stability_seconds,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO version, measured cost, or execution diagnostic",N/A,metadata,mfproto stability seconds,current
+mfproto_total_seconds,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO version, measured cost, or execution diagnostic",N/A,metadata,mfproto total seconds,current
+mp2_amplitude_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 amplitude applicable,current
+mp2_amplitude_l1_norm,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 amplitude l1 norm,current
+mp2_amplitude_l2_norm,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 amplitude l2 norm,current
+mp2_amplitude_max_abs,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 amplitude max abs,current
+mp2_amplitude_partial_mask,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 amplitude partial mask,current
+mp2_amplitude_participation_ratio,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 amplitude participation ratio,current
+mp2_amplitude_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 amplitude reason,current
+mp2_amplitude_shape_boundary_ambiguous,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 amplitude shape boundary ambiguous,current
+mp2_amplitude_top_128_l2_mass_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 amplitude top 128 l2 mass fraction,current
+mp2_amplitude_top_16_l2_mass_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 amplitude top 16 l2 mass fraction,current
+mp2_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 applicable,current
+mp2_correlation_energy_hartree,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 correlation energy hartree,current
+mp2_correlation_energy_per_electron_hartree,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 correlation energy per electron hartree,current
+mp2_denominator_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 denominator applicable,current
+mp2_denominator_inverse_first_moment,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 denominator inverse first moment,current
+mp2_denominator_inverse_second_moment,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 denominator inverse second moment,current
+mp2_denominator_masked_count,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 denominator masked count,current
+mp2_denominator_masked_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 denominator masked fraction,current
+mp2_denominator_p1_hartree,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 denominator p1 hartree,current
+mp2_denominator_p25_hartree,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 denominator p25 hartree,current
+mp2_denominator_p50_hartree,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 denominator p50 hartree,current
+mp2_denominator_p5_hartree,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 denominator p5 hartree,current
+mp2_denominator_partial_mask,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 denominator partial mask,current
+mp2_denominator_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 denominator reason,current
+mp2_denominator_term_count,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 denominator term count,current
+mp2_kappa_1p1_amplitude_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p1 amplitude applicable,current
+mp2_kappa_1p1_amplitude_l1_norm,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 kappa 1p1 amplitude l1 norm,current
+mp2_kappa_1p1_amplitude_l2_norm,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 kappa 1p1 amplitude l2 norm,current
+mp2_kappa_1p1_amplitude_max_abs,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p1 amplitude max abs,current
+mp2_kappa_1p1_amplitude_partial_mask,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p1 amplitude partial mask,current
+mp2_kappa_1p1_amplitude_participation_ratio,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p1 amplitude participation ratio,current
+mp2_kappa_1p1_amplitude_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p1 amplitude reason,current
+mp2_kappa_1p1_amplitude_top_128_l2_mass_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p1 amplitude top 128 l2 mass fraction,current
+mp2_kappa_1p1_amplitude_top_16_l2_mass_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p1 amplitude top 16 l2 mass fraction,current
+mp2_kappa_1p1_correlation_energy_hartree,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 kappa 1p1 correlation energy hartree,current
+mp2_kappa_1p1_correlation_energy_per_electron_hartree,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p1 correlation energy per electron hartree,current
+mp2_kappa_1p1_opposite_spin_amplitude_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p1 opposite spin amplitude applicable,current
+mp2_kappa_1p1_opposite_spin_amplitude_l1_norm,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 kappa 1p1 opposite spin amplitude l1 norm,current
+mp2_kappa_1p1_opposite_spin_amplitude_l2_norm,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 kappa 1p1 opposite spin amplitude l2 norm,current
+mp2_kappa_1p1_opposite_spin_amplitude_max_abs,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p1 opposite spin amplitude max abs,current
+mp2_kappa_1p1_opposite_spin_amplitude_partial_mask,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p1 opposite spin amplitude partial mask,current
+mp2_kappa_1p1_opposite_spin_amplitude_participation_ratio,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p1 opposite spin amplitude participation ratio,current
+mp2_kappa_1p1_opposite_spin_amplitude_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p1 opposite spin amplitude reason,current
+mp2_kappa_1p1_opposite_spin_amplitude_top_128_l2_mass_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p1 opposite spin amplitude top 128 l2 mass fraction,current
+mp2_kappa_1p1_opposite_spin_amplitude_top_16_l2_mass_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p1 opposite spin amplitude top 16 l2 mass fraction,current
+mp2_kappa_1p1_same_spin_amplitude_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p1 same spin amplitude applicable,current
+mp2_kappa_1p1_same_spin_amplitude_l1_norm,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 kappa 1p1 same spin amplitude l1 norm,current
+mp2_kappa_1p1_same_spin_amplitude_l2_norm,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 kappa 1p1 same spin amplitude l2 norm,current
+mp2_kappa_1p1_same_spin_amplitude_max_abs,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p1 same spin amplitude max abs,current
+mp2_kappa_1p1_same_spin_amplitude_partial_mask,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p1 same spin amplitude partial mask,current
+mp2_kappa_1p1_same_spin_amplitude_participation_ratio,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p1 same spin amplitude participation ratio,current
+mp2_kappa_1p1_same_spin_amplitude_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p1 same spin amplitude reason,current
+mp2_kappa_1p1_same_spin_amplitude_top_128_l2_mass_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p1 same spin amplitude top 128 l2 mass fraction,current
+mp2_kappa_1p1_same_spin_amplitude_top_16_l2_mass_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p1 same spin amplitude top 16 l2 mass fraction,current
+mp2_kappa_1p1_vs_1p45_difference_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p1 vs 1p45 difference applicable,current
+mp2_kappa_1p1_vs_1p45_difference_hartree,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 kappa 1p1 vs 1p45 difference hartree,current
+mp2_kappa_1p1_vs_1p45_difference_per_electron_hartree,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p1 vs 1p45 difference per electron hartree,current
+mp2_kappa_1p1_vs_1p45_difference_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p1 vs 1p45 difference reason,current
+mp2_kappa_1p1_vs_1p45_ratio,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p1 vs 1p45 ratio,current
+mp2_kappa_1p1_vs_1p45_ratio_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p1 vs 1p45 ratio applicable,current
+mp2_kappa_1p1_vs_1p45_ratio_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p1 vs 1p45 ratio reason,current
+mp2_kappa_1p1_vs_inf_difference_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p1 vs inf difference applicable,current
+mp2_kappa_1p1_vs_inf_difference_hartree,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 kappa 1p1 vs inf difference hartree,current
+mp2_kappa_1p1_vs_inf_difference_per_electron_hartree,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p1 vs inf difference per electron hartree,current
+mp2_kappa_1p1_vs_inf_difference_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p1 vs inf difference reason,current
+mp2_kappa_1p1_vs_inf_ratio,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p1 vs inf ratio,current
+mp2_kappa_1p1_vs_inf_ratio_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p1 vs inf ratio applicable,current
+mp2_kappa_1p1_vs_inf_ratio_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p1 vs inf ratio reason,current
+mp2_kappa_1p45_amplitude_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p45 amplitude applicable,current
+mp2_kappa_1p45_amplitude_l1_norm,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 kappa 1p45 amplitude l1 norm,current
+mp2_kappa_1p45_amplitude_l2_norm,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 kappa 1p45 amplitude l2 norm,current
+mp2_kappa_1p45_amplitude_max_abs,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p45 amplitude max abs,current
+mp2_kappa_1p45_amplitude_partial_mask,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p45 amplitude partial mask,current
+mp2_kappa_1p45_amplitude_participation_ratio,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p45 amplitude participation ratio,current
+mp2_kappa_1p45_amplitude_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p45 amplitude reason,current
+mp2_kappa_1p45_amplitude_top_128_l2_mass_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p45 amplitude top 128 l2 mass fraction,current
+mp2_kappa_1p45_amplitude_top_16_l2_mass_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p45 amplitude top 16 l2 mass fraction,current
+mp2_kappa_1p45_correlation_energy_hartree,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 kappa 1p45 correlation energy hartree,current
+mp2_kappa_1p45_correlation_energy_per_electron_hartree,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p45 correlation energy per electron hartree,current
+mp2_kappa_1p45_opposite_spin_amplitude_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p45 opposite spin amplitude applicable,current
+mp2_kappa_1p45_opposite_spin_amplitude_l1_norm,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 kappa 1p45 opposite spin amplitude l1 norm,current
+mp2_kappa_1p45_opposite_spin_amplitude_l2_norm,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 kappa 1p45 opposite spin amplitude l2 norm,current
+mp2_kappa_1p45_opposite_spin_amplitude_max_abs,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p45 opposite spin amplitude max abs,current
+mp2_kappa_1p45_opposite_spin_amplitude_partial_mask,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p45 opposite spin amplitude partial mask,current
+mp2_kappa_1p45_opposite_spin_amplitude_participation_ratio,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p45 opposite spin amplitude participation ratio,current
+mp2_kappa_1p45_opposite_spin_amplitude_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p45 opposite spin amplitude reason,current
+mp2_kappa_1p45_opposite_spin_amplitude_top_128_l2_mass_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p45 opposite spin amplitude top 128 l2 mass fraction,current
+mp2_kappa_1p45_opposite_spin_amplitude_top_16_l2_mass_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p45 opposite spin amplitude top 16 l2 mass fraction,current
+mp2_kappa_1p45_same_spin_amplitude_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p45 same spin amplitude applicable,current
+mp2_kappa_1p45_same_spin_amplitude_l1_norm,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 kappa 1p45 same spin amplitude l1 norm,current
+mp2_kappa_1p45_same_spin_amplitude_l2_norm,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 kappa 1p45 same spin amplitude l2 norm,current
+mp2_kappa_1p45_same_spin_amplitude_max_abs,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p45 same spin amplitude max abs,current
+mp2_kappa_1p45_same_spin_amplitude_partial_mask,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p45 same spin amplitude partial mask,current
+mp2_kappa_1p45_same_spin_amplitude_participation_ratio,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p45 same spin amplitude participation ratio,current
+mp2_kappa_1p45_same_spin_amplitude_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p45 same spin amplitude reason,current
+mp2_kappa_1p45_same_spin_amplitude_top_128_l2_mass_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p45 same spin amplitude top 128 l2 mass fraction,current
+mp2_kappa_1p45_same_spin_amplitude_top_16_l2_mass_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p45 same spin amplitude top 16 l2 mass fraction,current
+mp2_kappa_1p45_vs_inf_difference_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p45 vs inf difference applicable,current
+mp2_kappa_1p45_vs_inf_difference_hartree,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 kappa 1p45 vs inf difference hartree,current
+mp2_kappa_1p45_vs_inf_difference_per_electron_hartree,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p45 vs inf difference per electron hartree,current
+mp2_kappa_1p45_vs_inf_difference_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p45 vs inf difference reason,current
+mp2_kappa_1p45_vs_inf_ratio,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa 1p45 vs inf ratio,current
+mp2_kappa_1p45_vs_inf_ratio_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p45 vs inf ratio applicable,current
+mp2_kappa_1p45_vs_inf_ratio_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa 1p45 vs inf ratio reason,current
+mp2_kappa_inf_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa inf applicable,current
+mp2_kappa_inf_correlation_energy_hartree,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 kappa inf correlation energy hartree,current
+mp2_kappa_inf_correlation_energy_per_electron_hartree,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 kappa inf correlation energy per electron hartree,current
+mp2_kappa_inf_partial_mask,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa inf partial mask,current
+mp2_kappa_inf_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 kappa inf reason,current
+mp2_natural_active_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 natural active fraction,current
+mp2_natural_entropy,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 natural entropy,current
+mp2_natural_entropy_per_electron,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 natural entropy per electron,current
+mp2_natural_occupation_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 natural occupation applicable,current
+mp2_natural_occupation_clipped_count,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 natural occupation clipped count,current
+mp2_natural_occupation_maximum_raw,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 natural occupation maximum raw,current
+mp2_natural_occupation_minimum_raw,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 natural occupation minimum raw,current
+mp2_natural_occupation_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 natural occupation reason,current
+mp2_opposite_spin_amplitude_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 opposite spin amplitude applicable,current
+mp2_opposite_spin_amplitude_l1_norm,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 opposite spin amplitude l1 norm,current
+mp2_opposite_spin_amplitude_l2_norm,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 opposite spin amplitude l2 norm,current
+mp2_opposite_spin_amplitude_max_abs,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 opposite spin amplitude max abs,current
+mp2_opposite_spin_amplitude_partial_mask,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 opposite spin amplitude partial mask,current
+mp2_opposite_spin_amplitude_participation_ratio,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 opposite spin amplitude participation ratio,current
+mp2_opposite_spin_amplitude_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 opposite spin amplitude reason,current
+mp2_opposite_spin_amplitude_top_128_l2_mass_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 opposite spin amplitude top 128 l2 mass fraction,current
+mp2_opposite_spin_amplitude_top_16_l2_mass_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 opposite spin amplitude top 16 l2 mass fraction,current
+mp2_opposite_spin_correlation_energy_hartree,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 opposite spin correlation energy hartree,current
+mp2_opposite_spin_correlation_energy_per_electron_hartree,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 opposite spin correlation energy per electron hartree,current
+mp2_pair_cut_best_max,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut best max,current
+mp2_pair_cut_best_max_heuristic,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 pair cut best max heuristic,current
+mp2_pair_cut_best_max_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut best max normalized,current
+mp2_pair_cut_best_p95,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut best p95,current
+mp2_pair_cut_best_p95_heuristic,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 pair cut best p95 heuristic,current
+mp2_pair_cut_best_p95_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut best p95 normalized,current
+mp2_pair_cut_best_sum,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut best sum,current
+mp2_pair_cut_best_sum_heuristic,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 pair cut best sum heuristic,current
+mp2_pair_cut_best_sum_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut best sum normalized,current
+mp2_pair_cut_fiedler_max,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut fiedler max,current
+mp2_pair_cut_fiedler_max_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut fiedler max normalized,current
+mp2_pair_cut_fiedler_p95,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut fiedler p95,current
+mp2_pair_cut_fiedler_p95_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut fiedler p95 normalized,current
+mp2_pair_cut_fiedler_sum,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut fiedler sum,current
+mp2_pair_cut_fiedler_sum_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut fiedler sum normalized,current
+mp2_pair_cut_file_max,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut file max,current
+mp2_pair_cut_file_max_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut file max normalized,current
+mp2_pair_cut_file_p95,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut file p95,current
+mp2_pair_cut_file_p95_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut file p95 normalized,current
+mp2_pair_cut_file_sum,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut file sum,current
+mp2_pair_cut_file_sum_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut file sum normalized,current
+mp2_pair_cut_heuristic_spread_max,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut heuristic spread max,current
+mp2_pair_cut_heuristic_spread_p95,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut heuristic spread p95,current
+mp2_pair_cut_heuristic_spread_sum,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut heuristic spread sum,current
+mp2_pair_cut_linear_relaxation_max,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut linear relaxation max,current
+mp2_pair_cut_linear_relaxation_max_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut linear relaxation max normalized,current
+mp2_pair_cut_linear_relaxation_p95,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut linear relaxation p95,current
+mp2_pair_cut_linear_relaxation_p95_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut linear relaxation p95 normalized,current
+mp2_pair_cut_linear_relaxation_sum,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut linear relaxation sum,current
+mp2_pair_cut_linear_relaxation_sum_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut linear relaxation sum normalized,current
+mp2_pair_cut_minimum_degree_max,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut minimum degree max,current
+mp2_pair_cut_minimum_degree_max_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut minimum degree max normalized,current
+mp2_pair_cut_minimum_degree_p95,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut minimum degree p95,current
+mp2_pair_cut_minimum_degree_p95_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut minimum degree p95 normalized,current
+mp2_pair_cut_minimum_degree_sum,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut minimum degree sum,current
+mp2_pair_cut_minimum_degree_sum_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut minimum degree sum normalized,current
+mp2_pair_cut_random_max,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut random max,current
+mp2_pair_cut_random_max_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut random max normalized,current
+mp2_pair_cut_random_p95,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut random p95,current
+mp2_pair_cut_random_p95_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut random p95 normalized,current
+mp2_pair_cut_random_sum,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut random sum,current
+mp2_pair_cut_random_sum_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut random sum normalized,current
+mp2_pair_cut_rcm_max,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut rcm max,current
+mp2_pair_cut_rcm_max_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut rcm max normalized,current
+mp2_pair_cut_rcm_p95,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut rcm p95,current
+mp2_pair_cut_rcm_p95_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut rcm p95 normalized,current
+mp2_pair_cut_rcm_sum,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair cut rcm sum,current
+mp2_pair_cut_rcm_sum_normalized,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2_pair_graph,mp2 pair cut rcm sum normalized,current
+mp2_pair_graph_edge_count,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair graph edge count,current
+mp2_pair_graph_random_seed,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair graph random seed,current
+mp2_pair_graph_total_weight,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2_pair_graph,mp2 pair graph total weight,current
+mp2_pair_graph_zero,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 pair graph zero,current
+mp2_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 reason,current
+mp2_reference,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 reference,current
+mp2_same_spin_amplitude_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 same spin amplitude applicable,current
+mp2_same_spin_amplitude_l1_norm,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 same spin amplitude l1 norm,current
+mp2_same_spin_amplitude_l2_norm,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 same spin amplitude l2 norm,current
+mp2_same_spin_amplitude_max_abs,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 same spin amplitude max abs,current
+mp2_same_spin_amplitude_partial_mask,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 same spin amplitude partial mask,current
+mp2_same_spin_amplitude_participation_ratio,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 same spin amplitude participation ratio,current
+mp2_same_spin_amplitude_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 same spin amplitude reason,current
+mp2_same_spin_amplitude_top_128_l2_mass_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 same spin amplitude top 128 l2 mass fraction,current
+mp2_same_spin_amplitude_top_16_l2_mass_fraction,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 same spin amplitude top 16 l2 mass fraction,current
+mp2_same_spin_correlation_energy_hartree,feature,T2,BAS+ORD,MF-PROTO,audit-only,False,"raw extensive quantity, count, ceiling, or numerical audit",audit,mp2,mp2 same spin correlation energy hartree,current
+mp2_same_spin_correlation_energy_per_electron_hartree,feature,T2,BAS+ORD,MF-PROTO,accuracy,True,,intensive,mp2,mp2 same spin correlation energy per electron hartree,current
+mp2_unregularized_applicable,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 unregularized applicable,current
+mp2_unregularized_partial_mask,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 unregularized partial mask,current
+mp2_unregularized_reason,procedural,N/A,N/A,N/A,audit-only,False,"MFPROTO applicability, mask, tie, method, or ordering diagnostic",N/A,metadata,mp2 unregularized reason,current

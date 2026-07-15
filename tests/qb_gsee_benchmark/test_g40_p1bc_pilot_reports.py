@@ -89,9 +89,7 @@ def test_p1c_production_table_and_report_are_complete() -> None:
     assert frame.shape[0] == 591
     assert frame.shape[1] >= 232
     assert frame["task_uuid"].is_unique
-    assert set(frame["orderability_features_version"]) == {
-        "g40_p1c_orderability_v1"
-    }
+    assert set(frame["orderability_features_version"]) == {"g40_p1c_orderability_v1"}
     required = [
         "cut_weight_best_max",
         "cut_weight_heuristic_spread_p95",
@@ -112,9 +110,7 @@ def test_p1c_production_table_and_report_are_complete() -> None:
     assert report["changed_populated_cells"] == 0
     assert report["code_revision"] == "a1179fa"
     assert report["builder_revision"] == "0da1087"
-    assert report["input_feature_table_sha256"] == p1b[
-        "output_feature_table_sha256"
-    ]
+    assert report["input_feature_table_sha256"] == p1b["output_feature_table_sha256"]
     assert report["output_feature_table_sha256"] == (
         "3ef297f012f7cb5a2eb839515d33140c10a203d558852cdbe9b873f8fe68f3b8"
     )
@@ -130,19 +126,33 @@ def test_p1c_production_table_and_report_are_complete() -> None:
 def test_retag_audit_flags_and_report_are_complete() -> None:
     table = ROOT / "scripts" / "Hamiltonian_features.csv"
     frame = pd.read_csv(table)
-    assert frame.shape == (591, 253)
-    assert not frame[[
-        "det_coupling_reference_boundary_tie",
-        "mpo_pair_rank_applicable",
-        "retag_audit_features_version",
-    ]].isna().any().any()
+    assert frame.shape == (591, 580)
+    assert (
+        not frame[
+            [
+                "det_coupling_reference_boundary_tie",
+                "mpo_pair_rank_applicable",
+                "retag_audit_features_version",
+            ]
+        ]
+        .isna()
+        .any()
+        .any()
+    )
     assert set(frame["retag_audit_features_version"]) == {"g40_retag_audit_v1"}
-    assert not frame[[
-        "orderability_degeneracy_features_version",
-        "orderability_fiedler_min_coordinate_gap",
-        "orderability_laplacian_lambda23_relative_split",
-        "orderability_laplacian_lambda23_split_applicable",
-    ]].isna().any().any()
+    assert (
+        not frame[
+            [
+                "orderability_degeneracy_features_version",
+                "orderability_fiedler_min_coordinate_gap",
+                "orderability_laplacian_lambda23_relative_split",
+                "orderability_laplacian_lambda23_split_applicable",
+            ]
+        ]
+        .isna()
+        .any()
+        .any()
+    )
     assert set(frame["orderability_degeneracy_features_version"]) == {
         "g40_orderability_degeneracy_v1"
     }
@@ -150,6 +160,7 @@ def test_retag_audit_flags_and_report_are_complete() -> None:
     p1c = json.loads((OUT / "g40_p1c_production_report.json").read_text())
     r6 = json.loads((OUT / "g40_r6_production_report.json").read_text())
     p1d = json.loads((OUT / "g40_p1d_production_report.json").read_text())
+    p2 = json.loads((OUT / "g40_p2_production_report.json").read_text())
     assert report["successful_states"] == report["corpus_tasks"] == 591
     assert report["columns_before"] == 232
     assert report["columns_after"] == 235
@@ -157,12 +168,12 @@ def test_retag_audit_flags_and_report_are_complete() -> None:
     assert report["changed_populated_cells"] == 0
     assert report["input_feature_table_sha256"] == p1c["output_feature_table_sha256"]
     assert report["output_feature_table_sha256"] == r6["input_feature_table_sha256"]
-    assert r6["output_feature_table_sha256"] == p1d[
-        "input_feature_table_sha256"
-    ]
-    assert p1d["output_feature_table_sha256"] == hashlib.sha256(
-        table.read_bytes()
-    ).hexdigest()
+    assert r6["output_feature_table_sha256"] == p1d["input_feature_table_sha256"]
+    assert p2["input_feature_table_sha256"] == p1d["output_feature_table_sha256"]
+    assert (
+        p2["output_feature_table_sha256"]
+        == hashlib.sha256(table.read_bytes()).hexdigest()
+    )
     assert [job["job_id"] for job in report["pbs_jobs"]] == [
         "7651548.imgt1",
         "7651553.imgt1",
