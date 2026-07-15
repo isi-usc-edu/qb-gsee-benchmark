@@ -25,7 +25,14 @@ DEFAULT_OUTPUT_DIR = REPOSITORY_ROOT / "analysis" / "runtime_cost"
 G48_CAMPAIGN = "g48_pyscf_clean_slate_2026-07_v1"
 G48_PRODUCTION_RELATIVE = Path("work/solver_runs/g48_p3_production_728ef21")
 G48_PILOT_RELATIVE = Path("work/solver_runs/g48_p2_repilot_v041_728ef21")
-SCHEMA_VERSION = "g51_runtime_cost_v1"
+G49_CAMPAIGN = "g49_pyscf_stability_resolved_2026-07_v1"
+G49_RELATIVE = Path("work/solver_runs/g49_stability_resolved_2026-07_v1")
+G49B_RELATIVE = Path("work/solver_runs/g49b_remediation_2026-07_v1")
+G40_CAMPAIGN = "g40_p2_production"
+G40_RELATIVE = Path("work/feature_runs/g40_p2_production_e95e8f6")
+G40_REPORT_RELATIVE = Path("analysis/feature_schema/g40_p2_production_report.json")
+SCHEMA_VERSION = "g51_runtime_cost_v2"
+OUTPUT_STEM = "g51_runtime_cost_v2"
 
 
 def _load_metrics_exporter() -> Any:
@@ -158,8 +165,9 @@ def _pbs_fields(path: Path) -> dict[str, str]:
 
 def _g48_accounting(
     production: Path, pilot: Path
-) -> tuple[dict[str, float], list[Path]]:
+) -> tuple[dict[str, float], dict[str, int], list[Path]]:
     totals: dict[str, float] = defaultdict(float)
+    counts: dict[str, int] = defaultdict(int)
     used_paths = []
     name_to_method = {
         "hf": "HF",
@@ -188,13 +196,17 @@ def _g48_accounting(
             if walltime is None:
                 raise ValueError(f"missing PBS walltime: {path}")
             totals[method] += _parse_hms(walltime) / 3600.0
+            counts[method] += 1
             used_paths.append(path)
-    return dict(totals), used_paths
+    return dict(totals), dict(counts), used_paths
 
 
-def _g48_observations(
-    workspace_root: Path, tasks: dict[str, dict[str, Any]]
-) -> tuple[list[dict[str, Any]], dict[str, Any], dict[str, float]]:
+def _g48_observations(workspace_root: Path, tasks: dict[str, dict[str, Any]]) -> tuple[
+    list[dict[str, Any]],
+    dict[str, Any],
+    dict[str, float],
+    dict[str, int],
+]:
     production = workspace_root / G48_PRODUCTION_RELATIVE
     pilot = workspace_root / G48_PILOT_RELATIVE
     result_path = production / "g48_p3_campaign_results.csv"
@@ -240,13 +252,269 @@ def _g48_observations(
         )
     if len(observations) != 2955:
         raise ValueError(f"expected 2955 G48 rows, found {len(observations)}")
-    allocated, accounting_paths = _g48_accounting(production, pilot)
+    allocated, accounting_counts, accounting_paths = _g48_accounting(production, pilot)
     source_paths.extend(accounting_paths)
     provenance = _tree_digest(source_paths, workspace_root)
     provenance["description"] = (
         "adjudicated G48 result table, raw timing records, and method job accounting"
     )
-    return observations, provenance, allocated
+    return observations, provenance, allocated, accounting_counts
+
+
+def _valid_timing(record: dict[str, Any]) -> float | None:
+    if record.get("status") == "not_attempted":
+        return None
+    value = (record.get("timing") or {}).get("seconds")
+    if isinstance(value, (int, float)) and math.isfinite(float(value)) and value >= 0:
+        return float(value)
+    return None
+
+
+def _g49_observations(
+    workspace_root: Path, tasks: dict[str, dict[str, Any]]
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    initial = workspace_root / G49_RELATIVE
+    remediation = workspace_root / G49B_RELATIVE
+    result_table = initial / "g49_campaign_results.csv"
+    verification = remediation / "g49b_verification.json"
+    if not result_table.exists() or not verification.exists():
+        raise FileNotFoundError("G49 or G49b accepted bundle is absent")
+
+    records: list[tuple[Path, str]] = []
+    with result_table.open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            records.append((initial / row["raw_record"], "g49_initial_generation"))
+    remediation_paths = sorted(remediation.glob("results/*/method_*.json"))
+    records.extend((path, "g49b_remediation_v1") for path in remediation_paths)
+    if len(records) != 38 or len(remediation_paths) != 8:
+        raise ValueError(
+            f"expected 30 G49 and 8 G49b records, found {len(records)} total"
+        )
+
+    observations = []
+    source_paths = [
+        result_table,
+        initial / "g49_task_manifest.json",
+        verification,
+        remediation / "g49b_task_manifest.json",
+        remediation / "g49b_closeout_evidence_2026-07-15.json",
+        remediation / "g49b_accounting.txt",
+        *sorted((initial / "accounting").glob("*")),
+    ]
+    for path, run_generation in records:
+        record = json.loads(path.read_text(encoding="utf-8"))
+        if record.get("campaign_id") != G49_CAMPAIGN:
+            raise ValueError(f"unexpected G49 campaign ID in {path}")
+        if run_generation == "g49b_remediation_v1" and (
+            record.get("run_generation") != run_generation
+        ):
+            raise ValueError(f"missing G49b run generation in {path}")
+        task_uuid = str(record["task_uuid"])
+        observations.append(
+            {
+                "campaign": G49_CAMPAIGN,
+                "method": record["method"],
+                "task_uuid": task_uuid,
+                "status": record["status"],
+                "wall_seconds": _valid_timing(record),
+                "timing_source": "method_record.timing.seconds",
+                "exclusive_node_attribution": False,
+                "hardware_profile": (
+                    "LCRC Improv full CPU node; 128 cores; no memory request; "
+                    "PySCF 2.8.0 pinned campaign environment"
+                ),
+                "source": path.relative_to(workspace_root).as_posix(),
+                "run_generation": run_generation,
+                **_task_labels(tasks.get(task_uuid, {})),
+            }
+        )
+        source_paths.append(path)
+    provenance = _tree_digest(source_paths, workspace_root)
+    provenance["description"] = (
+        "accepted G49 initial and G49b remediation method timing records"
+    )
+    return observations, provenance
+
+
+def _g40_observations(
+    repository_root: Path,
+    workspace_root: Path,
+    tasks: dict[str, dict[str, Any]],
+) -> tuple[list[dict[str, Any]], dict[str, Any], dict[str, Any]]:
+    run_root = workspace_root / G40_RELATIVE
+    report_path = repository_root / G40_REPORT_RELATIVE
+    plan_path = run_root / "production_plan.json"
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    plan = json.loads(plan_path.read_text(encoding="utf-8"))
+    preseeded = {row["path"] for row in plan["seed_state_ledger"]}
+    if len(preseeded) != 25:
+        raise ValueError(
+            f"expected 25 preseeded G40 pilot states, found {len(preseeded)}"
+        )
+
+    observations = []
+    source_paths = [report_path, plan_path]
+    for path in sorted((run_root / "state").glob("*.mfproto.json")):
+        if path.name in preseeded:
+            continue
+        state = json.loads(path.read_text(encoding="utf-8"))
+        if state.get("status") != "success":
+            raise ValueError(f"non-success G40 production state: {path}")
+        task_uuid = str(state["task_uuid"])
+        observations.append(
+            {
+                "campaign": G40_CAMPAIGN,
+                "method": "MFPROTO-v3",
+                "task_uuid": task_uuid,
+                "status": "completed",
+                "wall_seconds": float(state["walltime_seconds"]),
+                "timing_source": "mfproto_state.walltime_seconds",
+                "exclusive_node_attribution": True,
+                "hardware_profile": (
+                    "LCRC Improv full CPU node; 128 cores; no memory request; "
+                    "PySCF 2.8.0; MFPROTO-v3"
+                ),
+                "source": path.relative_to(workspace_root).as_posix(),
+                "run_generation": "g40_p2_production_e95e8f6",
+                **_task_labels(tasks.get(task_uuid, {})),
+            }
+        )
+        source_paths.append(path)
+    if len(observations) != 566:
+        raise ValueError(
+            f"expected 566 new G40 production states, found {len(observations)}"
+        )
+    provenance = _tree_digest(source_paths, workspace_root)
+    provenance["description"] = (
+        "566 new MFPROTO-v3 production states, excluding 25 preseeded pilot states, "
+        "plus the frozen plan and committed production report"
+    )
+    return observations, provenance, report
+
+
+def _scheduler_cost_components(
+    workspace_root: Path,
+    g48_allocated: dict[str, float],
+    g48_counts: dict[str, int],
+    g40_report: dict[str, Any],
+) -> list[dict[str, Any]]:
+    hardware = "LCRC Improv full CPU node; 128 cores; compute queue"
+    components = [
+        {
+            "campaign": G48_CAMPAIGN,
+            "run_generation": "accepted_phase2_pilot_and_phase3_production",
+            "component": "successful_method_jobs",
+            "method": method,
+            "attribution_scope": "method",
+            "job_count": g48_counts[method],
+            "node_hours": hours,
+            "hardware_profile": hardware,
+            "source_manifest": "g48_clean_slate",
+        }
+        for method, hours in sorted(g48_allocated.items())
+    ]
+
+    g49_root = workspace_root / G49_RELATIVE
+    initial_paths = []
+    initial_seconds = 0.0
+    for path in sorted((g49_root / "accounting").glob("*.qstat-xf.txt")):
+        fields = _pbs_fields(path)
+        walltime = fields.get("resources_used.walltime")
+        if walltime is None:
+            continue
+        initial_paths.append(path)
+        initial_seconds += _parse_hms(walltime)
+    if len(initial_paths) != 8 or initial_seconds != 2920:
+        raise ValueError("G49 initial accounting does not reproduce 2920 seconds")
+    components.append(
+        {
+            "campaign": G49_CAMPAIGN,
+            "run_generation": "g49_initial_generation",
+            "component": "task_jobs_and_verifiers",
+            "method": None,
+            "attribution_scope": "campaign_shared_across_methods",
+            "job_count": len(initial_paths),
+            "node_hours": initial_seconds / 3600.0,
+            "hardware_profile": hardware,
+            "source_manifest": "g49_stability_resolved",
+        }
+    )
+
+    evidence_path = (
+        workspace_root / G49B_RELATIVE / "g49b_closeout_evidence_2026-07-15.json"
+    )
+    evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
+    jobs = evidence["accounting"]["jobs"]
+    remediation_seconds = sum(float(row["walltime_seconds"]) for row in jobs)
+    if len(jobs) != 5 or remediation_seconds != 527:
+        raise ValueError("G49b accounting does not reproduce 527 seconds")
+    components.append(
+        {
+            "campaign": G49_CAMPAIGN,
+            "run_generation": "g49b_remediation_v1",
+            "component": "task_jobs_and_verifier",
+            "method": None,
+            "attribution_scope": "campaign_shared_across_methods",
+            "job_count": len(jobs),
+            "node_hours": remediation_seconds / 3600.0,
+            "hardware_profile": hardware,
+            "source_manifest": "g49_stability_resolved",
+        }
+    )
+
+    extraction_jobs = [
+        row for row in g40_report["pbs_jobs"] if row["job_name"] != "g40p2_verify"
+    ]
+    verifier_jobs = [
+        row for row in g40_report["pbs_jobs"] if row["job_name"] == "g40p2_verify"
+    ]
+    if len(extraction_jobs) != 15 or len(verifier_jobs) != 1:
+        raise ValueError("G40 report does not contain 15 shards and one verifier")
+    if any(row["exit_status"] != 0 for row in extraction_jobs + verifier_jobs):
+        raise ValueError("G40 scheduler components contain a failed job")
+    reported_node_hours = (
+        sum(row["walltime_seconds"] for row in extraction_jobs + verifier_jobs) / 3600.0
+    )
+    if not math.isclose(
+        reported_node_hours, g40_report["pbs_gate"]["node_hours"], abs_tol=1e-12
+    ):
+        raise ValueError("G40 scheduler components do not reproduce report total")
+    for label, jobs, method, scope in (
+        ("extraction_shards", extraction_jobs, "MFPROTO-v3", "method"),
+        ("afterok_verifier", verifier_jobs, None, "campaign_support"),
+    ):
+        components.append(
+            {
+                "campaign": G40_CAMPAIGN,
+                "run_generation": "g40_p2_production_e95e8f6",
+                "component": label,
+                "method": method,
+                "attribution_scope": scope,
+                "job_count": len(jobs),
+                "node_hours": sum(row["walltime_seconds"] for row in jobs) / 3600.0,
+                "hardware_profile": hardware,
+                "source_manifest": "g40_mfproto_production",
+            }
+        )
+    return components
+
+
+def _scheduler_cost_totals(
+    components: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in components:
+        groups[row["campaign"]].append(row)
+    return [
+        {
+            "campaign": campaign,
+            "component_count": len(rows),
+            "job_count": sum(row["job_count"] for row in rows),
+            "node_hours": sum(row["node_hours"] for row in rows),
+            "hardware_profiles": sorted({row["hardware_profile"] for row in rows}),
+        }
+        for campaign, rows in sorted(groups.items())
+    ]
 
 
 def _nearest_rank(values: list[float], percentile: float) -> float:
@@ -257,12 +525,15 @@ def _nearest_rank(values: list[float], percentile: float) -> float:
 
 
 def _aggregate(
-    observations: list[dict[str, Any]], allocated: dict[str, float]
+    observations: list[dict[str, Any]], allocated: dict[tuple[str, str], float]
 ) -> list[dict[str, Any]]:
     groups: dict[tuple[str, str, str, str], list[dict[str, Any]]] = defaultdict(list)
     scopes = ("overall", "family", "size_band", "tier", "reference_threshold_stratum")
     for observation in observations:
-        for scope in scopes:
+        observation_scopes = list(scopes)
+        if observation.get("run_generation"):
+            observation_scopes.append("run_generation")
+        for scope in observation_scopes:
             stratum = "all" if scope == "overall" else observation[scope]
             groups[
                 (
@@ -287,9 +558,7 @@ def _aggregate(
             row["exclusive_node_attribution"] for row in attempted
         )
         scheduler_node_hours = (
-            allocated.get(method)
-            if campaign == G48_CAMPAIGN and scope == "overall"
-            else None
+            allocated.get((campaign, method)) if scope == "overall" else None
         )
         task_node_hours = sum(timings) / 3600.0 if exclusive else None
         aggregates.append(
@@ -372,12 +641,43 @@ def _write_report(path: Path, bundle: dict[str, Any]) -> None:
     lines.extend(
         [
             "",
+            "## Scheduler campaign totals",
+            "",
+            "| Campaign | Components | Jobs | Scheduler node-h |",
+            "| --- | ---: | ---: | ---: |",
+        ]
+    )
+    for row in bundle["scheduler_cost_totals"]:
+        lines.append(
+            f"| {row['campaign']} | {row['component_count']} | "
+            f"{row['job_count']} | {row['node_hours']:.6f} |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Scheduler components",
+            "",
+            "| Campaign | Run generation | Component | Method | Scope | Jobs | Node-h |",
+            "| --- | --- | --- | --- | --- | ---: | ---: |",
+        ]
+    )
+    for row in bundle["scheduler_cost_components"]:
+        lines.append(
+            f"| {row['campaign']} | {row['run_generation']} | {row['component']} | "
+            f"{row['method'] or ''} | {row['attribution_scope']} | "
+            f"{row['job_count']} | {row['node_hours']:.6f} |"
+        )
+    lines.extend(
+        [
+            "",
             "## Interpretation guardrails",
             "",
             "- Wall time is the recorded per-task overall or adapter timing; it is not normalized across hardware.",
             "- G48 scheduler node-hours sum archived successful method jobs from the accepted pilot and production arrays; verifier and smoke jobs are excluded.",
             "- G48 family/size rows expose task-attributed full-node hours. Scheduler allocation is reported only at method level because shards mix strata.",
-            "- Legacy and non-G48 campaigns retain wall-time summaries, but allocated node-hours are null because attributable scheduler accounting is absent.",
+            "- G49 and G49b ran all requested methods inside shared task jobs. Their 0.811111 and 0.146389 node-hour components are preserved at run-generation/campaign scope and are never duplicated across method rows.",
+            "- G40 production observations exclude the 25 preseeded pilot states. Its method-level scheduler value covers 15 extraction shards; the 0.030833 node-hour verifier appears only in the campaign total.",
+            "- Legacy campaigns retain wall-time summaries, but allocated node-hours are null where attributable scheduler accounting is absent.",
             "- `not_attempted` rows are coverage records and never contribute zero seconds to timing statistics.",
             "- These data do not support solver-efficiency rankings without a separately preregistered normalization study.",
             "",
@@ -392,8 +692,24 @@ def build_bundle(repository_root: Path, workspace_root: Path) -> dict[str, Any]:
     committed, committed_provenance = _committed_observations(repository_root)
     metrics = _load_metrics_exporter()
     tasks, _attempts = metrics.load_committed_artifacts(repository_root)
-    g48, g48_provenance, allocated = _g48_observations(workspace_root, tasks)
-    observations = committed + g48
+    g48, g48_provenance, g48_allocated, g48_counts = _g48_observations(
+        workspace_root, tasks
+    )
+    g49, g49_provenance = _g49_observations(workspace_root, tasks)
+    g40, g40_provenance, g40_report = _g40_observations(
+        repository_root, workspace_root, tasks
+    )
+    observations = committed + g48 + g49 + g40
+    components = _scheduler_cost_components(
+        workspace_root, g48_allocated, g48_counts, g40_report
+    )
+    allocated = {
+        (G48_CAMPAIGN, method): hours for method, hours in g48_allocated.items()
+    }
+    g40_extraction = next(
+        row for row in components if row["campaign"] == G40_CAMPAIGN and row["method"]
+    )
+    allocated[(G40_CAMPAIGN, "MFPROTO-v3")] = g40_extraction["node_hours"]
     aggregates = _aggregate(observations, allocated)
     return {
         "schema_version": SCHEMA_VERSION,
@@ -407,15 +723,23 @@ def build_bundle(repository_root: Path, workspace_root: Path) -> dict[str, Any]:
                 "held an exclusive full-node allocation."
             ),
             "scheduler_allocated_node_hours": (
-                "Sum of archived PBS resources_used.walltime for successful "
-                "method jobs; verifier and smoke jobs excluded."
+                "Method-attributable archived PBS walltime. Campaign-shared and "
+                "support jobs are reported only in scheduler cost components/totals."
+            ),
+            "scheduler_cost_components": (
+                "Archived PBS walltime split by campaign, run generation, and "
+                "honest attribution scope; includes explicitly labeled support jobs."
             ),
             "p90": "Nearest-rank 90th percentile over timed attempted records.",
         },
         "source_manifests": {
             "committed_solutions": committed_provenance,
             "g48_clean_slate": g48_provenance,
+            "g49_stability_resolved": g49_provenance,
+            "g40_mfproto_production": g40_provenance,
         },
+        "scheduler_cost_components": components,
+        "scheduler_cost_totals": _scheduler_cost_totals(components),
         "coverage": _coverage(aggregates),
         "aggregates": aggregates,
     }
@@ -430,9 +754,9 @@ def main() -> None:
 
     bundle = build_bundle(args.repository_root.resolve(), args.workspace_root.resolve())
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    json_path = args.output_dir / "g51_runtime_cost_v1.json"
-    csv_path = args.output_dir / "g51_runtime_cost_v1.csv"
-    report_path = args.output_dir / "g51_runtime_cost_v1.md"
+    json_path = args.output_dir / f"{OUTPUT_STEM}.json"
+    csv_path = args.output_dir / f"{OUTPUT_STEM}.csv"
+    report_path = args.output_dir / f"{OUTPUT_STEM}.md"
     json_path.write_text(
         json.dumps(bundle, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
