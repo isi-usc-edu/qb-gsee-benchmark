@@ -1,0 +1,97 @@
+{
+  "campaigns": [
+    {
+      "campaign_id": "g50_ipie_swing_clean_slate_2026-07_v1",
+      "execution_site": "ALCF Swing",
+      "solver": "ipie_uhf_trial",
+      "submitter": "Matt",
+      "submission_package_author": "implementer"
+    },
+    {
+      "campaign_id": "g50_dmrg_clean_slate_2026-07_v1",
+      "execution_site": "LCRC Improv",
+      "solver": "DMRG",
+      "submitter": "implementer",
+      "submission_package_author": "implementer"
+    },
+    {
+      "campaign_id": "g50_trimci_clean_slate_2026-07_v1",
+      "execution_site": "LCRC Improv",
+      "solver": "TrimCI",
+      "submitter": "implementer",
+      "submission_package_author": "implementer"
+    },
+    {
+      "campaign_id": "g50_shci_clean_slate_2026-07_v1",
+      "execution_site": "LCRC Improv",
+      "solver": "SHCI",
+      "submitter": "implementer",
+      "submission_package_author": "implementer"
+    }
+  ],
+  "clean_slate": {
+    "fresh_execution": true,
+    "legacy_pooling": false,
+    "pilot_result_reuse": false,
+    "shared_frozen_core_manifest": true
+  },
+  "cost_projection": {
+    "admitted_task_count": "TBD_AT_GATE_2",
+    "core_task_count": "TBD_AT_GATE_1",
+    "planning_caps_per_admitted_task_hours": {
+      "DMRG": 4,
+      "SHCI": 4,
+      "TrimCI": 4,
+      "ipie_uhf_trial": 2
+    },
+    "planning_scenarios": [
+      {
+        "core_rows_per_solver": 100,
+        "cpu_node_hours_all_admitted": 1200,
+        "ipie_gpu_hours_all_admitted": 200
+      },
+      {
+        "core_rows_per_solver": 250,
+        "cpu_node_hours_all_admitted": 3000,
+        "ipie_gpu_hours_all_admitted": 500
+      },
+      {
+        "core_rows_per_solver": 591,
+        "cpu_node_hours_all_admitted": 7092,
+        "ipie_gpu_hours_all_admitted": 1182
+      }
+    ],
+    "production_hard_caps": "TBD_AT_GATE_2",
+    "status": "budgetary_worst_case_pending_calibration"
+  },
+  "gates": [
+    "corpus_and_core_manifest_freeze",
+    "adapter_environment_admission_and_cost_pin",
+    "pi_design_review"
+  ],
+  "outcome_statuses": [
+    "completed",
+    "failed",
+    "timeout",
+    "not_attempted"
+  ],
+  "schema_version": 1,
+  "status": "desk_design_only_execution_held",
+  "target_blind_admission": {
+    "allowed_inputs": [
+      "norb",
+      "electron_sector",
+      "spin_sector",
+      "integral_sparsity_and_norms",
+      "symmetry_and_ordering_metadata",
+      "determinant_space_bounds",
+      "pilot_calibrated_resource_predictors"
+    ],
+    "forbidden_inputs": [
+      "reference_energy",
+      "accuracy_threshold",
+      "prior_solver_outcome",
+      "supervised_success_label"
+    ]
+  }
+}
