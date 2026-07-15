@@ -182,6 +182,10 @@ def main() -> int:
     parser.add_argument("--mock-submission-log", type=Path, required=True)
     parser.add_argument("--preflight-log", type=Path, required=True)
     parser.add_argument("--shards", type=int, default=15)
+    parser.add_argument("--plan-version", default="g40_p2_production_plan_v2")
+    parser.add_argument("--required-pending-instances", type=Path)
+    parser.add_argument("--pending-only-shards", action="store_true")
+    parser.add_argument("--maximum-predicted-node-hours", type=float)
     args = parser.parse_args()
     if args.shards < 1:
         raise ValueError("--shards must be positive")
@@ -270,6 +274,18 @@ def main() -> int:
         shutil.copyfile(source, temporary)
         os.replace(temporary, destination)
 
+    pending_task_uuids = set(records_by_uuid) - set(seed_states)
+    if args.required_pending_instances is not None:
+        required_pending = load_corpus_fcidumps(args.required_pending_instances)
+        required_by_uuid = {record.task_uuid: record for record in required_pending}
+        if set(required_by_uuid) != pending_task_uuids:
+            raise ValueError(
+                "pending production tasks do not exactly match the required corpus"
+            )
+        for task_uuid, record in required_by_uuid.items():
+            if record.signature() != records_by_uuid[task_uuid].signature():
+                raise ValueError(f"required pending manifest drift for {task_uuid}")
+
     sample_norbs, envelope, sources = _runtime_model(seed_states, norbs)
     tasks = []
     for record in records:
@@ -293,8 +309,13 @@ def main() -> int:
 
     shard_tasks: list[list[dict[str, Any]]] = [[] for _ in range(args.shards)]
     shard_loads = [0.0] * args.shards
+    tasks_to_shard = (
+        [task for task in tasks if not task["preseeded_from_pilot"]]
+        if args.pending_only_shards
+        else tasks
+    )
     for task in sorted(
-        tasks,
+        tasks_to_shard,
         key=lambda item: (-item["predicted_pending_seconds"], item["task_uuid"]),
     ):
         shard = min(range(args.shards), key=lambda index: (shard_loads[index], index))
@@ -302,19 +323,32 @@ def main() -> int:
         shard_tasks[shard].append(task)
         shard_loads[shard] += task["predicted_pending_seconds"]
 
+    predicted_pending_node_hours = sum(shard_loads) / 3600.0
+    if (
+        args.maximum_predicted_node_hours is not None
+        and predicted_pending_node_hours > args.maximum_predicted_node_hours
+    ):
+        raise ValueError(
+            "predicted pending allocation exceeds cap: "
+            f"{predicted_pending_node_hours:.6f} > "
+            f"{args.maximum_predicted_node_hours:.6f} node-hours"
+        )
+
     write_corpus_manifest_jsonl(records, args.output_dir / "corpus_manifest.jsonl")
     for index, items in enumerate(shard_tasks):
         text = "".join(f"{item['task_uuid']}\n" for item in items)
         _write_text_exact(args.output_dir / f"shard_{index:02d}.txt", text)
     plan = {
-        "plan_version": "g40_p2_production_plan_v2",
+        "plan_version": args.plan_version,
         "extractor_version": pilot["extractor_version"],
         "extractor_code_revision": pilot["code_revision"],
         "configuration": pilot["configuration"],
         "corpus_tasks": len(records),
         "shards": args.shards,
         "preseeded_states": len(seed_states),
-        "predicted_pending_node_hours": sum(shard_loads) / 3600.0,
+        "pending_tasks": len(pending_task_uuids),
+        "pending_only_shards": args.pending_only_shards,
+        "predicted_pending_node_hours": predicted_pending_node_hours,
         "predicted_shard_seconds": shard_loads,
         "runtime_model": {
             "method": "monotone_next_norb_pilot_envelope_then_cubic_extrapolation",

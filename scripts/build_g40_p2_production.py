@@ -196,7 +196,7 @@ def _mask_reason_counts(states: list[dict[str, Any]]) -> dict[str, int]:
 def _markdown(report: dict[str, Any]) -> str:
     return "\n".join(
         [
-            "# G40 P2 MFPROTO-v3 production report",
+            f"# {report['report_title']}",
             "",
             "## Result",
             "",
@@ -288,6 +288,10 @@ def main() -> int:
     parser.add_argument("--stderr-log", type=Path, action="append", required=True)
     parser.add_argument("--job-script", type=Path, action="append", required=True)
     parser.add_argument("--output-prefix", type=Path, required=True)
+    parser.add_argument("--plan-version", default="g40_p2_production_plan_v2")
+    parser.add_argument("--report-version", default="g40_p2_production_v1")
+    parser.add_argument("--report-title", default="G40 P2 MFPROTO-v3 production report")
+    parser.add_argument("--maximum-node-hours", type=float)
     args = parser.parse_args()
     report_path = args.output_prefix.with_suffix(".json")
     previous = json.loads(report_path.read_text()) if report_path.exists() else {}
@@ -312,7 +316,7 @@ def main() -> int:
     records = load_corpus_fcidumps(args.problem_instances)
     records_by_uuid = {record.task_uuid: record for record in records}
     plan = json.loads(args.production_plan.read_text())
-    if plan.get("plan_version") != "g40_p2_production_plan_v2":
+    if plan.get("plan_version") != args.plan_version:
         raise ValueError("unexpected production plan version")
     bundle_evidence = _validate_bundle_evidence(plan, args.production_plan)
     if (
@@ -459,6 +463,11 @@ def main() -> int:
     output_sha256 = hashlib.sha256(table_bytes).hexdigest()
     state_ledger, state_ledger_sha256 = _state_ledger(state_paths)
     pbs_node_hours = sum(item["walltime_seconds"] for item in accounting) / 3600.0
+    if args.maximum_node_hours is not None and pbs_node_hours > args.maximum_node_hours:
+        raise ValueError(
+            "actual PBS allocation exceeds cap: "
+            f"{pbs_node_hours:.6f} > {args.maximum_node_hours:.6f} node-hours"
+        )
     task_walltimes = [float(state["walltime_seconds"]) for state in states]
     maximum_rss_gb = (
         max(float(state["process_peak_rss_kb"]) for state in states) / 1024**2
@@ -467,7 +476,8 @@ def main() -> int:
         max(_memory_kb(item["memory"]) for item in accounting) / 1024**2
     )
     report = {
-        "report_version": "g40_p2_production_v1",
+        "report_version": args.report_version,
+        "report_title": args.report_title,
         "status": "passed",
         "extractor_version": args.extractor_version,
         "extractor_code_revision": args.extractor_code_revision,
