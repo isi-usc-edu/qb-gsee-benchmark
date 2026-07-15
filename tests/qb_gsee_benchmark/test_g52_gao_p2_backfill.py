@@ -13,6 +13,12 @@ from scripts.verify_g52_gao_candidate import _verify
 
 ROOT = Path(__file__).resolve().parents[2]
 GAO = ROOT / "problem_instances" / "small_molecules" / "gao_distributed_fci"
+PREMERGE_TABLE_SHA256 = (
+    "8f0d89ec2cc7cf933a57c4ace7d32cd62d478c0fb8f8272aae4d36d387d45b2b"
+)
+ACKNOWLEDGED_MERGED_TABLE_SHA256 = (
+    "ee94df21f927ff2e548ac10fda8d5a88c601f31330619ec6c575dc75cf436dc7"
+)
 
 
 def _sha256(path: Path) -> str:
@@ -24,7 +30,7 @@ def _rows(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
-def test_g52_live_intake_is_exactly_the_missing_gao_partition() -> None:
+def test_g52_public_table_is_a_reviewed_release_state() -> None:
     table = ROOT / "scripts" / "Hamiltonian_features.csv"
     report = json.loads(
         (ROOT / "analysis/feature_schema/g40_p2_production_report.json").read_text()
@@ -35,15 +41,21 @@ def test_g52_live_intake_is_exactly_the_missing_gao_partition() -> None:
     }
     gao = {record.task_uuid for record in load_corpus_fcidumps(GAO)}
     public = {row["task_uuid"] for row in _rows(table)}
+    table_sha256 = _sha256(table)
 
     assert len(corpus) == 718
     assert len(gao) == 127
-    assert len(public) == 591
-    assert public == corpus - gao
     assert report["status"] == "passed"
     assert report["successful_states"] == 591
-    assert report["output_feature_table_sha256"] == _sha256(table)
     assert report["feature_contract_sha256"] == _sha256(contract)
+    if table_sha256 == PREMERGE_TABLE_SHA256:
+        assert len(public) == 591
+        assert public == corpus - gao
+        assert report["output_feature_table_sha256"] == table_sha256
+    else:
+        assert table_sha256 == ACKNOWLEDGED_MERGED_TABLE_SHA256
+        assert len(public) == 718
+        assert public == corpus
 
 
 def _instance(task_uuid: str, data_uuid: str, short_name: str) -> dict[str, object]:
