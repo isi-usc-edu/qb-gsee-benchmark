@@ -78,7 +78,7 @@ def test_method_adapters_match_legacy_h2_records(
     data = solution["solution_data"][0]
 
     assert manifest.adapter == adapter_name
-    assert manifest.adapter_version == "0.4.1"
+    assert manifest.adapter_version == "0.4.2"
     assert manifest.solver_uuid == solver_uuid
     assert manifest.solver_short_name == method
     assert manifest.config["method"] == method
@@ -89,6 +89,44 @@ def test_method_adapters_match_legacy_h2_records(
     assert data["solution_details"]["harness_status"] == "completed"
     assert data["solution_details"]["attempted"] is True
     assert data["solution_details"]["campaign"] == pyscf_adapter.G48_METHOD_CAMPAIGN
+
+
+def test_method_adapter_fails_closed_on_non_finite_energy(tmp_path, monkeypatch):
+    run_dir = tmp_path / "non-finite-mp2"
+    pyscf_adapter.prepare_method(
+        method="MP2",
+        problem_instance_path=H2_PROBLEM_INSTANCE,
+        task_uuid=H2_TASK_UUID,
+        fcidump_path=H2_FCIDUMP,
+        run_dir=run_dir,
+        campaign=pyscf_adapter.G48_METHOD_CAMPAIGN,
+        overwrite=True,
+    )
+    monkeypatch.setattr(
+        pyscf_adapter,
+        "_compute_energy",
+        lambda **_kwargs: (
+            float("nan"),
+            {"hf_converged": True, "converged": None},
+        ),
+    )
+
+    with pytest.raises(RuntimeError, match="non-finite scored energy"):
+        pyscf_adapter.run(run_dir)
+
+    raw_output = json.loads((run_dir / "raw_output.json").read_text())
+    solution = pyscf_adapter.harvest(run_dir)
+    data = solution["solution_data"][0]
+    assert raw_output["status"] == "failed"
+    assert raw_output["energy"] is None
+    assert raw_output["details"]["failure_stage"] == "MP2"
+    assert (
+        raw_output["details"]["failure_classification"]
+        == "non_finite_scored_energy"
+    )
+    assert data["energy"] is None
+    assert data["solution_details"]["harness_status"] == "failed"
+    assert data["solution_details"]["attempted"] is True
 
 
 def test_method_adapter_uses_legacy_uhf_open_shell_convention(tmp_path):

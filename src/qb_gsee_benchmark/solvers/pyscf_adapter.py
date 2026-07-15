@@ -65,7 +65,7 @@ from qb_gsee_benchmark.utils import iso8601_timestamp
 from qb_gsee_benchmark.utils import read_fcidump
 
 ADAPTER_NAME = "pyscf_reference"
-ADAPTER_VERSION = "0.4.1"
+ADAPTER_VERSION = "0.4.2"
 LEGACY_METHOD_CAMPAIGN = "pyscf_methods_2026-07"
 G48_METHOD_CAMPAIGN = "g48_pyscf_clean_slate_2026-07_v1"
 
@@ -291,7 +291,16 @@ def run(run_dir: str | Path) -> dict[str, Any]:
             legacy_open_shell_uhf=manifest.adapter in METHOD_ADAPTERS,
         )
         nonconverged_stages = _nonconverged_stages(config.normalized_method(), details)
-        if nonconverged_stages:
+        if not np.isfinite(float(energy)):
+            details["failure_stage"] = config.normalized_method()
+            details["failure_classification"] = "non_finite_scored_energy"
+            details["non_finite_energy_repr"] = repr(float(energy))
+            error_message = (
+                f"PySCF {config.normalized_method()} produced a non-finite scored energy"
+            )
+            status = "failed"
+            energy = None
+        elif nonconverged_stages:
             details["diagnostic_energy_hartree"] = energy
             details["nonconverged_stages"] = nonconverged_stages
             error_message = "PySCF did not converge at default settings: " + ", ".join(
