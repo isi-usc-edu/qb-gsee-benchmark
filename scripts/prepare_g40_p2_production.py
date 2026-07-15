@@ -19,6 +19,7 @@ from qb_gsee_benchmark.features.corpus_runner import (
     load_corpus_fcidumps,
     write_corpus_manifest_jsonl,
 )
+from scripts.build_g40_p2_production import _contract_features
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -84,8 +85,7 @@ def _validate_state(
         )
     ):
         raise ValueError(f"state {record.task_uuid} has invalid source_sha256")
-    if set(state.get("features") or {}) != contract_columns:
-        raise ValueError(f"state {record.task_uuid} does not match P2 contract")
+    _contract_features(state, sorted(contract_columns))
 
 
 def _runtime_model(
