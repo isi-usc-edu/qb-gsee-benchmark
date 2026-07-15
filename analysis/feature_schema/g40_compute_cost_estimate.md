@@ -4,10 +4,10 @@ Status: planning estimate before any G-40 heavy-compute submission.
 
 ## Live corpus
 
-- Tasks: **591**; exactly-one-FCIDUMP tasks: **591**.
-- Families: **91**.
-- NORB metadata known for **497** tasks; **94** will be resolved from FCIDUMP headers.
-- Known NORB bands: `{"17_32": 87, "33_64": 127, "65_96": 55, "97_128": 25, "ge129": 24, "le16": 179}`; maximum known NORB: **256**.
+- Tasks: **718**; exactly-one-FCIDUMP tasks: **718**.
+- Families: **218**.
+- NORB metadata known for **624** tasks; **94** will be resolved from FCIDUMP headers.
+- Known NORB bands: `{"17_32": 160, "33_64": 132, "65_96": 56, "97_128": 25, "ge129": 24, "le16": 227}`; maximum known NORB: **256**.
 - Acceptance is manifest-driven, not count-hardcoded; this census is a submission-time snapshot.
 
 ## Work estimate

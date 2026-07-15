@@ -80,20 +80,41 @@ def test_p0_eligibility_and_retags_are_explicit() -> None:
     assert log_dimension.implementation_status == "current"
     assert metadata_for_column("df_gap").representation == "INV"
     assert metadata_for_column("one_norm").representation == "BAS+ORD"
-    assert metadata_for_column("det_coupling_nonzero_degree").representation == "BAS+ORD"
-    assert metadata_for_column("random_det_expected_degree_rel_1e_8").representation == "BAS+ORD"
+    assert (
+        metadata_for_column("det_coupling_nonzero_degree").representation == "BAS+ORD"
+    )
+    assert (
+        metadata_for_column("random_det_expected_degree_rel_1e_8").representation
+        == "BAS+ORD"
+    )
     assert metadata_for_column("cut_weight_rcm_max").representation == "BAS+ORD"
-    assert metadata_for_column("cut_weight_minimum_degree_sum").representation == "BAS+ORD"
-    assert metadata_for_column("cut_weight_heuristic_spread_p95").representation == "BAS+ORD"
+    assert (
+        metadata_for_column("cut_weight_minimum_degree_sum").representation == "BAS+ORD"
+    )
+    assert (
+        metadata_for_column("cut_weight_heuristic_spread_p95").representation
+        == "BAS+ORD"
+    )
     assert metadata_for_column("cut_weight_fiedler_max").representation == "BAS+ORD"
-    assert metadata_for_column("cut_weight_linear_relaxation_sum").representation == "BAS+ORD"
+    assert (
+        metadata_for_column("cut_weight_linear_relaxation_sum").representation
+        == "BAS+ORD"
+    )
     assert metadata_for_column("cut_weight_best_p95").representation == "BAS+ORD"
     assert metadata_for_column("min_fill_width_upper_bound").representation == "BAS+ORD"
-    assert metadata_for_column("det_coupling_reference_boundary_tie").representation == "BAS+ORD"
+    assert (
+        metadata_for_column("det_coupling_reference_boundary_tie").representation
+        == "BAS+ORD"
+    )
     assert metadata_for_column("mpo_pair_rank_applicable").representation == "BAS"
-    assert metadata_for_column("interaction_spectrum_effective_rank").representation == "INV"
+    assert (
+        metadata_for_column("interaction_spectrum_effective_rank").representation
+        == "INV"
+    )
     assert metadata_for_column("interaction_spectrum_effective_rank").model_eligible
-    assert not metadata_for_column("interaction_spectrum_negative_mass_fraction").model_eligible
+    assert not metadata_for_column(
+        "interaction_spectrum_negative_mass_fraction"
+    ).model_eligible
     for column in (
         "df_rank",
         "df_gap",
@@ -122,18 +143,36 @@ def test_p0_eligibility_and_retags_are_explicit() -> None:
     assert "fermionic_coefficient_l1_norm" in eligible
 
 
-def test_generated_p0_artifacts_are_deterministic_and_value_preserving() -> None:
+def test_generated_p0_artifacts_are_deterministic_and_value_preserving(
+    tmp_path: Path,
+) -> None:
     before = FEATURES.read_bytes()
-    command = [sys.executable, str(ROOT / "scripts" / "build_g40_p0_artifacts.py")]
-    subprocess.run(command, cwd=ROOT, check=True, capture_output=True, text=True)
-    first = {path.name: path.read_bytes() for path in OUT.iterdir() if path.is_file()}
-    subprocess.run(command, cwd=ROOT, check=True, capture_output=True, text=True)
-    second = {path.name: path.read_bytes() for path in OUT.iterdir() if path.is_file()}
+    first_out = tmp_path / "first"
+    second_out = tmp_path / "second"
+
+    def generate(output_dir: Path) -> dict[str, bytes]:
+        command = [
+            sys.executable,
+            str(ROOT / "scripts" / "build_g40_p0_artifacts.py"),
+            "--output-dir",
+            str(output_dir),
+        ]
+        subprocess.run(command, cwd=ROOT, check=True, capture_output=True, text=True)
+        return {
+            path.name: path.read_bytes()
+            for path in output_dir.iterdir()
+            if path.is_file()
+        }
+
+    first = generate(first_out)
+    second = generate(second_out)
 
     assert FEATURES.read_bytes() == before
     assert second == first
+    for name, contents in first.items():
+        assert (OUT / name).read_bytes() == contents
 
-    manifest = json.loads((OUT / "g40_p0_model_manifest.json").read_text())
+    manifest = json.loads((first_out / "g40_p0_model_manifest.json").read_text())
     assert manifest["source_feature_table_sha256"]
     assert "one_norm" in manifest["excluded_columns"]
     assert "ccsd_t1_diagnostic" in manifest["excluded_columns"]
@@ -142,13 +181,16 @@ def test_generated_p0_artifacts_are_deterministic_and_value_preserving() -> None
     current_columns = set(pd.read_csv(FEATURES, nrows=0).columns)
     assert planned == {
         "pending_model_eligible": sorted(
-            (P1B_MODEL | P1C_BAS_MODEL | P1C_BAS_ORD_MODEL | P1D_MODEL) - current_columns
+            (P1B_MODEL | P1C_BAS_MODEL | P1C_BAS_ORD_MODEL | P1D_MODEL)
+            - current_columns
         ),
-        "permanently_audit_only": sorted((P1B_AUDIT | P1C_AUDIT | P1D_AUDIT) - current_columns),
+        "permanently_audit_only": sorted(
+            (P1B_AUDIT | P1C_AUDIT | P1D_AUDIT) - current_columns
+        ),
     }
 
-    with (OUT / "feature_column_metadata.csv").open(newline="") as handle:
+    with (first_out / "feature_column_metadata.csv").open(newline="") as handle:
         rows = list(csv.DictReader(handle))
     columns = list(pd.read_csv(FEATURES, nrows=0).columns)
     assert len(rows) == len(columns) + len(set(PLANNED_COLUMNS) - set(columns))
-    assert (OUT / "g40_p0_appendix_divergences.md").is_file()
+    assert (first_out / "g40_p0_appendix_divergences.md").is_file()
