@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "adjudication": "O27 FeMoco-54 source-defect quarantine",
+  "status": "quarantined_from_success_scoring",
+  "task_uuid": "34e0f543-0f23-405b-b06f-4be3cd556f9b",
+  "problem_instance_uuid": "296bc86d-6de4-4737-b3b3-9dc1b6a4c6b8",
+  "problem_instance_short_name": "fe_mo_co",
+  "task_name": "fe_mo_co_54",
+  "source_defect_documented": true,
+  "reason": "The shipped FCIDUMP contains conflicting duplicate two-electron integral keys, so Hamiltonian identity depends on reader duplicate-resolution behavior.",
+  "census_evidence": {
+    "duplicate_key_count": 341055,
+    "conflicting_key_count": 341029,
+    "maximum_absolute_disagreement": 0.21489576404528,
+    "maximum_disagreement_key_one_based": [
+      18,
+      27,
+      27,
+      28
+    ],
+    "source_sha256": "0ed675b5bc6e002549d61589ca17a5baa705f5dba51ea52da40690e543106d7f"
+  },
+  "comparison_control": {
+    "task_uuid": "c6e29566-d374-4bbd-88cb-32190117a7eb",
+    "task_name": "fe_mo_co_76",
+    "duplicate_key_count": 0,
+    "conflicting_key_count": 0,
+    "quarantined": false
+  },
+  "evidence_files": {
+    "analysis/fcidump_duplicate_conflicts/g45_duplicate_conflict_census.json": "3d2e933a47053305eaec90d745dd3515e26923c575f04aaa100c227f4147e2b5",
+    "analysis/fcidump_duplicate_conflicts/g45_duplicate_conflict_census.csv": "c993dd6769af36555243d957b75d5f501207ded9f3b53b9fc52d775d98f28b89",
+    "analysis/fcidump_duplicate_conflicts/g45_reader_behavior_matrix.csv": "008c9a62fe1482e47c4ea3fa5657485d771218f14953415a658805bbefb395fe"
+  },
+  "scope": {
+    "success_scored_metrics": "excluded",
+    "supervised_success_labels": "excluded",
+    "archive_record": "retained",
+    "fcidump_bytes": "unchanged",
+    "reference_energy": "unchanged",
+    "g48_not_attempted_history": "unchanged",
+    "canonicalization_or_reemission": "held",
+    "outreach": "held"
+  },
+  "review_gate": "Canonicalization, reference changes, and outreach remain held for Matt's personal census review."
+}

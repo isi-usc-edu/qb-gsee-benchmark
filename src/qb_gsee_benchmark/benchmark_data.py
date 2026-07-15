@@ -93,6 +93,22 @@ def test_task_uuids(problem_instance_list: list[dict[str, Any]]) -> set[str]:
     return task_uuids
 
 
+def success_scoring_excluded_task_uuids(
+    problem_instance_list: list[dict[str, Any]],
+) -> set[str]:
+    """Return tasks excluded from success labels and supervised exports."""
+
+    task_uuids = set()
+    for problem_instance in problem_instance_list:
+        for task in problem_instance.get("tasks", []):
+            if (
+                task.get("curation_tier") == "test"
+                or task.get("source_defect_documented") is True
+            ):
+                task_uuids.add(str(task["task_uuid"]))
+    return task_uuids
+
+
 def solver_outcome(
         attempted: bool,
         solved_within_accuracy: bool,
@@ -828,7 +844,10 @@ class BenchmarkData:
             for task in problem_instance["tasks"]:
                 task_uuid = task["task_uuid"]
 
-                if task.get("curation_tier") == "test":
+                if (
+                    task.get("curation_tier") == "test"
+                    or task.get("source_defect_documented") is True
+                ):
                     continue
 
                 if len(self.hamiltonian_features[self.hamiltonian_features["task_uuid"]==task_uuid])==0:
@@ -1399,7 +1418,9 @@ class BenchmarkData:
             output_directory (str): relative/path/for/outout.  Usually /ml_artifacts.
         """
 
-        excluded_task_uuids = test_task_uuids(self.problem_instance_list)
+        excluded_task_uuids = success_scoring_excluded_task_uuids(
+            self.problem_instance_list
+        )
         self.data_for_bubble_ml_df = self.hamiltonian_features[
             ~self.hamiltonian_features["task_uuid"].astype(str).isin(excluded_task_uuids)
         ].copy() # copy/init as Hamiltonian features.
@@ -1430,7 +1451,6 @@ class BenchmarkData:
         # write out data to CSV:
         output_path = os.path.join(output_directory, "data_for_BubbleML.csv")
         self.data_for_bubble_ml_df.to_csv(output_path)
-
 
 
 

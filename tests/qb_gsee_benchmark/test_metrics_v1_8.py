@@ -26,6 +26,7 @@ def task(
     uncertainty=None,
     tier="core",
     family="synthetic",
+    source_defect=False,
 ):
     requirements = {
         "absolute_accuracy_threshold": threshold,
@@ -42,6 +43,7 @@ def task(
         "curation_tier": tier,
         "size_band": "small",
         "reference_provenance_grade": grade,
+        "source_defect_documented": source_defect,
         "requirements": requirements,
     }
 
@@ -64,6 +66,14 @@ def test_outcome_taxonomy_boundary_and_reference_gating():
 
     test_tier = classify_outcome_v1_8(0.0, task("test", tier="test"))
     assert test_tier["metric_status"] == "excluded_test_tier"
+
+    source_defect = classify_outcome_v1_8(
+        0.0, task("source-defect", source_defect=True)
+    )
+    assert source_defect["outcome"] is None
+    assert (
+        source_defect["metric_status"] == "excluded_source_defect_documented"
+    )
 
 
 def test_tau_over_two_flag_and_reference_uncertainty_are_reported():
@@ -644,17 +654,22 @@ def test_v18_real_ingest_reconciliation_campaigns_and_ladders_close():
     disposition = bundle["diagnostics"]["attempt_disposition"]
     assert sum(disposition["counts"].values()) == 3612
     assert disposition["counts"] == {
-        "excluded_invalid_reference_grade": 1111,
+        "excluded_invalid_reference_grade": 1109,
+        "excluded_source_defect_documented": 2,
         "excluded_test_tier": 61,
         "not_attempted": 55,
         "scored": 2385,
     }
+    assert not any(
+        row["task_uuid"] == "34e0f543-0f23-405b-b06f-4be3cd556f9b"
+        for row in bundle["primitives"]
+    )
     correction = bundle["diagnostics"]["record_correction"]
     assert correction["n_original_corrections_declared"] == 27
     assert correction["n_original_corrections_present"] == 27
     assert correction["n_original_corrections_attempted"] == 27
     assert correction["disposition_counts"] == {
-        "excluded_invalid_reference_grade": 2,
+        "excluded_source_defect_documented": 2,
         "scored": 25,
     }
     assert correction["attempt_outcome_counts"] == {"indeterminate": 27}

@@ -86,6 +86,7 @@ def test_femoco_54_reference_provenance_is_explicit():
         "SHCI",
     ]
     assert requirements["reference_energy_independent_of_shci_family"] is False
+    assert task["source_defect_documented"] is True
 
 
 def test_williams_transition_metals_are_labeled_cross_validated():

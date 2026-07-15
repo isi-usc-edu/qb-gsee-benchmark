@@ -284,9 +284,14 @@ def _public_task(task: Mapping[str, Any]) -> bool:
     return str(task.get("curation_tier", "unspecified")) != "test"
 
 
+def _source_defect_documented(task: Mapping[str, Any]) -> bool:
+    return task.get("source_defect_documented") is True
+
+
 def _reference_valid(task: Mapping[str, Any]) -> bool:
     return (
         _public_task(task)
+        and not _source_defect_documented(task)
         and _reference_grade(task) in VALID_REFERENCE_GRADES
         and _reference_energy(task) is not None
         and (_threshold(task) or 0.0) > 0.0
@@ -363,6 +368,9 @@ def classify_outcome_v1_8(
     }
     if not _public_task(task):
         result["metric_status"] = "excluded_test_tier"
+        return result
+    if _source_defect_documented(task):
+        result["metric_status"] = "excluded_source_defect_documented"
         return result
     if not _reference_valid(task):
         result["metric_status"] = "excluded_invalid_reference"
@@ -813,6 +821,8 @@ def _attempt_disposition(
         return "unjoinable"
     if not _public_task(task):
         return "excluded_test_tier"
+    if _source_defect_documented(task):
+        return "excluded_source_defect_documented"
     grade = _reference_grade(task)
     if grade == "missing":
         return "excluded_missing_taxonomy_grade"

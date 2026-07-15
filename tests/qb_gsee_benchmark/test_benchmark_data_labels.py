@@ -20,6 +20,7 @@ from qb_gsee_benchmark.benchmark_data import (
     canonical_problem_family,
     problem_instance_category_by_short_name,
     solver_outcome,
+    success_scoring_excluded_task_uuids,
 )
 
 
@@ -63,6 +64,35 @@ def test_problem_instance_category_by_short_name(tmp_path):
     mapping = problem_instance_category_by_short_name(str(tmp_path))
 
     assert mapping == {"Fe_0": "transition_metals"}
+
+
+def test_success_scoring_excludes_test_tier_and_documented_source_defects():
+    problem_instances = [
+        {
+            "tasks": [
+                {
+                    "task_uuid": "scored",
+                    "curation_tier": "core",
+                    "source_defect_documented": False,
+                },
+                {
+                    "task_uuid": "test-tier",
+                    "curation_tier": "test",
+                    "source_defect_documented": False,
+                },
+                {
+                    "task_uuid": "source-defect",
+                    "curation_tier": "expanded",
+                    "source_defect_documented": True,
+                },
+            ]
+        }
+    ]
+
+    assert success_scoring_excluded_task_uuids(problem_instances) == {
+        "test-tier",
+        "source-defect",
+    }
 
 
 def test_calculate_solver_success_labels_adds_b1_columns():
