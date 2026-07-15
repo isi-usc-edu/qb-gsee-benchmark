@@ -3,6 +3,7 @@
     {
       "campaign_id": "g50_ipie_swing_clean_slate_2026-07_v1",
       "execution_site": "ALCF Swing",
+      "headline_designation_status": "not_designated",
       "solver": "ipie_uhf_trial",
       "submitter": "Matt",
       "submission_package_author": "implementer"
@@ -10,6 +11,7 @@
     {
       "campaign_id": "g50_dmrg_clean_slate_2026-07_v1",
       "execution_site": "LCRC Improv",
+      "headline_designation_status": "not_designated",
       "solver": "DMRG",
       "submitter": "implementer",
       "submission_package_author": "implementer"
@@ -17,6 +19,7 @@
     {
       "campaign_id": "g50_trimci_clean_slate_2026-07_v1",
       "execution_site": "LCRC Improv",
+      "headline_designation_status": "not_designated",
       "solver": "TrimCI",
       "submitter": "implementer",
       "submission_package_author": "implementer"
@@ -24,6 +27,7 @@
     {
       "campaign_id": "g50_shci_clean_slate_2026-07_v1",
       "execution_site": "LCRC Improv",
+      "headline_designation_status": "not_designated",
       "solver": "SHCI",
       "submitter": "implementer",
       "submission_package_author": "implementer"
@@ -34,6 +38,28 @@
     "legacy_pooling": false,
     "pilot_result_reuse": false,
     "shared_frozen_core_manifest": true
+  },
+  "corpus_settle": {
+    "conditions": [
+      {
+        "id": "g48_closed_out",
+        "satisfied": true
+      },
+      {
+        "id": "femoco54_quarantine_filed",
+        "satisfied": true
+      },
+      {
+        "id": "gao_feature_backfill_decided",
+        "satisfied": false
+      },
+      {
+        "id": "no_pending_task_admissions_or_removals",
+        "satisfied": true
+      }
+    ],
+    "definition": "G-48 closed out, FeMoco-54 quarantine filed, Gao feature backfill decided, no pending task admissions/removals",
+    "settled": false
   },
   "cost_projection": {
     "admitted_task_count": "TBD_AT_GATE_2",
@@ -66,9 +92,126 @@
   },
   "gates": [
     "corpus_and_core_manifest_freeze",
-    "adapter_environment_admission_and_cost_pin",
+    "matt_per_solver_configuration_signoff",
     "pi_design_review"
   ],
+  "headline_designation": {
+    "designation_required_before_headline": true,
+    "g48_structural_template": "analysis/g48_pyscf_full_corpus/g48_headline_designation_v1_9.json",
+    "historical_ipie_exclusions": [
+      {
+        "campaign_id": "ipie_swing_2026-07",
+        "headline_eligible": false,
+        "role": "history_only"
+      },
+      {
+        "campaign_id": "ipie_swing_envfix_2026-07",
+        "headline_eligible": false,
+        "role": "history_only"
+      }
+    ],
+    "metrics_spec_version": "1.9",
+    "required_fields": [
+      "campaign_id",
+      "solver_id",
+      "accepted_manifest_sha256",
+      "task_count",
+      "pair_count",
+      "reference_valid_scope",
+      "pi_approval"
+    ]
+  },
+  "matt_configuration_signoff": {
+    "authority": "Matt",
+    "configuration_freeze_allowed": false,
+    "ipie_submitter_selected": null,
+    "options": {
+      "DMRG": {
+        "recommended_option_id": "DMRG-A",
+        "selected_option_id": null,
+        "values": [
+          {
+            "option_id": "DMRG-A",
+            "summary": "global pilot-calibrated bond-dimension ladder"
+          },
+          {
+            "option_id": "DMRG-B",
+            "summary": "globally fixed terminal bond dimension"
+          },
+          {
+            "option_id": "DMRG-C",
+            "summary": "global discarded-weight stopping with hard bond ceiling"
+          }
+        ]
+      },
+      "SHCI": {
+        "recommended_option_id": "SHCI-A",
+        "selected_option_id": null,
+        "values": [
+          {
+            "option_id": "SHCI-A",
+            "summary": "global eps_var ladder with preregistered PT policy"
+          },
+          {
+            "option_id": "SHCI-B",
+            "summary": "global eps_var ladder with variational energies only"
+          },
+          {
+            "option_id": "SHCI-C",
+            "summary": "one globally fixed eps_var point"
+          }
+        ]
+      },
+      "TrimCI": {
+        "recommended_option_id": "TrimCI-A",
+        "selected_option_id": null,
+        "values": [
+          {
+            "option_id": "TrimCI-A",
+            "summary": "FE-enabled 64-run phase 0 with variational and PT2 records"
+          },
+          {
+            "option_id": "TrimCI-B",
+            "summary": "FE-enabled 64-run phase 0 with variational-only production"
+          },
+          {
+            "option_id": "TrimCI-C",
+            "summary": "reduced phase-0 ensemble"
+          }
+        ]
+      },
+      "ipie_uhf_trial": {
+        "recommended_option_id": "iPIE-A",
+        "selected_option_id": null,
+        "values": [
+          {
+            "option_id": "iPIE-A",
+            "summary": "G-43 baseline with 512 walkers and 1000 blocks"
+          },
+          {
+            "option_id": "iPIE-B",
+            "summary": "G-43 baseline with 1024 walkers"
+          },
+          {
+            "option_id": "iPIE-C",
+            "summary": "G-43 baseline with 2000 blocks"
+          }
+        ]
+      }
+    },
+    "pre_signoff_evidence": [
+      "clean_source_snapshot",
+      "immutable_dependency_lock",
+      "compute_node_smoke",
+      "failure_injection_tests",
+      "outcome_vocabulary_tests",
+      "target_blind_pilot_calibration",
+      "candidate_static_admission_rule",
+      "cost_calibration"
+    ],
+    "selected_by_pi_or_implementer": false,
+    "status": "pending"
+  },
   "outcome_statuses": [
     "completed",
     "failed",
