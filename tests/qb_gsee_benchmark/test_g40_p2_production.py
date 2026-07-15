@@ -6,6 +6,10 @@ import sys
 from pathlib import Path
 
 from qb_gsee_benchmark.features.corpus_runner import load_corpus_fcidumps
+from scripts.build_g40_p2_production import (
+    NO_CONVERGED_SCF_FEATURE_COLUMNS,
+    _contract_features,
+)
 
 ROOT = Path(__file__).resolve().parents[2]
 CONTRACT = ROOT / "analysis" / "feature_schema" / "g40_p2_feature_contract.json"
@@ -94,6 +98,30 @@ def _state(record, columns, *, walltime: float) -> dict:
         "error_type": None,
         "error_message": None,
     }
+
+
+def _no_converged_state(record, *, walltime: float) -> dict:
+    state = _state(record, NO_CONVERGED_SCF_FEATURE_COLUMNS, walltime=walltime)
+    state["features"].update(
+        {
+            "mf_branch_count": 8,
+            "mf_converged_branch_count": 0,
+            "mf_distinct_solution_count": 0,
+            "mf_selected_applicable": False,
+            "mf_selected_reason": "no_converged_scf_branch",
+            "mf_stability_applicable": False,
+            "mf_stability_reason": "no_converged_scf_branch",
+            "mf_hf_variance_applicable": False,
+            "mf_hf_variance_reason": "no_converged_scf_branch",
+            "mp2_applicable": False,
+            "mp2_reason": "no_converged_scf_branch",
+        }
+    )
+    state["audit"] = {
+        "selected_branch_index": None,
+        "branch_outcomes": [{"converged": False} for _ in range(8)],
+    }
+    return state
 
 
 def _run_prepare_and_build(
@@ -304,6 +332,16 @@ def test_p2_production_plan_is_deterministic_and_seeds_passed_pilot(tmp_path) ->
 
 def test_p2_production_merge_is_additive_idempotent_and_fail_closed(tmp_path) -> None:
     feature_table, output_prefix, run_dir, build, _ = _run_prepare_and_build(tmp_path)
+    partial_path = (
+        run_dir / "state" / "00000000-0000-0000-0000-000000000001.mfproto.json"
+    )
+    partial = json.loads(partial_path.read_text())
+    no_converged = _no_converged_state(
+        load_corpus_fcidumps(tmp_path / "problem_instances")[1], walltime=5.0
+    )
+    partial["features"] = no_converged["features"]
+    partial["audit"] = no_converged["audit"]
+    partial_path.write_text(json.dumps(partial) + "\n")
     subprocess.run(build, cwd=ROOT, check=True, capture_output=True, text=True)
     first_table = feature_table.read_bytes()
     first_report = json.loads(output_prefix.with_suffix(".json").read_text())
@@ -312,6 +350,15 @@ def test_p2_production_merge_is_additive_idempotent_and_fail_closed(tmp_path) ->
     assert first_report["changed_populated_cells"] == 0
     assert len(first_report["new_columns"]) == 327
     assert first_report["pbs_gate"]["status"] == "passed"
+    assert first_report["contract_shape_compatibility"] == [
+        {
+            "task_uuid": "00000000-0000-0000-0000-000000000001",
+            "reason": "no_converged_scf_branch",
+            "observed_feature_columns": 58,
+            "null_filled_contract_columns": 269,
+            "raw_state_unchanged": True,
+        }
+    ]
 
     subprocess.run(build, cwd=ROOT, check=True, capture_output=True, text=True)
     assert feature_table.read_bytes() == first_table
@@ -357,3 +404,60 @@ def test_p2_production_merge_is_additive_idempotent_and_fail_closed(tmp_path) ->
     )
     assert failed.returncode != 0
     assert "changed populated cell" in failed.stderr
+
+
+def test_no_converged_scf_state_is_strictly_expanded_to_contract() -> None:
+    columns = json.loads(CONTRACT.read_text())["output_columns"]
+    features = {column: None for column in NO_CONVERGED_SCF_FEATURE_COLUMNS}
+    features.update(
+        {
+            "mf_branch_count": 8,
+            "mf_converged_branch_count": 0,
+            "mf_distinct_solution_count": 0,
+            "mf_selected_applicable": False,
+            "mf_selected_reason": "no_converged_scf_branch",
+            "mf_stability_applicable": False,
+            "mf_stability_reason": "no_converged_scf_branch",
+            "mf_hf_variance_applicable": False,
+            "mf_hf_variance_reason": "no_converged_scf_branch",
+            "mp2_applicable": False,
+            "mp2_reason": "no_converged_scf_branch",
+        }
+    )
+    state = {
+        "task_uuid": "no-converged-fixture",
+        "features": features,
+        "audit": {
+            "selected_branch_index": None,
+            "branch_outcomes": [{"converged": False} for _ in range(8)],
+        },
+    }
+
+    normalized, compatibility = _contract_features(state, columns)
+    assert list(normalized) == columns
+    assert normalized["mf_selected_reason"] == "no_converged_scf_branch"
+    assert normalized["mp2_pair_graph_edge_count"] is None
+    assert compatibility == {
+        "task_uuid": "no-converged-fixture",
+        "reason": "no_converged_scf_branch",
+        "observed_feature_columns": 58,
+        "null_filled_contract_columns": 269,
+        "raw_state_unchanged": True,
+    }
+
+    malformed = {**state, "features": dict(features)}
+    malformed["features"].pop("mfproto_total_seconds")
+    try:
+        _contract_features(malformed, columns)
+    except ValueError as exc:
+        assert "violates P2 contract" in str(exc)
+    else:
+        raise AssertionError("malformed partial state was accepted")
+
+    false_claim = {**state, "audit": {**state["audit"], "selected_branch_index": 0}}
+    try:
+        _contract_features(false_claim, columns)
+    except ValueError as exc:
+        assert "lacks no-converged-SCF evidence" in str(exc)
+    else:
+        raise AssertionError("partial state with a selected branch was accepted")

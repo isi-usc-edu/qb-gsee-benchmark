@@ -24,6 +24,130 @@ from scripts.build_g40_p2_pilot_report import (
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_TABLE = ROOT / "scripts" / "Hamiltonian_features.csv"
 
+# MFPROTO-v3 returned early at this exact shape when all eight SCF branches
+# failed to converge. The production states remain immutable; the harvester
+# expands only this known shape to the frozen contract with null child-panel
+# values. Any other partial shape remains a hard failure.
+NO_CONVERGED_SCF_FEATURE_COLUMNS = frozenset(
+    {
+        "mf_branch_count",
+        "mf_converged_branch_count",
+        "mf_core_gap_alpha_applicable",
+        "mf_core_gap_alpha_hartree",
+        "mf_core_gap_alpha_reason",
+        "mf_core_gap_beta_applicable",
+        "mf_core_gap_beta_hartree",
+        "mf_core_gap_beta_reason",
+        "mf_core_gap_min_applicable",
+        "mf_core_gap_min_hartree",
+        "mf_core_gap_min_reason",
+        "mf_distinct_solution_count",
+        "mf_hf_variance_applicable",
+        "mf_hf_variance_reason",
+        "mf_lowest_rhf_energy_hartree",
+        "mf_lowest_uhf_energy_hartree",
+        "mf_selected_applicable",
+        "mf_selected_energy_hartree",
+        "mf_selected_guess",
+        "mf_selected_method",
+        "mf_selected_reason",
+        "mf_selected_s2",
+        "mf_solution_energy_spread_hartree",
+        "mf_solution_energy_spread_per_electron_hartree",
+        "mf_stability_applicable",
+        "mf_stability_reason",
+        "mf_symmetry_breaking_applicable",
+        "mf_symmetry_breaking_energy_hartree",
+        "mf_symmetry_breaking_energy_per_electron",
+        "mf_symmetry_breaking_reason",
+        "mf_tie_core_degenerate_subspace_count",
+        "mf_tie_core_hysteresis_band_split_count",
+        "mf_tie_core_minimum_adjacent_split",
+        "mf_tie_core_projected_index_tied_subspace_count",
+        "mf_tie_g1_alpha_boundary_tie",
+        "mf_tie_g1_beta_boundary_tie",
+        "mf_tie_g2_alpha_boundary_tie",
+        "mf_tie_g2_beta_boundary_tie",
+        "mf_tie_g3_alpha_boundary_tie",
+        "mf_tie_g3_beta_boundary_tie",
+        "mf_tie_selected_fock_alpha_boundary_tie",
+        "mf_tie_selected_fock_alpha_degenerate_subspace_count",
+        "mf_tie_selected_fock_alpha_hysteresis_band_split_count",
+        "mf_tie_selected_fock_alpha_minimum_adjacent_split",
+        "mf_tie_selected_fock_alpha_projected_index_tied_subspace_count",
+        "mf_tie_selected_fock_beta_boundary_tie",
+        "mf_tie_selected_fock_beta_degenerate_subspace_count",
+        "mf_tie_selected_fock_beta_hysteresis_band_split_count",
+        "mf_tie_selected_fock_beta_minimum_adjacent_split",
+        "mf_tie_selected_fock_beta_projected_index_tied_subspace_count",
+        "mf_tie_selection_energy_tie_tolerance_hartree",
+        "mf_tie_selection_method_order",
+        "mfproto_dense_eri_seconds",
+        "mfproto_features_version",
+        "mfproto_scf_seconds",
+        "mfproto_total_seconds",
+        "mp2_applicable",
+        "mp2_reason",
+    }
+)
+
+
+def _contract_features(
+    state: dict[str, Any], feature_columns: list[str]
+) -> tuple[dict[str, Any], dict[str, Any] | None]:
+    task_uuid = state.get("task_uuid")
+    features = state.get("features")
+    if not isinstance(features, dict):
+        raise ValueError(f"production state has invalid features: {task_uuid}")
+    contract_columns = set(feature_columns)
+    observed_columns = set(features)
+    if observed_columns == contract_columns:
+        return features, None
+    if observed_columns != NO_CONVERGED_SCF_FEATURE_COLUMNS:
+        raise ValueError(f"production state violates P2 contract: {task_uuid}")
+
+    audit = state.get("audit")
+    branch_outcomes = audit.get("branch_outcomes") if isinstance(audit, dict) else None
+    expected_values = {
+        "mf_branch_count": 8,
+        "mf_converged_branch_count": 0,
+        "mf_distinct_solution_count": 0,
+        "mf_selected_applicable": False,
+        "mf_selected_reason": "no_converged_scf_branch",
+        "mf_stability_applicable": False,
+        "mf_stability_reason": "no_converged_scf_branch",
+        "mf_hf_variance_applicable": False,
+        "mf_hf_variance_reason": "no_converged_scf_branch",
+        "mp2_applicable": False,
+        "mp2_reason": "no_converged_scf_branch",
+    }
+    valid_audit = (
+        isinstance(audit, dict)
+        and audit.get("selected_branch_index") is None
+        and isinstance(branch_outcomes, list)
+        and len(branch_outcomes) == 8
+        and all(
+            isinstance(branch, dict) and branch.get("converged") is False
+            for branch in branch_outcomes
+        )
+    )
+    if not valid_audit or any(
+        features.get(column) != value for column, value in expected_values.items()
+    ):
+        raise ValueError(
+            f"partial P2 state lacks no-converged-SCF evidence: {task_uuid}"
+        )
+
+    missing_columns = sorted(contract_columns - observed_columns)
+    normalized = {column: features.get(column) for column in feature_columns}
+    return normalized, {
+        "task_uuid": task_uuid,
+        "reason": "no_converged_scf_branch",
+        "observed_feature_columns": len(observed_columns),
+        "null_filled_contract_columns": len(missing_columns),
+        "raw_state_unchanged": True,
+    }
+
 
 def _value_text(value: Any) -> str:
     if value is None:
@@ -87,6 +211,11 @@ def _markdown(report: dict[str, Any]) -> str:
                 f"{report['columns_after']}**."
             ),
             f"- New columns: **{len(report['new_columns'])}**.",
+            (
+                "- Contract-shape compatibility rows: "
+                f"**{len(report['contract_shape_compatibility'])}** "
+                "(no-converged-SCF child panels null-filled; raw states unchanged)."
+            ),
             f"- Newly populated cells: **{report['newly_populated_cells']}**.",
             (
                 "- Existing populated P2 cells audited: "
@@ -169,7 +298,6 @@ def main() -> int:
     feature_columns = list(contract["output_columns"])
     if len(feature_columns) != len(set(feature_columns)):
         raise ValueError("duplicate P2 contract column")
-    contract_columns = set(feature_columns)
 
     pilot = json.loads(args.pilot_report.read_text())
     if pilot.get("status") != "passed":
@@ -227,6 +355,8 @@ def main() -> int:
     if set(state_ids) != set(records_by_uuid):
         raise ValueError("production states do not exactly match the live corpus")
     configuration = pilot["configuration"]
+    features_by_uuid: dict[str, dict[str, Any]] = {}
+    contract_shape_compatibility: list[dict[str, Any]] = []
     for state in states:
         task_uuid = state["task_uuid"]
         record = records_by_uuid[task_uuid]
@@ -262,8 +392,10 @@ def main() -> int:
             raise ValueError(
                 f"production state has invalid source SHA-256: {task_uuid}"
             )
-        if set(state.get("features") or {}) != contract_columns:
-            raise ValueError(f"production state violates P2 contract: {task_uuid}")
+        normalized_features, compatibility = _contract_features(state, feature_columns)
+        features_by_uuid[task_uuid] = normalized_features
+        if compatibility is not None:
+            contract_shape_compatibility.append(compatibility)
 
     representation = json.loads(args.representation_check.read_text())
     if (
@@ -306,10 +438,9 @@ def main() -> int:
 
     audited = 0
     newly_populated = 0
-    states_by_uuid = {state["task_uuid"]: state for state in states}
-    for task_uuid in sorted(states_by_uuid):
+    for task_uuid in sorted(features_by_uuid):
         row = rows_by_uuid[task_uuid]
-        features = states_by_uuid[task_uuid]["features"]
+        features = features_by_uuid[task_uuid]
         for column in feature_columns:
             old_value = row.get(column, "")
             new_value = _value_text(features[column])
@@ -355,6 +486,7 @@ def main() -> int:
             "existing_populated_cells_audited", audited
         ),
         "changed_populated_cells": 0,
+        "contract_shape_compatibility": contract_shape_compatibility,
         "input_feature_table_sha256": input_sha256,
         "output_feature_table_sha256": output_sha256,
         "feature_contract_sha256": _sha256(args.feature_contract),
