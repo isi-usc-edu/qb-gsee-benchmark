@@ -103,9 +103,12 @@ columns. Integral sparsity changes runtime only; it does not change definitions.
 
 ## Compatibility and feasibility gates
 
-Before the worst-case pilot, recompute at least 12 covered rows spanning
-molecular, lattice, and size regimes. Integer-valued columns must agree exactly
-with the committed table. Floating columns must agree within
+Before the worst-case pilot, recompute at least 12 covered rows spanning every
+available covered source class and small-to-large size regimes. The committed
+184-row block contains molecular and synthetic rows but no lattice row; the
+mandated 256-orbital lattice pilot therefore validates exact execution but has
+no historical value to compare. Integer-valued columns must agree exactly with
+the committed table. Floating columns must agree within
 `rtol = 5e-9, atol = 5e-10`. Any systematic mismatch holds production and
 requires a versioned protocol amendment.
 
