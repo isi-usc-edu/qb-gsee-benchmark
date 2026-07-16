@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "goal": "G-53",
+  "status": "preregistered_before_remediation_execution",
+  "parent_run_generation": "g49c_protocol_extension_v1",
+  "run_generation": "g49c_strict_tolerance_fix_v1",
+  "protocol_label": "g49c_strict_tolerance_enforcement_fix_v1",
+  "scope": [
+    "fb87d637-aaab-4e8f-8898-4ecca8bd0fe0"
+  ],
+  "first_launch": {
+    "array_job_id": "7660259[].imgt1",
+    "verifier_job_id": "7660260.imgt1",
+    "actual_node_hours": 0.08472222222222223,
+    "records_immutable": true,
+    "verifier_disposition": "invalid_false_pass_missing_energy_change_assertion",
+    "verifier_json_sha256": "0fc2f062b916f549f27c1bfd83c3f9506fd112cfab0643e496dfcc974d473e57",
+    "verifier_raw_junit_sha256": "a29394f3f6054b86e74f3eb56d53304cbb6010c3f34377bec92ea8e315aa2d61",
+    "fb87d637_trajectory_sha256": "9e30d15b595f50e77ab3b2af7e21951978416ff07bc5be7e0a564716d4b81bca",
+    "observed_final_delta_energy_hartree": 1.9818457985820714e-10,
+    "preregistered_limit_hartree": 1e-10
+  },
+  "accepted_first_launch_rows": [
+    "ab61c91a-68ea-401f-a3ad-392e83ee802e",
+    "ca6f7678-0952-4fe4-83fe-c4455a682132"
+  ],
+  "strict_acceptance": {
+    "engine_converged_required": true,
+    "final_delta_energy_strictly_less_than_hartree": 1e-10,
+    "maximum_ov_gradient_strictly_less_than": 1e-7,
+    "enforcement": "dataclass_acceptance_override_after_every_scf_or_newton_stage",
+    "refinement": "frozen_mfproto_v3_newton_controls_with_conv_tol_1e-10_and_conv_tol_grad_1e-7_from_candidate_orbitals",
+    "maximum_refinement_attempts_per_stationary_point": 1
+  },
+  "result_pooling": {
+    "pool_with_parent_generation": false,
+    "replacement_rule": "replace_only_fb87d637_if_remediation_verifier_passes"
+  },
+  "pbs": {
+    "queue": "compute",
+    "ncpus": 128,
+    "memory_request": null,
+    "task_count": 1,
+    "task_walltime_seconds": 300,
+    "scheduler_verifier_node": false,
+    "additional_maximum_node_hours": 0.08333333333333333,
+    "cumulative_worst_case_node_hours": 0.16805555555555557,
+    "authorized_cumulative_node_hour_cap": 1.0
+  },
+  "required_evidence": [
+    "frozen_remediation_bundle",
+    "live_compute_preflight",
+    "dry_run_qsub_command",
+    "raw_scheduler_log_and_accounting",
+    "per_task_stationary_point_accounting",
+    "corrected_raw_junit",
+    "environment_fingerprint",
+    "evidence_line"
+  ]
+}
