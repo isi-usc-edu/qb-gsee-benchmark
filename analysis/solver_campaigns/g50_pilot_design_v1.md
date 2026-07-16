@@ -1,4 +1,4 @@
-# G-50 target-blind pilot design v1
+# G-50 universal-attempt resource-cap pilot design v1
 
 Date: 2026-07-16
 
@@ -8,8 +8,9 @@ Status: submitted for PI review; all pilot and production execution held
 
 Authorize only the four calibration pilots defined here. This is not a request
 to authorize any clean-slate production campaign. Pilot outputs return to the
-PI as exact configuration locks, static admission ledgers over all 718 tasks,
-and hard cost ceilings before gate 3 can close.
+PI as exact configuration locks, measured walltime and peak-memory
+distributions, timeout-fraction and campaign-budget projections, and one
+uniform cap recommendation before gate 3 can close.
 
 ## Frozen pilot set
 
@@ -33,13 +34,16 @@ looking at a solver result.
 
 Pilot campaign IDs differ from all four production IDs. Pilot energies and
 checkpoints are never reusable in production, and no pilot row is eligible for
-headline designation. The calibration view excludes all energy fields. It may
-use only the frozen descriptors, pilot status, walltime, and peak memory to
-propose a deterministic production admission rule.
+headline designation. The calibration view excludes all energy fields. It may use only pilot status,
+walltime, and peak memory to characterize the fixed configurations and
+recommend one uniform production cap.
 
-Every proposal returns to PI review. In particular, the pilot cannot silently
-change a selected solver option, choose per-task scientific settings, admit a
-task to production, or convert a resource predictor into a success predictor.
+Every solver will attempt all 718 production tasks on its fixed hardware unit:
+one 128-core Improv node for each CPU solver and one A100 for iPIE. A cap hit is
+`timeout` and is scored as a non-success; OOM and build/ingest failures are
+`failed`. `not_attempted` is forbidden for these campaign solvers. The pilot
+cannot silently change a selected solver option, choose per-task scientific
+settings, or create an admission predictor.
 
 ## Solver protocols
 
@@ -84,4 +88,7 @@ submission while authorization remains false.
 
 After execution, retain raw statuses, rung/phase observations, walltime, peak
 memory, environment capture, scheduler accounting, and a fail-closed verifier.
-The PI receives the complete calibration report before any production submit.
+The report gives measured walltime and peak-memory distributions, projected
+timeout fractions and campaign budgets at the candidate cap, and one uniform
+cap recommendation. Matt pins the final value at gate 3 before any production
+submit.

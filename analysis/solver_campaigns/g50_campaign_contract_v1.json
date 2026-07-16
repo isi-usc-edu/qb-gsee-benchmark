@@ -62,33 +62,25 @@
     "settled": true
   },
   "cost_projection": {
-    "admitted_task_count": "TBD_AT_GATE_2",
     "core_task_count": 718,
-    "planning_caps_per_admitted_task_hours": {
-      "DMRG": 4,
-      "SHCI": 4,
-      "TrimCI": 4,
-      "ipie_uhf_trial": 2
+    "final_uniform_cap_hours_per_task": "TBD_AT_GATE_3",
+    "hardware_unit_per_task": {
+      "DMRG": "one 128-core Improv node",
+      "SHCI": "one 128-core Improv node",
+      "TrimCI": "one 128-core Improv node",
+      "ipie_uhf_trial": "one A100 GPU"
     },
     "planning_scenarios": [
       {
-        "core_rows_per_solver": 100,
-        "cpu_node_hours_all_admitted": 1200,
-        "ipie_gpu_hours_all_admitted": 200
-      },
-      {
-        "core_rows_per_solver": 250,
-        "cpu_node_hours_all_admitted": 3000,
-        "ipie_gpu_hours_all_admitted": 500
-      },
-      {
-        "core_rows_per_solver": 718,
-        "cpu_node_hours_all_admitted": 8616,
-        "ipie_gpu_hours_all_admitted": 1436
+        "cpu_node_hours_per_solver_worst_case": 8616,
+        "cpu_node_hours_three_solvers_worst_case": 25848,
+        "ipie_a100_hours_worst_case": 8616,
+        "tasks_per_solver": 718,
+        "uniform_cap_hours_per_task": 12
       }
     ],
-    "production_hard_caps": "TBD_AT_GATE_2",
-    "status": "budgetary_worst_case_pending_calibration"
+    "status": "planning_cap_pending_gate_3_pilot_calibration",
+    "working_uniform_cap_hours_per_task": 12
   },
   "gates": [
     "corpus_and_core_manifest_freeze",
@@ -219,9 +211,9 @@
       "compute_node_smoke",
       "failure_injection_tests",
       "outcome_vocabulary_tests",
-      "target_blind_pilot_calibration",
-      "candidate_static_admission_rule",
-      "cost_calibration"
+      "uniform_cap_pilot_calibration",
+      "timeout_fraction_projection",
+      "campaign_budget_projection"
     ],
     "signoff_date": "2026-07-15",
     "signoff_record": "work/IMPLEMENTER_GOALS.md#MATT-CONFIGURATION-SIGN-OFF-2026-07-15",
@@ -244,21 +236,16 @@
   },
   "schema_version": 1,
   "status": "pilot_design_submitted_execution_held_for_pi_design_review",
-  "target_blind_admission": {
-    "allowed_inputs": [
-      "norb",
-      "electron_sector",
-      "spin_sector",
-      "integral_sparsity_and_norms",
-      "symmetry_and_ordering_metadata",
-      "determinant_space_bounds",
-      "pilot_calibrated_resource_predictors"
-    ],
-    "forbidden_inputs": [
-      "reference_energy",
-      "accuracy_threshold",
-      "prior_solver_outcome",
-      "supervised_success_label"
-    ]
+  "universal_attempt": {
+    "admission_prediction_permitted": false,
+    "attempt_all_tasks_per_solver": true,
+    "final_uniform_cap_hours_per_task": "TBD_AT_GATE_3",
+    "not_attempted_permitted": false,
+    "oom_or_build_or_ingest_status": "failed",
+    "per_task_scientific_tuning_permitted": false,
+    "task_count_per_solver": 718,
+    "timeout_scored_as_success": false,
+    "timeout_status": "timeout",
+    "working_uniform_cap_hours_per_task": 12
   }
 }

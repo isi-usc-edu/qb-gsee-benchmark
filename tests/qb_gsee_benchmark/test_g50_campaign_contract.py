@@ -25,6 +25,30 @@ def test_g50_campaign_contract_assertions_pass() -> None:
     assert report["passed_count"] == report["check_count"]
 
 
+def test_g50_o34_replaces_admission_with_uniform_cap() -> None:
+    contract = json.loads(
+        (
+            ROOT / "analysis/solver_campaigns/g50_campaign_contract_v1.json"
+        ).read_text(encoding="utf-8")
+    )
+    pilot = json.loads(
+        (ROOT / "analysis/solver_campaigns/g50_pilot_design_v1.json").read_text(
+            encoding="utf-8"
+        )
+    )
+
+    assert "target_blind_admission" not in contract
+    assert contract["universal_attempt"]["attempt_all_tasks_per_solver"] is True
+    assert contract["universal_attempt"]["not_attempted_permitted"] is False
+    assert contract["cost_projection"]["working_uniform_cap_hours_per_task"] == 12
+    assert "admission_inputs" not in pilot["calibration_contract"]
+    assert "production_admission_policy" not in pilot["calibration_contract"]
+    assert (
+        pilot["calibration_contract"]["production_attempt_scope"]
+        == "all_718_tasks_per_solver"
+    )
+
+
 def test_g50_pilot_manifest_v2_is_held_stale_under_o32() -> None:
     result = subprocess.run(
         [

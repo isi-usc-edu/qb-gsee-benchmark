@@ -7,13 +7,8 @@
     "required_next_action": "PI review of this pilot design"
   },
   "calibration_contract": {
-    "admission_inputs": [
-      "n_orbitals",
-      "n_electrons",
-      "ms2",
-      "electron_filling_fraction",
-      "abs_ms2_fraction",
-      "log10_determinant_space_bound",
+    "admission_prediction_permitted": false,
+    "cap_recommendation_inputs": [
       "pilot_status",
       "pilot_wall_seconds",
       "pilot_peak_memory_bytes"
@@ -29,16 +24,25 @@
     "pilot_artifact_reuse_in_production": false,
     "pilot_checkpoint_reuse_in_production": false,
     "pilot_energy_reuse_in_production": false,
-    "production_admission_policy": "The pilot proposes a deterministic static rule and full 718-row admission ledger. No rule takes effect until PI review; production cannot tune per task.",
+    "production_attempt_scope": "all_718_tasks_per_solver",
     "production_outputs_required_before_gate_3_closure": [
       "exact solver configuration locks",
-      "static 718-row admission ledger per solver",
-      "per-task and total hard cost ceilings",
-      "pilot q50 and q90 walltime",
-      "pilot peak memory",
+      "measured pilot walltime distributions",
+      "measured pilot peak-memory distributions",
+      "timeout-fraction projection at the recommended uniform cap",
+      "campaign-budget projection at the recommended uniform cap",
+      "one uniform per-task cap recommendation for all four solvers",
       "failure and timeout inventory",
       "v1.9 designation skeletons still marked not_designated"
-    ]
+    ],
+    "uniform_cap": {
+      "final_hours_per_task": "TBD_AT_GATE_3",
+      "not_attempted_permitted": false,
+      "pinned_by": "Matt",
+      "timeout_scored_as_success": false,
+      "timeout_status": "timeout",
+      "working_hours_per_task": 12
+    }
   },
   "common_protocol": {
     "campaign_identity_relation": "pilot identities are distinct from clean-slate production identities",
@@ -105,8 +109,8 @@
       "eps_var_ladder": [
         0.0002,
         0.0001,
-        0.00005,
-        0.00002
+        5e-05,
+        2e-05
       ],
       "num_threads": 128,
       "production_campaign_id": "g50_shci_clean_slate_2026-07_v1",

@@ -8,6 +8,10 @@ Changelog 2026-07-15: corpus gate settled at 718 tasks; Matt selected iPIE-A,
 DMRG-A, TrimCI-A, and SHCI-A, selected himself as Swing submitter, and added
 the DMRG/TrimCI retained-rung directives below.
 
+Changelog 2026-07-16: O34 replaced solver-specific admission with a universal
+attempt policy and one uniform per-task resource cap. The 12-hour value is a
+planning cap; Matt pins the final value at gate 3 from pilot measurements.
+
 ## Purpose and clean-slate definition
 
 G-50 will run iPIE, DMRG, TrimCI, and SHCI against one frozen, versioned core
@@ -15,11 +19,12 @@ task manifest after the corpus and ML-core decisions settle. A clean-slate
 campaign means:
 
 - fresh execution from checksum-bound FCIDUMPs under a new campaign identity;
-- one preregistered configuration and admission model per solver;
+- one preregistered configuration per solver and one uniform resource cap;
 - no pooling with legacy, G-31, G-43, or other July campaigns;
 - no production reuse of pilot energies or checkpoints;
-- one terminal row for every solver-task pair, including deterministic
-  `not_attempted` rows for tasks outside the frozen admission region;
+- every solver attempts every task, with one terminal row for each pair;
+- `timeout` is a scored non-success, while OOM and build/ingest failures are
+  `failed`; `not_attempted` is forbidden for these four campaign solvers;
 - immutable raw failures, accounting, environment evidence, and verifier
   reports.
 
@@ -39,25 +44,27 @@ Execution remains held until all three Matt-ruled gates pass in order:
    corpus contains 718 tasks. This gate is satisfied.
 2. **Matt's per-solver configuration sign-off.** Solver configurations are
    Matt-reserved. The implementer supplies the adapter/environment evidence,
-   target-blind pilot calibration, and the options-plus-recommendation tables
+   resource-cap pilot calibration, and the options-plus-recommendation tables
    below. Matt selects or amends one option per solver and selects the iPIE
-   submitter. No solver configuration, admission threshold, seed policy, or
-   production cap may be frozen before that sign-off. Matt selected iPIE-A,
+   submitter. No solver configuration, seed policy, or final production cap
+   may be frozen before that sign-off. Matt selected iPIE-A,
    DMRG-A, TrimCI-A, and SHCI-A and selected himself as the Swing submitter.
    This gate is satisfied; exact numeric pins remain pilot outputs.
 3. **PI design review.** After Matt's selections are encoded in immutable
-   configuration manifests, the PI reviews the signed configurations,
-   admission thresholds, per-task caps, total cost ceilings, pilot separation,
-   v1.9 designation hooks, and the complete Swing handoff package. The PI does
+   configuration manifests, the PI reviews the signed configurations, the
+   pilot-derived uniform cap recommendation and campaign-budget projection,
+   pilot separation, v1.9 designation hooks, and the complete Swing handoff
+   package. The PI does
    not choose or substitute solver configurations. This gate remains pending.
    No production `qsub` or Swing submission is permitted before it.
 
 The evidence supplied for gate 2 includes a clean source snapshot,
 immutable dependency lock, compute-node smoke, failure-injection tests,
-outcome-vocabulary tests, cost calibration, and a candidate static admission
-rule. Those are evidence for Matt's decision. Exact ladders, phase caps, seeds,
-and admission thresholds remain pilot-calibrated numeric pins. All four
-candidate bundles must cross-check the same task manifest.
+outcome-vocabulary tests, measured walltime and peak-memory distributions,
+timeout-fraction projection, and campaign-budget projection. Those are
+evidence for Matt's decision. Exact ladders, phase caps, seeds, and the final
+uniform cap remain pilot-calibrated numeric pins. All four candidate bundles
+must cross-check the same task manifest.
 
 ## Configuration options for Matt
 
@@ -84,7 +91,7 @@ uncertainty and cost but do not silently switch the selected option.
 
 | Option | Configuration | Tradeoff | Recommendation |
 | --- | --- | --- | --- |
-| DMRG-A | One global, pilot-calibrated multi-bond-dimension ladder with fixed sweep counts and lowest within-run variational energy | Preserves convergence and nestedness evidence with predictable admission | Recommended |
+| DMRG-A | One global, pilot-calibrated multi-bond-dimension ladder with fixed sweep counts and lowest within-run variational energy | Preserves convergence and nestedness evidence under a fixed cap | Recommended |
 | DMRG-B | One globally fixed terminal bond dimension and sweep schedule | Lower cost and simpler accounting, but weak convergence evidence | Not recommended for the endgame panel |
 | DMRG-C | Global discarded-weight stopping rule with a hard bond-dimension ceiling | Can save work on easy rows, but makes cost prediction and cross-row comparability more complex | Alternative after a successful deterministic pilot |
 
@@ -137,38 +144,33 @@ solvability-region-growth analysis.
 ## Common contract
 
 The machine-readable companion is `g50_campaign_contract_v1.json`. All four
-campaigns use `completed`, `failed`, `timeout`, and `not_attempted`; completed
-energies must be finite, and every other scored energy is null. Failure stage,
-wall time, software versions, hardware, input hash, adapter revision, and
-campaign id are mandatory.
+campaigns use the shared four-state vocabulary: `completed`, `failed`,
+`timeout`, and `not_attempted`. For G-50, every solver attempts every task, so
+`not_attempted` is forbidden. A cap hit is `timeout` and is scored as a
+non-success; OOM and build/ingest failures are `failed` with a recorded reason.
+Completed energies must be finite, and every other scored energy is null.
+Failure stage, wall time, software versions, hardware, input hash, adapter
+revision, and campaign id are mandatory.
 
-Admission is deterministic and target-blind. It may use NORB, electron counts,
-spin sector, integral sparsity/norms, symmetry/ordering metadata, determinant
-space bounds, and pilot-calibrated resource predictors. It may not use the
-reference energy, accuracy threshold, prior solver outcome, or supervised
-success label. Thresholds are frozen before production, and the verifier
-recomputes every decision.
+There is no admission predictor or solver-specific admission region. Every
+solver attempts all `N = 718` tasks with its globally frozen scientific
+configuration. Per-task scientific tuning is forbidden. The fixed hardware
+unit is one 128-core Improv node for DMRG, TrimCI, and SHCI, and one A100 for
+iPIE.
 
-The planning unit is a final core of `N` tasks. Every campaign emits `N` rows;
-attempt count `A_s <= N` is fixed by solver `s`'s admission rule. The hard
-allocation bound is `A_s * per_task_cap + verifier/allocation overhead`, not a
-q90 forecast. Exact `N`, `A_s`, and production ceilings are gate-1/gate-2
-outputs.
+The working planning cap is 12 wall-clock hours per task for every solver. At
+that cap, the literal all-timeout upper bounds are:
 
-For allocation planning before calibration, use a conservative envelope of 2
-A100-hours per admitted iPIE task and 4 full-node hours per admitted task for
-each CPU solver. The all-admitted upper bounds are:
-
-| Scenario | Core rows per solver | iPIE GPU-h | DMRG + TrimCI + SHCI node-h |
-| --- | ---: | ---: | ---: |
-| Small core | 100 | 200 | 1,200 |
-| Medium core | 250 | 500 | 3,000 |
-| Full settled corpus | 718 | 1,436 | 8,616 |
+| Solver scope | Tasks | Hardware unit | Working cap | Worst-case hours |
+| --- | ---: | --- | ---: | ---: |
+| iPIE | 718 | one A100 | 12 h/task | 8,616 A100-h |
+| each CPU solver | 718 | one 128-core node | 12 h/task | 8,616 node-h |
+| all three CPU solvers | 2,154 | one 128-core node/task | 12 h/task | 25,848 node-h |
 
 These are budgetary worst cases, not production requests or runtime forecasts.
-Pilot calibration computes each `A_s` and replaces planning caps with
-preregistered hard caps before PI design review; static admission should make
-actual cost lower.
+The pilots measure walltime and peak-memory distributions and project timeout
+fractions and campaign budgets. Matt pins one final uniform cap at gate 3 from
+that evidence; the cap is a resource ceiling, not a per-task tuning parameter.
 
 ## Metrics-spec v1.9 designation
 
@@ -196,12 +198,11 @@ provenance, not yet the G-50 lock. Matt's sign-off selects the scientific
 configuration and himself as submitter; the implementer now rebuilds and
 hashes a fresh lock for the pilot package.
 
-Admission must predict trial construction, Cholesky/integral memory, walker
-memory, and wall cap on a 40 GB A100. UHF trial failure or insufficient finite
-post-equilibration samples is an attempted failure, not `not_attempted`.
-Random seed and population-control policy are frozen in the preregistered
-pilot design before PI review; a seed changes uncertainty, not campaign
-identity or task admission.
+Every task receives one attempted iPIE run on a 40 GB A100 under the uniform
+cap. UHF trial failure, OOM, or insufficient finite post-equilibration samples
+is a recorded non-success, never `not_attempted`. Random seed and
+population-control policy are frozen in the preregistered pilot design before
+PI review; a seed changes uncertainty, not campaign identity or attempt scope.
 
 The implementer writes the complete Swing package: source snapshot, input
 manifest, config generator, one-command preflight/submit wrapper, result
@@ -221,11 +222,10 @@ the block2 build, orbital ordering, sweep schedule, bond-dimension ladder,
 discarded-weight cutoff, threading, checkpoint policy, and energy-selection
 rule.
 
-Admission uses deterministic memory and walltime predictors based on NORB,
-electron sector, ordering features, and a preregistered short pilot. Production
-must retain every variational rung as a separately addressable nested result
-and report the lowest *within-run* energy only; it may not select across tuned
-per-task configurations.
+Every task receives one attempted DMRG run on a whole 128-core node under the
+uniform cap. Production must retain every completed variational rung as a
+separately addressable nested result and report the lowest *within-run* energy
+only; it may not select across tuned per-task configurations.
 
 ## TrimCI
 
@@ -241,10 +241,10 @@ The production seed policy must preserve the intended 64-run phase-0 search.
 The campaign records all phase-0 candidates and the selected variational state;
 one excellent variational state is sufficient for the reported best energy,
 while seed/candidate spread remains diagnostic rather than an accuracy
-penalty. Admission predicts determinant growth, FE memory, orbital-optimization
-cost, and PT2 cost from target-blind features and a frozen pilot. Phase caps
-and the rule for variational versus PT2-reported energy are preregistered
-globally. The pilot tests the 10,000,000-determinant ceiling and pins a nested
+penalty. Every task receives one attempted TrimCI run on a whole 128-core node
+under the uniform cap. Phase caps and the rule for variational versus
+PT2-reported energy are preregistered globally. The pilot tests the
+10,000,000-determinant ceiling and pins a nested
 determinant milestone grid. Milestone capture is observation-only and cannot
 alter the FE search protocol.
 
@@ -259,36 +259,34 @@ provenance,
 `eps_var` schedule, PT policy, stochastic seed policy, and
 scratch/checkpoint layout.
 
-Admission uses deterministic estimates of selected-determinant growth, memory,
-PT work, and walltime. Production keeps the configured variational/PT ladder so
+Every task receives one attempted SHCI run on a whole 128-core node under the
+uniform cap. Production keeps the configured variational/PT ladder so
 nestedness and convergence can be audited; a headline energy is derived only
 by the preregistered rule. Historical SHCI files and ladders remain archival
 comparison material, never production substitutes.
 
 ## Evidence package
 
-Each solver bundle must contain the frozen task/admission ledger, source and
-environment manifests, preflight report, prepared runs, submission ledger,
-per-task raw/status records, JUnit, terminal verification, and archived
-scheduler accounting. A cross-campaign verifier enforces identical task order,
-exactly `4N` rows, campaign separation, target-blind admission, and cost
-ceilings. S3 publication, public solution-table merge, metrics inclusion, and
-headline designation are separate post-review gates.
+Each solver bundle must contain the frozen task ledger, source and environment
+manifests, preflight report, prepared runs, submission ledger, per-task
+raw/status records, JUnit, terminal verification, and archived scheduler
+accounting. A cross-campaign verifier enforces identical task order, exactly
+`4N` attempted rows, campaign separation, the uniform cap, and the prohibition
+on `not_attempted`. S3 publication, public solution-table merge, metrics
+inclusion, and headline designation are separate post-review gates.
 
-## Cost projection deliverable at gate 2
+## Uniform-cap deliverable at gate 3
 
 The pilot report must fill this table with measured values before PI review:
 
-| Solver | Core rows `N` | Admitted `A_s` | Resource | Per-task hard cap | Total hard cap | Pilot q50/q90 | Peak memory |
-| --- | ---: | ---: | --- | ---: | ---: | --- | --- |
-| iPIE | TBD | TBD | A100 GPU | planning: 2 h | `2 A_ipie` GPU-h | TBD | TBD |
-| DMRG | TBD | TBD | full node | planning: 4 h | `4 A_dmrg` node-h | TBD | TBD |
-| TrimCI | TBD | TBD | full node | planning: 4 h | `4 A_trimci` node-h | TBD | TBD |
-| SHCI | TBD | TBD | full node | planning: 4 h | `4 A_shci` node-h | TBD | TBD |
+| Solver | Attempted rows | Resource | Working cap | Pilot walltime distribution | Peak memory | Projected timeout fraction | Projected campaign cost |
+| --- | ---: | --- | ---: | --- | --- | --- | --- |
+| iPIE | 718 | one A100 | 12 h/task | TBD | TBD | TBD | TBD |
+| DMRG | 718 | one 128-core node | 12 h/task | TBD | TBD | TBD | TBD |
+| TrimCI | 718 | one 128-core node | 12 h/task | TBD | TBD | TBD | TBD |
+| SHCI | 718 | one 128-core node | 12 h/task | TBD | TBD | TBD | TBD |
 
-The core row count is now fixed at 718. Admitted counts and calibrated columns
-remain TBD because the solver-specific admission models do not yet exist. The
-formulas above are sufficient for allocation-scale planning without fabricating
-a production request. The target-blind pilot design submitted for that
-calibration is `g50_pilot_design_v1.md` with machine-readable companion
-`g50_pilot_design_v1.json`.
+The pilot report recommends one uniform cap from these distributions and
+projections. Matt pins the final value at gate 3. No admission ledger is
+produced. The resource-cap pilot design is `g50_pilot_design_v1.md` with
+machine-readable companion `g50_pilot_design_v1.json`.

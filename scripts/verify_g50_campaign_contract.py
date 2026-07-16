@@ -125,26 +125,59 @@ def verify(
         corpus.get("settled") is True
         and contract.get("cost_projection", {}).get("core_task_count") == 718,
     )
-    scenarios = contract.get("cost_projection", {}).get("planning_scenarios", [])
-    full_scenarios = [
-        item for item in scenarios if item.get("core_rows_per_solver") == 718
-    ]
+    cost_projection = contract.get("cost_projection", {})
     _record(
         checks,
-        "full_corpus_budget_scenario",
-        full_scenarios
+        "uniform_cap_budget",
+        cost_projection.get("working_uniform_cap_hours_per_task") == 12
+        and cost_projection.get("final_uniform_cap_hours_per_task")
+        == "TBD_AT_GATE_3"
+        and cost_projection.get("planning_scenarios")
         == [
             {
-                "core_rows_per_solver": 718,
-                "cpu_node_hours_all_admitted": 8616,
-                "ipie_gpu_hours_all_admitted": 1436,
+                "cpu_node_hours_per_solver_worst_case": 8616,
+                "cpu_node_hours_three_solvers_worst_case": 25848,
+                "ipie_a100_hours_worst_case": 8616,
+                "tasks_per_solver": 718,
+                "uniform_cap_hours_per_task": 12,
             }
         ],
     )
     _record(
         checks,
-        "no_stale_591_budget_scenario",
-        all(item.get("core_rows_per_solver") != 591 for item in scenarios),
+        "uniform_cap_hardware_units",
+        cost_projection.get("hardware_unit_per_task")
+        == {
+            "DMRG": "one 128-core Improv node",
+            "SHCI": "one 128-core Improv node",
+            "TrimCI": "one 128-core Improv node",
+            "ipie_uhf_trial": "one A100 GPU",
+        },
+    )
+    universal_attempt = contract.get("universal_attempt", {})
+    _record(
+        checks,
+        "universal_attempt_scope",
+        universal_attempt.get("attempt_all_tasks_per_solver") is True
+        and universal_attempt.get("task_count_per_solver") == 718
+        and universal_attempt.get("admission_prediction_permitted") is False
+        and universal_attempt.get("per_task_scientific_tuning_permitted") is False
+        and universal_attempt.get("not_attempted_permitted") is False,
+    )
+    _record(
+        checks,
+        "timeout_scored_non_success",
+        universal_attempt.get("timeout_status") == "timeout"
+        and universal_attempt.get("timeout_scored_as_success") is False
+        and universal_attempt.get("oom_or_build_or_ingest_status") == "failed",
+    )
+    _record(
+        checks,
+        "admission_model_deleted",
+        "target_blind_admission" not in contract
+        and "admitted_task_count" not in cost_projection
+        and "planning_caps_per_admitted_task_hours" not in cost_projection
+        and "production_hard_caps" not in cost_projection,
     )
 
     signoff = contract.get("matt_configuration_signoff", {})
@@ -165,6 +198,21 @@ def verify(
         "freeze_allowed_after_signoff",
         signoff.get("configuration_freeze_allowed") is True
         and signoff.get("numeric_pins_pending_pilot_calibration") is True,
+    )
+    _record(
+        checks,
+        "uniform_cap_signoff_evidence",
+        set(signoff.get("pre_signoff_evidence", []))
+        == {
+            "clean_source_snapshot",
+            "immutable_dependency_lock",
+            "compute_node_smoke",
+            "failure_injection_tests",
+            "outcome_vocabulary_tests",
+            "uniform_cap_pilot_calibration",
+            "timeout_fraction_projection",
+            "campaign_budget_projection",
+        },
     )
     _record(
         checks,
@@ -258,6 +306,15 @@ def verify(
         "design_excludes_historical_ipie",
         all(campaign in design for campaign in HISTORICAL_IPIE)
         and "excluded from headline metrics" in design,
+    )
+    _record(
+        checks,
+        "design_uses_o34_universal_attempt",
+        "There is no admission predictor or solver-specific admission region."
+        in design_words
+        and "every solver attempts every task" in design_words
+        and "Matt pins one final uniform cap at gate 3" in design_words
+        and "No admission ledger is produced." in design_words,
     )
 
     pilot_contract = contract.get("pilot_design", {})
@@ -453,6 +510,36 @@ def verify(
         checks,
         "calibration_forbidden_inputs",
         set(calibration.get("forbidden_inputs", [])) == FORBIDDEN_PILOT_TOKENS,
+    )
+    pilot_cap = calibration.get("uniform_cap", {})
+    _record(
+        checks,
+        "pilot_universal_attempt_calibration",
+        calibration.get("admission_prediction_permitted") is False
+        and calibration.get("production_attempt_scope") == "all_718_tasks_per_solver"
+        and "admission_inputs" not in calibration
+        and "production_admission_policy" not in calibration
+        and pilot_cap.get("working_hours_per_task") == 12
+        and pilot_cap.get("final_hours_per_task") == "TBD_AT_GATE_3"
+        and pilot_cap.get("pinned_by") == "Matt"
+        and pilot_cap.get("not_attempted_permitted") is False
+        and pilot_cap.get("timeout_status") == "timeout"
+        and pilot_cap.get("timeout_scored_as_success") is False,
+    )
+    _record(
+        checks,
+        "pilot_cap_projection_outputs",
+        set(calibration.get("production_outputs_required_before_gate_3_closure", []))
+        == {
+            "exact solver configuration locks",
+            "measured pilot walltime distributions",
+            "measured pilot peak-memory distributions",
+            "timeout-fraction projection at the recommended uniform cap",
+            "campaign-budget projection at the recommended uniform cap",
+            "one uniform per-task cap recommendation for all four solvers",
+            "failure and timeout inventory",
+            "v1.9 designation skeletons still marked not_designated",
+        },
     )
     execution = pilot_design.get("improv_execution_shape", {})
     _record(
