@@ -1,0 +1,16 @@
+{
+  "ENABLE_USER_SITE": false,
+  "MKL_NUM_THREADS": "1",
+  "OMP_NUM_THREADS": "1",
+  "OPENBLAS_NUM_THREADS": "1",
+  "PYTHONNOUSERSITE": "1",
+  "command": "PYTHONNOUSERSITE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=src:. /home/ac.otten/soft/mambaforge/envs/qb_gsee/bin/python -m pytest -q tests/qb_gsee_benchmark/test_g40_p2_production.py --junitxml=/lcrc/project/PIRT/NCS_GSEE_Benchmark/qb-gsee-benchmark/analysis/release_evidence/gr23/d7012de_g40_p2_merge.junit.xml",
+  "exact_detached_checkout": "/tmp/gr24_d7012de_raw",
+  "numpy_version": "1.26.4",
+  "pyscf_version": "2.8.0",
+  "pytest_version": "8.3.4",
+  "python_executable": "/home/ac.otten/soft/mambaforge/envs/qb_gsee/bin/python",
+  "python_version": "3.12.0",
+  "scipy_version": "1.12.0",
+  "source_commit": "d7012ded23fa12f55e9effee7dc7d50e224b5ece"
+}

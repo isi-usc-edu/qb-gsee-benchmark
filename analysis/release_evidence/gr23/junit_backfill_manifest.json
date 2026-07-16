@@ -1,16 +1,32 @@
 {
   "environment": {
-    "numpy_version": "2.4.6",
+    "ENABLE_USER_SITE": false,
+    "PYTHONNOUSERSITE": "1",
+    "numpy_version": "1.26.4",
+    "pyscf_version": "2.8.0",
     "pytest_version": "8.3.4",
-    "python_version": "3.12.0"
+    "python_version": "3.12.0",
+    "scipy_version": "1.12.0",
+    "thread_limits": {
+      "MKL_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1"
+    }
   },
   "generated_date": "2026-07-15",
+  "raw_emission_policy": {
+    "execution": "separate sequential pytest processes at exact detached checkouts",
+    "post_processing": "none"
+  },
   "records": [
     {
-      "command": "PYTHONPATH=src:. pytest -q tests/qb_gsee_benchmark/test_g40_p2_production.py --junitxml=/tmp/gr23_d7012de_g40_p2_merge.junit.xml",
+      "command": "PYTHONNOUSERSITE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=src:. /home/ac.otten/soft/mambaforge/envs/qb_gsee/bin/python -m pytest -q tests/qb_gsee_benchmark/test_g40_p2_production.py --junitxml=/lcrc/project/PIRT/NCS_GSEE_Benchmark/qb-gsee-benchmark/analysis/release_evidence/gr23/d7012de_g40_p2_merge.junit.xml",
+      "environment_path": "analysis/release_evidence/gr23/d7012de_environment.json",
+      "environment_sha256": "7fc5976d778dc9c7f1a081da43995c776b8f8e0f70d8c6d0c1a267d4bb38eb29",
       "exact_detached_checkout": true,
+      "junit_emission": "raw_untouched_pytest",
       "junit_path": "analysis/release_evidence/gr23/d7012de_g40_p2_merge.junit.xml",
-      "junit_sha256": "fb896ef1fd145b2ac4c1d2dbe4f34b0a60cb45c8b4e7b10241a953d915c74a0a",
+      "junit_sha256": "e5596cf47a59706b12e88ed5d531f988899d1af1567bea4a1f382cbfe52e1fe9",
       "release_action": "G40 P2 public feature-table merge",
       "source_commit": "d7012ded23fa12f55e9effee7dc7d50e224b5ece",
       "summary": {
@@ -21,10 +37,13 @@
       }
     },
     {
-      "command": "PYTHONPATH=src:. pytest -q tests/qb_gsee_benchmark/test_runtime_cost_bundle.py --junitxml=/tmp/gr23_4d5895b_g51_v2.junit.xml",
+      "command": "PYTHONNOUSERSITE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=src:. /home/ac.otten/soft/mambaforge/envs/qb_gsee/bin/python -m pytest -q tests/qb_gsee_benchmark/test_runtime_cost_bundle.py --junitxml=/lcrc/project/PIRT/NCS_GSEE_Benchmark/qb-gsee-benchmark/analysis/release_evidence/gr23/4d5895b_g51_v2.junit.xml",
+      "environment_path": "analysis/release_evidence/gr23/4d5895b_environment.json",
+      "environment_sha256": "d9fd93be362972580fac3691f56cbf0ae00674b7c91c3c44c3e98f45107f66d2",
       "exact_detached_checkout": true,
+      "junit_emission": "raw_untouched_pytest",
       "junit_path": "analysis/release_evidence/gr23/4d5895b_g51_v2.junit.xml",
-      "junit_sha256": "4e75eb34a04894ba54cc260ea1cc364b9cfdb82a690066bfc115d763e742285e",
+      "junit_sha256": "96822ae1e2064f424620cdb1e53358d786e2391c36accaefaab07edc56b030cf",
       "release_action": "G51 v2 runtime-cost filing",
       "source_commit": "4d5895b0468556a6ae69dc883b2ea0a6aaaacfc5",
       "summary": {
@@ -35,5 +54,5 @@
       }
     }
   ],
-  "schema_version": "gr23_o3_junit_backfill_v1"
+  "schema_version": "gr24_o1_raw_junit_backfill_v2"
 }
