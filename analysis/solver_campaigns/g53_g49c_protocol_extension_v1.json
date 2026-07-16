@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "goal": "G-53",
+  "campaign_id": "g49_pyscf_stability_resolved_2026-07_v1",
+  "run_generation": "g49c_protocol_extension_v1",
+  "protocol_label": "g49c_newton_bootstrap_and_degenerate_direction_multifollow_v1",
+  "status": "preregistered_before_execution",
+  "parent_generations": {
+    "g49_initial_generation": "immutable",
+    "g49b_remediation_v1": "immutable"
+  },
+  "result_pooling": {
+    "pool_with_parent_generations": false,
+    "selection_rule": "report_each_generation_separately"
+  },
+  "environment": {
+    "requirements_lock_sha256": "f15657f0fd7b3ad873db9c7b38c57dc0c40719c83a591c42928832ed0ff8ff00",
+    "environment_pin_sha256": "77cb1dbbdb06f4e4a760f256291a6b96b415824ad146f85616a3dce8ecaa7f02"
+  },
+  "convergence": {
+    "scf_energy_change_hartree": 1e-10,
+    "maximum_ov_gradient": 1e-7,
+    "engine_converged_required": true,
+    "internal_stability_threshold_hartree": -1e-5,
+    "external_stability_threshold_hartree": -1e-5,
+    "density_deduplication_frobenius_norm": 1e-6,
+    "davidson_residual_norm": 1e-7
+  },
+  "newton_bootstrap": {
+    "tasks": [
+      "ab61c91a-68ea-401f-a3ad-392e83ee802e",
+      "fb87d637-aaab-4e8f-8898-4ecca8bd0fe0"
+    ],
+    "diagnostic_point": "g48_default_open_shell_uhf_state_reconstructed_from_checksum_bound_fcidump",
+    "second_order_controls": "frozen_mfproto_v3_configure_newton_fallback",
+    "maximum_follow_steps_after_bootstrap": 2,
+    "follow_policy": "single_lowest_internal_root_as_in_g49_initial_generation"
+  },
+  "degenerate_direction_multifollow": {
+    "task": "ca6f7678-0952-4fe4-83fe-c4455a682132",
+    "starting_point": "g48_default_open_shell_uhf",
+    "root_window_above_lowest_hartree": 5e-5,
+    "root_enumeration": "adaptive_deterministic_davidson_until_first_root_above_window_or_branch_budget_plus_one",
+    "root_vector_sign": "largest_absolute_component_positive_with_lowest_index_tie_break",
+    "queue_order": "breadth_first_then_parent_stationary_point_index_then_root_eigenvalue_then_root_index",
+    "branch_budget_unique_converged_stationary_points": 16,
+    "maximum_follow_hops_per_path": 6,
+    "follow_all_roots_in_window": true,
+    "known_target_used_for_search_or_stopping": false,
+    "known_audit_target_energy_hartree_report_only": -45.85907658,
+    "budget_exhaustion_disposition": "stability_unresolved_branch_budget_exhausted"
+  },
+  "pbs": {
+    "queue": "compute",
+    "ncpus": 128,
+    "memory_request": null,
+    "array_elements": 3,
+    "task_walltime_seconds": 900,
+    "verifier_walltime_seconds": 900,
+    "maximum_node_hours": 1.0,
+    "debug_queue_permitted": false,
+    "backfill_only_after_compute_allocation_exhaustion": true
+  },
+  "tasks": [
+    {
+      "task_uuid": "ab61c91a-68ea-401f-a3ad-392e83ee802e",
+      "element": "Ti",
+      "norb": 54,
+      "nelec": 12,
+      "ms2": 2,
+      "input_sha256": "92b60de603e3ef37facea34702b502ed1c4a26ac71831d1952e6a01aec4b7c37",
+      "mode": "newton_bootstrap_then_g49_follow"
+    },
+    {
+      "task_uuid": "fb87d637-aaab-4e8f-8898-4ecca8bd0fe0",
+      "element": "Sc",
+      "norb": 54,
+      "nelec": 11,
+      "ms2": 1,
+      "input_sha256": "037e770eaaca63c764cf70858bcad0f39316d97f16bab6b7e4d6877bc7004b13",
+      "mode": "newton_bootstrap_then_g49_follow"
+    },
+    {
+      "task_uuid": "ca6f7678-0952-4fe4-83fe-c4455a682132",
+      "element": "Sc",
+      "norb": 54,
+      "nelec": 10,
+      "ms2": 2,
+      "input_sha256": "8b031b37bee84fe68a2a2ddee0d11fcf1c0f99afe01af8464a6521dd045c9742",
+      "mode": "degenerate_direction_multifollow"
+    }
+  ],
+  "required_evidence": [
+    "frozen_plan_and_bundle_manifest",
+    "live_compute_preflight",
+    "dry_run_qsub_commands",
+    "raw_scheduler_logs_and_accounting",
+    "per_task_stationary_point_accounting",
+    "raw_junit",
+    "environment_fingerprint",
+    "evidence_line"
+  ]
+}
