@@ -7,13 +7,18 @@
   },
   "accepted_manifest_hash": "575b519179de1c69895cb36ef1caf8c4461812edd8af3206b42dcd5fc95bf0fe",
   "campaign_id": "g48_pyscf_clean_slate_2026-07_v1",
+  "dashboard_release_gate": {
+    "public_regeneration_authorized": false,
+    "required_acknowledgment": "GR23-O1 evidence acknowledgment",
+    "status": "held_for_pi_acknowledgment"
+  },
   "designation": {
-    "effective": false,
+    "effective": true,
     "headline_source_after_approval": "g48_pyscf_clean_slate_2026-07_v1",
     "legacy_campaign": "legacy:pyscf_solutions",
     "legacy_fallback_allowed": false,
     "pool_campaigns": false,
-    "status": "pending_pi_approval"
+    "status": "effective"
   },
   "metrics_spec": {
     "effective_version_after_approval": "1.9",
@@ -28,10 +33,14 @@
     "timeout": 0
   },
   "pi_approval": {
-    "approved_at": null,
-    "approved_by": null,
-    "review_artifact": null,
-    "status": "pending"
+    "approved_at": "2026-07-15",
+    "approved_by": "PI agent under GR22-O1; Matt V14 explicit approval relayed by PI",
+    "approval_artifact": "work/PI_DESIGNATION_APPROVAL_g48_v1_9.json",
+    "approval_artifact_sha256": "5d297c1bfbc05c27e28d9a14ea9f61c75069e601e97cfcb6c89b74573b5e9b41",
+    "matt_v14_record": "work/IMPLEMENTER_GOALS.md#MATT-RULINGS-2026-07-15",
+    "review_artifact": "work/PI_REVIEW_2026-07-15_gr24_batch.md",
+    "review_artifact_sha256": "5cf8dd499ba3d764df617ac1190267aad81f86b97c1a2b836e986cac2bc6ed9e",
+    "status": "approved"
   },
   "reference_valid_scope": {
     "frozen_design_reference_valid_pairs_before_o27": 2465,

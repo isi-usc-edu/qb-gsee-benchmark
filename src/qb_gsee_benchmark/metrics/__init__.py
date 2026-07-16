@@ -60,9 +60,17 @@ from .v1_8 import (
     solver_similarity_v1_8,
     stratified_aggregation_v1_8,
 )
+from .v1_9 import (
+    METRICS_SPEC_VERSION as METRICS_SPEC_VERSION_V1_9,
+    build_bundle_v1_9,
+    select_headline_attempts_v1_9,
+)
 
 __all__ = [
     "METRICS_SPEC_VERSION",
+    "METRICS_SPEC_VERSION_V1_9",
+    "build_bundle_v1_9",
+    "select_headline_attempts_v1_9",
     "METRICS_SPEC_VERSION_V1_7",
     "VALID_REFERENCE_GRADES_V1_7",
     "agreement_v1_8",
