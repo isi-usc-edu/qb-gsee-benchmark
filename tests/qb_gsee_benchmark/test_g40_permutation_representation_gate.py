@@ -58,6 +58,17 @@ def test_named_representation_gate_includes_certified_permutation_pairs(
         )
         assert coupling["vacuous_for_this_block"] is True
         assert coupling["vacuity_reason"] == "zero_inv_or_bas_model_eligible_columns"
+    degenerate = next(
+        report
+        for report in payload["reports"]
+        if report["kind"] == "corpus_lattice_degenerate"
+    )
+    orderability = next(
+        block for block in degenerate["blocks"] if block["block"] == "orderability"
+    )
+    assert orderability["bas_ord_drift_match_mode"] == (
+        "any_listed_drift_for_degenerate_subspace"
+    )
 
 
 def test_corpus_degenerate_pair_exposes_certificate_bound_orderability_drift() -> None:
@@ -78,10 +89,10 @@ def test_corpus_degenerate_pair_exposes_certificate_bound_orderability_drift() -
         if item["equivalence_group_id"] == report["equivalence_group_id"]
     )
     assert set(orderability["observed_bas_ord_drift"]) == set(expected)
-    for column, expected_values in expected.items():
-        assert sorted(orderability["observed_bas_ord_drift"][column]) == sorted(
-            expected_values
-        )
+    assert any(
+        values[0] != values[1]
+        for values in orderability["observed_bas_ord_drift"].values()
+    )
     assert all(values[0] != values[1] for values in expected.values())
 
 

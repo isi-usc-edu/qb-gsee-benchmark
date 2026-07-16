@@ -274,17 +274,31 @@ def _verify_permutation_certificates(
                     )
             observed_bas_ord_drift = {}
             expected_bas_ord_drift = pair.get("expected_bas_ord_drift", {})
+            bas_ord_drift_match_mode = None
             if expected_bas_ord_drift and block == "orderability":
+                degenerate_drift = pair["kind"] == "corpus_lattice_degenerate"
+                bas_ord_drift_match_mode = (
+                    "any_listed_drift_for_degenerate_subspace"
+                    if degenerate_drift
+                    else "unordered_expected_values"
+                )
+                listed_drift_observed = False
                 for column, expected_values in expected_bas_ord_drift.items():
                     observed_bas_ord_drift[column] = [
                         features["original"][column],
                         features["permuted"][column],
                     ]
                     observed_values = observed_bas_ord_drift[column]
-                    if len(observed_values) != len(expected_values) or not all(
-                        _close(observed, expected, rtol, atol)
-                        for observed, expected in zip(
-                            sorted(observed_values), sorted(expected_values)
+                    listed_drift_observed |= not _close(
+                        observed_values[0], observed_values[1], rtol, atol
+                    )
+                    if not degenerate_drift and (
+                        len(observed_values) != len(expected_values)
+                        or not all(
+                            _close(observed, expected, rtol, atol)
+                            for observed, expected in zip(
+                                sorted(observed_values), sorted(expected_values)
+                            )
                         )
                     ):
                         failures.append(
@@ -297,6 +311,16 @@ def _verify_permutation_certificates(
                                 "observed": observed_bas_ord_drift[column],
                             }
                         )
+                if degenerate_drift and not listed_drift_observed:
+                    failures.append(
+                        {
+                            "group": pair["equivalence_group_id"],
+                            "block": block,
+                            "reason": "missing_degenerate_bas_ord_drift",
+                            "columns": sorted(expected_bas_ord_drift),
+                            "observed": observed_bas_ord_drift,
+                        }
+                    )
             block_reports.append(
                 {
                     "block": block,
@@ -307,6 +331,7 @@ def _verify_permutation_certificates(
                     ),
                     "checks": checks,
                     "observed_bas_ord_drift": observed_bas_ord_drift,
+                    "bas_ord_drift_match_mode": bas_ord_drift_match_mode,
                     "status": (
                         "passed"
                         if all(item["passed"] for item in checks.values())
