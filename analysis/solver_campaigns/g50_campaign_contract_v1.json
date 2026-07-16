@@ -51,7 +51,7 @@
       },
       {
         "id": "gao_feature_backfill_decided",
-        "satisfied": false
+        "satisfied": true
       },
       {
         "id": "no_pending_task_admissions_or_removals",
@@ -59,11 +59,11 @@
       }
     ],
     "definition": "G-48 closed out, FeMoco-54 quarantine filed, Gao feature backfill decided, no pending task admissions/removals",
-    "settled": false
+    "settled": true
   },
   "cost_projection": {
     "admitted_task_count": "TBD_AT_GATE_2",
-    "core_task_count": "TBD_AT_GATE_1",
+    "core_task_count": 718,
     "planning_caps_per_admitted_task_hours": {
       "DMRG": 4,
       "SHCI": 4,
@@ -123,12 +123,26 @@
   },
   "matt_configuration_signoff": {
     "authority": "Matt",
-    "configuration_freeze_allowed": false,
-    "ipie_submitter_selected": null,
+    "configuration_freeze_allowed": true,
+    "directives": {
+      "DMRG": {
+        "retention": "every_bond_dimension_rung_as_separate_nested_result",
+        "solvability_region_growth_eligible": true
+      },
+      "TrimCI": {
+        "determinant_ceiling": 10000000,
+        "determinant_grid": "preregister_at_pilot",
+        "retention": "phase_boundaries_and_preregistered_determinant_milestones",
+        "snapshot_semantics": "observation_only_no_search_protocol_changes",
+        "solvability_region_growth_eligible": true
+      }
+    },
+    "ipie_submitter_selected": "Matt",
+    "numeric_pins_pending_pilot_calibration": true,
     "options": {
       "DMRG": {
         "recommended_option_id": "DMRG-A",
-        "selected_option_id": null,
+        "selected_option_id": "DMRG-A",
         "values": [
           {
             "option_id": "DMRG-A",
@@ -146,7 +160,7 @@
       },
       "SHCI": {
         "recommended_option_id": "SHCI-A",
-        "selected_option_id": null,
+        "selected_option_id": "SHCI-A",
         "values": [
           {
             "option_id": "SHCI-A",
@@ -164,7 +178,7 @@
       },
       "TrimCI": {
         "recommended_option_id": "TrimCI-A",
-        "selected_option_id": null,
+        "selected_option_id": "TrimCI-A",
         "values": [
           {
             "option_id": "TrimCI-A",
@@ -182,7 +196,7 @@
       },
       "ipie_uhf_trial": {
         "recommended_option_id": "iPIE-A",
-        "selected_option_id": null,
+        "selected_option_id": "iPIE-A",
         "values": [
           {
             "option_id": "iPIE-A",
@@ -209,8 +223,10 @@
       "candidate_static_admission_rule",
       "cost_calibration"
     ],
+    "signoff_date": "2026-07-15",
+    "signoff_record": "work/IMPLEMENTER_GOALS.md#MATT-CONFIGURATION-SIGN-OFF-2026-07-15",
     "selected_by_pi_or_implementer": false,
-    "status": "pending"
+    "status": "approved"
   },
   "outcome_statuses": [
     "completed",
@@ -219,7 +235,7 @@
     "not_attempted"
   ],
   "schema_version": 1,
-  "status": "desk_design_only_execution_held",
+  "status": "configuration_selected_execution_held_for_pi_design_review",
   "target_blind_admission": {
     "allowed_inputs": [
       "norb",

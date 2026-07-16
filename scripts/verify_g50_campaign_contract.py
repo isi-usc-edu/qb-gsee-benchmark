@@ -8,12 +8,9 @@ import json
 from pathlib import Path
 from typing import Any
 
-
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = Path("analysis/solver_campaigns/g50_campaign_contract_v1.json")
-DESIGN_PATH = Path(
-    "analysis/solver_campaigns/g50_endgame_clean_slate_design.md"
-)
+DESIGN_PATH = Path("analysis/solver_campaigns/g50_endgame_clean_slate_design.md")
 CORPUS_DEFINITION = (
     "G-48 closed out, FeMoco-54 quarantine filed, Gao feature backfill "
     "decided, no pending task admissions/removals"
@@ -31,6 +28,12 @@ EXPECTED_CAMPAIGNS = {
     "g50_shci_clean_slate_2026-07_v1",
 }
 HISTORICAL_IPIE = {"ipie_swing_2026-07", "ipie_swing_envfix_2026-07"}
+MATT_SELECTIONS = {
+    "DMRG": "DMRG-A",
+    "SHCI": "SHCI-A",
+    "TrimCI": "TrimCI-A",
+    "ipie_uhf_trial": "iPIE-A",
+}
 
 
 def _record(checks: dict[str, bool], name: str, condition: Any) -> None:
@@ -67,8 +70,7 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
         corpus.get("definition") == CORPUS_DEFINITION,
     )
     conditions = {
-        item.get("id"): item.get("satisfied")
-        for item in corpus.get("conditions", [])
+        item.get("id"): item.get("satisfied") for item in corpus.get("conditions", [])
     }
     _record(checks, "g48_closed", conditions.get("g48_closed_out") is True)
     _record(
@@ -78,8 +80,8 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
     )
     _record(
         checks,
-        "gao_still_open",
-        conditions.get("gao_feature_backfill_decided") is False,
+        "gao_decided",
+        conditions.get("gao_feature_backfill_decided") is True,
     )
     _record(
         checks,
@@ -87,15 +89,31 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
         "no_pending_task_admissions_or_removals" in conditions
         and conditions["no_pending_task_admissions_or_removals"] is True,
     )
-    _record(checks, "corpus_not_settled", corpus.get("settled") is False)
-
-    signoff = contract.get("matt_configuration_signoff", {})
-    _record(checks, "matt_authority", signoff.get("authority") == "Matt")
-    _record(checks, "signoff_pending", signoff.get("status") == "pending")
     _record(
         checks,
-        "freeze_prohibited",
-        signoff.get("configuration_freeze_allowed") is False,
+        "corpus_settled",
+        corpus.get("settled") is True
+        and contract.get("cost_projection", {}).get("core_task_count") == 718,
+    )
+
+    signoff = contract.get("matt_configuration_signoff", {})
+    directives = signoff.get("directives", {})
+    _record(checks, "matt_authority", signoff.get("authority") == "Matt")
+    _record(
+        checks,
+        "signoff_approved",
+        signoff.get("status") == "approved"
+        and directives.get("DMRG", {}).get("retention")
+        == "every_bond_dimension_rung_as_separate_nested_result"
+        and directives.get("TrimCI", {}).get("determinant_ceiling") == 10_000_000
+        and directives.get("TrimCI", {}).get("snapshot_semantics")
+        == "observation_only_no_search_protocol_changes",
+    )
+    _record(
+        checks,
+        "freeze_allowed_after_signoff",
+        signoff.get("configuration_freeze_allowed") is True
+        and signoff.get("numeric_pins_pending_pilot_calibration") is True,
     )
     _record(
         checks,
@@ -104,8 +122,8 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
     )
     _record(
         checks,
-        "ipie_submitter_unselected",
-        signoff.get("ipie_submitter_selected") is None,
+        "ipie_submitter_selected",
+        signoff.get("ipie_submitter_selected") == "Matt",
     )
     options = signoff.get("options", {})
     _record(checks, "all_solver_option_sets", set(options) == EXPECTED_SOLVERS)
@@ -121,8 +139,8 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
         )
         _record(
             checks,
-            f"{solver}:selection_pending",
-            item.get("selected_option_id") is None,
+            f"{solver}:selection_matches_matt",
+            item.get("selected_option_id") == MATT_SELECTIONS[solver],
         )
 
     designation = contract.get("headline_designation", {})
@@ -170,7 +188,13 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
         "design_reserves_matt_authority",
         "Matt's per-solver configuration sign-off" in design_words
         and "The PI does not choose or substitute solver configurations."
-        in design_words,
+        in design_words
+        and all(
+            f"Selected: {option_id}" in design for option_id in MATT_SELECTIONS.values()
+        )
+        and "Every bond-dimension rung is retained as a separate" in design
+        and "10,000,000 determinants" in design
+        and "Snapshotting is observation-only" in design,
     )
     for label in ("iPIE", "DMRG", "TrimCI", "SHCI"):
         _record(

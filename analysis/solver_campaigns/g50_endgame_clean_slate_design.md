@@ -2,7 +2,11 @@
 
 Date: 2026-07-15
 
-Status: desk design only; execution held at the three gates below
+Status: Matt selections encoded; execution held for PI design review
+
+Changelog 2026-07-15: corpus gate settled at 718 tasks; Matt selected iPIE-A,
+DMRG-A, TrimCI-A, and SHCI-A, selected himself as Swing submitter, and added
+the DMRG/TrimCI retained-rung directives below.
 
 ## Purpose and clean-slate definition
 
@@ -31,31 +35,34 @@ Execution remains held until all three Matt-ruled gates pass in order:
    The final task UUID manifest, FCIDUMP hashes, family and structure balance,
    source-defect exclusions, and core-manifest version then become immutable.
    Current state: G-48 closed out; FeMoco-54 quarantine filed; Gao feature
-   backfill not decided; no task admissions or removals are pending. This gate
-   is not satisfied.
+   backfill merged; no task admissions or removals are pending. The settled
+   corpus contains 718 tasks. This gate is satisfied.
 2. **Matt's per-solver configuration sign-off.** Solver configurations are
    Matt-reserved. The implementer supplies the adapter/environment evidence,
    target-blind pilot calibration, and the options-plus-recommendation tables
    below. Matt selects or amends one option per solver and selects the iPIE
    submitter. No solver configuration, admission threshold, seed policy, or
-   production cap may be frozen before that sign-off.
+   production cap may be frozen before that sign-off. Matt selected iPIE-A,
+   DMRG-A, TrimCI-A, and SHCI-A and selected himself as the Swing submitter.
+   This gate is satisfied; exact numeric pins remain pilot outputs.
 3. **PI design review.** After Matt's selections are encoded in immutable
    configuration manifests, the PI reviews the signed configurations,
    admission thresholds, per-task caps, total cost ceilings, pilot separation,
    v1.9 designation hooks, and the complete Swing handoff package. The PI does
-   not choose or substitute solver configurations. No production `qsub` or
-   Swing submission is permitted before this gate.
+   not choose or substitute solver configurations. This gate remains pending.
+   No production `qsub` or Swing submission is permitted before it.
 
-Before gate 2, each option package must include a clean source snapshot,
+The evidence supplied for gate 2 includes a clean source snapshot,
 immutable dependency lock, compute-node smoke, failure-injection tests,
 outcome-vocabulary tests, cost calibration, and a candidate static admission
-rule. Those are evidence for Matt's decision, not an implicit configuration
-freeze. All four candidate bundles must cross-check the same task manifest.
+rule. Those are evidence for Matt's decision. Exact ladders, phase caps, seeds,
+and admission thresholds remain pilot-calibrated numeric pins. All four
+candidate bundles must cross-check the same task manifest.
 
 ## Configuration options for Matt
 
-Every recommendation below is provisional. The machine-readable contract keeps
-all selected-option fields null until Matt signs them.
+The tables preserve the alternatives presented to Matt. The machine-readable
+contract now records his binding selections.
 
 ### iPIE options for Matt
 
@@ -70,6 +77,9 @@ uncertainty or population diagnostics; use that failure mode to choose B or C.
 Matt also chooses whether his Swing agent or the implementer performs the
 single-command submission.
 
+**Selected: iPIE-A. Submitter: Matt on Swing.** Pilot diagnostics calibrate
+uncertainty and cost but do not silently switch the selected option.
+
 ### DMRG options for Matt
 
 | Option | Configuration | Tradeoff | Recommendation |
@@ -81,6 +91,11 @@ single-command submission.
 Recommendation to Matt: choose DMRG-A; Matt signs the exact ordering, bond
 dimensions, sweep counts, discarded-weight rule, and checkpoint policy after
 pilot calibration.
+
+**Selected: DMRG-A.** Every bond-dimension rung is retained as a separate,
+nested result, not only the terminal lowest variational value. The pilot pins
+the global ladder and sweep schedule; all retained rungs feed the
+solvability-region-growth analysis.
 
 ### TrimCI options for Matt
 
@@ -94,6 +109,15 @@ Recommendation to Matt: choose TrimCI-A. Matt signs the exact FE revision,
 phase caps, seed schedule, and which preregistered energy field is eligible for
 headline designation.
 
+**Selected: TrimCI-A.** Pilot calibration uses a later-phase ceiling of up to
+10,000,000 determinants and returns to Matt only if that ceiling is infeasible.
+Production retains nested observations at every phase boundary and at a
+preregistered determinant-count grid up to the ceiling, including variational
+energy and PT2 where computed. Snapshotting is observation-only: it must not
+alter search decisions, phase caps, or the FE execution path. If the repaired
+FE path cannot expose those observations without perturbing the search, the
+pilot files that result instead of changing the algorithm.
+
 ### SHCI options for Matt
 
 | Option | Configuration | Tradeoff | Recommendation |
@@ -105,6 +129,10 @@ headline designation.
 Recommendation to Matt: choose SHCI-A. Matt signs the exact binary/toolchain,
 eps_var ladder, PT mode, stochastic seeds, and scratch/checkpoint policy after
 pilot calibration.
+
+**Selected: SHCI-A.** The pilot pins the exact global ladder and PT policy;
+every configured variational/PT rung remains retained for nestedness and
+solvability-region-growth analysis.
 
 ## Common contract
 
@@ -135,11 +163,12 @@ each CPU solver. The all-admitted upper bounds are:
 | --- | ---: | ---: | ---: |
 | Small core | 100 | 200 | 1,200 |
 | Medium core | 250 | 500 | 3,000 |
-| Full current corpus | 591 | 1,182 | 7,092 |
+| Full settled corpus | 718 | 1,436 | 8,616 |
 
 These are budgetary worst cases, not production requests or runtime forecasts.
-Gate 2 replaces `N` with the frozen core, computes each `A_s`, and calibrates
-caps from pilots; static admission should make actual cost lower.
+Pilot calibration computes each `A_s` and replaces planning caps with
+preregistered hard caps before PI design review; static admission should make
+actual cost lower.
 
 ## Metrics-spec v1.9 designation
 
@@ -159,18 +188,20 @@ or used to pre-designate the clean-slate G-50 iPIE campaign.
 
 Campaign id: `g50_ipie_swing_clean_slate_2026-07_v1`
 
-The provisional recommendation iPIE-A is the documented G-43 ph-AFQMC UHF trial:
+The selected iPIE-A configuration is the documented G-43 ph-AFQMC UHF trial:
 iPIE 0.7.1, one NVIDIA A100-SXM4-40GB, 512 walkers, 1,000 blocks, 25 steps per
 block, timestep 0.005, phaseless, one determinant. The G-43 software snapshot
 (Python 3.12.0, CuPy 13.6.0, NumPy 2.4.6, SciPy 1.18.0, h5py 3.16.0) is input
 provenance, not yet the G-50 lock. Matt's sign-off selects the scientific
-configuration; only then may the implementer rebuild and hash a fresh lock.
+configuration and himself as submitter; the implementer now rebuilds and
+hashes a fresh lock for the pilot package.
 
 Admission must predict trial construction, Cholesky/integral memory, walker
 memory, and wall cap on a 40 GB A100. UHF trial failure or insufficient finite
 post-equilibration samples is an attempted failure, not `not_attempted`.
-Random seed and population-control policy are frozen at gate 2; a seed changes
-uncertainty, not campaign identity or task admission.
+Random seed and population-control policy are frozen in the preregistered
+pilot design before PI review; a seed changes uncertainty, not campaign
+identity or task admission.
 
 The implementer writes the complete Swing package: source snapshot, input
 manifest, config generator, one-command preflight/submit wrapper, result
@@ -185,16 +216,16 @@ Campaign id: `g50_dmrg_clean_slate_2026-07_v1`
 
 The July `dmrg_block2` adapter v0.1.0 and 40-core/202 GB provenance establish a
 working path, but the recorded block2 version and production parameters are
-insufficient for an endgame pin. DMRG-A is the implementer's recommendation,
-not a decision. After Matt signs an option, the bundle freezes the block2
-build, orbital ordering, sweep schedule, bond-dimension ladder,
+insufficient for an endgame pin. DMRG-A is selected. The pilot bundle freezes
+the block2 build, orbital ordering, sweep schedule, bond-dimension ladder,
 discarded-weight cutoff, threading, checkpoint policy, and energy-selection
 rule.
 
 Admission uses deterministic memory and walltime predictors based on NORB,
 electron sector, ordering features, and a preregistered short pilot. Production
-must retain the full variational ladder and report the lowest *within-run*
-energy only; it may not select across tuned per-task configurations.
+must retain every variational rung as a separately addressable nested result
+and report the lowest *within-run* energy only; it may not select across tuned
+per-task configurations.
 
 ## TrimCI
 
@@ -202,27 +233,29 @@ Campaign id: `g50_trimci_clean_slate_2026-07_v1`
 
 The starting implementation is TrimCI 0.2.0 at git revision
 `8944a2be6b2c1e2a4f6c6c8cbbf6355baa068393`, adapter v0.1.1, with the real
-Fortran-extension path enabled. TrimCI-A is the implementer's recommendation,
-not a decision. After Matt signs an option, the bundle pins the repaired FE
-build and reruns the end-to-end extension smoke; the Python-only workaround is
-not an accepted production configuration.
+Fortran-extension path enabled. TrimCI-A is selected. The pilot bundle pins
+the repaired FE build and reruns the end-to-end extension smoke; the
+Python-only workaround is not an accepted production configuration.
 
 The production seed policy must preserve the intended 64-run phase-0 search.
 The campaign records all phase-0 candidates and the selected variational state;
 one excellent variational state is sufficient for the reported best energy,
 while seed/candidate spread remains diagnostic rather than an accuracy
 penalty. Admission predicts determinant growth, FE memory, orbital-optimization
-cost, and PT2 cost from target-blind features and a frozen pilot. Phase caps and
-the rule for variational versus PT2-reported energy are preregistered globally.
+cost, and PT2 cost from target-blind features and a frozen pilot. Phase caps
+and the rule for variational versus PT2-reported energy are preregistered
+globally. The pilot tests the 10,000,000-determinant ceiling and pins a nested
+determinant milestone grid. Milestone capture is observation-only and cannot
+alter the FE search protocol.
 
 ## SHCI
 
 Campaign id: `g50_shci_clean_slate_2026-07_v1`
 
 The July `shci_arrow` adapter v0.1.0 demonstrates the path but does not record a
-complete binary/compiler/MPI lock. SHCI-A is the implementer's recommendation,
-not a decision. After Matt signs an option, the bundle pins the exact SHCI
-source, compiler/MPI/OpenMP environment, optimized-orbital provenance,
+complete binary/compiler/MPI lock. SHCI-A is selected. The pilot bundle pins
+the exact SHCI source, compiler/MPI/OpenMP environment, optimized-orbital
+provenance,
 `eps_var` schedule, PT policy, stochastic seed policy, and
 scratch/checkpoint layout.
 
