@@ -1,0 +1,343 @@
+{
+  "corpus": {
+    "feature_table_path": "scripts/Hamiltonian_features.csv",
+    "feature_table_sha256": "ee94df21f927ff2e548ac10fda8d5a88c601f31330619ec6c575dc75cf436dc7",
+    "task_count": 718
+  },
+  "forbidden_selection_fields": [
+    "accuracy_threshold",
+    "prior_solver_outcome",
+    "reference_energy",
+    "supervised_success_label"
+  ],
+  "pilot_task_count": 12,
+  "pilot_tasks": [
+    {
+      "descriptors": {
+        "abs_ms2_fraction": 0.0,
+        "electron_filling_fraction": 0.5,
+        "log10_determinant_space_bound": 10.533197102248256,
+        "ms2": 0,
+        "n_electrons": 20,
+        "n_orbitals": 20
+      },
+      "family_group": "richardson_gaudin_pairing_extended_v1",
+      "family_group_source": "Hamiltonian_features.csv:problem_instance_short_name",
+      "fcidump": {
+        "instance_data_checksum": "8f5e1364e65d0ed938dbe13591192c6a20f287bc",
+        "instance_data_checksum_type": "sha1sum",
+        "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/richardson_gaudin_extended/rg_ext_nlev020_np010_gm0p50_uniform.fcidump.gz",
+        "instance_data_object_uuid": "c2985fa1-406b-5928-b393-4e2a026339ee"
+      },
+      "log10_determinant_space_bound_source": "Hamiltonian_features.csv:log_fci_dim",
+      "problem_instance_path": "problem_instances/lattice_models/problem_instance.richardson_gaudin_pairing_extended_v1.2b66fc5f-38a7-50dd-a6e9-a85d4f7ca3d7.json",
+      "problem_instance_sha256": "ef70379acced112b86d080ead19e7bfd75150742dcc4eec7b9f21e587508a0a1",
+      "problem_instance_short_name": "richardson_gaudin_pairing_extended_v1",
+      "problem_instance_uuid": "2b66fc5f-38a7-50dd-a6e9-a85d4f7ca3d7",
+      "selection_distance": 0.119627553850608,
+      "selection_rank": 1,
+      "task_uuid": "97d6b0ea-fcab-5587-bf27-a7e7f6c7f66a"
+    },
+    {
+      "descriptors": {
+        "abs_ms2_fraction": 1.0,
+        "electron_filling_fraction": 0.1,
+        "log10_determinant_space_bound": 0.6989700043360194,
+        "ms2": 1,
+        "n_electrons": 1,
+        "n_orbitals": 5
+      },
+      "family_group": "validation.H.cc-PVDZ",
+      "family_group_source": "Hamiltonian_features.csv:problem_instance_short_name",
+      "fcidump": {
+        "instance_data_checksum": "8bb1f7605e1d35638a6de2011961661c8ab62c88",
+        "instance_data_checksum_type": "sha1sum",
+        "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/legacy_sftp/v1/gsee/validation_instances/validation.H.cc-PVDZ.0b245a9c-7561-423d-bd50-8958b3625a94.fcidump.gz",
+        "instance_data_object_uuid": "0b245a9c-7561-423d-bd50-8958b3625a94"
+      },
+      "log10_determinant_space_bound_source": "Hamiltonian_features.csv:log_fci_dim",
+      "problem_instance_path": "problem_instances/validation_instances/problem_instance.validation.H.cc-PVDZ.3aa01b76-53e2-49e8-bc05-72875168a00a.json",
+      "problem_instance_sha256": "1c48f5b96956eca4904f3f317c809891883e42b7ddc66966871eb6b0cdfe8f56",
+      "problem_instance_short_name": "validation.H.cc-PVDZ",
+      "problem_instance_uuid": "3aa01b76-53e2-49e8-bc05-72875168a00a",
+      "selection_distance": 0.958537540509298,
+      "selection_rank": 2,
+      "task_uuid": "4e1617a3-7a5f-4c86-99b6-4cfc8b547197"
+    },
+    {
+      "descriptors": {
+        "abs_ms2_fraction": 0.38461538461538464,
+        "electron_filling_fraction": 0.04814814814814815,
+        "log10_determinant_space_bound": 20.616572052342736,
+        "ms2": 5,
+        "n_electrons": 13,
+        "n_orbitals": 135
+      },
+      "family_group": "Cr_1",
+      "family_group_source": "Hamiltonian_features.csv:problem_instance_short_name",
+      "fcidump": {
+        "instance_data_checksum": "8b348ac4e0326d7fa3b023d0ef3cd30b89fdda53",
+        "instance_data_checksum_type": "sha1sum",
+        "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/legacy_sftp/v1/gsee/small_molecules/fcidump.Cr1_vqz.4e3649dd-9050-4acc-93f6-a09c962e89d7.gz",
+        "instance_data_object_uuid": "4e3649dd-9050-4acc-93f6-a09c962e89d7"
+      },
+      "log10_determinant_space_bound_source": "Hamiltonian_features.csv:log_fci_dim",
+      "problem_instance_path": "problem_instances/transition_metals/problem_instance.Cr_1.02a8c4e9-9d15-4742-b4cc-7f47f69da0e5.json",
+      "problem_instance_sha256": "4662539f8b33598c4469a78a30ae44bfa7f0931a020a01f83f091a0104916496",
+      "problem_instance_short_name": "Cr_1",
+      "problem_instance_uuid": "02a8c4e9-9d15-4742-b4cc-7f47f69da0e5",
+      "selection_distance": 0.94787704230909,
+      "selection_rank": 3,
+      "task_uuid": "e604a906-55fa-4b3f-bf17-c24a30312b84"
+    },
+    {
+      "descriptors": {
+        "abs_ms2_fraction": 0.0,
+        "electron_filling_fraction": 0.05454545454545454,
+        "log10_determinant_space_bound": 18.66157876834884,
+        "ms2": 0,
+        "n_electrons": 12,
+        "n_orbitals": 110
+      },
+      "family_group": "li_f_0",
+      "family_group_source": "Hamiltonian_features.csv:problem_instance_short_name",
+      "fcidump": {
+        "instance_data_checksum": "191ac263d3a21aa8bfa20307d5bfacdece895d8f",
+        "instance_data_checksum_type": "sha1sum",
+        "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/legacy_sftp/v1/gsee/small_molecules/fcidump.li_f_cc-pVQZ.2294b211-7a05-445e-810d-4c1706e1444c.gz",
+        "instance_data_object_uuid": "2294b211-7a05-445e-810d-4c1706e1444c"
+      },
+      "log10_determinant_space_bound_source": "Hamiltonian_features.csv:log_fci_dim",
+      "problem_instance_path": "problem_instances/small_molecules/problem_instance.li_f_0.e48e7467-1fcd-478b-a599-f4ce881c57b9.json",
+      "problem_instance_sha256": "9d5ccec63592c3c4d233e10367c773667b2932e308c11a1923d6e7994b60e683",
+      "problem_instance_short_name": "li_f_0",
+      "problem_instance_uuid": "e48e7467-1fcd-478b-a599-f4ce881c57b9",
+      "selection_distance": 0.937680459650205,
+      "selection_rank": 4,
+      "task_uuid": "0485949f-722c-49ee-a748-eec54801f021"
+    },
+    {
+      "descriptors": {
+        "abs_ms2_fraction": 0.0,
+        "electron_filling_fraction": 0.9,
+        "log10_determinant_space_bound": 2.0,
+        "ms2": 0,
+        "n_electrons": 18,
+        "n_orbitals": 10
+      },
+      "family_group": "gao_distributed_fci",
+      "family_group_source": "problem_instance:ml_family_weighting_group",
+      "fcidump": {
+        "instance_data_checksum": "2bebfbec925a247a6ea46bf95147c0a818b4f357",
+        "instance_data_checksum_type": "sha1sum",
+        "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/gao_distributed_fci/gao_hcl_sto_3g.fcidump.gz",
+        "instance_data_object_uuid": "002c0542-d774-55ad-b408-987eb47ee599"
+      },
+      "log10_determinant_space_bound_source": "problem_instance:determinant_count",
+      "problem_instance_path": "problem_instances/small_molecules/gao_distributed_fci/problem_instance.gao_distributed_fci_005_hcl_sto_3g.abaf4a57-bfa0-5f59-b1ca-bad66baa4dab.json",
+      "problem_instance_sha256": "312cd60f1c1671322e1fd093df116be61e2efcacd7e422ce431e2832022c9207",
+      "problem_instance_short_name": "gao_distributed_fci",
+      "problem_instance_uuid": "abaf4a57-bfa0-5f59-b1ca-bad66baa4dab",
+      "selection_distance": 0.87059568991099,
+      "selection_rank": 5,
+      "task_uuid": "021ef4f6-736f-5c86-891b-990dcb815ce3"
+    },
+    {
+      "descriptors": {
+        "abs_ms2_fraction": 0.0,
+        "electron_filling_fraction": 0.6521739130434783,
+        "log10_determinant_space_bound": 36.725578928776116,
+        "ms2": 0,
+        "n_electrons": 90,
+        "n_orbitals": 69
+      },
+      "family_group": "planted_solution_0002",
+      "family_group_source": "Hamiltonian_features.csv:problem_instance_short_name",
+      "fcidump": {
+        "instance_data_checksum": "dd203ebc81470526d3dfbf157bcb87ce67f86515",
+        "instance_data_checksum_type": "sha1sum",
+        "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/legacy_sftp/v1/gsee/planted_solutions/fcidump.planted_solution_0002.16f9288f-be7e-4f8a-ab09-0153263f83c7.gz",
+        "instance_data_object_uuid": "16f9288f-be7e-4f8a-ab09-0153263f83c7"
+      },
+      "log10_determinant_space_bound_source": "Hamiltonian_features.csv:log_fci_dim",
+      "problem_instance_path": "problem_instances/planted_solutions/problem_instance.planted_solution_0002.00043d56-ed63-4266-907c-99c95c51b9db.json",
+      "problem_instance_sha256": "16242be1be4887c798e8f83173a574675e12f2dac526ec3383e45ca7511497f5",
+      "problem_instance_short_name": "planted_solution_0002",
+      "problem_instance_uuid": "00043d56-ed63-4266-907c-99c95c51b9db",
+      "selection_distance": 0.797043979570083,
+      "selection_rank": 6,
+      "task_uuid": "0deae366-42de-4081-914d-db85c6b47168"
+    },
+    {
+      "descriptors": {
+        "abs_ms2_fraction": 0.0,
+        "electron_filling_fraction": 0.2,
+        "log10_determinant_space_bound": 1.3979400086720388,
+        "ms2": 0,
+        "n_electrons": 2,
+        "n_orbitals": 5
+      },
+      "family_group": "validation.He.cc-PVDZ",
+      "family_group_source": "Hamiltonian_features.csv:problem_instance_short_name",
+      "fcidump": {
+        "instance_data_checksum": "3c4e9d753541cc079f14e65837d191d22bce50d4",
+        "instance_data_checksum_type": "sha1sum",
+        "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/legacy_sftp/v1/gsee/validation_instances/validation.He.cc-PVDZ.00243a50-3f5c-44da-99c8-021ac2214cba.fcidump.gz",
+        "instance_data_object_uuid": "00243a50-3f5c-44da-99c8-021ac2214cba"
+      },
+      "log10_determinant_space_bound_source": "Hamiltonian_features.csv:log_fci_dim",
+      "problem_instance_path": "problem_instances/validation_instances/problem_instance.validation.He.cc-PVDZ.036fc218-6a9c-4d49-88a4-930f5ebb5ae6.json",
+      "problem_instance_sha256": "01a9c5ec6fd648839a5ab2b5e78fd127874e06997de893bc472483fc2853c4d9",
+      "problem_instance_short_name": "validation.He.cc-PVDZ",
+      "problem_instance_uuid": "036fc218-6a9c-4d49-88a4-930f5ebb5ae6",
+      "selection_distance": 0.793913989587398,
+      "selection_rank": 7,
+      "task_uuid": "3e803f97-2478-4630-a7a3-12fbc69f7666"
+    },
+    {
+      "descriptors": {
+        "abs_ms2_fraction": 0.45454545454545453,
+        "electron_filling_fraction": 0.6875,
+        "log10_determinant_space_bound": 1.7481880270061996,
+        "ms2": 5,
+        "n_electrons": 11,
+        "n_orbitals": 8
+      },
+      "family_group": "p450_cpd1_spin5_goings_dmrg_ladder",
+      "family_group_source": "Hamiltonian_features.csv:problem_instance_short_name",
+      "fcidump": {
+        "instance_data_checksum": "0770055fab43b3aadebf62d93438d6e8582c63ce",
+        "instance_data_checksum_type": "sha1sum",
+        "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/p450_goings_active_spaces/p450_cpd1_b_spin5_goings.fcidump.gz",
+        "instance_data_object_uuid": "02007200-e1b9-5dba-b73f-4319b307a1ee"
+      },
+      "log10_determinant_space_bound_source": "Hamiltonian_features.csv:log_fci_dim",
+      "problem_instance_path": "problem_instances/homogeneous_catalysts/problem_instance.p450_cpd1_spin5_goings_dmrg_ladder.563dc156-ea3e-597e-b291-71b845e6be0b.json",
+      "problem_instance_sha256": "b57bc67867158372d6f3ef9f8096c51b10d7716609db355406c8e9440ff840c0",
+      "problem_instance_short_name": "p450_cpd1_spin5_goings_dmrg_ladder",
+      "problem_instance_uuid": "563dc156-ea3e-597e-b291-71b845e6be0b",
+      "selection_distance": 0.786668989020467,
+      "selection_rank": 8,
+      "task_uuid": "992b9494-5f30-5893-ae1d-1b92f5d9ec18"
+    },
+    {
+      "descriptors": {
+        "abs_ms2_fraction": 0.0,
+        "electron_filling_fraction": 0.5,
+        "log10_determinant_space_bound": 151.52214970836351,
+        "ms2": 0,
+        "n_electrons": 256,
+        "n_orbitals": 256
+      },
+      "family_group": "lattice_model",
+      "family_group_source": "problem_instance:hamiltonian_family",
+      "fcidump": {
+        "instance_data_checksum": "624c85987fc55a6f76292ced388f997a8d472dd4",
+        "instance_data_checksum_type": "sha1sum",
+        "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/qsz_hubbard_2d_halffilled/qsz_hubbard_L16x16_pbc_apbc_u6.fcidump.gz",
+        "instance_data_object_uuid": "0079ed8a-6761-521b-be57-80639048b8de"
+      },
+      "log10_determinant_space_bound_source": "Hamiltonian_features.csv:log_fci_dim",
+      "problem_instance_path": "problem_instances/lattice_models/problem_instance.qsz_hubbard_2d_halffilled.7c6743d7-497d-53b5-a303-effd916c27dc.json",
+      "problem_instance_sha256": "a7f58e33a1a2a3743a35978184cb58d3d30f6bca7ddcbd1cd8c965b7659f015e",
+      "problem_instance_short_name": "lattice_model",
+      "problem_instance_uuid": "7c6743d7-497d-53b5-a303-effd916c27dc",
+      "selection_distance": 0.772953336613865,
+      "selection_rank": 9,
+      "task_uuid": "fc432cd0-4856-54f2-a240-9813d9fda019"
+    },
+    {
+      "descriptors": {
+        "abs_ms2_fraction": 0.0,
+        "electron_filling_fraction": 0.045454545454545456,
+        "log10_determinant_space_bound": 5.951782272803587,
+        "ms2": 0,
+        "n_electrons": 4,
+        "n_orbitals": 44
+      },
+      "family_group": "li_h_0",
+      "family_group_source": "Hamiltonian_features.csv:problem_instance_short_name",
+      "fcidump": {
+        "instance_data_checksum": "510eed9ff0d4bc9b2fbaa843a966d52f0872fbdb",
+        "instance_data_checksum_type": "sha1sum",
+        "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/legacy_sftp/v1/gsee/small_molecules/fcidump.li_h_cc-pVTZ.02d12f52-ff42-4adf-99b9-acada93cb96b.gz",
+        "instance_data_object_uuid": "02d12f52-ff42-4adf-99b9-acada93cb96b"
+      },
+      "log10_determinant_space_bound_source": "Hamiltonian_features.csv:log_fci_dim",
+      "problem_instance_path": "problem_instances/small_molecules/problem_instance.li_h_0.6d355019-13aa-41fc-a530-31d5f968ba22.json",
+      "problem_instance_sha256": "314b49fd3e1205d1fce3752f3a17d754ff1ed182c6ee7e1621e80c6663bfff4e",
+      "problem_instance_short_name": "li_h_0",
+      "problem_instance_uuid": "6d355019-13aa-41fc-a530-31d5f968ba22",
+      "selection_distance": 0.652969948081247,
+      "selection_rank": 10,
+      "task_uuid": "d15db194-aa2d-4de9-8f86-fcffeb82f38b"
+    },
+    {
+      "descriptors": {
+        "abs_ms2_fraction": 0.0,
+        "electron_filling_fraction": 0.07407407407407407,
+        "log10_determinant_space_bound": 5.090614232931654,
+        "ms2": 0,
+        "n_electrons": 4,
+        "n_orbitals": 27
+      },
+      "family_group": "plane_wave_electron_gas",
+      "family_group_source": "problem_instance:hamiltonian_family",
+      "fcidump": {
+        "instance_data_checksum": "cc71cbf114374d10368885003fd5ee3bfa47b653",
+        "instance_data_checksum_type": "sha1sum",
+        "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/fcidumps/v1/block2_siam_ueg/block2_ueg_rs4_ne4_27orb_real_pw_script_exact.fcidump.gz",
+        "instance_data_object_uuid": "2c9229c5-56a0-54a5-b210-91630de6372f"
+      },
+      "log10_determinant_space_bound_source": "Hamiltonian_features.csv:log_fci_dim",
+      "problem_instance_path": "problem_instances/lattice_models/problem_instance.block2_siam_ueg_script_exact.26f8d520-e9da-5687-b2ec-918387bc8c39.json",
+      "problem_instance_sha256": "26476fe520950e5ebb137dbed43e224ebdd8be8435c50360914fb965b21b9012",
+      "problem_instance_short_name": "plane_wave_electron_gas",
+      "problem_instance_uuid": "26f8d520-e9da-5687-b2ec-918387bc8c39",
+      "selection_distance": 0.562520795571591,
+      "selection_rank": 11,
+      "task_uuid": "1ca99910-6d5a-5c82-ace4-70704a085bda"
+    },
+    {
+      "descriptors": {
+        "abs_ms2_fraction": 0.034482758620689655,
+        "electron_filling_fraction": 0.8055555555555556,
+        "log10_determinant_space_bound": 13.770416381133648,
+        "ms2": 2,
+        "n_electrons": 58,
+        "n_orbitals": 36
+      },
+      "family_group": "ru_mono",
+      "family_group_source": "Hamiltonian_features.csv:problem_instance_short_name",
+      "fcidump": {
+        "instance_data_checksum": "c6d7456e3c2436e25e2fb08142ddc7a44a848a44",
+        "instance_data_checksum_type": "sha1sum",
+        "instance_data_object_url": "https://web.s3.wisc.edu/gsee-benchmark-fcidumps/legacy_sftp/v1/gsee/fcidump.35_3ruo_IV_2pl_noncan_0.2_new.a2417602-4e97-4395-b3f0-1e29262c8053.gz",
+        "instance_data_object_uuid": "a2417602-4e97-4395-b3f0-1e29262c8053"
+      },
+      "log10_determinant_space_bound_source": "Hamiltonian_features.csv:log_fci_dim",
+      "problem_instance_path": "problem_instances/homogeneous_catalysts/problem_instance.ru_mono.7213642b-5f16-48be-d5e5-2bc42ebb8526.json",
+      "problem_instance_sha256": "54838a0fa721527cf28fe845c75254437f274973ec666fa5ba8da5b70cd4059d",
+      "problem_instance_short_name": "ru_mono",
+      "problem_instance_uuid": "7213642b-5f16-48be-d5e5-2bc42ebb8526",
+      "selection_distance": 0.560443899479805,
+      "selection_rank": 12,
+      "task_uuid": "ace55695-1ca9-4153-8fd4-55ed6658cf8c"
+    }
+  ],
+  "schema_version": 1,
+  "selection": {
+    "algorithm_id": "rank_scaled_maximin_unique_family_v1",
+    "family_constraint": "one_task_per_declared_family_group",
+    "first_point": "nearest_rank_scaled_descriptor_median",
+    "next_points": "maximum_minimum_rank_scaled_euclidean_distance",
+    "target_blind_descriptors": [
+      "log10_n_orbitals_plus_one",
+      "electron_filling_fraction",
+      "abs_ms2_fraction",
+      "log10_determinant_space_bound"
+    ],
+    "tie_break": "lexicographically_smallest_task_uuid"
+  },
+  "status": "design_only_submission_held"
+}

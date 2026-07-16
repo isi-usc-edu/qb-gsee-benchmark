@@ -82,9 +82,9 @@
         "ipie_gpu_hours_all_admitted": 500
       },
       {
-        "core_rows_per_solver": 591,
-        "cpu_node_hours_all_admitted": 7092,
-        "ipie_gpu_hours_all_admitted": 1182
+        "core_rows_per_solver": 718,
+        "cpu_node_hours_all_admitted": 8616,
+        "ipie_gpu_hours_all_admitted": 1436
       }
     ],
     "production_hard_caps": "TBD_AT_GATE_2",
@@ -234,8 +234,16 @@
     "timeout",
     "not_attempted"
   ],
+  "pilot_design": {
+    "design_path": "analysis/solver_campaigns/g50_pilot_design_v1.json",
+    "execution_authorized": false,
+    "pilot_task_count": 12,
+    "status": "submitted_for_pi_review_execution_held",
+    "task_manifest_path": "analysis/solver_campaigns/g50_pilot_task_manifest_v1.json",
+    "task_manifest_sha256": "1fe1cc604e1e81ba446aa189c7e3abe61468056c11c57d8febf8af0babeef81e"
+  },
   "schema_version": 1,
-  "status": "configuration_selected_execution_held_for_pi_design_review",
+  "status": "pilot_design_submitted_execution_held_for_pi_design_review",
   "target_blind_admission": {
     "allowed_inputs": [
       "norb",

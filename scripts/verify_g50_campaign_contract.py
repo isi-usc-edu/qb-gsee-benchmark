@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
@@ -11,6 +12,9 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = Path("analysis/solver_campaigns/g50_campaign_contract_v1.json")
 DESIGN_PATH = Path("analysis/solver_campaigns/g50_endgame_clean_slate_design.md")
+PILOT_DESIGN_PATH = Path("analysis/solver_campaigns/g50_pilot_design_v1.json")
+PILOT_MANIFEST_PATH = Path("analysis/solver_campaigns/g50_pilot_task_manifest_v1.json")
+FEATURES_PATH = Path("scripts/Hamiltonian_features.csv")
 CORPUS_DEFINITION = (
     "G-48 closed out, FeMoco-54 quarantine filed, Gao feature backfill "
     "decided, no pending task admissions/removals"
@@ -34,6 +38,21 @@ MATT_SELECTIONS = {
     "TrimCI": "TrimCI-A",
     "ipie_uhf_trial": "iPIE-A",
 }
+FORBIDDEN_PILOT_TOKENS = {
+    "accuracy_threshold",
+    "pilot_energy_error",
+    "prior_solver_outcome",
+    "reference_energy",
+    "supervised_success_label",
+}
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def _record(checks: dict[str, bool], name: str, condition: Any) -> None:
@@ -43,6 +62,10 @@ def _record(checks: dict[str, bool], name: str, condition: Any) -> None:
 def verify(root: Path = ROOT) -> dict[str, Any]:
     contract = json.loads((root / CONTRACT_PATH).read_text(encoding="utf-8"))
     design = (root / DESIGN_PATH).read_text(encoding="utf-8")
+    pilot_design = json.loads((root / PILOT_DESIGN_PATH).read_text(encoding="utf-8"))
+    pilot_manifest = json.loads(
+        (root / PILOT_MANIFEST_PATH).read_text(encoding="utf-8")
+    )
     design_words = " ".join(design.split())
     checks: dict[str, bool] = {}
 
@@ -94,6 +117,27 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
         "corpus_settled",
         corpus.get("settled") is True
         and contract.get("cost_projection", {}).get("core_task_count") == 718,
+    )
+    scenarios = contract.get("cost_projection", {}).get("planning_scenarios", [])
+    full_scenarios = [
+        item for item in scenarios if item.get("core_rows_per_solver") == 718
+    ]
+    _record(
+        checks,
+        "full_corpus_budget_scenario",
+        full_scenarios
+        == [
+            {
+                "core_rows_per_solver": 718,
+                "cpu_node_hours_all_admitted": 8616,
+                "ipie_gpu_hours_all_admitted": 1436,
+            }
+        ],
+    )
+    _record(
+        checks,
+        "no_stale_591_budget_scenario",
+        all(item.get("core_rows_per_solver") != 591 for item in scenarios),
     )
 
     signoff = contract.get("matt_configuration_signoff", {})
@@ -207,6 +251,212 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
         "design_excludes_historical_ipie",
         all(campaign in design for campaign in HISTORICAL_IPIE)
         and "excluded from headline metrics" in design,
+    )
+
+    pilot_contract = contract.get("pilot_design", {})
+    manifest_path = root / pilot_contract.get("task_manifest_path", "")
+    pilot_design_path = root / pilot_contract.get("design_path", "")
+    _record(checks, "pilot_manifest_path", manifest_path == root / PILOT_MANIFEST_PATH)
+    _record(checks, "pilot_design_path", pilot_design_path == root / PILOT_DESIGN_PATH)
+    _record(
+        checks,
+        "pilot_files_exist",
+        manifest_path.is_file() and pilot_design_path.is_file(),
+    )
+    manifest_sha = _sha256(root / PILOT_MANIFEST_PATH)
+    _record(
+        checks,
+        "pilot_manifest_hash_bound",
+        pilot_contract.get("task_manifest_sha256") == manifest_sha
+        and pilot_design.get("common_protocol", {}).get("manifest_sha256")
+        == manifest_sha,
+    )
+    _record(
+        checks,
+        "pilot_status_held",
+        contract.get("status")
+        == "pilot_design_submitted_execution_held_for_pi_design_review"
+        and pilot_contract.get("status") == "submitted_for_pi_review_execution_held"
+        and pilot_contract.get("execution_authorized") is False
+        and pilot_manifest.get("status") == "design_only_submission_held"
+        and pilot_design.get("status")
+        == "pilot_design_submitted_for_pi_review_execution_held",
+    )
+    authorization = pilot_design.get("authorization", {})
+    _record(
+        checks,
+        "all_execution_forbidden",
+        authorization.get("pilot_execution_authorized") is False
+        and authorization.get("production_execution_authorized") is False
+        and authorization.get("qsub_permitted") is False
+        and authorization.get("ipie_swing_submission_permitted") is False,
+    )
+
+    pilot_tasks = pilot_manifest.get("pilot_tasks", [])
+    task_uuids = [item.get("task_uuid") for item in pilot_tasks]
+    families = [item.get("family_group") for item in pilot_tasks]
+    _record(
+        checks,
+        "pilot_task_count",
+        pilot_manifest.get("pilot_task_count") == 12
+        and pilot_contract.get("pilot_task_count") == 12
+        and pilot_design.get("common_protocol", {}).get("pilot_task_count") == 12
+        and len(pilot_tasks) == 12,
+    )
+    _record(checks, "pilot_task_uuid_unique", len(set(task_uuids)) == 12)
+    _record(checks, "pilot_family_unique", len(set(families)) == 12)
+    _record(
+        checks,
+        "pilot_selection_order",
+        [item.get("selection_rank") for item in pilot_tasks] == list(range(1, 13)),
+    )
+    corpus = pilot_manifest.get("corpus", {})
+    _record(
+        checks,
+        "pilot_corpus_bound",
+        corpus.get("task_count") == 718
+        and corpus.get("feature_table_path") == FEATURES_PATH.as_posix()
+        and corpus.get("feature_table_sha256") == _sha256(root / FEATURES_PATH),
+    )
+    selection = pilot_manifest.get("selection", {})
+    _record(
+        checks,
+        "pilot_selection_target_blind",
+        selection.get("algorithm_id") == "rank_scaled_maximin_unique_family_v1"
+        and selection.get("family_constraint") == "one_task_per_declared_family_group"
+        and selection.get("tie_break") == "lexicographically_smallest_task_uuid",
+    )
+    serialized_tasks = json.dumps(pilot_tasks, sort_keys=True).lower()
+    _record(
+        checks,
+        "pilot_manifest_forbidden_fields_absent",
+        all(token not in serialized_tasks for token in FORBIDDEN_PILOT_TOKENS),
+    )
+
+    input_records_valid = True
+    for item in pilot_tasks:
+        instance_path = root / item.get("problem_instance_path", "")
+        if not instance_path.is_file() or item.get(
+            "problem_instance_sha256"
+        ) != _sha256(instance_path):
+            input_records_valid = False
+            continue
+        instance = json.loads(instance_path.read_text(encoding="utf-8"))
+        if instance.get("problem_instance_uuid") != item.get("problem_instance_uuid"):
+            input_records_valid = False
+        matching_tasks = [
+            task
+            for task in instance.get("tasks", [])
+            if task.get("task_uuid") == item.get("task_uuid")
+        ]
+        if len(matching_tasks) != 1:
+            input_records_valid = False
+            continue
+        fcidumps = [
+            record
+            for record in matching_tasks[0].get("supporting_files", [])
+            if record.get("is_fcidump_file") is True
+        ]
+        expected_fcidump = item.get("fcidump", {})
+        if len(fcidumps) != 1 or any(
+            fcidumps[0].get(key) != value for key, value in expected_fcidump.items()
+        ):
+            input_records_valid = False
+    _record(checks, "pilot_input_records_hash_bound", input_records_valid)
+
+    common = pilot_design.get("common_protocol", {})
+    calibration = pilot_design.get("calibration_contract", {})
+    _record(
+        checks,
+        "pilot_production_isolation",
+        common.get("campaign_identity_relation")
+        == "pilot identities are distinct from clean-slate production identities"
+        and calibration.get("pilot_artifact_reuse_in_production") is False
+        and calibration.get("pilot_checkpoint_reuse_in_production") is False
+        and calibration.get("pilot_energy_reuse_in_production") is False
+        and calibration.get("energy_fields_visible_to_calibrator") is False,
+    )
+    _record(
+        checks,
+        "calibration_forbidden_inputs",
+        set(calibration.get("forbidden_inputs", [])) == FORBIDDEN_PILOT_TOKENS,
+    )
+    execution = pilot_design.get("improv_execution_shape", {})
+    _record(
+        checks,
+        "improv_whole_node_compute",
+        execution.get("account") == "QC_NA_Sim"
+        and execution.get("primary_queue") == "compute"
+        and execution.get("debug_queue_permitted") is False
+        and execution.get("select") == "select=4:ncpus=128"
+        and execution.get("ncpus_per_node") == 128
+        and execution.get("nodes_per_campaign") == 4
+        and execution.get("explicit_memory_request") is False
+        and execution.get("pbs_walltime") == "03:30:00",
+    )
+    _record(
+        checks,
+        "pilot_cost_caps",
+        common.get("walltime_seconds_per_task") == 3600
+        and execution.get("cpu_campaign_hard_cap_node_hours_each") == 14
+        and execution.get("total_cpu_pilot_hard_cap_node_hours") == 42,
+    )
+
+    solvers = pilot_design.get("solvers", {})
+    _record(checks, "pilot_solver_set", set(solvers) == EXPECTED_SOLVERS)
+    production_ids = {item.get("campaign_id") for item in campaigns}
+    pilot_ids = {item.get("campaign_id") for item in solvers.values()}
+    _record(
+        checks,
+        "pilot_campaign_ids_separate",
+        len(pilot_ids) == 4
+        and not pilot_ids.intersection(production_ids)
+        and {item.get("production_campaign_id") for item in solvers.values()}
+        == production_ids,
+    )
+    ipie = solvers.get("ipie_uhf_trial", {})
+    _record(
+        checks,
+        "ipie_a_pilot_pin",
+        ipie.get("selected_option") == "iPIE-A"
+        and ipie.get("num_walkers") == 512
+        and ipie.get("num_blocks") == 1000
+        and ipie.get("num_steps_per_block") == 25
+        and ipie.get("timestep") == 0.005
+        and ipie.get("trial_wavefunction") == "UHF"
+        and ipie.get("swing_pilot_hard_cap_a100_hours") == 12,
+    )
+    dmrg = solvers.get("DMRG", {})
+    _record(
+        checks,
+        "dmrg_a_pilot_pin",
+        dmrg.get("selected_option") == "DMRG-A"
+        and dmrg.get("bond_dimension_ladder") == [256, 512, 1024, 2048]
+        and dmrg.get("sweeps_per_rung") == [4, 4, 6, 8]
+        and dmrg.get("completed_rung_retention")
+        == "every completed rung retained as a separate nested observation",
+    )
+    trimci = solvers.get("TrimCI", {})
+    _record(
+        checks,
+        "trimci_a_pilot_pin",
+        trimci.get("selected_option") == "TrimCI-A"
+        and trimci.get("fe_extension_required") is True
+        and trimci.get("phase0_candidate_count") == 64
+        and trimci.get("determinant_ceiling") == 10_000_000
+        and trimci.get("checkpoint_determinant_grid")
+        == [100_000, 250_000, 500_000, 1_000_000, 2_000_000, 5_000_000, 10_000_000]
+        and trimci.get("snapshot_semantics")
+        == "observation_only; no snapshot may alter search decisions, phase caps, or FE execution",
+    )
+    shci = solvers.get("SHCI", {})
+    _record(
+        checks,
+        "shci_a_pilot_pin",
+        shci.get("selected_option") == "SHCI-A"
+        and shci.get("eps_var_ladder") == [2e-4, 1e-4, 5e-5, 2e-5]
+        and shci.get("pt_policy")
+        == "variational energy at every rung; stochastic PT only at terminal eps_var=2e-5",
     )
 
     failed = sorted(name for name, passed in checks.items() if not passed)

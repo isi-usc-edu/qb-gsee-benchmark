@@ -5,7 +5,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -24,3 +23,18 @@ def test_g50_campaign_contract_assertions_pass() -> None:
     assert report["status"] == "passed"
     assert report["failed_checks"] == []
     assert report["passed_count"] == report["check_count"]
+
+
+def test_g50_pilot_manifest_is_reproducible() -> None:
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "scripts/build_g50_pilot_manifest.py"),
+            "--check",
+        ],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr

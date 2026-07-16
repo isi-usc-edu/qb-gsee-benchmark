@@ -2,7 +2,7 @@
 
 Date: 2026-07-15
 
-Status: Matt selections encoded; execution held for PI design review
+Status: pilot design submitted; execution held for PI design review
 
 Changelog 2026-07-15: corpus gate settled at 718 tasks; Matt selected iPIE-A,
 DMRG-A, TrimCI-A, and SHCI-A, selected himself as Swing submitter, and added
@@ -286,6 +286,9 @@ The pilot report must fill this table with measured values before PI review:
 | TrimCI | TBD | TBD | full node | planning: 4 h | `4 A_trimci` node-h | TBD | TBD |
 | SHCI | TBD | TBD | full node | planning: 4 h | `4 A_shci` node-h | TBD | TBD |
 
-The task counts and calibrated columns remain TBD because the core manifest and
-admission models do not yet exist. The formulas above are sufficient for
-allocation-scale planning without fabricating a production request.
+The core row count is now fixed at 718. Admitted counts and calibrated columns
+remain TBD because the solver-specific admission models do not yet exist. The
+formulas above are sufficient for allocation-scale planning without fabricating
+a production request. The target-blind pilot design submitted for that
+calibration is `g50_pilot_design_v1.md` with machine-readable companion
+`g50_pilot_design_v1.json`.

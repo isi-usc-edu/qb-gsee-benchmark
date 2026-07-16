@@ -1,0 +1,163 @@
+{
+  "authorization": {
+    "ipie_swing_submission_permitted": false,
+    "pilot_execution_authorized": false,
+    "production_execution_authorized": false,
+    "qsub_permitted": false,
+    "required_next_action": "PI review of this pilot design"
+  },
+  "calibration_contract": {
+    "admission_inputs": [
+      "n_orbitals",
+      "n_electrons",
+      "ms2",
+      "electron_filling_fraction",
+      "abs_ms2_fraction",
+      "log10_determinant_space_bound",
+      "pilot_status",
+      "pilot_wall_seconds",
+      "pilot_peak_memory_bytes"
+    ],
+    "energy_fields_visible_to_calibrator": false,
+    "forbidden_inputs": [
+      "reference_energy",
+      "accuracy_threshold",
+      "prior_solver_outcome",
+      "supervised_success_label",
+      "pilot_energy_error"
+    ],
+    "pilot_artifact_reuse_in_production": false,
+    "pilot_checkpoint_reuse_in_production": false,
+    "pilot_energy_reuse_in_production": false,
+    "production_admission_policy": "The pilot proposes a deterministic static rule and full 718-row admission ledger. No rule takes effect until PI review; production cannot tune per task.",
+    "production_outputs_required_before_gate_3_closure": [
+      "exact solver configuration locks",
+      "static 718-row admission ledger per solver",
+      "per-task and total hard cost ceilings",
+      "pilot q50 and q90 walltime",
+      "pilot peak memory",
+      "failure and timeout inventory",
+      "v1.9 designation skeletons still marked not_designated"
+    ]
+  },
+  "common_protocol": {
+    "campaign_identity_relation": "pilot identities are distinct from clean-slate production identities",
+    "manifest_path": "analysis/solver_campaigns/g50_pilot_task_manifest_v1.json",
+    "manifest_sha256": "1fe1cc604e1e81ba446aa189c7e3abe61468056c11c57d8febf8af0babeef81e",
+    "outcomes": [
+      "completed",
+      "failed",
+      "timeout"
+    ],
+    "pilot_task_count": 12,
+    "task_order": "selection_rank ascending",
+    "timeout_is_terminal_pilot_evidence": true,
+    "walltime_seconds_per_task": 3600
+  },
+  "improv_execution_shape": {
+    "account": "QC_NA_Sim",
+    "backfill_policy": "After compute allocation exhaustion only, the same immutable package may use backfill; record the queue and do not change scientific settings.",
+    "cpu_campaign_hard_cap_node_hours_each": 14,
+    "cpu_campaigns": 3,
+    "debug_queue_permitted": false,
+    "explicit_memory_request": false,
+    "launch_shape": "one task per whole node; four-node pbsdsh fan-out; at most three one-hour tasks per node",
+    "ncpus_per_node": 128,
+    "nodes_per_campaign": 4,
+    "place": "scatter",
+    "primary_queue": "compute",
+    "pbs_walltime": "03:30:00",
+    "select": "select=4:ncpus=128",
+    "total_cpu_pilot_hard_cap_node_hours": 42
+  },
+  "schema_version": 1,
+  "solvers": {
+    "DMRG": {
+      "adapter": "dmrg_block2",
+      "adapter_version": "0.2.0",
+      "bond_dimension_ladder": [
+        256,
+        512,
+        1024,
+        2048
+      ],
+      "campaign_id": "g50_dmrg_pilot_2026-07_v1",
+      "completed_rung_retention": "every completed rung retained as a separate nested observation",
+      "environment_lock": "required and hash-bound before execution",
+      "extrapolation": false,
+      "num_threads": 128,
+      "orbital_ordering": "Fiedler",
+      "production_campaign_id": "g50_dmrg_clean_slate_2026-07_v1",
+      "selected_option": "DMRG-A",
+      "sweeps_per_rung": [
+        4,
+        4,
+        6,
+        8
+      ],
+      "truncation_cutoff": 1e-08
+    },
+    "SHCI": {
+      "adapter": "shci_arrow",
+      "adapter_version": "0.2.0",
+      "campaign_id": "g50_shci_pilot_2026-07_v1",
+      "environment_lock": "exact source, binary, compiler, MPI, and OpenMP hashes required before execution",
+      "eps_var_ladder": [
+        0.0002,
+        0.0001,
+        0.00005,
+        0.00002
+      ],
+      "num_threads": 128,
+      "production_campaign_id": "g50_shci_clean_slate_2026-07_v1",
+      "pt_policy": "variational energy at every rung; stochastic PT only at terminal eps_var=2e-5",
+      "seed_derivation": "1 + int(first_8_bytes(SHA256('g50_shci_pilot_2026-07_v1:' + task_uuid)), big_endian) mod 2147483646",
+      "selected_option": "SHCI-A"
+    },
+    "TrimCI": {
+      "adapter": "trimci",
+      "adapter_version": "0.3.0",
+      "campaign_id": "g50_trimci_pilot_2026-07_v1",
+      "checkpoint_determinant_grid": [
+        100000,
+        250000,
+        500000,
+        1000000,
+        2000000,
+        5000000,
+        10000000
+      ],
+      "determinant_ceiling": 10000000,
+      "energy_records": [
+        "best_variational",
+        "pt2_if_computed"
+      ],
+      "fe_extension_required": true,
+      "num_threads": 128,
+      "phase0_candidate_count": 64,
+      "production_campaign_id": "g50_trimci_clean_slate_2026-07_v1",
+      "seed_derivation": "1 + int(first_8_bytes(SHA256('g50_trimci_pilot_2026-07_v1:' + task_uuid)), big_endian) mod 2147483646",
+      "selected_option": "TrimCI-A",
+      "snapshot_semantics": "observation_only; no snapshot may alter search decisions, phase caps, or FE execution",
+      "trimci_git_revision": "8944a2be6b2c1e2a4f6c6c8cbbf6355baa068393"
+    },
+    "ipie_uhf_trial": {
+      "adapter": "ipie_afqmc",
+      "adapter_version": "0.2.0",
+      "campaign_id": "g50_ipie_swing_pilot_2026-07_v1",
+      "environment_lock": "fresh source and dependency lock required before Matt's submission",
+      "gpu": "one NVIDIA A100-SXM4-40GB",
+      "num_blocks": 1000,
+      "num_steps_per_block": 25,
+      "num_walkers": 512,
+      "phaseless": true,
+      "production_campaign_id": "g50_ipie_swing_clean_slate_2026-07_v1",
+      "seed_derivation": "1 + int(first_8_bytes(SHA256('g50_ipie_swing_pilot_2026-07_v1:' + task_uuid)), big_endian) mod 2147483646",
+      "selected_option": "iPIE-A",
+      "swing_pilot_hard_cap_a100_hours": 12,
+      "timestep": 0.005,
+      "trial_wavefunction": "UHF"
+    }
+  },
+  "status": "pilot_design_submitted_for_pi_review_execution_held"
+}
