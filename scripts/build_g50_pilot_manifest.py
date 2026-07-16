@@ -11,11 +11,17 @@ import math
 from pathlib import Path
 from typing import Any
 
-from qb_gsee_benchmark.benchmark_data import canonical_problem_family
+from qb_gsee_benchmark.canonical_families import (
+    EXPECTED_ARTIFACT_SHA256,
+    canonical_problem_family,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 FEATURES_PATH = Path("scripts/Hamiltonian_features.csv")
-OUTPUT_PATH = Path("analysis/solver_campaigns/g50_pilot_task_manifest_v2.json")
+CANONICAL_FAMILY_ARTIFACT_PATH = Path(
+    "analysis/feature_schema/canonical_families_v1.json"
+)
+OUTPUT_PATH = Path("analysis/solver_campaigns/g50_pilot_task_manifest_v3.json")
 PILOT_TASK_COUNT = 12
 EXPECTED_CORPUS_TASKS = 718
 ALGORITHM_ID = "rank_scaled_maximin_unique_family_v1"
@@ -133,6 +139,10 @@ def _squared_distance(left: list[float], right: list[float]) -> float:
 
 
 def build(root: Path = ROOT) -> dict[str, Any]:
+    family_artifact_path = root / CANONICAL_FAMILY_ARTIFACT_PATH
+    if _sha256(family_artifact_path) != EXPECTED_ARTIFACT_SHA256:
+        raise ValueError("canonical-family artifact checksum mismatch")
+
     features_path = root / FEATURES_PATH
     with features_path.open(encoding="utf-8", newline="") as handle:
         rows = list(csv.DictReader(handle))
@@ -277,16 +287,17 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         "forbidden_selection_fields": list(FORBIDDEN_FIELD_TOKENS),
         "pilot_task_count": len(pilot_tasks),
         "pilot_tasks": pilot_tasks,
-        "schema_version": 2,
+        "schema_version": 3,
         "selection": {
             "algorithm_id": ALGORITHM_ID,
             "family_constraint": "one_task_per_canonical_problem_family",
+            "family_artifact_path": CANONICAL_FAMILY_ARTIFACT_PATH.as_posix(),
+            "family_artifact_sha256": EXPECTED_ARTIFACT_SHA256,
             "family_mapping_function": "canonical_problem_family",
-            "family_mapping_module": "qb_gsee_benchmark.benchmark_data",
+            "family_mapping_module": "qb_gsee_benchmark.canonical_families",
             "family_mapping_rule": (
-                "validation.* -> validation; gao_distributed_fci_* -> "
-                "gao_distributed_fci; strip a trailing numeric suffix; group "
-                "transition-metal oxides with their metal; otherwise use the base name"
+                "task_uuid lookup of canonical_family_recommended in "
+                "canonical_families_v1.json"
             ),
             "first_point": "nearest_rank_scaled_descriptor_median",
             "next_points": "maximum_minimum_rank_scaled_euclidean_distance",

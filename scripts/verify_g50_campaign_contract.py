@@ -9,13 +9,19 @@ import json
 from pathlib import Path
 from typing import Any
 
-from qb_gsee_benchmark.benchmark_data import canonical_problem_family
+from qb_gsee_benchmark.canonical_families import (
+    EXPECTED_ARTIFACT_SHA256,
+    canonical_problem_family,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = Path("analysis/solver_campaigns/g50_campaign_contract_v1.json")
 DESIGN_PATH = Path("analysis/solver_campaigns/g50_endgame_clean_slate_design.md")
 PILOT_DESIGN_PATH = Path("analysis/solver_campaigns/g50_pilot_design_v1.json")
-PILOT_MANIFEST_PATH = Path("analysis/solver_campaigns/g50_pilot_task_manifest_v2.json")
+PILOT_MANIFEST_PATH = Path("analysis/solver_campaigns/g50_pilot_task_manifest_v3.json")
+CANONICAL_FAMILY_ARTIFACT_PATH = Path(
+    "analysis/feature_schema/canonical_families_v1.json"
+)
 FEATURES_PATH = Path("scripts/Hamiltonian_features.csv")
 CORPUS_DEFINITION = (
     "G-48 closed out, FeMoco-54 quarantine filed, Gao feature backfill "
@@ -369,11 +375,6 @@ def verify(
     )
     _record(checks, "pilot_task_uuid_unique", len(set(task_uuids)) == 12)
     _record(checks, "pilot_family_unique", len(set(families)) == 12)
-    held_v2_transition = (
-        pilot_manifest.get("schema_version") == 2
-        and pilot_manifest.get("status") == "design_only_submission_held"
-        and authorization.get("pilot_execution_authorized") is False
-    )
     canonical_families = []
     canonical_bindings_valid = True
     for item in pilot_tasks:
@@ -388,45 +389,31 @@ def verify(
             canonical_bindings_valid = False
             canonical_families.append(None)
     _record(checks, "pilot_task_binding_canonical", canonical_bindings_valid)
-    if held_v2_transition:
-        _record(
-            checks,
-            "pilot_family_mapping_canonical",
-            all(
-                item.get("family_group_source")
-                == "qb_gsee_benchmark.benchmark_data.canonical_problem_family"
-                for item in pilot_tasks
-            ),
-        )
-        expected_unique_families = 11
-    else:
-        _record(
-            checks,
-            "pilot_family_mapping_canonical",
-            all(
-                item.get("family_group") == family
-                and item.get("family_group_source")
-                == "analysis/feature_schema/canonical_families_v1.json"
-                for item, family in zip(pilot_tasks, canonical_families, strict=True)
-            ),
-        )
-        expected_unique_families = 12
+    _record(
+        checks,
+        "pilot_family_mapping_canonical",
+        all(
+            item.get("family_group") == family
+            and item.get("family_group_source")
+            == CANONICAL_FAMILY_ARTIFACT_PATH.as_posix()
+            for item, family in zip(pilot_tasks, canonical_families, strict=True)
+        ),
+    )
     _record(
         checks,
         "pilot_canonical_family_unique",
         canonical_bindings_valid
         and len(canonical_families) == 12
-        and len(set(canonical_families)) == expected_unique_families,
-    )
-    _record(
-        checks,
-        "pilot_o32_transition_disposition",
-        not held_v2_transition or expected_unique_families == 11,
+        and len(set(canonical_families)) == 12,
     )
     _record(
         checks,
         "pilot_validation_family_at_most_one",
-        canonical_families.count("validation") <= 1,
+        sum(
+            str(item.get("problem_instance_short_name", "")).startswith("validation.")
+            for item in pilot_tasks
+        )
+        <= 1,
     )
     _record(
         checks,
@@ -444,14 +431,25 @@ def verify(
     selection = pilot_manifest.get("selection", {})
     _record(
         checks,
+        "pilot_family_artifact_bound",
+        selection.get("family_artifact_path")
+        == CANONICAL_FAMILY_ARTIFACT_PATH.as_posix()
+        and selection.get("family_artifact_sha256") == EXPECTED_ARTIFACT_SHA256
+        and _sha256(root / CANONICAL_FAMILY_ARTIFACT_PATH)
+        == EXPECTED_ARTIFACT_SHA256,
+    )
+    _record(
+        checks,
         "pilot_selection_target_blind",
-        pilot_manifest.get("schema_version") == 2
+        pilot_manifest.get("schema_version") == 3
         and selection.get("algorithm_id") == "rank_scaled_maximin_unique_family_v1"
         and selection.get("family_constraint")
         == "one_task_per_canonical_problem_family"
         and selection.get("family_mapping_function") == "canonical_problem_family"
         and selection.get("family_mapping_module")
-        == "qb_gsee_benchmark.benchmark_data"
+        == "qb_gsee_benchmark.canonical_families"
+        and selection.get("family_mapping_rule")
+        == "task_uuid lookup of canonical_family_recommended in canonical_families_v1.json"
         and selection.get("tie_break") == "lexicographically_smallest_task_uuid",
     )
     serialized_tasks = json.dumps(pilot_tasks, sort_keys=True).lower()

@@ -14,14 +14,13 @@ uniform cap recommendation before gate 3 can close.
 
 ## Frozen pilot set
 
-`g50_pilot_task_manifest_v2.json` contains 12 tasks selected reproducibly from
+`g50_pilot_task_manifest_v3.json` contains 12 tasks selected reproducibly from
 the frozen 718-row feature table. Selection uses rank-scaled maximin coverage
 of orbital count, electron filling, spin polarization, and determinant-space
-bound, with one row per family from the repository's
-`canonical_problem_family` mapping. That mapping groups all `validation.*`
-instances as `validation`, all Gao rows as `gao_distributed_fci`, trailing
-numeric variants together, and transition-metal oxides with their metal.
-Ties use task UUID. The
+bound, with one row per generation/import-protocol family from
+`analysis/feature_schema/canonical_families_v1.json`. Family membership is an
+exact task-UUID lookup of `canonical_family_recommended`; v2 remains retained
+as the superseded audit predecessor. Ties use task UUID. The
 manifest includes input identities and checksums, but no reference energy,
 accuracy threshold, prior solver result, success label, or energy error.
 
