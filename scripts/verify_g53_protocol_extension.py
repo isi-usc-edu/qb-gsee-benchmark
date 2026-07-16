@@ -23,6 +23,12 @@ ENFORCEMENT_FIX = Path(
 ENFORCEMENT_FIX_DESIGN = Path(
     "analysis/solver_campaigns/g53_g49c_strict_enforcement_fix_v2.md"
 )
+RECONSTRUCTION_FIX = Path(
+    "analysis/solver_campaigns/g53_g49c_strict_reconstruction_fix_v3.json"
+)
+RECONSTRUCTION_FIX_DESIGN = Path(
+    "analysis/solver_campaigns/g53_g49c_strict_reconstruction_fix_v3.md"
+)
 
 
 def _check(checks: dict[str, bool], name: str, value: Any) -> None:
@@ -37,6 +43,13 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
     enforcement = json.loads((root / ENFORCEMENT_FIX).read_text(encoding="utf-8"))
     enforcement_design = (root / ENFORCEMENT_FIX_DESIGN).read_text(encoding="utf-8")
     enforcement_words = " ".join(enforcement_design.lower().split())
+    reconstruction = json.loads(
+        (root / RECONSTRUCTION_FIX).read_text(encoding="utf-8")
+    )
+    reconstruction_design = (
+        root / RECONSTRUCTION_FIX_DESIGN
+    ).read_text(encoding="utf-8")
+    reconstruction_words = " ".join(reconstruction_design.lower().split())
     checks: dict[str, bool] = {}
 
     _check(checks, "goal", data.get("goal") == "G-53")
@@ -202,6 +215,45 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
         "enforcement_fix_design",
         "implementation correction, not a protocol change" in enforcement_words
         and "zero clean minima" in enforcement_words,
+    )
+    reconstruction_rule = reconstruction.get("implementation_correction", {})
+    reconstruction_pbs = reconstruction.get("pbs", {})
+    _check(
+        checks,
+        "reconstruction_fix_distinct_generation",
+        reconstruction.get("parent_run_generation")
+        == "g49c_strict_tolerance_fix_v2"
+        and reconstruction.get("run_generation")
+        == "g49c_strict_tolerance_fix_v3"
+        and reconstruction.get("protocol_changed") is False,
+    )
+    _check(
+        checks,
+        "reconstruction_fix_scoped",
+        reconstruction_rule.get("temporary_label_used_only_to_reconstruct_orbitals")
+        is True
+        and reconstruction_rule.get("strict_acceptance_reapplied_after_newton")
+        is True
+        and reconstruction_rule.get(
+            "maximum_strict_refinement_attempts_per_stationary_point"
+        )
+        == 1,
+    )
+    _check(
+        checks,
+        "reconstruction_fix_cost",
+        reconstruction_pbs.get("queue") == "compute"
+        and reconstruction_pbs.get("ncpus") == 128
+        and reconstruction_pbs.get("memory_request") is None
+        and reconstruction_pbs.get("cumulative_worst_case_node_hours")
+        < reconstruction_pbs.get("authorized_cumulative_node_hour_cap")
+        == 1.0,
+    )
+    _check(
+        checks,
+        "reconstruction_fix_design",
+        "temporary dataclass copy" in reconstruction_words
+        and "does not accept the candidate" in reconstruction_words,
     )
 
     failed = sorted(name for name, passed in checks.items() if not passed)

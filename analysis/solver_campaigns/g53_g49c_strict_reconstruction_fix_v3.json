@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "goal": "G-53",
+  "status": "preregistered_before_v3_execution",
+  "parent_run_generation": "g49c_strict_tolerance_fix_v2",
+  "run_generation": "g49c_strict_tolerance_fix_v3",
+  "protocol_changed": false,
+  "scope": [
+    "fb87d637-aaab-4e8f-8898-4ecca8bd0fe0"
+  ],
+  "v2_evidence": {
+    "job_id": "7660268.imgt1",
+    "actual_node_hours": 0.018055555555555554,
+    "records_immutable": true,
+    "trajectory_sha256": "897317be07c0afa67ba7b1b8601c4ba1dad6f67dc1cf5be4434b9750a2615102",
+    "exit_status": 1,
+    "failure": "pyscf_solver_for_branch_rejected_strictly_relabelled_candidate_before_refinement"
+  },
+  "implementation_correction": {
+    "reconstruction_input": "temporary_candidate_copy_with_converged_true",
+    "temporary_label_used_only_to_reconstruct_orbitals": true,
+    "strict_acceptance_reapplied_after_newton": true,
+    "maximum_strict_refinement_attempts_per_stationary_point": 1
+  },
+  "pbs": {
+    "queue": "compute",
+    "ncpus": 128,
+    "memory_request": null,
+    "task_count": 1,
+    "task_walltime_seconds": 300,
+    "additional_maximum_node_hours": 0.08333333333333333,
+    "prior_actual_node_hours": 0.12166666666666667,
+    "cumulative_worst_case_node_hours": 0.205,
+    "authorized_cumulative_node_hour_cap": 1.0
+  }
+}
