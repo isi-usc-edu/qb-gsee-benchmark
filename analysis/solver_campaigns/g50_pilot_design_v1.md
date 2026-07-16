@@ -4,6 +4,10 @@ Date: 2026-07-16
 
 Status: submitted for PI review; all pilot and production execution held
 
+Scope amendment 2026-07-16: production uses the future frozen ML-5 binding
+manifest at Matt's gate-3 k. The 12-task pilot is unchanged and is not gated
+on ML-5.
+
 ## Decision requested
 
 Authorize only the four calibration pilots defined here. This is not a request
@@ -33,16 +37,23 @@ looking at a solver result.
 
 Pilot campaign IDs differ from all four production IDs. Pilot energies and
 checkpoints are never reusable in production, and no pilot row is eligible for
-headline designation. The calibration view excludes all energy fields. It may use only pilot status,
-walltime, and peak memory to characterize the fixed configurations and
+headline designation. The calibration view excludes all energy fields. It may
+use only pilot status, walltime, and peak memory to characterize the fixed
+configurations and
 recommend one uniform production cap.
 
-Every solver will attempt all 718 production tasks on its fixed hardware unit:
-one 128-core Improv node for each CPU solver and one A100 for iPIE. A cap hit is
-`timeout` and is scored as a non-success; OOM and build/ingest failures are
-`failed`. `not_attempted` is forbidden for these campaign solvers. The pilot
-cannot silently change a selected solver option, choose per-task scientific
-settings, or create an admission predictor.
+Every solver will attempt every task in the frozen ML-5 binding manifest.
+Tasks outside that manifest are `not_attempted` with the selection manifest
+cited as the machine-readable reason; `not_attempted` is forbidden within the
+manifest. A cap hit is `timeout` and is scored as a non-success; OOM and
+build/ingest failures are `failed`. The pilot cannot silently change a
+selected solver option, choose per-task scientific settings, or create an
+admission predictor.
+
+The 12-task pilot remains independent of the unresolved production manifest.
+Its CPU shape is one 128-core node per task and iPIE uses one A100. The
+production SHCI hardware shape is Matt-reserved under O35; the pilot remains
+single-node unless O35 later orders the bounded multinode calibration leg.
 
 ## Solver protocols
 
@@ -89,5 +100,5 @@ After execution, retain raw statuses, rung/phase observations, walltime, peak
 memory, environment capture, scheduler accounting, and a fail-closed verifier.
 The report gives measured walltime and peak-memory distributions, projected
 timeout fractions and campaign budgets at the candidate cap, and one uniform
-cap recommendation. Matt pins the final value at gate 3 before any production
-submit.
+cap recommendation. At gate 3, Matt jointly pins the cap, the ML-5 binding k,
+and the O35 SHCI production hardware shape before any production submit.

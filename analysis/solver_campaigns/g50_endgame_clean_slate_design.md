@@ -12,6 +12,11 @@ Changelog 2026-07-16: O34 replaced solver-specific admission with a universal
 attempt policy and one uniform per-task resource cap. The 12-hour value is a
 planning cap; Matt pins the final value at gate 3 from pilot measurements.
 
+Scope amendment 2026-07-16: production runs the frozen ML-5 binding coreset at
+Matt's gate-3 k. Universal attempt applies within that manifest; rows outside
+it are `not_attempted` with the manifest cited. The pilot remains unchanged and
+is not gated on ML-5. O35 leaves the production SHCI hardware shape unresolved.
+
 ## Purpose and clean-slate definition
 
 G-50 will run iPIE, DMRG, TrimCI, and SHCI against one frozen, versioned core
@@ -22,9 +27,10 @@ campaign means:
 - one preregistered configuration per solver and one uniform resource cap;
 - no pooling with legacy, G-31, G-43, or other July campaigns;
 - no production reuse of pilot energies or checkpoints;
-- every solver attempts every task, with one terminal row for each pair;
+- every solver attempts every task in the frozen ML-5 binding manifest;
 - `timeout` is a scored non-success, while OOM and build/ingest failures are
-  `failed`; `not_attempted` is forbidden for these four campaign solvers;
+  `failed`; tasks outside the manifest are `not_attempted` with the binding
+  selection manifest cited, and `not_attempted` is forbidden within it;
 - immutable raw failures, accounting, environment evidence, and verifier
   reports.
 
@@ -37,11 +43,12 @@ Execution remains held until all three Matt-ruled gates pass in order:
 
 1. **Core corpus settled.** Defined as: G-48 closed out, FeMoco-54 quarantine
    filed, Gao feature backfill decided, no pending task admissions/removals.
-   The final task UUID manifest, FCIDUMP hashes, family and structure balance,
-   source-defect exclusions, and core-manifest version then become immutable.
-   Current state: G-48 closed out; FeMoco-54 quarantine filed; Gao feature
-   backfill merged; no task admissions or removals are pending. The settled
-   corpus contains 718 tasks. This gate is satisfied.
+   The source-corpus task UUIDs, FCIDUMP hashes, family and structure balance,
+   and source-defect exclusions then become immutable. Current state: G-48
+   closed out; FeMoco-54 quarantine filed; Gao feature backfill merged; no task
+   admissions or removals are pending. The settled source corpus contains 718
+   tasks. The production task manifest freezes separately at gate 3 from the
+   outcome-blind ML-5 binding selection. This source-corpus gate is satisfied.
 2. **Matt's per-solver configuration sign-off.** Solver configurations are
    Matt-reserved. The implementer supplies the adapter/environment evidence,
    resource-cap pilot calibration, and the options-plus-recommendation tables
@@ -52,9 +59,10 @@ Execution remains held until all three Matt-ruled gates pass in order:
    This gate is satisfied; exact numeric pins remain pilot outputs.
 3. **PI design review.** After Matt's selections are encoded in immutable
    configuration manifests, the PI reviews the signed configurations, the
-   pilot-derived uniform cap recommendation and campaign-budget projection,
-   pilot separation, v1.9 designation hooks, and the complete Swing handoff
-   package. The PI does
+   pilot-derived uniform cap recommendation, the ML-5 k-curve and Phase-B
+   validation, the O35 SHCI hardware options and budget projections, pilot
+   separation, v1.9 designation hooks, and the complete Swing handoff package.
+   The PI does
    not choose or substitute solver configurations. This gate remains pending.
    No production `qsub` or Swing submission is permitted before it.
 
@@ -63,8 +71,9 @@ immutable dependency lock, compute-node smoke, failure-injection tests,
 outcome-vocabulary tests, measured walltime and peak-memory distributions,
 timeout-fraction projection, and campaign-budget projection. Those are
 evidence for Matt's decision. Exact ladders, phase caps, seeds, and the final
-uniform cap remain pilot-calibrated numeric pins. All four candidate bundles
-must cross-check the same task manifest.
+uniform cap remain pilot-calibrated numeric pins. All four pilot bundles
+must cross-check the same 12-task pilot manifest. Production bundles later
+bind the single Matt-selected ML-5 manifest.
 
 ## Configuration options for Matt
 
@@ -145,32 +154,40 @@ solvability-region-growth analysis.
 
 The machine-readable companion is `g50_campaign_contract_v1.json`. All four
 campaigns use the shared four-state vocabulary: `completed`, `failed`,
-`timeout`, and `not_attempted`. For G-50, every solver attempts every task, so
-`not_attempted` is forbidden. A cap hit is `timeout` and is scored as a
-non-success; OOM and build/ingest failures are `failed` with a recorded reason.
-Completed energies must be finite, and every other scored energy is null.
-Failure stage, wall time, software versions, hardware, input hash, adapter
-revision, and campaign id are mandatory.
+`timeout`, and `not_attempted`. Every solver attempts every task in the
+frozen ML-5 binding manifest. Within that manifest, `not_attempted` is
+forbidden. A cap hit is `timeout` and is scored as a non-success; OOM and
+build/ingest failures are `failed` with a recorded reason. Tasks outside the
+manifest are `not_attempted` with the binding manifest cited as the
+machine-readable reason. Completed energies must be finite, and every other
+scored energy is null. Failure stage, wall time, software versions, hardware,
+input hash, adapter revision, and campaign id are mandatory.
 
-There is no admission predictor or solver-specific admission region. Every
-solver attempts all `N = 718` tasks with its globally frozen scientific
-configuration. Per-task scientific tuning is forbidden. The fixed hardware
-unit is one 128-core Improv node for DMRG, TrimCI, and SHCI, and one A100 for
-iPIE.
+There is no admission predictor or solver-specific admission region. The
+outcome-blind ML-5 selection defines the production scope; it is not a
+solver-specific feasibility screen. Per-task scientific tuning is forbidden.
+DMRG and TrimCI use one 128-core Improv node per task and iPIE uses one A100.
+The 12-task SHCI pilot is single-node; its production hardware shape remains
+Matt-reserved under O35.
 
-The working planning cap is 12 wall-clock hours per task for every solver. At
-that cap, the literal all-timeout upper bounds are:
+The working planning cap is 12 wall-clock hours per attempted task for every
+solver. The binding k, final cap, and SHCI production shape are all gate-3
+pins. At the currently ordered ML-5 candidate sizes, the single-unit
+all-timeout arithmetic is:
 
-| Solver scope | Tasks | Hardware unit | Working cap | Worst-case hours |
-| --- | ---: | --- | ---: | ---: |
-| iPIE | 718 | one A100 | 12 h/task | 8,616 A100-h |
-| each CPU solver | 718 | one 128-core node | 12 h/task | 8,616 node-h |
-| all three CPU solvers | 2,154 | one 128-core node/task | 12 h/task | 25,848 node-h |
+| k | iPIE A100-h | Each single-node CPU solver node-h | DMRG + TrimCI node-h | SHCI shape |
+| ---: | ---: | ---: | ---: | --- |
+| 48 | 576 | 576 | 1,152 | O35 TBD |
+| 64 | 768 | 768 | 1,536 | O35 TBD |
+| 96 | 1,152 | 1,152 | 2,304 | O35 TBD |
+| 144 | 1,728 | 1,728 | 3,456 | O35 TBD |
+| 192 | 2,304 | 2,304 | 4,608 | O35 TBD |
 
 These are budgetary worst cases, not production requests or runtime forecasts.
 The pilots measure walltime and peak-memory distributions and project timeout
-fractions and campaign budgets. Matt pins one final uniform cap at gate 3 from
-that evidence; the cap is a resource ceiling, not a per-task tuning parameter.
+fractions and campaign budgets. Matt jointly pins the final cap, binding k, and
+SHCI shape at gate 3; the cap is a resource ceiling, not a per-task tuning
+parameter.
 
 ## Metrics-spec v1.9 designation
 
@@ -198,11 +215,12 @@ provenance, not yet the G-50 lock. Matt's sign-off selects the scientific
 configuration and himself as submitter; the implementer now rebuilds and
 hashes a fresh lock for the pilot package.
 
-Every task receives one attempted iPIE run on a 40 GB A100 under the uniform
-cap. UHF trial failure, OOM, or insufficient finite post-equilibration samples
-is a recorded non-success, never `not_attempted`. Random seed and
-population-control policy are frozen in the preregistered pilot design before
-PI review; a seed changes uncertainty, not campaign identity or attempt scope.
+Every binding-manifest task receives one attempted iPIE run on a 40 GB A100
+under the uniform cap. UHF trial failure, OOM, or insufficient finite
+post-equilibration samples is a recorded non-success, never `not_attempted`
+within the manifest. Random seed and population-control policy are frozen in
+the preregistered pilot design before PI review; a seed changes uncertainty,
+not campaign identity or attempt scope.
 
 The implementer writes the complete Swing package: source snapshot, input
 manifest, config generator, one-command preflight/submit wrapper, result
@@ -222,8 +240,9 @@ the block2 build, orbital ordering, sweep schedule, bond-dimension ladder,
 discarded-weight cutoff, threading, checkpoint policy, and energy-selection
 rule.
 
-Every task receives one attempted DMRG run on a whole 128-core node under the
-uniform cap. Production must retain every completed variational rung as a
+Every binding-manifest task receives one attempted DMRG run on a whole
+128-core node under the uniform cap. Production must retain every completed
+variational rung as a
 separately addressable nested result and report the lowest *within-run* energy
 only; it may not select across tuned per-task configurations.
 
@@ -241,8 +260,9 @@ The production seed policy must preserve the intended 64-run phase-0 search.
 The campaign records all phase-0 candidates and the selected variational state;
 one excellent variational state is sufficient for the reported best energy,
 while seed/candidate spread remains diagnostic rather than an accuracy
-penalty. Every task receives one attempted TrimCI run on a whole 128-core node
-under the uniform cap. Phase caps and the rule for variational versus
+penalty. Every binding-manifest task receives one attempted TrimCI run on a
+whole 128-core node under the uniform cap. Phase caps and the rule for
+variational versus
 PT2-reported energy are preregistered globally. The pilot tests the
 10,000,000-determinant ceiling and pins a nested
 determinant milestone grid. Milestone capture is observation-only and cannot
@@ -259,11 +279,13 @@ provenance,
 `eps_var` schedule, PT policy, stochastic seed policy, and
 scratch/checkpoint layout.
 
-Every task receives one attempted SHCI run on a whole 128-core node under the
-uniform cap. Production keeps the configured variational/PT ladder so
-nestedness and convergence can be audited; a headline energy is derived only
-by the preregistered rule. Historical SHCI files and ladders remain archival
-comparison material, never production substitutes.
+The selected SHCI pilot remains one attempted run per pilot task on a whole
+128-core node. O35 determines the production hardware shape; after that pin,
+every binding-manifest task receives one attempt on the globally fixed shape
+under the uniform cap. Production keeps the configured variational/PT ladder
+so nestedness and convergence can be audited; a headline energy is derived
+only by the preregistered rule. Historical SHCI files and ladders remain
+archival comparison material, never production substitutes.
 
 ## Evidence package
 
@@ -271,22 +293,20 @@ Each solver bundle must contain the frozen task ledger, source and environment
 manifests, preflight report, prepared runs, submission ledger, per-task
 raw/status records, JUnit, terminal verification, and archived scheduler
 accounting. A cross-campaign verifier enforces identical task order, exactly
-`4N` attempted rows, campaign separation, the uniform cap, and the prohibition
-on `not_attempted`. S3 publication, public solution-table merge, metrics
-inclusion, and headline designation are separate post-review gates.
+`4N` attempted rows for binding-manifest size `N`, exactly `4(718-N)`
+selection-cited `not_attempted` rows outside it, campaign separation, and the
+uniform cap. S3 publication, public solution-table merge, metrics inclusion,
+and headline designation are separate post-review gates.
 
-## Uniform-cap deliverable at gate 3
+## Gate-3 decision bundle
 
-The pilot report must fill this table with measured values before PI review:
+The pilot report supplies, for each solver, measured walltime and peak-memory
+distributions plus projected timeout fractions and campaign cost at each
+candidate cap. The ML-5 binding run separately supplies the k-curve, frozen
+candidate manifests, and Phase-B validation. O35 supplies SHCI production
+hardware options and per-shape arithmetic.
 
-| Solver | Attempted rows | Resource | Working cap | Pilot walltime distribution | Peak memory | Projected timeout fraction | Projected campaign cost |
-| --- | ---: | --- | ---: | --- | --- | --- | --- |
-| iPIE | 718 | one A100 | 12 h/task | TBD | TBD | TBD | TBD |
-| DMRG | 718 | one 128-core node | 12 h/task | TBD | TBD | TBD | TBD |
-| TrimCI | 718 | one 128-core node | 12 h/task | TBD | TBD | TBD | TBD |
-| SHCI | 718 | one 128-core node | 12 h/task | TBD | TBD | TBD | TBD |
-
-The pilot report recommends one uniform cap from these distributions and
-projections. Matt pins the final value at gate 3. No admission ledger is
-produced. The resource-cap pilot design is `g50_pilot_design_v1.md` with
-machine-readable companion `g50_pilot_design_v1.json`.
+Matt considers those inputs in one sitting and pins the uniform cap, ML-5 k,
+and SHCI production shape. No admission ledger is produced. The resource-cap
+pilot design is `g50_pilot_design_v1.md` with machine-readable companion
+`g50_pilot_design_v1.json`.

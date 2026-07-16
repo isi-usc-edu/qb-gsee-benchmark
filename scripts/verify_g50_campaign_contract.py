@@ -53,6 +53,18 @@ FORBIDDEN_PILOT_TOKENS = {
     "reference_energy",
     "supervised_success_label",
 }
+ML5_CANDIDATE_TASK_COUNTS = [48, 64, 96, 144, 192]
+EXPECTED_PLANNING_SCENARIOS = [
+    {
+        "binding_tasks_per_solver": count,
+        "ipie_a100_hours_worst_case": count * 12,
+        "shci_hardware_shape": "TBD_AT_GATE_3_O35",
+        "single_node_cpu_hours_per_solver_worst_case": count * 12,
+        "two_fixed_single_node_cpu_solvers_hours_worst_case": count * 24,
+        "uniform_cap_hours_per_task": 12,
+    }
+    for count in ML5_CANDIDATE_TASK_COUNTS
+]
 
 
 def _sha256(path: Path) -> str:
@@ -125,37 +137,71 @@ def verify(
         "no_pending_task_admissions_or_removals" in conditions
         and conditions["no_pending_task_admissions_or_removals"] is True,
     )
+    cost_projection = contract.get("cost_projection", {})
+    production_scope = contract.get("production_scope", {})
     _record(
         checks,
         "corpus_settled",
         corpus.get("settled") is True
-        and contract.get("cost_projection", {}).get("core_task_count") == 718,
+        and cost_projection.get("source_corpus_task_count") == 718
+        and production_scope.get("source_corpus_task_count") == 718,
     )
-    cost_projection = contract.get("cost_projection", {})
+    _record(
+        checks,
+        "ml5_binding_scope_pending_gate_3",
+        production_scope.get("binding_manifest_kind") == "ML-5 binding coreset"
+        and production_scope.get("binding_manifest_path") == "TBD_AT_GATE_3"
+        and production_scope.get("binding_manifest_sha256") == "TBD_AT_GATE_3"
+        and production_scope.get("binding_task_count") == "TBD_AT_GATE_3"
+        and production_scope.get("candidate_binding_task_counts")
+        == ML5_CANDIDATE_TASK_COUNTS
+        and production_scope.get("outcome_blind_selection_required") is True
+        and production_scope.get("selection_authority") == "Matt"
+        and production_scope.get("pinned_at_gate") == 3
+        and production_scope.get("family_taxonomy_path")
+        == CANONICAL_FAMILY_ARTIFACT_PATH.as_posix()
+        and production_scope.get("family_taxonomy_sha256")
+        == EXPECTED_ARTIFACT_SHA256,
+    )
+    outside_scope = production_scope.get("outside_manifest", {})
+    _record(
+        checks,
+        "outside_manifest_not_attempted",
+        outside_scope.get("status") == "not_attempted"
+        and outside_scope.get("reason")
+        == "excluded_by_frozen_ml5_binding_manifest"
+        and outside_scope.get("selection_manifest_citation_required") is True,
+    )
     _record(
         checks,
         "uniform_cap_budget",
         cost_projection.get("working_uniform_cap_hours_per_task") == 12
         and cost_projection.get("final_uniform_cap_hours_per_task")
         == "TBD_AT_GATE_3"
+        and cost_projection.get("binding_manifest_path") == "TBD_AT_GATE_3"
+        and cost_projection.get("binding_manifest_sha256") == "TBD_AT_GATE_3"
+        and cost_projection.get("binding_task_count") == "TBD_AT_GATE_3"
+        and cost_projection.get("candidate_binding_task_counts")
+        == ML5_CANDIDATE_TASK_COUNTS
         and cost_projection.get("planning_scenarios")
-        == [
-            {
-                "cpu_node_hours_per_solver_worst_case": 8616,
-                "cpu_node_hours_three_solvers_worst_case": 25848,
-                "ipie_a100_hours_worst_case": 8616,
-                "tasks_per_solver": 718,
-                "uniform_cap_hours_per_task": 12,
-            }
-        ],
+        == EXPECTED_PLANNING_SCENARIOS
+        and cost_projection.get("status")
+        == "binding_k_cap_and_shci_shape_pending_gate_3",
     )
     _record(
         checks,
         "uniform_cap_hardware_units",
-        cost_projection.get("hardware_unit_per_task")
+        cost_projection.get("pilot_hardware_unit_per_task")
         == {
             "DMRG": "one 128-core Improv node",
             "SHCI": "one 128-core Improv node",
+            "TrimCI": "one 128-core Improv node",
+            "ipie_uhf_trial": "one A100 GPU",
+        }
+        and cost_projection.get("production_hardware_unit_per_task")
+        == {
+            "DMRG": "one 128-core Improv node",
+            "SHCI": "TBD_AT_GATE_3_O35",
             "TrimCI": "one 128-core Improv node",
             "ipie_uhf_trial": "one A100 GPU",
         },
@@ -164,11 +210,17 @@ def verify(
     _record(
         checks,
         "universal_attempt_scope",
-        universal_attempt.get("attempt_all_tasks_per_solver") is True
-        and universal_attempt.get("task_count_per_solver") == 718
+        universal_attempt.get("attempt_all_manifest_tasks_per_solver") is True
+        and universal_attempt.get("scope")
+        == "within_frozen_ml5_binding_manifest"
+        and universal_attempt.get("binding_task_count") == "TBD_AT_GATE_3"
+        and universal_attempt.get("source_corpus_task_count") == 718
         and universal_attempt.get("admission_prediction_permitted") is False
         and universal_attempt.get("per_task_scientific_tuning_permitted") is False
-        and universal_attempt.get("not_attempted_permitted") is False,
+        and universal_attempt.get(
+            "not_attempted_permitted_within_binding_manifest"
+        )
+        is False,
     )
     _record(
         checks,
@@ -318,8 +370,11 @@ def verify(
         "design_uses_o34_universal_attempt",
         "There is no admission predictor or solver-specific admission region."
         in design_words
-        and "every solver attempts every task" in design_words
-        and "Matt pins one final uniform cap at gate 3" in design_words
+        and "Every solver attempts every task in the frozen ML-5 binding manifest."
+        in design_words
+        and "Tasks outside the manifest are `not_attempted`" in design_words
+        and "Matt jointly pins the final cap, binding k, and SHCI shape at gate 3"
+        in design_words
         and "No admission ledger is produced." in design_words,
     )
 
@@ -510,19 +565,43 @@ def verify(
         set(calibration.get("forbidden_inputs", [])) == FORBIDDEN_PILOT_TOKENS,
     )
     pilot_cap = calibration.get("uniform_cap", {})
+    calibration_scope = calibration.get("production_scope", {})
     _record(
         checks,
         "pilot_universal_attempt_calibration",
         calibration.get("admission_prediction_permitted") is False
-        and calibration.get("production_attempt_scope") == "all_718_tasks_per_solver"
+        and calibration.get("production_attempt_scope")
+        == "all_tasks_within_frozen_ml5_binding_manifest_per_solver"
         and "admission_inputs" not in calibration
         and "production_admission_policy" not in calibration
         and pilot_cap.get("working_hours_per_task") == 12
         and pilot_cap.get("final_hours_per_task") == "TBD_AT_GATE_3"
         and pilot_cap.get("pinned_by") == "Matt"
-        and pilot_cap.get("not_attempted_permitted") is False
+        and pilot_cap.get(
+            "not_attempted_permitted_within_binding_manifest"
+        )
+        is False
         and pilot_cap.get("timeout_status") == "timeout"
         and pilot_cap.get("timeout_scored_as_success") is False,
+    )
+    _record(
+        checks,
+        "pilot_independent_of_ml5_binding",
+        calibration_scope.get("binding_manifest_path") == "TBD_AT_GATE_3"
+        and calibration_scope.get("binding_manifest_sha256") == "TBD_AT_GATE_3"
+        and calibration_scope.get("binding_task_count") == "TBD_AT_GATE_3"
+        and calibration_scope.get("candidate_binding_task_counts")
+        == ML5_CANDIDATE_TASK_COUNTS
+        and calibration_scope.get("source_corpus_task_count") == 718
+        and calibration_scope.get("pilot_execution_gated_on_binding_manifest")
+        is False
+        and calibration_scope.get("outside_manifest_status") == "not_attempted"
+        and calibration_scope.get("outside_manifest_reason")
+        == "excluded_by_frozen_ml5_binding_manifest"
+        and calibration_scope.get(
+            "outside_manifest_selection_manifest_citation_required"
+        )
+        is True,
     )
     _record(
         checks,
@@ -535,6 +614,8 @@ def verify(
             "timeout-fraction projection at the recommended uniform cap",
             "campaign-budget projection at the recommended uniform cap",
             "one uniform per-task cap recommendation for all four solvers",
+            "frozen ML-5 binding manifest with Matt-selected k",
+            "O35 SHCI production hardware shape",
             "failure and timeout inventory",
             "v1.9 designation skeletons still marked not_designated",
         },

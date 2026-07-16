@@ -62,9 +62,18 @@
     "settled": true
   },
   "cost_projection": {
-    "core_task_count": 718,
+    "binding_manifest_path": "TBD_AT_GATE_3",
+    "binding_manifest_sha256": "TBD_AT_GATE_3",
+    "binding_task_count": "TBD_AT_GATE_3",
+    "candidate_binding_task_counts": [
+      48,
+      64,
+      96,
+      144,
+      192
+    ],
     "final_uniform_cap_hours_per_task": "TBD_AT_GATE_3",
-    "hardware_unit_per_task": {
+    "pilot_hardware_unit_per_task": {
       "DMRG": "one 128-core Improv node",
       "SHCI": "one 128-core Improv node",
       "TrimCI": "one 128-core Improv node",
@@ -72,14 +81,54 @@
     },
     "planning_scenarios": [
       {
-        "cpu_node_hours_per_solver_worst_case": 8616,
-        "cpu_node_hours_three_solvers_worst_case": 25848,
-        "ipie_a100_hours_worst_case": 8616,
-        "tasks_per_solver": 718,
+        "binding_tasks_per_solver": 48,
+        "ipie_a100_hours_worst_case": 576,
+        "shci_hardware_shape": "TBD_AT_GATE_3_O35",
+        "single_node_cpu_hours_per_solver_worst_case": 576,
+        "two_fixed_single_node_cpu_solvers_hours_worst_case": 1152,
+        "uniform_cap_hours_per_task": 12
+      },
+      {
+        "binding_tasks_per_solver": 64,
+        "ipie_a100_hours_worst_case": 768,
+        "shci_hardware_shape": "TBD_AT_GATE_3_O35",
+        "single_node_cpu_hours_per_solver_worst_case": 768,
+        "two_fixed_single_node_cpu_solvers_hours_worst_case": 1536,
+        "uniform_cap_hours_per_task": 12
+      },
+      {
+        "binding_tasks_per_solver": 96,
+        "ipie_a100_hours_worst_case": 1152,
+        "shci_hardware_shape": "TBD_AT_GATE_3_O35",
+        "single_node_cpu_hours_per_solver_worst_case": 1152,
+        "two_fixed_single_node_cpu_solvers_hours_worst_case": 2304,
+        "uniform_cap_hours_per_task": 12
+      },
+      {
+        "binding_tasks_per_solver": 144,
+        "ipie_a100_hours_worst_case": 1728,
+        "shci_hardware_shape": "TBD_AT_GATE_3_O35",
+        "single_node_cpu_hours_per_solver_worst_case": 1728,
+        "two_fixed_single_node_cpu_solvers_hours_worst_case": 3456,
+        "uniform_cap_hours_per_task": 12
+      },
+      {
+        "binding_tasks_per_solver": 192,
+        "ipie_a100_hours_worst_case": 2304,
+        "shci_hardware_shape": "TBD_AT_GATE_3_O35",
+        "single_node_cpu_hours_per_solver_worst_case": 2304,
+        "two_fixed_single_node_cpu_solvers_hours_worst_case": 4608,
         "uniform_cap_hours_per_task": 12
       }
     ],
-    "status": "planning_cap_pending_gate_3_pilot_calibration",
+    "production_hardware_unit_per_task": {
+      "DMRG": "one 128-core Improv node",
+      "SHCI": "TBD_AT_GATE_3_O35",
+      "TrimCI": "one 128-core Improv node",
+      "ipie_uhf_trial": "one A100 GPU"
+    },
+    "source_corpus_task_count": 718,
+    "status": "binding_k_cap_and_shci_shape_pending_gate_3",
     "working_uniform_cap_hours_per_task": 12
   },
   "gates": [
@@ -238,14 +287,40 @@
   "status": "pilot_design_submitted_execution_held_for_pi_design_review",
   "universal_attempt": {
     "admission_prediction_permitted": false,
-    "attempt_all_tasks_per_solver": true,
+    "attempt_all_manifest_tasks_per_solver": true,
+    "binding_task_count": "TBD_AT_GATE_3",
     "final_uniform_cap_hours_per_task": "TBD_AT_GATE_3",
-    "not_attempted_permitted": false,
+    "not_attempted_permitted_within_binding_manifest": false,
     "oom_or_build_or_ingest_status": "failed",
     "per_task_scientific_tuning_permitted": false,
-    "task_count_per_solver": 718,
+    "scope": "within_frozen_ml5_binding_manifest",
+    "source_corpus_task_count": 718,
     "timeout_scored_as_success": false,
     "timeout_status": "timeout",
     "working_uniform_cap_hours_per_task": 12
+  },
+  "production_scope": {
+    "binding_manifest_kind": "ML-5 binding coreset",
+    "binding_manifest_path": "TBD_AT_GATE_3",
+    "binding_manifest_sha256": "TBD_AT_GATE_3",
+    "binding_task_count": "TBD_AT_GATE_3",
+    "candidate_binding_task_counts": [
+      48,
+      64,
+      96,
+      144,
+      192
+    ],
+    "family_taxonomy_path": "analysis/feature_schema/canonical_families_v1.json",
+    "family_taxonomy_sha256": "4bc9404feba3313cea64df734364a3ecbb45dbfda6f41bd337231181fef67942",
+    "outcome_blind_selection_required": true,
+    "outside_manifest": {
+      "reason": "excluded_by_frozen_ml5_binding_manifest",
+      "selection_manifest_citation_required": true,
+      "status": "not_attempted"
+    },
+    "pinned_at_gate": 3,
+    "selection_authority": "Matt",
+    "source_corpus_task_count": 718
   }
 }

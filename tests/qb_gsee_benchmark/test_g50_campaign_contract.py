@@ -42,14 +42,41 @@ def test_g50_o34_replaces_admission_with_uniform_cap() -> None:
     )
 
     assert "target_blind_admission" not in contract
-    assert contract["universal_attempt"]["attempt_all_tasks_per_solver"] is True
-    assert contract["universal_attempt"]["not_attempted_permitted"] is False
+    assert (
+        contract["universal_attempt"]["attempt_all_manifest_tasks_per_solver"]
+        is True
+    )
+    assert (
+        contract["universal_attempt"][
+            "not_attempted_permitted_within_binding_manifest"
+        ]
+        is False
+    )
+    assert contract["production_scope"]["binding_task_count"] == "TBD_AT_GATE_3"
+    assert contract["production_scope"]["outside_manifest"]["status"] == (
+        "not_attempted"
+    )
     assert contract["cost_projection"]["working_uniform_cap_hours_per_task"] == 12
+    assert contract["cost_projection"]["production_hardware_unit_per_task"][
+        "SHCI"
+    ] == "TBD_AT_GATE_3_O35"
     assert "admission_inputs" not in pilot["calibration_contract"]
     assert "production_admission_policy" not in pilot["calibration_contract"]
     assert (
         pilot["calibration_contract"]["production_attempt_scope"]
-        == "all_718_tasks_per_solver"
+        == "all_tasks_within_frozen_ml5_binding_manifest_per_solver"
+    )
+    assert (
+        pilot["calibration_contract"]["production_scope"][
+            "pilot_execution_gated_on_binding_manifest"
+        ]
+        is False
+    )
+
+
+def test_g50_scope_amendment_preserves_pilot_manifest_bytes() -> None:
+    assert hashlib.sha256(V3_MANIFEST.read_bytes()).hexdigest() == (
+        "13f90d0f34e0ba3dd7c56030b185979b7ef440d9d8cab73fa69e9a2c79fdea53"
     )
 
 

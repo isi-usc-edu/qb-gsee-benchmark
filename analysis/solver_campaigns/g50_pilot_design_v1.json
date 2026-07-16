@@ -24,7 +24,7 @@
     "pilot_artifact_reuse_in_production": false,
     "pilot_checkpoint_reuse_in_production": false,
     "pilot_energy_reuse_in_production": false,
-    "production_attempt_scope": "all_718_tasks_per_solver",
+    "production_attempt_scope": "all_tasks_within_frozen_ml5_binding_manifest_per_solver",
     "production_outputs_required_before_gate_3_closure": [
       "exact solver configuration locks",
       "measured pilot walltime distributions",
@@ -32,16 +32,35 @@
       "timeout-fraction projection at the recommended uniform cap",
       "campaign-budget projection at the recommended uniform cap",
       "one uniform per-task cap recommendation for all four solvers",
+      "frozen ML-5 binding manifest with Matt-selected k",
+      "O35 SHCI production hardware shape",
       "failure and timeout inventory",
       "v1.9 designation skeletons still marked not_designated"
     ],
     "uniform_cap": {
       "final_hours_per_task": "TBD_AT_GATE_3",
-      "not_attempted_permitted": false,
       "pinned_by": "Matt",
       "timeout_scored_as_success": false,
       "timeout_status": "timeout",
-      "working_hours_per_task": 12
+      "working_hours_per_task": 12,
+      "not_attempted_permitted_within_binding_manifest": false
+    },
+    "production_scope": {
+      "binding_manifest_path": "TBD_AT_GATE_3",
+      "binding_manifest_sha256": "TBD_AT_GATE_3",
+      "binding_task_count": "TBD_AT_GATE_3",
+      "candidate_binding_task_counts": [
+        48,
+        64,
+        96,
+        144,
+        192
+      ],
+      "outside_manifest_reason": "excluded_by_frozen_ml5_binding_manifest",
+      "outside_manifest_selection_manifest_citation_required": true,
+      "outside_manifest_status": "not_attempted",
+      "pilot_execution_gated_on_binding_manifest": false,
+      "source_corpus_task_count": 718
     }
   },
   "common_protocol": {
