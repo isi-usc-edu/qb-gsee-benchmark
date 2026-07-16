@@ -17,6 +17,12 @@ REMEDIATION = Path(
 REMEDIATION_DESIGN = Path(
     "analysis/solver_campaigns/g53_g49c_strict_tolerance_remediation_design.md"
 )
+ENFORCEMENT_FIX = Path(
+    "analysis/solver_campaigns/g53_g49c_strict_enforcement_fix_v2.json"
+)
+ENFORCEMENT_FIX_DESIGN = Path(
+    "analysis/solver_campaigns/g53_g49c_strict_enforcement_fix_v2.md"
+)
 
 
 def _check(checks: dict[str, bool], name: str, value: Any) -> None:
@@ -28,6 +34,9 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
     design = (root / DESIGN).read_text(encoding="utf-8")
     remediation = json.loads((root / REMEDIATION).read_text(encoding="utf-8"))
     remediation_design = (root / REMEDIATION_DESIGN).read_text(encoding="utf-8")
+    enforcement = json.loads((root / ENFORCEMENT_FIX).read_text(encoding="utf-8"))
+    enforcement_design = (root / ENFORCEMENT_FIX_DESIGN).read_text(encoding="utf-8")
+    enforcement_words = " ".join(enforcement_design.lower().split())
     checks: dict[str, bool] = {}
 
     _check(checks, "goal", data.get("goal") == "G-53")
@@ -155,6 +164,44 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
         "remediation_design_disclosure",
         "false pass" in remediation_design
         and "replaces only the fb87d637 row" in remediation_design,
+    )
+    corrections = enforcement.get("implementation_corrections", {})
+    enforcement_pbs = enforcement.get("pbs", {})
+    _check(
+        checks,
+        "enforcement_fix_distinct_generation",
+        enforcement.get("parent_run_generation")
+        == "g49c_strict_tolerance_fix_v1"
+        and enforcement.get("run_generation") == "g49c_strict_tolerance_fix_v2"
+        and enforcement.get("protocol_changed") is False,
+    )
+    _check(
+        checks,
+        "enforcement_fix_fail_closed",
+        corrections.get(
+            "bootstrap_candidate_receives_authorized_strict_refinement"
+        )
+        is True
+        and corrections.get("maximum_strict_refinement_attempts_per_stationary_point")
+        == 1
+        and corrections.get("verifier_requires_search_exhausted") is True
+        and corrections.get("verifier_requires_at_least_one_clean_minimum") is True,
+    )
+    _check(
+        checks,
+        "enforcement_fix_cost",
+        enforcement_pbs.get("queue") == "compute"
+        and enforcement_pbs.get("ncpus") == 128
+        and enforcement_pbs.get("memory_request") is None
+        and enforcement_pbs.get("cumulative_worst_case_node_hours")
+        < enforcement_pbs.get("authorized_cumulative_node_hour_cap")
+        == 1.0,
+    )
+    _check(
+        checks,
+        "enforcement_fix_design",
+        "implementation correction, not a protocol change" in enforcement_words
+        and "zero clean minima" in enforcement_words,
     )
 
     failed = sorted(name for name, passed in checks.items() if not passed)

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "goal": "G-53",
+  "status": "preregistered_before_v2_execution",
+  "parent_run_generation": "g49c_strict_tolerance_fix_v1",
+  "run_generation": "g49c_strict_tolerance_fix_v2",
+  "protocol_changed": false,
+  "scope": [
+    "fb87d637-aaab-4e8f-8898-4ecca8bd0fe0"
+  ],
+  "v1_evidence": {
+    "job_id": "7660266.imgt1",
+    "actual_node_hours": 0.01888888888888889,
+    "records_immutable": true,
+    "trajectory_sha256": "ed107f7631c2adca0532cddb14122ef55338806f1f492f206d9286213b9691b3",
+    "verifier_json_sha256": "fc758c3119babb6efd744b76d9f20c197e05104a514a72f9687577b03cb5d78c",
+    "verifier_raw_junit_sha256": "a29394f3f6054b86e74f3eb56d53304cbb6010c3f34377bec92ea8e315aa2d61",
+    "verifier_disposition": "invalid_false_pass_allowed_unresolved_no_clean_minimum",
+    "trajectory_disposition": "unresolved_bootstrap_refinement_not_invoked"
+  },
+  "implementation_corrections": {
+    "bootstrap_candidate_receives_authorized_strict_refinement": true,
+    "maximum_strict_refinement_attempts_per_stationary_point": 1,
+    "verifier_requires_search_exhausted": true,
+    "verifier_requires_at_least_one_clean_minimum": true,
+    "verifier_requires_every_converged_point_to_meet_strict_energy_and_gradient_limits": true
+  },
+  "pbs": {
+    "queue": "compute",
+    "ncpus": 128,
+    "memory_request": null,
+    "task_count": 1,
+    "task_walltime_seconds": 300,
+    "additional_maximum_node_hours": 0.08333333333333333,
+    "prior_actual_node_hours": 0.10361111111111111,
+    "cumulative_worst_case_node_hours": 0.18694444444444444,
+    "authorized_cumulative_node_hour_cap": 1.0
+  }
+}
