@@ -35,6 +35,8 @@ from qb_gsee_benchmark.benchmark_data import (
         ("CuO_0", "Cu"),
         ("planted_solution_0007", "planted_solution"),
         ("gao_distributed_fci_042_h2o_6_31g", "gao_distributed_fci"),
+        ("validation.H.cc-PVDZ", "validation"),
+        ("validation.He.cc-PVDZ", "validation"),
     ],
 )
 def test_canonical_problem_family(short_name, expected_family):

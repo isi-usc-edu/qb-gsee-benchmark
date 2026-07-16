@@ -11,9 +11,11 @@ import math
 from pathlib import Path
 from typing import Any
 
+from qb_gsee_benchmark.benchmark_data import canonical_problem_family
+
 ROOT = Path(__file__).resolve().parents[1]
 FEATURES_PATH = Path("scripts/Hamiltonian_features.csv")
-OUTPUT_PATH = Path("analysis/solver_campaigns/g50_pilot_task_manifest_v1.json")
+OUTPUT_PATH = Path("analysis/solver_campaigns/g50_pilot_task_manifest_v2.json")
 PILOT_TASK_COUNT = 12
 EXPECTED_CORPUS_TASKS = 718
 ALGORITHM_ID = "rank_scaled_maximin_unique_family_v1"
@@ -116,15 +118,10 @@ def _fcidump_record(task: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _family_key(row: dict[str, str], task: dict[str, Any]) -> tuple[str, str]:
-    features = task.get("features", {})
-    for key in ("ml_family_weighting_group", "hamiltonian_family"):
-        value = features.get(key)
-        if value:
-            return str(value), f"problem_instance:{key}"
+def _family_key(row: dict[str, str]) -> tuple[str, str]:
     return (
-        row["problem_instance_short_name"],
-        "Hamiltonian_features.csv:problem_instance_short_name",
+        canonical_problem_family(row["problem_instance_short_name"]),
+        "qb_gsee_benchmark.benchmark_data.canonical_problem_family",
     )
 
 
@@ -151,7 +148,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
     for row in rows:
         task_uuid = row["task_uuid"]
         path, instance, task = task_index[task_uuid]
-        family, family_source = _family_key(row, task)
+        family, family_source = _family_key(row)
         norb = int(_task_value(row, task, "n_orbs"))
         nelec = int(_task_value(row, task, "n_elec"))
         ms2 = int(_task_value(row, task, "ms2"))
@@ -173,6 +170,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                 "log_dimension_source": log_dimension_source,
                 "problem_instance_uuid": row["problem_instance_uuid"],
                 "row": row,
+                "short_name": row["problem_instance_short_name"],
                 "task": task,
                 "task_uuid": task_uuid,
                 "target_blind_vector": vector,
@@ -259,7 +257,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                 "log10_determinant_space_bound_source": item["log_dimension_source"],
                 "problem_instance_path": relative_path,
                 "problem_instance_sha256": _sha256(item["instance_path"]),
-                "problem_instance_short_name": item["family"],
+                "problem_instance_short_name": item["short_name"],
                 "problem_instance_uuid": item["problem_instance_uuid"],
                 "selection_distance": round(distance, 15),
                 "selection_rank": selection_rank,
@@ -276,10 +274,17 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         "forbidden_selection_fields": list(FORBIDDEN_FIELD_TOKENS),
         "pilot_task_count": len(pilot_tasks),
         "pilot_tasks": pilot_tasks,
-        "schema_version": 1,
+        "schema_version": 2,
         "selection": {
             "algorithm_id": ALGORITHM_ID,
-            "family_constraint": "one_task_per_declared_family_group",
+            "family_constraint": "one_task_per_canonical_problem_family",
+            "family_mapping_function": "canonical_problem_family",
+            "family_mapping_module": "qb_gsee_benchmark.benchmark_data",
+            "family_mapping_rule": (
+                "validation.* -> validation; gao_distributed_fci_* -> "
+                "gao_distributed_fci; strip a trailing numeric suffix; group "
+                "transition-metal oxides with their metal; otherwise use the base name"
+            ),
             "first_point": "nearest_rank_scaled_descriptor_median",
             "next_points": "maximum_minimum_rank_scaled_euclidean_distance",
             "target_blind_descriptors": [

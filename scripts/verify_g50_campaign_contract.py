@@ -9,11 +9,13 @@ import json
 from pathlib import Path
 from typing import Any
 
+from qb_gsee_benchmark.benchmark_data import canonical_problem_family
+
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = Path("analysis/solver_campaigns/g50_campaign_contract_v1.json")
 DESIGN_PATH = Path("analysis/solver_campaigns/g50_endgame_clean_slate_design.md")
 PILOT_DESIGN_PATH = Path("analysis/solver_campaigns/g50_pilot_design_v1.json")
-PILOT_MANIFEST_PATH = Path("analysis/solver_campaigns/g50_pilot_task_manifest_v1.json")
+PILOT_MANIFEST_PATH = Path("analysis/solver_campaigns/g50_pilot_task_manifest_v2.json")
 FEATURES_PATH = Path("scripts/Hamiltonian_features.csv")
 CORPUS_DEFINITION = (
     "G-48 closed out, FeMoco-54 quarantine filed, Gao feature backfill "
@@ -59,13 +61,18 @@ def _record(checks: dict[str, bool], name: str, condition: Any) -> None:
     checks[name] = bool(condition)
 
 
-def verify(root: Path = ROOT) -> dict[str, Any]:
+def verify(
+    root: Path = ROOT, pilot_manifest_path: Path = PILOT_MANIFEST_PATH
+) -> dict[str, Any]:
     contract = json.loads((root / CONTRACT_PATH).read_text(encoding="utf-8"))
     design = (root / DESIGN_PATH).read_text(encoding="utf-8")
     pilot_design = json.loads((root / PILOT_DESIGN_PATH).read_text(encoding="utf-8"))
-    pilot_manifest = json.loads(
-        (root / PILOT_MANIFEST_PATH).read_text(encoding="utf-8")
+    manifest_input_path = (
+        pilot_manifest_path
+        if pilot_manifest_path.is_absolute()
+        else root / pilot_manifest_path
     )
+    pilot_manifest = json.loads(manifest_input_path.read_text(encoding="utf-8"))
     design_words = " ".join(design.split())
     checks: dict[str, bool] = {}
 
@@ -263,7 +270,7 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
         "pilot_files_exist",
         manifest_path.is_file() and pilot_design_path.is_file(),
     )
-    manifest_sha = _sha256(root / PILOT_MANIFEST_PATH)
+    manifest_sha = _sha256(manifest_input_path)
     _record(
         checks,
         "pilot_manifest_hash_bound",
@@ -305,6 +312,30 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
     )
     _record(checks, "pilot_task_uuid_unique", len(set(task_uuids)) == 12)
     _record(checks, "pilot_family_unique", len(set(families)) == 12)
+    canonical_families = [
+        canonical_problem_family(str(item.get("problem_instance_short_name", "")))
+        for item in pilot_tasks
+    ]
+    _record(
+        checks,
+        "pilot_family_mapping_canonical",
+        all(
+            item.get("family_group") == family
+            and item.get("family_group_source")
+            == "qb_gsee_benchmark.benchmark_data.canonical_problem_family"
+            for item, family in zip(pilot_tasks, canonical_families, strict=True)
+        ),
+    )
+    _record(
+        checks,
+        "pilot_canonical_family_unique",
+        len(canonical_families) == 12 and len(set(canonical_families)) == 12,
+    )
+    _record(
+        checks,
+        "pilot_validation_family_at_most_one",
+        canonical_families.count("validation") <= 1,
+    )
     _record(
         checks,
         "pilot_selection_order",
@@ -322,8 +353,13 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
     _record(
         checks,
         "pilot_selection_target_blind",
-        selection.get("algorithm_id") == "rank_scaled_maximin_unique_family_v1"
-        and selection.get("family_constraint") == "one_task_per_declared_family_group"
+        pilot_manifest.get("schema_version") == 2
+        and selection.get("algorithm_id") == "rank_scaled_maximin_unique_family_v1"
+        and selection.get("family_constraint")
+        == "one_task_per_canonical_problem_family"
+        and selection.get("family_mapping_function") == "canonical_problem_family"
+        and selection.get("family_mapping_module")
+        == "qb_gsee_benchmark.benchmark_data"
         and selection.get("tie_break") == "lexicographically_smallest_task_uuid",
     )
     serialized_tasks = json.dumps(pilot_tasks, sort_keys=True).lower()
@@ -342,6 +378,8 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
             input_records_valid = False
             continue
         instance = json.loads(instance_path.read_text(encoding="utf-8"))
+        if instance.get("short_name") != item.get("problem_instance_short_name"):
+            input_records_valid = False
         if instance.get("problem_instance_uuid") != item.get("problem_instance_uuid"):
             input_records_valid = False
         matching_tasks = [
@@ -472,8 +510,9 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT)
+    parser.add_argument("--pilot-manifest", type=Path, default=PILOT_MANIFEST_PATH)
     args = parser.parse_args()
-    report = verify(args.root.resolve())
+    report = verify(args.root.resolve(), args.pilot_manifest)
     print(json.dumps(report, indent=2, sort_keys=True))
     return 0 if report["status"] == "passed" else 1
 

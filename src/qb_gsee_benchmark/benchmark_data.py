@@ -55,9 +55,12 @@ TASK_TAXONOMY_FIELDS = [
 
 def canonical_problem_family(problem_instance_short_name: str) -> str:
     """Return the canonical grouped-CV family for a problem instance."""
-    if str(problem_instance_short_name).startswith("gao_distributed_fci_"):
+    short_name = str(problem_instance_short_name)
+    if short_name.startswith("validation."):
+        return "validation"
+    if short_name.startswith("gao_distributed_fci_"):
         return "gao_distributed_fci"
-    base_name = re.sub(r"_\d+$", "", str(problem_instance_short_name))
+    base_name = re.sub(r"_\d+$", "", short_name)
     if base_name in TM_FAMILY_ELEMENTS:
         return base_name
     if base_name.endswith("O") and base_name[:-1] in TM_FAMILY_ELEMENTS:
