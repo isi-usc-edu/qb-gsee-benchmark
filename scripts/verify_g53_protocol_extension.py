@@ -29,6 +29,12 @@ RECONSTRUCTION_FIX = Path(
 RECONSTRUCTION_FIX_DESIGN = Path(
     "analysis/solver_campaigns/g53_g49c_strict_reconstruction_fix_v3.md"
 )
+FORCE_NEWTON_FIX = Path(
+    "analysis/solver_campaigns/g53_g49c_force_newton_fix_v4.json"
+)
+FORCE_NEWTON_FIX_DESIGN = Path(
+    "analysis/solver_campaigns/g53_g49c_force_newton_fix_v4.md"
+)
 
 
 def _check(checks: dict[str, bool], name: str, value: Any) -> None:
@@ -50,6 +56,13 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
         root / RECONSTRUCTION_FIX_DESIGN
     ).read_text(encoding="utf-8")
     reconstruction_words = " ".join(reconstruction_design.lower().split())
+    force_newton = json.loads(
+        (root / FORCE_NEWTON_FIX).read_text(encoding="utf-8")
+    )
+    force_newton_design = (
+        root / FORCE_NEWTON_FIX_DESIGN
+    ).read_text(encoding="utf-8")
+    force_newton_words = " ".join(force_newton_design.lower().split())
     checks: dict[str, bool] = {}
 
     _check(checks, "goal", data.get("goal") == "G-53")
@@ -254,6 +267,45 @@ def verify(root: Path = ROOT) -> dict[str, Any]:
         "reconstruction_fix_design",
         "temporary dataclass copy" in reconstruction_words
         and "does not accept the candidate" in reconstruction_words,
+    )
+    force_rule = force_newton.get("implementation_correction", {})
+    force_pbs = force_newton.get("pbs", {})
+    _check(
+        checks,
+        "force_newton_distinct_generation",
+        force_newton.get("parent_run_generation")
+        == "g49c_strict_tolerance_fix_v3"
+        and force_newton.get("run_generation")
+        == "g49c_strict_tolerance_fix_v4"
+        and force_newton.get("protocol_changed") is False,
+    )
+    _check(
+        checks,
+        "force_newton_scoped",
+        force_rule.get(
+            "set_reconstructed_pyscf_solver_converged_false_before_newton"
+        )
+        is True
+        and force_rule.get("strict_acceptance_reapplied_after_newton") is True
+        and force_rule.get("maximum_strict_refinement_attempts_per_stationary_point")
+        == 1,
+    )
+    _check(
+        checks,
+        "force_newton_cost",
+        force_pbs.get("queue") == "compute"
+        and force_pbs.get("ncpus") == 128
+        and force_pbs.get("memory_request") is None
+        and force_pbs.get("cumulative_worst_case_node_hours")
+        < force_pbs.get("authorized_cumulative_node_hour_cap")
+        == 1.0,
+    )
+    _check(
+        checks,
+        "force_newton_design",
+        "forces the single already-authorized strict refinement"
+        in force_newton_words
+        and "zero clean minima" in force_newton_words,
     )
 
     failed = sorted(name for name, passed in checks.items() if not passed)

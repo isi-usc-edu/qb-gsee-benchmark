@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "goal": "G-53",
+  "status": "preregistered_before_v4_execution",
+  "parent_run_generation": "g49c_strict_tolerance_fix_v3",
+  "run_generation": "g49c_strict_tolerance_fix_v4",
+  "protocol_changed": false,
+  "scope": [
+    "fb87d637-aaab-4e8f-8898-4ecca8bd0fe0"
+  ],
+  "v3_evidence": {
+    "job_id": "7660269.imgt1",
+    "actual_node_hours": 0.018055555555555554,
+    "records_immutable": true,
+    "trajectory_sha256": "d3df260bd0895a85f1fd64d57b75b18f20eebfee3047a930f2efe8e708501024",
+    "verifier_json_sha256": "1920801ef5cf6d403ace16bc68a8b5ffc054d3e9c3f367b846634645721fba79",
+    "verifier_raw_junit_sha256": "ebe0ba3f44decda1408c62bc6d9f36f6e0c2b0adaf5a01e38eb3996ade74779b",
+    "verifier_disposition": "valid_failure_zero_clean_minima",
+    "trajectory_disposition": "unresolved_newton_skipped_zero_cycles"
+  },
+  "implementation_correction": {
+    "set_reconstructed_pyscf_solver_converged_false_before_newton": true,
+    "purpose": "force_the_single_authorized_refinement_to_execute",
+    "strict_acceptance_reapplied_after_newton": true,
+    "maximum_strict_refinement_attempts_per_stationary_point": 1
+  },
+  "pbs": {
+    "queue": "compute",
+    "ncpus": 128,
+    "memory_request": null,
+    "task_count": 1,
+    "task_walltime_seconds": 300,
+    "additional_maximum_node_hours": 0.08333333333333333,
+    "prior_actual_node_hours": 0.13972222222222222,
+    "cumulative_worst_case_node_hours": 0.22305555555555556,
+    "authorized_cumulative_node_hour_cap": 1.0
+  }
+}
