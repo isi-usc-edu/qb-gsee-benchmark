@@ -1,0 +1,14 @@
+#!/bin/bash
+# Canonical future Python harvest stage.
+
+set -euo pipefail
+: "${PYTHON:?set PYTHON to the pinned interpreter}"
+: "${ENVIRONMENT_RECORD:?set ENVIRONMENT_RECORD to a persistent JSON path}"
+: "${HARVEST_COMMAND:?set HARVEST_COMMAND to the harvest command}"
+
+export PYTHONNOUSERSITE=1
+"$PYTHON" scripts/capture_campaign_environment.py \
+    --stage harvest \
+    --output "$ENVIRONMENT_RECORD"
+
+exec "$PYTHON" $HARVEST_COMMAND

@@ -1,0 +1,14 @@
+#!/bin/bash
+# Canonical future Python extraction stage.
+
+set -euo pipefail
+: "${PYTHON:?set PYTHON to the pinned interpreter}"
+: "${ENVIRONMENT_RECORD:?set ENVIRONMENT_RECORD to a persistent JSON path}"
+: "${EXTRACTION_COMMAND:?set EXTRACTION_COMMAND to the extraction command}"
+
+export PYTHONNOUSERSITE=1
+"$PYTHON" scripts/capture_campaign_environment.py \
+    --stage extraction \
+    --output "$ENVIRONMENT_RECORD"
+
+exec "$PYTHON" $EXTRACTION_COMMAND
