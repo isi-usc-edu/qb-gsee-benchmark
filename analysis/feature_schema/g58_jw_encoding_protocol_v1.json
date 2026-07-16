@@ -1,16 +1,20 @@
 {
   "artifact_id": "g58_jw_encoding_protocol_v1",
   "coefficient_absolute_threshold": 1e-08,
+  "coefficient_filter": {
+    "canonical_post_normal_order": "drop abs(value) < 1e-8",
+    "raw_ordered_pre_normal_order": "drop when numpy.isclose(value, 0, rtol=1e-5, atol=1e-8)"
+  },
   "compatibility": {
     "covered_source_classes": [
       "molecular",
       "synthetic"
     ],
     "lattice_historical_comparison_available": false,
-    "absolute_tolerance": 5e-10,
+    "absolute_tolerance": 1e-09,
     "integer_columns_exact": true,
     "minimum_covered_rows": 12,
-    "relative_tolerance": 5e-09
+    "relative_tolerance": 5e-08
   },
   "definitions": {
     "edge_order_coefficient_of_variation": "std_dev_edge_order / mean_edge_order",

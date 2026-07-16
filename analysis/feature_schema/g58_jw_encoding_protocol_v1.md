@@ -38,10 +38,14 @@ a_p^ = (gamma[2p] - i gamma[2p+1]) / 2
 a_p  = (gamma[2p] + i gamma[2p+1]) / 2.
 ```
 
-Majorana products are canonicalized in increasing index order, repeated
-Majoranas cancel, permutation parity is retained, and equal canonical strings
-are summed. After aggregation, coefficients with absolute value below
-`1.0e-8` are removed. Jordan-Wigner then maps
+To preserve the historical producer exactly, coefficient filtering occurs in
+two stages. Equal ordered Majorana strings are first summed in producer order;
+ordered strings for which `numpy.isclose(value, 0)` is true under NumPy's
+default `rtol = 1.0e-5, atol = 1.0e-8` are removed before normal ordering.
+Survivors are canonicalized in increasing index order, repeated Majoranas
+cancel, permutation parity is retained, and equal canonical strings are
+summed. Canonical coefficients with absolute value below `1.0e-8` are then
+removed. Jordan-Wigner maps
 
 ```text
 gamma[2p]   -> Z[0] ... Z[p-1] X[p]
@@ -88,10 +92,12 @@ the 15 cells remain null with a machine-readable reason.
    fail on conflicting symmetry-equivalent records.
 2. Canonicalize one- and two-body records under the declared Hermitian/eightfold
    symmetries. Group two-body records by orbital-index multiset.
-3. Apply the exact eightfold-symmetry Majorana formulas. Terms that receive
-   contributions from multiple groups use an `O(N^2)` accumulator. Unique
-   quartic Majorana terms stream directly into coefficient, edge-order, and
-   vertex-degree sufficient statistics after the absolute threshold.
+3. Within each orbital-index multiset, restore exact eightfold symmetry and
+   aggregate ordered Majorana strings. Apply the historical pre-normal-order
+   `numpy.isclose` filter, normal order the survivors, and aggregate equal
+   canonical strings. Terms that receive contributions from multiple groups
+   use an `O(N^2)` accumulator; unique quartic Majorana terms stream directly
+   into sufficient statistics after the canonical absolute threshold.
 4. Determine JW support directly from each canonical Majorana tuple. Do not
    construct dense `N^4` tensors or Pauli-operator objects.
 5. A reference materialization route is permitted only for compatibility tests
@@ -109,8 +115,10 @@ available covered source class and small-to-large size regimes. The committed
 mandated 256-orbital lattice pilot therefore validates exact execution but has
 no historical value to compare. Integer-valued columns must agree exactly with
 the committed table. Floating columns must agree within
-`rtol = 5e-9, atol = 5e-10`. Any systematic mismatch holds production and
-requires a versioned protocol amendment.
+`rtol = 5e-8, atol = 1e-9`. These tolerances cover the decimal precision of the
+historical CSV while remaining much tighter than the producer's coefficient
+filter. Any systematic mismatch holds production and requires a versioned
+protocol amendment.
 
 Every task emits one atomic result record with status `exact`, `infeasible`,
 `timeout`, or `failed`. Infeasible reasons are restricted to the enum in the
