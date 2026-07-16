@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = Path("analysis/solver_campaigns/g50_campaign_contract_v1.json")
 DESIGN_PATH = Path("analysis/solver_campaigns/g50_endgame_clean_slate_design.md")
 PILOT_DESIGN_PATH = Path("analysis/solver_campaigns/g50_pilot_design_v1.json")
+PILOT_DESIGN_NOTE_PATH = Path("analysis/solver_campaigns/g50_pilot_design_v1.md")
 PILOT_MANIFEST_PATH = Path("analysis/solver_campaigns/g50_pilot_task_manifest_v3.json")
 CANONICAL_FAMILY_ARTIFACT_PATH = Path(
     "analysis/feature_schema/canonical_families_v1.json"
@@ -40,6 +41,20 @@ EXPECTED_CAMPAIGNS = {
     "g50_shci_clean_slate_2026-07_v1",
 }
 HISTORICAL_IPIE = {"ipie_swing_2026-07", "ipie_swing_envfix_2026-07"}
+AUTHORIZED_CPU_PILOT_CAMPAIGNS = [
+    "g50_dmrg_pilot_2026-07_v1",
+    "g50_trimci_pilot_2026-07_v1",
+    "g50_shci_pilot_2026-07_v1",
+]
+PILOT_DESIGN_REVIEW_PATH = "work/PI_REVIEW_2026-07-16_g50_pilot_design.md"
+PILOT_DESIGN_REVIEW_SHA256 = (
+    "2076a82e94cafd9db11f1daf761122206c5bfb7d469fe3e0863a434554eb0505"
+)
+PILOT_PI_RECHECK_PATH = "work/IMPLEMENTER_GOALS.md"
+PILOT_PI_RECHECK_SECTION = (
+    "PI RE-CHECK 2026-07-16 (night) — manifest v3 + both amendments VERIFIED. "
+    "PILOT EXECUTION AUTHORIZED — FLIP THE FLAG."
+)
 MATT_SELECTIONS = {
     "DMRG": "DMRG-A",
     "SHCI": "SHCI-A",
@@ -84,6 +99,7 @@ def verify(
 ) -> dict[str, Any]:
     contract = json.loads((root / CONTRACT_PATH).read_text(encoding="utf-8"))
     design = (root / DESIGN_PATH).read_text(encoding="utf-8")
+    pilot_design_note = (root / PILOT_DESIGN_NOTE_PATH).read_text(encoding="utf-8")
     pilot_design = json.loads((root / PILOT_DESIGN_PATH).read_text(encoding="utf-8"))
     manifest_input_path = (
         pilot_manifest_path
@@ -92,6 +108,7 @@ def verify(
     )
     pilot_manifest = json.loads(manifest_input_path.read_text(encoding="utf-8"))
     design_words = " ".join(design.split())
+    pilot_design_note_words = " ".join(pilot_design_note.split())
     checks: dict[str, bool] = {}
 
     campaigns = contract.get("campaigns", [])
@@ -342,6 +359,16 @@ def verify(
     )
     _record(
         checks,
+        "design_records_cpu_only_authorization",
+        "Status: three Improv CPU pilots authorized; Swing submission and all production execution held"
+        in pilot_design_note_words
+        and PILOT_DESIGN_REVIEW_PATH in pilot_design_note
+        and PILOT_DESIGN_REVIEW_SHA256 in pilot_design_note
+        and "The iPIE Swing submission remains held for Matt"
+        in pilot_design_note_words,
+    )
+    _record(
+        checks,
         "design_reserves_matt_authority",
         "Matt's per-solver configuration sign-off" in design_words
         and "The PI does not choose or substitute solver configurations."
@@ -398,23 +425,44 @@ def verify(
     )
     _record(
         checks,
-        "pilot_status_held",
+        "pilot_status_authorized",
         contract.get("status")
-        == "pilot_design_submitted_execution_held_for_pi_design_review"
-        and pilot_contract.get("status") == "submitted_for_pi_review_execution_held"
-        and pilot_contract.get("execution_authorized") is False
+        == "cpu_pilot_execution_authorized_production_held"
+        and pilot_contract.get("status")
+        == "cpu_pilot_execution_authorized_swing_and_production_held"
+        and pilot_contract.get("execution_authorized") is True
         and pilot_manifest.get("status") == "design_only_submission_held"
         and pilot_design.get("status")
-        == "pilot_design_submitted_for_pi_review_execution_held",
+        == "cpu_pilot_execution_authorized_swing_and_production_held",
     )
     authorization = pilot_design.get("authorization", {})
     _record(
         checks,
-        "all_execution_forbidden",
-        authorization.get("pilot_execution_authorized") is False
+        "cpu_pilots_authorized_only",
+        authorization.get("pilot_execution_authorized") is True
         and authorization.get("production_execution_authorized") is False
-        and authorization.get("qsub_permitted") is False
-        and authorization.get("ipie_swing_submission_permitted") is False,
+        and authorization.get("qsub_permitted") is True
+        and authorization.get("ipie_swing_submission_permitted") is False
+        and authorization.get("authorized_cpu_campaign_ids")
+        == AUTHORIZED_CPU_PILOT_CAMPAIGNS
+        and pilot_contract.get("authorized_cpu_campaign_ids")
+        == AUTHORIZED_CPU_PILOT_CAMPAIGNS,
+    )
+    _record(
+        checks,
+        "pilot_authorization_evidence",
+        authorization.get("authorized_by") == "PI"
+        and authorization.get("authorized_at") == "2026-07-16"
+        and authorization.get("design_review_path") == PILOT_DESIGN_REVIEW_PATH
+        and authorization.get("design_review_sha256")
+        == PILOT_DESIGN_REVIEW_SHA256
+        and authorization.get("pi_recheck_path") == PILOT_PI_RECHECK_PATH
+        and authorization.get("pi_recheck_section") == PILOT_PI_RECHECK_SECTION
+        and pilot_contract.get("design_review_path") == PILOT_DESIGN_REVIEW_PATH
+        and pilot_contract.get("design_review_sha256")
+        == PILOT_DESIGN_REVIEW_SHA256
+        and pilot_contract.get("pi_recheck_path") == PILOT_PI_RECHECK_PATH
+        and pilot_contract.get("pi_recheck_section") == PILOT_PI_RECHECK_SECTION,
     )
 
     pilot_tasks = pilot_manifest.get("pilot_tasks", [])

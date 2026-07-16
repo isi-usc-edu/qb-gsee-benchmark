@@ -2,17 +2,22 @@
 
 Date: 2026-07-16
 
-Status: submitted for PI review; all pilot and production execution held
+Status: three Improv CPU pilots authorized; Swing submission and all
+production execution held
 
 Scope amendment 2026-07-16: production uses the future frozen ML-5 binding
 manifest at Matt's gate-3 k. The 12-task pilot is unchanged and is not gated
 on ML-5.
 
-## Decision requested
+## Authorization record
 
-Authorize only the four calibration pilots defined here. This is not a request
-to authorize any clean-slate production campaign. Pilot outputs return to the
-PI as exact configuration locks, measured walltime and peak-memory
+The PI authorized the three Improv CPU calibration pilots on 2026-07-16 after
+the manifest-v3 re-check recorded in `work/IMPLEMENTER_GOALS.md`. The design
+review is `work/PI_REVIEW_2026-07-16_g50_pilot_design.md` at SHA-256
+`2076a82e94cafd9db11f1daf761122206c5bfb7d469fe3e0863a434554eb0505`.
+The iPIE Swing submission remains held for Matt, and this is not authorization
+for any clean-slate production campaign. Pilot outputs return to the PI as
+exact configuration locks, measured walltime and peak-memory
 distributions, timeout-fraction and campaign-budget projections, and one
 uniform cap recommendation before gate 3 can close.
 

@@ -276,15 +276,24 @@
     "not_attempted"
   ],
   "pilot_design": {
+    "authorized_cpu_campaign_ids": [
+      "g50_dmrg_pilot_2026-07_v1",
+      "g50_trimci_pilot_2026-07_v1",
+      "g50_shci_pilot_2026-07_v1"
+    ],
     "design_path": "analysis/solver_campaigns/g50_pilot_design_v1.json",
-    "execution_authorized": false,
+    "design_review_path": "work/PI_REVIEW_2026-07-16_g50_pilot_design.md",
+    "design_review_sha256": "2076a82e94cafd9db11f1daf761122206c5bfb7d469fe3e0863a434554eb0505",
+    "execution_authorized": true,
+    "pi_recheck_path": "work/IMPLEMENTER_GOALS.md",
+    "pi_recheck_section": "PI RE-CHECK 2026-07-16 (night) — manifest v3 + both amendments VERIFIED. PILOT EXECUTION AUTHORIZED — FLIP THE FLAG.",
     "pilot_task_count": 12,
-    "status": "submitted_for_pi_review_execution_held",
+    "status": "cpu_pilot_execution_authorized_swing_and_production_held",
     "task_manifest_path": "analysis/solver_campaigns/g50_pilot_task_manifest_v3.json",
     "task_manifest_sha256": "13f90d0f34e0ba3dd7c56030b185979b7ef440d9d8cab73fa69e9a2c79fdea53"
   },
   "schema_version": 1,
-  "status": "pilot_design_submitted_execution_held_for_pi_design_review",
+  "status": "cpu_pilot_execution_authorized_production_held",
   "universal_attempt": {
     "admission_prediction_permitted": false,
     "attempt_all_manifest_tasks_per_solver": true,

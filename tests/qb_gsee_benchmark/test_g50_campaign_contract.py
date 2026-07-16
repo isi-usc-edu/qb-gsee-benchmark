@@ -80,6 +80,31 @@ def test_g50_scope_amendment_preserves_pilot_manifest_bytes() -> None:
     )
 
 
+def test_g50_authorization_is_cpu_pilot_only() -> None:
+    contract = json.loads(
+        (
+            ROOT / "analysis/solver_campaigns/g50_campaign_contract_v1.json"
+        ).read_text(encoding="utf-8")
+    )
+    pilot = json.loads(
+        (ROOT / "analysis/solver_campaigns/g50_pilot_design_v1.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    authorization = pilot["authorization"]
+
+    assert contract["pilot_design"]["execution_authorized"] is True
+    assert authorization["pilot_execution_authorized"] is True
+    assert authorization["qsub_permitted"] is True
+    assert authorization["ipie_swing_submission_permitted"] is False
+    assert authorization["production_execution_authorized"] is False
+    assert authorization["authorized_cpu_campaign_ids"] == [
+        "g50_dmrg_pilot_2026-07_v1",
+        "g50_trimci_pilot_2026-07_v1",
+        "g50_shci_pilot_2026-07_v1",
+    ]
+
+
 def test_g50_pilot_manifest_v3_is_reproducible() -> None:
     result = subprocess.run(
         [

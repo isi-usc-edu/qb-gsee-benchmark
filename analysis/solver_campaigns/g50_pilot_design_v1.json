@@ -1,10 +1,21 @@
 {
   "authorization": {
+    "authorized_at": "2026-07-16",
+    "authorized_by": "PI",
+    "authorized_cpu_campaign_ids": [
+      "g50_dmrg_pilot_2026-07_v1",
+      "g50_trimci_pilot_2026-07_v1",
+      "g50_shci_pilot_2026-07_v1"
+    ],
+    "design_review_path": "work/PI_REVIEW_2026-07-16_g50_pilot_design.md",
+    "design_review_sha256": "2076a82e94cafd9db11f1daf761122206c5bfb7d469fe3e0863a434554eb0505",
     "ipie_swing_submission_permitted": false,
-    "pilot_execution_authorized": false,
+    "pi_recheck_path": "work/IMPLEMENTER_GOALS.md",
+    "pi_recheck_section": "PI RE-CHECK 2026-07-16 (night) — manifest v3 + both amendments VERIFIED. PILOT EXECUTION AUTHORIZED — FLIP THE FLAG.",
+    "pilot_execution_authorized": true,
     "production_execution_authorized": false,
-    "qsub_permitted": false,
-    "required_next_action": "PI review of this pilot design"
+    "qsub_permitted": true,
+    "required_next_action": "submit the three authorized CPU pilots and deliver the held Swing package to Matt"
   },
   "calibration_contract": {
     "admission_prediction_permitted": false,
@@ -182,5 +193,5 @@
       "trial_wavefunction": "UHF"
     }
   },
-  "status": "pilot_design_submitted_for_pi_review_execution_held"
+  "status": "cpu_pilot_execution_authorized_swing_and_production_held"
 }
