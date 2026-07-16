@@ -7,7 +7,11 @@ import pandas as pd
 from qb_gsee_benchmark.benchmark_data import BenchmarkData
 
 
-def test_calculate_solver_success_labels_accuracy_boundary_is_inclusive():
+def test_calculate_solver_success_labels_accuracy_boundary_is_inclusive(monkeypatch):
+    monkeypatch.setattr(
+        "qb_gsee_benchmark.benchmark_data.canonical_problem_family",
+        lambda short_name, *, task_uuid: "fixture_family",
+    )
     benchmark_data = object.__new__(BenchmarkData)
     benchmark_data.hamiltonian_features = pd.DataFrame(
         [{"task_uuid": "task-boundary", "n_orbs": 4}]

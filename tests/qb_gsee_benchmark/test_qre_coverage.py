@@ -129,7 +129,12 @@ def test_load_qre_solution_file_flattens_resources(tmp_path):
     assert row["thc_rank"] == 7
 
 
-def test_qre_coverage_tables(tmp_path):
+def test_qre_coverage_tables(tmp_path, monkeypatch):
+    monkeypatch.setattr(
+        "qb_gsee_benchmark.qre_coverage.canonical_problem_family",
+        lambda short_name, *, task_uuid: "fixture_family",
+    )
+
     path = tmp_path / "solution.json"
     _write_qre_solution(path)
     qre_rows = pd.DataFrame(load_qre_solution_file(path, solution_root=tmp_path))

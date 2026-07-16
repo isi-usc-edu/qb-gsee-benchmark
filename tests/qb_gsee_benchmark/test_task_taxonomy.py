@@ -75,7 +75,11 @@ def taxonomy_fixture() -> BenchmarkData:
     return benchmark_data
 
 
-def test_test_tier_is_excluded_from_scoring_and_ml_feature_map(tmp_path):
+def test_test_tier_is_excluded_from_scoring_and_ml_feature_map(tmp_path, monkeypatch):
+    monkeypatch.setattr(
+        "qb_gsee_benchmark.benchmark_data.canonical_problem_family",
+        lambda short_name, *, task_uuid: "fixture_family",
+    )
     benchmark_data = taxonomy_fixture()
 
     labels = benchmark_data.calculate_solver_success_labels()

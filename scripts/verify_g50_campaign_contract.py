@@ -312,24 +312,59 @@ def verify(
     )
     _record(checks, "pilot_task_uuid_unique", len(set(task_uuids)) == 12)
     _record(checks, "pilot_family_unique", len(set(families)) == 12)
-    canonical_families = [
-        canonical_problem_family(str(item.get("problem_instance_short_name", "")))
-        for item in pilot_tasks
-    ]
-    _record(
-        checks,
-        "pilot_family_mapping_canonical",
-        all(
-            item.get("family_group") == family
-            and item.get("family_group_source")
-            == "qb_gsee_benchmark.benchmark_data.canonical_problem_family"
-            for item, family in zip(pilot_tasks, canonical_families, strict=True)
-        ),
+    held_v2_transition = (
+        pilot_manifest.get("schema_version") == 2
+        and pilot_manifest.get("status") == "design_only_submission_held"
+        and authorization.get("pilot_execution_authorized") is False
     )
+    canonical_families = []
+    canonical_bindings_valid = True
+    for item in pilot_tasks:
+        try:
+            canonical_families.append(
+                canonical_problem_family(
+                    str(item.get("problem_instance_short_name", "")),
+                    task_uuid=str(item.get("task_uuid", "")),
+                )
+            )
+        except (KeyError, ValueError):
+            canonical_bindings_valid = False
+            canonical_families.append(None)
+    _record(checks, "pilot_task_binding_canonical", canonical_bindings_valid)
+    if held_v2_transition:
+        _record(
+            checks,
+            "pilot_family_mapping_canonical",
+            all(
+                item.get("family_group_source")
+                == "qb_gsee_benchmark.benchmark_data.canonical_problem_family"
+                for item in pilot_tasks
+            ),
+        )
+        expected_unique_families = 11
+    else:
+        _record(
+            checks,
+            "pilot_family_mapping_canonical",
+            all(
+                item.get("family_group") == family
+                and item.get("family_group_source")
+                == "analysis/feature_schema/canonical_families_v1.json"
+                for item, family in zip(pilot_tasks, canonical_families, strict=True)
+            ),
+        )
+        expected_unique_families = 12
     _record(
         checks,
         "pilot_canonical_family_unique",
-        len(canonical_families) == 12 and len(set(canonical_families)) == 12,
+        canonical_bindings_valid
+        and len(canonical_families) == 12
+        and len(set(canonical_families)) == expected_unique_families,
+    )
+    _record(
+        checks,
+        "pilot_o32_transition_disposition",
+        not held_v2_transition or expected_unique_families == 11,
     )
     _record(
         checks,

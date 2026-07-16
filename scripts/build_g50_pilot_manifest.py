@@ -120,8 +120,11 @@ def _fcidump_record(task: dict[str, Any]) -> dict[str, Any]:
 
 def _family_key(row: dict[str, str]) -> tuple[str, str]:
     return (
-        canonical_problem_family(row["problem_instance_short_name"]),
-        "qb_gsee_benchmark.benchmark_data.canonical_problem_family",
+        canonical_problem_family(
+            row["problem_instance_short_name"],
+            task_uuid=row["task_uuid"],
+        ),
+        "analysis/feature_schema/canonical_families_v1.json",
     )
 
 

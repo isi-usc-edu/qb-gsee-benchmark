@@ -91,7 +91,11 @@ def test_coerce_bool_series_rejects_unknown_values():
         coerce_bool_series(pd.Series(["yes"]))
 
 
-def test_assemble_solver_ml_table_filters_attempted_test_tier_and_adds_family():
+def test_assemble_solver_ml_table_filters_attempted_test_tier_and_adds_family(monkeypatch):
+    monkeypatch.setattr(
+        "qb_gsee_benchmark.ml.data.canonical_problem_family",
+        lambda short_name, *, task_uuid: "prototype_transition_metal_atoms_monoxides",
+    )
     labels = pd.DataFrame(
         [
             {
@@ -138,7 +142,7 @@ def test_assemble_solver_ml_table_filters_attempted_test_tier_and_adds_family():
 
     assert set(assembled["task_uuid"]) == {"task-1"}
     assert len(assembled) == 1
-    assert assembled.loc[0, "family"] == "Fe"
+    assert assembled.loc[0, "family"] == "prototype_transition_metal_atoms_monoxides"
     assert assembled.loc[0, "category"] == "unknown"
     assert assembled.loc[0, "n_elec"] == 10
     assert bool(assembled.loc[0, "label"]) is True

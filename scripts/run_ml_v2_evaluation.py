@@ -546,9 +546,20 @@ def main() -> None:
     embedding_columns = [column for column in LEGACY_FULL_FEATURES + B2_INTENSIVE_FEATURES if column in features]
     if embedding_columns:
         map_features = features.copy()
-        if "family" not in map_features and "problem_instance_short_name" in map_features:
+        if "family" not in map_features and {
+            "problem_instance_short_name",
+            "task_uuid",
+        }.issubset(map_features):
             from qb_gsee_benchmark.benchmark_data import canonical_problem_family
-            map_features["family"] = map_features["problem_instance_short_name"].map(canonical_problem_family)
+
+            map_features["family"] = [
+                canonical_problem_family(short_name, task_uuid=task_uuid)
+                for short_name, task_uuid in zip(
+                    map_features["problem_instance_short_name"],
+                    map_features["task_uuid"],
+                    strict=True,
+                )
+            ]
         if "category" not in map_features and "problem_instance_short_name" in map_features:
             mapping = problem_instance_category_by_short_name(str(problem_instances_dir))
             map_features["category"] = map_features["problem_instance_short_name"].map(mapping).fillna("unknown")

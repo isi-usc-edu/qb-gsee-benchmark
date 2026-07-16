@@ -14,7 +14,6 @@
 
 
 import os
-import re
 from urllib.parse import urlparse
 from datetime import datetime
 
@@ -33,6 +32,7 @@ import numpy as np
 from sklearn.metrics import pairwise_distances
 import matplotlib.pyplot as plt
 from matplotlib.colors import cnames as color_names
+from qb_gsee_benchmark.canonical_families import canonical_problem_family
 
 from qb_gsee_benchmark.utils import load_json_files
 from qb_gsee_benchmark.utils import clear_or_create_output_directory
@@ -42,7 +42,6 @@ from qb_gsee_benchmark.utils import iso8601_timestamp
 from qb_gsee_benchmark.utils import validate_json
 
 
-TM_FAMILY_ELEMENTS = {"Sc", "Ti", "V", "Cr", "Mn", "Fe", "Cu", "O"}
 TASK_TAXONOMY_FIELDS = [
     "reference_provenance_grade",
     "curation_tier",
@@ -51,21 +50,6 @@ TASK_TAXONOMY_FIELDS = [
     "source_defect_documented",
     "planting_mechanism",
 ]
-
-
-def canonical_problem_family(problem_instance_short_name: str) -> str:
-    """Return the canonical grouped-CV family for a problem instance."""
-    short_name = str(problem_instance_short_name)
-    if short_name.startswith("validation."):
-        return "validation"
-    if short_name.startswith("gao_distributed_fci_"):
-        return "gao_distributed_fci"
-    base_name = re.sub(r"_\d+$", "", short_name)
-    if base_name in TM_FAMILY_ELEMENTS:
-        return base_name
-    if base_name.endswith("O") and base_name[:-1] in TM_FAMILY_ELEMENTS:
-        return base_name[:-1]
-    return base_name
 
 
 def problem_instance_category_by_short_name(
@@ -904,7 +888,10 @@ class BenchmarkData:
                     d["solution_uuid"] = solution_uuid
                     d["problem_instance_short_name"] = problem_instance_short_name
                     d["problem_instance_uuid"] = problem_instance_uuid
-                    d["family"] = canonical_problem_family(problem_instance_short_name)
+                    d["family"] = canonical_problem_family(
+                        problem_instance_short_name,
+                        task_uuid=task_uuid,
+                    )
                     d["category"] = self.problem_instance_category_by_short_name.get(
                         problem_instance_short_name
                     )

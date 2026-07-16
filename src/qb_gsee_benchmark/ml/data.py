@@ -106,10 +106,28 @@ def coerce_bool_series(series: pd.Series) -> pd.Series:
 def ensure_group_columns(df: pd.DataFrame) -> pd.DataFrame:
     """Return a copy with canonical ``family`` and ``category`` columns."""
     result = df.copy()
-    if "family" not in result:
-        if "problem_instance_short_name" not in result:
-            raise ValueError("family column missing and problem_instance_short_name unavailable")
-        result["family"] = result["problem_instance_short_name"].map(canonical_problem_family)
+    task_columns = {"problem_instance_short_name", "task_uuid"}
+    if task_columns.issubset(result):
+        canonical = pd.Series(
+            [
+                canonical_problem_family(short_name, task_uuid=task_uuid)
+                for short_name, task_uuid in zip(
+                    result["problem_instance_short_name"],
+                    result["task_uuid"],
+                    strict=True,
+                )
+            ],
+            index=result.index,
+        )
+        if "family" in result:
+            mismatch = result["family"].notna() & result["family"].ne(canonical)
+            if mismatch.any():
+                raise ValueError("family column conflicts with canonical_families_v1")
+        result["family"] = canonical
+    elif "family" not in result:
+        raise ValueError(
+            "family derivation requires problem_instance_short_name and task_uuid"
+        )
     if "category" not in result:
         result["category"] = "unknown"
     result["family"] = result["family"].fillna("unknown")

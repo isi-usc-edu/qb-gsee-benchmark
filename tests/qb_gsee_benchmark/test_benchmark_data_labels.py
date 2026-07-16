@@ -27,16 +27,16 @@ from qb_gsee_benchmark.benchmark_data import (
 @pytest.mark.parametrize(
     "short_name, expected_family",
     [
-        ("cl2_0", "cl2"),
-        ("blue_dimer", "blue_dimer"),
-        ("Fe_0", "Fe"),
-        ("Fe_1", "Fe"),
-        ("FeO_0", "Fe"),
-        ("CuO_0", "Cu"),
-        ("planted_solution_0007", "planted_solution"),
+        ("cl2_0", "prototype_small_molecules_pyscf"),
+        ("blue_dimer", "catalyst_blue_dimer"),
+        ("Fe_0", "prototype_transition_metal_atoms_monoxides"),
+        ("Fe_1", "prototype_transition_metal_atoms_monoxides"),
+        ("FeO_0", "prototype_transition_metal_atoms_monoxides"),
+        ("CuO_0", "prototype_transition_metal_atoms_monoxides"),
+        ("planted_solution_0007", "planted_synthetic_instances"),
         ("gao_distributed_fci_042_h2o_6_31g", "gao_distributed_fci"),
-        ("validation.H.cc-PVDZ", "validation"),
-        ("validation.He.cc-PVDZ", "validation"),
+        ("validation.H.cc-PVDZ", "validation_ccpvdz"),
+        ("validation.He.cc-PVDZ", "validation_ccpvdz"),
     ],
 )
 def test_canonical_problem_family(short_name, expected_family):
@@ -97,7 +97,15 @@ def test_success_scoring_excludes_test_tier_and_documented_source_defects():
     }
 
 
-def test_calculate_solver_success_labels_adds_b1_columns():
+def test_calculate_solver_success_labels_adds_b1_columns(monkeypatch):
+    import qb_gsee_benchmark.benchmark_data as benchmark_data_module
+
+    monkeypatch.setattr(
+        benchmark_data_module,
+        "canonical_problem_family",
+        lambda short_name, *, task_uuid: "prototype_transition_metal_atoms_monoxides",
+    )
+
     from qb_gsee_benchmark.benchmark_data import BenchmarkData
     import pandas as pd
 
@@ -207,7 +215,7 @@ def test_calculate_solver_success_labels_adds_b1_columns():
     }.issubset(labels.columns)
 
     not_attempted = labels[labels["solver_uuid"] == "solver-no"].iloc[0]
-    assert not_attempted["family"] == "Fe"
+    assert not_attempted["family"] == "prototype_transition_metal_atoms_monoxides"
     assert not_attempted["category"] == "transition_metals"
     assert not_attempted["attempted"] is False
     assert not_attempted["outcome"] == "not-attempted"

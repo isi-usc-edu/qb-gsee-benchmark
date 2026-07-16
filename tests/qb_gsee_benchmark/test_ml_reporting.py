@@ -241,6 +241,10 @@ def test_calculate_ml_scores_adds_ml_v2_without_importing_legacy_miniml(monkeypa
     fake_module = types.ModuleType("qb_gsee_benchmark.mini_ml")
     fake_module.MiniML = _FakeMiniML
     monkeypatch.setitem(sys.modules, "qb_gsee_benchmark.mini_ml", fake_module)
+    monkeypatch.setattr(
+        "qb_gsee_benchmark.ml.data.canonical_problem_family",
+        lambda short_name, *, task_uuid: short_name.replace("mol_", "family_"),
+    )
     benchmark_data = _benchmark_data_for_ml_scores()
 
     scores = benchmark_data.calculate_ml_scores()

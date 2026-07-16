@@ -25,7 +25,7 @@ def test_g50_campaign_contract_assertions_pass() -> None:
     assert report["passed_count"] == report["check_count"]
 
 
-def test_g50_pilot_manifest_is_reproducible() -> None:
+def test_g50_pilot_manifest_v2_is_held_stale_under_o32() -> None:
     result = subprocess.run(
         [
             sys.executable,
@@ -37,7 +37,8 @@ def test_g50_pilot_manifest_is_reproducible() -> None:
         capture_output=True,
         text=True,
     )
-    assert result.returncode == 0, result.stdout + result.stderr
+    assert result.returncode != 0
+    assert "stale or missing pilot manifest" in result.stderr
 
 
 def test_g50_verifier_rejects_duplicate_canonical_family(tmp_path: Path) -> None:

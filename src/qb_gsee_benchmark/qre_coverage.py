@@ -172,8 +172,19 @@ def add_task_metadata(
             enriched["problem_instance_uuid"]
         )
         enriched = enriched.drop(columns=["problem_instance_uuid_current"])
-    if "problem_instance_short_name" in enriched:
-        enriched["family"] = enriched["problem_instance_short_name"].map(canonical_problem_family)
+    if {"problem_instance_short_name", "task_uuid"}.issubset(enriched):
+        enriched["family"] = [
+            (
+                canonical_problem_family(short_name, task_uuid=task_uuid)
+                if pd.notna(short_name)
+                else "not_current_task"
+            )
+            for short_name, task_uuid in zip(
+                enriched["problem_instance_short_name"],
+                enriched["task_uuid"],
+                strict=True,
+            )
+        ]
     else:
         enriched["family"] = "unknown"
     if problem_instances_dir is not None and "problem_instance_short_name" in enriched:
