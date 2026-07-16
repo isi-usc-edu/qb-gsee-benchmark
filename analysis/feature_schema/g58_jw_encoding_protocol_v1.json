@@ -1,0 +1,91 @@
+{
+  "artifact_id": "g58_jw_encoding_protocol_v1",
+  "coefficient_absolute_threshold": 1e-08,
+  "compatibility": {
+    "absolute_tolerance": 5e-10,
+    "integer_columns_exact": true,
+    "minimum_covered_rows": 12,
+    "relative_tolerance": 5e-09
+  },
+  "definitions": {
+    "edge_order_coefficient_of_variation": "std_dev_edge_order / mean_edge_order",
+    "max_vertex_degree": "maximum nonidentity Pauli-hypergraph degree over touched qubits",
+    "max_vertex_degree_per_orbital": "max_vertex_degree / NORB",
+    "max_weight": "maximum absolute nonidentity Pauli coefficient",
+    "mean_edge_order": "population mean nonidentity Pauli support size",
+    "mean_vertex_degree": "population mean Pauli-hypergraph degree over touched qubits",
+    "mean_vertex_degree_per_orbital": "mean_vertex_degree / NORB",
+    "mean_weight": "population mean absolute nonidentity Pauli coefficient",
+    "min_vertex_degree": "minimum nonidentity Pauli-hypergraph degree over touched qubits",
+    "number_of_terms": "surviving Pauli string count including identity",
+    "pauli_terms_per_orbital_quartic": "number_of_terms / NORB^4",
+    "std_dev_edge_order": "population standard deviation of nonidentity Pauli support size",
+    "std_dev_vertex_degree": "population standard deviation of touched-qubit Pauli-hypergraph degree",
+    "std_dev_weight": "population standard deviation of absolute nonidentity Pauli coefficients",
+    "vertex_degree_coefficient_of_variation": "std_dev_vertex_degree / mean_vertex_degree"
+  },
+  "feasibility": {
+    "hard_campaign_node_hours": 25.0,
+    "infeasible_reason_enum": [
+      "checksum_or_input_unavailable",
+      "conflicting_symmetry_records",
+      "empty_nonidentity_jw_support",
+      "estimated_peak_rss_exceeds_192_gib",
+      "estimated_temporary_disk_exceeds_180_gib",
+      "exact_intermediate_rss_exceeds_192_gib",
+      "exact_intermediate_disk_exceeds_180_gib",
+      "invalid_fcidump_header",
+      "nonfinite_or_complex_coefficient",
+      "nonpositive_derived_denominator"
+    ],
+    "peak_rss_gib": 192.0,
+    "proceed_projection_node_hours": 20.0,
+    "temporary_disk_gib": 180.0
+  },
+  "identity_policy": "included_only_in_number_of_terms",
+  "implementation": {
+    "dense_n4_tensor_forbidden": true,
+    "materialization_max_estimated_rss_gib": 32.0,
+    "materialization_max_terms": 2000000,
+    "primary_route": "sparse_integral_multiset_to_streamed_majorana_jw_sufficient_statistics",
+    "sampling_forbidden": true,
+    "silent_truncation_forbidden": true
+  },
+  "majorana_convention": {
+    "annihilation": "a_p = (gamma_2p + i gamma_2p+1) / 2",
+    "creation": "a_p^ = (gamma_2p - i gamma_2p+1) / 2",
+    "normal_order": "increasing Majorana index with repeated-pair cancellation and permutation parity"
+  },
+  "operator_convention": "sum h_pq a_p^ a_q + sum V_pqrs a_p^ a_q a_r^ a_s; V is eightfold-restored FCIDUMP chemist tensor; no extra one-half prefactor",
+  "output_columns": [
+    "max_vertex_degree",
+    "min_vertex_degree",
+    "mean_vertex_degree",
+    "std_dev_vertex_degree",
+    "max_weight",
+    "mean_weight",
+    "std_dev_weight",
+    "mean_edge_order",
+    "std_dev_edge_order",
+    "number_of_terms",
+    "pauli_terms_per_orbital_quartic",
+    "mean_vertex_degree_per_orbital",
+    "max_vertex_degree_per_orbital",
+    "vertex_degree_coefficient_of_variation",
+    "edge_order_coefficient_of_variation"
+  ],
+  "population_standard_deviation_ddof": 0,
+  "representation": {
+    "mode_count": "FCIDUMP NORB",
+    "mode_to_qubit": "mode p maps to qubit p",
+    "orbital_order": "shipped FCIDUMP order",
+    "transform": "Jordan-Wigner"
+  },
+  "schema_version": 1,
+  "status_enum": [
+    "exact",
+    "infeasible",
+    "timeout",
+    "failed"
+  ]
+}
