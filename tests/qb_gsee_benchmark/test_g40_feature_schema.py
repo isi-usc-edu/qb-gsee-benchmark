@@ -143,6 +143,34 @@ def test_p0_eligibility_and_retags_are_explicit() -> None:
     assert "fermionic_coefficient_l1_norm" in eligible
 
 
+def test_mp2_amplitude_statistics_are_annotated_at_exact_degeneracy() -> None:
+    columns = list(pd.read_csv(FEATURES, nrows=0).columns)
+    catalog = metadata_catalog(columns, include_planned=False)
+    sensitive = [row for row in catalog if row.gauge_sensitive_at_degeneracy]
+
+    assert len(sensitive) == 46
+    assert {row.gauge_sensitivity_explanation for row in sensitive} == {
+        "Elementwise MP2 amplitude statistic; rotations within exactly "
+        "degenerate occupied or virtual orbital subspaces can change this "
+        "value while rotation-invariant energies and L2 norms remain unchanged."
+    }
+    assert metadata_for_column("mp2_amplitude_l1_norm").gauge_sensitive_at_degeneracy
+    assert metadata_for_column(
+        "mp2_kappa_1p45_same_spin_amplitude_top_16_l2_mass_fraction"
+    ).gauge_sensitive_at_degeneracy
+    assert metadata_for_column(
+        "mp2_pair_double_amplitude_l1_fraction"
+    ).gauge_sensitive_at_degeneracy
+    for invariant in (
+        "mp2_amplitude_l2_norm",
+        "mp2_correlation_energy_per_electron_hartree",
+        "mp2_denominator_inverse_second_moment",
+    ):
+        metadata = metadata_for_column(invariant)
+        assert metadata.gauge_sensitive_at_degeneracy is False
+        assert metadata.gauge_sensitivity_explanation == ""
+
+
 def test_generated_p0_artifacts_are_deterministic_and_value_preserving(
     tmp_path: Path,
 ) -> None:

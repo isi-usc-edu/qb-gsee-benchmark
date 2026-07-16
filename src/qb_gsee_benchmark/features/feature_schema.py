@@ -12,6 +12,28 @@ PROVENANCE_TIERS = {"T0", "T1", "T2", "T-probe", "T3", "N/A"}
 REPRESENTATION_TAGS = {"INV", "BAS", "BAS+ORD", "GAUGE", "N/A"}
 PROTOCOL_TAGS = {"NONE", "MF-PROTO", "AFQMC-PROTO", "N/A"}
 ROLE_TAGS = {"accuracy", "runtime", "representation-sensitivity", "audit-only"}
+MP2_GAUGE_SENSITIVE_SUFFIXES = (
+    "amplitude_l1_norm",
+    "amplitude_max_abs",
+    "amplitude_participation_ratio",
+    "amplitude_top_128_l2_mass_fraction",
+    "amplitude_top_16_l2_mass_fraction",
+)
+MP2_GAUGE_SENSITIVITY_EXPLANATION = (
+    "Elementwise MP2 amplitude statistic; rotations within exactly degenerate "
+    "occupied or virtual orbital subspaces can change this value while "
+    "rotation-invariant energies and L2 norms remain unchanged."
+)
+
+
+def _mp2_gauge_sensitive_at_degeneracy(column: str) -> bool:
+    return (
+        column == "mp2_pair_double_amplitude_l1_fraction"
+        or (
+            column.startswith("mp2_")
+            and column.endswith(MP2_GAUGE_SENSITIVE_SUFFIXES)
+        )
+    )
 
 @dataclass(frozen=True)
 class FeatureColumnMetadata:
@@ -27,6 +49,8 @@ class FeatureColumnMetadata:
     cost_class: str
     definition: str
     implementation_status: str = "current"
+    gauge_sensitive_at_degeneracy: bool = False
+    gauge_sensitivity_explanation: str = ""
 
     def __post_init__(self) -> None:
         if self.provenance_tier not in PROVENANCE_TIERS:
@@ -41,6 +65,10 @@ class FeatureColumnMetadata:
             raise ValueError(f"eligible column {self.column} has an exclusion reason")
         if not self.model_eligible and not self.exclusion_reason:
             raise ValueError(f"excluded column {self.column} lacks a reason")
+        if self.gauge_sensitive_at_degeneracy != bool(
+            self.gauge_sensitivity_explanation
+        ):
+            raise ValueError(f"gauge annotation mismatch for {self.column}")
 
     def to_dict(self) -> dict[str, object]:
         return asdict(self)
@@ -51,12 +79,17 @@ def _feature(
     scaling: str = "intensive", cost: str = "integral_postprocess",
     definition: str | None = None, status: str = "current",
 ) -> FeatureColumnMetadata:
+    gauge_sensitive = _mp2_gauge_sensitive_at_degeneracy(column)
     return FeatureColumnMetadata(
         column=column, column_kind="feature", provenance_tier=tier,
         representation=representation, protocol=protocol, role=role,
         model_eligible=eligible, exclusion_reason=reason, scaling=scaling,
         cost_class=cost, definition=definition or column.replace("_", " "),
         implementation_status=status,
+        gauge_sensitive_at_degeneracy=gauge_sensitive,
+        gauge_sensitivity_explanation=(
+            MP2_GAUGE_SENSITIVITY_EXPLANATION if gauge_sensitive else ""
+        ),
     )
 
 def _audit(column: str, kind: str, reason: str) -> FeatureColumnMetadata:
