@@ -50,6 +50,25 @@ def _parse_bool(value: str, context: str) -> bool:
     raise ValueError(f"{context} must be True or False")
 
 
+def enforce_dashboard_release_gate(
+    designation: dict[str, Any],
+    output: Path,
+    repository_root: Path,
+) -> None:
+    """Refuse public dashboard writes until the release gate is explicit."""
+    dashboard_directory = (
+        repository_root / "scripts" / "dashboard_data"
+    ).resolve()
+    resolved_output = output.resolve()
+    if not resolved_output.is_relative_to(dashboard_directory):
+        return
+    gate = designation.get("dashboard_release_gate")
+    if not isinstance(gate, dict) or gate.get("public_regeneration_authorized") is not True:
+        raise PermissionError(
+            "public dashboard regeneration is not authorized by the designation gate"
+        )
+
+
 def load_designated_attempts(
     results_path: Path, designation: dict[str, Any]
 ) -> list[dict[str, Any]]:
@@ -136,6 +155,7 @@ def export_bundle(
     bootstrap_iterations: int = 1000,
 ) -> bytes:
     designation = json.loads(designation_path.read_text(encoding="utf-8"))
+    enforce_dashboard_release_gate(designation, output, repository_root)
     tasks, committed_attempts = load_committed_artifacts(repository_root)
     designated_attempts = load_designated_attempts(results_path, designation)
     missing_tasks = sorted(

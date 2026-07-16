@@ -1,6 +1,8 @@
 import importlib.util
+import json
 from pathlib import Path
 
+import jsonschema
 import pytest
 
 from qb_gsee_benchmark.metrics import (
@@ -152,3 +154,74 @@ def test_v19_exporter_requires_byte_identical_accepted_manifest(tmp_path):
                 "outcome_counts": {"completed": 1},
             },
         )
+
+
+def test_v19_exporter_blocks_public_dashboard_path_while_gate_is_held(tmp_path):
+    root = Path(__file__).resolve().parents[2]
+    exporter_path = root / "scripts" / "export_metrics_bundle_v1_9.py"
+    spec = importlib.util.spec_from_file_location(
+        "export_metrics_bundle_v1_9_gate", exporter_path
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    designation_path = tmp_path / "designation.json"
+    designation_path.write_text(
+        __import__("json").dumps(
+            {
+                "dashboard_release_gate": {
+                    "public_regeneration_authorized": False
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+    blocked_output = (
+        root / "scripts" / "dashboard_data" / ".metrics_v1_9.held-test.json"
+    )
+    assert not blocked_output.exists()
+    with pytest.raises(PermissionError, match="not authorized"):
+        module.export_bundle(
+            root,
+            blocked_output,
+            tmp_path / "missing-results.csv",
+            designation_path,
+            bootstrap_iterations=1,
+        )
+    assert not blocked_output.exists()
+    module.enforce_dashboard_release_gate(
+        {"dashboard_release_gate": {"public_regeneration_authorized": False}},
+        tmp_path / "private-dry-run.json",
+        root,
+    )
+
+
+def test_committed_dashboard_release_gate_binds_gr25_acknowledgment():
+    root = Path(__file__).resolve().parents[2]
+    designation = __import__("json").loads(
+        (
+            root
+            / "analysis"
+            / "g48_pyscf_full_corpus"
+            / "g48_headline_designation_v1_9.json"
+        ).read_text(encoding="utf-8")
+    )
+    gate = designation["dashboard_release_gate"]
+    assert gate["public_regeneration_authorized"] is True
+    assert gate["status"] == "authorized_by_pi_acknowledgment"
+    assert (
+        gate["acknowledgment_artifact"]
+        == "work/PI_ACK_2026-07-16_v19_dashboard_regen.json"
+    )
+    assert (
+        gate["acknowledgment_artifact_sha256"]
+        == "789d972b364eda9fdd2daf8735b8785916f58900865082b65f79036ec68f45d4"
+    )
+
+
+def test_committed_v19_bundle_validates_against_committed_schema():
+    root = Path(__file__).resolve().parents[2]
+    data_path = root / "scripts" / "dashboard_data"
+    bundle = json.loads((data_path / "metrics_v1_9.json").read_text())
+    schema = json.loads((data_path / "metrics_v1_9.schema.json").read_text())
+    jsonschema.Draft202012Validator.check_schema(schema)
+    jsonschema.Draft202012Validator(schema).validate(bundle)
