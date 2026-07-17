@@ -10,6 +10,13 @@ ROOT = Path(__file__).resolve().parents[2]
 V2_MANIFEST = ROOT / "analysis/solver_campaigns/g50_pilot_task_manifest_v2.json"
 V3_MANIFEST = ROOT / "analysis/solver_campaigns/g50_pilot_task_manifest_v3.json"
 V2_MANIFEST_SHA256 = "e1586f910206bc9c92b10a5dff84adf9b6a4a3517f09d2228865f94dff58d612"
+V3_MANIFEST_SHA256 = "13f90d0f34e0ba3dd7c56030b185979b7ef440d9d8cab73fa69e9a2c79fdea53"
+FROZEN_PILOT_SOURCE_FEATURE_TABLE_SHA256 = (
+    "ee94df21f927ff2e548ac10fda8d5a88c601f31330619ec6c575dc75cf436dc7"
+)
+CURRENT_G58_FEATURE_TABLE_SHA256 = (
+    "b5f8a78c3fd8fa9ba1e5dce4e8e2986bfc19346b26375e22763816efa5cdc8f7"
+)
 
 
 def test_g50_campaign_contract_assertions_pass() -> None:
@@ -75,9 +82,22 @@ def test_g50_o34_replaces_admission_with_uniform_cap() -> None:
 
 
 def test_g50_scope_amendment_preserves_pilot_manifest_bytes() -> None:
-    assert hashlib.sha256(V3_MANIFEST.read_bytes()).hexdigest() == (
-        "13f90d0f34e0ba3dd7c56030b185979b7ef440d9d8cab73fa69e9a2c79fdea53"
+    assert hashlib.sha256(V3_MANIFEST.read_bytes()).hexdigest() == V3_MANIFEST_SHA256
+
+
+def test_g50_pilot_remains_bound_to_frozen_pre_g58_table() -> None:
+    manifest = json.loads(V3_MANIFEST.read_text(encoding="utf-8"))
+    live_table = ROOT / "scripts/Hamiltonian_features.csv"
+
+    assert (
+        manifest["corpus"]["feature_table_sha256"]
+        == FROZEN_PILOT_SOURCE_FEATURE_TABLE_SHA256
     )
+    assert (
+        hashlib.sha256(live_table.read_bytes()).hexdigest()
+        == CURRENT_G58_FEATURE_TABLE_SHA256
+    )
+    assert FROZEN_PILOT_SOURCE_FEATURE_TABLE_SHA256 != CURRENT_G58_FEATURE_TABLE_SHA256
 
 
 def test_g50_authorization_is_cpu_pilot_only() -> None:

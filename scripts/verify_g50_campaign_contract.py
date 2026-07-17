@@ -24,6 +24,10 @@ CANONICAL_FAMILY_ARTIFACT_PATH = Path(
     "analysis/feature_schema/canonical_families_v1.json"
 )
 FEATURES_PATH = Path("scripts/Hamiltonian_features.csv")
+# The launched v3 pilot remains bound to its table of record at selection freeze.
+FROZEN_PILOT_SOURCE_FEATURE_TABLE_SHA256 = (
+    "ee94df21f927ff2e548ac10fda8d5a88c601f31330619ec6c575dc75cf436dc7"
+)
 CORPUS_DEFINITION = (
     "G-48 closed out, FeMoco-54 quarantine filed, Gao feature backfill "
     "decided, no pending task admissions/removals"
@@ -529,7 +533,8 @@ def verify(
         "pilot_corpus_bound",
         corpus.get("task_count") == 718
         and corpus.get("feature_table_path") == FEATURES_PATH.as_posix()
-        and corpus.get("feature_table_sha256") == _sha256(root / FEATURES_PATH),
+        and corpus.get("feature_table_sha256")
+        == FROZEN_PILOT_SOURCE_FEATURE_TABLE_SHA256,
     )
     selection = pilot_manifest.get("selection", {})
     _record(

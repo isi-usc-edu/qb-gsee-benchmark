@@ -18,6 +18,10 @@ from qb_gsee_benchmark.canonical_families import (
 
 ROOT = Path(__file__).resolve().parents[1]
 FEATURES_PATH = Path("scripts/Hamiltonian_features.csv")
+# The launched v3 pilot remains bound to its table of record at selection freeze.
+FROZEN_PILOT_SOURCE_FEATURE_TABLE_SHA256 = (
+    "ee94df21f927ff2e548ac10fda8d5a88c601f31330619ec6c575dc75cf436dc7"
+)
 CANONICAL_FAMILY_ARTIFACT_PATH = Path(
     "analysis/feature_schema/canonical_families_v1.json"
 )
@@ -281,7 +285,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
     result = {
         "corpus": {
             "feature_table_path": FEATURES_PATH.as_posix(),
-            "feature_table_sha256": _sha256(features_path),
+            "feature_table_sha256": FROZEN_PILOT_SOURCE_FEATURE_TABLE_SHA256,
             "task_count": len(candidates),
         },
         "forbidden_selection_fields": list(FORBIDDEN_FIELD_TOKENS),
