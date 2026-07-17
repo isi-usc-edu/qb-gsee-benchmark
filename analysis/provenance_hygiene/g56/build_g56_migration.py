@@ -38,6 +38,8 @@ REPLACEMENTS = HERE / "public_replacements.json"
 FEATURE_TABLE = ROOT / "scripts/Hamiltonian_features.csv"
 OLD_CACHE = PROJECT / "work/feature_runs/g40_p1a_pilot/cache"
 DOWNLOAD_CACHE = ROOT.parent / "fcidump_cache"
+COMMITTED_PLAN = HERE / "g56_migration_plan.json"
+COMMITTED_LEDGER = HERE / "g56_migration_ledger.json"
 
 ARTIFACT_RENAMES = {
     "analysis/solver_panel/g31_legacy_lattice_task_mapping.csv":
@@ -189,6 +191,19 @@ def local_object(task: dict[str, Any]) -> Path:
     if len(matches) != 1:
         raise FileNotFoundError(f"{task['task_uuid']}: local object candidates={matches}")
     return matches[0]
+
+
+def offline_descriptor_rows(mode: str) -> dict[str, dict[str, Any]]:
+    """Load reviewed descriptor evidence for a cache-free check-mode replay."""
+    if mode != "check":
+        return {}
+    plan = json.loads(COMMITTED_PLAN.read_text(encoding="utf-8"))
+    rows = {
+        row["task_uuid"]: row for row in plan.get("descriptor_backfills", [])
+    }
+    if len(rows) != EXPECTED["descriptor_backfills"]:
+        raise RuntimeError("committed descriptor evidence is incomplete")
+    return rows
 
 
 def stream_header(handle: BinaryIO) -> tuple[int, int]:
@@ -386,6 +401,7 @@ def build_instances(mode: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         )
 
     sizes = feature_sizes()
+    offline_descriptors = offline_descriptor_rows(mode)
     descriptor_ledger: list[dict[str, Any]] = []
     for row in descriptors:
         path, task = task_index[row["task_uuid"]]
@@ -402,21 +418,52 @@ def build_instances(mode: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
                 raise ValueError(f"{row['task_uuid']}: supporting-file census drift")
         if support["instance_data_checksum_type"] != "sha1sum":
             raise ValueError(f"{row['task_uuid']}: unsupported checksum")
-        local = local_object(task)
-        actual_checksum = digest_file(local, "sha1")
-        if actual_checksum != support["instance_data_checksum"]:
-            raise ValueError(f"{row['task_uuid']}: FCIDUMP checksum mismatch")
-        norb, nelec, zip_member = read_fcidump_header(local)
         proposed = (int(row["proposed_num_orbitals"]), int(row["proposed_num_electrons"]))
-        if (norb, nelec) != proposed or sizes[row["task_uuid"]] != proposed:
-            raise ValueError(f"{row['task_uuid']}: header/census/feature-table mismatch")
-        features = task.setdefault("features", {})
-        if "num_orbitals" in features or "num_electrons" in features:
-            raise ValueError(f"{row['task_uuid']}: descriptor no longer missing")
-        features["num_orbitals"] = norb
-        features["num_electrons"] = nelec
-        descriptor_ledger.append(
-            {
+        try:
+            local = local_object(task)
+        except FileNotFoundError:
+            if mode != "check":
+                raise
+            evidence = offline_descriptors[row["task_uuid"]]
+            expected_evidence = {
+                "task_uuid": row["task_uuid"],
+                "problem_instance_path": row["problem_instance_path"],
+                "fcidump_url": support["instance_data_object_url"],
+                "fcidump_sha1": support["instance_data_checksum"],
+                "header_num_orbitals": proposed[0],
+                "header_num_electrons": proposed[1],
+                "feature_table_num_orbitals": sizes[row["task_uuid"]][0],
+                "feature_table_num_electrons": sizes[row["task_uuid"]][1],
+            }
+            for key, value in expected_evidence.items():
+                if evidence.get(key) != value:
+                    raise ValueError(
+                        f"{row['task_uuid']}: offline descriptor evidence drift in {key}"
+                    )
+            norb = evidence["header_num_orbitals"]
+            nelec = evidence["header_num_electrons"]
+            descriptor_entry = {
+                "task_uuid": evidence["task_uuid"],
+                "problem_instance_path": evidence["problem_instance_path"],
+                "fcidump_url": evidence["fcidump_url"],
+                "fcidump_sha1": evidence["fcidump_sha1"],
+                "local_object_path": evidence["local_object_path"],
+                "zip_member": evidence["zip_member"],
+                "header_num_orbitals": norb,
+                "header_num_electrons": nelec,
+                "feature_table_num_orbitals": evidence[
+                    "feature_table_num_orbitals"
+                ],
+                "feature_table_num_electrons": evidence[
+                    "feature_table_num_electrons"
+                ],
+            }
+        else:
+            actual_checksum = digest_file(local, "sha1")
+            if actual_checksum != support["instance_data_checksum"]:
+                raise ValueError(f"{row['task_uuid']}: FCIDUMP checksum mismatch")
+            norb, nelec, zip_member = read_fcidump_header(local)
+            descriptor_entry = {
                 "task_uuid": row["task_uuid"],
                 "problem_instance_path": row["problem_instance_path"],
                 "fcidump_url": support["instance_data_object_url"],
@@ -428,7 +475,14 @@ def build_instances(mode: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
                 "feature_table_num_orbitals": sizes[row["task_uuid"]][0],
                 "feature_table_num_electrons": sizes[row["task_uuid"]][1],
             }
-        )
+        if (norb, nelec) != proposed or sizes[row["task_uuid"]] != proposed:
+            raise ValueError(f"{row['task_uuid']}: header/census/feature-table mismatch")
+        features = task.setdefault("features", {})
+        if "num_orbitals" in features or "num_electrons" in features:
+            raise ValueError(f"{row['task_uuid']}: descriptor no longer missing")
+        features["num_orbitals"] = norb
+        features["num_electrons"] = nelec
+        descriptor_ledger.append(descriptor_entry)
 
     threshold_by_task = {row["task_uuid"]: row for row in thresholds}
     threshold_plan: list[dict[str, Any]] = []
@@ -676,9 +730,15 @@ def main() -> int:
         "artifact_rename_ledger": renames,
         "active_reference_update_ledger": references,
         "descriptor_object_count": len(sections["descriptor_backfills"]),
-        "descriptor_object_compressed_bytes": sum(
-            (PROJECT / row["local_object_path"]).stat().st_size
-            for row in sections["descriptor_backfills"]
+        "descriptor_object_compressed_bytes": (
+            json.loads(COMMITTED_LEDGER.read_text(encoding="utf-8"))[
+                "descriptor_object_compressed_bytes"
+            ]
+            if args.mode == "check"
+            else sum(
+                (PROJECT / row["local_object_path"]).stat().st_size
+                for row in sections["descriptor_backfills"]
+            )
         ),
         "byte_pinned_exclusions": [
             {
