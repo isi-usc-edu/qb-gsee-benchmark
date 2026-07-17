@@ -74,7 +74,18 @@
           "VarBench exact diagonalization"
         ],
         "reference_energy_source": "Our sparse ED is primary; VarBench pinned exact row: https://github.com/varbench/varbench/blob/390a21eab7eb6898d663bc594bc139d1ec616711/tV/square_16_P_5_0.01.md",
-        "reference_energy_note": "All-alpha FCIDUMP encoding, C(16,5)=4368 states; our ED/VarBench delta 2.309e-14 Ha."
+        "reference_energy_note": "All-alpha FCIDUMP encoding, C(16,5)=4368 states; our ED/VarBench delta 2.309e-14 Ha.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -132,7 +143,18 @@
           "VarBench exact diagonalization"
         ],
         "reference_energy_source": "Our sparse ED is primary; VarBench pinned exact row: https://github.com/varbench/varbench/blob/390a21eab7eb6898d663bc594bc139d1ec616711/tV/square_16_P_5_0.1.md",
-        "reference_energy_note": "All-alpha FCIDUMP encoding, C(16,5)=4368 states; our ED/VarBench delta 1.421e-14 Ha."
+        "reference_energy_note": "All-alpha FCIDUMP encoding, C(16,5)=4368 states; our ED/VarBench delta 1.421e-14 Ha.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -190,7 +212,18 @@
           "VarBench exact diagonalization"
         ],
         "reference_energy_source": "Our sparse ED is primary; VarBench pinned exact row: https://github.com/varbench/varbench/blob/390a21eab7eb6898d663bc594bc139d1ec616711/tV/square_16_P_5_1.md",
-        "reference_energy_note": "All-alpha FCIDUMP encoding, C(16,5)=4368 states; our ED/VarBench delta 3.553e-15 Ha."
+        "reference_energy_note": "All-alpha FCIDUMP encoding, C(16,5)=4368 states; our ED/VarBench delta 3.553e-15 Ha.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -248,7 +281,18 @@
           "VarBench exact diagonalization"
         ],
         "reference_energy_source": "Our sparse ED is primary; VarBench pinned exact row: https://github.com/varbench/varbench/blob/390a21eab7eb6898d663bc594bc139d1ec616711/tV/square_16_P_5_10.md",
-        "reference_energy_note": "All-alpha FCIDUMP encoding, C(16,5)=4368 states; our ED/VarBench delta 0.000e+00 Ha."
+        "reference_energy_note": "All-alpha FCIDUMP encoding, C(16,5)=4368 states; our ED/VarBench delta 0.000e+00 Ha.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {

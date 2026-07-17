@@ -22,7 +22,7 @@
   "references": [
     "Dian Wu et al., Variational benchmarks for quantum many-body problems. Science 386, 296-301(2024). DOI:10.1126/science.adg9774",
     {
-      "note": "C8 reinstatement requires 1D chain references to be upgraded to Lieb-Wu/Bethe exact numerics before paper claims."
+      "note": "The 1D chain references must be upgraded to finite-system Lieb-Wu/Bethe exact numerics before they support publication claims."
     },
     {
       "note": "Current 4x4 square tasks are doped; sign-free half-filled AFQMC/DQMC literature references do not directly certify these tasks."
@@ -71,9 +71,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -92,7 +103,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/0/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/0/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "29bd6386-c894-537a-ab47-a1917a9491c2",
@@ -136,9 +161,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa"
+        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -157,7 +193,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/1/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/1/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "76ac8530-77f0-5d28-9ce9-81532634bd99",
@@ -201,9 +251,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -222,7 +283,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/2/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/2/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "d86e9bb1-1d68-5dfb-8729-7d0336f52364",
@@ -266,9 +341,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa"
+        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -287,7 +373,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/3/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/3/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "f3670615-c7c7-5027-b6dd-a7fc4681e0f1",
@@ -331,9 +431,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -352,7 +463,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/4/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/4/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "9ed75a27-eb95-507f-a7c3-34d186e4cd9a",
@@ -396,9 +521,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa"
+        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -417,7 +553,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/5/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/5/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "6d69206c-186d-5d8e-9941-295f792ccdc2",
@@ -461,9 +611,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -482,7 +643,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/6/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/6/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "138a10d4-fa11-532f-b02a-c68384ef13b3",
@@ -526,9 +701,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa"
+        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -547,7 +733,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/7/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/7/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "41ea0797-3463-576f-b569-f2d42a22bfa2",
@@ -591,9 +791,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -612,7 +823,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/8/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/8/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "4cb7c726-163b-567b-b99c-91ed9eac36e3",
@@ -656,9 +881,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa"
+        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -677,7 +913,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/9/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/9/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "80052d4d-4ccd-55ec-9845-d048dd23761b",
@@ -721,9 +971,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -742,7 +1003,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/10/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/10/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "d10eb571-dfcf-5b0a-961e-d7a1bcf62058",
@@ -786,9 +1061,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa"
+        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -807,7 +1093,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/11/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/11/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "50b5a229-25f8-52eb-9181-5aaa146785aa",
@@ -851,9 +1151,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -872,7 +1183,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/12/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/12/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "425f36f9-e271-57e1-8026-c49a62b326d9",
@@ -916,9 +1241,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa"
+        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -937,7 +1273,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/13/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/13/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "c6a22df0-5a7a-5ebe-bd39-75e3b39a10e8",
@@ -981,9 +1331,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1002,7 +1363,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/14/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/14/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "4a6c4e94-c6b2-5a44-b961-b4f549ed69e8",
@@ -1046,9 +1421,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa"
+        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1067,7 +1453,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/15/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/15/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "88249b10-bdbe-5e09-bc63-5577e7a6317b",
@@ -1111,9 +1511,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1132,7 +1543,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/16/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/16/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "cb338e30-d3e0-5bd1-94cf-eeabafd5b5fd",
@@ -1176,9 +1601,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa"
+        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1197,7 +1633,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/17/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/17/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "38eabc19-2ab2-547e-8b43-21df8fd612f7",
@@ -1241,9 +1691,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1262,7 +1723,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/18/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/18/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "331e447c-8fb1-5b67-8936-b0c2d883021e",
@@ -1306,9 +1781,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa"
+        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1327,7 +1813,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/19/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/19/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "4abac6ea-1621-5670-89b5-8c026738e38a",
@@ -1371,9 +1871,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1392,7 +1903,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/20/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/20/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "c5619808-d083-5a43-b951-044b89ebfab6",
@@ -1436,9 +1961,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa"
+        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1457,7 +1993,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/21/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/21/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "bf92101c-b48e-5d7c-a4be-9e76c08efad0",
@@ -1501,9 +2051,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1522,7 +2083,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/22/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/22/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "23e4fbf9-05ec-52c9-8e96-7f17511bf0cd",
@@ -1566,9 +2141,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa"
+        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1587,7 +2173,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/23/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/23/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "751e7c8d-99d2-5290-bb5c-1e0e0afe1869",
@@ -1631,9 +2231,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1652,7 +2263,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/24/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/24/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "e9f28e85-bcb5-5d84-aae3-2625c8a55dfb",
@@ -1696,9 +2321,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa"
+        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1717,7 +2353,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/25/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/25/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "1d589d32-d8a4-5c3c-b2d6-605610c49bd1",
@@ -1761,9 +2411,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1782,7 +2443,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/26/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/26/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "a920e575-dbb4-58b3-be8f-5aaf92e567d2",
@@ -1826,9 +2501,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa"
+        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1847,7 +2533,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/27/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/27/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "8f730295-a4dd-5fe6-832e-1262da61f3ef",
@@ -1891,9 +2591,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1912,7 +2623,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/28/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/28/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "2f2b97c7-8e0e-511d-affc-16802164c9e8",
@@ -1956,9 +2681,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+        "reference_energy_note": "This square-lattice task is doped. Doped 2D Hubbard rows beyond exact-diagonalization reach use estimated references and are excluded from the hard tier.",
         "reference_target_class": "estimated_or_ed_if_small",
-        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa"
+        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1977,7 +2713,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/29/requirements/reference_energy_note",
+            "original_value": "Current square task is doped. The updated spec says doped non-ED-able 2D Hubbard should be estimated and hard-tier-excluded.",
+            "original_value_sha256": "394c26a1e6f900a8545d007d33a8dffc81436e10a8d8590e83c81387fce98862",
+            "public_replacement_pointer": "/tasks/29/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "a1b63e174630fb373830adca6cd9b374ff3a9568bb5e692d68b8385df821c511",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     }
   ],
   "short_name": "hubbard_square",
@@ -1988,5 +2738,19 @@
     "old_source_file": "qb-gsee-benchmark/scripts/hubbard_testing/problem_instance.hubbard_square.614c4444-a31a-4348-b24d-01040208651c.json",
     "restored_category": "lattice_models",
     "uuid_policy": "new problem/task/data-object UUIDs derived deterministically from legacy UUIDs"
+  },
+  "internal_provenance": {
+    "migration_records": [
+      {
+        "original_json_pointer": "/references/1/note",
+        "original_value": "C8 reinstatement requires 1D chain references to be upgraded to Lieb-Wu/Bethe exact numerics before paper claims.",
+        "original_value_sha256": "53208ead464a8abc2e841abee16ae4a84107b83d1f5d804d4c43ccd137d580b0",
+        "public_replacement_pointer": "/references/1/note",
+        "public_replacement_value_sha256": "a11fe7f9bff96f7e5f7e358a668ca4850210a508b0b7e164077980ac1e708c4b",
+        "internal_pointer_classes": [
+          "governance_id"
+        ]
+      }
+    ]
   }
 }

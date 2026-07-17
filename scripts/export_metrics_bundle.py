@@ -51,7 +51,7 @@ def _load_feature_norb(repository_root: Path) -> dict[str, int]:
 
 
 LEGACY_MAPPING_RELATIVE_PATH = Path(
-    "analysis/solver_panel/g31_legacy_lattice_task_mapping.csv"
+    "analysis/solver_panel/g31_prototype_lattice_task_mapping.csv"
 )
 CERTIFIED_MAPPING_STATUS = "certified_identity_lineage_and_recovered_payload"
 LEGACY_LATTICE_PROBLEM_UUIDS = (

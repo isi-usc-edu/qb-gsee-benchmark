@@ -21,7 +21,7 @@ MAPPING_PATH = (
     REPOSITORY_ROOT
     / "analysis"
     / "solver_panel"
-    / "g31_legacy_lattice_task_mapping.csv"
+    / "g31_prototype_lattice_task_mapping.csv"
 )
 DEFAULT_ABSOLUTE = 0.00159362
 EV_PER_HARTREE = 27.211386245988

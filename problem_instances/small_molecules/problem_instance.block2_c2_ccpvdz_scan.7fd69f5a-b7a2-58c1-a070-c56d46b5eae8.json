@@ -61,11 +61,22 @@
         ],
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_method": "block2 DMRG(M=3000) fixed-bond-dimension example energy",
-        "reference_energy_note": "Candidate staging only. Upstream provides scripts/results rather than FCIDUMPs; FCIDUMP reconstructed locally with PySCF from the upstream script. Reference scope needs Matt signoff before repo promotion.",
+        "reference_energy_note": "Candidate staging only. Upstream provides scripts and results rather than FCIDUMPs; the FCIDUMP was reconstructed with PySCF from the published method. Reference scope remains pending public curation.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "Zhai et al. JCP 159, 234801 (2023), block2-example-data 08-C2/dmrg.npy at upstream commit ee9868b32ce1527a5067707f21f178128ad4d9b0",
+        "reference_energy_source": "Zhai et al., J. Chem. Phys. 159, 234801 (2023), dicarbon DMRG example data at upstream commit ee9868b32ce1527a5067707f21f178128ad4d9b0.",
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -81,7 +92,31 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/0/requirements/reference_energy_note",
+            "original_value": "Candidate staging only. Upstream provides scripts/results rather than FCIDUMPs; FCIDUMP reconstructed locally with PySCF from the upstream script. Reference scope needs Matt signoff before repo promotion.",
+            "original_value_sha256": "776f8b402a7a3b5f5e8272d3f7f8a4405f2c83d07b942f589ad9a1e052df9de3",
+            "public_replacement_pointer": "/tasks/0/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "503b07e311f119975c9716616c9888408986dc5642a0d8a4f597095c658edb05",
+            "internal_pointer_classes": [
+              "scripts_path"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/0/requirements/reference_energy_source",
+            "original_value": "Zhai et al. JCP 159, 234801 (2023), block2-example-data 08-C2/dmrg.npy at upstream commit ee9868b32ce1527a5067707f21f178128ad4d9b0",
+            "original_value_sha256": "9fddc732701ac184360f110783ccfad009276f54402f4e7d1cd90a475516da58",
+            "public_replacement_pointer": "/tasks/0/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "e4c979a2b92df8d94751c3002ddfeb939d0aa68ef501eb63c7ee8318b75ac557",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "features": {
@@ -112,11 +147,22 @@
         ],
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_method": "block2 DMRG(M=3000) fixed-bond-dimension example energy",
-        "reference_energy_note": "Candidate staging only. Upstream provides scripts/results rather than FCIDUMPs; FCIDUMP reconstructed locally with PySCF from the upstream script. Reference scope needs Matt signoff before repo promotion.",
+        "reference_energy_note": "Candidate staging only. Upstream provides scripts and results rather than FCIDUMPs; the FCIDUMP was reconstructed with PySCF from the published method. Reference scope remains pending public curation.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "Zhai et al. JCP 159, 234801 (2023), block2-example-data 08-C2/dmrg.npy at upstream commit ee9868b32ce1527a5067707f21f178128ad4d9b0",
+        "reference_energy_source": "Zhai et al., J. Chem. Phys. 159, 234801 (2023), dicarbon DMRG example data at upstream commit ee9868b32ce1527a5067707f21f178128ad4d9b0.",
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -132,7 +178,31 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/1/requirements/reference_energy_note",
+            "original_value": "Candidate staging only. Upstream provides scripts/results rather than FCIDUMPs; FCIDUMP reconstructed locally with PySCF from the upstream script. Reference scope needs Matt signoff before repo promotion.",
+            "original_value_sha256": "776f8b402a7a3b5f5e8272d3f7f8a4405f2c83d07b942f589ad9a1e052df9de3",
+            "public_replacement_pointer": "/tasks/1/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "503b07e311f119975c9716616c9888408986dc5642a0d8a4f597095c658edb05",
+            "internal_pointer_classes": [
+              "scripts_path"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/1/requirements/reference_energy_source",
+            "original_value": "Zhai et al. JCP 159, 234801 (2023), block2-example-data 08-C2/dmrg.npy at upstream commit ee9868b32ce1527a5067707f21f178128ad4d9b0",
+            "original_value_sha256": "9fddc732701ac184360f110783ccfad009276f54402f4e7d1cd90a475516da58",
+            "public_replacement_pointer": "/tasks/1/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "e4c979a2b92df8d94751c3002ddfeb939d0aa68ef501eb63c7ee8318b75ac557",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "features": {
@@ -163,11 +233,22 @@
         ],
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_method": "block2 DMRG(M=3000) fixed-bond-dimension example energy",
-        "reference_energy_note": "Candidate staging only. Upstream provides scripts/results rather than FCIDUMPs; FCIDUMP reconstructed locally with PySCF from the upstream script. Reference scope needs Matt signoff before repo promotion.",
+        "reference_energy_note": "Candidate staging only. Upstream provides scripts and results rather than FCIDUMPs; the FCIDUMP was reconstructed with PySCF from the published method. Reference scope remains pending public curation.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "Zhai et al. JCP 159, 234801 (2023), block2-example-data 08-C2/dmrg.npy at upstream commit ee9868b32ce1527a5067707f21f178128ad4d9b0",
+        "reference_energy_source": "Zhai et al., J. Chem. Phys. 159, 234801 (2023), dicarbon DMRG example data at upstream commit ee9868b32ce1527a5067707f21f178128ad4d9b0.",
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -183,7 +264,31 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/2/requirements/reference_energy_note",
+            "original_value": "Candidate staging only. Upstream provides scripts/results rather than FCIDUMPs; FCIDUMP reconstructed locally with PySCF from the upstream script. Reference scope needs Matt signoff before repo promotion.",
+            "original_value_sha256": "776f8b402a7a3b5f5e8272d3f7f8a4405f2c83d07b942f589ad9a1e052df9de3",
+            "public_replacement_pointer": "/tasks/2/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "503b07e311f119975c9716616c9888408986dc5642a0d8a4f597095c658edb05",
+            "internal_pointer_classes": [
+              "scripts_path"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/2/requirements/reference_energy_source",
+            "original_value": "Zhai et al. JCP 159, 234801 (2023), block2-example-data 08-C2/dmrg.npy at upstream commit ee9868b32ce1527a5067707f21f178128ad4d9b0",
+            "original_value_sha256": "9fddc732701ac184360f110783ccfad009276f54402f4e7d1cd90a475516da58",
+            "public_replacement_pointer": "/tasks/2/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "e4c979a2b92df8d94751c3002ddfeb939d0aa68ef501eb63c7ee8318b75ac557",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     }
   ]
 }

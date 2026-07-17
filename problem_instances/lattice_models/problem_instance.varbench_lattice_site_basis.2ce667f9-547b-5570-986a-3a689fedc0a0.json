@@ -69,8 +69,19 @@
         "reference_energy_cross_validation_methods": [
           "VarBench exact diagonalization"
         ],
-        "reference_energy_source": "VarBench row work/fcidumps/varbench_lattice/source/Hubbard_square_16_P_4_2.md and method script work/fcidumps/varbench_lattice/source/methods_Hubbard_square_16_P_4_2/ed_lattice_symmetries.sh",
-        "reference_energy_note": "Candidate condensed-matter lattice subset. Promotion requires signoff that the VarBench site-basis convention and spinless all-alpha FCIDUMP convention are accepted."
+        "reference_energy_source": "VarBench Hubbard_square_16_P_4_2 benchmark row and accompanying public exact-diagonalization method script.",
+        "reference_energy_note": "Candidate condensed-matter lattice subset. Promotion requires signoff that the VarBench site-basis convention and spinless all-alpha FCIDUMP convention are accepted.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "VarBench site-basis threshold scales with lattice size."
+        }
       },
       "supporting_files": [
         {
@@ -85,7 +96,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/0/requirements/reference_energy_source",
+            "original_value": "VarBench row work/fcidumps/varbench_lattice/source/Hubbard_square_16_P_4_2.md and method script work/fcidumps/varbench_lattice/source/methods_Hubbard_square_16_P_4_2/ed_lattice_symmetries.sh",
+            "original_value_sha256": "4e4260c2e71dfc2f272ab7d2832f6cf3ce7e45d62dc9a9ce226e5aebe5160a27",
+            "public_replacement_pointer": "/tasks/0/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "48297b8bf89d3b512a6fa5fd4da72bc54d47ef6023b3caa5b29c69b23099aedb",
+            "internal_pointer_classes": [
+              "work_path"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "ddbffee8-5083-54d0-a2a0-e8258bf58bcc",
@@ -123,8 +148,19 @@
         "reference_energy_cross_validation_methods": [
           "VarBench exact diagonalization"
         ],
-        "reference_energy_source": "VarBench row work/fcidumps/varbench_lattice/source/Hubbard_square_16_P_4_4.md and method script work/fcidumps/varbench_lattice/source/methods_Hubbard_square_16_P_4_4/ed_lattice_symmetries.sh",
-        "reference_energy_note": "Candidate condensed-matter lattice subset. Promotion requires signoff that the VarBench site-basis convention and spinless all-alpha FCIDUMP convention are accepted."
+        "reference_energy_source": "VarBench Hubbard_square_16_P_4_4 benchmark row and accompanying public exact-diagonalization method script.",
+        "reference_energy_note": "Candidate condensed-matter lattice subset. Promotion requires signoff that the VarBench site-basis convention and spinless all-alpha FCIDUMP convention are accepted.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "VarBench site-basis threshold scales with lattice size."
+        }
       },
       "supporting_files": [
         {
@@ -139,7 +175,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/1/requirements/reference_energy_source",
+            "original_value": "VarBench row work/fcidumps/varbench_lattice/source/Hubbard_square_16_P_4_4.md and method script work/fcidumps/varbench_lattice/source/methods_Hubbard_square_16_P_4_4/ed_lattice_symmetries.sh",
+            "original_value_sha256": "15f2c53bfc2e8e6a4765bd4c4e09bd7fe069f9906333d2f18e8a83a1419e4b3b",
+            "public_replacement_pointer": "/tasks/1/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "b7e92ce1c0a0644cffff47549af1eec26b783ee848581ac54931a4ecab4f0bda",
+            "internal_pointer_classes": [
+              "work_path"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "d3ff6a43-0606-5c8f-b060-6a468723955f",
@@ -177,8 +227,19 @@
         "reference_energy_cross_validation_methods": [
           "VarBench exact diagonalization"
         ],
-        "reference_energy_source": "VarBench row work/fcidumps/varbench_lattice/source/Hubbard_square_16_P_4_6.md and method script work/fcidumps/varbench_lattice/source/methods_Hubbard_square_16_P_4_6/ed_lattice_symmetries.sh",
-        "reference_energy_note": "Candidate condensed-matter lattice subset. Promotion requires signoff that the VarBench site-basis convention and spinless all-alpha FCIDUMP convention are accepted."
+        "reference_energy_source": "VarBench Hubbard_square_16_P_4_6 benchmark row and accompanying public exact-diagonalization method script.",
+        "reference_energy_note": "Candidate condensed-matter lattice subset. Promotion requires signoff that the VarBench site-basis convention and spinless all-alpha FCIDUMP convention are accepted.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "VarBench site-basis threshold scales with lattice size."
+        }
       },
       "supporting_files": [
         {
@@ -193,7 +254,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/2/requirements/reference_energy_source",
+            "original_value": "VarBench row work/fcidumps/varbench_lattice/source/Hubbard_square_16_P_4_6.md and method script work/fcidumps/varbench_lattice/source/methods_Hubbard_square_16_P_4_6/ed_lattice_symmetries.sh",
+            "original_value_sha256": "aa182dfcb9a1ef52dd55174dfa15e734684557c44e64b9d8c7fb4acd5de97f7e",
+            "public_replacement_pointer": "/tasks/2/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "d2225b132113fcdcfdf6f22e5f26a8d1c82aab10a4b21c5e465c6eb5cc6c392c",
+            "internal_pointer_classes": [
+              "work_path"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "1bae5428-9b0d-570e-b16c-e623b049125c",
@@ -231,8 +306,19 @@
         "reference_energy_cross_validation_methods": [
           "VarBench exact diagonalization"
         ],
-        "reference_energy_source": "VarBench row work/fcidumps/varbench_lattice/source/Hubbard_square_16_P_4_8.md and method script work/fcidumps/varbench_lattice/source/methods_Hubbard_square_16_P_4_8/ed_lattice_symmetries.sh",
-        "reference_energy_note": "Candidate condensed-matter lattice subset. Promotion requires signoff that the VarBench site-basis convention and spinless all-alpha FCIDUMP convention are accepted."
+        "reference_energy_source": "VarBench Hubbard_square_16_P_4_8 benchmark row and accompanying public exact-diagonalization method script.",
+        "reference_energy_note": "Candidate condensed-matter lattice subset. Promotion requires signoff that the VarBench site-basis convention and spinless all-alpha FCIDUMP convention are accepted.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "VarBench site-basis threshold scales with lattice size."
+        }
       },
       "supporting_files": [
         {
@@ -247,7 +333,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/3/requirements/reference_energy_source",
+            "original_value": "VarBench row work/fcidumps/varbench_lattice/source/Hubbard_square_16_P_4_8.md and method script work/fcidumps/varbench_lattice/source/methods_Hubbard_square_16_P_4_8/ed_lattice_symmetries.sh",
+            "original_value_sha256": "81858f0d18d10a520cbeb5e68de2d408494418e5d0b2aa48e4c7b67ea32fe0bc",
+            "public_replacement_pointer": "/tasks/3/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "04f3cb966ebd8ce9edd01e1b15d64666cf1ef4c311c46f73aa5d1e592ae35bff",
+            "internal_pointer_classes": [
+              "work_path"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "3f07a4ce-a8a6-5b47-8f89-7461b76a580d",
@@ -288,13 +388,24 @@
           "VarBench exact diagonalization",
           "independent sparse ED validation ladder at L=8,12,16"
         ],
-        "reference_energy_source": "Finite-chain Bethe ansatz validation in analysis/varbench_lattice/validate_tv_bethe_ansatz.py for V/t=1 (Delta=0.5); VarBench ED cross-check row retained from work/fcidumps/varbench_lattice/source/tV_chain_32_P_16_1.md",
+        "reference_energy_source": "Finite-chain Bethe-ansatz value for V/t=1 (Delta=0.5), independently cross-checked against the corresponding VarBench exact-diagonalization result.",
         "reference_energy_note": "W3a provenance upgrade: the numeric reference energy is unchanged from the existing VarBench ED row, but the primary provenance is now the finite-chain spinless t-V Bethe ansatz. For this even-Nf periodic FCIDUMP sector, the Jordan-Wigner spin-chain representation carries a pi-flux/twisted boundary convention; the validation report rejects the symmetric naive periodic-XXZ quantum-number set.",
         "bethe_ansatz_validation": {
-          "validation_report": "analysis/varbench_lattice/varbench_tv_bethe_validation.md",
+          "validation_report": "Independent finite-chain Bethe-ansatz validation against exact diagonalization.",
           "small_chain_ed_ladder": "L=8,12,16 for V/t=1,2,4",
           "l32_cross_check": "Bethe ansatz vs VarBench exact diagonalization <= 1e-9 Hartree",
           "naive_periodic_xxz_negative_control": "symmetric V/t=2 quantum numbers rejected against small-chain ED"
+        },
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 32,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.032,
+          "detail": "VarBench site-basis threshold scales with lattice size."
         }
       },
       "supporting_files": [
@@ -310,7 +421,32 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/4/requirements/bethe_ansatz_validation/validation_report",
+            "original_value": "analysis/varbench_lattice/varbench_tv_bethe_validation.md",
+            "original_value_sha256": "66375146237cda9ca57bcd0f4cf5fa921e368f41fea0d3f9f5ca7bd030d48fd8",
+            "public_replacement_pointer": "/tasks/4/requirements/bethe_ansatz_validation/validation_report",
+            "public_replacement_value_sha256": "df912ba08877531fae727cbabd04b44a7ec19554908b4f75c0f2967d247c5f08",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/4/requirements/reference_energy_source",
+            "original_value": "Finite-chain Bethe ansatz validation in analysis/varbench_lattice/validate_tv_bethe_ansatz.py for V/t=1 (Delta=0.5); VarBench ED cross-check row retained from work/fcidumps/varbench_lattice/source/tV_chain_32_P_16_1.md",
+            "original_value_sha256": "410e6ccfa7351bac93404da8ac6cd6cd4d24aa36e51ab72cda225311547a07be",
+            "public_replacement_pointer": "/tasks/4/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "14a0f3e702851eef6c29df07c4e90b0db746762b2401105ae41c5456247b6ce8",
+            "internal_pointer_classes": [
+              "analysis_path",
+              "work_path"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "fcc8fbc8-87b5-5a77-b3e2-38539824873e",
@@ -351,13 +487,24 @@
           "VarBench exact diagonalization",
           "independent sparse ED validation ladder at L=8,12,16"
         ],
-        "reference_energy_source": "Finite-chain Bethe ansatz validation in analysis/varbench_lattice/validate_tv_bethe_ansatz.py for V/t=2 (Delta=1); VarBench ED cross-check row retained from work/fcidumps/varbench_lattice/source/tV_chain_32_P_16_2.md",
+        "reference_energy_source": "Finite-chain Bethe-ansatz value for V/t=2 (Delta=1), independently cross-checked against the corresponding VarBench exact-diagonalization result.",
         "reference_energy_note": "W3a provenance upgrade: the numeric reference energy is unchanged from the existing VarBench ED row, but the primary provenance is now the finite-chain spinless t-V Bethe ansatz. For this even-Nf periodic FCIDUMP sector, the Jordan-Wigner spin-chain representation carries a pi-flux/twisted boundary convention; the validation report rejects the symmetric naive periodic-XXZ quantum-number set.",
         "bethe_ansatz_validation": {
-          "validation_report": "analysis/varbench_lattice/varbench_tv_bethe_validation.md",
+          "validation_report": "Independent finite-chain Bethe-ansatz validation against exact diagonalization.",
           "small_chain_ed_ladder": "L=8,12,16 for V/t=1,2,4",
           "l32_cross_check": "Bethe ansatz vs VarBench exact diagonalization <= 1e-9 Hartree",
           "naive_periodic_xxz_negative_control": "symmetric V/t=2 quantum numbers rejected against small-chain ED"
+        },
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 32,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.032,
+          "detail": "VarBench site-basis threshold scales with lattice size."
         }
       },
       "supporting_files": [
@@ -373,7 +520,32 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/5/requirements/bethe_ansatz_validation/validation_report",
+            "original_value": "analysis/varbench_lattice/varbench_tv_bethe_validation.md",
+            "original_value_sha256": "66375146237cda9ca57bcd0f4cf5fa921e368f41fea0d3f9f5ca7bd030d48fd8",
+            "public_replacement_pointer": "/tasks/5/requirements/bethe_ansatz_validation/validation_report",
+            "public_replacement_value_sha256": "df912ba08877531fae727cbabd04b44a7ec19554908b4f75c0f2967d247c5f08",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/5/requirements/reference_energy_source",
+            "original_value": "Finite-chain Bethe ansatz validation in analysis/varbench_lattice/validate_tv_bethe_ansatz.py for V/t=2 (Delta=1); VarBench ED cross-check row retained from work/fcidumps/varbench_lattice/source/tV_chain_32_P_16_2.md",
+            "original_value_sha256": "e9d4b927dab2035887aaa4f86978e238a1d196e3d365e54fb00a6a3fadf62f72",
+            "public_replacement_pointer": "/tasks/5/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "2a72172a10b58e963c76870080182c7dd1ffda18d4af7b62d5c0a0c82b445309",
+            "internal_pointer_classes": [
+              "analysis_path",
+              "work_path"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "cf9437b3-291e-555e-8fcf-37d3c67203a4",
@@ -414,13 +586,24 @@
           "VarBench exact diagonalization",
           "independent sparse ED validation ladder at L=8,12,16"
         ],
-        "reference_energy_source": "Finite-chain Bethe ansatz validation in analysis/varbench_lattice/validate_tv_bethe_ansatz.py for V/t=4 (Delta=2); VarBench ED cross-check row retained from work/fcidumps/varbench_lattice/source/tV_chain_32_P_16_4.md",
+        "reference_energy_source": "Finite-chain Bethe-ansatz value for V/t=4 (Delta=2), independently cross-checked against the corresponding VarBench exact-diagonalization result.",
         "reference_energy_note": "W3a provenance upgrade: the numeric reference energy is unchanged from the existing VarBench ED row, but the primary provenance is now the finite-chain spinless t-V Bethe ansatz. For this even-Nf periodic FCIDUMP sector, the Jordan-Wigner spin-chain representation carries a pi-flux/twisted boundary convention; the validation report rejects the symmetric naive periodic-XXZ quantum-number set.",
         "bethe_ansatz_validation": {
-          "validation_report": "analysis/varbench_lattice/varbench_tv_bethe_validation.md",
+          "validation_report": "Independent finite-chain Bethe-ansatz validation against exact diagonalization.",
           "small_chain_ed_ladder": "L=8,12,16 for V/t=1,2,4",
           "l32_cross_check": "Bethe ansatz vs VarBench exact diagonalization <= 1e-9 Hartree",
           "naive_periodic_xxz_negative_control": "symmetric V/t=2 quantum numbers rejected against small-chain ED"
+        },
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 32,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.032,
+          "detail": "VarBench site-basis threshold scales with lattice size."
         }
       },
       "supporting_files": [
@@ -436,7 +619,32 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/6/requirements/bethe_ansatz_validation/validation_report",
+            "original_value": "analysis/varbench_lattice/varbench_tv_bethe_validation.md",
+            "original_value_sha256": "66375146237cda9ca57bcd0f4cf5fa921e368f41fea0d3f9f5ca7bd030d48fd8",
+            "public_replacement_pointer": "/tasks/6/requirements/bethe_ansatz_validation/validation_report",
+            "public_replacement_value_sha256": "df912ba08877531fae727cbabd04b44a7ec19554908b4f75c0f2967d247c5f08",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/6/requirements/reference_energy_source",
+            "original_value": "Finite-chain Bethe ansatz validation in analysis/varbench_lattice/validate_tv_bethe_ansatz.py for V/t=4 (Delta=2); VarBench ED cross-check row retained from work/fcidumps/varbench_lattice/source/tV_chain_32_P_16_4.md",
+            "original_value_sha256": "32b0b5426c8e414063faedd153e67ee05026f02121504fccc4e8e05b834144d1",
+            "public_replacement_pointer": "/tasks/6/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "1845991f4f2a5978047d9f44176ff5b9ede573183db8e65a9625ae4ebf8ce75d",
+            "internal_pointer_classes": [
+              "analysis_path",
+              "work_path"
+            ]
+          }
+        ]
+      }
     }
   ]
 }

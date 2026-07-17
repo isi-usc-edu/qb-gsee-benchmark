@@ -30,7 +30,7 @@
         "basis_set": "STO-3G",
         "charge": 0,
         "geometry": "C 0.000000000000000 0.000000000000000 1.090847499416857\nC 0.000000000000000 2.408456450590927 -0.508239082372113\nC 0.000000000000000 -2.408456450590927 -0.508239082372113\nH 1.647274608065995 0.000000000000000 2.326917616585571\nH -1.647274608065995 0.000000000000000 2.326917616585571\nH 0.000000000000000 4.092202780505809 0.672839993045172\nH 0.000000000000000 -4.092202780505809 0.672839993045172\nH 1.660691666362736 2.493683116673039 -1.721254535988681\nH 1.660691666362736 -2.493683116673039 -1.721254535988681\nH -1.660691666362736 2.493683116673039 -1.721254535988681\nH -1.660691666362736 -2.493683116673039 -1.721254535988681",
-        "geometry_source": "work/fcidumps/propane_sto3g/source/C3H8_CCSD_STO3G.out",
+        "geometry_source": "CCSD/STO-3G source output used to construct the archived geometry.",
         "geometry_units": "bohr",
         "hamiltonian_reconstruction_status": "near_match_pending_signoff",
         "hf_digit_match_abs_delta_hartree": 4.627115401945048e-08,
@@ -41,7 +41,7 @@
         "num_orbitals": 23,
         "pyscf_nuclear_repulsion_hartree": 82.59082513741143,
         "pyscf_rhf_energy_hartree": -116.88610269639085,
-        "rounded_xyz_source": "work/fcidumps/propane_sto3g/source/C3H8.xyz",
+        "rounded_xyz_source": "Rounded coordinates derived from the archived C3H8 geometry source.",
         "source_nuclear_repulsion_hartree": 82.5908251374,
         "source_scf_energy_hartree": -116.8861026501197
       },
@@ -60,7 +60,18 @@
         "reference_energy_provenance": "exact",
         "reference_energy_source": "Gao et al., J. Chem. Theory Comput. 2024, exact propane/STO-3G FCI energy; Loos et al. arXiv:2402.13111 ancillary files provide reconstruction geometry and method comparisons.",
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 43200
+        "time_limit_seconds": 43200,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -83,7 +94,31 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/0/features/geometry_source",
+            "original_value": "work/fcidumps/propane_sto3g/source/C3H8_CCSD_STO3G.out",
+            "original_value_sha256": "92be1c0bbb6a65692fb56df62684e335e4e1deefaf73b7ba05eaf67fda0f117b",
+            "public_replacement_pointer": "/tasks/0/features/geometry_source",
+            "public_replacement_value_sha256": "0115b2919cc56a863eb79a9e15785763e5f9df182477fd23accd36ec374d26a9",
+            "internal_pointer_classes": [
+              "work_path"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/0/features/rounded_xyz_source",
+            "original_value": "work/fcidumps/propane_sto3g/source/C3H8.xyz",
+            "original_value_sha256": "82ac8711d7e37edb46093f81bf4491dc981d7a8d85b27924ccbbadd5a7be7147",
+            "public_replacement_pointer": "/tasks/0/features/rounded_xyz_source",
+            "public_replacement_value_sha256": "c275989a1a8d514b4ebdbbb8a49d9a160f081bf6ee3bf8bd9521ab64d3329d28",
+            "internal_pointer_classes": [
+              "work_path"
+            ]
+          }
+        ]
+      }
     }
   ]
 }

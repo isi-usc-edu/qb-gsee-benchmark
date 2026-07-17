@@ -19,9 +19,9 @@
   "problem_type": "GSEE",
   "references": [
     "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), DOI 10.1103/PhysRevB.94.085103.",
-    "arXiv:1605.09421v2 official PDF and source tarball, checksummed in analysis/qsz_hubbard_2d_halffilled/qsz_source_manifest.csv.",
-    "C13 implementer spec W1, analysis/coverage_expansion/C13_implementer_spec.md.",
-    "O7 policy in MATT_DECISION_QUEUE.md: local 4x4 FCI anchors are Exact references; QSZ AFQMC rows remain controlled with caveats."
+    "arXiv:1605.09421v2 official PDF and source tarball.",
+    "Coverage-expansion specification for the analytic plane-wave uniform-electron-gas subset.",
+    "Local 4x4 FCI anchors are exact references; QSZ AFQMC rows remain controlled references with explicit caveats."
   ],
   "short_name": "qsz_hubbard_2d_halffilled",
   "status": "in_development",
@@ -72,11 +72,11 @@
         "fermi_degeneracy_spin_orbitals": 12,
         "occupied_fermi_spin_orbitals": 6,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+        "reference_policy_note": "The same-Hamiltonian 4x4 generic-reader FCI value is the exact reference; QSZ AFQMC is retained as a controlled cross-check.",
         "qsz_afqmc_reference_energy_hartree": -18.024,
         "qsz_afqmc_standard_error_hartree": 0.006,
         "exact_anchor_energy_hartree": -18.01756687069585,
-        "exact_anchor_source": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv"
+        "exact_anchor_source": "Local same-Hamiltonian generic-reader FCI calculation on the emitted FCIDUMP."
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -94,8 +94,21 @@
           "QSZ Table IV AFQMC controlled cross-check",
           "independent literature audit for the U/t=4 PBC caption-defect caveat"
         ],
-        "reference_energy_source": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
-        "reference_energy_note": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate."
+        "reference_energy_source": "Local PySCF generic-reader FCI calculation on the emitted FCIDUMP, treated as an exact same-Hamiltonian reference. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+        "reference_energy_note": "Finite-size total energy in units t=1. The same-Hamiltonian 4x4 generic-reader FCI value is the exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented as a source caveat.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.0
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -110,7 +123,52 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/0/features/exact_anchor_source",
+            "original_value": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv",
+            "original_value_sha256": "4a73522b40b0517301132a292d847a494cb11d8235db77059dd170cb418dc64c",
+            "public_replacement_pointer": "/tasks/0/features/exact_anchor_source",
+            "public_replacement_value_sha256": "6c1ebd7e2280ce07e303e17c13b050ed25e50d8b833b39af44250bc31c3fe24c",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/0/features/reference_policy_note",
+            "original_value": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+            "original_value_sha256": "856372f4f5539e150a51c000dc494f026554ff7324e07c1c1598e5411173f3b2",
+            "public_replacement_pointer": "/tasks/0/features/reference_policy_note",
+            "public_replacement_value_sha256": "06675ee7728cce1335e03305eb749b64e0a3a2ec24aef90dceea309f6f69ec1e",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/0/requirements/reference_energy_note",
+            "original_value": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate.",
+            "original_value_sha256": "6eb046e0bc30cae6b77c2d22d628fb3b40a3519763916012fc7e5ce447edb3ac",
+            "public_replacement_pointer": "/tasks/0/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "254d91af2168a82e94be8041fc28525f4d0a956e9ea524d5bea7c6d46ed914a2",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/0/requirements/reference_energy_source",
+            "original_value": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+            "original_value_sha256": "292075bc8ceebc279a9cb8de2bd1a79b734a13359fd255caeabc9688d74bb59f",
+            "public_replacement_pointer": "/tasks/0/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "db6981ccdb3d28745ce505b27a282e92dbe88ac4cda4c19e6d0d4294eadf7e8a",
+            "internal_pointer_classes": [
+              "analysis_path",
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "203dd012-1d00-5037-9eb9-9b645c8bfaed",
@@ -147,11 +205,11 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+        "reference_policy_note": "The same-Hamiltonian 4x4 generic-reader FCI value is the exact reference; QSZ AFQMC is retained as a controlled cross-check.",
         "qsz_afqmc_reference_energy_hartree": -20.114,
         "qsz_afqmc_standard_error_hartree": 0.002,
         "exact_anchor_energy_hartree": -20.112711434260994,
-        "exact_anchor_source": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv"
+        "exact_anchor_source": "Local same-Hamiltonian generic-reader FCI calculation on the emitted FCIDUMP."
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -169,8 +227,21 @@
           "QSZ Table IV AFQMC controlled cross-check",
           "independent literature audit for the U/t=4 PBC caption-defect caveat"
         ],
-        "reference_energy_source": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
-        "reference_energy_note": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate."
+        "reference_energy_source": "Local PySCF generic-reader FCI calculation on the emitted FCIDUMP, treated as an exact same-Hamiltonian reference. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+        "reference_energy_note": "Finite-size total energy in units t=1. The same-Hamiltonian 4x4 generic-reader FCI value is the exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented as a source caveat.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.0
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -185,7 +256,52 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/1/features/exact_anchor_source",
+            "original_value": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv",
+            "original_value_sha256": "4a73522b40b0517301132a292d847a494cb11d8235db77059dd170cb418dc64c",
+            "public_replacement_pointer": "/tasks/1/features/exact_anchor_source",
+            "public_replacement_value_sha256": "6c1ebd7e2280ce07e303e17c13b050ed25e50d8b833b39af44250bc31c3fe24c",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/1/features/reference_policy_note",
+            "original_value": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+            "original_value_sha256": "856372f4f5539e150a51c000dc494f026554ff7324e07c1c1598e5411173f3b2",
+            "public_replacement_pointer": "/tasks/1/features/reference_policy_note",
+            "public_replacement_value_sha256": "06675ee7728cce1335e03305eb749b64e0a3a2ec24aef90dceea309f6f69ec1e",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/1/requirements/reference_energy_note",
+            "original_value": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate.",
+            "original_value_sha256": "6eb046e0bc30cae6b77c2d22d628fb3b40a3519763916012fc7e5ce447edb3ac",
+            "public_replacement_pointer": "/tasks/1/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "254d91af2168a82e94be8041fc28525f4d0a956e9ea524d5bea7c6d46ed914a2",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/1/requirements/reference_energy_source",
+            "original_value": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+            "original_value_sha256": "292075bc8ceebc279a9cb8de2bd1a79b734a13359fd255caeabc9688d74bb59f",
+            "public_replacement_pointer": "/tasks/1/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "db6981ccdb3d28745ce505b27a282e92dbe88ac4cda4c19e6d0d4294eadf7e8a",
+            "internal_pointer_classes": [
+              "analysis_path",
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "3bf5ac12-b549-5577-ba33-4487cc1fe245",
@@ -222,11 +338,11 @@
         "fermi_degeneracy_spin_orbitals": 12,
         "occupied_fermi_spin_orbitals": 6,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+        "reference_policy_note": "The same-Hamiltonian 4x4 generic-reader FCI value is the exact reference; QSZ AFQMC is retained as a controlled cross-check.",
         "qsz_afqmc_reference_energy_hartree": -13.616,
         "qsz_afqmc_standard_error_hartree": 0.006,
         "exact_anchor_energy_hartree": -13.621854821105831,
-        "exact_anchor_source": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv"
+        "exact_anchor_source": "Local same-Hamiltonian generic-reader FCI calculation on the emitted FCIDUMP."
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -244,8 +360,21 @@
           "QSZ Table IV AFQMC controlled cross-check",
           "independent literature audit for the U/t=4 PBC caption-defect caveat"
         ],
-        "reference_energy_source": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
-        "reference_energy_note": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate."
+        "reference_energy_source": "Local PySCF generic-reader FCI calculation on the emitted FCIDUMP, treated as an exact same-Hamiltonian reference. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+        "reference_energy_note": "Finite-size total energy in units t=1. The same-Hamiltonian 4x4 generic-reader FCI value is the exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented as a source caveat.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.0
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -260,7 +389,52 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": true
+      "source_defect_documented": true,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/2/features/exact_anchor_source",
+            "original_value": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv",
+            "original_value_sha256": "4a73522b40b0517301132a292d847a494cb11d8235db77059dd170cb418dc64c",
+            "public_replacement_pointer": "/tasks/2/features/exact_anchor_source",
+            "public_replacement_value_sha256": "6c1ebd7e2280ce07e303e17c13b050ed25e50d8b833b39af44250bc31c3fe24c",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/2/features/reference_policy_note",
+            "original_value": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+            "original_value_sha256": "856372f4f5539e150a51c000dc494f026554ff7324e07c1c1598e5411173f3b2",
+            "public_replacement_pointer": "/tasks/2/features/reference_policy_note",
+            "public_replacement_value_sha256": "06675ee7728cce1335e03305eb749b64e0a3a2ec24aef90dceea309f6f69ec1e",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/2/requirements/reference_energy_note",
+            "original_value": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate.",
+            "original_value_sha256": "6eb046e0bc30cae6b77c2d22d628fb3b40a3519763916012fc7e5ce447edb3ac",
+            "public_replacement_pointer": "/tasks/2/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "254d91af2168a82e94be8041fc28525f4d0a956e9ea524d5bea7c6d46ed914a2",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/2/requirements/reference_energy_source",
+            "original_value": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+            "original_value_sha256": "292075bc8ceebc279a9cb8de2bd1a79b734a13359fd255caeabc9688d74bb59f",
+            "public_replacement_pointer": "/tasks/2/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "db6981ccdb3d28745ce505b27a282e92dbe88ac4cda4c19e6d0d4294eadf7e8a",
+            "internal_pointer_classes": [
+              "analysis_path",
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "ff3fa734-deca-5c94-8024-75f34c076b59",
@@ -297,11 +471,11 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+        "reference_policy_note": "The same-Hamiltonian 4x4 generic-reader FCI value is the exact reference; QSZ AFQMC is retained as a controlled cross-check.",
         "qsz_afqmc_reference_energy_hartree": -14.594,
         "qsz_afqmc_standard_error_hartree": 0.003,
         "exact_anchor_energy_hartree": -14.59349892094018,
-        "exact_anchor_source": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv"
+        "exact_anchor_source": "Local same-Hamiltonian generic-reader FCI calculation on the emitted FCIDUMP."
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -319,8 +493,21 @@
           "QSZ Table IV AFQMC controlled cross-check",
           "independent literature audit for the U/t=4 PBC caption-defect caveat"
         ],
-        "reference_energy_source": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
-        "reference_energy_note": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate."
+        "reference_energy_source": "Local PySCF generic-reader FCI calculation on the emitted FCIDUMP, treated as an exact same-Hamiltonian reference. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+        "reference_energy_note": "Finite-size total energy in units t=1. The same-Hamiltonian 4x4 generic-reader FCI value is the exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented as a source caveat.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.0
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -335,7 +522,52 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/3/features/exact_anchor_source",
+            "original_value": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv",
+            "original_value_sha256": "4a73522b40b0517301132a292d847a494cb11d8235db77059dd170cb418dc64c",
+            "public_replacement_pointer": "/tasks/3/features/exact_anchor_source",
+            "public_replacement_value_sha256": "6c1ebd7e2280ce07e303e17c13b050ed25e50d8b833b39af44250bc31c3fe24c",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/3/features/reference_policy_note",
+            "original_value": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+            "original_value_sha256": "856372f4f5539e150a51c000dc494f026554ff7324e07c1c1598e5411173f3b2",
+            "public_replacement_pointer": "/tasks/3/features/reference_policy_note",
+            "public_replacement_value_sha256": "06675ee7728cce1335e03305eb749b64e0a3a2ec24aef90dceea309f6f69ec1e",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/3/requirements/reference_energy_note",
+            "original_value": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate.",
+            "original_value_sha256": "6eb046e0bc30cae6b77c2d22d628fb3b40a3519763916012fc7e5ce447edb3ac",
+            "public_replacement_pointer": "/tasks/3/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "254d91af2168a82e94be8041fc28525f4d0a956e9ea524d5bea7c6d46ed914a2",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/3/requirements/reference_energy_source",
+            "original_value": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+            "original_value_sha256": "292075bc8ceebc279a9cb8de2bd1a79b734a13359fd255caeabc9688d74bb59f",
+            "public_replacement_pointer": "/tasks/3/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "db6981ccdb3d28745ce505b27a282e92dbe88ac4cda4c19e6d0d4294eadf7e8a",
+            "internal_pointer_classes": [
+              "analysis_path",
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "d969b014-a589-5edf-8407-12634908a31e",
@@ -372,11 +604,11 @@
         "fermi_degeneracy_spin_orbitals": 12,
         "occupied_fermi_spin_orbitals": 6,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+        "reference_policy_note": "The same-Hamiltonian 4x4 generic-reader FCI value is the exact reference; QSZ AFQMC is retained as a controlled cross-check.",
         "qsz_afqmc_reference_energy_hartree": -10.541,
         "qsz_afqmc_standard_error_hartree": 0.004,
         "exact_anchor_energy_hartree": -10.552217991520266,
-        "exact_anchor_source": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv"
+        "exact_anchor_source": "Local same-Hamiltonian generic-reader FCI calculation on the emitted FCIDUMP."
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -394,8 +626,21 @@
           "QSZ Table IV AFQMC controlled cross-check",
           "independent literature audit for the U/t=4 PBC caption-defect caveat"
         ],
-        "reference_energy_source": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
-        "reference_energy_note": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate."
+        "reference_energy_source": "Local PySCF generic-reader FCI calculation on the emitted FCIDUMP, treated as an exact same-Hamiltonian reference. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+        "reference_energy_note": "Finite-size total energy in units t=1. The same-Hamiltonian 4x4 generic-reader FCI value is the exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented as a source caveat.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.0
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -410,7 +655,52 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/4/features/exact_anchor_source",
+            "original_value": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv",
+            "original_value_sha256": "4a73522b40b0517301132a292d847a494cb11d8235db77059dd170cb418dc64c",
+            "public_replacement_pointer": "/tasks/4/features/exact_anchor_source",
+            "public_replacement_value_sha256": "6c1ebd7e2280ce07e303e17c13b050ed25e50d8b833b39af44250bc31c3fe24c",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/4/features/reference_policy_note",
+            "original_value": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+            "original_value_sha256": "856372f4f5539e150a51c000dc494f026554ff7324e07c1c1598e5411173f3b2",
+            "public_replacement_pointer": "/tasks/4/features/reference_policy_note",
+            "public_replacement_value_sha256": "06675ee7728cce1335e03305eb749b64e0a3a2ec24aef90dceea309f6f69ec1e",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/4/requirements/reference_energy_note",
+            "original_value": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate.",
+            "original_value_sha256": "6eb046e0bc30cae6b77c2d22d628fb3b40a3519763916012fc7e5ce447edb3ac",
+            "public_replacement_pointer": "/tasks/4/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "254d91af2168a82e94be8041fc28525f4d0a956e9ea524d5bea7c6d46ed914a2",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/4/requirements/reference_energy_source",
+            "original_value": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+            "original_value_sha256": "292075bc8ceebc279a9cb8de2bd1a79b734a13359fd255caeabc9688d74bb59f",
+            "public_replacement_pointer": "/tasks/4/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "db6981ccdb3d28745ce505b27a282e92dbe88ac4cda4c19e6d0d4294eadf7e8a",
+            "internal_pointer_classes": [
+              "analysis_path",
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "6b2c9e72-ba53-5b2a-8f88-f05f0563c8db",
@@ -447,11 +737,11 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+        "reference_policy_note": "The same-Hamiltonian 4x4 generic-reader FCI value is the exact reference; QSZ AFQMC is retained as a controlled cross-check.",
         "qsz_afqmc_reference_energy_hartree": -10.902,
         "qsz_afqmc_standard_error_hartree": 0.007,
         "exact_anchor_energy_hartree": -10.91236808100485,
-        "exact_anchor_source": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv"
+        "exact_anchor_source": "Local same-Hamiltonian generic-reader FCI calculation on the emitted FCIDUMP."
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -469,8 +759,21 @@
           "QSZ Table IV AFQMC controlled cross-check",
           "independent literature audit for the U/t=4 PBC caption-defect caveat"
         ],
-        "reference_energy_source": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
-        "reference_energy_note": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate."
+        "reference_energy_source": "Local PySCF generic-reader FCI calculation on the emitted FCIDUMP, treated as an exact same-Hamiltonian reference. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+        "reference_energy_note": "Finite-size total energy in units t=1. The same-Hamiltonian 4x4 generic-reader FCI value is the exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented as a source caveat.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.0
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -485,7 +788,52 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/5/features/exact_anchor_source",
+            "original_value": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv",
+            "original_value_sha256": "4a73522b40b0517301132a292d847a494cb11d8235db77059dd170cb418dc64c",
+            "public_replacement_pointer": "/tasks/5/features/exact_anchor_source",
+            "public_replacement_value_sha256": "6c1ebd7e2280ce07e303e17c13b050ed25e50d8b833b39af44250bc31c3fe24c",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/5/features/reference_policy_note",
+            "original_value": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+            "original_value_sha256": "856372f4f5539e150a51c000dc494f026554ff7324e07c1c1598e5411173f3b2",
+            "public_replacement_pointer": "/tasks/5/features/reference_policy_note",
+            "public_replacement_value_sha256": "06675ee7728cce1335e03305eb749b64e0a3a2ec24aef90dceea309f6f69ec1e",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/5/requirements/reference_energy_note",
+            "original_value": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate.",
+            "original_value_sha256": "6eb046e0bc30cae6b77c2d22d628fb3b40a3519763916012fc7e5ce447edb3ac",
+            "public_replacement_pointer": "/tasks/5/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "254d91af2168a82e94be8041fc28525f4d0a956e9ea524d5bea7c6d46ed914a2",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/5/requirements/reference_energy_source",
+            "original_value": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+            "original_value_sha256": "292075bc8ceebc279a9cb8de2bd1a79b734a13359fd255caeabc9688d74bb59f",
+            "public_replacement_pointer": "/tasks/5/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "db6981ccdb3d28745ce505b27a282e92dbe88ac4cda4c19e6d0d4294eadf7e8a",
+            "internal_pointer_classes": [
+              "analysis_path",
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "03505c3d-bfe3-51c9-8d2d-1e0feb7a073a",
@@ -522,11 +870,11 @@
         "fermi_degeneracy_spin_orbitals": 12,
         "occupied_fermi_spin_orbitals": 6,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+        "reference_policy_note": "The same-Hamiltonian 4x4 generic-reader FCI value is the exact reference; QSZ AFQMC is retained as a controlled cross-check.",
         "qsz_afqmc_reference_energy_hartree": -8.476,
         "qsz_afqmc_standard_error_hartree": 0.009000000000000001,
         "exact_anchor_energy_hartree": -8.46887501415959,
-        "exact_anchor_source": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv"
+        "exact_anchor_source": "Local same-Hamiltonian generic-reader FCI calculation on the emitted FCIDUMP."
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -544,8 +892,21 @@
           "QSZ Table IV AFQMC controlled cross-check",
           "independent literature audit for the U/t=4 PBC caption-defect caveat"
         ],
-        "reference_energy_source": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
-        "reference_energy_note": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate."
+        "reference_energy_source": "Local PySCF generic-reader FCI calculation on the emitted FCIDUMP, treated as an exact same-Hamiltonian reference. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+        "reference_energy_note": "Finite-size total energy in units t=1. The same-Hamiltonian 4x4 generic-reader FCI value is the exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented as a source caveat.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.0
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -560,7 +921,52 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/6/features/exact_anchor_source",
+            "original_value": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv",
+            "original_value_sha256": "4a73522b40b0517301132a292d847a494cb11d8235db77059dd170cb418dc64c",
+            "public_replacement_pointer": "/tasks/6/features/exact_anchor_source",
+            "public_replacement_value_sha256": "6c1ebd7e2280ce07e303e17c13b050ed25e50d8b833b39af44250bc31c3fe24c",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/6/features/reference_policy_note",
+            "original_value": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+            "original_value_sha256": "856372f4f5539e150a51c000dc494f026554ff7324e07c1c1598e5411173f3b2",
+            "public_replacement_pointer": "/tasks/6/features/reference_policy_note",
+            "public_replacement_value_sha256": "06675ee7728cce1335e03305eb749b64e0a3a2ec24aef90dceea309f6f69ec1e",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/6/requirements/reference_energy_note",
+            "original_value": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate.",
+            "original_value_sha256": "6eb046e0bc30cae6b77c2d22d628fb3b40a3519763916012fc7e5ce447edb3ac",
+            "public_replacement_pointer": "/tasks/6/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "254d91af2168a82e94be8041fc28525f4d0a956e9ea524d5bea7c6d46ed914a2",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/6/requirements/reference_energy_source",
+            "original_value": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+            "original_value_sha256": "292075bc8ceebc279a9cb8de2bd1a79b734a13359fd255caeabc9688d74bb59f",
+            "public_replacement_pointer": "/tasks/6/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "db6981ccdb3d28745ce505b27a282e92dbe88ac4cda4c19e6d0d4294eadf7e8a",
+            "internal_pointer_classes": [
+              "analysis_path",
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "c02a6d71-4a7c-58e1-b6a3-6832dd4dbf5f",
@@ -597,11 +1003,11 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+        "reference_policy_note": "The same-Hamiltonian 4x4 generic-reader FCI value is the exact reference; QSZ AFQMC is retained as a controlled cross-check.",
         "qsz_afqmc_reference_energy_hartree": -8.646,
         "qsz_afqmc_standard_error_hartree": 0.008,
         "exact_anchor_energy_hartree": -8.638711054344935,
-        "exact_anchor_source": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv"
+        "exact_anchor_source": "Local same-Hamiltonian generic-reader FCI calculation on the emitted FCIDUMP."
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -619,8 +1025,21 @@
           "QSZ Table IV AFQMC controlled cross-check",
           "independent literature audit for the U/t=4 PBC caption-defect caveat"
         ],
-        "reference_energy_source": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
-        "reference_energy_note": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate."
+        "reference_energy_source": "Local PySCF generic-reader FCI calculation on the emitted FCIDUMP, treated as an exact same-Hamiltonian reference. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+        "reference_energy_note": "Finite-size total energy in units t=1. The same-Hamiltonian 4x4 generic-reader FCI value is the exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented as a source caveat.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 16,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.0
+          },
+          "computed_threshold_hartree": 0.016,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -635,7 +1054,52 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/7/features/exact_anchor_source",
+            "original_value": "analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv",
+            "original_value_sha256": "4a73522b40b0517301132a292d847a494cb11d8235db77059dd170cb418dc64c",
+            "public_replacement_pointer": "/tasks/7/features/exact_anchor_source",
+            "public_replacement_value_sha256": "6c1ebd7e2280ce07e303e17c13b050ed25e50d8b833b39af44250bc31c3fe24c",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/7/features/reference_policy_note",
+            "original_value": "O7: 4x4 emitted-FCIDUMP generic-reader FCI anchor is the Exact reference; QSZ AFQMC retained as controlled cross-check.",
+            "original_value_sha256": "856372f4f5539e150a51c000dc494f026554ff7324e07c1c1598e5411173f3b2",
+            "public_replacement_pointer": "/tasks/7/features/reference_policy_note",
+            "public_replacement_value_sha256": "06675ee7728cce1335e03305eb749b64e0a3a2ec24aef90dceea309f6f69ec1e",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/7/requirements/reference_energy_note",
+            "original_value": "Finite-size total energy in units t=1. O7 sets the 4x4 same-Hamiltonian generic-reader FCI anchor as the Exact reference. QSZ AFQMC remains a controlled cross-check with stochastic and constrained-path/Trotter caveats; the U/t=4 PBC printed-caption ED mismatch is documented and no longer a blocking strict-source gate.",
+            "original_value_sha256": "6eb046e0bc30cae6b77c2d22d628fb3b40a3519763916012fc7e5ce447edb3ac",
+            "public_replacement_pointer": "/tasks/7/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "254d91af2168a82e94be8041fc28525f4d0a956e9ea524d5bea7c6d46ed914a2",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/7/requirements/reference_energy_source",
+            "original_value": "Local PySCF generic-reader FCI anchor on the emitted FCIDUMP, recorded in analysis/qsz_hubbard_2d_halffilled/qsz_4x4_fci_anchor_results.csv; O7 policy treats these 4x4 anchors as Exact references. QSZ Table IV AFQMC is retained as a controlled cross-check. For U/t=4 PBC, the QSZ caption ED mismatch is documented as a rounded-caption/source-defect caveat.",
+            "original_value_sha256": "292075bc8ceebc279a9cb8de2bd1a79b734a13359fd255caeabc9688d74bb59f",
+            "public_replacement_pointer": "/tasks/7/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "db6981ccdb3d28745ce505b27a282e92dbe88ac4cda4c19e6d0d4294eadf7e8a",
+            "internal_pointer_classes": [
+              "analysis_path",
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "7f3b7817-7084-5db6-a22a-ed91728b74e6",
@@ -672,7 +1136,7 @@
         "fermi_degeneracy_spin_orbitals": 20,
         "occupied_fermi_spin_orbitals": 10,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -41.457,
         "qsz_afqmc_standard_error_hartree": 0.005,
         "exact_anchor_energy_hartree": null,
@@ -693,7 +1157,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 36,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.005
+          },
+          "computed_threshold_hartree": 0.036000000000000004,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -708,7 +1185,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/8/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/8/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "84332a1c-fd0d-59ac-b21d-372bdf9b4865",
@@ -745,7 +1236,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -43.499,
         "qsz_afqmc_standard_error_hartree": 0.002,
         "exact_anchor_energy_hartree": null,
@@ -766,7 +1257,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 36,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.002
+          },
+          "computed_threshold_hartree": 0.036000000000000004,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -781,7 +1285,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/9/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/9/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "c1b48f12-6797-502a-a9e6-091172986a0a",
@@ -818,7 +1336,7 @@
         "fermi_degeneracy_spin_orbitals": 20,
         "occupied_fermi_spin_orbitals": 10,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -30.865,
         "qsz_afqmc_standard_error_hartree": 0.009000000000000001,
         "exact_anchor_energy_hartree": null,
@@ -839,7 +1357,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 36,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.009000000000000001
+          },
+          "computed_threshold_hartree": 0.036000000000000004,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -854,7 +1385,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": true
+      "source_defect_documented": true,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/10/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/10/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "cc64bf3c-3ad3-561a-b416-4f530e770e96",
@@ -891,7 +1436,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -31.43,
         "qsz_afqmc_standard_error_hartree": 0.02,
         "exact_anchor_energy_hartree": null,
@@ -912,7 +1457,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 36,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.02
+          },
+          "computed_threshold_hartree": 0.04,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -927,7 +1485,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/11/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/11/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "34ee114f-ec28-59d4-a3aa-e57f61eed8e6",
@@ -964,7 +1536,7 @@
         "fermi_degeneracy_spin_orbitals": 20,
         "occupied_fermi_spin_orbitals": 10,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -23.74,
         "qsz_afqmc_standard_error_hartree": 0.01,
         "exact_anchor_energy_hartree": null,
@@ -985,7 +1557,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 36,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.01
+          },
+          "computed_threshold_hartree": 0.036000000000000004,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -1000,7 +1585,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/12/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/12/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "4f4f70de-2edf-5034-973c-566d3e220c21",
@@ -1037,7 +1636,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -23.84,
         "qsz_afqmc_standard_error_hartree": 0.01,
         "exact_anchor_energy_hartree": null,
@@ -1058,7 +1657,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 36,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.01
+          },
+          "computed_threshold_hartree": 0.036000000000000004,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -1073,7 +1685,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/13/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/13/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "57ba5f51-8b64-59c5-add7-bdc02619f060",
@@ -1110,7 +1736,7 @@
         "fermi_degeneracy_spin_orbitals": 20,
         "occupied_fermi_spin_orbitals": 10,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -19.0,
         "qsz_afqmc_standard_error_hartree": 0.02,
         "exact_anchor_energy_hartree": null,
@@ -1131,7 +1757,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 36,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.02
+          },
+          "computed_threshold_hartree": 0.04,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -1146,7 +1785,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/14/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/14/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "f00ad2cf-0c64-5cfe-b807-aa5a9a785b90",
@@ -1183,7 +1836,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -19.01,
         "qsz_afqmc_standard_error_hartree": 0.01,
         "exact_anchor_energy_hartree": null,
@@ -1204,7 +1857,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 36,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.01
+          },
+          "computed_threshold_hartree": 0.036000000000000004,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -1219,7 +1885,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/15/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/15/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "5f5688c2-51b1-5f69-bede-65a94386e392",
@@ -1256,7 +1936,7 @@
         "fermi_degeneracy_spin_orbitals": 28,
         "occupied_fermi_spin_orbitals": 14,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -74.47,
         "qsz_afqmc_standard_error_hartree": 0.005,
         "exact_anchor_energy_hartree": null,
@@ -1277,7 +1957,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 64,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.005
+          },
+          "computed_threshold_hartree": 0.064,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -1292,7 +1985,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/16/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/16/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "c3331808-c745-55d6-b9f5-5b3c0a90ea94",
@@ -1329,7 +2036,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -76.308,
         "qsz_afqmc_standard_error_hartree": 0.003,
         "exact_anchor_energy_hartree": null,
@@ -1350,7 +2057,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 64,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.003
+          },
+          "computed_threshold_hartree": 0.064,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -1365,7 +2085,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/17/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/17/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "1f5d15a5-2a68-5cdf-9a0a-7f42c6190a68",
@@ -1402,7 +2136,7 @@
         "fermi_degeneracy_spin_orbitals": 28,
         "occupied_fermi_spin_orbitals": 14,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -55.05,
         "qsz_afqmc_standard_error_hartree": 0.01,
         "exact_anchor_energy_hartree": null,
@@ -1423,7 +2157,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 64,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.01
+          },
+          "computed_threshold_hartree": 0.064,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -1438,7 +2185,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": true
+      "source_defect_documented": true,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/18/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/18/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "8d8894fe-ccf2-5908-a98c-0e870346f804",
@@ -1475,7 +2236,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -55.31,
         "qsz_afqmc_standard_error_hartree": 0.01,
         "exact_anchor_energy_hartree": null,
@@ -1496,7 +2257,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 64,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.01
+          },
+          "computed_threshold_hartree": 0.064,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -1511,7 +2285,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/19/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/19/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "4ece41c4-13f2-574a-838f-0c9ac1be488d",
@@ -1548,7 +2336,7 @@
         "fermi_degeneracy_spin_orbitals": 28,
         "occupied_fermi_spin_orbitals": 14,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -42.16,
         "qsz_afqmc_standard_error_hartree": 0.02,
         "exact_anchor_energy_hartree": null,
@@ -1569,7 +2357,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 64,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.02
+          },
+          "computed_threshold_hartree": 0.064,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -1584,7 +2385,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/20/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/20/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "272835ce-dde4-59ab-8337-c479a7d517bc",
@@ -1621,7 +2436,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -42.17,
         "qsz_afqmc_standard_error_hartree": 0.02,
         "exact_anchor_energy_hartree": null,
@@ -1642,7 +2457,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 64,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.02
+          },
+          "computed_threshold_hartree": 0.064,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -1657,7 +2485,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/21/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/21/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "9f3be85c-7214-51b5-badc-633715329c89",
@@ -1694,7 +2536,7 @@
         "fermi_degeneracy_spin_orbitals": 28,
         "occupied_fermi_spin_orbitals": 14,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -33.68,
         "qsz_afqmc_standard_error_hartree": 0.03,
         "exact_anchor_energy_hartree": null,
@@ -1715,7 +2557,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 64,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.03
+          },
+          "computed_threshold_hartree": 0.064,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -1730,7 +2585,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/22/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/22/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "c8483ed6-4145-54ab-ae8c-44dbf70aedb2",
@@ -1767,7 +2636,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -33.66,
         "qsz_afqmc_standard_error_hartree": 0.02,
         "exact_anchor_energy_hartree": null,
@@ -1788,7 +2657,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 64,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.02
+          },
+          "computed_threshold_hartree": 0.064,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -1803,7 +2685,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/23/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/23/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "165a257c-248d-5e0a-b8cc-a3e8f7380931",
@@ -1840,7 +2736,7 @@
         "fermi_degeneracy_spin_orbitals": 36,
         "occupied_fermi_spin_orbitals": 18,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -116.908,
         "qsz_afqmc_standard_error_hartree": 0.004,
         "exact_anchor_energy_hartree": null,
@@ -1861,7 +2757,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 100,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.004
+          },
+          "computed_threshold_hartree": 0.1,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -1876,7 +2785,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/24/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/24/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "8abe07a9-78ff-5e19-9cbc-79c6b1b18e75",
@@ -1913,7 +2836,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -118.505,
         "qsz_afqmc_standard_error_hartree": 0.004,
         "exact_anchor_energy_hartree": null,
@@ -1934,7 +2857,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 100,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.004
+          },
+          "computed_threshold_hartree": 0.1,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -1949,7 +2885,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/25/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/25/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "46eb70f6-9df3-515d-bdf3-d19681e495ce",
@@ -1986,7 +2936,7 @@
         "fermi_degeneracy_spin_orbitals": 36,
         "occupied_fermi_spin_orbitals": 18,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -86.12,
         "qsz_afqmc_standard_error_hartree": 0.04,
         "exact_anchor_energy_hartree": null,
@@ -2007,7 +2957,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 100,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.04
+          },
+          "computed_threshold_hartree": 0.1,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -2022,7 +2985,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": true
+      "source_defect_documented": true,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/26/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/26/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "fb31d8ae-e9bd-59a6-9360-b78cb2d50e2d",
@@ -2059,7 +3036,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -86.2,
         "qsz_afqmc_standard_error_hartree": 0.02,
         "exact_anchor_energy_hartree": null,
@@ -2080,7 +3057,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 100,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.02
+          },
+          "computed_threshold_hartree": 0.1,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -2095,7 +3085,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/27/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/27/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "6e1d7d0f-5161-5aec-8812-35882f903e12",
@@ -2132,7 +3136,7 @@
         "fermi_degeneracy_spin_orbitals": 36,
         "occupied_fermi_spin_orbitals": 18,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -65.8,
         "qsz_afqmc_standard_error_hartree": 0.02,
         "exact_anchor_energy_hartree": null,
@@ -2153,7 +3157,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 100,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.02
+          },
+          "computed_threshold_hartree": 0.1,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -2168,7 +3185,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/28/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/28/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "afc9312d-7813-57cd-8e26-aaa9a5cd7981",
@@ -2205,7 +3236,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -65.76,
         "qsz_afqmc_standard_error_hartree": 0.02,
         "exact_anchor_energy_hartree": null,
@@ -2226,7 +3257,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 100,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.02
+          },
+          "computed_threshold_hartree": 0.1,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -2241,7 +3285,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/29/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/29/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "b4efb68a-d15b-5e3c-b1d8-70d4effaa023",
@@ -2278,7 +3336,7 @@
         "fermi_degeneracy_spin_orbitals": 36,
         "occupied_fermi_spin_orbitals": 18,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -52.54,
         "qsz_afqmc_standard_error_hartree": 0.03,
         "exact_anchor_energy_hartree": null,
@@ -2299,7 +3357,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 100,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.03
+          },
+          "computed_threshold_hartree": 0.1,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -2314,7 +3385,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/30/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/30/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "2343ed54-e181-5a20-b88d-5ffec353585c",
@@ -2351,7 +3436,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -52.49,
         "qsz_afqmc_standard_error_hartree": 0.02,
         "exact_anchor_energy_hartree": null,
@@ -2372,7 +3457,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 100,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.02
+          },
+          "computed_threshold_hartree": 0.1,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -2387,7 +3485,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/31/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/31/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "51ff6d30-9530-51d4-8583-929ed1223885",
@@ -2424,7 +3536,7 @@
         "fermi_degeneracy_spin_orbitals": 44,
         "occupied_fermi_spin_orbitals": 22,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -168.749,
         "qsz_afqmc_standard_error_hartree": 0.007,
         "exact_anchor_energy_hartree": null,
@@ -2445,7 +3557,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 144,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.007
+          },
+          "computed_threshold_hartree": 0.14400000000000002,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -2460,7 +3585,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/32/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/32/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "47001793-04d7-5baf-ba86-93a8156e402e",
@@ -2497,7 +3636,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -170.112,
         "qsz_afqmc_standard_error_hartree": 0.003,
         "exact_anchor_energy_hartree": null,
@@ -2518,7 +3657,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 144,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.003
+          },
+          "computed_threshold_hartree": 0.14400000000000002,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -2533,7 +3685,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/33/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/33/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "afb5c6c5-eb40-5e3d-9ea9-b2566f8a12d1",
@@ -2570,7 +3736,7 @@
         "fermi_degeneracy_spin_orbitals": 44,
         "occupied_fermi_spin_orbitals": 22,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -123.95,
         "qsz_afqmc_standard_error_hartree": 0.02,
         "exact_anchor_energy_hartree": null,
@@ -2591,7 +3757,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 144,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.02
+          },
+          "computed_threshold_hartree": 0.14400000000000002,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -2606,7 +3785,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": true
+      "source_defect_documented": true,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/34/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/34/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "4868f4f5-3898-592b-8d2c-2c40094918da",
@@ -2643,7 +3836,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -123.99,
         "qsz_afqmc_standard_error_hartree": 0.03,
         "exact_anchor_energy_hartree": null,
@@ -2664,7 +3857,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 144,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.03
+          },
+          "computed_threshold_hartree": 0.14400000000000002,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -2679,7 +3885,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/35/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/35/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "12c53b97-a0c8-5b02-b2d7-20b150439cf2",
@@ -2716,7 +3936,7 @@
         "fermi_degeneracy_spin_orbitals": 44,
         "occupied_fermi_spin_orbitals": 22,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -94.66,
         "qsz_afqmc_standard_error_hartree": 0.02,
         "exact_anchor_energy_hartree": null,
@@ -2737,7 +3957,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 144,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.02
+          },
+          "computed_threshold_hartree": 0.14400000000000002,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -2752,7 +3985,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/36/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/36/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "dbc0edb4-f4c8-55a9-a633-98ca5689e193",
@@ -2789,7 +4036,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -94.67,
         "qsz_afqmc_standard_error_hartree": 0.02,
         "exact_anchor_energy_hartree": null,
@@ -2810,7 +4057,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 144,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.02
+          },
+          "computed_threshold_hartree": 0.14400000000000002,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -2825,7 +4085,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/37/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/37/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "cd09f3a1-def5-5c63-8fe6-441ebbb55204",
@@ -2862,7 +4136,7 @@
         "fermi_degeneracy_spin_orbitals": 44,
         "occupied_fermi_spin_orbitals": 22,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -75.54,
         "qsz_afqmc_standard_error_hartree": 0.02,
         "exact_anchor_energy_hartree": null,
@@ -2883,7 +4157,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 144,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.02
+          },
+          "computed_threshold_hartree": 0.14400000000000002,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -2898,7 +4185,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/38/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/38/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "7e16e5ee-a5d9-5de3-b4a8-104d44e32966",
@@ -2935,7 +4236,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -75.58,
         "qsz_afqmc_standard_error_hartree": 0.03,
         "exact_anchor_energy_hartree": null,
@@ -2956,7 +4257,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 144,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.03
+          },
+          "computed_threshold_hartree": 0.14400000000000002,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -2971,7 +4285,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/39/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/39/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "7cb9d535-d12b-5de8-b861-4f2cddb95118",
@@ -3008,7 +4336,7 @@
         "fermi_degeneracy_spin_orbitals": 60,
         "occupied_fermi_spin_orbitals": 30,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -300.596,
         "qsz_afqmc_standard_error_hartree": 0.006,
         "exact_anchor_energy_hartree": null,
@@ -3029,7 +4357,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 256,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.006
+          },
+          "computed_threshold_hartree": 0.256,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -3044,7 +4385,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/40/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/40/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "4519521c-d1a7-5190-8d00-77f3af6d6eea",
@@ -3081,7 +4436,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -301.562,
         "qsz_afqmc_standard_error_hartree": 0.005,
         "exact_anchor_energy_hartree": null,
@@ -3102,7 +4457,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 256,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.005
+          },
+          "computed_threshold_hartree": 0.256,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -3117,7 +4485,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/41/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/41/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "f8901861-5b5a-5b92-832b-f5bb20bd0527",
@@ -3154,7 +4536,7 @@
         "fermi_degeneracy_spin_orbitals": 60,
         "occupied_fermi_spin_orbitals": 30,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -220.29,
         "qsz_afqmc_standard_error_hartree": 0.04,
         "exact_anchor_energy_hartree": null,
@@ -3175,7 +4557,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 256,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.04
+          },
+          "computed_threshold_hartree": 0.256,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -3190,7 +4585,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": true
+      "source_defect_documented": true,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/42/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/42/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "5489c563-8e95-52bd-b47d-eeea140c9982",
@@ -3227,7 +4636,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -220.3,
         "qsz_afqmc_standard_error_hartree": 0.04,
         "exact_anchor_energy_hartree": null,
@@ -3248,7 +4657,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 256,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.04
+          },
+          "computed_threshold_hartree": 0.256,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -3263,7 +4685,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/43/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/43/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "7a699b31-5c4b-56a0-878d-c00b8c2372d7",
@@ -3300,7 +4736,7 @@
         "fermi_degeneracy_spin_orbitals": 60,
         "occupied_fermi_spin_orbitals": 30,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -168.19,
         "qsz_afqmc_standard_error_hartree": 0.03,
         "exact_anchor_energy_hartree": null,
@@ -3321,7 +4757,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 256,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.03
+          },
+          "computed_threshold_hartree": 0.256,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -3336,7 +4785,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/44/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/44/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "fc432cd0-4856-54f2-a240-9813d9fda019",
@@ -3373,7 +4836,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -168.21,
         "qsz_afqmc_standard_error_hartree": 0.05,
         "exact_anchor_energy_hartree": null,
@@ -3394,7 +4857,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 256,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.05
+          },
+          "computed_threshold_hartree": 0.256,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -3409,7 +4885,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/45/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/45/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "e14e9bed-b93b-54be-9050-15c19757678b",
@@ -3446,7 +4936,7 @@
         "fermi_degeneracy_spin_orbitals": 60,
         "occupied_fermi_spin_orbitals": 30,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -134.23,
         "qsz_afqmc_standard_error_hartree": 0.03,
         "exact_anchor_energy_hartree": null,
@@ -3467,7 +4957,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 256,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.03
+          },
+          "computed_threshold_hartree": 0.256,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -3482,7 +4985,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/46/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/46/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "80b61006-12bc-5148-82a3-cd3fbfdda946",
@@ -3519,7 +5036,7 @@
         "fermi_degeneracy_spin_orbitals": 4,
         "occupied_fermi_spin_orbitals": 4,
         "basis_convention_note": "Site-basis square lattice; ECORE=0; no particle-hole shift; PBC-APBC is periodic x and antiperiodic y.",
-        "reference_policy_note": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+        "reference_policy_note": "QSZ Table IV AFQMC is a controlled reference with explicit stochastic and constrained-path/Trotter caveats.",
         "qsz_afqmc_reference_energy_hartree": -134.25,
         "qsz_afqmc_standard_error_hartree": 0.03,
         "exact_anchor_energy_hartree": null,
@@ -3540,7 +5057,20 @@
           "small-lattice dense ED code-path checks"
         ],
         "reference_energy_source": "Qin, Shi, Zhang, Phys. Rev. B 94, 085103 (2016), Table IV; arXiv:1605.09421v2.",
-        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder."
+        "reference_energy_note": "Finite-size total energy in units t=1 from QSZ Table IV AFQMC. Provenance is controlled, not exact: QSZ Table IV AFQMC is treated as controlled, not exact; stochastic error bars are printed one-sigma values and the reference carries the usual constrained-path/Trotter/finite-walker caveat. The 4x4 local FCI anchors are exact references for 4x4 rows and diagnostics for the AFQMC ladder.",
+        "threshold_convention": {
+          "kind": "hybrid_per_site_statistical_floor",
+          "display_label": "per site with statistical floor",
+          "formula": "max(per_unit_value_hartree * scale_count, statistical_floor_multiplier * reference_standard_error_hartree)",
+          "scale_count": 256,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001,
+            "statistical_floor_multiplier": 2.0,
+            "reference_standard_error_hartree": 0.03
+          },
+          "computed_threshold_hartree": 0.256,
+          "detail": "Maximum of the per-site tolerance and twice the reference standard error."
+        }
       },
       "supporting_files": [
         {
@@ -3555,7 +5085,58 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/47/features/reference_policy_note",
+            "original_value": "O7: QSZ Table IV AFQMC remains a controlled reference with explicit stochastic/constrained-path/Trotter caveat.",
+            "original_value_sha256": "0eed2880b680f0c79c83640b2eb496cd3ea956e99905e746365bb49aed941bb2",
+            "public_replacement_pointer": "/tasks/47/features/reference_policy_note",
+            "public_replacement_value_sha256": "eb92b181bafaa8e1ce9416fdc4c8b4d56d1b5d419f902d87f69aa8a606c182df",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     }
-  ]
+  ],
+  "internal_provenance": {
+    "migration_records": [
+      {
+        "original_json_pointer": "/references/1",
+        "original_value": "arXiv:1605.09421v2 official PDF and source tarball, checksummed in analysis/qsz_hubbard_2d_halffilled/qsz_source_manifest.csv.",
+        "original_value_sha256": "41f94b7ee2375c00f758bfd56fdfade0c155b287d5c56827cbffc52e3f7130e9",
+        "public_replacement_pointer": "/references/1",
+        "public_replacement_value_sha256": "bce491290146ece16e51d2bd974abceaf2c77f196b2a6d84c9e4f96b4d4413e0",
+        "internal_pointer_classes": [
+          "analysis_path"
+        ]
+      },
+      {
+        "original_json_pointer": "/references/2",
+        "original_value": "C13 implementer spec W1, analysis/coverage_expansion/C13_implementer_spec.md.",
+        "original_value_sha256": "8ec9e6e918f265680987a1f96ef6621b37496c51d0ae2e418d307fcfd6273f5a",
+        "public_replacement_pointer": "/references/2",
+        "public_replacement_value_sha256": "83544892be84cfbd788776bb88150cd209e8ee182a81e4e8fc5f6a2af39e2b9f",
+        "internal_pointer_classes": [
+          "analysis_path",
+          "governance_id",
+          "spec_or_wave_id"
+        ]
+      },
+      {
+        "original_json_pointer": "/references/3",
+        "original_value": "O7 policy in MATT_DECISION_QUEUE.md: local 4x4 FCI anchors are Exact references; QSZ AFQMC rows remain controlled with caveats.",
+        "original_value_sha256": "85a2ff4ac3dd3b3b1b3941e411e7c1865e7c5915cec91077720727868182ae2e",
+        "public_replacement_pointer": "/references/3",
+        "public_replacement_value_sha256": "937031a94f2b0fb919448ae0c9475c9eb1c3e26d78950e06b0847a674009670d",
+        "internal_pointer_classes": [
+          "governance_id",
+          "matt_decision_queue"
+        ]
+      }
+    ]
+  }
 }

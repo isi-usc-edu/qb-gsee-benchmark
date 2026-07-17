@@ -1,0 +1,41 @@
+{
+  "archived_classification_sha256": "7cc95f55ae246ced02260cb45b8b2911dbdfecdc0f2ce77fb448bc3330560527",
+  "archived_column_classification_counts": {
+    "demoted_for_jw_mechanism": 2,
+    "measurement_defect": 7,
+    "superseded_by_protocol_equivalent": 4
+  },
+  "census_sha256": "a541cd7f4194a78a5c15b06021db3bb9ece1d3f3a4e33b64adc341816db16aad",
+  "checks": {
+    "all_jw_cost_tags_become_neutral": true,
+    "audit_record_explicitly_excluded": true,
+    "classification_split_7_4_2": true,
+    "feature_catalog_21_cost_class_cells": true,
+    "feature_catalog_28_affected_rows": true,
+    "feature_catalog_55_changed_cells": true,
+    "feature_catalog_580_rows": true,
+    "fifteen_current_jw_columns_stay_eligible": true,
+    "four_cheap_artifact_renames": true,
+    "four_replacement_mappings_exist": true,
+    "metrics_v1_9_explicitly_excluded": true,
+    "only_edge_order_columns_restore": true,
+    "standing_vocabulary_clean": true,
+    "thirteen_archived_columns_classified": true,
+    "two_code_reference_updates": true
+  },
+  "feature_catalog_affected_row_count": 28,
+  "feature_catalog_changed_cell_count": 55,
+  "feature_catalog_cost_class_rename_count": 21,
+  "goal": "G-56",
+  "passed": true,
+  "row_kind_counts": {
+    "audit_exclusion": 1,
+    "byte_pinned_bundle_exclusion": 1,
+    "feature_catalog_cell": 55,
+    "forward_artifact_filename": 4,
+    "forward_code_reference": 2
+  },
+  "schema_version": 2,
+  "scope_addition": "matt_jw_hamiltonian_feature_ruling",
+  "status": "proposal_only_pending_pi_review"
+}

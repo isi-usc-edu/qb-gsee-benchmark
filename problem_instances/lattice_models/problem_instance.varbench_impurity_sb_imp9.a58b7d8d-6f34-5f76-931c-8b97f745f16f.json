@@ -70,9 +70,20 @@
           "VarBench exact diagonalization",
           "local exact diagonalization of generated FCIDUMP"
         ],
-        "reference_energy_source": "VarBench row work/fcidumps/varbench_impurity/source/SB-IMP_9.md and method script work/fcidumps/varbench_impurity/source/methods_SB-IMP_9.py",
+        "reference_energy_source": "VarBench SB-IMP_9 benchmark row and accompanying public method script.",
         "reference_energy_note": "Candidate condensed-matter impurity subset. Local ED of the generated finite Hamiltonian matches the VarBench exact-ED row to numerical precision.",
-        "absolute_accuracy_threshold_note": "O19 keeps the absolute threshold: an impurity plus finite bath is not translationally extensive, so a per-site rule is not physically meaningful."
+        "absolute_accuracy_threshold_note": "The absolute threshold is retained because an impurity plus finite bath is not translationally extensive, so a per-site rule is not physically meaningful.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -87,7 +98,31 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/0/requirements/absolute_accuracy_threshold_note",
+            "original_value": "O19 keeps the absolute threshold: an impurity plus finite bath is not translationally extensive, so a per-site rule is not physically meaningful.",
+            "original_value_sha256": "48c47c9c3b666db347ec4ed8ad69276c840bd5475511cb08f6ccf495ca687db4",
+            "public_replacement_pointer": "/tasks/0/requirements/absolute_accuracy_threshold_note",
+            "public_replacement_value_sha256": "ec348d753904485ac327f5ca37c4d14eb5a8deb7c58b1b1e65a733ebd2a7bf6b",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/0/requirements/reference_energy_source",
+            "original_value": "VarBench row work/fcidumps/varbench_impurity/source/SB-IMP_9.md and method script work/fcidumps/varbench_impurity/source/methods_SB-IMP_9.py",
+            "original_value_sha256": "b4a4baff3a17fcc34503e954b5faf8e7a8d0d170b33585d3bdf898bba528c224",
+            "public_replacement_pointer": "/tasks/0/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "ec0cad1d179562201783a6091c3031d66b3f76b098ee5d236a7f363dab4c3b20",
+            "internal_pointer_classes": [
+              "work_path"
+            ]
+          }
+        ]
+      }
     }
   ]
 }

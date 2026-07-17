@@ -31,7 +31,7 @@
     "url": "http://www.apache.org/licenses/LICENSE-2.0"
   },
   "references": [
-    "Inorg. Chem. 2014, 53 (13), 6904\u00e2\u20ac\u201c6913"
+    "Inorg. Chem. 2014, 53 (13), 6904–6913"
   ],
   "short_name": "ru_mono",
   "tasks": [
@@ -126,7 +126,9 @@
         "avas_ne": 11,
         "avas_no": 9,
         "nbasis": 895,
-        "utility_scale": false
+        "utility_scale": false,
+        "num_orbitals": 9,
+        "num_electrons": 11
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -144,7 +146,18 @@
           "DMRG"
         ],
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference."
+        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -254,7 +267,9 @@
         "avas_ne": 53,
         "avas_no": 34,
         "nbasis": 895,
-        "utility_scale": false
+        "utility_scale": false,
+        "num_orbitals": 34,
+        "num_electrons": 53
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -268,7 +283,18 @@
         "reference_energy_method": "None",
         "reference_energy_provenance": "no_reference",
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row."
+        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -377,7 +403,9 @@
         "avas_ne": 10,
         "avas_no": 10,
         "nbasis": 913,
-        "utility_scale": false
+        "utility_scale": false,
+        "num_orbitals": 10,
+        "num_electrons": 10
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -395,7 +423,18 @@
           "DMRG"
         ],
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference."
+        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -508,7 +547,9 @@
         "avas_ne": 58,
         "avas_no": 36,
         "nbasis": 913,
-        "utility_scale": false
+        "utility_scale": false,
+        "num_orbitals": 36,
+        "num_electrons": 58
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -526,7 +567,18 @@
           "DMRG"
         ],
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference."
+        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -634,7 +686,9 @@
         "avas_ne": 12,
         "avas_no": 9,
         "nbasis": 895,
-        "utility_scale": false
+        "utility_scale": false,
+        "num_orbitals": 9,
+        "num_electrons": 12
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -652,7 +706,18 @@
           "DMRG"
         ],
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference."
+        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -769,7 +834,9 @@
         "reference_energy_uncertainty_units": "millihartree",
         "reference_energy_source": "Calculated with Block2 (https://block2.readthedocs.io/)",
         "reference_energy_method": "DMRG with linear extrapolation to zero discarded weight. Forward schedule used with orbital ordering based on genetic algorithm optimization with the exchange matrix. See DRMG section of arXiv:2406.06335.",
-        "reference_energy_uncertainty_type": "value +/- uncertainty gives a 95% confidence interval. The uncertainty is from the fit."
+        "reference_energy_uncertainty_type": "value +/- uncertainty gives a 95% confidence interval. The uncertainty is from the fit.",
+        "num_orbitals": 34,
+        "num_electrons": 54
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -787,7 +854,18 @@
           "DMRG"
         ],
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference."
+        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {

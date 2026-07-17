@@ -19,7 +19,7 @@
   "problem_type": "GSEE",
   "references": [
     "https://doi.org/10.1103/PhysRevLett.20.1445",
-    "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968); finite periodic-chain Bethe equations solved numerically and validated against exact diagonalization in analysis/hubbard_lieb_wu_subset."
+    "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968); finite periodic-chain Bethe equations solved numerically and validated against exact diagonalization."
   ],
   "short_name": "hubbard_lieb_wu_1d_site_basis",
   "status": "in_development",
@@ -77,8 +77,19 @@
         "reference_energy_cross_validation_methods": [
           "exact diagonalization"
         ],
-        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
-        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package."
+        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically and independently checked by exact diagonalization.",
+        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "Small six-site exception retains fixed chemical accuracy."
+        }
       },
       "supporting_files": [
         {
@@ -93,7 +104,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/0/requirements/reference_energy_source",
+            "original_value": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
+            "original_value_sha256": "110972816ea61b098a78592ecd07ee19b8c7717500fabc8a3a9ca5116e6e550c",
+            "public_replacement_pointer": "/tasks/0/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "d615fbee8c83bbd96c6afabae618ea851aeaf4a99ed6aabd1f04309dfa9d8815",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "2a644fc2-ca5e-5000-b688-33c1ed15b2bf",
@@ -137,8 +162,19 @@
         "reference_energy_cross_validation_methods": [
           "exact diagonalization"
         ],
-        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
-        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package."
+        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically and independently checked by exact diagonalization.",
+        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "Small six-site exception retains fixed chemical accuracy."
+        }
       },
       "supporting_files": [
         {
@@ -153,7 +189,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/1/requirements/reference_energy_source",
+            "original_value": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
+            "original_value_sha256": "110972816ea61b098a78592ecd07ee19b8c7717500fabc8a3a9ca5116e6e550c",
+            "public_replacement_pointer": "/tasks/1/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "d615fbee8c83bbd96c6afabae618ea851aeaf4a99ed6aabd1f04309dfa9d8815",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "a614387a-cd98-5c4c-b738-b2b51ee8cda4",
@@ -197,8 +247,19 @@
         "reference_energy_cross_validation_methods": [
           "exact diagonalization"
         ],
-        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
-        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package."
+        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically and independently checked by exact diagonalization.",
+        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "Small six-site exception retains fixed chemical accuracy."
+        }
       },
       "supporting_files": [
         {
@@ -213,7 +274,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/2/requirements/reference_energy_source",
+            "original_value": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
+            "original_value_sha256": "110972816ea61b098a78592ecd07ee19b8c7717500fabc8a3a9ca5116e6e550c",
+            "public_replacement_pointer": "/tasks/2/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "d615fbee8c83bbd96c6afabae618ea851aeaf4a99ed6aabd1f04309dfa9d8815",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "110f9d7e-6490-51ca-9316-148800685feb",
@@ -257,8 +332,19 @@
         "reference_energy_cross_validation_methods": [
           "exact diagonalization"
         ],
-        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
-        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package."
+        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically and independently checked by exact diagonalization.",
+        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "Small six-site exception retains fixed chemical accuracy."
+        }
       },
       "supporting_files": [
         {
@@ -273,7 +359,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/3/requirements/reference_energy_source",
+            "original_value": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
+            "original_value_sha256": "110972816ea61b098a78592ecd07ee19b8c7717500fabc8a3a9ca5116e6e550c",
+            "public_replacement_pointer": "/tasks/3/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "d615fbee8c83bbd96c6afabae618ea851aeaf4a99ed6aabd1f04309dfa9d8815",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "59883e1b-62d9-5848-8720-a96be824a68c",
@@ -317,8 +417,19 @@
         "reference_energy_cross_validation_methods": [
           "exact diagonalization"
         ],
-        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
-        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package."
+        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically and independently checked by exact diagonalization.",
+        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 10,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.01,
+          "detail": "Lattice threshold scales with the number of sites."
+        }
       },
       "supporting_files": [
         {
@@ -333,7 +444,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/4/requirements/reference_energy_source",
+            "original_value": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
+            "original_value_sha256": "110972816ea61b098a78592ecd07ee19b8c7717500fabc8a3a9ca5116e6e550c",
+            "public_replacement_pointer": "/tasks/4/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "d615fbee8c83bbd96c6afabae618ea851aeaf4a99ed6aabd1f04309dfa9d8815",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "b25111d5-8bed-5aed-9ab4-b6e1157784a5",
@@ -377,8 +502,19 @@
         "reference_energy_cross_validation_methods": [
           "exact diagonalization"
         ],
-        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
-        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package."
+        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically and independently checked by exact diagonalization.",
+        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 10,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.01,
+          "detail": "Lattice threshold scales with the number of sites."
+        }
       },
       "supporting_files": [
         {
@@ -393,7 +529,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/5/requirements/reference_energy_source",
+            "original_value": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
+            "original_value_sha256": "110972816ea61b098a78592ecd07ee19b8c7717500fabc8a3a9ca5116e6e550c",
+            "public_replacement_pointer": "/tasks/5/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "d615fbee8c83bbd96c6afabae618ea851aeaf4a99ed6aabd1f04309dfa9d8815",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "23bb39de-0492-5ac4-950c-16e1acc71990",
@@ -437,8 +587,19 @@
         "reference_energy_cross_validation_methods": [
           "exact diagonalization"
         ],
-        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
-        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package."
+        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically and independently checked by exact diagonalization.",
+        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 10,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.01,
+          "detail": "Lattice threshold scales with the number of sites."
+        }
       },
       "supporting_files": [
         {
@@ -453,7 +614,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/6/requirements/reference_energy_source",
+            "original_value": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
+            "original_value_sha256": "110972816ea61b098a78592ecd07ee19b8c7717500fabc8a3a9ca5116e6e550c",
+            "public_replacement_pointer": "/tasks/6/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "d615fbee8c83bbd96c6afabae618ea851aeaf4a99ed6aabd1f04309dfa9d8815",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "487199a7-ce3c-5174-b9f6-77d25dd5c59b",
@@ -497,8 +672,19 @@
         "reference_energy_cross_validation_methods": [
           "exact diagonalization"
         ],
-        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
-        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package."
+        "reference_energy_source": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically and independently checked by exact diagonalization.",
+        "reference_energy_note": "Candidate in_development analytic lattice subset. The reference is exact for this finite periodic site-basis FCIDUMP Hamiltonian; promotion still needs scope signoff that this lattice calibration tier belongs in the hard-tier package.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 10,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.01,
+          "detail": "Lattice threshold scales with the number of sites."
+        }
       },
       "supporting_files": [
         {
@@ -513,7 +699,35 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/7/requirements/reference_energy_source",
+            "original_value": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968), DOI 10.1103/PhysRevLett.20.1445; finite periodic-chain Bethe equations solved numerically in analysis/hubbard_lieb_wu_subset and independently checked by exact diagonalization.",
+            "original_value_sha256": "110972816ea61b098a78592ecd07ee19b8c7717500fabc8a3a9ca5116e6e550c",
+            "public_replacement_pointer": "/tasks/7/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "d615fbee8c83bbd96c6afabae618ea851aeaf4a99ed6aabd1f04309dfa9d8815",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          }
+        ]
+      }
     }
-  ]
+  ],
+  "internal_provenance": {
+    "migration_records": [
+      {
+        "original_json_pointer": "/references/1",
+        "original_value": "Lieb and Wu, Phys. Rev. Lett. 20, 1445 (1968); finite periodic-chain Bethe equations solved numerically and validated against exact diagonalization in analysis/hubbard_lieb_wu_subset.",
+        "original_value_sha256": "bc5a88309c4fa620e81f0b6bf62e45ac30edbabcf3123586ed7858ea42501c29",
+        "public_replacement_pointer": "/references/1",
+        "public_replacement_value_sha256": "c5f7c3dac0b8de802fd6e3109dc27d6e46163466794de3c03311cc407a943430",
+        "internal_pointer_classes": [
+          "analysis_path"
+        ]
+      }
+    ]
+  }
 }

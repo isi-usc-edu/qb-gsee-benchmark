@@ -76,7 +76,18 @@
           "closed-shell determinant count"
         ],
         "reference_energy_source": "https://doi.org/10.1021/acs.jctc.3c01190",
-        "reference_energy_note": "Tier P: the published distributed-FCI value is used as the exact reference; the reconstructed Hamiltonian is checked by SI geometry/basis/sector, determinant count, and FCIDUMP HF roundtrip. No independent reproduction of Gao's distributed calculation is claimed."
+        "reference_energy_note": "Tier P: the published distributed-FCI value is used as the exact reference; the reconstructed Hamiltonian is checked by SI geometry/basis/sector, determinant count, and FCIDUMP HF roundtrip. No independent reproduction of Gao's distributed calculation is claimed.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {

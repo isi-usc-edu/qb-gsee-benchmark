@@ -8,15 +8,15 @@ SCRIPT = (
     Path(__file__).resolve().parents[2]
     / "scripts"
     / "solver_panel"
-    / "build_legacy_lattice_task_mapping.py"
+    / "build_prototype_lattice_task_mapping.py"
 )
-SPEC = importlib.util.spec_from_file_location("legacy_lattice_mapping", SCRIPT)
+SPEC = importlib.util.spec_from_file_location("prototype_lattice_mapping", SCRIPT)
 assert SPEC is not None and SPEC.loader is not None
 mapping_module = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(mapping_module)
 
 
-def test_legacy_lattice_mapping_is_complete_and_checksum_certified():
+def test_prototype_lattice_mapping_is_complete_and_checksum_certified():
     repo_root = Path(__file__).resolve().parents[2]
     mapping = mapping_module.build_mapping(repo_root)
     summary = mapping["summary"]

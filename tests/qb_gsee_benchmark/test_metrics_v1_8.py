@@ -471,7 +471,7 @@ def test_v18_certified_mapping_join_and_lattice_metadata_paths(tmp_path):
     )
     (instance_dir / "instance.json").write_text(json.dumps(instance), encoding="utf-8")
     (solution_dir / "solution.json").write_text(json.dumps(solution), encoding="utf-8")
-    (mapping_dir / "g31_legacy_lattice_task_mapping.csv").write_text(
+    (mapping_dir / "g31_prototype_lattice_task_mapping.csv").write_text(
         mapping, encoding="utf-8"
     )
     tasks, attempts = module.load_committed_artifacts(repository)

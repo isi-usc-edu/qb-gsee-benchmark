@@ -31,7 +31,7 @@
     "url": "http://www.apache.org/licenses/LICENSE-2.0"
   },
   "references": [
-    "J. Am. Chem. Soc. 2006, 128 (23), 7476\u00e2\u20ac\u201c7485"
+    "J. Am. Chem. Soc. 2006, 128 (23), 7476–7485"
   ],
   "short_name": "blue_dimer",
   "tasks": [
@@ -145,7 +145,9 @@
         "avas_ne": 22,
         "avas_no": 18,
         "nbasis": 2106,
-        "utility_scale": false
+        "utility_scale": false,
+        "num_orbitals": 18,
+        "num_electrons": 22
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -159,7 +161,18 @@
         "reference_energy_method": "None",
         "reference_energy_provenance": "no_reference",
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row."
+        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -288,7 +301,9 @@
         "avas_ne": 30,
         "avas_no": 22,
         "nbasis": 2106,
-        "utility_scale": false
+        "utility_scale": false,
+        "num_orbitals": 22,
+        "num_electrons": 30
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -302,7 +317,18 @@
         "reference_energy_method": "None",
         "reference_energy_provenance": "no_reference",
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row."
+        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -437,7 +463,9 @@
         "avas_ne": 50,
         "avas_no": 34,
         "nbasis": 2106,
-        "utility_scale": false
+        "utility_scale": false,
+        "num_orbitals": 34,
+        "num_electrons": 50
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -451,7 +479,18 @@
         "reference_energy_method": "None",
         "reference_energy_provenance": "no_reference",
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row."
+        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -588,7 +627,9 @@
         "avas_ne": 50,
         "avas_no": 36,
         "nbasis": 2106,
-        "utility_scale": false
+        "utility_scale": false,
+        "num_orbitals": 36,
+        "num_electrons": 50
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -602,7 +643,18 @@
         "reference_energy_method": "None",
         "reference_energy_provenance": "no_reference",
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row."
+        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -729,7 +781,9 @@
         "avas_ne": 22,
         "avas_no": 18,
         "nbasis": 2106,
-        "utility_scale": false
+        "utility_scale": false,
+        "num_orbitals": 18,
+        "num_electrons": 22
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -743,7 +797,18 @@
         "reference_energy_method": "None",
         "reference_energy_provenance": "no_reference",
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row."
+        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -872,7 +937,9 @@
         "avas_ne": 30,
         "avas_no": 22,
         "nbasis": 2106,
-        "utility_scale": false
+        "utility_scale": false,
+        "num_orbitals": 22,
+        "num_electrons": 30
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -890,7 +957,18 @@
           "DMRG"
         ],
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference."
+        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -1025,7 +1103,9 @@
         "avas_ne": 50,
         "avas_no": 34,
         "nbasis": 2106,
-        "utility_scale": false
+        "utility_scale": false,
+        "num_orbitals": 34,
+        "num_electrons": 50
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -1039,7 +1119,18 @@
         "reference_energy_method": "None",
         "reference_energy_provenance": "no_reference",
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row."
+        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -1176,7 +1267,9 @@
         "avas_ne": 50,
         "avas_no": 36,
         "nbasis": 2106,
-        "utility_scale": false
+        "utility_scale": false,
+        "num_orbitals": 36,
+        "num_electrons": 50
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -1190,7 +1283,18 @@
         "reference_energy_method": "None",
         "reference_energy_provenance": "no_reference",
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row."
+        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -1317,7 +1421,9 @@
         "avas_ne": 22,
         "avas_no": 19,
         "nbasis": 2106,
-        "utility_scale": false
+        "utility_scale": false,
+        "num_orbitals": 19,
+        "num_electrons": 22
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -1335,7 +1441,18 @@
           "DMRG"
         ],
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference."
+        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -1464,7 +1581,9 @@
         "avas_ne": 38,
         "avas_no": 28,
         "nbasis": 2106,
-        "utility_scale": false
+        "utility_scale": false,
+        "num_orbitals": 28,
+        "num_electrons": 38
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -1482,7 +1601,18 @@
           "DMRG"
         ],
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference."
+        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -1617,7 +1747,9 @@
         "avas_ne": 50,
         "avas_no": 34,
         "nbasis": 2106,
-        "utility_scale": false
+        "utility_scale": false,
+        "num_orbitals": 34,
+        "num_electrons": 50
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -1631,7 +1763,18 @@
         "reference_energy_method": "None",
         "reference_energy_provenance": "no_reference",
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row."
+        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -1768,7 +1911,9 @@
         "avas_ne": 50,
         "avas_no": 36,
         "nbasis": 2106,
-        "utility_scale": false
+        "utility_scale": false,
+        "num_orbitals": 36,
+        "num_electrons": 50
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -1782,7 +1927,18 @@
         "reference_energy_method": "None",
         "reference_energy_provenance": "no_reference",
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row."
+        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {

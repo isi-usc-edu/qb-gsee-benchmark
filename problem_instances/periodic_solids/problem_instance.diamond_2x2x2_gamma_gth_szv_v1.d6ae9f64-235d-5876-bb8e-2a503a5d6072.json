@@ -89,8 +89,19 @@
         "reference_energy_method": "lowest TrimCI T3 variational state among three recorded outer seeds; 10,000,000 determinants",
         "reference_energy_provenance": "variational_upper_bound",
         "reference_energy_independent_of_shci_family": true,
-        "reference_energy_source": "In-house same-Hamiltonian TrimCI T1-T3 campaign with full seed, engine-content, wavefunction, and orbital-rotation provenance in analysis/diamond_2x2x2/trimci_production_analysis.json.",
-        "reference_energy_note": "This value is a rigorous variational upper bound, not a nearly exact point reference. The selected T3 PT2 magnitude is 0.06387459293438362 Ha and is recorded only as one-sided distance-to-ground context, not as an uncertainty. Outer-seed spread is a protocol diagnostic only; the preregistered ladder produced no extrapolated reference."
+        "reference_energy_source": "Same-Hamiltonian TrimCI T1-T3 campaign with recorded seeds, engine content, wavefunction, and orbital-rotation provenance.",
+        "reference_energy_note": "This value is a rigorous variational upper bound, not a nearly exact point reference. The selected T3 PT2 magnitude is 0.06387459293438362 Ha and is recorded only as one-sided distance-to-ground context, not as an uncertainty. Outer-seed spread is a protocol diagnostic only; the preregistered ladder produced no extrapolated reference.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -105,7 +116,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/0/requirements/reference_energy_source",
+            "original_value": "In-house same-Hamiltonian TrimCI T1-T3 campaign with full seed, engine-content, wavefunction, and orbital-rotation provenance in analysis/diamond_2x2x2/trimci_production_analysis.json.",
+            "original_value_sha256": "efd9894037f33e6d9d24b419b132f135ed73d37bafa2049f4db3349be8c7dd91",
+            "public_replacement_pointer": "/tasks/0/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "b264dfa18fb22e879ad141658ae4b554e231213e19da77a0998d981cc21e6690",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          }
+        ]
+      }
     }
   ]
 }

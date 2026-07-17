@@ -25,7 +25,7 @@
   "problem_type": "GSEE",
   "references": [
     "Analytic nearest-neighbor tight-binding controls generated from the finite one-body hopping matrix; no external numerical reference data are used.",
-    "C13 implementer spec W3c, analysis/coverage_expansion/C13_implementer_spec.md."
+    "Coverage-expansion specification for finite tight-binding controls."
   ],
   "short_name": "tight_binding_controls",
   "status": "in_development",
@@ -89,8 +89,19 @@
         "reference_energy_cross_validation_methods": [
           "PySCF FCIDUMP reader one-body spectrum verifier"
         ],
-        "reference_energy_source": "C13 W3c analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
-        "reference_energy_note": "Control-sanity task only. Exclude from benchmark scoring and ML feature maps; use for convention checks."
+        "reference_energy_source": "Analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
+        "reference_energy_note": "Control-sanity task only. Exclude from benchmark scoring and ML feature maps; use for convention checks.",
+        "threshold_convention": {
+          "kind": "control",
+          "display_label": "control tolerance",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 1e-10
+          },
+          "computed_threshold_hartree": 1e-10,
+          "detail": "Numerical validation/control tolerance, not a science accuracy window."
+        }
       },
       "supporting_files": [
         {
@@ -105,7 +116,21 @@
       "curation_tier": "test",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/0/requirements/reference_energy_source",
+            "original_value": "C13 W3c analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
+            "original_value_sha256": "a83127aeac7b545bac93c9b3746b9c0a9cfa9b05e11d76c3344b353db32d973d",
+            "public_replacement_pointer": "/tasks/0/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "2cb906acf4e099ea61fff7c713b16a0e109dfc594791084f30edf0ead1ef7f27",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "fe55f18e-d86d-50d9-83ae-49ae37799e0a",
@@ -157,8 +182,19 @@
         "reference_energy_cross_validation_methods": [
           "PySCF FCIDUMP reader one-body spectrum verifier"
         ],
-        "reference_energy_source": "C13 W3c analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
-        "reference_energy_note": "Control-sanity task only. Exclude from benchmark scoring and ML feature maps; use for convention checks."
+        "reference_energy_source": "Analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
+        "reference_energy_note": "Control-sanity task only. Exclude from benchmark scoring and ML feature maps; use for convention checks.",
+        "threshold_convention": {
+          "kind": "control",
+          "display_label": "control tolerance",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 1e-10
+          },
+          "computed_threshold_hartree": 1e-10,
+          "detail": "Numerical validation/control tolerance, not a science accuracy window."
+        }
       },
       "supporting_files": [
         {
@@ -173,7 +209,21 @@
       "curation_tier": "test",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/1/requirements/reference_energy_source",
+            "original_value": "C13 W3c analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
+            "original_value_sha256": "a83127aeac7b545bac93c9b3746b9c0a9cfa9b05e11d76c3344b353db32d973d",
+            "public_replacement_pointer": "/tasks/1/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "2cb906acf4e099ea61fff7c713b16a0e109dfc594791084f30edf0ead1ef7f27",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "f323dcf7-70b5-5636-a085-86c78fd989e2",
@@ -225,8 +275,19 @@
         "reference_energy_cross_validation_methods": [
           "PySCF FCIDUMP reader one-body spectrum verifier"
         ],
-        "reference_energy_source": "C13 W3c analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
-        "reference_energy_note": "Control-sanity task only. Exclude from benchmark scoring and ML feature maps; use for convention checks."
+        "reference_energy_source": "Analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
+        "reference_energy_note": "Control-sanity task only. Exclude from benchmark scoring and ML feature maps; use for convention checks.",
+        "threshold_convention": {
+          "kind": "control",
+          "display_label": "control tolerance",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 1e-10
+          },
+          "computed_threshold_hartree": 1e-10,
+          "detail": "Numerical validation/control tolerance, not a science accuracy window."
+        }
       },
       "supporting_files": [
         {
@@ -241,7 +302,21 @@
       "curation_tier": "test",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/2/requirements/reference_energy_source",
+            "original_value": "C13 W3c analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
+            "original_value_sha256": "a83127aeac7b545bac93c9b3746b9c0a9cfa9b05e11d76c3344b353db32d973d",
+            "public_replacement_pointer": "/tasks/2/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "2cb906acf4e099ea61fff7c713b16a0e109dfc594791084f30edf0ead1ef7f27",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "c5697f2e-013f-55c4-98a5-f1ddf6ffbd65",
@@ -293,8 +368,19 @@
         "reference_energy_cross_validation_methods": [
           "PySCF FCIDUMP reader one-body spectrum verifier"
         ],
-        "reference_energy_source": "C13 W3c analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
-        "reference_energy_note": "Control-sanity task only. Exclude from benchmark scoring and ML feature maps; use for convention checks."
+        "reference_energy_source": "Analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
+        "reference_energy_note": "Control-sanity task only. Exclude from benchmark scoring and ML feature maps; use for convention checks.",
+        "threshold_convention": {
+          "kind": "control",
+          "display_label": "control tolerance",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 1e-10
+          },
+          "computed_threshold_hartree": 1e-10,
+          "detail": "Numerical validation/control tolerance, not a science accuracy window."
+        }
       },
       "supporting_files": [
         {
@@ -309,7 +395,21 @@
       "curation_tier": "test",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/3/requirements/reference_energy_source",
+            "original_value": "C13 W3c analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
+            "original_value_sha256": "a83127aeac7b545bac93c9b3746b9c0a9cfa9b05e11d76c3344b353db32d973d",
+            "public_replacement_pointer": "/tasks/3/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "2cb906acf4e099ea61fff7c713b16a0e109dfc594791084f30edf0ead1ef7f27",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "da5fe92d-18e9-5990-9346-81bc874e25b5",
@@ -361,8 +461,19 @@
         "reference_energy_cross_validation_methods": [
           "PySCF FCIDUMP reader one-body spectrum verifier"
         ],
-        "reference_energy_source": "C13 W3c analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
-        "reference_energy_note": "Control-sanity task only. Exclude from benchmark scoring and ML feature maps; use for convention checks."
+        "reference_energy_source": "Analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
+        "reference_energy_note": "Control-sanity task only. Exclude from benchmark scoring and ML feature maps; use for convention checks.",
+        "threshold_convention": {
+          "kind": "control",
+          "display_label": "control tolerance",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 1e-10
+          },
+          "computed_threshold_hartree": 1e-10,
+          "detail": "Numerical validation/control tolerance, not a science accuracy window."
+        }
       },
       "supporting_files": [
         {
@@ -377,7 +488,37 @@
       "curation_tier": "test",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/4/requirements/reference_energy_source",
+            "original_value": "C13 W3c analytic finite tight-binding control: diagonalize the generated one-body hopping matrix and sum the lowest NELEC spin-orbital eigenvalues.",
+            "original_value_sha256": "a83127aeac7b545bac93c9b3746b9c0a9cfa9b05e11d76c3344b353db32d973d",
+            "public_replacement_pointer": "/tasks/4/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "2cb906acf4e099ea61fff7c713b16a0e109dfc594791084f30edf0ead1ef7f27",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     }
-  ]
+  ],
+  "internal_provenance": {
+    "migration_records": [
+      {
+        "original_json_pointer": "/references/1",
+        "original_value": "C13 implementer spec W3c, analysis/coverage_expansion/C13_implementer_spec.md.",
+        "original_value_sha256": "5ab1a4ff8be32dd104adaf139b090d7be0b20b65303f6c5e8d1b591cea58a727",
+        "public_replacement_pointer": "/references/1",
+        "public_replacement_value_sha256": "70dbbe7d4fc04f606bce8ddc7d02274dc652203b8791c64a8c20a6211021d8fe",
+        "internal_pointer_classes": [
+          "analysis_path",
+          "governance_id",
+          "spec_or_wave_id"
+        ]
+      }
+    ]
+  }
 }

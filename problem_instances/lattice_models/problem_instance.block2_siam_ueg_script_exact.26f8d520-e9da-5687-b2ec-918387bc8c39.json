@@ -64,7 +64,18 @@
           "block2 DMRG"
         ],
         "reference_energy_source": "block2-example-data 06-SIAM output at commit ee9868b32ce1527a5067707f21f178128ad4d9b0; pyblock2 driver convention from block2-preview commit d0549a22839377b1658e581be3ac4dde8d951c10",
-        "reference_energy_note": "Script-exact 06-SIAM Hamiltonian. The upstream pyblock2 script sets g2e[idximp,idximp,idximp,idximp]=u/2; this FCIDUMP preserves that value rather than rewriting it to a different physical-U convention."
+        "reference_energy_note": "Script-exact 06-SIAM Hamiltonian. The upstream pyblock2 script sets g2e[idximp,idximp,idximp,idximp]=u/2; this FCIDUMP preserves that value rather than rewriting it to a different physical-U convention.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 48,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.048,
+          "detail": "SIAM threshold scales with the finite impurity-plus-bath orbital count."
+        }
       },
       "supporting_files": [
         {
@@ -116,7 +127,18 @@
           "block2 DMRG"
         ],
         "reference_energy_source": "block2-example-data 07-UEG output at commit ee9868b32ce1527a5067707f21f178128ad4d9b0; pyblock2 driver convention from block2-preview commit d0549a22839377b1658e581be3ac4dde8d951c10",
-        "reference_energy_note": "The Hamiltonian is the block2 07-UEG script-exact finite-basis Hamiltonian with ECORE=0. The complex momentum basis was unitarily transformed to a real cosine/sine basis before FCIDUMP export."
+        "reference_energy_note": "The Hamiltonian is the block2 07-UEG script-exact finite-basis Hamiltonian with ECORE=0. The complex momentum basis was unitarily transformed to a real cosine/sine basis before FCIDUMP export.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {

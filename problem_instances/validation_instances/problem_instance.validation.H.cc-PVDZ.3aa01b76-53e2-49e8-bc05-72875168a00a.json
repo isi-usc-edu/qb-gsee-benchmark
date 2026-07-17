@@ -25,7 +25,18 @@
         "reference_energy_method": "Exact FCI solution in PySCF 2.8.0, with multithreading disabled.",
         "reference_energy_provenance": "exact",
         "reference_energy_independent_of_shci_family": true,
-        "reference_energy_note": "Reference energy is an exact FCI solution from PySCF 2.8.0 with multithreading disabled; this is independent of the SHCI family."
+        "reference_energy_note": "Reference energy is an exact FCI solution from PySCF 2.8.0 with multithreading disabled; this is independent of the SHCI family.",
+        "threshold_convention": {
+          "kind": "control",
+          "display_label": "control tolerance",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "Numerical validation/control tolerance, not a science accuracy window."
+        }
       },
       "supporting_files": [
         {

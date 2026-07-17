@@ -3,6 +3,192 @@
     "$id": "problem_instance.schema.0.0.2.json",
     "title": "Quantum Benchmarking Problem Instance File Schema",
     "description": "Describes required fields for a valid problem instance file. Version 0.0.2 adds O1 task-level reference taxonomy and curation fields.",
+    "$defs": {
+        "internal_provenance": {
+            "title": "Internal Provenance",
+            "description": "Audit-only repository provenance. Dashboard public-source rendering must exclude this object.",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "governance": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                            "identifier",
+                            "original_json_pointer"
+                        ],
+                        "properties": {
+                            "identifier": {
+                                "type": "string"
+                            },
+                            "source_path": {
+                                "type": "string"
+                            },
+                            "original_json_pointer": {
+                                "type": "string",
+                                "pattern": "^/"
+                            }
+                        }
+                    }
+                },
+                "validation_artifacts": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                            "path",
+                            "sha256",
+                            "role"
+                        ],
+                        "properties": {
+                            "path": {
+                                "type": "string"
+                            },
+                            "sha256": {
+                                "type": "string",
+                                "pattern": "^[0-9a-f]{64}$"
+                            },
+                            "role": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "migration_records": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                            "original_json_pointer",
+                            "original_value",
+                            "original_value_sha256",
+                            "public_replacement_pointer",
+                            "public_replacement_value_sha256",
+                            "internal_pointer_classes"
+                        ],
+                        "properties": {
+                            "original_json_pointer": {
+                                "type": "string",
+                                "pattern": "^/"
+                            },
+                            "original_value": {
+                                "type": "string"
+                            },
+                            "original_value_sha256": {
+                                "type": "string",
+                                "pattern": "^[0-9a-f]{64}$"
+                            },
+                            "public_replacement_pointer": {
+                                "type": "string",
+                                "pattern": "^/"
+                            },
+                            "public_replacement_value_sha256": {
+                                "type": "string",
+                                "pattern": "^[0-9a-f]{64}$"
+                            },
+                            "internal_pointer_classes": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "minItems": 1,
+                                "uniqueItems": true
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "threshold_convention": {
+            "title": "Threshold Convention",
+            "description": "Public, machine-recomputable derivation of the stored absolute accuracy threshold.",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "kind",
+                "display_label",
+                "formula",
+                "scale_count",
+                "formula_parameters",
+                "computed_threshold_hartree",
+                "detail"
+            ],
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "enum": [
+                        "fixed",
+                        "per_site",
+                        "per_site_energy_scaled",
+                        "hybrid_per_site_statistical_floor",
+                        "control"
+                    ]
+                },
+                "display_label": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "formula": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "scale_count": {
+                    "oneOf": [
+                        {
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "formula_parameters": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "fixed_value_hartree": {
+                            "type": "number",
+                            "minimum": 0
+                        },
+                        "per_unit_value_hartree": {
+                            "type": "number",
+                            "minimum": 0
+                        },
+                        "statistical_floor_multiplier": {
+                            "type": "number",
+                            "minimum": 0
+                        },
+                        "reference_standard_error_hartree": {
+                            "type": "number",
+                            "minimum": 0
+                        },
+                        "per_site_dimensionless_factor": {
+                            "type": "number",
+                            "minimum": 0
+                        },
+                        "energy_scale_hartree": {
+                            "type": "number",
+                            "minimum": 0
+                        }
+                    },
+                    "minProperties": 1
+                },
+                "computed_threshold_hartree": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "detail": {
+                    "type": "string",
+                    "minLength": 1
+                }
+            }
+        }
+    },
     "required": [
         "problem_instance_uuid",
         "short_name",
@@ -260,6 +446,9 @@
                                 "enum": [
                                     "Hartree"
                                 ]
+                            },
+                            "threshold_convention": {
+                                "$ref": "#/$defs/threshold_convention"
                             }
                         }
                     },
@@ -317,6 +506,9 @@
                         "title": "Planting Mechanism",
                         "description": "Optional planted-solution construction mechanism for planted families.",
                         "type": "string"
+                    },
+                    "internal_provenance": {
+                        "$ref": "#/$defs/internal_provenance"
                     }
                 }
             }
@@ -325,6 +517,9 @@
             "title": "Instance Features",
             "description": "An object describing the features of the instance. E.g., basis set used for Hamiltonian creation, number of orbitals, etc.  Exact structure is TBD.",
             "type": "object"
+        },
+        "internal_provenance": {
+            "$ref": "#/$defs/internal_provenance"
         }
     }
 }

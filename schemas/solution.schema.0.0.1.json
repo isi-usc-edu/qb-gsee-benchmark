@@ -121,6 +121,18 @@
                                 "title": "RAM (GB)",
                                 "description": "Total RAM available for the computation, in GB.",
                                 "type": "number"
+                            },
+                            "peak_rss_bytes": {
+                                "title": "Peak Resident Set Size (bytes)",
+                                "description": "Optional maximum resident set size observed for this task attempt, in bytes.",
+                                "type": "integer",
+                                "minimum": 0
+                            },
+                            "peak_rss_measurement_method": {
+                                "title": "Peak RSS Measurement Method",
+                                "description": "Optional description of the operating-system or runtime measurement used for peak_rss_bytes.",
+                                "type": "string",
+                                "minLength": 1
                             }
                         }
                     },

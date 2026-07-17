@@ -104,7 +104,9 @@
         "density functional": "B3LYP",
         "effective core potential": "Only for Mo atom",
         "supplementary information": "https://www.pnas.org/doi/suppl/10.1073/pnas.1619152114/suppl_file/pnas.1619152114.sapp.pdf",
-        "utility_scale": false
+        "utility_scale": false,
+        "num_orbitals": 54,
+        "num_electrons": 54
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -122,7 +124,18 @@
           "SHCI"
         ],
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Reference energy is the existing average of extrapolated DMRG and SHCI values; this is cross-validated literature metadata, but not an SHCI-independent hard-tier reference."
+        "reference_energy_note": "Reference energy is the existing average of extrapolated DMRG and SHCI values; this is cross-validated literature metadata, but not an SHCI-independent hard-tier reference.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -386,7 +399,9 @@
         "PYSCF convention": "2*S, for UKS/B3LYP with sf-X2C Hamiltonian and COSMO eps=4.0",
         "molecular orbitals": "Split-Localized MOs, see MOs_plots (ordered by Genetic Algorithm implemented in the BLOCK code)",
         "active space information": "CAS(113e,76o)",
-        "utility_scale": true
+        "utility_scale": true,
+        "num_orbitals": 76,
+        "num_electrons": 113
       },
       "requirements": {
         "probability_of_success": 0.99,
@@ -402,7 +417,18 @@
         "reference_energy_provenance": "cross-validated",
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_update_delta_hartree": 0.0005,
-        "reference_energy_note": "Updated from -22140.4106 Hartree to the Zhai et al. 2026 cross-validated value; the 0.0005 Hartree (0.5 mHa) change is below the 0.00159362 Hartree accuracy threshold."
+        "reference_energy_note": "Updated from -22140.4106 Hartree to the Zhai et al. 2026 cross-validated value; the 0.0005 Hartree (0.5 mHa) change is below the 0.00159362 Hartree accuracy threshold.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {

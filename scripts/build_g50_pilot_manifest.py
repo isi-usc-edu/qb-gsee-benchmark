@@ -8,6 +8,7 @@ import csv
 import hashlib
 import json
 import math
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -22,6 +23,8 @@ FEATURES_PATH = Path("scripts/Hamiltonian_features.csv")
 FROZEN_PILOT_SOURCE_FEATURE_TABLE_SHA256 = (
     "ee94df21f927ff2e548ac10fda8d5a88c601f31330619ec6c575dc75cf436dc7"
 )
+# The executed pilot's per-instance hashes are immutable pre-G-56 evidence.
+FROZEN_PILOT_INSTANCE_BASE_COMMIT = "665f436bffbde3f86541314837bd2f69479efc9c"
 CANONICAL_FAMILY_ARTIFACT_PATH = Path(
     "analysis/feature_schema/canonical_families_v1.json"
 )
@@ -47,6 +50,18 @@ def _sha256(path: Path) -> str:
 
 def _json_dump(data: Any) -> str:
     return json.dumps(data, indent=2, sort_keys=True) + "\n"
+
+
+def _frozen_instance_sha256(root: Path, relative: str) -> str:
+    payload = subprocess.check_output(
+        [
+            "git",
+            "show",
+            f"{FROZEN_PILOT_INSTANCE_BASE_COMMIT}:{relative}",
+        ],
+        cwd=root,
+    )
+    return hashlib.sha256(payload).hexdigest()
 
 
 def _finite_number(value: Any) -> float | None:
@@ -273,7 +288,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                 "fcidump": _fcidump_record(item["task"]),
                 "log10_determinant_space_bound_source": item["log_dimension_source"],
                 "problem_instance_path": relative_path,
-                "problem_instance_sha256": _sha256(item["instance_path"]),
+                "problem_instance_sha256": _frozen_instance_sha256(root, relative_path),
                 "problem_instance_short_name": item["short_name"],
                 "problem_instance_uuid": item["problem_instance_uuid"],
                 "selection_distance": round(distance, 15),

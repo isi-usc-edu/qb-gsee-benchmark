@@ -78,7 +78,18 @@
         "reference_energy_uncertainty_units": "Hartree",
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "von Burg et al., Phys. Rev. Research 3, 033055 (2021), Supporting Information Table postHFEnergies and accompanying DMRG settings",
-        "reference_energy_note": "The published value is a finite-m QCMaquis DMRG-CI variational upper bound (m=1000, n=10, Fiedler ordering), not an extrapolation. The SI reports 1-2 mHartree lowering from m=500 to 1000 and an additional -1.7 mHartree change for IX from m=1000 to 2048, so the value is never treated as nearly exact."
+        "reference_energy_note": "The published value is a finite-m QCMaquis DMRG-CI variational upper bound (m=1000, n=10, Fiedler ordering), not an extrapolation. The SI reports 1-2 mHartree lowering from m=500 to 1000 and an additional -1.7 mHartree change for IX from m=1000 to 2048, so the value is never treated as nearly exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {

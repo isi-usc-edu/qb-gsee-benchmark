@@ -62,7 +62,18 @@
           "DMRG"
         ],
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference."
+        "reference_energy_note": "Reference energy is an existing benchmark-host average of SHCI and DMRG values within 0.1 mHa; this is cross-validated metadata, but not an SHCI-independent hard-tier reference.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -106,11 +117,22 @@
         "energy_target": 0.99,
         "reference_energy": null,
         "reference_energy_units": "Hartree",
-        "reference_energy_source": "None; originally from https://doi.org/10.1063/5.0018577; see scripts/original_small_molecule_reference_energies.csv",
+        "reference_energy_source": "No current reference energy; original source: https://doi.org/10.1063/5.0018577.",
         "reference_energy_method": "None",
         "reference_energy_provenance": "no_reference",
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row."
+        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -132,7 +154,21 @@
       "curation_tier": "utility",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/1/requirements/reference_energy_source",
+            "original_value": "None; originally from https://doi.org/10.1063/5.0018577; see scripts/original_small_molecule_reference_energies.csv",
+            "original_value_sha256": "2069435852614b5fa1e42c09948c9352705eca5f6c0c753ceec72c85f3980532",
+            "public_replacement_pointer": "/tasks/1/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "c3d7adf60dbc4e46e3ca06a764c42caa01cf6c21e89f03371707bf1560c898a6",
+            "internal_pointer_classes": [
+              "scripts_path"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "b80345ff-5df9-4fb3-86ab-0a25188b296d",
@@ -154,11 +190,22 @@
         "energy_target": 0.99,
         "reference_energy": null,
         "reference_energy_units": "Hartree",
-        "reference_energy_source": "None; originally from https://doi.org/10.1063/5.0018577; see scripts/original_small_molecule_reference_energies.csv",
+        "reference_energy_source": "No current reference energy; original source: https://doi.org/10.1063/5.0018577.",
         "reference_energy_method": "None",
         "reference_energy_provenance": "no_reference",
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row."
+        "reference_energy_note": "Target-only task retained for utility or coverage; not scored as a referenced benchmark row.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -180,7 +227,21 @@
       "curation_tier": "utility",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/2/requirements/reference_energy_source",
+            "original_value": "None; originally from https://doi.org/10.1063/5.0018577; see scripts/original_small_molecule_reference_energies.csv",
+            "original_value_sha256": "2069435852614b5fa1e42c09948c9352705eca5f6c0c753ceec72c85f3980532",
+            "public_replacement_pointer": "/tasks/2/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "c3d7adf60dbc4e46e3ca06a764c42caa01cf6c21e89f03371707bf1560c898a6",
+            "internal_pointer_classes": [
+              "scripts_path"
+            ]
+          }
+        ]
+      }
     }
   ]
 }

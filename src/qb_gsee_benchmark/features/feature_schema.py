@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from typing import Iterable
 
 PROVENANCE_TIERS = {"T0", "T1", "T2", "T-probe", "T3", "N/A"}
@@ -393,7 +393,7 @@ def _p2_metadata(column: str) -> FeatureColumnMetadata | None:
     )
 
 
-def metadata_for_column(column: str) -> FeatureColumnMetadata:
+def _p0_metadata_for_column(column: str) -> FeatureColumnMetadata:
     """Return explicit P0 metadata; unknown columns fail closed."""
     if column in IDENTIFIERS:
         return _audit(column, "identifier", "identifier or split-group metadata")
@@ -501,6 +501,90 @@ def metadata_for_column(column: str) -> FeatureColumnMetadata:
         return p2_metadata
     raise KeyError(f"G-40 P0 has no metadata classification for column {column!r}")
 
+
+G56_ARCHIVE_EXCLUSION_REASONS = {
+    "one_norm": (
+        "archive measurement defect: The stored value used a spinless read, "
+        "omitted the one-half two-body prefactor and identity term, and therefore "
+        "cannot be relabelled as the coefficient norm of the declared JW mapping."
+    ),
+    "one_norm_per_orbital": (
+        "archive measurement defect: Derived from the defective archived one_norm "
+        "measurement."
+    ),
+    "one_norm_per_pauli_term": (
+        "archive measurement defect: Derived from the defective archived one_norm "
+        "measurement."
+    ),
+    "min_weight": (
+        "archive measurement defect: The value equals the producer pruning cutoff "
+        "on 90 of 184 populated rows, so it measures a pipeline threshold rather "
+        "than the Hamiltonian."
+    ),
+}
+G56_SOLVER_EXCLUSION_REASONS = {
+    "ccsd_d1_diagnostic": (
+        "archive measurement defect: The value was parsed from solver-panel "
+        "output, violating the Hamiltonian-feature source contract; no independent "
+        "protocol equivalent currently exists."
+    ),
+    "ccsd_max_t2": (
+        "archive measurement defect: The value was parsed from solver-panel "
+        "output, violating the Hamiltonian-feature source contract; no independent "
+        "protocol equivalent currently exists."
+    ),
+    "ccsd_t1_diagnostic": (
+        "archive measurement defect: The value was parsed from solver-panel "
+        "output, violating the Hamiltonian-feature source contract; no independent "
+        "protocol equivalent currently exists."
+    ),
+    "mp2_corr_energy": (
+        "archived source superseded by protocol-versioned Hamiltonian-derived "
+        "mp2_corr_energy_hartree; values retained"
+    ),
+    "mp2_corr_energy_per_electron": (
+        "archived source superseded by protocol-versioned Hamiltonian-derived "
+        "mp2_correlation_energy_per_electron_hartree; values retained"
+    ),
+    "pyscf_homo_lumo_gap": (
+        "archived source superseded by protocol-versioned Hamiltonian-derived "
+        "mf_selected_fock_gap_min_hartree; values retained"
+    ),
+    "pyscf_uhf_s2": (
+        "archived source superseded by protocol-versioned Hamiltonian-derived "
+        "mf_selected_s2; values retained"
+    ),
+}
+
+
+def metadata_for_column(column: str) -> FeatureColumnMetadata:
+    """Return current metadata, including the PI-approved G-56 overlay."""
+    metadata = _p0_metadata_for_column(column)
+    if column in LEGACY_JW_MODEL:
+        return replace(
+            metadata,
+            cost_class="jw_encoding",
+            definition=f"Jordan-Wigner hypergraph statistic: {column}",
+        )
+    if column in {"max_edge_order", "min_edge_order"}:
+        return replace(
+            metadata,
+            cost_class="jw_encoding",
+            exclusion_reason="",
+            model_eligible=True,
+            role="representation-sensitivity",
+            scaling="intensive",
+        )
+    if column in G56_ARCHIVE_EXCLUSION_REASONS:
+        return replace(
+            metadata,
+            cost_class="jw_encoding",
+            exclusion_reason=G56_ARCHIVE_EXCLUSION_REASONS[column],
+        )
+    if column in G56_SOLVER_EXCLUSION_REASONS:
+        return replace(metadata, exclusion_reason=G56_SOLVER_EXCLUSION_REASONS[column])
+    return metadata
+
 PLANNED_COLUMNS = {
     column: metadata_for_column(column)
     for column in sorted(
@@ -530,6 +614,25 @@ PLANNED_COLUMNS = {
     )
     for name, metadata in PLANNED_COLUMNS.items()
 }
+
+
+def p0_metadata_catalog(
+    columns: Iterable[str], include_planned: bool = True
+) -> list[FeatureColumnMetadata]:
+    """Rebuild the historical G-40 P0 catalog without later overlays."""
+    column_list = list(columns)
+    result = [_p0_metadata_for_column(column) for column in column_list]
+    if include_planned:
+        current_names = set(column_list)
+        result.extend(
+            metadata
+            for name, metadata in PLANNED_COLUMNS.items()
+            if name not in current_names
+        )
+    names = [row.column for row in result]
+    if len(names) != len(set(names)):
+        raise ValueError("duplicate columns in feature metadata catalog")
+    return result
 
 def metadata_catalog(columns: Iterable[str], include_planned: bool = True) -> list[FeatureColumnMetadata]:
     column_list = list(columns)

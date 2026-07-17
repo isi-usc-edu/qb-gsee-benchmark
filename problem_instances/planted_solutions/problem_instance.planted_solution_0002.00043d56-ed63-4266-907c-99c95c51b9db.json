@@ -46,13 +46,25 @@
         "reference_energy_method": "Planted exact ground-state energy",
         "reference_energy_provenance": "exact",
         "reference_energy_independent_of_shci_family": true,
-        "reference_energy_note": "Reference energy is exact by construction from the planted-solution generator; this makes the reference independent of the SHCI family."
+        "reference_energy_note": "Reference energy is exact by construction from the planted-solution generator; this makes the reference independent of the SHCI family.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "features": {
         "multiplicity": 1,
         "num_electrons": 90,
         "num_orbitals": 69,
-        "utility_scale": false
+        "utility_scale": false,
+        "planted_solution": true
       },
       "task_uuid": "0deae366-42de-4081-914d-db85c6b47168",
       "reference_provenance_grade": "exact",

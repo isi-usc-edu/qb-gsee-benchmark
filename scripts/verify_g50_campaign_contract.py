@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -28,6 +29,8 @@ FEATURES_PATH = Path("scripts/Hamiltonian_features.csv")
 FROZEN_PILOT_SOURCE_FEATURE_TABLE_SHA256 = (
     "ee94df21f927ff2e548ac10fda8d5a88c601f31330619ec6c575dc75cf436dc7"
 )
+# The executed pilot's per-instance hashes are immutable pre-G-56 evidence.
+FROZEN_PILOT_INSTANCE_BASE_COMMIT = "665f436bffbde3f86541314837bd2f69479efc9c"
 CORPUS_DEFINITION = (
     "G-48 closed out, FeMoco-54 quarantine filed, Gao feature backfill "
     "decided, no pending task admissions/removals"
@@ -92,6 +95,22 @@ def _sha256(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def _frozen_instance_sha256(root: Path, relative: str) -> str | None:
+    try:
+        payload = subprocess.check_output(
+            [
+                "git",
+                "show",
+                f"{FROZEN_PILOT_INSTANCE_BASE_COMMIT}:{relative}",
+            ],
+            cwd=root,
+            stderr=subprocess.DEVNULL,
+        )
+    except subprocess.CalledProcessError:
+        return None
+    return hashlib.sha256(payload).hexdigest()
 
 
 def _record(checks: dict[str, bool], name: str, condition: Any) -> None:
@@ -572,7 +591,7 @@ def verify(
         instance_path = root / item.get("problem_instance_path", "")
         if not instance_path.is_file() or item.get(
             "problem_instance_sha256"
-        ) != _sha256(instance_path):
+        ) != _frozen_instance_sha256(root, item.get("problem_instance_path", "")):
             input_records_valid = False
             continue
         instance = json.loads(instance_path.read_text(encoding="utf-8"))

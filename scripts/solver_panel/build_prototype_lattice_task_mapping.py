@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Certify legacy-to-current Hubbard task UUID lineage for G-31."""
+"""Certify prototype-to-current Hubbard task UUID lineage for G-31."""
 
 from __future__ import annotations
 
@@ -262,18 +262,18 @@ def build_mapping(repo_root: Path) -> dict[str, Any]:
 def write_outputs(repo_root: Path, mapping: dict[str, Any]) -> None:
     output = repo_root / "analysis" / "solver_panel"
     output.mkdir(parents=True, exist_ok=True)
-    with (output / "g31_legacy_lattice_task_mapping.csv").open(
+    with (output / "g31_prototype_lattice_task_mapping.csv").open(
         "w", newline=""
     ) as handle:
         writer = csv.DictWriter(handle, fieldnames=FIELDS)
         writer.writeheader()
         writer.writerows(mapping["rows"])
-    (output / "g31_legacy_lattice_task_mapping.json").write_text(
+    (output / "g31_prototype_lattice_task_mapping.json").write_text(
         json.dumps(mapping, indent=2, sort_keys=True) + "\n"
     )
     summary = mapping["summary"]
     lines = [
-        "# G-31 legacy lattice task mapping",
+        "# G-31 prototype lattice task mapping",
         "",
         f"Status: **{mapping['status']}**.",
         "",
@@ -299,7 +299,7 @@ def write_outputs(repo_root: Path, mapping: dict[str, Any]) -> None:
         "files remain unchanged.",
         "",
     ]
-    (output / "g31_legacy_lattice_task_mapping.md").write_text("\n".join(lines))
+    (output / "g31_prototype_lattice_task_mapping.md").write_text("\n".join(lines))
 
 
 def main() -> int:

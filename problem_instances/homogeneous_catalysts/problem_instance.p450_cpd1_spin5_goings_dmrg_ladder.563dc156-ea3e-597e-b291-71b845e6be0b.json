@@ -94,7 +94,18 @@
           "exact FCI through the generic emitted-FCIDUMP reader"
         ],
         "reference_energy_source": "In-house exact FCI of released FCIDUMP gzip SHA1 2e7011abea6ba46d6c0874128ee479f05a404b05; source-HDF5 and FCIDUMP energies agree to serialized precision.",
-        "reference_energy_note": "PI-approved Test-tier control. Active space A has fixed-Ms determinant dimension 1; this exact reference is unscored and validates source-HDF5 to FCIDUMP conversion."
+        "reference_energy_note": "PI-approved Test-tier control. Active space A has fixed-Ms determinant dimension 1; this exact reference is unscored and validates source-HDF5 to FCIDUMP conversion.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -157,7 +168,18 @@
           "exact FCI through the generic emitted-FCIDUMP reader"
         ],
         "reference_energy_source": "In-house exact FCI of released FCIDUMP gzip SHA1 0770055fab43b3aadebf62d93438d6e8582c63ce; source-HDF5 and FCIDUMP energies agree to serialized precision.",
-        "reference_energy_note": "PI-approved Test-tier control. Active space B has fixed-Ms determinant dimension 56; this exact reference is unscored and validates source-HDF5 to FCIDUMP conversion."
+        "reference_energy_note": "PI-approved Test-tier control. Active space B has fixed-Ms determinant dimension 56; this exact reference is unscored and validates source-HDF5 to FCIDUMP conversion.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -226,9 +248,20 @@
         "reference_energy_method": "DMRG finite-M bond-dimension ladder with second-order polynomial extrapolation in 1/M; author-supplied private communication",
         "reference_energy_note": "Spin-5/2 active-space C uses M ladder 512.0;1024.0;2048.0;3072.0;4096.0 with energies -2756.511360000000;-2756.511360000000;-2756.511360000000;-2756.511360000000;-2756.511360000000 Ha. Extrapolated reference is -2756.511360000000 Ha; largest-M(4096.0) energy is -2756.511360000000 Ha; fit-minus-largest-M is -4.547e-13 Ha and max fit residual is 2.274e-12 Ha. The author-supplied file states the fitted energies use only a second-order polynomial and not the truncation error.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "author-supplied fitted DMRG M-ladder values from paper authors to Matt Otten, private communication; mapped to emitted FCIDUMP checksum from analysis/p450_goings_active_spaces/p450_g9_reference_mapping.csv.",
+        "reference_energy_source": "Author-supplied fitted DMRG bond-dimension ladder values from the paper authors to Matt Otten, private communication; mapped to the checksum-bound emitted FCIDUMP.",
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -244,7 +277,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/2/requirements/reference_energy_source",
+            "original_value": "author-supplied fitted DMRG M-ladder values from paper authors to Matt Otten, private communication; mapped to emitted FCIDUMP checksum from analysis/p450_goings_active_spaces/p450_g9_reference_mapping.csv.",
+            "original_value_sha256": "94eaa7b602a4938539b6ccff56d4526209854af7e41c1f2558969d0d5d47c7c7",
+            "public_replacement_pointer": "/tasks/2/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "5ea22b1a0fa48882948fadb44409b0459fd97e32b0148d3c3aaa8052853ff6a5",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          }
+        ]
+      }
     },
     {
       "features": {
@@ -298,9 +345,20 @@
         "reference_energy_method": "DMRG finite-M bond-dimension ladder with second-order polynomial extrapolation in 1/M; author-supplied private communication",
         "reference_energy_note": "Spin-5/2 active-space D uses M ladder 512.0;1024.0;2048.0;3072.0;4096.0 with energies -2756.507080000000;-2756.507190000000;-2756.507210000000;-2756.507220000000;-2756.507220000000 Ha. Extrapolated reference is -2756.507220000000 Ha; largest-M(4096.0) energy is -2756.507220000000 Ha; fit-minus-largest-M is -1.833e-07 Ha and max fit residual is 3.860e-06 Ha. The author-supplied file states the fitted energies use only a second-order polynomial and not the truncation error.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "author-supplied fitted DMRG M-ladder values from paper authors to Matt Otten, private communication; mapped to emitted FCIDUMP checksum from analysis/p450_goings_active_spaces/p450_g9_reference_mapping.csv.",
+        "reference_energy_source": "Author-supplied fitted DMRG bond-dimension ladder values from the paper authors to Matt Otten, private communication; mapped to the checksum-bound emitted FCIDUMP.",
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -316,7 +374,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/3/requirements/reference_energy_source",
+            "original_value": "author-supplied fitted DMRG M-ladder values from paper authors to Matt Otten, private communication; mapped to emitted FCIDUMP checksum from analysis/p450_goings_active_spaces/p450_g9_reference_mapping.csv.",
+            "original_value_sha256": "94eaa7b602a4938539b6ccff56d4526209854af7e41c1f2558969d0d5d47c7c7",
+            "public_replacement_pointer": "/tasks/3/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "5ea22b1a0fa48882948fadb44409b0459fd97e32b0148d3c3aaa8052853ff6a5",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          }
+        ]
+      }
     },
     {
       "features": {
@@ -370,9 +442,20 @@
         "reference_energy_method": "DMRG finite-M bond-dimension ladder with second-order polynomial extrapolation in 1/M; author-supplied private communication",
         "reference_energy_note": "Spin-5/2 active-space E uses M ladder 512.0;1024.0;2048.0;3072.0;4096.0 with energies -2756.542190000000;-2756.542440000000;-2756.542480000000;-2756.542540000000;-2756.542550000000 Ha. Extrapolated reference is -2756.542577000000 Ha; largest-M(4096.0) energy is -2756.542550000000 Ha; fit-minus-largest-M is -1.704e-05 Ha and max fit residual is 2.903e-05 Ha. The author-supplied file states the fitted energies use only a second-order polynomial and not the truncation error.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "author-supplied fitted DMRG M-ladder values from paper authors to Matt Otten, private communication; mapped to emitted FCIDUMP checksum from analysis/p450_goings_active_spaces/p450_g9_reference_mapping.csv.",
+        "reference_energy_source": "Author-supplied fitted DMRG bond-dimension ladder values from the paper authors to Matt Otten, private communication; mapped to the checksum-bound emitted FCIDUMP.",
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -388,7 +471,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/4/requirements/reference_energy_source",
+            "original_value": "author-supplied fitted DMRG M-ladder values from paper authors to Matt Otten, private communication; mapped to emitted FCIDUMP checksum from analysis/p450_goings_active_spaces/p450_g9_reference_mapping.csv.",
+            "original_value_sha256": "94eaa7b602a4938539b6ccff56d4526209854af7e41c1f2558969d0d5d47c7c7",
+            "public_replacement_pointer": "/tasks/4/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "5ea22b1a0fa48882948fadb44409b0459fd97e32b0148d3c3aaa8052853ff6a5",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          }
+        ]
+      }
     },
     {
       "features": {
@@ -442,9 +539,20 @@
         "reference_energy_method": "DMRG finite-M bond-dimension ladder with second-order polynomial extrapolation in 1/M; author-supplied private communication",
         "reference_energy_note": "Spin-5/2 active-space F uses M ladder 512.0;1024.0;2048.0;3072.0;4096.0 with energies -2756.706020000000;-2756.708040000000;-2756.709020000000;-2756.709320000000;-2756.709460000000 Ha. Extrapolated reference is -2756.709929000000 Ha; largest-M(4096.0) energy is -2756.709460000000 Ha; fit-minus-largest-M is -4.664e-04 Ha and max fit residual is 1.420e-05 Ha. The author-supplied file states the fitted energies use only a second-order polynomial and not the truncation error.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "author-supplied fitted DMRG M-ladder values from paper authors to Matt Otten, private communication; mapped to emitted FCIDUMP checksum from analysis/p450_goings_active_spaces/p450_g9_reference_mapping.csv.",
+        "reference_energy_source": "Author-supplied fitted DMRG bond-dimension ladder values from the paper authors to Matt Otten, private communication; mapped to the checksum-bound emitted FCIDUMP.",
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -460,7 +568,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/5/requirements/reference_energy_source",
+            "original_value": "author-supplied fitted DMRG M-ladder values from paper authors to Matt Otten, private communication; mapped to emitted FCIDUMP checksum from analysis/p450_goings_active_spaces/p450_g9_reference_mapping.csv.",
+            "original_value_sha256": "94eaa7b602a4938539b6ccff56d4526209854af7e41c1f2558969d0d5d47c7c7",
+            "public_replacement_pointer": "/tasks/5/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "5ea22b1a0fa48882948fadb44409b0459fd97e32b0148d3c3aaa8052853ff6a5",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          }
+        ]
+      }
     },
     {
       "features": {
@@ -514,9 +636,20 @@
         "reference_energy_method": "DMRG finite-M bond-dimension ladder with second-order polynomial extrapolation in 1/M; author-supplied private communication",
         "reference_energy_note": "Spin-5/2 active-space G uses M ladder 512.0;1024.0;2048.0;3072.0;4096.0 with energies -2756.718150000000;-2756.721970000000;-2756.723970000000;-2756.724640000000;-2756.724970000000 Ha. Extrapolated reference is -2756.726003000000 Ha; largest-M(4096.0) energy is -2756.724970000000 Ha; fit-minus-largest-M is -1.033e-03 Ha and max fit residual is 7.097e-06 Ha. The author-supplied file states the fitted energies use only a second-order polynomial and not the truncation error.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "author-supplied fitted DMRG M-ladder values from paper authors to Matt Otten, private communication; mapped to emitted FCIDUMP checksum from analysis/p450_goings_active_spaces/p450_g9_reference_mapping.csv.",
+        "reference_energy_source": "Author-supplied fitted DMRG bond-dimension ladder values from the paper authors to Matt Otten, private communication; mapped to the checksum-bound emitted FCIDUMP.",
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -532,7 +665,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/6/requirements/reference_energy_source",
+            "original_value": "author-supplied fitted DMRG M-ladder values from paper authors to Matt Otten, private communication; mapped to emitted FCIDUMP checksum from analysis/p450_goings_active_spaces/p450_g9_reference_mapping.csv.",
+            "original_value_sha256": "94eaa7b602a4938539b6ccff56d4526209854af7e41c1f2558969d0d5d47c7c7",
+            "public_replacement_pointer": "/tasks/6/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "5ea22b1a0fa48882948fadb44409b0459fd97e32b0148d3c3aaa8052853ff6a5",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          }
+        ]
+      }
     }
   ]
 }

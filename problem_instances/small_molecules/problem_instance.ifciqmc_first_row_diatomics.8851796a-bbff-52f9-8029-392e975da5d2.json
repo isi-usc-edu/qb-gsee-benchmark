@@ -82,7 +82,18 @@
         "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, Be2 VDZ",
         "reference_energy_standard_error_hartree": 8e-05,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -146,7 +157,18 @@
         "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, Be2 VTZ",
         "reference_energy_standard_error_hartree": 7.000000000000001e-05,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -210,7 +232,18 @@
         "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, Be2 VQZ",
         "reference_energy_standard_error_hartree": 0.0001,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -271,10 +304,21 @@
         "reference_energy_method": "initiator FCIQMC with initiator-bias control and stochastic error estimate",
         "reference_energy_note": "Reference is the Table 1 frozen-core i-FCIQMC total energy with one-standard-deviation stochastic error in parentheses. FCIDUMP is a local PySCF reconstruction of the same geometry, basis, frozen-core, and restricted-HF-orbital convention.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, C2 VDZ",
+        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, dicarbon VDZ.",
         "reference_energy_standard_error_hartree": 0.0001,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -291,7 +335,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/3/requirements/reference_energy_source",
+            "original_value": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, C2 VDZ",
+            "original_value_sha256": "ce75347fcc965e19a2fa6fbfd6bb810a8d5abfbd4018b66fa05e88d5aec7e116",
+            "public_replacement_pointer": "/tasks/3/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "17b1a4291059d8a1c0b7ab5893860ee651dc44b74ccf10b8084ddf893223f620",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "features": {
@@ -335,10 +393,21 @@
         "reference_energy_method": "initiator FCIQMC with initiator-bias control and stochastic error estimate",
         "reference_energy_note": "Reference is the Table 1 frozen-core i-FCIQMC total energy with one-standard-deviation stochastic error in parentheses. FCIDUMP is a local PySCF reconstruction of the same geometry, basis, frozen-core, and restricted-HF-orbital convention.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, C2 VTZ",
+        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, dicarbon VTZ.",
         "reference_energy_standard_error_hartree": 0.0001,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -355,7 +424,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/4/requirements/reference_energy_source",
+            "original_value": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, C2 VTZ",
+            "original_value_sha256": "2811b02a8f5d75acc32797658b0e8570d5afd9938c0bad5dcba650d1ac58abe9",
+            "public_replacement_pointer": "/tasks/4/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "b1e7ea4b6ac58bce3c0fd42d85f7e587b4424541eead08b2639403e810d09d4d",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "features": {
@@ -399,10 +482,21 @@
         "reference_energy_method": "initiator FCIQMC with initiator-bias control and stochastic error estimate",
         "reference_energy_note": "Reference is the Table 1 frozen-core i-FCIQMC total energy with one-standard-deviation stochastic error in parentheses. FCIDUMP is a local PySCF reconstruction of the same geometry, basis, frozen-core, and restricted-HF-orbital convention.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, C2 VQZ",
+        "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, dicarbon VQZ.",
         "reference_energy_standard_error_hartree": 0.00030000000000000003,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -419,7 +513,21 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/5/requirements/reference_energy_source",
+            "original_value": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, C2 VQZ",
+            "original_value_sha256": "be1f2ee4b4a1580966fb4c069522708d512cb807d74893235ab34c612438d3f1",
+            "public_replacement_pointer": "/tasks/5/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "46f06d809c5f753bad6e7d53d0bcaff1bd8126ff8c477290624ec5e541c988ca",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "features": {
@@ -466,7 +574,18 @@
         "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, N2 VDZ",
         "reference_energy_standard_error_hartree": 0.0001,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -530,7 +649,18 @@
         "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, N2 VTZ",
         "reference_energy_standard_error_hartree": 0.0001,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -594,7 +724,18 @@
         "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, N2 VQZ",
         "reference_energy_standard_error_hartree": 0.0001,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -658,7 +799,18 @@
         "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, CO VDZ",
         "reference_energy_standard_error_hartree": 9e-05,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -722,7 +874,18 @@
         "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, CO VTZ",
         "reference_energy_standard_error_hartree": 7.000000000000001e-05,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -786,7 +949,18 @@
         "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, CO VQZ",
         "reference_energy_standard_error_hartree": 0.0001,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -850,7 +1024,18 @@
         "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, F2 VDZ",
         "reference_energy_standard_error_hartree": 9e-05,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -914,7 +1099,18 @@
         "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, F2 VTZ",
         "reference_energy_standard_error_hartree": 0.0001,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -978,7 +1174,18 @@
         "reference_energy_source": "Cleland, Booth, Overy, and Alavi, J. Chem. Theory Comput. 8, 4138-4152 (2012), Table 1, F2 VQZ",
         "reference_energy_standard_error_hartree": 0.0002,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {

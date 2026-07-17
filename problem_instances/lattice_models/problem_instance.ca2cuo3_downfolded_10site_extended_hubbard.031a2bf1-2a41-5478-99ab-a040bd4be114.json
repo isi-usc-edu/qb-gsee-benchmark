@@ -20,7 +20,7 @@
   "references": [
     "https://arxiv.org/abs/2409.12237",
     "https://doi.org/10.1103/PhysRevApplied.23.044028",
-    "analysis/ca2cuo3_spec/ca2cuo3_spec_summary.md"
+    "Local same-Hamiltonian exact-diagonalization convention scan for the finite downfolded Ca2CuO3 model."
   ],
   "short_name": "ca2cuo3_downfolded_10site_extended_hubbard",
   "status": "in_development",
@@ -102,8 +102,20 @@
           "independent ED convention scan confirming open-chain full-V model",
           "verifier ED recomputation from emitted FCIDUMP integrals"
         ],
-        "reference_energy_source": "Local exact diagonalization of the same finite downfolded model encoded in the FCIDUMP, anchored to analysis/ca2cuo3_spec/ca2cuo3_ed_convention_scan.csv; the arXiv v3 / Phys. Rev. Applied paper reports DMRG 6.005 eV for the same 10x1 half-filled model and parameters.",
-        "reference_energy_note": "ED anchor 6.005054926021 eV = 0.220681698158850 Ha using 27.211386245988 eV/Ha. This is an effective one-band Ca2CuO3 Hamiltonian obtained by Wannierization/downfolding with cRPA-screened parameters, not a full ab initio electronic-structure Hamiltonian. The exact label applies only to the finite 10-site model encoded in the FCIDUMP."
+        "reference_energy_source": "Local exact diagonalization of the same finite downfolded model encoded in the FCIDUMP; the arXiv v3 / Phys. Rev. Applied paper reports DMRG 6.005 eV for the same 10x1 half-filled model and parameters.",
+        "reference_energy_note": "ED anchor 6.005054926021 eV = 0.220681698158850 Ha using 27.211386245988 eV/Ha. This is an effective one-band Ca2CuO3 Hamiltonian obtained by Wannierization/downfolding with cRPA-screened parameters, not a full ab initio electronic-structure Hamiltonian. The exact label applies only to the finite 10-site model encoded in the FCIDUMP.",
+        "threshold_convention": {
+          "kind": "per_site_energy_scaled",
+          "display_label": "per site, model-energy scaled",
+          "formula": "per_site_dimensionless_factor * scale_count * energy_scale_hartree",
+          "scale_count": 10,
+          "formula_parameters": {
+            "per_site_dimensionless_factor": 0.001,
+            "energy_scale_hartree": 0.018043917188246602
+          },
+          "computed_threshold_hartree": 0.00018043917188246604,
+          "detail": "Per-site tolerance scaled by the downfolded hopping-energy unit."
+        }
       },
       "supporting_files": [
         {
@@ -118,7 +130,35 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": true,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/0/requirements/reference_energy_source",
+            "original_value": "Local exact diagonalization of the same finite downfolded model encoded in the FCIDUMP, anchored to analysis/ca2cuo3_spec/ca2cuo3_ed_convention_scan.csv; the arXiv v3 / Phys. Rev. Applied paper reports DMRG 6.005 eV for the same 10x1 half-filled model and parameters.",
+            "original_value_sha256": "a091103eb815f15281971e6449078aa3497c92bf2df4061940a9b7c875a6373f",
+            "public_replacement_pointer": "/tasks/0/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "91c43e5e1d3e486e39c34e422a45965e1728ab4b01a9208bf4bc62c83fc4c8da",
+            "internal_pointer_classes": [
+              "analysis_path"
+            ]
+          }
+        ]
+      }
     }
-  ]
+  ],
+  "internal_provenance": {
+    "migration_records": [
+      {
+        "original_json_pointer": "/references/2",
+        "original_value": "analysis/ca2cuo3_spec/ca2cuo3_spec_summary.md",
+        "original_value_sha256": "00f818d1cf674b3dee67b3041250c287c5f8036cab660f697a8754d76422b0ac",
+        "public_replacement_pointer": "/references/2",
+        "public_replacement_value_sha256": "62213fefe0e2cda6d3024d7e24a2453716ceb529d9d4c422feecbd3084e46aac",
+        "internal_pointer_classes": [
+          "analysis_path"
+        ]
+      }
+    ]
+  }
 }

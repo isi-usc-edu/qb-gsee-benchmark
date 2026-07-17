@@ -1,0 +1,87 @@
+{
+  "artifacts": {
+    "encoding_defect_census": {
+      "path": "g56_encoding_defect_census.csv",
+      "sha256": "c0551842bd69b742f9f5e1b79ae216de112ba75f9fff25d3ab9b44237d01a438"
+    },
+    "missing_size_descriptor_census": {
+      "path": "g56_missing_size_descriptor_census.csv",
+      "sha256": "27f98f6727cf2217814489ffc11fd4e91fb6ff1e5b7a040fd2abb55a37ea0b98"
+    },
+    "public_provenance_census": {
+      "path": "g56_public_provenance_census.csv",
+      "sha256": "d552adabf0c125539a786d8330d5fa4fffd464be78efa727653becc96109bfae"
+    },
+    "threshold_convention_proposal": {
+      "path": "g56_threshold_convention_proposal.csv",
+      "sha256": "cf49d0db1c8cec8ad1d8bcf60de65a7f2d467c853309972a62487c6f7db9c474"
+    }
+  },
+  "binding": false,
+  "checks": {
+    "all_encoding_repairs_reduce_markers": true,
+    "all_missing_rows_have_fcidump": true,
+    "feature_size_count_718": true,
+    "instance_count_218": true,
+    "internal_pointer_census_nonempty": true,
+    "known_mojibake_instances_found": true,
+    "missing_descriptor_classes_exact": true,
+    "missing_descriptor_count_234": true,
+    "task_count_718": true,
+    "threshold_rows_718": true
+  },
+  "encoding_defect_instance_count": 8,
+  "encoding_defect_short_names": [
+    "blue_dimer",
+    "fe_red",
+    "mn_mono",
+    "mo2_n2",
+    "mo_n2",
+    "mo_n2_pincer",
+    "ru_macho",
+    "ru_mono"
+  ],
+  "encoding_defect_string_count": 8,
+  "goal": "G-56",
+  "internal_pointer_class_counts": {
+    "analysis_path": 43,
+    "governance_id": 143,
+    "matt_decision_queue": 15,
+    "scripts_path": 39,
+    "spec_or_wave_id": 61,
+    "work_path": 10
+  },
+  "internal_pointer_instance_count": 35,
+  "internal_pointer_string_count": 264,
+  "internal_pointer_task_count": 193,
+  "known_mojibake_short_names": [
+    "blue_dimer",
+    "fe_red",
+    "mn_mono",
+    "mo2_n2",
+    "mo_n2",
+    "mo_n2_pincer",
+    "ru_macho",
+    "ru_mono"
+  ],
+  "missing_size_descriptor_class_counts": {
+    "homogeneous_catalysts": 69,
+    "lattice_models": 140,
+    "small_molecules": 25
+  },
+  "missing_size_descriptor_task_count": 234,
+  "passed": true,
+  "public_provenance_string_count": 2301,
+  "schema_version": 1,
+  "source_instance_count": 218,
+  "source_repository_commit": "95bfbbadebefa8f07718ac09c1735846344e5832",
+  "source_task_count": 718,
+  "status": "proposal_only_pending_pi_review",
+  "threshold_convention_counts": {
+    "control": 9,
+    "fixed": 421,
+    "hybrid_per_site_statistical_floor": 48,
+    "per_site": 239,
+    "per_site_energy_scaled": 1
+  }
+}

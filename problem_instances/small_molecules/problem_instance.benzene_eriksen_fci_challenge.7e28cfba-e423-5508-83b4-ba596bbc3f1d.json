@@ -32,7 +32,7 @@
   "references": [
     "Eriksen et al., J. Phys. Chem. Lett. 11, 8922 (2020), DOI 10.1021/acs.jpclett.0c02621 / arXiv:2008.02678.",
     "SI-benzene-paper-DMRG source FCIDUMP_optSHCIorbs from commit 1d40f216317563d64971785cd274e08ef3710fe1.",
-    "C13 W8 convention approval in MATT_DECISION_QUEUE.md O12: stage the source optimized-SHCI-orbital FCIDUMP; reference is SI RHF plus non-SCI consensus correlation energy."
+    "Source optimized-SHCI-orbital FCIDUMP; the reference is the SI RHF energy plus the non-SCI consensus correlation energy."
   ],
   "short_name": "benzene_eriksen_fci_challenge",
   "status": "in_development",
@@ -83,11 +83,22 @@
         "reference_energy_method": "non-SCI consensus mean of DMRG, MBE-FCI, CAD-FCIQMC, and AS-FCIQMC correlation energies added to SI RHF total energy",
         "reference_energy_note": "Selected-CI rows ASCI, iCI, and SHCI are excluded from the reference mean; the 0.9 mEh quantity is the non-SCI cross-method span (max-min), not a statistical standard error. The schema standard-error field carries this span by convention for this release.",
         "reference_energy_provenance": "cross-validated",
-        "reference_energy_source": "Eriksen et al. SI Table S2 and main-text non-SCI span; total uses SI RHF energy plus non-SCI consensus correlation energy. O12 approves this source-FCIDUMP convention.",
+        "reference_energy_source": "Eriksen et al. SI Table S2 and main-text non-SCI span; the total uses the SI RHF energy plus the non-SCI consensus correlation energy under the source-FCIDUMP convention.",
         "reference_energy_standard_error": 0.0009,
         "reference_energy_units": "Hartree",
         "time_limit_seconds": 86400,
-        "reference_energy_uncertainty_note": "reference_energy_standard_error stores the 0.0009 Ha cross-method span by convention; it is not a standard error."
+        "reference_energy_uncertainty_note": "reference_energy_standard_error stores the 0.0009 Ha cross-method span by convention; it is not a standard error.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -103,7 +114,36 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/0/requirements/reference_energy_source",
+            "original_value": "Eriksen et al. SI Table S2 and main-text non-SCI span; total uses SI RHF energy plus non-SCI consensus correlation energy. O12 approves this source-FCIDUMP convention.",
+            "original_value_sha256": "6d7a04f161fba2f03dc473231d3712f257ba3f59e63634607952ad725a8cd3ca",
+            "public_replacement_pointer": "/tasks/0/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "c6cb2221ddc33a274d32f51224d48c91bae33b807fb5439f593d8d0ffd1f3c09",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     }
-  ]
+  ],
+  "internal_provenance": {
+    "migration_records": [
+      {
+        "original_json_pointer": "/references/2",
+        "original_value": "C13 W8 convention approval in MATT_DECISION_QUEUE.md O12: stage the source optimized-SHCI-orbital FCIDUMP; reference is SI RHF plus non-SCI consensus correlation energy.",
+        "original_value_sha256": "8de41b01e33bb95d6bf4332f5c28919c23ff797f5d87b94d87a4821b5c0f2c30",
+        "public_replacement_pointer": "/references/2",
+        "public_replacement_value_sha256": "f0da6121f2ea711da07e91e30f49752dd543ad53cae68ffbe29b066d27244b96",
+        "internal_pointer_classes": [
+          "governance_id",
+          "matt_decision_queue"
+        ]
+      }
+    ]
+  }
 }

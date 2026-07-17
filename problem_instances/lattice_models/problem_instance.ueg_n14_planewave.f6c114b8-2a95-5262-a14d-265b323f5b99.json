@@ -27,8 +27,8 @@
   "problem_type": "GSEE",
   "references": [
     "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691.",
-    "C13 W4 convention approval in MATT_DECISION_QUEUE.md O12: analytic plane-wave HF plus cubic Madelung, E_ref = E_HF + Shepherd E_corr.",
-    "Sparse FCIDUMP writer validated by analysis/ueg_n14_planewave/ueg_sparse_writer_anchor_verification.md."
+    "Analytic plane-wave Hartree-Fock plus cubic Madelung convention, with E_ref = E_HF + the Shepherd et al. correlation energy.",
+    "Sparse FCIDUMP writer validated against dense integral construction and exact small-system checks."
   ],
   "short_name": "ueg_n14_planewave",
   "status": "in_development",
@@ -39,7 +39,7 @@
       "features": {
         "analytic_hf_with_madelung_hartree": 48.36852150419694,
         "application_domain": "condensed_matter",
-        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; the one-body term includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
         "benchmark_role": "hard_tier_condensed_matter",
         "box_length_bohr": 1.9425649689427535,
         "hamiltonian_family": "plane_wave_ueg",
@@ -74,10 +74,21 @@
         "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
         "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; the total convention uses analytic plane-wave Hartree-Fock plus cubic Madelung and the published correlation energy.",
         "reference_energy_standard_error": 0.0001,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.0014
+          },
+          "computed_threshold_hartree": 0.0014,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -93,14 +104,39 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/0/features/basis_convention_note",
+            "original_value": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+            "original_value_sha256": "5f5163f03bf0f79458d15aff9556b4c867c8cb605be418f9dfe4b6c229e5ac1d",
+            "public_replacement_pointer": "/tasks/0/features/basis_convention_note",
+            "public_replacement_value_sha256": "015a828032da90ede1f665145ccb7dc3e3a7700b5e9990f4d12353cee82b2955",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/0/requirements/reference_energy_source",
+            "original_value": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+            "original_value_sha256": "eb3118e131effaa49b8dd537d9dbc515c224c7dc7aa12fc1e99b07df6f749b96",
+            "public_replacement_pointer": "/tasks/0/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "a3e0342fc7b4306a2502cda8722d0e948c2479ad6a646c41534a8d9d219b4cf2",
+            "internal_pointer_classes": [
+              "governance_id",
+              "matt_decision_queue"
+            ]
+          }
+        ]
+      }
     },
     {
       "benchmark_role": "hard_tier_condensed_matter",
       "features": {
         "analytic_hf_with_madelung_hartree": 8.491480603537624,
         "application_domain": "condensed_matter",
-        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; the one-body term includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
         "benchmark_role": "hard_tier_condensed_matter",
         "box_length_bohr": 3.885129937885507,
         "hamiltonian_family": "plane_wave_ueg",
@@ -135,10 +171,21 @@
         "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
         "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; the total convention uses analytic plane-wave Hartree-Fock plus cubic Madelung and the published correlation energy.",
         "reference_energy_standard_error": 9e-05,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.0014
+          },
+          "computed_threshold_hartree": 0.0014,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -154,14 +201,39 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/1/features/basis_convention_note",
+            "original_value": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+            "original_value_sha256": "5f5163f03bf0f79458d15aff9556b4c867c8cb605be418f9dfe4b6c229e5ac1d",
+            "public_replacement_pointer": "/tasks/1/features/basis_convention_note",
+            "public_replacement_value_sha256": "015a828032da90ede1f665145ccb7dc3e3a7700b5e9990f4d12353cee82b2955",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/1/requirements/reference_energy_source",
+            "original_value": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+            "original_value_sha256": "eb3118e131effaa49b8dd537d9dbc515c224c7dc7aa12fc1e99b07df6f749b96",
+            "public_replacement_pointer": "/tasks/1/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "a3e0342fc7b4306a2502cda8722d0e948c2479ad6a646c41534a8d9d219b4cf2",
+            "internal_pointer_classes": [
+              "governance_id",
+              "matt_decision_queue"
+            ]
+          }
+        ]
+      }
     },
     {
       "benchmark_role": "hard_tier_condensed_matter",
       "features": {
         "analytic_hf_with_madelung_hartree": 0.3225452646286011,
         "application_domain": "condensed_matter",
-        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; the one-body term includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
         "benchmark_role": "hard_tier_condensed_matter",
         "box_length_bohr": 7.770259875771014,
         "hamiltonian_family": "plane_wave_ueg",
@@ -196,10 +268,21 @@
         "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
         "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; the total convention uses analytic plane-wave Hartree-Fock plus cubic Madelung and the published correlation energy.",
         "reference_energy_standard_error": 0.0002,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.0014
+          },
+          "computed_threshold_hartree": 0.0014,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -215,14 +298,39 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/2/features/basis_convention_note",
+            "original_value": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+            "original_value_sha256": "5f5163f03bf0f79458d15aff9556b4c867c8cb605be418f9dfe4b6c229e5ac1d",
+            "public_replacement_pointer": "/tasks/2/features/basis_convention_note",
+            "public_replacement_value_sha256": "015a828032da90ede1f665145ccb7dc3e3a7700b5e9990f4d12353cee82b2955",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/2/requirements/reference_energy_source",
+            "original_value": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+            "original_value_sha256": "eb3118e131effaa49b8dd537d9dbc515c224c7dc7aa12fc1e99b07df6f749b96",
+            "public_replacement_pointer": "/tasks/2/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "a3e0342fc7b4306a2502cda8722d0e948c2479ad6a646c41534a8d9d219b4cf2",
+            "internal_pointer_classes": [
+              "governance_id",
+              "matt_decision_queue"
+            ]
+          }
+        ]
+      }
     },
     {
       "benchmark_role": "hard_tier_condensed_matter",
       "features": {
         "analytic_hf_with_madelung_hartree": -0.8125487030622105,
         "application_domain": "condensed_matter",
-        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; the one-body term includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
         "benchmark_role": "hard_tier_condensed_matter",
         "box_length_bohr": 19.425649689427537,
         "hamiltonian_family": "plane_wave_ueg",
@@ -257,10 +365,21 @@
         "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
         "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; the total convention uses analytic plane-wave Hartree-Fock plus cubic Madelung and the published correlation energy.",
         "reference_energy_standard_error": 0.00030000000000000003,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.0014
+          },
+          "computed_threshold_hartree": 0.0014,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -276,14 +395,39 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/3/features/basis_convention_note",
+            "original_value": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+            "original_value_sha256": "5f5163f03bf0f79458d15aff9556b4c867c8cb605be418f9dfe4b6c229e5ac1d",
+            "public_replacement_pointer": "/tasks/3/features/basis_convention_note",
+            "public_replacement_value_sha256": "015a828032da90ede1f665145ccb7dc3e3a7700b5e9990f4d12353cee82b2955",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/3/requirements/reference_energy_source",
+            "original_value": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+            "original_value_sha256": "eb3118e131effaa49b8dd537d9dbc515c224c7dc7aa12fc1e99b07df6f749b96",
+            "public_replacement_pointer": "/tasks/3/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "a3e0342fc7b4306a2502cda8722d0e948c2479ad6a646c41534a8d9d219b4cf2",
+            "internal_pointer_classes": [
+              "governance_id",
+              "matt_decision_queue"
+            ]
+          }
+        ]
+      }
     },
     {
       "benchmark_role": "hard_tier_condensed_matter",
       "features": {
         "analytic_hf_with_madelung_hartree": 48.36852150419694,
         "application_domain": "condensed_matter",
-        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; the one-body term includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
         "benchmark_role": "hard_tier_condensed_matter",
         "box_length_bohr": 1.9425649689427535,
         "hamiltonian_family": "plane_wave_ueg",
@@ -318,10 +462,21 @@
         "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
         "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; the total convention uses analytic plane-wave Hartree-Fock plus cubic Madelung and the published correlation energy.",
         "reference_energy_standard_error": 0.0001,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.0014
+          },
+          "computed_threshold_hartree": 0.0014,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -337,14 +492,39 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/4/features/basis_convention_note",
+            "original_value": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+            "original_value_sha256": "5f5163f03bf0f79458d15aff9556b4c867c8cb605be418f9dfe4b6c229e5ac1d",
+            "public_replacement_pointer": "/tasks/4/features/basis_convention_note",
+            "public_replacement_value_sha256": "015a828032da90ede1f665145ccb7dc3e3a7700b5e9990f4d12353cee82b2955",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/4/requirements/reference_energy_source",
+            "original_value": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+            "original_value_sha256": "eb3118e131effaa49b8dd537d9dbc515c224c7dc7aa12fc1e99b07df6f749b96",
+            "public_replacement_pointer": "/tasks/4/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "a3e0342fc7b4306a2502cda8722d0e948c2479ad6a646c41534a8d9d219b4cf2",
+            "internal_pointer_classes": [
+              "governance_id",
+              "matt_decision_queue"
+            ]
+          }
+        ]
+      }
     },
     {
       "benchmark_role": "hard_tier_condensed_matter",
       "features": {
         "analytic_hf_with_madelung_hartree": 8.491480603537624,
         "application_domain": "condensed_matter",
-        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; the one-body term includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
         "benchmark_role": "hard_tier_condensed_matter",
         "box_length_bohr": 3.885129937885507,
         "hamiltonian_family": "plane_wave_ueg",
@@ -379,10 +559,21 @@
         "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
         "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; the total convention uses analytic plane-wave Hartree-Fock plus cubic Madelung and the published correlation energy.",
         "reference_energy_standard_error": 9e-05,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.0014
+          },
+          "computed_threshold_hartree": 0.0014,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -398,14 +589,39 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/5/features/basis_convention_note",
+            "original_value": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+            "original_value_sha256": "5f5163f03bf0f79458d15aff9556b4c867c8cb605be418f9dfe4b6c229e5ac1d",
+            "public_replacement_pointer": "/tasks/5/features/basis_convention_note",
+            "public_replacement_value_sha256": "015a828032da90ede1f665145ccb7dc3e3a7700b5e9990f4d12353cee82b2955",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/5/requirements/reference_energy_source",
+            "original_value": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+            "original_value_sha256": "eb3118e131effaa49b8dd537d9dbc515c224c7dc7aa12fc1e99b07df6f749b96",
+            "public_replacement_pointer": "/tasks/5/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "a3e0342fc7b4306a2502cda8722d0e948c2479ad6a646c41534a8d9d219b4cf2",
+            "internal_pointer_classes": [
+              "governance_id",
+              "matt_decision_queue"
+            ]
+          }
+        ]
+      }
     },
     {
       "benchmark_role": "hard_tier_condensed_matter",
       "features": {
         "analytic_hf_with_madelung_hartree": 0.3225452646286011,
         "application_domain": "condensed_matter",
-        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; the one-body term includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
         "benchmark_role": "hard_tier_condensed_matter",
         "box_length_bohr": 7.770259875771014,
         "hamiltonian_family": "plane_wave_ueg",
@@ -440,10 +656,21 @@
         "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
         "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; the total convention uses analytic plane-wave Hartree-Fock plus cubic Madelung and the published correlation energy.",
         "reference_energy_standard_error": 0.00030000000000000003,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.0014
+          },
+          "computed_threshold_hartree": 0.0014,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -459,14 +686,39 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/6/features/basis_convention_note",
+            "original_value": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+            "original_value_sha256": "5f5163f03bf0f79458d15aff9556b4c867c8cb605be418f9dfe4b6c229e5ac1d",
+            "public_replacement_pointer": "/tasks/6/features/basis_convention_note",
+            "public_replacement_value_sha256": "015a828032da90ede1f665145ccb7dc3e3a7700b5e9990f4d12353cee82b2955",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/6/requirements/reference_energy_source",
+            "original_value": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+            "original_value_sha256": "eb3118e131effaa49b8dd537d9dbc515c224c7dc7aa12fc1e99b07df6f749b96",
+            "public_replacement_pointer": "/tasks/6/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "a3e0342fc7b4306a2502cda8722d0e948c2479ad6a646c41534a8d9d219b4cf2",
+            "internal_pointer_classes": [
+              "governance_id",
+              "matt_decision_queue"
+            ]
+          }
+        ]
+      }
     },
     {
       "benchmark_role": "hard_tier_condensed_matter",
       "features": {
         "analytic_hf_with_madelung_hartree": -0.8125487030622105,
         "application_domain": "condensed_matter",
-        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; the one-body term includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
         "benchmark_role": "hard_tier_condensed_matter",
         "box_length_bohr": 19.425649689427537,
         "hamiltonian_family": "plane_wave_ueg",
@@ -501,10 +753,21 @@
         "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
         "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; the total convention uses analytic plane-wave Hartree-Fock plus cubic Madelung and the published correlation energy.",
         "reference_energy_standard_error": 0.0004,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.0014
+          },
+          "computed_threshold_hartree": 0.0014,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -520,14 +783,39 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/7/features/basis_convention_note",
+            "original_value": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+            "original_value_sha256": "5f5163f03bf0f79458d15aff9556b4c867c8cb605be418f9dfe4b6c229e5ac1d",
+            "public_replacement_pointer": "/tasks/7/features/basis_convention_note",
+            "public_replacement_value_sha256": "015a828032da90ede1f665145ccb7dc3e3a7700b5e9990f4d12353cee82b2955",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/7/requirements/reference_energy_source",
+            "original_value": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+            "original_value_sha256": "eb3118e131effaa49b8dd537d9dbc515c224c7dc7aa12fc1e99b07df6f749b96",
+            "public_replacement_pointer": "/tasks/7/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "a3e0342fc7b4306a2502cda8722d0e948c2479ad6a646c41534a8d9d219b4cf2",
+            "internal_pointer_classes": [
+              "governance_id",
+              "matt_decision_queue"
+            ]
+          }
+        ]
+      }
     },
     {
       "benchmark_role": "hard_tier_condensed_matter",
       "features": {
         "analytic_hf_with_madelung_hartree": 48.36852150419694,
         "application_domain": "condensed_matter",
-        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; the one-body term includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
         "benchmark_role": "hard_tier_condensed_matter",
         "box_length_bohr": 1.9425649689427535,
         "hamiltonian_family": "plane_wave_ueg",
@@ -562,10 +850,21 @@
         "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
         "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; the total convention uses analytic plane-wave Hartree-Fock plus cubic Madelung and the published correlation energy.",
         "reference_energy_standard_error": 0.00030000000000000003,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.0014
+          },
+          "computed_threshold_hartree": 0.0014,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -581,14 +880,39 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/8/features/basis_convention_note",
+            "original_value": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+            "original_value_sha256": "5f5163f03bf0f79458d15aff9556b4c867c8cb605be418f9dfe4b6c229e5ac1d",
+            "public_replacement_pointer": "/tasks/8/features/basis_convention_note",
+            "public_replacement_value_sha256": "015a828032da90ede1f665145ccb7dc3e3a7700b5e9990f4d12353cee82b2955",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/8/requirements/reference_energy_source",
+            "original_value": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+            "original_value_sha256": "eb3118e131effaa49b8dd537d9dbc515c224c7dc7aa12fc1e99b07df6f749b96",
+            "public_replacement_pointer": "/tasks/8/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "a3e0342fc7b4306a2502cda8722d0e948c2479ad6a646c41534a8d9d219b4cf2",
+            "internal_pointer_classes": [
+              "governance_id",
+              "matt_decision_queue"
+            ]
+          }
+        ]
+      }
     },
     {
       "benchmark_role": "hard_tier_condensed_matter",
       "features": {
         "analytic_hf_with_madelung_hartree": 8.491480603537624,
         "application_domain": "condensed_matter",
-        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; the one-body term includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
         "benchmark_role": "hard_tier_condensed_matter",
         "box_length_bohr": 3.885129937885507,
         "hamiltonian_family": "plane_wave_ueg",
@@ -623,10 +947,21 @@
         "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
         "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; the total convention uses analytic plane-wave Hartree-Fock plus cubic Madelung and the published correlation energy.",
         "reference_energy_standard_error": 0.0001,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.0014
+          },
+          "computed_threshold_hartree": 0.0014,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -642,14 +977,39 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/9/features/basis_convention_note",
+            "original_value": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+            "original_value_sha256": "5f5163f03bf0f79458d15aff9556b4c867c8cb605be418f9dfe4b6c229e5ac1d",
+            "public_replacement_pointer": "/tasks/9/features/basis_convention_note",
+            "public_replacement_value_sha256": "015a828032da90ede1f665145ccb7dc3e3a7700b5e9990f4d12353cee82b2955",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/9/requirements/reference_energy_source",
+            "original_value": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+            "original_value_sha256": "eb3118e131effaa49b8dd537d9dbc515c224c7dc7aa12fc1e99b07df6f749b96",
+            "public_replacement_pointer": "/tasks/9/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "a3e0342fc7b4306a2502cda8722d0e948c2479ad6a646c41534a8d9d219b4cf2",
+            "internal_pointer_classes": [
+              "governance_id",
+              "matt_decision_queue"
+            ]
+          }
+        ]
+      }
     },
     {
       "benchmark_role": "hard_tier_condensed_matter",
       "features": {
         "analytic_hf_with_madelung_hartree": 0.3225452646286011,
         "application_domain": "condensed_matter",
-        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; the one-body term includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
         "benchmark_role": "hard_tier_condensed_matter",
         "box_length_bohr": 7.770259875771014,
         "hamiltonian_family": "plane_wave_ueg",
@@ -684,10 +1044,21 @@
         "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
         "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; the total convention uses analytic plane-wave Hartree-Fock plus cubic Madelung and the published correlation energy.",
         "reference_energy_standard_error": 0.0004,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.0014
+          },
+          "computed_threshold_hartree": 0.0014,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -703,14 +1074,39 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/10/features/basis_convention_note",
+            "original_value": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+            "original_value_sha256": "5f5163f03bf0f79458d15aff9556b4c867c8cb605be418f9dfe4b6c229e5ac1d",
+            "public_replacement_pointer": "/tasks/10/features/basis_convention_note",
+            "public_replacement_value_sha256": "015a828032da90ede1f665145ccb7dc3e3a7700b5e9990f4d12353cee82b2955",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/10/requirements/reference_energy_source",
+            "original_value": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+            "original_value_sha256": "eb3118e131effaa49b8dd537d9dbc515c224c7dc7aa12fc1e99b07df6f749b96",
+            "public_replacement_pointer": "/tasks/10/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "a3e0342fc7b4306a2502cda8722d0e948c2479ad6a646c41534a8d9d219b4cf2",
+            "internal_pointer_classes": [
+              "governance_id",
+              "matt_decision_queue"
+            ]
+          }
+        ]
+      }
     },
     {
       "benchmark_role": "hard_tier_condensed_matter",
       "features": {
         "analytic_hf_with_madelung_hartree": -0.8125487030622105,
         "application_domain": "condensed_matter",
-        "basis_convention_note": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+        "basis_convention_note": "Real plane-wave UEG FCIDUMP; the one-body term includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
         "benchmark_role": "hard_tier_condensed_matter",
         "box_length_bohr": 19.425649689427537,
         "hamiltonian_family": "plane_wave_ueg",
@@ -745,10 +1141,21 @@
         "reference_energy_method": "analytic plane-wave HF plus Shepherd finite-basis i-FCIQMC correlation energy",
         "reference_energy_note": "Controlled UEG hard-tier task. Total reference includes analytic HF with cubic Madelung plus the tabulated finite-basis correlation energy; same-basis CC rows were not recovered.",
         "reference_energy_provenance": "controlled",
-        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+        "reference_energy_source": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; the total convention uses analytic plane-wave Hartree-Fock plus cubic Madelung and the published correlation energy.",
         "reference_energy_standard_error": 0.0007,
         "reference_energy_units": "Hartree",
-        "time_limit_seconds": 86400
+        "time_limit_seconds": 86400,
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.0014
+          },
+          "computed_threshold_hartree": 0.0014,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -764,7 +1171,58 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/11/features/basis_convention_note",
+            "original_value": "Real plane-wave UEG FCIDUMP; H1 includes kinetic energy plus v_M/2 on every spatial orbital so the N-electron Hamiltonian carries N*v_M/2.",
+            "original_value_sha256": "5f5163f03bf0f79458d15aff9556b4c867c8cb605be418f9dfe4b6c229e5ac1d",
+            "public_replacement_pointer": "/tasks/11/features/basis_convention_note",
+            "public_replacement_value_sha256": "015a828032da90ede1f665145ccb7dc3e3a7700b5e9990f4d12353cee82b2955",
+            "internal_pointer_classes": [
+              "spec_or_wave_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/11/requirements/reference_energy_source",
+            "original_value": "Shepherd, Booth, Alavi, J. Chem. Phys. 136, 244101 (2012), Table I / arXiv:1201.4691; total convention approved in MATT_DECISION_QUEUE.md O12.",
+            "original_value_sha256": "eb3118e131effaa49b8dd537d9dbc515c224c7dc7aa12fc1e99b07df6f749b96",
+            "public_replacement_pointer": "/tasks/11/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "a3e0342fc7b4306a2502cda8722d0e948c2479ad6a646c41534a8d9d219b4cf2",
+            "internal_pointer_classes": [
+              "governance_id",
+              "matt_decision_queue"
+            ]
+          }
+        ]
+      }
     }
-  ]
+  ],
+  "internal_provenance": {
+    "migration_records": [
+      {
+        "original_json_pointer": "/references/1",
+        "original_value": "C13 W4 convention approval in MATT_DECISION_QUEUE.md O12: analytic plane-wave HF plus cubic Madelung, E_ref = E_HF + Shepherd E_corr.",
+        "original_value_sha256": "ac5cdfdc3d5dd5f52f21b7e5e3d3768152e4bf112366de9ce865eb23b470aa84",
+        "public_replacement_pointer": "/references/1",
+        "public_replacement_value_sha256": "c4d0373361998ffec17f3cd58764cebb99a89c4cb8251ca8167ef1ade224e822",
+        "internal_pointer_classes": [
+          "governance_id",
+          "matt_decision_queue",
+          "spec_or_wave_id"
+        ]
+      },
+      {
+        "original_json_pointer": "/references/2",
+        "original_value": "Sparse FCIDUMP writer validated by analysis/ueg_n14_planewave/ueg_sparse_writer_anchor_verification.md.",
+        "original_value_sha256": "3c8519b6fbb1d4feade87b4756d28c3de618f23df226b73b4117915187fdfae4",
+        "public_replacement_pointer": "/references/2",
+        "public_replacement_value_sha256": "19b4b6792db6e09954cc821f73d208dfe883ca5a15eae2402830836212d7945d",
+        "internal_pointer_classes": [
+          "analysis_path"
+        ]
+      }
+    ]
+  }
 }

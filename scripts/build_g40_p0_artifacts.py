@@ -12,7 +12,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from qb_gsee_benchmark.features.feature_schema import metadata_catalog
+from qb_gsee_benchmark.features.feature_schema import p0_metadata_catalog
 
 ROOT = Path(__file__).resolve().parents[1]
 FEATURES = ROOT / "scripts" / "Hamiltonian_features.csv"
@@ -371,7 +371,7 @@ def main() -> int:
 
     before = sha256(args.feature_table)
     columns = list(pd.read_csv(args.feature_table, nrows=0).columns)
-    catalog = metadata_catalog(columns, include_planned=True)
+    catalog = p0_metadata_catalog(columns, include_planned=True)
     write_csv(metadata_path, [row.to_dict() for row in catalog])
     write_csv(migration_path, migration_rows())
     census = corpus_census(args.problem_instances, args.feature_table)

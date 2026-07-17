@@ -57,7 +57,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 0.004486611550270637,
         "fragment_inferred_two_body_inter_intra_ratio": 0.1979913266927909,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 4,
+        "num_electrons": 4
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -70,7 +72,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -119,7 +132,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 9.389650340346609e-05,
         "fragment_inferred_two_body_inter_intra_ratio": 0.12854058328913703,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 4,
+        "num_electrons": 4
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -132,7 +147,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -181,7 +207,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 3.820583201237047e-09,
         "fragment_inferred_two_body_inter_intra_ratio": 0.07616330001505535,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 4,
+        "num_electrons": 4
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -194,7 +222,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -243,7 +282,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 0.006352853044801494,
         "fragment_inferred_two_body_inter_intra_ratio": 0.22776567814779433,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 4,
+        "num_electrons": 4
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -256,7 +297,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -305,7 +357,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 0.00013984301349766518,
         "fragment_inferred_two_body_inter_intra_ratio": 0.14355036030766977,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 4,
+        "num_electrons": 4
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -318,7 +372,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -367,7 +432,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 9.300469904453042e-09,
         "fragment_inferred_two_body_inter_intra_ratio": 0.08413764067349289,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 4,
+        "num_electrons": 4
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -380,7 +447,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -429,7 +507,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 0.03271239666570826,
         "fragment_inferred_two_body_inter_intra_ratio": 0.39450056032479286,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 4,
+        "num_electrons": 4
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -442,7 +522,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -491,7 +582,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 0.0006902241286138211,
         "fragment_inferred_two_body_inter_intra_ratio": 0.16654250175455648,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 4,
+        "num_electrons": 4
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -504,7 +597,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -553,7 +657,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 8.228055613506753e-08,
         "fragment_inferred_two_body_inter_intra_ratio": 0.09383225178852905,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 4,
+        "num_electrons": 4
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -566,7 +672,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -615,7 +732,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 0.004406451856636286,
         "fragment_inferred_two_body_inter_intra_ratio": 0.2644560770452726,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 8,
+        "num_electrons": 8
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -628,7 +747,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -677,7 +807,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 9.736818136109924e-05,
         "fragment_inferred_two_body_inter_intra_ratio": 0.17228460895602146,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 8,
+        "num_electrons": 8
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -690,7 +822,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -739,7 +882,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 4.189539904950583e-09,
         "fragment_inferred_two_body_inter_intra_ratio": 0.10224888345474592,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 8,
+        "num_electrons": 8
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -752,7 +897,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -801,7 +957,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 0.0064078681438460095,
         "fragment_inferred_two_body_inter_intra_ratio": 0.30246231846817145,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 8,
+        "num_electrons": 8
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -814,7 +972,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -863,7 +1032,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 0.00014590299909125827,
         "fragment_inferred_two_body_inter_intra_ratio": 0.191993176349011,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 8,
+        "num_electrons": 8
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -876,7 +1047,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -925,7 +1107,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 1.0099534412190472e-08,
         "fragment_inferred_two_body_inter_intra_ratio": 0.11287020089941456,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 8,
+        "num_electrons": 8
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -938,7 +1122,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -987,7 +1182,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 0.035561394416550346,
         "fragment_inferred_two_body_inter_intra_ratio": 0.5291558176679639,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 8,
+        "num_electrons": 8
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -1000,7 +1197,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -1049,7 +1257,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 0.0007654450632139204,
         "fragment_inferred_two_body_inter_intra_ratio": 0.2211340127811082,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 8,
+        "num_electrons": 8
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -1062,7 +1272,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -1111,7 +1332,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 9.007974682504056e-08,
         "fragment_inferred_two_body_inter_intra_ratio": 0.12556921361472465,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 8,
+        "num_electrons": 8
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -1124,7 +1347,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -1173,7 +1407,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 8.991682647240454e-05,
         "fragment_inferred_two_body_inter_intra_ratio": 0.19729050486406405,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 16,
+        "num_electrons": 16
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -1186,7 +1422,18 @@
         "reference_energy_standard_error": 1e-10,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -1235,7 +1482,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 0.0006685549120656534,
         "fragment_inferred_two_body_inter_intra_ratio": 0.2517234927650548,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "physical_fragmentation_grid"
+        "calibration_role": "physical_fragmentation_grid",
+        "num_orbitals": 16,
+        "num_electrons": 16
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -1248,7 +1497,18 @@
         "reference_energy_standard_error": 1e-10,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -1297,7 +1557,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 0.0,
         "fragment_inferred_two_body_inter_intra_ratio": 0.0,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "planted_interfragment_coupling"
+        "calibration_role": "planted_interfragment_coupling",
+        "num_orbitals": 8,
+        "num_electrons": 8
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -1310,7 +1572,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -1359,7 +1632,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 0.027812429017106885,
         "fragment_inferred_two_body_inter_intra_ratio": 0.011056461924251861,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "planted_interfragment_coupling"
+        "calibration_role": "planted_interfragment_coupling",
+        "num_orbitals": 8,
+        "num_electrons": 8
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -1372,7 +1647,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -1421,7 +1707,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 0.11124971606842754,
         "fragment_inferred_two_body_inter_intra_ratio": 0.044225847697007444,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "planted_interfragment_coupling"
+        "calibration_role": "planted_interfragment_coupling",
+        "num_orbitals": 8,
+        "num_electrons": 8
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -1434,7 +1722,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -1483,7 +1782,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 0.2781242901710688,
         "fragment_inferred_two_body_inter_intra_ratio": 0.1105646192425186,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "planted_interfragment_coupling"
+        "calibration_role": "planted_interfragment_coupling",
+        "num_orbitals": 8,
+        "num_electrons": 8
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -1496,7 +1797,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -1545,7 +1857,9 @@
         "fragment_inferred_one_body_inter_intra_ratio": 0.5562485803421376,
         "fragment_inferred_two_body_inter_intra_ratio": 0.2211292384850372,
         "fragment_detector_version": "g22_fragment_coupling_detector_v1",
-        "calibration_role": "planted_interfragment_coupling"
+        "calibration_role": "planted_interfragment_coupling",
+        "num_orbitals": 8,
+        "num_electrons": 8
       },
       "requirements": {
         "time_limit_seconds": 86400,
@@ -1558,7 +1872,18 @@
         "reference_energy_standard_error": 0.0,
         "reference_energy_independent_of_shci_family": true,
         "reference_energy_source": "In-house fixed-Hamiltonian FCI or block2 DMRG from the emitted FCIDUMP; construction and convergence evidence are linked in the fragment sidecar and manifest.",
-        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact."
+        "reference_energy_note": "Exact for K<=4. K=8 uses one independently converged variational SU(2) DMRG sequence and is graded one_nearly_exact.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {

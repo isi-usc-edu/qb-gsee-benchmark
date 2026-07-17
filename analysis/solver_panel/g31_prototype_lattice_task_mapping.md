@@ -1,4 +1,4 @@
-# G-31 legacy lattice task mapping
+# G-31 prototype lattice task mapping
 
 Status: **pass**.
 

@@ -19,7 +19,7 @@
   "problem_type": "GSEE",
   "references": [
     "https://doi.org/10.1103/PhysRevLett.20.1445",
-    "O14 decision: sparse ED is the primary exact same-Hamiltonian reference for W3b doped/magnetized rows; Bethe real-root scans are non-blocking cross-checks only where validated."
+    "Sparse exact diagonalization is the primary same-Hamiltonian reference for the doped or magnetized rows; Bethe real-root scans are non-blocking cross-checks only where validated."
   ],
   "short_name": "w3b_hubbard_lieb_wu_1d_doped_o14_ed",
   "status": "in_development",
@@ -72,7 +72,7 @@
         "hilbert_dimension": 44100,
         "lanczos_tol": 1e-12,
         "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
-        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "bethe_cross_check_note": "Sparse exact diagonalization is primary for these tasks; existing real-root scans are retained only as non-blocking diagnostics and do not validate the emitted target sectors.",
         "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
       },
       "requirements": {
@@ -87,8 +87,19 @@
         "reference_energy_cross_validation_methods": [
           "independent sparse ED verifier from FCIDUMP integrals"
         ],
-        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
-        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 44100. Actual total filling n=N_e/L=0.8."
+        "reference_energy_source": "Sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 44100. Actual total filling n=N_e/L=0.8.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 10,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.01,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -103,7 +114,31 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/0/features/bethe_cross_check_note",
+            "original_value": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+            "original_value_sha256": "c59d3d94d94a744c25f293d470c5ede9b45b7e2dbdf230536c6b75bba023253e",
+            "public_replacement_pointer": "/tasks/0/features/bethe_cross_check_note",
+            "public_replacement_value_sha256": "4ec4380c6d58a15ad81730819d8a00d4f6080ddf8504f120a531e5b985d04990",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/0/requirements/reference_energy_source",
+            "original_value": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+            "original_value_sha256": "e5a7540f1b714119c0de94584bb5c4d8b46c304d7ccfea708b0dc394d7b140ef",
+            "public_replacement_pointer": "/tasks/0/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "b58319bf6dcdac459701a7fe2ce2db54850a475c81f27b48635c029877ff1186",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "433a495b-874b-5c36-abbe-fb242beef004",
@@ -142,7 +177,7 @@
         "hilbert_dimension": 44100,
         "lanczos_tol": 1e-12,
         "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
-        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "bethe_cross_check_note": "Sparse exact diagonalization is primary for these tasks; existing real-root scans are retained only as non-blocking diagnostics and do not validate the emitted target sectors.",
         "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
       },
       "requirements": {
@@ -157,8 +192,19 @@
         "reference_energy_cross_validation_methods": [
           "independent sparse ED verifier from FCIDUMP integrals"
         ],
-        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
-        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 44100. Actual total filling n=N_e/L=0.8."
+        "reference_energy_source": "Sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 44100. Actual total filling n=N_e/L=0.8.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 10,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.01,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -173,7 +219,31 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/1/features/bethe_cross_check_note",
+            "original_value": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+            "original_value_sha256": "c59d3d94d94a744c25f293d470c5ede9b45b7e2dbdf230536c6b75bba023253e",
+            "public_replacement_pointer": "/tasks/1/features/bethe_cross_check_note",
+            "public_replacement_value_sha256": "4ec4380c6d58a15ad81730819d8a00d4f6080ddf8504f120a531e5b985d04990",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/1/requirements/reference_energy_source",
+            "original_value": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+            "original_value_sha256": "e5a7540f1b714119c0de94584bb5c4d8b46c304d7ccfea708b0dc394d7b140ef",
+            "public_replacement_pointer": "/tasks/1/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "b58319bf6dcdac459701a7fe2ce2db54850a475c81f27b48635c029877ff1186",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "6d471452-fc44-5e62-a2f2-7898ede7b015",
@@ -212,7 +282,7 @@
         "hilbert_dimension": 44100,
         "lanczos_tol": 1e-12,
         "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
-        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "bethe_cross_check_note": "Sparse exact diagonalization is primary for these tasks; existing real-root scans are retained only as non-blocking diagnostics and do not validate the emitted target sectors.",
         "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
       },
       "requirements": {
@@ -227,8 +297,19 @@
         "reference_energy_cross_validation_methods": [
           "independent sparse ED verifier from FCIDUMP integrals"
         ],
-        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
-        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 44100. Actual total filling n=N_e/L=0.8."
+        "reference_energy_source": "Sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 44100. Actual total filling n=N_e/L=0.8.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 10,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.01,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -243,7 +324,31 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/2/features/bethe_cross_check_note",
+            "original_value": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+            "original_value_sha256": "c59d3d94d94a744c25f293d470c5ede9b45b7e2dbdf230536c6b75bba023253e",
+            "public_replacement_pointer": "/tasks/2/features/bethe_cross_check_note",
+            "public_replacement_value_sha256": "4ec4380c6d58a15ad81730819d8a00d4f6080ddf8504f120a531e5b985d04990",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/2/requirements/reference_energy_source",
+            "original_value": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+            "original_value_sha256": "e5a7540f1b714119c0de94584bb5c4d8b46c304d7ccfea708b0dc394d7b140ef",
+            "public_replacement_pointer": "/tasks/2/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "b58319bf6dcdac459701a7fe2ce2db54850a475c81f27b48635c029877ff1186",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "f741ad60-c607-5d84-a0f3-73471ba36915",
@@ -282,7 +387,7 @@
         "hilbert_dimension": 14400,
         "lanczos_tol": 1e-12,
         "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
-        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "bethe_cross_check_note": "Sparse exact diagonalization is primary for these tasks; existing real-root scans are retained only as non-blocking diagnostics and do not validate the emitted target sectors.",
         "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
       },
       "requirements": {
@@ -297,8 +402,19 @@
         "reference_energy_cross_validation_methods": [
           "independent sparse ED verifier from FCIDUMP integrals"
         ],
-        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
-        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 14400. Actual total filling n=N_e/L=0.6."
+        "reference_energy_source": "Sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 14400. Actual total filling n=N_e/L=0.6.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 10,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.01,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -313,7 +429,31 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/3/features/bethe_cross_check_note",
+            "original_value": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+            "original_value_sha256": "c59d3d94d94a744c25f293d470c5ede9b45b7e2dbdf230536c6b75bba023253e",
+            "public_replacement_pointer": "/tasks/3/features/bethe_cross_check_note",
+            "public_replacement_value_sha256": "4ec4380c6d58a15ad81730819d8a00d4f6080ddf8504f120a531e5b985d04990",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/3/requirements/reference_energy_source",
+            "original_value": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+            "original_value_sha256": "e5a7540f1b714119c0de94584bb5c4d8b46c304d7ccfea708b0dc394d7b140ef",
+            "public_replacement_pointer": "/tasks/3/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "b58319bf6dcdac459701a7fe2ce2db54850a475c81f27b48635c029877ff1186",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "478999cb-5f32-5e88-8610-a3671e9463d0",
@@ -352,7 +492,7 @@
         "hilbert_dimension": 14400,
         "lanczos_tol": 1e-12,
         "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
-        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "bethe_cross_check_note": "Sparse exact diagonalization is primary for these tasks; existing real-root scans are retained only as non-blocking diagnostics and do not validate the emitted target sectors.",
         "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
       },
       "requirements": {
@@ -367,8 +507,19 @@
         "reference_energy_cross_validation_methods": [
           "independent sparse ED verifier from FCIDUMP integrals"
         ],
-        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
-        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 14400. Actual total filling n=N_e/L=0.6."
+        "reference_energy_source": "Sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 14400. Actual total filling n=N_e/L=0.6.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 10,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.01,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -383,7 +534,31 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/4/features/bethe_cross_check_note",
+            "original_value": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+            "original_value_sha256": "c59d3d94d94a744c25f293d470c5ede9b45b7e2dbdf230536c6b75bba023253e",
+            "public_replacement_pointer": "/tasks/4/features/bethe_cross_check_note",
+            "public_replacement_value_sha256": "4ec4380c6d58a15ad81730819d8a00d4f6080ddf8504f120a531e5b985d04990",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/4/requirements/reference_energy_source",
+            "original_value": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+            "original_value_sha256": "e5a7540f1b714119c0de94584bb5c4d8b46c304d7ccfea708b0dc394d7b140ef",
+            "public_replacement_pointer": "/tasks/4/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "b58319bf6dcdac459701a7fe2ce2db54850a475c81f27b48635c029877ff1186",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "f13bae7b-cb74-5d09-9089-5745668b2c53",
@@ -422,7 +597,7 @@
         "hilbert_dimension": 14400,
         "lanczos_tol": 1e-12,
         "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
-        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "bethe_cross_check_note": "Sparse exact diagonalization is primary for these tasks; existing real-root scans are retained only as non-blocking diagnostics and do not validate the emitted target sectors.",
         "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
       },
       "requirements": {
@@ -437,8 +612,19 @@
         "reference_energy_cross_validation_methods": [
           "independent sparse ED verifier from FCIDUMP integrals"
         ],
-        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
-        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 14400. Actual total filling n=N_e/L=0.6."
+        "reference_energy_source": "Sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 14400. Actual total filling n=N_e/L=0.6.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 10,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.01,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -453,7 +639,31 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/5/features/bethe_cross_check_note",
+            "original_value": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+            "original_value_sha256": "c59d3d94d94a744c25f293d470c5ede9b45b7e2dbdf230536c6b75bba023253e",
+            "public_replacement_pointer": "/tasks/5/features/bethe_cross_check_note",
+            "public_replacement_value_sha256": "4ec4380c6d58a15ad81730819d8a00d4f6080ddf8504f120a531e5b985d04990",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/5/requirements/reference_energy_source",
+            "original_value": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+            "original_value_sha256": "e5a7540f1b714119c0de94584bb5c4d8b46c304d7ccfea708b0dc394d7b140ef",
+            "public_replacement_pointer": "/tasks/5/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "b58319bf6dcdac459701a7fe2ce2db54850a475c81f27b48635c029877ff1186",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "bddd01e2-9505-53d9-a408-9c593a28b05f",
@@ -492,7 +702,7 @@
         "hilbert_dimension": 627264,
         "lanczos_tol": 1e-12,
         "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
-        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "bethe_cross_check_note": "Sparse exact diagonalization is primary for these tasks; existing real-root scans are retained only as non-blocking diagnostics and do not validate the emitted target sectors.",
         "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
       },
       "requirements": {
@@ -507,8 +717,19 @@
         "reference_energy_cross_validation_methods": [
           "independent sparse ED verifier from FCIDUMP integrals"
         ],
-        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
-        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 627264. Actual total filling n=N_e/L=0.833333333333."
+        "reference_energy_source": "Sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 627264. Actual total filling n=N_e/L=0.833333333333.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 12,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.012,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -523,7 +744,31 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/6/features/bethe_cross_check_note",
+            "original_value": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+            "original_value_sha256": "c59d3d94d94a744c25f293d470c5ede9b45b7e2dbdf230536c6b75bba023253e",
+            "public_replacement_pointer": "/tasks/6/features/bethe_cross_check_note",
+            "public_replacement_value_sha256": "4ec4380c6d58a15ad81730819d8a00d4f6080ddf8504f120a531e5b985d04990",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/6/requirements/reference_energy_source",
+            "original_value": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+            "original_value_sha256": "e5a7540f1b714119c0de94584bb5c4d8b46c304d7ccfea708b0dc394d7b140ef",
+            "public_replacement_pointer": "/tasks/6/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "b58319bf6dcdac459701a7fe2ce2db54850a475c81f27b48635c029877ff1186",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "7babf8ad-ed50-51d5-9ef6-c118d182525b",
@@ -562,7 +807,7 @@
         "hilbert_dimension": 627264,
         "lanczos_tol": 1e-12,
         "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
-        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "bethe_cross_check_note": "Sparse exact diagonalization is primary for these tasks; existing real-root scans are retained only as non-blocking diagnostics and do not validate the emitted target sectors.",
         "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
       },
       "requirements": {
@@ -577,8 +822,19 @@
         "reference_energy_cross_validation_methods": [
           "independent sparse ED verifier from FCIDUMP integrals"
         ],
-        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
-        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 627264. Actual total filling n=N_e/L=0.833333333333."
+        "reference_energy_source": "Sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 627264. Actual total filling n=N_e/L=0.833333333333.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 12,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.012,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -593,7 +849,31 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/7/features/bethe_cross_check_note",
+            "original_value": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+            "original_value_sha256": "c59d3d94d94a744c25f293d470c5ede9b45b7e2dbdf230536c6b75bba023253e",
+            "public_replacement_pointer": "/tasks/7/features/bethe_cross_check_note",
+            "public_replacement_value_sha256": "4ec4380c6d58a15ad81730819d8a00d4f6080ddf8504f120a531e5b985d04990",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/7/requirements/reference_energy_source",
+            "original_value": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+            "original_value_sha256": "e5a7540f1b714119c0de94584bb5c4d8b46c304d7ccfea708b0dc394d7b140ef",
+            "public_replacement_pointer": "/tasks/7/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "b58319bf6dcdac459701a7fe2ce2db54850a475c81f27b48635c029877ff1186",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "7d524593-eb44-525d-aba8-b96e7f1ad464",
@@ -632,7 +912,7 @@
         "hilbert_dimension": 627264,
         "lanczos_tol": 1e-12,
         "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
-        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "bethe_cross_check_note": "Sparse exact diagonalization is primary for these tasks; existing real-root scans are retained only as non-blocking diagnostics and do not validate the emitted target sectors.",
         "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
       },
       "requirements": {
@@ -647,8 +927,19 @@
         "reference_energy_cross_validation_methods": [
           "independent sparse ED verifier from FCIDUMP integrals"
         ],
-        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
-        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 627264. Actual total filling n=N_e/L=0.833333333333."
+        "reference_energy_source": "Sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 627264. Actual total filling n=N_e/L=0.833333333333.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 12,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.012,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -663,7 +954,31 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/8/features/bethe_cross_check_note",
+            "original_value": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+            "original_value_sha256": "c59d3d94d94a744c25f293d470c5ede9b45b7e2dbdf230536c6b75bba023253e",
+            "public_replacement_pointer": "/tasks/8/features/bethe_cross_check_note",
+            "public_replacement_value_sha256": "4ec4380c6d58a15ad81730819d8a00d4f6080ddf8504f120a531e5b985d04990",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/8/requirements/reference_energy_source",
+            "original_value": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+            "original_value_sha256": "e5a7540f1b714119c0de94584bb5c4d8b46c304d7ccfea708b0dc394d7b140ef",
+            "public_replacement_pointer": "/tasks/8/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "b58319bf6dcdac459701a7fe2ce2db54850a475c81f27b48635c029877ff1186",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "4339a791-272d-5eb9-8450-c9f7e57410f9",
@@ -702,7 +1017,7 @@
         "hilbert_dimension": 245025,
         "lanczos_tol": 1e-12,
         "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
-        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "bethe_cross_check_note": "Sparse exact diagonalization is primary for these tasks; existing real-root scans are retained only as non-blocking diagnostics and do not validate the emitted target sectors.",
         "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
       },
       "requirements": {
@@ -717,8 +1032,19 @@
         "reference_energy_cross_validation_methods": [
           "independent sparse ED verifier from FCIDUMP integrals"
         ],
-        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
-        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 245025. Actual total filling n=N_e/L=0.666666666667."
+        "reference_energy_source": "Sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 245025. Actual total filling n=N_e/L=0.666666666667.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 12,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.012,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -733,7 +1059,31 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/9/features/bethe_cross_check_note",
+            "original_value": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+            "original_value_sha256": "c59d3d94d94a744c25f293d470c5ede9b45b7e2dbdf230536c6b75bba023253e",
+            "public_replacement_pointer": "/tasks/9/features/bethe_cross_check_note",
+            "public_replacement_value_sha256": "4ec4380c6d58a15ad81730819d8a00d4f6080ddf8504f120a531e5b985d04990",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/9/requirements/reference_energy_source",
+            "original_value": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+            "original_value_sha256": "e5a7540f1b714119c0de94584bb5c4d8b46c304d7ccfea708b0dc394d7b140ef",
+            "public_replacement_pointer": "/tasks/9/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "b58319bf6dcdac459701a7fe2ce2db54850a475c81f27b48635c029877ff1186",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "4eb3cba3-fbfd-5bf5-b139-354585fa4699",
@@ -772,7 +1122,7 @@
         "hilbert_dimension": 245025,
         "lanczos_tol": 1e-12,
         "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
-        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "bethe_cross_check_note": "Sparse exact diagonalization is primary for these tasks; existing real-root scans are retained only as non-blocking diagnostics and do not validate the emitted target sectors.",
         "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
       },
       "requirements": {
@@ -787,8 +1137,19 @@
         "reference_energy_cross_validation_methods": [
           "independent sparse ED verifier from FCIDUMP integrals"
         ],
-        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
-        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 245025. Actual total filling n=N_e/L=0.666666666667."
+        "reference_energy_source": "Sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 245025. Actual total filling n=N_e/L=0.666666666667.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 12,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.012,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -803,7 +1164,31 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/10/features/bethe_cross_check_note",
+            "original_value": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+            "original_value_sha256": "c59d3d94d94a744c25f293d470c5ede9b45b7e2dbdf230536c6b75bba023253e",
+            "public_replacement_pointer": "/tasks/10/features/bethe_cross_check_note",
+            "public_replacement_value_sha256": "4ec4380c6d58a15ad81730819d8a00d4f6080ddf8504f120a531e5b985d04990",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/10/requirements/reference_energy_source",
+            "original_value": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+            "original_value_sha256": "e5a7540f1b714119c0de94584bb5c4d8b46c304d7ccfea708b0dc394d7b140ef",
+            "public_replacement_pointer": "/tasks/10/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "b58319bf6dcdac459701a7fe2ce2db54850a475c81f27b48635c029877ff1186",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "c3dc0087-f54d-5a4e-9513-f80c102f8442",
@@ -842,7 +1227,7 @@
         "hilbert_dimension": 245025,
         "lanczos_tol": 1e-12,
         "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
-        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "bethe_cross_check_note": "Sparse exact diagonalization is primary for these tasks; existing real-root scans are retained only as non-blocking diagnostics and do not validate the emitted target sectors.",
         "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
       },
       "requirements": {
@@ -857,8 +1242,19 @@
         "reference_energy_cross_validation_methods": [
           "independent sparse ED verifier from FCIDUMP integrals"
         ],
-        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
-        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 245025. Actual total filling n=N_e/L=0.666666666667."
+        "reference_energy_source": "Sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 245025. Actual total filling n=N_e/L=0.666666666667.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 12,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.012,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -873,7 +1269,31 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/11/features/bethe_cross_check_note",
+            "original_value": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+            "original_value_sha256": "c59d3d94d94a744c25f293d470c5ede9b45b7e2dbdf230536c6b75bba023253e",
+            "public_replacement_pointer": "/tasks/11/features/bethe_cross_check_note",
+            "public_replacement_value_sha256": "4ec4380c6d58a15ad81730819d8a00d4f6080ddf8504f120a531e5b985d04990",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/11/requirements/reference_energy_source",
+            "original_value": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+            "original_value_sha256": "e5a7540f1b714119c0de94584bb5c4d8b46c304d7ccfea708b0dc394d7b140ef",
+            "public_replacement_pointer": "/tasks/11/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "b58319bf6dcdac459701a7fe2ce2db54850a475c81f27b48635c029877ff1186",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "6a5548f3-9cf5-57fd-bbbc-696ce1bec8d4",
@@ -912,7 +1332,7 @@
         "hilbert_dimension": 44100,
         "lanczos_tol": 1e-12,
         "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
-        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "bethe_cross_check_note": "Sparse exact diagonalization is primary for these tasks; existing real-root scans are retained only as non-blocking diagnostics and do not validate the emitted target sectors.",
         "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
       },
       "requirements": {
@@ -927,8 +1347,19 @@
         "reference_energy_cross_validation_methods": [
           "independent sparse ED verifier from FCIDUMP integrals"
         ],
-        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
-        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 44100. Actual total filling n=N_e/L=1."
+        "reference_energy_source": "Sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 44100. Actual total filling n=N_e/L=1.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 10,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.01,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -943,7 +1374,31 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/12/features/bethe_cross_check_note",
+            "original_value": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+            "original_value_sha256": "c59d3d94d94a744c25f293d470c5ede9b45b7e2dbdf230536c6b75bba023253e",
+            "public_replacement_pointer": "/tasks/12/features/bethe_cross_check_note",
+            "public_replacement_value_sha256": "4ec4380c6d58a15ad81730819d8a00d4f6080ddf8504f120a531e5b985d04990",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/12/requirements/reference_energy_source",
+            "original_value": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+            "original_value_sha256": "e5a7540f1b714119c0de94584bb5c4d8b46c304d7ccfea708b0dc394d7b140ef",
+            "public_replacement_pointer": "/tasks/12/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "b58319bf6dcdac459701a7fe2ce2db54850a475c81f27b48635c029877ff1186",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "6f8a0a46-3788-5bae-a0cf-1ac80246c966",
@@ -982,7 +1437,7 @@
         "hilbert_dimension": 44100,
         "lanczos_tol": 1e-12,
         "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
-        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "bethe_cross_check_note": "Sparse exact diagonalization is primary for these tasks; existing real-root scans are retained only as non-blocking diagnostics and do not validate the emitted target sectors.",
         "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
       },
       "requirements": {
@@ -997,8 +1452,19 @@
         "reference_energy_cross_validation_methods": [
           "independent sparse ED verifier from FCIDUMP integrals"
         ],
-        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
-        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 44100. Actual total filling n=N_e/L=1."
+        "reference_energy_source": "Sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 44100. Actual total filling n=N_e/L=1.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 10,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.01,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1013,7 +1479,31 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/13/features/bethe_cross_check_note",
+            "original_value": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+            "original_value_sha256": "c59d3d94d94a744c25f293d470c5ede9b45b7e2dbdf230536c6b75bba023253e",
+            "public_replacement_pointer": "/tasks/13/features/bethe_cross_check_note",
+            "public_replacement_value_sha256": "4ec4380c6d58a15ad81730819d8a00d4f6080ddf8504f120a531e5b985d04990",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/13/requirements/reference_energy_source",
+            "original_value": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+            "original_value_sha256": "e5a7540f1b714119c0de94584bb5c4d8b46c304d7ccfea708b0dc394d7b140ef",
+            "public_replacement_pointer": "/tasks/13/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "b58319bf6dcdac459701a7fe2ce2db54850a475c81f27b48635c029877ff1186",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "2095ccd7-2007-55ba-8a0d-ced04e5ae859",
@@ -1052,7 +1542,7 @@
         "hilbert_dimension": 44100,
         "lanczos_tol": 1e-12,
         "bethe_cross_check_status": "not_attached_no_valid_target_real_root_scan",
-        "bethe_cross_check_note": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+        "bethe_cross_check_note": "Sparse exact diagonalization is primary for these tasks; existing real-root scans are retained only as non-blocking diagnostics and do not validate the emitted target sectors.",
         "basis_convention_note": "FCIDUMP spatial orbitals are Hubbard sites, not Hartree-Fock orbitals; ECORE=0 and no particle-hole shift."
       },
       "requirements": {
@@ -1067,8 +1557,19 @@
         "reference_energy_cross_validation_methods": [
           "independent sparse ED verifier from FCIDUMP integrals"
         ],
-        "reference_energy_source": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
-        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 44100. Actual total filling n=N_e/L=1."
+        "reference_energy_source": "Sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+        "reference_energy_note": "Lanczos tolerance 1e-12; Hilbert dimension 44100. Actual total filling n=N_e/L=1.",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 10,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.01,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1083,7 +1584,45 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": true,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/14/features/bethe_cross_check_note",
+            "original_value": "O14 makes ED primary for W3b; existing real-root scans are retained only as non-blocking diagnostics and do not validate these emitted target sectors.",
+            "original_value_sha256": "c59d3d94d94a744c25f293d470c5ede9b45b7e2dbdf230536c6b75bba023253e",
+            "public_replacement_pointer": "/tasks/14/features/bethe_cross_check_note",
+            "public_replacement_value_sha256": "4ec4380c6d58a15ad81730819d8a00d4f6080ddf8504f120a531e5b985d04990",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          },
+          {
+            "original_json_pointer": "/tasks/14/requirements/reference_energy_source",
+            "original_value": "O14 W3b route: sparse Lanczos exact diagonalization of the same finite periodic site-basis Hubbard Hamiltonian emitted as FCIDUMP; Lieb-Wu real-root scans are non-blocking cross-checks only when same-target validation exists.",
+            "original_value_sha256": "e5a7540f1b714119c0de94584bb5c4d8b46c304d7ccfea708b0dc394d7b140ef",
+            "public_replacement_pointer": "/tasks/14/requirements/reference_energy_source",
+            "public_replacement_value_sha256": "b58319bf6dcdac459701a7fe2ce2db54850a475c81f27b48635c029877ff1186",
+            "internal_pointer_classes": [
+              "governance_id"
+            ]
+          }
+        ]
+      }
     }
-  ]
+  ],
+  "internal_provenance": {
+    "migration_records": [
+      {
+        "original_json_pointer": "/references/1",
+        "original_value": "O14 decision: sparse ED is the primary exact same-Hamiltonian reference for W3b doped/magnetized rows; Bethe real-root scans are non-blocking cross-checks only where validated.",
+        "original_value_sha256": "0167d53c58a0b2c8255ee8c8aea81a8d3231ec4f28012194c991a9c0b99b9de0",
+        "public_replacement_pointer": "/references/1",
+        "public_replacement_value_sha256": "092a916075365d922b2ce24c7d56e30a5acfa5ba7709fb34ced7d5e57e370b41",
+        "internal_pointer_classes": [
+          "governance_id"
+        ]
+      }
+    ]
+  }
 }

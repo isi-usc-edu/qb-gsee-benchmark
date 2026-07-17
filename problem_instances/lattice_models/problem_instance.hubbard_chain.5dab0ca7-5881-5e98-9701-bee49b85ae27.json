@@ -22,7 +22,7 @@
   "references": [
     "Dian Wu et al., Variational benchmarks for quantum many-body problems. Science 386, 296-301(2024). DOI:10.1126/science.adg9774",
     {
-      "note": "C8 reinstatement requires 1D chain references to be upgraded to Lieb-Wu/Bethe exact numerics before paper claims."
+      "note": "The 1D chain references must be upgraded to finite-system Lieb-Wu/Bethe exact numerics before they support publication claims."
     },
     {
       "note": "Current 4x4 square tasks are doped; sign-free half-filled AFQMC/DQMC literature references do not directly certify these tasks."
@@ -71,9 +71,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+        "reference_energy_note": "The 1D chain reference must come from finite-system Lieb-Wu/Bethe numerics. The current value is inherited from an earlier staged record and is not yet accepted as the exact reference.",
         "reference_target_class": "exact_lieb_wu_bethe",
-        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa"
+        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 14,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.014,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -92,7 +103,22 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/0/requirements/reference_energy_note",
+            "original_value": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+            "original_value_sha256": "b95af9f32b50bae84a157b7194f5b86aae43eca350d70bf710f1d057aaca354f",
+            "public_replacement_pointer": "/tasks/0/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "32b3fc9c0d1886dac033accbbe14143238abb0cfa5ebb3a84854fcbda193eb67",
+            "internal_pointer_classes": [
+              "governance_id",
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "b0a4ffc9-b2e3-571b-9832-68c8a4c4e98f",
@@ -136,9 +162,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+        "reference_energy_note": "The 1D chain reference must come from finite-system Lieb-Wu/Bethe numerics. The current value is inherited from an earlier staged record and is not yet accepted as the exact reference.",
         "reference_target_class": "exact_lieb_wu_bethe",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 14,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.014,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -157,7 +194,22 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/1/requirements/reference_energy_note",
+            "original_value": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+            "original_value_sha256": "b95af9f32b50bae84a157b7194f5b86aae43eca350d70bf710f1d057aaca354f",
+            "public_replacement_pointer": "/tasks/1/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "32b3fc9c0d1886dac033accbbe14143238abb0cfa5ebb3a84854fcbda193eb67",
+            "internal_pointer_classes": [
+              "governance_id",
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "6332241a-83ea-55e1-bcb6-4544d750e4af",
@@ -201,9 +253,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference. Reference energy is currently null in the parked JSON.",
+        "reference_energy_note": "The 1D chain reference must come from finite-system Lieb-Wu/Bethe numerics. The current value is inherited from an earlier staged record and is not yet accepted as the exact reference. The reference energy is currently null.",
         "reference_target_class": "exact_lieb_wu_bethe",
-        "reference_energy_source_legacy": "None"
+        "reference_energy_source_legacy": "None",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 14,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.014,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -222,7 +285,22 @@
       "curation_tier": "utility",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/2/requirements/reference_energy_note",
+            "original_value": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference. Reference energy is currently null in the parked JSON.",
+            "original_value_sha256": "27abc80476d441528d480fd0d9bed841d6581ce66c37825aab830f79877a87e9",
+            "public_replacement_pointer": "/tasks/2/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "ec72a0080e4502ce044b522939730c04bf12d65f3e56c7912cd0acc2d6818c6e",
+            "internal_pointer_classes": [
+              "governance_id",
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "7c8a6a7e-0ce9-56cf-b069-62eceeb66855",
@@ -266,9 +344,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+        "reference_energy_note": "The 1D chain reference must come from finite-system Lieb-Wu/Bethe numerics. The current value is inherited from an earlier staged record and is not yet accepted as the exact reference.",
         "reference_target_class": "exact_lieb_wu_bethe",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 14,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.014,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -287,7 +376,22 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/3/requirements/reference_energy_note",
+            "original_value": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+            "original_value_sha256": "b95af9f32b50bae84a157b7194f5b86aae43eca350d70bf710f1d057aaca354f",
+            "public_replacement_pointer": "/tasks/3/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "32b3fc9c0d1886dac033accbbe14143238abb0cfa5ebb3a84854fcbda193eb67",
+            "internal_pointer_classes": [
+              "governance_id",
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "1517b6a4-81f1-5a4e-aef5-d295bba72e01",
@@ -331,9 +435,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference. Reference energy is currently null in the parked JSON.",
+        "reference_energy_note": "The 1D chain reference must come from finite-system Lieb-Wu/Bethe numerics. The current value is inherited from an earlier staged record and is not yet accepted as the exact reference. The reference energy is currently null.",
         "reference_target_class": "exact_lieb_wu_bethe",
-        "reference_energy_source_legacy": "None"
+        "reference_energy_source_legacy": "None",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 14,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.014,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -352,7 +467,22 @@
       "curation_tier": "utility",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/4/requirements/reference_energy_note",
+            "original_value": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference. Reference energy is currently null in the parked JSON.",
+            "original_value_sha256": "27abc80476d441528d480fd0d9bed841d6581ce66c37825aab830f79877a87e9",
+            "public_replacement_pointer": "/tasks/4/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "ec72a0080e4502ce044b522939730c04bf12d65f3e56c7912cd0acc2d6818c6e",
+            "internal_pointer_classes": [
+              "governance_id",
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "06f7c1cc-d5cc-52e8-94ee-9cc3b9f03c25",
@@ -396,9 +526,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+        "reference_energy_note": "The 1D chain reference must come from finite-system Lieb-Wu/Bethe numerics. The current value is inherited from an earlier staged record and is not yet accepted as the exact reference.",
         "reference_target_class": "exact_lieb_wu_bethe",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 14,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.014,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -417,7 +558,22 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/5/requirements/reference_energy_note",
+            "original_value": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+            "original_value_sha256": "b95af9f32b50bae84a157b7194f5b86aae43eca350d70bf710f1d057aaca354f",
+            "public_replacement_pointer": "/tasks/5/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "32b3fc9c0d1886dac033accbbe14143238abb0cfa5ebb3a84854fcbda193eb67",
+            "internal_pointer_classes": [
+              "governance_id",
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "f54b591d-96be-51f5-a97a-86ae5da01304",
@@ -461,9 +617,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+        "reference_energy_note": "The 1D chain reference must come from finite-system Lieb-Wu/Bethe numerics. The current value is inherited from an earlier staged record and is not yet accepted as the exact reference.",
         "reference_target_class": "exact_lieb_wu_bethe",
-        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa"
+        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 14,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.014,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -482,7 +649,22 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/6/requirements/reference_energy_note",
+            "original_value": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+            "original_value_sha256": "b95af9f32b50bae84a157b7194f5b86aae43eca350d70bf710f1d057aaca354f",
+            "public_replacement_pointer": "/tasks/6/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "32b3fc9c0d1886dac033accbbe14143238abb0cfa5ebb3a84854fcbda193eb67",
+            "internal_pointer_classes": [
+              "governance_id",
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "4420e097-130d-5f6c-9cc9-5d70dae12c07",
@@ -526,9 +708,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+        "reference_energy_note": "The 1D chain reference must come from finite-system Lieb-Wu/Bethe numerics. The current value is inherited from an earlier staged record and is not yet accepted as the exact reference.",
         "reference_target_class": "exact_lieb_wu_bethe",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 14,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.014,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -547,7 +740,22 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/7/requirements/reference_energy_note",
+            "original_value": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+            "original_value_sha256": "b95af9f32b50bae84a157b7194f5b86aae43eca350d70bf710f1d057aaca354f",
+            "public_replacement_pointer": "/tasks/7/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "32b3fc9c0d1886dac033accbbe14143238abb0cfa5ebb3a84854fcbda193eb67",
+            "internal_pointer_classes": [
+              "governance_id",
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "a942aecf-cb63-523c-a7f1-5fe44a222341",
@@ -591,9 +799,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference. Reference energy is currently null in the parked JSON.",
+        "reference_energy_note": "The 1D chain reference must come from finite-system Lieb-Wu/Bethe numerics. The current value is inherited from an earlier staged record and is not yet accepted as the exact reference. The reference energy is currently null.",
         "reference_target_class": "exact_lieb_wu_bethe",
-        "reference_energy_source_legacy": "None"
+        "reference_energy_source_legacy": "None",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 14,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.014,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -612,7 +831,22 @@
       "curation_tier": "utility",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/8/requirements/reference_energy_note",
+            "original_value": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference. Reference energy is currently null in the parked JSON.",
+            "original_value_sha256": "27abc80476d441528d480fd0d9bed841d6581ce66c37825aab830f79877a87e9",
+            "public_replacement_pointer": "/tasks/8/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "ec72a0080e4502ce044b522939730c04bf12d65f3e56c7912cd0acc2d6818c6e",
+            "internal_pointer_classes": [
+              "governance_id",
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "4d5c0913-b7b2-57fe-b6f8-bec7813b04f4",
@@ -656,9 +890,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+        "reference_energy_note": "The 1D chain reference must come from finite-system Lieb-Wu/Bethe numerics. The current value is inherited from an earlier staged record and is not yet accepted as the exact reference.",
         "reference_target_class": "exact_lieb_wu_bethe",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 14,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.014,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -677,7 +922,22 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/9/requirements/reference_energy_note",
+            "original_value": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+            "original_value_sha256": "b95af9f32b50bae84a157b7194f5b86aae43eca350d70bf710f1d057aaca354f",
+            "public_replacement_pointer": "/tasks/9/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "32b3fc9c0d1886dac033accbbe14143238abb0cfa5ebb3a84854fcbda193eb67",
+            "internal_pointer_classes": [
+              "governance_id",
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "603f9c47-2e69-53b0-a3dc-64402ce383a5",
@@ -721,9 +981,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+        "reference_energy_note": "The 1D chain reference must come from finite-system Lieb-Wu/Bethe numerics. The current value is inherited from an earlier staged record and is not yet accepted as the exact reference.",
         "reference_target_class": "exact_lieb_wu_bethe",
-        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa"
+        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 14,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.014,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -742,7 +1013,22 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/10/requirements/reference_energy_note",
+            "original_value": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+            "original_value_sha256": "b95af9f32b50bae84a157b7194f5b86aae43eca350d70bf710f1d057aaca354f",
+            "public_replacement_pointer": "/tasks/10/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "32b3fc9c0d1886dac033accbbe14143238abb0cfa5ebb3a84854fcbda193eb67",
+            "internal_pointer_classes": [
+              "governance_id",
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "d7269a39-cca7-5f83-8c0a-4dd4f4aa8256",
@@ -786,9 +1072,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+        "reference_energy_note": "The 1D chain reference must come from finite-system Lieb-Wu/Bethe numerics. The current value is inherited from an earlier staged record and is not yet accepted as the exact reference.",
         "reference_target_class": "exact_lieb_wu_bethe",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 14,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.014,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -807,7 +1104,22 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/11/requirements/reference_energy_note",
+            "original_value": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+            "original_value_sha256": "b95af9f32b50bae84a157b7194f5b86aae43eca350d70bf710f1d057aaca354f",
+            "public_replacement_pointer": "/tasks/11/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "32b3fc9c0d1886dac033accbbe14143238abb0cfa5ebb3a84854fcbda193eb67",
+            "internal_pointer_classes": [
+              "governance_id",
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "3df8b2b5-ee51-5064-81ba-a22ad0c72e8c",
@@ -851,9 +1163,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference. Reference energy is currently null in the parked JSON.",
+        "reference_energy_note": "The 1D chain reference must come from finite-system Lieb-Wu/Bethe numerics. The current value is inherited from an earlier staged record and is not yet accepted as the exact reference. The reference energy is currently null.",
         "reference_target_class": "exact_lieb_wu_bethe",
-        "reference_energy_source_legacy": "None"
+        "reference_energy_source_legacy": "None",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 14,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.014,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -872,7 +1195,22 @@
       "curation_tier": "utility",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/12/requirements/reference_energy_note",
+            "original_value": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference. Reference energy is currently null in the parked JSON.",
+            "original_value_sha256": "27abc80476d441528d480fd0d9bed841d6581ce66c37825aab830f79877a87e9",
+            "public_replacement_pointer": "/tasks/12/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "ec72a0080e4502ce044b522939730c04bf12d65f3e56c7912cd0acc2d6818c6e",
+            "internal_pointer_classes": [
+              "governance_id",
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "46a2e196-0c65-5d8a-b00f-cc2809b36d9c",
@@ -916,9 +1254,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+        "reference_energy_note": "The 1D chain reference must come from finite-system Lieb-Wu/Bethe numerics. The current value is inherited from an earlier staged record and is not yet accepted as the exact reference.",
         "reference_target_class": "exact_lieb_wu_bethe",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 14,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.014,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -937,7 +1286,22 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/13/requirements/reference_energy_note",
+            "original_value": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+            "original_value_sha256": "b95af9f32b50bae84a157b7194f5b86aae43eca350d70bf710f1d057aaca354f",
+            "public_replacement_pointer": "/tasks/13/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "32b3fc9c0d1886dac033accbbe14143238abb0cfa5ebb3a84854fcbda193eb67",
+            "internal_pointer_classes": [
+              "governance_id",
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "4aac2195-43ba-5eee-8758-4ac5c81a4c93",
@@ -981,9 +1345,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+        "reference_energy_note": "The 1D chain reference must come from finite-system Lieb-Wu/Bethe numerics. The current value is inherited from an earlier staged record and is not yet accepted as the exact reference.",
         "reference_target_class": "exact_lieb_wu_bethe",
-        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa"
+        "reference_energy_source_legacy": "Benchmark Host Calculations, SHCI and DMRG; average of two values within 0.1 mHa",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 14,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.014,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1002,7 +1377,22 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/14/requirements/reference_energy_note",
+            "original_value": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+            "original_value_sha256": "b95af9f32b50bae84a157b7194f5b86aae43eca350d70bf710f1d057aaca354f",
+            "public_replacement_pointer": "/tasks/14/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "32b3fc9c0d1886dac033accbbe14143238abb0cfa5ebb3a84854fcbda193eb67",
+            "internal_pointer_classes": [
+              "governance_id",
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     },
     {
       "task_uuid": "74015917-2b2a-5990-b6a6-fba321dbbdf7",
@@ -1046,9 +1436,20 @@
         "reference_energy_independent_of_shci_family": false,
         "hard_tier_eligible": false,
         "reference_upgrade_required": true,
-        "reference_energy_note": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+        "reference_energy_note": "The 1D chain reference must come from finite-system Lieb-Wu/Bethe numerics. The current value is inherited from an earlier staged record and is not yet accepted as the exact reference.",
         "reference_target_class": "exact_lieb_wu_bethe",
-        "reference_energy_source_legacy": "https://github.com/varbench/varbench"
+        "reference_energy_source_legacy": "https://github.com/varbench/varbench",
+        "threshold_convention": {
+          "kind": "per_site",
+          "display_label": "per site",
+          "formula": "per_unit_value_hartree * scale_count",
+          "scale_count": 14,
+          "formula_parameters": {
+            "per_unit_value_hartree": 0.001
+          },
+          "computed_threshold_hartree": 0.014,
+          "detail": "Lattice threshold is a site-count-scaled success window."
+        }
       },
       "supporting_files": [
         {
@@ -1067,7 +1468,22 @@
       "curation_tier": "expanded",
       "reference_independence_from_solvers": false,
       "model_hamiltonian_downfolded": false,
-      "source_defect_documented": false
+      "source_defect_documented": false,
+      "internal_provenance": {
+        "migration_records": [
+          {
+            "original_json_pointer": "/tasks/15/requirements/reference_energy_note",
+            "original_value": "C8 spec requires 1D chain references from Lieb-Wu/Bethe numerics. Current value is inherited from parked JSON and is not yet accepted as the exact reference.",
+            "original_value_sha256": "b95af9f32b50bae84a157b7194f5b86aae43eca350d70bf710f1d057aaca354f",
+            "public_replacement_pointer": "/tasks/15/requirements/reference_energy_note",
+            "public_replacement_value_sha256": "32b3fc9c0d1886dac033accbbe14143238abb0cfa5ebb3a84854fcbda193eb67",
+            "internal_pointer_classes": [
+              "governance_id",
+              "spec_or_wave_id"
+            ]
+          }
+        ]
+      }
     }
   ],
   "short_name": "hubbard_chain",
@@ -1078,5 +1494,19 @@
     "old_source_file": "qb-gsee-benchmark/scripts/hubbard_testing/problem_instance.hubbard_chain.c2009f9f-4738-4919-9295-5f9231ca5199.json",
     "restored_category": "lattice_models",
     "uuid_policy": "new problem/task/data-object UUIDs derived deterministically from legacy UUIDs"
+  },
+  "internal_provenance": {
+    "migration_records": [
+      {
+        "original_json_pointer": "/references/1/note",
+        "original_value": "C8 reinstatement requires 1D chain references to be upgraded to Lieb-Wu/Bethe exact numerics before paper claims.",
+        "original_value_sha256": "53208ead464a8abc2e841abee16ae4a84107b83d1f5d804d4c43ccd137d580b0",
+        "public_replacement_pointer": "/references/1/note",
+        "public_replacement_value_sha256": "a11fe7f9bff96f7e5f7e358a668ca4850210a508b0b7e164077980ac1e708c4b",
+        "internal_pointer_classes": [
+          "governance_id"
+        ]
+      }
+    ]
   }
 }

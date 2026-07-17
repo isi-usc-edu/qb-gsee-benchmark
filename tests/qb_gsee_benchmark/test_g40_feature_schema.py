@@ -30,6 +30,11 @@ from qb_gsee_benchmark.features.integral_features import (
 ROOT = Path(__file__).resolve().parents[2]
 FEATURES = ROOT / "scripts" / "Hamiltonian_features.csv"
 OUT = ROOT / "analysis" / "feature_schema"
+G56_SUPERSEDED_P0_OUTPUTS = {
+    "feature_column_metadata.csv",
+    "g40_compute_cost_estimate.md",
+    "g40_p0_corpus_census.json",
+}
 
 
 def test_log10_fci_dimension_uses_fcidump_ms2_convention() -> None:
@@ -130,6 +135,8 @@ def test_p0_eligibility_and_retags_are_explicit() -> None:
             "different threshold conventions"
         )
     assert not metadata_for_column("one_norm").model_eligible
+    assert metadata_for_column("max_edge_order").model_eligible
+    assert metadata_for_column("min_edge_order").model_eligible
     assert not metadata_for_column("ccsd_t1_diagnostic").model_eligible
     assert not metadata_for_column("sign_free_condition_flag").model_eligible
 
@@ -198,7 +205,13 @@ def test_generated_p0_artifacts_are_deterministic_and_value_preserving(
     assert FEATURES.read_bytes() == before
     assert second == first
     for name, contents in first.items():
-        assert (OUT / name).read_bytes() == contents
+        if name not in G56_SUPERSEDED_P0_OUTPUTS:
+            assert (OUT / name).read_bytes() == contents
+    assert set(first) >= G56_SUPERSEDED_P0_OUTPUTS
+    assert all(
+        (OUT / name).read_bytes() != first[name]
+        for name in G56_SUPERSEDED_P0_OUTPUTS
+    )
 
     manifest = json.loads((first_out / "g40_p0_model_manifest.json").read_text())
     assert manifest["source_feature_table_sha256"]

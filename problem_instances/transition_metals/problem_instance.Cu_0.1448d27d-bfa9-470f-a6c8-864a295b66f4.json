@@ -63,7 +63,18 @@
           "i-FCIQMC"
         ],
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Williams et al. 2020 report agreement among systematically converged SHCI, DMRG, and i-FCIQMC calculations for this transition-metal benchmark set. The stored reference method remains SHCI, so this is a validation-tier cross-validated label, not an SHCI-independent hard-tier reference."
+        "reference_energy_note": "Williams et al. 2020 report agreement among systematically converged SHCI, DMRG, and i-FCIQMC calculations for this transition-metal benchmark set. The stored reference method remains SHCI, so this is a validation-tier cross-validated label, not an SHCI-independent hard-tier reference.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
@@ -116,7 +127,18 @@
           "i-FCIQMC"
         ],
         "reference_energy_independent_of_shci_family": false,
-        "reference_energy_note": "Williams et al. 2020 report agreement among systematically converged SHCI, DMRG, and i-FCIQMC calculations for this transition-metal benchmark set. The stored reference method remains SHCI, so this is a validation-tier cross-validated label, not an SHCI-independent hard-tier reference."
+        "reference_energy_note": "Williams et al. 2020 report agreement among systematically converged SHCI, DMRG, and i-FCIQMC calculations for this transition-metal benchmark set. The stored reference method remains SHCI, so this is a validation-tier cross-validated label, not an SHCI-independent hard-tier reference.",
+        "threshold_convention": {
+          "kind": "fixed",
+          "display_label": "fixed absolute",
+          "formula": "fixed_value_hartree",
+          "scale_count": null,
+          "formula_parameters": {
+            "fixed_value_hartree": 0.00159362
+          },
+          "computed_threshold_hartree": 0.00159362,
+          "detail": "One fixed absolute-energy tolerance applies to this task."
+        }
       },
       "supporting_files": [
         {
