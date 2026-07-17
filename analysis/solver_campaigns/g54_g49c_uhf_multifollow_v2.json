@@ -1,0 +1,117 @@
+{
+  "campaign_id": "g49_pyscf_stability_resolved_2026-07_v1",
+  "convergence": {
+    "density_deduplication_frobenius_norm": 1e-06,
+    "engine_converged_required": true,
+    "final_delta_energy_strictly_less_than_hartree": 1e-10,
+    "maximum_ov_gradient_strictly_less_than": 1e-07,
+    "maximum_strict_refinement_attempts_per_stationary_point": 8
+  },
+  "goal": "G-54",
+  "method_scope": {
+    "complex_orbitals_permitted": false,
+    "external_stability_recomputed": false,
+    "ghf_permitted": false,
+    "method": "real_UHF_only",
+    "result_label": "within_uhf_stable",
+    "stability_clean_label_permitted": false
+  },
+  "outcome_contract": {
+    "no_lower_stable_within_protocol": "accepted_qualified_annotation",
+    "stable_lower_found": "accepted_annotation",
+    "still_unresolved": "unresolved_not_no_lower_claim",
+    "target_energy_used_for_search": false
+  },
+  "parent_evidence": {
+    "g53_terminal_density_sha256": "e456f4f650be6cfdf1e3860e0527a4162df22812e1f95c73f19613023f6b6663",
+    "g53_terminal_energy_hartree_report_only": -46.05956572894405,
+    "g53_terminal_trajectory_sha256": "c227c8eacd2ebd31594e8f12ecaf0ad9b6a710b923f5c884e1292bee6c5ad04b",
+    "records_immutable": true,
+    "run_generation": "g49c_strict_tolerance_fix_v4"
+  },
+  "pbs": {
+    "account": "QC_NA_Sim",
+    "backfill_only_after_compute_allocation_exhaustion": true,
+    "debug_queue_permitted": false,
+    "maximum_node_hours": 0.5,
+    "memory_request": null,
+    "ncpus": 128,
+    "queue": "compute",
+    "scheduler_jobs": 1,
+    "task_and_verifier_share_allocation": true,
+    "walltime_seconds": 1800
+  },
+  "result_pooling": {
+    "annotation_layer_only": true,
+    "pool_with_g48_or_g53": false,
+    "replace_frozen_records": false
+  },
+  "run_generation": "g49c_uhf_multifollow_v2",
+  "schema_version": 1,
+  "search": {
+    "branch_queue_order": "start_index_then_breadth_first_path_depth_then_parent_stationary_point_index_then_root_eigenvalue_then_root_panel_then_root_index",
+    "follow_all_internal_roots_in_window": true,
+    "known_terminal_energy_used_for_initialization_ordering_stopping_or_acceptance": false,
+    "maximum_follow_hops_per_path": 6,
+    "root_vector_sign": "largest_absolute_component_positive_with_lowest_index_tie_break",
+    "root_window_above_lowest_hartree": 5e-05,
+    "stationary_point_budget_including_global_starts": 16,
+    "stop_rule": "all_four_starts_and_all_reachable_window_roots_exhausted_or_stationary_point_budget_or_hop_cap_reached",
+    "target_energy": null
+  },
+  "stability_certification": {
+    "davidson_eigenvalue_agreement_hartree": 1e-06,
+    "davidson_residual_norm": 1e-07,
+    "independent_start_panels": [
+      {
+        "count": 8,
+        "id": "lowest_diagonal_coordinates",
+        "rule": "unit_vectors_at_eight_lowest_finite_internal_hessian_diagonal_indices"
+      },
+      {
+        "count": 8,
+        "id": "sha256_rademacher",
+        "rule": "orthonormalized_rademacher_vectors_from_sha256_g54_task_uuid_density_sha256_counter"
+      }
+    ],
+    "internal_stability_threshold_hartree": -1e-05,
+    "multi_start_required_at_every_claimed_minimum": true,
+    "panel_disagreement_disposition": "unresolved_not_stable",
+    "scope": "internal_real_UHF_tangent_space_only"
+  },
+  "start_generation": {
+    "branch_start_budget": 4,
+    "density_source": "frozen_mfproto_v3_initial_spin_density_guesses",
+    "order": [
+      "G1",
+      "G2",
+      "G3",
+      "G4"
+    ],
+    "per_start_protocol": "real_UHF_primary_scf_then_frozen_newton_fallback_then_up_to_eight_strict_newton_refinement_cycles",
+    "start_selection_by_energy_permitted": false
+  },
+  "status": "preregistered_before_execution",
+  "task": {
+    "element": "Sc",
+    "input_path": "work/solver_runs/g48_p3_production_728ef21/runs/hf_fb87d637/input.fcidump",
+    "input_sha256": "037e770eaaca63c764cf70858bcad0f39316d97f16bab6b7e4d6877bc7004b13",
+    "ms2": 1,
+    "nelec": 11,
+    "norb": 54,
+    "task_uuid": "fb87d637-aaab-4e8f-8898-4ecca8bd0fe0"
+  },
+  "required_evidence": [
+    "frozen_checksum_bound_bundle",
+    "canonical_environment_capture",
+    "live_compute_preflight",
+    "dry_run_qsub_command",
+    "raw_scheduler_log_and_accounting_inside_bundle",
+    "per_start_stationary_point_and_branch_accounting",
+    "per_branch_refinement_cycle_accounting",
+    "multi_start_stability_evidence",
+    "raw_junit",
+    "pinned_environment_record",
+    "evidence_line"
+  ]
+}
