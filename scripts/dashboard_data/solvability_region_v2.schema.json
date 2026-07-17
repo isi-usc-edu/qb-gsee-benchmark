@@ -1,0 +1,68 @@
+{
+  "$id": "https://gsee-benchmark.org/schemas/solvability-region-v2.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {
+      "const": "solvability_region_v2"
+    },
+    "boundary_analysis": {
+      "type": "object"
+    },
+    "corpus": {
+      "type": "object"
+    },
+    "definitions": {
+      "type": "object"
+    },
+    "embedding": {
+      "type": "object"
+    },
+    "feature_space": {
+      "type": "object"
+    },
+    "files": {
+      "additionalProperties": {
+        "properties": {
+          "row_count": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "sha256",
+          "row_count"
+        ],
+        "type": "object"
+      },
+      "type": "object"
+    },
+    "outcomes": {
+      "type": "object"
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "2.0.0"
+    }
+  },
+  "required": [
+    "artifact_id",
+    "schema_version",
+    "definitions",
+    "provenance",
+    "corpus",
+    "feature_space",
+    "embedding",
+    "outcomes",
+    "boundary_analysis",
+    "files"
+  ],
+  "title": "Benchmark-v2 solvability region",
+  "type": "object"
+}
