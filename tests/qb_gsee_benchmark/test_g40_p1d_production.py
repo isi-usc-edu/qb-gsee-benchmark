@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "analysis" / "feature_schema"
 TABLE = ROOT / "scripts" / "Hamiltonian_features.csv"
 G40_P2_TABLE_SHA256 = "8f0d89ec2cc7cf933a57c4ace7d32cd62d478c0fb8f8272aae4d36d387d45b2b"
-G52_TABLE_SHA256 = "ee94df21f927ff2e548ac10fda8d5a88c601f31330619ec6c575dc75cf436dc7"
+G58_TABLE_SHA256 = "b5f8a78c3fd8fa9ba1e5dce4e8e2986bfc19346b26375e22763816efa5cdc8f7"
 
 
 def test_p1d_production_report_binds_full_additive_merge() -> None:
@@ -32,7 +32,7 @@ def test_p1d_production_report_binds_full_additive_merge() -> None:
     assert report["input_feature_table_sha256"] == r6["output_feature_table_sha256"]
     assert p2["input_feature_table_sha256"] == report["output_feature_table_sha256"]
     assert p2["output_feature_table_sha256"] == G40_P2_TABLE_SHA256
-    assert hashlib.sha256(TABLE.read_bytes()).hexdigest() == G52_TABLE_SHA256
+    assert hashlib.sha256(TABLE.read_bytes()).hexdigest() == G58_TABLE_SHA256
     assert report["legacy_df_values_preserved"] is True
     assert (
         report["legacy_df_value_sha256_before"]

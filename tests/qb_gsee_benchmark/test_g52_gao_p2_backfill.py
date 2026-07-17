@@ -16,8 +16,8 @@ GAO = ROOT / "problem_instances" / "small_molecules" / "gao_distributed_fci"
 PREMERGE_TABLE_SHA256 = (
     "8f0d89ec2cc7cf933a57c4ace7d32cd62d478c0fb8f8272aae4d36d387d45b2b"
 )
-ACKNOWLEDGED_MERGED_TABLE_SHA256 = (
-    "ee94df21f927ff2e548ac10fda8d5a88c601f31330619ec6c575dc75cf436dc7"
+ACKNOWLEDGED_G58_TABLE_SHA256 = (
+    "b5f8a78c3fd8fa9ba1e5dce4e8e2986bfc19346b26375e22763816efa5cdc8f7"
 )
 
 
@@ -53,7 +53,7 @@ def test_g52_public_table_is_a_reviewed_release_state() -> None:
         assert public == corpus - gao
         assert report["output_feature_table_sha256"] == table_sha256
     else:
-        assert table_sha256 == ACKNOWLEDGED_MERGED_TABLE_SHA256
+        assert table_sha256 == ACKNOWLEDGED_G58_TABLE_SHA256
         assert len(public) == 718
         assert public == corpus
 

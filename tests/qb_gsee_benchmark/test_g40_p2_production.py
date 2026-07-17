@@ -486,7 +486,7 @@ def test_committed_p2_report_binds_live_table_and_production_evidence() -> None:
         "8f0d89ec2cc7cf933a57c4ace7d32cd62d478c0fb8f8272aae4d36d387d45b2b"
     )
     assert _sha256(table) == (
-        "ee94df21f927ff2e548ac10fda8d5a88c601f31330619ec6c575dc75cf436dc7"
+        "b5f8a78c3fd8fa9ba1e5dce4e8e2986bfc19346b26375e22763816efa5cdc8f7"
     )
     assert report["pbs_gate"]["status"] == "passed"
     assert report["pbs_gate"]["successful_jobs"] == report["pbs_gate"]["jobs"] == 16
