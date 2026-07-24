@@ -22,3 +22,10 @@ unresolved size-sector field remains a hard error.
 
 No per-task G50 labels, model scores, predictions, or variant-level class
 counts were inspected before this amendment was frozen.
+
+The later solver-catalog snapshot binding amendment changes only the path of an
+unchanged checksum-pinned input. This amendment's parent preregistration hash
+was refreshed accordingly before the final refit. The final_v2 model scores
+had been seen by then; no size-sector backfill value, policy, or model rule
+changed. See amendment_catalog_snapshot_binding.json for the controlling
+reproducibility disclosure.
