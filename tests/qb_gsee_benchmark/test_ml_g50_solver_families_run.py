@@ -16,6 +16,7 @@ from qb_gsee_benchmark.ml.g50_solver_families_run import (
     build_size_sector_frame,
     load_rung_recovery_amendment,
     load_size_sector_amendment,
+    load_trimci_bounded_rung_amendment,
     lofo_knn_probabilities,
     normalize_g50_outcomes,
     variant_eligibility,
@@ -27,6 +28,10 @@ PREREGISTRATION = ROOT / "analysis/ml_g50_solver_families/preregistration.json"
 AMENDMENT = ROOT / "analysis/ml_g50_solver_families/amendment_size_sector_backfill.json"
 RUNG_AMENDMENT = (
     ROOT / "analysis/ml_g50_solver_families/amendment_rung_ledger_recovery.json"
+)
+TRIMCI_AMENDMENT = (
+    ROOT
+    / "analysis/ml_g50_solver_families/amendment_trimci_bounded_rung_semantics.json"
 )
 
 
@@ -56,22 +61,44 @@ def test_g50_size_sector_amendment_resolves_exact_null_set() -> None:
     assert len(backfill) == 127
 
 
-def test_g50_outcome_normalization_preserves_censoring_contract() -> None:
+def test_g50_outcome_normalization_applies_bounded_trimci_failures() -> None:
     preregistration, canonical, variants = _inputs()
     _, rung_recovery = load_rung_recovery_amendment(ROOT, RUNG_AMENDMENT)
-    observations, coverage = normalize_g50_outcomes(
-        ROOT, preregistration, variants, canonical, rung_recovery
+    _, trimci_recovery = load_trimci_bounded_rung_amendment(
+        ROOT, TRIMCI_AMENDMENT, PREREGISTRATION
     )
-    assert len(observations) == 1113
+    observations, coverage = normalize_g50_outcomes(
+        ROOT,
+        preregistration,
+        variants,
+        canonical,
+        rung_recovery,
+        trimci_recovery,
+    )
+    assert len(observations) == 1728
     assert len(coverage) == 1728
     assert {row["observed_outcome"] for row in observations} == {"fail", "success"}
     assert (
         sum(
-            row["observation_source"] == "trimci_recovered_checkpoint"
+            row["observation_source"] == "trimci_all_parent_checkpoint"
             for row in observations
         )
-        == 57
+        == 388
     )
+    trimci_failures = [
+        row
+        for row in observations
+        if row["observation_source"] == "trimci_bounded_milestone_failure"
+    ]
+    assert len(trimci_failures) == 284
+    assert {row["observed_outcome"] for row in trimci_failures} == {"fail"}
+    assert {row["metric_outcome_annotation"] for row in trimci_failures} == {
+        "indeterminate"
+    }
+    assert {row["metric_status_annotation"] for row in trimci_failures} == {
+        "indeterminate"
+    }
+    assert {row["energy_hartree"] for row in trimci_failures} == {None}
     assert (
         sum(row["observation_source"] == "dmrg_rung_ledger" for row in observations)
         == 285
@@ -85,7 +112,20 @@ def test_g50_outcome_normalization_preserves_censoring_contract() -> None:
         sum(row["coverage_status"] == "missing_attempted_rung" for row in coverage)
         == 254
     )
-    assert sum(row["coverage_status"] == "right_censored" for row in coverage) == 209
+    assert (
+        sum(row["coverage_status"] == "bounded_failure_unreached" for row in coverage)
+        == 284
+    )
+    assert (
+        sum(row["coverage_status"] == "observed_checkpoint" for row in coverage) == 166
+    )
+    assert (
+        sum(
+            row["coverage_status"] == "observed_parent_completed_below_cap"
+            for row in coverage
+        )
+        == 222
+    )
     eligibility = variant_eligibility(
         pd.DataFrame(observations),
         variants,
@@ -93,7 +133,7 @@ def test_g50_outcome_normalization_preserves_censoring_contract() -> None:
     )
     assert len(eligibility) == 18
     assert all(
-        row["model_status"] == "insufficient_data"
+        row["model_status"] == "eligible" and row["n_labels"] == 96
         for row in eligibility
         if row["solver_short_name"].startswith("TrimCI_ndet_")
     )

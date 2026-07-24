@@ -201,6 +201,66 @@ def load_rung_recovery_amendment(
     return amendment, frame
 
 
+def load_trimci_bounded_rung_amendment(
+    root: Path,
+    amendment_path: Path,
+    preregistration_path: Path,
+) -> tuple[dict[str, Any], pd.DataFrame]:
+    """Load the post-result correction for bounded TrimCI rung outcomes."""
+
+    amendment = json.loads(amendment_path.read_text(encoding="utf-8"))
+    _require(
+        amendment.get("artifact_id")
+        == "ml_g50_trimci_bounded_rung_semantics_amendment_v1",
+        "wrong TrimCI bounded-rung amendment",
+    )
+    _require(
+        amendment.get("frozen_before_superseding_refit") is True,
+        "unfrozen TrimCI bounded-rung amendment",
+    )
+    parent = amendment["parent_preregistration"]
+    _require(
+        parent["sha256"] == sha256_file(preregistration_path),
+        "TrimCI amendment parent preregistration changed",
+    )
+    superseded = amendment["superseded_bundle"]
+    superseded_path = root / str(superseded["manifest_path"])
+    _require(superseded_path.is_file(), "missing superseded G50 bundle manifest")
+    _require(
+        sha256_file(superseded_path) == superseded["manifest_sha256"],
+        "superseded G50 bundle manifest changed",
+    )
+    specification = amendment["recovery_archive"]
+    archive = Path(str(specification["external_path"]))
+    _require(archive.is_file(), f"missing TrimCI all-parent recovery: {archive}")
+    _require(
+        sha256_file(archive) == specification["sha256"],
+        "TrimCI all-parent recovery changed",
+    )
+    frame = pd.DataFrame(_zip_csv(archive, "UNFOLDED_RUNG_MATRIX.csv"))
+    _require(
+        len(frame) == int(specification["rung_cells"]) == 672,
+        "TrimCI bounded-rung cell count changed",
+    )
+    _require(
+        int(frame["rung_status"].str.startswith("observed_").sum())
+        == int(specification["observed_rung_cells"])
+        == 388,
+        "TrimCI observed rung count changed",
+    )
+    _require(
+        int((frame["rung_status"] == "bounded_failure_unreached").sum())
+        == int(specification["bounded_failure_cells"])
+        == 284,
+        "TrimCI bounded failure count changed",
+    )
+    _require(
+        not frame.duplicated(["task_uuid", "target_n_dets"]).any(),
+        "duplicate TrimCI bounded-rung key",
+    )
+    return amendment, frame
+
+
 def _variant_maps(
     variants: Sequence[Mapping[str, Any]],
 ) -> tuple[dict[str, dict[str, Any]], dict[tuple[str, float], dict[str, Any]]]:
@@ -303,6 +363,7 @@ def normalize_g50_outcomes(
     variants: Sequence[Mapping[str, Any]],
     canonical: Mapping[str, str],
     rung_recovery: pd.DataFrame,
+    trimci_recovery: pd.DataFrame,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """Normalize terminal and rung outcomes under the frozen binary contract."""
     tasks = _load_tasks(root)
@@ -311,9 +372,6 @@ def normalize_g50_outcomes(
     )
     metrics_path = resolve_input_path(
         root, preregistration["inputs"]["g50_terminal_metrics"]
-    )
-    recovery_archive = resolve_input_path(
-        root, preregistration["inputs"]["g50_trimci_recovery"]
     )
     manifest = _zip_json(terminal_archive, "BASELINE_MANIFEST.json")
     contract = list(manifest["rows"])
@@ -428,8 +486,8 @@ def normalize_g50_outcomes(
                         True,
                     )
 
-    recovery = _zip_csv(recovery_archive, "UNFOLDED_RUNG_MATRIX.csv")
-    _require(len(recovery) == 38 * 7, "TrimCI recovery matrix changed")
+    recovery = trimci_recovery.to_dict(orient="records")
+    _require(len(recovery) == 96 * 7, "TrimCI all-parent recovery matrix changed")
     recovery_lookup = {
         (str(row["task_uuid"]), int(row["target_n_dets"])): row for row in recovery
     }
@@ -446,23 +504,33 @@ def normalize_g50_outcomes(
         for variant in trimci_variants:
             target = int(variant["resource_value"])
             row = recovery_lookup.get((task_uuid, target))
-            if row is None:
-                add_coverage(
-                    task_uuid,
-                    variant,
-                    "outside_recovery_parent_set",
-                    "parent_not_timeout_recovery_scope",
-                    False,
-                )
-                continue
+            _require(
+                row is not None, f"missing TrimCI all-parent cell: {task_uuid}/{target}"
+            )
             status = str(row["rung_status"])
-            if status != "observed":
+            if not status.startswith("observed_"):
+                observation = _scored_observation(
+                    task_uuid=task_uuid,
+                    task=tasks[task_uuid],
+                    canonical_family=canonical[task_uuid],
+                    variant=variant,
+                    energy=None,
+                    source="trimci_bounded_milestone_failure",
+                    reason_override="bounded_attempt_ended_before_milestone",
+                    raw_status=str(row["parent_harness_status"]),
+                    force_fail=True,
+                )
+                observation["metric_outcome_annotation"] = "indeterminate"
+                observation["metric_status_annotation"] = str(
+                    row["metric_status_annotation"]
+                )
+                observations.append(observation)
                 add_coverage(
                     task_uuid,
                     variant,
-                    "right_censored",
-                    str(row["right_censor_reason"]),
-                    False,
+                    "bounded_failure_unreached",
+                    str(row["coverage_reason"]),
+                    True,
                 )
                 continue
             observations.append(
@@ -472,15 +540,15 @@ def normalize_g50_outcomes(
                     canonical_family=canonical[task_uuid],
                     variant=variant,
                     energy=row["energy_hartree"],
-                    source="trimci_recovered_checkpoint",
-                    raw_status=status,
+                    source="trimci_all_parent_checkpoint",
+                    raw_status=str(row["parent_harness_status"]),
                 )
             )
             add_coverage(
                 task_uuid,
                 variant,
-                "observed_recovered_rung",
-                "checkpoint_emitted",
+                status,
+                str(row["coverage_reason"]),
                 True,
             )
 
@@ -530,7 +598,7 @@ def normalize_g50_outcomes(
     observation_keys = {(row["task_uuid"], row["solver_uuid"]) for row in observations}
     coverage_keys = {(row["task_uuid"], row["solver_uuid"]) for row in coverage}
     _require(
-        len(observation_keys) == len(observations) == 1113,
+        len(observation_keys) == len(observations) == 1728,
         f"normalized label census changed: {len(observations)}",
     )
     _require(
@@ -539,11 +607,19 @@ def normalize_g50_outcomes(
     )
     _require(
         sum(
-            row["observation_source"] == "trimci_recovered_checkpoint"
+            row["observation_source"] == "trimci_all_parent_checkpoint"
             for row in observations
         )
-        == 57,
+        == 388,
         "TrimCI observed rung census changed",
+    )
+    _require(
+        sum(
+            row["observation_source"] == "trimci_bounded_milestone_failure"
+            for row in observations
+        )
+        == 284,
+        "TrimCI bounded failure census changed",
     )
     _require(
         sum(row["observation_source"] == "dmrg_rung_ledger" for row in observations)
@@ -1298,7 +1374,7 @@ def _write_markdown_report(
         )
     lines += [
         "",
-        "The weighted rate uses the mandatory ML-5 selection weights only for complete 96-task panels. TrimCI checkpoint variants remain incomplete right-censored panels and do not receive a population-rate estimate.",
+        "The weighted rate uses the mandatory ML-5 selection weights only for complete 96-task panels. Every TrimCI cap now has a complete bounded-run panel: reached checkpoints are scored, while an unreached cap is an explicit binary failure with no energy.",
         "",
         "## Eligible variant performance",
         "",
@@ -1346,7 +1422,7 @@ def _write_markdown_report(
         )
     lines += [
         "",
-        "`lost_success` is reported rather than repaired: no monotonic postprocessing is applied to observed labels or predictions. For TrimCI, only pairs of actually observed recovered checkpoints enter these diagnostics.",
+        "`lost_success` is reported rather than repaired: no monotonic postprocessing is applied to observed labels or predictions. TrimCI diagnostics include the complete bounded-run panels and retain metric-indeterminate, binary-fail cells for unreached caps.",
         "",
         "## Reproducibility and scope",
         "",
@@ -1363,6 +1439,7 @@ def run_finalization(
     preregistration_path: Path,
     amendment_path: Path,
     rung_recovery_amendment_path: Path,
+    trimci_bounded_rung_amendment_path: Path,
     output_directory: Path,
 ) -> dict[str, Any]:
     """Execute one complete deterministic G50 solver-family ML run."""
@@ -1426,11 +1503,21 @@ def run_finalization(
     rung_amendment, rung_recovery = load_rung_recovery_amendment(
         root, rung_recovery_amendment_path
     )
+    trimci_amendment, trimci_recovery = load_trimci_bounded_rung_amendment(
+        root,
+        trimci_bounded_rung_amendment_path,
+        preregistration_path,
+    )
     variants = g50_variant_rows(
         resolve_input_path(root, preregistration["inputs"]["solver_family_catalog"])
     )
     observations, coverage_rows = normalize_g50_outcomes(
-        root, preregistration, variants, canonical, rung_recovery
+        root,
+        preregistration,
+        variants,
+        canonical,
+        rung_recovery,
+        trimci_recovery,
     )
     observation_frame = pd.DataFrame(observations)
     coverage_frame = pd.DataFrame(coverage_rows)
@@ -1623,7 +1710,11 @@ def run_finalization(
             "potential_variant_task_cells": len(coverage_rows),
             "prediction_rows": len(prediction_rows),
         },
-        "label_policy": preregistration["label_policy"],
+        "label_policy": {
+            **preregistration["label_policy"],
+            "trimci_unobserved_recovery_rung": "bounded_binary_fail_no_energy",
+            "trimci_bounded_rung_amendment": trimci_amendment["artifact_id"],
+        },
         "eligibility": eligibility,
         "bootstrap_attempts_by_variant": bootstrap_attempts,
         "signals": {
@@ -1642,6 +1733,15 @@ def run_finalization(
         "size_sector_backfill_sha256": amendment["backfill"]["sha256"],
         "rung_recovery_amendment_sha256": sha256_file(rung_recovery_amendment_path),
         "rung_recovery_snapshot_sha256": rung_amendment["snapshot"]["sha256"],
+        "trimci_bounded_rung_amendment_sha256": sha256_file(
+            trimci_bounded_rung_amendment_path
+        ),
+        "trimci_all_parent_recovery_sha256": trimci_amendment["recovery_archive"][
+            "sha256"
+        ],
+        "superseded_bundle_manifest_sha256": trimci_amendment["superseded_bundle"][
+            "manifest_sha256"
+        ],
         "rejected_first_fit_manifest_sha256": rung_amendment["rejected_first_fit"][
             "manifest_sha256"
         ],
@@ -1699,6 +1799,9 @@ def run_finalization(
         "preregistration_sha256": sha256_file(preregistration_path),
         "size_sector_amendment_sha256": sha256_file(amendment_path),
         "rung_recovery_amendment_sha256": sha256_file(rung_recovery_amendment_path),
+        "trimci_bounded_rung_amendment_sha256": sha256_file(
+            trimci_bounded_rung_amendment_path
+        ),
         "prediction_schema_sha256": sha256_file(prediction_schema_path),
         "files": [
             {

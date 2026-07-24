@@ -1,0 +1,63 @@
+{
+  "artifact_id": "ml_g50_trimci_bounded_rung_semantics_amendment_v1",
+  "correction_trigger": "The bounded-run contract requires an unreached determinant milestone to be a binary solvability failure even though its energy metric is indeterminate; the timeout-only recovery also omitted completed-parent and Phase-1 checkpoint states.",
+  "exposure_disclosure": {
+    "correction_selected_from_model_performance": false,
+    "final_v3_model_scores_seen": true,
+    "final_v3_per_task_labels_seen": true,
+    "selection_basis": "solver execution semantics and all-parent artifact reconciliation"
+  },
+  "frozen_before_superseding_refit": true,
+  "model_protocol_changed": false,
+  "parent_preregistration": {
+    "path": "analysis/ml_g50_solver_families/preregistration.json",
+    "sha256": "4307360c57353ffee84896b86d1ef4ac2a3240759ed969d2c4c48c5b8b7207de"
+  },
+  "policy": {
+    "completed_below_cap": "use the terminal native checkpoint at larger caps",
+    "energy_for_observed_rung": "native variational checkpoint plus rotated FCIDUMP constant; no PT2",
+    "fixed_resource_caps": [
+      100000,
+      250000,
+      500000,
+      1000000,
+      2000000,
+      5000000,
+      10000000
+    ],
+    "interrupted_observation": "execution must reach the cap and have emitted a checkpoint at or below it",
+    "monotonic_repair": false,
+    "phase0_and_nonselected_native_checkpoints": "archived but not introduced post hoc as ML variants",
+    "unreached_binary_outcome": "fail",
+    "unreached_energy": null,
+    "unreached_metric_annotation": "indeterminate"
+  },
+  "recovery_archive": {
+    "bounded_failure_cells": 284,
+    "external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g50_trimci_all_parent_checkpoint_recovery_2026-07-24_v2/g50_trimci_all_parent_checkpoint_recovery_2026-07-24_v2.zip",
+    "native_expansion_checkpoints": 4177,
+    "observed_rung_cells": 388,
+    "parent_attempts": 96,
+    "phase0_observations": 85,
+    "rung_cells": 672,
+    "sha256": "b395bd9ceada892b1182e676b84b38c26c9f3372359156386309d2a435d94539"
+  },
+  "status": "frozen_post_result_semantic_and_ingestion_correction",
+  "superseded_bundle": {
+    "manifest_path": "analysis/ml_g50_solver_families/final_v3/artifact_manifest.json",
+    "manifest_sha256": "33cad15974f8380c0d942e9ba35a2d28b3a979002a73645db56d91ceec3154c6",
+    "scope": "TrimCI rung labels, eligibility, fitted models, predictions, and aggregate reports",
+    "status": "retained_as_superseded_evidence"
+  },
+  "unchanged": [
+    "fixed seven-cap TrimCI ladder",
+    "terminal TrimCI default labels",
+    "DMRG, SHCI, and iPIE labels",
+    "feature policy",
+    "model eligibility floor",
+    "leave-one-canonical-family-out protocol",
+    "models and baselines",
+    "bootstrap",
+    "reporting contract"
+  ]
+}
