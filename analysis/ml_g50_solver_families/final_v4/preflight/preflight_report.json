@@ -1,0 +1,121 @@
+{
+  "artifact_id": "ml_g50_solver_families_outcome_blind_preflight_v1",
+  "checks": {
+    "all_input_hashes": true,
+    "binding_selection_exact": true,
+    "family_never_model_input": true,
+    "feature_screen_exact": true,
+    "g50_contract_exact": true,
+    "no_cross_domain_imputation": true,
+    "outcomes_not_consumed": true,
+    "solver_family_catalog_exact": true,
+    "trimci_censor_matrix_exact": true
+  },
+  "feature_census": {
+    "eligible": 241,
+    "gauge_excluded": 37,
+    "identifier_excluded": 11,
+    "ipie_selected_after_prerequisite_exclusion": 107,
+    "jw": 17,
+    "selected": 193
+  },
+  "geometry": {
+    "dmrg": {
+      "with_jw": {
+        "exact_applicability_blocks": 35,
+        "input_columns": 193,
+        "maximum_distance": 12.572630003356052,
+        "maximum_shared_blocks": 32,
+        "minimum_shared_blocks": 4,
+        "retained_components": 86
+      },
+      "without_jw": {
+        "exact_applicability_blocks": 33,
+        "input_columns": 176,
+        "maximum_distance": 12.940762853378308,
+        "maximum_shared_blocks": 31,
+        "minimum_shared_blocks": 3,
+        "retained_components": 78
+      }
+    },
+    "ipie_afqmc": {
+      "with_jw": {
+        "exact_applicability_blocks": 19,
+        "input_columns": 107,
+        "maximum_distance": 10.352711712251182,
+        "maximum_shared_blocks": 17,
+        "minimum_shared_blocks": 1,
+        "retained_components": 41
+      },
+      "without_jw": {
+        "exact_applicability_blocks": 17,
+        "input_columns": 90,
+        "maximum_distance": 10.839350856153281,
+        "maximum_shared_blocks": 16,
+        "minimum_shared_blocks": 1,
+        "retained_components": 33
+      }
+    },
+    "shci": {
+      "with_jw": {
+        "exact_applicability_blocks": 35,
+        "input_columns": 193,
+        "maximum_distance": 12.572630003356052,
+        "maximum_shared_blocks": 32,
+        "minimum_shared_blocks": 4,
+        "retained_components": 86
+      },
+      "without_jw": {
+        "exact_applicability_blocks": 33,
+        "input_columns": 176,
+        "maximum_distance": 12.940762853378308,
+        "maximum_shared_blocks": 31,
+        "minimum_shared_blocks": 3,
+        "retained_components": 78
+      }
+    },
+    "trimci": {
+      "with_jw": {
+        "exact_applicability_blocks": 35,
+        "input_columns": 193,
+        "maximum_distance": 12.572630003356052,
+        "maximum_shared_blocks": 32,
+        "minimum_shared_blocks": 4,
+        "retained_components": 86
+      },
+      "without_jw": {
+        "exact_applicability_blocks": 33,
+        "input_columns": 176,
+        "maximum_distance": 12.940762853378308,
+        "maximum_shared_blocks": 31,
+        "minimum_shared_blocks": 3,
+        "retained_components": 78
+      }
+    }
+  },
+  "input_hashes_verified": {
+    "binding_selection_manifest": "d1627e66e65f5ea33fcb8e4092a28def44ee6ad6111804df96e541135483959e",
+    "canonical_families": "4bc9404feba3313cea64df734364a3ecbb45dbfda6f41bd337231181fef67942",
+    "feature_metadata": "3efad3a89b7fd2463da7d777a6c3e6c99759a04b15e007584266d24f44ec6590",
+    "feature_table": "b5f8a78c3fd8fa9ba1e5dce4e8e2986bfc19346b26375e22763816efa5cdc8f7",
+    "g50_terminal_intake": "3d3ef0f9be616cd594efe5c2ef6a6e2bfdc80115fad6beb9a61d3e84306e565d",
+    "g50_terminal_metrics": "ba5cf212440e67424d3a5614b40c6c9e137bbe9a0d2be5d060981abe366263a3",
+    "g50_trimci_recovery": "2ef4827187d023592ea5d3fbff1690ef6c76eafbe13d4282c9756ace07aa6947",
+    "identifier_screen": "f4ca6d170215d2f87fba67de8df3ce6d6987fb2f635c37eeb0506500ced4650d",
+    "selection_weights": "6d0ba47102ba9b19ff6909a6713dc1481d40412b5c9d9c3ac23304b6341976a8",
+    "solver_family_catalog": "7531bdb2a68d57eb6271ffbe0b48981781e7683b43e62f12045f4486f6bb728f"
+  },
+  "model_fitted": false,
+  "panel": {
+    "analysis_solver_families": 4,
+    "analysis_variants": 18,
+    "canonical_families": 40,
+    "corpus_tasks": 718,
+    "selected_tasks": 96,
+    "terminal_contract_rows": 384
+  },
+  "preregistration_sha256": "4307360c57353ffee84896b86d1ef4ac2a3240759ed969d2c4c48c5b8b7207de",
+  "protocol": "ml-g50-solver-families-v1",
+  "scientific_outcomes_consumed": false,
+  "status": "pass"
+}
