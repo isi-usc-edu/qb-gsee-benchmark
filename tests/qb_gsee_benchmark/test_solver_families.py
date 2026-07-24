@@ -36,11 +36,11 @@ def test_solver_family_catalog_validates_and_recounts() -> None:
     ).validate(document)
     catalog = load_solver_family_catalog()
     assert len(catalog.families) == 12
-    assert len(catalog.variants) == 44
+    assert len(catalog.variants) == 42
     assert document["counts"] == {
         "families": 12,
-        "variants": 44,
-        "committed_variants": 28,
+        "variants": 42,
+        "committed_variants": 26,
         "reserved_g50_variants": 16,
         "resource_ladders": 5,
     }

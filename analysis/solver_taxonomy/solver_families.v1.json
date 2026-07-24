@@ -11,8 +11,8 @@
   },
   "counts": {
     "families": 12,
-    "variants": 44,
-    "committed_variants": 28,
+    "variants": 42,
+    "committed_variants": 26,
     "reserved_g50_variants": 16,
     "resource_ladders": 5
   },
@@ -539,28 +539,6 @@
       "solver_variant_id": "pyliqtr_p1e_4_cycle_1us_parallel",
       "display_name": "pyLIQTR parallel DF-QPE, p=1e-4, cycle=1 us",
       "implementation_id": "pyliqtr",
-      "result_semantics": "fault_tolerant_resource_estimate",
-      "catalog_status": "committed",
-      "resource_axis": null
-    },
-    {
-      "solver_uuid": "cd9fd9dd-87f5-47bc-96e5-b7eb6a43ccb9",
-      "solver_short_name": "TopQAD-BL",
-      "solver_family_id": "double_factorized_qpe",
-      "solver_variant_id": "topqad_baseline",
-      "display_name": "TopQAD double-factorized QPE baseline",
-      "implementation_id": "topqad",
-      "result_semantics": "fault_tolerant_resource_estimate",
-      "catalog_status": "committed",
-      "resource_axis": null
-    },
-    {
-      "solver_uuid": "8803d774-2e4d-49c6-bba1-637a57e490ea",
-      "solver_short_name": "TopQAD-D",
-      "solver_family_id": "double_factorized_qpe",
-      "solver_variant_id": "topqad_desired",
-      "display_name": "TopQAD double-factorized QPE desired",
-      "implementation_id": "topqad",
       "result_semantics": "fault_tolerant_resource_estimate",
       "catalog_status": "committed",
       "resource_axis": null
