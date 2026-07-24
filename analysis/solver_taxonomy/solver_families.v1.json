@@ -1,0 +1,591 @@
+{
+  "$schema": "solver_families.v1.schema.json",
+  "catalog_id": "solver_families_v1",
+  "schema_version": 1,
+  "status": "effective",
+  "definitions": {
+    "solver_family": "A stable scientific method identity; configuration, implementation, and resource cutoffs are variants within the family.",
+    "solver_variant": "One concrete solver UUID and short name within a solver family.",
+    "implementation": "The software or external implementation used by a variant; it is not the scientific family.",
+    "resource_rank": "A zero-based position within one declared ladder; larger ranks always mean more family-specific resource."
+  },
+  "counts": {
+    "families": 12,
+    "variants": 44,
+    "committed_variants": 28,
+    "reserved_g50_variants": 16,
+    "resource_ladders": 5
+  },
+  "families": [
+    {
+      "solver_family_id": "hartree_fock",
+      "solver_family_uuid": "ca5abe17-b11a-5de0-b2b6-c9173070e0a9",
+      "display_name": "Hartree-Fock",
+      "method_class": "mean_field",
+      "description": "Self-consistent single-determinant mean-field theory."
+    },
+    {
+      "solver_family_id": "mp2",
+      "solver_family_uuid": "7a35df85-e599-50fb-8afd-4364c07c3838",
+      "display_name": "MP2",
+      "method_class": "perturbation_theory",
+      "description": "Second-order Moller-Plesset perturbation theory."
+    },
+    {
+      "solver_family_id": "cisd",
+      "solver_family_uuid": "235e0b39-b9a3-52da-af13-d35784db70eb",
+      "display_name": "CISD",
+      "method_class": "truncated_configuration_interaction",
+      "description": "Configuration interaction with single and double excitations."
+    },
+    {
+      "solver_family_id": "ccsd",
+      "solver_family_uuid": "6b1a03de-15ae-52a4-82a3-e392a8cf8865",
+      "display_name": "CCSD",
+      "method_class": "coupled_cluster",
+      "description": "Coupled-cluster theory with single and double excitations."
+    },
+    {
+      "solver_family_id": "ccsd_t",
+      "solver_family_uuid": "bda7c57d-8527-5655-9ac2-abec7686131f",
+      "display_name": "CCSD(T)",
+      "method_class": "coupled_cluster",
+      "description": "CCSD with a perturbative triples correction."
+    },
+    {
+      "solver_family_id": "fci",
+      "solver_family_uuid": "a171987e-878f-5fb3-8d2b-f14bd72211b4",
+      "display_name": "FCI",
+      "method_class": "exact_diagonalization",
+      "description": "Full configuration interaction in the supplied orbital space."
+    },
+    {
+      "solver_family_id": "dmrg",
+      "solver_family_uuid": "175c6dd3-c8f1-58f9-8eb8-1a64c056affa",
+      "display_name": "DMRG",
+      "method_class": "tensor_network",
+      "description": "Density matrix renormalization group variational optimization."
+    },
+    {
+      "solver_family_id": "shci",
+      "solver_family_uuid": "bcc83dba-58b0-564e-9116-3150f4bda87a",
+      "display_name": "SHCI",
+      "method_class": "selected_configuration_interaction",
+      "description": "Semistochastic heat-bath selected configuration interaction."
+    },
+    {
+      "solver_family_id": "trimci",
+      "solver_family_uuid": "556f5b69-a579-575b-9db4-6ab1b2eb273c",
+      "display_name": "TrimCI",
+      "method_class": "selected_configuration_interaction",
+      "description": "TrimCI selected-CI workflow with determinant-space expansion and trimming."
+    },
+    {
+      "solver_family_id": "ipie_afqmc",
+      "solver_family_uuid": "c3f2c959-5c4e-577f-812d-bcf62e65919c",
+      "display_name": "ipie AFQMC",
+      "method_class": "auxiliary_field_quantum_monte_carlo",
+      "description": "Phaseless auxiliary-field quantum Monte Carlo implemented with ipie."
+    },
+    {
+      "solver_family_id": "double_factorized_qpe",
+      "solver_family_uuid": "29e5d94d-4dd7-50d5-b043-cc359e3bbdf9",
+      "display_name": "Double-factorized QPE",
+      "method_class": "fault_tolerant_quantum_resource_estimate",
+      "description": "Fault-tolerant phase-estimation resource estimates using double factorization."
+    },
+    {
+      "solver_family_id": "thc_qpe",
+      "solver_family_uuid": "10f440c8-aa79-5ff8-a3ec-e10f168b265f",
+      "display_name": "THC QPE",
+      "method_class": "fault_tolerant_quantum_resource_estimate",
+      "description": "Fault-tolerant phase-estimation resource estimates using tensor hypercontraction, optionally with BLISS."
+    }
+  ],
+  "variants": [
+    {
+      "solver_uuid": "5f5e617a-19c2-4d82-bebc-b2d6b3dcb012",
+      "solver_short_name": "HF",
+      "solver_family_id": "hartree_fock",
+      "solver_variant_id": "pyscf_default",
+      "display_name": "PySCF HF",
+      "implementation_id": "pyscf",
+      "result_semantics": "mean_field_energy",
+      "catalog_status": "committed",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "b420358b-5def-41e6-8c5d-b9d93b6aecd2",
+      "solver_short_name": "MP2",
+      "solver_family_id": "mp2",
+      "solver_variant_id": "pyscf_default",
+      "display_name": "PySCF MP2",
+      "implementation_id": "pyscf",
+      "result_semantics": "second_order_perturbative_energy",
+      "catalog_status": "committed",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "418f060e-496b-4024-8d2d-9b1f8791e76d",
+      "solver_short_name": "CISD",
+      "solver_family_id": "cisd",
+      "solver_variant_id": "pyscf_default",
+      "display_name": "PySCF CISD",
+      "implementation_id": "pyscf",
+      "result_semantics": "variational_energy",
+      "catalog_status": "committed",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "0a29e54f-bef9-4d19-bafa-d94b1c4b37aa",
+      "solver_short_name": "CCSD",
+      "solver_family_id": "ccsd",
+      "solver_variant_id": "pyscf_default",
+      "display_name": "PySCF CCSD",
+      "implementation_id": "pyscf",
+      "result_semantics": "coupled_cluster_energy",
+      "catalog_status": "committed",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "c09217e6-d0f7-4b0f-81c4-79210b7ac878",
+      "solver_short_name": "CCSD(T)",
+      "solver_family_id": "ccsd_t",
+      "solver_variant_id": "pyscf_default",
+      "display_name": "PySCF CCSD(T)",
+      "implementation_id": "pyscf",
+      "result_semantics": "coupled_cluster_perturbative_triples_energy",
+      "catalog_status": "committed",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "99f002d5-3e19-5ea4-986e-5282d43a3c91",
+      "solver_short_name": "FCI",
+      "solver_family_id": "fci",
+      "solver_variant_id": "pyscf_direct_spin1",
+      "display_name": "PySCF FCI",
+      "implementation_id": "pyscf",
+      "result_semantics": "exact_variational_energy",
+      "catalog_status": "committed",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "16537433-9f4c-4eae-a65d-787dc3b35b59",
+      "solver_short_name": "DMRG_Niagara_cluster_lowest_energy",
+      "solver_family_id": "dmrg",
+      "solver_variant_id": "fixed_budget_lowest_energy",
+      "display_name": "DMRG fixed-budget lowest energy",
+      "implementation_id": "block2",
+      "result_semantics": "variational_energy",
+      "catalog_status": "committed",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "e6fc5c39-7cc6-5575-ae96-ddf05b54ebd6",
+      "solver_short_name": "DMRG_bond_dimension_256",
+      "solver_family_id": "dmrg",
+      "solver_variant_id": "g50_bond_dimension_256",
+      "display_name": "DMRG M=256",
+      "implementation_id": "block2",
+      "result_semantics": "variational_energy",
+      "catalog_status": "reserved_g50",
+      "resource_axis": {"ladder_id": "g50_dmrg_bond_dimension_v1", "name": "bond_dimension", "value": 256, "units": "states", "rank": 0, "value_direction": "increasing"}
+    },
+    {
+      "solver_uuid": "5e395630-54be-595a-82a0-6e662de00e48",
+      "solver_short_name": "DMRG_bond_dimension_512",
+      "solver_family_id": "dmrg",
+      "solver_variant_id": "g50_bond_dimension_512",
+      "display_name": "DMRG M=512",
+      "implementation_id": "block2",
+      "result_semantics": "variational_energy",
+      "catalog_status": "reserved_g50",
+      "resource_axis": {"ladder_id": "g50_dmrg_bond_dimension_v1", "name": "bond_dimension", "value": 512, "units": "states", "rank": 1, "value_direction": "increasing"}
+    },
+    {
+      "solver_uuid": "6fdd634b-e4ba-5320-be16-3b25b576015a",
+      "solver_short_name": "DMRG_bond_dimension_1024",
+      "solver_family_id": "dmrg",
+      "solver_variant_id": "g50_bond_dimension_1024",
+      "display_name": "DMRG M=1024",
+      "implementation_id": "block2",
+      "result_semantics": "variational_energy",
+      "catalog_status": "reserved_g50",
+      "resource_axis": {"ladder_id": "g50_dmrg_bond_dimension_v1", "name": "bond_dimension", "value": 1024, "units": "states", "rank": 2, "value_direction": "increasing"}
+    },
+    {
+      "solver_uuid": "cc2b9498-9af4-5d4c-954c-a64e8b6e0e5a",
+      "solver_short_name": "DMRG_bond_dimension_2048",
+      "solver_family_id": "dmrg",
+      "solver_variant_id": "g50_bond_dimension_2048",
+      "display_name": "DMRG M=2048",
+      "implementation_id": "block2",
+      "result_semantics": "variational_energy",
+      "catalog_status": "reserved_g50",
+      "resource_axis": {"ladder_id": "g50_dmrg_bond_dimension_v1", "name": "bond_dimension", "value": 2048, "units": "states", "rank": 3, "value_direction": "increasing"}
+    },
+    {
+      "solver_uuid": "ad964781-302e-4728-a26d-39918e0a6cdb",
+      "solver_short_name": "SHCI_pt_2e-4",
+      "solver_family_id": "shci",
+      "solver_variant_id": "pt_eps_2e_4",
+      "display_name": "SHCI+PT eps_var=2e-4",
+      "implementation_id": "shci_arrow",
+      "result_semantics": "variational_plus_stochastic_pt",
+      "catalog_status": "committed",
+      "resource_axis": {"ladder_id": "shci_pt_eps_var_v1", "name": "eps_var", "value": 0.0002, "units": "hartree", "rank": 0, "value_direction": "decreasing"}
+    },
+    {
+      "solver_uuid": "4ed500f1-0650-41e3-af00-e4d0359394b4",
+      "solver_short_name": "SHCI_pt_1e-4",
+      "solver_family_id": "shci",
+      "solver_variant_id": "pt_eps_1e_4",
+      "display_name": "SHCI+PT eps_var=1e-4",
+      "implementation_id": "shci_arrow",
+      "result_semantics": "variational_plus_stochastic_pt",
+      "catalog_status": "committed",
+      "resource_axis": {"ladder_id": "shci_pt_eps_var_v1", "name": "eps_var", "value": 0.0001, "units": "hartree", "rank": 1, "value_direction": "decreasing"}
+    },
+    {
+      "solver_uuid": "d626506c-7aae-4ad6-802a-b29af5f2bb93",
+      "solver_short_name": "SHCI_pt_5e-5",
+      "solver_family_id": "shci",
+      "solver_variant_id": "pt_eps_5e_5",
+      "display_name": "SHCI+PT eps_var=5e-5",
+      "implementation_id": "shci_arrow",
+      "result_semantics": "variational_plus_stochastic_pt",
+      "catalog_status": "committed",
+      "resource_axis": {"ladder_id": "shci_pt_eps_var_v1", "name": "eps_var", "value": 0.00005, "units": "hartree", "rank": 2, "value_direction": "decreasing"}
+    },
+    {
+      "solver_uuid": "c71b90bd-3250-4c0c-b4e7-fc9878f141f6",
+      "solver_short_name": "SHCI_pt_2e-5",
+      "solver_family_id": "shci",
+      "solver_variant_id": "pt_eps_2e_5",
+      "display_name": "SHCI+PT eps_var=2e-5",
+      "implementation_id": "shci_arrow",
+      "result_semantics": "variational_plus_stochastic_pt",
+      "catalog_status": "committed",
+      "resource_axis": {"ladder_id": "shci_pt_eps_var_v1", "name": "eps_var", "value": 0.00002, "units": "hartree", "rank": 3, "value_direction": "decreasing"}
+    },
+    {
+      "solver_uuid": "0db183e3-a86d-491b-9125-599556e37c7a",
+      "solver_short_name": "SHCI_var_2e-4",
+      "solver_family_id": "shci",
+      "solver_variant_id": "var_eps_2e_4",
+      "display_name": "SHCI variational eps_var=2e-4",
+      "implementation_id": "shci_arrow",
+      "result_semantics": "variational_energy",
+      "catalog_status": "committed",
+      "resource_axis": {"ladder_id": "shci_variational_eps_var_v1", "name": "eps_var", "value": 0.0002, "units": "hartree", "rank": 0, "value_direction": "decreasing"}
+    },
+    {
+      "solver_uuid": "7e730dfb-57ee-480b-a8a1-4b73f5f07c54",
+      "solver_short_name": "SHCI_var_1e-4",
+      "solver_family_id": "shci",
+      "solver_variant_id": "var_eps_1e_4",
+      "display_name": "SHCI variational eps_var=1e-4",
+      "implementation_id": "shci_arrow",
+      "result_semantics": "variational_energy",
+      "catalog_status": "committed",
+      "resource_axis": {"ladder_id": "shci_variational_eps_var_v1", "name": "eps_var", "value": 0.0001, "units": "hartree", "rank": 1, "value_direction": "decreasing"}
+    },
+    {
+      "solver_uuid": "01949b95-c427-4693-9134-01f47f688c09",
+      "solver_short_name": "SHCI_var_5e-5",
+      "solver_family_id": "shci",
+      "solver_variant_id": "var_eps_5e_5",
+      "display_name": "SHCI variational eps_var=5e-5",
+      "implementation_id": "shci_arrow",
+      "result_semantics": "variational_energy",
+      "catalog_status": "committed",
+      "resource_axis": {"ladder_id": "shci_variational_eps_var_v1", "name": "eps_var", "value": 0.00005, "units": "hartree", "rank": 2, "value_direction": "decreasing"}
+    },
+    {
+      "solver_uuid": "86bfe50c-9342-4d54-bb68-abc8abd95688",
+      "solver_short_name": "SHCI_var_2e-5",
+      "solver_family_id": "shci",
+      "solver_variant_id": "var_eps_2e_5",
+      "display_name": "SHCI variational eps_var=2e-5",
+      "implementation_id": "shci_arrow",
+      "result_semantics": "variational_energy",
+      "catalog_status": "committed",
+      "resource_axis": {"ladder_id": "shci_variational_eps_var_v1", "name": "eps_var", "value": 0.00002, "units": "hartree", "rank": 3, "value_direction": "decreasing"}
+    },
+    {
+      "solver_uuid": "2dde727e-a881-44fa-aabf-bba6248e4baf",
+      "solver_short_name": "SHCI_opt",
+      "solver_family_id": "shci",
+      "solver_variant_id": "orbital_optimized_pt_eps_5e_5",
+      "display_name": "Orbital-optimized SHCI+PT eps_var=5e-5",
+      "implementation_id": "shci_arrow",
+      "result_semantics": "orbital_optimized_variational_plus_stochastic_pt",
+      "catalog_status": "committed",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "0340d346-8736-5fb3-8bd1-76b6a9bfc60e",
+      "solver_short_name": "SHCI_pt_2e-5_nchunks8",
+      "solver_family_id": "shci",
+      "solver_variant_id": "g50_orbopt_terminal_pt_eps_2e_5_nchunks8",
+      "display_name": "G50 orbital-preconditioned SHCI+PT eps_var=2e-5",
+      "implementation_id": "shci_arrow",
+      "result_semantics": "orbital_preconditioned_variational_plus_stochastic_pt",
+      "catalog_status": "reserved_g50",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "f0a6420a-928b-5d81-a185-fc213229896f",
+      "solver_short_name": "SHCI_orbopt_var_2e-4_nchunks8",
+      "solver_family_id": "shci",
+      "solver_variant_id": "g50_orbopt_var_eps_2e_4_nchunks8",
+      "display_name": "G50 orbital-preconditioned SHCI variational eps_var=2e-4",
+      "implementation_id": "shci_arrow",
+      "result_semantics": "orbital_preconditioned_variational_energy",
+      "catalog_status": "reserved_g50",
+      "resource_axis": {"ladder_id": "g50_shci_orbopt_variational_eps_var_v1", "name": "eps_var", "value": 0.0002, "units": "hartree", "rank": 0, "value_direction": "decreasing"}
+    },
+    {
+      "solver_uuid": "095d8e6f-acbe-508e-929b-25bbc2498ceb",
+      "solver_short_name": "SHCI_orbopt_var_1e-4_nchunks8",
+      "solver_family_id": "shci",
+      "solver_variant_id": "g50_orbopt_var_eps_1e_4_nchunks8",
+      "display_name": "G50 orbital-preconditioned SHCI variational eps_var=1e-4",
+      "implementation_id": "shci_arrow",
+      "result_semantics": "orbital_preconditioned_variational_energy",
+      "catalog_status": "reserved_g50",
+      "resource_axis": {"ladder_id": "g50_shci_orbopt_variational_eps_var_v1", "name": "eps_var", "value": 0.0001, "units": "hartree", "rank": 1, "value_direction": "decreasing"}
+    },
+    {
+      "solver_uuid": "8da76450-cca0-5740-b18a-e09b3c3be1c2",
+      "solver_short_name": "SHCI_orbopt_var_5e-5_nchunks8",
+      "solver_family_id": "shci",
+      "solver_variant_id": "g50_orbopt_var_eps_5e_5_nchunks8",
+      "display_name": "G50 orbital-preconditioned SHCI variational eps_var=5e-5",
+      "implementation_id": "shci_arrow",
+      "result_semantics": "orbital_preconditioned_variational_energy",
+      "catalog_status": "reserved_g50",
+      "resource_axis": {"ladder_id": "g50_shci_orbopt_variational_eps_var_v1", "name": "eps_var", "value": 0.00005, "units": "hartree", "rank": 2, "value_direction": "decreasing"}
+    },
+    {
+      "solver_uuid": "86cb1f20-bc0d-5a9a-bf86-20d1f9c0c3e2",
+      "solver_short_name": "SHCI_orbopt_var_2e-5_nchunks8",
+      "solver_family_id": "shci",
+      "solver_variant_id": "g50_orbopt_var_eps_2e_5_nchunks8",
+      "display_name": "G50 orbital-preconditioned SHCI variational eps_var=2e-5",
+      "implementation_id": "shci_arrow",
+      "result_semantics": "orbital_preconditioned_variational_energy",
+      "catalog_status": "reserved_g50",
+      "resource_axis": {"ladder_id": "g50_shci_orbopt_variational_eps_var_v1", "name": "eps_var", "value": 0.00002, "units": "hartree", "rank": 3, "value_direction": "decreasing"}
+    },
+    {
+      "solver_uuid": "54feec4d-06b8-5ac2-a936-7e645130fb48",
+      "solver_short_name": "TrimCI_default",
+      "solver_family_id": "trimci",
+      "solver_variant_id": "default_three_phase",
+      "display_name": "TrimCI default three-phase workflow",
+      "implementation_id": "trimci",
+      "result_semantics": "variational_plus_pt_when_available",
+      "catalog_status": "committed",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "1e75f9d9-b6cf-500d-8145-a5b0ca106102",
+      "solver_short_name": "TrimCI_ndet_100000",
+      "solver_family_id": "trimci",
+      "solver_variant_id": "g50_target_determinants_100000",
+      "display_name": "TrimCI target 100,000 determinants",
+      "implementation_id": "trimci",
+      "result_semantics": "variational_checkpoint_energy",
+      "catalog_status": "reserved_g50",
+      "resource_axis": {"ladder_id": "g50_trimci_target_determinants_v1", "name": "target_n_determinants", "value": 100000, "units": "determinants", "rank": 0, "value_direction": "increasing"}
+    },
+    {
+      "solver_uuid": "f06004e0-e2ca-53ef-a54a-2fc12c811a69",
+      "solver_short_name": "TrimCI_ndet_250000",
+      "solver_family_id": "trimci",
+      "solver_variant_id": "g50_target_determinants_250000",
+      "display_name": "TrimCI target 250,000 determinants",
+      "implementation_id": "trimci",
+      "result_semantics": "variational_checkpoint_energy",
+      "catalog_status": "reserved_g50",
+      "resource_axis": {"ladder_id": "g50_trimci_target_determinants_v1", "name": "target_n_determinants", "value": 250000, "units": "determinants", "rank": 1, "value_direction": "increasing"}
+    },
+    {
+      "solver_uuid": "7b5f6ebd-e632-5343-8065-184d523e9c2e",
+      "solver_short_name": "TrimCI_ndet_500000",
+      "solver_family_id": "trimci",
+      "solver_variant_id": "g50_target_determinants_500000",
+      "display_name": "TrimCI target 500,000 determinants",
+      "implementation_id": "trimci",
+      "result_semantics": "variational_checkpoint_energy",
+      "catalog_status": "reserved_g50",
+      "resource_axis": {"ladder_id": "g50_trimci_target_determinants_v1", "name": "target_n_determinants", "value": 500000, "units": "determinants", "rank": 2, "value_direction": "increasing"}
+    },
+    {
+      "solver_uuid": "90fc4c28-9889-5f09-a6f0-2693b64c4893",
+      "solver_short_name": "TrimCI_ndet_1000000",
+      "solver_family_id": "trimci",
+      "solver_variant_id": "g50_target_determinants_1000000",
+      "display_name": "TrimCI target 1,000,000 determinants",
+      "implementation_id": "trimci",
+      "result_semantics": "variational_checkpoint_energy",
+      "catalog_status": "reserved_g50",
+      "resource_axis": {"ladder_id": "g50_trimci_target_determinants_v1", "name": "target_n_determinants", "value": 1000000, "units": "determinants", "rank": 3, "value_direction": "increasing"}
+    },
+    {
+      "solver_uuid": "d4993bbf-ba45-50ab-a215-9bf2bb49a9d7",
+      "solver_short_name": "TrimCI_ndet_2000000",
+      "solver_family_id": "trimci",
+      "solver_variant_id": "g50_target_determinants_2000000",
+      "display_name": "TrimCI target 2,000,000 determinants",
+      "implementation_id": "trimci",
+      "result_semantics": "variational_checkpoint_energy",
+      "catalog_status": "reserved_g50",
+      "resource_axis": {"ladder_id": "g50_trimci_target_determinants_v1", "name": "target_n_determinants", "value": 2000000, "units": "determinants", "rank": 4, "value_direction": "increasing"}
+    },
+    {
+      "solver_uuid": "078dff8b-14ac-5ca7-b4da-8c7e56be9320",
+      "solver_short_name": "TrimCI_ndet_5000000",
+      "solver_family_id": "trimci",
+      "solver_variant_id": "g50_target_determinants_5000000",
+      "display_name": "TrimCI target 5,000,000 determinants",
+      "implementation_id": "trimci",
+      "result_semantics": "variational_checkpoint_energy",
+      "catalog_status": "reserved_g50",
+      "resource_axis": {"ladder_id": "g50_trimci_target_determinants_v1", "name": "target_n_determinants", "value": 5000000, "units": "determinants", "rank": 5, "value_direction": "increasing"}
+    },
+    {
+      "solver_uuid": "e5e9dea7-ce43-558a-97e4-1ad447104125",
+      "solver_short_name": "TrimCI_ndet_10000000",
+      "solver_family_id": "trimci",
+      "solver_variant_id": "g50_target_determinants_10000000",
+      "display_name": "TrimCI target 10,000,000 determinants",
+      "implementation_id": "trimci",
+      "result_semantics": "variational_checkpoint_energy",
+      "catalog_status": "reserved_g50",
+      "resource_axis": {"ladder_id": "g50_trimci_target_determinants_v1", "name": "target_n_determinants", "value": 10000000, "units": "determinants", "rank": 6, "value_direction": "increasing"}
+    },
+    {
+      "solver_uuid": "54cf1eae-79a4-5ee5-9553-80f4f380882b",
+      "solver_short_name": "ipie_uhf_trial",
+      "solver_family_id": "ipie_afqmc",
+      "solver_variant_id": "uhf_trial_512_walkers_1000_blocks",
+      "display_name": "ipie ph-AFQMC, UHF trial, 512 walkers",
+      "implementation_id": "ipie",
+      "result_semantics": "phaseless_afqmc_energy",
+      "catalog_status": "committed",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "7c8ef984-4d3a-4468-8900-e0da3bd8b22d",
+      "solver_short_name": "DF_QPE",
+      "solver_family_id": "double_factorized_qpe",
+      "solver_variant_id": "benchq_20250304",
+      "display_name": "BenchQ double-factorized QPE",
+      "implementation_id": "benchq",
+      "result_semantics": "fault_tolerant_resource_estimate",
+      "catalog_status": "committed",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "f6b36bde-be4a-4eee-975b-2c5f7e553f5f",
+      "solver_short_name": "DF_QPE",
+      "solver_family_id": "double_factorized_qpe",
+      "solver_variant_id": "pyliqtr_p1e_6_cycle_0p1us",
+      "display_name": "pyLIQTR DF-QPE, p=1e-6, cycle=0.1 us",
+      "implementation_id": "pyliqtr",
+      "result_semantics": "fault_tolerant_resource_estimate",
+      "catalog_status": "committed",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "5d768520-b3d0-4292-bbb4-9776fa128107",
+      "solver_short_name": "DF_QPE",
+      "solver_family_id": "double_factorized_qpe",
+      "solver_variant_id": "pyliqtr_p1e_6_cycle_1us",
+      "display_name": "pyLIQTR DF-QPE, p=1e-6, cycle=1 us",
+      "implementation_id": "pyliqtr",
+      "result_semantics": "fault_tolerant_resource_estimate",
+      "catalog_status": "committed",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "2610d8de-bd3a-469e-9a80-473e8988755f",
+      "solver_short_name": "DF_QPE",
+      "solver_family_id": "double_factorized_qpe",
+      "solver_variant_id": "pyliqtr_p1e_4_cycle_0p1us",
+      "display_name": "pyLIQTR DF-QPE, p=1e-4, cycle=0.1 us",
+      "implementation_id": "pyliqtr",
+      "result_semantics": "fault_tolerant_resource_estimate",
+      "catalog_status": "committed",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "5dad4064-cd11-412f-85cb-d722afe3b3de",
+      "solver_short_name": "DF_QPE",
+      "solver_family_id": "double_factorized_qpe",
+      "solver_variant_id": "pyliqtr_p1e_4_cycle_1us",
+      "display_name": "pyLIQTR DF-QPE, p=1e-4, cycle=1 us",
+      "implementation_id": "pyliqtr",
+      "result_semantics": "fault_tolerant_resource_estimate",
+      "catalog_status": "committed",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "4b07b89f-c66f-4e72-8c24-df3e4222cb41",
+      "solver_short_name": "DF_QPE",
+      "solver_family_id": "double_factorized_qpe",
+      "solver_variant_id": "pyliqtr_p1e_4_cycle_1us_parallel",
+      "display_name": "pyLIQTR parallel DF-QPE, p=1e-4, cycle=1 us",
+      "implementation_id": "pyliqtr",
+      "result_semantics": "fault_tolerant_resource_estimate",
+      "catalog_status": "committed",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "cd9fd9dd-87f5-47bc-96e5-b7eb6a43ccb9",
+      "solver_short_name": "TopQAD-BL",
+      "solver_family_id": "double_factorized_qpe",
+      "solver_variant_id": "topqad_baseline",
+      "display_name": "TopQAD double-factorized QPE baseline",
+      "implementation_id": "topqad",
+      "result_semantics": "fault_tolerant_resource_estimate",
+      "catalog_status": "committed",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "8803d774-2e4d-49c6-bba1-637a57e490ea",
+      "solver_short_name": "TopQAD-D",
+      "solver_family_id": "double_factorized_qpe",
+      "solver_variant_id": "topqad_desired",
+      "display_name": "TopQAD double-factorized QPE desired",
+      "implementation_id": "topqad",
+      "result_semantics": "fault_tolerant_resource_estimate",
+      "catalog_status": "committed",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "18c187af-3e5b-4e6c-87fd-73c26fd48a60",
+      "solver_short_name": "THC_QPE_1mHa",
+      "solver_family_id": "thc_qpe",
+      "solver_variant_id": "thc_1mha",
+      "display_name": "THC QPE at 1 mHa",
+      "implementation_id": "benchq",
+      "result_semantics": "fault_tolerant_resource_estimate",
+      "catalog_status": "committed",
+      "resource_axis": null
+    },
+    {
+      "solver_uuid": "b8ed03bd-9c3e-4d07-80af-8f77f0e7c2ac",
+      "solver_short_name": "THC_BLISS_QPE_1mHa",
+      "solver_family_id": "thc_qpe",
+      "solver_variant_id": "thc_bliss_1mha",
+      "display_name": "THC+BLISS QPE at 1 mHa",
+      "implementation_id": "benchq",
+      "result_semantics": "fault_tolerant_resource_estimate",
+      "catalog_status": "committed",
+      "resource_axis": null
+    }
+  ]
+}

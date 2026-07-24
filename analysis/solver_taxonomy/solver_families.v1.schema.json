@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "solver_families.v1.schema.json",
+  "title": "QB-GSEE solver-family catalog v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "catalog_id",
+    "schema_version",
+    "status",
+    "definitions",
+    "counts",
+    "families",
+    "variants"
+  ],
+  "properties": {
+    "$schema": {"type": "string"},
+    "catalog_id": {"const": "solver_families_v1"},
+    "schema_version": {"const": 1},
+    "status": {"const": "effective"},
+    "definitions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "solver_family",
+        "solver_variant",
+        "implementation",
+        "resource_rank"
+      ],
+      "properties": {
+        "solver_family": {"type": "string", "minLength": 1},
+        "solver_variant": {"type": "string", "minLength": 1},
+        "implementation": {"type": "string", "minLength": 1},
+        "resource_rank": {"type": "string", "minLength": 1}
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "families",
+        "variants",
+        "committed_variants",
+        "reserved_g50_variants",
+        "resource_ladders"
+      ],
+      "properties": {
+        "families": {"type": "integer", "minimum": 1},
+        "variants": {"type": "integer", "minimum": 1},
+        "committed_variants": {"type": "integer", "minimum": 0},
+        "reserved_g50_variants": {"type": "integer", "minimum": 0},
+        "resource_ladders": {"type": "integer", "minimum": 0}
+      }
+    },
+    "families": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/family"}
+    },
+    "variants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/variant"}
+    }
+  },
+  "$defs": {
+    "family": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "solver_family_id",
+        "solver_family_uuid",
+        "display_name",
+        "method_class",
+        "description"
+      ],
+      "properties": {
+        "solver_family_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "solver_family_uuid": {"type": "string", "format": "uuid"},
+        "display_name": {"type": "string", "minLength": 1},
+        "method_class": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "description": {"type": "string", "minLength": 1}
+      }
+    },
+    "resourceAxis": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": [
+        "ladder_id",
+        "name",
+        "value",
+        "units",
+        "rank",
+        "value_direction"
+      ],
+      "properties": {
+        "ladder_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "name": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "value": {"type": "number"},
+        "units": {"type": "string", "minLength": 1},
+        "rank": {"type": "integer", "minimum": 0},
+        "value_direction": {"enum": ["increasing", "decreasing"]}
+      }
+    },
+    "variant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "solver_uuid",
+        "solver_short_name",
+        "solver_family_id",
+        "solver_variant_id",
+        "display_name",
+        "implementation_id",
+        "result_semantics",
+        "catalog_status",
+        "resource_axis"
+      ],
+      "properties": {
+        "solver_uuid": {"type": "string", "format": "uuid"},
+        "solver_short_name": {"type": "string", "minLength": 1},
+        "solver_family_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "solver_variant_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "display_name": {"type": "string", "minLength": 1},
+        "implementation_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "result_semantics": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "catalog_status": {"enum": ["committed", "reserved_g50"]},
+        "resource_axis": {"$ref": "#/$defs/resourceAxis"}
+      }
+    }
+  }
+}
