@@ -21,10 +21,7 @@ H2_PROBLEM_INSTANCE = (
     "9162371c-b23f-45a6-bacd-44cb7aaea917.json"
 )
 H2_FCIDUMP = (
-    REPO_ROOT
-    / "scripts"
-    / "development"
-    / "validation.H2.cc-PVDZ."
+    REPO_ROOT / "scripts" / "development" / "validation.H2.cc-PVDZ."
     "bbcd09f2-8a89-4f35-9577-7851a76ea17c.fcidump.gz"
 )
 H2_TASK_UUID = "f847059f-a89f-4008-9ae1-39847c899e75"
@@ -139,9 +136,7 @@ def test_trimci_adapter_validation_h2_and_full_provenance(tmp_path, monkeypatch)
     assert absolute_paths(raw) == []
     assert (run_dir / "realtime_progress.out").is_file()
     assert not (tmp_path / "realtime_progress.out").exists()
-    assert solution["solution_data"][0]["energy"] == pytest.approx(
-        -1.1634029610645866
-    )
+    assert solution["solution_data"][0]["energy"] == pytest.approx(-1.1634029610645866)
     assert solution["solver_details"]["solver_uuid"] == adapter.SOLVER_UUID
     assert solution["solver_details"]["algorithm_details"]["solver_config"]
     assert absolute_paths(solution) == []
@@ -236,13 +231,30 @@ def test_checkpoint_grid_selection_is_strict_and_at_or_below_budget():
         {"n_dets": 80, "checkpoint_index": 2},
         {"n_dets": 150, "checkpoint_index": 3},
     ]
-    selected = adapter._select_phase2_checkpoints(
-        records, (30, 100, 300), n_fci=200
-    )
+    selected = adapter._select_phase2_checkpoints(records, (30, 100, 300), n_fci=200)
     assert [
         (row["target_n_dets"], row["n_dets"], row["checkpoint_index"])
         for row in selected
     ] == [(30, 20, 0), (100, 80, 2)]
+
+
+def test_checkpoint_cap_selection_requires_interrupted_parent_to_reach_cap():
+    records = [
+        {"phase": "phase1", "n_dets": 20, "checkpoint_index": 0},
+        {"phase": "phase1", "n_dets": 80, "checkpoint_index": 1},
+    ]
+    interrupted = adapter._select_checkpoint_caps(
+        records, (30, 100, 300), parent_completed=False
+    )
+    assert [row["target_n_dets"] for row in interrupted] == [30]
+    assert interrupted[0]["cap_observation_status"] == "execution_reached_cap"
+
+    completed = adapter._select_checkpoint_caps(
+        records, (30, 100, 300), parent_completed=True
+    )
+    assert [row["target_n_dets"] for row in completed] == [30, 100, 300]
+    assert completed[-1]["n_dets"] == 80
+    assert completed[-1]["cap_observation_status"] == "parent_completed_below_cap"
 
 
 def test_harvest_emits_schema_valid_checkpoint_members_with_shared_provenance(
@@ -290,7 +302,7 @@ def test_harvest_emits_schema_valid_checkpoint_members_with_shared_provenance(
     standard = adapter.harvest(run_dir)
     assert standard["solver_details"]["solver_short_name"] == "TrimCI_default"
     summary = json.loads((run_dir / "harvest_summary.json").read_text())
-    assert len(summary["checkpoint_solution_files"]) == 2
+    assert len(summary["checkpoint_solution_files"]) == 3
     checkpoint_solutions = [
         json.loads((run_dir / relative).read_text())
         for relative in summary["checkpoint_solution_files"]
@@ -298,27 +310,110 @@ def test_harvest_emits_schema_valid_checkpoint_members_with_shared_provenance(
     assert [
         solution["solver_details"]["solver_short_name"]
         for solution in checkpoint_solutions
-    ] == ["TrimCI_ndet_30", "TrimCI_ndet_100"]
+    ] == ["TrimCI_ndet_30", "TrimCI_ndet_100", "TrimCI_ndet_300"]
     assert [
-        solution["solution_data"][0]["energy"]
-        for solution in checkpoint_solutions
-    ] == pytest.approx([-1.151, -1.162])
-    assert len(
-        {solution["solver_details"]["solver_uuid"] for solution in checkpoint_solutions}
-    ) == 2
+        solution["solution_data"][0]["energy"] for solution in checkpoint_solutions
+    ] == pytest.approx([-1.151, -1.162, -1.162])
+    assert (
+        len(
+            {
+                solution["solver_details"]["solver_uuid"]
+                for solution in checkpoint_solutions
+            }
+        )
+        == 3
+    )
     for solution in checkpoint_solutions:
-        details = solution["solution_data"][0]["solution_details"][
-            "trimci_checkpoint"
-        ]
+        details = solution["solution_data"][0]["solution_details"]["trimci_checkpoint"]
         config = solution["solver_details"]["algorithm_details"]["solver_config"]
         assert details["shared_parent_run_id"] == manifest.run_id
         assert details["runtime_not_separately_measured"] is True
         assert config["shared_parent_solver_uuid"] == adapter.SOLVER_UUID
         assert config["shared_parent_run_id"] == manifest.run_id
-        assert config["checkpoint_actual_n_dets"] <= config[
-            "checkpoint_target_n_dets"
-        ]
+        assert config["checkpoint_actual_n_dets"] <= config["checkpoint_target_n_dets"]
         assert absolute_paths(solution) == []
+
+
+def test_harvest_recovers_reached_checkpoint_from_interrupted_parent(
+    tmp_path, monkeypatch
+):
+    monkeypatch.setattr(adapter, "_import_trimci", fake_trimci_module)
+    run_dir = tmp_path / "trimci-interrupted"
+    manifest = adapter.prepare(
+        problem_instance_path=H2_PROBLEM_INSTANCE,
+        task_uuid=H2_TASK_UUID,
+        fcidump_path=H2_FCIDUMP,
+        run_dir=run_dir,
+        config=adapter.TrimCIConfig(
+            seed=12345,
+            checkpoint_ndet_grid=(30, 100, 300),
+        ),
+    )
+    recovered = [
+        {
+            "phase": "phase1",
+            "checkpoint_index": 0,
+            "checkpoint_round": 0,
+            "history_index": None,
+            "history_alignment_status": "native_checkpoint_only",
+            "n_dets": 20,
+            "variational_energy": -1.15,
+            "pt2_correction": None,
+            "selected_energy": -1.15,
+            "checkpoint_file": (
+                "trimci_work/checkpoints/phase1/checkpoint_round_0.bin"
+            ),
+        },
+        {
+            "phase": "phase1",
+            "checkpoint_index": 1,
+            "checkpoint_round": 1,
+            "history_index": None,
+            "history_alignment_status": "native_checkpoint_only",
+            "n_dets": 80,
+            "variational_energy": -1.16,
+            "pt2_correction": None,
+            "selected_energy": -1.16,
+            "checkpoint_file": (
+                "trimci_work/checkpoints/phase1/checkpoint_round_1.bin"
+            ),
+        },
+    ]
+    monkeypatch.setattr(
+        adapter,
+        "_checkpoint_history",
+        lambda _run_path, *, require_result_alignment: recovered,
+    )
+
+    parent = adapter.harvest(
+        run_dir,
+        missing_output_status="timeout",
+        not_attempted_reason="scheduler walltime",
+    )
+    assert parent["solution_data"][0]["energy"] is None
+    assert parent["solution_data"][0]["solution_details"]["harness_status"] == (
+        "timeout"
+    )
+    summary = json.loads((run_dir / "harvest_summary.json").read_text())
+    assert len(summary["checkpoint_solution_files"]) == 1
+    checkpoint = json.loads(
+        (run_dir / summary["checkpoint_solution_files"][0]).read_text()
+    )
+    row = checkpoint["solution_data"][0]
+    assert checkpoint["solver_details"]["solver_short_name"] == "TrimCI_ndet_30"
+    assert row["energy"] == pytest.approx(-1.15)
+    assert row["solution_details"]["harness_status"] == "completed"
+    assert row["solution_details"]["parent_attempt"]["harness_status"] == "timeout"
+    assert (
+        row["solution_details"]["trimci_checkpoint"]["cap_observation_status"]
+        == "execution_reached_cap"
+    )
+    assert (
+        checkpoint["solver_details"]["algorithm_details"]["solver_config"][
+            "shared_parent_run_id"
+        ]
+        == manifest.run_id
+    )
 
 
 def test_batch_prepare_records_checkpoint_grid(tmp_path, monkeypatch):
