@@ -1,0 +1,37 @@
+{
+  "artifact_id": "ml_g50_catalog_snapshot_binding_amendment_v1",
+  "status": "frozen_reproducibility_binding_correction",
+  "frozen_before_final_refit": true,
+  "scientific_input_bytes_changed": false,
+  "model_protocol_changed": false,
+  "old_preregistration_sha256": "6403cb18cbe537df433e949105d15eaf7caa6fc8e3713fe599d9773e7eaa54aa",
+  "corrected_preregistration_sha256": "4307360c57353ffee84896b86d1ef4ac2a3240759ed969d2c4c48c5b8b7207de",
+  "snapshot": {
+    "path": "analysis/ml_g50_solver_families/inputs/solver_families_g50_snapshot.v1.json",
+    "sha256": "7531bdb2a68d57eb6271ffbe0b48981781e7683b43e62f12045f4486f6bb728f"
+  },
+  "live_catalog_correction": {
+    "commit": "3337b5b0",
+    "removed_non_g50_solver_uuids": [
+      "cd9fd9dd-87f5-47bc-96e5-b7eb6a43ccb9",
+      "8803d774-2e4d-49c6-bba1-637a57e490ea"
+    ],
+    "corrected_catalog_sha256": "64715465cd93f6bc47fb195f98824d377094ba0d278ea2be86d942ccf5e45120"
+  },
+  "g50_projection_equivalence": {
+    "variant_count": 18,
+    "snapshot_projection_sha256": "b5d5013b058d2765bfefab4590ed5d3be1b7ce672c822500cdf7c162de520f0a",
+    "corrected_live_projection_sha256": "b5d5013b058d2765bfefab4590ed5d3be1b7ce672c822500cdf7c162de520f0a",
+    "exactly_equal": true
+  },
+  "rejected_final_v2": {
+    "manifest_sha256": "43b311d01359280c626b7da51daafa117f7da5fbca9811d606399bf0f914c370",
+    "reason": "valid internally but no longer reproducible from branch tip after the live catalog correction",
+    "status": "rejected_not_promotable"
+  },
+  "exposure_disclosure": {
+    "final_v2_model_scores_seen": true,
+    "correction_selected_from_model_performance": false,
+    "correction_trigger": "broad-suite catalog completeness failure and pinned-input reproducibility audit"
+  }
+}
