@@ -1,0 +1,29 @@
+{
+  "artifact_id": "ml_g50_size_sector_backfill_amendment_v1",
+  "backfill": {
+    "path": "analysis/ml_g50_solver_families/inputs/size_sector_metadata_backfill.csv",
+    "row_count": 127,
+    "sha256": "5b324b3cbc27237fef0b6065a96452cf7f19852290d1e77a7f746144d9afd233"
+  },
+  "frozen_before_model_fitting": true,
+  "parent_preregistration": {
+    "path": "analysis/ml_g50_solver_families/preregistration.json",
+    "sha256": "6403cb18cbe537df433e949105d15eaf7caa6fc8e3713fe599d9773e7eaa54aa"
+  },
+  "policy": {
+    "allowed_target": "strong_size_sector_ridge_baseline_only",
+    "generic_imputation_allowed": false,
+    "log_fci_dim_formula": "log10(comb(n_orbs,n_alpha)*comb(n_orbs,n_beta))",
+    "ms2_source": "committed_problem_instance_task.features.ms2",
+    "physics_knn_inputs_changed": false,
+    "unresolved_value_policy": "hard_error"
+  },
+  "prior_exposure": {
+    "model_scores_or_predictions_seen": false,
+    "per_task_g50_labels_seen": false,
+    "scientific_outcomes_consumed": false,
+    "variant_class_counts_seen": false
+  },
+  "status": "frozen_pre_fit",
+  "trigger": "127 feature-table rows lacked header-derived ms2 and log_fci_dim while committed Gao task metadata supplied the exact sector"
+}
