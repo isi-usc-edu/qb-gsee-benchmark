@@ -14,6 +14,7 @@ from qb_gsee_benchmark.ml.g50_solver_families import (
 )
 from qb_gsee_benchmark.ml.g50_solver_families_run import (
     build_size_sector_frame,
+    load_rung_recovery_amendment,
     load_size_sector_amendment,
     lofo_knn_probabilities,
     normalize_g50_outcomes,
@@ -24,6 +25,9 @@ from qb_gsee_benchmark.ml.g50_solver_families_run import (
 ROOT = Path(__file__).resolve().parents[2]
 PREREGISTRATION = ROOT / "analysis/ml_g50_solver_families/preregistration.json"
 AMENDMENT = ROOT / "analysis/ml_g50_solver_families/amendment_size_sector_backfill.json"
+RUNG_AMENDMENT = (
+    ROOT / "analysis/ml_g50_solver_families/amendment_rung_ledger_recovery.json"
+)
 
 
 def _inputs() -> tuple[dict, dict[str, str], list[dict]]:
@@ -54,8 +58,9 @@ def test_g50_size_sector_amendment_resolves_exact_null_set() -> None:
 
 def test_g50_outcome_normalization_preserves_censoring_contract() -> None:
     preregistration, canonical, variants = _inputs()
+    _, rung_recovery = load_rung_recovery_amendment(ROOT, RUNG_AMENDMENT)
     observations, coverage = normalize_g50_outcomes(
-        ROOT, preregistration, variants, canonical
+        ROOT, preregistration, variants, canonical, rung_recovery
     )
     assert len(observations) == 1113
     assert len(coverage) == 1728
@@ -66,6 +71,19 @@ def test_g50_outcome_normalization_preserves_censoring_contract() -> None:
             for row in observations
         )
         == 57
+    )
+    assert (
+        sum(row["observation_source"] == "dmrg_rung_ledger" for row in observations)
+        == 285
+    )
+    assert (
+        sum(row["observation_source"] == "shci_rung_ledger" for row in observations)
+        == 229
+    )
+    assert sum(row["coverage_status"] == "observed_rung" for row in coverage) == 514
+    assert (
+        sum(row["coverage_status"] == "missing_attempted_rung" for row in coverage)
+        == 254
     )
     assert sum(row["coverage_status"] == "right_censored" for row in coverage) == 209
     eligibility = variant_eligibility(

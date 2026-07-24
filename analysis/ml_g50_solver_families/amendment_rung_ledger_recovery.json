@@ -1,0 +1,35 @@
+{
+  "artifact_id": "ml_g50_rung_ledger_recovery_amendment_v1",
+  "frozen_before_corrected_refit": true,
+  "model_protocol_changed": false,
+  "parent_implementation_commit": "b2313d04",
+  "rejected_first_fit": {
+    "manifest_sha256": "f8f8d3003b6248659c09fdb87dbc960514965a1e040704fcf8428f95663d12fd",
+    "reason": "98 source-ledger rung observations were incorrectly treated as missing attempted rungs",
+    "status": "rejected_not_promotable"
+  },
+  "snapshot": {
+    "dmrg_rows": 285,
+    "path": "analysis/ml_g50_solver_families/inputs/dmrg_shci_rung_recovery.csv",
+    "row_count": 514,
+    "sha256": "4e0c9cd27ef6699fca0e31a5eb6858dead6f4d9e83b1468b4eebbf259fb6e943",
+    "shci_rows": 229,
+    "source_ledger_count": 144
+  },
+  "unchanged": [
+    "binary_label_policy",
+    "trimci_right_censoring",
+    "feature_policy",
+    "model_eligibility_floor",
+    "leave_one_canonical_family_out_protocol",
+    "models_and_baselines",
+    "bootstrap",
+    "reporting_contract"
+  ],
+  "exposure_disclosure": {
+    "rejected_run_model_scores_seen": true,
+    "correction_selected_from_model_performance": false,
+    "correction_trigger": "structural rung-ledger census reconciliation"
+  },
+  "status": "frozen_ingestion_correction"
+}

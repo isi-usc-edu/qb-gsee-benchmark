@@ -155,6 +155,52 @@ def build_size_sector_frame(
     return selected
 
 
+def load_rung_recovery_amendment(
+    root: Path, amendment_path: Path
+) -> tuple[dict[str, Any], pd.DataFrame]:
+    amendment = json.loads(amendment_path.read_text(encoding="utf-8"))
+    _require(
+        amendment.get("artifact_id") == "ml_g50_rung_ledger_recovery_amendment_v1",
+        "wrong rung-recovery amendment",
+    )
+    _require(
+        amendment.get("frozen_before_corrected_refit") is True,
+        "unfrozen rung-recovery amendment",
+    )
+    specification = amendment["snapshot"]
+    path = root / str(specification["path"])
+    _require(path.is_file(), f"missing rung-recovery snapshot: {path}")
+    _require(sha256_file(path) == specification["sha256"], "rung snapshot changed")
+    frame = pd.read_csv(path)
+    _require(
+        len(frame) == int(specification["row_count"]) == 514,
+        "rung row count changed",
+    )
+    _require(
+        int((frame["solver_family_id"] == "dmrg").sum())
+        == int(specification["dmrg_rows"])
+        == 285,
+        "DMRG recovered rung count changed",
+    )
+    _require(
+        int((frame["solver_family_id"] == "shci").sum())
+        == int(specification["shci_rows"])
+        == 229,
+        "SHCI recovered rung count changed",
+    )
+    _require(
+        frame["source_ledger_path"].nunique()
+        == int(specification["source_ledger_count"])
+        == 144,
+        "source rung-ledger count changed",
+    )
+    _require(
+        not frame.duplicated(["task_uuid", "solver_family_id", "resource_value"]).any(),
+        "duplicate recovered rung key",
+    )
+    return amendment, frame
+
+
 def _variant_maps(
     variants: Sequence[Mapping[str, Any]],
 ) -> tuple[dict[str, dict[str, Any]], dict[tuple[str, float], dict[str, Any]]]:
@@ -256,6 +302,7 @@ def normalize_g50_outcomes(
     preregistration: Mapping[str, Any],
     variants: Sequence[Mapping[str, Any]],
     canonical: Mapping[str, str],
+    rung_recovery: pd.DataFrame,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """Normalize terminal and rung outcomes under the frozen binary contract."""
     tasks = _load_tasks(root)
@@ -321,10 +368,7 @@ def normalize_g50_outcomes(
             }
         )
 
-    for family, detail_key, energy_key in (
-        ("dmrg", "dmrg_details", "energy"),
-        ("shci", "shci_details", "variational_energy"),
-    ):
+    for family in ("dmrg", "shci"):
         family_variants = sorted(
             (
                 row
@@ -334,32 +378,15 @@ def normalize_g50_outcomes(
             ),
             key=lambda row: int(row["resource_rank"]),
         )
+        family_recovery = rung_recovery.loc[rung_recovery["solver_family_id"] == family]
         for task_uuid in selected_tasks:
-            result = _result(documents.get((family, task_uuid)))
-            details = {} if result is None else result.get("solution_details", {})
-            solver_details = (
-                details.get(detail_key, {}) if isinstance(details, dict) else {}
-            )
-            result_data = (
-                solver_details.get("result_data", {})
-                if isinstance(solver_details, dict)
-                else {}
-            )
-            rung_rows = (
-                result_data.get("completed_rungs", [])
-                if isinstance(result_data, dict)
-                else []
-            )
-            observed: dict[float, Mapping[str, Any]] = {}
-            for rung in rung_rows if isinstance(rung_rows, list) else []:
-                value = float(
-                    rung["bond_dimension"] if family == "dmrg" else rung["eps_var"]
-                )
-                _require(
-                    value not in observed,
-                    f"duplicate {family} rung: {task_uuid}/{value}",
-                )
-                observed[value] = rung
+            recovered = family_recovery.loc[
+                family_recovery["task_uuid"].astype(str) == task_uuid
+            ]
+            observed = {
+                float(row.resource_value): row
+                for row in recovered.itertuples(index=False)
+            }
             raw = str(contract_lookup[(family, task_uuid)].get("harness_status"))
             for variant in family_variants:
                 value = float(variant["resource_value"])
@@ -388,12 +415,18 @@ def normalize_g50_outcomes(
                             task=tasks[task_uuid],
                             canonical_family=canonical[task_uuid],
                             variant=variant,
-                            energy=rung[energy_key],
-                            source=f"{family}_completed_rung",
-                            raw_status=raw,
+                            energy=float(rung.energy_hartree),
+                            source=f"{family}_rung_ledger",
+                            raw_status=str(rung.source_harness_status),
                         )
                     )
-                    add_coverage(task_uuid, variant, "observed_rung", raw, True)
+                    add_coverage(
+                        task_uuid,
+                        variant,
+                        "observed_rung",
+                        f"rung_ledger:{rung.source_harness_status}",
+                        True,
+                    )
 
     recovery = _zip_csv(recovery_archive, "UNFOLDED_RUNG_MATRIX.csv")
     _require(len(recovery) == 38 * 7, "TrimCI recovery matrix changed")
@@ -511,6 +544,16 @@ def normalize_g50_outcomes(
         )
         == 57,
         "TrimCI observed rung census changed",
+    )
+    _require(
+        sum(row["observation_source"] == "dmrg_rung_ledger" for row in observations)
+        == 285,
+        "DMRG rung-ledger observation census changed",
+    )
+    _require(
+        sum(row["observation_source"] == "shci_rung_ledger" for row in observations)
+        == 229,
+        "SHCI rung-ledger observation census changed",
     )
     observations.sort(
         key=lambda row: (
@@ -1319,6 +1362,7 @@ def run_finalization(
     root: Path,
     preregistration_path: Path,
     amendment_path: Path,
+    rung_recovery_amendment_path: Path,
     output_directory: Path,
 ) -> dict[str, Any]:
     """Execute one complete deterministic G50 solver-family ML run."""
@@ -1379,11 +1423,14 @@ def run_finalization(
                 geometry_cache[key] = block_aware_distance(len(features), models)[0]
             distances[(solver_family, arm)] = geometry_cache[key]
 
+    rung_amendment, rung_recovery = load_rung_recovery_amendment(
+        root, rung_recovery_amendment_path
+    )
     variants = g50_variant_rows(
         resolve_input_path(root, preregistration["inputs"]["solver_family_catalog"])
     )
     observations, coverage_rows = normalize_g50_outcomes(
-        root, preregistration, variants, canonical
+        root, preregistration, variants, canonical, rung_recovery
     )
     observation_frame = pd.DataFrame(observations)
     coverage_frame = pd.DataFrame(coverage_rows)
@@ -1593,6 +1640,11 @@ def run_finalization(
         ),
         "size_sector_amendment_sha256": sha256_file(amendment_path),
         "size_sector_backfill_sha256": amendment["backfill"]["sha256"],
+        "rung_recovery_amendment_sha256": sha256_file(rung_recovery_amendment_path),
+        "rung_recovery_snapshot_sha256": rung_amendment["snapshot"]["sha256"],
+        "rejected_first_fit_manifest_sha256": rung_amendment["rejected_first_fit"][
+            "manifest_sha256"
+        ],
         "degenerate_mcc_convention": "zero_denominator_is_zero",
         "no_gate_statement": (
             "Internal descriptive analysis only; no model-performance cutoff, "
@@ -1645,7 +1697,8 @@ def run_finalization(
         "status": "complete_internal_descriptive_no_gate",
         "protocol": PROTOCOL_ID,
         "preregistration_sha256": sha256_file(preregistration_path),
-        "amendment_sha256": sha256_file(amendment_path),
+        "size_sector_amendment_sha256": sha256_file(amendment_path),
+        "rung_recovery_amendment_sha256": sha256_file(rung_recovery_amendment_path),
         "prediction_schema_sha256": sha256_file(prediction_schema_path),
         "files": [
             {

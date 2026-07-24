@@ -17,6 +17,7 @@ def main() -> None:
         ROOT,
         ROOT / "analysis/ml_g50_solver_families/preregistration.json",
         ROOT / "analysis/ml_g50_solver_families/amendment_size_sector_backfill.json",
+        ROOT / "analysis/ml_g50_solver_families/amendment_rung_ledger_recovery.json",
         arguments.output,
     )
     panel = report["panel"]
