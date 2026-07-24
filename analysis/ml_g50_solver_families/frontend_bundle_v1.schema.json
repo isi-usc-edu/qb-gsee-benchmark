@@ -1,0 +1,122 @@
+{
+  "$id": "https://gsee-benchmark.org/schemas/g50-solver-family-frontend-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "const": "schema/index.schema.json"
+    },
+    "artifact_id": {
+      "const": "g50_solver_family_frontend_v1"
+    },
+    "counts": {
+      "type": "object"
+    },
+    "entrypoints": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "files": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "bytes": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "path": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "role": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "row_count": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "role",
+          "bytes",
+          "sha256"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "prediction_chunks": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "row_count": {
+            "const": 1436
+          },
+          "solver_family_id": {
+            "type": "string"
+          },
+          "solver_short_name": {
+            "type": "string"
+          },
+          "solver_uuid": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "solver_uuid",
+          "solver_short_name",
+          "solver_family_id",
+          "path",
+          "row_count"
+        ],
+        "type": "object"
+      },
+      "maxItems": 18,
+      "minItems": 18,
+      "type": "array"
+    },
+    "release_scope": {
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "semantics": {
+      "type": "object"
+    },
+    "source": {
+      "type": "object"
+    },
+    "status": {
+      "const": "complete_internal_descriptive_visualization_bundle"
+    }
+  },
+  "required": [
+    "$schema",
+    "artifact_id",
+    "schema_version",
+    "status",
+    "entrypoints",
+    "release_scope",
+    "semantics",
+    "counts",
+    "source",
+    "prediction_chunks",
+    "files"
+  ],
+  "title": "G50 solver-family frontend bundle index",
+  "type": "object"
+}
