@@ -1,0 +1,129 @@
+{
+  "artifact_id": "ml_g50_solver_families_preregistration_v1",
+  "bootstrap": {
+    "accepted_two_class_draws": 2000,
+    "seed": 20260724
+  },
+  "evaluation": {
+    "grouping_field": "canonical_hamiltonian_family",
+    "metrics": [
+      "average_precision_success",
+      "roc_auc",
+      "brier",
+      "balanced_accuracy",
+      "mcc"
+    ],
+    "protocol": "leave_one_canonical_family_out",
+    "random_fold_diagnostic": false
+  },
+  "feature_policy": {
+    "exclude_family_and_provenance_inputs": true,
+    "exclude_gauge_sensitive": true,
+    "exclude_identifier_capable": true,
+    "exclude_masks_and_reason_columns": true,
+    "ipie_exclude_protocols": [
+      "MF-PROTO"
+    ],
+    "jw_ablation": true,
+    "no_cross_domain_imputation": true,
+    "pca_variance_threshold": 0.95,
+    "scaling": "zscore"
+  },
+  "frozen_before_model_fitting": true,
+  "inputs": {
+    "binding_selection_manifest": {
+      "path": "analysis/ml_g50_solver_families/inputs/binding_selection_manifest.json",
+      "sha256": "d1627e66e65f5ea33fcb8e4092a28def44ee6ad6111804df96e541135483959e"
+    },
+    "canonical_families": {
+      "path": "analysis/feature_schema/canonical_families_v1.json",
+      "sha256": "4bc9404feba3313cea64df734364a3ecbb45dbfda6f41bd337231181fef67942"
+    },
+    "feature_metadata": {
+      "path": "analysis/feature_schema/feature_column_metadata.csv",
+      "sha256": "3efad3a89b7fd2463da7d777a6c3e6c99759a04b15e007584266d24f44ec6590"
+    },
+    "feature_table": {
+      "path": "scripts/Hamiltonian_features.csv",
+      "sha256": "b5f8a78c3fd8fa9ba1e5dce4e8e2986bfc19346b26375e22763816efa5cdc8f7"
+    },
+    "g50_terminal_intake": {
+      "external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g50_prepatch_pipeline_baseline_2026-07-23_v1/g50_prepatch_solution_intake_2026-07-23.zip",
+      "sha256": "3d3ef0f9be616cd594efe5c2ef6a6e2bfdc80115fad6beb9a61d3e84306e565d"
+    },
+    "g50_terminal_metrics": {
+      "external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g50_prepatch_pipeline_baseline_2026-07-23_v1/pipeline/metrics_v1_9.prepatch.json",
+      "sha256": "ba5cf212440e67424d3a5614b40c6c9e137bbe9a0d2be5d060981abe366263a3"
+    },
+    "g50_trimci_recovery": {
+      "external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g50_trimci_timeout_checkpoint_recovery_2026-07-24_v1/g50_trimci_timeout_checkpoint_recovery_2026-07-24_v1.zip",
+      "sha256": "2ef4827187d023592ea5d3fbff1690ef6c76eafbe13d4282c9756ace07aa6947"
+    },
+    "identifier_screen": {
+      "path": "analysis/ml_v2/identifier_screen.json",
+      "sha256": "f4ca6d170215d2f87fba67de8df3ce6d6987fb2f635c37eeb0506500ced4650d"
+    },
+    "selection_weights": {
+      "path": "analysis/ml_g50_solver_families/inputs/selection_weights_718.csv",
+      "sha256": "6d0ba47102ba9b19ff6909a6713dc1481d40412b5c9d9c3ac23304b6341976a8"
+    },
+    "solver_family_catalog": {
+      "path": "analysis/solver_taxonomy/solver_families.v1.json",
+      "sha256": "7531bdb2a68d57eb6271ffbe0b48981781e7683b43e62f12045f4486f6bb728f"
+    }
+  },
+  "label_policy": {
+    "dmrg_and_shci_missing_attempted_rung": "fail",
+    "failure_reason_role": "annotation_only",
+    "headline": "binary",
+    "success": "accurate_within_stored_threshold",
+    "terminal_non_success": "fail",
+    "trimci_unobserved_recovery_rung": "right_censored_not_a_label"
+  },
+  "model": {
+    "baselines": [
+      "leave_one_family_out_prevalence",
+      "leave_one_family_out_size_sector_ridge"
+    ],
+    "k": 15,
+    "primary": "shared_block_distance_knn"
+  },
+  "model_eligibility_floor": {
+    "minimum_failures": 5,
+    "minimum_families": 5,
+    "minimum_fold_training_tasks": 15,
+    "minimum_labeled_tasks": 30,
+    "minimum_successes": 5
+  },
+  "prior_exposure": {
+    "known_before_freeze": [
+      "campaign-level terminal status and metric counts",
+      "TrimCI recovery aggregate 57 rows with 11 success and 36 miss"
+    ],
+    "not_inspected_before_freeze": [
+      "per-task labels",
+      "variant-level class counts",
+      "model scores",
+      "feature importances",
+      "predictions"
+    ]
+  },
+  "release": {
+    "dashboard_or_public": false,
+    "interpretation": "internal_descriptive_not_validated_predictor"
+  },
+  "schema_version": 1,
+  "seeds": {
+    "model": 117
+  },
+  "source_commit": "650241baaf761bccb946c835f94d7865fc7f7f60",
+  "variants": {
+    "families": [
+      "dmrg",
+      "shci",
+      "trimci",
+      "ipie_afqmc"
+    ],
+    "variant_count": 18
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "binding_selection": true,
+  "campaign_scope_manifest_of_record": true,
+  "chosen_k": 96,
+  "chosen_mode": "floor_free",
+  "coverage": {
+    "all_families_represented": false,
+    "distance_q95": 0.5285257591324446,
+    "families_represented": 26,
+    "free_pick_count": 96,
+    "mean_distance": 0.31307415326818067,
+    "radius": 0.5699176969661106
+  },
+  "decision": {
+    "authority": "Matt gate-3 ruling",
+    "binding_selection": true,
+    "chosen_k": 96,
+    "chosen_mode": "floor_free",
+    "date": "2026-07-17",
+    "ruling_text": "families are fake labels that I now think are actually harmful... K=96, free mode, if the additional cost is not too bad. And it doesn't look too bad"
+  },
+  "downstream_scoring_policy": {
+    "fail": [
+      "timeout",
+      "OOM",
+      "crash",
+      "inaccurate result"
+    ],
+    "failure_reason_ablations": "secondary_only",
+    "failure_reason_role": "annotation_only",
+    "headline_label": "binary",
+    "success": "accurate answer within threshold"
+  },
+  "effective": true,
+  "feature_table_pin": {
+    "path": "scripts/Hamiltonian_features.csv",
+    "sha256": "b5f8a78c3fd8fa9ba1e5dce4e8e2986bfc19346b26375e22763816efa5cdc8f7",
+    "shape": [
+      718,
+      580
+    ]
+  },
+  "g58_whole_block_null_jw_tasks": {
+    "count": 3,
+    "semantics": "entire JW applicability block is null for each task",
+    "task_uuids": [
+      "2cb87d49-8fc6-54d4-ad36-680cc7234ffc",
+      "38105998-616e-50a7-8927-c8c990a9f9fb",
+      "81f65b14-2085-5443-b91b-3d791a55ab00"
+    ]
+  },
+  "immutable_reviewed_scopes": [
+    "analysis/ml_core_set/binding/post_g58_floor_free_candidates_b5f8a78_v1",
+    "analysis/ml_core_set/binding/post_g58_mode_comparison_b5f8a78_v1",
+    "analysis/ml_core_set/phase_b/post_g58_candidate_grid_b5f8a78_v1",
+    "analysis/ml_core_set/phase_b/post_g58_floor_free_candidate_grid_b5f8a78_v1",
+    "analysis/ml_core_set/phase_b/post_g58_floor_free_candidate_grid_b5f8a78_v2",
+    "analysis/ml_core_set/final_evidence/post_g58_two_mode_b5f8a78_v1"
+  ],
+  "natural_family_census": {
+    "hit_count": 26,
+    "hit_families": [
+      "attractive_hubbard_1d_ed",
+      "benzene_eriksen_fci_challenge",
+      "block2_siam_script_exact",
+      "ca2cuo3_downfolded_extended_hubbard",
+      "catalyst_fe_mo_co",
+      "catalyst_mn_mono",
+      "catalyst_mo_n2_pincer",
+      "catalyst_p450_cpd1_spin5_goings_dmrg_ladder",
+      "diamond_2x2x2_periodic_solid",
+      "gao_distributed_fci",
+      "h2_fragmentation_sto6g",
+      "hubbard_chain_mean_field_orbitals",
+      "hubbard_lieb_wu_1d_site_basis",
+      "hubbard_square_mean_field_orbitals",
+      "ifciqmc_first_row_diatomics",
+      "planted_synthetic_instances",
+      "prototype_small_molecules_pyscf",
+      "prototype_transition_metal_atoms_monoxides",
+      "qsz_hubbard_2d_halffilled",
+      "richardson_gaudin",
+      "simons_hydrogen_chains",
+      "tight_binding_controls",
+      "ueg_n14_planewave",
+      "varbench_tv_chain32_site_basis",
+      "varbench_tv_square16_ed",
+      "w3b_hubbard_1d_doped_ed"
+    ],
+    "unsampled_count": 14,
+    "unsampled_families": [
+      "block2_c2_ccpvdz_scan",
+      "block2_ueg_script_exact",
+      "catalyst_blue_dimer",
+      "catalyst_fe_red",
+      "catalyst_mo2_n2",
+      "catalyst_mo_n2",
+      "catalyst_ru_macho",
+      "catalyst_ru_mono",
+      "catalyst_vonburg_ru_ix_cas16_fb_68e62o",
+      "orbital_representation_pairs",
+      "propane_sto3g_exact_fci",
+      "validation_ccpvdz",
+      "varbench_hubbard_square16_site_basis",
+      "varbench_impurity_sb_imp9"
+    ]
+  },
+  "phase_b_projection": {
+    "panel_tasks": 591,
+    "rule": "reassign each panel task to the nearest selected center that is also in the panel",
+    "selected_centers_with_panel_outcomes": 92
+  },
+  "pi_acknowledged": {
+    "acknowledged": true,
+    "gate": "GR23-O1",
+    "path": "work/PI_ACK_2026-07-17_ml5_binding_selection.json",
+    "sha256": "a77ba0e454a0bae364c9d42a3381cb3ce41b16b617f5805059ff7054acdd7941"
+  },
+  "pinned_candidate_artifacts": {
+    "coverage_assignments_718": {
+      "path": "analysis/ml_core_set/binding/post_g58_floor_free_candidates_b5f8a78_v1/k096/coverage_assignments_718.csv",
+      "sha256": "ce3c806094f8c5a68153a04ff42e18e4b95e40e0e66712cc2210caad547f0a59"
+    },
+    "phase_b_coverage_assignments_591": {
+      "path": "analysis/ml_core_set/binding/post_g58_floor_free_candidates_b5f8a78_v1/k096/phase_b_coverage_assignments_591.csv",
+      "sha256": "d47b1ac560350591ebf97101872d7c161db405913d46ac8824de8bf465fa1b41"
+    },
+    "phase_b_selection_weights_591": {
+      "path": "analysis/ml_core_set/binding/post_g58_floor_free_candidates_b5f8a78_v1/k096/phase_b_selection_weights_591.csv",
+      "sha256": "d9ba89263221ec6b064b28832c6fab9c9c5991cdf97fc9529c00b6d53119f36f",
+      "summary": {
+        "centers": 92,
+        "max": 102,
+        "min": 1,
+        "sum": 591
+      }
+    },
+    "selection_weights_718": {
+      "path": "analysis/ml_core_set/binding/post_g58_floor_free_candidates_b5f8a78_v1/k096/selection_weights_718.csv",
+      "sha256": "6d0ba47102ba9b19ff6909a6713dc1481d40412b5c9d9c3ac23304b6341976a8",
+      "summary": {
+        "centers": 96,
+        "max": 160,
+        "min": 1,
+        "sum": 718
+      }
+    }
+  },
+  "population_statement_policy": {
+    "full_corpus_weight_table": "selection_weights_718",
+    "phase_b_weight_table": "phase_b_selection_weights_591",
+    "selection_reweighting": "mandatory",
+    "unweighted_population_level_statements_permitted": false
+  },
+  "preregistration": {
+    "path": "analysis/ml_core_set/binding/gate3_binding_selection_preregistration.json",
+    "sha256": "58e808fb6b15a231f62e3abbd7f728556ca2edd7dafe5c8d920093b3050d147b",
+    "status": "frozen_before_held_binding_selection_generation"
+  },
+  "promotion_requires_separate_post_ack_commit": true,
+  "schema_version": "ml5-gate3-binding-selection-held-manifest-v1",
+  "source_candidate": {
+    "candidate_manifest": {
+      "path": "analysis/ml_core_set/binding/post_g58_floor_free_candidates_b5f8a78_v1/k096/candidate_manifest.json",
+      "sha256": "7c18735af97496ba8187143b5e6b4ab0467e443046d6867a116107ea2013a17b"
+    },
+    "candidate_remains_binding_selection_false": true,
+    "directory": "analysis/ml_core_set/binding/post_g58_floor_free_candidates_b5f8a78_v1/k096"
+  },
+  "status": "effective_campaign_scope_manifest_of_record",
+  "taxonomy_policy": {
+    "natural_census_is_descriptive": true,
+    "relabeling_authorized": false,
+    "selection_used_family_labels": false
+  }
+}
