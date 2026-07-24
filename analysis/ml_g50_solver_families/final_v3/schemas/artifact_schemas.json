@@ -1,0 +1,63 @@
+{
+  "artifact_id": "ml_g50_solver_family_artifact_schemas_v1",
+  "csv_columns": {
+    "coverage.csv": [
+      "task_uuid", "canonical_family", "solver_family_id", "solver_short_name",
+      "solver_uuid", "solver_variant_id", "resource_ladder_id", "resource_value",
+      "coverage_status", "coverage_reason", "enters_binary_label_table"
+    ],
+    "family_balanced_performance.csv": [
+      "solver_family_id", "solver_short_name", "solver_uuid", "estimator",
+      "feature_arm", "metric", "point", "lower_95", "upper_95",
+      "accepted_family_draws", "attempted_family_draws", "orientation"
+    ],
+    "ladder_growth.csv": [
+      "solver_family_id", "solver_short_name", "solver_uuid", "solver_variant_id",
+      "resource_ladder_id", "resource_axis_name", "resource_value", "resource_units",
+      "resource_rank", "potential_cells", "labeled_cells", "coverage_fraction",
+      "n_success", "n_fail", "selected_sample_success_rate",
+      "selection_weighted_population_success_rate", "population_rate_status",
+      "predicted_success_tasks_with_jw", "predicted_success_rate_with_jw"
+    ],
+    "nestedness.csv": [
+      "solver_family_id", "resource_ladder_id", "earlier_solver_short_name",
+      "earlier_resource_value", "later_solver_short_name", "later_resource_value",
+      "joint_labeled_tasks", "both_fail", "newly_solved", "lost_success",
+      "both_success", "nestedness_violation_rate",
+      "selection_weighted_newly_solved_rate", "selection_weighted_lost_success_rate",
+      "predicted_joint_tasks_with_jw", "predicted_newly_solved_with_jw",
+      "predicted_lost_success_with_jw", "mean_predicted_probability_change_with_jw"
+    ],
+    "normalized_observations.csv": [
+      "task_uuid", "canonical_family", "solver_family_id", "solver_family_uuid",
+      "solver_short_name", "solver_uuid", "solver_variant_id", "resource_ladder_id",
+      "resource_axis_name", "resource_value", "resource_units", "resource_rank",
+      "energy_hartree", "observed_outcome", "metric_outcome_annotation",
+      "metric_status_annotation", "label_reason_annotation", "raw_status_annotation",
+      "observation_source", "absolute_error_hartree", "graded_residual",
+      "reference_energy_hartree", "threshold_hartree", "reference_grade"
+    ],
+    "paired_deltas.csv": [
+      "solver_family_id", "solver_short_name", "solver_uuid", "comparison", "metric",
+      "point_improvement", "lower_95", "upper_95", "two_sided_p",
+      "accepted_family_draws", "attempted_family_draws", "orientation"
+    ],
+    "predictions.csv": [
+      "task_uuid", "canonical_family", "solver_family_id", "solver_family_uuid",
+      "solver_short_name", "solver_uuid", "solver_variant_id", "resource_ladder_id",
+      "resource_value", "feature_arm", "model", "protocol", "prediction_kind",
+      "predicted_outcome", "predicted_probability", "probability_fail",
+      "probability_success", "family_used_as_model_input", "n_training_labels",
+      "n_training_families"
+    ],
+    "variant_eligibility.csv": [
+      "solver_family_id", "solver_short_name", "solver_uuid", "solver_variant_id",
+      "resource_ladder_id", "resource_value", "n_labels", "n_success", "n_fail",
+      "n_canonical_families", "minimum_fold_training_tasks", "model_status",
+      "failed_floor_checks"
+    ]
+  },
+  "json_schemas": {
+    "predictions": "predictions.schema.json"
+  }
+}

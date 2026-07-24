@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qb-gsee-benchmark.local/schemas/ml-g50-solver-family-predictions-v1.json",
+  "title": "G50 solver-family task-keyed predictions",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "task_uuid",
+      "canonical_family",
+      "solver_family_id",
+      "solver_family_uuid",
+      "solver_short_name",
+      "solver_uuid",
+      "solver_variant_id",
+      "resource_ladder_id",
+      "resource_value",
+      "feature_arm",
+      "model",
+      "protocol",
+      "prediction_kind",
+      "predicted_outcome",
+      "predicted_probability",
+      "probability_fail",
+      "probability_success",
+      "family_used_as_model_input",
+      "n_training_labels",
+      "n_training_families"
+    ],
+    "properties": {
+      "task_uuid": {"type": "string", "format": "uuid"},
+      "canonical_family": {"type": "string", "minLength": 1},
+      "solver_family_id": {
+        "enum": ["dmrg", "ipie_afqmc", "shci", "trimci"]
+      },
+      "solver_family_uuid": {"type": "string", "format": "uuid"},
+      "solver_short_name": {"type": "string", "minLength": 1},
+      "solver_uuid": {"type": "string", "format": "uuid"},
+      "solver_variant_id": {"type": "string", "minLength": 1},
+      "resource_ladder_id": {"type": ["string", "null"]},
+      "resource_value": {"type": ["number", "null"]},
+      "feature_arm": {"enum": ["with_jw", "without_jw"]},
+      "model": {"const": "shared_block_distance_knn_k15"},
+      "protocol": {"const": "ml-g50-solver-families-v1"},
+      "prediction_kind": {"const": "leave_one_canonical_family_out"},
+      "predicted_outcome": {"enum": ["fail", "success"]},
+      "predicted_probability": {"type": "number", "minimum": 0, "maximum": 1},
+      "probability_fail": {"type": "number", "minimum": 0, "maximum": 1},
+      "probability_success": {"type": "number", "minimum": 0, "maximum": 1},
+      "family_used_as_model_input": {"const": false},
+      "n_training_labels": {"type": "integer", "minimum": 30},
+      "n_training_families": {"type": "integer", "minimum": 5}
+    }
+  }
+}
