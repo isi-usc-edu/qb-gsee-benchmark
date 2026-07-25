@@ -242,7 +242,7 @@ def test_comparison_table_pairs_before_and_after_and_flags_status_change():
                 "solver_uuid": "u1",
                 "comparison": "with_jw_vs_size_sector",
                 "metric": "average_precision_success",
-                "delta": -0.1,
+                "point_improvement": -0.1,
                 "lower_95": -0.3,
             }
         ]

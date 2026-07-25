@@ -336,7 +336,7 @@ def _ap_delta(
         return None, None
     _require(len(subset) == 1, f"duplicate delta row: {solver_uuid}/{comparison}")
     row = subset.iloc[0]
-    return float(row["delta"]), float(row["lower_95"])
+    return float(row["point_improvement"]), float(row["lower_95"])
 
 
 def build_comparison_table(
@@ -347,7 +347,7 @@ def build_comparison_table(
     masked_deltas: Sequence[Mapping[str, Any]],
 ) -> list[dict[str, Any]]:
     masked_frame = pd.DataFrame(masked_deltas) if masked_deltas else pd.DataFrame(
-        columns=["solver_uuid", "comparison", "metric", "delta", "lower_95"]
+        columns=list(DELTA_COLUMNS)
     )
     masked_by_uuid = {str(row["solver_uuid"]): row for row in masked_eligibility}
     parent_by_uuid = {
