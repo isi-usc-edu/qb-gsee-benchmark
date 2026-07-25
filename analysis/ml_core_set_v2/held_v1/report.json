@@ -1,0 +1,288 @@
+{
+  "amendment": {
+    "artifact_id": "ml5c_gradeable_reselection_amendment_v1",
+    "path": "analysis/ml_core_set_v2/amendment_ml5c_gradeable_reselection.json",
+    "sha256": "fa861cc78ff53804b13cb3eda4747a4d1862e8acd3f2ce894bec150456acd44d"
+  },
+  "artifact_id": "ml5c_gradeable_reselection_v1",
+  "binding_selection": false,
+  "campaign_scope_manifest_of_record": false,
+  "candidates": {
+    "all_candidates_placeable": true,
+    "candidates": 609,
+    "corpus_tasks": 718,
+    "excluded": 109,
+    "minimum_shared_blocks_among_candidates": 5,
+    "unplaceable_task_uuids": []
+  },
+  "deployment_target_layer": {
+    "adjudication_language_verbatim": "at the accessible panel size, model calibration could be neither established nor refuted",
+    "calibration_certified_variants": 0,
+    "ml6_no_validated_predictor_rule": "stands_unamended",
+    "output_kind": "estimate",
+    "ratio_of_record": "design_based",
+    "rows": 1962,
+    "tasks": 109,
+    "validated_predictor_claim": false,
+    "variants": 18
+  },
+  "effective": false,
+  "family_used_for_selection": false,
+  "inputs": {
+    "binding_selection_manifest": {
+      "path": "analysis/ml_g50_solver_families/inputs/binding_selection_manifest.json",
+      "role": "",
+      "sha256": "d1627e66e65f5ea33fcb8e4092a28def44ee6ad6111804df96e541135483959e"
+    },
+    "binding_selection_weights_718": {
+      "path": "analysis/ml_g50_solver_families/inputs/selection_weights_718.csv",
+      "role": "",
+      "sha256": "6d0ba47102ba9b19ff6909a6713dc1481d40412b5c9d9c3ac23304b6341976a8"
+    },
+    "canonical_families": {
+      "path": "analysis/feature_schema/canonical_families_v1.json",
+      "role": "reporting_only",
+      "sha256": "4bc9404feba3313cea64df734364a3ecbb45dbfda6f41bd337231181fef67942"
+    },
+    "feature_metadata_current_193": {
+      "path": "analysis/feature_schema/feature_column_metadata.csv",
+      "role": "sensitivity_metric_derivation",
+      "sha256": "3efad3a89b7fd2463da7d777a6c3e6c99759a04b15e007584266d24f44ec6590"
+    },
+    "feature_metadata_ml5_191": {
+      "path": "analysis/ml_core_set_v2/inputs/feature_column_metadata_ml5_191.csv",
+      "role": "primary_metric_derivation",
+      "sha256": "6c411cecf5fd9d9240be1f0b2ea3e61e2dfe7b1231cfd120c07fd0c3cf9fbe0c"
+    },
+    "feature_table": {
+      "path": "scripts/Hamiltonian_features.csv",
+      "role": "",
+      "sha256": "b5f8a78c3fd8fa9ba1e5dce4e8e2986bfc19346b26375e22763816efa5cdc8f7"
+    },
+    "gradeability_census": {
+      "path": "analysis/ml_gradeability_census/held_v1/census.csv",
+      "role": "",
+      "sha256": "9487c30d4738dbb2964160bf8ae54e06dbdf248519b900ef4cb3accad913daab"
+    },
+    "identifier_screen": {
+      "path": "analysis/ml_v2/identifier_screen.json",
+      "role": "",
+      "sha256": "f4ca6d170215d2f87fba67de8df3ce6d6987fb2f635c37eeb0506500ced4650d"
+    },
+    "ml8d_posteriors": {
+      "path": "analysis/ml_solvability_uq/held_v1/per_task_posterior.csv",
+      "role": "deployment_target_estimate_layer",
+      "sha256": "0fcb54e3d344a00cee204399e301735be4d1c5761e929b6297e2add27bb9f50f"
+    },
+    "solver_family_catalog": {
+      "path": "analysis/ml_g50_solver_families/inputs/solver_families_g50_snapshot.v1.json",
+      "role": "locked_solver_identities_for_the_bill_of_materials",
+      "sha256": "7531bdb2a68d57eb6271ffbe0b48981781e7683b43e62f12045f4486f6bb728f"
+    }
+  },
+  "manifest_of_record_unchanged": "d1627e66e65f5ea33fcb8e4092a28def44ee6ad6111804df96e541135483959e",
+  "metric": {
+    "applicability_blocks": 34,
+    "n_columns": 191,
+    "n_eligible": 239,
+    "n_gauge_excluded": 37,
+    "n_identifier_excluded": 11,
+    "n_jw": 15,
+    "pca_variance_threshold": 0.95,
+    "scaling": "zscore",
+    "seed": 20260714
+  },
+  "metric_divergence": {
+    "extra_column_corpus": 718,
+    "extra_column_coverage": 184,
+    "extra_columns": [
+      "max_edge_order",
+      "min_edge_order"
+    ],
+    "flagged": true,
+    "g50_chain_metric": {
+      "census": "241 eligible - 37 gauge-sensitive - 11 identifier-capable, 17 JW",
+      "columns": 193,
+      "consumed_by": [
+        "G-50 final_v4",
+        "ML-8C",
+        "ML-8D"
+      ],
+      "metadata_sha256": "3efad3a89b7fd2463da7d777a6c3e6c99759a04b15e007584266d24f44ec6590"
+    },
+    "introduced_by_ml5c": false,
+    "ml5_binding_metric": {
+      "census": "239 eligible - 37 gauge-sensitive - 11 identifier-capable, 15 JW",
+      "columns": 191,
+      "metadata_sha256": "6c411cecf5fd9d9240be1f0b2ea3e61e2dfe7b1231cfd120c07fd0c3cf9fbe0c"
+    },
+    "pre_existing_in_the_accepted_record": true,
+    "resolution": {
+      "ml5c_rules_on_canonical_metric": false,
+      "primary": "191-column metric exactly as the ML-8B order specifies, metadata 6c411cec pinned as a committed input",
+      "primary_rationale": "makes the delta against d1627e66 attributable solely to the gradeable-eligibility restriction; a simultaneous metric change would confound it",
+      "repin_cost": "one line of this amendment",
+      "sensitivity": "193-column metric on current metadata 3efad3a8, run identically, reporting selection overlap"
+    },
+    "scientifically_material": true
+  },
+  "modes": {
+    "pure_reselection": {
+      "coverage_radius": 0.5430871866064135,
+      "coverage_weight_max": 128,
+      "coverage_weight_sum": 718,
+      "distance_q95": 0.4897869368274148,
+      "entering": 18,
+      "families_hit": 23,
+      "families_unsampled": 17,
+      "families_unsampled_list": [
+        "block2_c2_ccpvdz_scan",
+        "block2_ueg_script_exact",
+        "catalyst_blue_dimer",
+        "catalyst_fe_red",
+        "catalyst_mo2_n2",
+        "catalyst_mo_n2",
+        "catalyst_mo_n2_pincer",
+        "catalyst_p450_cpd1_spin5_goings_dmrg_ladder",
+        "catalyst_ru_macho",
+        "catalyst_ru_mono",
+        "catalyst_vonburg_ru_ix_cas16_fb_68e62o",
+        "diamond_2x2x2_periodic_solid",
+        "propane_sto3g_exact_fci",
+        "tight_binding_controls",
+        "validation_ccpvdz",
+        "varbench_hubbard_square16_site_basis",
+        "varbench_impurity_sb_imp9"
+      ],
+      "k": 96,
+      "leaving": 18,
+      "rerun_cells": 72,
+      "retained": 78,
+      "role": "PRIMARY",
+      "scored_weight_max": 125,
+      "scored_weight_min": 1,
+      "scored_weight_sum": 609
+    },
+    "retain_and_extend": {
+      "coverage_radius": 0.537879115691931,
+      "coverage_weight_max": 122,
+      "coverage_weight_sum": 718,
+      "distance_q95": 0.4897395805046301,
+      "entering": 16,
+      "families_hit": 23,
+      "families_unsampled": 17,
+      "families_unsampled_list": [
+        "block2_c2_ccpvdz_scan",
+        "block2_ueg_script_exact",
+        "catalyst_blue_dimer",
+        "catalyst_fe_red",
+        "catalyst_mo2_n2",
+        "catalyst_mo_n2",
+        "catalyst_mo_n2_pincer",
+        "catalyst_p450_cpd1_spin5_goings_dmrg_ladder",
+        "catalyst_ru_macho",
+        "catalyst_ru_mono",
+        "catalyst_vonburg_ru_ix_cas16_fb_68e62o",
+        "diamond_2x2x2_periodic_solid",
+        "propane_sto3g_exact_fci",
+        "tight_binding_controls",
+        "validation_ccpvdz",
+        "varbench_hubbard_square16_site_basis",
+        "varbench_impurity_sb_imp9"
+      ],
+      "k": 96,
+      "leaving": 16,
+      "rerun_cells": 64,
+      "retained": 80,
+      "role": "SECONDARY_LABELLED_VARIANT",
+      "scored_weight_max": 119,
+      "scored_weight_min": 1,
+      "scored_weight_sum": 609
+    }
+  },
+  "outcome_blind": true,
+  "sensitivity_193_columns": {
+    "mode": "pure_reselection",
+    "n_columns": 193,
+    "n_eligible": 241,
+    "n_jw": 17,
+    "overlap_count": 84,
+    "overlap_fraction": 0.875,
+    "primary_only_task_uuids": [
+      "106deaf8-422f-4e06-bf25-6191abd6eecf",
+      "12d0d43c-22d5-5699-b713-4fae60701a4e",
+      "443371ce-c80d-450d-b281-ac1c4d5ecc4d",
+      "5c7c5ee6-ff84-5fb3-9de8-b94b896937cc",
+      "5f5fee92-5821-4d38-a54a-d204660f205f",
+      "84332a1c-fd0d-59ac-b21d-372bdf9b4865",
+      "91386d39-02d1-523a-b00d-4b5ad1684ff8",
+      "9e358399-42b8-5eb4-85c1-825dc3410e96",
+      "d15db194-aa2d-4de9-8f86-fcffeb82f38b",
+      "f2f09d9f-8328-4d4a-ba91-089f9e56bf0d",
+      "f741ad60-c607-5d84-a0f3-73471ba36915",
+      "fb87d637-aaab-4e8f-8898-4ecca8bd0fe0"
+    ],
+    "sensitivity_only_task_uuids": [
+      "1c7f5399-8982-4daf-81a5-7cef4e4588cc",
+      "25c59f20-261b-59ad-b10f-fe2b61ae317e",
+      "35b59fd4-e046-4d69-ba52-4b94a7777ac3",
+      "5d85532e-9116-48a1-9810-7925c9ed9c57",
+      "64122cc6-e1bb-4c11-8d00-2189d27194f1",
+      "80d75334-b878-41ec-99a8-b21277f3df60",
+      "810e368c-6e98-56ed-8c61-132093091940",
+      "8d8894fe-ccf2-5908-a98c-0e870346f804",
+      "afdc2f74-eb52-41ae-b72a-30e5a4c07013",
+      "b164af91-a758-445c-8e78-610ffd2ad795",
+      "b24b71b9-971a-4aca-9fc0-7198d16ca9ed",
+      "dc1da839-0ccc-434c-bf9c-a3874ffc3b1c"
+    ]
+  },
+  "status": "held_pending_pi_ack",
+  "supersedes": null,
+  "weight_sets": {
+    "coverage_weights_718": {
+      "admissible_for_population_statements": false,
+      "max_weight": 128,
+      "role": "coverage_and_deployment_map_only",
+      "sums_to": 718
+    },
+    "selection_weights_609": {
+      "admissible_for_population_statements": true,
+      "max_weight": 125,
+      "min_weight": 1,
+      "role": "scored_population_weighting",
+      "sums_to": 609
+    }
+  },
+  "zero_gradeable_families": {
+    "carry_population_statements": false,
+    "count": 6,
+    "families": [
+      {
+        "canonical_family": "catalyst_fe_red",
+        "n_tasks": 9
+      },
+      {
+        "canonical_family": "tight_binding_controls",
+        "n_tasks": 5
+      },
+      {
+        "canonical_family": "validation_ccpvdz",
+        "n_tasks": 4
+      },
+      {
+        "canonical_family": "catalyst_mo2_n2",
+        "n_tasks": 3
+      },
+      {
+        "canonical_family": "catalyst_vonburg_ru_ix_cas16_fb_68e62o",
+        "n_tasks": 1
+      },
+      {
+        "canonical_family": "diamond_2x2x2_periodic_solid",
+        "n_tasks": 1
+      }
+    ],
+    "scored_weight_attributed": 0
+  }
+}

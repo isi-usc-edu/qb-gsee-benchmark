@@ -1,0 +1,87 @@
+{
+  "$id": "https://qb-gsee-benchmark/analysis/ml_core_set_v2/report.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "amendment": {
+      "type": "object"
+    },
+    "artifact_id": {
+      "const": "ml5c_gradeable_reselection_v1"
+    },
+    "binding_selection": {
+      "const": false
+    },
+    "campaign_scope_manifest_of_record": {
+      "const": false
+    },
+    "candidates": {
+      "type": "object"
+    },
+    "deployment_target_layer": {
+      "type": "object"
+    },
+    "effective": {
+      "const": false
+    },
+    "family_used_for_selection": {
+      "const": false
+    },
+    "inputs": {
+      "type": "object"
+    },
+    "manifest_of_record_unchanged": {
+      "type": "string"
+    },
+    "metric": {
+      "type": "object"
+    },
+    "metric_divergence": {
+      "type": "object"
+    },
+    "modes": {
+      "type": "object"
+    },
+    "outcome_blind": {
+      "const": true
+    },
+    "sensitivity_193_columns": {
+      "type": "object"
+    },
+    "status": {
+      "const": "held_pending_pi_ack"
+    },
+    "supersedes": {
+      "type": "null"
+    },
+    "weight_sets": {
+      "type": "object"
+    },
+    "zero_gradeable_families": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "artifact_id",
+    "status",
+    "effective",
+    "supersedes",
+    "binding_selection",
+    "campaign_scope_manifest_of_record",
+    "manifest_of_record_unchanged",
+    "outcome_blind",
+    "family_used_for_selection",
+    "candidates",
+    "metric",
+    "metric_divergence",
+    "modes",
+    "weight_sets",
+    "zero_gradeable_families",
+    "deployment_target_layer",
+    "sensitivity_193_columns",
+    "inputs",
+    "amendment"
+  ],
+  "title": "ML-5c gradeable-eligible reselection report",
+  "type": "object"
+}
