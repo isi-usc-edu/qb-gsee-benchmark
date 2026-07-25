@@ -319,6 +319,59 @@ def verify(root: Path, artifact: Path) -> dict[str, Any]:
         )
         checks += 3
 
+    # 7b. amendment A1 structural diagnostics, recounted from the task rows
+    structural = report["structural_consequences"]
+    zero_families = sorted(
+        family
+        for family in families
+        if not any(
+            row["gradeable_for_campaign_scoring"]
+            for row in rows
+            if str(row["canonical_family"]) == family
+        )
+    )
+    _check(
+        sorted(
+            str(record["canonical_family"])
+            for record in structural["families_with_zero_gradeable_tasks"]
+        )
+        == zero_families,
+        "zero-gradeable family list mismatch",
+    )
+    for record in structural["families_with_zero_gradeable_tasks"]:
+        _check(
+            int(record["n_tasks"]) == int(families[str(record["canonical_family"])]),
+            f"zero-gradeable family task count: {record['canonical_family']}",
+        )
+        checks += 1
+    _check(
+        int(structural["n_families_with_zero_gradeable_tasks"]) == len(zero_families),
+        "zero-gradeable family count",
+    )
+    _check(
+        int(structural["n_families_with_any_gradeable_task"])
+        == len(families) - len(zero_families),
+        "any-gradeable family count",
+    )
+    _check(
+        int(structural["n_families_with_any_non_gradeable_task"])
+        == sum(
+            1
+            for family in families
+            if any(
+                not row["gradeable_for_campaign_scoring"]
+                for row in rows
+                if str(row["canonical_family"]) == family
+            )
+        ),
+        "any-non-gradeable family count",
+    )
+    _check(
+        structural["recommendation_offered"] is False,
+        "census must offer no recommendation",
+    )
+    checks += 5
+
     # 8. re-evaluate the preregistered falsifiable prediction
     check = report["panel_cross_check"]
     if check.get("evaluated"):
@@ -380,6 +433,7 @@ def verify(root: Path, artifact: Path) -> dict[str, Any]:
         "n_gradeable": gradeable,
         "n_not_gradeable": len(rows) - gradeable,
         "panel_prediction_confirmed": check.get("prediction_confirmed"),
+        "n_families_with_zero_gradeable_tasks": len(zero_families),
     }
 
 

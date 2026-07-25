@@ -1,0 +1,23 @@
+{
+  "artifact_id": "ml8a_amendment_a1_structural_diagnostics",
+  "parent_preregistration": "ml8a_gradeability_census_preregistration_v1",
+  "frozen_before_census_results_commit": true,
+  "adds_report_block": "structural_consequences",
+  "added_fields": [
+    "families_with_zero_gradeable_tasks",
+    "n_families_with_zero_gradeable_tasks",
+    "n_families_with_any_gradeable_task",
+    "n_families_with_any_non_gradeable_task"
+  ],
+  "changes_criteria": false,
+  "changes_ladder": false,
+  "changes_vocabulary": false,
+  "changes_pinned_inputs": false,
+  "changes_any_per_task_field": false,
+  "changes_any_declared_count": false,
+  "changes_held_state": false,
+  "changes_falsifiable_prediction": false,
+  "derivable_from_already_declared_output": "family_counts.csv",
+  "rationale": "a canonical family with zero gradeable tasks cannot be represented in any gradeable-eligible selection at any k or seed; that consequence is decisive for the held ML-8B/ML-5c reselection and for Matt's O43 dispositions, so it is stated in the report rather than left implicit in a CSV",
+  "recommendation_offered": false
+}

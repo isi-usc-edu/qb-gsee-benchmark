@@ -312,6 +312,37 @@ def family_count_rows(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]
     return result
 
 
+def structural_consequences(
+    family_rows: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Derived diagnostics added by amendment A1; restates family_counts only.
+
+    A canonical family with zero gradeable tasks cannot be represented in any
+    gradeable-eligible selection, at any k, under any seed.
+    """
+    zero = [
+        {
+            "canonical_family": str(row["canonical_family"]),
+            "n_tasks": int(row["n_tasks"]),
+        }
+        for row in family_rows
+        if int(row["n_gradeable"]) == 0
+    ]
+    return {
+        "families_with_zero_gradeable_tasks": zero,
+        "n_families_with_zero_gradeable_tasks": len(zero),
+        "n_families_with_any_gradeable_task": len(family_rows) - len(zero),
+        "n_families_with_any_non_gradeable_task": sum(
+            1 for row in family_rows if int(row["n_not_gradeable"]) > 0
+        ),
+        "consequence": (
+            "a canonical family with zero gradeable tasks cannot be represented "
+            "in any gradeable-eligible selection at any k or seed"
+        ),
+        "recommendation_offered": False,
+    }
+
+
 def grade_count_rows(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
     grades = sorted({str(row["reference_grade"]) for row in rows})
     result: list[dict[str, Any]] = []
@@ -460,6 +491,7 @@ def _report_schema() -> dict[str, Any]:
             "family_counts",
             "jw_block",
             "panel_cross_check",
+            "structural_consequences",
             "conservative_choices",
             "inputs",
         ],
@@ -476,6 +508,7 @@ def _report_schema() -> dict[str, Any]:
             "family_counts": {"type": "array"},
             "jw_block": {"type": "object"},
             "panel_cross_check": {"type": "object"},
+            "structural_consequences": {"type": "object"},
             "conservative_choices": {"type": "array"},
             "inputs": {"type": "object"},
         },
@@ -520,6 +553,28 @@ def _markdown_report(report: Mapping[str, Any]) -> str:
             f"| `{row['reference_grade']}` | {str(row['checkable']).lower()} | "
             f"{row['n_tasks']} | {row['n_gradeable']} | {row['n_not_gradeable']} |"
         )
+    structural = report["structural_consequences"]
+    lines += [
+        "",
+        "## Structural consequences (amendment A1; counts only, no recommendation)",
+        "",
+        f"- canonical families with **zero** gradeable tasks: "
+        f"**{structural['n_families_with_zero_gradeable_tasks']}** of "
+        f"{totals['n_canonical_families']}",
+        f"- canonical families with at least one gradeable task: "
+        f"{structural['n_families_with_any_gradeable_task']}",
+        f"- canonical families with at least one non-gradeable task: "
+        f"{structural['n_families_with_any_non_gradeable_task']}",
+        "",
+        f"{structural['consequence'].capitalize()}. Which of these families "
+        "should be dispositioned, and how, is Matt's O43 call; ML-8A offers no "
+        "recommendation.",
+        "",
+        "| canonical family with zero gradeable tasks | tasks |",
+        "|---|---|",
+    ]
+    for row in structural["families_with_zero_gradeable_tasks"]:
+        lines.append(f"| `{row['canonical_family']}` | {row['n_tasks']} |")
     lines += [
         "",
         "## Canonical family breakdown",
@@ -663,6 +718,7 @@ def build_census(
         "family_counts": families,
         "jw_block": census_payload["jw_block"],
         "panel_cross_check": check,
+        "structural_consequences": structural_consequences(families),
         "conservative_choices": list(preregistration["conservative_choices"]),
         "inputs": inputs,
     }

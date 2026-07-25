@@ -16,6 +16,7 @@ from qb_gsee_benchmark.ml.gradeability_census import (
     grade_count_rows,
     family_count_rows,
     reason_counts,
+    structural_consequences,
 )
 
 PREREGISTRATION = Path("analysis/ml_gradeability_census/preregistration.json")
@@ -139,6 +140,43 @@ def test_family_and_grade_counts_partition_the_rows():
     assert grades["exact"]["n_gradeable"] == 1
     assert grades["no_reference"]["checkable"] is False
     assert sum(row["n_tasks"] for row in grade_count_rows(rows)) == len(rows)
+
+
+def test_structural_consequences_isolate_zero_gradeable_families():
+    family_rows = [
+        {"canonical_family": "alpha", "n_tasks": 4, "n_gradeable": 0, "n_not_gradeable": 4},
+        {"canonical_family": "beta", "n_tasks": 3, "n_gradeable": 2, "n_not_gradeable": 1},
+        {"canonical_family": "gamma", "n_tasks": 2, "n_gradeable": 2, "n_not_gradeable": 0},
+    ]
+    result = structural_consequences(family_rows)
+    assert result["n_families_with_zero_gradeable_tasks"] == 1
+    assert result["families_with_zero_gradeable_tasks"] == [
+        {"canonical_family": "alpha", "n_tasks": 4}
+    ]
+    assert result["n_families_with_any_gradeable_task"] == 2
+    assert result["n_families_with_any_non_gradeable_task"] == 2
+    assert result["recommendation_offered"] is False
+
+
+def test_amendment_a1_changes_no_computed_rule():
+    payload = json.loads(
+        Path(
+            "analysis/ml_gradeability_census/amendment_a1_structural_diagnostics.json"
+        ).read_text(encoding="utf-8")
+    )
+    assert payload["frozen_before_census_results_commit"] is True
+    for key in (
+        "changes_criteria",
+        "changes_ladder",
+        "changes_vocabulary",
+        "changes_pinned_inputs",
+        "changes_any_per_task_field",
+        "changes_any_declared_count",
+        "changes_held_state",
+        "changes_falsifiable_prediction",
+        "recommendation_offered",
+    ):
+        assert payload[key] is False, key
 
 
 def test_corpus_listing_digest_is_order_independent_and_content_sensitive():
