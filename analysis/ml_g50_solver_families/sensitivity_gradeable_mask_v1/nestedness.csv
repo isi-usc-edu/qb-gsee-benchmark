@@ -1,0 +1,13 @@
+solver_family_id,resource_ladder_id,earlier_solver_short_name,earlier_resource_value,later_solver_short_name,later_resource_value,joint_labeled_tasks,both_fail,newly_solved,lost_success,both_success,nestedness_violation_rate,selection_weighted_newly_solved_rate,selection_weighted_lost_success_rate,predicted_joint_tasks_with_jw,predicted_newly_solved_with_jw,predicted_lost_success_with_jw,mean_predicted_probability_change_with_jw
+dmrg,g50_dmrg_bond_dimension_v1,DMRG_bond_dimension_256,256,DMRG_bond_dimension_512,512,80,42,10,0,28,0,0.13344887348353554,0,718,351,0,0.11216957534905081
+dmrg,g50_dmrg_bond_dimension_v1,DMRG_bond_dimension_512,512,DMRG_bond_dimension_1024,1024,80,38,4,0,38,0,0.031195840554592721,0,718,6,0,0.0061296056574411317
+dmrg,g50_dmrg_bond_dimension_v1,DMRG_bond_dimension_1024,1024,DMRG_bond_dimension_2048,2048,80,38,0,0,42,0,0,0,718,0,0,0
+shci,g50_shci_orbopt_variational_eps_var_v1,SHCI_orbopt_var_2e-4_nchunks8,0.00020000000000000001,SHCI_orbopt_var_1e-4_nchunks8,0.0001,80,42,0,0,38,0,0,0,718,0,0,0
+shci,g50_shci_orbopt_variational_eps_var_v1,SHCI_orbopt_var_1e-4_nchunks8,0.0001,SHCI_orbopt_var_5e-5_nchunks8,5.0000000000000002e-05,80,40,2,1,37,0.012500000000000001,0.027729636048526862,0.0017331022530329288,718,15,1,0.02684363800842832
+shci,g50_shci_orbopt_variational_eps_var_v1,SHCI_orbopt_var_5e-5_nchunks8,5.0000000000000002e-05,SHCI_orbopt_var_2e-5_nchunks8,2.0000000000000002e-05,80,40,1,3,36,0.037499999999999999,0.0017331022530329288,0.010398613518197574,718,1,6,-0.021226872752825456
+trimci,g50_trimci_target_determinants_v1,TrimCI_ndet_100000,100000,TrimCI_ndet_250000,250000,80,43,0,0,37,0,0,0,718,0,0,0
+trimci,g50_trimci_target_determinants_v1,TrimCI_ndet_250000,250000,TrimCI_ndet_500000,500000,80,42,1,0,37,0,0.0017331022530329288,0,718,14,0,0.0032343678306717841
+trimci,g50_trimci_target_determinants_v1,TrimCI_ndet_500000,500000,TrimCI_ndet_1000000,1000000,80,41,1,0,38,0,0.0017331022530329288,0,718,0,0,0.0010888353568284123
+trimci,g50_trimci_target_determinants_v1,TrimCI_ndet_1000000,1000000,TrimCI_ndet_2000000,2000000,80,39,2,2,37,0.025000000000000001,0.025996533795493933,0.0051993067590987872,718,19,9,0.00049152488874053973
+trimci,g50_trimci_target_determinants_v1,TrimCI_ndet_2000000,2000000,TrimCI_ndet_5000000,5000000,80,41,0,0,39,0,0,0,718,0,0,0
+trimci,g50_trimci_target_determinants_v1,TrimCI_ndet_5000000,5000000,TrimCI_ndet_10000000,10000000,80,41,0,1,38,0.012500000000000001,0,0.024263431542461005,718,0,10,-0.0040917847431571905

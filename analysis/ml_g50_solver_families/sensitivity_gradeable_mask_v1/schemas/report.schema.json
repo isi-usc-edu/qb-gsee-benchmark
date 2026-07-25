@@ -1,0 +1,95 @@
+{
+  "$id": "https://qb-gsee-benchmark/analysis/ml_g50_solver_families/sensitivity_gradeable_mask_v1/report.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {
+      "const": "ml8c_gradeable_mask_sensitivity_v1"
+    },
+    "bootstrap_attempts_by_variant": {
+      "type": "object"
+    },
+    "eligibility_changes": {
+      "type": "array"
+    },
+    "equivalence_guard": {
+      "type": "object"
+    },
+    "family_used_as_model_input": {
+      "const": false
+    },
+    "gradeable_population": {
+      "type": "object"
+    },
+    "inputs": {
+      "type": "object"
+    },
+    "label_policy": {
+      "type": "object"
+    },
+    "mask": {
+      "type": "object"
+    },
+    "negative_verdict_survives_decontamination": {
+      "type": "boolean"
+    },
+    "panel": {
+      "type": "object"
+    },
+    "parent_analysis_of_record": {
+      "type": "string"
+    },
+    "parent_bytes_unchanged_claim": {
+      "const": true
+    },
+    "parent_signals": {
+      "type": "object"
+    },
+    "preregistration": {
+      "type": "object"
+    },
+    "release_class": {
+      "const": "internal_sensitivity_annex"
+    },
+    "signals": {
+      "type": "object"
+    },
+    "status": {
+      "const": "complete_internal_sensitivity_annex_no_gate"
+    },
+    "stop_at_triggered": {
+      "type": "boolean"
+    },
+    "supersedes": {
+      "type": "null"
+    },
+    "validated_predictor_claim": {
+      "const": false
+    }
+  },
+  "required": [
+    "artifact_id",
+    "status",
+    "release_class",
+    "supersedes",
+    "parent_analysis_of_record",
+    "parent_bytes_unchanged_claim",
+    "validated_predictor_claim",
+    "family_used_as_model_input",
+    "mask",
+    "panel",
+    "gradeable_population",
+    "signals",
+    "parent_signals",
+    "negative_verdict_survives_decontamination",
+    "stop_at_triggered",
+    "eligibility_changes",
+    "equivalence_guard",
+    "bootstrap_attempts_by_variant",
+    "label_policy",
+    "inputs",
+    "preregistration"
+  ],
+  "title": "ML-8C gradeable-mask sensitivity annex report",
+  "type": "object"
+}
