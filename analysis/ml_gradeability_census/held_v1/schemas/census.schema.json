@@ -1,0 +1,139 @@
+{
+  "$id": "https://qb-gsee-benchmark/analysis/ml_gradeability_census/census.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {
+      "const": "ml8a_gradeability_census_v1"
+    },
+    "corpus_digest": {
+      "type": "object"
+    },
+    "effective": {
+      "const": false
+    },
+    "eligibility_substrate_of_record": {
+      "const": false
+    },
+    "gradeability_reason_order": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "inputs": {
+      "type": "object"
+    },
+    "jw_block": {
+      "type": "object"
+    },
+    "modifies_committed_artifact": {
+      "const": false
+    },
+    "preregistration": {
+      "type": "object"
+    },
+    "reads_solver_outcomes": {
+      "const": false
+    },
+    "reference_grade_vocabulary": {
+      "type": "object"
+    },
+    "status": {
+      "const": "held_pending_pi_review"
+    },
+    "tasks": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "absolute_accuracy_threshold": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "canonical_family": {
+            "type": "string"
+          },
+          "curation_tier": {
+            "type": "string"
+          },
+          "gradeability_reason": {
+            "type": "string"
+          },
+          "gradeable_for_campaign_scoring": {
+            "type": "boolean"
+          },
+          "jw_block_null_infeasible": {
+            "type": "boolean"
+          },
+          "problem_instance_path": {
+            "type": "string"
+          },
+          "problem_instance_short_name": {
+            "type": "string"
+          },
+          "reference_energy_present": {
+            "type": "boolean"
+          },
+          "reference_grade": {
+            "type": "string"
+          },
+          "reference_grade_checkable": {
+            "type": "boolean"
+          },
+          "source_defect_documented": {
+            "type": "boolean"
+          },
+          "task_uuid": {
+            "type": "string"
+          },
+          "test_tier": {
+            "type": "boolean"
+          },
+          "threshold_positive": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "task_uuid",
+          "problem_instance_path",
+          "problem_instance_short_name",
+          "canonical_family",
+          "reference_grade",
+          "reference_grade_checkable",
+          "curation_tier",
+          "test_tier",
+          "source_defect_documented",
+          "reference_energy_present",
+          "absolute_accuracy_threshold",
+          "threshold_positive",
+          "jw_block_null_infeasible",
+          "gradeable_for_campaign_scoring",
+          "gradeability_reason"
+        ],
+        "type": "object"
+      },
+      "maxItems": 718,
+      "minItems": 718,
+      "type": "array"
+    }
+  },
+  "required": [
+    "artifact_id",
+    "status",
+    "effective",
+    "eligibility_substrate_of_record",
+    "modifies_committed_artifact",
+    "reads_solver_outcomes",
+    "preregistration",
+    "inputs",
+    "corpus_digest",
+    "reference_grade_vocabulary",
+    "gradeability_reason_order",
+    "jw_block",
+    "tasks"
+  ],
+  "title": "ML-8A corpus-wide gradeability census",
+  "type": "object"
+}

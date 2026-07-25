@@ -1,0 +1,71 @@
+{
+  "$id": "https://qb-gsee-benchmark/analysis/ml_gradeability_census/report.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {
+      "const": "ml8a_gradeability_census_report_v1"
+    },
+    "conservative_choices": {
+      "type": "array"
+    },
+    "effective": {
+      "const": false
+    },
+    "eligibility_substrate_of_record": {
+      "const": false
+    },
+    "family_counts": {
+      "type": "array"
+    },
+    "grade_counts": {
+      "type": "array"
+    },
+    "inputs": {
+      "type": "object"
+    },
+    "jw_block": {
+      "type": "object"
+    },
+    "modifies_committed_artifact": {
+      "const": false
+    },
+    "panel_cross_check": {
+      "type": "object"
+    },
+    "reads_solver_outcomes": {
+      "const": false
+    },
+    "reason_counts": {
+      "type": "object"
+    },
+    "status": {
+      "const": "held_pending_pi_review"
+    },
+    "structural_consequences": {
+      "type": "object"
+    },
+    "totals": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "artifact_id",
+    "status",
+    "effective",
+    "eligibility_substrate_of_record",
+    "modifies_committed_artifact",
+    "reads_solver_outcomes",
+    "totals",
+    "reason_counts",
+    "grade_counts",
+    "family_counts",
+    "jw_block",
+    "panel_cross_check",
+    "structural_consequences",
+    "conservative_choices",
+    "inputs"
+  ],
+  "title": "ML-8A gradeability census report",
+  "type": "object"
+}
