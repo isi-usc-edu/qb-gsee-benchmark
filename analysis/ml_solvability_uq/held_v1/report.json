@@ -1,0 +1,126 @@
+{
+  "artifact_id": "ml8d_solvability_uq_v1",
+  "calibration_gate": {
+    "assessed_count": 18,
+    "ece_threshold": 0.1,
+    "multiplicity_claim": false,
+    "nature": "calibration_not_discrimination",
+    "passed_count": 3,
+    "passed_variants": [
+      "DMRG_bond_dimension_256",
+      "SHCI_orbopt_var_1e-4_nchunks8",
+      "SHCI_orbopt_var_2e-4_nchunks8"
+    ],
+    "pooling_across_variants": false,
+    "reliability_bins": 5,
+    "slope_condition": "family-grouped 95% interval contains 1.0"
+  },
+  "design_track": {
+    "bootstrap_draws": 2000,
+    "bootstrap_seed": 20260725,
+    "displaced_by_model_output": false,
+    "estimand": "covered_gradeable_subpopulation",
+    "primary_interval": "family_grouped",
+    "ratio_range": [
+      0.2027729636048527,
+      0.7053726169844021
+    ],
+    "role": "ratio_of_record",
+    "sensitivity_interval": "center_level"
+  },
+  "effective": false,
+  "every_model_output_labelled_estimate": true,
+  "family_used_as_model_input": false,
+  "inputs": {
+    "canonical_families": {
+      "path": "analysis/feature_schema/canonical_families_v1.json",
+      "sha256": "4bc9404feba3313cea64df734364a3ecbb45dbfda6f41bd337231181fef67942"
+    },
+    "feature_metadata": {
+      "path": "analysis/feature_schema/feature_column_metadata.csv",
+      "sha256": "3efad3a89b7fd2463da7d777a6c3e6c99759a04b15e007584266d24f44ec6590"
+    },
+    "feature_table": {
+      "path": "scripts/Hamiltonian_features.csv",
+      "sha256": "b5f8a78c3fd8fa9ba1e5dce4e8e2986bfc19346b26375e22763816efa5cdc8f7"
+    },
+    "gradeability_census": {
+      "path": "analysis/ml_gradeability_census/held_v1/census.csv",
+      "sha256": "9487c30d4738dbb2964160bf8ae54e06dbdf248519b900ef4cb3accad913daab"
+    },
+    "gradeable_selection_weights": {
+      "path": "analysis/ml_g50_solver_families/sensitivity_gradeable_mask_v1/gradeable_selection_weights.csv",
+      "sha256": "02aba247003b10a616bde6358ffd4a9307c7d1c4bf768100d05202941f3f7538"
+    },
+    "identifier_screen": {
+      "path": "analysis/ml_v2/identifier_screen.json",
+      "sha256": "f4ca6d170215d2f87fba67de8df3ce6d6987fb2f635c37eeb0506500ced4650d"
+    },
+    "knn_predictions": {
+      "path": "analysis/ml_g50_solver_families/sensitivity_gradeable_mask_v1/predictions.csv",
+      "sha256": "a38f8d9003d6ada7b3f1836c6304aecbb92e0d188c15b56b042b5c4a3e0d31b5"
+    },
+    "masked_observations": {
+      "path": "analysis/ml_g50_solver_families/sensitivity_gradeable_mask_v1/masked_observations.csv",
+      "sha256": "1d03218a4b476796415522abf83c294aa4df8a66a3663cb3e49674160c49d5eb"
+    },
+    "ml8c_report": {
+      "path": "analysis/ml_g50_solver_families/sensitivity_gradeable_mask_v1/report.json",
+      "sha256": "d28c67023b722e81cd182786072eb6ab143d06ec490168422285b57fdeb2e065"
+    }
+  },
+  "kernel_psd_summary": {
+    "kernels": 480,
+    "max_frobenius_correction": 2.148387426191804,
+    "min_eigenvalue_overall": -1.9679368213321238,
+    "projections_applied": 480,
+    "silent_correction": false
+  },
+  "model_track": {
+    "cross_fold_assumption_is_declared_approximation": true,
+    "cross_fold_posterior_correlation": "treated_as_independent",
+    "estimator": "gp_laplace_block_aware",
+    "fallback_used_for_variants": [],
+    "geometry_re_derived": false,
+    "kernel": "exp(-D^2 / (2 * lengthscale^2)) with unit prior variance",
+    "lengthscale_optimised": false,
+    "lengthscale_rule": "median of strictly positive pairwise training-fold distances",
+    "output_kind": "estimate",
+    "ratio_range": [
+      0.3293795040477306,
+      0.5624320147247961
+    ]
+  },
+  "panel": {
+    "corpus_tasks": 718,
+    "design_covered": 577,
+    "design_orphaned": 32,
+    "gradeable_corpus_tasks": 609,
+    "lengthscale_variants": [
+      "median",
+      "median_x0.5",
+      "median_x2"
+    ],
+    "lofo_folds": 40,
+    "posterior_rows": 12924,
+    "training_canonical_families": 22,
+    "training_panel_tasks": 80,
+    "variants": 18
+  },
+  "preregistration": {
+    "artifact_id": "ml8d_solvability_uq_preregistration_v1",
+    "path": "analysis/ml_solvability_uq/preregistration.json",
+    "sha256": "1984a1cbec2bc49915d31e75ab7670b73407ace0f138ec2ed09fb4c44e51b2ce"
+  },
+  "ratio_of_record": "design_based",
+  "scope": "gradeable_tasks_only",
+  "status": "held_pending_pi_review",
+  "stop_at": {
+    "interpretation_offered": false,
+    "no_validated_predictor_rule_stands": true,
+    "rule": "any variant passing the frozen calibration gate is a claim-language decision requiring PI review and Matt's ack",
+    "triggered": true
+  },
+  "supersedes": null,
+  "validated_predictor_claim": false
+}
