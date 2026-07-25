@@ -1,0 +1,146 @@
+{
+  "artifact_id": "ml8a_gradeability_census_preregistration_v1",
+  "schema_version": "1.0",
+  "order_of_record": "work/ML_GOALS.md :: PI ORDER 2026-07-25 -- ML-8A",
+  "frozen_before_census_output": true,
+  "modifies_committed_artifact": false,
+  "reads_solver_outcomes": false,
+  "corpus": {
+    "instance_glob": "problem_instances/**/*.json",
+    "expected_instance_files": 218,
+    "expected_tasks": 718,
+    "population_filter": "none"
+  },
+  "inputs": {
+    "canonical_families": {
+      "path": "analysis/feature_schema/canonical_families_v1.json",
+      "sha256": "4bc9404feba3313cea64df734364a3ecbb45dbfda6f41bd337231181fef67942",
+      "role": "reporting_and_stratification_only"
+    },
+    "feature_metadata": {
+      "path": "analysis/feature_schema/feature_column_metadata.csv",
+      "sha256": "3efad3a89b7fd2463da7d777a6c3e6c99759a04b15e007584266d24f44ec6590",
+      "role": "jw_encoding_column_identification"
+    },
+    "feature_table": {
+      "path": "scripts/Hamiltonian_features.csv",
+      "sha256": "b5f8a78c3fd8fa9ba1e5dce4e8e2986bfc19346b26375e22763816efa5cdc8f7",
+      "role": "jw_block_null_detection"
+    }
+  },
+  "reference_grade_vocabulary": {
+    "checkable": [
+      "analytical",
+      "exact",
+      "multiple_nearly_exact",
+      "one_nearly_exact"
+    ],
+    "not_checkable": [
+      "no_reference",
+      "uncontrolled_estimate",
+      "variational_upper_bound"
+    ],
+    "absent_sentinel": "missing",
+    "source_of_checkable_set": "VALID_REFERENCE_GRADES in src/qb_gsee_benchmark/metrics/v1_8.py",
+    "widened_by_ml8a": false
+  },
+  "gradeability_ladder": [
+    {
+      "order": 1,
+      "test": "curation_tier != 'test'",
+      "reason_on_failure": "excluded_test_tier"
+    },
+    {
+      "order": 2,
+      "test": "source_defect_documented is falsy",
+      "reason_on_failure": "excluded_source_defect_documented"
+    },
+    {
+      "order": 3,
+      "test": "reference_provenance_grade is present",
+      "reason_on_failure": "excluded_missing_taxonomy_grade"
+    },
+    {
+      "order": 4,
+      "test": "reference_provenance_grade in checkable set",
+      "reason_on_failure": "excluded_reference_grade_<grade>"
+    },
+    {
+      "order": 5,
+      "test": "requirements.reference_energy is a finite number",
+      "reason_on_failure": "excluded_missing_reference_energy"
+    },
+    {
+      "order": 6,
+      "test": "requirements.absolute_accuracy_threshold is finite and > 0",
+      "reason_on_failure": "excluded_missing_or_invalid_threshold"
+    },
+    {
+      "order": 7,
+      "test": "all preceding tests pass",
+      "reason_on_success": "gradeable"
+    }
+  ],
+  "jw_block_null_policy": {
+    "cost_class": "jw_encoding",
+    "model_eligible_only": true,
+    "corpus_complete_column_coverage": 715,
+    "expected_corpus_complete_columns": 15,
+    "excluded_partial_columns": [
+      "max_edge_order",
+      "min_edge_order"
+    ],
+    "excluded_partial_column_coverage": 184,
+    "flag_definition": "all corpus-complete model-eligible jw_encoding columns are null",
+    "enters_gradeability_boolean": false,
+    "rationale": "JW-null constrains a model feature space, not whether an answer can be graded"
+  },
+  "conservative_choices": [
+    "variational_upper_bound is recorded as not gradeable under the frozen metrics rule and reported as its own reason class for Matt's O43 disposition",
+    "uncontrolled_estimate is recorded as not gradeable under the frozen metrics rule and reported as its own reason class for Matt's O43 disposition",
+    "test-tier exclusion is retained even where the underlying reference grade is exact",
+    "a documented source defect excludes the task regardless of reference grade",
+    "the JW-null flag is censused but excluded from the derived boolean"
+  ],
+  "outputs": {
+    "directory": "analysis/ml_gradeability_census/held_v1",
+    "files": [
+      "census.csv",
+      "census.json",
+      "family_counts.csv",
+      "grade_counts.csv",
+      "report.json",
+      "REPORT.md",
+      "schemas/census.schema.json",
+      "schemas/report.schema.json",
+      "artifact_manifest.json"
+    ]
+  },
+  "held_state": {
+    "status": "held_pending_pi_review",
+    "effective": false,
+    "eligibility_substrate_of_record": false,
+    "promotion_requires_separate_commit": true
+  },
+  "verification": {
+    "independent_verifier": "scripts/verify_gradeability_census.py",
+    "independent_verifier_may_import_builder_decision_code": false,
+    "two_run_byte_identity_required": true,
+    "schema_validation_required": true,
+    "falsifiable_prediction": {
+      "statement": "restricting the census to the 96 tasks of the accepted final_v4 G-50 panel yields exactly 80 gradeable and 16 non-gradeable tasks",
+      "panel_source": "analysis/ml_g50_solver_families/final_v4/normalized_observations.csv",
+      "expected_gradeable": 80,
+      "expected_non_gradeable": 16,
+      "mismatch_action": "FLAG for PI; do not adjust the ladder"
+    }
+  },
+  "fences": [
+    "no committed artifact modified",
+    "no public or dashboard placement",
+    "no solver outcome or metrics bundle read",
+    "no selection, reweighting, or panel revision",
+    "no PBS work; login-node CPU only",
+    "no push"
+  ]
+}
