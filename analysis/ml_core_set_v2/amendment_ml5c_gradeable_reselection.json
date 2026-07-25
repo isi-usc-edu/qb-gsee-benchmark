@@ -1,0 +1,207 @@
+{
+  "artifact_id": "ml5c_gradeable_reselection_amendment_v1",
+  "schema_version": "1.0",
+  "orders_of_record": [
+    "work/ML_GOALS.md :: standing ML-8B order",
+    "work/ML_GOALS.md :: PI REVIEW 2026-07-25 (census accepted as eligibility substrate of record)",
+    "work/ML_GOALS.md :: PI NOTE 2026-07-25 evening (O44/O43 ruled; ML-8B unblocked; deployment-target role)"
+  ],
+  "frozen_before_selection_output": true,
+  "supersedes": null,
+  "manifest_of_record_unchanged": "d1627e66e65f5ea33fcb8e4092a28def44ee6ad6111804df96e541135483959e",
+  "binding_selection": false,
+  "promotion_commit_in_this_wave": false,
+  "outcome_blind": true,
+  "eligibility": {
+    "candidate_set": "gradeable corpus tasks per the accepted ML-8A census",
+    "expected_candidates": 609,
+    "excluded": 109,
+    "exclusion_basis": "Matt O43: non-gradeable tasks remain in corpus, panel-ineligible for scored selection",
+    "census_manifest_sha256": "acdee96c5789c4eea62e31c891cba75de81eae2f841babccd1df9ba3bbacbaa4",
+    "model_eligible_reading": {
+      "column_level": "model_eligible selects the metric columns, as always",
+      "task_level": "the task must carry at least one applicable metric block and share at least one block with every other candidate (the block_aware_distance precondition)",
+      "verified_at_run_time": true,
+      "failures_excluded_and_disclosed_individually": true
+    }
+  },
+  "unchanged_doctrine": {
+    "k": 96,
+    "mode": "floor_free",
+    "algorithm": "global_farthest_first",
+    "initial_center": "global_feature_space_medoid_of_the_candidate_set",
+    "seed": 20260714,
+    "tie_break": "frozen seed plus task UUID",
+    "assignment": "nearest_global_selected_center",
+    "weight_definition": "global_feature_space_voronoi_cluster_size",
+    "family_used_for_selection": false,
+    "family_used_for_assignment": false,
+    "family_floor_constraint": false,
+    "family_representation": "reported_natural_census_only",
+    "scaling": "zscore",
+    "pca_variance_threshold": 0.95,
+    "universal_only": false,
+    "missingness": "exact_applicability_blocks_no_cross_domain_imputation"
+  },
+  "column_metric_divergence": {
+    "flagged": true,
+    "scientifically_material": true,
+    "pre_existing_in_the_accepted_record": true,
+    "introduced_by_ml5c": false,
+    "ml5_binding_metric": {
+      "columns": 191,
+      "metadata_sha256": "6c411cecf5fd9d9240be1f0b2ea3e61e2dfe7b1231cfd120c07fd0c3cf9fbe0c",
+      "census": "239 eligible - 37 gauge-sensitive - 11 identifier-capable, 15 JW"
+    },
+    "g50_chain_metric": {
+      "columns": 193,
+      "metadata_sha256": "3efad3a89b7fd2463da7d777a6c3e6c99759a04b15e007584266d24f44ec6590",
+      "census": "241 eligible - 37 gauge-sensitive - 11 identifier-capable, 17 JW",
+      "consumed_by": ["G-50 final_v4", "ML-8C", "ML-8D"]
+    },
+    "extra_columns": ["max_edge_order", "min_edge_order"],
+    "extra_column_coverage": 184,
+    "extra_column_corpus": 718,
+    "resolution": {
+      "primary": "191-column metric exactly as the ML-8B order specifies, metadata 6c411cec pinned as a committed input",
+      "primary_rationale": "makes the delta against d1627e66 attributable solely to the gradeable-eligibility restriction; a simultaneous metric change would confound it",
+      "sensitivity": "193-column metric on current metadata 3efad3a8, run identically, reporting selection overlap",
+      "ml5c_rules_on_canonical_metric": false,
+      "repin_cost": "one line of this amendment"
+    }
+  },
+  "weight_sets": {
+    "selection_weights_609": {
+      "population": "the 609 gradeable candidates",
+      "sums_to": 609,
+      "role": "scored_population_weighting",
+      "admissible_for_population_statements": true
+    },
+    "coverage_weights_718": {
+      "population": "all 718 corpus tasks assigned to the nearest selected center",
+      "sums_to": 718,
+      "role": "coverage_and_deployment_map_only",
+      "admissible_for_population_statements": false,
+      "rationale": "Matt O43 makes non-gradeable tasks the estimator's deployment targets, so which center represents each is informative"
+    }
+  },
+  "zero_gradeable_families": {
+    "carry_population_statements": false,
+    "scored_weight_attributed": 0,
+    "families": [
+      {"canonical_family": "catalyst_fe_red", "n_tasks": 9},
+      {"canonical_family": "tight_binding_controls", "n_tasks": 5},
+      {"canonical_family": "validation_ccpvdz", "n_tasks": 4},
+      {"canonical_family": "catalyst_mo2_n2", "n_tasks": 3},
+      {"canonical_family": "catalyst_vonburg_ru_ix_cas16_fb_68e62o", "n_tasks": 1},
+      {"canonical_family": "diamond_2x2x2_periodic_solid", "n_tasks": 1}
+    ]
+  },
+  "modes": [
+    {
+      "name": "pure_reselection",
+      "role": "PRIMARY",
+      "definition": "global farthest-first over the 609 candidates from scratch, k=96",
+      "is_the_ordered_deliverable": true
+    },
+    {
+      "name": "retain_and_extend",
+      "role": "SECONDARY_LABELLED_VARIANT",
+      "definition": "keep the panel tasks that are both in d1627e66 and gradeable (80), then farthest-first the remaining 16 over the gradeable candidate set with the same seed and tie-break",
+      "changes_primary": false,
+      "changes_doctrine": false,
+      "rationale": "the rerun bill of materials is Matt's gate-3 cost variable and pure reselection can churn centers that already have paid-for campaign results"
+    }
+  ],
+  "inputs": {
+    "gradeability_census": {
+      "path": "analysis/ml_gradeability_census/held_v1/census.csv",
+      "sha256": "9487c30d4738dbb2964160bf8ae54e06dbdf248519b900ef4cb3accad913daab"
+    },
+    "binding_selection_manifest": {
+      "path": "analysis/ml_g50_solver_families/inputs/binding_selection_manifest.json",
+      "sha256": "d1627e66e65f5ea33fcb8e4092a28def44ee6ad6111804df96e541135483959e"
+    },
+    "binding_selection_weights_718": {
+      "path": "analysis/ml_g50_solver_families/inputs/selection_weights_718.csv",
+      "sha256": "6d0ba47102ba9b19ff6909a6713dc1481d40412b5c9d9c3ac23304b6341976a8"
+    },
+    "feature_table": {
+      "path": "scripts/Hamiltonian_features.csv",
+      "sha256": "b5f8a78c3fd8fa9ba1e5dce4e8e2986bfc19346b26375e22763816efa5cdc8f7"
+    },
+    "feature_metadata_ml5_191": {
+      "path": "analysis/ml_core_set_v2/inputs/feature_column_metadata_ml5_191.csv",
+      "sha256": "6c411cecf5fd9d9240be1f0b2ea3e61e2dfe7b1231cfd120c07fd0c3cf9fbe0c",
+      "role": "primary_metric_derivation"
+    },
+    "feature_metadata_current_193": {
+      "path": "analysis/feature_schema/feature_column_metadata.csv",
+      "sha256": "3efad3a89b7fd2463da7d777a6c3e6c99759a04b15e007584266d24f44ec6590",
+      "role": "sensitivity_metric_derivation"
+    },
+    "canonical_families": {
+      "path": "analysis/feature_schema/canonical_families_v1.json",
+      "sha256": "4bc9404feba3313cea64df734364a3ecbb45dbfda6f41bd337231181fef67942",
+      "role": "reporting_only"
+    },
+    "identifier_screen": {
+      "path": "analysis/ml_v2/identifier_screen.json",
+      "sha256": "f4ca6d170215d2f87fba67de8df3ce6d6987fb2f635c37eeb0506500ced4650d"
+    },
+    "ml8d_posteriors": {
+      "path": "analysis/ml_solvability_uq/held_v1/per_task_posterior.csv",
+      "sha256": "0fcb54e3d344a00cee204399e301735be4d1c5761e929b6297e2add27bb9f50f",
+      "role": "deployment_target_estimate_layer"
+    },
+    "solver_family_catalog": {
+      "path": "analysis/ml_g50_solver_families/inputs/solver_families_g50_snapshot.v1.json",
+      "sha256": "7531bdb2a68d57eb6271ffbe0b48981781e7683b43e62f12045f4486f6bb728f",
+      "role": "locked_solver_identities_for_the_bill_of_materials"
+    }
+  },
+  "deployment_target_layer": {
+    "tasks": 109,
+    "source": "ML-8D per-task posteriors",
+    "fields": [
+      "posterior_mean_probability_success",
+      "credible_lower_95",
+      "credible_upper_95",
+      "assigned_center_task_uuid",
+      "assigned_center_distance"
+    ],
+    "output_kind": "estimate",
+    "validated_predictor_claim": false,
+    "adjudication_language_verbatim": "at the accessible panel size, model calibration could be neither established nor refuted",
+    "calibration_certified_variants": 0,
+    "point_gate_passes_carry_claim_weight": false,
+    "ratio_of_record": "design_based",
+    "ml6_no_validated_predictor_rule": "stands_unamended"
+  },
+  "bill_of_materials": {
+    "definition": "entering tasks x the 4 locked solver identities",
+    "solver_identities_reopened": false,
+    "locked_solver_family_count": 4
+  },
+  "verification": {
+    "two_run_byte_identity_required": true,
+    "independent_verifier": "scripts/verify_ml5c_reselection.py",
+    "schema_validation_required": true,
+    "read_only_scopes_must_show_empty_diff": [
+      "analysis/ml_gradeability_census",
+      "analysis/ml_g50_solver_families",
+      "analysis/ml_solvability_uq",
+      "analysis/feature_schema",
+      "scripts/dashboard_data"
+    ]
+  },
+  "fences": [
+    "held; binding_selection=false; d1627e66 remains the manifest of record until a PI ack is issued and consumed",
+    "no promotion commit in this wave",
+    "no solver run, campaign submission, or PBS work",
+    "no push",
+    "solver identities are not reopened",
+    "no solver outcome, label, or metric bundle read in the selection",
+    "family is reporting-only and never a selection or assignment input"
+  ]
+}
