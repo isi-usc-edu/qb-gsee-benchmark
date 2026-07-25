@@ -217,6 +217,7 @@ def verify(root: Path, artifact: Path) -> dict[str, Any]:
             f"non-gradeable center: {row['task_uuid']}",
         )
         _check(row["binding_selection"].lower() == "false", "center claims binding")
+        checks += 2
     checks += 4
 
     # 5. both weight sets recomputed
@@ -246,6 +247,7 @@ def verify(root: Path, artifact: Path) -> dict[str, Any]:
             "scored weight row not marked admissible",
         )
         _check(row["population"] == "gradeable_candidates_609", "wrong population label")
+        checks += 2
 
     coverage = _rows(artifact / "coverage_map_718.csv")
     _check(len(coverage) == len(tasks), "coverage map size")
@@ -265,6 +267,7 @@ def verify(root: Path, artifact: Path) -> dict[str, Any]:
             row["role"] == "coverage_and_deployment_map_only", "coverage role label"
         )
         coverage_counts[expected_center] += 1
+        checks += 3
     _check(sum(coverage_counts.values()) == len(tasks), "coverage weights sum")
     checks += 5
 
@@ -313,6 +316,7 @@ def verify(root: Path, artifact: Path) -> dict[str, Any]:
             str(row["task_uuid"]) in set(expected["entering"]),
             "bill of materials names a non-entering task",
         )
+        checks += 2
     checks += 3
 
     # 7. zero-gradeable families carry no scored weight
@@ -343,6 +347,7 @@ def verify(root: Path, artifact: Path) -> dict[str, Any]:
                 "zero-gradeable family claims population statements",
             )
         _check(row["role"] == "reporting_only_never_a_constraint", "family role label")
+        checks += 1
     checks += 2
 
     # 8. deployment-target layer
@@ -391,6 +396,7 @@ def verify(root: Path, artifact: Path) -> dict[str, Any]:
             str(row["assigned_center_task_uuid"]) == expected_center,
             f"deployment center mismatch: {key}",
         )
+        checks += 6
     _check(
         int(report["deployment_target_layer"]["calibration_certified_variants"]) == 0,
         "a variant is claimed calibrated",
