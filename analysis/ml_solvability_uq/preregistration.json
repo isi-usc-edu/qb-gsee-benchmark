@@ -1,0 +1,219 @@
+{
+  "artifact_id": "ml8d_solvability_uq_preregistration_v1",
+  "schema_version": "1.0",
+  "order_of_record": "work/ML_GOALS.md :: PI ORDER 2026-07-25 -- ML-8D",
+  "frozen_before_any_estimator_fit": true,
+  "supersedes": null,
+  "gate": {
+    "requirement": "after ML-8A and ML-8C",
+    "ml8a_results_commit": "967b5eb8",
+    "ml8c_results_commit": "d42bb3f6",
+    "satisfied": true
+  },
+  "scope": "gradeable tasks only, both tracks",
+  "inputs": {
+    "gradeability_census": {
+      "path": "analysis/ml_gradeability_census/held_v1/census.csv",
+      "sha256": "9487c30d4738dbb2964160bf8ae54e06dbdf248519b900ef4cb3accad913daab"
+    },
+    "masked_observations": {
+      "path": "analysis/ml_g50_solver_families/sensitivity_gradeable_mask_v1/masked_observations.csv",
+      "sha256": "1d03218a4b476796415522abf83c294aa4df8a66a3663cb3e49674160c49d5eb"
+    },
+    "gradeable_selection_weights": {
+      "path": "analysis/ml_g50_solver_families/sensitivity_gradeable_mask_v1/gradeable_selection_weights.csv",
+      "sha256": "02aba247003b10a616bde6358ffd4a9307c7d1c4bf768100d05202941f3f7538"
+    },
+    "ml8c_report": {
+      "path": "analysis/ml_g50_solver_families/sensitivity_gradeable_mask_v1/report.json",
+      "sha256": "d28c67023b722e81cd182786072eb6ab143d06ec490168422285b57fdeb2e065"
+    },
+    "knn_predictions": {
+      "path": "analysis/ml_g50_solver_families/sensitivity_gradeable_mask_v1/predictions.csv",
+      "sha256": "a38f8d9003d6ada7b3f1836c6304aecbb92e0d188c15b56b042b5c4a3e0d31b5"
+    },
+    "feature_table": {
+      "path": "scripts/Hamiltonian_features.csv",
+      "sha256": "b5f8a78c3fd8fa9ba1e5dce4e8e2986bfc19346b26375e22763816efa5cdc8f7"
+    },
+    "feature_metadata": {
+      "path": "analysis/feature_schema/feature_column_metadata.csv",
+      "sha256": "3efad3a89b7fd2463da7d777a6c3e6c99759a04b15e007584266d24f44ec6590"
+    },
+    "canonical_families": {
+      "path": "analysis/feature_schema/canonical_families_v1.json",
+      "sha256": "4bc9404feba3313cea64df734364a3ecbb45dbfda6f41bd337231181fef67942"
+    },
+    "identifier_screen": {
+      "path": "analysis/ml_v2/identifier_screen.json",
+      "sha256": "f4ca6d170215d2f87fba67de8df3ce6d6987fb2f635c37eeb0506500ced4650d"
+    }
+  },
+  "design_based_track": {
+    "role": "ratio_of_record",
+    "estimator": "sum(weight * success) / sum(weight) over the retained gradeable centers",
+    "population": 609,
+    "covered": 577,
+    "orphaned": 32,
+    "estimand": "covered_gradeable_subpopulation",
+    "bootstrap": {
+      "draws": 2000,
+      "seed": 20260725,
+      "interval": "percentile_95_two_sided",
+      "primary": "family_grouped",
+      "primary_definition": "resample the canonical families present among retained centers, with replacement, drawing as many families as are present; every center in a drawn family contributes with its weight",
+      "sensitivity": "center_level",
+      "sensitivity_definition": "resample the retained centers with replacement",
+      "zero_weight_draw_policy": "reject_and_redraw_recording_attempts",
+      "primary_rationale": "family-grouped resampling is mandatory house practice given demonstrated feature-space near-duplication (ML-4: 92.6% same-family neighbour purity)"
+    },
+    "may_be_displaced_by_model_output": false
+  },
+  "model_based_track": {
+    "classifier": "gaussian_process_classification_laplace_approximation",
+    "likelihood": "bernoulli_logit",
+    "geometry": "frozen block-aware distance, with_jw arm, per solver family",
+    "geometry_re_derived": false,
+    "cross_domain_imputation": false,
+    "family_input": false,
+    "kernel": "exp(-D^2 / (2 * lengthscale^2)) with unit prior variance",
+    "lengthscale_rule": "median of strictly positive pairwise training-fold distances",
+    "lengthscale_optimised": false,
+    "lengthscale_sensitivity_multipliers": [0.5, 2.0],
+    "psd_guard": {
+      "min_eigenvalue_tolerance": -1e-10,
+      "correction": "clip negative eigenvalues to zero (nearest-PSD projection)",
+      "jitter": 1e-08,
+      "must_report_per_kernel": [
+        "min_eigenvalue_before_projection",
+        "frobenius_norm_of_correction"
+      ],
+      "silent_correction_forbidden": true,
+      "rationale": "the block-averaged metric is not guaranteed Euclidean, so the Gram matrix is not guaranteed PSD"
+    },
+    "newton": {
+      "max_iterations": 100,
+      "log_marginal_tolerance": 1e-09,
+      "non_convergence_is_hard_failure": true
+    },
+    "predictive_probability": "MacKay/probit approximation sigma(kappa * f_bar), kappa = (1 + pi * var_f / 8) ** -0.5",
+    "reported_per_task_mean": "monte_carlo_mean_of_logistic_of_joint_latent_samples",
+    "reported_cross_check": "mackay_probit_approximation",
+    "protocol": "leave_one_canonical_family_out",
+    "training_labels": "the 80 retained gradeable panel tasks",
+    "prediction_domain": "all 718 corpus tasks",
+    "declared_fallback": {
+      "trigger": "GP fails to converge or to scale for a variant",
+      "fallback": "isotonic-calibrated logistic regression on the same geometry",
+      "recorded_per_variant": true,
+      "gp_attempted_first_for_every_variant": true
+    }
+  },
+  "calibration_gate": {
+    "nature": "calibration_not_discrimination",
+    "assessed_on": "leave-one-family-out out-of-fold predictions at the 80 labelled gradeable panel tasks",
+    "reliability_bins": 5,
+    "bin_rule": "equal_count_quantile",
+    "bin_rationale": "16 labelled tasks per bin at n=80; 10 bins would be too thin to read",
+    "instruments": [
+      "expected_calibration_error",
+      "calibration_slope",
+      "calibration_intercept",
+      "brier_decomposition_reliability_resolution_uncertainty"
+    ],
+    "logit_clip": 1e-06,
+    "bootstrap": {
+      "draws": 2000,
+      "seed": 20260725,
+      "grouping": "family_grouped"
+    },
+    "pass_conditions_all_required": [
+      "expected_calibration_error <= 0.10",
+      "family-grouped 95% interval of the calibration slope contains 1.0"
+    ],
+    "thresholds_frozen_before_any_value_computed": true,
+    "pooling_across_variants": false,
+    "multiplicity_claim": false
+  },
+  "model_based_ratio": {
+    "estimator": "unweighted mean of predicted P(success) over the 609 gradeable corpus tasks",
+    "weighted": false,
+    "weighting_rationale": "a model predicts at every corpus point, so no selection weighting is needed; weights exist to extrapolate from a sample, which is the design track's job",
+    "credible_interval": {
+      "joint_latent_samples_per_fold": 2000,
+      "seed": 20260725,
+      "within_fold_joint_covariance_respected": true,
+      "cross_fold_posterior_correlation": "treated_as_independent",
+      "cross_fold_assumption_is_declared_approximation": true
+    }
+  },
+  "miscalibration_reference_of_record": {
+    "source": "PI ORDER 2026-07-25 ML-8D",
+    "statement": "the current kNN corpus predictions are uncalibrated (DMRG@256: predicted 0.150 vs design-weighted 0.398)",
+    "must_report_side_by_side": [
+      "design_based_ratio",
+      "knn_corpus_hard_label_rate_recomputed_from_pinned_predictions",
+      "knn_corpus_mean_probability_recomputed_from_pinned_predictions",
+      "gp_model_based_ratio",
+      "gap_to_design_ratio_for_every_model_quantity"
+    ],
+    "both_knn_quantities_required": true,
+    "both_knn_quantities_rationale": "the quoted 0.150 is an argmax hard-label rate; the mean predicted probability of the same predictions is a different quantity and the design-based ratio is a probability-scale quantity, so comparing only the hard-label rate would misattribute a thresholding effect to probability miscalibration",
+    "gp_narrowing_the_gap_is_a_reported_number_not_an_assumption": true
+  },
+  "outputs": {
+    "directory": "analysis/ml_solvability_uq/held_v1",
+    "files": [
+      "design_based_ratios.csv",
+      "model_based_ratios.csv",
+      "per_task_posterior.csv",
+      "calibration.csv",
+      "reliability_bins.csv",
+      "calibration_gate.csv",
+      "lengthscale_sensitivity.csv",
+      "kernel_psd_diagnostics.csv",
+      "ratio_comparison.csv",
+      "report.json",
+      "REPORT.md",
+      "schemas/report.schema.json",
+      "artifact_manifest.json"
+    ]
+  },
+  "held_state": {
+    "status": "held_pending_pi_review",
+    "effective": false,
+    "validated_predictor_claim": false,
+    "ratio_of_record": "design_based",
+    "every_model_output_labelled_estimate": true
+  },
+  "stop_at": {
+    "no_validated_predictor_rule_stands": true,
+    "trigger": "any variant PASSES the frozen calibration gate",
+    "action": "FLAG, report numbers plainly, stop short of all interpretation; Matt acks claim language and the PI reviews first",
+    "forbidden": [
+      "prose",
+      "paper framing",
+      "dashboard placement",
+      "validated-predictor claim"
+    ],
+    "all_variants_failing_is_equally_a_result": true
+  },
+  "verification": {
+    "two_run_byte_identity_required": true,
+    "read_only_scopes_must_show_empty_diff": [
+      "analysis/ml_g50_solver_families/final_v4",
+      "analysis/ml_g50_solver_families/sensitivity_gradeable_mask_v1",
+      "analysis/ml_gradeability_census"
+    ],
+    "independent_verifier": "scripts/verify_solvability_uq.py",
+    "schema_validation_required": true
+  },
+  "fences": [
+    "supersedes nothing",
+    "no new label, feature, variant, solver run, or reselection",
+    "no family, mask, reason, or provenance column enters any model",
+    "no public or dashboard placement",
+    "login-node CPU only; no PBS work",
+    "no push"
+  ]
+}
