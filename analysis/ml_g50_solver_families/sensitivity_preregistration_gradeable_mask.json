@@ -1,0 +1,190 @@
+{
+  "artifact_id": "ml8c_gradeable_mask_sensitivity_preregistration_v1",
+  "schema_version": "1.0",
+  "order_of_record": "work/ML_GOALS.md :: PI ORDER 2026-07-25 -- ML-8C",
+  "frozen_before_masked_results": true,
+  "supersedes": null,
+  "parent_analysis_of_record": "analysis/ml_g50_solver_families/final_v4",
+  "parent_bytes_must_be_unchanged": true,
+  "release_class": "internal_sensitivity_annex",
+  "held_ack_cycle_owed": false,
+  "inputs": {
+    "parent_preregistration": {
+      "path": "analysis/ml_g50_solver_families/preregistration.json",
+      "verification": "frozen loader plus frozen verify_inputs over its own pins"
+    },
+    "gradeability_census": {
+      "path": "analysis/ml_gradeability_census/held_v1/census.csv",
+      "sha256": "9487c30d4738dbb2964160bf8ae54e06dbdf248519b900ef4cb3accad913daab"
+    },
+    "gradeability_census_report": {
+      "path": "analysis/ml_gradeability_census/held_v1/report.json",
+      "sha256": "b51c25eb0d817f42940ee8601d430c1c6b59a3c5eccb7e2a82f1c00982666d8f"
+    },
+    "coverage_assignments_718": {
+      "path": "analysis/ml_g50_solver_families/inputs/coverage_assignments_718.csv",
+      "sha256": "ce3c806094f8c5a68153a04ff42e18e4b95e40e0e66712cc2210caad547f0a59",
+      "provenance": "byte-exact copy of the ML-5 binding candidate assignment already pinned by promoted binding manifest d1627e66e65f5ea33fcb8e4092a28def44ee6ad6111804df96e541135483959e"
+    },
+    "selection_weights_718": {
+      "path": "analysis/ml_g50_solver_families/inputs/selection_weights_718.csv",
+      "sha256": "6d0ba47102ba9b19ff6909a6713dc1481d40412b5c9d9c3ac23304b6341976a8"
+    },
+    "parent_normalized_observations": {
+      "path": "analysis/ml_g50_solver_families/final_v4/normalized_observations.csv",
+      "sha256": "8244e7518cf5ea156c0378c79cc88ef511a820998b230e9e857dd88dde51730e",
+      "role": "byte-equivalence guard before the mask is applied"
+    }
+  },
+  "mask": {
+    "definition": "panel tasks whose census row has gradeable_for_campaign_scoring == false",
+    "hand_listed": false,
+    "expected_panel_tasks": 96,
+    "expected_masked_tasks": 16,
+    "expected_retained_tasks": 80,
+    "must_equal_census_panel_cross_check": true
+  },
+  "held_identical_to_parent": {
+    "model": "shared_block_distance_knn_k15",
+    "k": 15,
+    "protocol": "leave_one_canonical_family_out",
+    "grouping_field": "canonical_hamiltonian_family",
+    "metrics": [
+      "average_precision_success",
+      "roc_auc",
+      "brier",
+      "balanced_accuracy",
+      "mcc"
+    ],
+    "baselines": [
+      "leave_one_family_out_prevalence",
+      "leave_one_family_out_size_sector_ridge"
+    ],
+    "arms": [
+      "with_jw",
+      "without_jw"
+    ],
+    "model_seed": 117,
+    "bootstrap_seed": 20260724,
+    "accepted_two_class_draws": 2000,
+    "eligibility_floor": {
+      "minimum_failures": 5,
+      "minimum_families": 5,
+      "minimum_fold_training_tasks": 15,
+      "minimum_labeled_tasks": 30,
+      "minimum_successes": 5
+    },
+    "feature_policy": "unchanged parent policy; block geometry is outcome-blind and corpus-wide",
+    "label_policy": "unchanged parent policy including corrected bounded TrimCI rung semantics"
+  },
+  "equivalence_guard": {
+    "assert_regenerated_parent_observations_byte_identical": true,
+    "applies_before_mask": true,
+    "rationale": "makes 'the mask is the only difference' a checked fact, not a claim"
+  },
+  "changes_by_construction": [
+    "labeled cells 1728 -> 1440 (80 tasks x 18 variants)",
+    "eligibility re-evaluated against the unchanged floor and reported per variant",
+    "LOFO folds, family-balanced weights, and accepted bootstrap draws re-derived on retained families",
+    "predictions remain over all 718 corpus tasks per eligible variant per arm"
+  ],
+  "gradeable_population_reweighting": {
+    "population": "the 609 gradeable corpus tasks",
+    "centers": "the 80 retained gradeable panel tasks",
+    "weight_definition": "count of gradeable corpus tasks whose frozen nearest-selected center is c",
+    "orphan_policy": "disclosed, never reassigned",
+    "orphan_rationale": "reassignment would silently alter the frozen selection geometry; reselection is ML-8B/ML-5c, held for Matt's O43 dispositions",
+    "reported_fields": [
+      "gradeable_population_total",
+      "gradeable_population_covered",
+      "gradeable_population_orphaned",
+      "gradeable_population_coverage_fraction"
+    ],
+    "estimand": "the covered gradeable subpopulation, not all 609",
+    "both_denominators_reported": true,
+    "parent_rate_quoted_unchanged": true
+  },
+  "comparison_contract": {
+    "per_variant_fields": [
+      "n_labels_before",
+      "n_labels_after",
+      "n_success_before",
+      "n_success_after",
+      "n_fail_before",
+      "n_fail_after",
+      "model_status_before",
+      "model_status_after",
+      "with_jw_vs_size_sector_ap_delta_before",
+      "with_jw_vs_size_sector_ap_delta_after",
+      "with_jw_vs_size_sector_ap_lower_95_before",
+      "with_jw_vs_size_sector_ap_lower_95_after",
+      "with_jw_vs_without_jw_ap_delta_before",
+      "with_jw_vs_without_jw_ap_delta_after",
+      "with_jw_vs_without_jw_ap_lower_95_before",
+      "with_jw_vs_without_jw_ap_lower_95_after"
+    ],
+    "headline_counters": [
+      "with_jw_ap_lower_bound_above_size_sector_count",
+      "with_jw_ap_lower_bound_above_without_jw_count"
+    ],
+    "parent_values": {
+      "with_jw_ap_lower_bound_above_size_sector_count": 0,
+      "with_jw_ap_lower_bound_above_without_jw_count": 0,
+      "eligible_variant_denominator": 18
+    },
+    "explicit_boolean": "negative_verdict_survives_decontamination"
+  },
+  "stop_at": {
+    "trigger": "any variant with a with_jw-vs-size_sector average-precision paired delta whose 95% lower bound exceeds zero under the mask",
+    "action": "FLAG, report numbers plainly, stop short of all interpretation",
+    "forbidden": [
+      "prose",
+      "paper framing",
+      "validated-predictor claim"
+    ]
+  },
+  "prior_exposure": {
+    "inspected_before_freeze": "input composition of the masked cells only",
+    "facts_of_record": {
+      "masked_cells": 288,
+      "masked_cells_with_outcome_fail": 288,
+      "masked_cells_with_outcome_success": 0,
+      "masked_cells_carrying_a_solver_energy": 162
+    },
+    "source": "accepted final_v4 label table joined to the ML-8A census",
+    "no_masked_run_statistic_computed_before_freeze": true
+  },
+  "outputs": {
+    "directory": "analysis/ml_g50_solver_families/sensitivity_gradeable_mask_v1",
+    "files": [
+      "REPORT.md",
+      "report.json",
+      "masked_observations.csv",
+      "variant_eligibility.csv",
+      "family_balanced_performance.csv",
+      "paired_deltas.csv",
+      "ladder_growth.csv",
+      "nestedness.csv",
+      "gradeable_selection_weights.csv",
+      "comparison_vs_final_v4.csv",
+      "predictions.csv",
+      "schemas/report.schema.json",
+      "artifact_manifest.json"
+    ]
+  },
+  "verification": {
+    "two_run_byte_identity_required": true,
+    "parent_diff_must_be_empty": true,
+    "schema_validation_required": true,
+    "independent_verifier": "scripts/verify_gradeable_mask_sensitivity.py"
+  },
+  "fences": [
+    "supersedes nothing",
+    "no metric, tolerance, seed, floor, model, or label-policy change",
+    "no reselection, reassignment, or new solver run",
+    "no public or dashboard placement",
+    "no PBS work; login-node CPU only",
+    "no push",
+    "canonical family is grouping and reporting only, never a model input"
+  ]
+}
