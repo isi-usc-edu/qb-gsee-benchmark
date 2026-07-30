@@ -1,0 +1,28 @@
+{
+  "artifact_id": "ml_g59_panel_refresh_preflight_v1",
+  "census": {
+    "baseline_rows_retained": 1320,
+    "entering_tasks": 16,
+    "harvest_variant_rows": 408,
+    "merged_rows": 1728,
+    "panel_tasks": 96,
+    "required_parent_attempts": 86,
+    "retained_tasks": 80,
+    "selection_weight_sum": 609
+  },
+  "checks": {
+    "amendment_frozen": true,
+    "complete_binary_panel": true,
+    "exact_required_pair_coverage": true,
+    "exact_variant_expansion": true,
+    "g59_contract_hashes_verified": true,
+    "harvest_member_hashes_verified": true,
+    "no_monotonic_repair": true,
+    "parent_hashes_verified": true,
+    "selection_of_record_hashes_verified": true
+  },
+  "complete_harvest": true,
+  "model_fitted": false,
+  "scientific_outcomes_consumed": true,
+  "status": "pass"
+}
