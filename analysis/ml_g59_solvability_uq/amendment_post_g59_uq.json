@@ -1,0 +1,77 @@
+{
+  "amendment_id": "ml_g59_solvability_uq_amendment_v1",
+  "status": "frozen_before_post_g59_uq_refit",
+  "frozen_before_refit": true,
+  "purpose": "Recompute the accepted ML-8D design and model uncertainty tracks on the promoted 96-task G59 panel without changing the estimator or gate.",
+  "parent_uq": {
+    "preregistration_path": "analysis/ml_solvability_uq/preregistration.json",
+    "preregistration_sha256": "1984a1cbec2bc49915d31e75ab7670b73407ace0f138ec2ed09fb4c44e51b2ce",
+    "accepted_manifest_path": "analysis/ml_solvability_uq/held_v1/artifact_manifest.json",
+    "accepted_manifest_sha256": "28a15e12fb978b1a9d4c429ba655655b397190de704be99d3d04be083e2046c5"
+  },
+  "panel_refresh": {
+    "amendment_path": "analysis/ml_g59_panel_refresh/amendment_post_g59_panel_refresh.json",
+    "amendment_sha256": "eb2c328ddfbdf7f5503db9634b64d85e8e90a35696f3038a7f730f1fb80e5899",
+    "analysis_directory": "analysis/ml_g59_panel_refresh/final_v1",
+    "required_analysis_revision_id": "ml_g59_panel_refresh_v1",
+    "required_analysis_artifact_id": "ml_g59_solver_family_solvability_v1",
+    "required_panel_tasks": 96,
+    "required_variants": 18,
+    "required_labels": 1728,
+    "required_prediction_rows": 25848,
+    "required_selection_weight_sum": 609
+  },
+  "scope": {
+    "corpus_tasks": 718,
+    "gradeable_corpus_tasks": 609,
+    "training_panel_tasks": 96,
+    "training_panel_gradeable_tasks": 96,
+    "design_population_covered": 609,
+    "design_population_orphaned": 0,
+    "current_panel_denominator": 96,
+    "current_gradeable_panel_denominator": 96,
+    "historical_gradeable_sensitivity_denominator": 80
+  },
+  "frozen_policy": {
+    "design_estimator": "selection-weighted gradeable-population success rate",
+    "design_ratio_role": "ratio_of_record",
+    "design_bootstrap": "unchanged from parent ML-8D preregistration",
+    "model_estimator": "unchanged GP Laplace block-aware estimator",
+    "feature_geometry": "unchanged from parent ML-8D preregistration",
+    "lengthscale_policy": "unchanged from parent ML-8D preregistration",
+    "calibration_gate": "unchanged from parent ML-8D preregistration",
+    "model_output_role": "estimate_only",
+    "family_used_as_model_input": false,
+    "validated_predictor_claim": false,
+    "monotonic_repair": false,
+    "public_or_dashboard_release": false
+  },
+  "input_policy": {
+    "observations": "verified in-memory G59 promoted-panel merge",
+    "selection_weights": "selection_weight_609 from the promoted panel of record",
+    "knn_predictions": "byte-verified deterministic post-G59 solver-family finalization",
+    "gradeability_census": "unchanged accepted ML-8A census",
+    "features_and_taxonomy": "unchanged pinned parent inputs",
+    "complete_g59_harvest_required": true,
+    "two_run_byte_identity_required": true
+  },
+  "output": {
+    "directory": "analysis/ml_g59_solvability_uq/held_v1",
+    "artifact_id": "ml_g59_solvability_uq_v1",
+    "manifest_artifact_id": "ml_g59_solvability_uq_manifest_v1",
+    "status": "held_pending_pi_review",
+    "effective": false,
+    "supersedes": null
+  },
+  "prior_exposure": {
+    "scientific_outcomes_consumed": true,
+    "exposure_before_freeze": [
+      "aggregate CPU parent terminal-state counts",
+      "representative task-level parser checks recorded by the panel-refresh amendment"
+    ],
+    "variant-level_or_task-level_performance_compared": false,
+    "post_g59_model_fitted_before_freeze": false,
+    "rules_selected_from_g59_outcome_distribution": false,
+    "mitigation": "The panel, labels, selection weights, estimator, feature geometry, hyperparameters, bootstrap, calibration gate, and reporting roles were fixed independently of post-G59 model results."
+  }
+}
