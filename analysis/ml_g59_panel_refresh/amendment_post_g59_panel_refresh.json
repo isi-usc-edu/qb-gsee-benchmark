@@ -1,0 +1,86 @@
+{
+  "amendment_id": "ml_g59_panel_refresh_amendment_v1",
+  "status": "frozen_before_post_g59_refit",
+  "frozen_before_refit": true,
+  "purpose": "Replace the non-gradeable G50 panel rows with the promoted ML-5c entering tasks and incorporate only the frozen G59 rerun scope.",
+  "parent_analysis": {
+    "preregistration_path": "analysis/ml_g50_solver_families/preregistration.json",
+    "preregistration_sha256": "4307360c57353ffee84896b86d1ef4ac2a3240759ed969d2c4c48c5b8b7207de",
+    "final_manifest_path": "analysis/ml_g50_solver_families/final_v4/artifact_manifest.json",
+    "final_manifest_sha256": "b182856c3ddf53ab3706fc2bb1a521952b530991b91e9254d8ee2ff51de52a4e",
+    "normalized_observations_path": "analysis/ml_g50_solver_families/final_v4/normalized_observations.csv",
+    "normalized_observations_sha256": "8244e7518cf5ea156c0378c79cc88ef511a820998b230e9e857dd88dde51730e",
+    "coverage_path": "analysis/ml_g50_solver_families/final_v4/coverage.csv",
+    "coverage_sha256": "e65a1d5d51b19a8bf0024df60ed6a7f419c18547d30e6cd855dcc714e3ccf253"
+  },
+  "selection_of_record": {
+    "manifest_path": "analysis/ml_core_set_v2/selection_of_record_v1/selection_of_record_manifest.json",
+    "manifest_sha256": "20159c02b3463af39a3ac8ce946992f0c89ddfd52e79e9ad2c30fee08982bf77",
+    "panel_path": "analysis/ml_core_set_v2/selection_of_record_v1/panel_of_record.csv",
+    "panel_sha256": "367f8a484f2c9c6e3e3b9d03ac6d5e5edcc06ead185a2cb5d14204510a01ffe3",
+    "mode": "retain_and_extend",
+    "selected_tasks": 96,
+    "retained_tasks": 80,
+    "entering_tasks": 16,
+    "leaving_tasks": 16,
+    "selection_weight_sum": 609
+  },
+  "g59_acquisition_contract": {
+    "required_attempts_external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g59_panel_revision_rerun_held_2026-07-25_v2/frozen_contract/g59_required_attempts_v1.csv",
+    "required_attempts_sha256": "1ba45af0ec641277175440ffa19cac15ddafa3fc087881cd8f3ac7f1020417fd",
+    "scope_external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g59_panel_revision_rerun_held_2026-07-25_v2/frozen_contract/g59_scope.json",
+    "scope_sha256": "80b889c3087da06c1024682d9a33d38b003f6a60307cc96c5fa7b4c59d44f9e6",
+    "harvest_builder_external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g59_panel_revision_harvest_2026-07-30_v1/build_g59_harvest.py",
+    "harvest_builder_sha256": "38b79a201f555df4cd94a971b1471075ca675b8a6b75a52e565fe036f326d282",
+    "harvest_manifest_external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g59_panel_revision_harvest_2026-07-30_v1/HARVEST_MANIFEST.json",
+    "variant_observations_external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g59_panel_revision_harvest_2026-07-30_v1/VARIANT_OBSERVATIONS.csv",
+    "terminal_cells_external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g59_panel_revision_harvest_2026-07-30_v1/TERMINAL_CELLS.csv",
+    "required_parent_attempts": 86,
+    "required_expanded_variant_rows": 408,
+    "required_terminal_cells": 86,
+    "required_dmrg_terminal_cells": 30,
+    "complete_harvest_required_before_refit": true
+  },
+  "merge_policy": {
+    "baseline_source": "accepted G50 final_v4 normalized observations and coverage",
+    "drop_all_rows_for_leaving_tasks": true,
+    "retain_all_rows_for_retained_tasks_except_frozen_g59_family_replacements": true,
+    "entering_tasks_receive_all_18_variants_from_g59": true,
+    "g59_required_family_replaces_baseline_family_wholesale": true,
+    "expected_final_labels": 1728,
+    "expected_labels_per_task": 18,
+    "expected_tasks_per_variant": 96,
+    "unreached_bounded_variant": "binary_fail_without_energy",
+    "emitted_rung_before_later_timeout": "observed_variational_result",
+    "terminal_variant_requires_completed_parent": true,
+    "monotonic_repair": false,
+    "dmrg_terminal_cells": "frontend_only_not_additional_ml_variants",
+    "energy_serialization": "IEEE-754 binary64 round-trip text"
+  },
+  "analysis_policy": {
+    "feature_policy": "unchanged_from_parent_preregistration",
+    "model_family": "unchanged_from_parent_preregistration",
+    "hyperparameters": "unchanged_from_parent_preregistration",
+    "bootstrap": "unchanged_from_parent_preregistration",
+    "model_eligibility_floor": "unchanged_from_parent_preregistration",
+    "population_weights": "selection_weight_609_from_promoted_panel_only",
+    "coverage_map_718_population_admissible": false,
+    "validated_predictor_claim": false,
+    "interpretation": "internal_descriptive_no_gate",
+    "determinism_requirement": "two independent runs recursively byte-identical before promotion"
+  },
+  "prior_exposure": {
+    "scientific_outcomes_consumed": true,
+    "exposure_before_freeze": [
+      "aggregate CPU parent terminal-state counts",
+      "one representative completed DMRG terminal energy and rung ledger",
+      "one representative completed SHCI terminal energy and rung ledger",
+      "one representative completed TrimCI native history",
+      "one representative timeout placeholder per relevant parser check"
+    ],
+    "task_level_panel_performance_compared": false,
+    "model_fitted_to_g59_labels": false,
+    "rules_selected_from_g59_outcome_distribution": false,
+    "mitigation": "Panel selection, variants, scoring, feature policy, model, hyperparameters, bootstrap, and merge semantics were fixed independently of the observed G59 result distribution."
+  }
+}
