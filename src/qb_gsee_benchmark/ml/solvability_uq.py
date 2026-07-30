@@ -251,7 +251,10 @@ def design_based_interval(
     if grouping == "family_grouped":
         names = sorted(set(map(str, families)))
         membership = np.asarray(
-            [[1.0 if str(family) == name else 0.0 for name in names] for family in families]
+            [
+                [1.0 if str(family) == name else 0.0 for name in names]
+                for family in families
+            ]
         )
         while len(samples) < draws:
             attempted += 1
@@ -418,9 +421,7 @@ def expected_calibration_error(
 ) -> float:
     rows = reliability_bins(probability, y, bins=bins)
     total = float(sum(row["n_tasks"] for row in rows))
-    return float(
-        sum(row["n_tasks"] / total * row["absolute_gap"] for row in rows)
-    )
+    return float(sum(row["n_tasks"] / total * row["absolute_gap"] for row in rows))
 
 
 def calibration_slope_intercept(
@@ -429,7 +430,8 @@ def calibration_slope_intercept(
     if np.unique(y).size < 2:
         return None, None
     logit = np.log(
-        np.clip(probability, clip, 1.0 - clip) / (1.0 - np.clip(probability, clip, 1.0 - clip))
+        np.clip(probability, clip, 1.0 - clip)
+        / (1.0 - np.clip(probability, clip, 1.0 - clip))
     )
     if float(np.ptp(logit)) <= 0.0:
         return None, None
@@ -448,7 +450,9 @@ def brier_decomposition(
     rows = reliability_bins(probability, y, bins=bins)
     reliability = float(
         sum(
-            row["n_tasks"] / total * (row["mean_predicted"] - row["observed_frequency"]) ** 2
+            row["n_tasks"]
+            / total
+            * (row["mean_predicted"] - row["observed_frequency"]) ** 2
             for row in rows
         )
     )
@@ -477,7 +481,9 @@ def family_grouped_calibration_intervals(
     seed: int,
 ) -> dict[str, Any]:
     names = sorted(set(map(str, families)))
-    index_by_family = {name: np.flatnonzero(np.asarray(families) == name) for name in names}
+    index_by_family = {
+        name: np.flatnonzero(np.asarray(families) == name) for name in names
+    }
     rng = np.random.default_rng(seed)
     ece_samples: list[float] = []
     slope_samples: list[float] = []
@@ -485,7 +491,9 @@ def family_grouped_calibration_intervals(
     while attempted < draws:
         attempted += 1
         drawn = rng.integers(0, len(names), size=len(names))
-        indices = np.concatenate([index_by_family[names[position]] for position in drawn])
+        indices = np.concatenate(
+            [index_by_family[names[position]] for position in drawn]
+        )
         sample_y = y[indices]
         if np.unique(sample_y).size < 2:
             continue
@@ -547,8 +555,10 @@ def isotonic_fallback_probabilities(
 # ------------------------------------------------------------- orchestration
 
 
-def _report_schema() -> dict[str, Any]:
-    return {
+def _report_schema(
+    artifact_id: str = ARTIFACT_ID, *, include_analysis_revision: bool = False
+) -> dict[str, Any]:
+    schema = {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://qb-gsee-benchmark/analysis/ml_solvability_uq/report.schema.json",
         "title": "ML-8D UQ solvability estimator report",
@@ -574,7 +584,7 @@ def _report_schema() -> dict[str, Any]:
             "preregistration",
         ],
         "properties": {
-            "artifact_id": {"const": ARTIFACT_ID},
+            "artifact_id": {"const": artifact_id},
             "status": {"const": "held_pending_pi_review"},
             "effective": {"const": False},
             "supersedes": {"type": "null"},
@@ -593,6 +603,9 @@ def _report_schema() -> dict[str, Any]:
             "preregistration": {"type": "object"},
         },
     }
+    if include_analysis_revision:
+        schema["properties"]["analysis_revision"] = {"type": "object"}
+    return schema
 
 
 def _fit_gp_variant(
@@ -783,6 +796,7 @@ def _markdown_report(
         "|---|---|---|---|---|---|---|",
     ]
     for row in gate:
+
         def _fmt(value: Any) -> str:
             return "—" if value is None else f"{float(value):.4f}"
 
@@ -864,12 +878,31 @@ def _markdown_report(
 
 
 def run_solvability_uq(
-    root: Path, preregistration_path: Path, output_directory: Path
+    root: Path,
+    preregistration_path: Path,
+    output_directory: Path,
+    *,
+    observations_override: Sequence[Mapping[str, Any]] | pd.DataFrame | None = None,
+    selection_weights_override: Mapping[str, int] | None = None,
+    knn_predictions_override: pd.DataFrame | None = None,
+    analysis_revision: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Execute one complete deterministic ML-8D run."""
     _require(not output_directory.exists(), f"output exists: {output_directory}")
     settings = load_uq_preregistration(preregistration_path)
     inputs = verify_uq_inputs(root, settings)
+    revision = dict(analysis_revision or {})
+    artifact_id = str(revision.get("artifact_id", ARTIFACT_ID))
+    manifest_artifact_id = str(
+        revision.get("manifest_artifact_id", "ml8d_solvability_uq_manifest_v1")
+    )
+    expected_panel_tasks = int(
+        revision.get("training_panel_tasks", RETAINED_PANEL_TASKS)
+    )
+    design_estimand = str(
+        revision.get("design_estimand", "covered_gradeable_subpopulation")
+    )
+    inputs.update(dict(revision.get("inputs", {})))
 
     parent_directory = root / "analysis/ml_g50_solver_families"
     parent_path = parent_directory / "preregistration.json"
@@ -913,38 +946,54 @@ def run_solvability_uq(
         f"gradeable corpus census changed: {int(gradeable_mask.sum())}",
     )
 
-    observations = pd.read_csv(
-        root / str(settings["inputs"]["masked_observations"]["path"])
-    )
+    if observations_override is None:
+        observations = pd.read_csv(
+            root / str(settings["inputs"]["masked_observations"]["path"])
+        )
+    elif isinstance(observations_override, pd.DataFrame):
+        observations = observations_override.copy()
+    else:
+        observations = pd.DataFrame(list(observations_override))
     panel_tasks = sorted(set(map(str, observations["task_uuid"])))
     _require(
-        len(panel_tasks) == RETAINED_PANEL_TASKS,
-        f"retained panel census changed: {len(panel_tasks)}",
+        len(panel_tasks) == expected_panel_tasks,
+        f"training panel census changed: {len(panel_tasks)}",
     )
     _require(
         all(gradeable[task] for task in panel_tasks),
         "a non-gradeable task reached the ML-8D training panel",
     )
-    weight_frame = pd.read_csv(
-        root / str(settings["inputs"]["gradeable_selection_weights"]["path"])
-    )
-    weights = {
-        str(row.task_uuid): int(row.gradeable_selection_weight)
-        for row in weight_frame.itertuples(index=False)
-    }
+    if selection_weights_override is None:
+        weight_frame = pd.read_csv(
+            root / str(settings["inputs"]["gradeable_selection_weights"]["path"])
+        )
+        weights = {
+            str(row.task_uuid): int(row.gradeable_selection_weight)
+            for row in weight_frame.itertuples(index=False)
+        }
+    else:
+        weights = {
+            str(task_uuid): int(weight)
+            for task_uuid, weight in selection_weights_override.items()
+        }
     _require(set(weights) == set(panel_tasks), "weight/panel task mismatch")
     ml8c_report = json.loads(
         (root / str(settings["inputs"]["ml8c_report"]["path"])).read_text(
             encoding="utf-8"
         )
     )
-    population = ml8c_report["gradeable_population"]
+    population = dict(
+        revision.get("design_population", ml8c_report["gradeable_population"])
+    )
     _require(
         int(population["restated_weight_sum"]) == sum(weights.values()),
         "weight sum disagrees with the ML-8C report",
     )
 
-    knn = pd.read_csv(root / str(settings["inputs"]["knn_predictions"]["path"]))
+    if knn_predictions_override is None:
+        knn = pd.read_csv(root / str(settings["inputs"]["knn_predictions"]["path"]))
+    else:
+        knn = knn_predictions_override.copy()
     knn = knn.loc[knn["feature_arm"].astype(str) == MODEL_ARM]
 
     variants = g50_variant_rows(
@@ -994,7 +1043,9 @@ def run_solvability_uq(
     comparison_rows: list[dict[str, Any]] = []
     psd_seen: set[tuple[str, str]] = set()
 
-    for variant in sorted(variants, key=lambda row: (row["solver_family_id"], row["solver_short_name"])):
+    for variant in sorted(
+        variants, key=lambda row: (row["solver_family_id"], row["solver_short_name"])
+    ):
         uuid = str(variant["solver_uuid"])
         solver_family = str(variant["solver_family_id"])
         data = observations.loc[observations["solver_uuid"].astype(str) == uuid]
@@ -1051,7 +1102,7 @@ def run_solvability_uq(
                 "center_level_accepted_draws": center_level["accepted_draws"],
                 "center_level_attempted_draws": center_level["attempted_draws"],
                 "primary_interval": "family_grouped",
-                "estimand": "covered_gradeable_subpopulation",
+                "estimand": design_estimand,
                 "role": "ratio_of_record",
             }
         )
@@ -1086,9 +1137,7 @@ def run_solvability_uq(
                 [task_index[task] for task in panel_tasks], dtype=int
             )
             out_of_fold = fitted["probability"][panel_positions]
-            labelled_y = np.asarray(
-                [labels[task] for task in panel_tasks], dtype=float
-            )
+            labelled_y = np.asarray([labels[task] for task in panel_tasks], dtype=float)
             panel_families = [canonical[task] for task in panel_tasks]
             ece = expected_calibration_error(
                 out_of_fold, labelled_y, bins=int(gate_settings["reliability_bins"])
@@ -1207,7 +1256,9 @@ def run_solvability_uq(
                         "solver_family_id": solver_family,
                         "solver_short_name": variant["solver_short_name"],
                         "solver_uuid": uuid,
-                        "gradeable_for_campaign_scoring": bool(gradeable_mask[position]),
+                        "gradeable_for_campaign_scoring": bool(
+                            gradeable_mask[position]
+                        ),
                         "in_training_panel": task in labels,
                         "probability_success": float(fitted["probability"][position]),
                         "probability_success_mackay": float(fitted["mackay"][position]),
@@ -1230,7 +1281,9 @@ def run_solvability_uq(
         hard_rate = float(
             (knn_gradeable["predicted_outcome"].astype(str) == "success").mean()
         )
-        mean_probability = float(knn_gradeable["probability_success"].astype(float).mean())
+        mean_probability = float(
+            knn_gradeable["probability_success"].astype(float).mean()
+        )
         gp_gap = abs(primary["model_ratio"] - ratio)
         comparison_rows.append(
             {
@@ -1261,7 +1314,7 @@ def run_solvability_uq(
         float(row["min_eigenvalue_before_projection"]) for row in psd_rows
     )
     report = {
-        "artifact_id": ARTIFACT_ID,
+        "artifact_id": artifact_id,
         "status": "held_pending_pi_review",
         "effective": False,
         "supersedes": None,
@@ -1286,7 +1339,7 @@ def run_solvability_uq(
         },
         "design_track": {
             "role": "ratio_of_record",
-            "estimand": "covered_gradeable_subpopulation",
+            "estimand": design_estimand,
             "primary_interval": "family_grouped",
             "sensitivity_interval": "center_level",
             "bootstrap_draws": int(design_settings["draws"]),
@@ -1361,14 +1414,19 @@ def run_solvability_uq(
             "sha256": sha256_file(preregistration_path),
         },
     }
-    Draft202012Validator(_report_schema()).validate(report)
+    if revision:
+        report["analysis_revision"] = revision
+    schema = _report_schema(artifact_id, include_analysis_revision=bool(revision))
+    Draft202012Validator(schema).validate(report)
 
     output_directory.mkdir(parents=True, exist_ok=False)
     stable_csv_dump(
         design_rows, DESIGN_COLUMNS, output_directory / "design_based_ratios.csv"
     )
     stable_csv_dump(
-        model_ratio_rows, MODEL_RATIO_COLUMNS, output_directory / "model_based_ratios.csv"
+        model_ratio_rows,
+        MODEL_RATIO_COLUMNS,
+        output_directory / "model_based_ratios.csv",
     )
     stable_csv_dump(
         posterior_rows, POSTERIOR_COLUMNS, output_directory / "per_task_posterior.csv"
@@ -1389,10 +1447,12 @@ def run_solvability_uq(
         psd_rows, PSD_COLUMNS, output_directory / "kernel_psd_diagnostics.csv"
     )
     stable_csv_dump(
-        comparison_rows, RATIO_COMPARISON_COLUMNS, output_directory / "ratio_comparison.csv"
+        comparison_rows,
+        RATIO_COMPARISON_COLUMNS,
+        output_directory / "ratio_comparison.csv",
     )
     stable_json_dump(report, output_directory / "report.json")
-    stable_json_dump(_report_schema(), output_directory / "schemas/report.schema.json")
+    stable_json_dump(schema, output_directory / "schemas/report.schema.json")
     (output_directory / "REPORT.md").write_text(
         _markdown_report(report, design_rows, gate_rows, comparison_rows),
         encoding="utf-8",
@@ -1404,7 +1464,7 @@ def run_solvability_uq(
         if path.is_file() and path.name != "artifact_manifest.json"
     )
     manifest = {
-        "artifact_id": "ml8d_solvability_uq_manifest_v1",
+        "artifact_id": manifest_artifact_id,
         "status": "held_pending_pi_review",
         "effective": False,
         "supersedes": None,
@@ -1419,4 +1479,9 @@ def run_solvability_uq(
         ],
     }
     stable_json_dump(manifest, output_directory / "artifact_manifest.json")
-    return {"report": report, "manifest": manifest, "comparison": comparison_rows}
+    return {
+        "report": report,
+        "manifest": manifest,
+        "comparison": comparison_rows,
+        "design": design_rows,
+    }
