@@ -1,0 +1,232 @@
+{
+  "analysis_revision": {
+    "artifact_id": "ml_g59_solvability_uq_v1",
+    "design_estimand": "gradeable_population",
+    "design_population": {
+      "gradeable_population_covered": 609,
+      "gradeable_population_orphaned": 0,
+      "restated_weight_sum": 609
+    },
+    "inputs": {
+      "post_g59_harvest": {
+        "amendment": "eb2c328ddfbdf7f5503db9634b64d85e8e90a35696f3038a7f730f1fb80e5899",
+        "harvest_manifest": "da7090755b8d15c5d92a5426ec626481765f2c22c0754d8fa4db6bf4c3236824",
+        "harvest_terminal_cells": "ba44e2e2b99b9fa9b2fee862a0f1a36bb0959856e9bac7001ecf78f992924003",
+        "harvest_variant_observations": "4bd836ab3274aa07a1836d63d7184de8b306fcd261fc16ba8a8e26d0460158b8"
+      },
+      "post_g59_predictions": {
+        "path": "analysis/ml_g59_panel_refresh/final_v1/predictions.csv",
+        "sha256": "cb753b7ddfb53468695dea6f53c3b0ecebb55dc7219a74443775a4fcf36cb997"
+      },
+      "post_g59_solver_family_manifest": {
+        "path": "analysis/ml_g59_panel_refresh/final_v1/artifact_manifest.json",
+        "sha256": "1c01305fc8a290fe2bbd9ef866eb859195f1f6dd90a5a8ae66f51fdeb73f9d89"
+      },
+      "post_g59_uq_amendment": {
+        "path": "analysis/ml_g59_solvability_uq/amendment_post_g59_uq.json",
+        "sha256": "e6489ab2fa3a20e6175500b6a960964224c6312473bffa50fb8a31c5d509ead2"
+      }
+    },
+    "manifest_artifact_id": "ml_g59_solvability_uq_manifest_v1",
+    "public_or_dashboard_release": false,
+    "revision_id": "ml_g59_solvability_uq_revision_v1",
+    "source_analysis_revision": {
+      "analysis_revision_id": "ml_g59_panel_refresh_v1",
+      "input_hashes": {
+        "amendment": "eb2c328ddfbdf7f5503db9634b64d85e8e90a35696f3038a7f730f1fb80e5899",
+        "harvest_manifest": "da7090755b8d15c5d92a5426ec626481765f2c22c0754d8fa4db6bf4c3236824",
+        "harvest_terminal_cells": "ba44e2e2b99b9fa9b2fee862a0f1a36bb0959856e9bac7001ecf78f992924003",
+        "harvest_variant_observations": "4bd836ab3274aa07a1836d63d7184de8b306fcd261fc16ba8a8e26d0460158b8"
+      },
+      "manifest_artifact_id": "ml_g59_solver_family_solvability_manifest_v1",
+      "merge_policy": {
+        "baseline_source": "accepted G50 final_v4 normalized observations and coverage",
+        "dmrg_terminal_cells": "frontend_only_not_additional_ml_variants",
+        "drop_all_rows_for_leaving_tasks": true,
+        "emitted_rung_before_later_timeout": "observed_variational_result",
+        "energy_serialization": "IEEE-754 binary64 round-trip text",
+        "entering_tasks_receive_all_18_variants_from_g59": true,
+        "expected_final_labels": 1728,
+        "expected_labels_per_task": 18,
+        "expected_tasks_per_variant": 96,
+        "g59_required_family_replaces_baseline_family_wholesale": true,
+        "monotonic_repair": false,
+        "retain_all_rows_for_retained_tasks_except_frozen_g59_family_replacements": true,
+        "terminal_variant_requires_completed_parent": true,
+        "unreached_bounded_variant": "binary_fail_without_energy"
+      },
+      "preflight": {
+        "artifact_id": "ml_g59_panel_refresh_preflight_v1",
+        "census": {
+          "baseline_rows_retained": 1320,
+          "entering_tasks": 16,
+          "harvest_variant_rows": 408,
+          "merged_rows": 1728,
+          "panel_tasks": 96,
+          "required_parent_attempts": 86,
+          "retained_tasks": 80,
+          "selection_weight_sum": 609
+        },
+        "checks": {
+          "amendment_frozen": true,
+          "complete_binary_panel": true,
+          "exact_required_pair_coverage": true,
+          "exact_variant_expansion": true,
+          "g59_contract_hashes_verified": true,
+          "harvest_member_hashes_verified": true,
+          "no_monotonic_repair": true,
+          "parent_hashes_verified": true,
+          "selection_of_record_hashes_verified": true
+        },
+        "complete_harvest": true,
+        "model_fitted": false,
+        "scientific_outcomes_consumed": true,
+        "status": "pass"
+      },
+      "report_artifact_id": "ml_g59_solver_family_solvability_v1",
+      "selection_weight_sum": 609
+    },
+    "training_panel_tasks": 96,
+    "validated_predictor_claim": false
+  },
+  "artifact_id": "ml_g59_solvability_uq_v1",
+  "calibration_gate": {
+    "assessed_count": 18,
+    "ece_threshold": 0.1,
+    "multiplicity_claim": false,
+    "nature": "calibration_not_discrimination",
+    "passed_count": 1,
+    "passed_variants": [
+      "ipie_uhf_trial"
+    ],
+    "pooling_across_variants": false,
+    "reliability_bins": 5,
+    "slope_condition": "family-grouped 95% interval contains 1.0"
+  },
+  "design_track": {
+    "bootstrap_draws": 2000,
+    "bootstrap_seed": 20260725,
+    "displaced_by_model_output": false,
+    "estimand": "gradeable_population",
+    "primary_interval": "family_grouped",
+    "ratio_range": [
+      0.23973727422003285,
+      0.6912972085385879
+    ],
+    "role": "ratio_of_record",
+    "sensitivity_interval": "center_level"
+  },
+  "effective": false,
+  "every_model_output_labelled_estimate": true,
+  "family_used_as_model_input": false,
+  "inputs": {
+    "canonical_families": {
+      "path": "analysis/feature_schema/canonical_families_v1.json",
+      "sha256": "4bc9404feba3313cea64df734364a3ecbb45dbfda6f41bd337231181fef67942"
+    },
+    "feature_metadata": {
+      "path": "analysis/feature_schema/feature_column_metadata.csv",
+      "sha256": "3efad3a89b7fd2463da7d777a6c3e6c99759a04b15e007584266d24f44ec6590"
+    },
+    "feature_table": {
+      "path": "scripts/Hamiltonian_features.csv",
+      "sha256": "b5f8a78c3fd8fa9ba1e5dce4e8e2986bfc19346b26375e22763816efa5cdc8f7"
+    },
+    "gradeability_census": {
+      "path": "analysis/ml_gradeability_census/held_v1/census.csv",
+      "sha256": "9487c30d4738dbb2964160bf8ae54e06dbdf248519b900ef4cb3accad913daab"
+    },
+    "gradeable_selection_weights": {
+      "path": "analysis/ml_g50_solver_families/sensitivity_gradeable_mask_v1/gradeable_selection_weights.csv",
+      "sha256": "02aba247003b10a616bde6358ffd4a9307c7d1c4bf768100d05202941f3f7538"
+    },
+    "identifier_screen": {
+      "path": "analysis/ml_v2/identifier_screen.json",
+      "sha256": "f4ca6d170215d2f87fba67de8df3ce6d6987fb2f635c37eeb0506500ced4650d"
+    },
+    "knn_predictions": {
+      "path": "analysis/ml_g50_solver_families/sensitivity_gradeable_mask_v1/predictions.csv",
+      "sha256": "a38f8d9003d6ada7b3f1836c6304aecbb92e0d188c15b56b042b5c4a3e0d31b5"
+    },
+    "masked_observations": {
+      "path": "analysis/ml_g50_solver_families/sensitivity_gradeable_mask_v1/masked_observations.csv",
+      "sha256": "1d03218a4b476796415522abf83c294aa4df8a66a3663cb3e49674160c49d5eb"
+    },
+    "ml8c_report": {
+      "path": "analysis/ml_g50_solver_families/sensitivity_gradeable_mask_v1/report.json",
+      "sha256": "d28c67023b722e81cd182786072eb6ab143d06ec490168422285b57fdeb2e065"
+    },
+    "post_g59_harvest": {
+      "amendment": "eb2c328ddfbdf7f5503db9634b64d85e8e90a35696f3038a7f730f1fb80e5899",
+      "harvest_manifest": "da7090755b8d15c5d92a5426ec626481765f2c22c0754d8fa4db6bf4c3236824",
+      "harvest_terminal_cells": "ba44e2e2b99b9fa9b2fee862a0f1a36bb0959856e9bac7001ecf78f992924003",
+      "harvest_variant_observations": "4bd836ab3274aa07a1836d63d7184de8b306fcd261fc16ba8a8e26d0460158b8"
+    },
+    "post_g59_predictions": {
+      "path": "analysis/ml_g59_panel_refresh/final_v1/predictions.csv",
+      "sha256": "cb753b7ddfb53468695dea6f53c3b0ecebb55dc7219a74443775a4fcf36cb997"
+    },
+    "post_g59_solver_family_manifest": {
+      "path": "analysis/ml_g59_panel_refresh/final_v1/artifact_manifest.json",
+      "sha256": "1c01305fc8a290fe2bbd9ef866eb859195f1f6dd90a5a8ae66f51fdeb73f9d89"
+    },
+    "post_g59_uq_amendment": {
+      "path": "analysis/ml_g59_solvability_uq/amendment_post_g59_uq.json",
+      "sha256": "e6489ab2fa3a20e6175500b6a960964224c6312473bffa50fb8a31c5d509ead2"
+    }
+  },
+  "kernel_psd_summary": {
+    "kernels": 480,
+    "max_frobenius_correction": 2.2591574276820467,
+    "min_eigenvalue_overall": -2.016649355554112,
+    "projections_applied": 480,
+    "silent_correction": false
+  },
+  "model_track": {
+    "cross_fold_assumption_is_declared_approximation": true,
+    "cross_fold_posterior_correlation": "treated_as_independent",
+    "estimator": "gp_laplace_block_aware",
+    "fallback_used_for_variants": [],
+    "geometry_re_derived": false,
+    "kernel": "exp(-D^2 / (2 * lengthscale^2)) with unit prior variance",
+    "lengthscale_optimised": false,
+    "lengthscale_rule": "median of strictly positive pairwise training-fold distances",
+    "output_kind": "estimate",
+    "ratio_range": [
+      0.31119434335050566,
+      0.6355685086111227
+    ]
+  },
+  "panel": {
+    "corpus_tasks": 718,
+    "design_covered": 609,
+    "design_orphaned": 0,
+    "gradeable_corpus_tasks": 609,
+    "lengthscale_variants": [
+      "median",
+      "median_x0.5",
+      "median_x2"
+    ],
+    "lofo_folds": 40,
+    "posterior_rows": 12924,
+    "training_canonical_families": 23,
+    "training_panel_tasks": 96,
+    "variants": 18
+  },
+  "preregistration": {
+    "artifact_id": "ml8d_solvability_uq_preregistration_v1",
+    "path": "analysis/ml_solvability_uq/preregistration.json",
+    "sha256": "1984a1cbec2bc49915d31e75ab7670b73407ace0f138ec2ed09fb4c44e51b2ce"
+  },
+  "ratio_of_record": "design_based",
+  "scope": "gradeable_tasks_only",
+  "status": "held_pending_pi_review",
+  "stop_at": {
+    "interpretation_offered": false,
+    "no_validated_predictor_rule_stands": true,
+    "rule": "any variant passing the frozen calibration gate is a claim-language decision requiring PI review and Matt's ack",
+    "triggered": true
+  },
+  "supersedes": null,
+  "validated_predictor_claim": false
+}

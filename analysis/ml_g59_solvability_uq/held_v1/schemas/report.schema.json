@@ -1,0 +1,82 @@
+{
+  "$id": "https://qb-gsee-benchmark/analysis/ml_solvability_uq/report.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "analysis_revision": {
+      "type": "object"
+    },
+    "artifact_id": {
+      "const": "ml_g59_solvability_uq_v1"
+    },
+    "calibration_gate": {
+      "type": "object"
+    },
+    "design_track": {
+      "type": "object"
+    },
+    "effective": {
+      "const": false
+    },
+    "every_model_output_labelled_estimate": {
+      "const": true
+    },
+    "family_used_as_model_input": {
+      "const": false
+    },
+    "inputs": {
+      "type": "object"
+    },
+    "kernel_psd_summary": {
+      "type": "object"
+    },
+    "model_track": {
+      "type": "object"
+    },
+    "panel": {
+      "type": "object"
+    },
+    "preregistration": {
+      "type": "object"
+    },
+    "ratio_of_record": {
+      "const": "design_based"
+    },
+    "scope": {
+      "const": "gradeable_tasks_only"
+    },
+    "status": {
+      "const": "held_pending_pi_review"
+    },
+    "stop_at": {
+      "type": "object"
+    },
+    "supersedes": {
+      "type": "null"
+    },
+    "validated_predictor_claim": {
+      "const": false
+    }
+  },
+  "required": [
+    "artifact_id",
+    "status",
+    "effective",
+    "supersedes",
+    "ratio_of_record",
+    "validated_predictor_claim",
+    "family_used_as_model_input",
+    "every_model_output_labelled_estimate",
+    "scope",
+    "panel",
+    "design_track",
+    "model_track",
+    "calibration_gate",
+    "stop_at",
+    "kernel_psd_summary",
+    "inputs",
+    "preregistration"
+  ],
+  "title": "ML-8D UQ solvability estimator report",
+  "type": "object"
+}
