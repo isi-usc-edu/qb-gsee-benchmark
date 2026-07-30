@@ -1441,6 +1441,12 @@ def run_finalization(
     rung_recovery_amendment_path: Path,
     trimci_bounded_rung_amendment_path: Path,
     output_directory: Path,
+    *,
+    normalized_override: (
+        tuple[list[dict[str, Any]], list[dict[str, Any]]] | None
+    ) = None,
+    selection_weights_override: Mapping[str, int] | None = None,
+    analysis_revision: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Execute one complete deterministic G50 solver-family ML run."""
     _require(not output_directory.exists(), f"output exists: {output_directory}")
@@ -1511,14 +1517,23 @@ def run_finalization(
     variants = g50_variant_rows(
         resolve_input_path(root, preregistration["inputs"]["solver_family_catalog"])
     )
-    observations, coverage_rows = normalize_g50_outcomes(
-        root,
-        preregistration,
-        variants,
-        canonical,
-        rung_recovery,
-        trimci_recovery,
-    )
+    if normalized_override is None:
+        observations, coverage_rows = normalize_g50_outcomes(
+            root,
+            preregistration,
+            variants,
+            canonical,
+            rung_recovery,
+            trimci_recovery,
+        )
+    else:
+        observations, coverage_rows = normalized_override
+        _require(
+            analysis_revision is not None,
+            "normalized override requires analysis revision metadata",
+        )
+        _require(len(observations) == 1728, "override label census changed")
+        _require(len(coverage_rows) == 1728, "override coverage census changed")
     observation_frame = pd.DataFrame(observations)
     coverage_frame = pd.DataFrame(coverage_rows)
     eligibility = variant_eligibility(
@@ -1528,15 +1543,31 @@ def run_finalization(
     )
     eligibility_by_uuid = {str(row["solver_uuid"]): row for row in eligibility}
 
-    weight_frame = pd.read_csv(
-        resolve_input_path(root, preregistration["inputs"]["selection_weights"])
+    if selection_weights_override is None:
+        weight_frame = pd.read_csv(
+            resolve_input_path(root, preregistration["inputs"]["selection_weights"])
+        )
+        selection_weights = {
+            str(row.task_uuid): int(row.selection_weight)
+            for row in weight_frame.itertuples(index=False)
+        }
+    else:
+        selection_weights = {
+            str(task): int(weight)
+            for task, weight in selection_weights_override.items()
+        }
+    expected_weight_sum = int(
+        (analysis_revision or {}).get("selection_weight_sum", 718)
     )
-    selection_weights = {
-        str(row.task_uuid): int(row.selection_weight)
-        for row in weight_frame.itertuples(index=False)
-    }
-    _require(sum(selection_weights.values()) == 718, "selection weight sum changed")
+    _require(
+        sum(selection_weights.values()) == expected_weight_sum,
+        "selection weight sum changed",
+    )
     selected_tasks = set(selection_weights)
+    _require(
+        selected_tasks == set(map(str, observation_frame["task_uuid"])),
+        "selection weights and normalized panel differ",
+    )
 
     prediction_rows: list[dict[str, Any]] = []
     performance_rows: list[dict[str, Any]] = []
@@ -1693,7 +1724,9 @@ def run_finalization(
         for row in delta_rows
     )
     report = {
-        "artifact_id": "ml_g50_solver_family_solvability_v1",
+        "artifact_id": (analysis_revision or {}).get(
+            "report_artifact_id", "ml_g50_solver_family_solvability_v1"
+        ),
         "status": "complete_internal_descriptive_no_gate",
         "protocol": PROTOCOL_ID,
         "public_or_dashboard_bundle": False,
@@ -1751,6 +1784,9 @@ def run_finalization(
             "dashboard overwrite, public release, or validated-predictor claim."
         ),
     }
+    if analysis_revision is not None:
+        report["panel"]["selection_weight_sum"] = sum(selection_weights.values())
+        report["analysis_revision"] = dict(analysis_revision)
 
     stable_csv_dump(
         observations,
@@ -1782,6 +1818,11 @@ def run_finalization(
         nestedness,
         output_directory / "REPORT.md",
     )
+    if analysis_revision is not None:
+        stable_json_dump(
+            analysis_revision["preflight"],
+            output_directory / "panel_refresh_preflight.json",
+        )
     schema_directory = output_directory / "schemas"
     schema_directory.mkdir()
     shutil.copyfile(
@@ -1793,7 +1834,10 @@ def run_finalization(
 
     files = sorted(path for path in output_directory.rglob("*") if path.is_file())
     manifest = {
-        "artifact_id": "ml_g50_solver_family_solvability_manifest_v1",
+        "artifact_id": (analysis_revision or {}).get(
+            "manifest_artifact_id",
+            "ml_g50_solver_family_solvability_manifest_v1",
+        ),
         "status": "complete_internal_descriptive_no_gate",
         "protocol": PROTOCOL_ID,
         "preregistration_sha256": sha256_file(preregistration_path),
@@ -1812,6 +1856,8 @@ def run_finalization(
             for path in files
         ],
     }
+    if analysis_revision is not None:
+        manifest["analysis_revision"] = dict(analysis_revision)
     stable_json_dump(manifest, output_directory / "artifact_manifest.json")
     return report
 
@@ -1821,6 +1867,8 @@ def verify_and_promote_two_runs(
     second: Path,
     promoted: Path,
     identity_path: Path,
+    *,
+    artifact_id: str = "ml_g50_solver_family_two_run_identity_v1",
 ) -> dict[str, Any]:
     """Require recursive byte identity and promote exactly one fresh run."""
 
@@ -1839,7 +1887,7 @@ def verify_and_promote_two_runs(
     _require(left == right, "two G50 ML runs are not byte-identical")
     shutil.copytree(first, promoted)
     report = {
-        "artifact_id": "ml_g50_solver_family_two_run_identity_v1",
+        "artifact_id": artifact_id,
         "status": "pass",
         "byte_identical": True,
         "file_count": len(left),
