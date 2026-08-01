@@ -394,13 +394,13 @@ def _diagnostics(idata, variables: Iterable[str]) -> dict[str, Any]:
     import arviz as az
 
     names = list(variables)
-    rhat = np.asarray(az.rhat(idata, var_names=names).to_array()).astype(float)
-    bulk = np.asarray(az.ess(idata, var_names=names, method="bulk").to_array()).astype(
-        float
-    )
-    tail = np.asarray(az.ess(idata, var_names=names, method="tail").to_array()).astype(
-        float
-    )
+    rhat = np.asarray(az.rhat(idata, var_names=names).ds.to_array()).astype(float)
+    bulk = np.asarray(
+        az.ess(idata, var_names=names, method="bulk").ds.to_array()
+    ).astype(float)
+    tail = np.asarray(
+        az.ess(idata, var_names=names, method="tail").ds.to_array()
+    ).astype(float)
     divergences = int(np.asarray(idata.sample_stats["diverging"]).sum())
     maximum_rhat = float(np.nanmax(rhat))
     minimum_bulk_ess = float(np.nanmin(bulk))
@@ -532,8 +532,8 @@ def _loo_comparison(
 
     loo_one = az.loo(one_factor, var_name="response", pointwise=True)
     loo_two = az.loo(two_factor, var_name="response", pointwise=True)
-    point_one = np.asarray(loo_one.loo_i, dtype=float)
-    point_two = np.asarray(loo_two.loo_i, dtype=float)
+    point_one = np.asarray(loo_one.elpd_i, dtype=float)
+    point_two = np.asarray(loo_two.elpd_i, dtype=float)
     differences = point_two - point_one
     delta = float(np.sum(differences))
     standard_error = float(np.sqrt(len(differences) * np.var(differences, ddof=1)))
@@ -549,9 +549,9 @@ def _loo_comparison(
         rows.append(
             {
                 "model": name,
-                "elpd_loo": float(result.elpd_loo),
+                "elpd_loo": float(result.elpd),
                 "se": float(result.se),
-                "p_loo": float(result.p_loo),
+                "p_loo": float(result.p),
                 "pareto_k_over_0_7": int(np.sum(pareto > 0.7)),
                 "pareto_k_over_1": int(np.sum(pareto > 1.0)),
                 "pointwise_unit": "task",

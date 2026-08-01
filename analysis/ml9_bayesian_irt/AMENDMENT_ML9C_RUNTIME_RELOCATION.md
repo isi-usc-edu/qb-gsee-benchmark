@@ -20,6 +20,15 @@ direct virtual-environment interpreter and requires no login initialization,
 so it is frozen as a non-login Bash script with `TERM=dumb`; a clean scheduler
 exit is still required before production.
 
+The first production attempt, job `7685180.imgt1`, completed all four initial
+model fits in both executions but stopped before diagnostics and artifact
+construction. ArviZ 1.2 returns diagnostic results as an xarray `DataTree` and
+LOO results as `ELPDData`; the committed adapter had used the older Dataset and
+field accessors. PBS recorded exit 1 after 16 minutes 59 seconds. The adapter is
+bound to `.ds.to_array()`, `elpd_i`, `elpd`, and `p` after a synthetic
+end-to-end check. Model definitions, samples, seeds, health gates, and output
+estimands are unchanged. No incomplete tree is promoted.
+
 This amendment changes only the runtime location recorded by the
 preregistration. It does not change the response link, priors, testlet effects,
 sampling seeds, tuning or draw counts, diagnostic gates, estimands, factor
