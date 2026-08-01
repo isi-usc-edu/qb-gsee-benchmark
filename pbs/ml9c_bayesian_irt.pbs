@@ -1,4 +1,4 @@
-#!/bin/bash -l
+#!/bin/bash
 #PBS -A QC_NA_Sim
 #PBS -q compute
 #PBS -l select=1:ncpus=128
@@ -19,6 +19,7 @@ cd "$ROOT"
 
 export PYTHONHASHSEED=0
 export PYTHONPATH="$ROOT/src"
+export TERM=dumb
 export OMP_NUM_THREADS=1
 export OPENBLAS_NUM_THREADS=1
 export MKL_NUM_THREADS=1
