@@ -1,0 +1,28 @@
+{
+  "amendment_id": "ml9d_target_gate_nonnegative_recovery_identity_v3",
+  "date": "2026-08-01",
+  "frozen_before_target_access": true,
+  "reason": "The byte-identical identified recovery v2 was retained rather than promoted. The separately frozen nonnegative recovery v3 keeps the final_v1 target path unchanged and, if all gates pass, records promotion identity as v3.",
+  "prior_target_gate_amendment_path": "analysis/ml9_grouped_inference/target_gate_amendment_v2.json",
+  "prior_target_gate_amendment_sha256": "ed6e45bde0749f6c19586a0ca6e6cea044cd64f299fe3454e49a93e94e196031",
+  "execution_contract_path": "analysis/ml9_grouped_inference/execution_contract_v1.json",
+  "execution_contract_sha256": "4a668ddb231b82ea2340f9d458601147ace49a1d3026e741d12f63d4e8455f23",
+  "recovery_preregistration_path": "analysis/ml9_bayesian_irt/recovery_preregistration_v3.json",
+  "recovery_preregistration_sha256": "effdbdf004ef7d3c79e3675ac8f33e301da9fcbb04b860332a777a87cd7afaa6",
+  "recovery_implementation_commit": "b91921d4f09e9e72b96ab2f66d2052e5f7db2d7c",
+  "target_gate_change": {
+    "superseded_identity_path": "analysis/ml9_bayesian_irt/two_run_identity_v2.json",
+    "accepted_recovery_identity_path": "analysis/ml9_bayesian_irt/two_run_identity_v3.json",
+    "promoted_primary_path_unchanged": "analysis/ml9_bayesian_irt/final_v1/difficulty_handoff_ml9d.csv",
+    "promoted_manifest_path_unchanged": "analysis/ml9_bayesian_irt/final_v1/artifact_manifest.json",
+    "required_state_unchanged": "promoted_final_v1_with_all_preregistered_health_gates_passing"
+  },
+  "unchanged_rules": [
+    "target values remain unread until the superseding primary gate passes",
+    "all retained raw ML-9C handoffs remain prohibited",
+    "secondary targets remain unread until the primary gate passes",
+    "feature groups, contrasts, estimators, splits, resampling, multiplicity, reporting, exactness, and failure actions remain unchanged"
+  ],
+  "scientific_targets_consumed": false,
+  "model_fitted": false
+}
