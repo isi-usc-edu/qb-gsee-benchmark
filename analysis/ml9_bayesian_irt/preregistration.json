@@ -1,0 +1,254 @@
+{
+  "artifact_id": "ml9c_bayesian_inverted_irt_preregistration_v1",
+  "status": "frozen_before_ml9c_response_construction_or_fit",
+  "frozen_before_response_construction": true,
+  "frozen_before_model_fit": true,
+  "purpose": "Bayesian dependence-aware inverted IRT task-difficulty scale and exploratory solver-side dimensionality analysis for the accepted post-G59 panel.",
+  "order": {
+    "ml_goals_external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/ML_GOALS.md",
+    "ml_goals_sha256": "dfded5420af33a5969c32d7ba20e9e989990db3b4b67773c72fce6a7f00c4545",
+    "pi_literature_memo_external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/PI_LIT_REVIEW_2026-07-31_hardness_instruments.md",
+    "pi_literature_memo_sha256": "e4653aa7d203f5fd22fcdbea9d1823e654b8ad2a98a88c5f82e68f4f451dce7b",
+    "order_revision": "ML-9 v2 2026-07-31",
+    "hold_lifted": true
+  },
+  "inputs": {
+    "post_g59_manifest": {
+      "path": "analysis/ml_g59_panel_refresh/final_v1/artifact_manifest.json",
+      "sha256": "1c01305fc8a290fe2bbd9ef866eb859195f1f6dd90a5a8ae66f51fdeb73f9d89"
+    },
+    "normalized_observations": {
+      "path": "analysis/ml_g59_panel_refresh/final_v1/normalized_observations.csv",
+      "sha256": "80ecc6c7968d4d6ffc0028dc72fb5ff73681ef9a7d18592e996510fe932b78c7"
+    },
+    "solver_variants": {
+      "path": "analysis/ml_g59_panel_refresh/final_v1/preflight/solver_variants.json",
+      "sha256": "171be76d4893b0e046ff66fc1c0c9f7b6d129271e8f2681043039c84ac19ead5"
+    },
+    "panel_of_record": {
+      "path": "analysis/ml_core_set_v2/selection_of_record_v1/panel_of_record.csv",
+      "sha256": "367f8a484f2c9c6e3e3b9d03ac6d5e5edcc06ead185a2cb5d14204510a01ffe3"
+    }
+  },
+  "runtime": {
+    "environment_path": "/scratch/ac.otten/NCS_GSEE_Benchmark_ml9c_pymc620",
+    "isolated_from_qb_gsee_environment": true,
+    "python": "3.12.0",
+    "engine": "PyMC",
+    "engine_version": "6.2.0",
+    "engine_wheel_sha256": "b168d0ce7e55df947a01289425f038346445232cfc4d1dfdfa8f54b909e8bcc1",
+    "arviz_version": "1.2.0",
+    "arviz_wheel_sha256": "3b2b313b4b57ebb2e028c5237e4eacbd4f56084d0162128f8f1f42266c7cf515",
+    "pytensor_version": "3.2.3",
+    "pytensor_wheel_sha256": "82826e52288d9ecc95f4e5db9567943e5d9ba976f861618aead83d68f8855bae",
+    "numpy_version": "2.4.6",
+    "scipy_version": "1.18.0",
+    "pandas_version": "3.0.5",
+    "seeded_nuts_smoke_passed_before_freeze": true
+  },
+  "population": {
+    "respondent_orientation": "tasks",
+    "item_orientation": "solver_variants",
+    "panel_tasks": 96,
+    "observed_variants": 18,
+    "complete_cells": 1728,
+    "solver_families": ["dmrg", "ipie_afqmc", "shci", "trimci"],
+    "selection_weights_used": false
+  },
+  "response_construction": {
+    "binary": {
+      "success": "accepted observed_outcome equals success",
+      "failure": "every other accepted observed_outcome",
+      "threshold": "stored label of record only",
+      "label_mutation": false
+    },
+    "continuous": {
+      "source": "graded_residual",
+      "finite_transform": "clipped_residual = min(max(graded_residual, 0), 4)",
+      "missing_or_nonfinite": "clipped_residual = 4",
+      "failure_cap": 4.0,
+      "open_interval_quality": "1 / (1 + clipped_residual + 1e-6)",
+      "epsilon": 0.000001,
+      "direction": "larger quality means better performance"
+    },
+    "matrix_sort": ["task_uuid", "solver_family_id", "solver_variant_id"]
+  },
+  "family_dependence": {
+    "method": "testlet_style_random_effect",
+    "shared_by": "task and solver_family_id",
+    "raw_effect_prior": "Normal(0, 1)",
+    "solver_family_scale_prior": "HalfNormal(0.5)",
+    "identification": "center the four scaled solver-family effects within each task",
+    "included_in": ["binary_rasch", "continuous_beta"]
+  },
+  "binary_rasch": {
+    "role": "primary_hardness_scale",
+    "likelihood": "Bernoulli(logit_p = variant_ability - task_difficulty + task_family_testlet)",
+    "discrimination": 1.0,
+    "free_item_discrimination": false,
+    "variant_hierarchy": {
+      "solver_family_mean_prior": "Normal(0, 0.75)",
+      "variant_offset_prior": "Normal(0, solver_family_variant_sd)",
+      "solver_family_variant_sd_prior": "HalfNormal(0.5)"
+    },
+    "task_hierarchy": {
+      "canonical_family_mean_prior": "Normal(0, 0.5)",
+      "task_offset_prior": "Normal(0, task_sd)",
+      "task_sd_prior": "HalfNormal(1.0)",
+      "identification": "center realized task difficulties to mean zero"
+    }
+  },
+  "continuous_beta": {
+    "role": "graded_response_corroboration",
+    "likelihood": "Beta(alpha = mean * precision, beta = (1 - mean) * precision)",
+    "mean_link": "logit(mean) = variant_ability - task_difficulty + task_family_testlet",
+    "discrimination": 1.0,
+    "free_item_discrimination": false,
+    "ability_and_difficulty_priors": "same structure and scales as binary_rasch in a separate fit",
+    "precision_hierarchy": {
+      "solver_family_log_precision_mean_prior": "Normal(log(20), 0.5)",
+      "variant_log_precision_offset_prior": "Normal(0, solver_family_log_precision_sd)",
+      "solver_family_log_precision_sd_prior": "HalfNormal(0.35)",
+      "consistency_index": "precision / (precision + 1)"
+    }
+  },
+  "reported_estimands": {
+    "interval": "95% highest-density interval",
+    "task_primary": "binary Rasch task difficulty posterior mean, sd, and interval",
+    "task_secondary": "continuous beta task difficulty posterior mean, sd, and interval",
+    "variant_ability": "binary and continuous ability posterior mean, sd, and interval",
+    "variant_consistency": "continuous precision/(precision+1) posterior mean, sd, and interval",
+    "variant_difficulty_limit": {
+      "success_probability": 0.1,
+      "testlet_effect": 0.0,
+      "formula": "binary ability - logit(0.10)",
+      "posterior_interval_required": true
+    },
+    "point_rankings": false,
+    "ml9d_primary_handoff": "binary Rasch task difficulty posterior mean with sd and interval"
+  },
+  "solver_side_dimensionality": {
+    "status": "exploratory_named_a_priori",
+    "matrix": "96 tasks by 18 solver variants",
+    "response": "logit(open_interval_quality)",
+    "likelihood": "Gaussian item-wise residual model",
+    "one_factor": {
+      "task_scores_prior": "Normal(0, 1)",
+      "item_intercepts_prior": "Normal(0, 2)",
+      "item_residual_sd_prior": "HalfNormal(1)",
+      "dmrg_anchor": "g50_bond_dimension_256 factor-1 loading HalfNormal(1)",
+      "other_loadings_prior": "Normal(0, 0.75)"
+    },
+    "two_factor": {
+      "task_scores_prior": "independent Normal(0, 1)",
+      "item_intercepts_prior": "Normal(0, 2)",
+      "item_residual_sd_prior": "HalfNormal(1)",
+      "dmrg_anchor": "g50_bond_dimension_256 factor-1 loading HalfNormal(1) and factor-2 loading fixed zero",
+      "ipie_anchor": "uhf_trial_512_walkers_1000_blocks factor-2 loading HalfNormal(1)",
+      "other_loadings_prior": "Normal(0, 0.75)"
+    },
+    "comparison": {
+      "criterion": "PSIS-LOO",
+      "pointwise_unit": "task with its 18 item log likelihoods summed",
+      "delta": "elpd_loo_two_factor minus elpd_loo_one_factor",
+      "decision": "favor two factors when delta exceeds its standard error; favor one factor when negative delta magnitude exceeds its standard error; otherwise equivocal",
+      "pareto_k_over_0_7": "flag and report",
+      "pareto_k_over_1": "comparison labeled unreliable"
+    },
+    "named_hypothesis": {
+      "name": "ipie_afqmc_second_axis_distinct_from_cpu_axis",
+      "loading_contrast": "absolute iPIE factor-2 loading divided by median absolute CPU-variant factor-2 loading",
+      "posterior_probability_threshold": 0.95,
+      "support_rule": "two-factor LOO favored and P(loading_contrast > 1) >= 0.95"
+    }
+  },
+  "sampling": {
+    "algorithm": "PyMC NUTS",
+    "chains": 4,
+    "cores": 1,
+    "tune": 1000,
+    "draws": 1000,
+    "target_accept": 0.95,
+    "chain_seeds": [2026073101, 2026073102, 2026073103, 2026073104],
+    "progressbar": false,
+    "compute_convergence_checks": true,
+    "models": ["binary_rasch", "continuous_beta", "one_factor", "two_factor"],
+    "diagnostic_escalation": {
+      "trigger": "any preregistered sampler health criterion fails",
+      "tune": 2000,
+      "draws": 1000,
+      "target_accept": 0.99,
+      "apply_to_both_independent_executions": true,
+      "model_or_estimand_change": false
+    }
+  },
+  "diagnostics": {
+    "divergences": 0,
+    "maximum_rhat": 1.01,
+    "minimum_bulk_ess_for_reported_central_quantities": 400,
+    "minimum_tail_ess_for_reported_interval_quantities": 400,
+    "posterior_predictive": [
+      "binary cell success rate by solver family",
+      "binary task total-score distribution",
+      "continuous quality mean and 0.1/0.5/0.9 quantiles by solver family"
+    ],
+    "failure_action": "use frozen diagnostic escalation once; if criteria still fail, retain result with explicit nonconvergence caveat and do not promote a hardness handoff"
+  },
+  "outputs": {
+    "internal_only": true,
+    "all_model_outputs_labeled": "posterior_estimate",
+    "required_files": [
+      "REPORT.md",
+      "report.json",
+      "environment.json",
+      "response_matrix.csv",
+      "task_difficulty.csv",
+      "variant_parameters.csv",
+      "difficulty_handoff_ml9d.csv",
+      "factor_loadings.csv",
+      "dimensionality_comparison.csv",
+      "posterior_diagnostics.csv",
+      "posterior_predictive_checks.csv",
+      "posterior_samples.npz",
+      "pointwise_log_likelihood.npz",
+      "artifact_manifest.json"
+    ]
+  },
+  "reproducibility": {
+    "python_hash_seed": 0,
+    "thread_limits": 1,
+    "stable_row_sorting": true,
+    "csv_line_terminator": "LF",
+    "float_serialization": ".17g",
+    "json_serialization": "sort_keys true, indent 2, trailing newline",
+    "npz_serialization": "uncompressed deterministic zip with sorted members and fixed 1980-01-01 timestamp",
+    "two_independent_process_runs": true,
+    "same_frozen_chain_seeds": true,
+    "recursive_byte_identity_required": true,
+    "raw_run_trees_retained": true,
+    "promotion_only_after_identity": true
+  },
+  "fences": {
+    "new_solver_runs": false,
+    "task_reselection": false,
+    "label_changes": false,
+    "design_based_ratio_replaced": false,
+    "public_or_dashboard_placement": false,
+    "jw_feature_eligibility_changed": false,
+    "free_item_discrimination": false,
+    "prohibited_vocabulary_absent_from_new_artifacts": true,
+    "ambiguous_choice_policy": "conservative_document_and_continue"
+  },
+  "prior_exposure": {
+    "accepted_g50_g59_aggregate_outcomes_seen": true,
+    "ml9a_family_geometry_and_labels_seen": true,
+    "ml9b_endpoint_summaries_seen": true,
+    "representative_normalized_observation_rows_seen": true,
+    "ml9c_response_matrix_computed": false,
+    "ml9c_posterior_computed": false,
+    "ml9c_factor_fit_computed": false,
+    "ml9c_loo_comparison_computed": false,
+    "ml9c_difficulty_handoff_computed": false,
+    "design_selected_from_ml9c_result_comparison": false
+  }
+}
