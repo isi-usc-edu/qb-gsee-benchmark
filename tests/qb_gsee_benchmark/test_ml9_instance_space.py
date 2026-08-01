@@ -3,10 +3,17 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 from qb_gsee_benchmark.ml.core_set import sha256_file
 from qb_gsee_benchmark.ml.instance_space import run_outcome_blind_preflight
+from qb_gsee_benchmark.ml.instance_space_run import (
+    FAMILY_ORDER,
+    TARGET_ORDER,
+    THRESHOLD_FACTORS,
+    prepare_isa_data,
+)
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -76,3 +83,21 @@ def test_ml9a_preflight_is_outcome_blind_and_deterministic(
         path.name: path.read_bytes() for path in second.iterdir() if path.is_file()
     }
     assert first_files == second_files
+
+
+def test_ml9a_frozen_response_reproduces_primary_labels() -> None:
+    data = prepare_isa_data(ROOT, PREREGISTRATION)
+    assert tuple(data.family_costs.columns) == FAMILY_ORDER
+    assert tuple(data.all_costs.columns) == TARGET_ORDER
+    assert tuple(data.labels) == THRESHOLD_FACTORS
+    assert data.family_costs.shape == (96, 4)
+    assert data.all_costs.shape == (96, 5)
+    assert data.labels[1.0].sum().to_dict() == {
+        "dmrg": 54,
+        "ipie_afqmc": 29,
+        "shci": 52,
+        "trimci": 60,
+        "portfolio_union": 77,
+    }
+    assert np.isfinite(data.features_transformed.to_numpy()).all()
+    assert data.features_transformed.shape == (718, 193)
