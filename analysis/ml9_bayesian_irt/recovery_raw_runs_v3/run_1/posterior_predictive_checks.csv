@@ -1,0 +1,10 @@
+track,scope,scope_id,statistic,observed,predictive_mean,predictive_q10,predictive_q50,predictive_q90,output_kind
+binary,solver_family,dmrg,mean,0.49479166666666657,0.49613411458333329,0,0,1,posterior_predictive_check
+binary,solver_family,ipie_afqmc,mean,0.30208333333333331,0.3241692708333333,0,0,1,posterior_predictive_check
+binary,solver_family,shci,mean,0.50208333333333333,0.50277083333333317,0,1,1,posterior_predictive_check
+binary,solver_family,trimci,mean,0.57942708333333326,0.57740852864583325,0,1,1,posterior_predictive_check
+binary,all_tasks,task_total_score,mean,9.4270833333333321,9.4418281250000007,0,11,18,posterior_predictive_check
+continuous_quality,solver_family,dmrg,mean,0.58275623260158671,0.60252635795785514,0.084684155927698956,0.68124889189936777,0.9998135030897205,posterior_predictive_check
+continuous_quality,solver_family,ipie_afqmc,mean,0.40101625174877403,0.40271218143920057,0.10428984259783661,0.28641351153980787,0.92108964943540195,posterior_predictive_check
+continuous_quality,solver_family,shci,mean,0.58554666511263187,0.59810682534225856,0.12207295568118805,0.60821767269020421,0.99999589979310921,posterior_predictive_check
+continuous_quality,solver_family,trimci,mean,0.65306895290743439,0.66842465977979448,0.1290731020659788,0.89647593267648262,0.99999925160740299,posterior_predictive_check
