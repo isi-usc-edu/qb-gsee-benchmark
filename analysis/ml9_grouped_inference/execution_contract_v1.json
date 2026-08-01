@@ -1,0 +1,75 @@
+{
+  "artifact_id": "ml9d_grouped_inference_execution_contract_v1",
+  "date": "2026-08-01",
+  "frozen_before_target_access": true,
+  "preregistration_path": "analysis/ml9_grouped_inference/preregistration.json",
+  "preregistration_sha256": "97a5d8f2b04a71f75f76b06f187d6c6c9449e2bdd40d4cb35b93e7ea9bd4caf2",
+  "target_gate_amendment_path": "analysis/ml9_grouped_inference/target_gate_amendment_v2.json",
+  "target_gate_amendment_sha256": "ed6e45bde0749f6c19586a0ca6e6cea044cd64f299fe3454e49a93e94e196031",
+  "outcome_blind_preflight_manifest_path": "analysis/ml9_grouped_inference/preflight_v1/artifact_manifest.json",
+  "outcome_blind_preflight_manifest_sha256": "c4d0beb25352f94a11ee3fc0b5018df945e12467a540c5be515b19fa06065ecc",
+  "operational_definitions": {
+    "continuous_score": "R2 over the complete fixed out-of-fold prediction vector",
+    "binary_score": "ROC AUC over the complete fixed out-of-fold probability vector",
+    "delta": "augmented score minus baseline score",
+    "bootstrap_draw": "sample the 23 canonical-family names with replacement and concatenate every row in each sampled family block, retaining repeated blocks",
+    "bootstrap_binary_one_class_draw": "retain the draw with gradeable false and null metric values; intervals and selection frequencies use only gradeable draws and report their count",
+    "selection_frequency_denominator": "number of gradeable bootstrap draws",
+    "paired_randomization_draw": "independently within each canonical family, either retain or swap the complete baseline and augmented out-of-fold prediction blocks with probability one half",
+    "randomization_p_value": "(1 plus count of randomized deltas at least the observed delta) divided by (draws plus 1)",
+    "primary_multiplicity_family": "five continuous RandomForestRegressor contrast p-values",
+    "secondary_multiplicity_family": "twenty binary RandomForestClassifier contrast p-values",
+    "rank_concordance": "Spearman correlation between the five full-panel contrast delta ranks and each gradeable bootstrap replicate's five contrast delta ranks, separately by target and estimator",
+    "model_reliance_range": "minimum and maximum full-panel delta across the preregistered random-forest and extra-trees estimators"
+  },
+  "execution": {
+    "process_runs": 2,
+    "python_hash_seed": 0,
+    "thread_limits": 1,
+    "fit_order": "continuous target then binary targets in dmrg, ipie_afqmc, shci, trimci order; contrasts in preregistration order; random forest then extra trees",
+    "bootstrap_draws": 2000,
+    "bootstrap_seed": 20260731,
+    "randomization_draws": 9999,
+    "randomization_seed": 20260801,
+    "float_serialization": ".17g",
+    "promotion_only_after_recursive_byte_identity": true
+  },
+  "outputs": {
+    "raw_run_paths": [
+      "analysis/ml9_grouped_inference/raw_runs/run_1",
+      "analysis/ml9_grouped_inference/raw_runs/run_2"
+    ],
+    "promotion_path": "analysis/ml9_grouped_inference/final_v1",
+    "identity_path": "analysis/ml9_grouped_inference/two_run_identity_v1.json",
+    "required_files": [
+      "REPORT.md",
+      "artifact_manifest.json",
+      "bootstrap_deltas.csv",
+      "contrast_estimates.csv",
+      "contrast_predictions.csv",
+      "environment.json",
+      "fold_assignments.csv",
+      "model_reliance_ranges.csv",
+      "multiplicity_results.csv",
+      "randomization_tests.csv",
+      "rank_concordance.csv",
+      "report.json",
+      "target_gate_evidence.json",
+      "task_targets.csv"
+    ]
+  },
+  "failure_actions": {
+    "target_gate_failure": "stop before reading either target",
+    "degenerate_binary_fold": "mark that solver-family target non-gradeable for every contrast and estimator without changing the splitter",
+    "fewer_than_two_gradeable_binary_bootstrap_draws": "mark interval and selection frequency non-gradeable",
+    "identity_failure": "retain both raw trees and do not promote"
+  },
+  "reporting_fences": {
+    "internal_descriptive_analysis_only": true,
+    "causal_claims": false,
+    "validated_predictor_claims": false,
+    "single_rank_claims": false,
+    "new_solver_runs": false,
+    "target_or_label_mutation": false
+  }
+}
