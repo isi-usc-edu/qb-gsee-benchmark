@@ -6,6 +6,10 @@ from pathlib import Path
 import pandas as pd
 
 from qb_gsee_benchmark.ml.bayesian_irt import run_outcome_blind_preflight
+from qb_gsee_benchmark.ml.bayesian_irt_run import (
+    _deterministic_npz,
+    prepare_irt_data,
+)
 from qb_gsee_benchmark.ml.core_set import sha256_file
 
 
@@ -70,3 +74,27 @@ def test_ml9c_preflight_is_outcome_blind_and_deterministic(
     assert {
         path.name: path.read_bytes() for path in first.iterdir() if path.is_file()
     } == {path.name: path.read_bytes() for path in second.iterdir() if path.is_file()}
+
+
+def test_ml9c_frozen_response_construction_and_link() -> None:
+    data = prepare_irt_data(ROOT, PREREGISTRATION)
+    assert data.binary.shape == (96, 18)
+    assert data.quality.shape == (96, 18)
+    assert len(data.canonical_families) == 23
+    assert data.solver_families == ("dmrg", "ipie_afqmc", "shci", "trimci")
+    assert set(data.binary.reshape(-1)) <= {0, 1}
+    assert ((data.quality > 0.0) & (data.quality < 1.0)).all()
+    assert (data.clipped_residual >= 0.0).all()
+    assert (data.clipped_residual <= 4.0).all()
+
+
+def test_ml9c_deterministic_npz_is_byte_identical(tmp_path: Path) -> None:
+    arrays = {
+        "z_second": pd.Series([3.0, 4.0]).to_numpy(),
+        "a_first": pd.Series([1.0, 2.0]).to_numpy(),
+    }
+    first = tmp_path / "first.npz"
+    second = tmp_path / "second.npz"
+    _deterministic_npz(first, arrays)
+    _deterministic_npz(second, dict(reversed(list(arrays.items()))))
+    assert first.read_bytes() == second.read_bytes()
