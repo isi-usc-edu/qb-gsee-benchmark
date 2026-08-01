@@ -79,7 +79,10 @@ def verify_recovery_preregistration(
     preregistration = _read_json(recovery_preregistration_path)
     _require(
         preregistration.get("artifact_id")
-        == "ml9c_identified_recovery_preregistration_v2",
+        in {
+            "ml9c_identified_recovery_preregistration_v2",
+            "ml9c_nonnegative_recovery_preregistration_v3",
+        },
         "wrong ML-9C recovery preregistration",
     )
     _require(
@@ -100,7 +103,10 @@ def verify_recovery_preregistration(
     _verify_specification(
         root, preregistration["original_preregistration"], "original_preregistration"
     )
-    for section in ("retained_v1_evidence", "unchanged_inputs"):
+    evidence_sections = ["retained_v1_evidence", "unchanged_inputs"]
+    if "prior_recovery_v2_evidence" in preregistration:
+        evidence_sections.append("prior_recovery_v2_evidence")
+    for section in evidence_sections:
         for label, specification in sorted(preregistration[section].items()):
             if isinstance(specification, dict) and "path" in specification:
                 _verify_specification(root, specification, f"{section}.{label}")
@@ -311,9 +317,23 @@ def fit_recovery_models(
         "full_data_sampling"
     ]
     factor_traces: dict[str, Any] = {}
+    use_nonnegative = (
+        recovery_preregistration["identified_factor_models"].get(
+            "loading_sign_constraint"
+        )
+        == "all_free_loading_elements_are_nonnegative"
+    )
+    if use_nonnegative:
+        from qb_gsee_benchmark.ml.bayesian_irt_nonnegative import (
+            nonnegative_factor_model,
+        )
+
+        factor_model_builder = nonnegative_factor_model
+    else:
+        factor_model_builder = identified_factor_model
     for factors, name in ((1, "one_factor"), (2, "two_factor")):
         print(f"ML9C_RECOVERY_FIT_START model={name}", flush=True)
-        model = identified_factor_model(
+        model = factor_model_builder(
             full_transform.standardized,
             data.variant_ids,
             data.task_ids,
@@ -349,7 +369,7 @@ def fit_recovery_models(
             train_indices = np.flatnonzero(folds != fold)
             transform = factor_transform(data.logit_quality, train_indices)
             train_ids = tuple(data.task_ids[index] for index in train_indices)
-            model = identified_factor_model(
+            model = factor_model_builder(
                 transform.standardized[train_indices],
                 data.variant_ids,
                 train_ids,
@@ -498,6 +518,13 @@ def write_recovery_artifacts(
 ) -> dict[str, Any]:
     preregistration = verify_recovery_preregistration(
         root, recovery_preregistration_path
+    )
+    version = str(preregistration["artifact_id"]).rsplit("_", 1)[-1]
+    recovery_source = (
+        "identified_recovery_v2" if version == "v2" else "nonnegative_recovery_v3"
+    )
+    artifact_stem = (
+        "ml9c_identified_recovery" if version == "v2" else "ml9c_nonnegative_recovery"
     )
     if output_directory.exists():
         shutil.rmtree(output_directory)
@@ -721,7 +748,7 @@ def write_recovery_artifacts(
             {
                 "model": name,
                 **fit.diagnostics[name],
-                "source": "identified_recovery_v2",
+                "source": recovery_source,
                 "output_kind": "posterior_diagnostic",
             }
         )
@@ -766,7 +793,7 @@ def write_recovery_artifacts(
         and all(row["passed"] for row in fit.cross_validation_diagnostics)
     )
     report = {
-        "artifact_id": "ml9c_identified_recovery_report_v2",
+        "artifact_id": f"{artifact_stem}_report_{version}",
         "status": (
             "complete_internal_posterior_estimate"
             if all_recovery_diagnostics_pass
@@ -793,7 +820,7 @@ def write_recovery_artifacts(
     }
     stable_json_dump(report, output_directory / "report.json")
     environment = {
-        "artifact_id": "ml9c_identified_recovery_environment_v2",
+        "artifact_id": f"{artifact_stem}_environment_{version}",
         "python": platform.python_version(),
         "python_implementation": platform.python_implementation(),
         "pymc": __import__("pymc").__version__,
@@ -866,7 +893,7 @@ def write_recovery_artifacts(
         if path.is_file() and path.name != "artifact_manifest.json"
     ]
     manifest = {
-        "artifact_id": "ml9c_identified_recovery_manifest_v2",
+        "artifact_id": f"{artifact_stem}_manifest_{version}",
         "status": report["status"],
         "files": files,
         "binary_handoff_unchanged": True,
