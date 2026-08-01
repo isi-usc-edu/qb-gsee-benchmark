@@ -1,0 +1,214 @@
+{
+  "artifact_id": "ml9b_resource_profiles_preregistration_v1",
+  "status": "frozen_before_ml9b_result_construction",
+  "frozen_before_result_construction": true,
+  "purpose": "Censored resource-to-solution records and More-Wild-style data profiles from the accepted post-G59 panel only.",
+  "order": {
+    "ml_goals_external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/ML_GOALS.md",
+    "ml_goals_sha256": "dfded5420af33a5969c32d7ba20e9e989990db3b4b67773c72fce6a7f00c4545",
+    "pi_literature_memo_external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/PI_LIT_REVIEW_2026-07-31_hardness_instruments.md",
+    "pi_literature_memo_sha256": "e4653aa7d203f5fd22fcdbea9d1823e654b8ad2a98a88c5f82e68f4f451dce7b",
+    "order_revision": "ML-9 v2 2026-07-31",
+    "hold_lifted": true
+  },
+  "inputs": {
+    "post_g59_manifest": {
+      "path": "analysis/ml_g59_panel_refresh/final_v1/artifact_manifest.json",
+      "sha256": "1c01305fc8a290fe2bbd9ef866eb859195f1f6dd90a5a8ae66f51fdeb73f9d89"
+    },
+    "normalized_observations": {
+      "path": "analysis/ml_g59_panel_refresh/final_v1/normalized_observations.csv",
+      "sha256": "80ecc6c7968d4d6ffc0028dc72fb5ff73681ef9a7d18592e996510fe932b78c7"
+    },
+    "coverage": {
+      "path": "analysis/ml_g59_panel_refresh/final_v1/coverage.csv",
+      "sha256": "cd2a2823060591ba8dfe07ce8027b9fc735412091b05e28e8b052dc0b7092984"
+    },
+    "solver_variants": {
+      "path": "analysis/ml_g59_panel_refresh/final_v1/preflight/solver_variants.json",
+      "sha256": "171be76d4893b0e046ff66fc1c0c9f7b6d129271e8f2681043039c84ac19ead5"
+    },
+    "panel_of_record": {
+      "path": "analysis/ml_core_set_v2/selection_of_record_v1/panel_of_record.csv",
+      "sha256": "367f8a484f2c9c6e3e3b9d03ac6d5e5edcc06ead185a2cb5d14204510a01ffe3"
+    },
+    "selection_manifest": {
+      "path": "analysis/ml_core_set_v2/selection_of_record_v1/selection_of_record_manifest.json",
+      "sha256": "20159c02b3463af39a3ac8ce946992f0c89ddfd52e79e9ad2c30fee08982bf77"
+    },
+    "rung_recovery_amendment": {
+      "path": "analysis/ml_g50_solver_families/amendment_rung_ledger_recovery.json",
+      "sha256": "98589612d6523a917ab3885f5a2e1ce04c385d572de7a09bee9cc5f6a3402c72"
+    },
+    "trimci_bounded_rung_amendment": {
+      "path": "analysis/ml_g50_solver_families/amendment_trimci_bounded_rung_semantics.json",
+      "sha256": "3859025c98a25383e3026aee761b127e6b3d138d12899263a7aa7b0ab3892149"
+    }
+  },
+  "population": {
+    "panel_tasks": 96,
+    "observed_variants": 18,
+    "complete_binary_cells": 1728,
+    "selection_weights_used": false,
+    "profile_denominator": "all 96 panel tasks"
+  },
+  "tracks": {
+    "ladders": [
+      {
+        "solver_family_id": "dmrg",
+        "resource_ladder_id": "g50_dmrg_bond_dimension_v1",
+        "resource_axis_name": "bond_dimension",
+        "resource_units": "states",
+        "ordered_values": [256, 512, 1024, 2048],
+        "effort_multiplier": "resource_value / 256"
+      },
+      {
+        "solver_family_id": "shci",
+        "resource_ladder_id": "g50_shci_orbopt_variational_eps_var_v1",
+        "resource_axis_name": "eps_var",
+        "resource_units": "hartree",
+        "ordered_values": [0.0002, 0.0001, 0.00005, 0.00002],
+        "effort_multiplier": "0.0002 / resource_value"
+      },
+      {
+        "solver_family_id": "trimci",
+        "resource_ladder_id": "g50_trimci_target_determinants_v1",
+        "resource_axis_name": "target_n_determinants",
+        "resource_units": "determinants",
+        "ordered_values": [100000, 250000, 500000, 1000000, 2000000, 5000000, 10000000],
+        "effort_multiplier": "resource_value / 100000"
+      }
+    ],
+    "single_point": {
+      "solver_family_id": "ipie_afqmc",
+      "solver_variant_id": "uhf_trial_512_walkers_1000_blocks",
+      "resource_axis_name": "single_budget",
+      "resource_units": "accepted_configuration",
+      "resource_value": 1,
+      "effort_multiplier": 1
+    },
+    "companion_variants_excluded_from_ladder_profiles": [
+      "g50_orbopt_terminal_pt_eps_2e_5_nchunks8",
+      "default_three_phase"
+    ],
+    "companion_reason": "no common ordered resource axis; retain a separate runstatus view"
+  },
+  "thresholds": {
+    "factors": [0.5, 1.0, 2.0],
+    "success_rule": "finite nonnegative graded_residual <= threshold factor",
+    "primary_factor": 1.0,
+    "stored_label_mutation": false,
+    "sensitivity_role": "analysis_layer_only"
+  },
+  "attempt_evidence": {
+    "finite_result": "finite energy and finite graded residual is an observed attempt even if the parent later terminated",
+    "terminal_no_result": "accepted timeout or crash annotation is an observed attempt",
+    "complete_matrix_placeholder": "no finite result and no accepted timeout/crash annotation is not_observed and receives no ASlib runstatus",
+    "coverage_crosscheck": "coverage_status and coverage_reason must agree with observation annotations; disagreements fail finalization"
+  },
+  "runstatus": {
+    "vocabulary": ["ok", "accuracy_miss", "timeout", "crash"],
+    "precedence": [
+      "crash for a no-result accepted crash",
+      "timeout for a no-result accepted timeout",
+      "ok for a finite residual meeting the active threshold",
+      "accuracy_miss for any other finite residual"
+    ],
+    "crash_is_competing_risk": true,
+    "timeout_is_right_censor": true,
+    "missing_attempts_emitted_as_runstatus": false
+  },
+  "resource_to_solution": {
+    "unit": "task by track by threshold factor",
+    "event": "first ordered rung with ok runstatus",
+    "event_types": [
+      "solution",
+      "competing_risk_crash",
+      "right_censored_walltime",
+      "right_censored_ladder_exhaustion",
+      "no_attempt_evidence"
+    ],
+    "terminal_priority_without_solution": [
+      "competing_risk_crash",
+      "right_censored_walltime",
+      "right_censored_ladder_exhaustion",
+      "no_attempt_evidence"
+    ],
+    "censor_resource": "highest evidenced rung; never a configured but unevidenced later rung",
+    "intermediate_result_on_terminated_parent": "retain the finite result while preserving terminal crash or timeout for an unsolved ladder endpoint",
+    "monotonic_repair": false
+  },
+  "data_profiles": {
+    "definition": "cumulative fraction of all 96 panel tasks with a solution at or before the ordered resource point",
+    "denominator": 96,
+    "resource_coordinates": ["resource_rank", "resource_value", "effort_multiplier"],
+    "ipie_single_point_documented": true,
+    "selection_weighting": false,
+    "population_inference": false
+  },
+  "threshold_stability": {
+    "comparisons": ["0.5x_minus_1x", "2x_minus_1x"],
+    "per_track_metrics": [
+      "endpoint_fraction_solved",
+      "endpoint_fraction_difference",
+      "maximum_absolute_profile_difference_over_common_rungs"
+    ],
+    "cross_track_metric": "Spearman endpoint-rank concordance with 1x; undefined ties reported explicitly",
+    "qualitative_statement_required": true
+  },
+  "summaries": {
+    "resource_distribution_scope": "successful events only, explicitly conditional",
+    "statistics": ["count", "25th_percentile", "median", "75th_percentile"],
+    "means": false,
+    "par_k": false,
+    "status_counts_required": true,
+    "heavy_tail_caveat_required": true
+  },
+  "outputs": {
+    "internal_only": true,
+    "all_derived_outputs_labeled": "descriptive",
+    "required_files": [
+      "REPORT.md",
+      "report.json",
+      "environment.json",
+      "attempt_coverage.csv",
+      "runstatus.csv",
+      "resource_to_solution.csv",
+      "data_profiles.csv",
+      "threshold_stability.csv",
+      "conditional_resource_quantiles.csv",
+      "companion_variants.csv",
+      "artifact_manifest.json"
+    ]
+  },
+  "reproducibility": {
+    "python_hash_seed": 0,
+    "stable_row_sorting": true,
+    "csv_line_terminator": "LF",
+    "float_serialization": ".17g",
+    "json_serialization": "sort_keys true, indent 2, trailing newline",
+    "two_independent_runs": true,
+    "recursive_byte_identity_required": true,
+    "raw_run_trees_retained": true,
+    "promotion_only_after_identity": true
+  },
+  "fences": {
+    "new_solver_runs": false,
+    "task_reselection": false,
+    "label_changes": false,
+    "design_based_ratio_replaced": false,
+    "public_or_dashboard_placement": false,
+    "crashes_pooled_with_censoring": false,
+    "prohibited_vocabulary_absent_from_new_artifacts": true,
+    "ambiguous_choice_policy": "conservative_document_and_continue"
+  },
+  "prior_exposure": {
+    "accepted_g50_g59_aggregate_outcomes_seen": true,
+    "ml9a_family_labels_seen": true,
+    "ml9b_resource_endpoint_computed": false,
+    "ml9b_data_profile_computed": false,
+    "ml9b_threshold_comparison_computed": false,
+    "ml9b_summary_computed": false,
+    "design_selected_from_ml9b_result_comparison": false
+  }
+}
