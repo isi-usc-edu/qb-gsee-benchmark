@@ -1,0 +1,137 @@
+{
+  "artifact_id": "ml9a_instance_space_manifest_v1",
+  "census": {
+    "bootstrap_replicates": 2000,
+    "corpus_tasks": 718,
+    "non_gradeable_coverage_points": 109,
+    "panel_tasks": 96,
+    "portfolio_objects": 1,
+    "priority_rows": 622,
+    "projection_features": 8,
+    "solver_families": 4,
+    "threshold_factors": 3
+  },
+  "files": [
+    {
+      "bytes": 1471,
+      "path": "REPORT.md",
+      "sha256": "a039d12e93ee77d6ec07b890d54a90d671d7f7e3f61f2dddba9c08cd082ff8c3"
+    },
+    {
+      "bytes": 2266487,
+      "path": "bootstrap_draws.csv",
+      "sha256": "63595f6616b5afc754fa6288957c706b51011953792dce60f252a95a0f29a6bf"
+    },
+    {
+      "bytes": 7450,
+      "path": "bootstrap_intervals.csv",
+      "sha256": "c505b12bc95d122a3ba0f1c86699532304b7e3af1e6c0b4fb05c0dcd78b8e73c"
+    },
+    {
+      "bytes": 2177,
+      "path": "cloister_boundary.csv",
+      "sha256": "ee173bbcbc7fcf6444bf631dea93715cd85adec747d234520957136c146821ec"
+    },
+    {
+      "bytes": 22367,
+      "path": "cloister_coverage.json",
+      "sha256": "a1b434c937118964b528b91824a99722b25488d628d8e515b1e1c818695302dd"
+    },
+    {
+      "bytes": 133041,
+      "path": "corpus_coordinates.csv",
+      "sha256": "264baa1315bfab9ad404fa0d0e4da2a38359265591af2993eb0f4ce374b54859"
+    },
+    {
+      "bytes": 1078,
+      "path": "environment.json",
+      "sha256": "8df56cc53cc10c8bfed09a6dece5a20bb72f284ed017e771e3be03dac9db0b03"
+    },
+    {
+      "bytes": 23775,
+      "path": "feature_preprocessing.csv",
+      "sha256": "3bb470add41e34438182ee023e0f35183d479248f37cbc077545a13a7ceeeaf9"
+    },
+    {
+      "bytes": 176686,
+      "path": "labels_by_threshold.csv",
+      "sha256": "8d8dc386af818e0d5554f5ad7a264809bfdae8758e383b6fbf7361246939a72f"
+    },
+    {
+      "bytes": 15712,
+      "path": "panel_coordinates.csv",
+      "sha256": "766103c97c43523053586c1e0b7252fba57eb5fb512e476068dc6d3aa5a1afdc"
+    },
+    {
+      "bytes": 199536,
+      "path": "priority_targets.csv",
+      "sha256": "3e18bcb07e80f3afce0ee8ba7f83a3a2848428e1f5070a6c6f48fdab49ad1311"
+    },
+    {
+      "bytes": 8006,
+      "path": "priority_targets_top25.csv",
+      "sha256": "2b41060a36e4046dd892c9d5e12660cc297a66d15e57952fbe30571a77db92a7"
+    },
+    {
+      "bytes": 704,
+      "path": "projection_features.csv",
+      "sha256": "e8bfdebad7e1a6d6656106993eb5f5bae78139978d13d079da8eb143c779f8a5"
+    },
+    {
+      "bytes": 1011,
+      "path": "projection_matrix.csv",
+      "sha256": "309896fec61108648e53e7835cbe4deb403f255e0ba765949aff1d1e90534e0e"
+    },
+    {
+      "bytes": 2758,
+      "path": "pythia_gate.csv",
+      "sha256": "fa3f841ad894eb129017065ed4e81a589c721f89cfa11f449122bace6bb8ae4e"
+    },
+    {
+      "bytes": 1610,
+      "path": "report.json",
+      "sha256": "cc0914b68dc6dfb95eefa80a4b55a7586957a962ca5122450ab66c0a56a2107d"
+    },
+    {
+      "bytes": 132,
+      "path": "topological_preservation.csv",
+      "sha256": "d9068eeb347ec9eb3a2dbee8acbb6ce96e150df4a09e2e145542e55ce0a917e1"
+    },
+    {
+      "bytes": 4099,
+      "path": "trace_footprints.csv",
+      "sha256": "b796d8359f4b7e6ee15cb0cb9710b86cf3e6635b03f9d2ea969cab07b154dc99"
+    },
+    {
+      "bytes": 261161,
+      "path": "trace_polygons.json",
+      "sha256": "1fc03de2f9701687f0fc70fb7c68d1bd2802be5078af8274ed0998d63f613a23"
+    }
+  ],
+  "fitted_surface_integral": false,
+  "input_hashes": {
+    "canonical_families": "4bc9404feba3313cea64df734364a3ecbb45dbfda6f41bd337231181fef67942",
+    "feature_metadata": "3efad3a89b7fd2463da7d777a6c3e6c99759a04b15e007584266d24f44ec6590",
+    "feature_table": "b5f8a78c3fd8fa9ba1e5dce4e8e2986bfc19346b26375e22763816efa5cdc8f7",
+    "gradeability_census": "9487c30d4738dbb2964160bf8ae54e06dbdf248519b900ef4cb3accad913daab",
+    "gradeability_manifest": "acdee96c5789c4eea62e31c891cba75de81eae2f841babccd1df9ba3bbacbaa4",
+    "identifier_screen": "f4ca6d170215d2f87fba67de8df3ce6d6987fb2f635c37eeb0506500ced4650d",
+    "normalized_observations": "80ecc6c7968d4d6ffc0028dc72fb5ff73681ef9a7d18592e996510fe932b78c7",
+    "panel_of_record": "367f8a484f2c9c6e3e3b9d03ac6d5e5edcc06ead185a2cb5d14204510a01ffe3",
+    "post_g59_manifest": "1c01305fc8a290fe2bbd9ef866eb859195f1f6dd90a5a8ae66f51fdeb73f9d89",
+    "selection_of_record_manifest": "20159c02b3463af39a3ac8ce946992f0c89ddfd52e79e9ad2c30fee08982bf77",
+    "solver_variants": "171be76d4893b0e046ff66fc1c0c9f7b6d129271e8f2681043039c84ac19ead5"
+  },
+  "internal_only": true,
+  "label_changes": false,
+  "new_solver_runs": false,
+  "output_kind": "estimate",
+  "preflight_manifest_sha256": "adbeb4cfd1f05eae61b7d10b55ac83ba882742916bbede241cc7b408b0623467",
+  "preregistration_sha256": "025a2986d5f39d889e4c7216f8e34780213707ec7ea82c0951a50399467f78b3",
+  "ratio_of_record": "design_based_unchanged",
+  "status": "complete_internal_descriptive",
+  "task_reselection": false,
+  "toolkit_version": "0.2.1",
+  "toolkit_wheel_sha256": "d0d81a7347f52745a0ad58594a3ad1d06cfac6a2a43110970e1fec55cfeb4e8e",
+  "validated_predictor_claim": false
+}
