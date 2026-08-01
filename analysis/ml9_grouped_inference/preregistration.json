@@ -1,0 +1,224 @@
+{
+  "artifact_id": "ml9d_grouped_inference_preregistration_v1",
+  "status": "frozen_before_any_target_fit",
+  "frozen_before_target_fit": true,
+  "purpose": "Outcome-blind correlation grouping and prespecified refit-and-compare inference for task difficulty and solver-family solvability.",
+  "order": {
+    "ml_goals_external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/ML_GOALS.md",
+    "ml_goals_sha256": "dfded5420af33a5969c32d7ba20e9e989990db3b4b67773c72fce6a7f00c4545",
+    "pi_literature_memo_external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/PI_LIT_REVIEW_2026-07-31_hardness_instruments.md",
+    "pi_literature_memo_sha256": "e4653aa7d203f5fd22fcdbea9d1823e654b8ad2a98a88c5f82e68f4f451dce7b",
+    "order_revision": "ML-9 v2 2026-07-31",
+    "ml9e_authorized": false
+  },
+  "outcome_blind_inputs": {
+    "feature_table": {
+      "path": "scripts/Hamiltonian_features.csv",
+      "sha256": "b5f8a78c3fd8fa9ba1e5dce4e8e2986bfc19346b26375e22763816efa5cdc8f7"
+    },
+    "feature_metadata": {
+      "path": "analysis/feature_schema/feature_column_metadata.csv",
+      "sha256": "3efad3a89b7fd2463da7d777a6c3e6c99759a04b15e007584266d24f44ec6590"
+    },
+    "identifier_screen": {
+      "path": "analysis/ml_v2/identifier_screen.json",
+      "sha256": "f4ca6d170215d2f87fba67de8df3ce6d6987fb2f635c37eeb0506500ced4650d"
+    },
+    "panel_of_record": {
+      "path": "analysis/ml_core_set_v2/selection_of_record_v1/panel_of_record.csv",
+      "sha256": "367f8a484f2c9c6e3e3b9d03ac6d5e5edcc06ead185a2cb5d14204510a01ffe3"
+    },
+    "canonical_families": {
+      "path": "analysis/feature_schema/canonical_families_v1.json",
+      "sha256": "4bc9404feba3313cea64df734364a3ecbb45dbfda6f41bd337231181fef67942"
+    },
+    "ml9a_preflight_manifest": {
+      "path": "analysis/ml9_instance_space/preflight_v1/artifact_manifest.json",
+      "sha256": "adbeb4cfd1f05eae61b7d10b55ac83ba882742916bbede241cc7b408b0623467"
+    },
+    "ml9a_feature_census": {
+      "path": "analysis/ml9_instance_space/preflight_v1/feature_census.csv",
+      "sha256": "a6cfab93d2caaad16b0575c15e53ad8735d20365eaccfe9c9401ff25a3b967ce"
+    }
+  },
+  "target_inputs": {
+    "primary": {
+      "role": "continuous_task_difficulty_posterior_mean",
+      "path": "analysis/ml9_bayesian_irt/final_v1/difficulty_handoff_ml9d.csv",
+      "manifest_path": "analysis/ml9_bayesian_irt/final_v1/artifact_manifest.json",
+      "identity_path": "analysis/ml9_bayesian_irt/two_run_identity_v1.json",
+      "required_state": "promoted_final_v1_with_all_preregistered_health_gates_passing",
+      "current_retained_raw_files_allowed": false
+    },
+    "secondary": {
+      "role": "per_family_binary_solvability_at_absolute_threshold_1x",
+      "path": "analysis/ml9_instance_space/final_v1/labels_by_threshold.csv",
+      "sha256": "8d8dc386af818e0d5554f5ad7a264809bfdae8758e383b6fbf7361246939a72f",
+      "manifest_path": "analysis/ml9_instance_space/final_v1/artifact_manifest.json",
+      "manifest_sha256": "c617819e86d1bd21074e5d6889e2384bc29282ffc69c6dbf472ded8fb19a8a03",
+      "threshold_factor": 1.0,
+      "families": [
+        "dmrg",
+        "ipie_afqmc",
+        "shci",
+        "trimci"
+      ]
+    },
+    "access_embargo": "Read neither primary nor secondary target until the primary required_state is verified after this preregistration commit."
+  },
+  "population": {
+    "tasks": 96,
+    "features": 193,
+    "task_ids": "panel_of_record task_uuid in stored order",
+    "bootstrap_and_split_block": "canonical_task_family_recommended",
+    "expected_canonical_family_blocks": 40,
+    "selection_weights_used": false
+  },
+  "feature_preprocessing": {
+    "implementation": "qb_gsee_benchmark.ml.instance_space.coordinate_preprocessing",
+    "numeric_coercion": "non_numeric_becomes_missing",
+    "completion": "per_feature_panel_median",
+    "center": "per_feature_panel_median",
+    "scale_fallback": [
+      "panel_iqr",
+      "1.4826_times_panel_mad",
+      "panel_sample_standard_deviation",
+      "1.0"
+    ],
+    "clip": [-5.0, 5.0],
+    "constant_features_retained_as_singletons": true,
+    "all_193_columns_remain_eligible": true
+  },
+  "correlation_grouping": {
+    "correlation": "Pearson_on_completed_centered_scaled_clipped_panel_features",
+    "distance": "1_minus_absolute_correlation",
+    "zero_variance_distance": "1.0_to_every_other_feature_and_0.0_to_self",
+    "linkage": "average",
+    "optimal_leaf_ordering": true,
+    "fixed_distance_cut": 0.3,
+    "cluster_id_order": "descending_cluster_size_then_lexicographically_smallest_member",
+    "generic_name_rule": "cluster_id__dominant_logical_blocks__lexicographically_first_member",
+    "dominant_block_rule": "include logical blocks tied for the largest member count, lexicographic order",
+    "anchor_name_overrides": {
+      "log_fci_dim+n_elec+n_orbs": "size_sector_complexity_baseline",
+      "number_of_terms": "jw_representation_connectivity",
+      "cut_weight_best_sum": "interaction_orderability_scale",
+      "bare_one_body_gap_min": "one_body_mean_field_gaps",
+      "mp2_correlation_energy_per_electron_hartree": "correlation_energy_integral_density",
+      "mp2_natural_entropy_per_electron": "multireference_natural_occupation"
+    },
+    "outcome_adaptive_regrouping_allowed": false
+  },
+  "prespecified_contrasts": {
+    "baseline": {
+      "id": "size_sector_complexity_baseline",
+      "construction": "union_of_unique_clusters_containing_log_fci_dim_n_elec_or_n_orbs",
+      "anchors": ["log_fci_dim", "n_elec", "n_orbs"]
+    },
+    "additions": [
+      {
+        "id": "C1_jw_representation_connectivity",
+        "anchor": "number_of_terms",
+        "question": "Does the JW/representation-connectivity group add difficulty signal beyond size/sector complexity?"
+      },
+      {
+        "id": "C2_interaction_orderability_scale",
+        "anchor": "cut_weight_best_sum",
+        "question": "Does the interaction-orderability group add difficulty signal beyond size/sector complexity?"
+      },
+      {
+        "id": "C3_one_body_mean_field_gaps",
+        "anchor": "bare_one_body_gap_min",
+        "question": "Does the one-body/mean-field-gap group add difficulty signal beyond size/sector complexity?"
+      },
+      {
+        "id": "C4_correlation_energy_integral_density",
+        "anchor": "mp2_correlation_energy_per_electron_hartree",
+        "question": "Does the correlation-energy/integral-density group add difficulty signal beyond size/sector complexity?"
+      },
+      {
+        "id": "C5_multireference_natural_occupation",
+        "anchor": "mp2_natural_entropy_per_electron",
+        "question": "Does the multireference natural-occupation group add difficulty signal beyond size/sector complexity?"
+      }
+    ],
+    "anchor_clusters_must_be_unique": true,
+    "anchor_clusters_must_not_overlap_baseline": true,
+    "all_other_cluster_tests": "exploratory"
+  },
+  "inference": {
+    "comparison": "refit_baseline_versus_baseline_plus_one_prespecified_group",
+    "folds": 5,
+    "regression_splitter": "GroupKFold_by_canonical_task_family",
+    "classification_splitter": "StratifiedGroupKFold_shuffle_true_random_state_20260731",
+    "primary_metric": "out_of_fold_delta_R2_augmented_minus_baseline",
+    "secondary_metric": "out_of_fold_delta_AUC_augmented_minus_baseline",
+    "primary_estimator": {
+      "class": "RandomForestRegressor",
+      "n_estimators": 1000,
+      "max_features": "sqrt",
+      "min_samples_leaf": 5,
+      "n_jobs": 1,
+      "random_state": 20260731
+    },
+    "secondary_estimator": {
+      "class": "RandomForestClassifier",
+      "n_estimators": 1000,
+      "max_features": "sqrt",
+      "min_samples_leaf": 5,
+      "class_weight": "balanced",
+      "n_jobs": 1,
+      "random_state": 20260731
+    },
+    "interval": {
+      "method": "canonical_family_blocked_percentile_bootstrap_of_fixed_out_of_fold_predictions",
+      "replicates": 2000,
+      "seed": 20260731,
+      "bounds_percent": [2.5, 97.5]
+    },
+    "zero_importance_test": {
+      "method": "one_sided_family_block_paired_randomization_by_swapping_baseline_and_augmented_out_of_fold_predictions",
+      "draws": 9999,
+      "seed": 20260801,
+      "null": "augmentation_has_no_positive_predictive_importance",
+      "primary_family": "five_primary_continuous_contrasts",
+      "secondary_family": "twenty_secondary_contrasts_across_five_groups_and_four_solver_families"
+    },
+    "multiplicity": {
+      "method": "Benjamini_Hochberg",
+      "q": 0.05,
+      "apply_separately_to_primary_and_secondary_families": true
+    }
+  },
+  "stability_and_model_reliance": {
+    "family_blocked_bootstrap_replicates": 2000,
+    "selection_frequency": "fraction_of_bootstrap_delta_metric_values_strictly_above_zero",
+    "rank_concordance": "Spearman_correlation_of_five_contrast_ranks_against_full_panel_ranks_per_bootstrap_draw",
+    "bounded_model_class_range": {
+      "second_estimators": ["ExtraTreesRegressor", "ExtraTreesClassifier"],
+      "same_tree_count_leaf_size_feature_rule_splits_and_seeds_as_primary_estimators": true,
+      "reported_range": "minimum_and_maximum_delta_metric_across_random_forest_and_extra_trees"
+    },
+    "single_rank_claims_allowed": false
+  },
+  "reporting": {
+    "primary_estimates_descriptive_internal": true,
+    "no_causal_feature_claims": true,
+    "no_validated_predictor_claim": true,
+    "shap_planned": false,
+    "all_non_prespecified_results_labeled_exploratory": true,
+    "ml9c_posterior_uncertainty_caveat_required": true
+  },
+  "exactness": {
+    "independent_process_runs": 2,
+    "byte_identical_artifacts_required_before_promotion": true,
+    "raw_run_trees_retained": true,
+    "hash_manifest_required": true
+  },
+  "failure_actions": {
+    "missing_or_unhealthy_ml9c_primary": "stop_before_all_target_access_and_fitting; retain outcome_blind_group_artifacts_only",
+    "nonunique_or_baseline_overlapping_anchor_cluster": "stop_before_target_access; do_not_substitute_another_cluster",
+    "degenerate_binary_fold": "mark_that_family_contrast_non_gradeable; do_not_change_splitter_or_pool_families",
+    "identity_failure": "do_not_promote"
+  }
+}
