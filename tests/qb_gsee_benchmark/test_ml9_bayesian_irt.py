@@ -15,6 +15,8 @@ from qb_gsee_benchmark.ml.core_set import sha256_file
 
 ROOT = Path(__file__).resolve().parents[2]
 PREREGISTRATION = ROOT / "analysis/ml9_bayesian_irt/preregistration.json"
+RAW_RUNS = ROOT / "analysis/ml9_bayesian_irt/raw_runs"
+RETAINED_IDENTITY = ROOT / "analysis/ml9_bayesian_irt/two_run_identity_retained_v1.json"
 
 
 def test_ml9c_preregistration_freezes_reduced_dependence_aware_models() -> None:
@@ -98,3 +100,35 @@ def test_ml9c_deterministic_npz_is_byte_identical(tmp_path: Path) -> None:
     _deterministic_npz(first, arrays)
     _deterministic_npz(second, dict(reversed(list(arrays.items()))))
     assert first.read_bytes() == second.read_bytes()
+
+
+def test_ml9c_nonconverged_trees_are_identical_and_not_promoted() -> None:
+    preregistration = json.loads(PREREGISTRATION.read_text(encoding="utf-8"))
+    required = set(preregistration["outputs"]["required_files"])
+    identity = json.loads(RETAINED_IDENTITY.read_text(encoding="utf-8"))
+    assert identity["status"] == "pass_retained_not_promoted"
+    assert identity["byte_identical"] is True
+    assert identity["promoted"] is False
+    assert identity["file_count"] == 14
+    assert set(identity["relative_paths"]) == required
+    assert not (ROOT / "analysis/ml9_bayesian_irt/final_v1").exists()
+    for name, expected_hash in identity["file_hashes"].items():
+        first = RAW_RUNS / "run_1" / name
+        second = RAW_RUNS / "run_2" / name
+        assert first.read_bytes() == second.read_bytes()
+        assert sha256_file(first) == expected_hash
+
+    diagnostics = pd.read_csv(RAW_RUNS / "run_1/posterior_diagnostics.csv")
+    passed = dict(zip(diagnostics["model"], diagnostics["passed"]))
+    assert passed == {
+        "binary_rasch": True,
+        "continuous_beta": False,
+        "one_factor": False,
+        "two_factor": False,
+    }
+    assert int(diagnostics["divergences"].sum()) == 0
+    report = json.loads((RAW_RUNS / "run_1/report.json").read_text(encoding="utf-8"))
+    assert report["status"] == "retained_internal_nonconverged"
+    assert report["all_sampler_diagnostics_pass"] is False
+    assert report["diagnostic_escalation_used"] is True
+    assert report["loo_comparison"]["reliable"] is False

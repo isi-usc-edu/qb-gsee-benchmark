@@ -29,6 +29,15 @@ bound to `.ds.to_array()`, `elpd_i`, `elpd`, and `p` after a synthetic
 end-to-end check. Model definitions, samples, seeds, health gates, and output
 estimands are unchanged. No incomplete tree is promoted.
 
+The compatibility-fixed production attempt, job `7685269.imgt1`, completed the
+initial and frozen escalation passes in both executions. PBS recorded exit 1
+after 56 minutes 23 seconds because the post-escalation health gate did not
+pass. The primary binary Rasch fit passed; the continuous beta fit missed the
+bulk-ESS threshold; both exploratory factor fits failed convergence, and the
+PSIS-LOO comparison was unreliable. Both complete raw trees are retained and
+verified byte-identical. No `final_v1` directory or ML-9D hardness handoff is
+promoted, exactly as preregistered.
+
 This amendment changes only the runtime location recorded by the
 preregistration. It does not change the response link, priors, testlet effects,
 sampling seeds, tuning or draw counts, diagnostic gates, estimands, factor
