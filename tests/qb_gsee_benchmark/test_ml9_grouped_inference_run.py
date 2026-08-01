@@ -98,6 +98,4 @@ def test_ml9d_block_bootstrap_and_scoring_are_deterministic() -> None:
 
 def test_ml9d_benjamini_hochberg_is_monotone_in_rank() -> None:
     adjusted = _benjamini_hochberg([0.01, 0.04, 0.03, 0.2])
-    assert np.allclose(
-        adjusted, [0.04, 0.05333333333333334, 0.05333333333333334, 0.2]
-    )
+    assert np.allclose(adjusted, [0.04, 0.05333333333333334, 0.05333333333333334, 0.2])

@@ -102,8 +102,7 @@ def verify_target_gate(
         "wrong ML-9D preregistration",
     )
     _require(
-        contract.get("artifact_id")
-        == "ml9d_grouped_inference_execution_contract_v1",
+        contract.get("artifact_id") == "ml9d_grouped_inference_execution_contract_v1",
         "wrong ML-9D execution contract",
     )
     _require(
@@ -245,7 +244,9 @@ def prepare_inference(
 ) -> PreparedInference:
     """Open the targets only after the complete deterministic gate passes."""
 
-    gate_evidence = verify_target_gate(root, preregistration_path, execution_contract_path)
+    gate_evidence = verify_target_gate(
+        root, preregistration_path, execution_contract_path
+    )
     preregistration = _read_json(preregistration_path)
 
     preflight = root / "analysis/ml9_grouped_inference/preflight_v1"
@@ -255,7 +256,9 @@ def prepare_inference(
     _require(len(set(feature_names)) == 193, "duplicate ML-9D grouped feature")
 
     outcome_inputs = preregistration["outcome_blind_inputs"]
-    features = pd.read_csv(root / outcome_inputs["feature_table"]["path"], low_memory=False)
+    features = pd.read_csv(
+        root / outcome_inputs["feature_table"]["path"], low_memory=False
+    )
     panel = pd.read_csv(root / outcome_inputs["panel_of_record"]["path"])
     features["task_uuid"] = features["task_uuid"].astype(str)
     panel["task_uuid"] = panel["task_uuid"].astype(str)
@@ -266,15 +269,17 @@ def prepare_inference(
         .apply(pd.to_numeric, errors="coerce")
     )
     transformed, parameters = coordinate_preprocessing(raw)
-    expected_parameters = pd.read_csv(preflight / "feature_preprocessing.csv").set_index(
-        "feature"
-    )
+    expected_parameters = pd.read_csv(
+        preflight / "feature_preprocessing.csv"
+    ).set_index("feature")
     _require(
         list(expected_parameters.index.astype(str)) == list(feature_names),
         "ML-9D preprocessing feature order changed",
     )
     for column in parameters.columns:
-        expected = pd.to_numeric(expected_parameters[column], errors="coerce").to_numpy()
+        expected = pd.to_numeric(
+            expected_parameters[column], errors="coerce"
+        ).to_numpy()
         observed = pd.to_numeric(parameters[column], errors="coerce").to_numpy()
         _require(
             np.allclose(observed, expected, rtol=0.0, atol=1e-14, equal_nan=True),
@@ -322,9 +327,7 @@ def prepare_inference(
     _require(np.isfinite(primary_target).all(), "non-finite ML-9D primary target")
 
     canonical_families = primary["canonical_family"].astype(str).to_numpy()
-    canonical_payload = _read_json(
-        root / outcome_inputs["canonical_families"]["path"]
-    )
+    canonical_payload = _read_json(root / outcome_inputs["canonical_families"]["path"])
     canonical_map = {
         str(row["task_uuid"]): str(row["canonical_family_recommended"])
         for row in canonical_payload["tasks"]
@@ -345,7 +348,9 @@ def prepare_inference(
         )
         & labels["target"].astype(str).isin(FAMILY_TARGETS)
     ].copy()
-    _require(len(labels) == len(task_ids) * len(FAMILY_TARGETS), "wrong ML-9D label census")
+    _require(
+        len(labels) == len(task_ids) * len(FAMILY_TARGETS), "wrong ML-9D label census"
+    )
     _require(
         not labels.duplicated(["task_uuid", "target"]).any(),
         "duplicate ML-9D secondary label",
@@ -372,13 +377,17 @@ def prepare_inference(
 def _continuous_folds(groups: np.ndarray, folds: int) -> np.ndarray:
     assignment = np.full(len(groups), -1, dtype=int)
     splitter = GroupKFold(n_splits=folds)
-    for fold, (_, test) in enumerate(splitter.split(np.zeros(len(groups)), groups=groups)):
+    for fold, (_, test) in enumerate(
+        splitter.split(np.zeros(len(groups)), groups=groups)
+    ):
         assignment[test] = fold
     _require(bool((assignment >= 0).all()), "incomplete ML-9D continuous folds")
     return assignment
 
 
-def _binary_folds(y: np.ndarray, groups: np.ndarray, folds: int, seed: int) -> tuple[np.ndarray, bool]:
+def _binary_folds(
+    y: np.ndarray, groups: np.ndarray, folds: int, seed: int
+) -> tuple[np.ndarray, bool]:
     assignment = np.full(len(groups), -1, dtype=int)
     splitter = StratifiedGroupKFold(n_splits=folds, shuffle=True, random_state=seed)
     try:
@@ -430,9 +439,9 @@ def _fit_oof(
             prediction[test] = model.predict(x[np.ix_(test, feature_indices)])
         else:
             class_index = list(model.classes_).index(True)
-            prediction[test] = model.predict_proba(
-                x[np.ix_(test, feature_indices)]
-            )[:, class_index]
+            prediction[test] = model.predict_proba(x[np.ix_(test, feature_indices)])[
+                :, class_index
+            ]
     _require(np.isfinite(prediction).all(), "non-finite ML-9D OOF prediction")
     return prediction
 
@@ -474,7 +483,13 @@ def fit_comparisons(
 
     comparisons: list[FittedComparison] = []
     targets: list[tuple[str, str, np.ndarray, np.ndarray, bool]] = [
-        ("continuous", "task_difficulty", prepared.primary_target, continuous_folds, True)
+        (
+            "continuous",
+            "task_difficulty",
+            prepared.primary_target,
+            continuous_folds,
+            True,
+        )
     ]
     targets.extend(
         (
@@ -488,7 +503,11 @@ def fit_comparisons(
     )
     for target_kind, target_name, observed, folds, target_gradeable in targets:
         settings = inference[
-            "primary_estimator" if target_kind == "continuous" else "secondary_estimator"
+            (
+                "primary_estimator"
+                if target_kind == "continuous"
+                else "secondary_estimator"
+            )
         ]
         for contrast in prepared.contrasts:
             augmented_indices = np.unique(
@@ -577,7 +596,11 @@ def _score_comparisons(
     comparisons: Sequence[FittedComparison],
     groups: np.ndarray,
     contract: Mapping[str, Any],
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[tuple[str, str, str, str], np.ndarray]]:
+) -> tuple[
+    list[dict[str, Any]],
+    list[dict[str, Any]],
+    dict[tuple[str, str, str, str], np.ndarray],
+]:
     execution = contract["execution"]
     draws = _bootstrap_indices(
         groups, int(execution["bootstrap_draws"]), int(execution["bootstrap_seed"])
@@ -605,7 +628,8 @@ def _score_comparisons(
                     "estimator": comparison.estimator,
                     "baseline_feature_count": comparison.baseline_feature_count,
                     "added_feature_count": comparison.added_feature_count,
-                    "augmented_feature_count": comparison.baseline_feature_count + comparison.added_feature_count,
+                    "augmented_feature_count": comparison.baseline_feature_count
+                    + comparison.added_feature_count,
                     "tasks": len(comparison.observed),
                     "canonical_families": len(set(groups)),
                     "gradeable": False,
@@ -631,7 +655,9 @@ def _score_comparisons(
         delta_values = np.full(len(draws), np.nan)
         for replicate, indices in enumerate(draws):
             observed = comparison.observed[indices]
-            gradeable = comparison.target_kind == "continuous" or len(np.unique(observed)) == 2
+            gradeable = (
+                comparison.target_kind == "continuous" or len(np.unique(observed)) == 2
+            )
             if gradeable:
                 baseline = _metric(
                     comparison.target_kind,
@@ -671,7 +697,8 @@ def _score_comparisons(
                 "estimator": comparison.estimator,
                 "baseline_feature_count": comparison.baseline_feature_count,
                 "added_feature_count": comparison.added_feature_count,
-                "augmented_feature_count": comparison.baseline_feature_count + comparison.added_feature_count,
+                "augmented_feature_count": comparison.baseline_feature_count
+                + comparison.added_feature_count,
                 "tasks": len(comparison.observed),
                 "canonical_families": len(set(groups)),
                 "gradeable": True,
@@ -680,9 +707,15 @@ def _score_comparisons(
                 "augmented_score": augmented_score,
                 "delta_score": augmented_score - baseline_score,
                 "bootstrap_gradeable_draws": len(finite),
-                "bootstrap_ci_2_5pct": float(np.percentile(finite, 2.5)) if interval_gradeable else None,
-                "bootstrap_ci_97_5pct": float(np.percentile(finite, 97.5)) if interval_gradeable else None,
-                "selection_frequency": float(np.mean(finite > 0.0)) if interval_gradeable else None,
+                "bootstrap_ci_2_5pct": (
+                    float(np.percentile(finite, 2.5)) if interval_gradeable else None
+                ),
+                "bootstrap_ci_97_5pct": (
+                    float(np.percentile(finite, 97.5)) if interval_gradeable else None
+                ),
+                "selection_frequency": (
+                    float(np.mean(finite > 0.0)) if interval_gradeable else None
+                ),
             }
         )
     return estimate_rows, bootstrap_rows, deltas_by_key
@@ -699,7 +732,9 @@ def _randomization_tests(
     group_index = {group: index for index, group in enumerate(unique)}
     row_groups = np.array([group_index[group] for group in groups])
     rng = np.random.default_rng(int(execution["randomization_seed"]))
-    swap_masks = rng.integers(0, 2, size=(draws, len(unique)), dtype=np.int8).astype(bool)
+    swap_masks = rng.integers(0, 2, size=(draws, len(unique)), dtype=np.int8).astype(
+        bool
+    )
     rows: list[dict[str, Any]] = []
     for comparison in comparisons:
         if comparison.estimator != "random_forest":
@@ -782,7 +817,9 @@ def _multiplicity_rows(
         ("five_primary_continuous_contrasts", "continuous"),
         ("twenty_secondary_binary_contrasts", "binary"),
     ):
-        members = [row for row in randomization_rows if row["target_kind"] == target_kind]
+        members = [
+            row for row in randomization_rows if row["target_kind"] == target_kind
+        ]
         adjusted = _benjamini_hochberg(
             [
                 float(row["p_value_one_sided"]) if row["gradeable"] else 1.0
@@ -826,10 +863,7 @@ def _rank_concordance_rows(
         for row in estimate_rows
     }
     target_estimators = sorted(
-        {
-            (row["target_kind"], row["target"], row["estimator"])
-            for row in estimate_rows
-        }
+        {(row["target_kind"], row["target"], row["estimator"]) for row in estimate_rows}
     )
     rows: list[dict[str, Any]] = []
     for target_kind, target, estimator in target_estimators:
@@ -1000,9 +1034,7 @@ def run_grouped_inference(
     multiplicity_rows = _multiplicity_rows(
         randomization_rows, float(preregistration["inference"]["multiplicity"]["q"])
     )
-    rank_rows = _rank_concordance_rows(
-        estimate_rows, deltas_by_key, prepared.contrasts
-    )
+    rank_rows = _rank_concordance_rows(estimate_rows, deltas_by_key, prepared.contrasts)
     reliance_rows = _model_reliance_rows(estimate_rows)
     _write_csv_outputs(
         output_directory,
@@ -1016,7 +1048,9 @@ def run_grouped_inference(
         rank_rows,
         reliance_rows,
     )
-    stable_json_dump(prepared.gate_evidence, output_directory / "target_gate_evidence.json")
+    stable_json_dump(
+        prepared.gate_evidence, output_directory / "target_gate_evidence.json"
+    )
 
     environment = {
         "artifact_id": "ml9d_grouped_inference_environment_v1",
@@ -1041,12 +1075,12 @@ def run_grouped_inference(
         if row["target_kind"] == "binary" and row["estimator"] == "random_forest"
     ]
     rejected = [
-        row for row in multiplicity_rows if row["reject_zero_positive_importance"] is True
+        row
+        for row in multiplicity_rows
+        if row["reject_zero_positive_importance"] is True
     ]
     rank_values = [
-        float(row["spearman_rank_concordance"])
-        for row in rank_rows
-        if row["gradeable"]
+        float(row["spearman_rank_concordance"]) for row in rank_rows if row["gradeable"]
     ]
     report = {
         "artifact_id": "ml9d_grouped_inference_report_v1",
@@ -1141,8 +1175,8 @@ def run_grouped_inference(
     }
     stable_json_dump(manifest, output_directory / "artifact_manifest.json")
     _require(
-        {path.name for path in output_directory.iterdir() if path.is_file()} == required,
+        {path.name for path in output_directory.iterdir() if path.is_file()}
+        == required,
         "ML-9D final output contract changed",
     )
     return report
-
