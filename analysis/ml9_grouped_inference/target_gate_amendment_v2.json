@@ -1,0 +1,25 @@
+{
+  "amendment_id": "ml9d_target_gate_recovery_identity_v2",
+  "date": "2026-08-01",
+  "frozen_before_target_access": true,
+  "reason": "The separately preregistered ML-9C identified recovery promotes the accepted bundle at the original final_v1 path but records its two-run identity as v2. The original v1 identity documents a retained diagnostic failure and cannot authorize target access.",
+  "original_preregistration_path": "analysis/ml9_grouped_inference/preregistration.json",
+  "original_preregistration_sha256": "97a5d8f2b04a71f75f76b06f187d6c6c9449e2bdd40d4cb35b93e7ea9bd4caf2",
+  "recovery_preregistration_path": "analysis/ml9_bayesian_irt/recovery_preregistration_v2.json",
+  "recovery_preregistration_sha256": "d2ef8dc8622917a1da5eb24b74f0e7e0240c423b723e9e784460c5beec6043a3",
+  "target_gate_change": {
+    "original_identity_path": "analysis/ml9_bayesian_irt/two_run_identity_v1.json",
+    "accepted_recovery_identity_path": "analysis/ml9_bayesian_irt/two_run_identity_v2.json",
+    "promoted_primary_path_unchanged": "analysis/ml9_bayesian_irt/final_v1/difficulty_handoff_ml9d.csv",
+    "promoted_manifest_path_unchanged": "analysis/ml9_bayesian_irt/final_v1/artifact_manifest.json",
+    "required_state_unchanged": "promoted_final_v1_with_all_preregistered_health_gates_passing"
+  },
+  "unchanged_rules": [
+    "target values remain unread until the amended primary gate passes",
+    "retained raw ML-9C handoffs remain prohibited",
+    "secondary targets remain unread until the primary gate passes",
+    "feature groups, contrasts, estimators, splits, resampling, multiplicity, reporting, exactness, and failure actions remain unchanged"
+  ],
+  "scientific_targets_consumed": false,
+  "model_fitted": false
+}
