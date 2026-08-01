@@ -1,0 +1,37 @@
+{
+  "artifact_id": "ml9c_bayesian_irt_preflight_v1",
+  "census": {
+    "canonical_task_families": 23,
+    "complete_cells_expected": 1728,
+    "observation_rows_by_line_count_only": 1728,
+    "panel_tasks": 96,
+    "solver_families": 4,
+    "solver_variants": 18
+  },
+  "checks": {
+    "all_input_hashes_verified": true,
+    "binary_discrimination_fixed_one": true,
+    "continuous_discrimination_fixed_one": true,
+    "dimensionality_hypothesis_frozen": true,
+    "family_testlet_effect_frozen": true,
+    "no_response_fit": true,
+    "normalized_observation_header_only": true,
+    "normalized_observation_line_count_only": true,
+    "panel_identity_columns_only": true,
+    "tasks_are_respondents": true,
+    "variants_are_items": true
+  },
+  "factor_model_computed": false,
+  "input_hashes": {
+    "normalized_observations": "80ecc6c7968d4d6ffc0028dc72fb5ff73681ef9a7d18592e996510fe932b78c7",
+    "panel_of_record": "367f8a484f2c9c6e3e3b9d03ac6d5e5edcc06ead185a2cb5d14204510a01ffe3",
+    "post_g59_manifest": "1c01305fc8a290fe2bbd9ef866eb859195f1f6dd90a5a8ae66f51fdeb73f9d89",
+    "solver_variants": "171be76d4893b0e046ff66fc1c0c9f7b6d129271e8f2681043039c84ac19ead5"
+  },
+  "loo_comparison_computed": false,
+  "posterior_computed": false,
+  "preregistration_sha256": "6379bd779dbdd0d5c2bb33935fce45d3d352f1ca2f1dcdeb6cd941d5a74b4a14",
+  "response_matrix_computed": false,
+  "scientific_outcomes_consumed": false,
+  "status": "pass"
+}
