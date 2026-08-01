@@ -478,6 +478,7 @@ def fit_comparisons(
                     "canonical_family": prepared.canonical_families[index],
                     "fold": None if assignments[index] < 0 else int(assignments[index]),
                     "target_gradeable": gradeable,
+                    "output_kind": "prespecified_cross_validation_assignment",
                 }
             )
 
@@ -634,6 +635,7 @@ def _score_comparisons(
                     "canonical_families": len(set(groups)),
                     "gradeable": False,
                     "status": comparison.status,
+                    "output_kind": "cross_fitted_estimate",
                     "baseline_score": None,
                     "augmented_score": None,
                     "delta_score": None,
@@ -681,6 +683,7 @@ def _score_comparisons(
                     "baseline_score": None if not gradeable else baseline,
                     "augmented_score": None if not gradeable else augmented,
                     "delta_score": None if not gradeable else augmented - baseline,
+                    "output_kind": "family_block_bootstrap_estimate",
                 }
             )
         deltas_by_key[key] = delta_values
@@ -703,6 +706,7 @@ def _score_comparisons(
                 "canonical_families": len(set(groups)),
                 "gradeable": True,
                 "status": comparison.status,
+                "output_kind": "cross_fitted_estimate",
                 "baseline_score": baseline_score,
                 "augmented_score": augmented_score,
                 "delta_score": augmented_score - baseline_score,
@@ -746,6 +750,7 @@ def _randomization_tests(
             "estimator": comparison.estimator,
             "draws": draws,
             "seed": int(execution["randomization_seed"]),
+            "output_kind": "paired_family_randomization_estimate",
         }
         if not comparison.gradeable:
             rows.append(
@@ -844,6 +849,7 @@ def _multiplicity_rows(
                     "p_value_one_sided": row["p_value_one_sided"],
                     "p_value_bh": adjusted_value,
                     "q_threshold": q,
+                    "output_kind": "multiplicity_adjusted_estimate",
                     "reject_zero_positive_importance": (
                         None if adjusted_value is None else adjusted_value <= q
                     ),
@@ -896,6 +902,7 @@ def _rank_concordance_rows(
                     "replicate": replicate,
                     "gradeable": gradeable,
                     "spearman_rank_concordance": concordance,
+                    "output_kind": "bootstrap_stability_estimate",
                 }
             )
     return rows
@@ -928,6 +935,7 @@ def _model_reliance_rows(
                 "extra_trees_delta": by_estimator["extra_trees"]["delta_score"],
                 "model_reliance_min_delta": min(values) if len(values) == 2 else None,
                 "model_reliance_max_delta": max(values) if len(values) == 2 else None,
+                "output_kind": "model_class_reliance_range_estimate",
             }
         )
     return rows
