@@ -37,3 +37,9 @@ diagnostics exists. In particular, the retained raw
 Secondary per-family binary labels are already pinned, but they will remain
 unread until the primary handoff gate opens so that all target-dependent work
 starts from this single unchanged freeze. No SHAP analysis is planned.
+
+Outcome-blind correction before preflight: the accepted feature corpus has 40
+canonical task families, while the 96-task inference panel has 23. The
+preregistration's expected split/bootstrap block count is therefore 23, not
+40. This correction changes no feature rule, contrast, target, estimator, or
+inference decision and precedes all target access and fitting.
