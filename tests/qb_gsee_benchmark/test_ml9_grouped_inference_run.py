@@ -1,19 +1,23 @@
 from __future__ import annotations
 
+from copy import deepcopy
 import json
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
+from qb_gsee_benchmark.ml import grouped_inference_run as grouped_module
 from qb_gsee_benchmark.ml.core_set import sha256_file
 from qb_gsee_benchmark.ml.grouped_inference_run import (
     FittedComparison,
+    PreparedInference,
     TARGET_GATE_SUPERSESSION_SHA256,
     _benjamini_hochberg,
     _binary_folds,
     _bootstrap_indices,
     _score_comparisons,
+    run_grouped_inference,
     verify_target_gate,
 )
 
@@ -120,3 +124,90 @@ def test_ml9d_block_bootstrap_and_scoring_are_deterministic() -> None:
 def test_ml9d_benjamini_hochberg_is_monotone_in_rank() -> None:
     adjusted = _benjamini_hochberg([0.01, 0.04, 0.03, 0.2])
     assert np.allclose(adjusted, [0.04, 0.05333333333333334, 0.05333333333333334, 0.2])
+
+
+def test_ml9d_synthetic_full_pipeline_is_deterministic(
+    tmp_path: Path, monkeypatch
+) -> None:
+    rng = np.random.default_rng(20260801)
+    groups = np.repeat(np.array([f"family_{index}" for index in range(10)]), 3)
+    features = rng.normal(size=(30, 8))
+    binary = np.tile(np.array([False, True, False]), 10)
+    contrasts = tuple(
+        {
+            "order": index,
+            "contrast_id": f"C{index}",
+            "anchor": f"feature_{index + 1}",
+            "group_id": f"G{index}",
+            "group_name": f"synthetic_group_{index}",
+            "indices": np.array([index + 1], dtype=int),
+        }
+        for index in range(1, 6)
+    )
+    prepared = PreparedInference(
+        task_ids=tuple(f"task_{index:02d}" for index in range(30)),
+        canonical_families=groups,
+        features=features,
+        feature_names=tuple(f"feature_{index}" for index in range(8)),
+        baseline_indices=np.array([0, 1], dtype=int),
+        contrasts=contrasts,
+        primary_target=features[:, 2] + 0.2 * features[:, 0],
+        binary_targets={
+            family: binary.copy() for family in grouped_module.FAMILY_TARGETS
+        },
+        gate_evidence={
+            "artifact_id": "synthetic_ml9d_target_gate_evidence",
+            "status": "pass_target_access_authorized",
+            "primary_target_access_authorized": True,
+            "secondary_target_access_authorized": True,
+            "retained_raw_handoff_used": False,
+        },
+    )
+    monkeypatch.setattr(grouped_module, "prepare_inference", lambda *args: prepared)
+
+    preregistration = json.loads(PREREGISTRATION.read_text(encoding="utf-8"))
+    preregistration = deepcopy(preregistration)
+    preregistration["inference"]["primary_estimator"]["n_estimators"] = 5
+    preregistration["inference"]["secondary_estimator"]["n_estimators"] = 5
+    contract = json.loads(EXECUTION_CONTRACT.read_text(encoding="utf-8"))
+    contract = deepcopy(contract)
+    contract["execution"]["bootstrap_draws"] = 20
+    contract["execution"]["randomization_draws"] = 31
+    synthetic_preregistration = tmp_path / "preregistration.json"
+    synthetic_contract = tmp_path / "execution_contract.json"
+    synthetic_preregistration.write_text(
+        json.dumps(preregistration, sort_keys=True, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    synthetic_contract.write_text(
+        json.dumps(contract, sort_keys=True, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    first = tmp_path / "run_1"
+    second = tmp_path / "run_2"
+    report = run_grouped_inference(
+        ROOT, synthetic_preregistration, synthetic_contract, first
+    )
+    repeated = run_grouped_inference(
+        ROOT, synthetic_preregistration, synthetic_contract, second
+    )
+    assert report == repeated
+    assert report["panel_tasks"] == 30
+    assert report["prespecified_contrasts"] == 5
+    assert report["continuous_gradeable_contrasts"] == 5
+    assert report["binary_gradeable_contrasts"] == 20
+    assert report["bootstrap_replicates"] == 20
+    assert report["randomization_draws"] == 31
+
+    required = set(contract["outputs"]["required_files"])
+    first_files = {path.name: path.read_bytes() for path in first.iterdir()}
+    second_files = {path.name: path.read_bytes() for path in second.iterdir()}
+    assert set(first_files) == required
+    assert first_files == second_files
+    assert len(pd.read_csv(first / "contrast_estimates.csv")) == 50
+    assert len(pd.read_csv(first / "fold_assignments.csv")) == 150
+    manifest = json.loads((first / "artifact_manifest.json").read_text())
+    assert manifest["status"] == "complete_internal_descriptive_inference"
+    assert manifest["target_gate_status"] == "pass_target_access_authorized"
+    assert not (ROOT / "analysis/ml9_grouped_inference/final_v1").exists()
