@@ -36,6 +36,9 @@ ESTIMATOR_ORDER = ("random_forest", "extra_trees")
 TARGET_GATE_SUPERSESSION = Path(
     "analysis/ml9_grouped_inference/target_gate_supersession_v3.json"
 )
+TARGET_GATE_SUPERSESSION_SHA256 = (
+    "32a2fb52007100f2a7dfec9892e6306a8c5acba704f0abf165f3e72e5db6145f"
+)
 
 
 @dataclass(frozen=True)
@@ -151,15 +154,16 @@ def verify_target_gate(
         pinned[label] = _verify_hash(path, str(amendment[hash_key]), label)
 
     supersession_path = root / TARGET_GATE_SUPERSESSION
-    _require(
-        supersession_path.is_file(), "ML-9D target-gate supersession is unavailable"
+    pinned["target-gate supersession"] = _verify_hash(
+        supersession_path,
+        TARGET_GATE_SUPERSESSION_SHA256,
+        "target-gate supersession",
     )
     supersession = _read_json(supersession_path)
     _require(
         supersession.get("frozen_before_target_access") is True,
         "ML-9D target-gate supersession is not frozen",
     )
-    pinned["target-gate supersession"] = sha256_file(supersession_path)
     for path_key, hash_key, label in (
         (
             "prior_target_gate_amendment_path",

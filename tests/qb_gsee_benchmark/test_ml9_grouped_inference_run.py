@@ -9,6 +9,7 @@ import pandas as pd
 from qb_gsee_benchmark.ml.core_set import sha256_file
 from qb_gsee_benchmark.ml.grouped_inference_run import (
     FittedComparison,
+    TARGET_GATE_SUPERSESSION_SHA256,
     _benjamini_hochberg,
     _binary_folds,
     _bootstrap_indices,
@@ -44,6 +45,7 @@ def test_ml9d_execution_contract_is_frozen_before_target_access() -> None:
 
 def test_ml9d_target_gate_supersession_is_frozen_before_target_access() -> None:
     payload = json.loads(TARGET_GATE_SUPERSESSION.read_text(encoding="utf-8"))
+    assert sha256_file(TARGET_GATE_SUPERSESSION) == TARGET_GATE_SUPERSESSION_SHA256
     assert payload["frozen_before_target_access"] is True
     assert payload["scientific_targets_consumed"] is False
     assert payload["model_fitted"] is False
