@@ -1,0 +1,157 @@
+{
+  "artifact_id": "ml9d_outcome_blind_group_preflight_v1",
+  "baseline": {
+    "anchors": [
+      "log_fci_dim",
+      "n_elec",
+      "n_orbs"
+    ],
+    "group_ids": [
+      "G09",
+      "G24"
+    ],
+    "group_names": [
+      "size_sector_complexity_baseline_part_1",
+      "size_sector_complexity_baseline_part_2"
+    ],
+    "name": "size_sector_complexity_baseline"
+  },
+  "census": {
+    "baseline_features": 8,
+    "baseline_groups": 2,
+    "constant_after_completion": 5,
+    "corpus_tasks": 718,
+    "correlation_groups": 58,
+    "jw_features": 17,
+    "modeling_features": 193,
+    "panel_canonical_task_families": 23,
+    "panel_tasks": 96,
+    "prespecified_contrasts": 5
+  },
+  "grouping": {
+    "distance": "1_minus_absolute_correlation",
+    "fixed_distance_cut": 0.3,
+    "group_size_descending": [
+      24,
+      16,
+      12,
+      11,
+      10,
+      8,
+      7,
+      6,
+      6,
+      6,
+      6,
+      5,
+      5,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "linkage": "average"
+  },
+  "input_hashes": {
+    "canonical_families": "4bc9404feba3313cea64df734364a3ecbb45dbfda6f41bd337231181fef67942",
+    "feature_metadata": "3efad3a89b7fd2463da7d777a6c3e6c99759a04b15e007584266d24f44ec6590",
+    "feature_table": "b5f8a78c3fd8fa9ba1e5dce4e8e2986bfc19346b26375e22763816efa5cdc8f7",
+    "identifier_screen": "f4ca6d170215d2f87fba67de8df3ce6d6987fb2f635c37eeb0506500ced4650d",
+    "ml9a_feature_census": "a6cfab93d2caaad16b0575c15e53ad8735d20365eaccfe9c9401ff25a3b967ce",
+    "ml9a_preflight_manifest": "adbeb4cfd1f05eae61b7d10b55ac83ba882742916bbede241cc7b408b0623467",
+    "panel_of_record": "367f8a484f2c9c6e3e3b9d03ac6d5e5edcc06ead185a2cb5d14204510a01ffe3"
+  },
+  "model_fitted": false,
+  "order_hashes": {
+    "ml_goals": "dfded5420af33a5969c32d7ba20e9e989990db3b4b67773c72fce6a7f00c4545",
+    "pi_literature_memo": "e4653aa7d203f5fd22fcdbea9d1823e654b8ad2a98a88c5f82e68f4f451dce7b"
+  },
+  "preregistration_sha256": "97a5d8f2b04a71f75f76b06f187d6c6c9449e2bdd40d4cb35b93e7ea9bd4caf2",
+  "prespecified_contrasts": [
+    {
+      "anchor": "number_of_terms",
+      "contrast_id": "C1_jw_representation_connectivity",
+      "feature_count": 16,
+      "group_id": "G02",
+      "group_name": "jw_representation_connectivity"
+    },
+    {
+      "anchor": "cut_weight_best_sum",
+      "contrast_id": "C2_interaction_orderability_scale",
+      "feature_count": 24,
+      "group_id": "G01",
+      "group_name": "interaction_orderability_scale"
+    },
+    {
+      "anchor": "bare_one_body_gap_min",
+      "contrast_id": "C3_one_body_mean_field_gaps",
+      "feature_count": 6,
+      "group_id": "G08",
+      "group_name": "one_body_mean_field_gaps"
+    },
+    {
+      "anchor": "mp2_correlation_energy_per_electron_hartree",
+      "contrast_id": "C4_correlation_energy_integral_density",
+      "feature_count": 6,
+      "group_id": "G10",
+      "group_name": "correlation_energy_integral_density"
+    },
+    {
+      "anchor": "mp2_natural_entropy_per_electron",
+      "contrast_id": "C5_multireference_natural_occupation",
+      "feature_count": 1,
+      "group_id": "G48",
+      "group_name": "multireference_natural_occupation"
+    }
+  ],
+  "primary_target_accessed": false,
+  "scientific_targets_consumed": false,
+  "secondary_targets_accessed": false,
+  "status": "pass_outcome_blind_groups_frozen",
+  "target_gate": {
+    "reason": "ML-9C promoted final_v1 handoff is required and was not inspected by this outcome-blind preflight.",
+    "retained_raw_handoff_allowed": false,
+    "status": "held_before_target_access"
+  }
+}
