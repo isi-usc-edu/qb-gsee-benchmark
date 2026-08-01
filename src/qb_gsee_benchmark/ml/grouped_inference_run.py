@@ -33,6 +33,9 @@ from qb_gsee_benchmark.ml.instance_space import coordinate_preprocessing
 
 FAMILY_TARGETS = ("dmrg", "ipie_afqmc", "shci", "trimci")
 ESTIMATOR_ORDER = ("random_forest", "extra_trees")
+TARGET_GATE_SUPERSESSION = Path(
+    "analysis/ml9_grouped_inference/target_gate_supersession_v3.json"
+)
 
 
 @dataclass(frozen=True)
@@ -147,7 +150,47 @@ def verify_target_gate(
         path = root / str(amendment[path_key])
         pinned[label] = _verify_hash(path, str(amendment[hash_key]), label)
 
-    gate = amendment["target_gate_change"]
+    supersession_path = root / TARGET_GATE_SUPERSESSION
+    _require(
+        supersession_path.is_file(), "ML-9D target-gate supersession is unavailable"
+    )
+    supersession = _read_json(supersession_path)
+    _require(
+        supersession.get("frozen_before_target_access") is True,
+        "ML-9D target-gate supersession is not frozen",
+    )
+    pinned["target-gate supersession"] = sha256_file(supersession_path)
+    for path_key, hash_key, label in (
+        (
+            "prior_target_gate_amendment_path",
+            "prior_target_gate_amendment_sha256",
+            "supersession target-gate source",
+        ),
+        (
+            "execution_contract_path",
+            "execution_contract_sha256",
+            "supersession execution-contract source",
+        ),
+        (
+            "recovery_preregistration_path",
+            "recovery_preregistration_sha256",
+            "ML-9C nonnegative recovery preregistration",
+        ),
+    ):
+        path = root / str(supersession[path_key])
+        pinned[label] = _verify_hash(path, str(supersession[hash_key]), label)
+    _require(
+        supersession["prior_target_gate_amendment_path"]
+        == contract["target_gate_amendment_path"],
+        "ML-9D supersession does not extend the frozen target-gate amendment",
+    )
+    _require(
+        supersession["execution_contract_path"]
+        == str(execution_contract_path.relative_to(root)),
+        "ML-9D supersession names the wrong execution contract",
+    )
+
+    gate = supersession["target_gate_change"]
     final_handoff = root / str(gate["promoted_primary_path_unchanged"])
     final_manifest = root / str(gate["promoted_manifest_path_unchanged"])
     recovery_identity = root / str(gate["accepted_recovery_identity_path"])
@@ -187,7 +230,7 @@ def verify_target_gate(
         _verify_hash(final_manifest.parent / relative, str(expected), "promoted file")
 
     recovery_preregistration = _read_json(
-        root / str(amendment["recovery_preregistration_path"])
+        root / str(supersession["recovery_preregistration_path"])
     )
     handoff_hash = _verify_hash(
         final_handoff,
@@ -230,6 +273,7 @@ def verify_target_gate(
         "status": "pass_target_access_authorized",
         "primary_target_access_authorized": True,
         "secondary_target_access_authorized": True,
+        "target_gate_supersession_sha256": sha256_file(supersession_path),
         "ml9c_recovery_identity_sha256": sha256_file(recovery_identity),
         "ml9c_promoted_manifest_sha256": sha256_file(final_manifest),
         "primary_handoff_sha256": handoff_hash,

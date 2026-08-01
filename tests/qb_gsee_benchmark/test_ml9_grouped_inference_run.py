@@ -20,6 +20,9 @@ from qb_gsee_benchmark.ml.grouped_inference_run import (
 ROOT = Path(__file__).resolve().parents[2]
 PREREGISTRATION = ROOT / "analysis/ml9_grouped_inference/preregistration.json"
 EXECUTION_CONTRACT = ROOT / "analysis/ml9_grouped_inference/execution_contract_v1.json"
+TARGET_GATE_SUPERSESSION = (
+    ROOT / "analysis/ml9_grouped_inference/target_gate_supersession_v3.json"
+)
 
 
 def test_ml9d_execution_contract_is_frozen_before_target_access() -> None:
@@ -35,6 +38,22 @@ def test_ml9d_execution_contract_is_frozen_before_target_access() -> None:
             "outcome_blind_preflight_manifest_path",
             "outcome_blind_preflight_manifest_sha256",
         ),
+    ]:
+        assert sha256_file(ROOT / payload[path_key]) == payload[hash_key]
+
+
+def test_ml9d_target_gate_supersession_is_frozen_before_target_access() -> None:
+    payload = json.loads(TARGET_GATE_SUPERSESSION.read_text(encoding="utf-8"))
+    assert payload["frozen_before_target_access"] is True
+    assert payload["scientific_targets_consumed"] is False
+    assert payload["model_fitted"] is False
+    for path_key, hash_key in [
+        (
+            "prior_target_gate_amendment_path",
+            "prior_target_gate_amendment_sha256",
+        ),
+        ("execution_contract_path", "execution_contract_sha256"),
+        ("recovery_preregistration_path", "recovery_preregistration_sha256"),
     ]:
         assert sha256_file(ROOT / payload[path_key]) == payload[hash_key]
 
