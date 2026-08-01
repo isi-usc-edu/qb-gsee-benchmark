@@ -10,7 +10,7 @@
 set -euo pipefail
 
 ROOT=/lcrc/project/PIRT/NCS_GSEE_Benchmark/ml_agent/qb-gsee-benchmark
-PYTHON=/scratch/ac.otten/NCS_GSEE_Benchmark_ml9c_pymc620/bin/python
+PYTHON="$ROOT/.ml9c-venv/bin/python"
 RUN_MODE=${RUN_MODE:-smoke}
 LOG_ROOT=/scratch/ac.otten/NCS_GSEE_Benchmark_ml9c_logs/${PBS_JOBID}
 
