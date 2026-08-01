@@ -1,0 +1,345 @@
+{
+  "artifact_id": "ml9a_instance_space_preregistration_v1",
+  "status": "frozen_before_ml9a_benchmark_fit",
+  "frozen_before_benchmark_fit": true,
+  "purpose": "Canonical iteration-one Instance Space Analysis of the accepted post-G59 solver-family panel and corpus-wide feature-only projection.",
+  "order": {
+    "ml_goals_external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/ML_GOALS.md",
+    "ml_goals_sha256": "dfded5420af33a5969c32d7ba20e9e989990db3b4b67773c72fce6a7f00c4545",
+    "pi_literature_memo_external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/PI_LIT_REVIEW_2026-07-31_hardness_instruments.md",
+    "pi_literature_memo_sha256": "e4653aa7d203f5fd22fcdbea9d1823e654b8ad2a98a88c5f82e68f4f451dce7b",
+    "order_revision": "ML-9 v2 2026-07-31",
+    "hold_lifted": true,
+    "prior_ml9_design_superseded": true
+  },
+  "inputs": {
+    "feature_table": {
+      "path": "scripts/Hamiltonian_features.csv",
+      "sha256": "b5f8a78c3fd8fa9ba1e5dce4e8e2986bfc19346b26375e22763816efa5cdc8f7"
+    },
+    "feature_metadata": {
+      "path": "analysis/feature_schema/feature_column_metadata.csv",
+      "sha256": "3efad3a89b7fd2463da7d777a6c3e6c99759a04b15e007584266d24f44ec6590"
+    },
+    "identifier_screen": {
+      "path": "analysis/ml_v2/identifier_screen.json",
+      "sha256": "f4ca6d170215d2f87fba67de8df3ce6d6987fb2f635c37eeb0506500ced4650d"
+    },
+    "canonical_families": {
+      "path": "analysis/feature_schema/canonical_families_v1.json",
+      "sha256": "4bc9404feba3313cea64df734364a3ecbb45dbfda6f41bd337231181fef67942"
+    },
+    "selection_of_record_manifest": {
+      "path": "analysis/ml_core_set_v2/selection_of_record_v1/selection_of_record_manifest.json",
+      "sha256": "20159c02b3463af39a3ac8ce946992f0c89ddfd52e79e9ad2c30fee08982bf77"
+    },
+    "panel_of_record": {
+      "path": "analysis/ml_core_set_v2/selection_of_record_v1/panel_of_record.csv",
+      "sha256": "367f8a484f2c9c6e3e3b9d03ac6d5e5edcc06ead185a2cb5d14204510a01ffe3"
+    },
+    "post_g59_manifest": {
+      "path": "analysis/ml_g59_panel_refresh/final_v1/artifact_manifest.json",
+      "sha256": "1c01305fc8a290fe2bbd9ef866eb859195f1f6dd90a5a8ae66f51fdeb73f9d89"
+    },
+    "normalized_observations": {
+      "path": "analysis/ml_g59_panel_refresh/final_v1/normalized_observations.csv",
+      "sha256": "80ecc6c7968d4d6ffc0028dc72fb5ff73681ef9a7d18592e996510fe932b78c7"
+    },
+    "solver_variants": {
+      "path": "analysis/ml_g59_panel_refresh/final_v1/preflight/solver_variants.json",
+      "sha256": "171be76d4893b0e046ff66fc1c0c9f7b6d129271e8f2681043039c84ac19ead5"
+    },
+    "gradeability_manifest": {
+      "path": "analysis/ml_gradeability_census/held_v1/artifact_manifest.json",
+      "sha256": "acdee96c5789c4eea62e31c891cba75de81eae2f841babccd1df9ba3bbacbaa4"
+    },
+    "gradeability_census": {
+      "path": "analysis/ml_gradeability_census/held_v1/census.csv",
+      "sha256": "9487c30d4738dbb2964160bf8ae54e06dbdf248519b900ef4cb3accad913daab"
+    }
+  },
+  "toolkit": {
+    "distribution": "instancespace",
+    "version": "0.2.1",
+    "wheel_filename": "instancespace-0.2.1-py3-none-any.whl",
+    "wheel_sha256": "d0d81a7347f52745a0ad58594a3ad1d06cfac6a2a43110970e1fec55cfeb4e8e",
+    "runtime_python": "3.12",
+    "runtime_dependencies": {
+      "numpy": "1.26.4",
+      "scipy": "1.13.1",
+      "pandas": "2.2.3",
+      "scikit-learn": "1.6.1",
+      "scikit-optimize": "0.10.2",
+      "shapely": "2.1.2",
+      "alphashape": "1.3.1",
+      "pygad": "3.7.0"
+    },
+    "fallback_implementation_allowed": false,
+    "installation_smoke": "synthetic_full_InstanceSpace.build_passed_before_freeze"
+  },
+  "analysis_population": {
+    "corpus_tasks": 718,
+    "labeled_panel_tasks": 96,
+    "canonical_task_families": 40,
+    "observed_variants": 18,
+    "solver_families": [
+      "dmrg",
+      "ipie_afqmc",
+      "shci",
+      "trimci"
+    ],
+    "portfolio_id": "portfolio_union",
+    "non_gradeable_coverage_points": 109,
+    "population_weights_used_for_geometry": false,
+    "selection_weight_role": "audit_only_not_geometry_or_population_inference"
+  },
+  "feature_space": {
+    "candidate_columns": 193,
+    "derive_with_accepted_policy": "eligible minus 37 gauge-sensitive minus 11 identifier-capable, sorted by column name",
+    "jw_columns": 17,
+    "jw_eligible": true,
+    "family_or_provenance_model_inputs": false,
+    "reason_or_mask_columns_model_inputs": false,
+    "projection_only_pruning": true,
+    "later_feature_eligibility_remains": 193,
+    "coordinate_completion": {
+      "fit_rows": "96 labeled panel tasks only",
+      "numeric_coercion": "non-numeric becomes missing",
+      "fill": "per-column panel median",
+      "center": "per-column panel median",
+      "scale_fallback_order": [
+        "panel IQR when positive",
+        "1.4826 times panel MAD when positive",
+        "panel sample standard deviation when positive",
+        "1.0"
+      ],
+      "clip": [
+        -5.0,
+        5.0
+      ],
+      "scientific_estimate": false,
+      "missingness_output": "observed_feature_count and observed_feature_fraction for every task"
+    },
+    "outcome_blind_census_frozen_before_fit": {
+      "panel_complete_columns": 18,
+      "panel_columns_below_20_percent_missing": 167,
+      "panel_columns_at_least_20_percent_missing": 26,
+      "panel_all_missing_columns": 0,
+      "constant_after_completion": 5,
+      "nonconstant_after_completion": 188,
+      "minimum_observed_features_per_panel_task": 93,
+      "minimum_observed_features_per_corpus_task": 91
+    }
+  },
+  "response_construction": {
+    "source_rows": "accepted 96 by 18 normalized R4 observations",
+    "continuous_variant_cost": "finite nonnegative graded_residual capped at 4.0; missing residual becomes 4.0",
+    "continuous_family_cost": "minimum variant cost within solver_family_id",
+    "failure_cap": 4.0,
+    "threshold_factors": [
+      0.5,
+      1.0,
+      2.0
+    ],
+    "binary_family_label": "continuous_family_cost <= threshold_factor",
+    "portfolio_cost": "minimum continuous_family_cost across four solver families",
+    "portfolio_label": "union of four family labels",
+    "primary_exactness_check": "at 1.0, family labels must exactly equal any accepted variant observed_outcome success within family",
+    "label_of_record_mutation": false,
+    "sensitivity_role": "analysis_layer_only"
+  },
+  "prelim": {
+    "maximise_performance": false,
+    "absolute_performance": true,
+    "toolkit_auto_preprocessing": false,
+    "toolkit_bounding": false,
+    "toolkit_normalization": false,
+    "reason": "the explicit outcome-blind completion and robust transform is frozen and must be reusable for all 718 tasks"
+  },
+  "sifted": {
+    "enabled": true,
+    "target_projection_features": 8,
+    "acceptable_projection_feature_count": [
+      7,
+      10
+    ],
+    "rho": 0.1,
+    "k": 8,
+    "n_trees": 50,
+    "max_iter": 1000,
+    "replicates": 100,
+    "num_generations": 100,
+    "num_parents_mating": 2,
+    "solutions_per_population": 50,
+    "parent_selection_type": "tournament",
+    "k_tournament": 4,
+    "keep_elitism": 2,
+    "crossover_type": "scattered",
+    "crossover_probability": 0.8,
+    "mutation_type": "random",
+    "mutation_probability": 0.05,
+    "stop_criteria": "saturate_5",
+    "toolkit_seed": 0,
+    "scope": "projection_basis_only"
+  },
+  "pilot": {
+    "mode": "optimized_numerical_BFGS",
+    "analytic": false,
+    "n_tries": 30,
+    "toolkit_seed": 0,
+    "forbidden_substitutes": [
+      "PCA",
+      "UMAP"
+    ],
+    "topological_preservation": "Pearson correlation of upper-triangle pairwise Euclidean distances in selected scaled feature basis and 2D coordinates"
+  },
+  "cloister": {
+    "p_value": 0.05,
+    "correlation_threshold": 0.7,
+    "outputs": [
+      "theoretical_boundary",
+      "correlation_pruned_boundary",
+      "empirical_space_boundary",
+      "unoccupied_theoretical_area",
+      "unoccupied_theoretical_area_fraction"
+    ]
+  },
+  "pythia": {
+    "targets": [
+      "four_solver_families",
+      "portfolio_union"
+    ],
+    "kernel": "rbf",
+    "hyperparameter_search": "toolkit Bayesian search, 30 iterations, fixed seed 0",
+    "requested_folds": 5,
+    "fold_rule": "min(5, minority_class_count); fewer than 2 minority examples is an automatic structural gate failure",
+    "gate": {
+      "raw_accuracy_minimum": 0.7,
+      "raw_accuracy_margin_over_majority_baseline": 0.05,
+      "balanced_accuracy_minimum": 0.6,
+      "pass_rule": "raw_accuracy >= max(0.70, majority_baseline + 0.05) and balanced_accuracy >= 0.60"
+    },
+    "gate_failure_action": "ship observed footprint with explicit feature-adequacy caveat; do not suppress or reinterpret it"
+  },
+  "trace": {
+    "use_observed_labels": true,
+    "use_pythia_simulated_labels": false,
+    "purity_threshold": 0.55,
+    "objects": [
+      "good footprint per solver family",
+      "best footprint per solver family",
+      "good portfolio-union footprint"
+    ],
+    "best_tie_break": "solver family order dmrg, ipie_afqmc, shci, trimci",
+    "reported_metrics": [
+      "area",
+      "area_normalized_to_empirical_space",
+      "density",
+      "density_normalized_to_empirical_space",
+      "purity",
+      "elements",
+      "good_elements"
+    ],
+    "fitted_surface_integral": false,
+    "interpretation": "descriptive_geometry_not_population_ratio"
+  },
+  "bootstrap": {
+    "unit": "canonical_task_family_block",
+    "replicates": 2000,
+    "seed": 20260731,
+    "interval": "2.5 and 97.5 percentile",
+    "projection_refit_per_draw": false,
+    "conditional_on_frozen_projection": true,
+    "recompute": "TRACE empirical space and good/best/portfolio footprints for each resampled block set",
+    "raw_draws_retained": true,
+    "degenerate_draw_policy": "retain draw with zero geometry and explicit degenerate status"
+  },
+  "corpus_projection": {
+    "tasks": 718,
+    "formula": "z = transformed_selected_features @ PILOT_A.T",
+    "gradeability_role_source": "accepted ML-8A census",
+    "non_gradeable_role": "prediction_target_or_coverage",
+    "observed_panel_overlay": true,
+    "unobserved_tasks_receive_labels": false
+  },
+  "acquisition_priority": {
+    "eligible_rows": "all corpus tasks outside the 96-task labeled panel",
+    "novelty": "nearest labeled-task Euclidean distance in 2D, min-max scaled over eligible rows",
+    "portfolio_uncertainty": "1 - 2 * abs(portfolio_probability - 0.5)",
+    "family_deficit": "1 - labeled_count_for_canonical_family / maximum_labeled_family_count",
+    "feature_coverage": "observed_feature_fraction over 193 columns",
+    "score": "feature_coverage * (0.50 * novelty + 0.30 * portfolio_uncertainty + 0.20 * family_deficit)",
+    "tie_break": "task_uuid ascending",
+    "non_gradeable_action": "reference_or_gradeability_work_first",
+    "gradeable_action": "candidate_for_future_solver_labeling",
+    "headline_count": 25,
+    "authorizes_solver_run": false
+  },
+  "outputs": {
+    "all_model_outputs_labeled": "estimate",
+    "internal_only": true,
+    "public_or_dashboard_placement": false,
+    "required_files": [
+      "REPORT.md",
+      "report.json",
+      "environment.json",
+      "feature_preprocessing.csv",
+      "projection_features.csv",
+      "projection_matrix.csv",
+      "topological_preservation.csv",
+      "cloister_boundary.csv",
+      "cloister_coverage.json",
+      "panel_coordinates.csv",
+      "corpus_coordinates.csv",
+      "labels_by_threshold.csv",
+      "pythia_gate.csv",
+      "trace_footprints.csv",
+      "trace_polygons.json",
+      "bootstrap_draws.csv",
+      "bootstrap_intervals.csv",
+      "priority_targets.csv",
+      "priority_targets_top25.csv",
+      "artifact_manifest.json"
+    ],
+    "ratio_of_record": "design_based_unchanged",
+    "validated_predictor_claim": false
+  },
+  "reproducibility": {
+    "python_hash_seed": 0,
+    "numeric_threads": 1,
+    "stable_row_sorting": true,
+    "csv_line_terminator": "LF",
+    "float_serialization": ".17g",
+    "json_serialization": "sort_keys true, indent 2, trailing newline",
+    "two_independent_runs": true,
+    "recursive_byte_identity_required": true,
+    "raw_run_trees_retained": true,
+    "promotion_only_after_identity": true
+  },
+  "fences": {
+    "new_solver_runs": false,
+    "task_reselection": false,
+    "label_changes": false,
+    "design_based_ratio_replaced": false,
+    "every_model_output_estimate_labeled": true,
+    "internal_only": true,
+    "jw_features_eligible": true,
+    "prohibited_vocabulary_absent_from_new_artifacts": true,
+    "ambiguous_choice_policy": "conservative_document_and_continue"
+  },
+  "prior_exposure": {
+    "accepted_post_g59_reports_available": true,
+    "accepted_aggregate_counts_known": true,
+    "normalized_observation_schema_inspected": true,
+    "feature_only_missingness_census_run": true,
+    "synthetic_only_isa_smoke_run": true,
+    "ml9_benchmark_model_fitted": false,
+    "ml9_benchmark_sifted_features_selected": false,
+    "ml9_benchmark_projection_fit": false,
+    "ml9_benchmark_pythia_fit": false,
+    "ml9_benchmark_trace_run": false,
+    "ml9_benchmark_targets_ranked": false,
+    "design_selected_from_new_outcome_comparison": false,
+    "mitigation": "The PI v2 order, literature memo, accepted contracts, toolkit behavior, and feature-only census determine the frozen design; all new outcome-driven steps occur after this commit."
+  }
+}
