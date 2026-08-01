@@ -620,6 +620,27 @@ def fit_pythia(data: PreparedIsaData, projection: ProjectionResult) -> PythiaRes
     return PythiaResult(gate_rows, panel_probabilities, corpus_probabilities)
 
 
+@contextlib.contextmanager
+def _instancespace_021_trace_compatibility():
+    """Represent a failed TRACE polygon refinement as empty geometry."""
+
+    _require(
+        importlib_metadata.version("instancespace") == "0.2.1",
+        "TRACE compatibility path is pinned to instancespace 0.2.1",
+    )
+    original = TraceStage.__dict__["tight"]
+
+    def tight_or_empty(stage: TraceStage, polygon: Any, y_bin: np.ndarray) -> Any:
+        refined = original(stage, polygon, y_bin)
+        return Polygon() if refined is None else refined
+
+    TraceStage.tight = tight_or_empty
+    try:
+        yield
+    finally:
+        TraceStage.tight = original
+
+
 def _run_trace(
     z: np.ndarray,
     labels: pd.DataFrame,
@@ -630,8 +651,10 @@ def _run_trace(
     all_labels = labels.loc[:, list(TARGET_ORDER)].to_numpy(dtype=bool)
     best_family = np.argmin(family_costs.to_numpy(dtype=float), axis=1)
     beta = family_labels.sum(axis=1) > (0.55 * len(FAMILY_ORDER))
-    with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(
-        io.StringIO()
+    with (
+        _instancespace_021_trace_compatibility(),
+        contextlib.redirect_stdout(io.StringIO()),
+        contextlib.redirect_stderr(io.StringIO()),
     ):
         return TraceStage.trace(
             z=z,
@@ -1295,11 +1318,18 @@ def run_finalization(
         "instancespace_wheel_sha256": data.preregistration["toolkit"]["wheel_sha256"],
         "numeric_threads": 1,
         "python_hash_seed": 0,
-        "compatibility": {
-            "component": "instancespace 0.2.1 PRELIM",
-            "condition": "toolkit bounding and normalization disabled",
-            "effect": "neutral disabled-preprocessing diagnostics supplied; transformed features and response labels unchanged",
-        },
+        "compatibility": [
+            {
+                "component": "instancespace 0.2.1 PRELIM",
+                "condition": "toolkit bounding and normalization disabled",
+                "effect": "neutral disabled-preprocessing diagnostics supplied; transformed features and response labels unchanged",
+            },
+            {
+                "component": "instancespace 0.2.1 TRACE",
+                "condition": "degenerate refinement returns no polygon",
+                "effect": "represented as empty zero geometry under frozen degenerate-draw policy",
+            },
+        ],
         "output_kind": "environment_record",
     }
     stable_json_dump(environment, output_directory / "environment.json")

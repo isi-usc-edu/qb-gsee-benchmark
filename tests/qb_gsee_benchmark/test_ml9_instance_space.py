@@ -5,6 +5,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from instancespace.stages.trace import TraceStage
 
 from qb_gsee_benchmark.ml.core_set import sha256_file
 from qb_gsee_benchmark.ml.instance_space import run_outcome_blind_preflight
@@ -12,6 +13,7 @@ from qb_gsee_benchmark.ml.instance_space_run import (
     FAMILY_ORDER,
     TARGET_ORDER,
     THRESHOLD_FACTORS,
+    _instancespace_021_trace_compatibility,
     prepare_isa_data,
 )
 
@@ -101,3 +103,12 @@ def test_ml9a_frozen_response_reproduces_primary_labels() -> None:
     }
     assert np.isfinite(data.features_transformed.to_numpy()).all()
     assert data.features_transformed.shape == (718, 193)
+
+
+def test_ml9a_trace_compatibility_converts_missing_refinement_to_empty(
+    monkeypatch,
+) -> None:
+    monkeypatch.setattr(TraceStage, "tight", lambda self, polygon, y_bin: None)
+    with _instancespace_021_trace_compatibility():
+        polygon = TraceStage.tight(object(), None, np.array([], dtype=bool))
+    assert polygon.is_empty
