@@ -1,0 +1,127 @@
+#!/bin/bash
+#PBS -A QC_NA_Sim
+#PBS -q compute
+#PBS -l select=1:ncpus=128
+#PBS -l place=scatter
+#PBS -l walltime=12:00:00
+#PBS -j oe
+#PBS -r y
+
+set -euo pipefail
+
+ROOT=/lcrc/project/PIRT/NCS_GSEE_Benchmark/ml_agent/qb-gsee-benchmark
+PYTHON="$ROOT/.ml9c-venv/bin/python"
+RUN_MODE=${RUN_MODE:-smoke}
+LOG_ROOT=/scratch/ac.otten/NCS_GSEE_Benchmark_ml9c_recovery_logs/${PBS_JOBID}
+
+mkdir -p "$LOG_ROOT"
+cd "$ROOT"
+
+export PYTHONHASHSEED=0
+export PYTHONPATH="$ROOT/src"
+export TERM=dumb
+export OMP_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1
+export NUMBA_NUM_THREADS=1
+
+echo "job_id=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "run_mode=$RUN_MODE"
+echo "root=$ROOT"
+echo "python=$PYTHON"
+"$PYTHON" -V
+"$PYTHON" -c 'import pymc, arviz, pytensor; print(pymc.__version__, arviz.__version__, pytensor.__version__)'
+
+if [[ "$RUN_MODE" == smoke ]]; then
+    PYTENSOR_FLAGS="base_compiledir=${TMPDIR:-/tmp}/pytensor_ml9c_recovery_smoke" \
+        "$PYTHON" -u - <<'PY'
+from pathlib import Path
+
+import numpy as np
+import pymc as pm
+
+from qb_gsee_benchmark.ml.bayesian_irt_run import prepare_irt_data
+from qb_gsee_benchmark.ml.bayesian_irt_recovery import (
+    factor_transform,
+    identified_factor_model,
+    posterior_log_predictive_density,
+    verify_recovery_preregistration,
+)
+
+root = Path.cwd()
+recovery_path = root / "analysis/ml9_bayesian_irt/recovery_preregistration_v2.json"
+recovery = verify_recovery_preregistration(root, recovery_path)
+data = prepare_irt_data(root, root / recovery["original_preregistration"]["path"])
+training = np.arange(2, len(data.task_ids))
+transform = factor_transform(data.logit_quality, training)
+model = identified_factor_model(
+    transform.standardized[training],
+    data.variant_ids,
+    tuple(data.task_ids[index] for index in training),
+    factors=2,
+)
+with model:
+    trace = pm.sample(
+        tune=25,
+        draws=25,
+        chains=2,
+        cores=1,
+        random_seed=[2026080111, 2026080112],
+        target_accept=0.95,
+        progressbar=False,
+        compute_convergence_checks=False,
+        idata_kwargs={"log_likelihood": False},
+    )
+loading = np.asarray(trace.posterior["factor_loading"])
+if loading.shape != (2, 25, 18, 2) or not np.isfinite(loading).all():
+    raise RuntimeError("ML-9C recovery smoke produced invalid loadings")
+lpd = posterior_log_predictive_density(trace, transform.standardized[:2])
+if lpd.shape != (2,) or not np.isfinite(lpd).all():
+    raise RuntimeError("ML-9C recovery smoke produced invalid predictive density")
+print(f"ML9C_RECOVERY_PBS_SMOKE_PASS loading={loading.shape} lpd={lpd.shape}")
+PY
+    exit 0
+fi
+
+if [[ "$RUN_MODE" != production ]]; then
+    echo "unsupported RUN_MODE=$RUN_MODE" >&2
+    exit 2
+fi
+
+RUN_1="$ROOT/analysis/ml9_bayesian_irt/recovery_raw_runs_v2/run_1"
+RUN_2="$ROOT/analysis/ml9_bayesian_irt/recovery_raw_runs_v2/run_2"
+FINAL="$ROOT/analysis/ml9_bayesian_irt/final_v1"
+IDENTITY="$ROOT/analysis/ml9_bayesian_irt/two_run_identity_v2.json"
+
+PYTENSOR_FLAGS="base_compiledir=${TMPDIR:-/tmp}/pytensor_ml9c_recovery_run_1" \
+    "$PYTHON" -u analysis/ml9_bayesian_irt/run_recovery_finalization.py \
+    --output-dir "$RUN_1" >"$LOG_ROOT/run_1.log" 2>&1 &
+PID_1=$!
+PYTENSOR_FLAGS="base_compiledir=${TMPDIR:-/tmp}/pytensor_ml9c_recovery_run_2" \
+    "$PYTHON" -u analysis/ml9_bayesian_irt/run_recovery_finalization.py \
+    --output-dir "$RUN_2" >"$LOG_ROOT/run_2.log" 2>&1 &
+PID_2=$!
+
+set +e
+wait "$PID_1"
+STATUS_1=$?
+wait "$PID_2"
+STATUS_2=$?
+set -e
+echo "run_1_status=$STATUS_1"
+echo "run_2_status=$STATUS_2"
+tail -n 80 "$LOG_ROOT/run_1.log"
+tail -n 80 "$LOG_ROOT/run_2.log"
+if [[ "$STATUS_1" -ne 0 || "$STATUS_2" -ne 0 ]]; then
+    exit 1
+fi
+
+"$PYTHON" -u analysis/ml9_bayesian_irt/verify_recovery_two_runs.py \
+    --run-1 "$RUN_1" \
+    --run-2 "$RUN_2" \
+    --promote "$FINAL" \
+    --identity "$IDENTITY"
+
+echo "ML9C_RECOVERY_PBS_PRODUCTION_PASS log_root=$LOG_ROOT"
