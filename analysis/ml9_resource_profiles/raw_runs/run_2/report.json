@@ -1,0 +1,41 @@
+{
+  "artifact_id": "ml9b_resource_profiles_report_v1",
+  "attempted_cells": 1723,
+  "conditional_quantiles_only": true,
+  "crashes_pooled_with_censoring": false,
+  "design_based_ratio": "unchanged_ratio_of_record",
+  "g59_shci_crashes_pooled_with_walltime": false,
+  "g59_shci_parent_crash_endpoints": 3,
+  "internal_only": true,
+  "ipie_single_point": true,
+  "label_changes": false,
+  "maximum_threshold_profile_difference": 0.0625,
+  "new_solver_runs": false,
+  "not_observed_cells": 5,
+  "output_kind": "descriptive",
+  "panel_tasks": 96,
+  "par_k_reported": false,
+  "primary_endpoint_counts": {
+    "competing_risk_crash": 28,
+    "no_attempt_evidence": 5,
+    "right_censored_ladder_exhaustion": 82,
+    "right_censored_walltime": 75,
+    "solution": 194
+  },
+  "primary_endpoint_fraction_solved": {
+    "g50_dmrg_bond_dimension_v1": 0.5625,
+    "g50_shci_orbopt_variational_eps_var_v1": 0.5416666666666666,
+    "g50_trimci_target_determinants_v1": 0.6145833333333334,
+    "ipie_single_budget_v1": 0.3020833333333333
+  },
+  "primary_runstatus_counts": {
+    "accuracy_miss": 342,
+    "crash": 116,
+    "ok": 905,
+    "timeout": 360
+  },
+  "shci_walltime_censored_endpoints": 20,
+  "status": "complete_internal_descriptive",
+  "task_reselection": false,
+  "variant_cells": 1728
+}
