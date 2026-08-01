@@ -549,12 +549,14 @@ def _fit_one_pythia_target(
         }
         return row, panel_probability, corpus_probability
 
-    mu, sigma, normalized_panel = PythiaStage._compute_znorm(panel_z)  # noqa: SLF001
-    normalized_corpus = (corpus_z - np.asarray(mu)) / np.asarray(sigma)
+    _, _, normalized_panel = PythiaStage._compute_znorm(panel_z)  # noqa: SLF001
+    panel_mu = np.mean(panel_z, axis=0)
+    panel_sigma = np.std(panel_z, axis=0, ddof=1)
+    _require(bool((panel_sigma > 0).all()), "degenerate PYTHIA coordinate axis")
+    normalized_corpus = (corpus_z - panel_mu) / panel_sigma
     splitter = StratifiedKFold(n_splits=folds, shuffle=True, random_state=0)
     parameter_space = PythiaStage._generate_params(  # noqa: SLF001
-        False,
-        np.random.default_rng(seed=0),
+        np.random.default_rng(seed=0)
     )
     with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(
         io.StringIO()
