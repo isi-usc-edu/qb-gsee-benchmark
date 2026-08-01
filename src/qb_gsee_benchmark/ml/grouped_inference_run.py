@@ -783,13 +783,16 @@ def _multiplicity_rows(
         ("twenty_secondary_binary_contrasts", "binary"),
     ):
         members = [row for row in randomization_rows if row["target_kind"] == target_kind]
-        gradeable = [row for row in members if row["gradeable"]]
         adjusted = _benjamini_hochberg(
-            [float(row["p_value_one_sided"]) for row in gradeable]
+            [
+                float(row["p_value_one_sided"]) if row["gradeable"] else 1.0
+                for row in members
+            ]
         )
         adjusted_by_key = {
             (row["target"], row["contrast_id"]): float(value)
-            for row, value in zip(gradeable, adjusted, strict=True)
+            for row, value in zip(members, adjusted, strict=True)
+            if row["gradeable"]
         }
         for row in members:
             adjusted_value = adjusted_by_key.get((row["target"], row["contrast_id"]))
