@@ -1,0 +1,307 @@
+{
+  "artifact_id": "ml9c_nonnegative_recovery_preregistration_v3",
+  "status": "frozen_postdiagnostic_before_recovery_fit",
+  "frozen_before_recovery_fit": true,
+  "purpose": "Resolve the retained v2 near-zero-marker sign modes with a response-direction-compatible nonnegative loading space while preserving the healthy binary Rasch estimand, the unchanged continuous beta model, and exact blocked comparison.",
+  "order": {
+    "ml_goals_external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/ML_GOALS.md",
+    "ml_goals_sha256": "dfded5420af33a5969c32d7ba20e9e989990db3b4b67773c72fce6a7f00c4545",
+    "pi_literature_memo_external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/PI_LIT_REVIEW_2026-07-31_hardness_instruments.md",
+    "pi_literature_memo_sha256": "e4653aa7d203f5fd22fcdbea9d1823e654b8ad2a98a88c5f82e68f4f451dce7b",
+    "order_revision": "ML-9 v2 2026-07-31",
+    "no_gate_clause_applied": true
+  },
+  "original_preregistration": {
+    "path": "analysis/ml9_bayesian_irt/preregistration.json",
+    "sha256": "5952030c110bc292f3c917e56c7ee9c2d0e38636bf8a6f5836a5474b8ccc4c53"
+  },
+  "retained_v1_evidence": {
+    "two_run_identity": {
+      "path": "analysis/ml9_bayesian_irt/two_run_identity_retained_v1.json",
+      "sha256": "30f48738b5be69151d52d594f46ae65337fc2713f3f5f70306b9f48ae1fa4b55"
+    },
+    "run_1_manifest": {
+      "path": "analysis/ml9_bayesian_irt/raw_runs/run_1/artifact_manifest.json",
+      "sha256": "d27b4f4d285d2560d9820f0596ce7c5cb9628efac9f34d3c23f0e4f415b92297"
+    },
+    "posterior_diagnostics": {
+      "path": "analysis/ml9_bayesian_irt/raw_runs/run_1/posterior_diagnostics.csv",
+      "sha256": "7294d666fb38f6f9d48d9c4cc29a5b409573929df0b9ac389bea0a7fb46ff8b7"
+    },
+    "posterior_samples": {
+      "path": "analysis/ml9_bayesian_irt/raw_runs/run_1/posterior_samples.npz",
+      "sha256": "b5fffe35157949af88b61cb58c42f8509f55f4731bc135b278a09abe334a409a"
+    },
+    "pointwise_log_likelihood": {
+      "path": "analysis/ml9_bayesian_irt/raw_runs/run_1/pointwise_log_likelihood.npz",
+      "sha256": "690d0abcc2a634da32cb9431131701cdac3b9dfc1e5a2474dd60f00a00f4f68d"
+    },
+    "binary_difficulty_handoff": {
+      "path": "analysis/ml9_bayesian_irt/raw_runs/run_1/difficulty_handoff_ml9d.csv",
+      "sha256": "b8fac83b33da755361dd5049f4627e9f60495d0370a42b601a547617d295490a"
+    },
+    "retention_note": {
+      "path": "analysis/ml9_bayesian_irt/RETENTION_EVIDENCE_2026-08-01.md",
+      "sha256": "b4135890cacee025265a6cbe49fcff2b770b32079a3d4ebc5c5af426ae8490d0"
+    },
+    "diagnostics": {
+      "binary_rasch": {
+        "divergences": 0,
+        "maximum_rhat": 1.0052426278344706,
+        "minimum_bulk_ess": 2755.437918419625,
+        "minimum_tail_ess": 2174.109214388564,
+        "passed": true
+      },
+      "continuous_beta": {
+        "divergences": 0,
+        "maximum_rhat": 1.0085507949598564,
+        "minimum_bulk_ess": 364.1462471264365,
+        "minimum_tail_ess": 430.12664040041653,
+        "passed": false
+      },
+      "one_factor": {
+        "divergences": 0,
+        "maximum_rhat": 1.5413270006359101,
+        "minimum_bulk_ess": 7.130603545543707,
+        "minimum_tail_ess": 10.55811878729531,
+        "passed": false
+      },
+      "two_factor": {
+        "divergences": 0,
+        "maximum_rhat": 2.3519375885244944,
+        "minimum_bulk_ess": 4.965873888843173,
+        "minimum_tail_ess": 10.497427863777276,
+        "passed": false
+      }
+    },
+    "psis": {
+      "one_factor_pareto_k_over_0_7": 13,
+      "one_factor_pareto_k_over_1": 7,
+      "two_factor_pareto_k_over_0_7": 21,
+      "two_factor_pareto_k_over_1": 15,
+      "comparison_reliable": false
+    }
+  },
+  "prior_recovery_v2_evidence": {
+    "preregistration": {
+      "path": "analysis/ml9_bayesian_irt/recovery_preregistration_v2.json",
+      "sha256": "d2ef8dc8622917a1da5eb24b74f0e7e0240c423b723e9e784460c5beec6043a3"
+    },
+    "retained_identity": {
+      "path": "analysis/ml9_bayesian_irt/two_run_identity_retained_v2.json",
+      "sha256": "6a92736ad6e6687476ee84e3dd9d5bd2c7248cdcd8eb915615bc6db9703609d9"
+    },
+    "run_1_manifest": {
+      "path": "analysis/ml9_bayesian_irt/recovery_raw_runs_v2/run_1/artifact_manifest.json",
+      "sha256": "665a559386f707e453f76928692594aef3f2cd16076955a6da19fe9024de1f9a"
+    },
+    "posterior_samples": {
+      "path": "analysis/ml9_bayesian_irt/recovery_raw_runs_v2/run_1/posterior_samples.npz",
+      "sha256": "d7ed1748041f7a4bb1c553887e0717211e7bc996e6a9108674de43690c230781"
+    },
+    "retention_evidence": {
+      "path": "analysis/ml9_bayesian_irt/RECOVERY_V2_RETENTION_EVIDENCE_2026-08-01.md",
+      "sha256": "2914dc7c9348b77d9c626bbb3eade0243d27ef739a85260111777a64b77de91c"
+    },
+    "diagnostic_finding": "The positive DMRG-2048 marker averages about 0.69 in two one-factor chains and about 0.015 in two chains, permitting the remaining loading vector to reverse sign. The two-factor posterior retains reflected and rotated modes. The continuous model passes."
+  },
+  "unchanged_inputs": {
+    "post_g59_manifest": {
+      "path": "analysis/ml_g59_panel_refresh/final_v1/artifact_manifest.json",
+      "sha256": "1c01305fc8a290fe2bbd9ef866eb859195f1f6dd90a5a8ae66f51fdeb73f9d89"
+    },
+    "normalized_observations": {
+      "path": "analysis/ml_g59_panel_refresh/final_v1/normalized_observations.csv",
+      "sha256": "80ecc6c7968d4d6ffc0028dc72fb5ff73681ef9a7d18592e996510fe932b78c7"
+    },
+    "solver_variants": {
+      "path": "analysis/ml_g59_panel_refresh/final_v1/preflight/solver_variants.json",
+      "sha256": "171be76d4893b0e046ff66fc1c0c9f7b6d129271e8f2681043039c84ac19ead5"
+    },
+    "panel_of_record": {
+      "path": "analysis/ml_core_set_v2/selection_of_record_v1/panel_of_record.csv",
+      "sha256": "367f8a484f2c9c6e3e3b9d03ac6d5e5edcc06ead185a2cb5d14204510a01ffe3"
+    }
+  },
+  "runtime": {
+    "environment_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/ml_agent/qb-gsee-benchmark/.ml9c-venv",
+    "python": "3.12.0",
+    "pymc": "6.2.0",
+    "arviz": "1.2.0",
+    "pytensor": "3.2.3",
+    "threads_per_process": 1
+  },
+  "binary_rasch": {
+    "action": "reuse_healthy_retained_v1_posterior_without_refit",
+    "required_arrays": [
+      "binary_task_difficulty",
+      "binary_variant_ability",
+      "binary_variant_difficulty_limit_10pct"
+    ],
+    "required_handoff_sha256": "b8fac83b33da755361dd5049f4627e9f60495d0370a42b601a547617d295490a",
+    "estimand_change": false,
+    "posterior_change": false
+  },
+  "continuous_beta": {
+    "model_source": "original_preregistration_continuous_beta_unchanged",
+    "likelihood_change": false,
+    "prior_change": false,
+    "response_change": false,
+    "testlet_change": false,
+    "sampling": {
+      "chains": 4,
+      "tune": 2000,
+      "draws": 2000,
+      "target_accept": 0.99,
+      "chain_seeds": [2026080101, 2026080102, 2026080103, 2026080104],
+      "cores": 1
+    }
+  },
+  "identified_factor_models": {
+    "role": "exploratory_solver_side_dimensionality",
+    "loading_sign_constraint": "all_free_loading_elements_are_nonnegative",
+    "scientific_direction": "Every response is higher-is-better open-interval solver quality; latent ease dimensions may have zero or positive association with an item, never a sign-reversing association.",
+    "postdiagnostic_change_from_v2": "Replace Normal free loadings with HalfNormal loadings. Keep the same pure CPU and iPIE markers, likelihood, residual and intercept priors, transforms, folds, and comparison. This removes the sign-reflection route without choosing another response-dependent marker.",
+    "response": "per_variant_standardized_logit_open_interval_quality",
+    "standardization": {
+      "fit_rows": "training_tasks_only",
+      "center": "training_task_arithmetic_mean_per_variant",
+      "scale": "training_task_sample_standard_deviation_per_variant",
+      "nonpositive_or_nonfinite_scale_fallback": 1.0,
+      "full_data_fit_rows": 96,
+      "cross_validation_fit_rows": "training_fold_only"
+    },
+    "likelihood": "multivariate_normal_with_item_intercepts_low_rank_covariance_and_diagonal_residual_variance",
+    "item_intercept_prior": "Normal(0, 0.25)",
+    "item_residual_sd_prior": "HalfNormal(0.75)",
+    "free_loading_prior": "Normal(0, 0.75)",
+    "one_factor": {
+      "positive_marker": "g50_bond_dimension_2048",
+      "positive_marker_prior": "HalfNormal(1)",
+      "other_loadings": "HalfNormal(0.75), nonnegative"
+    },
+    "two_factor": {
+      "cpu_axis_positive_marker": "g50_bond_dimension_2048",
+      "ipie_axis_positive_marker": "uhf_trial_512_walkers_1000_blocks",
+      "cpu_marker_ipie_axis_loading": 0.0,
+      "ipie_marker_cpu_axis_loading": 0.0,
+      "other_variants": "HalfNormal(0.75) nonnegative cross-loadings"
+    },
+    "full_data_sampling": {
+      "chains": 4,
+      "tune": 2000,
+      "draws": 2000,
+      "target_accept": 0.99,
+      "chain_seeds": [2026080111, 2026080112, 2026080113, 2026080114],
+      "cores": 1
+    }
+  },
+  "exact_cross_validation": {
+    "method": "five_fold_refit_predictive_log_density",
+    "pointwise_unit": "held_out_task_with_18_variant_response_vector",
+    "block": "canonical_family",
+    "fold_count": 5,
+    "fold_seed": 20260801,
+    "assignment": "sort canonical families by descending task count then sha256(seed colon family); greedily assign each family to the fold with smallest current task count then smallest fold index",
+    "standardization_leakage": false,
+    "heldout_log_predictive_density": "log_mean_exp_of_multivariate_normal_density_over_retained_posterior_draws",
+    "fit_sampling": {
+      "chains": 4,
+      "tune": 2000,
+      "draws": 2000,
+      "target_accept": 0.99,
+      "cores": 1,
+      "seed_formula": "2026081000 + 100 times factor_count + 10 times fold_index + chain_index"
+    },
+    "comparison": {
+      "delta": "sum task log_predictive_density_two_factor minus sum task log_predictive_density_one_factor",
+      "standard_error": "sqrt(96 times sample_variance_of_taskwise_differences)",
+      "favor_two": "delta greater than standard_error",
+      "favor_one": "negative delta magnitude greater than standard_error",
+      "otherwise": "equivocal"
+    }
+  },
+  "named_hypothesis": {
+    "name": "ipie_afqmc_second_axis_distinct_from_cpu_axis",
+    "loading_contrast": "absolute iPIE factor_2 marker loading divided by median absolute non_iPIE factor_2 loading",
+    "support_rule": "exact cross-validation favors two factors and posterior probability loading_contrast greater than one is at least 0.95",
+    "marker_constraint_caveat_required": true
+  },
+  "diagnostics": {
+    "apply_to": "continuous_beta, one_factor_full, two_factor_full, and all ten cross_validation_fits",
+    "divergences": 0,
+    "maximum_rhat": 1.01,
+    "minimum_bulk_ess": 400,
+    "minimum_tail_ess": 400,
+    "reported_variables": {
+      "continuous_beta": [
+        "task_difficulty",
+        "variant_ability",
+        "variant_precision",
+        "variant_consistency"
+      ],
+      "factor": [
+        "factor_loading",
+        "item_intercept",
+        "item_residual_sd"
+      ]
+    },
+    "failure_action": "retain complete recovery raw trees with explicit failure evidence; do not promote final_v1 or an ML-9D handoff"
+  },
+  "promotion_gate": {
+    "binary_source_health_verified": true,
+    "all_recovery_diagnostics_must_pass": true,
+    "binary_handoff_must_be_byte_identical_to_retained_v1": true,
+    "two_independent_process_runs_must_be_byte_identical": true,
+    "raw_recovery_trees_retained": true,
+    "promote_path": "analysis/ml9_bayesian_irt/final_v1",
+    "identity_path": "analysis/ml9_bayesian_irt/two_run_identity_v3.json"
+  },
+  "outputs": {
+    "required_files": [
+      "REPORT.md",
+      "report.json",
+      "environment.json",
+      "response_matrix.csv",
+      "task_difficulty.csv",
+      "variant_parameters.csv",
+      "difficulty_handoff_ml9d.csv",
+      "factor_preprocessing.csv",
+      "factor_loadings.csv",
+      "dimensionality_comparison.csv",
+      "cross_validation_folds.csv",
+      "cross_validation_diagnostics.csv",
+      "cross_validation_pointwise.csv",
+      "posterior_diagnostics.csv",
+      "posterior_predictive_checks.csv",
+      "posterior_samples.npz",
+      "cross_validation_log_predictive_density.npz",
+      "artifact_manifest.json"
+    ],
+    "internal_only": true,
+    "all_scientific_values_estimate_labeled": true
+  },
+  "exactness": {
+    "python_hash_seed": 0,
+    "thread_limits": 1,
+    "float_serialization": ".17g",
+    "json_serialization": "sort_keys true, indent 2, trailing newline",
+    "npz_serialization": "uncompressed deterministic zip with sorted members and fixed 1980-01-01 timestamp",
+    "two_independent_process_runs": true,
+    "same_frozen_seeds": true,
+    "raw_run_paths": [
+      "analysis/ml9_bayesian_irt/recovery_raw_runs_v3/run_1",
+      "analysis/ml9_bayesian_irt/recovery_raw_runs_v3/run_2"
+    ]
+  },
+  "fences": {
+    "new_solver_runs": false,
+    "task_reselection": false,
+    "label_changes": false,
+    "design_based_ratio_replaced": false,
+    "public_or_dashboard_placement": false,
+    "free_item_discrimination": false,
+    "ml9d_target_access_before_promotion": false,
+    "prohibited_vocabulary_absent_from_new_artifacts": true
+  }
+}
