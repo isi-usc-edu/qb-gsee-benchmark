@@ -1,0 +1,35 @@
+{
+  "artifact_id": "ml9b_raw_failure_schema_binding_v1",
+  "status": "frozen_before_ml9b_result_construction",
+  "frozen_before_result_construction": true,
+  "parent_preregistration": {
+    "path": "analysis/ml9_resource_profiles/preregistration.json",
+    "sha256": "0c9dbca5b104e49b03e2e319d0549d156a41bb8d9c82ff30c06a8b1c7adfa8cc"
+  },
+  "source": {
+    "path": "analysis/ml_g59_panel_refresh/final_v1/normalized_observations.csv",
+    "sha256": "80ecc6c7968d4d6ffc0028dc72fb5ff73681ef9a7d18592e996510fe932b78c7"
+  },
+  "binding": {
+    "no_result_raw_failed": "crash",
+    "no_result_raw_timeout": "timeout",
+    "finite_result_raw_failed": "classify_by_residual_as_ok_or_accuracy_miss",
+    "finite_result_raw_timeout": "classify_by_residual_as_ok_or_accuracy_miss",
+    "no_result_without_terminal_status": "not_observed"
+  },
+  "ladder_endpoint": {
+    "unsolved_terminal_failed": "competing_risk_crash",
+    "finite_intermediate_result_retained": true,
+    "crash_pooled_with_censoring": false
+  },
+  "label_mutation": false,
+  "exposure_disclosure": {
+    "accepted_status_tokens_inspected": true,
+    "runstatus_census_computed": false,
+    "resource_endpoint_computed": false,
+    "data_profile_computed": false,
+    "threshold_comparison_computed": false,
+    "summary_computed": false,
+    "binding_selected_from_result_comparison": false
+  }
+}
