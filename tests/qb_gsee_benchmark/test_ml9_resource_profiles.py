@@ -127,6 +127,19 @@ def test_ml9b_resource_endpoints_and_profiles_follow_frozen_axes() -> None:
     }
     assert not (endpoints["crash_competing_risk"] & endpoints["right_censored"]).any()
     assert not endpoints["monotonic_repair_applied"].any()
+    primary_shci = endpoints.loc[
+        endpoints["threshold_factor"].eq(1.0) & endpoints["solver_family_id"].eq("shci")
+    ]
+    assert (
+        int(
+            (
+                primary_shci["event_type"].eq("competing_risk_crash")
+                & primary_shci["terminal_coverage_reason"].eq("g59_parent:failed")
+            ).sum()
+        )
+        == 3
+    )
+    assert int(primary_shci["event_type"].eq("right_censored_walltime").sum()) == 20
 
     profiles = pd.DataFrame(build_data_profiles(data, endpoints.to_dict("records")))
     assert len(profiles) == (4 + 4 + 7 + 1) * 3

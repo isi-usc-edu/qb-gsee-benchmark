@@ -503,6 +503,16 @@ def build_resource_endpoints(data: PreparedResourceData) -> list[dict[str, Any]]
                             if terminal is not None
                             else None
                         ),
+                        "terminal_coverage_reason": (
+                            terminal["coverage_reason"]
+                            if terminal is not None
+                            else None
+                        ),
+                        "terminal_observation_source": (
+                            terminal["observation_source"]
+                            if terminal is not None
+                            else None
+                        ),
                         "attempted_variant_count": int(group["attempted"].sum()),
                         "finite_result_count": int(group["finite_result"].sum()),
                         "monotonic_repair_applied": False,
@@ -691,6 +701,18 @@ def _write_report(
     )
     primary_counts = Counter(primary_status["runstatus"])
     endpoint_counts = Counter(primary_endpoints["event_type"])
+    primary_shci = primary_endpoints.loc[
+        primary_endpoints["solver_family_id"].eq("shci")
+    ]
+    g59_shci_crashes = int(
+        (
+            primary_shci["event_type"].eq("competing_risk_crash")
+            & primary_shci["terminal_coverage_reason"].eq("g59_parent:failed")
+        ).sum()
+    )
+    shci_walltime_censors = int(
+        primary_shci["event_type"].eq("right_censored_walltime").sum()
+    )
     max_sensitivity = max(
         float(row["maximum_absolute_profile_difference"]) for row in stability
     )
@@ -709,6 +731,9 @@ def _write_report(
         "not_observed_cells": int((~attempt_frame["attempted"]).sum()),
         "primary_runstatus_counts": dict(sorted(primary_counts.items())),
         "primary_endpoint_counts": dict(sorted(endpoint_counts.items())),
+        "g59_shci_parent_crash_endpoints": g59_shci_crashes,
+        "shci_walltime_censored_endpoints": shci_walltime_censors,
+        "g59_shci_crashes_pooled_with_walltime": False,
         "primary_endpoint_fraction_solved": {
             row.profile_track_id: float(row.fraction_solved_cumulative)
             for row in primary_profile.itertuples()
@@ -730,6 +755,11 @@ At the primary threshold, the four-class attempted-cell census is
 `{dict(sorted(primary_counts.items()))}`. The 96-task by track endpoint census
 is `{dict(sorted(endpoint_counts.items()))}`. Crashes remain competing-risk
 events and are not included in either right-censor class.
+
+In particular, the three G59 SHCI parent-crash endpoints are retained as
+competing risks and remain distinct from the 20 SHCI walltime-censored
+endpoints. The larger all-source SHCI crash count also retains accepted failed
+attempts from the G50-retained portion and is reported by the endpoint table.
 
 The primary endpoint fractions solved are
 `{report['primary_endpoint_fraction_solved']}`. iPIE/AFQMC is a documented
