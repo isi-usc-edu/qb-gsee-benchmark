@@ -1,0 +1,69 @@
+{
+  "artifact_id": "ml11c_frontend_extensions_preregistration_v1",
+  "date": "2026-08-02",
+  "delivery": {
+    "base_v3_unchanged": true,
+    "prior_ml11b_addendum_unchanged": true,
+    "schema_version": "3.1.0",
+    "type": "combined_additive_recut"
+  },
+  "geometry": {
+    "expected_objects": 16,
+    "normalization": {
+      "empty_geometry": null,
+      "nonempty_type": "MultiPolygon",
+      "normalize_before_serialization": true,
+      "rings_closed": true
+    },
+    "profile_rungs": {
+      "g50_dmrg_bond_dimension_v1": 4,
+      "g50_shci_orbopt_variational_eps_var_v1": 4,
+      "g50_trimci_target_determinants_v1": 7,
+      "ipie_single_budget_v1": 1
+    },
+    "purity": 0.55,
+    "simulation": false,
+    "threshold_factor": 1.0,
+    "toolkit": "instancespace 0.2.1"
+  },
+  "index_assertions": {
+    "gradeable_population": 609,
+    "no_reference_population": 109
+  },
+  "mapping_extension": {
+    "categories": [
+      "coverage_class",
+      "coverage_role",
+      "endpoint_class",
+      "gate_reason",
+      "portfolio_object",
+      "state_value",
+      "validation_reason"
+    ],
+    "unknown_identifier_policy": "auto_stub_and_build_warning_until_public_name_and_description_are_filled"
+  },
+  "optional_contrast_display_table": {
+    "included": false,
+    "reason": "Existing stable contrast keys make an additional joined copy redundant."
+  },
+  "order": {
+    "ledger_path": "work/ML_GOALS.md",
+    "ledger_sha256": "6991694510d6172777f51a9711d22d84ec61a3b8ab88922e12be7e8569020a7a",
+    "section": "ML-11c ORDER 2026-08-02"
+  },
+  "sources": {
+    "base_contract_sha256": "f7d90c38e7593a27dc60c9c53da354f03b43109bb079841969d9ef5fcfecfc7b",
+    "base_public_name_mapping_sha256": "38fbd45ade3124c4a392faf372ac4194206655e6ad7dcc5bb6035995a3a00a90",
+    "instance_space_identity_sha256": "f7dcd62cfe796da4b0b63d6a6b755d7bc2dbabeb58c3887a5eaf851ffc267515",
+    "instance_space_manifest_sha256": "c617819e86d1bd21074e5d6889e2384bc29282ffc69c6dbf472ded8fb19a8a03",
+    "instance_space_preregistration_sha256": "025a2986d5f39d889e4c7216f8e34780213707ec7ea82c0951a50399467f78b3",
+    "ml11b_promotion_identity_sha256": "48408dcaf2774d80c3d941e01032320db09440db25cadc523dd2973dd8fc7ee5",
+    "ml11b_promotion_manifest_sha256": "09609f2f5d54c39f970be132f9c91f776a317dfaaa4281b1475c7e0d384cdafb",
+    "panel_coordinates_sha256": "766103c97c43523053586c1e0b7252fba57eb5fb512e476068dc6d3aa5a1afdc",
+    "resource_identity_sha256": "9f62988b0026531b10ef0b12c3a2d5f46414c8cc7d4cd167d78db4238dba671d",
+    "resource_manifest_sha256": "72f8df51a44ee181df8f016f8c951530a1e74a3e1c1d478241fce97325387408",
+    "resource_profiles_sha256": "f078dc98c081ee8d5d892026a831f8f89cca81d6a96798b53ae033ebafdbbd35",
+    "resource_to_solution_sha256": "ca90468194949af11bc1afe1fd4f14f191a2fad7794b6b3cb29e8c6bd6305034"
+  },
+  "status": "frozen_before_geometry_derivation"
+}
