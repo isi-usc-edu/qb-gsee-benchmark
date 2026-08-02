@@ -1,0 +1,32 @@
+{
+  "amendment_freeze_commit": "72f94b57fbfbd3e53fe90725c9a42a1e4ecccdd5",
+  "amendment_sha256": "b8fead0bd18c1069a9d37d2b656f49a11a8885a4acf8751bb23230fe20e43464",
+  "artifact_id": "ml9c_primary_hardness_promotion_evidence_v1",
+  "factor_artifacts_included": false,
+  "factor_disposition": {
+    "fourth_attempt_authorized": false,
+    "frozen_support_rule": 0.95,
+    "ipie_afqmc_second_axis_posterior_support": 0.6365,
+    "named_hypothesis_supported": false,
+    "nominal_elpd_delta": 503.9,
+    "nominal_elpd_reliable": false,
+    "nominal_elpd_standard_error": 58.2,
+    "recovery_closed_at_v3": true,
+    "status": "retained_exploratory_unreliable_unsupported"
+  },
+  "full_campaign_raw_trees_retained": true,
+  "handoff_identity_across_original_v2_v3_runs": true,
+  "handoff_sha256": "b8fac83b33da755361dd5049f4627e9f60495d0370a42b601a547617d295490a",
+  "pi_ruling_section_sha256": "ad5e7aae98e9bf9be9ba9bef10a8eb6259161ec1f55522a7ac9e7f9ee013ef42",
+  "pi_ruling_sha256": "1e5dbdf7741852df6cad31afc03869554fb3b49c98cb69ec914d5424fc2934ad",
+  "primary_posterior_health": {
+    "divergences": 0,
+    "max_rhat": 1.0052426278344706,
+    "min_bulk_ess": 2755.437918419625,
+    "min_tail_ess": 2174.109214388564,
+    "passed": true
+  },
+  "record_language": "The task-difficulty scale is a family-aware binary Rasch posterior with per-task uncertainty. Solver-side dimensionality was probed as a preregistered exploratory analysis; exact blocked cross-validation could not certify the two-factor comparison at this panel scale (nominal ELPD delta +503.9 +/- 58.2, marked unreliable), and the named iPIE/AFQMC second-axis hypothesis was unsupported (posterior support 0.6365 vs the frozen 0.95 rule). Difficulty could be established; dimensionality could not be decided.",
+  "scope": "family_aware_binary_rasch_task_difficulty_posterior_only",
+  "status": "pass_primary_scope_only"
+}

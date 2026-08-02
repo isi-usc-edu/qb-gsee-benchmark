@@ -46,7 +46,12 @@ def test_ml9c_recovery_source_handoff_is_unchanged() -> None:
     payload = json.loads(RECOVERY.read_text(encoding="utf-8"))
     source = ROOT / payload["retained_v1_evidence"]["binary_difficulty_handoff"]["path"]
     assert sha256_file(source) == payload["binary_rasch"]["required_handoff_sha256"]
-    assert not (ROOT / "analysis/ml9_bayesian_irt/final_v1").exists()
+    final = ROOT / "analysis/ml9_bayesian_irt/final_v1"
+    assert sha256_file(final / "difficulty_handoff_ml9d.csv") == (
+        payload["binary_rasch"]["required_handoff_sha256"]
+    )
+    manifest = json.loads((final / "artifact_manifest.json").read_text())
+    assert manifest["factor_artifacts_included"] is False
 
 
 def test_ml9c_recovery_folds_are_balanced_and_family_blocked() -> None:

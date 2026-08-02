@@ -1,0 +1,48 @@
+{
+  "all_primary_diagnostics_pass": true,
+  "artifact_id": "ml9c_primary_hardness_posterior_manifest_v1",
+  "factor_artifacts_included": false,
+  "factor_diagnostics_excluded_from_gate": true,
+  "files": [
+    {
+      "bytes": 958,
+      "path": "REPORT.md",
+      "sha256": "56288321e7a1c8594c96ef85b5140aca1d52f96f5a337db514410b37446ebd86"
+    },
+    {
+      "bytes": 15476,
+      "path": "difficulty_handoff_ml9d.csv",
+      "sha256": "b8fac83b33da755361dd5049f4627e9f60495d0370a42b601a547617d295490a"
+    },
+    {
+      "bytes": 559,
+      "path": "environment.json",
+      "sha256": "04d9f45bf415013380a2785fd7177e873555e79e8fca0b31a1e828b4cbec79f6"
+    },
+    {
+      "bytes": 213,
+      "path": "primary_posterior_diagnostics.csv",
+      "sha256": "17ec8716af6fa7fd7ae9a0c770d1c78d9735b3e4a85972e4ce264bfa858dfdd7"
+    },
+    {
+      "bytes": 1886,
+      "path": "promotion_evidence.json",
+      "sha256": "12303bde5251ac1eb73738c6fe950f0536384be3f63d239fb869632992b2f294"
+    },
+    {
+      "bytes": 1375,
+      "path": "report.json",
+      "sha256": "abb947010443d2f922372b3ec228bec163c48ca2b411b4238569b38230fa43ef"
+    }
+  ],
+  "handoff_sha256": "b8fac83b33da755361dd5049f4627e9f60495d0370a42b601a547617d295490a",
+  "label_changes": false,
+  "new_solver_runs": false,
+  "outputs_are_estimates": true,
+  "promotion_eligible_after_two_run_identity": true,
+  "public_or_dashboard_placement": false,
+  "raw_build_trees_retained": true,
+  "scope": "family_aware_binary_rasch_task_difficulty_posterior_only",
+  "status": "complete_internal_primary_hardness_posterior",
+  "task_reselection": false
+}

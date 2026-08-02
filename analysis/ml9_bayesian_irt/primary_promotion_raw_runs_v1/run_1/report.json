@@ -1,0 +1,26 @@
+{
+  "all_primary_diagnostics_pass": true,
+  "artifact_id": "ml9c_primary_hardness_posterior_report_v1",
+  "canonical_families": 23,
+  "factor_artifacts_included": false,
+  "factor_recovery_closed_at_v3": true,
+  "label_changes": false,
+  "new_solver_runs": false,
+  "outputs_are_estimates": true,
+  "panel_tasks": 96,
+  "per_task_uncertainty_included": true,
+  "primary_model": "family_aware_binary_rasch",
+  "primary_posterior_health": {
+    "divergences": 0,
+    "max_rhat": 1.0052426278344706,
+    "min_bulk_ess": 2755.437918419625,
+    "min_tail_ess": 2174.109214388564,
+    "passed": true
+  },
+  "public_or_dashboard_placement": false,
+  "record_language": "The task-difficulty scale is a family-aware binary Rasch posterior with per-task uncertainty. Solver-side dimensionality was probed as a preregistered exploratory analysis; exact blocked cross-validation could not certify the two-factor comparison at this panel scale (nominal ELPD delta +503.9 +/- 58.2, marked unreliable), and the named iPIE/AFQMC second-axis hypothesis was unsupported (posterior support 0.6365 vs the frozen 0.95 rule). Difficulty could be established; dimensionality could not be decided.",
+  "scope": "family_aware_binary_rasch_task_difficulty_posterior_only",
+  "status": "complete_internal_primary_hardness_posterior",
+  "task_reselection": false,
+  "validated_predictor_claim": false
+}

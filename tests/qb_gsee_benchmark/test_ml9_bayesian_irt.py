@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[2]
 PREREGISTRATION = ROOT / "analysis/ml9_bayesian_irt/preregistration.json"
 RAW_RUNS = ROOT / "analysis/ml9_bayesian_irt/raw_runs"
 RETAINED_IDENTITY = ROOT / "analysis/ml9_bayesian_irt/two_run_identity_retained_v1.json"
+FINAL = ROOT / "analysis/ml9_bayesian_irt/final_v1"
 
 
 def test_ml9c_preregistration_freezes_reduced_dependence_aware_models() -> None:
@@ -102,7 +103,7 @@ def test_ml9c_deterministic_npz_is_byte_identical(tmp_path: Path) -> None:
     assert first.read_bytes() == second.read_bytes()
 
 
-def test_ml9c_nonconverged_trees_are_identical_and_not_promoted() -> None:
+def test_ml9c_nonconverged_trees_remain_retained_beside_scoped_promotion() -> None:
     preregistration = json.loads(PREREGISTRATION.read_text(encoding="utf-8"))
     required = set(preregistration["outputs"]["required_files"])
     identity = json.loads(RETAINED_IDENTITY.read_text(encoding="utf-8"))
@@ -111,12 +112,20 @@ def test_ml9c_nonconverged_trees_are_identical_and_not_promoted() -> None:
     assert identity["promoted"] is False
     assert identity["file_count"] == 14
     assert set(identity["relative_paths"]) == required
-    assert not (ROOT / "analysis/ml9_bayesian_irt/final_v1").exists()
     for name, expected_hash in identity["file_hashes"].items():
         first = RAW_RUNS / "run_1" / name
         second = RAW_RUNS / "run_2" / name
         assert first.read_bytes() == second.read_bytes()
         assert sha256_file(first) == expected_hash
+    final_manifest = json.loads((FINAL / "artifact_manifest.json").read_text())
+    assert final_manifest["status"] == "complete_internal_primary_hardness_posterior"
+    assert final_manifest["scope"] == (
+        "family_aware_binary_rasch_task_difficulty_posterior_only"
+    )
+    assert final_manifest["factor_artifacts_included"] is False
+    assert (FINAL / "difficulty_handoff_ml9d.csv").read_bytes() == (
+        RAW_RUNS / "run_1/difficulty_handoff_ml9d.csv"
+    ).read_bytes()
 
     diagnostics = pd.read_csv(RAW_RUNS / "run_1/posterior_diagnostics.csv")
     passed = dict(zip(diagnostics["model"], diagnostics["passed"]))
