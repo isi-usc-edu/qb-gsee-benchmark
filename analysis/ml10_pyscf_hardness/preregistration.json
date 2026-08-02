@@ -1,0 +1,350 @@
+{
+  "artifact_id": "ml10_pyscf_hardness_preregistration_v1",
+  "status": "frozen_before_ml10_row_outcomes_or_energies_parsed",
+  "frozen_before_preflight_result_construction": true,
+  "frozen_before_energy_grading": true,
+  "frozen_before_model_fit": true,
+  "scope_decision": {
+    "gao_extension_pi_accepted_when_preflight_began": false,
+    "panel_tasks": 96,
+    "panel_tasks_with_campaign_coverage": 92,
+    "corpus_tasks": 718,
+    "corpus_tasks_with_campaign_coverage": 591,
+    "coverage_delta_required_after_later_pi_acceptance": true,
+    "no_imputation": true
+  },
+  "order": {
+    "external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/ML_GOALS.md",
+    "document_sha256_at_freeze": "49233fcb9bbbd2f9957bf1cb67c43f1ed6e472124c5daba0f5d12b42d8782be3",
+    "ml10_section_start_line": 3077,
+    "ml10_section_sha256": "77da504061edf34bda08c5919cc672c0319fc3f5dca2aa1cf191555e51b7220e",
+    "order_revision": "ML-10 2026-08-02 including G48-EXT-GAO sequencing addendum"
+  },
+  "repository": {
+    "freeze_parent_commit": "53d62840be726e28478679c7498438e36d559512",
+    "problem_instances_tree_git_sha1": "2cb653e27b1519d3d987c61a77e744cd67bb23d8",
+    "feature_schema_tree_git_sha1": "fa63a0ab3a50209a9739a503077416f68109a0b7"
+  },
+  "inputs": {
+    "g48_campaign_results": {
+      "external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g48_p3_production_728ef21/g48_p3_campaign_results.csv",
+      "sha256": "575b519179de1c69895cb36ef1caf8c4461812edd8af3206b42dcd5fc95bf0fe",
+      "campaign_id": "g48_pyscf_clean_slate_2026-07_v1",
+      "expected_rows": 2955
+    },
+    "g48_closeout_adjudication": {
+      "external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g48_p3_production_728ef21/g48_p3_closeout_adjudication.json",
+      "sha256": "9bbafef78f5ee3748cbbaa7cd1dda45eb63db7fcd8324aaa1a09bcc36f04f4ff"
+    },
+    "g48_closeout_evidence": {
+      "external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g48_p3_production_728ef21/g48_p3_closeout_evidence_2026-07-15.json",
+      "sha256": "149ef00ec30b31ba0eb0ead6656668d2edc88b4d3d2a4d45c384ea2ca3bdf557"
+    },
+    "g48_verification": {
+      "external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g48_p3_production_728ef21/g48_p3_verification.json",
+      "sha256": "b109ccfa1b93a9fc26d126451716038f6f9f0fa0af7b4bc15af40de533dd59a7"
+    },
+    "g48_baseline_plan": {
+      "path": "analysis/g48_pyscf_full_corpus/g48_phase1_plan_591x5.csv",
+      "sha256": "ad88af2c2391da2b63fceeedd596f38f6cc52fba854d05d077a3461d6b7bbda1"
+    },
+    "panel_of_record": {
+      "path": "analysis/ml_core_set_v2/selection_of_record_v1/panel_of_record.csv",
+      "sha256": "367f8a484f2c9c6e3e3b9d03ac6d5e5edcc06ead185a2cb5d14204510a01ffe3"
+    },
+    "selection_manifest": {
+      "path": "analysis/ml_core_set_v2/selection_of_record_v1/selection_of_record_manifest.json",
+      "sha256": "20159c02b3463af39a3ac8ce946992f0c89ddfd52e79e9ad2c30fee08982bf77"
+    },
+    "gradeability_census_csv": {
+      "path": "analysis/ml_gradeability_census/held_v1/census.csv",
+      "sha256": "9487c30d4738dbb2964160bf8ae54e06dbdf248519b900ef4cb3accad913daab"
+    },
+    "gradeability_census_json": {
+      "path": "analysis/ml_gradeability_census/held_v1/census.json",
+      "sha256": "12fc1b1926cf2d58f7f7ed6f49da62d2fb794920ae2811e5aeb705f212a6ef8e"
+    },
+    "post_g59_observations": {
+      "path": "analysis/ml_g59_panel_refresh/final_v1/normalized_observations.csv",
+      "sha256": "80ecc6c7968d4d6ffc0028dc72fb5ff73681ef9a7d18592e996510fe932b78c7"
+    },
+    "ml9a_manifest": {
+      "path": "analysis/ml9_instance_space/final_v1/artifact_manifest.json",
+      "sha256": "c617819e86d1bd21074e5d6889e2384bc29282ffc69c6dbf472ded8fb19a8a03"
+    },
+    "ml9a_corpus_coordinates": {
+      "path": "analysis/ml9_instance_space/final_v1/corpus_coordinates.csv",
+      "sha256": "264baa1315bfab9ad404fa0d0e4da2a38359265591af2993eb0f4ce374b54859"
+    },
+    "ml9a_panel_coordinates": {
+      "path": "analysis/ml9_instance_space/final_v1/panel_coordinates.csv",
+      "sha256": "766103c97c43523053586c1e0b7252fba57eb5fb512e476068dc6d3aa5a1afdc"
+    },
+    "ml9a_projection_features": {
+      "path": "analysis/ml9_instance_space/final_v1/projection_features.csv",
+      "sha256": "e8bfdebad7e1a6d6656106993eb5f5bae78139978d13d079da8eb143c779f8a5"
+    },
+    "ml9a_projection_matrix": {
+      "path": "analysis/ml9_instance_space/final_v1/projection_matrix.csv",
+      "sha256": "309896fec61108648e53e7835cbe4deb403f255e0ba765949aff1d1e90534e0e"
+    },
+    "ml9a_cloister_boundary": {
+      "path": "analysis/ml9_instance_space/final_v1/cloister_boundary.csv",
+      "sha256": "ee173bbcbc7fcf6444bf631dea93715cd85adec747d234520957136c146821ec"
+    },
+    "ml9b_manifest": {
+      "path": "analysis/ml9_resource_profiles/final_v1/artifact_manifest.json",
+      "sha256": "72f8df51a44ee181df8f016f8c951530a1e74a3e1c1d478241fce97325387408"
+    },
+    "ml9c_manifest": {
+      "path": "analysis/ml9_bayesian_irt/final_v1/artifact_manifest.json",
+      "sha256": "1ec1807bd0d48627e7dbec25c9741b17a0179eccfc47a06108f2a190675bc541"
+    },
+    "ml9c_difficulty_handoff": {
+      "path": "analysis/ml9_bayesian_irt/final_v1/difficulty_handoff_ml9d.csv",
+      "sha256": "b8fac83b33da755361dd5049f4627e9f60495d0370a42b601a547617d295490a"
+    },
+    "ml9c_primary_posterior_samples": {
+      "path": "analysis/ml9_bayesian_irt/raw_runs/run_1/posterior_samples.npz",
+      "sha256": "b5fffe35157949af88b61cb58c42f8509f55f4731bc135b278a09abe334a409a"
+    }
+  },
+  "methods": [
+    {"method": "hf", "item_id": "pyscf_hf", "display_name": "HF"},
+    {"method": "mp2", "item_id": "pyscf_mp2", "display_name": "MP2"},
+    {"method": "cisd", "item_id": "pyscf_cisd", "display_name": "CISD"},
+    {"method": "ccsd", "item_id": "pyscf_ccsd", "display_name": "CCSD"},
+    {"method": "ccsd_t", "item_id": "pyscf_ccsd_t", "display_name": "CCSD(T)"}
+  ],
+  "preflight": {
+    "outcome_blind": true,
+    "energy_column_must_not_be_parsed": true,
+    "unit": "current_corpus_task_by_pyscf_method",
+    "expected_rows": 3590,
+    "coverage_mapping": {
+      "completed": "labeled",
+      "failed": "failed",
+      "not_attempted": "not_attempted_cost_screened",
+      "absent_pair": "no_pyscf_coverage"
+    },
+    "unexpected_source_status_action": "fail",
+    "baseline_pair_grid": "exactly 591 tasks by five methods",
+    "epistemic_flags": [
+      "scf_multistable_stationary_point",
+      "method_inapplicable_degenerate_reference",
+      "variationally_inferior_reference_annotation_ca6f7678",
+      "pending_reference_recompute_603f9c47"
+    ],
+    "required_outputs": [
+      "coverage_census.csv",
+      "panel_coverage_summary.csv",
+      "corpus_coverage_summary.csv",
+      "epistemic_flags.csv",
+      "report.json",
+      "REPORT.md",
+      "artifact_manifest.json"
+    ]
+  },
+  "label_construction_after_preflight": {
+    "reference_source": "current problem_instances tree pinned above",
+    "eligible_task_rule": "gradeability_census.gradeable_for_campaign_scoring is true",
+    "completed_success": "abs(energy_hartree - reference_energy) <= absolute_accuracy_threshold",
+    "completed_miss": "finite completed energy outside the positive absolute threshold",
+    "attempted_failed": "binary failure response with continuous quality capped at the frozen failure cap",
+    "not_attempted_cost_screened": "missing response",
+    "no_pyscf_coverage": "missing response",
+    "stored_source_mutation": false,
+    "pending_reference_recompute_603f9c47": "compute from the pinned current reference but flag every derived cell and exclude it from unqualified claims"
+  },
+  "ml10a_instance_space": {
+    "output_directory": "analysis/ml10_instance_space/final_v2",
+    "projection_refit": false,
+    "fixed_from_ml9a": [
+      "feature transform",
+      "selected projection features",
+      "projection matrix",
+      "panel and corpus coordinates",
+      "CLOISTER empirical boundary"
+    ],
+    "panel_tracks": "five PySCF methods plus ladder union plus PySCF portfolio",
+    "trace_labels": "observed attempted success and failure only",
+    "named_boundary": "pyscf_ccsd_t",
+    "bootstrap": {
+      "unit": "canonical_task_family_block",
+      "replicates": 2000,
+      "seed": 20260802,
+      "projection_refit_per_draw": false,
+      "raw_draws_retained": true
+    },
+    "corpus_validation": {
+      "training_population": "covered gradeable attempted panel tasks",
+      "test_population": "covered gradeable attempted nonpanel tasks",
+      "classifier": "RBF SVM with the accepted ML-9A fixed hyperparameter-search and gate rules",
+      "trace": "direct observed geometry on covered gradeable attempted corpus tasks",
+      "no_cost_screen_imputation": true
+    }
+  },
+  "ml10b_resource_profiles": {
+    "output_directory": "analysis/ml10_resource_profiles/final_v2",
+    "base_tables_untouched": true,
+    "track_type": "single_budget",
+    "resource_axis_invented": false,
+    "runstatus": {
+      "completed_success": "ok",
+      "completed_miss": "accuracy_miss",
+      "explicit_timeout": "timeout",
+      "other_attempted_failure": "crash",
+      "cost_screened": "no runstatus",
+      "no_coverage": "no runstatus"
+    },
+    "endpoint_classes": [
+      "solution",
+      "accuracy_miss",
+      "right_censored_walltime",
+      "competing_risk_failure",
+      "not_attempted_cost_screened",
+      "no_pyscf_coverage"
+    ],
+    "profile_denominators": [
+      "all_96_panel_tasks_descriptive_lower_bound",
+      "attempted_covered_panel_tasks_conditional"
+    ]
+  },
+  "ml10c_bayesian_irt": {
+    "output_directory": "analysis/ml10_bayesian_irt/final_v1",
+    "items": 23,
+    "tasks": 96,
+    "matrix": "sparse observed-cell matrix with 18 complete ladder items and five PySCF items",
+    "primary_model": {
+      "likelihood": "Bernoulli(logit_p = item_ability - task_difficulty + task_by_solver_group_testlet)",
+      "item_discrimination": 1.0,
+      "free_item_discrimination": false,
+      "priors": "same hierarchical ability, canonical-family difficulty, task offset, and testlet priors as ML-9C",
+      "solver_groups": ["dmrg", "ipie_afqmc", "shci", "trimci", "pyscf_methods"],
+      "missing_cells_excluded_from_likelihood": true
+    },
+    "graded_corroboration": {
+      "response": "1 / (1 + min(max(graded_residual, 0), 4) + 1e-6)",
+      "attempted_failure_cap": 4.0,
+      "missing_cells_excluded_from_likelihood": true,
+      "model": "fixed-discrimination hierarchical beta response with the same five testlet groups"
+    },
+    "dimensionality": {
+      "response": "per-item training-fold-standardized logit open-interval quality on observed cells",
+      "likelihood": "cellwise Gaussian latent factor model; held-out task density marginalizes its latent scores over the observed item subset",
+      "loading_prior": "HalfNormal(0.75) for all free loadings",
+      "one_factor_positive_marker": "g50_bond_dimension_2048",
+      "two_factor_first_marker": "g50_bond_dimension_2048",
+      "two_factor_second_marker": "pyscf_ccsd_t",
+      "cross_marker_loadings": 0.0,
+      "named_hypothesis": "single_reference_multireference_axis",
+      "loading_contrast": "median PySCF second-axis loading divided by median 18-ladder-item second-axis loading",
+      "support_rule": "exact blocked CV favors two factors and posterior probability loading contrast greater than one is at least 0.95",
+      "marker_constraint_caveat_required": true
+    },
+    "exact_cross_validation": {
+      "method": "five_fold_refit_predictive_log_density",
+      "block": "canonical_family",
+      "fold_count": 5,
+      "fold_seed": 20260802,
+      "assignment": "descending family size then sha256(seed colon family), greedy smallest fold then smallest index",
+      "pointwise_unit": "held-out task with all observed item responses",
+      "delta": "sum task log predictive density for two factors minus one factor",
+      "standard_error": "sqrt(number of tasks times sample variance of taskwise differences)",
+      "favor_two": "delta greater than standard_error",
+      "favor_one": "negative delta magnitude greater than standard_error",
+      "otherwise": "equivocal",
+      "training_fold_standardization_only": true
+    },
+    "sampling": {
+      "engine": "PyMC 6.2.0",
+      "chains": 4,
+      "cores": 1,
+      "tune": 2000,
+      "draws": 2000,
+      "target_accept": 0.99,
+      "fixed_chain_seeds": [2026080211, 2026080212, 2026080213, 2026080214]
+    },
+    "diagnostics": {
+      "divergences": 0,
+      "maximum_rhat": 1.01,
+      "minimum_bulk_ess": 400,
+      "minimum_tail_ess": 400,
+      "failure_action": "retain complete raw trees with a nonpromotion report"
+    },
+    "difficulty_shift": {
+      "reference": "promoted ML-9C binary task-difficulty posterior",
+      "alignment": "both task scales centered to mean zero in every posterior draw",
+      "estimands": [
+        "per-task posterior mean shift",
+        "per-task 95 percent interval for shift",
+        "Pearson and Spearman posterior-mean concordance",
+        "median absolute posterior-mean shift"
+      ],
+      "ml9d_target_regated": false
+    }
+  },
+  "ml10d_desk": {
+    "output_directory": "analysis/ml10_pyscf_desk/final_v1",
+    "panel_union_outputs": [
+      "per-method additions beyond the 18-item ladder union",
+      "five-method PySCF union additions beyond the 18-item ladder union",
+      "18-item ladder solves not reproduced by each PySCF method"
+    ],
+    "design_based_ratios": {
+      "weights": "selection_weight_609",
+      "denominator_total": 609,
+      "reported": [
+        "weighted known-success lower bound",
+        "weighted missingness upper bound",
+        "weighted attempted-coverage conditional ratio"
+      ],
+      "missing": "cost-screened and uncovered weight; never imputed"
+    },
+    "corpus_rates": {
+      "population": "gradeable tasks with accepted G48 campaign coverage",
+      "reported": [
+        "observed attempted solvability rate",
+        "cost-screened missingness fraction",
+        "partial-identification lower and upper bounds"
+      ],
+      "label": "near-census observed descriptive estimate"
+    }
+  },
+  "reproducibility": {
+    "python_hash_seed": 0,
+    "thread_limits": 1,
+    "stable_row_sorting": true,
+    "csv_line_terminator": "LF",
+    "float_serialization": ".17g",
+    "json_serialization": "sort_keys true, indent 2, trailing newline",
+    "npz_serialization": "uncompressed deterministic zip with sorted members and fixed 1980-01-01 timestamp",
+    "two_independent_process_runs": true,
+    "same_frozen_seeds": true,
+    "recursive_byte_identity_required": true,
+    "raw_run_trees_retained": true,
+    "promotion_only_after_identity": true
+  },
+  "fences": {
+    "new_solver_runs": false,
+    "gao_extension_consumed": false,
+    "task_reselection": false,
+    "accepted_artifact_mutation": false,
+    "label_mutation": false,
+    "new_versions_only": true,
+    "public_or_dashboard_placement": false,
+    "design_based_ratio_replaced": false,
+    "free_item_discrimination": false,
+    "prohibited_vocabulary_absent_from_new_artifacts": true,
+    "ambiguous_choice_policy": "conservative_document_and_continue"
+  },
+  "prior_exposure": {
+    "pi_filed_g48_aggregate_totals_seen": true,
+    "g48_schema_header_seen": true,
+    "g48_json_top_level_keys_seen": true,
+    "g48_row_statuses_seen_before_freeze": false,
+    "g48_row_energies_seen_before_freeze": false,
+    "ml10_success_labels_computed_before_freeze": false,
+    "ml10_footprints_profiles_posteriors_unions_or_ratios_computed_before_freeze": false
+  }
+}
