@@ -1,0 +1,56 @@
+{
+  "$id": "https://gsee-benchmark.org/schemas/frontend-bundle-v3.1-ability-addendum.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {"const": "schema/index.schema.json"},
+    "artifact_id": {"const": "ml11b_frontend_ability_addendum_v3_1"},
+    "schema_version": {"const": "3.1.0"},
+    "status": {"const": "complete_internal_single_layer_addendum"},
+    "applies_to": {
+      "type": "object",
+      "required": ["base_artifact_id", "base_index_sha256", "replaces_path", "replaces_sha256"]
+    },
+    "entrypoints": {
+      "type": "object",
+      "required": ["definitions", "public_name_mapping", "variant_ability_consistency"]
+    },
+    "layer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_state": {"const": "frozen_artifact"},
+        "bundle_materialization": {"const": "derivable_at_export"},
+        "estimate_label": {"type": "string", "minLength": 1},
+        "row_count": {"const": 18}
+      },
+      "required": ["source_state", "bundle_materialization", "estimate_label", "row_count"]
+    },
+    "release_scope": {
+      "type": "object",
+      "required": ["public_deployment_authorized", "validated_predictor_claim"]
+    },
+    "source": {
+      "type": "object",
+      "required": ["promotion_manifest_sha256", "promotion_identity_sha256"]
+    },
+    "files": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "role": {"type": "string", "minLength": 1},
+          "bytes": {"type": "integer", "minimum": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "row_count": {"type": "integer", "minimum": 0}
+        },
+        "required": ["path", "role", "bytes", "sha256"]
+      }
+    }
+  },
+  "required": ["$schema", "artifact_id", "schema_version", "status", "applies_to", "entrypoints", "layer", "release_scope", "source", "files"],
+  "type": "object"
+}

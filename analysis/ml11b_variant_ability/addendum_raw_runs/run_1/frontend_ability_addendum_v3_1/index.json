@@ -1,0 +1,64 @@
+{
+  "$schema": "schema/index.schema.json",
+  "applies_to": {
+    "base_artifact_id": "ml11_frontend_bundle_v3",
+    "base_index_sha256": "633396f80823f25beeeef3b3e0a90d47daf0eebb316017d22a3fa6240d9ca8c8",
+    "replaces_path": "layers/difficulty/variant_ability_consistency.json",
+    "replaces_sha256": "e0f1881f93199158790d387d2239fef18cc1d22db7a5172fea6972fbeb08bbf6"
+  },
+  "artifact_id": "ml11b_frontend_ability_addendum_v3_1",
+  "entrypoints": {
+    "definitions": "definitions.json",
+    "public_name_mapping": "public_name_mapping.json",
+    "variant_ability_consistency": "layers/difficulty/variant_ability_consistency.json"
+  },
+  "files": [
+    {
+      "bytes": 234,
+      "path": "README.md",
+      "role": "documentation",
+      "sha256": "e931982541799322d4aca9d4c7987d8df233faa5ce58d83203acd944afa85ee3"
+    },
+    {
+      "bytes": 796,
+      "path": "definitions.json",
+      "role": "normative_definitions",
+      "sha256": "0b709127d0cded3bb0dfbb3c8990adeb0d545952286cd25c5ca1d6fa7f9a7a31"
+    },
+    {
+      "bytes": 5324,
+      "path": "layers/difficulty/variant_ability_consistency.json",
+      "role": "frontend_layer",
+      "row_count": 18,
+      "sha256": "448384ac6d8ac01f133c314836e40f34b2215eb7dbdb96fade72e026ccedf127"
+    },
+    {
+      "bytes": 19330,
+      "path": "public_name_mapping.json",
+      "role": "public_name_mapping",
+      "sha256": "38fbd45ade3124c4a392faf372ac4194206655e6ad7dcc5bb6035995a3a00a90"
+    },
+    {
+      "bytes": 2119,
+      "path": "schema/index.schema.json",
+      "role": "schema",
+      "sha256": "124512509fb2fcaea338dbb1dbe97fcfa90a217243e378d43e06c7bf406c3624"
+    }
+  ],
+  "layer": {
+    "bundle_materialization": "derivable_at_export",
+    "estimate_label": "frozen binary-Rasch posterior estimate",
+    "row_count": 18,
+    "source_state": "frozen_artifact"
+  },
+  "release_scope": {
+    "public_deployment_authorized": false,
+    "validated_predictor_claim": false
+  },
+  "schema_version": "3.1.0",
+  "source": {
+    "promotion_identity_sha256": "48408dcaf2774d80c3d941e01032320db09440db25cadc523dd2973dd8fc7ee5",
+    "promotion_manifest_sha256": "09609f2f5d54c39f970be132f9c91f776a317dfaaa4281b1475c7e0d384cdafb"
+  },
+  "status": "complete_internal_single_layer_addendum"
+}

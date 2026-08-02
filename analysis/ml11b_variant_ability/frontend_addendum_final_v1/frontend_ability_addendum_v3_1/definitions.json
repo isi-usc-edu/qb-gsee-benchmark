@@ -1,0 +1,19 @@
+{
+  "artifact_id": "ml11b_frontend_ability_addendum_v3_1_definitions",
+  "definitions_are_normative": true,
+  "layer": {
+    "bundle_materialization": "derivable_at_export",
+    "estimate_label": "frozen binary-Rasch posterior estimate",
+    "source_state": "frozen_artifact"
+  },
+  "model_provenance": {
+    "ability": "family-aware binary Rasch posterior",
+    "consistency": "excluded because the available estimand is a continuous Beta precision transform",
+    "consistency_availability": "excluded_continuous_model_quantity"
+  },
+  "release": {
+    "public_deployment_authorized": false,
+    "validated_predictor_claim": false
+  },
+  "replacement_semantics": "Replace the base v3 zero-row availability payload at the same layer path with this 18-row table; do not modify other v3 files."
+}
