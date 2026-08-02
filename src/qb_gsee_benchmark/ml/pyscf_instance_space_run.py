@@ -346,8 +346,10 @@ def run_instance_space_finalization(
     output_directory: Path,
     *,
     bootstrap_replicates: int | None = None,
+    prepared_data: PreparedPyscfData | None = None,
+    artifact_version: int = 2,
 ) -> dict[str, Any]:
-    """Build the ML-10A final_v2 extension without refitting the projection."""
+    """Build an ML-10A revision without refitting the projection."""
 
     _require(
         not output_directory.exists(), f"output already exists: {output_directory}"
@@ -360,7 +362,7 @@ def run_instance_space_finalization(
     ):
         os.environ[name] = "1"
     os.environ["PYTHONHASHSEED"] = "0"
-    data = prepare_pyscf_data(root, preregistration_path)
+    data = prepared_data or prepare_pyscf_data(root, preregistration_path)
     targets = _target_table(data)
     gate_rows, validation_rows, gate_by_target = _fit_pythia_and_validate(data, targets)
     panel_trace_rows, panel_polygons = _panel_trace(targets, gate_by_target)
@@ -414,8 +416,9 @@ def run_instance_space_finalization(
     ]
 
     output_directory.mkdir(parents=True)
+    label_rows = label_records(data)
     stable_csv_dump(
-        label_records(data), LABEL_COLUMNS, output_directory / "pyscf_labels.csv"
+        label_rows, list(label_rows[0]), output_directory / "pyscf_labels.csv"
     )
     stable_csv_dump(
         gate_rows, list(gate_rows[0]), output_directory / "panel_pythia_gate.csv"
@@ -451,7 +454,7 @@ def run_instance_space_finalization(
         output_directory / "portfolio_union_comparison.csv",
     )
     projection_binding = {
-        "artifact_id": "ml10a_fixed_projection_binding_v2",
+        "artifact_id": f"ml10a_fixed_projection_binding_v{artifact_version}",
         "projection_refit": False,
         "ml9a_manifest_sha256": data.input_hashes["ml9a_manifest"],
         "panel_coordinates_sha256": data.input_hashes["ml9a_panel_coordinates"],
@@ -463,21 +466,28 @@ def run_instance_space_finalization(
     }
     stable_json_dump(projection_binding, output_directory / "projection_binding.json")
     stable_json_dump(
-        _environment("ml10a_runtime_environment_v2"),
+        _environment(f"ml10a_runtime_environment_v{artifact_version}"),
         output_directory / "environment.json",
     )
 
     ccsdt = next(row for row in panel_trace_rows if row["target"] == "pyscf_ccsd_t")
     combined = comparison_rows[-1]
     report = {
-        "artifact_id": "ml10a_instance_space_report_v2",
+        "artifact_id": f"ml10a_instance_space_report_v{artifact_version}",
         "status": "complete_internal_descriptive",
         "output_kind": "estimate",
         "projection_refit": False,
         "panel_tasks": 96,
-        "covered_panel_tasks": 92,
+        "covered_panel_tasks": int(
+            data.labels.loc[
+                data.labels["in_panel"] & data.labels["in_campaign_baseline"],
+                "task_uuid",
+            ].nunique()
+        ),
         "corpus_tasks": 718,
-        "covered_corpus_tasks": 591,
+        "covered_corpus_tasks": int(
+            data.labels.loc[data.labels["in_campaign_baseline"], "task_uuid"].nunique()
+        ),
         "pyscf_tracks": 5,
         "panel_pythia_gates_passed": int(
             sum(bool(row["gate_passed"]) for row in gate_rows)
@@ -502,7 +512,7 @@ def run_instance_space_finalization(
         "internal_only": True,
     }
     stable_json_dump(report, output_directory / "report.json")
-    text = f"""# ML-10A Instance Space Analysis — internal final v2
+    text = f"""# ML-10A Instance Space Analysis — internal final v{artifact_version}
 
 Status: complete internal descriptive artifact. The accepted ML-9A transform,
 projection, coordinates, and boundary remain fixed; no PySCF outcome refit the
@@ -532,7 +542,7 @@ push occurred.
     (output_directory / "REPORT.md").write_text(text, encoding="utf-8")
     _write_manifest(
         output_directory,
-        "ml10a_instance_space_manifest_v2",
+        f"ml10a_instance_space_manifest_v{artifact_version}",
         preregistration_path,
         data.input_hashes,
     )

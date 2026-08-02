@@ -10,11 +10,20 @@ from collections import Counter
 from pathlib import Path
 from typing import Any, Mapping
 
+import numpy as np
+import pandas as pd
+
 from qb_gsee_benchmark.ml.core_set import (
     _require,
     sha256_file,
     stable_csv_dump,
     stable_json_dump,
+)
+from qb_gsee_benchmark.ml.pyscf_hardness_labels import (
+    FAILURE_CAP,
+    QUALITY_EPSILON,
+    PreparedPyscfData,
+    prepare_pyscf_data,
 )
 from qb_gsee_benchmark.ml.pyscf_hardness_preflight import (
     FLAG_COLUMNS,
@@ -427,3 +436,307 @@ artifact tree.
         output_directory / "artifact_manifest.json",
     )
     return report
+
+
+def _verify_grading_binding(
+    root: Path, preregistration_path: Path
+) -> dict[str, str]:
+    binding_path = root / "analysis/ml10_gao_coverage_delta/grading_binding.json"
+    binding = _read_json(binding_path)
+    _require(
+        binding.get("artifact_id") == "ml10_gao_delta_grading_binding_v1",
+        "wrong Gao grading binding",
+    )
+    _require(
+        sha256_file(preregistration_path)
+        == binding["analysis_rules_source"]["sha256"],
+        "Gao grading rules changed",
+    )
+    hashes = {"grading_binding": sha256_file(binding_path)}
+    for name in ("identity", "manifest", "report"):
+        specification = binding["status_preflight"][name]
+        path, digest = _verify_input(root, specification, f"grading.{name}")
+        hashes[f"grading.{name}"] = digest
+        payload = _read_json(path)
+        if name == "identity":
+            _require(payload.get("byte_identical") is True, "preflight runs differ")
+        elif name == "manifest":
+            _require(
+                payload.get("energy_values_consumed") is False,
+                "preflight consumed energies",
+            )
+            _require(
+                payload.get("success_labels_computed") is False,
+                "preflight computed labels",
+            )
+        else:
+            _require(payload.get("status") == "pass", "preflight did not pass")
+            _require(
+                payload["census"]["covered_panel_tasks"] == 96
+                and payload["census"]["covered_corpus_tasks"] == 718,
+                "preflight coverage changed",
+            )
+    return hashes
+
+
+def _bool_series(values: pd.Series) -> pd.Series:  # type: ignore[type-arg]
+    text = values.astype(str).str.lower()
+    _require(bool(text.isin(["true", "false"]).all()), "invalid boolean column")
+    return text.eq("true")
+
+
+def prepare_gao_delta_data(
+    root: Path, preregistration_path: Path
+) -> PreparedPyscfData:
+    """Grade the frozen accepted Gao block and extend the pinned ML-10 labels."""
+
+    preregistration, paths, input_hashes, _ = verify_delta_preregistration(
+        root, preregistration_path
+    )
+    grading_hashes = _verify_grading_binding(root, preregistration_path)
+    base = prepare_pyscf_data(
+        root, paths["prior_artifacts.baseline_preregistration"]
+    )
+
+    preflight = pd.read_csv(
+        root / "analysis/ml10_pyscf_hardness/preflight_v2/coverage_census.csv",
+        dtype={"task_uuid": str},
+        float_precision="round_trip",
+    )
+    _require(len(preflight) == 3590, "Gao preflight census changed")
+    _require(
+        not preflight.duplicated(["task_uuid", "item_id"]).any(),
+        "duplicate Gao preflight cell",
+    )
+    preflight["in_gao_extension"] = _bool_series(preflight["in_gao_extension"])
+    _require(
+        int(preflight["in_gao_extension"].sum()) == 635,
+        "Gao preflight delta count changed",
+    )
+
+    source = pd.read_csv(
+        paths["accepted_gao_inputs.results"],
+        dtype={"task_uuid": str},
+        float_precision="round_trip",
+    )
+    required = {
+        "task_uuid",
+        "adapter",
+        "harness_status",
+        "attempted",
+        "energy_hartree",
+        "reference_scoring_eligible",
+        "reference_energy_hartree",
+        "threshold_hartree",
+        "absolute_error_hartree",
+        "solved",
+        "classification",
+        "failure_stage",
+    }
+    _require(len(source) == 635 and required <= set(source.columns), "Gao outcome schema changed")
+    source["attempted"] = _bool_series(source["attempted"])
+    source["reference_scoring_eligible"] = _bool_series(
+        source["reference_scoring_eligible"]
+    )
+    source["source_solved"] = _bool_series(source["solved"])
+    _require(bool(source["attempted"].all()), "Gao row was not attempted")
+    _require(
+        bool(source["reference_scoring_eligible"].all()),
+        "Gao row is not score eligible",
+    )
+    _require(
+        bool(source["harness_status"].eq("completed").all()),
+        "Gao outcome is not completed",
+    )
+    expected_items = {str(row["item_id"]) for row in preregistration["methods"]}
+    _require(bool(source["adapter"].isin(expected_items).all()), "Gao item changed")
+    numeric_columns = (
+        "energy_hartree",
+        "reference_energy_hartree",
+        "threshold_hartree",
+        "absolute_error_hartree",
+    )
+    for column in numeric_columns:
+        source[column] = pd.to_numeric(source[column], errors="coerce")
+        _require(bool(np.isfinite(source[column]).all()), f"nonfinite Gao {column}")
+    _require(bool(source["threshold_hartree"].gt(0.0).all()), "bad Gao threshold")
+
+    source = source[
+        [
+            "task_uuid",
+            "adapter",
+            "harness_status",
+            "energy_hartree",
+            "reference_energy_hartree",
+            "threshold_hartree",
+            "absolute_error_hartree",
+            "source_solved",
+            "classification",
+            "failure_stage",
+        ]
+    ].rename(
+        columns={
+            "adapter": "item_id",
+            "harness_status": "gao_result_status",
+            "energy_hartree": "gao_energy_hartree",
+            "reference_energy_hartree": "gao_reference_energy_hartree",
+            "threshold_hartree": "gao_threshold_hartree",
+            "absolute_error_hartree": "gao_absolute_error_hartree",
+            "classification": "gao_classification",
+            "failure_stage": "gao_failure_stage",
+        }
+    )
+    _require(
+        not source.duplicated(["task_uuid", "item_id"]).any(),
+        "duplicate Gao outcome pair",
+    )
+
+    labels = base.labels.merge(
+        source, on=["task_uuid", "item_id"], how="left", validate="one_to_one"
+    )
+    is_gao = labels["gao_result_status"].notna()
+    _require(int(is_gao.sum()) == 635, "Gao outcomes did not map to 635 cells")
+    _require(
+        bool(labels.loc[is_gao, "coverage_class"].eq("no_pyscf_coverage").all()),
+        "Gao outcome mapped outside the frozen missing block",
+    )
+    expected_pairs = set(
+        preflight.loc[
+            preflight["in_gao_extension"], ["task_uuid", "item_id"]
+        ].itertuples(index=False, name=None)
+    )
+    actual_pairs = set(
+        labels.loc[is_gao, ["task_uuid", "item_id"]].itertuples(
+            index=False, name=None
+        )
+    )
+    _require(actual_pairs == expected_pairs, "graded Gao pair set changed")
+    for current, accepted, tolerance in (
+        ("reference_energy_hartree", "gao_reference_energy_hartree", 1.0e-12),
+        ("threshold_hartree", "gao_threshold_hartree", 1.0e-15),
+    ):
+        _require(
+            bool(
+                np.isclose(
+                    labels.loc[is_gao, current],
+                    labels.loc[is_gao, accepted],
+                    rtol=0.0,
+                    atol=tolerance,
+                ).all()
+            ),
+            f"Gao {current} disagrees with frozen task",
+        )
+
+    labels["in_gao_extension"] = is_gao
+    labels["in_accepted_campaign_union"] = (
+        labels["in_campaign_baseline"].astype(bool) | is_gao
+    )
+    labels.loc[is_gao, "in_campaign_baseline"] = True
+    labels.loc[is_gao, "coverage_class"] = "labeled"
+    labels.loc[is_gao, "source_status"] = "completed"
+    labels.loc[is_gao, "attempted"] = True
+    labels.loc[is_gao, "source_origin"] = "gao_arrival_127"
+    labels.loc[is_gao, "planned_disposition"] = "planned_attempt"
+    labels.loc[is_gao, "result_status"] = "completed"
+    labels.loc[is_gao, "energy_hartree"] = labels.loc[is_gao, "gao_energy_hartree"]
+    labels.loc[is_gao, "classification"] = labels.loc[is_gao, "gao_classification"]
+    labels.loc[is_gao, "failure_stage"] = labels.loc[is_gao, "gao_failure_stage"]
+
+    labels["energy_hartree"] = pd.to_numeric(labels["energy_hartree"], errors="coerce")
+    completed = labels["result_status"].eq("completed")
+    failed = labels["result_status"].eq("failed")
+    gradeable = labels["gradeable_for_campaign_scoring"].astype(bool)
+    valid_reference = np.isfinite(labels["reference_energy_hartree"])
+    valid_threshold = np.isfinite(labels["threshold_hartree"]) & labels[
+        "threshold_hartree"
+    ].gt(0)
+    labels["absolute_error_hartree"] = np.where(
+        completed & valid_reference,
+        np.abs(labels["energy_hartree"] - labels["reference_energy_hartree"]),
+        np.nan,
+    )
+    labels["graded_residual"] = np.where(
+        completed & valid_reference & valid_threshold,
+        labels["absolute_error_hartree"] / labels["threshold_hartree"],
+        np.where(failed & gradeable, FAILURE_CAP, np.nan),
+    )
+    labels["response_observed"] = gradeable & (completed | failed)
+    threshold_solved = completed & labels["graded_residual"].le(1.0)
+    labels["solvable"] = np.where(
+        labels["response_observed"],
+        threshold_solved,
+        pd.NA,
+    )
+    labels["continuous_quality"] = np.where(
+        labels["response_observed"],
+        1.0
+        / (
+            1.0
+            + np.minimum(np.maximum(labels["graded_residual"], 0.0), FAILURE_CAP)
+            + QUALITY_EPSILON
+        ),
+        np.nan,
+    )
+    labels["label_reason"] = np.select(
+        [
+            labels["coverage_class"].eq("not_attempted_cost_screened"),
+            labels["coverage_class"].eq("no_pyscf_coverage"),
+            ~gradeable,
+            failed,
+            completed & labels["graded_residual"].le(1.0),
+            completed,
+        ],
+        [
+            "not_attempted_cost_screened",
+            "no_pyscf_coverage",
+            "not_gradeable",
+            "attempted_failure",
+            "completed_within_threshold",
+            "completed_outside_threshold",
+        ],
+        default="invalid",
+    )
+    _require(not labels["label_reason"].eq("invalid").any(), "unclassified Gao label")
+    _require(
+        bool(
+            np.isclose(
+                labels.loc[is_gao, "absolute_error_hartree"],
+                labels.loc[is_gao, "gao_absolute_error_hartree"],
+                rtol=0.0,
+                atol=1.0e-12,
+            ).all()
+        ),
+        "recomputed Gao absolute error changed",
+    )
+    recomputed = threshold_solved.loc[is_gao].astype(bool).to_numpy()
+    accepted = labels.loc[is_gao, "source_solved"].astype(bool).to_numpy()
+    _require(np.array_equal(recomputed, accepted), "recomputed Gao label changed")
+    _require(int(recomputed.sum()) == 169, "Gao solve aggregate changed")
+    _require(
+        not labels["coverage_class"].eq("no_pyscf_coverage").any(),
+        "Gao delta left a no-coverage cell",
+    )
+
+    helper_columns = [
+        name for name in labels.columns if name.startswith("gao_")
+    ] + ["source_solved"]
+    labels = labels.drop(columns=helper_columns)
+    contract = dict(preregistration)
+    contract["ml10a_instance_space"] = {
+        "bootstrap": preregistration["instance_space"]["bootstrap"]
+    }
+    combined_hashes = {
+        **{f"baseline.{key}": value for key, value in base.input_hashes.items()},
+        **base.input_hashes,
+        **input_hashes,
+        **grading_hashes,
+    }
+    return PreparedPyscfData(
+        preregistration=contract,
+        labels=labels,
+        panel=base.panel,
+        panel_coordinates=base.panel_coordinates,
+        corpus_coordinates=base.corpus_coordinates,
+        ladder_panel=base.ladder_panel,
+        input_hashes=dict(sorted(combined_hashes.items())),
+    )

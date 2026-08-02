@@ -397,5 +397,9 @@ def label_records(data: PreparedPyscfData) -> list[dict[str, Any]]:
         "epistemic_flags",
         "pending_reference_recompute",
     ]
+    columns.extend(
+        column for column in ("in_gao_extension", "in_accepted_campaign_union")
+        if column in data.labels
+    )
     frame = data.labels[columns].copy()
     return frame.where(pd.notna(frame), None).to_dict(orient="records")

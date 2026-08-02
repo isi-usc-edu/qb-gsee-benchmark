@@ -6,6 +6,7 @@ from pathlib import Path
 from qb_gsee_benchmark.ml.core_set import sha256_file
 from qb_gsee_benchmark.ml.pyscf_gao_delta import (
     DELTA_CENSUS_COLUMNS,
+    prepare_gao_delta_data,
     run_gao_delta_preflight,
     verify_delta_preregistration,
 )
@@ -70,3 +71,17 @@ def test_gao_delta_new_sources_avoid_prohibited_term() -> None:
     ]
     for path in paths:
         assert prohibited.encode() not in path.read_bytes().lower()
+
+
+def test_gao_delta_labels_preserve_gradeability_and_source_scoring() -> None:
+    data = prepare_gao_delta_data(ROOT, PREREGISTRATION)
+    labels = data.labels
+    gao = labels.loc[labels["in_gao_extension"]]
+    assert len(labels) == 3590
+    assert len(gao) == 635
+    assert int(gao["gradeable_for_campaign_scoring"].sum()) == 615
+    assert int(gao["response_observed"].sum()) == 615
+    assert int(gao["solvable"].eq(True).sum()) == 162
+    assert int(labels["response_observed"].sum()) == 2669
+    assert not labels["coverage_class"].eq("no_pyscf_coverage").any()
+    assert labels["in_accepted_campaign_union"].all()

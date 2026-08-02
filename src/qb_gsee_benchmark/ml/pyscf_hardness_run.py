@@ -400,14 +400,19 @@ def _resource_rows(data: PreparedPyscfData) -> dict[str, list[dict[str, Any]]]:
 
 
 def run_resource_finalization(
-    root: Path, preregistration_path: Path, output_directory: Path
+    root: Path,
+    preregistration_path: Path,
+    output_directory: Path,
+    *,
+    prepared_data: PreparedPyscfData | None = None,
+    artifact_version: int = 2,
 ) -> dict[str, Any]:
-    """Create ML-10B final_v2 while retaining every ML-9B table row."""
+    """Create an ML-10B revision while retaining every ML-9B table row."""
 
     _require(
         not output_directory.exists(), f"output already exists: {output_directory}"
     )
-    data = prepare_pyscf_data(root, preregistration_path)
+    data = prepared_data or prepare_pyscf_data(root, preregistration_path)
     rows = _resource_rows(data)
     base = root / "analysis/ml9_resource_profiles/final_v1"
     base_manifest = json.loads((base / "artifact_manifest.json").read_text())
@@ -443,8 +448,9 @@ def run_resource_finalization(
         list(rows["pyscf_single_budget_profiles"][0]),
         output_directory / "pyscf_single_budget_profiles.csv",
     )
+    label_rows = label_records(data)
     stable_csv_dump(
-        label_records(data), LABEL_COLUMNS, output_directory / "pyscf_labels.csv"
+        label_rows, list(label_rows[0]), output_directory / "pyscf_labels.csv"
     )
 
     primary_runstatus = [
@@ -461,7 +467,7 @@ def run_resource_finalization(
     combined_endpoints = Counter(base_report["primary_endpoint_counts"])
     combined_endpoints.update(new_endpoints)
     report = {
-        "artifact_id": "ml10b_resource_profiles_report_v2",
+        "artifact_id": f"ml10b_resource_profiles_report_v{artifact_version}",
         "status": "complete_internal_descriptive",
         "output_kind": "descriptive",
         "panel_tasks": 96,
@@ -500,10 +506,10 @@ def run_resource_finalization(
     }
     stable_json_dump(report, output_directory / "report.json")
     stable_json_dump(
-        _environment("ml10b_runtime_environment_v2"),
+        _environment(f"ml10b_runtime_environment_v{artifact_version}"),
         output_directory / "environment.json",
     )
-    text = f"""# ML-10B censored resource profiles — internal final v2
+    text = f"""# ML-10B censored resource profiles — internal final v{artifact_version}
 
 Status: complete internal descriptive artifact. The accepted ML-9B rows are
 retained and five PySCF methods are appended as one-point single-budget tracks;
@@ -524,7 +530,7 @@ mutation, PAR-k summary, or public placement occurred.
     (output_directory / "REPORT.md").write_text(text, encoding="utf-8")
     _write_manifest(
         output_directory,
-        "ml10b_resource_profiles_manifest_v2",
+        f"ml10b_resource_profiles_manifest_v{artifact_version}",
         preregistration_path,
         data.input_hashes,
     )
@@ -668,6 +674,11 @@ def _frontier_rows(data: PreparedPyscfData) -> list[dict[str, Any]]:
 
 def _corpus_rate_rows(data: PreparedPyscfData) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
+    eligible = (
+        data.labels["in_campaign_baseline"]
+        & data.labels["gradeable_for_campaign_scoring"]
+    )
+    expected_tasks = int(data.labels.loc[eligible, "task_uuid"].nunique())
     for item in METHOD_ORDER:
         subset = data.labels.loc[
             data.labels["item_id"].eq(item)
@@ -677,7 +688,7 @@ def _corpus_rate_rows(data: PreparedPyscfData) -> list[dict[str, Any]]:
         observed = subset["response_observed"].astype(bool)
         success = subset["solvable"].eq(True)
         missing = ~observed
-        _require(len(subset) == 486, "gradeable G48 coverage changed")
+        _require(len(subset) == expected_tasks, "gradeable coverage changed")
         rows.append(
             {
                 "method": DISPLAY_BY_ITEM[item],
@@ -701,14 +712,19 @@ def _corpus_rate_rows(data: PreparedPyscfData) -> list[dict[str, Any]]:
 
 
 def run_desk_finalization(
-    root: Path, preregistration_path: Path, output_directory: Path
+    root: Path,
+    preregistration_path: Path,
+    output_directory: Path,
+    *,
+    prepared_data: PreparedPyscfData | None = None,
+    artifact_version: int = 1,
 ) -> dict[str, Any]:
     """Create ML-10D unions, method frontiers, and missingness-bounded ratios."""
 
     _require(
         not output_directory.exists(), f"output already exists: {output_directory}"
     )
-    data = prepare_pyscf_data(root, preregistration_path)
+    data = prepared_data or prepare_pyscf_data(root, preregistration_path)
     union_rows, ratio_rows = _panel_desk_rows(data)
     frontier_rows = _frontier_rows(data)
     corpus_rows = _corpus_rate_rows(data)
@@ -727,14 +743,15 @@ def run_desk_finalization(
         list(corpus_rows[0]),
         output_directory / "corpus_near_census_rates.csv",
     )
+    label_rows = label_records(data)
     stable_csv_dump(
-        label_records(data), LABEL_COLUMNS, output_directory / "pyscf_labels.csv"
+        label_rows, list(label_rows[0]), output_directory / "pyscf_labels.csv"
     )
     union = next(
         row for row in union_rows if row["target"] == "pyscf_five_method_union"
     )
     report = {
-        "artifact_id": "ml10d_pyscf_desk_report_v1",
+        "artifact_id": f"ml10d_pyscf_desk_report_v{artifact_version}",
         "status": "complete_internal_descriptive",
         "output_kind": "estimate",
         "panel_tasks": 96,
@@ -757,10 +774,10 @@ def run_desk_finalization(
     }
     stable_json_dump(report, output_directory / "report.json")
     stable_json_dump(
-        _environment("ml10d_runtime_environment_v1"),
+        _environment(f"ml10d_runtime_environment_v{artifact_version}"),
         output_directory / "environment.json",
     )
-    text = f"""# ML-10D PySCF unions, frontiers, and ratios — internal final v1
+    text = f"""# ML-10D PySCF unions, frontiers, and ratios — internal final v{artifact_version}
 
 Status: complete internal descriptive artifact. The known five-method PySCF
 union solves {union['known_successes']} panel tasks and adds
@@ -771,7 +788,7 @@ and no-coverage cell as missing.
 Design-based method ratios use the frozen weights summing to 609 and report a
 known-success lower bound, missingness upper bound, and attempted-coverage
 conditional estimate. Corpus rates are near-census observed estimates over
-the 486 gradeable tasks covered by the accepted campaign, with cost-screened
+the {corpus_rows[0]['gradeable_covered_tasks']} gradeable tasks covered by the accepted campaign, with cost-screened
 partial-identification bounds. These estimates do not replace the existing
 design-based ratio of record.
 
@@ -781,7 +798,7 @@ imputation, public placement, or push occurred.
     (output_directory / "REPORT.md").write_text(text, encoding="utf-8")
     _write_manifest(
         output_directory,
-        "ml10d_pyscf_desk_manifest_v1",
+        f"ml10d_pyscf_desk_manifest_v{artifact_version}",
         preregistration_path,
         data.input_hashes,
     )

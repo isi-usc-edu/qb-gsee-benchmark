@@ -1,0 +1,6 @@
+method,item_id,selection_weight_total,known_success_weight,observed_attempted_weight,missing_weight,design_lower_bound,design_upper_bound,attempted_coverage_conditional_ratio,missing_imputed,output_kind
+HF,pyscf_hf,609,9,576,33,0.014778325123152709,0.068965517241379309,0.015625,false,estimate
+MP2,pyscf_mp2,609,68,579,30,0.1116584564860427,0.16091954022988506,0.11744386873920552,false,estimate
+CISD,pyscf_cisd,609,78,530,79,0.12807881773399016,0.25779967159277506,0.14716981132075471,false,estimate
+CCSD,pyscf_ccsd,609,138,530,79,0.22660098522167488,0.35632183908045978,0.26037735849056604,false,estimate
+CCSD(T),pyscf_ccsd_t,609,227,507,102,0.37274220032840721,0.54022988505747127,0.44773175542406313,false,estimate

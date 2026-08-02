@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ml10b_resource_profiles_report_v3",
+  "base_solver_variants": 18,
+  "combined_items": 23,
+  "combined_primary_endpoint_counts": {
+    "competing_risk_crash": 28,
+    "competing_risk_failure": 60,
+    "no_attempt_evidence": 5,
+    "not_attempted_cost_screened": 103,
+    "right_censored_ladder_exhaustion": 309,
+    "right_censored_walltime": 75,
+    "solution": 284
+  },
+  "combined_primary_runstatus_counts": {
+    "accuracy_miss": 569,
+    "crash": 176,
+    "ok": 995,
+    "timeout": 360
+  },
+  "conditional_quantiles_only": true,
+  "cost_screened_endpoint_distinct": true,
+  "internal_only": true,
+  "missing_imputed": false,
+  "new_solver_runs": false,
+  "no_coverage_endpoint_distinct": true,
+  "output_kind": "descriptive",
+  "panel_tasks": 96,
+  "par_k_reported": false,
+  "pyscf_panel_attempted_cells": 377,
+  "pyscf_panel_cost_screened_cells": 103,
+  "pyscf_panel_no_coverage_cells": 0,
+  "pyscf_primary_endpoint_counts": {
+    "competing_risk_failure": 60,
+    "not_attempted_cost_screened": 103,
+    "right_censored_ladder_exhaustion": 227,
+    "solution": 90
+  },
+  "pyscf_primary_runstatus_counts": {
+    "accuracy_miss": 227,
+    "crash": 60,
+    "ok": 90
+  },
+  "pyscf_single_budget_tracks": 5,
+  "single_budget_ladder_invented": false,
+  "source_labels_mutated": false,
+  "status": "complete_internal_descriptive",
+  "task_reselection": false
+}
