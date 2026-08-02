@@ -1,0 +1,66 @@
+#!/bin/bash
+#PBS -N ml10a_instance_space_v2
+#PBS -A QC_NA_Sim
+#PBS -l select=1:ncpus=128
+#PBS -l walltime=02:00:00
+#PBS -j oe
+#PBS -r n
+
+set -euo pipefail
+
+ROOT="${PBS_O_WORKDIR:?}"
+PYTHON="/home/ac.otten/soft/mambaforge/envs/qb_gsee/bin/python"
+RUN_ROOT="$ROOT/analysis/ml10_instance_space/raw_runs"
+LOG_ROOT="/scratch/ac.otten/NCS_GSEE_Benchmark_ml10a_logs/${PBS_JOBID:?}"
+
+export PYTHONNOUSERSITE=1
+export PYTHONHASHSEED=0
+export PYTHONPATH="$ROOT/src"
+export OMP_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1
+
+cd "$ROOT"
+mkdir -p "$LOG_ROOT"
+test ! -e "$RUN_ROOT/run_1"
+test ! -e "$RUN_ROOT/run_2"
+test ! -e "$ROOT/analysis/ml10_instance_space/final_v2"
+test ! -e "$ROOT/analysis/ml10_instance_space/two_run_identity_v2.json"
+
+echo "job_id=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "root=$ROOT"
+echo "python=$PYTHON"
+"$PYTHON" --version
+"$PYTHON" -c 'import instancespace, numpy, pandas, scipy, sklearn; print(instancespace.__version__, numpy.__version__, pandas.__version__, scipy.__version__, sklearn.__version__)'
+
+"$PYTHON" -u analysis/ml10_instance_space/run_finalization.py \
+  --output-dir "$RUN_ROOT/run_1" >"$LOG_ROOT/run_1.log" 2>&1 &
+pid_1=$!
+"$PYTHON" -u analysis/ml10_instance_space/run_finalization.py \
+  --output-dir "$RUN_ROOT/run_2" >"$LOG_ROOT/run_2.log" 2>&1 &
+pid_2=$!
+
+set +e
+wait "$pid_1"
+status_1=$?
+wait "$pid_2"
+status_2=$?
+set -e
+echo "run_1_status=$status_1"
+echo "run_2_status=$status_2"
+tail -n 80 "$LOG_ROOT/run_1.log" || true
+tail -n 80 "$LOG_ROOT/run_2.log" || true
+if [[ "$status_1" -ne 0 || "$status_2" -ne 0 ]]; then
+  exit 1
+fi
+
+"$PYTHON" analysis/ml10_instance_space/verify_two_runs.py \
+  --first "$RUN_ROOT/run_1" \
+  --second "$RUN_ROOT/run_2" \
+  --promoted "$ROOT/analysis/ml10_instance_space/final_v2" \
+  --identity "$ROOT/analysis/ml10_instance_space/two_run_identity_v2.json"
+
+echo "ML10A_PBS_PRODUCTION_PASS log_root=$LOG_ROOT"
