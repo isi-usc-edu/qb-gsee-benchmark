@@ -17,6 +17,7 @@ from qb_gsee_benchmark.ml.grouped_inference_run import (
     _binary_folds,
     _bootstrap_indices,
     _score_comparisons,
+    prepare_inference,
     run_grouped_inference,
     verify_target_gate,
 )
@@ -83,6 +84,15 @@ def test_ml9d_gate_opens_without_parsing_targets(monkeypatch) -> None:
     assert evidence["secondary_target_access_authorized"] is True
     assert evidence["retained_raw_handoff_used"] is False
     assert evidence["factor_artifact_used"] is False
+
+
+def test_ml9d_real_targets_prepare_after_gate() -> None:
+    prepared = prepare_inference(ROOT, PREREGISTRATION, EXECUTION_CONTRACT)
+    assert prepared.features.shape == (96, 193)
+    assert prepared.primary_target.shape == (96,)
+    assert set(prepared.binary_targets) == {"dmrg", "ipie_afqmc", "shci", "trimci"}
+    assert all(values.shape == (96,) for values in prepared.binary_targets.values())
+    assert prepared.gate_evidence["status"] == "pass_target_access_authorized"
 
 
 def test_ml9d_binary_folds_keep_groups_intact() -> None:

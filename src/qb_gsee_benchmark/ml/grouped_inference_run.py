@@ -403,19 +403,39 @@ def prepare_inference(
     )
     transformed, parameters = coordinate_preprocessing(raw)
     expected_parameters = pd.read_csv(
-        preflight / "feature_preprocessing.csv"
+        preflight / "feature_preprocessing.csv", float_precision="round_trip"
     ).set_index("feature")
     _require(
         list(expected_parameters.index.astype(str)) == list(feature_names),
         "ML-9D preprocessing feature order changed",
     )
+    _require(
+        list(expected_parameters.columns) == list(parameters.columns),
+        "ML-9D preprocessing parameter columns changed",
+    )
     for column in parameters.columns:
+        if column == "scale_source":
+            _require(
+                parameters[column].astype(str).tolist()
+                == expected_parameters[column].astype(str).tolist(),
+                "ML-9D preprocessing parameter changed: scale_source",
+            )
+            continue
+        if column == "constant_after_completion":
+            _require(
+                np.array_equal(
+                    _bool_series(parameters[column], column),
+                    _bool_series(expected_parameters[column], column),
+                ),
+                "ML-9D preprocessing parameter changed: constant_after_completion",
+            )
+            continue
         expected = pd.to_numeric(
             expected_parameters[column], errors="coerce"
         ).to_numpy()
         observed = pd.to_numeric(parameters[column], errors="coerce").to_numpy()
         _require(
-            np.allclose(observed, expected, rtol=0.0, atol=1e-14, equal_nan=True),
+            np.array_equal(observed, expected, equal_nan=True),
             f"ML-9D preprocessing parameter changed: {column}",
         )
 

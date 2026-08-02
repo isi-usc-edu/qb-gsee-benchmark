@@ -28,4 +28,4 @@ echo "python=$PYTHON"
 "$PYTHON" -c 'import numpy, pandas, scipy, sklearn; print(numpy.__version__, pandas.__version__, scipy.__version__, sklearn.__version__)'
 "$PYTHON" -m pytest -q \
   tests/qb_gsee_benchmark/test_ml9_grouped_inference_run.py \
-  -k 'target_gate_decoupling or gate_opens_without_parsing_targets or synthetic_full_pipeline'
+  -k 'target_gate_decoupling or gate_opens_without_parsing_targets or real_targets_prepare or synthetic_full_pipeline'
