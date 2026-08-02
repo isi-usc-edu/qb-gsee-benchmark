@@ -29,6 +29,9 @@ EXECUTION_CONTRACT = ROOT / "analysis/ml9_grouped_inference/execution_contract_v
 TARGET_GATE_DECOUPLING = (
     ROOT / "analysis/ml9_grouped_inference/target_gate_decoupling_v4.json"
 )
+RAW_RUNS = ROOT / "analysis/ml9_grouped_inference/raw_runs"
+FINAL = ROOT / "analysis/ml9_grouped_inference/final_v1"
+IDENTITY = ROOT / "analysis/ml9_grouped_inference/two_run_identity_v1.json"
 
 
 def test_ml9d_execution_contract_is_frozen_before_target_access() -> None:
@@ -228,4 +231,37 @@ def test_ml9d_synthetic_full_pipeline_is_deterministic(
     manifest = json.loads((first / "artifact_manifest.json").read_text())
     assert manifest["status"] == "complete_internal_descriptive_inference"
     assert manifest["target_gate_status"] == "pass_target_access_authorized"
-    assert not (ROOT / "analysis/ml9_grouped_inference/final_v1").exists()
+    promoted_manifest = json.loads((FINAL / "artifact_manifest.json").read_text())
+    assert promoted_manifest["status"] == "complete_internal_descriptive_inference"
+
+
+def test_ml9d_promoted_runs_are_byte_identical_and_hashed() -> None:
+    identity = json.loads(IDENTITY.read_text(encoding="utf-8"))
+    assert identity["status"] == "pass"
+    assert identity["byte_identical"] is True
+    assert identity["target_gate_passed"] is True
+    assert identity["file_count"] == 14
+    assert identity["promoted"] == "analysis/ml9_grouped_inference/final_v1"
+    for name, expected_hash in identity["file_hashes"].items():
+        assert sha256_file(RAW_RUNS / "run_1" / name) == expected_hash
+        assert sha256_file(RAW_RUNS / "run_2" / name) == expected_hash
+        assert sha256_file(FINAL / name) == expected_hash
+
+
+def test_ml9d_promoted_results_record_the_negative_verdict() -> None:
+    report = json.loads((FINAL / "report.json").read_text(encoding="utf-8"))
+    assert report["status"] == "complete_internal_descriptive_inference"
+    assert report["bh_rejections_primary"] == 0
+    assert report["bh_rejections_secondary"] == 0
+    assert report["continuous_gradeable_contrasts"] == 5
+    assert report["binary_gradeable_contrasts"] == 15
+    assert report["stored_targets_or_labels_mutated"] is False
+    assert report["new_solver_runs"] is False
+
+    estimates = pd.read_csv(FINAL / "contrast_estimates.csv")
+    dmrg = estimates.loc[estimates["target"].eq("dmrg")]
+    assert len(dmrg) == 10
+    assert not dmrg["gradeable"].any()
+    assert set(dmrg["status"]) == {"non_gradeable_degenerate_binary_fold"}
+    multiplicity = pd.read_csv(FINAL / "multiplicity_results.csv")
+    assert multiplicity["reject_zero_positive_importance"].eq(True).sum() == 0
