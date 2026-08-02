@@ -1,0 +1,32 @@
+{
+  "all_sampler_diagnostics_pass": false,
+  "artifact_id": "ml10c_sparse_bayesian_irt_report_v1",
+  "difficulty_shift": {
+    "median_absolute_posterior_mean_shift": 0.5124957106702108,
+    "pearson_posterior_mean_concordance": 0.9832588219871993,
+    "spearman_posterior_mean_concordance": 0.9696147585458492
+  },
+  "dimensionality_comparison": {
+    "decision": "favor_two_factors",
+    "delta_elpd_two_minus_one": 420.862621543032,
+    "delta_standard_error": 58.31074858219635,
+    "method": "exact_five_fold_canonical_family_blocked",
+    "reliable": false
+  },
+  "graded_corroboration": "fixed_discrimination_sparse_hierarchical_beta",
+  "items": 23,
+  "label_changes": false,
+  "marker_constraint_caveat": true,
+  "missing_response_cells": 123,
+  "ml9d_target_regated": false,
+  "named_single_reference_multireference_hypothesis_supported": false,
+  "new_solver_runs": false,
+  "observed_response_cells": 2085,
+  "outputs_are_estimates": true,
+  "panel_tasks": 96,
+  "primary_model": "fixed_discrimination_sparse_hierarchical_rasch",
+  "public_or_dashboard_placement": false,
+  "pyscf_second_axis_loading_contrast_probability_gt_one": 0.558375,
+  "status": "retained_internal_diagnostic_failure",
+  "task_reselection": false
+}
