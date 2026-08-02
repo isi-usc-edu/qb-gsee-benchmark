@@ -1,0 +1,67 @@
+{
+  "$id": "https://gsee-benchmark.org/schemas/frontend-bundle-v3.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {"const": "schema/index.schema.json"},
+    "artifact_id": {"const": "ml11_frontend_bundle_v3"},
+    "schema_version": {"const": "3.0.0"},
+    "status": {"const": "complete_internal_frozen_scale_bundle"},
+    "entrypoints": {
+      "type": "object",
+      "additionalProperties": {"type": "string"},
+      "required": ["definitions", "contract", "public_name_mapping"]
+    },
+    "release_scope": {
+      "type": "object",
+      "required": ["public_deployment_authorized", "validated_predictor_claim"]
+    },
+    "counts": {"type": "object"},
+    "layers": {
+      "type": "object",
+      "minProperties": 6,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "source_state": {"const": "frozen_artifact"},
+          "bundle_materialization": {"const": "derivable_at_export"},
+          "estimate_label": {"type": "string", "minLength": 1},
+          "paths": {
+            "type": "array",
+            "minItems": 1,
+            "items": {"type": "string", "minLength": 1}
+          }
+        },
+        "required": ["source_state", "bundle_materialization", "estimate_label", "paths"]
+      }
+    },
+    "source_bindings": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": {
+        "type": "object",
+        "required": ["source_id", "manifest_path", "manifest_sha256", "identity_path", "identity_sha256"]
+      }
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "role": {"type": "string", "minLength": 1},
+          "bytes": {"type": "integer", "minimum": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "row_count": {"type": "integer", "minimum": 0}
+        },
+        "required": ["path", "role", "bytes", "sha256"]
+      }
+    }
+  },
+  "required": ["$schema", "artifact_id", "schema_version", "status", "entrypoints", "release_scope", "counts", "layers", "source_bindings", "files"],
+  "type": "object"
+}

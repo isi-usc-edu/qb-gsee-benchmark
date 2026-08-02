@@ -1,0 +1,85 @@
+{
+  "artifact_id": "ml11_frontend_bundle_v3_definitions",
+  "contract_requirement": "P-7",
+  "definitions_are_normative": true,
+  "derivation_contract": "contract/CONTRACT.md",
+  "difficulty_corroboration": {
+    "expanded_item_scale_pearson_concordance": 0.983,
+    "ipie_afqmc_hypothesis_supported": false,
+    "one_factor_cross_validation_passes": 5,
+    "one_factor_cross_validation_total": 5,
+    "output_kind": "accepted_display_metadata",
+    "second_axis_hypotheses_supported": false,
+    "single_reference_hypothesis_supported": false,
+    "two_factor_identifiable": false
+  },
+  "endpoint_taxonomy": {
+    "competing_risk_crash_or_failure": "attempt ended in a distinct failure risk and is not pooled with walltime censoring",
+    "cost_screened": "method was deliberately not attempted under the accepted cost screen",
+    "ladder_exhaustion": "all accepted ladder rungs were exhausted without solution",
+    "no_coverage": "no accepted campaign coverage exists",
+    "solution": "accepted endpoint satisfied the stored task threshold",
+    "walltime": "right-censored by walltime"
+  },
+  "estimate_labels": {
+    "descriptive": "descriptive estimate; not a population ratio unless explicitly marked design-based",
+    "external_validation": "external-validation estimate; failed gates are findings, not missing results",
+    "frozen_posterior": "frozen posterior estimate; do not refit at export",
+    "observed": "observed accepted record",
+    "prediction": "estimated solvability; not a validated predictor"
+  },
+  "layers": {
+    "base": {
+      "bundle_materialization": "derivable_at_export",
+      "definition": "Observed and estimated solver-family records carried forward from bundle v2.",
+      "source_state": "frozen_artifact"
+    },
+    "difficulty": {
+      "bundle_materialization": "derivable_at_export",
+      "definition": "Frozen task posterior estimates and accepted corroboration metadata.",
+      "source_state": "frozen_artifact"
+    },
+    "group_inference": {
+      "bundle_materialization": "derivable_at_export",
+      "definition": "Grouped descriptive inference with multiplicity-adjusted honest-negative results.",
+      "source_state": "frozen_artifact"
+    },
+    "instance_space": {
+      "bundle_materialization": "derivable_at_export",
+      "definition": "Frozen coordinates and descriptive footprint geometry; failed adequacy gates remain attached.",
+      "source_state": "frozen_artifact"
+    },
+    "pyscf": {
+      "bundle_materialization": "derivable_at_export",
+      "definition": "Observed electronic-structure labels, explicit missingness classes, and descriptive frontiers.",
+      "source_state": "frozen_artifact"
+    },
+    "resource_profiles": {
+      "bundle_materialization": "derivable_at_export",
+      "definition": "Observed endpoint classes plus descriptive censored profiles and conditional quantiles.",
+      "source_state": "frozen_artifact"
+    }
+  },
+  "metric_distinction": {
+    "additional_193_columns": [
+      "max_edge_order",
+      "min_edge_order"
+    ],
+    "additional_columns_observed_tasks": 184,
+    "binding_selection_columns": 191,
+    "frontend_feature_columns": 193,
+    "interpretation": "The binding selection used 191 columns. The accepted solver-family analysis and placement space use 193 columns; the two added narrow-applicability columns do not retroactively change the binding selection."
+  },
+  "release": {
+    "public_deployment_authorized": false,
+    "validated_predictor_claim": false
+  },
+  "state_vocabulary": {
+    "bundle_materialization": [
+      "derivable_at_export"
+    ],
+    "source_state": [
+      "frozen_artifact"
+    ]
+  }
+}

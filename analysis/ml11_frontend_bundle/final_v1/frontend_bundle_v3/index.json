@@ -1,0 +1,730 @@
+{
+  "$schema": "schema/index.schema.json",
+  "artifact_id": "ml11_frontend_bundle_v3",
+  "counts": {
+    "base_observations": 1728,
+    "base_prediction_rows": 25848,
+    "corpus_tasks": 718,
+    "difficulty_tasks": 96,
+    "g50_retained_dmrg_terminal_cells": 66,
+    "group_multiplicity_rows": 25,
+    "panel_tasks": 96,
+    "projection_features": 8,
+    "pyscf_label_rows": 3590,
+    "solver_variants": 18,
+    "table_rows": {
+      "difficulty.task_difficulty": 96,
+      "difficulty.variant_ability_consistency": 0,
+      "group_inference.contrast_estimates": 50,
+      "group_inference.multiplicity_results": 25,
+      "instance_space.acquisition_priorities": 622,
+      "instance_space.cloister_boundary": 32,
+      "instance_space.coordinates": 718,
+      "instance_space.feature_preprocessing": 193,
+      "instance_space.panel_coordinates": 96,
+      "instance_space.portfolio_union": 3,
+      "instance_space.projection_features": 8,
+      "instance_space.projection_matrix": 16,
+      "instance_space.pyscf_bootstrap_intervals": 30,
+      "instance_space.pyscf_corpus_footprints": 5,
+      "instance_space.pyscf_external_validation": 5,
+      "instance_space.pyscf_panel_footprints": 6,
+      "instance_space.pyscf_panel_pythia_gates": 6,
+      "instance_space.solver_family_bootstrap_intervals": 50,
+      "instance_space.solver_family_footprints": 27,
+      "instance_space.solver_family_pythia_gates": 15,
+      "pyscf.corpus_near_census_rates": 5,
+      "pyscf.design_based_ratios": 5,
+      "pyscf.labels": 3590,
+      "pyscf.method_frontiers": 718,
+      "pyscf.panel_unions": 6,
+      "resource_profiles.combined_attempt_coverage": 2208,
+      "resource_profiles.combined_conditional_quantiles": 27,
+      "resource_profiles.combined_endpoints": 2592,
+      "resource_profiles.combined_profiles": 63,
+      "resource_profiles.combined_runstatus": 6300,
+      "resource_profiles.combined_stability": 18,
+      "resource_profiles.companion_variants": 576,
+      "resource_profiles.ladder_conditional_quantiles": 12,
+      "resource_profiles.ladder_endpoints": 1152,
+      "resource_profiles.ladder_profiles": 48,
+      "resource_profiles.ladder_stability": 8,
+      "resource_profiles.pyscf_single_budget_profiles": 15
+    }
+  },
+  "entrypoints": {
+    "base_catalog": "base/catalog.json",
+    "base_features": "base/features.json",
+    "base_observations": "base/observations.json",
+    "base_uncertainty": "base/uncertainty.json",
+    "contract": "contract/CONTRACT.md",
+    "definitions": "definitions.json",
+    "group_multiplicity": "layers/group_inference/multiplicity_results.json",
+    "instance_coordinates": "layers/instance_space/coordinates.json",
+    "public_name_mapping": "public_name_mapping.json",
+    "pyscf_labels": "layers/pyscf/labels.json",
+    "resource_endpoints": "layers/resource_profiles/combined_endpoints.json",
+    "task_difficulty": "layers/difficulty/task_difficulty.json"
+  },
+  "files": [
+    {
+      "bytes": 631,
+      "path": "README.md",
+      "role": "documentation",
+      "sha256": "82b75f4aec3d164cad3b0141aec9a598f8c3c0722c0de0bf3a6ac8501fd8d14a"
+    },
+    {
+      "bytes": 710739,
+      "path": "base/catalog.json",
+      "role": "frontend_layer",
+      "sha256": "23334b19eac989a3ecea094fdf3cbbf629a2e7c8fd2cfb52124992a2db32a2be"
+    },
+    {
+      "bytes": 453116,
+      "path": "base/coverage.json",
+      "role": "frontend_layer",
+      "sha256": "a333c0ea6024f9810f52eea2d2999078fa05b2c30296aee0d579b2e11ae0ce26"
+    },
+    {
+      "bytes": 49023,
+      "path": "base/dmrg_terminal_cells.json",
+      "role": "frontend_layer",
+      "sha256": "6f623e0015b416acb9cb59084d61e8dd2b1cf5b36e093c0fd1875a5d84604614"
+    },
+    {
+      "bytes": 1822550,
+      "path": "base/features.json",
+      "role": "frontend_layer",
+      "sha256": "966ae08cf7b11b8fc633e279f2f9e66eb42823562554e0c6e574481c1bae9a07"
+    },
+    {
+      "bytes": 39298,
+      "path": "base/g59_parent_terminal_cells.json",
+      "role": "frontend_layer",
+      "sha256": "da79391f98d86de7d36cf39218c99678483a3cb8ddcdd68fbdeeb788fd82e81b"
+    },
+    {
+      "bytes": 795621,
+      "path": "base/observations.json",
+      "role": "frontend_layer",
+      "sha256": "7857af3d39c9a73f5987e574c9333d9d8654b0c76993bcaa053f3a3ec8132cc0"
+    },
+    {
+      "bytes": 604899,
+      "path": "base/predictions/01_dmrg_bond_dimension_256.json",
+      "role": "frontend_layer",
+      "sha256": "f93fabaaf0056bb4d0a2d5d2605efacf31435bea39c473faf76fafeb5f35b65b"
+    },
+    {
+      "bytes": 606318,
+      "path": "base/predictions/02_dmrg_bond_dimension_512.json",
+      "role": "frontend_layer",
+      "sha256": "dbc6e791c06f108e8328e17ec9f0b7cb2d1eb63f667d427c3bd8419b12305788"
+    },
+    {
+      "bytes": 610665,
+      "path": "base/predictions/03_dmrg_bond_dimension_1024.json",
+      "role": "frontend_layer",
+      "sha256": "c2e4535726525b78c8844cf4a5dc68443d0a41933263a416d46ae97cb089b963"
+    },
+    {
+      "bytes": 610855,
+      "path": "base/predictions/04_dmrg_bond_dimension_2048.json",
+      "role": "frontend_layer",
+      "sha256": "8b319ee3147aab0a6039940a3a5b8d261b9c71681e1952cb9f4f769b70ea9b8f"
+    },
+    {
+      "bytes": 578558,
+      "path": "base/predictions/05_ipie_uhf_trial.json",
+      "role": "frontend_layer",
+      "sha256": "b28c3a6b7269023028cf39b945aebda61843f987733f8afafe54feb53750e3bf"
+    },
+    {
+      "bytes": 648279,
+      "path": "base/predictions/06_shci_orbopt_var_2e_4_nchunks8.json",
+      "role": "frontend_layer",
+      "sha256": "e639a4a4b94d7184b1721af27a73df99162bf282bbca7e87528586ab1ef8e293"
+    },
+    {
+      "bytes": 648279,
+      "path": "base/predictions/07_shci_orbopt_var_1e_4_nchunks8.json",
+      "role": "frontend_layer",
+      "sha256": "eb1ea5ab8cac029aeee9e7f13c645713c335fe86e5ed0b44e9a46b44f8a20089"
+    },
+    {
+      "bytes": 646990,
+      "path": "base/predictions/08_shci_orbopt_var_5e_5_nchunks8.json",
+      "role": "frontend_layer",
+      "sha256": "3729075c49a7b22e4b83d74e856701c306c102f4d92f51ccacf1707196843a11"
+    },
+    {
+      "bytes": 646899,
+      "path": "base/predictions/09_shci_orbopt_var_2e_5_nchunks8.json",
+      "role": "frontend_layer",
+      "sha256": "5287060e4242a659fc86e8134e283310551284008067d471c225bacde5f7977e"
+    },
+    {
+      "bytes": 593751,
+      "path": "base/predictions/10_shci_pt_2e_5_nchunks8.json",
+      "role": "frontend_layer",
+      "sha256": "bd58f34e8ce06b519e2de29a8ab7aa1ff8f4c03b040486bca30615e7b07e7710"
+    },
+    {
+      "bytes": 628276,
+      "path": "base/predictions/11_trimci_ndet_100000.json",
+      "role": "frontend_layer",
+      "sha256": "38f11a1d8d77b4bd156ed20f802fcaf9b72cc21893e3f463eed32845c6c98f83"
+    },
+    {
+      "bytes": 628447,
+      "path": "base/predictions/12_trimci_ndet_250000.json",
+      "role": "frontend_layer",
+      "sha256": "4e98d56777df74ed7e3253607351c645b490e98a58f60f8ad139ee5fd63972a9"
+    },
+    {
+      "bytes": 628458,
+      "path": "base/predictions/13_trimci_ndet_500000.json",
+      "role": "frontend_layer",
+      "sha256": "607f6c321dab27f2dd0b25ab5abb2bd07cf64efc2df5ef59161c5a99ad908412"
+    },
+    {
+      "bytes": 632773,
+      "path": "base/predictions/14_trimci_ndet_1000000.json",
+      "role": "frontend_layer",
+      "sha256": "0a48b9298d53d5aecbcee3658e51a775d02c5c31ede929e48e0db70ca3d99db2"
+    },
+    {
+      "bytes": 632803,
+      "path": "base/predictions/15_trimci_ndet_2000000.json",
+      "role": "frontend_layer",
+      "sha256": "aba88551c4ad46d85941bc3b801b619e355b0aecd41f92dc12c6e6c058205b44"
+    },
+    {
+      "bytes": 632803,
+      "path": "base/predictions/16_trimci_ndet_5000000.json",
+      "role": "frontend_layer",
+      "sha256": "fcde18b43c56214ada7e8b48c62cc88f5d883e3c25b5bebc05aea2749526f034"
+    },
+    {
+      "bytes": 636990,
+      "path": "base/predictions/17_trimci_ndet_10000000.json",
+      "role": "frontend_layer",
+      "sha256": "4323d1372fdd74e362917bbd603e7b24a90f537bfaca32175e2c50064d0f1148"
+    },
+    {
+      "bytes": 556588,
+      "path": "base/predictions/18_trimci_default.json",
+      "role": "frontend_layer",
+      "sha256": "a6cfd117be1b77c04287fc2160f8e1a3ff96e05af12cd29488e58ccb9a11f2d7"
+    },
+    {
+      "bytes": 208936,
+      "path": "base/summaries.json",
+      "role": "frontend_layer",
+      "sha256": "b997ead69850503d741d331d55b03d25b8a49b2874f71b5dfe89417a3137be82"
+    },
+    {
+      "bytes": 4088701,
+      "path": "base/uncertainty.json",
+      "role": "frontend_layer",
+      "sha256": "22c44fcff5a9af29c7e50a9c127ed5048eb2f59e4f39d6aef18f1c2008772f95"
+    },
+    {
+      "bytes": 5431,
+      "path": "contract/CONTRACT.md",
+      "role": "contract",
+      "sha256": "f7d90c38e7593a27dc60c9c53da354f03b43109bb079841969d9ef5fcfecfc7b"
+    },
+    {
+      "bytes": 3646,
+      "path": "definitions.json",
+      "role": "normative_definitions",
+      "sha256": "24b2e3658badf26c5da44c2831808c10478c7bd558d45d220a6c5ca19cc5d292"
+    },
+    {
+      "bytes": 16544,
+      "path": "layers/difficulty/task_difficulty.json",
+      "role": "frontend_layer",
+      "row_count": 96,
+      "sha256": "2941f3585a3ffae5f7109d77b1ca6939b5874ca13a84d5a8142e27e5a98dd53c"
+    },
+    {
+      "bytes": 807,
+      "path": "layers/difficulty/variant_ability_consistency.json",
+      "role": "frontend_layer",
+      "row_count": 0,
+      "sha256": "e0f1881f93199158790d387d2239fef18cc1d22db7a5172fea6972fbeb08bbf6"
+    },
+    {
+      "bytes": 16768,
+      "path": "layers/group_inference/contrast_estimates.json",
+      "role": "frontend_layer",
+      "row_count": 50,
+      "sha256": "83ee6f37fe31a47dab552c6af8f80f338fa53838a331a1bf68f7ce36f6d7988b"
+    },
+    {
+      "bytes": 5075,
+      "path": "layers/group_inference/multiplicity_results.json",
+      "role": "frontend_layer",
+      "row_count": 25,
+      "sha256": "c478aa6852309f86862058edeeb2fb1c25bd9656b0bb00f2a97e4ed48e4e89d7"
+    },
+    {
+      "bytes": 204482,
+      "path": "layers/instance_space/acquisition_priorities.json",
+      "role": "frontend_layer",
+      "row_count": 622,
+      "sha256": "c8a58f9df684eab6111af34992d96e45369bab0a0fea91e6f8a3f2509600331c"
+    },
+    {
+      "bytes": 2874,
+      "path": "layers/instance_space/cloister_boundary.json",
+      "role": "frontend_layer",
+      "row_count": 32,
+      "sha256": "1a6697900d70124429b0a26b0e38d2d744f38dfd0f218aa493313c7b22925723"
+    },
+    {
+      "bytes": 11365,
+      "path": "layers/instance_space/cloister_coverage.json",
+      "role": "frontend_layer",
+      "sha256": "fdcca529e46d611ce3993181ef3b824e768e78c3b5df6f1af6545206cdb6f990"
+    },
+    {
+      "bytes": 138796,
+      "path": "layers/instance_space/coordinates.json",
+      "role": "frontend_layer",
+      "row_count": 718,
+      "sha256": "7874966fe918f27e58794ab8a74c0c8a05de593d7a65cb0e6ca56976d0be8415"
+    },
+    {
+      "bytes": 25701,
+      "path": "layers/instance_space/feature_preprocessing.json",
+      "role": "frontend_layer",
+      "row_count": 193,
+      "sha256": "824a107619d7258bb3435542c4e76c76d4312f4f769a57a05e191cf34eb34d33"
+    },
+    {
+      "bytes": 16833,
+      "path": "layers/instance_space/panel_coordinates.json",
+      "role": "frontend_layer",
+      "row_count": 96,
+      "sha256": "38fcb6da60efdb3e2771fdc7bae6f1a8fce90f3885c693df6d113fdcfe5d8b84"
+    },
+    {
+      "bytes": 788,
+      "path": "layers/instance_space/portfolio_union.json",
+      "role": "frontend_layer",
+      "row_count": 3,
+      "sha256": "ff8ced0b8f40a4cd782af972fe534072539fdb9e55c0a284185dd348a06283b8"
+    },
+    {
+      "bytes": 1073,
+      "path": "layers/instance_space/projection_binding.json",
+      "role": "frontend_layer",
+      "sha256": "ec09d09bd58b1efb1e5158de72a633af40efa803b9dbd3fd36b7a1b0a033dc8c"
+    },
+    {
+      "bytes": 1304,
+      "path": "layers/instance_space/projection_features.json",
+      "role": "frontend_layer",
+      "row_count": 8,
+      "sha256": "b86c040c1b371b7fc05a73a4ba16e9dccc65622ba9e5b4b3261fabd9d7ff324a"
+    },
+    {
+      "bytes": 1631,
+      "path": "layers/instance_space/projection_matrix.json",
+      "role": "frontend_layer",
+      "row_count": 16,
+      "sha256": "e834e4c2b7740fd3c2d44ecbb8e7492baae2a88de062057c7a3508d8112ca817"
+    },
+    {
+      "bytes": 6441,
+      "path": "layers/instance_space/pyscf_bootstrap_intervals.json",
+      "role": "frontend_layer",
+      "row_count": 30,
+      "sha256": "9e0ffd78da14a3a0072f1b40a9123b5b26638a23611c20839ed34a387f7f65d4"
+    },
+    {
+      "bytes": 1661,
+      "path": "layers/instance_space/pyscf_corpus_footprints.json",
+      "role": "frontend_layer",
+      "row_count": 5,
+      "sha256": "e95a46d20eebde0a517012286ef2f5c3d28bc90c935307bed40965ff2d0c91ae"
+    },
+    {
+      "bytes": 127699,
+      "path": "layers/instance_space/pyscf_corpus_polygons.json",
+      "role": "frontend_layer",
+      "sha256": "86232ad45b940a6b3dcffa455a51ec18c54a9e93e80844f98c890bedb78cde0d"
+    },
+    {
+      "bytes": 1798,
+      "path": "layers/instance_space/pyscf_external_validation.json",
+      "role": "frontend_layer",
+      "row_count": 5,
+      "sha256": "bc60e8e23a2c259196ebde4bfc1e59a42d4c32cb6f4f4c330257a37d98af98de"
+    },
+    {
+      "bytes": 1864,
+      "path": "layers/instance_space/pyscf_panel_footprints.json",
+      "role": "frontend_layer",
+      "row_count": 6,
+      "sha256": "9ac06e23aa439f32ba77f73ba4653066ee69e2e2f1d9a3837d46194148f95b4c"
+    },
+    {
+      "bytes": 32324,
+      "path": "layers/instance_space/pyscf_panel_polygons.json",
+      "role": "frontend_layer",
+      "sha256": "20dd5e1f211b95fa1b628dd5b0b9a184a28f92f57a8254edaf64a57d52fa810d"
+    },
+    {
+      "bytes": 2098,
+      "path": "layers/instance_space/pyscf_panel_pythia_gates.json",
+      "role": "frontend_layer",
+      "row_count": 6,
+      "sha256": "c74b091be494b85aa106e53a53a054d5453bff7eeeb42b47394aef3c8bc40d22"
+    },
+    {
+      "bytes": 8694,
+      "path": "layers/instance_space/solver_family_bootstrap_intervals.json",
+      "role": "frontend_layer",
+      "row_count": 50,
+      "sha256": "b77e1137b2c54a03a787ef9d54003349ffda3df09a081ff87e34239b8f8da703"
+    },
+    {
+      "bytes": 4998,
+      "path": "layers/instance_space/solver_family_footprints.json",
+      "role": "frontend_layer",
+      "row_count": 27,
+      "sha256": "c3e8cbda386d62ea85e966ee0a85d55e06f56c54e6a895001ebde63933754c8d"
+    },
+    {
+      "bytes": 95183,
+      "path": "layers/instance_space/solver_family_polygons.json",
+      "role": "frontend_layer",
+      "sha256": "cb5c3a68725fbe5ab9909186ddb799e156d31821c006b837b71c84d646c2fb0c"
+    },
+    {
+      "bytes": 3414,
+      "path": "layers/instance_space/solver_family_pythia_gates.json",
+      "role": "frontend_layer",
+      "row_count": 15,
+      "sha256": "266df1b7497d83d1d8b1e849c9395d4962d37f292ceec391aaf163fdc9b1a203"
+    },
+    {
+      "bytes": 1490,
+      "path": "layers/pyscf/corpus_near_census_rates.json",
+      "role": "frontend_layer",
+      "row_count": 5,
+      "sha256": "29979a66ccff66cfe25aec9cacaaa4bb3423b9149a28c782f781f74e967736de"
+    },
+    {
+      "bytes": 1284,
+      "path": "layers/pyscf/design_based_ratios.json",
+      "role": "frontend_layer",
+      "row_count": 5,
+      "sha256": "3c4a349d877d2d58ef90467688cd3745feff8b7e6ac155bbd2b18915770dbdad"
+    },
+    {
+      "bytes": 933472,
+      "path": "layers/pyscf/labels.json",
+      "role": "frontend_layer",
+      "row_count": 3590,
+      "sha256": "7b14ba1b7ce2eb8547394fd73edd50fe89a4ec7d4892bd14cf591e1692478143"
+    },
+    {
+      "bytes": 103288,
+      "path": "layers/pyscf/method_frontiers.json",
+      "role": "frontend_layer",
+      "row_count": 718,
+      "sha256": "fa6368a33c05fb0f73b91d30c719003df142dcc8ac9ebc4c2aea83a633cf5847"
+    },
+    {
+      "bytes": 1210,
+      "path": "layers/pyscf/panel_unions.json",
+      "role": "frontend_layer",
+      "row_count": 6,
+      "sha256": "8f2e388f952dece29b231595720395bdc31a10590273163a2c268d28e4a3bffb"
+    },
+    {
+      "bytes": 675655,
+      "path": "layers/resource_profiles/combined_attempt_coverage.json",
+      "role": "frontend_layer",
+      "row_count": 2208,
+      "sha256": "743ec38baac3abd2b889c68ec7a1651544a9160a742564a345fc752b333c5002"
+    },
+    {
+      "bytes": 5098,
+      "path": "layers/resource_profiles/combined_conditional_quantiles.json",
+      "role": "frontend_layer",
+      "row_count": 27,
+      "sha256": "82b91b908793b6da748a0298a306c97c8ce65aab4217eae7bef1bcf74ff0812c"
+    },
+    {
+      "bytes": 860621,
+      "path": "layers/resource_profiles/combined_endpoints.json",
+      "role": "frontend_layer",
+      "row_count": 2592,
+      "sha256": "10eb86ee7e23e938da9db96061e21c452bf248455c3da34145cd4cec677c93b6"
+    },
+    {
+      "bytes": 10499,
+      "path": "layers/resource_profiles/combined_profiles.json",
+      "role": "frontend_layer",
+      "row_count": 63,
+      "sha256": "37748d1402d2f83d1ac522f23ce20534cd1cdac8031dd248dadea5a6b2f09be1"
+    },
+    {
+      "bytes": 1643811,
+      "path": "layers/resource_profiles/combined_runstatus.json",
+      "role": "frontend_layer",
+      "row_count": 6300,
+      "sha256": "25918262087b3d0bfaca792d9e29491b7ff141aaf0b8b5d528b208765efdf0da"
+    },
+    {
+      "bytes": 3780,
+      "path": "layers/resource_profiles/combined_stability.json",
+      "role": "frontend_layer",
+      "row_count": 18,
+      "sha256": "b89a52dfd2cb7f46b44765ba4e7559f75867d8586c0700db2d7e65561735892b"
+    },
+    {
+      "bytes": 132594,
+      "path": "layers/resource_profiles/companion_variants.json",
+      "role": "frontend_layer",
+      "row_count": 576,
+      "sha256": "748a3bd816242be349fa02eaea66a1ff0cfcd0674d9a1c62b45ac911989889c3"
+    },
+    {
+      "bytes": 2906,
+      "path": "layers/resource_profiles/ladder_conditional_quantiles.json",
+      "role": "frontend_layer",
+      "row_count": 12,
+      "sha256": "a012adbeceda3843aacdb5737080a9509dc78c7f7c0fa771b2b95ae88f9a9c5d"
+    },
+    {
+      "bytes": 363643,
+      "path": "layers/resource_profiles/ladder_endpoints.json",
+      "role": "frontend_layer",
+      "row_count": 1152,
+      "sha256": "2552953b729a9f898002e3a61bab7b834b89fcad3f2cc10467430620fce90681"
+    },
+    {
+      "bytes": 8063,
+      "path": "layers/resource_profiles/ladder_profiles.json",
+      "role": "frontend_layer",
+      "row_count": 48,
+      "sha256": "f1ca8a254855191d35c0a3340f5ca1909ee88892a002b6cab503bea87c3ea949"
+    },
+    {
+      "bytes": 2072,
+      "path": "layers/resource_profiles/ladder_stability.json",
+      "role": "frontend_layer",
+      "row_count": 8,
+      "sha256": "25fafdd4b44cfe5db9150d3854e6b47f260a53c424d7ae77605a69daabdc30b3"
+    },
+    {
+      "bytes": 2975,
+      "path": "layers/resource_profiles/pyscf_single_budget_profiles.json",
+      "role": "frontend_layer",
+      "row_count": 15,
+      "sha256": "6f422620f963d045ca4259ff0d6fb949a073dd5fd402f79b96ea7484a34996c8"
+    },
+    {
+      "bytes": 19330,
+      "path": "public_name_mapping.json",
+      "role": "public_name_mapping",
+      "sha256": "38fbd45ade3124c4a392faf372ac4194206655e6ad7dcc5bb6035995a3a00a90"
+    },
+    {
+      "bytes": 2352,
+      "path": "schema/index.schema.json",
+      "role": "schema",
+      "sha256": "2d04cb445c5ed7f92740aeb772a901cc8947425cfb4d723647de04ad7fae8c6a"
+    }
+  ],
+  "layers": {
+    "base": {
+      "bundle_materialization": "derivable_at_export",
+      "estimate_label": "observations and estimates are labeled per carried-forward table",
+      "paths": [
+        "base/catalog.json",
+        "base/coverage.json",
+        "base/dmrg_terminal_cells.json",
+        "base/features.json",
+        "base/g59_parent_terminal_cells.json",
+        "base/observations.json",
+        "base/predictions/01_dmrg_bond_dimension_256.json",
+        "base/predictions/02_dmrg_bond_dimension_512.json",
+        "base/predictions/03_dmrg_bond_dimension_1024.json",
+        "base/predictions/04_dmrg_bond_dimension_2048.json",
+        "base/predictions/05_ipie_uhf_trial.json",
+        "base/predictions/06_shci_orbopt_var_2e_4_nchunks8.json",
+        "base/predictions/07_shci_orbopt_var_1e_4_nchunks8.json",
+        "base/predictions/08_shci_orbopt_var_5e_5_nchunks8.json",
+        "base/predictions/09_shci_orbopt_var_2e_5_nchunks8.json",
+        "base/predictions/10_shci_pt_2e_5_nchunks8.json",
+        "base/predictions/11_trimci_ndet_100000.json",
+        "base/predictions/12_trimci_ndet_250000.json",
+        "base/predictions/13_trimci_ndet_500000.json",
+        "base/predictions/14_trimci_ndet_1000000.json",
+        "base/predictions/15_trimci_ndet_2000000.json",
+        "base/predictions/16_trimci_ndet_5000000.json",
+        "base/predictions/17_trimci_ndet_10000000.json",
+        "base/predictions/18_trimci_default.json",
+        "base/summaries.json",
+        "base/uncertainty.json"
+      ],
+      "source_state": "frozen_artifact"
+    },
+    "difficulty": {
+      "bundle_materialization": "derivable_at_export",
+      "estimate_label": "frozen posterior estimate",
+      "paths": [
+        "layers/difficulty/task_difficulty.json",
+        "layers/difficulty/variant_ability_consistency.json"
+      ],
+      "source_state": "frozen_artifact"
+    },
+    "group_inference": {
+      "bundle_materialization": "derivable_at_export",
+      "estimate_label": "multiplicity-adjusted descriptive inference estimate",
+      "paths": [
+        "layers/group_inference/contrast_estimates.json",
+        "layers/group_inference/multiplicity_results.json"
+      ],
+      "source_state": "frozen_artifact"
+    },
+    "instance_space": {
+      "bundle_materialization": "derivable_at_export",
+      "estimate_label": "descriptive geometry estimate with explicit adequacy gates",
+      "paths": [
+        "layers/instance_space/acquisition_priorities.json",
+        "layers/instance_space/cloister_boundary.json",
+        "layers/instance_space/cloister_coverage.json",
+        "layers/instance_space/coordinates.json",
+        "layers/instance_space/feature_preprocessing.json",
+        "layers/instance_space/panel_coordinates.json",
+        "layers/instance_space/portfolio_union.json",
+        "layers/instance_space/projection_binding.json",
+        "layers/instance_space/projection_features.json",
+        "layers/instance_space/projection_matrix.json",
+        "layers/instance_space/pyscf_bootstrap_intervals.json",
+        "layers/instance_space/pyscf_corpus_footprints.json",
+        "layers/instance_space/pyscf_corpus_polygons.json",
+        "layers/instance_space/pyscf_external_validation.json",
+        "layers/instance_space/pyscf_panel_footprints.json",
+        "layers/instance_space/pyscf_panel_polygons.json",
+        "layers/instance_space/pyscf_panel_pythia_gates.json",
+        "layers/instance_space/solver_family_bootstrap_intervals.json",
+        "layers/instance_space/solver_family_footprints.json",
+        "layers/instance_space/solver_family_polygons.json",
+        "layers/instance_space/solver_family_pythia_gates.json"
+      ],
+      "source_state": "frozen_artifact"
+    },
+    "pyscf": {
+      "bundle_materialization": "derivable_at_export",
+      "estimate_label": "observed labels and descriptive coverage estimates",
+      "paths": [
+        "layers/pyscf/corpus_near_census_rates.json",
+        "layers/pyscf/design_based_ratios.json",
+        "layers/pyscf/labels.json",
+        "layers/pyscf/method_frontiers.json",
+        "layers/pyscf/panel_unions.json"
+      ],
+      "source_state": "frozen_artifact"
+    },
+    "resource_profiles": {
+      "bundle_materialization": "derivable_at_export",
+      "estimate_label": "observed endpoints and descriptive conditional summaries",
+      "paths": [
+        "layers/resource_profiles/combined_attempt_coverage.json",
+        "layers/resource_profiles/combined_conditional_quantiles.json",
+        "layers/resource_profiles/combined_endpoints.json",
+        "layers/resource_profiles/combined_profiles.json",
+        "layers/resource_profiles/combined_runstatus.json",
+        "layers/resource_profiles/combined_stability.json",
+        "layers/resource_profiles/companion_variants.json",
+        "layers/resource_profiles/ladder_conditional_quantiles.json",
+        "layers/resource_profiles/ladder_endpoints.json",
+        "layers/resource_profiles/ladder_profiles.json",
+        "layers/resource_profiles/ladder_stability.json",
+        "layers/resource_profiles/pyscf_single_budget_profiles.json"
+      ],
+      "source_state": "frozen_artifact"
+    }
+  },
+  "release_scope": {
+    "intended_use": "internal clone-and-extend frontend",
+    "public_deployment_authorized": false,
+    "validated_predictor_claim": false
+  },
+  "schema_version": "3.0.0",
+  "source_bindings": [
+    {
+      "identity_path": "analysis/ml_g59_panel_refresh/two_run_identity_v1.json",
+      "identity_sha256": "ce595a9e2611f6bb300e455be2f34489fbed00e75d0d10883f71925158ce8845",
+      "manifest_path": "analysis/ml_g59_panel_refresh/final_v1/artifact_manifest.json",
+      "manifest_sha256": "1c01305fc8a290fe2bbd9ef866eb859195f1f6dd90a5a8ae66f51fdeb73f9d89",
+      "source_id": "solver_family_analysis"
+    },
+    {
+      "identity_path": "analysis/ml_g59_solvability_uq/two_run_identity_v1.json",
+      "identity_sha256": "a50d614c04cfec7937cccbe9a4c318f2220d252a05a4dcf0fa12e20a0d608009",
+      "manifest_path": "analysis/ml_g59_solvability_uq/held_v1/artifact_manifest.json",
+      "manifest_sha256": "68bc7fc454bb82dff03e4fa2c94f36eaaae2de22d672d30dadfa86d2d55a5dc2",
+      "source_id": "solver_family_uncertainty"
+    },
+    {
+      "identity_path": "analysis/ml9_instance_space/two_run_identity_v1.json",
+      "identity_sha256": "f7dcd62cfe796da4b0b63d6a6b755d7bc2dbabeb58c3887a5eaf851ffc267515",
+      "manifest_path": "analysis/ml9_instance_space/final_v1/artifact_manifest.json",
+      "manifest_sha256": "c617819e86d1bd21074e5d6889e2384bc29282ffc69c6dbf472ded8fb19a8a03",
+      "source_id": "instance_space"
+    },
+    {
+      "identity_path": "analysis/ml10_instance_space/two_run_identity_v3.json",
+      "identity_sha256": "10599419ca6b5dbc26fd96e3ec4dbd34c7a5e336c61fc94d322b0e07c1791155",
+      "manifest_path": "analysis/ml10_instance_space/final_v3/artifact_manifest.json",
+      "manifest_sha256": "67cd35dcbe0a3f5b21149904a63a05fc2c86741b75d238190be3035f85703a0a",
+      "source_id": "pyscf_instance_space"
+    },
+    {
+      "identity_path": "analysis/ml9_bayesian_irt/two_run_identity_primary_v1.json",
+      "identity_sha256": "0b6c3894dc8c79df0084ce979330c32fa79e27fe6e5df75a5cee9624b8bcd77c",
+      "manifest_path": "analysis/ml9_bayesian_irt/final_v1/artifact_manifest.json",
+      "manifest_sha256": "1ec1807bd0d48627e7dbec25c9741b17a0179eccfc47a06108f2a190675bc541",
+      "source_id": "difficulty"
+    },
+    {
+      "identity_path": "analysis/ml9_resource_profiles/two_run_identity_v1.json",
+      "identity_sha256": "9f62988b0026531b10ef0b12c3a2d5f46414c8cc7d4cd167d78db4238dba671d",
+      "manifest_path": "analysis/ml9_resource_profiles/final_v1/artifact_manifest.json",
+      "manifest_sha256": "72f8df51a44ee181df8f016f8c951530a1e74a3e1c1d478241fce97325387408",
+      "source_id": "ladder_resource_profiles"
+    },
+    {
+      "identity_path": "analysis/ml10_resource_profiles/two_run_identity_v3.json",
+      "identity_sha256": "5e303d1b9ec0fe267813720332a76d50ca1ca071d6c0a189bda46cdf595eb396",
+      "manifest_path": "analysis/ml10_resource_profiles/final_v3/artifact_manifest.json",
+      "manifest_sha256": "0086ce34940cdf7ae007455685d495d325eb48177b7cf7591eefd64ac9c32171",
+      "source_id": "combined_resource_profiles"
+    },
+    {
+      "identity_path": "analysis/ml9_grouped_inference/two_run_identity_v1.json",
+      "identity_sha256": "96f6e0ce55d4d2eafcbb219e717747eb59cda46a83d947abdbc317396a6d4fe5",
+      "manifest_path": "analysis/ml9_grouped_inference/final_v1/artifact_manifest.json",
+      "manifest_sha256": "318b18f7c59b7e43395a511ad3fa5f8525ba306d0f7f0d97ca2988e7841f7403",
+      "source_id": "group_inference"
+    },
+    {
+      "identity_path": "analysis/ml10_pyscf_desk/two_run_identity_v2.json",
+      "identity_sha256": "1848c0381e5eef4ea0a36972828582aea95025c95a895fab4437dbcd83f05ff1",
+      "manifest_path": "analysis/ml10_pyscf_desk/final_v2/artifact_manifest.json",
+      "manifest_sha256": "93260db0d886237ce078d2d9358bd61387d59d8ab6ca1a87fce78af3e43330f9",
+      "source_id": "pyscf_labels"
+    }
+  ],
+  "status": "complete_internal_frozen_scale_bundle"
+}
