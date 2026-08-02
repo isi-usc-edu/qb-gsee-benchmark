@@ -1,0 +1,96 @@
+{
+  "artifact_id": "ml9c_primary_hardness_promotion_amendment_v1",
+  "date": "2026-08-02",
+  "status": "frozen_pi_authorized_before_ml9d_target_access",
+  "frozen_before_ml9d_target_access": true,
+  "pi_ruling": {
+    "workspace_path": "work/ML_GOALS.md",
+    "sha256": "1e5dbdf7741852df6cad31afc03869554fb3b49c98cb69ec914d5424fc2934ad",
+    "section": "PI RULING 2026-08-02 - ML-9 v2 review; 9C/9D adjudication (9D UNBLOCKED)",
+    "decision": "adopt_option_1_decouple"
+  },
+  "prior_evidence": {
+    "completion_audit": {
+      "path": "analysis/ML9_V2_COMPLETION_AUDIT_2026-08-01.md",
+      "sha256": "8f9555f951ec2ad7299c0689328671efc0e29281109b345245d6709d6579da7f"
+    },
+    "original_retained_identity": {
+      "path": "analysis/ml9_bayesian_irt/two_run_identity_retained_v1.json",
+      "sha256": "30f48738b5be69151d52d594f46ae65337fc2713f3f5f70306b9f48ae1fa4b55"
+    },
+    "nonnegative_recovery_retained_identity": {
+      "path": "analysis/ml9_bayesian_irt/two_run_identity_retained_v3.json",
+      "sha256": "bf65f91934ca033f94c5193ba53c88b100fe8424154e522db7f248ff9eb0563c"
+    }
+  },
+  "promotion_scope": {
+    "included": "family-aware binary Rasch task-difficulty posterior handoff only",
+    "required_handoff_sha256": "b8fac83b33da755361dd5049f4627e9f60495d0370a42b601a547617d295490a",
+    "full_posterior_health": {
+      "divergences": 0,
+      "max_rhat": 1.005243,
+      "min_bulk_ess": 2755.4,
+      "min_tail_ess": 2174.1,
+      "all_frozen_thresholds_pass": true
+    },
+    "excluded": [
+      "continuous-response model as a promotion dependency",
+      "one-factor solver-side model as a promotion dependency",
+      "two-factor solver-side model as a promotion dependency",
+      "exact blocked factor cross-validation as a promotion dependency",
+      "factor ELPD comparison as a promotion dependency",
+      "iPIE/AFQMC second-axis contrast as a promotion dependency"
+    ]
+  },
+  "source_contract": {
+    "run_1": "analysis/ml9_bayesian_irt/raw_runs/run_1",
+    "run_2": "analysis/ml9_bayesian_irt/raw_runs/run_2",
+    "source_handoff_relative_path": "difficulty_handoff_ml9d.csv",
+    "source_diagnostics_relative_path": "posterior_diagnostics.csv",
+    "source_diagnostics_sha256": "7294d666fb38f6f9d48d9c4cc29a5b409573929df0b9ac389bea0a7fb46ff8b7",
+    "handoff_identity_across_original_v2_v3_runs": true,
+    "retained_full_raw_trees_immutable": true
+  },
+  "two_run_promotion_contract": {
+    "build_1": "analysis/ml9_bayesian_irt/primary_promotion_raw_runs_v1/run_1",
+    "build_2": "analysis/ml9_bayesian_irt/primary_promotion_raw_runs_v1/run_2",
+    "promote_path": "analysis/ml9_bayesian_irt/final_v1",
+    "identity_path": "analysis/ml9_bayesian_irt/two_run_identity_primary_v1.json",
+    "required_files": [
+      "REPORT.md",
+      "artifact_manifest.json",
+      "difficulty_handoff_ml9d.csv",
+      "environment.json",
+      "primary_posterior_diagnostics.csv",
+      "promotion_evidence.json",
+      "report.json"
+    ],
+    "copy_handoff_bytes_without_transformation": true,
+    "recursive_byte_identity_required": true,
+    "retain_both_build_trees": true,
+    "fail_closed_if_destination_exists": true
+  },
+  "factor_disposition": {
+    "recovery_closed_at_v3": true,
+    "fourth_attempt_authorized": false,
+    "status": "retained_exploratory_unreliable_unsupported",
+    "nominal_elpd_delta": 503.9,
+    "nominal_elpd_standard_error": 58.2,
+    "nominal_elpd_reliable": false,
+    "ipie_afqmc_second_axis_posterior_support": 0.6365,
+    "frozen_support_rule": 0.95,
+    "named_hypothesis_supported": false
+  },
+  "record_language": "The task-difficulty scale is a family-aware binary Rasch posterior with per-task uncertainty. Solver-side dimensionality was probed as a preregistered exploratory analysis; exact blocked cross-validation could not certify the two-factor comparison at this panel scale (nominal ELPD delta +503.9 +/- 58.2, marked unreliable), and the named iPIE/AFQMC second-axis hypothesis was unsupported (posterior support 0.6365 vs the frozen 0.95 rule). Difficulty could be established; dimensionality could not be decided.",
+  "standing_fences": {
+    "new_solver_runs": false,
+    "task_reselection": false,
+    "label_changes": false,
+    "outputs_estimate_labeled": true,
+    "internal_only": true,
+    "public_or_dashboard_placement": false,
+    "validated_predictor_claim": false
+  },
+  "ml9d_scientific_targets_consumed": false,
+  "ml9d_target_dependent_model_fitted": false
+}
