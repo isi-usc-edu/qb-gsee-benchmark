@@ -35,9 +35,9 @@ echo "root=$ROOT"
 "$PYTHON" --version
 "$PYTHON" -c 'import numpy, pandas, scipy, sklearn; print(numpy.__version__, pandas.__version__, scipy.__version__, sklearn.__version__)'
 
-"$PYTHON" -u analysis/ml10_gao_coverage_delta/run_instance_space.py +  --output-dir "$RUN_ROOT/run_1" >"$LOG_ROOT/run_1.log" 2>&1 &
+"$PYTHON" -u analysis/ml10_gao_coverage_delta/run_instance_space.py --output-dir "$RUN_ROOT/run_1" >"$LOG_ROOT/run_1.log" 2>&1 &
 pid_1=$!
-"$PYTHON" -u analysis/ml10_gao_coverage_delta/run_instance_space.py +  --output-dir "$RUN_ROOT/run_2" >"$LOG_ROOT/run_2.log" 2>&1 &
+"$PYTHON" -u analysis/ml10_gao_coverage_delta/run_instance_space.py --output-dir "$RUN_ROOT/run_2" >"$LOG_ROOT/run_2.log" 2>&1 &
 pid_2=$!
 
 set +e
@@ -54,6 +54,6 @@ if [[ "$status_1" -ne 0 || "$status_2" -ne 0 ]]; then
   exit 1
 fi
 
-"$PYTHON" analysis/ml10_gao_coverage_delta/verify_revision.py +  --kind instance +  --first "$RUN_ROOT/run_1" +  --second "$RUN_ROOT/run_2" +  --promoted "$ROOT/analysis/ml10_instance_space/final_v3" +  --identity "$ROOT/analysis/ml10_instance_space/two_run_identity_v3.json"
+"$PYTHON" analysis/ml10_gao_coverage_delta/verify_revision.py --kind instance --first "$RUN_ROOT/run_1" --second "$RUN_ROOT/run_2" --promoted "$ROOT/analysis/ml10_instance_space/final_v3" --identity "$ROOT/analysis/ml10_instance_space/two_run_identity_v3.json"
 
 echo "ML10A_GAO_PBS_PRODUCTION_PASS log_root=$LOG_ROOT"
