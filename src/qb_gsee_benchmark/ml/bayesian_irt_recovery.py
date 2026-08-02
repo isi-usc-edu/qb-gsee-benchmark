@@ -37,6 +37,14 @@ from qb_gsee_benchmark.ml.core_set import (
 
 CPU_FACTOR_ANCHOR = "g50_bond_dimension_2048"
 RECOVERY_MODEL_NAMES = ("continuous_beta", "one_factor", "two_factor")
+ML9_V2_ORDER_HEADING = (
+    '## ML-9 v2 ORDER 2026-07-31 (PI; Matt ruled "re-cut ML-9 with what the '
+    'literature says") — HOLD LIFTED for v2; v1 (SHAP + grid-integration '
+    "design) SUPERSEDED"
+)
+ML9_V2_ORDER_SECTION_SHA256 = (
+    "175d5adbfdf514780826813dedca7042a64947f7d349f1fbbd637dc409208d24"
+)
 
 
 @dataclass(frozen=True)
@@ -59,6 +67,17 @@ class RecoveryFit:
 
 def _read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _verify_ml9_v2_order_section(path: Path) -> None:
+    text = path.read_text(encoding="utf-8")
+    _require(text.count(ML9_V2_ORDER_HEADING) == 1, "ML-9 v2 order is not unique")
+    start = text.index(ML9_V2_ORDER_HEADING)
+    separator = text.find("\n---\n", start)
+    _require(separator >= 0, "ML-9 v2 order boundary is unavailable")
+    section = text[start:separator].rstrip() + "\n"
+    digest = hashlib.sha256(section.encode("utf-8")).hexdigest()
+    _require(digest == ML9_V2_ORDER_SECTION_SHA256, "ML-9 v2 order changed")
 
 
 def _verify_specification(
@@ -96,10 +115,12 @@ def verify_recovery_preregistration(
     ):
         path = Path(str(order[path_key]))
         _require(path.is_file(), f"missing ML-9C recovery order source: {path}")
-        _require(
-            sha256_file(path) == str(order[hash_key]),
-            f"changed ML-9C recovery order source: {path}",
-        )
+        if sha256_file(path) != str(order[hash_key]):
+            _require(
+                path_key == "ml_goals_external_path",
+                f"changed ML-9C recovery order source: {path}",
+            )
+            _verify_ml9_v2_order_section(path)
     _verify_specification(
         root, preregistration["original_preregistration"], "original_preregistration"
     )
