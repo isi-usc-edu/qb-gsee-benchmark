@@ -1,0 +1,6 @@
+target,method,training_panel_tasks,external_nonpanel_tasks,external_positive,external_negative,raw_accuracy,balanced_accuracy,majority_baseline,gate_passed,gate_rule,projection_refit,classifier_trained_on_panel_only,missing_imputed,output_kind
+pyscf_hf,HF,83,492,5,487,0.98983739837398377,0.5,0.98983739837398377,false,"raw >= max(0.70, majority + 0.05) and balanced >= 0.60",false,true,false,external_validation_estimate
+pyscf_mp2,MP2,85,494,29,465,0.9412955465587044,0.5,0.9412955465587044,false,"raw >= max(0.70, majority + 0.05) and balanced >= 0.60",false,true,false,external_validation_estimate
+pyscf_cisd,CISD,71,439,66,373,0.8177676537585421,0.54982126899016981,0.84965831435079731,false,"raw >= max(0.70, majority + 0.05) and balanced >= 0.60",false,true,false,external_validation_estimate
+pyscf_ccsd,CCSD,71,439,131,308,0.71753986332574027,0.69561068702290074,0.70159453302961272,false,"raw >= max(0.70, majority + 0.05) and balanced >= 0.60",false,true,false,external_validation_estimate
+pyscf_ccsd_t,CCSD(T),67,428,225,203,0.63551401869158874,0.62636015325670491,0.52570093457943923,false,"raw >= max(0.70, majority + 0.05) and balanced >= 0.60",false,true,false,external_validation_estimate
