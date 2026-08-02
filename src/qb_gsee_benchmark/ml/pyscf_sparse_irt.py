@@ -323,10 +323,16 @@ def sparse_factor_model(
         for pattern_number, (observed_items, tasks) in enumerate(sorted(pattern_tasks.items())):
             indices = np.asarray(observed_items, dtype=int)
             values = standardized[np.asarray(tasks, dtype=int)][:, indices]
+            pattern_loading = factor_loading[indices]
+            pattern_covariance = (
+                pt.outer(pattern_loading, pattern_loading)
+                if factors == 1
+                else pattern_loading @ pattern_loading.T
+            ) + pt.diag(residual[indices] ** 2)
             pm.MvNormal(
                 f"response_pattern_{pattern_number}",
                 mu=intercept[indices],
-                cov=covariance[indices][:, indices],
+                cov=pattern_covariance,
                 observed=values,
                 shape=values.shape,
             )

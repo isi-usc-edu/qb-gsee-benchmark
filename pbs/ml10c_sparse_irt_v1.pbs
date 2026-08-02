@@ -36,8 +36,10 @@ echo "python=$PYTHON"
 "$PYTHON" --version
 "$PYTHON" -c 'import pymc, arviz, numpy, pandas, scipy; print(pymc.__version__, arviz.__version__, numpy.__version__, pandas.__version__, scipy.__version__)'
 
+PYTENSOR_FLAGS="base_compiledir=${TMPDIR:-/tmp}/pytensor_ml10c_run_1" \
 "$PYTHON" -u analysis/ml10_bayesian_irt/run_finalization.py --output-dir "$RUN_ROOT/run_1" >"$LOG_ROOT/run_1.log" 2>&1 &
 pid_1=$!
+PYTENSOR_FLAGS="base_compiledir=${TMPDIR:-/tmp}/pytensor_ml10c_run_2" \
 "$PYTHON" -u analysis/ml10_bayesian_irt/run_finalization.py --output-dir "$RUN_ROOT/run_2" >"$LOG_ROOT/run_2.log" 2>&1 &
 pid_2=$!
 
