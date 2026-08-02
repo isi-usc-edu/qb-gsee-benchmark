@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import platform
 from collections import Counter
 from importlib import metadata as importlib_metadata
@@ -24,8 +25,29 @@ from qb_gsee_benchmark.ml.g50_solver_families import derive_feature_policy
 from qb_gsee_benchmark.ml.instance_space import coordinate_preprocessing
 
 
+ML9_V2_ORDER_HEADING = (
+    '## ML-9 v2 ORDER 2026-07-31 (PI; Matt ruled "re-cut ML-9 with what the '
+    'literature says") — HOLD LIFTED for v2; v1 (SHAP + grid-integration '
+    "design) SUPERSEDED"
+)
+ML9_V2_ORDER_SECTION_SHA256 = (
+    "175d5adbfdf514780826813dedca7042a64947f7d349f1fbbd637dc409208d24"
+)
+
+
 def _read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _verify_ml9_v2_order_section(path: Path) -> None:
+    text = path.read_text(encoding="utf-8")
+    _require(text.count(ML9_V2_ORDER_HEADING) == 1, "ML-9 v2 order is not unique")
+    start = text.index(ML9_V2_ORDER_HEADING)
+    separator = text.find("\n---\n", start)
+    _require(separator >= 0, "ML-9 v2 order boundary is unavailable")
+    section = text[start:separator].rstrip() + "\n"
+    digest = hashlib.sha256(section.encode("utf-8")).hexdigest()
+    _require(digest == ML9_V2_ORDER_SECTION_SHA256, "ML-9 v2 order changed")
 
 
 def _verify_path(
@@ -109,7 +131,10 @@ def run_outcome_blind_group_preflight(
         path = Path(str(order[path_key]))
         _require(path.is_file(), f"missing ML-9D order source: {path}")
         digest = sha256_file(path)
-        _require(digest == str(order[hash_key]), f"changed ML-9D order: {path}")
+        if digest != str(order[hash_key]):
+            _require(label == "ml_goals", f"changed ML-9D order: {path}")
+            _verify_ml9_v2_order_section(path)
+            digest = str(order[hash_key])
         order_hashes[label] = digest
 
     input_paths: dict[str, Path] = {}

@@ -33,11 +33,11 @@ from qb_gsee_benchmark.ml.instance_space import coordinate_preprocessing
 
 FAMILY_TARGETS = ("dmrg", "ipie_afqmc", "shci", "trimci")
 ESTIMATOR_ORDER = ("random_forest", "extra_trees")
-TARGET_GATE_SUPERSESSION = Path(
-    "analysis/ml9_grouped_inference/target_gate_supersession_v3.json"
+TARGET_GATE_DECOUPLING = Path(
+    "analysis/ml9_grouped_inference/target_gate_decoupling_v4.json"
 )
-TARGET_GATE_SUPERSESSION_SHA256 = (
-    "32a2fb52007100f2a7dfec9892e6306a8c5acba704f0abf165f3e72e5db6145f"
+TARGET_GATE_DECOUPLING_SHA256 = (
+    "f3821a355644f2ae37fbc4382ddc57730d98cb11335517963772b113bacef2dc"
 )
 
 
@@ -153,93 +153,177 @@ def verify_target_gate(
         path = root / str(amendment[path_key])
         pinned[label] = _verify_hash(path, str(amendment[hash_key]), label)
 
-    supersession_path = root / TARGET_GATE_SUPERSESSION
-    pinned["target-gate supersession"] = _verify_hash(
-        supersession_path,
-        TARGET_GATE_SUPERSESSION_SHA256,
-        "target-gate supersession",
+    decoupling_path = root / TARGET_GATE_DECOUPLING
+    pinned["target-gate decoupling"] = _verify_hash(
+        decoupling_path,
+        TARGET_GATE_DECOUPLING_SHA256,
+        "target-gate decoupling",
     )
-    supersession = _read_json(supersession_path)
+    decoupling = _read_json(decoupling_path)
     _require(
-        supersession.get("frozen_before_target_access") is True,
-        "ML-9D target-gate supersession is not frozen",
+        decoupling.get("frozen_before_target_access") is True,
+        "ML-9D target-gate decoupling is not frozen",
+    )
+    _require(
+        decoupling.get("scientific_targets_consumed") is False,
+        "ML-9D decoupling consumed a target before freezing",
+    )
+    _require(
+        decoupling.get("target_dependent_model_fitted") is False,
+        "ML-9D decoupling followed a target-dependent fit",
     )
     for path_key, hash_key, label in (
         (
-            "prior_target_gate_amendment_path",
-            "prior_target_gate_amendment_sha256",
-            "supersession target-gate source",
+            "prior_target_gate_supersession_path",
+            "prior_target_gate_supersession_sha256",
+            "prior target-gate supersession",
         ),
         (
             "execution_contract_path",
             "execution_contract_sha256",
-            "supersession execution-contract source",
+            "decoupling execution contract",
         ),
         (
-            "recovery_preregistration_path",
-            "recovery_preregistration_sha256",
-            "ML-9C nonnegative recovery preregistration",
+            "preregistration_path",
+            "preregistration_sha256",
+            "decoupling preregistration",
+        ),
+        (
+            "outcome_blind_preflight_manifest_path",
+            "outcome_blind_preflight_manifest_sha256",
+            "decoupling outcome-blind preflight",
+        ),
+        (
+            "ml9c_primary_promotion_amendment_path",
+            "ml9c_primary_promotion_amendment_sha256",
+            "ML-9C primary promotion amendment",
         ),
     ):
-        path = root / str(supersession[path_key])
-        pinned[label] = _verify_hash(path, str(supersession[hash_key]), label)
+        path = root / str(decoupling[path_key])
+        pinned[label] = _verify_hash(path, str(decoupling[hash_key]), label)
     _require(
-        supersession["prior_target_gate_amendment_path"]
-        == contract["target_gate_amendment_path"],
-        "ML-9D supersession does not extend the frozen target-gate amendment",
+        decoupling["execution_contract_path"]
+        == str(execution_contract_path.relative_to(root)),
+        "ML-9D decoupling names the wrong execution contract",
     )
     _require(
-        supersession["execution_contract_path"]
-        == str(execution_contract_path.relative_to(root)),
-        "ML-9D supersession names the wrong execution contract",
+        decoupling["preregistration_path"]
+        == str(preregistration_path.relative_to(root)),
+        "ML-9D decoupling names the wrong preregistration",
     )
 
-    gate = supersession["target_gate_change"]
-    final_handoff = root / str(gate["promoted_primary_path_unchanged"])
-    final_manifest = root / str(gate["promoted_manifest_path_unchanged"])
-    recovery_identity = root / str(gate["accepted_recovery_identity_path"])
+    prior = _read_json(root / str(decoupling["prior_target_gate_supersession_path"]))
+    _require(
+        prior.get("frozen_before_target_access") is True,
+        "prior ML-9D target-gate supersession is not frozen",
+    )
+    _require(
+        prior.get("scientific_targets_consumed") is False,
+        "prior ML-9D supersession consumed a target",
+    )
+    _require(
+        prior["prior_target_gate_amendment_path"]
+        == contract["target_gate_amendment_path"],
+        "prior ML-9D supersession does not extend the base amendment",
+    )
+
+    primary_amendment = _read_json(
+        root / str(decoupling["ml9c_primary_promotion_amendment_path"])
+    )
+    _require(
+        primary_amendment.get("artifact_id")
+        == "ml9c_primary_hardness_promotion_amendment_v1",
+        "wrong ML-9C primary promotion amendment",
+    )
+    _require(
+        primary_amendment.get("frozen_before_ml9d_target_access") is True,
+        "ML-9C primary promotion amendment was not frozen before target access",
+    )
+
+    gate = decoupling["target_gate_change"]
+    final_handoff = root / str(gate["promoted_primary_path"])
+    final_manifest = root / str(gate["promoted_manifest_path"])
+    final_report = root / str(gate["promoted_report_path"])
+    primary_identity = root / str(gate["accepted_identity_path"])
     _require(final_handoff.is_file(), "ML-9C promoted handoff is unavailable")
     _require(final_manifest.is_file(), "ML-9C promoted manifest is unavailable")
-    _require(recovery_identity.is_file(), "ML-9C recovery identity is unavailable")
+    _require(final_report.is_file(), "ML-9C promoted report is unavailable")
+    _require(primary_identity.is_file(), "ML-9C primary identity is unavailable")
 
-    identity = _read_json(recovery_identity)
+    identity = _read_json(primary_identity)
     manifest = _read_json(final_manifest)
-    report_path = final_manifest.parent / "report.json"
-    _require(report_path.is_file(), "ML-9C promoted report is unavailable")
-    report = _read_json(report_path)
-    _require(identity.get("status") == "pass", "ML-9C recovery identity failed")
-    _require(identity.get("byte_identical") is True, "ML-9C recovery is not exact")
+    report = _read_json(final_report)
+    required_scope = str(gate["required_scope"])
+    _require(
+        identity.get("status") == gate["required_identity_status"],
+        "ML-9C primary identity failed",
+    )
+    _require(identity.get("byte_identical") is True, "ML-9C promotion is not exact")
     _require(
         identity.get("promoted") == "analysis/ml9_bayesian_irt/final_v1",
-        "ML-9C recovery promoted the wrong path",
+        "ML-9C primary identity promoted the wrong path",
+    )
+    _require(
+        identity.get("promotion_scope") == required_scope,
+        "ML-9C primary identity has the wrong scope",
     )
     _require(
         identity.get("binary_handoff_unchanged") is True,
-        "ML-9C binary handoff changed during recovery",
+        "ML-9C binary handoff changed during promotion",
     )
     _require(
-        manifest.get("status") == "complete_internal_posterior_estimate",
+        identity.get("all_primary_diagnostics_pass") is True,
+        "ML-9C primary diagnostics failed",
+    )
+    _require(
+        identity.get("factor_artifacts_included") is False,
+        "ML-9C factor artifact entered the primary identity",
+    )
+    _require(
+        identity.get("amendment_sha256")
+        == decoupling["ml9c_primary_promotion_amendment_sha256"],
+        "ML-9C primary identity names the wrong amendment",
+    )
+    _require(
+        manifest.get("status") == gate["required_manifest_status"],
         "ML-9C promoted manifest is incomplete",
     )
     _require(
-        manifest.get("all_recovery_diagnostics_pass") is True,
-        "ML-9C promoted diagnostics failed",
+        report.get("status") == gate["required_report_status"],
+        "ML-9C promoted report is incomplete",
+    )
+    _require(manifest.get("scope") == required_scope, "manifest scope changed")
+    _require(report.get("scope") == required_scope, "report scope changed")
+    _require(
+        manifest.get("all_primary_diagnostics_pass") is True,
+        "ML-9C promoted primary diagnostics failed",
     )
     _require(
-        report.get("all_recovery_diagnostics_pass") is True,
+        report.get("all_primary_diagnostics_pass") is True,
         "ML-9C promoted report diagnostics failed",
     )
-
+    _require(
+        manifest.get("factor_artifacts_included") is False,
+        "ML-9C promoted manifest includes a factor artifact",
+    )
+    expected_files = sorted(
+        primary_amendment["two_run_promotion_contract"]["required_files"]
+    )
+    _require(
+        identity.get("relative_paths") == expected_files,
+        "ML-9C primary identity file contract changed",
+    )
     for relative, expected in sorted(identity["file_hashes"].items()):
         _verify_hash(final_manifest.parent / relative, str(expected), "promoted file")
 
-    recovery_preregistration = _read_json(
-        root / str(supersession["recovery_preregistration_path"])
-    )
     handoff_hash = _verify_hash(
         final_handoff,
-        str(recovery_preregistration["binary_rasch"]["required_handoff_sha256"]),
+        str(gate["required_handoff_sha256"]),
         "promoted primary handoff",
+    )
+    _require(
+        identity.get("primary_handoff_sha256") == handoff_hash,
+        "ML-9C identity handoff hash changed",
     )
 
     secondary = preregistration["target_inputs"]["secondary"]
@@ -277,13 +361,14 @@ def verify_target_gate(
         "status": "pass_target_access_authorized",
         "primary_target_access_authorized": True,
         "secondary_target_access_authorized": True,
-        "target_gate_supersession_sha256": sha256_file(supersession_path),
-        "ml9c_recovery_identity_sha256": sha256_file(recovery_identity),
+        "target_gate_decoupling_sha256": sha256_file(decoupling_path),
+        "ml9c_primary_identity_sha256": sha256_file(primary_identity),
         "ml9c_promoted_manifest_sha256": sha256_file(final_manifest),
         "primary_handoff_sha256": handoff_hash,
         "secondary_target_sha256": secondary_hash,
         "pinned_control_hashes": pinned,
         "retained_raw_handoff_used": False,
+        "factor_artifact_used": False,
     }
 
 

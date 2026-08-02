@@ -102,4 +102,9 @@ def test_ml9d_committed_preflight_is_hashed_and_target_free() -> None:
     assert contrast_rows["contrast_id"].nunique() == 5
     assert not contrast_rows["baseline_component"].any()
     assert report["target_gate"]["status"] == "held_before_target_access"
-    assert not (ROOT / "analysis/ml9_bayesian_irt/final_v1").exists()
+    final_manifest = json.loads(
+        (ROOT / "analysis/ml9_bayesian_irt/final_v1/artifact_manifest.json").read_text()
+    )
+    assert final_manifest["scope"] == (
+        "family_aware_binary_rasch_task_difficulty_posterior_only"
+    )

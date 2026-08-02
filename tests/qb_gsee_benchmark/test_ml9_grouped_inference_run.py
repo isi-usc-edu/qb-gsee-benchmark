@@ -12,7 +12,7 @@ from qb_gsee_benchmark.ml.core_set import sha256_file
 from qb_gsee_benchmark.ml.grouped_inference_run import (
     FittedComparison,
     PreparedInference,
-    TARGET_GATE_SUPERSESSION_SHA256,
+    TARGET_GATE_DECOUPLING_SHA256,
     _benjamini_hochberg,
     _binary_folds,
     _bootstrap_indices,
@@ -25,8 +25,8 @@ from qb_gsee_benchmark.ml.grouped_inference_run import (
 ROOT = Path(__file__).resolve().parents[2]
 PREREGISTRATION = ROOT / "analysis/ml9_grouped_inference/preregistration.json"
 EXECUTION_CONTRACT = ROOT / "analysis/ml9_grouped_inference/execution_contract_v1.json"
-TARGET_GATE_SUPERSESSION = (
-    ROOT / "analysis/ml9_grouped_inference/target_gate_supersession_v3.json"
+TARGET_GATE_DECOUPLING = (
+    ROOT / "analysis/ml9_grouped_inference/target_gate_decoupling_v4.json"
 )
 
 
@@ -47,34 +47,42 @@ def test_ml9d_execution_contract_is_frozen_before_target_access() -> None:
         assert sha256_file(ROOT / payload[path_key]) == payload[hash_key]
 
 
-def test_ml9d_target_gate_supersession_is_frozen_before_target_access() -> None:
-    payload = json.loads(TARGET_GATE_SUPERSESSION.read_text(encoding="utf-8"))
-    assert sha256_file(TARGET_GATE_SUPERSESSION) == TARGET_GATE_SUPERSESSION_SHA256
+def test_ml9d_target_gate_decoupling_is_frozen_before_target_access() -> None:
+    payload = json.loads(TARGET_GATE_DECOUPLING.read_text(encoding="utf-8"))
+    assert sha256_file(TARGET_GATE_DECOUPLING) == TARGET_GATE_DECOUPLING_SHA256
     assert payload["frozen_before_target_access"] is True
     assert payload["scientific_targets_consumed"] is False
-    assert payload["model_fitted"] is False
+    assert payload["target_dependent_model_fitted"] is False
     for path_key, hash_key in [
         (
-            "prior_target_gate_amendment_path",
-            "prior_target_gate_amendment_sha256",
+            "prior_target_gate_supersession_path",
+            "prior_target_gate_supersession_sha256",
         ),
         ("execution_contract_path", "execution_contract_sha256"),
-        ("recovery_preregistration_path", "recovery_preregistration_sha256"),
+        ("preregistration_path", "preregistration_sha256"),
+        (
+            "outcome_blind_preflight_manifest_path",
+            "outcome_blind_preflight_manifest_sha256",
+        ),
+        (
+            "ml9c_primary_promotion_amendment_path",
+            "ml9c_primary_promotion_amendment_sha256",
+        ),
     ]:
         assert sha256_file(ROOT / payload[path_key]) == payload[hash_key]
 
 
-def test_ml9d_gate_stops_before_parsing_targets(monkeypatch) -> None:
+def test_ml9d_gate_opens_without_parsing_targets(monkeypatch) -> None:
     def forbidden_read_csv(*args, **kwargs):
-        raise AssertionError("ML-9D gate failure must precede target parsing")
+        raise AssertionError("ML-9D gate verification must precede target parsing")
 
     monkeypatch.setattr(pd, "read_csv", forbidden_read_csv)
-    try:
-        verify_target_gate(ROOT, PREREGISTRATION, EXECUTION_CONTRACT)
-    except ValueError as error:
-        assert "promoted handoff is unavailable" in str(error)
-    else:
-        raise AssertionError("ML-9D gate unexpectedly opened")
+    evidence = verify_target_gate(ROOT, PREREGISTRATION, EXECUTION_CONTRACT)
+    assert evidence["status"] == "pass_target_access_authorized"
+    assert evidence["primary_target_access_authorized"] is True
+    assert evidence["secondary_target_access_authorized"] is True
+    assert evidence["retained_raw_handoff_used"] is False
+    assert evidence["factor_artifact_used"] is False
 
 
 def test_ml9d_binary_folds_keep_groups_intact() -> None:
