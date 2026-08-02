@@ -1,0 +1,113 @@
+{
+  "artifact_id": "ml11_frontend_bundle_v3_preregistration",
+  "contract_version": "3.0.0",
+  "date": "2026-08-02",
+  "execution": {
+    "archive": "sorted fixed-metadata ZIP, DEFLATE level 9",
+    "new_analysis": false,
+    "new_solver_runs": false,
+    "public_deployment": false,
+    "raw_export_trees": 2,
+    "required_identity": "recursive byte identity including archive and run manifest",
+    "source_policy": "promoted artifact trees only"
+  },
+  "frozen_counts": {
+    "base_observations": 1728,
+    "base_prediction_rows": 25848,
+    "corpus_tasks": 718,
+    "difficulty_tasks": 96,
+    "group_multiplicity_rows": 25,
+    "panel_tasks": 96,
+    "projection_features": 8,
+    "pyscf_label_rows": 3590,
+    "solver_variants": 18
+  },
+  "metric_disclosure": {
+    "additional_193_columns": [
+      "max_edge_order",
+      "min_edge_order"
+    ],
+    "additional_columns_observed_tasks": 184,
+    "binding_selection_columns": 191,
+    "frontend_feature_columns": 193,
+    "interpretation": "The binding selection used 191 columns. The accepted solver-family analysis and placement space use 193 columns; the two added narrow-applicability columns do not retroactively change the binding selection."
+  },
+  "no_gate_decisions": {
+    "per_variant_ability_consistency": {
+      "action": "emit an explicit zero-row availability payload",
+      "reason": "The promoted scoped ML-9C final tree contains task difficulty posteriors and primary diagnostics only. Per-variant posterior estimates occur only in retained full raw trees, which this order does not authorize as inputs.",
+      "status": "unavailable_from_promoted_scope"
+    }
+  },
+  "order": {
+    "ledger_path": "work/ML_GOALS.md",
+    "ledger_sha256": "e68730b5f4bbfe2c0ed934301ccd234b2765e87baa51b7e5932427b67bbb1faf",
+    "section": "ML-11 ORDER 2026-08-02"
+  },
+  "source_bindings": [
+    {
+      "identity_path": "analysis/ml_g59_panel_refresh/two_run_identity_v1.json",
+      "identity_sha256": "ce595a9e2611f6bb300e455be2f34489fbed00e75d0d10883f71925158ce8845",
+      "manifest_path": "analysis/ml_g59_panel_refresh/final_v1/artifact_manifest.json",
+      "manifest_sha256": "1c01305fc8a290fe2bbd9ef866eb859195f1f6dd90a5a8ae66f51fdeb73f9d89",
+      "source_id": "solver_family_analysis"
+    },
+    {
+      "identity_path": "analysis/ml_g59_solvability_uq/two_run_identity_v1.json",
+      "identity_sha256": "a50d614c04cfec7937cccbe9a4c318f2220d252a05a4dcf0fa12e20a0d608009",
+      "manifest_path": "analysis/ml_g59_solvability_uq/held_v1/artifact_manifest.json",
+      "manifest_sha256": "68bc7fc454bb82dff03e4fa2c94f36eaaae2de22d672d30dadfa86d2d55a5dc2",
+      "source_id": "solver_family_uncertainty"
+    },
+    {
+      "identity_path": "analysis/ml9_instance_space/two_run_identity_v1.json",
+      "identity_sha256": "f7dcd62cfe796da4b0b63d6a6b755d7bc2dbabeb58c3887a5eaf851ffc267515",
+      "manifest_path": "analysis/ml9_instance_space/final_v1/artifact_manifest.json",
+      "manifest_sha256": "c617819e86d1bd21074e5d6889e2384bc29282ffc69c6dbf472ded8fb19a8a03",
+      "source_id": "instance_space"
+    },
+    {
+      "identity_path": "analysis/ml10_instance_space/two_run_identity_v3.json",
+      "identity_sha256": "10599419ca6b5dbc26fd96e3ec4dbd34c7a5e336c61fc94d322b0e07c1791155",
+      "manifest_path": "analysis/ml10_instance_space/final_v3/artifact_manifest.json",
+      "manifest_sha256": "67cd35dcbe0a3f5b21149904a63a05fc2c86741b75d238190be3035f85703a0a",
+      "source_id": "pyscf_instance_space"
+    },
+    {
+      "identity_path": "analysis/ml9_bayesian_irt/two_run_identity_primary_v1.json",
+      "identity_sha256": "0b6c3894dc8c79df0084ce979330c32fa79e27fe6e5df75a5cee9624b8bcd77c",
+      "manifest_path": "analysis/ml9_bayesian_irt/final_v1/artifact_manifest.json",
+      "manifest_sha256": "1ec1807bd0d48627e7dbec25c9741b17a0179eccfc47a06108f2a190675bc541",
+      "source_id": "difficulty"
+    },
+    {
+      "identity_path": "analysis/ml9_resource_profiles/two_run_identity_v1.json",
+      "identity_sha256": "9f62988b0026531b10ef0b12c3a2d5f46414c8cc7d4cd167d78db4238dba671d",
+      "manifest_path": "analysis/ml9_resource_profiles/final_v1/artifact_manifest.json",
+      "manifest_sha256": "72f8df51a44ee181df8f016f8c951530a1e74a3e1c1d478241fce97325387408",
+      "source_id": "ladder_resource_profiles"
+    },
+    {
+      "identity_path": "analysis/ml10_resource_profiles/two_run_identity_v3.json",
+      "identity_sha256": "5e303d1b9ec0fe267813720332a76d50ca1ca071d6c0a189bda46cdf595eb396",
+      "manifest_path": "analysis/ml10_resource_profiles/final_v3/artifact_manifest.json",
+      "manifest_sha256": "0086ce34940cdf7ae007455685d495d325eb48177b7cf7591eefd64ac9c32171",
+      "source_id": "combined_resource_profiles"
+    },
+    {
+      "identity_path": "analysis/ml9_grouped_inference/two_run_identity_v1.json",
+      "identity_sha256": "96f6e0ce55d4d2eafcbb219e717747eb59cda46a83d947abdbc317396a6d4fe5",
+      "manifest_path": "analysis/ml9_grouped_inference/final_v1/artifact_manifest.json",
+      "manifest_sha256": "318b18f7c59b7e43395a511ad3fa5f8525ba306d0f7f0d97ca2988e7841f7403",
+      "source_id": "group_inference"
+    },
+    {
+      "identity_path": "analysis/ml10_pyscf_desk/two_run_identity_v2.json",
+      "identity_sha256": "1848c0381e5eef4ea0a36972828582aea95025c95a895fab4437dbcd83f05ff1",
+      "manifest_path": "analysis/ml10_pyscf_desk/final_v2/artifact_manifest.json",
+      "manifest_sha256": "93260db0d886237ce078d2d9358bd61387d59d8ab6ca1a87fce78af3e43330f9",
+      "source_id": "pyscf_labels"
+    }
+  ],
+  "status": "frozen_before_export"
+}
