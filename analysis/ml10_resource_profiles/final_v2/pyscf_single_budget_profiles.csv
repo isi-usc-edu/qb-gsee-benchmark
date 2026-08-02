@@ -1,0 +1,16 @@
+solver_family_id,method,profile_track_id,threshold_factor,panel_tasks,attempted_covered_tasks,cost_screened_tasks,no_coverage_tasks,tasks_solved,all_panel_lower_bound_fraction,attempted_coverage_conditional_fraction,partial_identification_upper_fraction,missing_imputed,output_kind
+pyscf_hf,HF,pyscf_hf_single_budget_v1,0.5,96,79,13,4,5,0.052083333333333336,0.063291139240506333,0.22916666666666666,false,estimate
+pyscf_hf,HF,pyscf_hf_single_budget_v1,1,96,79,13,4,5,0.052083333333333336,0.063291139240506333,0.22916666666666666,false,estimate
+pyscf_hf,HF,pyscf_hf_single_budget_v1,2,96,79,13,4,6,0.0625,0.075949367088607597,0.23958333333333334,false,estimate
+pyscf_mp2,MP2,pyscf_mp2_single_budget_v1,0.5,96,81,11,4,6,0.0625,0.07407407407407407,0.21875,false,estimate
+pyscf_mp2,MP2,pyscf_mp2_single_budget_v1,1,96,81,11,4,9,0.09375,0.1111111111111111,0.25,false,estimate
+pyscf_mp2,MP2,pyscf_mp2_single_budget_v1,2,96,81,11,4,13,0.13541666666666666,0.16049382716049382,0.29166666666666669,false,estimate
+pyscf_cisd,CISD,pyscf_cisd_single_budget_v1,0.5,96,67,25,4,9,0.09375,0.13432835820895522,0.39583333333333331,false,estimate
+pyscf_cisd,CISD,pyscf_cisd_single_budget_v1,1,96,67,25,4,14,0.14583333333333334,0.20895522388059701,0.44791666666666669,false,estimate
+pyscf_cisd,CISD,pyscf_cisd_single_budget_v1,2,96,67,25,4,17,0.17708333333333334,0.2537313432835821,0.47916666666666669,false,estimate
+pyscf_ccsd,CCSD,pyscf_ccsd_single_budget_v1,0.5,96,67,25,4,24,0.25,0.35820895522388058,0.55208333333333337,false,estimate
+pyscf_ccsd,CCSD,pyscf_ccsd_single_budget_v1,1,96,67,25,4,25,0.26041666666666669,0.37313432835820898,0.5625,false,estimate
+pyscf_ccsd,CCSD,pyscf_ccsd_single_budget_v1,2,96,67,25,4,27,0.28125,0.40298507462686567,0.58333333333333337,false,estimate
+pyscf_ccsd_t,CCSD(T),pyscf_ccsd_t_single_budget_v1,0.5,96,63,29,4,28,0.29166666666666669,0.44444444444444442,0.63541666666666663,false,estimate
+pyscf_ccsd_t,CCSD(T),pyscf_ccsd_t_single_budget_v1,1,96,63,29,4,29,0.30208333333333331,0.46031746031746029,0.64583333333333337,false,estimate
+pyscf_ccsd_t,CCSD(T),pyscf_ccsd_t_single_budget_v1,2,96,63,29,4,31,0.32291666666666669,0.49206349206349204,0.66666666666666663,false,estimate

@@ -15,6 +15,12 @@ from qb_gsee_benchmark.ml.pyscf_hardness_run import (
 
 ROOT = Path(__file__).resolve().parents[2]
 PREREGISTRATION = ROOT / "analysis/ml10_pyscf_hardness/preregistration.json"
+RESOURCE_FINAL = ROOT / "analysis/ml10_resource_profiles/final_v2"
+RESOURCE_RAW = ROOT / "analysis/ml10_resource_profiles/raw_runs"
+RESOURCE_IDENTITY = ROOT / "analysis/ml10_resource_profiles/two_run_identity_v2.json"
+DESK_FINAL = ROOT / "analysis/ml10_pyscf_desk/final_v1"
+DESK_RAW = ROOT / "analysis/ml10_pyscf_desk/raw_runs"
+DESK_IDENTITY = ROOT / "analysis/ml10_pyscf_desk/two_run_identity_v1.json"
 
 
 def test_ml10_pyscf_label_construction_is_sparse_and_pinned() -> None:
@@ -110,6 +116,36 @@ def test_ml10d_desk_finalization_is_deterministic_and_missingness_bounded(
     assert (
         corpus["near_census_lower_bound"] <= corpus["near_census_upper_bound"]
     ).all()
+
+
+def test_ml10b_and_ml10d_promotions_match_both_retained_runs() -> None:
+    for final, raw, identity_path, artifact_id, file_count in (
+        (
+            RESOURCE_FINAL,
+            RESOURCE_RAW,
+            RESOURCE_IDENTITY,
+            "ml10b_resource_profiles_two_run_identity_v2",
+            13,
+        ),
+        (
+            DESK_FINAL,
+            DESK_RAW,
+            DESK_IDENTITY,
+            "ml10d_pyscf_desk_two_run_identity_v1",
+            9,
+        ),
+    ):
+        identity = json.loads(identity_path.read_text(encoding="utf-8"))
+        assert identity["artifact_id"] == artifact_id
+        assert identity["status"] == "pass"
+        assert identity["byte_identical"] is True
+        assert identity["file_count"] == file_count
+        for name, digest in identity["file_hashes"].items():
+            assert (final / name).read_bytes() == (raw / "run_1" / name).read_bytes()
+            assert (final / name).read_bytes() == (raw / "run_2" / name).read_bytes()
+            from qb_gsee_benchmark.ml.core_set import sha256_file
+
+            assert sha256_file(final / name) == digest
 
 
 def test_ml10_outcome_stage_new_files_avoid_prohibited_word() -> None:
