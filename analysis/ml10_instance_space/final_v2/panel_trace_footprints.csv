@@ -1,0 +1,7 @@
+target,method,footprint_kind,observed_tasks,solved_tasks,area,area_normalized,density,density_normalized,purity,elements,good_elements,pythia_gate_passed,interpretation,status,projection_refit,missing_imputed,output_kind
+pyscf_hf,HF,good,79,5,0,0,0,0,0,0,0,false,caveated_feature_adequacy_gate_failed,degenerate,false,false,estimate
+pyscf_mp2,MP2,good,81,9,0,0,0,0,0,0,0,false,caveated_feature_adequacy_gate_failed,degenerate,false,false,estimate
+pyscf_cisd,CISD,good,67,14,0.057751035216069876,0.014471815879986359,0,0,0,0,0,false,caveated_feature_adequacy_gate_failed,estimated,false,false,estimate
+pyscf_ccsd,CCSD,good,67,25,0.2367621245773664,0.059330155059880402,0,0,0,0,0,false,caveated_feature_adequacy_gate_failed,estimated,false,false,estimate
+pyscf_ccsd_t,CCSD(T),good,63,29,0.89692124373490589,0.22475924543371775,12.26417600969563,1.6313752342383525,0.72727272727272729,11,8,false,caveated_feature_adequacy_gate_failed,estimated,false,false,estimate
+ladder_plus_pyscf_portfolio,ladder plus PySCF portfolio,good,96,77,4.0495390354774994,0.92176794602069712,8.1490756629066112,1.0228790737706692,0.96969696969696972,33,32,true,descriptive_geometry,estimated,false,false,estimate
