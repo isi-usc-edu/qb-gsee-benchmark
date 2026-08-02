@@ -34,7 +34,7 @@ echo "host=$(hostname)"
 echo "root=$ROOT"
 echo "python=$PYTHON"
 "$PYTHON" --version
-"$PYTHON" -c 'import instancespace, numpy, pandas, scipy, sklearn; print(instancespace.__version__, numpy.__version__, pandas.__version__, scipy.__version__, sklearn.__version__)'
+"$PYTHON" -c 'import importlib.metadata as m, numpy, pandas, scipy, sklearn; print(m.version("instancespace"), numpy.__version__, pandas.__version__, scipy.__version__, sklearn.__version__)'
 
 "$PYTHON" -u analysis/ml10_instance_space/run_finalization.py \
   --output-dir "$RUN_ROOT/run_1" >"$LOG_ROOT/run_1.log" 2>&1 &
