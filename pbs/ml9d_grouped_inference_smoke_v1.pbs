@@ -1,0 +1,31 @@
+#!/bin/bash -l
+#PBS -N ml9d_grouped_inference_smoke_v1
+#PBS -A QC_NA_Sim
+#PBS -l select=1:ncpus=128
+#PBS -l walltime=00:15:00
+#PBS -j oe
+
+set -euo pipefail
+
+ROOT="${PBS_O_WORKDIR:?}"
+PYTHON="/home/ac.otten/soft/mambaforge/envs/qb_gsee/bin/python"
+
+export PYTHONNOUSERSITE=1
+export PYTHONHASHSEED=0
+export PYTHONPATH="$ROOT/src"
+export OMP_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1
+
+cd "$ROOT"
+echo "job_id=$PBS_JOBID"
+echo "host=$(hostname)"
+echo "root=$ROOT"
+echo "python=$PYTHON"
+"$PYTHON" --version
+"$PYTHON" -c 'import numpy, pandas, scipy, sklearn; print(numpy.__version__, pandas.__version__, scipy.__version__, sklearn.__version__)'
+"$PYTHON" -m pytest -q \
+  tests/qb_gsee_benchmark/test_ml9_grouped_inference_run.py \
+  -k 'target_gate_decoupling or gate_opens_without_parsing_targets or synthetic_full_pipeline'
