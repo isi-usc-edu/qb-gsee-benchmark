@@ -12,6 +12,9 @@ ROOT = Path(__file__).resolve().parents[2]
 ANALYSIS = ROOT / "analysis/ml10_pyscf_hardness"
 PREREGISTRATION = ANALYSIS / "preregistration.json"
 BUILDER = ROOT / "src/qb_gsee_benchmark/ml/pyscf_hardness_preflight.py"
+PROMOTED = ANALYSIS / "preflight_v1"
+RAW_RUNS = ANALYSIS / "preflight_raw_runs"
+IDENTITY = ANALYSIS / "preflight_two_run_identity_v1.json"
 
 
 def test_ml10_preregistration_freezes_92_of_96_branch_and_all_parts() -> None:
@@ -109,6 +112,18 @@ def test_ml10_preflight_independent_verifier(tmp_path: Path) -> None:
         "flag_rows": 51,
         "identity_verified": False,
     }
+
+
+def test_ml10_promoted_preflight_matches_both_retained_runs() -> None:
+    identity = json.loads(IDENTITY.read_text(encoding="utf-8"))
+    assert identity["status"] == "pass"
+    assert identity["byte_identical"] is True
+    assert identity["file_count"] == 7
+    for name, digest in identity["file_hashes"].items():
+        promoted = PROMOTED / name
+        assert sha256_file(promoted) == digest
+        assert promoted.read_bytes() == (RAW_RUNS / "run_1" / name).read_bytes()
+        assert promoted.read_bytes() == (RAW_RUNS / "run_2" / name).read_bytes()
 
 
 def test_ml10_new_files_avoid_prohibited_word() -> None:
