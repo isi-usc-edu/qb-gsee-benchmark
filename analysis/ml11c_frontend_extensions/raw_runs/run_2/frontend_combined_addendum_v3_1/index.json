@@ -1,0 +1,116 @@
+{
+  "$schema": "schema/index.schema.json",
+  "applies_to": {
+    "base_artifact_id": "ml11_frontend_bundle_v3",
+    "base_index_sha256": "633396f80823f25beeeef3b3e0a90d47daf0eebb316017d22a3fa6240d9ca8c8",
+    "prior_addendum_retained": true
+  },
+  "artifact_id": "ml11c_frontend_combined_addendum_v3_1",
+  "assertions": {
+    "gradeable_population": 609,
+    "no_reference_population": 109
+  },
+  "entrypoints": {
+    "contract": "contract/CONTRACT.md",
+    "definitions": "definitions.json",
+    "names": "names.json",
+    "normalized_base_geometry": "layers/instance_space/normalized_base_geometry.json",
+    "per_rung_footprints": "layers/instance_space/per_rung_footprints.json",
+    "per_rung_polygons": "layers/instance_space/per_rung_polygons.json",
+    "public_name_mapping": "public_name_mapping.json",
+    "variant_ability_consistency": "layers/difficulty/variant_ability_consistency.json"
+  },
+  "files": [
+    {
+      "bytes": 241,
+      "path": "README.md",
+      "role": "documentation",
+      "sha256": "3dd5735e8fa1ab821b08fe94182944bc2a879759d41f3f6e3bec8f4172782d1a"
+    },
+    {
+      "bytes": 5997,
+      "path": "contract/CONTRACT.md",
+      "role": "contract",
+      "sha256": "0e589fc76e4d781ba6e4a813176cad185e99b44bde887ced2c06830401fa08ba"
+    },
+    {
+      "bytes": 906,
+      "path": "definitions.json",
+      "role": "normative_definitions",
+      "sha256": "bc26e8b3cc3389e5b268e9561f0450e6cf40d2f4afd17f8ddd4f12ff5d411ab6"
+    },
+    {
+      "bytes": 5324,
+      "path": "layers/difficulty/variant_ability_consistency.json",
+      "role": "frontend_layer",
+      "row_count": 18,
+      "sha256": "448384ac6d8ac01f133c314836e40f34b2215eb7dbdb96fade72e026ccedf127"
+    },
+    {
+      "bytes": 261532,
+      "path": "layers/instance_space/normalized_base_geometry.json",
+      "role": "frontend_geometry",
+      "row_count": 52,
+      "sha256": "82084a8c59304a0bd2d0fa85f466fb732afdb36bd45270f8869ebea73cc80782"
+    },
+    {
+      "bytes": 4722,
+      "path": "layers/instance_space/per_rung_footprints.json",
+      "role": "frontend_layer",
+      "row_count": 16,
+      "sha256": "4110ecb8584ed1cbc3ddad4d6d9e756a9a750009213d3b188a9955222a6d4df7"
+    },
+    {
+      "bytes": 84857,
+      "path": "layers/instance_space/per_rung_polygons.json",
+      "role": "frontend_geometry",
+      "row_count": 16,
+      "sha256": "005767050576676bddf6f8c16068c99dea10339dc9742b8fa6ca2e6329f4c127"
+    },
+    {
+      "bytes": 26886,
+      "path": "names.json",
+      "role": "names_governance",
+      "row_count": 109,
+      "sha256": "cb194b402e8cb0d6a483135d7d73e1a03865bed2a9143ba88d9dd9247bfffb6e"
+    },
+    {
+      "bytes": 26886,
+      "path": "public_name_mapping.json",
+      "role": "public_name_mapping",
+      "row_count": 109,
+      "sha256": "cb194b402e8cb0d6a483135d7d73e1a03865bed2a9143ba88d9dd9247bfffb6e"
+    },
+    {
+      "bytes": 2249,
+      "path": "schema/index.schema.json",
+      "role": "schema",
+      "sha256": "7505c49ecde3d3b0098d70a21de486d7602c0fd932c9c77ec6eb30b83ce63cb6"
+    }
+  ],
+  "layers": {
+    "difficulty": {
+      "bundle_materialization": "derivable_at_export",
+      "estimate_label": "frozen binary-Rasch posterior estimate",
+      "row_count": 18,
+      "source_state": "frozen_artifact"
+    },
+    "instance_space": {
+      "bundle_materialization": "derivable_at_export",
+      "estimate_label": "descriptive geometry on frozen projection",
+      "row_count": 16,
+      "source_state": "frozen_artifact"
+    }
+  },
+  "release_scope": {
+    "public_deployment_authorized": false,
+    "validated_predictor_claim": false
+  },
+  "schema_version": "3.1.0",
+  "source": {
+    "instance_space_manifest_sha256": "c617819e86d1bd21074e5d6889e2384bc29282ffc69c6dbf472ded8fb19a8a03",
+    "ml11b_promotion_manifest_sha256": "09609f2f5d54c39f970be132f9c91f776a317dfaaa4281b1475c7e0d384cdafb",
+    "resource_manifest_sha256": "72f8df51a44ee181df8f016f8c951530a1e74a3e1c1d478241fce97325387408"
+  },
+  "status": "complete_internal_combined_addendum"
+}

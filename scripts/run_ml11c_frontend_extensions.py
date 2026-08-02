@@ -38,7 +38,7 @@ def main() -> None:
         json.dumps(
             {
                 "archive_sha256": first["archive"]["archive_sha256"],
-                "final_manifest_sha256": promotion["promoted_manifest_sha256"],
+                "final_manifest_sha256": first["run_manifest_sha256"],
                 "index_sha256": first["index_sha256"],
                 "run_2_archive_sha256": second["archive"]["archive_sha256"],
                 "status": "pass",

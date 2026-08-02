@@ -1,0 +1,727 @@
+{
+  "artifact_id": "ml11c_public_name_mapping_v3_1",
+  "fallback_public_name": "Unmapped internal identifier",
+  "governance": {
+    "build_warning_until_filled": true,
+    "required_stub_fields": [
+      "identifier_kind",
+      "internal_identifier",
+      "public_name",
+      "public_description"
+    ],
+    "stub_action": "append names.json row with null public fields",
+    "ui_fallback": "Unmapped internal identifier"
+  },
+  "internal_identifiers_are_displayable": false,
+  "mapping": [
+    {
+      "identifier_kind": "campaign",
+      "internal_identifier": "g50",
+      "public_description": "solver-family ladder campaign",
+      "public_name": "solver-family ladder campaign"
+    },
+    {
+      "identifier_kind": "campaign",
+      "internal_identifier": "g59",
+      "public_description": "panel completion campaign",
+      "public_name": "panel completion campaign"
+    },
+    {
+      "identifier_kind": "campaign",
+      "internal_identifier": "ml10a",
+      "public_description": "electronic-structure footprint extension",
+      "public_name": "electronic-structure footprint extension"
+    },
+    {
+      "identifier_kind": "campaign",
+      "internal_identifier": "ml10b",
+      "public_description": "electronic-structure resource extension",
+      "public_name": "electronic-structure resource extension"
+    },
+    {
+      "identifier_kind": "campaign",
+      "internal_identifier": "ml10d",
+      "public_description": "electronic-structure label census",
+      "public_name": "electronic-structure label census"
+    },
+    {
+      "identifier_kind": "campaign",
+      "internal_identifier": "ml9a",
+      "public_description": "instance-space analysis",
+      "public_name": "instance-space analysis"
+    },
+    {
+      "identifier_kind": "campaign",
+      "internal_identifier": "ml9b",
+      "public_description": "censored resource profiles",
+      "public_name": "censored resource profiles"
+    },
+    {
+      "identifier_kind": "campaign",
+      "internal_identifier": "ml9c",
+      "public_description": "task-difficulty instrument",
+      "public_name": "task-difficulty instrument"
+    },
+    {
+      "identifier_kind": "campaign",
+      "internal_identifier": "ml9d",
+      "public_description": "grouped feature inference",
+      "public_name": "grouped feature inference"
+    },
+    {
+      "identifier_kind": "coverage_class",
+      "internal_identifier": "failed",
+      "public_description": "Attempted without accepted result",
+      "public_name": "Attempted without accepted result"
+    },
+    {
+      "identifier_kind": "coverage_class",
+      "internal_identifier": "labeled",
+      "public_description": "Accepted labeled result",
+      "public_name": "Accepted labeled result"
+    },
+    {
+      "identifier_kind": "coverage_class",
+      "internal_identifier": "no_coverage",
+      "public_description": "No accepted coverage",
+      "public_name": "No accepted coverage"
+    },
+    {
+      "identifier_kind": "coverage_class",
+      "internal_identifier": "not_attempted_cost_screened",
+      "public_description": "Not attempted after cost screen",
+      "public_name": "Not attempted after cost screen"
+    },
+    {
+      "identifier_kind": "coverage_role",
+      "internal_identifier": "labeled_panel",
+      "public_description": "Labeled panel task",
+      "public_name": "Labeled panel task"
+    },
+    {
+      "identifier_kind": "coverage_role",
+      "internal_identifier": "prediction_target_or_coverage",
+      "public_description": "Projection-only coverage task",
+      "public_name": "Projection-only coverage task"
+    },
+    {
+      "identifier_kind": "coverage_role",
+      "internal_identifier": "unlabeled_gradeable",
+      "public_description": "Unlabeled gradeable task",
+      "public_name": "Unlabeled gradeable task"
+    },
+    {
+      "identifier_kind": "electronic_structure_method",
+      "internal_identifier": "pyscf_ccsd",
+      "public_description": "coupled cluster with singles and doubles",
+      "public_name": "coupled cluster with singles and doubles"
+    },
+    {
+      "identifier_kind": "electronic_structure_method",
+      "internal_identifier": "pyscf_ccsd_t",
+      "public_description": "coupled cluster with perturbative triples",
+      "public_name": "coupled cluster with perturbative triples"
+    },
+    {
+      "identifier_kind": "electronic_structure_method",
+      "internal_identifier": "pyscf_cisd",
+      "public_description": "configuration interaction with singles and doubles",
+      "public_name": "configuration interaction with singles and doubles"
+    },
+    {
+      "identifier_kind": "electronic_structure_method",
+      "internal_identifier": "pyscf_hf",
+      "public_description": "Hartree--Fock",
+      "public_name": "Hartree--Fock"
+    },
+    {
+      "identifier_kind": "electronic_structure_method",
+      "internal_identifier": "pyscf_mp2",
+      "public_description": "second-order Moller--Plesset",
+      "public_name": "second-order Moller--Plesset"
+    },
+    {
+      "identifier_kind": "endpoint_class",
+      "internal_identifier": "competing_risk_crash",
+      "public_description": "Competing-risk crash",
+      "public_name": "Competing-risk crash"
+    },
+    {
+      "identifier_kind": "endpoint_class",
+      "internal_identifier": "competing_risk_failure",
+      "public_description": "Competing-risk failure",
+      "public_name": "Competing-risk failure"
+    },
+    {
+      "identifier_kind": "endpoint_class",
+      "internal_identifier": "no_attempt_evidence",
+      "public_description": "No attempt evidence",
+      "public_name": "No attempt evidence"
+    },
+    {
+      "identifier_kind": "endpoint_class",
+      "internal_identifier": "no_coverage",
+      "public_description": "No accepted coverage",
+      "public_name": "No accepted coverage"
+    },
+    {
+      "identifier_kind": "endpoint_class",
+      "internal_identifier": "not_attempted_cost_screened",
+      "public_description": "Not attempted after cost screen",
+      "public_name": "Not attempted after cost screen"
+    },
+    {
+      "identifier_kind": "endpoint_class",
+      "internal_identifier": "right_censored_ladder_exhaustion",
+      "public_description": "Ladder exhausted",
+      "public_name": "Ladder exhausted"
+    },
+    {
+      "identifier_kind": "endpoint_class",
+      "internal_identifier": "right_censored_walltime",
+      "public_description": "Wall-time limit",
+      "public_name": "Wall-time limit"
+    },
+    {
+      "identifier_kind": "endpoint_class",
+      "internal_identifier": "solution",
+      "public_description": "Solution",
+      "public_name": "Solution"
+    },
+    {
+      "identifier_kind": "gate_reason",
+      "internal_identifier": "feature_adequacy_gate_failed",
+      "public_description": "Feature-adequacy gate failed; display geometry with caveat",
+      "public_name": "Feature-adequacy gate failed; display geometry with caveat"
+    },
+    {
+      "identifier_kind": "gate_reason",
+      "internal_identifier": "pass",
+      "public_description": "Feature-adequacy gate passed",
+      "public_name": "Feature-adequacy gate passed"
+    },
+    {
+      "identifier_kind": "portfolio_object",
+      "internal_identifier": "18_item_ladder_union",
+      "public_description": "Eighteen-item ladder union",
+      "public_name": "Eighteen-item ladder union"
+    },
+    {
+      "identifier_kind": "portfolio_object",
+      "internal_identifier": "five_method_pyscf_union",
+      "public_description": "Five-method electronic-structure union",
+      "public_name": "Five-method electronic-structure union"
+    },
+    {
+      "identifier_kind": "portfolio_object",
+      "internal_identifier": "ladder_plus_pyscf_portfolio",
+      "public_description": "Combined ladder and electronic-structure portfolio",
+      "public_name": "Combined ladder and electronic-structure portfolio"
+    },
+    {
+      "identifier_kind": "portfolio_object",
+      "internal_identifier": "ladder_plus_pyscf_union",
+      "public_description": "Combined ladder and electronic-structure union",
+      "public_name": "Combined ladder and electronic-structure union"
+    },
+    {
+      "identifier_kind": "portfolio_object",
+      "internal_identifier": "portfolio_union",
+      "public_description": "Four-family ladder portfolio",
+      "public_name": "Four-family ladder portfolio"
+    },
+    {
+      "identifier_kind": "portfolio_object",
+      "internal_identifier": "pyscf_five_method_union",
+      "public_description": "Five-method electronic-structure union",
+      "public_name": "Five-method electronic-structure union"
+    },
+    {
+      "identifier_kind": "solver_family",
+      "internal_identifier": "dmrg",
+      "public_description": "DMRG bond-dimension ladder",
+      "public_name": "DMRG bond-dimension ladder"
+    },
+    {
+      "identifier_kind": "solver_family",
+      "internal_identifier": "ipie_afqmc",
+      "public_description": "phaseless AFQMC trial-state calculation",
+      "public_name": "phaseless AFQMC trial-state calculation"
+    },
+    {
+      "identifier_kind": "solver_family",
+      "internal_identifier": "shci",
+      "public_description": "SHCI threshold ladder",
+      "public_name": "SHCI threshold ladder"
+    },
+    {
+      "identifier_kind": "solver_family",
+      "internal_identifier": "trimci",
+      "public_description": "selected-CI determinant ladder",
+      "public_name": "selected-CI determinant ladder"
+    },
+    {
+      "aliases": [
+        "54feec4d-06b8-5ac2-a936-7e645130fb48"
+      ],
+      "identifier_kind": "solver_variant",
+      "internal_identifier": "default_three_phase",
+      "public_description": "selected-CI default schedule",
+      "public_name": "selected-CI default schedule"
+    },
+    {
+      "aliases": [
+        "6fdd634b-e4ba-5320-be16-3b25b576015a"
+      ],
+      "identifier_kind": "solver_variant",
+      "internal_identifier": "g50_bond_dimension_1024",
+      "public_description": "DMRG bond dimension 1024",
+      "public_name": "DMRG bond dimension 1024"
+    },
+    {
+      "aliases": [
+        "cc2b9498-9af4-5d4c-954c-a64e8b6e0e5a"
+      ],
+      "identifier_kind": "solver_variant",
+      "internal_identifier": "g50_bond_dimension_2048",
+      "public_description": "DMRG bond dimension 2048",
+      "public_name": "DMRG bond dimension 2048"
+    },
+    {
+      "aliases": [
+        "e6fc5c39-7cc6-5575-ae96-ddf05b54ebd6"
+      ],
+      "identifier_kind": "solver_variant",
+      "internal_identifier": "g50_bond_dimension_256",
+      "public_description": "DMRG bond dimension 256",
+      "public_name": "DMRG bond dimension 256"
+    },
+    {
+      "aliases": [
+        "5e395630-54be-595a-82a0-6e662de00e48"
+      ],
+      "identifier_kind": "solver_variant",
+      "internal_identifier": "g50_bond_dimension_512",
+      "public_description": "DMRG bond dimension 512",
+      "public_name": "DMRG bond dimension 512"
+    },
+    {
+      "aliases": [
+        "0340d346-8736-5fb3-8bd1-76b6a9bfc60e"
+      ],
+      "identifier_kind": "solver_variant",
+      "internal_identifier": "g50_orbopt_terminal_pt_eps_2e_5_nchunks8",
+      "public_description": "SHCI terminal perturbative correction",
+      "public_name": "SHCI terminal perturbative correction"
+    },
+    {
+      "aliases": [
+        "095d8e6f-acbe-508e-929b-25bbc2498ceb"
+      ],
+      "identifier_kind": "solver_variant",
+      "internal_identifier": "g50_orbopt_var_eps_1e_4_nchunks8",
+      "public_description": "SHCI variational threshold 1e-04",
+      "public_name": "SHCI variational threshold 1e-04"
+    },
+    {
+      "aliases": [
+        "f0a6420a-928b-5d81-a185-fc213229896f"
+      ],
+      "identifier_kind": "solver_variant",
+      "internal_identifier": "g50_orbopt_var_eps_2e_4_nchunks8",
+      "public_description": "SHCI variational threshold 2e-04",
+      "public_name": "SHCI variational threshold 2e-04"
+    },
+    {
+      "aliases": [
+        "86cb1f20-bc0d-5a9a-bf86-20d1f9c0c3e2"
+      ],
+      "identifier_kind": "solver_variant",
+      "internal_identifier": "g50_orbopt_var_eps_2e_5_nchunks8",
+      "public_description": "SHCI variational threshold 2e-05",
+      "public_name": "SHCI variational threshold 2e-05"
+    },
+    {
+      "aliases": [
+        "8da76450-cca0-5740-b18a-e09b3c3be1c2"
+      ],
+      "identifier_kind": "solver_variant",
+      "internal_identifier": "g50_orbopt_var_eps_5e_5_nchunks8",
+      "public_description": "SHCI variational threshold 5e-05",
+      "public_name": "SHCI variational threshold 5e-05"
+    },
+    {
+      "aliases": [
+        "1e75f9d9-b6cf-500d-8145-a5b0ca106102"
+      ],
+      "identifier_kind": "solver_variant",
+      "internal_identifier": "g50_target_determinants_100000",
+      "public_description": "selected-CI target 100,000 determinants",
+      "public_name": "selected-CI target 100,000 determinants"
+    },
+    {
+      "aliases": [
+        "90fc4c28-9889-5f09-a6f0-2693b64c4893"
+      ],
+      "identifier_kind": "solver_variant",
+      "internal_identifier": "g50_target_determinants_1000000",
+      "public_description": "selected-CI target 1,000,000 determinants",
+      "public_name": "selected-CI target 1,000,000 determinants"
+    },
+    {
+      "aliases": [
+        "e5e9dea7-ce43-558a-97e4-1ad447104125"
+      ],
+      "identifier_kind": "solver_variant",
+      "internal_identifier": "g50_target_determinants_10000000",
+      "public_description": "selected-CI target 10,000,000 determinants",
+      "public_name": "selected-CI target 10,000,000 determinants"
+    },
+    {
+      "aliases": [
+        "d4993bbf-ba45-50ab-a215-9bf2bb49a9d7"
+      ],
+      "identifier_kind": "solver_variant",
+      "internal_identifier": "g50_target_determinants_2000000",
+      "public_description": "selected-CI target 2,000,000 determinants",
+      "public_name": "selected-CI target 2,000,000 determinants"
+    },
+    {
+      "aliases": [
+        "f06004e0-e2ca-53ef-a54a-2fc12c811a69"
+      ],
+      "identifier_kind": "solver_variant",
+      "internal_identifier": "g50_target_determinants_250000",
+      "public_description": "selected-CI target 250,000 determinants",
+      "public_name": "selected-CI target 250,000 determinants"
+    },
+    {
+      "aliases": [
+        "7b5f6ebd-e632-5343-8065-184d523e9c2e"
+      ],
+      "identifier_kind": "solver_variant",
+      "internal_identifier": "g50_target_determinants_500000",
+      "public_description": "selected-CI target 500,000 determinants",
+      "public_name": "selected-CI target 500,000 determinants"
+    },
+    {
+      "aliases": [
+        "078dff8b-14ac-5ca7-b4da-8c7e56be9320"
+      ],
+      "identifier_kind": "solver_variant",
+      "internal_identifier": "g50_target_determinants_5000000",
+      "public_description": "selected-CI target 5,000,000 determinants",
+      "public_name": "selected-CI target 5,000,000 determinants"
+    },
+    {
+      "aliases": [
+        "54cf1eae-79a4-5ee5-9553-80f4f380882b"
+      ],
+      "identifier_kind": "solver_variant",
+      "internal_identifier": "uhf_trial_512_walkers_1000_blocks",
+      "public_description": "phaseless AFQMC with UHF trial state",
+      "public_name": "phaseless AFQMC with UHF trial state"
+    },
+    {
+      "identifier_kind": "state_value",
+      "internal_identifier": "accuracy_miss",
+      "public_description": "Completed outside target accuracy",
+      "public_name": "Completed outside target accuracy"
+    },
+    {
+      "identifier_kind": "state_value",
+      "internal_identifier": "crash",
+      "public_description": "Execution failure",
+      "public_name": "Execution failure"
+    },
+    {
+      "identifier_kind": "state_value",
+      "internal_identifier": "degenerate",
+      "public_description": "Degenerate geometry",
+      "public_name": "Degenerate geometry"
+    },
+    {
+      "identifier_kind": "state_value",
+      "internal_identifier": "empty",
+      "public_description": "Empty geometry",
+      "public_name": "Empty geometry"
+    },
+    {
+      "identifier_kind": "state_value",
+      "internal_identifier": "estimated",
+      "public_description": "Estimated geometry",
+      "public_name": "Estimated geometry"
+    },
+    {
+      "identifier_kind": "state_value",
+      "internal_identifier": "fail",
+      "public_description": "Observed bounded-run failure",
+      "public_name": "Observed bounded-run failure"
+    },
+    {
+      "identifier_kind": "state_value",
+      "internal_identifier": "ok",
+      "public_description": "Completed with finite result",
+      "public_name": "Completed with finite result"
+    },
+    {
+      "identifier_kind": "state_value",
+      "internal_identifier": "success",
+      "public_description": "Observed success",
+      "public_name": "Observed success"
+    },
+    {
+      "identifier_kind": "state_value",
+      "internal_identifier": "timeout",
+      "public_description": "Wall-time limit reached",
+      "public_name": "Wall-time limit reached"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "attractive_hubbard_1d_ed",
+      "public_description": "Canonical task family: Attractive Hubbard 1d Ed",
+      "public_name": "Attractive Hubbard 1d Ed"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "benzene_eriksen_fci_challenge",
+      "public_description": "Canonical task family: Benzene Eriksen FCI Challenge",
+      "public_name": "Benzene Eriksen FCI Challenge"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "block2_c2_ccpvdz_scan",
+      "public_description": "Canonical task family: Block2 C2 Ccpvdz Scan",
+      "public_name": "Block2 C2 Ccpvdz Scan"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "block2_siam_script_exact",
+      "public_description": "Canonical task family: Block2 Siam Script Exact",
+      "public_name": "Block2 Siam Script Exact"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "block2_ueg_script_exact",
+      "public_description": "Canonical task family: Block2 Ueg Script Exact",
+      "public_name": "Block2 Ueg Script Exact"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "ca2cuo3_downfolded_extended_hubbard",
+      "public_description": "Canonical task family: Ca2cuo3 Downfolded Extended Hubbard",
+      "public_name": "Ca2cuo3 Downfolded Extended Hubbard"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "catalyst_blue_dimer",
+      "public_description": "Canonical task family: Catalyst Blue Dimer",
+      "public_name": "Catalyst Blue Dimer"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "catalyst_fe_mo_co",
+      "public_description": "Canonical task family: Catalyst Fe Mo Co",
+      "public_name": "Catalyst Fe Mo Co"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "catalyst_fe_red",
+      "public_description": "Canonical task family: Catalyst Fe Red",
+      "public_name": "Catalyst Fe Red"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "catalyst_mn_mono",
+      "public_description": "Canonical task family: Catalyst Mn Mono",
+      "public_name": "Catalyst Mn Mono"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "catalyst_mo2_n2",
+      "public_description": "Canonical task family: Catalyst Mo2 N2",
+      "public_name": "Catalyst Mo2 N2"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "catalyst_mo_n2",
+      "public_description": "Canonical task family: Catalyst Mo N2",
+      "public_name": "Catalyst Mo N2"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "catalyst_mo_n2_pincer",
+      "public_description": "Canonical task family: Catalyst Mo N2 Pincer",
+      "public_name": "Catalyst Mo N2 Pincer"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "catalyst_p450_cpd1_spin5_goings_dmrg_ladder",
+      "public_description": "Canonical task family: Catalyst P450 Cpd1 Spin5 Goings DMRG Ladder",
+      "public_name": "Catalyst P450 Cpd1 Spin5 Goings DMRG Ladder"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "catalyst_ru_macho",
+      "public_description": "Canonical task family: Catalyst Ru Macho",
+      "public_name": "Catalyst Ru Macho"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "catalyst_ru_mono",
+      "public_description": "Canonical task family: Catalyst Ru Mono",
+      "public_name": "Catalyst Ru Mono"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "catalyst_vonburg_ru_ix_cas16_fb_68e62o",
+      "public_description": "Canonical task family: Catalyst Vonburg Ru Ix Cas16 Fb 68e62o",
+      "public_name": "Catalyst Vonburg Ru Ix Cas16 Fb 68e62o"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "diamond_2x2x2_periodic_solid",
+      "public_description": "Canonical task family: Diamond 2x2x2 Periodic Solid",
+      "public_name": "Diamond 2x2x2 Periodic Solid"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "gao_distributed_fci",
+      "public_description": "Canonical task family: Gao Distributed FCI",
+      "public_name": "Gao Distributed FCI"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "h2_fragmentation_sto6g",
+      "public_description": "Canonical task family: H2 Fragmentation Sto6g",
+      "public_name": "H2 Fragmentation Sto6g"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "hubbard_chain_mean_field_orbitals",
+      "public_description": "Canonical task family: Hubbard Chain Mean Field Orbitals",
+      "public_name": "Hubbard Chain Mean Field Orbitals"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "hubbard_lieb_wu_1d_site_basis",
+      "public_description": "Canonical task family: Hubbard Lieb Wu 1d Site Basis",
+      "public_name": "Hubbard Lieb Wu 1d Site Basis"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "hubbard_square_mean_field_orbitals",
+      "public_description": "Canonical task family: Hubbard Square Mean Field Orbitals",
+      "public_name": "Hubbard Square Mean Field Orbitals"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "ifciqmc_first_row_diatomics",
+      "public_description": "Canonical task family: Ifciqmc First Row Diatomics",
+      "public_name": "Ifciqmc First Row Diatomics"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "orbital_representation_pairs",
+      "public_description": "Canonical task family: Orbital Representation Pairs",
+      "public_name": "Orbital Representation Pairs"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "planted_synthetic_instances",
+      "public_description": "Canonical task family: Planted Synthetic Instances",
+      "public_name": "Planted Synthetic Instances"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "propane_sto3g_exact_fci",
+      "public_description": "Canonical task family: Propane Sto3g Exact FCI",
+      "public_name": "Propane Sto3g Exact FCI"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "prototype_small_molecules_pyscf",
+      "public_description": "Canonical task family: Prototype Small Molecules Pyscf",
+      "public_name": "Prototype Small Molecules Pyscf"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "prototype_transition_metal_atoms_monoxides",
+      "public_description": "Canonical task family: Prototype Transition Metal Atoms Monoxides",
+      "public_name": "Prototype Transition Metal Atoms Monoxides"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "qsz_hubbard_2d_halffilled",
+      "public_description": "Canonical task family: Qsz Hubbard 2d Halffilled",
+      "public_name": "Qsz Hubbard 2d Halffilled"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "richardson_gaudin",
+      "public_description": "Canonical task family: Richardson Gaudin",
+      "public_name": "Richardson Gaudin"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "simons_hydrogen_chains",
+      "public_description": "Canonical task family: Simons Hydrogen Chains",
+      "public_name": "Simons Hydrogen Chains"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "tight_binding_controls",
+      "public_description": "Canonical task family: Tight Binding Controls",
+      "public_name": "Tight Binding Controls"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "ueg_n14_planewave",
+      "public_description": "Canonical task family: Ueg N14 Planewave",
+      "public_name": "Ueg N14 Planewave"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "validation_ccpvdz",
+      "public_description": "Canonical task family: Validation Ccpvdz",
+      "public_name": "Validation Ccpvdz"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "varbench_hubbard_square16_site_basis",
+      "public_description": "Canonical task family: Varbench Hubbard Square16 Site Basis",
+      "public_name": "Varbench Hubbard Square16 Site Basis"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "varbench_impurity_sb_imp9",
+      "public_description": "Canonical task family: Varbench Impurity Sb Imp9",
+      "public_name": "Varbench Impurity Sb Imp9"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "varbench_tv_chain32_site_basis",
+      "public_description": "Canonical task family: Varbench Tv Chain32 Site Basis",
+      "public_name": "Varbench Tv Chain32 Site Basis"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "varbench_tv_square16_ed",
+      "public_description": "Canonical task family: Varbench Tv Square16 Ed",
+      "public_name": "Varbench Tv Square16 Ed"
+    },
+    {
+      "identifier_kind": "task_family",
+      "internal_identifier": "w3b_hubbard_1d_doped_ed",
+      "public_description": "Canonical task family: W3b Hubbard 1d Doped Ed",
+      "public_name": "W3b Hubbard 1d Doped Ed"
+    },
+    {
+      "identifier_kind": "validation_reason",
+      "internal_identifier": "raw >= max(0.70, majority + 0.05) and balanced >= 0.60",
+      "public_description": "External validation requires raw accuracy above both 0.70 and the majority baseline by 0.05, with balanced accuracy at least 0.60",
+      "public_name": "External validation requires raw accuracy above both 0.70 and the majority baseline by 0.05, with balanced accuracy at least 0.60"
+    }
+  ],
+  "status": "normative_translation_boundary"
+}
