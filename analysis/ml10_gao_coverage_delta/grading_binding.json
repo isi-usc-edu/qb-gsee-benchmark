@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ml10_gao_delta_grading_binding_v1",
+  "status": "bound_after_status_preflight_before_full_programmatic_grading",
+  "analysis_rules_source": {
+    "path": "analysis/ml10_gao_coverage_delta/preregistration.json",
+    "sha256": "d2ca617645134e080392ec2e93d4c1bae599e24d6802428d7eadc2692b6cf1af",
+    "frozen_commit": "252be2ae"
+  },
+  "status_preflight": {
+    "parent_commit": "892f4e176e5f0e643e3523f143dc6ad110169937",
+    "identity": {
+      "path": "analysis/ml10_pyscf_hardness/preflight_two_run_identity_v2.json",
+      "sha256": "86de512843b86b875a12704d2dbce9c4d309641aed2e69d89a87e12e57c08292"
+    },
+    "manifest": {
+      "path": "analysis/ml10_pyscf_hardness/preflight_v2/artifact_manifest.json",
+      "sha256": "1b56204dbebdc95df6c940d6d10dd289a1d744de0439df3b5ba4d66a0c8eec90"
+    },
+    "report": {
+      "path": "analysis/ml10_pyscf_hardness/preflight_v2/report.json",
+      "sha256": "62e3bb207336eed4997440138655d1d7bde371236bcdc7000dcee9a0aa380674"
+    },
+    "byte_identical": true,
+    "energy_values_consumed": false,
+    "success_labels_computed": false
+  },
+  "schema_inspection_disclosure": {
+    "performed_after_analysis_rule_freeze": true,
+    "header_and_first_five_accepted_rows_displayed": true,
+    "purpose": "map accepted producer columns to the already-frozen label contract",
+    "analysis_rule_changed": false,
+    "task_or_method_selected": false
+  },
+  "grading_outputs": {
+    "desk": "analysis/ml10_pyscf_desk/final_v2",
+    "resource_profiles": "analysis/ml10_resource_profiles/final_v3",
+    "instance_space": "analysis/ml10_instance_space/final_v3"
+  },
+  "fences": {
+    "new_solver_runs": false,
+    "task_reselection": false,
+    "projection_refit": false,
+    "source_mutation": false,
+    "missing_value_imputation": false,
+    "public_or_dashboard_placement": false,
+    "push": false
+  }
+}
