@@ -1,0 +1,197 @@
+{
+  "artifact_id": "ml10_gao_coverage_delta_preregistration_v1",
+  "status": "frozen_before_gao_row_outcomes_or_energies_parsed",
+  "frozen_before_gao_result_rows_parsed": true,
+  "frozen_before_preflight_result_construction": true,
+  "frozen_before_energy_grading": true,
+  "frozen_before_downstream_analysis": true,
+  "known_aggregate_disclosure_before_freeze": {
+    "source": "PI REVIEW 2026-08-02 (second) and accepted implementer evidence",
+    "gao_cells": 635,
+    "completed_finite": 635,
+    "threshold_solves": 169,
+    "threshold_misses": 466,
+    "failed": 0,
+    "timeout": 0,
+    "panel_task_coverage": "96/96",
+    "corpus_task_coverage": "718/718",
+    "row_level_results_inspected": false
+  },
+  "order": {
+    "external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/ML_GOALS.md",
+    "document_sha256_at_freeze": "063d0d4ec5e593f89f4aa7f57b73c29467904fc17e4a2b9e21e39d7765daadbd",
+    "section_start_line": 3170,
+    "section_end_line": 3195,
+    "section_sha256": "e2cbe471910449fad8aa52d532e4a2c4f0c753fd776e81fa7feba76bdbb7d7bc",
+    "ruling": "accepted Gao consumption gate and fresh versioned coverage delta"
+  },
+  "repository": {
+    "freeze_parent_commit": "5777975045f5bec8303bb36924047b67b7f5bf14",
+    "problem_instances_tree_git_sha1": "2cb653e27b1519d3d987c61a77e744cd67bb23d8",
+    "feature_schema_tree_git_sha1": "fa63a0ab3a50209a9739a503077416f68109a0b7"
+  },
+  "accepted_gao_inputs": {
+    "results": {
+      "external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g48_ext_gao_pyscf_971efc1/gao_campaign_results.csv",
+      "sha256": "ef4aad1142390e4d7ce18aaddda78ba272687c5a5562c1e3c59f97c6c3b5a98d",
+      "expected_rows": 635
+    },
+    "terminal_verification": {
+      "external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g48_ext_gao_pyscf_971efc1/gao_terminal_verification.json",
+      "sha256": "96e91aa63aa1bc5392451ca5a436b8515a4c3e3cdc0d4ecaf9aa9c58594534a3"
+    },
+    "accounting_manifest": {
+      "external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g48_ext_gao_pyscf_971efc1/accounting/accounting_manifest.json",
+      "sha256": "f1f2b414a4e7cea0b84810ebc68e3fdfbd14d94ff9948fdce66207caf42c5f09"
+    },
+    "arrival_plan": {
+      "external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g48_ext_gao_pyscf_971efc1/inputs/g48_gao_arrival_plan_127x5.csv",
+      "sha256": "45181b32cd2d86fc3b7fe6418b3093201e1049b45757249727a037d99b6d8b5d"
+    },
+    "closeout_evidence": {
+      "external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g48_ext_gao_pyscf_971efc1/gao_closeout_evidence.json",
+      "sha256": "be26b36fc8a1038ff614831980133faf46cba979d38f1cb579a255e105bc11f5"
+    },
+    "closeout_sha256sums": {
+      "external_path": "/lcrc/project/PIRT/NCS_GSEE_Benchmark/work/solver_runs/g48_ext_gao_pyscf_971efc1/CLOSEOUT_SHA256SUMS",
+      "sha256": "d20dee54be2004424ab52f6f9868867f585322d56f4ed27261f82e51641d3489"
+    }
+  },
+  "prior_artifacts": {
+    "baseline_preregistration": {
+      "path": "analysis/ml10_pyscf_hardness/preregistration.json",
+      "sha256": "cd3c5c070e5925f5d822478642076340d9199bea529afe2965fb09e39934c95c"
+    },
+    "preflight_v1_manifest": {
+      "path": "analysis/ml10_pyscf_hardness/preflight_v1/artifact_manifest.json",
+      "sha256": "e5ad83befd71c6c3bdd52d611523c5895aa95912fb106c30c673472727d08047"
+    },
+    "preflight_v1_identity": {
+      "path": "analysis/ml10_pyscf_hardness/preflight_two_run_identity_v1.json",
+      "sha256": "221d9e5bd8a61e0e227d746249a3a962add34063b033ff9dcd28f05d724ce8fc"
+    },
+    "desk_v1_manifest": {
+      "path": "analysis/ml10_pyscf_desk/final_v1/artifact_manifest.json",
+      "sha256": "ce6237083150ebd0e05b862f7375cfd538769812028d1c4bffa675099e5b35cc"
+    },
+    "desk_v1_identity": {
+      "path": "analysis/ml10_pyscf_desk/two_run_identity_v1.json",
+      "sha256": "951865104eaf795d7eab05f9b20a27c173670958c9eff1ad8be7ec5ba4dcba85"
+    },
+    "resource_v2_manifest": {
+      "path": "analysis/ml10_resource_profiles/final_v2/artifact_manifest.json",
+      "sha256": "449073424c01fb2b898f9aecc9988e6f6c87eb0874797e716b46c575f8c604b9"
+    },
+    "resource_v2_identity": {
+      "path": "analysis/ml10_resource_profiles/two_run_identity_v2.json",
+      "sha256": "c8778a522c2beb223686bb7af1d1dafda3711ee7e2df87afa12bf8147ae73c31"
+    },
+    "instance_v2_manifest": {
+      "path": "analysis/ml10_instance_space/final_v2/artifact_manifest.json",
+      "sha256": "43523e5bcb4b1c391f0752cca115bb092c4991eda11317a9fb220f97f2a4527c"
+    },
+    "instance_v2_identity": {
+      "path": "analysis/ml10_instance_space/two_run_identity_v2.json",
+      "sha256": "6c5fa6554aafa70c2dc5f1350e80b492dc0645f577dd9629e055fbe4cd640291"
+    },
+    "ml10c_retained_identity": {
+      "path": "analysis/ml10_bayesian_irt/two_run_identity_v1.json",
+      "sha256": "18d69e14b7c6f808ab5e70dd3acc26dd11e6ee7fc85a27f661654a11a244dadf"
+    }
+  },
+  "methods": [
+    {"method": "hf", "item_id": "pyscf_hf", "display_name": "HF"},
+    {"method": "mp2", "item_id": "pyscf_mp2", "display_name": "MP2"},
+    {"method": "cisd", "item_id": "pyscf_cisd", "display_name": "CISD"},
+    {"method": "ccsd", "item_id": "pyscf_ccsd", "display_name": "CCSD"},
+    {"method": "ccsd_t", "item_id": "pyscf_ccsd_t", "display_name": "CCSD(T)"}
+  ],
+  "preflight": {
+    "outcome_blind": true,
+    "energy_column_must_not_be_parsed": true,
+    "base": "accepted preflight_v1 status census",
+    "delta_pair_set": "exact preflight_v1 no_pyscf_coverage cells",
+    "expected_delta_cells": 635,
+    "expected_total_cells": 3590,
+    "expected_coverage_counts": {
+      "labeled": 2527,
+      "failed": 554,
+      "not_attempted_cost_screened": 509,
+      "no_pyscf_coverage": 0
+    },
+    "expected_panel_tasks_covered": 96,
+    "expected_corpus_tasks_covered": 718,
+    "required_outputs": [
+      "coverage_census.csv",
+      "panel_coverage_summary.csv",
+      "corpus_coverage_summary.csv",
+      "epistemic_flags.csv",
+      "report.json",
+      "REPORT.md",
+      "artifact_manifest.json"
+    ]
+  },
+  "label_construction": {
+    "baseline": "reproduce the pinned ML-10 v1 labels without mutation",
+    "gao_completed_success": "abs(energy_hartree - reference_energy) <= absolute_accuracy_threshold",
+    "gao_completed_miss": "finite completed energy outside the positive absolute threshold",
+    "failure_cap": 4.0,
+    "continuous_quality_epsilon": 1e-06,
+    "missing_imputation": false,
+    "stored_source_mutation": false
+  },
+  "outputs": {
+    "preflight": "analysis/ml10_pyscf_hardness/preflight_v2",
+    "desk": "analysis/ml10_pyscf_desk/final_v2",
+    "resource_profiles": "analysis/ml10_resource_profiles/final_v3",
+    "instance_space": "analysis/ml10_instance_space/final_v3"
+  },
+  "desk": {
+    "same_frontier_order": ["pyscf_hf", "pyscf_mp2", "pyscf_cisd", "pyscf_ccsd", "pyscf_ccsd_t"],
+    "same_panel_weights_total": 609,
+    "same_partial_identification_reporting": true,
+    "ratio_of_record_replaced": false
+  },
+  "resource_profiles": {
+    "same_five_single_budget_tracks": true,
+    "resource_axis_invented": false,
+    "endpoint_classes": [
+      "solution",
+      "accuracy_miss",
+      "right_censored_walltime",
+      "competing_risk_failure",
+      "not_attempted_cost_screened",
+      "no_pyscf_coverage"
+    ]
+  },
+  "instance_space": {
+    "projection_refit": false,
+    "fixed_ml9a_geometry": true,
+    "panel_tracks": 6,
+    "bootstrap": {
+      "unit": "canonical_task_family_block",
+      "replicates": 2000,
+      "seed": 20260802,
+      "projection_refit_per_draw": false,
+      "raw_draws_retained": true,
+      "paired_with_original_ml10a_seed": true
+    },
+    "pythia_gate_and_external_validation": "unchanged from ML-10A final_v2",
+    "validated_predictor_claim_requires_all_frozen_gates": true
+  },
+  "excluded": {
+    "ml10c_update": true,
+    "new_solver_runs": true,
+    "projection_refit": true,
+    "task_reselection": true,
+    "stored_source_mutation": true,
+    "missing_value_imputation": true,
+    "public_or_dashboard_placement": true,
+    "push": true
+  },
+  "promotion": {
+    "two_independent_runs": true,
+    "recursive_byte_identity_required": true,
+    "prior_promoted_trees_must_remain_byte_unchanged": true
+  }
+}
